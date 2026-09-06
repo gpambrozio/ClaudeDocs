@@ -8,7 +8,7 @@ description: Give your agents persistent memory that survives across sessions us
 
 Each Managed Agents session starts with a fresh context by default. When a session ends, any state the agent built up is gone. Memory stores let the agent carry information across sessions: user preferences, project conventions, prior mistakes, and domain context.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 Don't combine `agent-memory-2026-07-22` with `managed-agents-2026-04-01` on a memory store request: sending both returns a `400` error. If your code sets beta headers explicitly, replace `managed-agents-2026-04-01` with `agent-memory-2026-07-22` on memory store calls rather than adding a second value. Session endpoints, including attaching a memory store to a session, still use `managed-agents-2026-04-01`.
 
@@ -16,7 +16,7 @@ Don't combine `agent-memory-2026-07-22` with `managed-agents-2026-04-01` on a me
 
 ## Overview
 
-A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](managed-agents/tools.md) is required for these interactions; make sure to enable it during [agent creation](managed-agents/agent-setup.md). On [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), that directory is not a live mount. Instead, the SDK's environment worker downloads each attached store into your sandbox before the agent's tools run and keeps that copy in sync with the store.
+A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](tools.md) is required for these interactions; make sure to enable it during [agent creation](agent-setup.md). On [self-hosted sandboxes](self-hosted-sandboxes.md#use-memory-stores), that directory is not a live mount. Instead, the SDK's environment worker downloads each attached store into your sandbox before the agent's tools run and keeps that copy in sync with the store.
 
 Each **memory** in a store is addressed by a path and can be read and edited directly through the API or the Claude Console, allowing for tuning, importing, and exporting.
 
@@ -200,7 +200,7 @@ Individual memories within the store are capped at 100 kB (\~25k tokens). A stor
 
 ## Attach a memory store to a session
 
-Memory stores are attached in the session's `resources[]` array when the [session is created](managed-agents/sessions.md). Unlike file resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported. You attach memory stores the same way for sessions on cloud and [self-hosted environments](managed-agents/self-hosted-sandboxes.md); self-hosted environments accept only `memory_store` resources.
+Memory stores are attached in the session's `resources[]` array when the [session is created](sessions.md#creating-a-session). Unlike file resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported. You attach memory stores the same way for sessions on cloud and [self-hosted environments](self-hosted-sandboxes.md#use-memory-stores); self-hosted environments accept only `memory_store` resources.
 
 Optionally include `instructions` to provide session-specific guidance for how the agent should use this store. It is shown to the agent alongside the store's `name` and `description`, and is capped at 4,096 characters.
 
@@ -365,15 +365,15 @@ A maximum of **8 memory stores** are supported per session. Attach multiple stor
 
 ### How the agent accesses memory
 
-Each attached store is mounted inside the session's sandbox as a directory under `/mnt/memory/`. The directory name is the store's display name sanitized to a filesystem-safe slug (lowercased; non-alphanumeric runs become a single hyphen), so a store named "Demo Memory" mounts at `/mnt/memory/demo-memory/`. The exact path is returned in the `mount_path` field on the session's memory-store resource; read it from there rather than constructing it yourself. The agent reads and writes the store with the standard [agent toolset](managed-agents/tools.md). Writes under the mount path are persisted back to the store and stay in sync across sessions that share it; writes to any other path under `/mnt/memory/` fail, because the sandbox mounts that parent directory read-only. A short description of each mount (display name, mount path, access mode, store `description`, and any `instructions`) is automatically added to the system prompt.
+Each attached store is mounted inside the session's sandbox as a directory under `/mnt/memory/`. The directory name is the store's display name sanitized to a filesystem-safe slug (lowercased; non-alphanumeric runs become a single hyphen), so a store named "Demo Memory" mounts at `/mnt/memory/demo-memory/`. The exact path is returned in the `mount_path` field on the session's memory-store resource; read it from there rather than constructing it yourself. The agent reads and writes the store with the standard [agent toolset](tools.md). Writes under the mount path are persisted back to the store and stay in sync across sessions that share it; writes to any other path under `/mnt/memory/` fail, because the sandbox mounts that parent directory read-only. A short description of each mount (display name, mount path, access mode, store `description`, and any `instructions`) is automatically added to the system prompt.
 
-`access` is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](managed-agents/memory.md) attributed to the session.
+`access` is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](memory.md#audit-memory-changes) attributed to the session.
 
-On [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md), each store's directory is a local copy that the SDK worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent's `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker's file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
+On [self-hosted sandboxes](self-hosted-sandboxes.md#use-memory-stores), each store's directory is a local copy that the SDK worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent's `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker's file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
 
-For a `read_only` store, the worker's `write` and `edit` tools refuse changes under that directory and the worker never uploads anything from it. To learn how the worker resolves write conflicts, and what the `bash` tool can still change in a read-only store's local copy, see [Read-only stores and conflicts](managed-agents/self-hosted-sandboxes.md).
+For a `read_only` store, the worker's `write` and `edit` tools refuse changes under that directory and the worker never uploads anything from it. To learn how the worker resolves write conflicts, and what the `bash` tool can still change in a read-only store's local copy, see [Read-only stores and conflicts](self-hosted-sandboxes.md#read-only-stores-and-conflicts).
 
-The agent's reads and writes appear in the [event stream](managed-agents/events-and-streaming.md) as ordinary `agent.tool_use` and `agent.tool_result` events for whichever tool touched the mount.
+The agent's reads and writes appear in the [event stream](events-and-streaming.md) as ordinary `agent.tool_use` and `agent.tool_result` events for whichever tool touched the mount.
 
 ## View and edit memories
 
@@ -474,7 +474,7 @@ page.data.each do |entry|
 end
 ```
 
-See the [List memories reference](api/beta/memory_stores/memories/list.md) for full parameters and response schema.
+See the [List memories reference](../api/beta/memory_stores/memories/list.md) for full parameters and response schema.
 
 ### Read a memory
 
@@ -547,11 +547,11 @@ retrieved = client.beta.memory_stores.memories.retrieve(
 puts retrieved.content
 ```
 
-See the [Retrieve a memory reference](api/beta/memory_stores/memories/retrieve.md) for full parameters and response schema.
+See the [Retrieve a memory reference](../api/beta/memory_stores/memories/retrieve.md) for full parameters and response schema.
 
 ### Create a memory
 
-`memories.create` creates a memory at a given `path`. Create does not overwrite; to change an existing memory, use [`memories.update`](managed-agents/memory.md).
+`memories.create` creates a memory at a given `path`. Create does not overwrite; to change an existing memory, use [`memories.update`](memory.md#update-a-memory).
 
 ```bash cURL
 mem=$(curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
@@ -633,7 +633,7 @@ mem = client.beta.memory_stores.memories.create(
 )
 ```
 
-See the [Create a memory reference](api/beta/memory_stores/memories/create.md) for full parameters and response schema.
+See the [Create a memory reference](../api/beta/memory_stores/memories/create.md) for full parameters and response schema.
 
 ### Update a memory
 
@@ -715,7 +715,7 @@ client.beta.memory_stores.memories.update(
 )
 ```
 
-See the [Update a memory reference](api/beta/memory_stores/memories/update.md) for full parameters and response schema.
+See the [Update a memory reference](../api/beta/memory_stores/memories/update.md) for full parameters and response schema.
 
 #### Safe content edits (optimistic concurrency)
 
@@ -885,7 +885,7 @@ client.beta.memory_stores.memories.delete(
 )
 ```
 
-See the [Delete a memory reference](api/beta/memory_stores/memories/delete.md) for full parameters and response schema.
+See the [Delete a memory reference](../api/beta/memory_stores/memories/delete.md) for full parameters and response schema.
 
 ## Audit memory changes
 
@@ -1014,7 +1014,7 @@ end
 version_id = versions.data[1].id
 ```
 
-See the [List memory versions reference](api/beta/memory_stores/memory_versions/list.md) for full parameters and response schema.
+See the [List memory versions reference](../api/beta/memory_stores/memory_versions/list.md) for full parameters and response schema.
 
 ### Retrieve a version
 
@@ -1090,7 +1090,7 @@ version = client.beta.memory_stores.memory_versions.retrieve(
 puts version.content
 ```
 
-See the [Retrieve a memory version reference](api/beta/memory_stores/memory_versions/retrieve.md) for full parameters and response schema.
+See the [Retrieve a memory version reference](../api/beta/memory_stores/memory_versions/retrieve.md) for full parameters and response schema.
 
 ### Redact a version
 
@@ -1163,11 +1163,11 @@ client.beta.memory_stores.memory_versions.redact(
 )
 ```
 
-See the [Redact a memory version reference](api/beta/memory_stores/memory_versions/redact.md) for full parameters and response schema.
+See the [Redact a memory version reference](../api/beta/memory_stores/memory_versions/redact.md) for full parameters and response schema.
 
 ## Manage memory stores
 
-In addition to [`create`](api/beta/memory_stores/create.md), memory stores support [`retrieve`](api/beta/memory_stores/retrieve.md), [`update`](api/beta/memory_stores/update.md), [`list`](api/beta/memory_stores/list.md), [`archive`](api/beta/memory_stores/archive.md), and [`delete`](api/beta/memory_stores/delete.md).
+In addition to [`create`](../api/beta/memory_stores/create.md), memory stores support [`retrieve`](../api/beta/memory_stores/retrieve.md), [`update`](../api/beta/memory_stores/update.md), [`list`](../api/beta/memory_stores/list.md), [`archive`](../api/beta/memory_stores/archive.md), and [`delete`](../api/beta/memory_stores/delete.md).
 
 ### List stores
 
@@ -1238,7 +1238,7 @@ client.beta.memory_stores.list(include_archived: true).auto_paging_each do |memo
 end
 ```
 
-See the [List memory stores reference](api/beta/memory_stores/list.md) for full parameters and response schema.
+See the [List memory stores reference](../api/beta/memory_stores/list.md) for full parameters and response schema.
 
 ### Archive a store
 
@@ -1286,9 +1286,9 @@ $client->beta->memoryStores->archive($store->id);
 client.beta.memory_stores.archive(store.id)
 ```
 
-See the [Archive a memory store reference](api/beta/memory_stores/archive.md) for full parameters and response schema.
+See the [Archive a memory store reference](../api/beta/memory_stores/archive.md) for full parameters and response schema.
 
-To permanently remove a store along with all of its memories and versions, use [`memory_stores.delete`](api/beta/memory_stores/delete.md).
+To permanently remove a store along with all of its memories and versions, use [`memory_stores.delete`](../api/beta/memory_stores/delete.md).
 
 ## Best practices for memory management
 
@@ -1296,7 +1296,7 @@ When a store reaches its 10,000-memory limit, writes to new memories fail: both 
 
 * **Use focused stores.** Rather than one large general-purpose store, use smaller purpose-built stores: one per user, one for shared domain knowledge, and one for project-specific context. Each store has its own 10,000-memory limit, so keeping stores scoped reduces the chance any single one fills up.
 
-* **Condense or prune before the store fills up.** Delete stale or redundant memories with `memories.delete`. You can also run a [dreaming session](managed-agents/dreams.md), which consolidates fragmented content into a separate new output store rather than modifying the original. Switch your sessions over to that output store, then archive or delete the original.
+* **Condense or prune before the store fills up.** Delete stale or redundant memories with `memories.delete`. You can also run a [dreaming session](dreams.md), which consolidates fragmented content into a separate new output store rather than modifying the original. Switch your sessions over to that output store, then archive or delete the original.
 
 * **Attach a new store when it makes sense.** If a store has grown beyond its useful scope, attach a fresh one for new content and attach the original with `read_only` access. The agent can read from both while only writing to the new one.
 

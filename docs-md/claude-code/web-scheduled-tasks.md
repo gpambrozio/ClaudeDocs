@@ -69,10 +69,10 @@ Add one or more GitHub repositories for Claude to work in. Each repository is cl
 Pick a [cloud environment](cloud-environments.md) for the routine. Environments control what the cloud session has access to:
 
 * **Network access**: set the level of internet access available during each run
-* **Environment variables**: provide values Claude can use during each run. They're [visible to anyone who uses the environment](cloud-environments.md), so on Pro and Max plans, store keys for the APIs Claude calls during a run as [API credentials](cloud-environments.md) instead. That section also lists the requests that never get a credential
-* **Setup script**: install dependencies and tools the routine needs. The result is [cached](cloud-environments.md), so the script doesn't re-run on every session
+* **Environment variables**: provide values Claude can use during each run. They're [visible to anyone who uses the environment](cloud-environments.md#what-carries-over-from-your-setup), so on Pro and Max plans, store keys for the APIs Claude calls during a run as [API credentials](cloud-environments.md#add-api-credentials) instead. That section also lists the requests that never get a credential
+* **Setup script**: install dependencies and tools the routine needs. The result is [cached](cloud-environments.md#environment-caching), so the script doesn't re-run on every session
 
-A **Default** environment is provided with **Trusted** network access, which allows only the [default allowlist](cloud-environments.md) of package registries, cloud provider APIs, container registries, and common development domains through the session's network. Connectors you add to the routine reach their services through Anthropic's servers, so they don't need allowlist changes. If your routine needs to reach your own services directly, or a domain outside that list, edit the environment's [network access](cloud-environments.md) before running. To use a separate environment, [create one](cloud-environments.md) first.
+A **Default** environment is provided with **Trusted** network access, which allows only the [default allowlist](cloud-environments.md#default-allowed-domains) of package registries, cloud provider APIs, container registries, and common development domains through the session's network. Connectors you add to the routine reach their services through Anthropic's servers, so they don't need allowlist changes. If your routine needs to reach your own services directly, or a domain outside that list, edit the environment's [network access](cloud-environments.md#network-access) before running. To use a separate environment, [create one](cloud-environments.md#configure-your-environment) first.
 
 **Select a trigger**
 
@@ -199,7 +199,7 @@ The `/fire` endpoint ships under the `experimental-cc-routine-2026-04-01` beta h
 
 #### API reference
 
-For the full API reference, including all error responses, validation rules, and field limits, see [Trigger a routine via API](api/claude-code/routines-fire.md) in the Claude Platform documentation.
+For the full API reference, including all error responses, validation rules, and field limits, see [Trigger a routine via API](../api/api/claude-code/routines-fire.md) in the Claude Platform documentation.
 
 The `/fire` endpoint is available to claude.ai users only and is not part of the Claude Platform API surface.
 
@@ -289,7 +289,7 @@ You can also ask about a routine's run history, for example `/schedule why did m
 
 ### Repositories and branch permissions
 
-Routines need GitHub access to clone repositories. When you create a routine from the CLI with `/schedule`, Claude checks whether your account has GitHub access for the repository you ran it from and, if it doesn't, adds a setup note naming how to grant it. See [GitHub authentication options](claude-code-on-the-web.md) for the two ways to grant access.
+Routines need GitHub access to clone repositories. When you create a routine from the CLI with `/schedule`, Claude checks whether your account has GitHub access for the repository you ran it from and, if it doesn't, adds a setup note naming how to grant it. See [GitHub authentication options](claude-code-on-the-web.md#github-authentication-options) for the two ways to grant access.
 
 Each repository you add is cloned on every run. Claude starts from the repository's default branch unless your prompt specifies otherwise.
 
@@ -303,7 +303,7 @@ Claude pushes its work to branches prefixed with `claude/`, which are always acc
 
 Routines can use your connected MCP connectors to read from and write to external services during each run. For example, a routine that triages support requests might read from a Slack channel and create issues in Linear.
 
-Connectors are the [claude.ai integrations](mcp.md) on your account. MCP servers you added locally in the CLI with `claude mcp add` are stored on your machine rather than your claude.ai account, so they do not appear in the connectors list. To use one of those servers in a routine, add it as a connector at [claude.ai/customize/connectors](https://claude.ai/customize/connectors), or declare it in a committed [`.mcp.json`](mcp.md) so it is part of the cloned repository.
+Connectors are the [claude.ai integrations](mcp.md#use-mcp-servers-from-claude-ai) on your account. MCP servers you added locally in the CLI with `claude mcp add` are stored on your machine rather than your claude.ai account, so they do not appear in the connectors list. To use one of those servers in a routine, add it as a connector at [claude.ai/customize/connectors](https://claude.ai/customize/connectors), or declare it in a committed [`.mcp.json`](mcp.md#project-scope) so it is part of the cloned repository.
 
 When you create a routine, all of your currently connected connectors are included by default. Remove any that aren't needed to limit which tools Claude has access to during the run. You can also add connectors directly from the routine form.
 
@@ -313,7 +313,7 @@ To manage or add connectors outside of the routine form, visit [claude.ai/custom
 
 Each routine uses a [cloud environment](cloud-environments.md) that controls network access, environment variables, and setup scripts. The routine inherits the environment's network policy on every run.
 
-The **Default** environment uses **Trusted** network access, which allows only the [default allowlist](cloud-environments.md) through the session's network. Requests on that path to hosts outside the allowlist fail with `403` and `x-deny-reason: host_not_allowed`. MCP connector traffic is routed through Anthropic's servers rather than that path, so the connectors you add to the routine work without adding their hosts to **Allowed domains**. Remove any connectors you don't need under [Connectors](#connectors).
+The **Default** environment uses **Trusted** network access, which allows only the [default allowlist](cloud-environments.md#default-allowed-domains) through the session's network. Requests on that path to hosts outside the allowlist fail with `403` and `x-deny-reason: host_not_allowed`. MCP connector traffic is routed through Anthropic's servers rather than that path, so the connectors you add to the routine work without adding their hosts to **Allowed domains**. Remove any connectors you don't need under [Connectors](#connectors).
 
 To allow additional domains:
 
@@ -331,13 +331,13 @@ Hover over the environment in the list and click the settings icon that appears 
 
 **Change the network access level**
 
-In the **Update cloud environment** dialog, change **Network access** to **Custom** and enter your domains in **Allowed domains**. Check **Also include default list of common package managers** to keep the [default allowlist](cloud-environments.md) alongside your custom domains. Select **Full** instead for unrestricted access.
+In the **Update cloud environment** dialog, change **Network access** to **Custom** and enter your domains in **Allowed domains**. Check **Also include default list of common package managers** to keep the [default allowlist](cloud-environments.md#default-allowed-domains) alongside your custom domains. Select **Full** instead for unrestricted access.
 
 **Save**
 
 Click **Save changes**. The new policy applies from the next run.
 
-See [Network access](cloud-environments.md) for details on access levels and the default allowlist.
+See [Network access](cloud-environments.md#network-access) for details on access levels and the default allowlist.
 
 ## Usage and limits
 
@@ -355,7 +355,7 @@ One-off runs do not count against the daily routine cap. They draw down your reg
 
 The CLI hides `/schedule` when one of its requirements isn't met: the command menu shows `No commands match "/schedule"` while you type, and submitting it returns `Unknown command: /schedule` in every case below except a Console API key or an Anthropic profile with feature-flag fetching enabled. The cause is usually one of the following:
 
-* You are authenticated with a Console API key, an [Anthropic profile or federation credential](authentication.md), or a cloud provider such as Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. `/schedule` requires a claude.ai subscription login. With a Console API key or a profile, submitting `/schedule` instead shows `/schedule is available with Claude for Enterprise — ask your admin about migrating from API-key access`. With a cloud-provider login, you still see `Unknown command: /schedule`. If `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` is set in your shell, or `apiKeyHelper` is set in `settings.json`, remove it first, since these take precedence over a claude.ai login. A profile or federation credential takes precedence too, so switch that off as well
+* You are authenticated with a Console API key, an [Anthropic profile or federation credential](authentication.md#anthropic-profiles-and-federation-credentials), or a cloud provider such as Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. `/schedule` requires a claude.ai subscription login. With a Console API key or a profile, submitting `/schedule` instead shows `/schedule is available with Claude for Enterprise — ask your admin about migrating from API-key access`. With a cloud-provider login, you still see `Unknown command: /schedule`. If `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` is set in your shell, or `apiKeyHelper` is set in `settings.json`, remove it first, since these take precedence over a claude.ai login. A profile or federation credential takes precedence too, so switch that off as well
 * You are inside a Claude Code on the web session. Manage routines from the [web UI](https://claude.ai/code/routines) instead
 * Your organization's policy disables [Claude Code on the web](claude-code-on-the-web.md), which routines run on
 * An Owner [turned off routines](#routines-are-disabled-by-your-organizations-policy) for your Team or Enterprise organization. Before v2.1.227, the command still appeared in this case, and claude.ai rejected the routine when Claude tried to create or run it

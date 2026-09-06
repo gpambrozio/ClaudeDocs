@@ -8,13 +8,13 @@ description: Learn how to write effective Skills that Claude can discover and us
 
 Good Skills are concise, well-structured, and tested with real usage. This guide provides practical authoring decisions to help you write Skills that Claude can discover and use effectively.
 
-For conceptual background on how Skills work, see the [Skills overview](agents-and-tools/agent-skills/overview.md).
+For conceptual background on how Skills work, see the [Skills overview](overview.md).
 
 ## Core principles
 
 ### Concise is key
 
-The [context window](build-with-claude/context-windows.md) is a public good. Your Skill shares the context window with everything else Claude needs to know, including:
+The [context window](../../build-with-claude/context-windows.md) is a public good. Your Skill shares the context window with everything else Claude needs to know, including:
 
 * The system prompt
 * Conversation history
@@ -163,7 +163,7 @@ What works perfectly for Opus might need more detail for Haiku. If you plan to u
 * Cannot contain XML tags
 * Should describe what the Skill does and when to use it
 
-For complete Skill structure details, see the [Skills overview](agents-and-tools/agent-skills/overview.md).
+For complete Skill structure details, see the [Skills overview](overview.md#skill-structure).
 
 ### Naming conventions
 
@@ -248,7 +248,7 @@ description: Does stuff with files
 
 ### Progressive disclosure patterns
 
-SKILL.md serves as an overview that points Claude to detailed materials as needed, like a table of contents in an onboarding guide. For an explanation of how progressive disclosure works, see [How Skills work](agents-and-tools/agent-skills/overview.md) in the overview.
+SKILL.md serves as an overview that points Claude to detailed materials as needed, like a table of contents in an onboarding guide. For an explanation of how progressive disclosure works, see [How Skills work](overview.md#how-skills-work) in the overview.
 
 **Practical guidance:**
 
@@ -305,9 +305,9 @@ with pdfplumber.open("file.pdf") as pdf:
 
 ## Advanced features
 
-**Form filling**: See [FORMS.md](agents-and-tools/agent-skills/FORMS.md.md) for complete guide
-**API reference**: See [REFERENCE.md](agents-and-tools/agent-skills/REFERENCE.md.md) for all methods
-**Examples**: See [EXAMPLES.md](agents-and-tools/agent-skills/EXAMPLES.md.md) for common patterns
+**Form filling**: See [FORMS.md](FORMS.md) for complete guide
+**API reference**: See [REFERENCE.md](REFERENCE.md) for all methods
+**Examples**: See [EXAMPLES.md](EXAMPLES.md) for common patterns
 ````
 
 Claude loads FORMS.md, REFERENCE.md, or EXAMPLES.md only when needed.
@@ -332,10 +332,10 @@ For Skills with multiple domains, organize content by domain to avoid loading ir
 
 ## Available datasets
 
-**Finance**: Revenue, ARR, billing → See [reference/finance.md](agents-and-tools/agent-skills/reference/finance.md.md)
-**Sales**: Opportunities, pipeline, accounts → See [reference/sales.md](agents-and-tools/agent-skills/reference/sales.md.md)
-**Product**: API usage, features, adoption → See [reference/product.md](agents-and-tools/agent-skills/reference/product.md.md)
-**Marketing**: Campaigns, attribution, email → See [reference/marketing.md](agents-and-tools/agent-skills/reference/marketing.md.md)
+**Finance**: Revenue, ARR, billing → See [reference/finance.md](reference/finance.md)
+**Sales**: Opportunities, pipeline, accounts → See [reference/sales.md](reference/sales.md)
+**Product**: API usage, features, adoption → See [reference/product.md](reference/product.md)
+**Marketing**: Campaigns, attribution, email → See [reference/marketing.md](reference/marketing.md)
 
 ## Quick search
 
@@ -357,14 +357,14 @@ Show basic content, link to advanced content:
 
 ## Creating documents
 
-Use docx-js for new documents. See [DOCX-JS.md](agents-and-tools/agent-skills/DOCX-JS.md.md).
+Use docx-js for new documents. See [DOCX-JS.md](DOCX-JS.md).
 
 ## Editing documents
 
 For simple edits, modify the XML directly.
 
-**For tracked changes**: See [REDLINING.md](agents-and-tools/agent-skills/REDLINING.md.md)
-**For OOXML details**: See [OOXML.md](agents-and-tools/agent-skills/OOXML.md.md)
+**For tracked changes**: See [REDLINING.md](REDLINING.md)
+**For OOXML details**: See [OOXML.md](OOXML.md)
 ```
 
 Claude reads REDLINING.md or OOXML.md only when the user needs those features.
@@ -379,10 +379,10 @@ Claude may partially read files when they're referenced from other referenced fi
 
 ```markdown
 # SKILL.md
-See [advanced.md](agents-and-tools/agent-skills/advanced.md.md)...
+See [advanced.md](advanced.md)...
 
 # advanced.md
-See [details.md](agents-and-tools/agent-skills/details.md.md)...
+See [details.md](details.md)...
 
 # details.md
 Here's the actual information...
@@ -394,9 +394,9 @@ Here's the actual information...
 # SKILL.md
 
 **Basic usage**: [instructions in SKILL.md]
-**Advanced features**: See [advanced.md](agents-and-tools/agent-skills/advanced.md.md)
-**API reference**: See [reference.md](agents-and-tools/agent-skills/reference.md.md)
-**Examples**: See [examples.md](agents-and-tools/agent-skills/examples.md.md)
+**Advanced features**: See [advanced.md](advanced.md)
+**API reference**: See [reference.md](reference.md)
+**Examples**: See [examples.md](examples.md)
 ```
 
 ### Structure longer reference files with table of contents
@@ -424,7 +424,7 @@ For reference files longer than 100 lines, include a table of contents at the to
 
 Claude can then read the complete file or jump to specific sections as needed.
 
-For details on how this filesystem-based architecture enables progressive disclosure, see the [Runtime environment](agents-and-tools/agent-skills/best-practices.md) section later in this guide.
+For details on how this filesystem-based architecture enables progressive disclosure, see the [Runtime environment](best-practices.md#runtime-environment) section later in this guide.
 
 ## Workflows and feedback loops
 
@@ -863,7 +863,7 @@ For scanned PDFs requiring OCR, use pdf2image with pytesseract instead."
 
 ## Advanced: Skills with executable code
 
-The following sections focus on Skills that include executable scripts. If your Skill uses only markdown instructions, skip to [Checklist for effective Skills](agents-and-tools/agent-skills/best-practices.md).
+The following sections focus on Skills that include executable scripts. If your Skill uses only markdown instructions, skip to [Checklist for effective Skills](best-practices.md#checklist-for-effective-skills).
 
 ### Solve, don't defer
 
@@ -938,7 +938,7 @@ The preceding diagram shows how executable scripts work alongside instruction fi
 * **Execute the script** (most common): "Run `analyze_form.py` to extract fields"
 * **Read it as reference** (for complex logic): "See `analyze_form.py` for the field extraction algorithm"
 
-For most utility scripts, execution is preferred because it's more reliable and efficient. See the following [Runtime environment](agents-and-tools/agent-skills/best-practices.md) section for details on how script execution works.
+For most utility scripts, execution is preferred because it's more reliable and efficient. See the following [Runtime environment](best-practices.md#runtime-environment) section for details on how script execution works.
 
 **Example:**
 
@@ -1019,11 +1019,11 @@ Skills run in the code execution environment with platform-specific limitations:
 * **claude.ai:** Can install packages from npm and PyPI and pull from GitHub repositories
 * **Claude API:** Has no network access and no runtime package installation
 
-List required packages in your SKILL.md and verify they're available in the [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md) documentation.
+List required packages in your SKILL.md and verify they're available in the [Code execution tool](../tool-use/code-execution-tool.md) documentation.
 
 ### Runtime environment
 
-Skills run in a code execution environment with filesystem access, bash commands, and code execution capabilities. For the conceptual explanation of this architecture, see [The Skills architecture](agents-and-tools/agent-skills/overview.md) in the overview.
+Skills run in a code execution environment with filesystem access, bash commands, and code execution capabilities. For the conceptual explanation of this architecture, see [The Skills architecture](overview.md#the-skills-architecture) in the overview.
 
 **How this affects your authoring:**
 
@@ -1068,7 +1068,7 @@ Skills run in a code execution environment with filesystem access, bash commands
 
 When the user asks about revenue, Claude reads SKILL.md, sees the reference to `reference/finance.md`, and calls bash to read just that file. The sales.md and product.md files remain on the filesystem, consuming zero context tokens until needed. This filesystem-based model is what enables progressive disclosure. Claude can navigate and selectively load exactly what each task requires.
 
-For complete details on the technical architecture, see [How Skills work](agents-and-tools/agent-skills/overview.md) in the Skills overview.
+For complete details on the technical architecture, see [How Skills work](overview.md#how-skills-work) in the Skills overview.
 
 ### MCP tool references
 
@@ -1117,11 +1117,11 @@ The SKILL.md frontmatter requires `name` and `description` fields with specific 
 * `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words
 * `description`: Maximum 1,024 characters, non-empty, no XML tags
 
-See the [Skills overview](agents-and-tools/agent-skills/overview.md) for complete structure details.
+See the [Skills overview](overview.md#skill-structure) for complete structure details.
 
 ### Token budgets
 
-Keep SKILL.md body under 500 lines for optimal performance. If your content exceeds this, split it into separate files using the progressive disclosure patterns described earlier. For architectural details, see the [Skills overview](agents-and-tools/agent-skills/overview.md).
+Keep SKILL.md body under 500 lines for optimal performance. If your content exceeds this, split it into separate files using the progressive disclosure patterns described earlier. For architectural details, see the [Skills overview](overview.md#how-skills-work).
 
 ## Checklist for effective Skills
 

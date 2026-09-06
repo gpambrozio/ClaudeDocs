@@ -11,7 +11,7 @@ Don't want to use the terminal? The Claude Code desktop app lets you skip the te
 
 ## macOS and Linux
 
-Follow these steps to install and start Claude Code from a macOS or Linux terminal. Claude Code requires macOS 13.0 or later. See the [system requirements](setup.md) for supported Linux distributions.
+Follow these steps to install and start Claude Code from a macOS or Linux terminal. Claude Code requires macOS 13.0 or later. See the [system requirements](setup.md#system-requirements) for supported Linux distributions.
 
 **Open a terminal**
 
@@ -56,7 +56,7 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 ## Windows
 
-Follow these steps to optionally install Git for Windows, set up PowerShell, and start Claude Code on Windows. Claude Code requires Windows 10 version 1809 or later. See the [system requirements](setup.md) for full details.
+Follow these steps to optionally install Git for Windows, set up PowerShell, and start Claude Code on Windows. Claude Code requires Windows 10 version 1809 or later. See the [system requirements](setup.md#system-requirements) for full details.
 
 **Install Git for Windows (optional)**
 
@@ -196,7 +196,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Then open a new terminal and try `claude` again. If it still isn't found, check that the file `~/.local/bin/claude` exists. If it doesn't, the install didn't finish. For more details, see [fix your PATH](troubleshoot-install.md).
+Then open a new terminal and try `claude` again. If it still isn't found, check that the file `~/.local/bin/claude` exists. If it doesn't, the install didn't finish. For more details, see [fix your PATH](troubleshoot-install.md#verify-your-path).
 
 **Error with HTML code or 'syntax error near unexpected token'**
 
@@ -216,7 +216,7 @@ When it finishes, open a new terminal window, type `claude --version`, and press
 
 If you see `dyld: cannot load`, `dyld: Symbol not found`, or `built for Mac OS X 13.0`, your macOS version is likely older than Claude Code supports.
 
-Open the Apple menu and select About This Mac to check your version. If it's older than 13.0, update macOS through Software Update. See the [macOS troubleshooting guide](troubleshoot-install.md) for more details.
+Open the Apple menu and select About This Mac to check your version. If it's older than 13.0, update macOS through Software Update. See the [macOS troubleshooting guide](troubleshoot-install.md#dyld-cannot-load-on-macos) for more details.
 
 For other errors, see the full [installation troubleshooting guide](troubleshoot-install.md).
 
@@ -259,7 +259,7 @@ Neither PowerShell nor Git Bash was found. Claude Code needs at least one shell.
    ```
    Look for the `Git\bin` folder in that path and use it instead.
 
-To make this permanent so you don't have to set it every time, see [configure Git Bash path](troubleshoot-install.md).
+To make this permanent so you don't have to set it every time, see [configure Git Bash path](troubleshoot-install.md#claude-code-on-windows-requires-either-git-for-windows-for-bash-or-powershell).
 
 **'claude is not recognized'**
 
@@ -270,11 +270,11 @@ $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
 [Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
 ```
 
-Close PowerShell, open a new window, and try `claude` again. You should see the Claude Code welcome screen. See [verify your PATH](troubleshoot-install.md) for more details.
+Close PowerShell, open a new window, and try `claude` again. You should see the Claude Code welcome screen. See [verify your PATH](troubleshoot-install.md#verify-your-path) for more details.
 
 **'Claude Code does not support 32-bit Windows'**
 
-On a 64-bit machine, this error means you opened `Windows PowerShell (x86)` instead of `Windows PowerShell`. The x86 entry runs as a 32-bit process. Close it, open the Start menu entry without `(x86)` in its name, and run the install command again. If you're not sure your machine is 64-bit, or the error persists, see [the full explanation](troubleshoot-install.md).
+On a 64-bit machine, this error means you opened `Windows PowerShell (x86)` instead of `Windows PowerShell`. The x86 entry runs as a 32-bit process. Close it, open the Start menu entry without `(x86)` in its name, and run the install command again. If you're not sure your machine is 64-bit, or the error persists, see [the full explanation](troubleshoot-install.md#claude-code-does-not-support-32-bit-windows).
 
 For other errors, see the full [installation troubleshooting guide](troubleshoot-install.md).
 

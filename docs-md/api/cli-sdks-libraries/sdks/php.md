@@ -10,7 +10,7 @@ The Anthropic PHP library provides convenient access to the Claude API from any 
 
 The PHP SDK is currently in beta. APIs might change between versions.
 
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers PHP-specific SDK features and configuration.
+For API feature documentation with code examples, see the [API reference](../../api/overview.md). This page covers PHP-specific SDK features and configuration.
 
 ## Installation
 
@@ -41,7 +41,7 @@ $textBlock = array_find($message->content, static fn ($block): bool => $block->t
 echo $textBlock->text;
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
+For authentication options including Workload Identity Federation, see [Authentication](../../manage-claude/authentication.md). If your API key is a [personal or service account key](../../manage-claude/authentication.md#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../../manage-claude/authentication.md#select-a-workspace) shows the per-request option for this SDK.
 
 ## Value objects
 
@@ -212,11 +212,11 @@ $response = $client->request(
 
 For detailed platform setup guides with code examples, see:
 
-* [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-* [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-* [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-* [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
+* [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
+* [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)
+* [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)
 
 The PHP SDK supports the following platforms:
 
@@ -238,8 +238,8 @@ This package considers improvements to the (non-runtime) PHPDoc type definitions
 
 * [GitHub repository](https://github.com/anthropics/anthropic-sdk-php)
 * [Packagist](https://packagist.org/packages/anthropic-ai/sdk)
-* [API reference](api/overview.md)
-* [Streaming Messages](build-with-claude/streaming.md)
+* [API reference](../../api/overview.md)
+* [Streaming Messages](../../build-with-claude/streaming.md)
 
 ---
 

@@ -6,18 +6,18 @@ url: https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
 description: Anthropic's Claude models are available through [Google Cloud's Agent Platform](https://cloud.google.com/vertex-ai).
 ---
 
-The API for accessing Claude on Google Cloud's Agent Platform is nearly identical to the [Messages API](api/messages/create.md), with two key differences in request format:
+The API for accessing Claude on Google Cloud's Agent Platform is nearly identical to the [Messages API](../api/messages/create.md), with two key differences in request format:
 
 * On Agent Platform, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * On Agent Platform, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Agent Platform is also supported by Anthropic's official [client SDKs](cli-sdks-libraries/overview.md). This guide walks you through making a request to Claude on Agent Platform using one of Anthropic's client SDKs.
+Agent Platform is also supported by Anthropic's official [client SDKs](../cli-sdks-libraries/overview.md). This guide walks you through making a request to Claude on Agent Platform using one of Anthropic's client SDKs.
 
 Note that this guide assumes you already have a Google Cloud project that is able to use Agent Platform. See [Anthropic Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for more information on the setup required and a full walkthrough.
 
 ## Install an SDK for accessing Agent Platform
 
-First, install Anthropic's [client SDK](cli-sdks-libraries/overview.md) for your language of choice.
+First, install Anthropic's [client SDK](../cli-sdks-libraries/overview.md) for your language of choice.
 
 **Python**
 
@@ -111,7 +111,7 @@ Note that Anthropic model availability varies by region. Search for "Claude" in 
 
 #### API model IDs
 
-Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-claude/model-deprecations.md). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Agent Platform, see [Google Cloud's documentation for Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude).
+Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](../about-claude/model-deprecations.md). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Agent Platform, see [Google Cloud's documentation for Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude).
 
 | Model                        | Agent Platform API model ID |
 | ---------------------------- | --------------------------- |
@@ -132,7 +132,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-
 | Claude Haiku 4.5             | claude-haiku-4-5\@20251001  |
 | Claude Haiku 3.5 Deprecated. | claude-3-5-haiku\@20241022  |
 
-Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](agents-and-tools/agent-skills/claude-api-skill.md).
+Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model).
 
 ### Making requests
 
@@ -317,9 +317,9 @@ message = client.messages.create(
 puts message.content.find { it.type == :text }.text
 ```
 
-See the [client SDKs](cli-sdks-libraries/overview.md) and the official [Agent Platform docs](https://cloud.google.com/vertex-ai/docs) for more details.
+See the [client SDKs](../cli-sdks-libraries/overview.md) and the official [Agent Platform docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
-Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
+Claude is also available through [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Platform on AWS](claude-platform-on-aws.md), and [Microsoft Foundry](claude-in-microsoft-foundry.md).
 
 ## Data retention
 
@@ -335,17 +335,17 @@ Turning on this service does not give Google or Anthropic any access to your con
 
 ## Feature support
 
-For the full feature list with Google Cloud availability, see [Features overview](build-with-claude/overview.md).
+For the full feature list with Google Cloud availability, see [Features overview](overview.md).
 
 ### Supported feature highlights
 
-* [Messages API](api/messages/create.md)
-* [Prompt caching](build-with-claude/prompt-caching.md)
-* [Thinking](build-with-claude/thinking.md)
-* [Tool use](agents-and-tools/tool-use/overview.md), including the [Bash tool](agents-and-tools/tool-use/bash-tool.md), [Browser use tool](agents-and-tools/tool-use/browser-use-tool.md), [Computer use tool](agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md)
-* [Web search tool](agents-and-tools/tool-use/web-search-tool.md)
-* [Citations](build-with-claude/citations.md)
-* [Structured outputs](build-with-claude/structured-outputs.md)
+* [Messages API](../api/messages/create.md)
+* [Prompt caching](prompt-caching.md)
+* [Thinking](thinking.md)
+* [Tool use](../agents-and-tools/tool-use/overview.md), including the [Bash tool](../agents-and-tools/tool-use/bash-tool.md), [Browser use tool](../agents-and-tools/tool-use/browser-use-tool.md), [Computer use tool](../agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](../agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](../agents-and-tools/tool-use/text-editor-tool.md)
+* [Web search tool](../agents-and-tools/tool-use/web-search-tool.md)
+* [Citations](citations.md)
+* [Structured outputs](structured-outputs.md)
 
 ### Features not supported
 
@@ -354,11 +354,11 @@ For the full feature list with Google Cloud availability, see [Features overview
 * Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
 * API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 * Claude Managed Agents
-* Server-side fallback (the [`fallbacks` parameter](build-with-claude/refusals-and-fallback.md); use the [client-side fallback pattern](build-with-claude/refusals-and-fallback.md) instead)
+* Server-side fallback (the [`fallbacks` parameter](refusals-and-fallback.md#server-side-fallback); use the [client-side fallback pattern](refusals-and-fallback.md#client-side-fallback) instead)
 
 ### Context window
 
-Claude Fable 5.1, Claude Fable 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5.1, Claude Fable 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](context-windows.md) on Agent Platform. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Agent Platform limits request payloads to 30 MB. When sending large documents or many images, you might reach this limit before the token limit.
 
@@ -975,7 +975,7 @@ Claude Mythos Preview is a research preview available to invited customers on Ag
 * **Agent Platform pricing:** [Generative AI pricing on cloud.google.com](https://cloud.google.com/vertex-ai/generative-ai/pricing)
 * **Claude models documentation:** [Claude on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude)
 * **Google blog post:** [Global endpoint for Claude models](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai)
-* **Anthropic pricing details:** [Cloud platform pricing](about-claude/pricing.md)
+* **Anthropic pricing details:** [Cloud platform pricing](../about-claude/pricing.md#cloud-platform-pricing)
 
 ---
 

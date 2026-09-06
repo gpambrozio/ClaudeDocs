@@ -10,10 +10,10 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 
 For complete API reference including request/response schemas and all parameters, see:
 
-* [Skill Management API Reference](api/skills/list.md) - CRUD operations for Skills
-* [Skill Versions API Reference](api/skills/versions/list.md) - Version management
+* [Skill Management API Reference](../api/skills/list.md) - CRUD operations for Skills
+* [Skill Versions API Reference](../api/skills/versions/list.md) - Version management
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
 ## Quick links
 
@@ -29,7 +29,7 @@ Learn how to write effective Skills that Claude can discover and use successfull
 
 For a detailed look at the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 
-Skills integrate with the Messages API through the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
+Skills integrate with the Messages API through the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
 
 ### Using Skills
 
@@ -42,19 +42,19 @@ You can use Skills from two sources:
 | **Type value**     | `anthropic`                                | `custom`                                                                                          |
 | **Skill IDs**      | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv`                                                       |
 | **Version format** | Date-based: `20251013` or `latest`         | Version ID: `skver_01AbCdEfGhIjKlMnOpQrStUv` or `latest`                                          |
-| **Management**     | Pre-built and maintained by Anthropic      | Upload and manage through the [Skills API](api/skills/create.md) |
+| **Management**     | Pre-built and maintained by Anthropic      | Upload and manage through the [Skills API](../api/skills/create.md) |
 | **Availability**   | Available to all users                     | Private to your workspace                                                                         |
 
-Both skill sources are returned by the [List Skills endpoint](api/skills/list.md) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
+Both skill sources are returned by the [List Skills endpoint](../api/skills/list.md) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
 
 ### Prerequisites
 
 To use Skills, you need:
 
 1. **Claude API key** from the [Claude Console](https://platform.claude.com/settings/keys)
-2. **[Code execution tool](agents-and-tools/tool-use/code-execution-tool.md)** enabled in your requests
+2. **[Code execution tool](../agents-and-tools/tool-use/code-execution-tool.md)** enabled in your requests
 
-Skills require the code execution tool, so use a model from its [model compatibility list](agents-and-tools/tool-use/code-execution-tool.md).
+Skills require the code execution tool, so use a model from its [model compatibility list](../agents-and-tools/tool-use/code-execution-tool.md#compatibility).
 
 ***
 
@@ -300,11 +300,11 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 **How it works:**
 
 1. Skills create files during code execution.
-2. The response includes a `file_id` for each created file, inside code-execution tool result blocks (see [Response format](agents-and-tools/tool-use/code-execution-tool.md)).
+2. The response includes a `file_id` for each created file, inside code-execution tool result blocks (see [Response format](../agents-and-tools/tool-use/code-execution-tool.md#response-format)).
 3. Use the Files API to download the actual file content.
 4. Save locally or process as needed.
 
-To provide input files for Skills to work on, [upload them with the Files API](build-with-claude/files.md) and reference them in your request with a [container upload block](build-with-claude/files.md).
+To provide input files for Skills to work on, [upload them with the Files API](files.md#uploading-a-file) and reference them in your request with a [container upload block](files.md#container-upload-blocks).
 
 **Example: creating and downloading an Excel file**
 
@@ -914,11 +914,11 @@ end
 client.files.delete(file_id)
 ```
 
-For complete details, see [Files API](build-with-claude/files.md).
+For complete details, see [Files API](files.md).
 
 ### Multi-turn conversations
 
-The response's `container` object carries the container's `id` and `expires_at` timestamp (see [Container reuse](agents-and-tools/tool-use/code-execution-tool.md) for lifetime details). Reuse the same container across multiple messages by specifying the container ID:
+The response's `container` object carries the container's `id` and `expires_at` timestamp (see [Container reuse](../agents-and-tools/tool-use/code-execution-tool.md#container-reuse) for lifetime details). Reuse the same container across multiple messages by specifying the container ID:
 
 ```bash cURL
 # Multi-turn container reuse doesn't translate well to a one-off shell
@@ -2128,13 +2128,13 @@ puts message
 
 ## Managing custom Skills
 
-**Custom Skills are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can read, invoke, and delete every custom Skill uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to, so keep Skills that must stay separate in their own [workspace](manage-claude/workspaces.md) and access them only with keys scoped to that workspace.
+**Custom Skills are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can read, invoke, and delete every custom Skill uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to, so keep Skills that must stay separate in their own [workspace](../manage-claude/workspaces.md#api-keys-and-resource-scoping) and access them only with keys scoped to that workspace.
 
-If you are building a multi-tenant platform on the Skills API, create a separate [workspace](manage-claude/workspaces.md) for each tenant. The workspace is the isolation boundary for custom Skills, so a workspace per tenant gives each tenant's Skills hard isolation from every other tenant. Each organization can have up to 100 workspaces by default (see [How workspaces work](manage-claude/workspaces.md)); if you need more for tenant isolation, contact your account team.
+If you are building a multi-tenant platform on the Skills API, create a separate [workspace](../manage-claude/workspaces.md) for each tenant. The workspace is the isolation boundary for custom Skills, so a workspace per tenant gives each tenant's Skills hard isolation from every other tenant. Each organization can have up to 100 workspaces by default (see [How workspaces work](../manage-claude/workspaces.md#how-workspaces-work)); if you need more for tenant isolation, contact your account team.
 
 ### Creating a Skill
 
-A Skill bundle is a directory containing a `SKILL.md` file at the top level with `name` and `description` YAML frontmatter, plus any supporting scripts or resources. See [Get started with Agent Skills in the API](agents-and-tools/agent-skills/quickstart.md) to author one, and the **Requirements** list following the examples for the full constraints.
+A Skill bundle is a directory containing a `SKILL.md` file at the top level with `name` and `description` YAML frontmatter, plus any supporting scripts or resources. See [Get started with Agent Skills in the API](../agents-and-tools/agent-skills/quickstart.md) to author one, and the **Requirements** list following the examples for the full constraints.
 
 Upload your custom Skill to make it available in your workspace. You can upload a zip archive or individual file objects. The Python SDK also provides a `files_from_dir` helper that accepts a directory path.
 
@@ -2431,7 +2431,7 @@ puts "Latest version: #{skill.latest_version_id}"
   * `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words ("anthropic", "claude")
   * `description`: Maximum 1024 characters, non-empty, no XML tags
 
-For complete request/response schemas, see the [Create Skill API reference](api/skills/create.md).
+For complete request/response schemas, see the [Create Skill API reference](../api/skills/create.md).
 
 ### Listing Skills
 
@@ -2575,7 +2575,7 @@ custom_skills = client.skills.list(
 )
 ```
 
-See the [List Skills API reference](api/skills/list.md) for pagination and filtering options.
+See the [List Skills API reference](../api/skills/list.md) for pagination and filtering options.
 
 ### Retrieving a Skill
 
@@ -2751,7 +2751,7 @@ Skills support versioning to manage updates safely:
 * Use `"latest"` to always get the most recent version
 * Create new versions when updating Skill files
 
-A new version is a complete snapshot, not a delta: upload the Skill's full file set each time. Files you omit are not carried over, and the `name` in the new version's `SKILL.md` must match the Skill's existing name. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](build-with-claude/skills-guide.md).
+A new version is a complete snapshot, not a delta: upload the Skill's full file set each time. Files you omit are not carried over, and the `name` in the new version's `SKILL.md` must match the Skill's existing name. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](skills-guide.md#creating-a-skill).
 
 ```bash cURL
 # Create a new version
@@ -3270,7 +3270,7 @@ latest_response = client.messages.create(
 puts latest_response
 ```
 
-See the [Create Skill Version API reference](api/skills/versions/create.md) for complete details.
+See the [Create Skill Version API reference](../api/skills/versions/create.md) for complete details.
 
 ***
 
@@ -3636,7 +3636,7 @@ Skills run in the code execution container with these limitations:
 * **No runtime package installation:** Only pre-installed packages available
 * **Isolated environment:** A fresh container is created unless you specify an existing container ID
 
-See [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md) for available packages.
+See [Code execution tool](../agents-and-tools/tool-use/code-execution-tool.md) for available packages.
 
 ***
 
@@ -3660,7 +3660,7 @@ Combine Skills when tasks involve multiple document types or domains:
 
 The SDK tabs in this section show the `container` value to include in a Messages request. The cURL and CLI tabs show the full request.
 
-**For production:** pin a specific version, so Skill updates never change your deployed behavior. If you omit `version` or set it to `"latest"`, requests use the newest version of the Skill, so a version uploaded by anyone in the [workspace](build-with-claude/skills-guide.md) immediately changes what your production agents run. The version ID comes from the create-version response in [Versioning](build-with-claude/skills-guide.md) or from the [List Skill Versions API](api/skills/versions/list.md). The ID is always a string, so quote it in JSON or YAML even when it looks numeric.
+**For production:** pin a specific version, so Skill updates never change your deployed behavior. If you omit `version` or set it to `"latest"`, requests use the newest version of the Skill, so a version uploaded by anyone in the [workspace](skills-guide.md#workspace-scoped-access) immediately changes what your production agents run. The version ID comes from the create-version response in [Versioning](skills-guide.md#versioning) or from the [List Skill Versions API](../api/skills/versions/list.md). The ID is always a string, so quote it in JSON or YAML even when it looks numeric.
 
 ```bash cURL
 # Pin to specific versions for stability
@@ -3940,7 +3940,7 @@ container = {
 
 ### Prompt caching considerations
 
-If you use [Prompt caching](build-with-claude/prompt-caching.md), changing the Skills list in your container breaks the cache. Skills render into the system prompt in a fixed order, so the same list produces the same cacheable prefix:
+If you use [Prompt caching](prompt-caching.md), changing the Skills list in your container breaks the cache. Skills render into the system prompt in a fixed order, so the same list produces the same cacheable prefix:
 
 ```bash cURL
 # Skills render into the system prompt in a fixed, cache-friendly order
@@ -4621,7 +4621,7 @@ The Skills API is out of beta and needs no beta header. Migrating off `skills-20
 
 To migrate:
 
-1. **Remove the beta header.** Drop `anthropic-beta: skills-2025-10-02` from your requests. In the SDKs, call `client.skills` instead of `client.beta.skills`; keeping `client.beta.skills` works only on the [SDK releases that no longer send the header](build-with-claude/skills-guide.md). Earlier releases send it from `client.beta.skills` even with no `betas` argument.
+1. **Remove the beta header.** Drop `anthropic-beta: skills-2025-10-02` from your requests. In the SDKs, call `client.skills` instead of `client.beta.skills`; keeping `client.beta.skills` works only on the [SDK releases that no longer send the header](skills-guide.md#sdk-beta-namespace). Earlier releases send it from `client.beta.skills` even with no `betas` argument.
 2. **Rename fields** in your code: `display_title` to `display_name`, `latest_version` to `latest_version_id`, and read `source.type` instead of comparing `source` to a string.
 3. **Use version IDs.** Wherever you stored an epoch-microsecond version, store the version's `id` instead, or use `latest`. Skill references in Messages requests accept a version ID, `latest`, or (for Anthropic Skills) the catalog version.
 4. **Review delete calls.** `DELETE /v1/skills/{skill_id}` now removes every version with the Skill. If you relied on the beta's refusal as a safeguard, add your own check.
@@ -4638,11 +4638,11 @@ Starting with Python SDK 1.2.0, TypeScript SDK 0.122.0, Go SDK 1.68.0, Java SDK 
 
 Agent Skills are not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
 
-For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
+For ZDR eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
 ## Audit logging
 
-If your organization has the [Compliance API](manage-claude/compliance-api.md) enabled, its [Activity Feed](manage-claude/compliance-activity-feed.md) records the creation and deletion of Skills and Skill versions made with a Claude API key or from the Claude Console. Operations that occur while the Compliance API is off are not recorded and cannot be recovered later, so [set up the Compliance API](manage-claude/compliance-api-access.md) before you rely on this audit trail.
+If your organization has the [Compliance API](../manage-claude/compliance-api.md) enabled, its [Activity Feed](../manage-claude/compliance-activity-feed.md) records the creation and deletion of Skills and Skill versions made with a Claude API key or from the Claude Console. Operations that occur while the Compliance API is off are not recorded and cannot be recovered later, so [set up the Compliance API](../manage-claude/compliance-api-access.md) before you rely on this audit trail.
 
 ## Next steps
 

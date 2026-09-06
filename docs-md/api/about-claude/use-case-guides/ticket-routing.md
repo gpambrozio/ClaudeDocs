@@ -151,7 +151,7 @@ In addition to intent, ticket routing and prioritization may also be influenced 
 
 ### Establish success criteria
 
-Work with your support team to [define clear success criteria](test-and-evaluate/develop-tests.md) with measurable benchmarks, thresholds, and goals.
+Work with your support team to [define clear success criteria](../../test-and-evaluate/develop-tests.md) with measurable benchmarks, thresholds, and goals.
 
 Here are some standard criteria and benchmarks when using LLMs for support ticket routing:
 
@@ -229,7 +229,7 @@ This metric calculates the average cost to resolve each support ticket. Efficien
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
-Many customers have found `claude-haiku-4-5-20251001` an ideal model for ticket routing, as it is the fastest and most cost-effective model in the Claude 4 family while still delivering excellent results. If your classification problem requires deep subject matter expertise or a large volume of intent categories, or complex reasoning, you may opt for the [larger Sonnet model](about-claude/models.md).
+Many customers have found `claude-haiku-4-5-20251001` an ideal model for ticket routing, as it is the fastest and most cost-effective model in the Claude 4 family while still delivering excellent results. If your classification problem requires deep subject matter expertise or a large volume of intent categories, or complex reasoning, you may opt for the [larger Sonnet model](../../models/overview.md).
 
 ### Build a strong prompt
 
@@ -310,7 +310,7 @@ Having Claude split its response into separate XML tag sections lets you use reg
 
 ### Deploy your prompt
 
-It’s hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](test-and-evaluate/develop-tests.md).
+It’s hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](../../test-and-evaluate/develop-tests.md).
 
 Build the deployment structure. Start by defining the method signature for wrapping the call to Claude. Extend the method you began writing earlier, which takes `ticket_contents` as input, so that it now returns a tuple of `reasoning` and `intent` as output. If you have an existing automation using traditional ML, you'll want to follow that method signature instead.
 
@@ -366,7 +366,7 @@ Because the entire reasoning and intent text must be generated before parsing, t
 
 Prompting often requires testing and optimization for it to be production ready. To determine the readiness of your solution, evaluate performance based on the success criteria and thresholds you established earlier.
 
-To run your evaluation, you need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](test-and-evaluate/develop-tests.md).
+To run your evaluation, you need test cases to run it on. The rest of this guide assumes you have already [developed your test cases](../../test-and-evaluate/develop-tests.md).
 
 ### Build an evaluation function
 
@@ -438,7 +438,7 @@ Having these thresholds allows you to quickly and easily tell at scale, and with
 
 ## Improve performance
 
-In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](build-with-claude/prompt-engineering/overview.md) & [guardrail implementation strategies](test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md). Here are some common scenarios:
+In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](../../build-with-claude/prompt-engineering/overview.md) & [guardrail implementation strategies](../../test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md). Here are some common scenarios:
 
 ### Use a taxonomic hierarchy for cases with 20+ intent categories
 

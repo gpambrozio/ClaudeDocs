@@ -2,7 +2,7 @@
 
 > Connect Claude Code to your Chrome browser to test web apps, debug with console logs, automate form filling, and extract data from web pages.
 
-Claude Code integrates with the [Claude in Chrome browser extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) to give you browser automation capabilities from the CLI or the [VS Code extension](vs-code.md). Build your code, then test and debug in the browser without switching contexts.
+Claude Code integrates with the [Claude in Chrome browser extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) to give you browser automation capabilities from the CLI or the [VS Code extension](vs-code.md#automate-browser-tasks-with-chrome). Build your code, then test and debug in the browser without switching contexts.
 
 Claude opens new tabs for browser tasks and shares your browser's login state, so it can access any site you're already signed into. Browser actions run in a visible Chrome window in real time. When Claude encounters a login page or CAPTCHA, it pauses and asks you to handle it manually.
 
@@ -32,10 +32,10 @@ Before using Claude Code with Chrome, you need:
 
 * [Google Chrome](https://www.google.com/chrome/), [Microsoft Edge](https://www.microsoft.com/edge), or another Chromium-based browser such as Brave, Arc, Vivaldi, or Opera
 * [Claude in Chrome extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) version 1.0.36 or higher, available in the Chrome Web Store
-* [Claude Code](quickstart.md)
+* [Claude Code](quickstart.md#step-1-install-claude-code)
 * A direct Anthropic plan (Pro, Max, Team, or Enterprise)
 
-Chrome integration also requires signing in with `/login`. If you authenticate with an API key or a long-lived token from [`claude setup-token`](authentication.md), Claude Code keeps Chrome integration off, even when you pass `--chrome`, because the browser extension can't authenticate with those credentials. Before v2.1.216, these sessions could enable Chrome integration, but every attempt to connect to the browser extension failed with a 403 error.
+Chrome integration also requires signing in with `/login`. If you authenticate with an API key or a long-lived token from [`claude setup-token`](authentication.md#generate-a-long-lived-token), Claude Code keeps Chrome integration off, even when you pass `--chrome`, because the browser extension can't authenticate with those credentials. Before v2.1.216, these sessions could enable Chrome integration, but every attempt to connect to the browser extension failed with a 403 error.
 
 Chrome integration is not available through third-party providers like Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. If you access Claude exclusively through a third-party provider, you need a separate claude.ai account to use this feature.
 
@@ -68,7 +68,7 @@ Run `/chrome` at any time to check the connection status, manage permissions, re
 
 If more than one browser is connected, you choose which one Claude uses. When a browser action starts before you've chosen, Claude prompts you to pick one. To switch browsers later, run `/chrome` and select **Select browser…**. Claude keeps using your choice even when another browser connects.
 
-For VS Code, see [browser automation in VS Code](vs-code.md).
+For VS Code, see [browser automation in VS Code](vs-code.md#automate-browser-tasks-with-chrome).
 
 ### Install the extension when Claude asks
 
@@ -80,7 +80,7 @@ The prompt offers three choices:
 * **Not now**: continues the task without browser tools. Claude Code can ask again in a later session.
 * **Don't ask again**: stops the prompt in future sessions. You can still set up the integration anytime with `/chrome`.
 
-If your organization blocks the `claude-in-chrome` MCP server with the [`deniedMcpServers` managed setting](managed-mcp.md), Claude Code doesn't show the install prompt.
+If your organization blocks the `claude-in-chrome` MCP server with the [`deniedMcpServers` managed setting](managed-mcp.md#policy-based-control-with-allowlists-and-denylists), Claude Code doesn't show the install prompt.
 
 ### Enable Chrome by default
 
@@ -88,7 +88,7 @@ To avoid passing `--chrome` each session, run `/chrome` and select "Enabled by d
 
 Claude Code starts normally when Chrome isn't running. Before v2.1.211, startup could hang when Chrome integration was enabled but Chrome wasn't running.
 
-In the [VS Code extension](vs-code.md), Chrome is available whenever the Chrome extension is installed. No additional flag is needed.
+In the [VS Code extension](vs-code.md#automate-browser-tasks-with-chrome), Chrome is available whenever the Chrome extension is installed. No additional flag is needed.
 
 Enabling Chrome by default in the CLI increases context usage since browser tools are always loaded. If you notice increased context consumption, disable this setting and use `--chrome` only when needed.
 
@@ -98,7 +98,7 @@ Site-level permissions are inherited from the Chrome extension. Manage permissio
 
 ### Browser tools in plan mode
 
-In [plan mode](permission-modes.md), browser tool calls that only read the page or browser state run without a permission prompt, and calls that change state prompt for approval.
+In [plan mode](permission-modes.md#analyze-before-you-edit-with-plan-mode), browser tool calls that only read the page or browser state run without a permission prompt, and calls that change state prompt for approval.
 
 * **Read-only calls**: `read_page`, `get_page_text`, `find`, reading console messages or network requests, and taking a screenshot
 * **State-changing calls**: clicks, typing, navigation, tab and window management, and recording a GIF
@@ -157,7 +157,7 @@ and attach logs/session.log to it
 
 Three restrictions apply to uploads:
 
-* **Permissions**: Claude can upload a file only when the session is allowed to read it, so [permission rules](settings-reference.md) that deny `Read` access to a file also block uploading it.
+* **Permissions**: Claude can upload a file only when the session is allowed to read it, so [permission rules](settings-reference.md#permission-settings) that deny `Read` access to a file also block uploading it.
 * **Size**: a single upload can include up to 10 MB of files in total.
 * **Hard links**: Claude refuses files that have multiple hard links, which is common inside package-manager stores like `node_modules`. Copy the file and upload the copy.
 
@@ -274,7 +274,7 @@ These are the most frequently encountered errors and how to resolve them:
 
 | Error                                       | Cause                                                                                                                                          | Fix                                                                                                                                                                                                                                                  |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Browser extension is not connected"        | Native messaging host cannot reach the extension, or your organization's IP allowlist rejects the connection to `bridge.claudeusercontent.com` | Restart Chrome and Claude Code, then run `/chrome` to reconnect. If your organization uses IP allowlisting and the error persists, see [Organization IP allowlists and proxy egress](network-config.md) |
+| "Browser extension is not connected"        | Native messaging host cannot reach the extension, or your organization's IP allowlist rejects the connection to `bridge.claudeusercontent.com` | Restart Chrome and Claude Code, then run `/chrome` to reconnect. If your organization uses IP allowlisting and the error persists, see [Organization IP allowlists and proxy egress](network-config.md#organization-ip-allowlists-and-proxy-egress) |
 | Extension shows "Not detected" in `/chrome` | Chrome extension is not installed or is disabled                                                                                               | Install or enable the extension in `chrome://extensions`                                                                                                                                                                                             |
 | "No tab available"                          | Claude tried to act before a tab was ready                                                                                                     | Ask Claude to create a new tab and retry                                                                                                                                                                                                             |
 | "Receiving end does not exist"              | Extension service worker went idle                                                                                                             | Run `/chrome` and select "Reconnect extension"                                                                                                                                                                                                       |
@@ -282,7 +282,7 @@ These are the most frequently encountered errors and how to resolve them:
 ## See also
 
 * [Computer use](computer-use.md): control native macOS apps when a task can't be done in a browser
-* [Use Claude Code in VS Code](vs-code.md): browser automation in the VS Code extension
+* [Use Claude Code in VS Code](vs-code.md#automate-browser-tasks-with-chrome): browser automation in the VS Code extension
 * [CLI reference](cli-reference.md): command-line flags including `--chrome`
 * [Common workflows](common-workflows.md): more ways to use Claude Code
 * [Data and privacy](data-usage.md): how Claude Code handles your data

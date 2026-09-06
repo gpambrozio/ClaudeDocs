@@ -7,7 +7,7 @@ description: Get validated JSON results from agent workflows
 ---
 
 ## Compatibility
-- [ZDR](manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](manage-claude/api-and-data-retention.md))
+- [ZDR](../manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))
 - Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-mythos-preview`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-5`, `claude-sonnet-4-6`, `claude-sonnet-4-5-20250929`, `claude-opus-4-5-20251101`, `claude-haiku-4-5-20251001`
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock [1], Google Cloud, Microsoft Foundry
 1. On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
@@ -359,7 +359,7 @@ puts response.content.find { it.type == :text }.text
 
 **Define your JSON schema**
 
-Create a JSON schema that describes the structure you want Claude to follow. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](build-with-claude/structured-outputs.md)).
+Create a JSON schema that describes the structure you want Claude to follow. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](structured-outputs.md#json-schema-limitations)).
 
 **Add the output_config.format parameter**
 
@@ -818,7 +818,7 @@ console.log(response.parsed_output!.email);
 
 **Type inference requires `as const`.** Use a literal object expression with a `const` assertion so TypeScript can narrow the property types. Without `as const`, the inferred type collapses to `unknown`.
 
-**Schema transformation.** By default, the helper transforms the schema the same way `zodOutputFormat()` does: removing unsupported constraints, adding `additionalProperties: false` to objects, and filtering string formats. Pass `jsonSchemaOutputFormat(schema, { transform: false })` to send your schema to the API unchanged. See [How SDK transformation works](build-with-claude/structured-outputs.md).
+**Schema transformation.** By default, the helper transforms the schema the same way `zodOutputFormat()` does: removing unsupported constraints, adding `additionalProperties: false` to objects, and filtering string formats. Pass `jsonSchemaOutputFormat(schema, { transform: false })` to send your schema to the API unchanged. See [How SDK transformation works](structured-outputs.md#how-sdk-transformation-works).
 
 **C#**
 
@@ -927,7 +927,7 @@ func generateSchema(v any) map[string]any {
 
 **Java**
 
-Java examples on this page use [JDK 25 compact source file](https://openjdk.org/jeps/512) syntax; see the [Java SDK requirements](cli-sdks-libraries/sdks/java.md) for the substitution on earlier JDKs.
+Java examples on this page use [JDK 25 compact source file](https://openjdk.org/jeps/512) syntax; see the [Java SDK requirements](../cli-sdks-libraries/sdks/java.md#requirements) for the substitution on earlier JDKs.
 
 **`outputConfig(Class<T>)` method**
 
@@ -968,7 +968,7 @@ If an error occurs while converting a JSON response to a Java class instance, th
 
 **Local schema validation**
 
-Structured outputs support a [subset of the JSON Schema language](build-with-claude/structured-outputs.md). The SDK generates schemas automatically from classes to align with this subset. The `outputConfig(Class<T>)` method performs a validation check on the schema derived from the specified class.
+Structured outputs support a [subset of the JSON Schema language](structured-outputs.md#json-schema-limitations). The SDK generates schemas automatically from classes to align with this subset. The `outputConfig(Class<T>)` method performs a validation check on the schema derived from the specified class.
 
 Key points:
 
@@ -2333,7 +2333,7 @@ puts message.parsed_output
 
 ## Strict tool use
 
-To enforce JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](agents-and-tools/tool-use/strict-tool-use.md).
+To enforce JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](../agents-and-tools/tool-use/strict-tool-use.md).
 
 ## Using both features together
 
@@ -2779,7 +2779,7 @@ When using structured outputs, Claude automatically receives an additional syste
 
 * Your input token count is slightly higher
 * The injected prompt costs you tokens like any other system prompt
-* Changing the `output_config.format` parameter will invalidate any [prompt cache](build-with-claude/prompt-caching.md) for that conversation thread
+* Changing the `output_config.format` parameter will invalidate any [prompt cache](prompt-caching.md) for that conversation thread
 
 ### JSON Schema limitations
 
@@ -2788,7 +2788,7 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 **Supported features**
 
 * All basic types: object, array, string, integer, number, boolean, null
-* `enum` (strings, numbers, bools, or nulls only - no complex types; see [Invalid outputs](build-with-claude/structured-outputs.md) for a capitalization caveat)
+* `enum` (strings, numbers, bools, or nulls only - no complex types; see [Invalid outputs](structured-outputs.md#invalid-outputs) for a capitalization caveat)
 * `const`
 * `anyOf` and `allOf` (with limitations - `allOf` with `$ref` not supported)
 * `$ref`, `$def`, and `definitions` (external `$ref` not supported)
@@ -2827,7 +2827,7 @@ If you use an unsupported feature, you'll receive a 400 error with details.
 
 Simple regex patterns work well. Complex patterns may result in 400 errors.
 
-The Python, TypeScript, Ruby, and PHP SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. The C# and Go SDKs do the same when the schema is derived from a native type. See [SDK-specific methods](build-with-claude/structured-outputs.md) for details.
+The Python, TypeScript, Ruby, and PHP SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. The C# and Go SDKs do the same when the schema is derived from a native type. See [SDK-specific methods](structured-outputs.md#sdk-specific-methods) for details.
 
 ### Property ordering
 
@@ -2945,23 +2945,23 @@ Prompts and responses are processed with ZDR when using structured outputs. Howe
 
 Structured outputs are HIPAA eligible, but **PHI must not be included in JSON schema definitions**. The API compiles JSON schemas into grammars that are cached separately from message content, and these cached schemas do not receive the same PHI protections as prompts and responses. Do not include PHI in schema property names, `enum` values, `const` values, or `pattern` regular expressions. PHI should only appear in message content (prompts and responses), where it is protected under HIPAA safeguards.
 
-For ZDR and HIPAA eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
+For ZDR and HIPAA eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
 ## Feature compatibility
 
 **Works with:**
 
-* **[Batch processing](build-with-claude/batch-processing.md):** Process structured outputs at scale with 50% discount
-* **[Token counting](build-with-claude/token-counting.md):** Count tokens without compilation
-* **[Streaming](build-with-claude/streaming.md):** Stream structured outputs like normal responses
+* **[Batch processing](batch-processing.md):** Process structured outputs at scale with 50% discount
+* **[Token counting](token-counting.md):** Count tokens without compilation
+* **[Streaming](streaming.md):** Stream structured outputs like normal responses
 * **Combined usage:** Use JSON outputs (`output_config.format`) and strict tool use (`strict: true`) together in the same request
 
 **Incompatible with:**
 
-* **[Citations](build-with-claude/citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
+* **[Citations](citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
 * **Message Prefilling:** Incompatible with JSON outputs
 
-**Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [thinking](build-with-claude/thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
+**Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [thinking](thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
 
 ## Next steps
 

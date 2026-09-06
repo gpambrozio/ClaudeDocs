@@ -34,12 +34,12 @@ The `/loop` [bundled skill](commands.md) is the quickest way to run a prompt on 
 | Prompt only               | `/loop check the deploy`    | Your prompt runs at an [interval Claude chooses](#let-claude-choose-the-interval) each iteration              |
 | Interval only, or nothing | `/loop`                     | The [built-in maintenance prompt](#run-the-built-in-maintenance-prompt) runs, or your `loop.md` if one exists |
 
-You can also pass a skill as the prompt, for example `/loop 20m /review-pr 1234`, to re-run that skill each iteration. A scheduled fire only runs skills that Claude is [allowed to invoke on its own](skills.md). The following reach Claude as plain text instead of executing:
+You can also pass a skill as the prompt, for example `/loop 20m /review-pr 1234`, to re-run that skill each iteration. A scheduled fire only runs skills that Claude is [allowed to invoke on its own](skills.md#control-who-invokes-a-skill). The following reach Claude as plain text instead of executing:
 
 * Built-in commands such as `/permissions`, `/model`, or `/clear`
-* Skills marked [`disable-model-invocation: true`](skills.md), including the bundled `/verify` skill
-* Skills withheld from Claude by a [`skillOverrides`](skills.md) setting or a `Skill` [deny rule](skills.md)
-* [MCP prompts](mcp.md) such as `/mcp__github__list_prs`
+* Skills marked [`disable-model-invocation: true`](skills.md#frontmatter-reference), including the bundled `/verify` skill
+* Skills withheld from Claude by a [`skillOverrides`](skills.md#override-skill-visibility-from-settings) setting or a `Skill` [deny rule](skills.md#restrict-claude’s-skill-access)
+* [MCP prompts](mcp.md#use-mcp-prompts-as-commands) such as `/mcp__github__list_prs`
 
 ### Run on a fixed interval
 
@@ -63,13 +63,13 @@ The example below checks CI and review comments, with Claude waiting longer betw
 /loop check whether CI passed and address any review comments
 ```
 
-In a session where the [Monitor tool is available](tools-reference.md), Claude may use it directly when you ask for a dynamic `/loop` schedule. Monitor runs a background script and streams each output line back, which avoids polling altogether and is often more token-efficient and responsive than re-running a prompt on an interval.
+In a session where the [Monitor tool is available](tools-reference.md#monitor-tool), Claude may use it directly when you ask for a dynamic `/loop` schedule. Monitor runs a background script and streams each output line back, which avoids polling altogether and is often more token-efficient and responsive than re-running a prompt on an interval.
 
 A dynamically scheduled loop appears in your [scheduled task list](#manage-scheduled-tasks) like any other task, so you can list or cancel it the same way. The [jitter rules](#jitter) don't apply to it, but the [seven-day expiry](#seven-day-expiry) does.
 
 <span id="loop-provider-differences" />
 
-Dynamically chosen intervals and the [built-in maintenance prompt](#run-the-built-in-maintenance-prompt) work on every provider, and with [feature-flag fetching](env-vars.md) turned off. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, or with fetching turned off, both require Claude Code v2.1.248 or later. In those cases, on earlier versions, a prompt with no interval runs on a fixed 10-minute schedule, and a `/loop` with no prompt prints the usage message.
+Dynamically chosen intervals and the [built-in maintenance prompt](#run-the-built-in-maintenance-prompt) work on every provider, and with [feature-flag fetching](env-vars.md#features-that-need-feature-flag-fetching) turned off. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, or with fetching turned off, both require Claude Code v2.1.248 or later. In those cases, on earlier versions, a prompt with no interval runs on a fixed 10-minute schedule, and a `/loop` with no prompt prints the usage message.
 
 ### Run the built-in maintenance prompt
 
@@ -197,10 +197,10 @@ Set `CLAUDE_CODE_DISABLE_CRON=1` in your environment to disable the scheduler en
 
 Session-scoped scheduling has inherent constraints:
 
-* Tasks only fire while Claude Code is running and idle. Closing the terminal or letting the session exit stops them firing. [Backgrounding the session](agent-view.md) carries `/loop` tasks over to a background session, which keeps running without a terminal.
+* Tasks only fire while Claude Code is running and idle. Closing the terminal or letting the session exit stops them firing. [Backgrounding the session](agent-view.md#from-inside-a-session) carries `/loop` tasks over to a background session, which keeps running without a terminal.
 * No catch-up for missed fires. If a task's scheduled time passes while Claude is busy on a long-running request, it fires once when Claude becomes idle, not once per missed interval.
 * Starting a fresh conversation clears all session-scoped tasks. Resuming with `claude --resume` or `claude --continue` restores recurring tasks that have not [expired](#seven-day-expiry) and one-shot tasks whose scheduled time has not yet passed. Background Bash and monitor tasks are never restored on resume.
-* With [feature-flag fetching off](env-vars.md), Claude Code stores a task you asked to keep across sessions in the project's `.claude` directory. When that directory or the task file in it is a symlink, Claude Code returns an error instead of scheduling the task.
+* With [feature-flag fetching off](env-vars.md#features-that-need-feature-flag-fetching), Claude Code stores a task you asked to keep across sessions in the project's `.claude` directory. When that directory or the task file in it is a symlink, Claude Code returns an error instead of scheduling the task.
 
 For cron-driven automation that needs to run unattended:
 

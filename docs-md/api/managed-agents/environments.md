@@ -8,9 +8,9 @@ description: Customize cloud sandboxes for your sessions.
 
 Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated sandbox (a fresh Linux container).
 
-This page covers `type: cloud` environments. To run sandboxes on your own infrastructure, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
+This page covers `type: cloud` environments. To run sandboxes on your own infrastructure, see [Self-hosted sandboxes](self-hosted-sandboxes.md).
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Create an environment
 
@@ -136,7 +136,7 @@ Use a unique, descriptive `name` so you can tell environments apart.
 
 ## Use the environment in a session
 
-Pass the environment ID as a string when [creating a session](managed-agents/sessions.md).
+Pass the environment ID as a string when [creating a session](sessions.md).
 
 ```bash cURL
 session=$(curl -fsS https://api.anthropic.com/v1/sessions \
@@ -216,7 +216,7 @@ session = client.beta.sessions.create(
 
 ### Packages
 
-The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version. If the environment uses `limited` [networking](managed-agents/environments.md), also set `networking.allow_package_managers` to `true`; otherwise the request is rejected with a 400 error.
+The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version. If the environment uses `limited` [networking](environments.md#networking), also set `networking.allow_package_managers` to `true`; otherwise the request is rejected with a 400 error.
 
 ```bash cURL
 environment=$(curl -fsS https://api.anthropic.com/v1/environments \
@@ -383,7 +383,7 @@ Supported package managers:
 
 ### Networking
 
-The `networking` field controls the sandbox's outbound network access. It does not affect the `web_search` or `web_fetch` tools, which run on Anthropic's servers; to restrict the sites those tools can reach, set `allowed_domains` or `blocked_domains` on the tool's entry in the agent toolset. See [Restrict web search and web fetch domains](managed-agents/tools.md).
+The `networking` field controls the sandbox's outbound network access. It does not affect the `web_search` or `web_fetch` tools, which run on Anthropic's servers; to restrict the sites those tools can reach, set `allowed_domains` or `blocked_domains` on the tool's entry in the agent toolset. See [Restrict web search and web fetch domains](tools.md#restrict-web-search-and-web-fetch-domains).
 
 | Mode           | Description                                                                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -696,7 +696,7 @@ client.beta.environments.delete(environment.id)
 
 ## Pre-installed runtimes
 
-Cloud sandboxes include common language runtimes, databases, and command-line tools out of the box. See [Cloud sandbox reference](managed-agents/cloud-sandboxes-reference.md) for the full list.
+Cloud sandboxes include common language runtimes, databases, and command-line tools out of the box. See [Cloud sandbox reference](cloud-sandboxes-reference.md) for the full list.
 
 ## Next steps
 

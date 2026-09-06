@@ -8,7 +8,7 @@ Custom tools extend the Agent SDK by letting you define your own functions that 
 
 | If you want to...                            | Do this                                                                                                                                                                                                       |
 | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Define a tool                                | Use [`@tool`](agent-sdk/python.md) (Python) or [`tool()`](agent-sdk/typescript.md) (TypeScript) with a name, description, schema, and handler. See [Create a custom tool](#create-a-custom-tool). |
+| Define a tool                                | Use [`@tool`](python.md#tool) (Python) or [`tool()`](typescript.md#tool) (TypeScript) with a name, description, schema, and handler. See [Create a custom tool](#create-a-custom-tool). |
 | Register a tool with Claude                  | Wrap in `create_sdk_mcp_server` / `createSdkMcpServer` and pass to `mcpServers` in `query()`. See [Call a custom tool](#call-a-custom-tool).                                                                  |
 | Pre-approve a tool                           | Add to your allowed tools. See [Configure allowed tools](#configure-allowed-tools).                                                                                                                           |
 | Remove a built-in tool from Claude's context | Pass a `tools` array listing only the built-ins you want. See [Configure allowed tools](#configure-allowed-tools).                                                                                            |
@@ -16,11 +16,11 @@ Custom tools extend the Agent SDK by letting you define your own functions that 
 | Control the error message Claude reads       | Return `isError: true` to compose the message instead of surfacing the raw exception. See [Handle errors](#handle-errors).                                                                                    |
 | Return images or files                       | Use `image` or `resource` blocks in the content array. See [Return images and resources](#return-images-and-resources).                                                                                       |
 | Return a machine-readable JSON result        | Set `structuredContent` on the result. See [Return structured data](#return-structured-data).                                                                                                                 |
-| Scale to many tools                          | Use [tool search](agent-sdk/tool-search.md) to load tools on demand.                                                                                                                                         |
+| Scale to many tools                          | Use [tool search](tool-search.md) to load tools on demand.                                                                                                                                         |
 
 ## Create a custom tool
 
-A tool is defined by four parts, passed as arguments to the [`tool()`](agent-sdk/typescript.md) helper in TypeScript or the [`@tool`](agent-sdk/python.md) decorator in Python:
+A tool is defined by four parts, passed as arguments to the [`tool()`](typescript.md#tool) helper in TypeScript or the [`@tool`](python.md#tool) decorator in Python:
 
 * **Name:** a unique identifier Claude uses to call the tool.
 * **Description:** what the tool does. Claude reads this to decide when to call it.
@@ -30,7 +30,7 @@ A tool is defined by four parts, passed as arguments to the [`tool()`](agent-sdk
   * `structuredContent` (optional): a JSON object holding the result as machine-readable data, returned alongside `content`. See [Return structured data](#return-structured-data).
   * `isError` (optional): set to `true` to signal a tool failure so Claude can react to it. See [Handle errors](#handle-errors).
 
-After defining a tool, wrap it in a server with [`createSdkMcpServer`](agent-sdk/typescript.md) (TypeScript) or [`create_sdk_mcp_server`](agent-sdk/python.md) (Python). The server runs in-process inside your application, not as a separate process.
+After defining a tool, wrap it in a server with [`createSdkMcpServer`](typescript.md#createsdkmcpserver) (TypeScript) or [`create_sdk_mcp_server`](python.md#create_sdk_mcp_server) (Python). The server runs in-process inside your application, not as a separate process.
 
 ### Weather tool example
 
@@ -112,7 +112,7 @@ const weatherServer = createSdkMcpServer({
 });
 ```
 
-See the [`tool()`](agent-sdk/typescript.md) TypeScript reference or the [`@tool`](agent-sdk/python.md) Python reference for full parameter details, including JSON Schema input formats and return value structure.
+See the [`tool()`](typescript.md#tool) TypeScript reference or the [`@tool`](python.md#tool) Python reference for full parameter details, including JSON Schema input formats and return value structure.
 
 To make a parameter optional: in TypeScript, add `.default()` to the Zod field. In Python, the dict schema treats every key as required, so leave the parameter out of the schema, mention it in the description string, and read it with `args.get()` in the handler. The [`get_precipitation_chance` tool below](#add-more-tools) shows both patterns.
 
@@ -246,7 +246,7 @@ const weatherServer = createSdkMcpServer({
 });
 ```
 
-[Tool search](agent-sdk/tool-search.md) is on by default and defers SDK MCP tools: Claude sees each tool's name in a compact list and loads its full schema on demand. With tool search disabled, every tool in this array consumes context window space on every turn. In TypeScript, pass `alwaysLoad: true` in the `extras` argument of [`tool()`](agent-sdk/typescript.md) or in the options of [`createSdkMcpServer()`](agent-sdk/typescript.md) to keep a tool's full schema in the initial prompt.
+[Tool search](tool-search.md) is on by default and defers SDK MCP tools: Claude sees each tool's name in a compact list and loads its full schema on demand. With tool search disabled, every tool in this array consumes context window space on every turn. In TypeScript, pass `alwaysLoad: true` in the `extras` argument of [`tool()`](typescript.md#tool) or in the options of [`createSdkMcpServer()`](typescript.md#createsdkmcpserver) to keep a tool's full schema in the initial prompt.
 
 ### Add tool annotations
 
@@ -291,7 +291,7 @@ tool(
 );
 ```
 
-See `ToolAnnotations` in the [TypeScript](agent-sdk/typescript.md) or [Python](agent-sdk/python.md) reference.
+See `ToolAnnotations` in the [TypeScript](typescript.md#toolannotations) or [Python](python.md#toolannotations) reference.
 
 ## Control tool access
 
@@ -299,16 +299,16 @@ The [weather tool example](#weather-tool-example) registered a server and listed
 
 ### Configure allowed tools
 
-The `tools` option and the allowed/disallowed lists affect two layers: availability, which controls whether a tool appears in Claude's context, and permission, which controls whether a call is approved once Claude attempts it. `tools` and bare-name `disallowedTools` entries change availability. `allowedTools` and scoped `disallowedTools` rules change permission. If you name one of the [task-tracking tools](agent-sdk/todo-tracking.md) in `allowedTools`, Claude Code also opts the session in.
+The `tools` option and the allowed/disallowed lists affect two layers: availability, which controls whether a tool appears in Claude's context, and permission, which controls whether a call is approved once Claude attempts it. `tools` and bare-name `disallowedTools` entries change availability. `allowedTools` and scoped `disallowedTools` rules change permission. If you name one of the [task-tracking tools](todo-tracking.md#model-availability) in `allowedTools`, Claude Code also opts the session in.
 
 | Option                    | Layer        | Effect                                                                                                                                                                                                          |
 | :------------------------ | :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tools: ["Read", "Grep"]` | Availability | Only the listed built-ins are in Claude's context. Unlisted built-ins are removed. MCP tools are unaffected.                                                                                                    |
 | `tools: []`               | Availability | All built-ins are removed. Claude can only use your MCP tools.                                                                                                                                                  |
-| allowed tools             | Permission   | Listed tools run without a permission prompt. Other unlisted tools remain available; calls go through the [permission flow](agent-sdk/permissions.md).                                                         |
+| allowed tools             | Permission   | Listed tools run without a permission prompt. Other unlisted tools remain available; calls go through the [permission flow](permissions.md).                                                         |
 | disallowed tools          | Both         | A bare tool name such as `"Bash"` removes the tool from Claude's context, the same as omitting it from `tools`. A scoped rule such as `"Bash(rm *)"` leaves the tool in context and denies only matching calls. |
 
-To remove a built-in entirely, omit it from `tools` or list its bare name in `disallowedTools` (Python: `disallowed_tools`); both keep the tool out of context so Claude never attempts it. A scoped `disallowedTools` rule blocks matching calls but leaves the tool visible, so Claude may waste a turn trying it. See [Configure permissions](agent-sdk/permissions.md) for the full evaluation order.
+To remove a built-in entirely, omit it from `tools` or list its bare name in `disallowedTools` (Python: `disallowed_tools`); both keep the tool out of context so Claude never attempts it. A scoped `disallowedTools` rule blocks matching calls but leaves the tool visible, so Claude may waste a turn trying it. See [Configure permissions](permissions.md) for the full evaluation order.
 
 ## Handle errors
 
@@ -420,7 +420,7 @@ tool(
 
 The `content` array in a tool result accepts `text`, `image`, `audio`, `resource`, and `resource_link` blocks. You can mix them in the same response. In TypeScript, the SDK saves audio blocks to disk and Claude receives a text block with the saved file path; in Python, the SDK drops audio blocks from the tool result and logs a warning.
 
-Claude receives each resource link block as a text block containing the link's name, URI, and description. In TypeScript, your application also receives the links themselves as [`resourceLinks`](agent-sdk/typescript.md) on the user message's `tool_use_result`; in Python, the SDK flattens them to text before the CLI sees the result, so the Python [`resourceLinks` key](agent-sdk/python.md) is never produced for in-process tools.
+Claude receives each resource link block as a text block containing the link's name, URI, and description. In TypeScript, your application also receives the links themselves as [`resourceLinks`](typescript.md#sdkmcpresourcelink) on the user message's `tool_use_result`; in Python, the SDK flattens them to text before the CLI sees the result, so the Python [`resourceLinks` key](python.md#usermessage) is never produced for in-process tools.
 
 ### Images
 
@@ -555,7 +555,7 @@ return {
 };
 ```
 
-The Python `@tool` decorator forwards only `content` and `is_error` from the handler's return dict. To return `structuredContent` from Python, run a [standalone MCP server](agent-sdk/mcp.md) instead of an in-process SDK server.
+The Python `@tool` decorator forwards only `content` and `is_error` from the handler's return dict. To return `structuredContent` from Python, run a [standalone MCP server](mcp.md) instead of an in-process SDK server.
 
 ## Example: unit converter
 
@@ -721,7 +721,7 @@ const converterServer = createSdkMcpServer({
 
 Once the server is defined, pass it to `query` the same way as the weather example. This example sends three different prompts in a loop to show the same tool handling different unit types. For each response, it inspects `AssistantMessage` objects (which contain the tool calls Claude made during that turn) and prints each `ToolUseBlock` before printing the final `ResultMessage` text. This lets you see when Claude is using the tool versus answering from its own knowledge.
 
-Because [tool search](agent-sdk/tool-search.md) is on by default, the output may also include a `ToolSearch` call as Claude loads the deferred tool schema.
+Because [tool search](tool-search.md) is on by default, the output may also include a `ToolSearch` call as Claude loads the deferred tool schema.
 
 ```python Python
 import asyncio
@@ -806,9 +806,9 @@ You can mix the patterns on this page in the same server: a single server can ho
 
 From here:
 
-* If your server grows to dozens of tools, see [tool search](agent-sdk/tool-search.md) to defer loading them until Claude needs them.
-* To connect to external MCP servers (filesystem, GitHub, Slack) instead of building your own, see [Connect MCP servers](agent-sdk/mcp.md).
-* To control which tools run automatically versus requiring approval, see [Configure permissions](agent-sdk/permissions.md).
+* If your server grows to dozens of tools, see [tool search](tool-search.md) to defer loading them until Claude needs them.
+* To connect to external MCP servers (filesystem, GitHub, Slack) instead of building your own, see [Connect MCP servers](mcp.md).
+* To control which tools run automatically versus requiring approval, see [Configure permissions](permissions.md).
 
 ---
 

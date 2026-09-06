@@ -8,22 +8,22 @@ description: Control when agent and MCP tools execute.
 
 Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically or wait for your approval. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Permission policy types
 
 | Policy         | Behavior                                                                                                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `always_allow` | The tool executes automatically with no confirmation.                                                                                                                                                                                |
-| `always_ask`   | The session pauses and waits for your approval before executing. See [Respond to confirmation requests](managed-agents/permission-policies.md) for the event flow. |
+| `always_ask`   | The session pauses and waits for your approval before executing. See [Respond to confirmation requests](permission-policies.md#respond-to-confirmation-requests) for the event flow. |
 
 Each toolset kind has its own default: the agent toolset defaults to `always_allow`, and MCP toolsets default to `always_ask`.
 
-A permission policy controls when an enabled tool runs. To remove a tool from the agent entirely, disable it instead. See [Disabling specific tools](managed-agents/tools.md).
+A permission policy controls when an enabled tool runs. To remove a tool from the agent entirely, disable it instead. See [Disabling specific tools](tools.md#disabling-specific-tools).
 
 ## Set a policy for a toolset
 
-You set permission policies in the agent's `tools` configuration when you create the agent, and you can change them later by [updating the agent](managed-agents/agent-setup.md). Running sessions keep the toolset configuration they were created with. Updates apply to sessions created afterward.
+You set permission policies in the agent's `tools` configuration when you create the agent, and you can change them later by [updating the agent](agent-setup.md#update-an-agent). Running sessions keep the toolset configuration they were created with. Updates apply to sessions created afterward.
 
 ### Agent toolset permissions
 
@@ -460,7 +460,7 @@ agent = client.beta.agents.create(
 
 ## Override an individual tool policy
 
-Use the `configs` array to override the default for individual tools. The `name` values for the agent toolset are listed in [Available tools](managed-agents/tools.md). This example allows the full agent toolset by default but requires confirmation before any bash command runs:
+Use the `configs` array to override the default for individual tools. The `name` values for the agent toolset are listed in [Available tools](tools.md#available-tools). This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
 ```bash cURL
 tools='[
@@ -648,7 +648,7 @@ tools = [
 ]
 ```
 
-Pass this `tools` configuration in the agent create request (the CLI tab shows the complete command). MCP toolsets support the same per-tool overrides, with `name` set to the tool name reported by the MCP server. See [Configure which MCP tools are available](managed-agents/mcp-connector.md).
+Pass this `tools` configuration in the agent create request (the CLI tab shows the complete command). MCP toolsets support the same per-tool overrides, with `name` set to the tool name reported by the MCP server. See [Configure which MCP tools are available](mcp-connector.md#configure-which-mcp-tools-are-available).
 
 ## Respond to confirmation requests
 
@@ -659,7 +659,7 @@ When the agent invokes a tool with an `always_ask` policy:
 3. Send a `user.tool_confirmation` event for each blocking event, passing the event ID in the `tool_use_id` parameter. Set `result` to `"allow"` or `"deny"`. Use `deny_message` to explain a denial. You can send several confirmations in a single `events` request.
 4. Once all blocking events are resolved, the session transitions back to `running`. Allowed tools execute. Denied tools do not run, and the agent receives a tool result saying the call was rejected, including your `deny_message`.
 
-In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about receiving events in the [Session event stream](managed-agents/events-and-streaming.md) guide, or [subscribe to webhooks](managed-agents/webhooks.md) to be notified when a session pauses for input.
+In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about receiving events in the [Session event stream](events-and-streaming.md#integrating-events) guide, or [subscribe to webhooks](webhooks.md) to be notified when a session pauses for input.
 
 ```bash cURL
 # Allow the tool to execute
@@ -912,7 +912,7 @@ client.beta.sessions.events.send_(
 
 ## Custom tools
 
-Permission policies do not apply to custom tools. When the agent invokes a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to execute it before sending back a `user.custom_tool_result`. See [Session event stream](managed-agents/events-and-streaming.md) for the full flow.
+Permission policies do not apply to custom tools. When the agent invokes a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to execute it before sending back a `user.custom_tool_result`. See [Session event stream](events-and-streaming.md#handling-custom-tool-calls) for the full flow.
 
 ## Next steps
 

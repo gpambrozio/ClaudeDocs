@@ -38,7 +38,7 @@ A few features aren't available in WSL sessions yet: the integrated terminal, co
 
 ## Managed devices
 
-On devices managed by an organization, WSL sessions may be unavailable. If session start fails with a message that the device is managed, that's controlled by your administrator. Administrators: see [how settings reach devices](admin-setup.md) in the deployment guide.
+On devices managed by an organization, WSL sessions may be unavailable. If session start fails with a message that the device is managed, that's controlled by your administrator. Administrators: see [how settings reach devices](admin-setup.md#decide-how-settings-reach-devices) in the deployment guide.
 
 ---
 

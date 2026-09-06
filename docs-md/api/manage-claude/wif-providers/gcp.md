@@ -12,7 +12,7 @@ This guide shows how to register the Google issuer with Anthropic, bind a Google
 
 ## Prerequisites
 
-* Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
+* Familiarity with [WIF concepts](../workload-identity-federation.md#concepts): service accounts, federation issuers, and federation rules.
 * A Google Cloud project with a workload running on Cloud Run, Cloud Functions, App Engine, Compute Engine, or GKE.
 * A user-managed Google service account attached to that workload (not the Compute Engine default service account).
 * Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
@@ -45,7 +45,7 @@ gcloud auth print-identity-token \
   --include-email
 ```
 
-The SDK equivalents are shown in [Acquire and use the token](manage-claude/wif-providers/gcp.md).
+The SDK equivalents are shown in [Acquire and use the token](gcp.md#acquire-and-use-the-token).
 
 The decoded token payload looks like this:
 
@@ -81,13 +81,13 @@ With this binding in place, the GKE metadata server returns a Google-signed toke
 
 A `format=full` token from GKE additionally includes `google.compute_engine.project_id`, `google.compute_engine.zone`, and `google.compute_engine.instance_name` claims, which you can reference in a federation rule's `condition` matcher (a CEL expression like `claims.google.compute_engine.project_id == "my-project"`) to scope access to a specific cluster or node pool.
 
-If you do not want to bind Kubernetes service accounts to Google service accounts, GKE pods can instead use the cluster's own OIDC issuer (`https://container.googleapis.com/v1/projects/PROJECT/locations/REGION/clusters/CLUSTER`) with a projected `serviceAccountToken` volume. That path uses a per-cluster issuer rather than `accounts.google.com`. See [Use WIF with Kubernetes](manage-claude/wif-providers/kubernetes.md) for that pattern.
+If you do not want to bind Kubernetes service accounts to Google service accounts, GKE pods can instead use the cluster's own OIDC issuer (`https://container.googleapis.com/v1/projects/PROJECT/locations/REGION/clusters/CLUSTER`) with a projected `serviceAccountToken` volume. That path uses a per-cluster issuer rather than `accounts.google.com`. See [Use WIF with Kubernetes](kubernetes.md) for that pattern.
 
 ## Configure Anthropic
 
 In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Google Cloud** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
-The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](manage-claude/wif-admin-api.md):
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](../wif-admin-api.md):
 
 **Federation issuer:** Google publishes its OIDC discovery document publicly, so use discovery mode. This single issuer covers every Google Cloud surface (Cloud Run, GCE, Cloud Functions, App Engine, and GKE with Workload Identity). Differentiate workloads with rules, not issuers.
 
@@ -426,7 +426,7 @@ curl -sS -H "Metadata-Flavor: Google" \
   | jq -rR 'split(".")[1] | gsub("-";"+") | gsub("_";"/") | @base64d | fromjson'
 ```
 
-Check that `iss` is `https://accounts.google.com`, `aud` is `https://api.anthropic.com`, and `email` matches the value in your federation rule. Then run the exchange from the previous section. A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Google Cloud-side cause is the `email` claim missing (request the token with `format=full` so it is included).
+Check that `iss` is `https://accounts.google.com`, `aud` is `https://api.anthropic.com`, and `email` matches the value in your federation rule. Then run the exchange from the previous section. A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](../wif-reference.md#troubleshoot-a-failed-exchange); the most common Google Cloud-side cause is the `email` claim missing (request the token with `format=full` so it is included).
 
 ## Scope your rule
 
@@ -441,7 +441,7 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 ## Next steps
 
-* Read the [Workload Identity Federation](manage-claude/workload-identity-federation.md) page for the full resource model and SDK credential precedence.
+* Read the [Workload Identity Federation](../workload-identity-federation.md) page for the full resource model and SDK credential precedence.
 * Add a separate federation rule per environment (production, staging) so you can revoke one without affecting the others.
 
 ---

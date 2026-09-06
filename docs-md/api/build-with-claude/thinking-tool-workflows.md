@@ -6,18 +6,18 @@ url: https://platform.claude.com/docs/en/build-with-claude/thinking-tool-workflo
 description: Walk through a complete two-turn tool-use round trip that preserves thinking blocks correctly, and see how interleaved thinking changes the flow.
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
-This page walks through a complete two-turn tool-use round trip with thinking enabled: Claude thinks, requests a tool call, receives the result, and finishes its answer, with the thinking blocks handled correctly at every step. The full rules live on the [Thinking](build-with-claude/thinking.md) page, in [Thinking with tool use](build-with-claude/thinking.md) and [Preserving thinking blocks](build-with-claude/thinking.md); this page shows those rules applied in runnable code.
+This page walks through a complete two-turn tool-use round trip with thinking enabled: Claude thinks, requests a tool call, receives the result, and finishes its answer, with the thinking blocks handled correctly at every step. The full rules live on the [Thinking](thinking.md) page, in [Thinking with tool use](thinking.md#thinking-with-tool-use) and [Preserving thinking blocks](thinking.md#preserving-thinking-blocks); this page shows those rules applied in runnable code.
 
 ## The rules this walkthrough applies
 
 Each link leads to the full statement on the Thinking page:
 
-* [Limit tool choice to `auto` or `none` in manual mode](build-with-claude/thinking.md): `tool_choice` options that force tool use return an error with manual extended thinking (`thinking: {type: "enabled"}`); adaptive thinking supports forced tool use.
-* [Keep one thinking configuration per assistant turn](build-with-claude/thinking.md): a tool-use loop is one assistant turn, so change the configuration only between turns.
-* [Pass thinking blocks back complete and unmodified](build-with-claude/thinking.md): when you return a tool result, the thinking blocks from the assistant message must come back with it.
-* [Echo the assistant message exactly as received](build-with-claude/thinking.md): rebuilding the message or filtering out `redacted_thinking` blocks triggers a 400 error.
+* [Limit tool choice to `auto` or `none` in manual mode](thinking.md#thinking-with-tool-use): `tool_choice` options that force tool use return an error with manual extended thinking (`thinking: {type: "enabled"}`); adaptive thinking supports forced tool use.
+* [Keep one thinking configuration per assistant turn](thinking.md#thinking-with-tool-use): a tool-use loop is one assistant turn, so change the configuration only between turns.
+* [Pass thinking blocks back complete and unmodified](thinking.md#preserving-thinking-blocks): when you return a tool result, the thinking blocks from the assistant message must come back with it.
+* [Echo the assistant message exactly as received](thinking.md#preserving-thinking-blocks): rebuilding the message or filtering out `redacted_thinking` blocks triggers a 400 error.
 
 The samples use adaptive thinking; on models that support only extended thinking, substitute `thinking: {type: "enabled", budget_tokens: N}`. The round-trip rules are identical.
 
@@ -27,7 +27,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
 
 **Make the first request with a tool available**
 
-Send a request with adaptive thinking enabled and the tool defined. Apart from the `thinking` parameter, this is a standard [tool use](agents-and-tools/tool-use/overview.md) request:
+Send a request with adaptive thinking enabled and the tool defined. Apart from the `thinking` parameter, this is a standard [tool use](../agents-and-tools/tool-use/overview.md) request:
 
 ```bash CLI
 ant messages create --transform content <<'YAML'
@@ -257,7 +257,7 @@ puts message
 
 You should see `thinking`, `text`, and `tool_use` blocks in the response content on a run where Claude chose to think (on simpler requests, adaptive mode may skip the thinking block). Keep this content array intact: the next step sends it back verbatim.
 
-To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including claude-opus-4-8, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](build-with-claude/thinking.md).
+To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including claude-opus-4-8, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](thinking.md#controlling-thinking-display).
 
 ```json Output
 {
@@ -780,7 +780,7 @@ puts continuation
 
 **Read the final response**
 
-You should see Claude complete the turn with text. Because [interleaved thinking](build-with-claude/thinking.md) is automatic in adaptive mode, the continuation can also open with a new thinking block before the final text:
+You should see Claude complete the turn with text. Because [interleaved thinking](thinking.md#interleaved-thinking) is automatic in adaptive mode, the continuation can also open with a new thinking block before the final text:
 
 ```json Output
 {
@@ -795,7 +795,7 @@ You should see Claude complete the turn with text. Because [interleaved thinking
 
 ## How interleaved thinking changes the flow
 
-Interleaved thinking lets Claude think between tool calls, reasoning about each tool result before acting on it. The concept and per-model availability are covered in [Interleaved thinking](build-with-claude/thinking.md) on the Thinking page; interleaving changes where thinking blocks appear, not whether tool calls can chain. The following comparison shows what interleaved thinking changes in a two-tool workflow:
+Interleaved thinking lets Claude think between tool calls, reasoning about each tool result before acting on it. The concept and per-model availability are covered in [Interleaved thinking](thinking.md#interleaved-thinking) on the Thinking page; interleaving changes where thinking blocks appear, not whether tool calls can chain. The following comparison shows what interleaved thinking changes in a two-tool workflow:
 
 **Tool use without interleaved thinking**
 

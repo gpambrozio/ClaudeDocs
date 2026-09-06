@@ -64,7 +64,7 @@ During installation, you also grant permissions that other Claude features use. 
 Add one of the following secrets to your repository, depending on how you authenticate. See GitHub's guide to [using secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions).
 
 * `ANTHROPIC_API_KEY`: a Claude API key from the [Claude Console](https://platform.claude.com)
-* `CLAUDE_CODE_OAUTH_TOKEN`: an OAuth token that authenticates with your Claude subscription, available on Pro, Max, Team, and Enterprise plans. Generate one by running `claude setup-token` locally. See [Generate a long-lived token](authentication.md)
+* `CLAUDE_CODE_OAUTH_TOKEN`: an OAuth token that authenticates with your Claude subscription, available on Pro, Max, Team, and Enterprise plans. Generate one by running `claude setup-token` locally. See [Generate a long-lived token](authentication.md#generate-a-long-lived-token)
 
 In workflow files, pass the secret to the matching input: `anthropic_api_key` for an API key, or `claude_code_oauth_token` for an OAuth token.
 
@@ -107,7 +107,7 @@ If you configured a [cloud provider](github-actions-cloud-providers.md), also de
 
 ### GitHub App permissions
 
-The [Claude GitHub App](https://github.com/apps/claude) is shared by every Claude feature that integrates with GitHub, including the Claude Code GitHub Action, [Code Review](code-review.md), and [auto-fix for pull requests](claude-code-on-the-web.md) on Claude Code on the web. A GitHub App has a single permission set covering all of its features, so the set includes some permissions that the Claude Code GitHub Action doesn't use.
+The [Claude GitHub App](https://github.com/apps/claude) is shared by every Claude feature that integrates with GitHub, including the Claude Code GitHub Action, [Code Review](code-review.md), and [auto-fix for pull requests](claude-code-on-the-web.md#auto-fix-pull-requests) on Claude Code on the web. A GitHub App has a single permission set covering all of its features, so the set includes some permissions that the Claude Code GitHub Action doesn't use.
 
 When you install the app, you grant the following permissions:
 
@@ -242,7 +242,7 @@ Claude skips draft and closed pull requests, pull requests it judges not to need
 
 ### Run on a schedule
 
-With a `prompt` input, the Claude Code GitHub Action runs in automation mode on any GitHub event, including a cron schedule. For a plain-text prompt, Claude has no shell or GitHub API access until you grant the tools the prompt needs, with `--allowedTools` in `claude_args` or a [`permissions.allow` rule](permissions.md) in the `settings` input. If you invoke a skill instead, Claude can use the tools its [`allowed-tools` frontmatter](skills.md) grants. GitHub runs scheduled workflows only from the default branch and, in public repositories, disables the schedule after 60 days without repository activity.
+With a `prompt` input, the Claude Code GitHub Action runs in automation mode on any GitHub event, including a cron schedule. For a plain-text prompt, Claude has no shell or GitHub API access until you grant the tools the prompt needs, with `--allowedTools` in `claude_args` or a [`permissions.allow` rule](permissions.md#permission-rule-syntax) in the `settings` input. If you invoke a skill instead, Claude can use the tools its [`allowed-tools` frontmatter](skills.md#pre-approve-tools-for-a-skill) grants. GitHub runs scheduled workflows only from the default branch and, in public repositories, disables the schedule after 60 days without repository activity.
 
 This workflow generates a report in the workflow run log at 09:00 UTC each day. Its `claude_args` line [passes CLI arguments](#pass-cli-arguments) that select the model and allow two GitHub MCP tools. Claude reads commits and issues through the GitHub API with those tools, so you can omit the checkout step:
 
@@ -328,7 +328,7 @@ With all three providers, you authenticate through OIDC identity federation inst
 ### Authentication errors
 
 * Confirm the API key or OAuth token is valid by testing it locally with `claude` before debugging the workflow
-* For Bedrock, Agent Platform, and Foundry, see the cloud provider page's [troubleshooting section](github-actions-cloud-providers.md)
+* For Bedrock, Agent Platform, and Foundry, see the cloud provider page's [troubleshooting section](github-actions-cloud-providers.md#troubleshooting)
 
 For more solutions, see the Claude Code GitHub Action's [FAQ](https://github.com/anthropics/claude-code-action/blob/main/docs/faq.md).
 

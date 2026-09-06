@@ -8,7 +8,7 @@ description: Let genuine installations of your iOS or macOS app call the Claude 
 
 App Attest authenticates iOS and macOS apps that call the Claude API directly from the device, with usage billed to your workspace. This page explains how App Attest works, how to register your app in the Claude Console, and how to revoke an app integration.
 
-Apps use App Attest through the [Claude for Foundation Models](https://github.com/anthropics/ClaudeForFoundationModels) Swift package, which is in beta: it requires the OS 27 betas, and APIs might change during the beta. For the Swift configuration, see [Apple Foundation Models](cli-sdks-libraries/libraries/apple-foundation-models.md).
+Apps use App Attest through the [Claude for Foundation Models](https://github.com/anthropics/ClaudeForFoundationModels) Swift package, which is in beta: it requires the OS 27 betas, and APIs might change during the beta. For the Swift configuration, see [Apple Foundation Models](../cli-sdks-libraries/libraries/apple-foundation-models.md#app-attest-production).
 
 ## How App Attest works
 
@@ -18,11 +18,11 @@ App Attest authentication is available only when your app calls the Claude API d
 
 The first time your app uses Claude on a device, the app requests a challenge from Anthropic, attests the device with Apple's `DCAppAttestService`, and exchanges the verified attestation for an access token. The Claude for Foundation Models package runs this flow automatically and requests new tokens as they expire; there is no attestation code for you to write.
 
-Tokens are scoped to your workspace, expire after one hour, and authorize only [Messages API](api/messages/create.md) calls. They carry no end-user identity: App Attest identifies your app, not the person using it, so handle any per-user logic in your app.
+Tokens are scoped to your workspace, expire after one hour, and authorize only [Messages API](../api/messages/create.md) calls. They carry no end-user identity: App Attest identifies your app, not the person using it, so handle any per-user logic in your app.
 
 ## Set up App Attest
 
-App Attest requires a physical device. The Simulator, and hardware without a Secure Enclave, cannot perform App Attest. While developing in the Simulator, authenticate with an [API key](manage-claude/authentication.md) instead.
+App Attest requires a physical device. The Simulator, and hardware without a Secure Enclave, cannot perform App Attest. While developing in the Simulator, authenticate with an [API key](authentication.md#api-keys) instead.
 
 To set up App Attest, you need your Apple Developer Team ID and the admin, owner, or primary owner role in your organization. Configure your Xcode project and register your app in the [Claude Console](https://platform.claude.com/):
 

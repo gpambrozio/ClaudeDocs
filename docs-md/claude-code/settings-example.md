@@ -88,9 +88,9 @@ The same file with a comment above each key. Read it here; copy from the other t
 
 One team's shared settings, committed to the repository so everyone who clones it gets the same permissions, hooks, telemetry, and plugin marketplace. Save a file like this at `.claude/settings.json` at the top of the repository. Three things to know before you commit one:
 
-* **Cloud sessions read it too.** A [cloud session](settings.md) on Claude Code on the web starts from a clone of the repository, so the committed file applies there as well.
-* **Allow rules wait for trust.** Allow rules and `extraKnownMarketplaces` entries take effect after each person [trusts this folder itself](permissions.md), not only a parent folder; deny and ask rules apply in every session, trusted or not.
-* **The hook is a script in the repo.** This file's hook runs `.claude/hooks/block-rm.sh`; [How a hook resolves](hooks.md) walks through writing it.
+* **Cloud sessions read it too.** A [cloud session](settings.md#settings-in-cloud-sessions) on Claude Code on the web starts from a clone of the repository, so the committed file applies there as well.
+* **Allow rules wait for trust.** Allow rules and `extraKnownMarketplaces` entries take effect after each person [trusts this folder itself](permissions.md#project-allow-rules-and-workspace-trust), not only a parent folder; deny and ask rules apply in every session, trusted or not.
+* **The hook is a script in the repo.** This file's hook runs `.claude/hooks/block-rm.sh`; [How a hook resolves](hooks.md#how-a-hook-resolves) walks through writing it.
 
 **Copyable settings file**
 
@@ -244,7 +244,7 @@ A `managed-settings.json` file that shows the shape of the managed keys, with on
 * `forceLoginMethod` and `forceLoginOrgUUID` pin the login method and organization
 * `availableModels` and `enforceAvailableModels` restrict which models sessions can use
 * `permissions.deny` blocks two file reads and `curl`, and `disableBypassPermissionsMode` removes the bypass permission mode
-* [`allowManagedPermissionRulesOnly`](settings-reference.md) and [`allowManagedMcpServersOnly`](settings-reference.md) make the managed permission and MCP allowlists the only ones that apply
+* [`allowManagedPermissionRulesOnly`](settings-reference.md#allowmanagedpermissionrulesonly) and [`allowManagedMcpServersOnly`](settings-reference.md#allowmanagedmcpserversonly) make the managed permission and MCP allowlists the only ones that apply
 * `allowedMcpServers` pins the MCP server by URL
 * `strictKnownMarketplaces` allows one plugin marketplace
 * `sandbox` sandboxes commands with a fixed network allowlist and no unsandboxed retry
@@ -252,7 +252,7 @@ A `managed-settings.json` file that shows the shape of the managed keys, with on
 * `cleanupPeriodDays` shortens retention of session transcripts and other local data to seven days
 * `companyAnnouncements` shows a message at startup
 
-Administrators deploy a file like this as `managed-settings.json`, or the same JSON through MDM or [server-managed settings](server-managed-settings.md). One deployed file applies to every machine or account it reaches. To give a group different values, deploy a different file or profile to that group, since [server-managed settings don't support per-group policy yet](server-managed-settings.md).
+Administrators deploy a file like this as `managed-settings.json`, or the same JSON through MDM or [server-managed settings](server-managed-settings.md). One deployed file applies to every machine or account it reaches. To give a group different values, deploy a different file or profile to that group, since [server-managed settings don't support per-group policy yet](server-managed-settings.md#current-limitations).
 
 **Copyable settings file**
 

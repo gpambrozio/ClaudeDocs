@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using
 description: Command structure, output formats, GJSON transforms, request bodies, and debugging for the ant CLI.
 ---
 
-This page covers the `ant` CLI's input and output mechanics that apply across every endpoint. To install and authenticate, see the [Quickstart](cli-sdks-libraries/cli/quickstart.md). To chain commands and version-control resources, see [CLI scripting and automation](cli-sdks-libraries/cli/scripting.md).
+This page covers the `ant` CLI's input and output mechanics that apply across every endpoint. To install and authenticate, see the [Quickstart](quickstart.md). To chain commands and version-control resources, see [CLI scripting and automation](scripting.md).
 
 ## Command structure
 
@@ -31,18 +31,18 @@ ant beta:sessions:events list --session-id session_01...
 
 | Flag                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--profile`                           | Named profile to use for this invocation (equivalent to setting `ANTHROPIC_PROFILE`). See [Switch between workspaces](cli-sdks-libraries/cli/authentication.md).                                                                                                                                                                                                                                              |
+| `--profile`                           | Named profile to use for this invocation (equivalent to setting `ANTHROPIC_PROFILE`). See [Switch between workspaces](authentication.md#switch-between-workspaces).                                                                                                                                                                                                                                              |
 | `--format`                            | Output format: `auto`, `json`, `jsonl`, `yaml`, `pretty`, `raw`, `explore`                                                                                                                                                                                                                                                                                                                                                                                               |
-| `--transform`                         | Filter or reshape the response with a [GJSON path](cli-sdks-libraries/cli/using.md)                                                                                                                                                                                                                                                                                                                         |
+| `--transform`                         | Filter or reshape the response with a [GJSON path](using.md#transform-output-with-gjson)                                                                                                                                                                                                                                                                                                                         |
 | `-r`, `--raw-output`                  | Print string results without surrounding quotes, like `jq -r`                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `--base-url`                          | Override the API base URL                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `--workspace-id`                      | Optional. Workspace ID (`wrkspc_...`) to send as the `anthropic-workspace-id` header, for API keys with access to multiple workspaces (equivalent to setting `ANTHROPIC_WORKSPACE_ID`). See [Select a workspace](manage-claude/authentication.md). [Admin API](manage-claude/admin-api.md) commands take their own `--workspace-id`, which names the workspace they manage instead. |
+| `--workspace-id`                      | Optional. Workspace ID (`wrkspc_...`) to send as the `anthropic-workspace-id` header, for API keys with access to multiple workspaces (equivalent to setting `ANTHROPIC_WORKSPACE_ID`). See [Select a workspace](../../manage-claude/authentication.md#select-a-workspace). [Admin API](../../manage-claude/admin-api.md) commands take their own `--workspace-id`, which names the workspace they manage instead. |
 | `--debug`                             | Print full HTTP request and response to stderr                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](cli-sdks-libraries/cli/scripting.md)                                                                                                                                                                                                                                                                                                               |
+| `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](scripting.md#inspect-errors)                                                                                                                                                                                                                                                                                                               |
 
 ## Output formats
 
-`auto` pretty-prints JSON and is the default for commands that create or modify resources. List and retrieve commands default to the [interactive explorer](cli-sdks-libraries/cli/using.md) when writing to a terminal, and to pretty-printed JSON when piped. Override either default with `--format`:
+`auto` pretty-prints JSON and is the default for commands that create or modify resources. List and retrieve commands default to the [interactive explorer](using.md#interactive-explorer) when writing to a terminal, and to pretty-printed JSON when piped. Override either default with `--format`:
 
 ```bash
 ant models retrieve --model-id claude-opus-5 --format yaml
@@ -128,7 +128,7 @@ ant beta:agents create \
 
 ### Stdin
 
-Pipe a JSON or YAML document to stdin to supply the full request body. Fields from stdin are merged with flags, with flags taking precedence. Here `version` is the optimistic-locking token returned by an earlier `retrieve`, and `$AGENT_ID` was captured as in [Extract a scalar](cli-sdks-libraries/cli/using.md):
+Pipe a JSON or YAML document to stdin to supply the full request body. Fields from stdin are merged with flags, with flags taking precedence. Here `version` is the optimistic-locking token returned by an earlier `retrieve`, and `$AGENT_ID` was captured as in [Extract a scalar](using.md#extract-a-scalar):
 
 ```bash
 echo '{"description": "Updated test agent.", "version": 1}' | \
@@ -198,7 +198,7 @@ X-Api-Key: <REDACTED>
 
 ## Available resources
 
-Every API resource the CLI exposes is documented in the [API reference](api/cli/messages/create.md). For a local listing, run `ant --help`, and append `--help` to any subcommand for its flags and parameters.
+Every API resource the CLI exposes is documented in the [API reference](../../api/cli/messages/create.md). For a local listing, run `ant --help`, and append `--help` to any subcommand for its flags and parameters.
 
 ## Next steps
 

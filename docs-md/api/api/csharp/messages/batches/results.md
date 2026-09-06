@@ -8,7 +8,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../../../build-with-claude/batch-processing.md)
 
 ## Parameters
 
@@ -253,7 +253,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../../../../build-with-claude/extended-thinking.md) for details.
 
             - `required string Thinking`
 
@@ -269,7 +269,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
             - `JsonElement Type = "redacted_thinking"`
 
@@ -827,7 +827,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
             - `ReasoningExtraction("reasoning_extraction")`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../../../build-with-claude/thinking-steering-and-cost.md).
 
             - `GeneralHarms("general_harms")`
 

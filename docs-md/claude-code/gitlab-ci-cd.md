@@ -280,7 +280,7 @@ Model IDs for Amazon Bedrock include region-specific prefixes (for example, `us.
 * `GCP_PROJECT_ID`: Google Cloud project ID
 * `CLOUD_ML_REGION`: Google Cloud's Agent Platform region (for example, `us-east5`)
 
-GitLab mints the job's OIDC token from the `id_tokens:` block and exposes it as `GITLAB_OIDC_TOKEN`. Set `aud` to the audience value you configured on the Workload Identity Pool provider, for example your GitLab instance URL. The job writes the token to a file, and the credential configuration's `credential_source` entry tells Google's auth libraries to read it from there. Setting `GOOGLE_APPLICATION_CREDENTIALS` to the credential configuration file makes it available to Claude Code through [Application Default Credentials](google-vertex-ai.md).
+GitLab mints the job's OIDC token from the `id_tokens:` block and exposes it as `GITLAB_OIDC_TOKEN`. Set `aud` to the audience value you configured on the Workload Identity Pool provider, for example your GitLab instance URL. The job writes the token to a file, and the credential configuration's `credential_source` entry tells Google's auth libraries to read it from there. Setting `GOOGLE_APPLICATION_CREDENTIALS` to the credential configuration file makes it available to Claude Code through [Application Default Credentials](google-vertex-ai.md#3-configure-gcp-credentials).
 
 ```yaml
 stages:
@@ -369,7 +369,7 @@ When using Claude Code with GitLab CI/CD, be aware of associated costs:
 * **API costs**:
   * Each Claude interaction consumes tokens based on prompt and response size
   * Token usage varies by task complexity and codebase size
-  * See [Anthropic pricing](about-claude/pricing.md) for details
+  * See [Anthropic pricing](../api/about-claude/pricing.md) for details
 
 * **Cost optimization tips**:
   * Use specific `@claude` commands to reduce unnecessary turns

@@ -8,8 +8,8 @@ description: Preserved thinking lets a model use a thinking block from an earlie
 
 Preserved thinking is a property of newer Claude models that guards against distillation. It decides whether the model can use a thinking block that you send back from an earlier turn. Starting with Claude Fable 5.1, when a `thinking` or `redacted_thinking` block comes back in a request, the API checks the block's `signature` for two things:
 
-* **The model is the one that produced the block, or a newer one.** A model reads its own thinking blocks and those of earlier models. Claude Fable 5.1 reads blocks from Claude Opus 5, but Claude Opus 5 can't read blocks from Claude Fable 5.1. If the current model can't read a block, the API drops it from that request without an error. See [Switching models mid-conversation](build-with-claude/preserved-thinking.md).
-* **Nothing before the thinking block has changed.** The top-level `system` prompt, `tools`, and `messages` before the block are its prefix. If the prefix differs from what you sent when the block was produced, that block and every later thinking block are invalid, and the API rejects the request with a 400 error or drops the invalid blocks, whichever you choose. See [Keeping the prefix unchanged](build-with-claude/preserved-thinking.md).
+* **The model is the one that produced the block, or a newer one.** A model reads its own thinking blocks and those of earlier models. Claude Fable 5.1 reads blocks from Claude Opus 5, but Claude Opus 5 can't read blocks from Claude Fable 5.1. If the current model can't read a block, the API drops it from that request without an error. See [Switching models mid-conversation](preserved-thinking.md#switching-models).
+* **Nothing before the thinking block has changed.** The top-level `system` prompt, `tools`, and `messages` before the block are its prefix. If the prefix differs from what you sent when the block was produced, that block and every later thinking block are invalid, and the API rejects the request with a 400 error or drops the invalid blocks, whichever you choose. See [Keeping the prefix unchanged](preserved-thinking.md#prefix-check).
 
 The model check applies to every account. The API enforces the prefix check by default for accounts created on or after August 31, 2026, 00:00 UTC. On older accounts, it enforces the prefix check only on requests that set `thinking.block_binding.prefix_mismatch_behavior`. **Later models will enforce the prefix check for all accounts**, so make your integration append-only now.
 
@@ -18,13 +18,13 @@ The model check applies to every account. The API enforces the prefix check by d
 Claude Fable 5.1 and Claude Mythos 5.1 read thinking blocks produced by each other and by earlier Claude models. No earlier model reads thinking blocks from Claude Fable 5.1 or Claude Mythos 5.1.
 
 * **A conversation that moves up to Claude Fable 5.1 keeps its reasoning.** The earlier model's thinking blocks stay readable, so the model thinks as usual from the first turn after the switch.
-* **A conversation that moves down to an earlier model loses Claude Fable 5.1's reasoning for that request.** This happens when a router sends a turn to a cheaper model, after a [classifier refusal fallback](build-with-claude/refusals-and-fallback.md), or during a [server-side fallback](build-with-claude/refusals-and-fallback.md). The API removes the unreadable blocks before the prompt reaches the model. They aren't billed and don't count toward `input_tokens`.
+* **A conversation that moves down to an earlier model loses Claude Fable 5.1's reasoning for that request.** This happens when a router sends a turn to a cheaper model, after a [classifier refusal fallback](refusals-and-fallback.md), or during a [server-side fallback](refusals-and-fallback.md#server-side-fallback). The API removes the unreadable blocks before the prompt reaches the model. They aren't billed and don't count toward `input_tokens`.
 
 Keep sending the full history on every request, thinking blocks included, and let the API drop what the current model can't read. The API never edits your `messages` array, so the dropped blocks stay in your history. When the same history goes back to Claude Fable 5.1, its blocks are readable again, along with the earlier model's thinking. The reasoning is lost for good only if your client removes the blocks itself, for example a harness that strips thinking on a model switch or rebuilds the history from what each model used.
 
 ![Animation: switching to Claude Opus skips Claude Fable 5.1's thinking for that turn; switching back, everything is read again](https://platform.claude.com/docs/images/preserved-thinking-model-switch.gif)
 
-With the `thinking-binding-controls-2026-08-01` [beta header](api/beta-headers.md), the response lists each dropped block in a top-level `input_transformations` array with `reason: "model_binding_mismatch"`:
+With the `thinking-binding-controls-2026-08-01` [beta header](../api/beta-headers.md), the response lists each dropped block in a top-level `input_transformations` array with `reason: "model_binding_mismatch"`:
 
 ```json
 {
@@ -48,13 +48,13 @@ On Claude Fable 5.1, a thinking block stays valid only while everything you sent
 * The set of `tools`
 * Every `message` before the block
 
-Note: With server-side [compaction](build-with-claude/compaction.md), the checked prefix starts at the most recent compaction block.
+Note: With server-side [compaction](compaction.md), the checked prefix starts at the most recent compaction block.
 
-Request parameters outside those three fields, such as `effort`, `max_tokens`, `output_config`, `tool_choice`, and `metadata`, aren't part of the prefix check, and neither are `cache_control` markers. [What counts as an edit](build-with-claude/preserved-thinking.md) has the full list.
+Request parameters outside those three fields, such as `effort`, `max_tokens`, `output_config`, `tool_choice`, and `metadata`, aren't part of the prefix check, and neither are `cache_control` markers. [What counts as an edit](preserved-thinking.md#what-counts-as-an-edit) has the full list.
 
 Earlier thinking blocks aren't in the prefix, but each thinking block records which thinking block came before it, across turns. You can remove thinking blocks from the front of the history, oldest first. Removing one from the middle invalidates thinking blocks after it.
 
-Keep `system` and `tools` fixed for the session and treat `messages` as append-only. The same discipline keeps the prefix stable for [prompt caching](build-with-claude/prompt-caching.md): the edits that invalidate thinking are the edits that restart the cache.
+Keep `system` and `tools` fixed for the session and treat `messages` as append-only. The same discipline keeps the prefix stable for [prompt caching](prompt-caching.md): the edits that invalidate thinking are the edits that restart the cache.
 
 ### What the API does with an invalid block
 
@@ -63,7 +63,7 @@ You choose with `thinking.block_binding.prefix_mismatch_behavior`:
 * **`"error"` (the default):** the API rejects the request with a 400 `invalid_request_error` that names the first failing block.
 * **`"drop_block"`:** the API drops each failing block and every thinking block after it, and the request succeeds. Dropped blocks aren't billed. The model answers that turn without using reasoning from dropped blocks, and the prompt cache restarts at the edit. The response lists each dropped block in `input_transformations` (on the `message_start` event when streaming) with `reason: "prefix_binding_mismatch"`.
 
-Both the field and the `input_transformations` array require the `thinking-binding-controls-2026-08-01` [beta header](api/beta-headers.md). [Set the mismatch behavior and read `input_transformations`](build-with-claude/preserved-thinking.md) shows the request in each SDK.
+Both the field and the `input_transformations` array require the `thinking-binding-controls-2026-08-01` [beta header](../api/beta-headers.md). [Set the mismatch behavior and read `input_transformations`](preserved-thinking.md#preserved-thinking-controls) shows the request in each SDK.
 
 The 400 message begins:
 
@@ -77,7 +77,7 @@ If the request didn't send the beta header, the message continues:
 That setting requires the `thinking-binding-controls-2026-08-01` value in the `anthropic-beta` header.
 ```
 
-It usually ends with a sentence naming what changed, for example that the `system` prompt or the `tools` list differs from when the block was created. See [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md) for every variant of this error.
+It usually ends with a sentence naming what changed, for example that the `system` prompt or the `tools` list differs from when the block was created. See [Troubleshooting thinking](thinking-troubleshooting.md#error-thinking-block-signature) for every variant of this error.
 
 If you hit this 400 in production, retrying the same body fails the same way. Retry with the beta header and `prefix_mismatch_behavior: "drop_block"` and keep sending it for the rest of the session, or strip every `thinking` and `redacted_thinking` block from the history yourself and retry once. Then fix the edit that caused the mismatch. In the Message Batches API, an item that leaves the field unset drops failing blocks instead of erroring, so set `"error"` explicitly there if you want batch items to fail.
 
@@ -85,7 +85,7 @@ A tampered or undecryptable signature is a different failure. It always returns 
 
 ### Set the mismatch behavior and read `input_transformations`
 
-The `thinking-binding-controls-2026-08-01` [beta header](api/beta-headers.md) adds:
+The `thinking-binding-controls-2026-08-01` [beta header](../api/beta-headers.md) adds:
 
 * A top-level `input_transformations` array on every response
 * A `block_binding` object on the `thinking` configuration, whose one field is `prefix_mismatch_behavior`
@@ -345,9 +345,9 @@ The greatest common divisor of 1071 and 462 is 21.
 Input transformations: 0
 ```
 
-Under the beta header, every response from a thinking-capable model carries `input_transformations`. It's empty when nothing was dropped. Each entry has `type: "thinking_dropped"`, the `path` of the dropped block (for example `messages.1.content.0`), and a `reason` of `prefix_binding_mismatch` or `model_binding_mismatch` (see [Switching models mid-conversation](build-with-claude/preserved-thinking.md)). Ignore entries whose `type` or `reason` you don't recognize, because later checks add values.
+Under the beta header, every response from a thinking-capable model carries `input_transformations`. It's empty when nothing was dropped. Each entry has `type: "thinking_dropped"`, the `path` of the dropped block (for example `messages.1.content.0`), and a `reason` of `prefix_binding_mismatch` or `model_binding_mismatch` (see [Switching models mid-conversation](preserved-thinking.md#switching-models)). Ignore entries whose `type` or `reason` you don't recognize, because later checks add values.
 
-When [streaming](build-with-claude/streaming.md), the array arrives on the `message` object in the `message_start` event. After a mid-stream server-side fallback, the final `message_delta` event carries it again with the serving model's entries. In a [message batch](build-with-claude/batch-processing.md), an item whose block fails the prefix check under an explicit `"error"` resolves as `errored`, and an item that leaves the field unset drops the failing blocks instead. The [token counting](build-with-claude/token-counting.md) endpoint runs the same prefix check and returns the same 400.
+When [streaming](streaming.md), the array arrives on the `message` object in the `message_start` event. After a mid-stream server-side fallback, the final `message_delta` event carries it again with the serving model's entries. In a [message batch](batch-processing.md), an item whose block fails the prefix check under an explicit `"error"` resolves as `errored`, and an item that leaves the field unset drops the failing blocks instead. The [token counting](token-counting.md) endpoint runs the same prefix check and returns the same 400.
 
 ### When the API enforces the check
 
@@ -374,7 +374,7 @@ Each row compares two consecutive requests:
 | Add, move, or remove `cache_control` markers                                                                                                           | Valid                                                                  |
 | A rotating signed URL that returns the same bytes                                                                                                      | Valid                                                                  |
 | Server-side compaction or context editing removes or replaces content                                                                                  | Valid (the check compares what you sent, not the server's edited copy) |
-| A cleared [turn-scoped system message](build-with-claude/preserved-thinking.md) left in place      | Valid                                                                  |
+| A cleared [turn-scoped system message](preserved-thinking.md#per-turn-reminders) left in place      | Valid                                                                  |
 | Edit, reorder, or delete any earlier `user`, `assistant`, or `system` message                                                                          | Invalid                                                                |
 | Add a text block to an earlier user turn, or remove one you added last time                                                                            | Invalid                                                                |
 | Change the top-level `system` string or blocks                                                                                                         | Invalid                                                                |
@@ -669,10 +669,10 @@ Both turns print `0` because nothing earlier changed. Log `input_transformations
 ```
 
 * **Empty on every turn:** your integration keeps the prefix intact.
-* **`reason: "prefix_binding_mismatch"`:** something before the block at `path` changed since the previous request. Diff `system`, `tools`, and `messages` up to that turn to find it, then find the matching replacement in [Make changes without editing the prefix](build-with-claude/preserved-thinking.md).
-* **`reason: "model_binding_mismatch"`:** the conversation moved to a model that can't read the earlier model's blocks. This isn't a prefix edit. See [Switching models mid-conversation](build-with-claude/preserved-thinking.md).
+* **`reason: "prefix_binding_mismatch"`:** something before the block at `path` changed since the previous request. Diff `system`, `tools`, and `messages` up to that turn to find it, then find the matching replacement in [Make changes without editing the prefix](preserved-thinking.md#replace-prefix-edits).
+* **`reason: "model_binding_mismatch"`:** the conversation moved to a model that can't read the earlier model's blocks. This isn't a prefix edit. See [Switching models mid-conversation](preserved-thinking.md#switching-models).
 
-To fail loudly in CI instead, set `"error"` and treat the 400 described in [What the API does with an invalid block](build-with-claude/preserved-thinking.md) as a test failure.
+To fail loudly in CI instead, set `"error"` and treat the 400 described in [What the API does with an invalid block](preserved-thinking.md#mismatch-behavior) as a test failure.
 
 ## Make changes without editing the prefix
 
@@ -680,14 +680,14 @@ Each common prefix edit has a replacement that gives the model the same informat
 
 | Instead of                                                                              | Use                                                                                                                                                                                                                                                                                                            | Beta header                                             |
 | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| Rebuilding the top-level `system` prompt                                                | A [mid-conversation system message](build-with-claude/preserved-thinking.md)                                                                                                                                                                                 | None                                                    |
-| Injecting a reminder and deleting it on the next request                                | A [turn-scoped system message](build-with-claude/preserved-thinking.md) (`clear_at: "next_user_message"`)                                                                                                                                                  | `mid-conversation-system-clear-at-2026-08-21`           |
-| Adding or removing entries in `tools`                                                   | [`tool_addition` and `tool_removal` blocks](build-with-claude/preserved-thinking.md)                                                                                                                                                                             | `mid-conversation-tool-changes-2026-07-01`              |
-| Changing top-level `output_config.effort` (restarts the cache, doesn't affect thinking) | A [per-message `output_config`](build-with-claude/preserved-thinking.md)                                                                                                                                                                                       | `mid-conversation-output-config-2026-07-01`             |
-| Dropping or summarizing old turns on the client                                         | Server-side [compaction or context editing](build-with-claude/preserved-thinking.md), or [client-side compaction](build-with-claude/preserved-thinking.md) that keeps no stale thinking | `compact-2026-01-12` or `context-management-2025-06-27` |
-| An image or document URL whose bytes change between requests                            | A [`file_id` from the Files API](build-with-claude/preserved-thinking.md), or base64                                                                                                                                                                              | None                                                    |
+| Rebuilding the top-level `system` prompt                                                | A [mid-conversation system message](preserved-thinking.md#new-instructions)                                                                                                                                                                                 | None                                                    |
+| Injecting a reminder and deleting it on the next request                                | A [turn-scoped system message](preserved-thinking.md#per-turn-reminders) (`clear_at: "next_user_message"`)                                                                                                                                                  | `mid-conversation-system-clear-at-2026-08-21`           |
+| Adding or removing entries in `tools`                                                   | [`tool_addition` and `tool_removal` blocks](preserved-thinking.md#tool-changes)                                                                                                                                                                             | `mid-conversation-tool-changes-2026-07-01`              |
+| Changing top-level `output_config.effort` (restarts the cache, doesn't affect thinking) | A [per-message `output_config`](preserved-thinking.md#effort-changes)                                                                                                                                                                                       | `mid-conversation-output-config-2026-07-01`             |
+| Dropping or summarizing old turns on the client                                         | Server-side [compaction or context editing](preserved-thinking.md#server-side-trimming), or [client-side compaction](preserved-thinking.md#custom-compaction-on-the-client) that keeps no stale thinking | `compact-2026-01-12` or `context-management-2025-06-27` |
+| An image or document URL whose bytes change between requests                            | A [`file_id` from the Files API](preserved-thinking.md#files-by-id), or base64                                                                                                                                                                              | None                                                    |
 
-All of these assume you [send assistant turns back exactly as returned](build-with-claude/preserved-thinking.md). To use several betas in one request, combine the values in one `anthropic-beta` header. The same names apply on Amazon Bedrock and Google Cloud (see [Beta headers](api/beta-headers.md)):
+All of these assume you [send assistant turns back exactly as returned](preserved-thinking.md#append-assistant-turns-exactly-as-returned). To use several betas in one request, combine the values in one `anthropic-beta` header. The same names apply on Amazon Bedrock and Google Cloud (see [Beta headers](../api/beta-headers.md)):
 
 ```text wrap
 anthropic-beta: thinking-binding-controls-2026-08-01,mid-conversation-system-clear-at-2026-08-21,mid-conversation-tool-changes-2026-07-01
@@ -699,7 +699,7 @@ Store the `content` array from each response and send it back unchanged as the a
 
 ### Add instructions with a mid-conversation system message
 
-Some harnesses rebuild the top-level `system` prompt on each request to carry the current time, a token budget, a mode flag, or newly discovered project context. That invalidates every thinking block in the conversation. Instead, freeze `system` at session start. When something changes, append a [`role: "system"` message](build-with-claude/mid-conversation-system-messages.md) at the point in `messages` where the change becomes true:
+Some harnesses rebuild the top-level `system` prompt on each request to carry the current time, a token budget, a mode flag, or newly discovered project context. That invalidates every thinking block in the conversation. Instead, freeze `system` at session start. When something changes, append a [`role: "system"` message](mid-conversation-system-messages.md) at the point in `messages` where the change becomes true:
 
 ```json
 {
@@ -708,11 +708,11 @@ Some harnesses rebuild the top-level `system` prompt on each request to carry th
 }
 ```
 
-The model treats this message with system-prompt authority, and everything before it stays unchanged. In a tool loop, place the message after the `tool_result` user message, never between an assistant `tool_use` and its `tool_result` (see [Limitations](build-with-claude/mid-conversation-system-messages.md)). Once sent, the message is part of the prefix for later thinking: leave it in place on later requests.
+The model treats this message with system-prompt authority, and everything before it stays unchanged. In a tool loop, place the message after the `tool_result` user message, never between an assistant `tool_use` and its `tool_result` (see [Limitations](mid-conversation-system-messages.md#limitations)). Once sent, the message is part of the prefix for later thinking: leave it in place on later requests.
 
 ### Send per-turn reminders as turn-scoped system messages
 
-The most common prefix edit is the per-turn nudge: a line such as "request independent reads together" or "you haven't updated the user in a while" that your code appends after each batch of tool results. To keep reminders from piling up, send each nudge as a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md) with `clear_at: "next_user_message"`, placed after the `tool_result` user message. `clear_at` requires the beta header `mid-conversation-system-clear-at-2026-08-21`. The following `messages` array is the request after two tool calls and their results. `messages[3]` is the previous request's nudge, left in place, and `messages[6]` is this request's copy:
+The most common prefix edit is the per-turn nudge: a line such as "request independent reads together" or "you haven't updated the user in a while" that your code appends after each batch of tool results. To keep reminders from piling up, send each nudge as a [mid-conversation system message](mid-conversation-system-messages.md) with `clear_at: "next_user_message"`, placed after the `tool_result` user message. `clear_at` requires the beta header `mid-conversation-system-clear-at-2026-08-21`. The following `messages` array is the request after two tool calls and their results. `messages[3]` is the previous request's nudge, left in place, and `messages[6]` is this request's copy:
 
 ```json
 [
@@ -766,7 +766,7 @@ A user message that contains only `tool_result` blocks counts as the "next user 
 
 ### Add or remove tools with `tool_addition` and `tool_removal`
 
-Editing the `tools` array mid-session invalidates preserved thinking blocks. Instead, declare every tool the session might need in `tools` on the first request and never change the array. To change which tools the model can use from some point on, append a `role: "system"` message that carries a `tool_removal` or `tool_addition` block. These are [mid-conversation tool changes](build-with-claude/mid-conversation-system-messages.md) and need the beta header `mid-conversation-tool-changes-2026-07-01`. For example, to withdraw a dangerous tool after a mode switch:
+Editing the `tools` array mid-session invalidates preserved thinking blocks. Instead, declare every tool the session might need in `tools` on the first request and never change the array. To change which tools the model can use from some point on, append a `role: "system"` message that carries a `tool_removal` or `tool_addition` block. These are [mid-conversation tool changes](mid-conversation-system-messages.md#mid-conversation-tool-changes) and need the beta header `mid-conversation-tool-changes-2026-07-01`. For example, to withdraw a dangerous tool after a mode switch:
 
 ```json
 {
@@ -796,7 +796,7 @@ The `role: "system"` messages that carry these blocks join the prefix for later 
 
 ### Change effort with a per-message `output_config`
 
-Changing top-level `output_config.effort` between requests doesn't invalidate thinking, because effort isn't part of the prefix. Changing top-level effort does restart the prompt cache. On Claude Fable 5.1, use [per-message effort](build-with-claude/effort.md) instead: append a `role: "system"` message with empty `content` and the new level. It needs the beta header `mid-conversation-output-config-2026-07-01`.
+Changing top-level `output_config.effort` between requests doesn't invalidate thinking, because effort isn't part of the prefix. Changing top-level effort does restart the prompt cache. On Claude Fable 5.1, use [per-message effort](effort.md#change-effort-mid-conversation-beta) instead: append a `role: "system"` message with empty `content` and the new level. It needs the beta header `mid-conversation-output-config-2026-07-01`.
 
 ```json
 { "role": "system", "content": [], "output_config": { "effort": "low" } }
@@ -808,8 +808,8 @@ The new level takes effect from the next `user` turn. Once sent, the message is 
 
 The second most common prefix edit is client-side trimming: dropping or summarizing the oldest turns and keeping the recent ones verbatim. The kept turns' thinking blocks were produced while the removed history was still in place, so they fail the check. The server-side equivalents don't count as edits, because the check compares the conversation as you sent it:
 
-* [Compaction](build-with-claude/compaction.md) summarizes older turns into a compaction block when the context approaches a threshold you set, and the checked prefix restarts from that block. Its [`instructions` parameter](build-with-claude/compaction.md) takes your own summarization prompt, such as "preserve every ticker, position size, and stated assumption".
-* [Context editing](build-with-claude/context-editing.md) clears old tool results or old thinking blocks by rule, oldest first. The strategies are `clear_tool_uses_20250919` and `clear_thinking_20251015`.
+* [Compaction](compaction.md) summarizes older turns into a compaction block when the context approaches a threshold you set, and the checked prefix restarts from that block. Its [`instructions` parameter](compaction.md#custom-summarization-instructions) takes your own summarization prompt, such as "preserve every ticker, position size, and stated assumption".
+* [Context editing](context-editing.md) clears old tool results or old thinking blocks by rule, oldest first. The strategies are `clear_tool_uses_20250919` and `clear_thinking_20251015`.
 
 ### Compact on the client
 
@@ -1052,42 +1052,42 @@ Keep sending `"drop_block"` on later requests for as long as those two turns sta
 #### Patterns that don't work with preserved thinking
 
 * **Background compaction.** Building the summary off the critical path and swapping it in a few requests later breaks the rule the same way keep-tail does, with a delay: every assistant turn produced while the summary was being built carries thinking that predates the swap, and it all fails the moment the summary lands. If you need it, treat the swap like keep-tail and send `"drop_block"` from the swap onward. Otherwise compact synchronously.
-* **Cutting turns out of the middle.** Removing individual turns invalidates every thinking block after them, and no compaction scheme avoids that. If you were cutting a turn to change an instruction, append a [mid-conversation system message](build-with-claude/preserved-thinking.md) instead. To remove old tool results or old thinking selectively, use server-side [context editing](build-with-claude/context-editing.md).
-* **Compacting in the middle of a tool round.** Don't compact between an assistant turn's `tool_use` and the `tool_result` that answers it. Send that assistant turn back with its thinking intact so the model finishes the round with its reasoning. See [Preserving thinking blocks](build-with-claude/thinking.md).
+* **Cutting turns out of the middle.** Removing individual turns invalidates every thinking block after them, and no compaction scheme avoids that. If you were cutting a turn to change an instruction, append a [mid-conversation system message](preserved-thinking.md#new-instructions) instead. To remove old tool results or old thinking selectively, use server-side [context editing](context-editing.md).
+* **Compacting in the middle of a tool round.** Don't compact between an assistant turn's `tool_use` and the `tool_result` that answers it. Send that assistant turn back with its thinking intact so the model finishes the round with its reasoning. See [Preserving thinking blocks](thinking.md#preserving-thinking-blocks).
 
 ### Reference files by ID, not by a URL whose content changes
 
-For an `image` or `document` block with a `url` source, the check covers the fetched bytes, not the URL string. A URL whose content changes invalidates later thinking: a "latest screenshot" endpoint, or a document someone edits between turns. A rotating signed URL for the same file doesn't. For content you reference across turns, upload it once with the [Files API](build-with-claude/files.md) and use the `file_id`, or send base64.
+For an `image` or `document` block with a `url` source, the check covers the fetched bytes, not the URL string. A URL whose content changes invalidates later thinking: a "latest screenshot" endpoint, or a document someone edits between turns. A rotating signed URL for the same file doesn't. For content you reference across turns, upload it once with the [Files API](files.md) and use the `file_id`, or send base64.
 
 ## FAQ
 
 **Do I need a new account to test preserved thinking?**
 
-No. Send the `thinking-binding-controls-2026-08-01` beta header and set `thinking.block_binding.prefix_mismatch_behavior`. Setting the field opts that request into enforcement regardless of account age. `"error"` rejects an edited history with the same 400 a new account gets, and `"drop_block"` lets the request through and lists what was dropped in `input_transformations`. See [Check whether your code edits the prefix](build-with-claude/preserved-thinking.md).
+No. Send the `thinking-binding-controls-2026-08-01` beta header and set `thinking.block_binding.prefix_mismatch_behavior`. Setting the field opts that request into enforcement regardless of account age. `"error"` rejects an edited history with the same 400 a new account gets, and `"drop_block"` lets the request through and lists what was dropped in `input_transformations`. See [Check whether your code edits the prefix](preserved-thinking.md#how-to-tell-whether-your-integration-is-impacted).
 
 **If anything before a thinking block changes, even one tool description, is the conversation unusable?**
 
-No. What fails is the thinking already in the history after the point you changed, and you choose what happens to it. With `prefix_mismatch_behavior: "drop_block"`, the API drops those blocks and the request succeeds: the model answers that turn without that reasoning, and the prompt cache restarts at the edit. With the default `"error"`, the API rejects the request with a 400 until you undo the edit or resend with `"drop_block"`. See [What the API does with an invalid block](build-with-claude/preserved-thinking.md). [What counts as an edit](build-with-claude/preserved-thinking.md) lists which changes matter.
+No. What fails is the thinking already in the history after the point you changed, and you choose what happens to it. With `prefix_mismatch_behavior: "drop_block"`, the API drops those blocks and the request succeeds: the model answers that turn without that reasoning, and the prompt cache restarts at the edit. With the default `"error"`, the API rejects the request with a 400 until you undo the edit or resend with `"drop_block"`. See [What the API does with an invalid block](preserved-thinking.md#mismatch-behavior). [What counts as an edit](preserved-thinking.md#what-counts-as-an-edit) lists which changes matter.
 
 **Does changing effort or other thinking settings between requests invalidate earlier thinking?**
 
-No. `output_config.effort`, `max_tokens`, and the `thinking` configuration aren't part of the checked prefix, which covers only `system`, `tools`, and `messages`. A top-level effort change invalidates most of the prompt cache. On Claude Fable 5.1, a [per-message effort](build-with-claude/preserved-thinking.md) change keeps the prompt cache and is used as the new effort level until changed again.
+No. `output_config.effort`, `max_tokens`, and the `thinking` configuration aren't part of the checked prefix, which covers only `system`, `tools`, and `messages`. A top-level effort change invalidates most of the prompt cache. On Claude Fable 5.1, a [per-message effort](preserved-thinking.md#effort-changes) change keeps the prompt cache and is used as the new effort level until changed again.
 
 **My tool list changes mid-session. How do I avoid invalidating the conversation?**
 
-Don't edit `tools`. Declare the full set at session start, mark tools that aren't available yet with `defer_loading: true`, and offer or withdraw them with `tool_addition` and `tool_removal` blocks. If you learn a tool's schema only mid-session, such as from an MCP server discovered at runtime, you can still append it to `tools` with `defer_loading: true` and offer it the same way. That's safe because an unreferenced deferred tool isn't part of the prefix. The `role: "system"` messages that carry these blocks join the prefix for later thinking, so don't move, reword, or delete them afterward. See [Add or remove tools with `tool_addition` and `tool_removal`](build-with-claude/preserved-thinking.md).
+Don't edit `tools`. Declare the full set at session start, mark tools that aren't available yet with `defer_loading: true`, and offer or withdraw them with `tool_addition` and `tool_removal` blocks. If you learn a tool's schema only mid-session, such as from an MCP server discovered at runtime, you can still append it to `tools` with `defer_loading: true` and offer it the same way. That's safe because an unreferenced deferred tool isn't part of the prefix. The `role: "system"` messages that carry these blocks join the prefix for later thinking, so don't move, reword, or delete them afterward. See [Add or remove tools with `tool_addition` and `tool_removal`](preserved-thinking.md#tool-changes).
 
 **I compact by summarizing older turns and keeping recent turns verbatim. Does that still work?**
 
-Not if the kept turns still carry their thinking: those blocks were produced against the history you replaced, so they fail the check. Strip `thinking` and `redacted_thinking` blocks from the turns you carry across and keep their `text` and `tool_use` blocks, or send `prefix_mismatch_behavior: "drop_block"` and let the API drop them. Simple compaction leaves no thinking behind to fail and is the recommended approach: one summary message plus the next user turn, with no earlier turns replayed. Server-side [compaction](build-with-claude/compaction.md) and [context editing](build-with-claude/context-editing.md) don't count as edits. See [Compact on the client](build-with-claude/preserved-thinking.md).
+Not if the kept turns still carry their thinking: those blocks were produced against the history you replaced, so they fail the check. Strip `thinking` and `redacted_thinking` blocks from the turns you carry across and keep their `text` and `tool_use` blocks, or send `prefix_mismatch_behavior: "drop_block"` and let the API drop them. Simple compaction leaves no thinking behind to fail and is the recommended approach: one summary message plus the next user turn, with no earlier turns replayed. Server-side [compaction](compaction.md) and [context editing](context-editing.md) don't count as edits. See [Compact on the client](preserved-thinking.md#custom-compaction-on-the-client).
 
 **How do I handle instruction files such as AGENTS.md or CLAUDE.md that change mid-session?**
 
-Load them once at session start and keep the top-level `system` prompt and `tools` fixed. When a file changes, append the new version at that point in `messages` instead of editing the original. Use a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md) for instructions that come from you as the operator. For file text you treat as untrusted, which shouldn't carry system-prompt authority, put the content in the next `user` turn instead. See [Add instructions with a mid-conversation system message](build-with-claude/preserved-thinking.md) and [Limitations](build-with-claude/mid-conversation-system-messages.md).
+Load them once at session start and keep the top-level `system` prompt and `tools` fixed. When a file changes, append the new version at that point in `messages` instead of editing the original. Use a [mid-conversation system message](mid-conversation-system-messages.md) for instructions that come from you as the operator. For file text you treat as untrusted, which shouldn't carry system-prompt authority, put the content in the next `user` turn instead. See [Add instructions with a mid-conversation system message](preserved-thinking.md#new-instructions) and [Limitations](mid-conversation-system-messages.md#limitations).
 
 **Can I resume a saved session later, after a restart or the next day?**
 
-Yes. A resumed session is an ordinary follow-up request: `system`, `tools`, and the earlier `messages` must match what you last sent byte-for-byte. Persist exactly what you sent and received, and replay that: the rendered system prompt, the tool definitions, and each assistant turn as returned. Don't re-render from inputs that might have changed since, such as the date, an updated instruction file, or a new tool version. Anything new goes in an appended message. See [Send assistant turns back exactly as returned](build-with-claude/preserved-thinking.md).
+Yes. A resumed session is an ordinary follow-up request: `system`, `tools`, and the earlier `messages` must match what you last sent byte-for-byte. Persist exactly what you sent and received, and replay that: the rendered system prompt, the tool definitions, and each assistant turn as returned. Don't re-render from inputs that might have changed since, such as the date, an updated instruction file, or a new tool version. Anything new goes in an appended message. See [Send assistant turns back exactly as returned](preserved-thinking.md#append-assistant-turns-exactly-as-returned).
 
 **My harness can route a turn to a non-Claude model. Do those turns invalidate Claude's earlier thinking?**
 
@@ -1095,7 +1095,7 @@ No, provided they're appended after the existing history and nothing earlier cha
 
 **Can I carry a conversation's reasoning into a new conversation?**
 
-Not into a different conversation. A thinking block is usable only when it follows the exact `system`, `tools`, and `messages` it was produced from. A branch that replays that history unchanged up to the fork point keeps its thinking. A conversation that starts from anything else can't use it, so start that conversation from a summary of the task state, as in [simple compaction](build-with-claude/preserved-thinking.md): the goal, decisions made, files and results so far, and the next step.
+Not into a different conversation. A thinking block is usable only when it follows the exact `system`, `tools`, and `messages` it was produced from. A branch that replays that history unchanged up to the fork point keeps its thinking. A conversation that starts from anything else can't use it, so start that conversation from a summary of the task state, as in [simple compaction](preserved-thinking.md#custom-compaction-on-the-client): the goal, decisions made, files and results so far, and the next step.
 
 ## Next steps
 

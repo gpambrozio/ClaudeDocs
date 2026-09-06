@@ -14,7 +14,7 @@ The memory tool operates client-side: Claude requests file operations, and your 
 
 Reach out through the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
 ## Use cases
 
@@ -26,7 +26,7 @@ To learn how zero data retention (ZDR) applies to this feature, see [API and dat
 
 When the memory tool is enabled, Claude automatically checks its memory directory before starting a task. As it works, Claude stores what it learns in files under `/memories` and reads them back in later conversations to continue earlier work.
 
-Because the memory tool is client-side, Claude only requests memory operations. Your application executes each request against storage you control and returns the result in a `tool_result` block (see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)). The `/memories` path is a prefix that your handler maps onto real storage, such as a per-user directory or keys in a database. Memory lives entirely in your application. A later conversation continues from the same memory when it sends the same `tools` entry and your handler serves the same store. For security, restrict all memory operations to the `/memories` directory (see [Path traversal protection](agents-and-tools/tool-use/memory-tool.md)).
+Because the memory tool is client-side, Claude only requests memory operations. Your application executes each request against storage you control and returns the result in a `tool_result` block (see [Handle tool calls](handle-tool-calls.md)). The `/memories` path is a prefix that your handler maps onto real storage, such as a per-user directory or keys in a database. Memory lives entirely in your application. A later conversation continues from the same memory when it sends the same `tools` entry and your handler serves the same store. For security, restrict all memory operations to the `/memories` directory (see [Path traversal protection](memory-tool.md#path-traversal-protection)).
 
 ### Example: How memory tool calls work
 
@@ -98,14 +98,14 @@ Claude calls the memory tool:
 "Based on your customer service guidelines, I can help you craft a response. Please share the ticket details..."
 ```
 
-The memory tool is available on all Claude 4 and later models. For the full list of Anthropic-provided tools, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
+The memory tool is available on all Claude 4 and later models. For the full list of Anthropic-provided tools, see the [Tool reference](tool-reference.md).
 
 ## Getting started
 
 Using the memory tool takes two steps:
 
 1. Add the memory tool to your request. The `tools` entry `{"type": "memory_20250818", "name": "memory"}` is the entire configuration: the `name` must be `memory`, and you don't define an input schema for an Anthropic-provided tool.
-2. Implement a client-side handler for each memory command. Your handler must reject paths outside `/memories`, so read [Path traversal protection](agents-and-tools/tool-use/memory-tool.md) before you write it.
+2. Implement a client-side handler for each memory command. Your handler must reject paths outside `/memories`, so read [Path traversal protection](memory-tool.md#path-traversal-protection) before you write it.
 
 ## Basic usage
 
@@ -279,7 +279,7 @@ puts message
 
 ## Implement the memory handler
 
-Claude's reply to a request like the previous one ends with a `tool_use` block that requests a memory operation, such as `view /memories`. Your application executes the operation and returns the result in a `tool_result` block, then sends the conversation back so Claude can continue: the standard [tool-use loop](agents-and-tools/tool-use/handle-tool-calls.md).
+Claude's reply to a request like the previous one ends with a `tool_use` block that requests a memory operation, such as `view /memories`. Your application executes the operation and returns the result in a `tool_result` block, then sends the conversation back so Claude can continue: the standard [tool-use loop](handle-tool-calls.md).
 
 Four SDKs provide memory tool helpers that handle the tool interface and the loop. Subclass `BetaAbstractMemoryTool` (Python and C#), use `betaMemoryTool` (TypeScript), or implement `BetaMemoryToolHandler` (Java) to back memory with your own storage, such as files on disk, a database, cloud storage, or encrypted files. Python and TypeScript also ship a ready-made local-filesystem implementation, `BetaLocalFilesystemMemoryTool`. The helper and tool-runner surfaces live in each SDK's beta namespace even though the memory tool itself doesn't require a beta header. The Go and Ruby SDKs have no memory helper, so those examples run the tool-use loop themselves, and PHP wraps your handler closure in its generic `BetaRunnableTool`. All three use an in-memory store that you replace with your own storage.
 
@@ -704,7 +704,7 @@ loop do
 end
 ```
 
-The in-memory stores in the Go, PHP, and Ruby examples keep them self-contained: each one dispatches on the `command` field in the `tool_use` block's `input` and returns the strings described under [Tool commands](agents-and-tools/tool-use/memory-tool.md). A production handler also needs the [path validation](agents-and-tools/tool-use/memory-tool.md) these demonstration stores skip. For the SDKs' own complete examples, see:
+The in-memory stores in the Go, PHP, and Ruby examples keep them self-contained: each one dispatches on the `command` field in the `tool_use` block's `input` and returns the strings described under [Tool commands](memory-tool.md#tool-commands). A production handler also needs the [path validation](memory-tool.md#path-traversal-protection) these demonstration stores skip. For the SDKs' own complete examples, see:
 
 * Python: [examples/memory/basic.py](https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py)
 * TypeScript: [examples/tools-helpers-memory.ts](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts)
@@ -955,7 +955,7 @@ Consider these safeguards:
 
 ## Error handling
 
-The memory tool uses similar error-handling patterns to the [text editor tool](agents-and-tools/tool-use/text-editor-tool.md). Each command's error messages are listed under [Tool commands](agents-and-tools/tool-use/memory-tool.md). To return an error to Claude, set `is_error` to `true` on the tool result and put the message in `content`:
+The memory tool uses similar error-handling patterns to the [text editor tool](text-editor-tool.md#handle-errors). Each command's error messages are listed under [Tool commands](memory-tool.md#tool-commands). To return an error to Claude, set `is_error` to `true` on the tool result and put the message in `content`:
 
 ```json
 {
@@ -968,11 +968,11 @@ The memory tool uses similar error-handling patterns to the [text editor tool](a
 
 ## Context editing integration
 
-The memory tool pairs with context editing to manage long-running conversations. For details, see [Context editing](build-with-claude/context-editing.md).
+The memory tool pairs with context editing to manage long-running conversations. For details, see [Context editing](../../build-with-claude/context-editing.md).
 
 ## Using with compaction
 
-The memory tool can also be paired with [compaction](build-with-claude/compaction.md), which summarizes older conversation context server-side. Context editing clears specific tool results on the client. Compaction automatically summarizes the whole conversation on the server when the conversation approaches the context window limit.
+The memory tool can also be paired with [compaction](../../build-with-claude/compaction.md), which summarizes older conversation context server-side. Context editing clears specific tool results on the client. Compaction automatically summarizes the whole conversation on the server when the conversation approaches the context window limit.
 
 For long-running agents, consider using both: compaction keeps the active context small without client-side bookkeeping, and memory preserves the information that must survive summarization.
 

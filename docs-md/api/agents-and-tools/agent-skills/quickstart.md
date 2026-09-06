@@ -10,8 +10,8 @@ This tutorial shows you how to use Agent Skills to create a PowerPoint presentat
 
 ## Prerequisites
 
-* A [Claude API key](https://platform.claude.com/settings/keys) or a logged-in [ant CLI](cli-sdks-libraries/cli/authentication.md)
-* A [client SDK](cli-sdks-libraries/overview.md) for your language, or `curl` and `jq`
+* A [Claude API key](https://platform.claude.com/settings/keys) or a logged-in [ant CLI](../../cli-sdks-libraries/cli/authentication.md)
+* A [client SDK](../../cli-sdks-libraries/overview.md) for your language, or `curl` and `jq`
 * Basic familiarity with making API requests
 
 ## Agent Skills overview
@@ -338,14 +338,14 @@ puts "stop_reason=#{response.stop_reason}, blocks=#{response.content.length}"
 
 The request includes the following parts:
 
-* **`model`:** A [model that supports the code execution tool](agents-and-tools/tool-use/code-execution-tool.md)
+* **`model`:** A [model that supports the code execution tool](../tool-use/code-execution-tool.md#compatibility)
 * **`container.skills`:** Specifies which Skills Claude can use
 * **`type: "anthropic"`:** Indicates this is an Anthropic-managed Skill
 * **`skill_id: "pptx"`:** The PowerPoint Skill identifier
 * **`version: "latest"`:** The Skill version set to the most recently published
 * **`tools`:** Enables code execution (required for Skills)
 
-The examples use the `code_execution_20260521` tool version, and the Step 3 code parses the result types that current tool versions return. Skills also work with older [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) versions such as `code_execution_20250825`: any current code execution tool version satisfies the Skills requirement. If you use a different version, use the tool `type` listed on the code execution tool page.
+The examples use the `code_execution_20260521` tool version, and the Step 3 code parses the result types that current tool versions return. Skills also work with older [code execution tool](../tool-use/code-execution-tool.md) versions such as `code_execution_20250825`: any current code execution tool version satisfies the Skills requirement. If you use a different version, use the tool `type` listed on the code execution tool page.
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Because you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude runs the Skill's code to create your presentation.
 
@@ -584,7 +584,7 @@ if file_id
 end
 ```
 
-For complete details on working with generated files, see [Retrieve generated files](agents-and-tools/tool-use/code-execution-tool.md) in the code execution tool documentation.
+For complete details on working with generated files, see [Retrieve generated files](../tool-use/code-execution-tool.md#retrieve-generated-files) in the code execution tool documentation.
 
 ## Try more examples
 

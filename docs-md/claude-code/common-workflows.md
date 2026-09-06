@@ -91,7 +91,7 @@ Tips:
 
 * Be specific about what you're looking for
 * Use domain language from the project
-* Install a [code intelligence plugin](discover-plugins.md) for your language to give Claude precise "go to definition" and "find references" navigation
+* Install a [code intelligence plugin](discover-plugins.md#code-intelligence) for your language to give Claude precise "go to definition" and "find references" navigation
 
 ***
 
@@ -219,7 +219,7 @@ create a pr
 enhance the PR description with more context about the security improvements
 ```
 
-To find the session later, run `claude --from-pr 1234` with your own PR number, which opens the session picker filtered to sessions linked to that PR, or paste the PR URL into the [`/resume` picker](sessions.md) search. Claude Code links the session to the PR when Claude creates it with `gh pr create` or `glab mr create`, and when Claude [works on an existing PR](agent-view.md).
+To find the session later, run `claude --from-pr 1234` with your own PR number, which opens the session picker filtered to sessions linked to that PR, or paste the PR URL into the [`/resume` picker](sessions.md#use-the-session-picker) search. Claude Code links the session to the PR when Claude creates it with `gh pr create` or `glab mr create`, and when Claude [works on an existing PR](agent-view.md#pull-request-status).
 
 Review Claude's generated PR before submitting and ask Claude to highlight potential risks or considerations.
 
@@ -276,7 +276,7 @@ Suppose you need to work with images in your codebase, and you want Claude's hel
 You can use any of these methods:
 
 1. Drag and drop an image into the Claude Code window
-2. Copy an image and paste it into the CLI with `Ctrl+V`, or with [`Alt+V` on Windows and WSL](interactive-mode.md)
+2. Copy an image and paste it into the CLI with `Ctrl+V`, or with [`Alt+V` on Windows and WSL](interactive-mode.md#general-controls)
 3. Provide an image path to Claude. E.g., "Analyze this image: /path/to/your/image.png"
 
 **Ask Claude to analyze the image**
@@ -347,7 +347,7 @@ What's the structure of @src/components?
 Show me the data from @github:repos/owner/repo/issues
 ```
 
-This fetches data from connected MCP servers using the format @server:resource. See [MCP resources](mcp.md) for details.
+This fetches data from connected MCP servers using the format @server:resource. See [MCP resources](mcp.md#use-mcp-resources) for details.
 
 Tips:
 
@@ -444,7 +444,7 @@ For changes you want to review before they touch disk, switch to plan mode. Clau
 claude --permission-mode plan
 ```
 
-You can also press `Shift+Tab` mid-session until the status bar shows `⏸ plan mode on`. See [Plan mode](permission-modes.md) for the approval flow and editing the plan in your text editor.
+You can also press `Shift+Tab` mid-session until the status bar shows `⏸ plan mode on`. See [Plan mode](permission-modes.md#analyze-before-you-edit-with-plan-mode) for the approval flow and editing the plan in your text editor.
 
 ## Delegate research to subagents
 

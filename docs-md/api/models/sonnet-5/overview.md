@@ -14,22 +14,22 @@ Model ID: `claude-sonnet-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $2 / MTok · Output pricing: $10 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-sonnet-5) · [What’s new](models/sonnet-5/whats-new-sonnet-5.md) · [Migration guide](models/sonnet-5/migration-guide.md)
+[Announcement](https://www.anthropic.com/news/claude-sonnet-5) · [What’s new](whats-new-sonnet-5.md) · [Migration guide](migration-guide.md)
 
 ## Overview
 
-Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is a drop-in upgrade for Claude Sonnet 4.6 with three behavior changes: [adaptive thinking](build-with-claude/thinking.md) is on by default, manual extended thinking now returns a 400 error (it was deprecated on Claude Sonnet 4.6), and setting sampling parameters (`temperature`, `top_p`, `top_k`) to non-default values returns a 400 error. This page summarizes everything new at launch, including a new tokenizer.
+Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is a drop-in upgrade for Claude Sonnet 4.6 with three behavior changes: [adaptive thinking](../../build-with-claude/thinking.md) is on by default, manual extended thinking now returns a 400 error (it was deprecated on Claude Sonnet 4.6), and setting sampling parameters (`temperature`, `top_p`, `top_k`) to non-default values returns a 400 error. This page summarizes everything new at launch, including a new tokenizer.
 
-[What's new in Claude Sonnet 5](models/sonnet-5/whats-new-sonnet-5.md)
+[What's new in Claude Sonnet 5](whats-new-sonnet-5.md)
 
 ## How it compares
 
 | Model                                                                             | Context | Max output | Price / MTok | Latency  | Thinking             | Default effort | Knowledge cutoff |
 | :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------- | :------------------- | :------------- | :--------------- |
-| [Claude Fable 5.1](models/fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
-| [Claude Opus 5](models/opus-5/overview.md)       | 1M      | 128K       | $5 / $25     | Moderate | Adaptive             | `high`         | May 2026         |
+| [Claude Fable 5.1](../fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
+| [Claude Opus 5](../opus-5/overview.md)       | 1M      | 128K       | $5 / $25     | Moderate | Adaptive             | `high`         | May 2026         |
 | **Claude Sonnet 5** (this model)                                                  | 1M      | 128K       | $2 / $10     | Fast     | Adaptive             | `high`         | Jan 2026         |
-| [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K    | 64K        | $1 / $5      | Fastest  | Extended             | —              | Feb 2025         |
+| [Claude Haiku 4.5](../haiku-4-5/overview.md) | 200K    | 64K        | $1 / $5      | Fastest  | Extended             | —              | Feb 2025         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
@@ -46,10 +46,10 @@ Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is
 | Platform                                                                                               | Model ID                    |
 | :----------------------------------------------------------------------------------------------------- | :-------------------------- |
 | Claude API                                                                                             | `claude-sonnet-5`           |
-| [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)       | `anthropic.claude-sonnet-5` |
-| [Google Cloud](build-with-claude/claude-on-vertex-ai.md)              | `claude-sonnet-5`           |
-| [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) | `claude-sonnet-5`           |
-| [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) | `claude-sonnet-5`           |
+| [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)       | `anthropic.claude-sonnet-5` |
+| [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)              | `claude-sonnet-5`           |
+| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | `claude-sonnet-5`           |
+| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) | `claude-sonnet-5`           |
 
 ### Pricing
 
@@ -57,21 +57,21 @@ Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is
 | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
 | Input                                                                                  | $2 / MTok                                                           |
 | Output                                                                                 | $10 / MTok                                                          |
-| [5m cache write](build-with-claude/prompt-caching.md) | $2.50 / MTok                                                        |
-| [1h cache write](build-with-claude/prompt-caching.md) | $4 / MTok                                                           |
-| [Cache read](build-with-claude/prompt-caching.md)     | $0.20 / MTok                                                        |
-| [Batch API](build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](about-claude/pricing.md) |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $2.50 / MTok                                                        |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $4 / MTok                                                           |
+| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.20 / MTok                                                        |
+| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
+| Full price list                                                                        | [Pricing](../../about-claude/pricing.md) |
 
 ### Capabilities
 
 | Feature                                                                                                                     | Value                  |
 | :-------------------------------------------------------------------------------------------------------------------------- | :--------------------- |
-| [Context window](build-with-claude/context-windows.md)                                     | 1M tokens              |
+| [Context window](../../build-with-claude/context-windows.md)                                     | 1M tokens              |
 | Max output                                                                                                                  | 128K tokens            |
-| [Max output (Batch API, beta)](build-with-claude/batch-processing.md) | 300K tokens            |
-| [Thinking](build-with-claude/thinking.md)                                                  | Adaptive               |
-| [Default effort](build-with-claude/effort.md)                                              | `high`                 |
+| [Max output (Batch API, beta)](../../build-with-claude/batch-processing.md#extended-output-beta) | 300K tokens            |
+| [Thinking](../../build-with-claude/thinking.md)                                                  | Adaptive               |
+| [Default effort](../../build-with-claude/effort.md)                                              | `high`                 |
 | Comparative latency                                                                                                         | Fast                   |
 | Input → output                                                                                                              | Text and images → text |
 | Reliable knowledge cutoff                                                                                                   | Jan 2026               |
@@ -81,16 +81,16 @@ Claude Sonnet 5 is the next generation of Anthropic's Sonnet model family. It is
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [Status](../../about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Released                                                                      | June 30, 2026                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Retirement                                                                    | Not sooner than June 30, 2027                                                                                                                                                                                                                                                                                                                                                                                           |
-| Platforms                                                                     | Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) |
+| Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
 
 ## Good to know
 
-* On the [Message Batches API](build-with-claude/batch-processing.md), Claude Sonnet 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
-* Setting `temperature`, `top_p`, or `top_k` to non-default values returns a 400 error. See [What's new in Claude Sonnet 5](models/sonnet-5/whats-new-sonnet-5.md).
-* Query limits and capabilities programmatically with the [Models API](api/models/list.md).
+* On the [Message Batches API](../../build-with-claude/batch-processing.md#extended-output-beta), Claude Sonnet 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
+* Setting `temperature`, `top_p`, or `top_k` to non-default values returns a 400 error. See [What's new in Claude Sonnet 5](whats-new-sonnet-5.md#sampling-parameters-not-accepted).
+* Query limits and capabilities programmatically with the [Models API](../../api/models/list.md).
 
 ## Resources
 

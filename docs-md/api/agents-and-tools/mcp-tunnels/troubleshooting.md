@@ -8,19 +8,19 @@ description: Diagnose connectivity, TLS, IP validation, and OAuth routing issues
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-A request through the tunnel can fail at one of three layers; diagnose them in order: the outbound connection to the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md), the [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) from Anthropic to your [proxy](agents-and-tools/mcp-tunnels/concepts.md), then routing and IP validation toward the [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md).
+A request through the tunnel can fail at one of three layers; diagnose them in order: the outbound connection to the [tunnel edge](concepts.md#components), the [inner TLS](concepts.md#components) from Anthropic to your [proxy](concepts.md#components), then routing and IP validation toward the [upstream MCP server](concepts.md#components).
 
 ## Quick reference
 
 | Symptom                                                                                                                                                        | Cause                                                                                               | Fix                                                                                                                                                                   |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Tunnel doesn't appear in the agent **+ MCP Server** picker                                                                                                     | The picker only lists tunnels in the session's workspace that have at least one active certificate. | Register a CA certificate, or open the session in the workspace the tunnel was created in.                                                                            |
-| Caller sees HTTP 500; [cloudflared](agents-and-tools/mcp-tunnels/concepts.md) logs `No ingress rules were defined` | cloudflared has no local target.                                                                    | Add `--url http://localhost:8080` and `network_mode: "service:mcp-proxy"` to the cloudflared service.                                                                 |
+| Caller sees HTTP 500; [cloudflared](concepts.md#components) logs `No ingress rules were defined` | cloudflared has no local target.                                                                    | Add `--url http://localhost:8080` and `network_mode: "service:mcp-proxy"` to the cloudflared service.                                                                 |
 | Proxy logs `no route for host`                                                                                                                                 | `tunnel_domain` doesn't match the assigned domain, or `config.yaml` was edited without restarting.  | Set `tunnel_domain` to the exact domain shown on the tunnel detail page, then restart the proxy (`docker compose restart mcp-proxy`).                                 |
-| Proxy logs `IP validation failed: <ip> is not a private address`                                                                                               | Upstream MCP server resolves outside RFC1918.                                                       | See [Upstream IP validation](agents-and-tools/mcp-tunnels/troubleshooting.md).                                |
+| Proxy logs `IP validation failed: <ip> is not a private address`                                                                                               | Upstream MCP server resolves outside RFC1918.                                                       | See [Upstream IP validation](troubleshooting.md#upstream-ip-validation).                                |
 | Proxy exits with `cannot unmarshal !!seq into map[string]string`                                                                                               | `routes` is a YAML list.                                                                            | Use `routes: { name: http://host:port }`.                                                                                                                             |
 | Proxy exits with `open /data/tls.key: permission denied`                                                                                                       | The key is `0600`; the proxy container runs non-root.                                               | `chmod 644 data/tls.key`.                                                                                                                                             |
-| `curl https://<proxy>:8080` fails with `wrong version number`                                                                                                  | Expected; the listener is plaintext WebSocket. TLS happens inside the WS stream.                    | Verify through a [Managed Agent or the Messages API](agents-and-tools/mcp-tunnels/overview.md) instead. |
+| `curl https://<proxy>:8080` fails with `wrong version number`                                                                                                  | Expected; the listener is plaintext WebSocket. TLS happens inside the WS stream.                    | Verify through a [Managed Agent or the Messages API](overview.md#use-the-tunneled-mcp-servers) instead. |
 
 The following sections cover failures that need more than a one-line fix.
 
@@ -67,7 +67,7 @@ With this configuration, the user's browser hits `/authorize` on your existing h
 
 ## Setup component authentication failures
 
-The [setup component](agents-and-tools/mcp-tunnels/concepts.md) (Helm Job or Compose `setup` service) authenticates to the Tunnels API by exchanging an OIDC JWT through your federation rule. When the exchange fails, see [Troubleshoot a failed exchange](manage-claude/wif-reference.md) in the Workload Identity Federation reference; the failure modes (subject, audience, issuer, JWKS, lifetime) are the same.
+The [setup component](concepts.md#components) (Helm Job or Compose `setup` service) authenticates to the Tunnels API by exchanging an OIDC JWT through your federation rule. When the exchange fails, see [Troubleshoot a failed exchange](../../manage-claude/wif-reference.md#troubleshoot-a-failed-exchange) in the Workload Identity Federation reference; the failure modes (subject, audience, issuer, JWKS, lifetime) are the same.
 
 Tunnels-specific causes:
 
@@ -98,11 +98,11 @@ When Anthropic rejects the proxy's certificate during inner TLS, the proxy logs 
 * The certificate's Subject Alternative Name matches `*.<tunnel-domain>`.
 * The signing CA is registered with Anthropic for this tunnel.
 
-See the [certificate requirements](agents-and-tools/mcp-tunnels/reference.md) for the full validation rules.
+See the [certificate requirements](reference.md#certificate-requirements) for the full validation rules.
 
 ## Upstream IP validation
 
-For SSRF protection, the proxy only dials addresses in the RFC1918 private ranges (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) by default. Only IPv4 is supported for the proxy-to-upstream connection. (The cloudflared-to-edge egress range in [Network requirements](agents-and-tools/mcp-tunnels/overview.md) is a different hop.)
+For SSRF protection, the proxy only dials addresses in the RFC1918 private ranges (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) by default. Only IPv4 is supported for the proxy-to-upstream connection. (The cloudflared-to-edge egress range in [Network requirements](overview.md#network-requirements) is a different hop.)
 
 If the proxy logs `IP validation failed: <ip> is not a private address`, the upstream hostname resolved outside that set. On Kubernetes, some managed distributions allocate the Service CIDR outside RFC1918; if `kubectl get svc kubernetes -n default -o jsonpath='{.spec.clusterIP}'` returns an address outside the private ranges, look up your cluster's Service CIDR and add it.
 

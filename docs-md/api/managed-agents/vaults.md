@@ -10,7 +10,7 @@ Vaults and credentials are authentication primitives that let you register crede
 
 The vault reference is a per-session parameter, so you can manage your product at the `agent` resource granularity and your users at the `session` resource granularity.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Create a vault
 
@@ -130,7 +130,7 @@ Two credential categories are supported:
 
 The actual credential values you supply (`token`, `access_token`, `refresh_token`, `client_secret`, `secret_value`) are treated as sensitive, write-only fields and never returned in API responses.
 
-Environment variable credentials (`environment_variable`) are not yet supported with [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
+Environment variable credentials (`environment_variable`) are not yet supported with [self-hosted sandboxes](self-hosted-sandboxes.md).
 
 **MCP OAuth**
 
@@ -483,7 +483,7 @@ The `networking.allowed_hosts` array controls which outbound hosts the secret ca
 
 Limiting domains is strongly recommended for security purposes, and prevents your key from ever being shared with unauthorized hosts.
 
-`networking.allowed_hosts` on a vault credential controls which requests use the secret, not which requests are allowed. For the agent to actually reach a domain, it must also be allowed at the [environment level](managed-agents/environments.md). Both levels must include the domain (either through `unrestricted` networking or by explicitly listing the domain in `allowed_hosts`) for a secret-substituted request to succeed.
+`networking.allowed_hosts` on a vault credential controls which requests use the secret, not which requests are allowed. For the agent to actually reach a domain, it must also be allowed at the [environment level](environments.md). Both levels must include the domain (either through `unrestricted` networking or by explicitly listing the domain in `allowed_hosts`) for a secret-substituted request to succeed.
 
 The optional `injection_location` field scopes where the secret is substituted; the full semantics follow the example.
 
@@ -816,11 +816,11 @@ Runtime behavior:
 
 * When no MCP credential matches by `mcp_server_url`, the connection is attempted unauthenticated and will error if the server requires authentication.
 * When multiple vaults contain a matching credential, the first vault with a match wins.
-* In [multiagent sessions](managed-agents/multiagent-orchestration.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](managed-agents/multiagent-orchestration.md).
+* In [multiagent sessions](multiagent-orchestration.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](multiagent-orchestration.md#connect-agents-to-mcp-servers).
 
 ## Rotate a credential
 
-Secret values, `display_name`, and (on environment variable credentials) `injection_location` can be updated. `injection_location` updates merge per field, as described in the Environment variable tab of [Add a credential](managed-agents/vaults.md). For a running session, an `injection_location` update propagates the same way as a secret rotation: the session's credentials are re-resolved without a restart, as described in [Credential lifecycle](managed-agents/vaults.md), and the updated locations apply to the session's subsequent outbound requests. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
+Secret values, `display_name`, and (on environment variable credentials) `injection_location` can be updated. `injection_location` updates merge per field, as described in the Environment variable tab of [Add a credential](vaults.md#add-a-credential). For a running session, an `injection_location` update propagates the same way as a secret rotation: the session's credentials are re-resolved without a restart, as described in [Credential lifecycle](vaults.md#credential-lifecycle), and the updated locations apply to the session's subsequent outbound requests. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
 
 ```bash cURL
 curl --fail-with-body -sS \
@@ -959,7 +959,7 @@ client.beta.vaults.credentials.update(
 
 Credentials are re-resolved periodically, both during a session and during the vault lifecycle. This ensures that credential rotation, archival, or deletion propagates to running sessions without a restart.
 
-To be notified if a credential is archived, deleted, or fails to refresh, you can subscribe to the vault and credential [webhooks](managed-agents/webhooks.md) associated with those lifecycle changes.
+To be notified if a credential is archived, deleted, or fails to refresh, you can subscribe to the vault and credential [webhooks](webhooks.md) associated with those lifecycle changes.
 
 | Event                             | Trigger                                                                                                              |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -969,7 +969,7 @@ To be notified if a credential is archived, deleted, or fails to refresh, you ca
 | `vault_credential.deleted`        | Credential deleted, either directly or as a result of vault deletion.                                                |
 | `vault_credential.refresh_failed` | An `mcp_oauth` credential cannot be refreshed (invalid refresh token, or irrecoverable error from the OAuth server). |
 
-This is a non-exhaustive list of webhooks; see [Subscribe to webhooks](managed-agents/webhooks.md) for the complete list.
+This is a non-exhaustive list of webhooks; see [Subscribe to webhooks](webhooks.md) for the complete list.
 
 For `mcp_oauth` credentials, re-resolution also refreshes the access token if it has expired. If the refresh fails, a `vault_credential.refresh_failed` event is emitted.
 

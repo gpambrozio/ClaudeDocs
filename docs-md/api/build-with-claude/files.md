@@ -7,15 +7,15 @@ description: Upload files once, reference them by file_id in Messages requests, 
 ---
 
 ## Compatibility
-- [ZDR](manage-claude/api-and-data-retention.md): not eligible
+- [ZDR](../manage-claude/api-and-data-retention.md): not eligible
 - Platforms: Claude API, Claude Platform on AWS (beta), Microsoft Foundry (beta) [1]; not available on Amazon Bedrock, Google Cloud
-1. On [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md).
+1. On [Microsoft Foundry](claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
 
-The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](api/files/upload.md), in addition to this guide.
+The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](../api/files/upload.md), in addition to this guide.
 
 ## File type support
 
-Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](build-with-claude/vision.md) are supported on all current Claude models. For [PDFs](build-with-claude/pdf-support.md) and [other file types with the code execution tool](agents-and-tools/tool-use/code-execution-tool.md), see the linked pages for model support.
+Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](vision.md) are supported on all current Claude models. For [PDFs](pdf-support.md) and [other file types with the code execution tool](../agents-and-tools/tool-use/code-execution-tool.md#compatibility), see the linked pages for model support.
 
 ## How the Files API works
 
@@ -23,12 +23,12 @@ The Files API provides a create-once, use-many-times approach for working with f
 
 * **Upload files** to Anthropic's secure storage and receive a unique `file_id`
 * **Download files** that are created by skills or the code execution tool
-* **Reference files** in [Messages](api/messages/create.md) requests using the `file_id` instead of re-uploading content
+* **Reference files** in [Messages](../api/messages/create.md) requests using the `file_id` instead of re-uploading content
 * **Manage your files** with list, retrieve, and delete operations
 
-**Uploaded files are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can access any files uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to, so keep files that must stay separate in their own [workspace](manage-claude/workspaces.md) and access them only with keys scoped to that workspace. Never accept `file_id` values from end users or other untrusted sources: a user-supplied file ID would let one user of your application read content that another user uploaded. Treat file IDs as server-side references, and keep the mapping between your users and their files in your application.
+**Uploaded files are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can access any files uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to, so keep files that must stay separate in their own [workspace](../manage-claude/workspaces.md#api-keys-and-resource-scoping) and access them only with keys scoped to that workspace. Never accept `file_id` values from end users or other untrusted sources: a user-supplied file ID would let one user of your application read content that another user uploaded. Treat file IDs as server-side references, and keep the mapping between your users and their files in your application.
 
-If you are building a multi-tenant application on the Files API, create a separate [workspace](manage-claude/workspaces.md) for each tenant. The workspace is the isolation boundary for files, so a workspace per tenant gives each tenant's data hard isolation from every other tenant. Each organization can have up to 100 workspaces; contact your account team if you need more.
+If you are building a multi-tenant application on the Files API, create a separate [workspace](../manage-claude/workspaces.md) for each tenant. The workspace is the isolation boundary for files, so a workspace per tenant gives each tenant's data hard isolation from every other tenant. Each organization can have up to 100 workspaces; contact your account team if you need more.
 
 ## How to use the Files API
 
@@ -157,7 +157,7 @@ The response from uploading a file includes:
 }
 ```
 
-`downloadable` is `false` for files you upload. Only files created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) can be downloaded. See [Downloading a file](build-with-claude/files.md).
+`downloadable` is `false` for files you upload. Only files created by [skills](skills-guide.md) or the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md) can be downloaded. See [Downloading a file](files.md#downloading-a-file).
 
 ### Using a file in messages
 
@@ -382,7 +382,7 @@ The Files API supports different file types that correspond to different content
 | PDF                                                                                                                                     | `application/pdf`                                    | `document`         | Text analysis, document processing  |
 | Plain text                                                                                                                              | `text/plain`                                         | `document`         | Text analysis, processing           |
 | Images                                                                                                                                  | `image/jpeg`, `image/png`, `image/gif`, `image/webp` | `image`            | Image analysis, visual tasks        |
-| [Datasets, others](agents-and-tools/tool-use/code-execution-tool.md) | Varies                                               | `container_upload` | Analyze data, create visualizations |
+| [Datasets, others](../agents-and-tools/tool-use/code-execution-tool.md#upload-and-analyze-your-own-files) | Varies                                               | `container_upload` | Analyze data, create visualizations |
 
 #### Document blocks
 
@@ -417,7 +417,7 @@ For images, use the `image` content block:
 
 #### Container upload blocks
 
-To send a file to the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), use the `container_upload` content block:
+To send a file to the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md#upload-and-analyze-your-own-files), use the `container_upload` content block:
 
 ```json
 {
@@ -428,7 +428,7 @@ To send a file to the [code execution tool](agents-and-tools/tool-use/code-execu
 
 ### Working with other file formats
 
-For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in your message. Files that are already plain text, such as .csv and .md files, can either be read in this way or uploaded through the Files API with an explicit `text/plain` content type. To analyze datasets instead of reading them as text, upload them for the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) using a `container_upload` block.
+For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in your message. Files that are already plain text, such as .csv and .md files, can either be read in this way or uploaded through the Files API with an explicit `text/plain` content type. To analyze datasets instead of reading them as text, upload them for the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md#upload-and-analyze-your-own-files) using a `container_upload` block.
 
 The following examples read a text file and send its contents as plain text:
 
@@ -667,13 +667,13 @@ message.content.each do |block|
 end
 ```
 
-For .docx files containing images, convert them to PDF format first, then use [PDF support](build-with-claude/pdf-support.md) to take advantage of the built-in image parsing. This allows using citations from the PDF document.
+For .docx files containing images, convert them to PDF format first, then use [PDF support](pdf-support.md) to take advantage of the built-in image parsing. This allows using citations from the PDF document.
 
 ### Managing files
 
 #### List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](api/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](../api/files/list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/files \
@@ -844,7 +844,7 @@ client.files.delete(file_id)
 
 ### Downloading a file
 
-Download files that were created by [skills](build-with-claude/skills-guide.md) or the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md). Files you upload cannot be downloaded. The `file_id` of a generated file appears in the [`bash_code_execution_tool_result` content block](agents-and-tools/tool-use/code-execution-tool.md) of the Messages response that created it:
+Download files that were created by [skills](skills-guide.md) or the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md). Files you upload cannot be downloaded. The `file_id` of a generated file appears in the [`bash_code_execution_tool_result` content block](../agents-and-tools/tool-use/code-execution-tool.md#retrieve-generated-files) of the Messages response that created it:
 
 ```bash cURL
 curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
@@ -922,7 +922,7 @@ File.binwrite("downloaded_file.txt", file_content.read)
 
 A file is downloadable only when its metadata shows `"downloadable": true`, which is the case for files created by skills or the code execution tool. Downloading a file you uploaded returns a 400 error.
 
-On the Claude API, supported image, video, and audio files that Claude produces with the code execution tool, including files created by skills, carry signed C2PA Content Credentials when you download them. See [Content Credentials on generated files](agents-and-tools/tool-use/code-execution-tool.md) for what the credential contains and how to verify it.
+On the Claude API, supported image, video, and audio files that Claude produces with the code execution tool, including files created by skills, carry signed C2PA Content Credentials when you download them. See [Content Credentials on generated files](../agents-and-tools/tool-use/code-execution-tool.md#content-credentials-on-generated-files) for what the credential contains and how to verify it.
 
 ## File storage and limits
 
@@ -933,12 +933,12 @@ On the Claude API, supported image, video, and audio files that Claude produces 
 
 ### File lifecycle
 
-* Files are scoped to the workspace they were uploaded in. Any request in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](build-with-claude/files.md))
+* Files are scoped to the workspace they were uploaded in. Any request in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](files.md#workspace-scoped-access))
 * Files cannot be modified or renamed after upload. To change a file's content, upload a new file and delete the old one
 * Files persist until you delete them with the `DELETE /v1/files/{file_id}` endpoint or they reach their `expires_at`
 * Deleted files cannot be recovered
 * Files are inaccessible through the API shortly after deletion, but they may persist in active Messages API calls and associated tool uses
-* Files that users delete will be deleted in accordance with Anthropic's [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data). For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md)
+* Files that users delete will be deleted in accordance with Anthropic's [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data). For ZDR eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md)
 
 ### File expiration
 
@@ -957,7 +957,7 @@ Expiration is a lifecycle feature, not a guaranteed-deletion control. After `exp
 
 ### Audit logging
 
-If your organization has the [Compliance API](manage-claude/compliance-api.md) enabled, its [Activity Feed](manage-claude/compliance-activity-feed.md) records Files API operations made with a Claude API key or from the Claude Console: each upload (`POST /v1/files`), content download (`GET /v1/files/{file_id}/content`), and deletion (`DELETE /v1/files/{file_id}`) appears as a `platform_file_uploaded`, `platform_file_content_downloaded`, or `platform_file_deleted` activity. Listing files and retrieving file metadata are not recorded. Operations that occur while the Compliance API is off are not recorded and cannot be recovered later, so [set up the Compliance API](manage-claude/compliance-api-access.md) before you rely on this audit trail. On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), audit file operations with AWS CloudTrail data events instead.
+If your organization has the [Compliance API](../manage-claude/compliance-api.md) enabled, its [Activity Feed](../manage-claude/compliance-activity-feed.md) records Files API operations made with a Claude API key or from the Claude Console: each upload (`POST /v1/files`), content download (`GET /v1/files/{file_id}/content`), and deletion (`DELETE /v1/files/{file_id}`) appears as a `platform_file_uploaded`, `platform_file_content_downloaded`, or `platform_file_deleted` activity. Listing files and retrieving file metadata are not recorded. Operations that occur while the Compliance API is off are not recorded and cannot be recovered later, so [set up the Compliance API](../manage-claude/compliance-api-access.md) before you rely on this audit trail. On [Claude Platform on AWS](claude-platform-on-aws.md#monitoring-and-logging), audit file operations with AWS CloudTrail data events instead.
 
 ## Migrate from `files-api-2025-04-14`
 
@@ -972,13 +972,13 @@ The Files API is out of beta and needs no beta header. Migrating off `files-api-
 
 To migrate:
 
-1. **Remove the beta header.** Drop `anthropic-beta: files-api-2025-04-14` from your requests. In the SDKs, call `client.files` instead of `client.beta.files`; keeping `client.beta.files` works only on the [SDK releases that no longer send the header](build-with-claude/files.md). Earlier releases send it from `client.beta.files` even with no `betas` argument.
-2. **Update pagination.** Replace `after_id`/`before_id` loops with the `page`/`next_page` cursor, or use the SDK auto-pagination helpers shown in [Managing files](build-with-claude/files.md).
-3. **Read `expires_at`.** The field appears only without the header; `null` means the file has no expiration (see [File expiration](build-with-claude/files.md)).
+1. **Remove the beta header.** Drop `anthropic-beta: files-api-2025-04-14` from your requests. In the SDKs, call `client.files` instead of `client.beta.files`; keeping `client.beta.files` works only on the [SDK releases that no longer send the header](files.md#sdk-beta-namespace). Earlier releases send it from `client.beta.files` even with no `betas` argument.
+2. **Update pagination.** Replace `after_id`/`before_id` loops with the `page`/`next_page` cursor, or use the SDK auto-pagination helpers shown in [Managing files](files.md#managing-files).
+3. **Read `expires_at`.** The field appears only without the header; `null` means the file has no expiration (see [File expiration](files.md#file-expiration)).
 
 ### SDK beta namespace
 
-Starting with Python SDK 1.2.0, TypeScript SDK 0.122.0, Go SDK 1.68.0, Java SDK 2.59.0, Ruby SDK 1.67.0, and C# SDK 12.44.0, `client.beta.files` no longer sends `files-api-2025-04-14` and returns the same shapes as `client.files`, with `Beta`-prefixed type names. It accepts a `betas` argument for Files features that are still in beta, such as `scope_id` filtering under a [Managed Agents](managed-agents/files.md) beta header. Earlier SDK releases are typed to the beta shapes; if you depend on those types, stay on an earlier release until you migrate.
+Starting with Python SDK 1.2.0, TypeScript SDK 0.122.0, Go SDK 1.68.0, Java SDK 2.59.0, Ruby SDK 1.67.0, and C# SDK 12.44.0, `client.beta.files` no longer sends `files-api-2025-04-14` and returns the same shapes as `client.files`, with `Beta`-prefixed type names. It accepts a `betas` argument for Files features that are still in beta, such as `scope_id` filtering under a [Managed Agents](../managed-agents/files.md) beta header. Earlier SDK releases are typed to the beta shapes; if you depend on those types, stay on an earlier release until you migrate.
 
 Requests that carry `anthropic-beta: managed-agents-2026-04-01` without `files-api-2025-04-14` receive the shapes on this page with one compatibility affordance on `GET /v1/files`: `before_id` and `after_id` are still accepted (not combinable with `page` or `ids[]`), and the list response includes `has_more`, `first_id`, and `last_id` alongside `next_page`. Later Managed Agents beta versions receive the plain shape.
 

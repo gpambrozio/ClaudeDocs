@@ -10,8 +10,8 @@ Learn how Access Transparency creates a record of human access to your organizat
 
 When Access Transparency is enabled for your organization:
 
-* Each human view of your retained data (see [covered content](manage-claude/access-transparency.md)) by an Anthropic employee writes an `anthropic_access` activity to your [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md).
-* Access occurs only for safety review or incident response. See [Reason codes](manage-claude/access-transparency.md).
+* Each human view of your retained data (see [covered content](access-transparency.md#what-access-transparency-covers)) by an Anthropic employee writes an `anthropic_access` activity to your [Compliance API Activity Feed](compliance-activity-feed.md).
+* Access occurs only for safety review or incident response. See [Reason codes](access-transparency.md#reason-codes).
 
 Access Transparency is available to eligible customers on request and is not self-serve. For eligibility, refer to your contract terms or contact your Anthropic account representative.
 
@@ -21,22 +21,22 @@ Anthropic personnel access customer content only under defined conditions. Acces
 
 * **Human access happens only under a published reason code.**
 * **Human views of your covered content are recorded.** Anthropic's internal tooling that can reach your covered content is instrumented to emit an event on each view.
-* **Events represent human access, not automated processing.** Anthropic's automated safety systems process your content in a secured pipeline with no interactive human access; that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](manage-claude/access-transparency.md)).
-* **Events arrive on your existing feed.** Activities are accessible through your [Compliance API Activity Feed](manage-claude/compliance-activity-feed.md). Existing credentials, audit, export, and SIEM integrations for the Compliance API will still apply.
+* **Events represent human access, not automated processing.** Anthropic's automated safety systems process your content in a secured pipeline with no interactive human access; that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](access-transparency.md#cmek-content-preservation)).
+* **Events arrive on your existing feed.** Activities are accessible through your [Compliance API Activity Feed](compliance-activity-feed.md). Existing credentials, audit, export, and SIEM integrations for the Compliance API will still apply.
 
 ## What Access Transparency covers
 
-* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. Anthropic's [general ZDR documentation](manage-claude/api-and-data-retention.md) and [ZDR for Claude Code documentation](zero-data-retention.md) explain which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
+* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. Anthropic's [general ZDR documentation](api-and-data-retention.md) and [ZDR for Claude Code documentation](../../claude-code/zero-data-retention.md) explain which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
 * **Manual views by Anthropic personnel:** Manual views of your covered content by Anthropic reviewers generate events.
 
 ## What Access Transparency does not cover
 
-* **Automated processing:** Model serving, safety classifiers, and abuse-detection pipelines process your content as part of normal operation and do not generate `anthropic_access` events. Preservation initiated by automated processing does generate a `cmek_preserve` event (see [CMEK content preservation](manage-claude/access-transparency.md)).
-* **Your own organization's activity:** Your API calls, admin actions, and Compliance API reads are covered by standard [Activity Feed](manage-claude/compliance-activity-feed.md) event types.
+* **Automated processing:** Model serving, safety classifiers, and abuse-detection pipelines process your content as part of normal operation and do not generate `anthropic_access` events. Preservation initiated by automated processing does generate a `cmek_preserve` event (see [CMEK content preservation](access-transparency.md#cmek-content-preservation)).
+* **Your own organization's activity:** Your API calls, admin actions, and Compliance API reads are covered by standard [Activity Feed](compliance-activity-feed.md) event types.
 * **Claude for Enterprise and Claude Apps:** claude.ai Enterprise seats, Claude for Work, Cowork, and Claude in Chrome are not covered.
 * **Claude consumer products:** Claude Free, Pro, or Max plans.
 * **Partner-operated platforms:** Amazon Bedrock and Google Cloud; refer to those platforms' transparency controls.
-* **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [ZDR documentation](zero-data-retention.md) for additional details.
+* **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [ZDR documentation](../../claude-code/zero-data-retention.md#what-zdr-does-not-cover) for additional details.
 
 ## Getting started
 
@@ -69,7 +69,7 @@ curl --fail-with-body -sS -G \
   --header "anthropic-version: 2023-06-01"
 ```
 
-Pagination, date-range filtering (`created_at.gte` / `.lt`), and the response envelope (`has_more`, `first_id`, `last_id`) are shared with the rest of the Activity Feed. See [Query the Activity Feed](manage-claude/compliance-activity-feed.md).
+Pagination, date-range filtering (`created_at.gte` / `.lt`), and the response envelope (`has_more`, `first_id`, `last_id`) are shared with the rest of the Activity Feed. See [Query the Activity Feed](compliance-activity-feed.md).
 
 Each `anthropic_access` activity carries the standard Activity fields plus the following:
 
@@ -80,7 +80,7 @@ Each `anthropic_access` activity carries the standard Activity fields plus the f
 | `created_at`              | RFC 3339 string | When the activity became visible in your feed                                                                                                                    |
 | `actor`                   | object          | Always `{ "type": "anthropic_actor", "email_address": null }`. Individual employee identity is not disclosed                                                     |
 | `accessor_department`     | string          | The Anthropic team that performed the access (for example, `Safeguards`)                                                                                         |
-| `reason_code`             | enum            | See [Reason codes](manage-claude/access-transparency.md)                                                           |
+| `reason_code`             | enum            | See [Reason codes](access-transparency.md#reason-codes)                                                           |
 | `resource_details.type`   | enum            | A resource type, currently only `message`. Extensible for future resource types                                                                                  |
 | `resource_details.id`     | string or null  | Identifier of the content accessed                                                                                                                               |
 | `resource_details.parent` | string or null  | Identifier of the content's parent, for example the conversation ID containing a message. Currently `null` or omitted until resources with parents are supported |
@@ -109,7 +109,7 @@ Example JSON message:
 
 In rare cases, Anthropic preserves specific content beyond the standard retention window (for example, when a safety review confirms severely harmful content that must be retained for an ongoing investigation). Preservation is itself a logged, customer-visible action:
 
-* **A preservation event is written to your feed.** When content is preserved, an event with type `cmek_preserve` is written to your Compliance API Activity Feed. Preservation events carry the same fields as an `anthropic_access` event; only the event type differs, so a parser that handles one handles both. See [Reason codes](manage-claude/access-transparency.md).
+* **A preservation event is written to your feed.** When content is preserved, an event with type `cmek_preserve` is written to your Compliance API Activity Feed. Preservation events carry the same fields as an `anthropic_access` event; only the event type differs, so a parser that handles one handles both. See [Reason codes](access-transparency.md#reason-codes).
 * **A preservation event is written regardless of how the preservation was initiated.** Preservation ordinarily follows human review of the content, but the event is written whether the preservation was initiated by a human reviewer or by an automated safety pipeline: the record reflects that your content's retention state changed, independent of who changed it.
 * **For CMEK organizations, preservation is a visible key movement.** Preserved content is re-encrypted outside your customer-managed key so that the investigation can continue independent of your key. The preservation event is your record that this occurred. All other retained content remains under your key.
 
@@ -183,7 +183,7 @@ Access Transparency applies from the time it is enabled for your organization. C
 
 ### Automated processing does not generate access events
 
-`anthropic_access` events record human access only. Anthropic's automated safety systems and classifiers continue to process your content as part of normal operation, and that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](manage-claude/access-transparency.md)). An empty feed means no human at Anthropic has viewed your content; it does not mean your content was not processed by automated systems.
+`anthropic_access` events record human access only. Anthropic's automated safety systems and classifiers continue to process your content as part of normal operation, and that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](access-transparency.md#cmek-content-preservation)). An empty feed means no human at Anthropic has viewed your content; it does not mean your content was not processed by automated systems.
 
 ### Access Transparency does not change what Anthropic can access
 
@@ -217,7 +217,7 @@ Within two business days of the access. Configure any SIEM alerting or scheduled
 
 **How do I know which request an anthropic_access event refers to?**
 
-Use the `resource_details.id` field. It contains the same message ID (`msg_...`) that the [Messages API](api/messages/create.md) returns in the `id` field of every response body. To make this useful, log `id` in your own systems alongside your internal metadata, such as the application, end user, or conversation that produced the request. When an event arrives, join its `resource_details.id` against your logs to identify exactly which request was viewed.
+Use the `resource_details.id` field. It contains the same message ID (`msg_...`) that the [Messages API](../api/messages/create.md) returns in the `id` field of every response body. To make this useful, log `id` in your own systems alongside your internal metadata, such as the application, end user, or conversation that produced the request. When an event arrives, join its `resource_details.id` against your logs to identify exactly which request was viewed.
 
 **Can I enable Access Transparency for a single workspace?**
 
@@ -225,7 +225,7 @@ Access Transparency is enabled at the organization level and covers all workspac
 
 **How does Access Transparency relate to CMEK?**
 
-They are independent. With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](manage-claude/access-transparency.md) and [CMEK](manage-claude/cmek.md).
+They are independent. With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](access-transparency.md#cmek-content-preservation) and [CMEK](cmek.md).
 
 **How do I request Access Transparency?**
 
@@ -233,11 +233,11 @@ Contact your Anthropic account representative.
 
 ## Related resources
 
-* [Compliance API overview](manage-claude/compliance-api.md)
-* [Activity Feed](manage-claude/compliance-activity-feed.md)
-* [API and data retention](manage-claude/api-and-data-retention.md)
-* [Customer-Managed Encryption Keys (CMEK)](manage-claude/cmek.md)
-* [Claude Code data usage](data-usage.md)
+* [Compliance API overview](compliance-api.md)
+* [Activity Feed](compliance-activity-feed.md)
+* [API and data retention](api-and-data-retention.md)
+* [Customer-Managed Encryption Keys (CMEK)](cmek.md)
+* [Claude Code data usage](../../claude-code/data-usage.md)
 * [Trust Center](https://trust.anthropic.com/resources)
 
 ---

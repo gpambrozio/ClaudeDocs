@@ -8,23 +8,23 @@ description: Specify tool schemas, write effective descriptions, and control whe
 
 ## Prerequisites
 
-* Familiarity with the [tool use overview](agents-and-tools/tool-use/overview.md)
+* Familiarity with the [tool use overview](overview.md)
 * A Claude API key and a working SDK or cURL setup
 
-If using Claude with tool use and thinking, see [Thinking](build-with-claude/thinking.md) for more information.
+If using Claude with tool use and thinking, see [Thinking](../../build-with-claude/thinking.md) for more information.
 
 ## Specifying client tools
 
-Client tools are specified in the `tools` top-level parameter of the API request. Anthropic-schema client tools, such as the bash and text editor tools, are declared by a date-versioned `type`; see each tool's page, linked from the [Tool reference](agents-and-tools/tool-use/tool-reference.md), for the fields it accepts. The computer use and browser use tools are [client toolsets](agents-and-tools/tool-use/tool-reference.md): a single entry with no `name` that declares a fixed set of member tools. A user-defined tool definition includes:
+Client tools are specified in the `tools` top-level parameter of the API request. Anthropic-schema client tools, such as the bash and text editor tools, are declared by a date-versioned `type`; see each tool's page, linked from the [Tool reference](tool-reference.md), for the fields it accepts. The computer use and browser use tools are [client toolsets](tool-reference.md#client-toolsets): a single entry with no `name` that declares a fixed set of member tools. A user-defined tool definition includes:
 
 | Parameter        | Description                                                                                                                                                                                                                            |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`           | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,64}$`.                                                                                                                                                                    |
 | `description`    | A detailed plaintext description of what the tool does, when it should be used, and how it behaves.                                                                                                                                    |
 | `input_schema`   | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool.                                                                                                                                        |
-| `input_examples` | (Optional) An array of example input objects to help Claude understand how to use the tool. See [Providing tool use examples](agents-and-tools/tool-use/define-tools.md). |
+| `input_examples` | (Optional) An array of example input objects to help Claude understand how to use the tool. See [Providing tool use examples](define-tools.md#providing-tool-use-examples). |
 
-For the full set of optional properties available on any single tool definition, including `cache_control`, `strict`, `defer_loading`, and `allowed_callers`, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md). A client toolset entry accepts `cache_control` and `allowed_callers` on the entry and sets `defer_loading` per member; see [Client toolsets](agents-and-tools/tool-use/tool-reference.md).
+For the full set of optional properties available on any single tool definition, including `cache_control`, `strict`, `defer_loading`, and `allowed_callers`, see the [Tool reference](tool-reference.md#tool-definition-properties). A client toolset entry accepts `cache_control` and `allowed_callers` on the entry and sets `defer_loading` per member; see [Client toolsets](tool-reference.md#client-toolsets).
 
 **Example simple tool definition**
 
@@ -77,11 +77,11 @@ To get the best performance out of Claude when using tools, follow these guideli
   * What each parameter means and how it affects the tool's behavior
   * Any important caveats or limitations, such as what information the tool does not return if the tool name is unclear. The more context you can give Claude about your tools, the better it will be at deciding when and how to use them. Aim for at least 3–4 sentences for each tool description, more if the tool is complex.
 
-* **Prioritize descriptions, but consider using `input_examples` for complex tools.** Clear descriptions are most important, but for tools with complex inputs, nested objects, or format-sensitive parameters, you can use the `input_examples` field to provide schema-validated examples. See [Providing tool use examples](agents-and-tools/tool-use/define-tools.md) for details.
+* **Prioritize descriptions, but consider using `input_examples` for complex tools.** Clear descriptions are most important, but for tools with complex inputs, nested objects, or format-sensitive parameters, you can use the `input_examples` field to provide schema-validated examples. See [Providing tool use examples](define-tools.md#providing-tool-use-examples) for details.
 
 * **Consolidate related operations into fewer tools.** Rather than creating a separate tool for every action (`create_pr`, `review_pr`, `merge_pr`), group them into a single tool with an `action` parameter. Fewer, more capable tools reduce selection ambiguity and make your tool surface easier for Claude to navigate.
 
-* **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the service (for example, `github_list_prs`, `slack_send_message`). This makes tool selection unambiguous as your library grows, and is especially important when using [tool search](agents-and-tools/tool-use/tool-search-tool.md).
+* **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the service (for example, `github_list_prs`, `slack_send_message`). This makes tool selection unambiguous as your library grows, and is especially important when using [tool search](tool-search-tool.md).
 
 * **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to reason about its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
 
@@ -539,7 +539,7 @@ Examples are included in the prompt alongside your tool schema, showing Claude c
 ### Requirements and limitations
 
 * **Schema validation** - Each example must be valid according to the tool's `input_schema`. Invalid examples return a 400 error
-* **Not supported for server-side tools or client toolsets** - Input examples work on user-defined and Anthropic-schema client tools other than the [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets, but not on server tools such as web search or code execution
+* **Not supported for server-side tools or client toolsets** - Input examples work on user-defined and Anthropic-schema client tools other than the [computer use](computer-use-tool.md) and [browser use](browser-use-tool.md) toolsets, but not on server tools such as web search or code execution
 * **Token cost** - Examples add to prompt tokens: \~20–50 tokens for simple examples, \~100–200 tokens for complex nested objects
 
 ## Controlling Claude's output
@@ -552,8 +552,8 @@ Not every model and setting supports forced tool use. Where it isn't supported, 
 
 | Model or setting                                                                                                                    | Restriction                                                                                                         | What to use instead                                                                                                                                                                                                                                                                                                                                                                |
 | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Manual [extended thinking](build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) | `any` and `tool` are not supported and result in an error                                                           | `auto` or `none`. [Adaptive thinking](build-with-claude/thinking.md), including on models where thinking is on by default such as Claude Opus 5, supports forced tool use                                                                                                                                                                         |
-| Claude Fable 5.1 and [Claude Mythos 5.1](https://anthropic.com/glasswing)                                                           | `any` and `tool` return a [400 error](api/errors.md) | `auto` with [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) to guarantee schema-valid tool inputs, or [structured outputs](build-with-claude/structured-outputs.md) when you need a response in a fixed JSON shape. Prompting still influences which tool `auto` picks. `none` is also supported |
+| Manual [extended thinking](../../build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) | `any` and `tool` are not supported and result in an error                                                           | `auto` or `none`. [Adaptive thinking](../../build-with-claude/thinking.md), including on models where thinking is on by default such as Claude Opus 5, supports forced tool use                                                                                                                                                                         |
+| Claude Fable 5.1 and [Claude Mythos 5.1](https://anthropic.com/glasswing)                                                           | `any` and `tool` return a [400 error](../../api/errors.md#forced-tool-use-not-supported) | `auto` with [strict tool use](strict-tool-use.md) to guarantee schema-valid tool inputs, or [structured outputs](../../build-with-claude/structured-outputs.md) when you need a response in a fixed JSON shape. Prompting still influences which tool `auto` picks. `none` is also supported |
 
 On models that support it, the highlighted lines are the only difference from a standard tool use request:
 
@@ -839,7 +839,7 @@ When working with the `tool_choice` parameter, there are four possible options:
 * `tool` forces Claude to always use a particular tool.
 * `none` prevents Claude from using any tools. This is the default value when no `tools` are provided.
 
-When using [prompt caching](build-with-claude/prompt-caching.md), changes to the `tool_choice` parameter will invalidate cached message blocks. Tool definitions and system prompts remain cached, but message content must be reprocessed.
+When using [prompt caching](../../build-with-claude/prompt-caching.md#what-invalidates-the-cache), changes to the `tool_choice` parameter will invalidate cached message blocks. Tool definitions and system prompts remain cached, but message content must be reprocessed.
 
 This diagram illustrates how each option works:
 
@@ -851,7 +851,7 @@ Testing has shown that this should not reduce performance. If you would like the
 
 **Guaranteed tool calls with strict tools**
 
-On models that support forced tool use, combine `tool_choice: {"type": "any"}` with [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) to guarantee both that one of your tools is called and that the tool inputs strictly follow your schema. Set `strict: true` on your tool definitions to enable schema validation.
+On models that support forced tool use, combine `tool_choice: {"type": "any"}` with [strict tool use](strict-tool-use.md) to guarantee both that one of your tools is called and that the tool inputs strictly follow your schema. Set `strict: true` on your tool definitions to enable schema validation.
 
 ### Model responses with tools
 

@@ -90,7 +90,7 @@ First, create a Claude resource in Azure:
    * Claude Sonnet
    * Claude Haiku
 
-   When you configure a deployment, you also choose its [hosting option](build-with-claude/claude-in-microsoft-foundry.md), which determines whether inference runs on Azure or on Anthropic infrastructure.
+   When you configure a deployment, you also choose its [hosting option](../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options), which determines whether inference runs on Azure or on Anthropic infrastructure.
 
 ### 2. Configure Azure credentials
 
@@ -162,7 +162,7 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5'
 
 Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Microsoft Foundry, Claude Code defaults this to the primary model because not every account has a Haiku deployment. To use Haiku for background tasks, set `ANTHROPIC_DEFAULT_HAIKU_MODEL` to a Haiku deployment that is available in your account, as shown above.
 
-For current and legacy model IDs, see [Models overview](about-claude/models/overview.md). See [Model configuration](model-config.md) for the full list of environment variables.
+For current and legacy model IDs, see [Models overview](../api/models/overview.md). See [Model configuration](model-config.md#pin-models-for-third-party-deployments) for the full list of environment variables.
 
 [Prompt caching](prompt-caching.md) is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set the following variable; cache writes with a 1-hour TTL are billed at a higher rate:
 
@@ -170,7 +170,7 @@ For current and legacy model IDs, see [Models overview](about-claude/models/over
 export ENABLE_PROMPT_CACHING_1H=1
 ```
 
-To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md).
+To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md#choose-the-ttl-yourself).
 
 ### 5. Run Claude Code
 

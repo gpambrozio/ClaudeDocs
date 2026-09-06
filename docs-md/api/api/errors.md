@@ -10,9 +10,9 @@ description: Understand the HTTP status codes, error response shape, and request
 
 The API follows a predictable HTTP error code format:
 
-* 400 - `invalid_request_error`: There was an issue with the format or content of your request. This error type may also be used for other 4XX status codes not listed in this section. The API also returns a 400 when usage reaches an organization or workspace [spend limit you set](api/rate-limits.md), except limits on the [Claude Code workspace](manage-claude/workspaces.md), which can return a 429 instead.
+* 400 - `invalid_request_error`: There was an issue with the format or content of your request. This error type may also be used for other 4XX status codes not listed in this section. The API also returns a 400 when usage reaches an organization or workspace [spend limit you set](rate-limits.md#setting-your-own-spend-limit), except limits on the [Claude Code workspace](../manage-claude/workspaces.md#claude-code-workspace), which can return a 429 instead.
 
-* 401 - `authentication_error`: There's an issue with your API key (for example, it's malformed, revoked, or expired; see [Key expiration](manage-claude/authentication.md)). On Claude Platform on AWS, this can also indicate a problem with your AWS credentials or SigV4 signature.
+* 401 - `authentication_error`: There's an issue with your API key (for example, it's malformed, revoked, or expired; see [Key expiration](../manage-claude/authentication.md#key-expiration)). On Claude Platform on AWS, this can also indicate a problem with your AWS credentials or SigV4 signature.
 
 * 402 - `billing_error`: There's an issue with your billing or payment information. Check your payment details in the [Claude Console](https://platform.claude.com), or in AWS Marketplace if you're using Claude Platform on AWS.
 
@@ -22,13 +22,13 @@ The API follows a predictable HTTP error code format:
 
 * 409 - `conflict_error`: The request conflicts with the current state of a resource. For example, the resource was modified concurrently, or a value that must be unique is already in use. Resolve the conflict, then retry the request.
 
-* 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. See [Request size limits](api/errors.md) for per-endpoint maximums.
+* 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. See [Request size limits](errors.md#request-size-limits) for per-endpoint maximums.
 
-* 429 - `rate_limit_error`: Your organization has hit a [rate limit](api/rate-limits.md), reached its usage tier's monthly spend cap, or reached a spend limit on the Claude Code workspace. A tier spend-cap 429 has no `retry-after` header and keeps failing until access resumes; see [Reaching your spend cap](api/rate-limits.md) for how to recognize it.
+* 429 - `rate_limit_error`: Your organization has hit a [rate limit](rate-limits.md), reached its usage tier's monthly spend cap, or reached a spend limit on the Claude Code workspace. A tier spend-cap 429 has no `retry-after` header and keeps failing until access resumes; see [Reaching your spend cap](rate-limits.md#reaching-your-spend-cap) for how to recognize it.
 
-* 500 - `api_error`: An unexpected error has occurred internal to Anthropic's systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](api/errors.md).
+* 500 - `api_error`: An unexpected error has occurred internal to Anthropic's systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](errors.md#request-id).
 
-* 504 - `timeout_error`: The request timed out while processing. Consider using the [streaming Messages API](build-with-claude/streaming.md) for long-running requests. See [Long requests](api/errors.md) for more options.
+* 504 - `timeout_error`: The request timed out while processing. Consider using the [streaming Messages API](../build-with-claude/streaming.md) for long-running requests. See [Long requests](errors.md#long-requests) for more options.
 
 * 529 - `overloaded_error`: The API is temporarily overloaded.
 
@@ -38,7 +38,7 @@ The API follows a predictable HTTP error code format:
 
 The official SDKs automatically retry transient failures (such as connection errors, rate limits, and 5xx server errors) with exponential backoff, twice by default, honoring the `retry-after` header when present. Each SDK client accepts a maximum-retries option to configure or disable this behavior.
 
-When receiving a [streaming](build-with-claude/streaming.md) response over server-sent events (SSE), an error can occur after the API returns a 200 response. In that case, error handling doesn't follow these standard mechanisms. See [Error events](build-with-claude/streaming.md) for the shape of mid-stream errors.
+When receiving a [streaming](../build-with-claude/streaming.md) response over server-sent events (SSE), an error can occur after the API returns a 200 response. In that case, error handling doesn't follow these standard mechanisms. See [Error events](../build-with-claude/streaming.md#error-events) for the shape of mid-stream errors.
 
 ## Request size limits
 
@@ -48,8 +48,8 @@ The API enforces request size limits:
 | ----------------------------------------------------------------------------------- | -------------------- |
 | Messages API                                                                        | 32 MB                |
 | Token Counting API                                                                  | 32 MB                |
-| [Batch API](build-with-claude/batch-processing.md) | 256 MB               |
-| [Files API](build-with-claude/files.md)            | 500 MB               |
+| [Batch API](../build-with-claude/batch-processing.md) | 256 MB               |
+| [Files API](../build-with-claude/files.md)            | 500 MB               |
 
 If you exceed these limits, you'll receive a 413 `request_too_large` error. On the direct Claude API, Cloudflare returns this error before the request reaches the API servers.
 
@@ -68,21 +68,21 @@ The API always returns errors as JSON, with a top-level `error` object that alwa
 }
 ```
 
-In accordance with the [versioning](api/versioning.md) policy, the values within these objects may expand, and it is possible that the `type` values will grow over time.
+In accordance with the [versioning](versioning.md) policy, the values within these objects may expand, and it is possible that the `type` values will grow over time.
 
 ## SDK error types
 
 The official SDKs raise typed exceptions for these errors instead of returning raw JSON, and the class names and namespaces differ by language. For example, a 404 surfaces as `anthropic.NotFoundError` in Python, `Anthropic::Errors::NotFoundError` in Ruby, `com.anthropic.errors.NotFoundException` in Java, and as a single `*anthropic.Error` value (branch on `StatusCode`) in Go. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Each SDK page documents its full exception hierarchy:
 
-* [Python](cli-sdks-libraries/sdks/python.md) · [TypeScript](cli-sdks-libraries/sdks/typescript.md) · [C#](cli-sdks-libraries/sdks/csharp.md) · [Go](cli-sdks-libraries/sdks/go.md) · [Java](cli-sdks-libraries/sdks/java.md) · [PHP](cli-sdks-libraries/sdks/php.md) · [Ruby](cli-sdks-libraries/sdks/ruby.md)
+* [Python](../cli-sdks-libraries/sdks/python.md#handling-errors) · [TypeScript](../cli-sdks-libraries/sdks/typescript.md#handling-errors) · [C#](../cli-sdks-libraries/sdks/csharp.md#error-handling) · [Go](../cli-sdks-libraries/sdks/go.md#error-handling) · [Java](../cli-sdks-libraries/sdks/java.md#error-handling) · [PHP](../cli-sdks-libraries/sdks/php.md#error-handling) · [Ruby](../cli-sdks-libraries/sdks/ruby.md#handling-errors)
 
 ## Request ID
 
-Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. The same identifier appears as the `request_id` field in [error response bodies](api/errors.md). When contacting support about a specific request, include this ID to help quickly resolve your issue.
+Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. The same identifier appears as the `request_id` field in [error response bodies](errors.md#error-shapes). When contacting support about a specific request, include this ID to help quickly resolve your issue.
 
-On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), responses include two request IDs: the AWS request ID (`x-amzn-requestid`, primary, indexed in CloudTrail) and the Anthropic request ID (`request-id`, secondary). Use the AWS request ID for CloudTrail lookups and the Anthropic request ID for Anthropic support tickets.
+On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), responses include two request IDs: the AWS request ID (`x-amzn-requestid`, primary, indexed in CloudTrail) and the Anthropic request ID (`request-id`, secondary). Use the AWS request ID for CloudTrail lookups and the Anthropic request ID for Anthropic support tickets.
 
-The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, and the Ruby SDK through [middleware](cli-sdks-libraries/middleware.md). The same mechanisms, along with `with_raw_response` in Python and `.withResponse()` in TypeScript, read any other [response header](api/overview.md) too, such as `anthropic-organization-id` and [`anthropic-workspace-id`](manage-claude/workspaces.md). On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
+The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, and the Ruby SDK through [middleware](../cli-sdks-libraries/middleware.md). The same mechanisms, along with `with_raw_response` in Python and `.withResponse()` in TypeScript, read any other [response header](overview.md#response-headers) too, such as `anthropic-organization-id` and [`anthropic-workspace-id`](../manage-claude/workspaces.md#identify-the-workspace-behind-an-api-response). On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
 
 ```bash cURL
 # Print the response headers (including request-id); discard the body
@@ -248,20 +248,20 @@ console.log("AWS request ID:", raw.headers.get("x-amzn-requestid"));
 console.log("Anthropic request ID:", request_id);
 ```
 
-For Claude Platform on AWS request-ID examples in other languages, see [Request IDs](build-with-claude/claude-platform-on-aws.md).
+For Claude Platform on AWS request-ID examples in other languages, see [Request IDs](../build-with-claude/claude-platform-on-aws.md#request-ids).
 
 ## Long requests
 
-Consider using the [streaming Messages API](build-with-claude/streaming.md) or [Message Batches API](api/messages/batches/create.md) for long-running requests, especially those over 10 minutes.
+Consider using the [streaming Messages API](../build-with-claude/streaming.md) or [Message Batches API](messages/batches/create.md) for long-running requests, especially those over 10 minutes.
 
-Avoid setting a large `max_tokens` value without using the [streaming Messages API](build-with-claude/streaming.md) or [Message Batches API](api/messages/batches/create.md):
+Avoid setting a large `max_tokens` value without using the [streaming Messages API](../build-with-claude/streaming.md) or [Message Batches API](messages/batches/create.md):
 
 * Some networks may drop idle connections after a variable period of time, which can cause the request to fail or time out without receiving a response from Anthropic.
-* Networks differ in reliability. The [Message Batches API](api/messages/batches/create.md) can help you manage the risk of network issues by allowing you to poll for results rather than requiring an uninterrupted network connection.
+* Networks differ in reliability. The [Message Batches API](messages/batches/create.md) can help you manage the risk of network issues by allowing you to poll for results rather than requiring an uninterrupted network connection.
 
 If you are building a direct API integration, setting a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/programming.html) can reduce the impact of idle connection timeouts on some networks.
 
-The [SDKs](cli-sdks-libraries/overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10-minute timeout. They also set a socket option for TCP keep-alive.
+The [SDKs](../cli-sdks-libraries/overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10-minute timeout. They also set a socket option for TCP keep-alive.
 
 If you don't need to process events incrementally, the SDKs can consume the stream for you and return the complete `Message` object, identical to what a non-streaming call returns:
 
@@ -417,7 +417,7 @@ message = client.messages.stream(
 puts message.content.find { it.type == :text }.text
 ```
 
-See [Streaming Messages](build-with-claude/streaming.md) for more details.
+See [Streaming Messages](../build-with-claude/streaming.md#get-the-final-message-without-handling-events) for more details.
 
 ## Common validation errors
 
@@ -435,7 +435,7 @@ Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/gl
 }
 ```
 
-Use [structured outputs](build-with-claude/structured-outputs.md) on models that support it, system prompt instructions, or [`output_config.format`](build-with-claude/structured-outputs.md) instead.
+Use [structured outputs](../build-with-claude/structured-outputs.md) on models that support it, system prompt instructions, or [`output_config.format`](../build-with-claude/structured-outputs.md#json-outputs) instead.
 
 ### Thinking blocks cannot be modified
 
@@ -445,7 +445,7 @@ If the most recent assistant message contains `thinking` or `redacted_thinking` 
 `thinking` or `redacted_thinking` blocks in the latest assistant message cannot be modified. These blocks must remain as they were in the original response.
 ```
 
-With tool use, every `thinking` and `redacted_thinking` block from the assistant turn must be passed back exactly as received, including blocks whose `thinking` field is empty. Pass thinking blocks back unchanged, and if your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. See [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md), [Preserving thinking blocks](build-with-claude/thinking.md), and [Preserved thinking](build-with-claude/thinking.md).
+With tool use, every `thinking` and `redacted_thinking` block from the assistant turn must be passed back exactly as received, including blocks whose `thinking` field is empty. Pass thinking blocks back unchanged, and if your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. See [Troubleshooting thinking](../build-with-claude/thinking-troubleshooting.md#error-thinking-blocks-modified), [Preserving thinking blocks](../build-with-claude/thinking.md#preserving-thinking-blocks), and [Preserved thinking](../build-with-claude/thinking.md#preserved-thinking).
 
 ### Extended thinking not supported
 
@@ -455,7 +455,7 @@ Claude 4.7 and later models have removed extended thinking. Sending `thinking: {
 "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
 ```
 
-Use [adaptive thinking](build-with-claude/thinking.md) instead. [Migrating to adaptive thinking](build-with-claude/extended-thinking.md) shows the parameter mapping, and [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md) covers the symptom-first fix.
+Use [adaptive thinking](../build-with-claude/thinking.md) instead. [Migrating to adaptive thinking](../build-with-claude/extended-thinking.md#migrating-to-adaptive-thinking) shows the parameter mapping, and [Troubleshooting thinking](../build-with-claude/thinking-troubleshooting.md#error-thinking-type-enabled) covers the symptom-first fix.
 
 ### Adaptive thinking not supported
 
@@ -465,7 +465,7 @@ Models that support only extended thinking (Claude 4.5 and earlier models) rejec
 adaptive thinking is not supported on this model
 ```
 
-Use `thinking: {"type": "enabled", "budget_tokens": N}` on these models; see [Extended thinking](build-with-claude/extended-thinking.md) for the configuration and [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md) for the symptom-first fix.
+Use `thinking: {"type": "enabled", "budget_tokens": N}` on these models; see [Extended thinking](../build-with-claude/extended-thinking.md) for the configuration and [Troubleshooting thinking](../build-with-claude/thinking-troubleshooting.md#error-thinking-type-adaptive) for the symptom-first fix.
 
 ### Thinking cannot be disabled
 
@@ -475,17 +475,17 @@ On Claude Fable 5.1, [Claude Mythos 5.1](https://anthropic.com/glasswing), Claud
 "thinking.type.disabled" is not supported for this model. Thinking defaults to adaptive mode when not specified; use "thinking.type.enabled" with "budget_tokens" for extended thinking.
 ```
 
-On Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5, the error message's own suggestion of `"thinking.type.enabled"` is also rejected. Omit the `thinking` parameter and the request runs with adaptive thinking. To keep thinking content out of responses without turning thinking off, set `display: "omitted"` on the thinking configuration. See [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md).
+On Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5, the error message's own suggestion of `"thinking.type.enabled"` is also rejected. Omit the `thinking` parameter and the request runs with adaptive thinking. To keep thinking content out of responses without turning thinking off, set `display: "omitted"` on the thinking configuration. See [Troubleshooting thinking](../build-with-claude/thinking-troubleshooting.md#error-thinking-type-disabled).
 
 ### Forced tool use not supported
 
-Claude Fable 5.1 and [Claude Mythos 5.1](https://anthropic.com/glasswing) don't support forced tool use. Sending `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` to either model, including on the [token counting endpoint](build-with-claude/token-counting.md), returns a 400 `invalid_request_error`:
+Claude Fable 5.1 and [Claude Mythos 5.1](https://anthropic.com/glasswing) don't support forced tool use. Sending `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` to either model, including on the [token counting endpoint](../build-with-claude/token-counting.md), returns a 400 `invalid_request_error`:
 
 ```text wrap
 tool_choice: type "tool" and "any" are not supported for this model.
 ```
 
-`tool_choice: {"type": "auto"}` (the default) and `{"type": "none"}` are accepted. Use `auto` with [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) to keep tool inputs schema-valid, or [structured outputs](build-with-claude/structured-outputs.md) when you need the response itself in a fixed JSON shape. See [Forcing tool use](agents-and-tools/tool-use/define-tools.md).
+`tool_choice: {"type": "auto"}` (the default) and `{"type": "none"}` are accepted. Use `auto` with [strict tool use](../agents-and-tools/tool-use/strict-tool-use.md) to keep tool inputs schema-valid, or [structured outputs](../build-with-claude/structured-outputs.md) when you need the response itself in a fixed JSON shape. See [Forcing tool use](../agents-and-tools/tool-use/define-tools.md#forcing-tool-use).
 
 ### Thinking block no longer matches the conversation
 
@@ -495,9 +495,9 @@ On Claude Fable 5.1, the API accepts a replayed thinking block only while the `s
 messages.{i}.content.{j}: Invalid `signature` in `thinking` block. The block is bound to a different conversation. Remove the block, or set `thinking.block_binding.prefix_mismatch_behavior` to "drop_block".
 ```
 
-Without the `thinking-binding-controls-2026-08-01` beta header the message also names that header. Keep the conversation history append-only, or send the beta header with `prefix_mismatch_behavior: "drop_block"` to drop the block and continue. A block from a model the target model can't read is dropped rather than rejected. See [Preserved thinking](build-with-claude/thinking.md) and [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md).
+Without the `thinking-binding-controls-2026-08-01` beta header the message also names that header. Keep the conversation history append-only, or send the beta header with `prefix_mismatch_behavior: "drop_block"` to drop the block and continue. A block from a model the target model can't read is dropped rather than rejected. See [Preserved thinking](../build-with-claude/thinking.md#preserved-in-conversation) and [Troubleshooting thinking](../build-with-claude/thinking-troubleshooting.md#error-thinking-block-signature).
 
-Sending `thinking.block_binding` without the `thinking-binding-controls-2026-08-01` [beta header](api/beta-headers.md) returns a 400 `invalid_request_error` whose message ends in:
+Sending `thinking.block_binding` without the `thinking-binding-controls-2026-08-01` [beta header](beta-headers.md) returns a 400 `invalid_request_error` whose message ends in:
 
 ```text wrap
 block_binding: Extra inputs are not permitted
@@ -507,7 +507,7 @@ Add the header, or remove the field.
 
 ### Outbound web identity federation disabled (Claude Platform on AWS)
 
-If every request to [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) returns `"Outbound web identity federation is disabled for your account"`, run `aws iam enable-outbound-web-identity-federation` once per AWS account. See [Enable outbound web identity federation](build-with-claude/claude-platform-on-aws.md) for details.
+If every request to [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) returns `"Outbound web identity federation is disabled for your account"`, run `aws iam enable-outbound-web-identity-federation` once per AWS account. See [Enable outbound web identity federation](../build-with-claude/claude-platform-on-aws.md#enable-outbound-web-identity-federation) for details.
 
 ## Next steps
 

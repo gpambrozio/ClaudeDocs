@@ -174,7 +174,7 @@ Each SDK also accepts a custom HTTP client (for proxy configuration, custom TLS,
 
 ## Built-in middleware
 
-The SDKs ship a refusal-fallback middleware that automatically retries requests Claude Fable 5 declines on a fallback model. See [Detect and retry on a fallback model](build-with-claude/refusals-and-fallback.md) for setup and per-language examples.
+The SDKs ship a refusal-fallback middleware that automatically retries requests Claude Fable 5 declines on a fallback model. See [Detect and retry on a fallback model](../build-with-claude/refusals-and-fallback.md#client-side-fallback) for setup and per-language examples.
 
 ---
 

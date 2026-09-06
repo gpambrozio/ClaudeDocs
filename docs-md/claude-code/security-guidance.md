@@ -17,7 +17,7 @@ On first run the plugin creates a virtual environment under `~/.claude/security/
 
 ## Install the plugin
 
-In a terminal Claude Code session, install from the [official Anthropic marketplace](discover-plugins.md):
+In a terminal Claude Code session, install from the [official Anthropic marketplace](discover-plugins.md#official-anthropic-marketplace):
 
 ```text
 /plugin install security-guidance@claude-plugins-official
@@ -25,7 +25,7 @@ In a terminal Claude Code session, install from the [official Anthropic marketpl
 
 `/plugin` opens an interactive panel and is available only in the terminal CLI. If Claude replies that `/plugin` isn't available in this environment, install another way:
 
-* **Claude desktop app, local or SSH session**: open the [plugin browser](desktop.md) by clicking the **+** button next to the prompt, then **Plugins**, then **Add plugin**
+* **Claude desktop app, local or SSH session**: open the [plugin browser](desktop.md#install-plugins) by clicking the **+** button next to the prompt, then **Plugins**, then **Add plugin**
 * **Claude Code on the web or a desktop cloud session**: declare the plugin in `.claude/settings.json` as shown under [Enable in cloud sessions](#enable-in-cloud-sessions-and-shared-repositories)
 
 The terminal install prompts for a scope. Choose user scope to write the plugin to your user settings, so it loads in every new local session you start on this machine.
@@ -33,7 +33,7 @@ The terminal install prompts for a scope. Choose user scope to write the plugin 
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
+* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
 
 Check the install summary. If it reports `Run /reload-plugins to activate.`, apply the pending change without a restart:
 
@@ -53,7 +53,7 @@ User-scoped plugins do not carry into [Claude Code on the web](claude-code-on-th
 }
 ```
 
-Administrators can enable the plugin organization-wide by setting [`enabledPlugins`](settings-reference.md) in [managed settings](admin-setup.md).
+Administrators can enable the plugin organization-wide by setting [`enabledPlugins`](settings-reference.md#enabledplugins) in [managed settings](admin-setup.md).
 
 ## What the plugin checks
 
@@ -124,7 +124,7 @@ The following example is for a web service with role-gated admin routes and a cu
 - Use `crypto.timingSafeEqual` for token comparison instead of `===`.
 ```
 
-These rules are guidance for the reviewer, not deterministic guardrails. The plugin surfaces violations as findings for Claude to fix, but it does not block writes or guarantee every violation is caught. The guidance is additive only: a rule that says to ignore a vulnerability class does not suppress those findings. For hard enforcement, pair the plugin with a [hook that blocks the edit](hooks-guide.md) or a CI check.
+These rules are guidance for the reviewer, not deterministic guardrails. The plugin surfaces violations as findings for Claude to fix, but it does not block writes or guarantee every violation is caught. The guidance is additive only: a rule that says to ignore a vulnerability class does not suppress those findings. For hard enforcement, pair the plugin with a [hook that blocks the edit](hooks-guide.md#block-edits-to-protected-files) or a CI check.
 
 ### Add custom per-edit patterns
 
@@ -219,12 +219,12 @@ The plugin is one layer in a defense-in-depth approach. It catches issues earlie
 | Stage                  | Tool                                                      | What it covers                                                                                           |
 | :--------------------- | :-------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
 | In session             | Security guidance plugin                                  | Common vulnerabilities in code Claude writes, fixed in the same session                                  |
-| On demand, single pass | [`/security-review`](commands.md)           | One-time security pass on the current branch, run when you ask                                           |
+| On demand, single pass | [`/security-review`](commands.md#all-commands)           | One-time security pass on the current branch, run when you ask                                           |
 | On demand, deep scan   | [Claude Security plugin](claude-security.md)             | Multi-agent vulnerability scan of a repository or diff, with independently reviewed findings and patches |
 | On pull request        | [Code Review](code-review.md), Team and Enterprise plans | Multi-agent correctness and security review with full codebase context                                   |
 | In CI                  | Your existing static analysis and dependency scanners     | Language-specific rules, supply-chain checks, and policy enforcement the plugin does not attempt         |
 
-To find security issues in code you already have, rather than in changes Claude is writing, ask Claude in a session to review a specific file or directory for vulnerabilities, or use the [Claude Security plugin](claude-security.md) for a deeper multi-agent scan of the whole repository; [`/security-review`](commands.md) covers only the changes on your current branch. Either way, the review reads the source code in your checkout, not a running site or deployed service.
+To find security issues in code you already have, rather than in changes Claude is writing, ask Claude in a session to review a specific file or directory for vulnerabilities, or use the [Claude Security plugin](claude-security.md) for a deeper multi-agent scan of the whole repository; [`/security-review`](commands.md#all-commands) covers only the changes on your current branch. Either way, the review reads the source code in your checkout, not a running site or deployed service.
 
 ## Troubleshooting
 
@@ -242,7 +242,7 @@ To go deeper on the pieces this page touches:
 
 * [Code Review](code-review.md): set up the PR-time multi-agent review
 * [Automate actions with hooks](hooks-guide.md): build your own checks at the same lifecycle points
-* [Discover and install plugins](discover-plugins.md): browse other official plugins
+* [Discover and install plugins](discover-plugins.md#official-anthropic-marketplace): browse other official plugins
 
 ---
 

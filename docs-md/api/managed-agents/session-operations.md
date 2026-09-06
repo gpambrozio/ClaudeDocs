@@ -6,13 +6,13 @@ url: https://platform.claude.com/docs/en/managed-agents/session-operations
 description: Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
 ---
 
-Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](managed-agents/sessions.md) for creating a session and sending it work.
+Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](sessions.md) for creating a session and sending it work.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Session statuses
 
-Sessions progress through these statuses. See [Start a session](managed-agents/sessions.md) for the session lifecycle.
+Sessions progress through these statuses. See [Start a session](sessions.md) for the session lifecycle.
 
 | Status         | Description                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -23,13 +23,13 @@ Sessions progress through these statuses. See [Start a session](managed-agents/s
 
 ## Updating the agent configuration
 
-You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies and per-tool web settings such as [domain filters](managed-agents/tools.md), mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent. Updated `allowed_domains` and `blocked_domains` apply to the rest of the session.
+You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies and per-tool web settings such as [domain filters](tools.md#restrict-web-search-and-web-fetch-domains), mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent. Updated `allowed_domains` and `blocked_domains` apply to the rest of the session.
 
-Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](managed-agents/sessions.md) when you create the session. The agent's model configuration, including its [`inference_geo`](manage-claude/data-residency.md) pin, also can't change mid-session: set the pin when you save the agent, or set or clear it for a single session with a `model` override when you create it. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still append system-level guidance mid-session by sending a [`system.message` event](managed-agents/events-and-streaming.md).
+Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](sessions.md#override-agent-configuration-for-a-session) when you create the session. The agent's model configuration, including its [`inference_geo`](../manage-claude/data-residency.md) pin, also can't change mid-session: set the pin when you save the agent, or set or clear it for a single session with a `model` override when you create it. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still append system-level guidance mid-session by sending a [`system.message` event](events-and-streaming.md#sending-system-messages).
 
 The semantics of a `tools` or `mcp_servers` update are full replacement: the provided array is the new value. To preserve existing entries, `GET` the session, modify the array, and `POST` it back.
 
-The session must be `idle` to update the agent. To update the agent while the session is running, send a [`user.interrupt` event](managed-agents/events-and-streaming.md) by itself and wait for the session to become `idle`.
+The session must be `idle` to update the agent. To update the agent while the session is running, send a [`user.interrupt` event](events-and-streaming.md#integrating-events) by itself and wait for the session to become `idle`.
 
 ```bash cURL
 curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
@@ -211,7 +211,7 @@ client.beta.sessions.update(
 
 ## Updating the session budget
 
-A session [created with a budget](managed-agents/sessions.md) accepts two kinds of budget update: replacing the cap with a new `max_list_cost`, and removing it by setting `budget` to `null`. Both automatically resume work that paused when the session reached its cap. A replacement cap can be higher or lower than the current one, but it must be strictly greater than the session's consumed list cost, and removal is one-way: a non-null `budget` is accepted only on a session that currently has one, so you can't re-add a removed budget or add one to a session created without it. See [Session budgets](managed-agents/budgets.md) for request examples, the error behaviors, and what counts toward list cost.
+A session [created with a budget](sessions.md#set-a-session-budget) accepts two kinds of budget update: replacing the cap with a new `max_list_cost`, and removing it by setting `budget` to `null`. Both automatically resume work that paused when the session reached its cap. A replacement cap can be higher or lower than the current one, but it must be strictly greater than the session's consumed list cost, and removal is one-way: a non-null `budget` is accepted only on a session that currently has one, so you can't re-add a removed budget or add one to a session created without it. See [Session budgets](budgets.md#resume-a-session-at-its-budget) for request examples, the error behaviors, and what counts toward list cost.
 
 ## Retrieving a session
 
@@ -271,7 +271,7 @@ Results from `GET /v1/sessions` are paginated. Use the `limit` query parameter t
 
 To go back a page, pass `prev_page` as the `page` parameter. `prev_page` is `null` when you're on the first page.
 
-A `page` cursor is opaque and encodes the `order` of the request that produced it. The `order` query parameter sets the sort direction of the results, `asc` or `desc` by creation time; the default is `desc` (newest first). Reusing a cursor with a different `order` returns a 400 error, as does changing a `created_at` filter so that it excludes the cursor's position. Other query parameters, including the remaining filters and `limit`, can change between paginated requests. For the pagination fields shared across list endpoints, see [Pagination](api/overview.md).
+A `page` cursor is opaque and encodes the `order` of the request that produced it. The `order` query parameter sets the sort direction of the results, `asc` or `desc` by creation time; the default is `desc` (newest first). Reusing a cursor with a different `order` returns a 400 error, as does changing a `created_at` filter so that it excludes the cursor's position. Other query parameters, including the remaining filters and `limit`, can change between paginated requests. For the pagination fields shared across list endpoints, see [Pagination](../api/overview.md#pagination).
 
 ```bash cURL
 first_page=$(curl -sS --fail-with-body \
@@ -526,7 +526,7 @@ end
 
 ## Archiving a session
 
-Archive a session to prevent new events from being sent while preserving its history. A `running` session cannot be archived; to archive one, send a [`user.interrupt` event](managed-agents/events-and-streaming.md) by itself and wait for the session to become `idle`.
+Archive a session to prevent new events from being sent while preserving its history. A `running` session cannot be archived; to archive one, send a [`user.interrupt` event](events-and-streaming.md#integrating-events) by itself and wait for the session to become `idle`.
 
 ```bash cURL
 curl -fsSL -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/archive" \
@@ -573,9 +573,9 @@ client.beta.sessions.archive(session.id)
 
 ## Deleting a session
 
-Delete a session to permanently remove its record, events, and associated sandbox. A `running` session cannot be deleted; to delete one, send a [`user.interrupt` event](managed-agents/events-and-streaming.md) by itself and wait for the session to become `idle`.
+Delete a session to permanently remove its record, events, and associated sandbox. A `running` session cannot be deleted; to delete one, send a [`user.interrupt` event](events-and-streaming.md#integrating-events) by itself and wait for the session to become `idle`.
 
-Memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion. Files you uploaded through the Files API are also unaffected, but files the session itself produced are scoped to it and are permanently deleted along with its filesystem. Download anything you need to keep before deleting the session. An output file written at the end of the last turn can take a few seconds after the session goes idle to appear in the [session's file list](managed-agents/files.md), so check that the files you expect are listed first.
+Memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion. Files you uploaded through the Files API are also unaffected, but files the session itself produced are scoped to it and are permanently deleted along with its filesystem. Download anything you need to keep before deleting the session. An output file written at the end of the last turn can take a few seconds after the session goes idle to appear in the [session's file list](files.md#listing-and-downloading-session-files), so check that the files you expect are listed first.
 
 ```bash cURL
 curl -fsSL -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID" \

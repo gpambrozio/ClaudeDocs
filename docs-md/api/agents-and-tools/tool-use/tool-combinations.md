@@ -8,7 +8,7 @@ description: Common Anthropic tool pairings for research agents, coding agents, 
 
 Anthropic-provided tools are designed to work together. Common agent patterns pair tools that cover complementary stages of a workflow: one tool gathers or discovers, another processes or acts. The combinations below are starting points, not prescriptions. Mix them to fit your task.
 
-Each snippet shows only the `tools` array. See [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md) for the full request shape.
+Each snippet shows only the `tools` array. See [Handle tool calls](handle-tool-calls.md) for the full request shape.
 
 ## Research agent: web\_search + code\_execution
 
@@ -38,7 +38,7 @@ The text editor reads and modifies files; bash runs tests and build commands. Th
 }
 ```
 
-Pair this with a constrained working directory and a command allowlist if the agent operates on untrusted code. See [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md) and [Bash tool](agents-and-tools/tool-use/bash-tool.md) for the execution contracts.
+Pair this with a constrained working directory and a command allowlist if the agent operates on untrusted code. See [Text editor tool](text-editor-tool.md) and [Bash tool](bash-tool.md) for the execution contracts.
 
 ## Cite-then-fetch: web\_search + web\_fetch
 
@@ -67,7 +67,7 @@ Memory persists state across conversations; the other tools do the work. Add mem
 
 Add your other tools alongside `memory` in the same array.
 
-Memory is orthogonal to your other tools. It doesn't change how they behave; it gives Claude a place to write down and later retrieve facts that would otherwise be lost when the context window resets. See [Memory tool](agents-and-tools/tool-use/memory-tool.md) for the storage model.
+Memory is orthogonal to your other tools. It doesn't change how they behave; it gives Claude a place to write down and later retrieve facts that would otherwise be lost when the context window resets. See [Memory tool](memory-tool.md) for the storage model.
 
 ## All-in-one: computer\_use
 
@@ -81,7 +81,7 @@ The computer use tool subsumes most others by operating a full desktop. Claude s
 
 The toolset entry takes no `name` or display dimensions: coordinates are expressed in the pixel space of the screenshots you return, and you can turn individual actions off through the entry's `configs` field.
 
-Computer use is the most general option and also the slowest, because Claude typically needs a fresh screenshot after each batch of actions. Prefer narrower tools when they cover your use case, and reach for computer use when nothing else fits. If the task stays inside a web browser, use the browser agent pattern in the next section. See [Computer use tool](agents-and-tools/tool-use/computer-use-tool.md) for the sandbox setup.
+Computer use is the most general option and also the slowest, because Claude typically needs a fresh screenshot after each batch of actions. Prefer narrower tools when they cover your use case, and reach for computer use when nothing else fits. If the task stays inside a web browser, use the browser agent pattern in the next section. See [Computer use tool](computer-use-tool.md) for the sandbox setup.
 
 ## Browser agent: browser\_use
 
@@ -93,7 +93,7 @@ When the whole task happens inside webpages (filling forms, reading page content
 }
 ```
 
-Like the computer use toolset, the entry takes no `name`, and you turn individual member tools off through its `configs` field. See [Browser use tool](agents-and-tools/tool-use/browser-use-tool.md) for the execution contract.
+Like the computer use toolset, the entry takes no `name`, and you turn individual member tools off through its `configs` field. See [Browser use tool](browser-use-tool.md) for the execution contract.
 
 ## Next steps
 

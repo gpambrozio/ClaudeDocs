@@ -55,7 +55,7 @@ Each binding block specifies a **context** where the bindings apply:
 | `Footer`          | Footer indicator navigation (tasks, teams, diff, artifacts)  |
 | `MessageSelector` | Rewind and summarize dialog message selection                |
 | `DiffDialog`      | Diff viewer navigation                                       |
-| `DiffPanel`       | The [diff panel](interactive-mode.md) is open    |
+| `DiffPanel`       | The [diff panel](interactive-mode.md#diff-panel) is open    |
 | `ModelPicker`     | Model picker effort level                                    |
 | `Select`          | Generic select/list components                               |
 | `Plugin`          | Plugin dialog (browse, discover, manage)                     |
@@ -96,15 +96,15 @@ Actions available in the `Chat` context:
 | Action                | Default                           | Description                                                                                                                                                                                                                                                                                              |
 | :-------------------- | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `chat:cancel`         | Escape                            | Cancel current input                                                                                                                                                                                                                                                                                     |
-| `chat:clearInput`     | Ctrl+L                            | Force a full screen redraw, preserving input and conversation. In [fullscreen rendering](fullscreen.md), also clear the screen                                                                                                                                                   |
-| `chat:clearScreen`    | Cmd+K                             | Same as `chat:clearInput`. See [Clear the conversation](fullscreen.md) for how Cmd+K behaves on iTerm2 and Terminal.app                                                                                                                                                          |
-| `chat:killAgents`     | Ctrl+X Ctrl+K                     | Stop all running [background subagents](sub-agents.md) in this session and turn off [artifact auto-replies](artifacts.md) for the rest of it                                                                         |
+| `chat:clearInput`     | Ctrl+L                            | Force a full screen redraw, preserving input and conversation. In [fullscreen rendering](fullscreen.md#clear-the-conversation), also clear the screen                                                                                                                                                   |
+| `chat:clearScreen`    | Cmd+K                             | Same as `chat:clearInput`. See [Clear the conversation](fullscreen.md#clear-the-conversation) for how Cmd+K behaves on iTerm2 and Terminal.app                                                                                                                                                          |
+| `chat:killAgents`     | Ctrl+X Ctrl+K                     | Stop all running [background subagents](sub-agents.md#run-subagents-in-foreground-or-background) in this session and turn off [artifact auto-replies](artifacts.md#let-claude-reply-to-comments-on-its-own) for the rest of it                                                                         |
 | `chat:cycleMode`      | Shift+Tab\*                       | Cycle permission modes                                                                                                                                                                                                                                                                                   |
 | `chat:modelPicker`    | Meta+P                            | Open model picker                                                                                                                                                                                                                                                                                        |
 | `chat:fastMode`       | Meta+O                            | Toggle fast mode                                                                                                                                                                                                                                                                                         |
 | `chat:thinkingToggle` | Meta+T                            | Toggle extended thinking                                                                                                                                                                                                                                                                                 |
 | `chat:submit`         | Enter                             | Submit message                                                                                                                                                                                                                                                                                           |
-| `chat:queueSubmit`    | Ctrl+X Enter                      | Submit the message, marked to wait its turn: while Claude is working, Claude Code [queues it](interactive-mode.md) and never interrupts the turn. Unlike `chat:submit`, it submits the draft even while autocomplete suggestions are open. Requires v2.1.247 or later |
+| `chat:queueSubmit`    | Ctrl+X Enter                      | Submit the message, marked to wait its turn: while Claude is working, Claude Code [queues it](interactive-mode.md#queue-messages-while-claude-works) and never interrupts the turn. Unlike `chat:submit`, it submits the draft even while autocomplete suggestions are open. Requires v2.1.247 or later |
 | `chat:newline`        | Ctrl+J                            | Insert a newline without submitting                                                                                                                                                                                                                                                                      |
 | `chat:undo`           | Ctrl+\_, Ctrl+Shift+-             | Undo last action                                                                                                                                                                                                                                                                                         |
 | `chat:externalEditor` | Ctrl+G, Ctrl+X Ctrl+E             | Open in external editor                                                                                                                                                                                                                                                                                  |
@@ -137,7 +137,7 @@ Actions available in the `Confirmation` context:
 | `confirm:nextField`     | Tab         | Next field                                                                                                                                                                                                                                                                            |
 | `confirm:previousField` | (unbound)   | Previous field                                                                                                                                                                                                                                                                        |
 | `confirm:toggle`        | Space       | Toggle selection                                                                                                                                                                                                                                                                      |
-| `confirm:cycleMode`     | Shift+Tab\* | Cycle permission modes. On a file permission prompt, closes an open [comment field](permissions.md); with no field open, selects the option that allows the action for the rest of the session, when the prompt offers that option |
+| `confirm:cycleMode`     | Shift+Tab\* | Cycle permission modes. On a file permission prompt, closes an open [comment field](permissions.md#add-a-comment-when-you-answer-a-permission-prompt); with no field open, selects the option that allows the action for the rest of the session, when the prompt offers that option |
 
 \*On Windows without VT mode (Node \<24.2.0/\<22.17.0, Bun \<1.2.23), defaults to Meta+M.
 
@@ -273,7 +273,7 @@ The diff detail view also binds pager-style keys to the standard [scroll actions
 
 ### Diff panel actions
 
-Actions for the [diff panel](interactive-mode.md) that `/diff` opens in fullscreen rendering. `app:cycleDiffBase` is in the `DiffPanel` context, which is active while the panel is open; the others are `Global`. The panel requires Claude Code v2.1.260 or later.
+Actions for the [diff panel](interactive-mode.md#diff-panel) that `/diff` opens in fullscreen rendering. `app:cycleDiffBase` is in the `DiffPanel` context, which is active while the panel is open; the others are `Global`. The panel requires Claude Code v2.1.260 or later.
 
 | Action                      | Default              | Description                                                               |
 | :-------------------------- | :------------------- | :------------------------------------------------------------------------ |
@@ -484,7 +484,7 @@ These shortcuts cannot be rebound:
 | Ctrl+M    | Claude Code always receives it as Enter                                                                                                                                                                                                            |
 | Ctrl+\[   | Claude Code always receives it as Escape. In terminals that use the Kitty keyboard protocol, this requires v2.1.242 or later                                                                                                                       |
 | Ctrl+I    | Claude Code always receives it as Tab                                                                                                                                                                                                              |
-| Ctrl+H    | Sends the ASCII backspace byte. [How Claude Code reads it on Windows](terminal-config.md) depends on your terminal and the [`CLAUDE_CODE_BS_AS_CTRL_BACKSPACE`](env-vars.md) environment variable |
+| Ctrl+H    | Sends the ASCII backspace byte. [How Claude Code reads it on Windows](terminal-config.md#fix-backspace-deleting-a-whole-word-on-windows) depends on your terminal and the [`CLAUDE_CODE_BS_AS_CTRL_BACKSPACE`](env-vars.md) environment variable |
 | Caps Lock | Not delivered to terminal applications                                                                                                                                                                                                             |
 
 ## Terminal conflicts
@@ -505,7 +505,7 @@ When vim mode is enabled via `/config` → Editor mode, keybindings and vim mode
 * **Keybindings** handle actions at the component level (toggle todos, submit, etc.)
 * The Escape key in vim mode switches INSERT to NORMAL mode; it does not trigger `chat:cancel`
 * Most Ctrl+key shortcuts pass through vim mode to the keybinding system
-* Vim keys aren't remappable through the keybindings file. To map a two-key INSERT-mode sequence such as `jj` to Escape, use the [`vimInsertModeRemaps`](interactive-mode.md) setting
+* Vim keys aren't remappable through the keybindings file. To map a two-key INSERT-mode sequence such as `jj` to Escape, use the [`vimInsertModeRemaps`](interactive-mode.md#remap-insert-mode-key-sequences) setting
 * In vim NORMAL mode, `?` shows the help menu (vim behavior)
 * In vim NORMAL mode, `/` opens history search, the same as Ctrl+R in standard mode
 
@@ -520,7 +520,7 @@ Claude Code validates your keybindings and shows warnings for:
 * Reserved shortcut conflicts
 * Duplicate bindings in the same context
 
-Claude Code reports warnings when the file loads and writes each one to the debug log. Start Claude Code with [`--debug`](cli-reference.md) to see the details.
+Claude Code reports warnings when the file loads and writes each one to the debug log. Start Claude Code with [`--debug`](cli-reference.md#cli-flags) to see the details.
 
 ---
 

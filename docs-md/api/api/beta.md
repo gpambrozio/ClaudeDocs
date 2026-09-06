@@ -1133,7 +1133,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](get-started.md)
+Learn more about the Messages API in our [user guide](../get-started.md)
 
 #### Headers
 
@@ -1245,9 +1245,9 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-  Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+  Set to `0` to populate the [prompt cache](../build-with-claude/prompt-caching.md#pre-warming-the-cache) without generating a response.
 
-  Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
+  Different models have different maximum values for this parameter.  See [models](../models/overview.md) for details.
 
   minimum: 0
 
@@ -1296,9 +1296,9 @@ Learn more about the Messages API in our [user guide](get-started.md)
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](build-with-claude/working-with-messages.md).
+  See [input examples](../build-with-claude/working-with-messages.md).
 
-  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -1331,7 +1331,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defaults to `5m`. See [prompt caching pricing](../build-with-claude/prompt-caching.md) for details.
 
             - `"5m"`
 
@@ -2899,7 +2899,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
       - `format: optional BetaJSONOutputFormat or null`
 
-        A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+        A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/structured-outputs.md)
 
         - `schema: map[unknown]`
 
@@ -2945,7 +2945,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
           Must be ≥1024 and less than `max_tokens`.
 
-          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+          See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
           minimum: 1024
 
@@ -3049,7 +3049,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-  Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](service-tiers.md) for details.
 
   - `"auto"`
 
@@ -3075,13 +3075,13 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](build-with-claude/streaming.md) for details.
+  See [streaming](../build-with-claude/streaming.md) for details.
 
 - `system: optional string or array of BetaTextBlockParam`
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
   - `string`
 
@@ -3105,7 +3105,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](build-with-claude/extended-thinking.md) for details.
+  See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
   - `BetaThinkingConfigEnabled object`
 
@@ -3169,7 +3169,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](../agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](../agents-and-tools/tool-use/web-search-tool.md)).
 
   Each tool definition includes:
 
@@ -3225,7 +3225,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+  See our [guide](../agents-and-tools/tool-use/overview.md) for more details.
 
   - `BetaTool object`
 
@@ -5036,7 +5036,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   **Deprecated**
 
-  Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+  Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/structured-outputs.md)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -5305,7 +5305,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
         This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
       - `thinking: string`
 
@@ -5323,7 +5323,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
         Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
       - `type: "redacted_thinking"`
 
@@ -6103,7 +6103,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
           - `"reasoning_extraction"`
 
-            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/thinking-steering-and-cost.md).
 
           - `"general_harms"`
 
@@ -6264,7 +6264,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
       - `"reasoning_extraction"`
 
-        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/thinking-steering-and-cost.md).
 
       - `"general_harms"`
 
@@ -7269,7 +7269,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](build-with-claude/token-counting.md)
+Learn more about token counting in our [user guide](../build-with-claude/token-counting.md)
 
 #### Headers
 
@@ -7420,9 +7420,9 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](build-with-claude/working-with-messages.md).
+  See [input examples](../build-with-claude/working-with-messages.md).
 
-  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -7455,7 +7455,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defaults to `5m`. See [prompt caching pricing](../build-with-claude/prompt-caching.md) for details.
 
             - `"5m"`
 
@@ -8931,7 +8931,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   - `format: optional BetaJSONOutputFormat or null`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+    A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/structured-outputs.md)
 
     - `schema: map[unknown]`
 
@@ -8971,7 +8971,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
   - `string`
 
@@ -8995,7 +8995,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](build-with-claude/extended-thinking.md) for details.
+  See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
   - `BetaThinkingConfigEnabled object`
 
@@ -9005,7 +9005,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
       minimum: 1024
 
@@ -9119,7 +9119,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](../agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](../agents-and-tools/tool-use/web-search-tool.md)).
 
   Each tool definition includes:
 
@@ -9175,7 +9175,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+  See our [guide](../agents-and-tools/tool-use/overview.md) for more details.
 
   - `BetaTool object`
 
@@ -10986,7 +10986,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   **Deprecated**
 
-  Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+  Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/structured-outputs.md)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -11069,7 +11069,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../build-with-claude/batch-processing.md)
 
 #### Headers
 
@@ -11193,7 +11193,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
     Messages API creation parameters for the individual request.
 
-    See the [Messages API reference](api/messages.md) for full documentation on available parameters.
+    See the [Messages API reference](messages.md) for full documentation on available parameters.
 
     - `max_tokens: number`
 
@@ -11201,9 +11201,9 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-      Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+      Set to `0` to populate the [prompt cache](../build-with-claude/prompt-caching.md#pre-warming-the-cache) without generating a response.
 
-      Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
+      Different models have different maximum values for this parameter.  See [models](../models/overview.md) for details.
 
       minimum: 0
 
@@ -11252,9 +11252,9 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
       {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
       ```
 
-      See [input examples](build-with-claude/working-with-messages.md).
+      See [input examples](../build-with-claude/working-with-messages.md).
 
-      Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+      Note that if you want to include a [system prompt](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
       There is a limit of 100,000 messages in a single request.
 
@@ -11287,7 +11287,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                Defaults to `5m`. See [prompt caching pricing](../build-with-claude/prompt-caching.md) for details.
 
                 - `"5m"`
 
@@ -12855,7 +12855,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
           - `format: optional BetaJSONOutputFormat or null`
 
-            A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+            A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/structured-outputs.md)
 
             - `schema: map[unknown]`
 
@@ -12901,7 +12901,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               Must be ≥1024 and less than `max_tokens`.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
               minimum: 1024
 
@@ -13005,7 +13005,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-      Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
+      Anthropic offers different levels of service for your API requests. See [service-tiers](service-tiers.md) for details.
 
       - `"auto"`
 
@@ -13031,13 +13031,13 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](build-with-claude/streaming.md) for details.
+      See [streaming](../build-with-claude/streaming.md) for details.
 
     - `system: optional string or array of BetaTextBlockParam`
 
       System prompt.
 
-      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
       - `string`
 
@@ -13061,7 +13061,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
       - `BetaThinkingConfigEnabled object`
 
@@ -13125,7 +13125,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](../agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](../agents-and-tools/tool-use/web-search-tool.md)).
 
       Each tool definition includes:
 
@@ -13181,7 +13181,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-      See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+      See our [guide](../agents-and-tools/tool-use/overview.md) for more details.
 
       - `BetaTool object`
 
@@ -14992,7 +14992,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       **Deprecated**
 
-      Deprecated: Use `output_config.format` instead. See [structured outputs](build-with-claude/structured-outputs.md)
+      Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/structured-outputs.md)
 
       A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -15198,7 +15198,7 @@ curl https://api.anthropic.com/v1/messages/batches \
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../build-with-claude/batch-processing.md)
 
 #### Path parameters
 
@@ -15452,7 +15452,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../build-with-claude/batch-processing.md)
 
 #### Query parameters
 
@@ -15739,7 +15739,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../build-with-claude/batch-processing.md)
 
 #### Path parameters
 
@@ -15996,7 +15996,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../build-with-claude/batch-processing.md)
 
 #### Path parameters
 
@@ -16145,7 +16145,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../build-with-claude/batch-processing.md)
 
 #### Path parameters
 
@@ -16498,7 +16498,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../build-with-claude/extended-thinking.md) for details.
 
             - `thinking: string`
 
@@ -16516,7 +16516,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
             - `type: "redacted_thinking"`
 
@@ -17296,7 +17296,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
                 - `"reasoning_extraction"`
 
-                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/thinking-steering-and-cost.md).
 
                 - `"general_harms"`
 
@@ -17457,7 +17457,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
             - `"reasoning_extraction"`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/thinking-steering-and-cost.md).
 
             - `"general_harms"`
 
@@ -18234,7 +18234,7 @@ Create Agent
 
 - `model: BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
   - `BetaManagedAgentsModel = "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
 
@@ -18390,7 +18390,7 @@ Create Agent
 
 - `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams`
 
-  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
+  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/mcp-connector.md).
 
   - `name: string`
 
@@ -21138,7 +21138,7 @@ Update Agent
 
 - `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams or null`
 
-  MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
+  MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../managed-agents/mcp-connector.md).
 
   - `name: string`
 
@@ -21160,7 +21160,7 @@ Update Agent
 
 - `model: optional BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
   - `BetaManagedAgentsModel = "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
 
@@ -35360,7 +35360,7 @@ List Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -35390,7 +35390,7 @@ List Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -36518,7 +36518,7 @@ List Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_result"`
 
@@ -37621,7 +37621,7 @@ Send Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       minLength: 1, maxLength: 128
 
@@ -37639,7 +37639,7 @@ Send Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       minLength: 1, maxLength: 128
 
@@ -37751,7 +37751,7 @@ Send Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       minLength: 1, maxLength: 128
 
@@ -38013,7 +38013,7 @@ Send Events
 
       - `tool_use_id: string`
 
-        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+        The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.tool_confirmation"`
 
@@ -38043,7 +38043,7 @@ Send Events
 
       - `custom_tool_use_id: string`
 
-        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+        The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.custom_tool_result"`
 
@@ -38179,7 +38179,7 @@ Send Events
 
       - `tool_use_id: string`
 
-        The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+        The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       - `type: "user.tool_result"`
 
@@ -38616,7 +38616,7 @@ Stream Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -38646,7 +38646,7 @@ Stream Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -39774,7 +39774,7 @@ Stream Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_result"`
 
@@ -44587,7 +44587,7 @@ List Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -44617,7 +44617,7 @@ List Session Thread Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -45745,7 +45745,7 @@ List Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_result"`
 
@@ -46873,7 +46873,7 @@ Stream Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -46903,7 +46903,7 @@ Stream Session Thread Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -48031,7 +48031,7 @@ Stream Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_result"`
 
@@ -60323,7 +60323,7 @@ Create a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](beta/memory_stores/memory_versions/list.md).
 
   - `path: string`
 
@@ -60546,7 +60546,7 @@ List memories
 
     - `memory_version_id: string`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](beta/memory_stores/memory_versions/list.md).
 
     - `path: string`
 
@@ -60566,7 +60566,7 @@ List memories
 
   - `BetaManagedAgentsMemoryPrefix object`
 
-    A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    A rolled-up directory marker returned by [List memories](beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
     - `path: string`
 
@@ -60761,7 +60761,7 @@ Retrieve a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](beta/memory_stores/memory_versions/list.md).
 
   - `path: string`
 
@@ -60979,7 +60979,7 @@ Update a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](beta/memory_stores/memory_versions/list.md).
 
   - `path: string`
 
@@ -61145,7 +61145,7 @@ Delete a memory
 
 - `BetaManagedAgentsDeletedMemory object`
 
-  Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
+  Tombstone returned by [Delete a memory](beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
   - `id: string`
 
@@ -61358,7 +61358,7 @@ List memory versions
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -61392,7 +61392,7 @@ List memory versions
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor object`
 
@@ -61400,7 +61400,7 @@ List memory versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -61454,7 +61454,7 @@ List memory versions
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 - `next_page: optional string or null`
 
@@ -61638,7 +61638,7 @@ Retrieve a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -61672,7 +61672,7 @@ Retrieve a memory version
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor object`
 
@@ -61680,7 +61680,7 @@ Retrieve a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -61734,7 +61734,7 @@ Retrieve a memory version
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 #### Example
 
@@ -61899,7 +61899,7 @@ Redact a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -61933,7 +61933,7 @@ Redact a memory version
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor object`
 
@@ -61941,7 +61941,7 @@ Redact a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -61995,7 +61995,7 @@ Redact a memory version
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 #### Example
 
@@ -70512,7 +70512,7 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
 **POST** `/v1/organizations/federation_issuers`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Register an OIDC issuer that Anthropic will trust for workload identity
 federation in your organization.
@@ -70888,7 +70888,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers \
 
 **GET** `/v1/organizations/federation_issuers`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List federation issuers in your organization.
 
@@ -71199,7 +71199,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers \
 
 **GET** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a federation issuer by its ID (`fdis_...`).
 
@@ -71492,7 +71492,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Partially update a federation issuer.
 
@@ -71872,7 +71872,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Archive a federation issuer.
 
@@ -72173,7 +72173,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_rules`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Create a federation rule owned by your organization.
 
@@ -72569,7 +72569,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules \
 
 **GET** `/v1/organizations/federation_rules`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List federation rules in your organization.
 
@@ -72881,7 +72881,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules \
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a federation rule by its ID (`fdrl_...`).
 
@@ -73176,7 +73176,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Partially update a federation rule.
 
@@ -73571,7 +73571,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Archive a federation rule.
 
@@ -73877,7 +73877,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Enable a federation rule for a workspace.
 
@@ -74059,7 +74059,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List workspaces where this federation rule is enabled.
 
@@ -74249,7 +74249,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **DELETE** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Disable a federation rule for a workspace.
 
@@ -74877,7 +74877,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
 **POST** `/v1/organizations/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Create a service account.
 
@@ -75106,7 +75106,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 **GET** `/v1/organizations/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List service accounts in the caller's organization.
 
@@ -75327,7 +75327,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a service account by its ID (`svac_...`).
 
@@ -75528,7 +75528,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Update a service account.
 
@@ -75752,7 +75752,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Archive a service account.
 
@@ -75961,7 +75961,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -76162,7 +76162,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List the workspaces a service account is a member of.
 
@@ -76368,7 +76368,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Remove a service account from a workspace.
 
@@ -78365,7 +78365,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List the service accounts that are members of a workspace.
 
@@ -78564,7 +78564,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -78767,7 +78767,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a service account's membership in a workspace.
 
@@ -78949,7 +78949,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Change a service account's role in a workspace.
 
@@ -79149,7 +79149,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **DELETE** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Remove a service account from a workspace.
 

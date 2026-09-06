@@ -14,7 +14,7 @@ Claude Code's **Default** output style is the existing system prompt, designed t
 
 There are four additional built-in output styles:
 
-* **Proactive**: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This is stronger autonomous-execution guidance than [auto mode](permission-modes.md) applies, and it works without changing your permission mode, so your permission mode still decides what runs without asking you.
+* **Proactive**: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This is stronger autonomous-execution guidance than [auto mode](permission-modes.md#eliminate-prompts-with-auto-mode) applies, and it works without changing your permission mode, so your permission mode still decides what runs without asking you.
 
 * **Concise**: Claude leads with the result, skips preamble and narration, and keeps responses short by default, while doing the engineering work as thoroughly as in the Default style. When you ask for an explanation or more detail, Claude answers in full. Claude always keeps the complete content of error reports, security warnings, and confirmations for destructive actions. Requires Claude Code v2.1.237 or later.
 
@@ -27,8 +27,8 @@ There are four additional built-in output styles:
 Pick a style in one of these ways:
 
 * **Terminal**: run `/config` and select **Output style** to pick a style from a menu. Claude Code saves your selection to `.claude/settings.local.json` at the [local project level](settings.md).
-* **VS Code extension**: open the [command menu](vs-code.md) with `/` and select **Output styles** to pick a style, including your custom styles. Claude Code saves your selection to `.claude/settings.local.json`, the same file the terminal menu writes. Requires Claude Code v2.1.257 or later.
-* **Desktop app**: set the `outputStyle` field in a settings file, for example `.claude/settings.local.json`, the file the terminal menu writes. When you run `/config` there, Claude Code [opens **Settings > Claude Code**](desktop.md) rather than a menu.
+* **VS Code extension**: open the [command menu](vs-code.md#use-the-prompt-box) with `/` and select **Output styles** to pick a style, including your custom styles. Claude Code saves your selection to `.claude/settings.local.json`, the same file the terminal menu writes. Requires Claude Code v2.1.257 or later.
+* **Desktop app**: set the `outputStyle` field in a settings file, for example `.claude/settings.local.json`, the file the terminal menu writes. When you run `/config` there, Claude Code [opens **Settings > Claude Code**](desktop.md#what’s-not-available-in-desktop) rather than a menu.
 
 The standalone `/output-style` command was deprecated in v2.1.73 and removed in v2.1.91. Use `/config` or edit the `outputStyle` setting directly.
 
@@ -40,7 +40,7 @@ To set a style without the menu, edit the `outputStyle` field directly in a sett
 }
 ```
 
-Output style is part of the system prompt, which Claude Code reads once at session start. Changes take effect after `/clear` or a new session. See [How Claude Code uses prompt caching](prompt-caching.md) for what an output style change does to the cache.
+Output style is part of the system prompt, which Claude Code reads once at session start. Changes take effect after `/clear` or a new session. See [How Claude Code uses prompt caching](prompt-caching.md#changing-output-style) for what an output style change does to the cache.
 
 ## Create a custom output style
 
@@ -52,7 +52,7 @@ Save it at one of three levels. The file name becomes the style name unless you 
 
 * User: `~/.claude/output-styles`
 * Project: `.claude/output-styles`
-* Managed policy: `.claude/output-styles` inside the [managed settings directory](managed-settings.md)
+* Managed policy: `.claude/output-styles` inside the [managed settings directory](managed-settings.md#delivery-mechanisms)
 
 Project output styles load from every `.claude/output-styles/` between the working directory and the repository root. When more than one of these nested directories defines a style with the same name, Claude Code uses the one closest to the working directory.
 
@@ -101,7 +101,7 @@ Output styles directly modify Claude Code's system prompt.
 * When you [select a style other than Default](#change-your-output-style), Claude Code also reminds Claude of the style during the conversation.
 * Custom output styles leave out Claude Code's built-in software engineering instructions, such as how to scope changes, write comments, and verify work, unless `keep-coding-instructions` is set to `true`.
 
-Output styles apply to the main conversation only: a [subagent runs its own system prompt](sub-agents.md), so styles don't change how subagents respond. A [fork](sub-agents.md) is the exception, because it inherits the parent's full system prompt.
+Output styles apply to the main conversation only: a [subagent runs its own system prompt](sub-agents.md#what-loads-at-startup), so styles don't change how subagents respond. A [fork](sub-agents.md#fork-the-current-conversation) is the exception, because it inherits the parent's full system prompt.
 
 Token usage depends on the style. Adding instructions to the system prompt increases input tokens, though prompt caching reduces this cost after the first request in a session. The built-in Explanatory and Learning styles produce longer responses than Default by design, which increases output tokens, and the Concise style does the opposite by instructing Claude to keep responses short by default. For custom styles, output token usage depends on what your instructions tell Claude to produce.
 

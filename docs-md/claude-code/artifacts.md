@@ -2,7 +2,7 @@
 
 > Artifacts turn Claude Code's work into live, interactive pages on claude.ai that you can keep private, share with your organization, or publish to a public link.
 
-Artifacts are available on Pro, Max, Team, and Enterprise plans and require a session signed in with [`/login`](setup.md). See [Availability](#availability) for the full set of requirements.
+Artifacts are available on Pro, Max, Team, and Enterprise plans and require a session signed in with [`/login`](setup.md#authenticate). See [Availability](#availability) for the full set of requirements.
 
 An artifact is a live, interactive web page that Claude Code publishes from your session to a private URL on claude.ai. You open it in a browser, and it updates in place as the session continues. Share it from the page header when you want someone else to see it too.
 
@@ -39,7 +39,7 @@ Build a dashboard artifact of last week's deploy failures by service and keep it
 
 Unless you name a location, Claude writes the page to an HTML or Markdown file in a temporary directory outside your project, then publishes it. Publishing a new artifact goes through your session's [permission mode](permission-modes.md):
 
-* **Auto mode**: the classifier reviews the publish instead of prompting you, so Claude can publish a page without you seeing a prompt. Which mode your sessions start in depends on your plan; see [the starting permission mode](permission-modes.md).
+* **Auto mode**: the classifier reviews the publish instead of prompting you, so Claude can publish a page without you seeing a prompt. Which mode your sessions start in depends on your plan; see [the starting permission mode](permission-modes.md#eliminate-prompts-with-auto-mode).
 * **Manual and Accept edits modes**: Claude Code asks for permission; it might say something like `Claude wants to publish deploy-failures.html, uploading it to claude.ai (Anthropic's servers) to host as the page "Deploy failures by service", private to you until you share it`. Select **Yes** to publish.
 
 After you approve an artifact once, Claude Code republishes it without asking, and asks again in some cases, including when:
@@ -113,14 +113,14 @@ Read the comments on https://claude.ai/code/artifact/5fbea6f3-... and make the c
 If Claude tells you it can't read comments, check three things:
 
 * You're running Claude Code v2.1.221 or later.
-* You're not in your first session since you installed Claude Code or upgraded from a version before v2.1.221. In that [first session after an install or upgrade](env-vars.md), Claude might not be able to read comments yet; start a new session and ask again.
+* You're not in your first session since you installed Claude Code or upgraded from a version before v2.1.221. In that [first session after an install or upgrade](env-vars.md#first-session-after-an-install-or-upgrade), Claude might not be able to read comments yet; start a new session and ask again.
 * You haven't turned feature-flag fetching off.
 
 ### Let Claude reply to comments on its own
 
 After your session publishes an artifact, Claude Code watches that artifact for comments for as long as the session runs. When someone who can edit the artifact sends a comment to Claude, it reaches your session right away, and Claude can read the thread and reply without you asking.
 
-You need Claude Code v2.1.228 or later. If you turned [feature-flag fetching](env-vars.md) off, Claude Code doesn't watch for comments.
+You need Claude Code v2.1.228 or later. If you turned [feature-flag fetching](env-vars.md#features-that-need-feature-flag-fetching) off, Claude Code doesn't watch for comments.
 
 Your [permission mode](permission-modes.md) decides what Claude does when a sent comment arrives:
 
@@ -134,13 +134,13 @@ Run `/tasks` to see each artifact your session is watching, listed as a live-upd
 
 * **Press Ctrl+C once at an idle prompt**: Claude pauses replying on every artifact your session is watching. Replies start again after you send your next message.
 * **Stop the task in `/tasks`**: Claude stops replying on that artifact until you ask it to resume replies there. Publishing the artifact again doesn't start replies again, and the stop still applies when you resume the session later.
-* **Press `Ctrl+X Ctrl+K` twice within 3 seconds**: the chord that [stops every running background subagent](interactive-mode.md) also stops Claude from replying on every artifact for the rest of the session. Asking Claude to resume replies doesn't undo this stop.
+* **Press `Ctrl+X Ctrl+K` twice within 3 seconds**: the chord that [stops every running background subagent](interactive-mode.md#general-controls) also stops Claude from replying on every artifact for the rest of the session. Asking Claude to resume replies doesn't undo this stop.
 
 If the service that delivers comments becomes unavailable or stops answering, Claude Code keeps trying to reconnect for a while, then stops watching each artifact your session was watching.
 
 ## Pull live data with MCP connectors
 
-An artifact can call [MCP connectors](mcp.md) each time someone views it, so the page shows current data rather than a snapshot from the session that built it. Connector calls from artifacts are available on Pro, Max, Team, and Enterprise plans and require Claude Code v2.1.209 or later. On earlier versions, Claude publishes the page with whatever data the session gathered while building it.
+An artifact can call [MCP connectors](mcp.md#use-mcp-servers-from-claude-ai) each time someone views it, so the page shows current data rather than a snapshot from the session that built it. Connector calls from artifacts are available on Pro, Max, Team, and Enterprise plans and require Claude Code v2.1.209 or later. On earlier versions, Claude publishes the page with whatever data the session gathered while building it.
 
 To create a connector-backed page, name the connector and the data you want in your prompt:
 
@@ -280,12 +280,12 @@ To turn artifacts off for your own sessions regardless of your organization's se
 
 | Where                                | What to do                                                                                                                            |
 | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| [`/config`](commands.md)            | Turn the **Artifacts** row off, which writes [`"enableArtifact": false`](settings-reference.md) to your user settings |
+| [`/config`](commands.md)            | Turn the **Artifacts** row off, which writes [`"enableArtifact": false`](settings-reference.md#enableartifact) to your user settings |
 | [Settings file](settings.md)        | Set `"enableArtifact": false`. The deprecated `"disableArtifact": true` also turns artifacts off                                      |
 | [Environment variable](env-vars.md) | Set `CLAUDE_CODE_DISABLE_ARTIFACT=1`                                                                                                  |
 | [Permission rule](permissions.md)   | Add `Artifact` to `permissions.deny`                                                                                                  |
 
-Once you turn artifacts off in a [`--settings`](cli-reference.md) file or with `CLAUDE_CODE_DISABLE_ARTIFACT`, or your administrator turns them off in [managed settings](server-managed-settings.md), no settings file turns them back on. Before v2.1.242, a file higher in the [precedence stack](settings.md) could turn artifacts back on even when a lower-precedence file set `"enableArtifact": false`.
+Once you turn artifacts off in a [`--settings`](cli-reference.md#cli-flags) file or with `CLAUDE_CODE_DISABLE_ARTIFACT`, or your administrator turns them off in [managed settings](server-managed-settings.md), no settings file turns them back on. Before v2.1.242, a file higher in the [precedence stack](settings.md#settings-precedence) could turn artifacts back on even when a lower-precedence file set `"enableArtifact": false`.
 
 You can also set `"enableArtifact": false` in a project's `.claude/settings.json` or `.claude/settings.local.json` to turn artifacts off for sessions in that project. An `"enableArtifact": true` in either file doesn't turn them back on. Honoring the key in project and local settings requires Claude Code v2.1.242 or later.
 
@@ -315,7 +315,7 @@ Publishing, sharing, and deleting an artifact each appear in your organization's
 
 ### Allowlist the viewer domain
 
-The viewer on claude.ai loads each artifact from a sandboxed `*.claudeusercontent.com` origin. If your organization restricts outbound network access, add that domain to your allowlist alongside `claude.ai`. See [Network access requirements](network-config.md) for the full list.
+The viewer on claude.ai loads each artifact from a sandboxed `*.claudeusercontent.com` origin. If your organization restricts outbound network access, add that domain to your allowlist alongside `claude.ai`. See [Network access requirements](network-config.md#network-access-requirements) for the full list.
 
 An artifact that loads a typeface from [Google Fonts](#improve-the-visual-design) also requests `fonts.googleapis.com` and `fonts.gstatic.com`. Both hosts are optional. If you block them, artifacts render in fallback typefaces. Block with a fast rejection rather than a silent drop so the font request fails immediately instead of delaying the page's first render.
 

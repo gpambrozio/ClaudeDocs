@@ -8,11 +8,11 @@ description: Diagnose unexpected prompt cache misses by comparing consecutive re
 
 ## Compatibility
 - Status: Beta
-- [Beta header](api/beta-headers.md): `cache-diagnosis-2026-04-07`
-- [ZDR](manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](manage-claude/api-and-data-retention.md))
+- [Beta header](../api/beta-headers.md): `cache-diagnosis-2026-04-07`
+- [ZDR](../manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))
 - Platforms: Claude API (beta); not available on Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
-[Prompt caching](build-with-claude/prompt-caching.md) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.
+[Prompt caching](prompt-caching.md) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.
 
 Cache diagnostics closes that gap. Pass the `id` of your previous response, and the API compares the two requests and tells you where they diverged (the model, the system prompt, the tools, or the message history) so you can fix the root cause instead of guessing.
 
@@ -20,7 +20,7 @@ Cache diagnostics closes that gap. Pass the `id` of your previous response, and 
 
 When the beta header is present, the API stores a lightweight fingerprint of each request, keyed by the response `id`. On your next request, include that `id` as `diagnostics.previous_message_id`. The API rebuilds the fingerprint for the new request, compares it against the stored one, and attaches a `diagnostics` object to the response describing the first point of divergence.
 
-The comparison is about request structure, independent of whether the cache actually hit. See [Reading diagnostics alongside usage](build-with-claude/cache-diagnostics.md) for how to combine the `diagnostics` result with `usage.cache_read_input_tokens`.
+The comparison is about request structure, independent of whether the cache actually hit. See [Reading diagnostics alongside usage](cache-diagnostics.md#reading-diagnostics-alongside-usage) for how to combine the `diagnostics` result with `usage.cache_read_input_tokens`.
 
 Fingerprints contain only hashes and token-count estimates (never raw prompt content), are retained for a limited time, are scoped to your organization and workspace, and are not used for any other purpose.
 
@@ -729,7 +729,7 @@ in {cache_miss_reason: {type:}}
 end
 ```
 
-The `message_start` event carries the full `diagnostics` field; see [Response format](build-with-claude/cache-diagnostics.md) for the possible values.
+The `message_start` event carries the full `diagnostics` field; see [Response format](cache-diagnostics.md#response-format) for the possible values.
 
 ## Threading diagnostics through a conversation loop
 
@@ -737,11 +737,11 @@ In a multi-turn conversation, carry the latest response `id` forward as `previou
 
 **cURL**
 
-This workflow doesn't translate well to a one-off shell command. See the SDK tabs for the loop pattern; the per-turn HTTP request is identical to [Basic usage](build-with-claude/cache-diagnostics.md).
+This workflow doesn't translate well to a one-off shell command. See the SDK tabs for the loop pattern; the per-turn HTTP request is identical to [Basic usage](cache-diagnostics.md#basic-usage).
 
 **CLI**
 
-This workflow doesn't translate well to a one-off shell command. See the SDK tabs for the loop pattern; the per-turn CLI invocation is identical to [Basic usage](build-with-claude/cache-diagnostics.md).
+This workflow doesn't translate well to a one-off shell command. See the SDK tabs for the loop pattern; the per-turn CLI invocation is identical to [Basic usage](cache-diagnostics.md#basic-usage).
 
 **Python**
 
@@ -1049,7 +1049,7 @@ When `cache_miss_reason` is non-null, it looks like this:
 | `tools_changed`              | The `tools` array differs: tools were added, removed, or reordered between turns, or tool `input_schema` JSON was serialized non-deterministically.                                                                                                                                                                                                                                                                                             | Send the same tool list on every turn in a fixed order with deterministically serialized schemas (for example, sort keys).                                                                                                                                                                                    |
 | `messages_changed`           | The model, system, and tools all match, but an earlier entry in `messages` was altered, reordered, or removed rather than appended to. Typically conversation history was truncated or edited, or assistant turns and `tool_result` blocks were re-serialized differently on resend.                                                                                                                                                            | Treat the history as append-only; echo assistant `content` and tool results back verbatim.                                                                                                                                                                                                                    |
 | `previous_message_not_found` | No stored fingerprint exists for the supplied `previous_message_id`. This is not evidence that your request changed. Typically the previous request did not carry the beta header, it came from a different workspace, or too much time has passed since it was sent.                                                                                                                                                                           | Send the beta header on every turn and keep consecutive turns close together in time.                                                                                                                                                                                                                         |
-| `unavailable`                | Diagnostic information was not available for this request. This includes the case where `model`, `system`, and `tools` match but another prompt-affecting request parameter (`tool_choice`, `thinking`, `context_management`, `output_config`, `output_format`, or the set of active `anthropic-beta` headers) differs, and very long conversations where the divergence is beyond the comparison horizon. Your request was processed normally. | Keep the prompt-affecting request parameters constant for the lifetime of a cached conversation. If persistent, apply the manual checks under [Troubleshooting common issues](build-with-claude/prompt-caching.md) on the prompt caching page. |
+| `unavailable`                | Diagnostic information was not available for this request. This includes the case where `model`, `system`, and `tools` match but another prompt-affecting request parameter (`tool_choice`, `thinking`, `context_management`, `output_config`, `output_format`, or the set of active `anthropic-beta` headers) differs, and very long conversations where the divergence is beyond the comparison horizon. Your request was processed normally. | Keep the prompt-affecting request parameters constant for the lifetime of a cached conversation. If persistent, apply the manual checks under [Troubleshooting common issues](prompt-caching.md#troubleshooting-common-issues) on the prompt caching page. |
 
 The four `*_changed` types also carry a `cache_missed_input_tokens` integer: an estimate of how many input tokens fell after the divergence point, giving you a sense of how much cacheable prefix was lost. It is derived from byte lengths before tokenization, so treat it as a magnitude indicator rather than a billing number. It can differ from (and occasionally exceed) `usage.input_tokens`.
 
@@ -1062,7 +1062,7 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 | Diagnostics result                        | Cache read tokens | Interpretation                                                                                                                                                                                                                       |
 | ----------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `null`                                    | high              | Working as expected. Your prefix is stable and the cache hit.                                                                                                                                                                        |
-| `null`                                    | low or zero       | Your requests match but the cache entry was no longer available. Consider shortening gaps between turns or using the [1-hour cache TTL](build-with-claude/prompt-caching.md). |
+| `null`                                    | low or zero       | Your requests match but the cache entry was no longer available. Consider shortening gaps between turns or using the [1-hour cache TTL](prompt-caching.md#1-hour-cache-duration). |
 | `cache_miss_reason` is a `*_changed` type | low or zero       | Your bug. The request changed; fix the cause indicated by `type`.                                                                                                                                                                    |
 | `cache_miss_reason` is a `*_changed` type | high              | Rare. A change occurred late in the prompt but an earlier `cache_control` breakpoint still hit. Worth fixing, but low impact.                                                                                                        |
 
@@ -1071,7 +1071,7 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 * **Beta:** Field names and semantics may change while this feature is in beta.
 * **Claude API only:** Not available on Amazon Bedrock or Google Cloud.
 * **Limited retention:** Fingerprints for `previous_message_id` lookup expire after a short period. Run diagnostic comparisons between closely spaced requests.
-* **Same workspace:** The previous request must have run in the same organization and workspace. To check, compare the `anthropic-workspace-id` [response header](api/overview.md) on the two responses.
+* **Same workspace:** The previous request must have run in the same organization and workspace. To check, compare the `anthropic-workspace-id` [response header](../api/overview.md#response-headers) on the two responses.
 * **Comparison horizon:** For very long conversations where the only change is deep in the message list, the response may be `unavailable` rather than a precise location.
 * **Best-effort:** Diagnostics never blocks or fails your request. If diagnostic information is not available, the response returns `unavailable`, or `cache_miss_reason: null` when the comparison was still running.
 
@@ -1081,13 +1081,13 @@ Cache diagnostics is ZDR eligible (qualified). Anthropic does not store the raw 
 
 The fingerprint stored for each request consists only of cryptographic hashes and token-count estimates, keyed by the response `id` and scoped to your organization and workspace. Fingerprints expire after a short period and are not used for any other purpose.
 
-For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
+For ZDR eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
 ## See also
 
-* [Prompt caching](build-with-claude/prompt-caching.md)
-* [Token counting](build-with-claude/token-counting.md)
-* [Beta headers](api/beta-headers.md)
+* [Prompt caching](prompt-caching.md)
+* [Token counting](token-counting.md)
+* [Beta headers](../api/beta-headers.md)
 
 ---
 

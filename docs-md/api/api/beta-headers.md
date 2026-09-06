@@ -8,7 +8,7 @@ description: Access experimental features before they become part of the standar
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
-Each [client SDK](cli-sdks-libraries/overview.md) exposes a `beta` namespace for calling the API with beta features enabled.
+Each [client SDK](../cli-sdks-libraries/overview.md) exposes a `beta` namespace for calling the API with beta features enabled.
 
 ## How to use beta headers
 
@@ -22,9 +22,9 @@ anthropic-beta: BETA_FEATURE_NAME
 content-type: application/json
 ```
 
-Each feature's documentation states the exact beta name to send. The [API overview](api/overview.md) lists the APIs currently in beta.
+Each feature's documentation states the exact beta name to send. The [API overview](overview.md) lists the APIs currently in beta.
 
-The following examples show the same request with cURL, the `ant` CLI, and the SDKs, using the [context editing](build-with-claude/context-editing.md) beta as the example. The SDKs take beta names in the `betas` parameter and send the `anthropic-beta` header for you:
+The following examples show the same request with cURL, the `ant` CLI, and the SDKs, using the [context editing](../build-with-claude/context-editing.md) beta as the example. The SDKs take beta names in the `betas` parameter and send the `anthropic-beta` header for you:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -176,7 +176,7 @@ Some beta APIs are scoped to specific endpoints and require a feature-specific b
 | `/v1/tunnels`                                    | `mcp-tunnels-2026-06-22`    |
 | `/v1/memory_stores` and sub-resources            | `agent-memory-2026-07-22`   |
 
-The SDKs' `beta` namespaces add these headers automatically. Add them yourself only when making raw HTTP requests. See the [Managed Agents overview](managed-agents/overview.md), [Using agent memory](managed-agents/memory.md), and the [MCP tunnels reference](agents-and-tools/mcp-tunnels/reference.md) for details.
+The SDKs' `beta` namespaces add these headers automatically. Add them yourself only when making raw HTTP requests. See the [Managed Agents overview](../managed-agents/overview.md), [Using agent memory](../managed-agents/memory.md), and the [MCP tunnels reference](../agents-and-tools/mcp-tunnels/reference.md#tunnels-api) for details.
 
 Endpoint-specific headers that apply to the same endpoint aren't always combinable. On memory store endpoints, `agent-memory-2026-07-22` replaces `managed-agents-2026-04-01`: sending both on the same request returns a `400` error. The client SDKs send the correct header for each endpoint automatically.
 
@@ -201,7 +201,7 @@ If you use an invalid beta name, or a beta your organization doesn't have access
 
 ## Getting help
 
-For updates to beta features, see the [release notes](release-notes/overview.md). For help with production issues, contact [support](https://support.claude.com/).
+For updates to beta features, see the [release notes](../release-notes/overview.md). For help with production issues, contact [support](https://support.claude.com/).
 
 ## Next steps
 

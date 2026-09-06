@@ -20,7 +20,7 @@ Update Agent
 
   - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp] Optional`
 
-    Body param: MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
+    Body param: MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../../managed-agents/mcp-connector.md).
 
     - `Name string`
 
@@ -42,7 +42,7 @@ Update Agent
 
   - `Model param.Field[BetaManagedAgentsModelConfigParamsResp] Optional`
 
-    Body param: Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+    Body param: Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
     - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
 

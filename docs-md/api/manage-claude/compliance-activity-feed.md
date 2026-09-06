@@ -6,11 +6,11 @@ url: https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed
 description: Retrieve, filter, and paginate your organization's Compliance API Activity Feed.
 ---
 
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
+To enable the Compliance API, see [Set up the Compliance API](compliance-api-access.md).
 
 **Required scope:** `read:compliance_activities` on the Compliance Access Key or Admin API key.
 
-Both Compliance Access Keys (`sk-ant-api01-...`) carrying this scope and Admin API keys (`sk-ant-admin01-...`) can call the Activity Feed. See [Set up the Compliance API](manage-claude/compliance-api-access.md) for the conditions under which each key type carries the scope.
+Both Compliance Access Keys (`sk-ant-api01-...`) carrying this scope and Admin API keys (`sk-ant-admin01-...`) can call the Activity Feed. See [Set up the Compliance API](compliance-api-access.md) for the conditions under which each key type carries the scope.
 
 The Activity Feed records authentication, chat, file, project, administrative, and platform activity across your organization and returns it in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years. Recording is not retroactive: it begins when the Compliance API is first enabled for your organization, and activity from before enablement is not backfilled.
 
@@ -49,7 +49,7 @@ curl --fail-with-body -sS \
 
 ## Filter activities
 
-Filter by organization, actor, activity type, or a `created_at` time window using the dotted sub-parameters `created_at.gte`, `.gt`, `.lte`, and `.lt`. See the [API reference](api/compliance/activities/list.md) for each parameter's type and accepted values.
+Filter by organization, actor, activity type, or a `created_at` time window using the dotted sub-parameters `created_at.gte`, `.gt`, `.lte`, and `.lt`. See the [API reference](../api/compliance/activities/list.md) for each parameter's type and accepted values.
 
 Repeatable parameters use array-bracket query syntax: pass `activity_types[]=...`, `actor_ids[]=...`, or `organization_ids[]=...` once for each value.
 
@@ -63,11 +63,11 @@ curl --fail-with-body -sS -G \
   --header "anthropic-version: 2023-06-01"
 ```
 
-The Activity Feed produces hundreds of distinct activity types. See [Query compliance activities](api/compliance/activities/list.md) in the API reference for the full list of values that `activity_types[]` accepts.
+The Activity Feed produces hundreds of distinct activity types. See [Query compliance activities](../api/compliance/activities/list.md) in the API reference for the full list of values that `activity_types[]` accepts.
 
 ## Paginate results
 
-Activities are returned newest first, with ties in `created_at` broken by activity ID, and capped at `limit` results in each response (default 100, max 5,000). See the [API reference](api/compliance/activities/list.md) for the full response schema.
+Activities are returned newest first, with ties in `created_at` broken by activity ID, and capped at `limit` results in each response (default 100, max 5,000). See the [API reference](../api/compliance/activities/list.md) for the full response schema.
 
 The Compliance API uses two pagination schemes depending on the endpoint family:
 
@@ -88,11 +88,11 @@ To page through activities:
 * Pass `first_id` as `before_id` to return to the previous page.
 * Stop when `has_more` is `false`.
 
-The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, and projects](manage-claude/compliance-content-data.md) for the cursor semantics there.
+The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, and projects](compliance-content-data.md) for the cursor semantics there.
 
 **Cursors are safe to reuse on retry.** A cursor or page token from a successfully returned page remains valid; a request that fails (5xx, timeout, network error) does not advance your position. Retry the same request with the same cursor. Only move to the next cursor after you have stored the page it points past.
 
-Page tokens on the local session endpoints are the exception over longer pauses. On the [local session messages endpoint](manage-claude/compliance-sessions.md), a walk's `page` tokens expire 24 hours after its first page (a walk is one pass through the pages), so finish or resume within that window, or restart without the `page` parameter. On the [local session list](manage-claude/compliance-sessions.md), an older `page` token is still accepted but is re-evaluated against the current retention boundary and can skip sessions, so complete list walks within 24 hours as well.
+Page tokens on the local session endpoints are the exception over longer pauses. On the [local session messages endpoint](compliance-sessions.md#retrieve-a-local-session-transcript), a walk's `page` tokens expire 24 hours after its first page (a walk is one pass through the pages), so finish or resume within that window, or restart without the `page` parameter. On the [local session list](compliance-sessions.md#retrieve-local-sessions), an older `page` token is still accepted but is re-evaluated against the current retention boundary and can skip sessions, so complete list walks within 24 hours as well.
 
 ```bash cURL
 # Fetch the first page (newest activities first) and capture its trailing cursor.
@@ -142,7 +142,7 @@ Every entry in `data` is an Activity with this top-level shape:
 | `organization_uuid` | string or null  | Same scoping as `organization_id`, expressed as a UUID.                                                                                                                                                                                                 |
 | `actor`             | Actor union     | Who or what performed the activity. See the following actor table.                                                                                                                                                                                      |
 | `type`              | string          | The activity type, for example `claude_chat_created`.                                                                                                                                                                                                   |
-| *additional fields* | varies          | Type-specific fields, for example `claude_chat_id` on chat events or `filename` on file events. See [Query compliance activities](api/compliance/activities/list.md) in the API reference for the per-type field list. |
+| *additional fields* | varies          | Type-specific fields, for example `claude_chat_id` on chat events or `filename` on file events. See [Query compliance activities](../api/compliance/activities/list.md) in the API reference for the per-type field list. |
 
 The `actor` field is a discriminated union. The `type` discriminator tells you which other fields are present:
 

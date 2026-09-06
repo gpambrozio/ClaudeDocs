@@ -11,7 +11,7 @@ The desktop app on Linux gives you the same Chat, Cowork, and Claude Code experi
 * Ubuntu 22.04 or later, or Debian 12 or later
 * x86\_64 or arm64
 
-Other Debian-based distributions that meet these requirements may work but aren't officially tested. On distributions that aren't Debian-based, such as Fedora or Arch, run the [CLI](setup.md) instead. If you work on Windows with WSL 2, install the Windows desktop app and run sessions inside your distribution; see [Claude Code Desktop in WSL](desktop-wsl.md).
+Other Debian-based distributions that meet these requirements may work but aren't officially tested. On distributions that aren't Debian-based, such as Fedora or Arch, run the [CLI](setup.md#system-requirements) instead. If you work on Windows with WSL 2, install the Windows desktop app and run sessions inside your distribution; see [Claude Code Desktop in WSL](desktop-wsl.md).
 
 ### Cowork requirements
 
@@ -146,12 +146,12 @@ If the Cowork tab shows one of these messages, fix the requirement it names, the
 
 ## What's not in the Linux beta yet
 
-* **Computer Use**: [app and screen control](desktop.md) isn't available on Linux.
+* **Computer Use**: [app and screen control](desktop.md#let-claude-use-your-computer) isn't available on Linux.
 * **Dictation**: voice input isn't available in the Linux desktop app. Use [voice dictation](voice-dictation.md) in the CLI instead.
 * **Quick Entry global hotkey**: works on X11. On native Wayland it requires your desktop environment's GlobalShortcuts portal.
 * **Fedora and RHEL**: only Debian-based distributions are supported today. Support for additional distributions is coming in the future.
 
-For anything not yet available in the desktop app, the [CLI](quickstart.md) runs the same Claude Code engine and supports a wider range of Linux distributions; see the [system requirements](setup.md).
+For anything not yet available in the desktop app, the [CLI](quickstart.md) runs the same Claude Code engine and supports a wider range of Linux distributions; see the [system requirements](setup.md#system-requirements).
 
 ---
 

@@ -8,9 +8,9 @@ description: Avoid paying the prompt-cache cost twice when you retry a refused r
 
 Prompt caches are per-model. When a model declines a request and you retry on another model, the conversation prefix already cached for the first model must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
 
-You need this page only when you build the retry yourself: over raw HTTP or with custom retry logic. [Server-side fallback](build-with-claude/refusals-and-fallback.md) and the [SDK middleware](build-with-claude/refusals-and-fallback.md) apply fallback credit automatically. If you use either, skip this page.
+You need this page only when you build the retry yourself: over raw HTTP or with custom retry logic. [Server-side fallback](refusals-and-fallback.md#server-side-fallback) and the [SDK middleware](refusals-and-fallback.md#client-side-fallback) apply fallback credit automatically. If you use either, skip this page.
 
-[Refusals and fallback](build-with-claude/refusals-and-fallback.md) covers detecting refusals and choosing a fallback approach. [Prompt caching](build-with-claude/prompt-caching.md) explains cache reads and cache writes if those terms are new.
+[Refusals and fallback](refusals-and-fallback.md) covers detecting refusals and choosing a fallback approach. [Prompt caching](prompt-caching.md) explains cache reads and cache writes if those terms are new.
 
 ## The basic flow
 
@@ -44,7 +44,7 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 
 ## Example
 
-The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](build-with-claude/fallback-credit.md).
+The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](fallback-credit.md#when-a-retry-is-rejected).
 
 ```bash cURL
 # Initial request (may be refused)
@@ -338,7 +338,7 @@ send := func(model anthropic.Model, body anthropic.BetaMessageNewParams) (*anthr
 // unavailable" is transient: surface it and retry with the token within
 // its five-minute window.
 canFallBack := func(err error) bool {
-	apiErr, ok := errors.AsType[*anthropic.Error](build-with-claude/err.md)
+	apiErr, ok := errors.AsType[*anthropic.Error](err)
 	return ok && apiErr.StatusCode == 400 &&
 		!strings.Contains(apiErr.Error(), "redemption temporarily unavailable")
 }
@@ -558,13 +558,13 @@ puts JSON.generate({stop_reason: response.stop_reason, model: response.model})
 
 ## Where it works
 
-Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Refusals in [Message Batches](build-with-claude/batch-processing.md) don't mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored.
+Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry. Refusals in [Message Batches](batch-processing.md) don't mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored.
 
 The retry model must be one of the refused model's permitted fallback targets. For Claude Fable 5.1 and Claude Fable 5, those are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`).
 
 **Looking up permitted fallback targets programmatically**
 
-On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](api/models/list.md) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
+On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](../api/models/list.md) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 
 ## Checking that the credit applied
 
@@ -618,7 +618,7 @@ On models that include the 1M token context window by default, such as Claude Fa
 
 **When fallback_has_prefill_claim is absent**
 
-The field is `null` only when the token is also `null`, so a value you observe while holding a token is never `null`. It can still be absent (`None` in the typed SDKs) on Amazon Bedrock, Google Cloud, and Microsoft Foundry while their support for the field rolls out. In that case, treat the retry shape as unknown rather than as `false`. Try the appended-assistant-message shape first, and rely on the rejection handling in [When a retry is rejected](build-with-claude/fallback-credit.md), which falls back to the unchanged body.
+The field is `null` only when the token is also `null`, so a value you observe while holding a token is never `null`. It can still be absent (`None` in the typed SDKs) on Amazon Bedrock, Google Cloud, and Microsoft Foundry while their support for the field rolls out. In that case, treat the retry shape as unknown rather than as `false`. Try the appended-assistant-message shape first, and rely on the rejection handling in [When a retry is rejected](fallback-credit.md#when-a-retry-is-rejected), which falls back to the unchanged body.
 
 **Echoing the refused response's content**
 
@@ -629,7 +629,7 @@ Two adjustments may still be needed before sending:
 * If the final block you send is a `text` block, strip its trailing whitespace.
 * Omit any client-side `tool_use` block that has no matching `tool_result`.
 
-If the echoed content includes a `fallback` block from an earlier [server-side fallback](build-with-claude/refusals-and-fallback.md), keep the block exactly where it appeared. It is accepted on any request without a beta header. The API uses its position to validate the thinking blocks around it, so a request that echoes thinking blocks from both sides of that boundary is rejected if the block is omitted or moved.
+If the echoed content includes a `fallback` block from an earlier [server-side fallback](refusals-and-fallback.md#server-side-fallback), keep the block exactly where it appeared. It is accepted on any request without a beta header. The API uses its position to validate the thinking blocks around it, so a request that echoes thinking blocks from both sides of that boundary is rejected if the block is omitted or moved.
 
 **Token scope and lifetime**
 

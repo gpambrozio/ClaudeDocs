@@ -8,29 +8,29 @@ description: Manage organization members, workspaces, invites, and API keys prog
 
 **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 
-The [Admin API](api/admin.md) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
+The [Admin API](../api/admin.md) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
 
 **The Admin API requires special access**
 
 The Admin API accepts three credentials:
 
-* An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](manage-claude/admin-api-keys.md).
-* An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](manage-claude/admin-api.md).
-* A **personal key** or **service account key** that isn't scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](manage-claude/authentication.md).
+* An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](admin-api-keys.md).
+* An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](admin-api.md#oauth-bearer-token).
+* A **personal key** or **service account key** that isn't scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](authentication.md#key-types).
 
-**Claude Enterprise:** Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](manage-claude/spend-limits-api.md). See [User management](manage-claude/user-management.md).
+**Claude Enterprise:** Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](spend-limits-api.md). See [User management](user-management.md).
 
-**Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) and the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](manage-claude/cmek-aws-kms.md); there is no validate endpoint, because keys are validated when attached to a workspace) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
+**Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) and the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](cmek-aws-kms.md#claude-platform-on-aws); there is no validate endpoint, because keys are validated when attached to a workspace) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md).
 
 ## Authentication
 
-Authenticate with any of the three credentials. An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](manage-claude/admin-api.md) with an OAuth token and with an Admin API key.
+Authenticate with any of the three credentials. An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](admin-api.md#accessing-organization-info) with an OAuth token and with an Admin API key.
 
-The Python, TypeScript, C#, Go, Java, PHP, and Ruby SDKs expose the Admin API under `client.beta.organization`, and the `ant` CLI under `ant beta:organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](api/admin.md).
+The Python, TypeScript, C#, Go, Java, PHP, and Ruby SDKs expose the Admin API under `client.beta.organization`, and the `ant` CLI under `ant beta:organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](../api/admin.md).
 
 ### OAuth bearer token
 
-Log in with the [`ant` CLI](cli-sdks-libraries/cli/quickstart.md) under a dedicated profile with the `org:admin` scope (see [Admin access](cli-sdks-libraries/cli/authentication.md)), then export the bearer token. `--profile admin` stores the `org:admin` credential under its own profile and makes it the CLI's active profile. The exported variable applies to every SDK and CLI call in that shell. Use a shell you reserve for administration, unset the variable when you're done, and switch the CLI back with `ant profile activate default`:
+Log in with the [`ant` CLI](../cli-sdks-libraries/cli/quickstart.md) under a dedicated profile with the `org:admin` scope (see [Admin access](../cli-sdks-libraries/cli/authentication.md#admin-access)), then export the bearer token. `--profile admin` stores the `org:admin` credential under its own profile and makes it the CLI's active profile. The exported variable applies to every SDK and CLI call in that shell. Use a shell you reserve for administration, unset the variable when you're done, and switch the CLI back with `ant profile activate default`:
 
 ```bash CLI
 ant auth login --profile admin --scope "org:admin"
@@ -39,7 +39,7 @@ export ANTHROPIC_AUTH_TOKEN=$(ant auth print-credentials --profile admin --acces
 
 Interactive tokens are short-lived. If requests start returning 401, re-run the `export` command to refresh the token.
 
-The SDKs and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically. Leave `ANTHROPIC_API_KEY` unset in the same shell so they send the bearer token. Automated workloads skip the login: they authenticate through workload identity federation, and the SDKs and CLI perform the token exchange from the federation environment variables. See [Bootstrap a workload to manage WIF](manage-claude/wif-admin-api.md).
+The SDKs and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically. Leave `ANTHROPIC_API_KEY` unset in the same shell so they send the bearer token. Automated workloads skip the login: they authenticate through workload identity federation, and the SDKs and CLI perform the token exchange from the federation environment variables. See [Bootstrap a workload to manage WIF](wif-admin-api.md#bootstrap-a-workload-to-manage-wif).
 
 Call the Admin API with the exported token:
 
@@ -119,13 +119,13 @@ puts "id: #{organization.id}"
 puts "name: #{organization.name}"
 ```
 
-An `org:admin` token grants access to the whole organization, regardless of the workspace the underlying profile or [federation rule](manage-claude/admin-api.md) is bound to.
+An `org:admin` token grants access to the whole organization, regardless of the workspace the underlying profile or [federation rule](admin-api.md#federation-rules) is bound to.
 
-For CI and other non-interactive workloads, mint the token with Workload Identity Federation instead of logging in interactively. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+For CI and other non-interactive workloads, mint the token with Workload Identity Federation instead of logging in interactively. See [Manage WIF with the Admin API](wif-admin-api.md#workload-ci-and-automation).
 
 ### Admin API key
 
-To create an Admin API key for your organization type, see [Create an Admin API key](manage-claude/admin-api-keys.md).
+To create an Admin API key for your organization type, see [Create an Admin API key](admin-api-keys.md).
 
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
@@ -205,7 +205,7 @@ puts "name: #{organization.name}"
 
 ## How the Admin API works
 
-Authenticate with any credential from [Authentication](manage-claude/admin-api.md), then manage the following resources:
+Authenticate with any credential from [Authentication](admin-api.md#authentication), then manage the following resources:
 
 * Organization members and their roles
 * Organization invites
@@ -222,7 +222,7 @@ There are five organization-level roles. For details, see [API Console roles and
 | Role               | Permissions                                                                    |
 | ------------------ | ------------------------------------------------------------------------------ |
 | user               | Can use playground                                                             |
-| claude\_code\_user | Can use playground and [Claude Code](overview.md) |
+| claude\_code\_user | Can use playground and [Claude Code](../../claude-code/overview.md) |
 | developer          | Can use playground and manage API keys                                         |
 | billing            | Can use playground and manage billing details                                  |
 | admin              | Can do all of the preceding, plus manage users                                 |
@@ -233,7 +233,7 @@ Organization owners and primary owners have all admin permissions and can also m
 
 ### Organization members
 
-List [organization members](api/admin-api/users/get-user.md), update their roles, and remove them.
+List [organization members](../api/admin/users/retrieve.md), update their roles, and remove them.
 
 List the members of your organization:
 
@@ -523,7 +523,7 @@ puts "id: #{removed_user.id}"
 
 ### Organization invites
 
-Invite users to your organization and manage pending [invites](api/admin-api/invites/get-invite.md).
+Invite users to your organization and manage pending [invites](../api/admin/invites/retrieve.md).
 
 Invite a user to your organization:
 
@@ -830,11 +830,11 @@ puts "id: #{deleted_invite.id}"
 
 ### Workspaces
 
-See [Workspaces](manage-claude/workspaces.md) for Console and API examples.
+See [Workspaces](workspaces.md) for Console and API examples.
 
 ### Workspace members
 
-Manage [user access to specific workspaces](api/admin-api/workspace_members/get-workspace-member.md):
+Manage [user access to specific workspaces](../api/admin/workspaces/members/retrieve.md):
 
 Add a member to a workspace:
 
@@ -1320,7 +1320,7 @@ puts "user_id: #{removed_member.user_id}"
 
 ### API keys
 
-Monitor and manage [API keys](api/admin/api_keys/list.md). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](manage-claude/authentication.md)) and `principal`, the identity it acts as (see [Key types](manage-claude/authentication.md)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`; for a service account key, `{"type": "service_account_actor", "service_account_id": "svac_..."}`; and for a workspace key, `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. The top-level `workspace_id` field is deprecated and is `null` both for keys bound to the Default Workspace and for keys without a workspace scope; use `scope` to tell them apart. Filtering the list by `workspace_id` with the Default Workspace's ID returns only keys bound to the Default Workspace; keys without a workspace scope aren't returned under any `workspace_id` filter.
+Monitor and manage [API keys](../api/admin/api_keys/list.md). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](authentication.md#key-expiration)) and `principal`, the identity it acts as (see [Key types](authentication.md#key-types)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`; for a service account key, `{"type": "service_account_actor", "service_account_id": "svac_..."}`; and for a workspace key, `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. The top-level `workspace_id` field is deprecated and is `null` both for keys bound to the Default Workspace and for keys without a workspace scope; use `scope` to tell them apart. Filtering the list by `workspace_id` with the Default Workspace's ID returns only keys bound to the Default Workspace; keys without a workspace scope aren't returned under any `workspace_id` filter.
 
 List the active API keys in a workspace:
 
@@ -1589,15 +1589,15 @@ puts "status: #{api_key.status}"
 
 ### Service accounts
 
-Create and manage service accounts (`svac_...`), the non-human identities that [service account keys](manage-claude/authentication.md) and [Workload Identity Federation](manage-claude/workload-identity-federation.md) tokens act as. These endpoints, like the federation-issuer and federation-rule endpoints, require an `org:admin` OAuth token. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+Create and manage service accounts (`svac_...`), the non-human identities that [service account keys](authentication.md#key-types) and [Workload Identity Federation](workload-identity-federation.md) tokens act as. These endpoints, like the federation-issuer and federation-rule endpoints, require an `org:admin` OAuth token. See [Manage WIF with the Admin API](wif-admin-api.md#service-accounts).
 
 ### Federation issuers
 
-Register the OIDC identity providers (`fdis_...`) whose tokens may assert workload identity for your organization. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+Register the OIDC identity providers (`fdis_...`) whose tokens may assert workload identity for your organization. See [Manage WIF with the Admin API](wif-admin-api.md#federation-issuers).
 
 ### Federation rules
 
-Manage the rules (`fdrl_...`) that map issuer tokens to service accounts and scopes. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+Manage the rules (`fdrl_...`) that map issuer tokens to service accounts and scopes. See [Manage WIF with the Admin API](wif-admin-api.md#federation-rules).
 
 ## Accessing organization info
 
@@ -1687,23 +1687,23 @@ puts "name: #{organization.name}"
 }
 ```
 
-For parameter details and response schemas, see the [Organization Info API reference](api/admin-api/organization/get-me.md).
+For parameter details and response schemas, see the [Organization Info API reference](../api/admin/organizations/me.md).
 
 ## Usage and cost reports
 
-Track your organization's usage and costs with the [Usage and Cost API](manage-claude/usage-cost-api.md).
+Track your organization's usage and costs with the [Usage and Cost API](usage-cost-api.md).
 
 ## Claude Code analytics
 
-Monitor developer productivity and Claude Code adoption with the [Claude Code Analytics API](manage-claude/claude-code-analytics-api.md).
+Monitor developer productivity and Claude Code adoption with the [Claude Code Analytics API](claude-code-analytics-api.md).
 
 ## Rate limits
 
-Read the rate limits configured for your organization and its workspaces with the [Rate Limits API](manage-claude/rate-limits-api.md).
+Read the rate limits configured for your organization and its workspaces with the [Rate Limits API](rate-limits-api.md).
 
 ## Compliance API
 
-Retrieve audit and activity data for your organization with the [Compliance API](manage-claude/compliance-api.md). Admin API keys can read only the Activity Feed. For full access, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
+Retrieve audit and activity data for your organization with the [Compliance API](compliance-api.md). Admin API keys can read only the Activity Feed. For full access, see [Set up the Compliance API](compliance-api-access.md).
 
 ## Best practices
 
@@ -1711,13 +1711,13 @@ Retrieve audit and activity data for your organization with the [Compliance API]
 * Handle errors from failed operations
 * Regularly audit member roles and permissions
 * Clean up unused workspaces and expired invites
-* Monitor API key usage, audit each key's [`expires_at`](manage-claude/authentication.md), and rotate keys periodically
+* Monitor API key usage, audit each key's [`expires_at`](authentication.md#key-expiration), and rotate keys periodically
 
 ## FAQ
 
 **What permissions are needed to use the Admin API?**
 
-The Admin API accepts an Admin API key (starting with `sk-ant-admin`), an OAuth bearer token with the `org:admin` scope, or a personal key or service account key that isn't scoped to a specific workspace. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. A personal key or service account key has the same permissions as the linked account. See [Authentication](manage-claude/admin-api.md).
+The Admin API accepts an Admin API key (starting with `sk-ant-admin`), an OAuth bearer token with the `org:admin` scope, or a personal key or service account key that isn't scoped to a specific workspace. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. A personal key or service account key has the same permissions as the linked account. See [Authentication](admin-api.md#authentication).
 
 **Can I create new API keys through the Admin API?**
 
@@ -1725,9 +1725,9 @@ No. You create API keys in the Claude Console. The Admin API can only read, rena
 
 **What happens to API keys when removing a user?**
 
-Behavior depends on the [key type](manage-claude/authentication.md).
+Behavior depends on the [key type](authentication.md#key-types).
 
-Personal keys stop working when their user is removed from the organization. Service account keys stop working if their service account is archived, but continue to work even if the user that created them is removed. Workspace API keys continue to work. In the [Claude Code workspace](manage-claude/workspaces.md), each key is bound to the member who created it and stops working when that member is removed.
+Personal keys stop working when their user is removed from the organization. Service account keys stop working if their service account is archived, but continue to work even if the user that created them is removed. Workspace API keys continue to work. In the [Claude Code workspace](workspaces.md#claude-code-workspace), each key is bound to the member who created it and stops working when that member is removed.
 
 **Can organization admins be removed through the API?**
 
@@ -1737,7 +1737,7 @@ No. The API can't remove members with the admin role.
 
 Invites expire after 21 days. The expiration period isn't configurable.
 
-For workspace-specific questions, see the [Workspaces FAQ](manage-claude/workspaces.md).
+For workspace-specific questions, see the [Workspaces FAQ](workspaces.md#faq).
 
 ---
 

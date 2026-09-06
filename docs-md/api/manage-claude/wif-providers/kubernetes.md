@@ -12,18 +12,18 @@ Self-managed Kubernetes clusters (kubeadm, k3s, OpenShift, and on-premises distr
 kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
 ```
 
-The mechanism on this page (projected service-account token, cluster API server as the OIDC issuer) is native to Kubernetes itself, so it underlies every Kubernetes distribution. If you run on a managed Kubernetes service, the cloud provider guides walk through where to find the provider-managed issuer URL: [AWS (EKS)](manage-claude/wif-providers/aws.md), [Google Cloud (GKE)](manage-claude/wif-providers/gcp.md), or [Azure (AKS)](manage-claude/wif-providers/azure.md). If your cluster runs SPIRE, the SPIRE OIDC Discovery Provider is the issuer rather than the cluster API server; see [SPIFFE](manage-claude/wif-providers/spiffe.md). For any other distribution or a managed provider not listed there, follow this guide and use the issuer URL your cluster reports.
+The mechanism on this page (projected service-account token, cluster API server as the OIDC issuer) is native to Kubernetes itself, so it underlies every Kubernetes distribution. If you run on a managed Kubernetes service, the cloud provider guides walk through where to find the provider-managed issuer URL: [AWS (EKS)](aws.md#use-eks-projected-service-account-tokens), [Google Cloud (GKE)](gcp.md), or [Azure (AKS)](azure.md). If your cluster runs SPIRE, the SPIRE OIDC Discovery Provider is the issuer rather than the cluster API server; see [SPIFFE](spiffe.md). For any other distribution or a managed provider not listed there, follow this guide and use the issuer URL your cluster reports.
 
 ## Prerequisites
 
-* Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
+* Familiarity with [WIF concepts](../workload-identity-federation.md#concepts): service accounts, federation issuers, and federation rules.
 
 * A Kubernetes cluster with the [`--service-account-issuer`](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) flag configured on the API server. Most distributions set this by default; kubeadm clusters typically use `https://kubernetes.default.svc.cluster.local`. Your platform team can confirm the value if you don't have direct access to the API server configuration.
 
 * One of the following so Anthropic can validate token signatures:
 
   * The issuer's JWKS endpoint is reachable from the public internet over HTTPS on port 443, or
-  * You can fetch the JWKS from inside the cluster and register it in `inline` mode (covered in [Configure Anthropic](manage-claude/wif-providers/kubernetes.md)).
+  * You can fetch the JWKS from inside the cluster and register it in `inline` mode (covered in [Configure Anthropic](kubernetes.md#configure-anthropic)).
 
 * Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
 
@@ -73,7 +73,7 @@ The token issued for this pod carries `sub: "system:serviceaccount:inference:inf
 
 In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **Kubernetes** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
-The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](manage-claude/wif-admin-api.md):
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](../wif-admin-api.md):
 
 **Federation issuer:** Many self-managed clusters use an issuer URL such as `https://kubernetes.default.svc.cluster.local` that is not reachable from the public internet. If that applies to your cluster, choose the **inline** JWKS source and paste the cluster's keys. Fetch them from inside the cluster:
 
@@ -122,7 +122,7 @@ Be as specific as the workload allows. Loosen `subject_prefix` to `system:servic
 
 ## Acquire and use the token
 
-The pod spec in [Configure Kubernetes](manage-claude/wif-providers/kubernetes.md) sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to the projected mount path, along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. With those in place, the SDK reads the token from disk on every exchange and refreshes the Anthropic access token automatically.
+The pod spec in [Configure Kubernetes](kubernetes.md#configure-kubernetes) sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to the projected mount path, along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. With those in place, the SDK reads the token from disk on every exchange and refreshes the Anthropic access token automatically.
 
 ```bash cURL
 JWT=$(cat "$ANTHROPIC_IDENTITY_TOKEN_FILE")
@@ -287,7 +287,7 @@ puts message.content.find { it.type == :text }.text
 
 ## Verify the setup
 
-A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](manage-claude/wif-reference.md); the most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
+A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](../wif-reference.md#troubleshoot-a-failed-exchange); the most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
 
 ## Scope your rule
 
@@ -302,8 +302,8 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 ## Next steps
 
-* [Workload Identity Federation](manage-claude/workload-identity-federation.md): concepts, the token-exchange flow, and SDK configuration options.
-* [WIF reference](manage-claude/wif-reference.md): environment variables, JWKS source modes, and rule match modes.
+* [Workload Identity Federation](../workload-identity-federation.md): concepts, the token-exchange flow, and SDK configuration options.
+* [WIF reference](../wif-reference.md): environment variables, JWKS source modes, and rule match modes.
 
 ---
 

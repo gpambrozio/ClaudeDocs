@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/managed-agents/scheduled-deployments
 description: "Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history."
 ---
 
-A **scheduled deployment** allows an [agent](managed-agents/agent-setup.md) to start [sessions](managed-agents/sessions.md) autonomously, enabling task completion over a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
+A **scheduled deployment** allows an [agent](agent-setup.md) to start [sessions](sessions.md) autonomously, enabling task completion over a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
 
 For the launch context and examples of what teams run on schedules, see [scheduled deployments and vaults in Claude Managed Agents](https://claude.com/blog/whats-new-in-claude-managed-agents) on the blog.
 
@@ -14,9 +14,9 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Create a scheduled deployment
 
-When creating a deployment, you pass the [session configurations](managed-agents/sessions.md) required for execution, in addition to a `schedule`.
+When creating a deployment, you pass the [session configurations](sessions.md) required for execution, in addition to a `schedule`.
 
-* Deployments require [agent configuration](managed-agents/agent-setup.md) and [environment configuration](managed-agents/environments.md), and optionally accept [files](managed-agents/files.md), [GitHub](managed-agents/github.md), [memory stores](managed-agents/memory.md), and [vaults](managed-agents/vaults.md). A deployment that targets a [self-hosted environment](managed-agents/self-hosted-sandboxes.md) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
+* Deployments require [agent configuration](agent-setup.md) and [environment configuration](environments.md), and optionally accept [files](files.md), [GitHub](github.md), [memory stores](memory.md), and [vaults](vaults.md). A deployment that targets a [self-hosted environment](self-hosted-sandboxes.md#use-memory-stores) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
 * Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work.
 * In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 
@@ -244,7 +244,7 @@ The upcoming run timestamps reflect the exact schedule configured. However, to d
 
 A maximum of **1,000 scheduled deployments** is supported per organization. Contact Anthropic support if you need more.
 
-See the [Create Deployment reference](api/beta/deployments/create.md) for full parameters and response schema.
+See the [Create Deployment reference](../api/beta/deployments/create.md) for full parameters and response schema.
 
 ### Cron and timezone semantics
 
@@ -256,9 +256,9 @@ Wall-clock times that do not exist on a spring-forward day (such as 2 AM) are no
 
 ### Set a budget on each run
 
-Pass the optional `budget` object when you create or update the deployment. It takes the same shape as a [session budget](managed-agents/budgets.md). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
+Pass the optional `budget` object when you create or update the deployment. It takes the same shape as a [session budget](budgets.md). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
 
-A session started by the deployment behaves exactly like any other budgeted session: it pauses with `budget_reached` when its own list cost [reaches the cap](managed-agents/budgets.md). Changing the deployment's budget applies to runs started afterward; a session already running keeps the cap it started with, which you can [change through the session itself](managed-agents/session-operations.md). Unlike a session budget, a deployment's budget can be removed with `"budget": null` and set again later.
+A session started by the deployment behaves exactly like any other budgeted session: it pauses with `budget_reached` when its own list cost [reaches the cap](budgets.md#when-a-session-reaches-its-budget). Changing the deployment's budget applies to runs started afterward; a session already running keeps the cap it started with, which you can [change through the session itself](session-operations.md#updating-the-session-budget). Unlike a session budget, a deployment's budget can be removed with `"budget": null` and set again later.
 
 The following example sets a budget on an existing deployment:
 
@@ -282,7 +282,7 @@ EOF
 
 Deployments can fail to trigger for a variety of reasons: for example, if the `environment` resource has been archived, or if session creation is rate-limited. Each attempt at executing a deployment generates a **deployment run** record, allowing you to track successes and failures independent of the session lifecycle.
 
-Successful deployments generate active sessions, and a successful deployment run contains the associated `session_id`. To follow a session's lifecycle, track the session events through the [event stream](managed-agents/events-and-streaming.md) or [webhooks](managed-agents/webhooks.md). Deployment lifecycle changes and the outcome of each scheduled run are also delivered as webhook events, listed in the Deployment events and Deployment run events tabs of [Supported event types](managed-agents/webhooks.md).
+Successful deployments generate active sessions, and a successful deployment run contains the associated `session_id`. To follow a session's lifecycle, track the session events through the [event stream](events-and-streaming.md) or [webhooks](webhooks.md). Deployment lifecycle changes and the outcome of each scheduled run are also delivered as webhook events, listed in the Deployment events and Deployment run events tabs of [Supported event types](webhooks.md#supported-event-types).
 
 List all deployment runs for a deployment as follows:
 
@@ -455,7 +455,7 @@ client.beta.deployment_runs.list(
 end
 ```
 
-A failed run includes an `error` with a `type` describing why session creation was rejected (for example, `environment_archived_error`, `agent_archived_error`, or `session_rate_limited_error`). See the [List Deployment Runs reference](api/beta/deployment_runs/list.md) for all filter parameters and the response schema.
+A failed run includes an `error` with a `type` describing why session creation was rejected (for example, `environment_archived_error`, `agent_archived_error`, or `session_rate_limited_error`). See the [List Deployment Runs reference](../api/beta/deployment_runs/list.md) for all filter parameters and the response schema.
 
 ```json
 {
@@ -473,11 +473,11 @@ A failed run includes an `error` with a `type` describing why session creation w
 }
 ```
 
-To retrieve a single run by ID, call [`GET /v1/deployment_runs/{deployment_run_id}`](api/beta/deployment_runs/retrieve.md). A [`deployment_run` webhook event](managed-agents/webhooks.md) carries the run ID as its `data.id`.
+To retrieve a single run by ID, call [`GET /v1/deployment_runs/{deployment_run_id}`](../api/beta/deployment_runs/retrieve.md). A [`deployment_run` webhook event](webhooks.md#supported-event-types) carries the run ID as its `data.id`.
 
 ## Managing deployment lifecycle
 
-Each lifecycle change emits a [webhook event](managed-agents/webhooks.md), so you can react to a paused, unpaused, or archived deployment without polling; see the Deployment events tab.
+Each lifecycle change emits a [webhook event](webhooks.md#supported-event-types), so you can react to a paused, unpaused, or archived deployment without polling; see the Deployment events tab.
 
 **Pause** suppresses scheduled triggers on a go-forward basis; running sessions from a prior deployment run continue to execute. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
 
@@ -616,7 +616,7 @@ If a deployment's agent has been archived, the deployment is automatically archi
 
 ## Trigger a manual run
 
-To run a deployment outside its schedule, call the [`run` endpoint](api/beta/deployments/run.md). This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
+To run a deployment outside its schedule, call the [`run` endpoint](../api/beta/deployments/run.md). This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
 
 ```bash cURL
 curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/run?beta=true" \

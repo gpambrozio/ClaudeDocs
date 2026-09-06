@@ -8,14 +8,14 @@ description: Allow Inference hooks for your Claude Enterprise organization, conn
 
 Inference hooks are in beta and available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission, which the built-in Admin, Owner, and Primary owner roles hold, as does any custom role granted it.
 
-Inference hooks send prompts from your organization to an AI security server you choose, and hold each request for an allow or deny verdict before Claude processes it. This page walks through turning the feature on, connecting your server, and controlling enforcement. To learn what Inference hooks are and when to use them, see the [Inference hooks overview](manage-claude/inference-hooks.md). To build the AI security server itself, see [Develop an Inference hooks integration](manage-claude/inference-hooks-endpoint.md).
+Inference hooks send prompts from your organization to an AI security server you choose, and hold each request for an allow or deny verdict before Claude processes it. This page walks through turning the feature on, connecting your server, and controlling enforcement. To learn what Inference hooks are and when to use them, see the [Inference hooks overview](inference-hooks.md). To build the AI security server itself, see [Develop an Inference hooks integration](inference-hooks-endpoint.md).
 
 ## Before you begin
 
 You need:
 
 * The `organization:manage` permission in claude.ai. The built-in **Admin**, **Owner**, and **Primary owner** roles hold it, as does any custom role it has been granted.
-* An AI security server HTTPS endpoint that accepts verdict requests: an `https://` URL on port 443, on a publicly routable host, reachable without redirects. Reverse-tunnel hosts (ngrok and similar tunnel services) are not supported: Anthropic's network policy blocks them. Don't test through a tunnel; host your server on a domain you control. For the full [hosting requirements](manage-claude/inference-hooks-endpoint.md), and to build the server and verify signed requests, see [Develop an Inference hooks integration](manage-claude/inference-hooks-endpoint.md).
+* An AI security server HTTPS endpoint that accepts verdict requests: an `https://` URL on port 443, on a publicly routable host, reachable without redirects. Reverse-tunnel hosts (ngrok and similar tunnel services) are not supported: Anthropic's network policy blocks them. Don't test through a tunnel; host your server on a domain you control. For the full [hosting requirements](inference-hooks-endpoint.md#receive-a-request), and to build the server and verify signed requests, see [Develop an Inference hooks integration](inference-hooks-endpoint.md).
 
 ## Set up Inference hooks
 
@@ -57,9 +57,9 @@ Common failure results:
 
 **Save and store your signing secret**
 
-Save the endpoint configuration. The first save generates your webhook signing secret and reveals it once. Copy it and store it securely before closing the dialog: the secret cannot be retrieved later, only [rotated](manage-claude/inference-hooks-configuration.md).
+Save the endpoint configuration. The first save generates your webhook signing secret and reveals it once. Copy it and store it securely before closing the dialog: the secret cannot be retrieved later, only [rotated](inference-hooks-configuration.md#rotate-your-signing-secret).
 
-Your AI security server uses this secret to verify the signature on every request it receives. For the verification procedure, see [Verify the signature](manage-claude/inference-hooks-endpoint.md).
+Your AI security server uses this secret to verify the signature on every request it receives. For the verification procedure, see [Verify the signature](inference-hooks-endpoint.md#verify-the-signature).
 
 **Choose failure handling and timeout**
 
@@ -68,7 +68,7 @@ Under **Failure handling**, set **Mode** to choose what happens while the AI sec
 * **Block the request:** stop inference when your AI security server can't deliver a verdict (fail closed).
 * **Allow the request:** let the request proceed to the model without inspection (fail open).
 
-The dropdown's third option, **Shadow mode**, is a rollout tool rather than a failure policy; see [Shadow mode](manage-claude/inference-hooks-configuration.md).
+The dropdown's third option, **Shadow mode**, is a rollout tool rather than a failure policy; see [Shadow mode](inference-hooks-configuration.md#shadow-mode).
 
 Then set **Prompt verdict timeout (ms)**: 1 to 10,000ms, with a default of 5,000ms. The budget covers the entire exchange, and a slower verdict counts as an unreachable server, so set the lowest value your server can reliably meet.
 
@@ -82,7 +82,7 @@ Each request rolls once for its whole conversation turn, so a single conversatio
 
 **Turn on Enforce verdicts**
 
-To evaluate verdicts against live traffic without blocking anyone at first, set **Mode** to **Shadow mode** (step 6) before turning on enforcement; see [Shadow mode](manage-claude/inference-hooks-configuration.md).
+To evaluate verdicts against live traffic without blocking anyone at first, set **Mode** to **Shadow mode** (step 6) before turning on enforcement; see [Shadow mode](inference-hooks-configuration.md#shadow-mode).
 
 Turn on **Enforce verdicts** to gate Claude on your AI security server's verdict for every governed prompt, then confirm in the dialog, which restates your failure handling choice. Allow about a minute for the change to reach every Anthropic server; requests already in flight finish under the old setting. Turning it off stops prompts from being sent to your AI security server, again within about a minute; your configuration is kept.
 
@@ -118,7 +118,7 @@ The panel is best-effort: if Anthropic cannot read the counters it shows zero fa
 
 Sustained webhook failures attributable to your AI security server trip the circuit breaker, which stops enforcement: your server is no longer contacted, and your **Failure handling** choice applies to every inspected request. With **Block the request** selected, users in your organization are blocked until the breaker resets. When the breaker trips, administrators are also notified in the claude.ai notification center.
 
-Each trip is also recorded in your organization's [Activity Feed](manage-claude/compliance-activity-feed.md) as an `inference_hooks_circuit_breaker_tripped` activity, so your security team or vendor can alert on trips from monitoring they already run, such as a SIEM that ingests the feed. One activity is recorded per trip, not one per affected request. Recording requires the Compliance API to be enabled for your organization; see [Set up the Compliance API](manage-claude/compliance-api-access.md).
+Each trip is also recorded in your organization's [Activity Feed](compliance-activity-feed.md) as an `inference_hooks_circuit_breaker_tripped` activity, so your security team or vendor can alert on trips from monitoring they already run, such as a SIEM that ingests the feed. One activity is recorded per trip, not one per affected request. Recording requires the Compliance API to be enabled for your organization; see [Set up the Compliance API](compliance-api-access.md).
 
 To recover, fix the server, then turn **Enforce verdicts** back on to reset the breaker.
 
@@ -130,11 +130,11 @@ Automatic recovery runs only while your Inference hooks settings are unchanged s
 
 Click **Rotate secret** under **Request signing** to replace your signing secret. Rotation is an immediate cutover: the new secret is generated and revealed once, the old secret can no longer be retrieved, and no request is ever signed with both secrets, so there is no overlap period to rely on.
 
-Requests signed with the previous secret can still arrive briefly after rotation; [Verify the signature](manage-claude/inference-hooks-endpoint.md) covers how your AI security server should handle the switchover.
+Requests signed with the previous secret can still arrive briefly after rotation; [Verify the signature](inference-hooks-endpoint.md#verify-the-signature) covers how your AI security server should handle the switchover.
 
 ## Audit trail
 
-Inference hooks activity is recorded in your organization's [Activity Feed](manage-claude/compliance-activity-feed.md): configuration changes, denials, circuit breaker trips, and requests that proceeded without inspection under your failure handling setting. While the circuit breaker is tripped, no per-request Inference hooks activities are recorded; the trip activity is the feed's record of that window. Denial records carry identifiers that let you join each denial to the matching record in your own system.
+Inference hooks activity is recorded in your organization's [Activity Feed](compliance-activity-feed.md): configuration changes, denials, circuit breaker trips, and requests that proceeded without inspection under your failure handling setting. While the circuit breaker is tripped, no per-request Inference hooks activities are recorded; the trip activity is the feed's record of that window. Denial records carry identifiers that let you join each denial to the matching record in your own system.
 
 ## Turn Inference hooks off
 

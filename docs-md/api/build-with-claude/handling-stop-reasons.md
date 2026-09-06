@@ -8,19 +8,19 @@ description: Learn what each stop_reason value means and how to handle truncatio
 
 Every Messages API response includes a `stop_reason` field that tells you why Claude stopped generating. Check this field to decide whether to use the response as-is, continue the conversation, retry, or fall back to another model.
 
-For the full response schema, see the [Messages API reference](api/messages/create.md).
+For the full response schema, see the [Messages API reference](../api/messages/create.md).
 
 ## Quick reference
 
 | Value                                                                                                                                        | When it occurs                                  | What to do                                                                                                                                              |
 | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`end_turn`](build-with-claude/handling-stop-reasons.md)                                           | Claude finished its response naturally.         | Use the response.                                                                                                                                       |
-| [`max_tokens`](build-with-claude/handling-stop-reasons.md)                                       | The response reached your `max_tokens` limit.   | Raise `max_tokens` or [continue the response](build-with-claude/handling-stop-reasons.md). |
-| [`stop_sequence`](build-with-claude/handling-stop-reasons.md)                                 | Claude emitted one of your `stop_sequences`.    | Read `stop_sequence` to see which one fired.                                                                                                            |
-| [`tool_use`](build-with-claude/handling-stop-reasons.md)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response.                                    |
-| [`pause_turn`](build-with-claude/handling-stop-reasons.md)                                       | A server-tool loop reached its iteration limit. | Send the assistant content back to continue.                                                                                                            |
-| [`refusal`](build-with-claude/handling-stop-reasons.md)                                             | Claude declined to respond.                     | Read `stop_details` and [retry on a fallback model](build-with-claude/refusals-and-fallback.md).                       |
-| [`model_context_window_exceeded`](build-with-claude/handling-stop-reasons.md) | The response filled the model's context window. | Treat the response as truncated.                                                                                                                        |
+| [`end_turn`](handling-stop-reasons.md#end-turn)                                           | Claude finished its response naturally.         | Use the response.                                                                                                                                       |
+| [`max_tokens`](handling-stop-reasons.md#max-tokens)                                       | The response reached your `max_tokens` limit.   | Raise `max_tokens` or [continue the response](handling-stop-reasons.md#ensuring-complete-responses). |
+| [`stop_sequence`](handling-stop-reasons.md#stop-sequence)                                 | Claude emitted one of your `stop_sequences`.    | Read `stop_sequence` to see which one fired.                                                                                                            |
+| [`tool_use`](handling-stop-reasons.md#tool-use)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response.                                    |
+| [`pause_turn`](handling-stop-reasons.md#pause-turn)                                       | A server-tool loop reached its iteration limit. | Send the assistant content back to continue.                                                                                                            |
+| [`refusal`](handling-stop-reasons.md#refusal)                                             | Claude declined to respond.                     | Read `stop_details` and [retry on a fallback model](refusals-and-fallback.md).                       |
+| [`model_context_window_exceeded`](handling-stop-reasons.md#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated.                                                                                                                        |
 
 ## The stop\_reason field
 
@@ -1192,7 +1192,7 @@ end
 
 Claude is calling a tool and expects you to run it.
 
-For most tool use implementations, use the [tool runner](agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
+For most tool use implementations, use the [tool runner](../agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -1476,9 +1476,9 @@ if response.stop_reason == :tool_use
 end
 ```
 
-A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not finished, and this response does not carry its result. In the common case, Claude calls a [server tool](agents-and-tools/tool-use/server-tools.md) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
+A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not finished, and this response does not carry its result. In the common case, Claude calls a [server tool](../agents-and-tools/tool-use/server-tools.md) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
 
-With [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code finishes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
+With [programmatic tool calling](../agents-and-tools/tool-use/programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code finishes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
 
 ```json A mixed tool_use response
 {
@@ -1500,7 +1500,7 @@ With [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-cal
 }
 ```
 
-The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends ``but no `web_search` tool was provided``. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
+The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](../agents-and-tools/tool-use/handle-tool-calls.md)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends ``but no `web_search` tool was provided``. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
 
 ```json The follow-up user message
 {
@@ -1525,9 +1525,9 @@ Leaving out a `tool_result`, or putting one after other content, fails earlier w
 
 ### pause\_turn
 
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](agents-and-tools/tool-use/server-tools.md) such as web search. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](../agents-and-tools/tool-use/server-tools.md) such as web search. The default limit is 10 iterations per request.
 
-When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](build-with-claude/handling-stop-reasons.md), and you continue it by sending the client `tool_result` blocks instead of the response itself.
+When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](handling-stop-reasons.md#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
 ```bash cURL
 # The SDKs handle continuation directly. With cURL, inspect stop_reason
@@ -1885,11 +1885,11 @@ if response.stop_reason == :refusal
 end
 ```
 
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Claude Opus 4.1 (the latter [retired, except on Bedrock and Google Cloud](about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Claude Opus 4.1 (the latter [retired, except on Bedrock and Google Cloud](../about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
-On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](build-with-claude/refusals-and-fallback.md). `stop_details` is `null` for all stop reasons other than `refusal`.
+On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
-A refused request on Claude Fable 5.1, Claude Fable 5, or Claude Opus 5 can usually be served by retrying on another Claude model. [Refusals and fallback](build-with-claude/refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. If you build the retry yourself from Claude Fable 5.1, Claude Fable 5, or Claude Opus 5, [fallback credit](build-with-claude/fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
+A refused request on Claude Fable 5.1, Claude Fable 5, or Claude Opus 5 can usually be served by retrying on another Claude model. [Refusals and fallback](refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. If you build the retry yourself from Claude Fable 5.1, Claude Fable 5, or Claude Opus 5, [fallback credit](fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
 
 ### model\_context\_window\_exceeded
 
@@ -2184,7 +2184,7 @@ end
 
 ### Handle truncated responses gracefully
 
-When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](build-with-claude/handling-stop-reasons.md).
+When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](handling-stop-reasons.md#ensuring-complete-responses).
 
 ```python Python
 def handle_truncated_response(response):
@@ -2311,7 +2311,7 @@ end
 
 ### Implement retry logic for pause\_turn
 
-When using [server tools](agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
+When using [server tools](../agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
 ```python Python
 def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
@@ -2946,7 +2946,7 @@ end
 
 ### Handling tool use workflows
 
-**Simpler with tool runner:** The following example shows manual tool handling. For most use cases, the [tool runner](agents-and-tools/tool-use/tool-runner.md) automatically handles tool execution with much less code.
+**Simpler with tool runner:** The following example shows manual tool handling. For most use cases, the [tool runner](../agents-and-tools/tool-use/tool-runner.md) automatically handles tool execution with much less code.
 
 ```python Python
 def complete_tool_workflow(client, user_query, tools):

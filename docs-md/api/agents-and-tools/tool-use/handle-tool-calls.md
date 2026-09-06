@@ -6,11 +6,11 @@ url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-c
 description: Parse tool_use blocks, format tool_result responses, and handle errors with is_error.
 ---
 
-This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude's response, formatting `tool_result` blocks in your reply, and signaling errors. For the SDK abstraction that handles this automatically, see [Tool Runner](agents-and-tools/tool-use/tool-runner.md).
+This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude's response, formatting `tool_result` blocks in your reply, and signaling errors. For the SDK abstraction that handles this automatically, see [Tool Runner](tool-runner.md).
 
-**Simpler with Tool Runner:** The manual tool handling described on this page is automatically managed by [Tool Runner](agents-and-tools/tool-use/tool-runner.md). Use this page when you need custom control over tool execution.
+**Simpler with Tool Runner:** The manual tool handling described on this page is automatically managed by [Tool Runner](tool-runner.md). Use this page when you need custom control over tool execution.
 
-Claude's response differs based on whether it uses a [client or server tool](agents-and-tools/tool-use/overview.md).
+Claude's response differs based on whether it uses a [client or server tool](overview.md#how-tool-use-works).
 
 ## Handling results from client tools
 
@@ -20,7 +20,7 @@ The response will have a `stop_reason` of `tool_use` and one or more `tool_use` 
 * `name`: The name of the tool being used.
 * `input`: An object containing the input being passed to the tool, conforming to the tool's `input_schema`.
 
-A `tool_use` block for a member of the [computer use](agents-and-tools/tool-use/computer-use-tool.md) or [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolset also carries a `toolset_name` field (`"computer"` or `"browser"`). Its `name` is the member tool Claude is calling, such as `screenshot` or `navigate`, so dispatch those blocks on both fields.
+A `tool_use` block for a member of the [computer use](computer-use-tool.md) or [browser use](browser-use-tool.md) toolset also carries a `toolset_name` field (`"computer"` or `"browser"`). Its `name` is the member tool Claude is calling, such as `screenshot` or `navigate`, so dispatch those blocks on both fields.
 
 **Example API response with a `tool_use` content block**
 
@@ -54,16 +54,16 @@ When you receive a tool use response for a client tool, you should:
 3. Continue the conversation by sending a new message with the `role` of `user`, and a `content` block containing the `tool_result` type and the following information:
 
    * `tool_use_id`: The `id` of the tool use request this is a result for.
-   * `content` (optional): The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": [{"type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}}]`). These content blocks can use the `text`, `image`, `document`, or [`search_result`](build-with-claude/search-results.md) types.
+   * `content` (optional): The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": [{"type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}}]`). These content blocks can use the `text`, `image`, `document`, or [`search_result`](../../build-with-claude/search-results.md) types.
    * `is_error` (optional): Set to `true` if the tool execution resulted in an error.
 
-A `tool_result` that answers a computer use or browser use member block must also echo the same `toolset_name` value as the `tool_use` block; a member result that omits it is rejected. Its `content` is also narrower: a member result may contain only `text` and `image` blocks, and a browser use result may add one [`browser_state`](agents-and-tools/tool-use/browser-use-tool.md) block (the [tab-management members](agents-and-tools/tool-use/browser-use-tool.md) return only that block).
+A `tool_result` that answers a computer use or browser use member block must also echo the same `toolset_name` value as the `tool_use` block; a member result that omits it is rejected. Its `content` is also narrower: a member result may contain only `text` and `image` blocks, and a browser use result may add one [`browser_state`](browser-use-tool.md#track-tabs-and-page-state) block (the [tab-management members](browser-use-tool.md#tab-management-results) return only that block).
 
 **Important formatting requirements:**
 
 * Tool result blocks must immediately follow their corresponding tool use blocks in the message history. You cannot include any messages between the assistant's tool use message and the user's tool result message.
 * In the user message containing tool results, the tool\_result blocks must come FIRST in the content array. Any text must come AFTER all tool results.
-* If the assistant turn also called a [server tool](agents-and-tools/tool-use/server-tools.md) that has no result block yet, the user message must contain only `tool_result` blocks. Text after the results ends the turn early; for a server tool Claude called directly, the request then fails with a 400 error that names the unresolved server tool. See [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md).
+* If the assistant turn also called a [server tool](server-tools.md) that has no result block yet, the user message must contain only `tool_result` blocks. Text after the results ends the turn early; for a server tool Claude called directly, the request then fails with a 400 error that names the unresolved server tool. See [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use).
 
 For example, this will cause a 400 error:
 
@@ -91,7 +91,7 @@ This is correct when the assistant turn calls only client tools:
 
 If you receive an error like "tool\_use ids were found without tool\_result blocks immediately after", check that your tool results are formatted correctly.
 
-Tool results often carry content from sources outside your control: web pages, inbound email, user uploads, third-party APIs. Treat that content as untrusted: an attacker who can influence it may embed instructions that try to redirect Claude (indirect prompt injection). Keep untrusted content inside `tool_result` blocks rather than `system` prompts or plain user `text` blocks, and see [Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md) for further hardening.
+Tool results often carry content from sources outside your control: web pages, inbound email, user uploads, third-party APIs. Treat that content as untrusted: an attacker who can influence it may embed instructions that try to redirect Claude (indirect prompt injection). Keep untrusted content inside `tool_result` blocks rather than `system` prompts or plain user `text` blocks, and see [Mitigate jailbreaks and prompt injections](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md#indirect-prompt-injection) for further hardening.
 
 **Example of successful tool result**
 
@@ -178,7 +178,7 @@ After receiving the tool result, Claude will use that information to continue ge
 
 Claude executes the tool internally and incorporates the results directly into its response without requiring additional user interaction.
 
-A response can contain both a client `tool_use` block and a `server_tool_use` block that has no result block. That server tool call is not finished yet, and its result block arrives in a later response. Reply with a user message that contains only the `tool_result` blocks for the client tools and keep the same `tools` array; for a server tool Claude called directly, the API runs it on that request and the next response starts with its result block. See [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md).
+A response can contain both a client `tool_use` block and a `server_tool_use` block that has no result block. That server tool call is not finished yet, and its result block arrives in a later response. Reply with a user message that contains only the `tool_result` blocks for the client tools and keep the same `tools` array; for a server tool Claude called directly, the API runs it on that request and the next response starts with its result block. See [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use).
 
 **Differences from other APIs**
 
@@ -234,7 +234,7 @@ However, you can also continue the conversation forward with a `tool_result` tha
 
 If a tool request is invalid or missing parameters, Claude will retry 2-3 times with corrections before apologizing to the user.
 
-To eliminate invalid tool calls entirely, use [strict tool use](agents-and-tools/tool-use/strict-tool-use.md) with `strict: true` on your tool definitions. This guarantees that tool inputs will always match your schema exactly, preventing missing parameters and type mismatches.
+To eliminate invalid tool calls entirely, use [strict tool use](strict-tool-use.md) with `strict: true` on your tool definitions. This guarantees that tool inputs will always match your schema exactly, preventing missing parameters and type mismatches.
 
 **Server tool errors**
 

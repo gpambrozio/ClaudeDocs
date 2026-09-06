@@ -12,7 +12,7 @@ When you define an outcome, the harness automatically provisions a *grader* to e
 
 The grader returns an explanation summarizing which criteria passed or failed, or confirming that the artifact satisfies the rubric. That feedback is handed back to the agent for the next iteration.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Create a rubric
 
@@ -52,7 +52,7 @@ Example rubric:
 - Sensitivity analysis on WACC and terminal growth rate is included
 ```
 
-Pass the rubric as inline text on `user.define_outcome` (see [Create a session with an outcome](managed-agents/define-outcomes.md)), or upload it through the Files API for reuse across sessions.
+Pass the rubric as inline text on `user.define_outcome` (see [Create a session with an outcome](define-outcomes.md#create-a-session-with-an-outcome)), or upload it through the Files API for reuse across sessions.
 
 ```bash cURL
 rubric=$(curl -fsSL https://api.anthropic.com/v1/files \
@@ -284,7 +284,7 @@ puts "Uploaded rubric: #{rubric.id}"
 
 ## Create a session with an outcome
 
-The following examples create a [session](managed-agents/sessions.md) for an existing [agent](managed-agents/agent-setup.md) and [environment](managed-agents/environments.md) (both created separately), then send a `user.define_outcome` event. The agent begins work immediately. No additional user message event is required.
+The following examples create a [session](sessions.md) for an existing [agent](agent-setup.md) and [environment](environments.md) (both created separately), then send a `user.define_outcome` event. The agent begins work immediately. No additional user message event is required.
 
 ```bash cURL
 # Create a session
@@ -527,15 +527,15 @@ client.beta.sessions.events.send_(
 )
 ```
 
-You can also define the outcome in the create request itself: pass a single `user.define_outcome` event in [`initial_events`](managed-agents/sessions.md) to create the session and start work toward the outcome in one call.
+You can also define the outcome in the create request itself: pass a single `user.define_outcome` event in [`initial_events`](sessions.md#seed-the-session-with-initial-events) to create the session and start work toward the outcome in one call.
 
 ## Outcome events
 
-Progress on an outcome-oriented session is surfaced on the events [stream](managed-agents/events-and-streaming.md).
+Progress on an outcome-oriented session is surfaced on the events [stream](events-and-streaming.md).
 
 * `agent.*` events (such as messages and tool use) show progress toward the outcome.
 * `span.outcome_evaluation_*` events are only emitted for outcome-oriented sessions and show the number of iteration loops and the grader's feedback process.
-* You can also send `user.message` [events](managed-agents/reference.md) to an outcome-oriented session to direct the agent's work as it progresses, but it isn't required: the agent works toward the outcome on its own, iterating until it succeeds or runs out of iterations.
+* You can also send `user.message` [events](reference.md#event-types) to an outcome-oriented session to direct the agent's work as it progresses, but it isn't required: the agent works toward the outcome on its own, iterating until it succeeds or runs out of iterations.
 * A `user.interrupt` event pauses work on the current outcome and marks the `span.outcome_evaluation_end.result` as `interrupted`, allowing you to kick off a new outcome.
 * After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be started. The session retains history of the prior outcome.
 
@@ -615,7 +615,7 @@ Emitted when an outcome evaluation cycle ends: after the grader finishes evaluat
 
 ## Check outcome status
 
-You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/{session_id}` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
+You can either listen on the [event stream](events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/{session_id}` and read `outcome_evaluations[].result`. Until an evaluation completes, `result` reports `pending`, `running`, or `evaluating`:
 
 ```bash cURL
 session=$(curl -fsSL "https://api.anthropic.com/v1/sessions/$session_id" \
@@ -700,7 +700,7 @@ end
 
 ## Retrieve deliverables
 
-The agent writes output files to `/mnt/session/outputs/` inside the sandbox. To retrieve them, list files through the [Files API](build-with-claude/files.md) with the session ID as the `scope_id`, then download them by ID. Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header on the list request, so the SDK and CLI examples make that call through the `beta` namespace and pass the header explicitly. Files appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If a file you expect is not listed yet, list again after a short delay; once it appears in the list, its upload has finished.
+The agent writes output files to `/mnt/session/outputs/` inside the sandbox. To retrieve them, list files through the [Files API](../build-with-claude/files.md) with the session ID as the `scope_id`, then download them by ID. Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header on the list request, so the SDK and CLI examples make that call through the `beta` namespace and pass the header explicitly. Files appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If a file you expect is not listed yet, list again after a short delay; once it appears in the list, its upload has finished.
 
 ```bash cURL
 # List files produced by this session

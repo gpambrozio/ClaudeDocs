@@ -78,7 +78,7 @@ Install the Anthropic CLI with Homebrew:
 brew install anthropics/tap/ant
 ```
 
-For other installation methods, see [Installation](cli-sdks-libraries/cli/quickstart.md) in the CLI quickstart.
+For other installation methods, see [Installation](cli-sdks-libraries/cli/quickstart.md#installation) in the CLI quickstart.
 
 **Authenticate**
 

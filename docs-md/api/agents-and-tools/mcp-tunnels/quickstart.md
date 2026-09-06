@@ -8,16 +8,16 @@ description: Connect Claude to a private MCP server using a local Docker Compose
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with [manual](agents-and-tools/mcp-tunnels/concepts.md) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) or [Deploy with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md).
+This quickstart takes you from zero to Claude calling a private MCP server through a tunnel. It uses Docker Compose with [manual](concepts.md#credential-provisioning) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](deploy-helm.md) or [Deploy with Docker Compose](deploy-compose.md).
 
 ## What you'll build
 
-A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [proxy](agents-and-tools/mcp-tunnels/concepts.md) and [cloudflared](agents-and-tools/mcp-tunnels/concepts.md)) plus a sample MCP server running alongside it. When everything is running, the sample server is reachable from Claude at `https://echo.<your-tunnel-domain>/mcp` even though nothing is listening on a public port.
+A two-container [tunnel stack](concepts.md#components) (the [proxy](concepts.md#components) and [cloudflared](concepts.md#components)) plus a sample MCP server running alongside it. When everything is running, the sample server is reachable from Claude at `https://echo.<your-tunnel-domain>/mcp` even though nothing is listening on a public port.
 
 ## What you need
 
 * [Docker and Docker Compose](https://docs.docker.com/get-docker/) on a machine with outbound internet access.
-* A role in the [Claude Console](https://platform.claude.com) that can manage MCP tunnels. See the [Console guide prerequisites](agents-and-tools/mcp-tunnels/console.md).
+* A role in the [Claude Console](https://platform.claude.com) that can manage MCP tunnels. See the [Console guide prerequisites](console.md#prerequisites).
 * [OpenSSL](https://openssl-library.org/source/) 1.1.1 or later. Preinstalled on macOS and most Linux distributions; on Windows, install it separately (the `openssl` binary must be on your `PATH`).
 
 **Create a tunnel**
@@ -51,7 +51,7 @@ $env:TUNNEL_TOKEN  = "eyJ..."             # from step 1
 
 **Generate a CA and server certificate**
 
-The proxy terminates [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) using a certificate signed by a CA you control. Generate both:
+The proxy terminates [inner TLS](concepts.md#components) using a certificate signed by a CA you control. Generate both:
 
 **macOS / Linux**
 

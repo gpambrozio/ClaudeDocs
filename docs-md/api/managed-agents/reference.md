@@ -6,13 +6,13 @@ url: https://platform.claude.com/docs/en/managed-agents/reference
 description: Event types, self-hosted worker CLI flags, supported MCP server types, rate limits, and branding guidelines for Claude Managed Agents.
 ---
 
-This page collects reference material for Claude Managed Agents. For task-oriented guides, follow the links in each section. For the operations on the session resource, see [Session operations](managed-agents/session-operations.md).
+This page collects reference material for Claude Managed Agents. For task-oriented guides, follow the links in each section. For the operations on the session resource, see [Session operations](session-operations.md).
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Event types
 
-Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](managed-agents/events-and-streaming.md) for sending, streaming, and listing events. Webhook event types are listed separately in [Subscribe to webhooks](managed-agents/webhooks.md), and some of their names differ from the stream's (for example, `session.status_idled` rather than `session.status_idle`).
+Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](events-and-streaming.md) for sending, streaming, and listing events. Webhook event types are listed separately in [Subscribe to webhooks](webhooks.md#supported-event-types), and some of their names differ from the stream's (for example, `session.status_idled` rather than `session.status_idle`).
 
 **User events**
 
@@ -22,8 +22,8 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
 | `user.interrupt`          | Stop the agent mid-execution.                                                                                                                                                                                                                        |
 | `user.custom_tool_result` | Response to a custom tool call from the agent.                                                                                                                                                                                                       |
 | `user.tool_confirmation`  | Approve or deny an agent or MCP tool call when a permission policy requires confirmation.                                                                                                                                                            |
-| `user.define_outcome`     | Define an [outcome](managed-agents/define-outcomes.md) for the agent to work toward.                                                                                                                                |
-| `user.tool_result`        | For sessions with `self_hosted` [environments](managed-agents/self-hosted-sandboxes.md) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
+| `user.define_outcome`     | Define an [outcome](define-outcomes.md) for the agent to work toward.                                                                                                                                |
+| `user.tool_result`        | For sessions with `self_hosted` [environments](self-hosted-sandboxes.md) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
 
 **Agent events**
 
@@ -37,8 +37,8 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
 | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                                                                                                                                                                               |
 | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                                                                                                                                                                                        |
 | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                                                                                                                                                                                  |
-| `agent.thread_message_received`  | In a [multiagent](managed-agents/multiagent-orchestration.md) session, a message from another thread arrived on the thread whose stream carries this event; on the primary thread, an agent sent a report or question to the coordinator.     |
-| `agent.thread_message_sent`      | In a [multiagent](managed-agents/multiagent-orchestration.md) session, the thread whose stream carries this event sent a message to another thread; on the primary thread, the coordinator sent a task or follow-up message to another agent. |
+| `agent.thread_message_received`  | In a [multiagent](multiagent-orchestration.md) session, a message from another thread arrived on the thread whose stream carries this event; on the primary thread, an agent sent a report or question to the coordinator.     |
+| `agent.thread_message_sent`      | In a [multiagent](multiagent-orchestration.md) session, the thread whose stream carries this event sent a message to another thread; on the primary thread, the coordinator sent a task or follow-up message to another agent. |
 
 Message content in these events can include a `redacted` content block, `{"type": "redacted"}`: a placeholder for content withheld by Anthropic model policy. The block carries no other fields. Redacted blocks appear only in content the platform emits; a user event that includes one is rejected with a 400 error.
 
@@ -53,9 +53,9 @@ Message content in these events can include a `redacted` content block, `{"type"
 | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                                                                                                                                                        |
 | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.                                                                                                                                       |
 | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                                                                                                                                                     |
-| `session.usage`                     | Snapshot of the session's cumulative usage and tracked list cost. Carries the session's usage totals and an echo of the session's [budget](managed-agents/budgets.md), or `null` when the session has none.                    |
-| `session.thread_created`            | A [multiagent](managed-agents/multiagent-orchestration.md) thread was created.                                                                                                                                                 |
-| `session.thread_status_running`     | A session thread began executing. Every session emits this for its primary thread; in [multiagent](managed-agents/multiagent-orchestration.md) sessions, child-thread transitions are also cross-posted to the primary stream. |
+| `session.usage`                     | Snapshot of the session's cumulative usage and tracked list cost. Carries the session's usage totals and an echo of the session's [budget](budgets.md), or `null` when the session has none.                    |
+| `session.thread_created`            | A [multiagent](multiagent-orchestration.md) thread was created.                                                                                                                                                 |
+| `session.thread_status_running`     | A session thread began executing. Every session emits this for its primary thread; in [multiagent](multiagent-orchestration.md) sessions, child-thread transitions are also cross-posted to the primary stream. |
 | `session.thread_status_idle`        | A session thread finished its turn and is awaiting input. Includes `stop_reason`.                                                                                                                                                                               |
 | `session.thread_status_rescheduled` | A session thread hit a transient error and is retrying automatically.                                                                                                                                                                                           |
 | `session.thread_status_terminated`  | A session thread was archived or reached a terminal error.                                                                                                                                                                                                      |
@@ -68,9 +68,9 @@ Span events are observability markers that wrap activity for timing and usage tr
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `span.model_request_start`        | A model inference call has started.                                                                                                                                                                                                                      |
 | `span.model_request_end`          | A model inference call has completed. Includes `model_usage` with token counts.                                                                                                                                                                          |
-| `span.outcome_evaluation_start`   | [Outcome](managed-agents/define-outcomes.md) evaluation has started.                                                                                                                                                    |
-| `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](managed-agents/define-outcomes.md) evaluation.                                                                                                                                    |
-| `span.outcome_evaluation_end`     | An [outcome](managed-agents/define-outcomes.md) evaluation cycle has completed. A `needs_revision` result means another cycle follows; `satisfied`, `max_iterations_reached`, `failed`, and `interrupted` are terminal. |
+| `span.outcome_evaluation_start`   | [Outcome](define-outcomes.md) evaluation has started.                                                                                                                                                    |
+| `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](define-outcomes.md) evaluation.                                                                                                                                    |
+| `span.outcome_evaluation_end`     | An [outcome](define-outcomes.md) evaluation cycle has completed. A `needs_revision` result means another cycle follows; `satisfied`, `max_iterations_reached`, `failed`, and `interrupted` are terminal. |
 
 **System events**
 
@@ -80,7 +80,7 @@ Span events are observability markers that wrap activity for timing and usage tr
 
 **Event deltas**
 
-Event deltas are stream-only preview events. They are emitted on stream connections (session-level or per-thread) that opt in with the `event_deltas[]` parameter, and they are never persisted to the session's event history. See [Event deltas](managed-agents/events-and-streaming.md) for opting in, accumulating, and reconciling them.
+Event deltas are stream-only preview events. They are emitted on stream connections (session-level or per-thread) that opt in with the `event_deltas[]` parameter, and they are never persisted to the session's event history. See [Event deltas](events-and-streaming.md#event-deltas) for opting in, accumulating, and reconciling them.
 
 | Type          | Description                                                                                                              |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -89,7 +89,7 @@ Event deltas are stream-only preview events. They are emitted on stream connecti
 
 ## Self-hosted worker
 
-These are the `ant beta:worker` CLI flags for the pre-built worker that drives a `self_hosted` environment. See [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md) for setting up the environment, running a worker, and the SDK helper options.
+These are the `ant beta:worker` CLI flags for the pre-built worker that drives a `self_hosted` environment. See [Self-hosted sandboxes](self-hosted-sandboxes.md) for setting up the environment, running a worker, and the SDK helper options.
 
 | Flag                   | Description                                                                                                                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -98,14 +98,14 @@ These are the `ant beta:worker` CLI flags for the pre-built worker that drives a
 | `--workdir`            | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory); the system default working directory is `/workspace`.                  |
 | `--on-work`            | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables.                                                     |
 | `--unrestricted-paths` | Allow the file tools to read and write paths outside `--workdir`. The workdir check is a guardrail for the file tools only, not a sandbox; it does not constrain bash.                |
-| `--max-idle`           | How long to wait after the session goes idle with an `end_turn` [stop reason](api/handling-stop-reasons.md) before shutting down. Defaults to `60s`. |
+| `--max-idle`           | How long to wait after the session goes idle with an `end_turn` [stop reason](../build-with-claude/handling-stop-reasons.md) before shutting down. Defaults to `60s`. |
 | `--log-format`         | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                                       |
 
-The CLI worker does not mount [memory stores](managed-agents/memory.md): a session that attaches one still runs, but the agent finds nothing at the store's `mount_path` and no changes sync back to the store. To use memory stores in sessions on a self-hosted environment, run the SDK worker instead; see [Use memory stores](managed-agents/self-hosted-sandboxes.md).
+The CLI worker does not mount [memory stores](memory.md): a session that attaches one still runs, but the agent finds nothing at the store's `mount_path` and no changes sync back to the store. To use memory stores in sessions on a self-hosted environment, run the SDK worker instead; see [Use memory stores](self-hosted-sandboxes.md#use-memory-stores).
 
 ## Supported MCP server types
 
-Claude Managed Agents connects to [remote MCP servers](agents-and-tools/remote-mcp-servers.md) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md). The server should support the MCP protocol's streamable HTTP transport; servers that only support the deprecated SSE transport still work through an automatic fallback. See [MCP connector](managed-agents/mcp-connector.md) for declaring servers on an agent.
+Claude Managed Agents connects to [remote MCP servers](../agents-and-tools/remote-mcp-servers.md) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md). The server should support the MCP protocol's streamable HTTP transport; servers that only support the deprecated SSE transport still work through an automatic fallback. See [MCP connector](mcp-connector.md) for declaring servers on an agent.
 
 For more information on MCP and building MCP servers, see the [MCP documentation](https://modelcontextprotocol.io).
 
@@ -118,7 +118,7 @@ Managed Agents endpoints are rate-limited per organization:
 | Create endpoints (such as agents, sessions, and environments) | 300 requests per minute   |
 | Read endpoints (such as retrieve, list, and stream)           | 1,200 requests per minute |
 
-Organization-level [spend limits and usage-tier rate limits](api/rate-limits.md) also apply.
+Organization-level [spend limits and usage-tier rate limits](../api/rate-limits.md) also apply.
 
 ## Branding guidelines
 

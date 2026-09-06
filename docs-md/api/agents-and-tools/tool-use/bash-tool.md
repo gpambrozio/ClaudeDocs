@@ -6,13 +6,13 @@ url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool
 description: Let Claude request shell commands that your application runs in a persistent bash session and returns as tool results.
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
-The bash tool is a [client tool](agents-and-tools/tool-use/how-tool-use-works.md): Claude doesn't run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.
+The bash tool is a [client tool](how-tool-use-works.md): Claude doesn't run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.
 
 Your application keeps one bash process alive across tool calls, so state persists between commands. The working directory, environment variables, and any files a command creates are still there for the next command.
 
-The current version of the tool is `bash_20250124`. For model support, beta headers, and the earlier version, see [Tool versions](agents-and-tools/tool-use/bash-tool.md). For all Anthropic-provided tools, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
+The current version of the tool is `bash_20250124`. For model support, beta headers, and the earlier version, see [Tool versions](bash-tool.md#tool-versions). For all Anthropic-provided tools, see the [Tool reference](tool-reference.md).
 
 ## Use cases
 
@@ -205,7 +205,7 @@ Claude responds with `stop_reason: "tool_use"` and a `tool_use` block that conta
 }
 ```
 
-Run `input.command` in your bash session and send the output back as a `tool_result`. See [Implement the bash tool](agents-and-tools/tool-use/bash-tool.md) for the round trip.
+Run `input.command` in your bash session and send the output back as a `tool_result`. See [Implement the bash tool](bash-tool.md#implement-the-bash-tool) for the round trip.
 
 ## How it works
 
@@ -216,9 +216,9 @@ Each tool call is one round trip between Claude and your application:
 3. Your application returns the command's output, stdout and stderr together, to Claude in a `tool_result` block.
 4. Claude either requests another command in the same session or responds with text.
 
-Claude can also return several `tool_use` blocks in one response. Run them in order in the same session and return all of the results in one `user` message. See [Parallel tool use](agents-and-tools/tool-use/parallel-tool-use.md).
+Claude can also return several `tool_use` blocks in one response. Run them in order in the same session and return all of the results in one `user` message. See [Parallel tool use](parallel-tool-use.md).
 
-The API is stateless. Nothing about your shell session travels between requests, so your application decides when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md).
+The API is stateless. Nothing about your shell session travels between requests, so your application decides when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](handle-tool-calls.md).
 
 ## Parameters
 
@@ -253,9 +253,9 @@ Restart the session:
 
 ## Tool versions
 
-`bash_20250124` is the current version of the tool, and it requires no beta header. Every model from Claude Sonnet 3.7 ([retired](about-claude/model-deprecations.md)) onward accepts it, including all current Claude models.
+`bash_20250124` is the current version of the tool, and it requires no beta header. Every model from Claude Sonnet 3.7 ([retired](../../about-claude/model-deprecations.md)) onward accepts it, including all current Claude models.
 
-The original `bash_20241022` version works only with the October 2024 Claude Sonnet 3.5 model ([retired](about-claude/model-deprecations.md)). Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
+The original `bash_20241022` version works only with the October 2024 Claude Sonnet 3.5 model ([retired](../../about-claude/model-deprecations.md)). Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
 
 ## Example: Multistep automation
 
@@ -677,7 +677,7 @@ puts session.execute_command("cd /tmp && pwd")
 puts session.execute_command("pwd") # still /tmp: the session kept its state
 ```
 
-The session interleaves stderr with stdout, so error messages land where they happened. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](agents-and-tools/tool-use/bash-tool.md) best practice shows one way to add it.
+The session interleaves stderr with stdout, so error messages land where they happened. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](bash-tool.md#follow-implementation-best-practices) best practice shows one way to add it.
 
 **Process Claude's tool calls**
 
@@ -1180,7 +1180,7 @@ response = client.messages.create(
 puts response.content
 ```
 
-Repeat the run-and-return cycle while `stop_reason` is `tool_use`. For the full loop, see [Handling results from client tools](agents-and-tools/tool-use/handle-tool-calls.md).
+Repeat the run-and-return cycle while `stop_reason` is `tool_use`. For the full loop, see [Handling results from client tools](handle-tool-calls.md#handling-results-from-client-tools).
 
 **Implement safety measures**
 
@@ -1423,11 +1423,11 @@ def validate_command(command)
 end
 ```
 
-This check is a tripwire for obvious mistakes, not an enforcement boundary. It rejects the spaced chaining (`&&`), pipes, and redirection that the other examples on this page use. It does not catch an operator glued to a word, such as `cat data.txt|grep x`, because the tokenizer keeps `data.txt|grep` inside one token. Decide which commands and operators your application allows. The real control is isolation: run the whole session inside a container or a virtual machine (see [Security](agents-and-tools/tool-use/bash-tool.md)).
+This check is a tripwire for obvious mistakes, not an enforcement boundary. It rejects the spaced chaining (`&&`), pipes, and redirection that the other examples on this page use. It does not catch an operator glued to a word, such as `cat data.txt|grep x`, because the tokenizer keeps `data.txt|grep` inside one token. Decide which commands and operators your application allows. The real control is isolation: run the whole session inside a container or a virtual machine (see [Security](bash-tool.md#security)).
 
 ### Handle errors
 
-When a command fails or the session breaks, tell Claude what happened. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](agents-and-tools/tool-use/handle-tool-calls.md).
+When a command fails or the session breaks, tell Claude what happened. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](handle-tool-calls.md#handling-errors-with-is-error).
 
 **Command execution timeout**
 
@@ -1636,7 +1636,7 @@ rescue Timeout::Error
 end
 ```
 
-The kill stops the hung command and everything it started. Return the message as an error `tool_result` (see [Handle errors](agents-and-tools/tool-use/bash-tool.md)), which marks the tool call as failed.
+The kill stops the hung command and everything it started. Return the message as an error `tool_result` (see [Handle errors](bash-tool.md#handle-errors)), which marks the tool call as failed.
 
 **Maintain session state**
 
@@ -1880,14 +1880,14 @@ Your application runs whatever command Claude requests. Run the session in an is
 
 Beyond isolation, add these controls:
 
-* Validate commands before running them, with an allowlist rather than a blocklist. See [Implement the bash tool](agents-and-tools/tool-use/bash-tool.md).
+* Validate commands before running them, with an allowlist rather than a blocklist. See [Implement the bash tool](bash-tool.md#implement-the-bash-tool).
 * Set resource limits on the shell process (CPU, memory, and disk), for example with `ulimit`.
 * Log every command and its output so you can audit what ran.
 * Redact credentials and other secrets from output before returning it to Claude.
 
 ## Pricing
 
-The bash tool definition adds the following input tokens to your request. This is in addition to the per-model [tool use system prompt](agents-and-tools/tool-use/overview.md) that applies whenever any tool is present.
+The bash tool definition adds the following input tokens to your request. This is in addition to the per-model [tool use system prompt](overview.md#pricing) that applies whenever any tool is present.
 
 | Model                                               | Additional input tokens |
 | --------------------------------------------------- | ----------------------- |
@@ -1900,7 +1900,7 @@ Additional tokens are consumed by:
 * Error messages
 * Large file contents
 
-See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete pricing details.
+See [tool use pricing](overview.md#pricing) for complete pricing details.
 
 ## Common patterns
 
@@ -1910,7 +1910,7 @@ See [tool use pricing](agents-and-tools/tool-use/overview.md) for complete prici
 * Building projects: `npm install && npm run build`
 * Git operations: `git status && git add . && git commit -m "message"`
 
-For guidance on using git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+For guidance on using git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#state-management-best-practices).
 
 ### File operations
 
@@ -1934,9 +1934,9 @@ For guidance on using git as a checkpoint-and-recovery mechanism in long-running
 
 ## Combining with other tools
 
-The bash tool pairs well with the [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md): Claude edits a file with one tool and requests the command that runs it with the other.
+The bash tool pairs well with the [Text editor tool](text-editor-tool.md): Claude edits a file with one tool and requests the command that runs it with the other.
 
-If you're also using the [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](agents-and-tools/tool-use/code-execution-tool.md) for guidance on prompting Claude to distinguish between environments.
+If you're also using the [Code execution tool](code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](code-execution-tool.md#using-code-execution-with-other-execution-tools) for guidance on prompting Claude to distinguish between environments.
 
 ## Next steps
 

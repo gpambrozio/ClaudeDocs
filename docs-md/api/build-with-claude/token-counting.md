@@ -7,7 +7,7 @@ description: Count the tokens in a message before you send it to Claude. Use tok
 ---
 
 ## Compatibility
-- [ZDR](manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](manage-claude/api-and-data-retention.md))
+- [ZDR](../manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
 Token counting lets you determine the number of tokens in a message before you send it to Claude. This helps you make informed decisions about your prompts and usage. With token counting, you can:
@@ -20,7 +20,7 @@ Token counting lets you determine the number of tokens in a message before you s
 
 ## How to count message tokens
 
-The [token counting](api/messages-count-tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](agents-and-tools/tool-use/overview.md), [images](build-with-claude/vision.md), and [PDFs](build-with-claude/pdf-support.md). The response contains the total number of input tokens.
+The [token counting](../api/messages/count_tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/tool-use/overview.md), [images](vision.md), and [PDFs](pdf-support.md). The response contains the total number of input tokens.
 
 The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
 
@@ -28,7 +28,7 @@ Token counts may include tokens added automatically by Anthropic for system opti
 
 ### Supported models
 
-All [active models](models/overview.md) support token counting.
+All [active models](../models/overview.md) support token counting.
 
 Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer. The same input text produces approximately 30 percent more tokens than on earlier models. The exact increase depends on the content and workload shape. Recount prompts against the model you plan to use rather than reusing counts measured against earlier models.
 
@@ -179,7 +179,7 @@ puts response
 
 ### Count tokens in messages with tools
 
-[Server tool](agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
+[Server tool](../agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -762,13 +762,13 @@ puts response
 { "input_tokens": 1028 }
 ```
 
-An embedded image block that sets [`"oversized_image": "error"`](build-with-claude/vision-coordinates.md) is rejected at count time exactly as the Messages API would reject it.
+An embedded image block that sets [`"oversized_image": "error"`](vision-coordinates.md#oversized-image-error) is rejected at count time exactly as the Messages API would reject it.
 
 ### Count tokens in messages with thinking
 
-See [Thinking and the context window](build-with-claude/thinking.md) for more details.
+See [Thinking and the context window](thinking.md#thinking-and-the-context-window) for more details.
 
-* Thinking blocks from **previous** assistant turns count toward your input tokens on models that [keep all prior turns](build-with-claude/thinking.md); on models that keep only the last turn, the API strips them and they do **not** count
+* Thinking blocks from **previous** assistant turns count toward your input tokens on models that [keep all prior turns](thinking.md#thinking-block-preservation-by-model); on models that keep only the last turn, the API strips them and they do **not** count
 * **Current** assistant turn thinking **does** count toward your input tokens
 
 ```bash cURL
@@ -1091,7 +1091,7 @@ puts response
 
 ### Count tokens in messages with PDFs
 
-Token counting supports PDFs with the same [PDF support limitations](build-with-claude/pdf-support.md) as the Messages API.
+Token counting supports PDFs with the same [PDF support limitations](pdf-support.md#pdf-support-limitations) as the Messages API.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -1380,7 +1380,7 @@ Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5 share t
 
 ## Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](api/rate-limits.md). If you need higher limits, use **Request rate limit increase** on the [Rate limits](https://platform.claude.com/settings/limits) page.
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/rate-limits.md#rate-limits). If you need higher limits, use **Request rate limit increase** on the [Rate limits](https://platform.claude.com/settings/limits) page.
 
 | Usage tier | Requests per minute (RPM) |
 | ---------- | ------------------------- |

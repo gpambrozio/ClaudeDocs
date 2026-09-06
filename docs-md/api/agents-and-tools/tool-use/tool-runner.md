@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
 description: Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
 ---
 
-The tool runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](agents-and-tools/tool-use/handle-tool-calls.md) instead.
+The tool runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](handle-tool-calls.md) instead.
 
 Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:
 
@@ -343,7 +343,7 @@ The `jsonschema:` struct tags generate the input schema. For example, `Calculate
 
 **Java**
 
-Define each tool as a class implementing `Supplier<String>`. Annotate the class with `@JsonClassDescription` for the tool description, and each public field with `@JsonPropertyDescription` for parameter descriptions. The SDK derives the JSON schema, tool name (snake-cased class name), and input parsing from the class, and marks the tool with `strict: true` ([strict tool use](agents-and-tools/tool-use/strict-tool-use.md)).
+Define each tool as a class implementing `Supplier<String>`. Annotate the class with `@JsonClassDescription` for the tool description, and each public field with `@JsonPropertyDescription` for parameter descriptions. The SDK derives the JSON schema, tool name (snake-cased class name), and input parsing from the class, and marks the tool with `strict: true` ([strict tool use](strict-tool-use.md)).
 
 ```java
 import com.anthropic.client.AnthropicClient;
@@ -764,7 +764,7 @@ Within the loop, you can read each response message and modify the runner's stat
 4. When your loop body returns, the runner checks whether you modified its message history.
 
    * **If you did not modify message history:** If the message contains tool calls, the runner appends the assistant message and the tool results, then continues. If there are no tool calls, the loop exits.
-   * **If you modified message history:** The runner skips its automatic append and uses your state unchanged. See [Taking over message history](agents-and-tools/tool-use/tool-runner.md).
+   * **If you modified message history:** The runner skips its automatic append and uses your state unchanged. See [Taking over message history](tool-runner.md#taking-over-message-history).
 
 ```mermaid
 sequenceDiagram
@@ -1075,7 +1075,7 @@ runner.run_until_finished
 
 ### Automatic context management
 
-For long-running agentic tasks, the TypeScript and Ruby tool runners support automatic [compaction](build-with-claude/context-editing.md), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. Both SDKs have deprecated this client-side option in favor of [server-side compaction](build-with-claude/compaction.md), which works with every SDK's tool runner through the `context_management` request parameter. The Python SDK (v1.0 and later) and the Go, Java, C#, and PHP tool runners don't include client-side compaction.
+For long-running agentic tasks, the TypeScript and Ruby tool runners support automatic [compaction](../../build-with-claude/context-editing.md#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. Both SDKs have deprecated this client-side option in favor of [server-side compaction](../../build-with-claude/compaction.md), which works with every SDK's tool runner through the `context_management` request parameter. The Python SDK (v1.0 and later) and the Go, Java, C#, and PHP tool runners don't include client-side compaction.
 
 ### Debugging tool execution
 
@@ -1228,7 +1228,7 @@ Intercepting tool errors before they're sent to Claude is not currently supporte
 
 **PHP**
 
-The PHP tool runner does not currently expose tool results before they are appended. Exceptions thrown from a tool's `run` closure are caught and sent to Claude as tool results with `is_error: true` automatically. To inspect or replace error content, use the manual `pushMessages()` pattern shown in [Modifying tool results](agents-and-tools/tool-use/tool-runner.md).
+The PHP tool runner does not currently expose tool results before they are appended. Exceptions thrown from a tool's `run` closure are caught and sent to Claude as tool results with `is_error: true` automatically. To inspect or replace error content, use the manual `pushMessages()` pattern shown in [Modifying tool results](tool-runner.md#modifying-tool-results).
 
 **Ruby**
 
@@ -1270,7 +1270,7 @@ end
 
 ### Modifying tool results
 
-You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](build-with-claude/prompt-caching.md) on tool results, or for transforming the tool output.
+You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](../../build-with-claude/prompt-caching.md) on tool results, or for transforming the tool output.
 
 In the Python and TypeScript SDKs, use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK. See the code comments in each tab.
 
@@ -1493,7 +1493,7 @@ loop do
 end
 ```
 
-Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (such as document search results) that you want to cache for subsequent API calls. See [Prompt caching](build-with-claude/prompt-caching.md) for more details on caching strategies.
+Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (such as document search results) that you want to cache for subsequent API calls. See [Prompt caching](../../build-with-claude/prompt-caching.md) for more details on caching strategies.
 
 ## Streaming
 

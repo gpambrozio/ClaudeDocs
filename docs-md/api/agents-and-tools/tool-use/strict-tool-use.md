@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-u
 description: Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.
 ---
 
-Setting `strict: true` on a tool definition guarantees Claude's tool inputs match your JSON Schema by constraining the model's token sampling to schema-valid outputs (a technique called grammar-constrained sampling). This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](build-with-claude/structured-outputs.md). For non-strict schema guidance, see [Define tools](agents-and-tools/tool-use/define-tools.md).
+Setting `strict: true` on a tool definition guarantees Claude's tool inputs match your JSON Schema by constraining the model's token sampling to schema-valid outputs (a technique called grammar-constrained sampling). This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](../../build-with-claude/structured-outputs.md#json-schema-limitations). For non-strict schema guidance, see [Define tools](define-tools.md).
 
 Strict tool use validates tool parameters, ensuring Claude calls your functions with correctly-typed arguments. Use strict tool use when you need to:
 
@@ -368,7 +368,7 @@ puts message.content
 
 **Define your tool schema**
 
-Create a JSON schema for your tool's `input_schema`. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](build-with-claude/structured-outputs.md)).
+Create a JSON schema for your tool's `input_schema`. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](../../build-with-claude/structured-outputs.md#json-schema-limitations)).
 
 **Add strict: true**
 
@@ -378,7 +378,7 @@ Set `"strict": true` as a top-level property in your tool definition, alongside 
 
 When Claude uses the tool, the `input` field in the `tool_use` block strictly follows your `input_schema`, and the `name` is always valid.
 
-The [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolset entries (`computer_toolset_20260801` and `browser_toolset_20260801`) don't accept `strict: true`; a request that sets it on either entry is rejected.
+The [computer use](computer-use-tool.md) and [browser use](browser-use-tool.md) toolset entries (`computer_toolset_20260801` and `browser_toolset_20260801`) don't accept `strict: true`; a request that sets it on either entry is rejected.
 
 ## Common use cases
 
@@ -1109,11 +1109,11 @@ puts message
 
 ## Data retention
 
-Strict tool use compiles tool `input_schema` definitions into grammars using the same pipeline as [structured outputs](build-with-claude/structured-outputs.md). Tool schemas are temporarily cached for up to 24 hours since last use. Prompts and responses are not retained beyond the API response.
+Strict tool use compiles tool `input_schema` definitions into grammars using the same pipeline as [structured outputs](../../build-with-claude/structured-outputs.md). Tool schemas are temporarily cached for up to 24 hours since last use. Prompts and responses are not retained beyond the API response.
 
 Strict tool use is HIPAA eligible, but **protected health information (PHI) must not be included in tool schema definitions**. The API caches compiled schemas separately from message content, and these cached schemas do not receive the same PHI protections as prompts and responses. Do not include PHI in `input_schema` property names, `enum` values, `const` values, or `pattern` regular expressions. PHI should only appear in message content (prompts and responses), where it is protected under HIPAA safeguards.
 
-For ZDR and HIPAA eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
+For ZDR and HIPAA eligibility across all features, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
 ## Next steps
 
