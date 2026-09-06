@@ -79,11 +79,35 @@ The served source is MDX, so `sync_docs.py` reduces it to plain Markdown:
 - Turns `<Update>` into a `##` heading from its `label`, since the release notes
   pages carry the version or week only in that attribute
 - Converts `<img>` tags to Markdown image syntax
-- Rewrites in-site links to point at the local `.md` files
 - Drops Mintlify's `theme={null}` from code fence info strings
 
 Code blocks are masked before any of this runs, so angle brackets inside them
 (generics, literal markup) are never mistaken for MDX components.
+
+### Link Rewriting
+
+In-site links are repointed at the local `.md` files, but only after every
+site has been crawled: whether a link can be rewritten depends on whether its
+target was mirrored, and links cross between the two sites.
+
+- The path emitted is relative to the **linking file**, which is how a Markdown
+  viewer resolves it. A cross-site link reaches across the sibling mirror
+  directories (`../api/about-claude/pricing.md`).
+- Renamed pages are followed through the `{requested -> final}` map that
+  `fetch_markdown` records whenever a request redirects. The docs keep linking
+  to the pre-rename path long after the page has moved.
+- `#fragments` are preserved, so a link into a section still lands there.
+- A target that is not mirrored -- it 404s upstream, or it is in `SKIP_URLS` --
+  keeps an absolute URL, so the reader reaches the real site rather than a path
+  that will never exist.
+- Links inside code blocks are left alone. There they are sample content, not
+  navigation. An href that already ends in `.md` is left alone for the same
+  reason: the docs use those to name a file bundled with a skill.
+
+`check_links` audits the finished mirror the way a reader does, resolving each
+relative link against the directory of the file holding it. A local link is
+only ever emitted for a page that was mirrored, so a broken one means the
+resolution is wrong and the sync fails rather than publishing it.
 
 ### Output Structure
 
