@@ -8,7 +8,7 @@ echo "=== Claude Docs Sync ==="
 echo "Date: $(date)"
 echo ""
 
-# Run the Playwright-based crawler (unbuffered for real-time output with tee)
+# Fetch the Markdown sources (unbuffered for real-time output with tee)
 PYTHONUNBUFFERED=1 uv run sync_docs.py
 
 # Sync changelog versions
