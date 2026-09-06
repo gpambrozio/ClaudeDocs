@@ -31,8 +31,12 @@ OUTPUT_DIR = Path("docs-md")
 
 COPYRIGHT_NOTICE = "\n\n---\n\n*Copyright © Anthropic. All rights reserved.*\n"
 
-# URLs to skip (e.g., pages that are mirrored by another script)
-SKIP_URLS: set[str] = set()
+# The changelog page is generated from the same CHANGELOG.md that
+# sync_changelog.py splits into versions/, so mirroring it here would duplicate
+# every release entry within a single sync commit.
+SKIP_URLS = {
+    "https://code.claude.com/docs/en/changelog",
+}
 
 # Documentation sites to crawl
 SITES = [
@@ -92,6 +96,11 @@ ATTR_RE = re.compile(r'(\w[\w-]*)\s*=\s*"([^"]*)"')
 
 # Components whose `title` attribute carries content worth keeping
 TITLED_TAGS = {"Step", "Tab", "Accordion", "Card", "Expandable", "Frame"}
+
+# Components that head a section of the page rather than sit inside one. Their
+# label is the only place the version or week appears, so dropping it would
+# leave the release notes an undifferentiated wall of bullets.
+HEADING_TAGS = {"Update"}
 
 # A Markdown link. The label allows one level of nested brackets so that links
 # labelled with code such as [`_meta["key"]`](...) are matched whole.
@@ -251,9 +260,18 @@ def unwrap_block_tags(text: str) -> str:
 
         inner = dedent_block(lines[i + 1 : close_at], len(indent))
 
-        title = dict(ATTR_RE.findall(attrs)).get("title")
-        if title and name in TITLED_TAGS:
-            inner = [f"{indent}**{title}**", ""] + inner
+        attributes = dict(ATTR_RE.findall(attrs))
+        # Release-note components label the section with `label`, not `title`
+        label = attributes.get("title") or attributes.get("label")
+
+        if label and name in HEADING_TAGS:
+            heading = [f"{indent}## {label}"]
+            description = attributes.get("description")
+            if description:
+                heading += ["", f"{indent}*{description}*"]
+            inner = heading + [""] + inner
+        elif label and name in TITLED_TAGS:
+            inner = [f"{indent}**{label}**", ""] + inner
 
         lines[i : close_at + 1] = inner
 

@@ -63,6 +63,11 @@ a non-Markdown content type. A cross-site redirect drops the `.md` suffix and
 returns a rendered HTML page, which must not be written to disk as if it were
 Markdown.
 
+`SKIP_URLS` holds pages deliberately left out of the mirror. The Claude Code
+changelog is generated from the same `CHANGELOG.md` that `sync_changelog.py`
+splits into `versions/`, so mirroring it would duplicate every release entry
+within a single sync commit.
+
 ### MDX Conversion
 
 The served source is MDX, so `sync_docs.py` reduces it to plain Markdown:
@@ -71,6 +76,8 @@ The served source is MDX, so `sync_docs.py` reduces it to plain Markdown:
 - Unwraps components (`<Note>`, `<CodeGroup>`, `<Steps>`, ...), keeping their
   content and removing the indentation they added; a `title` attribute becomes
   a bold line
+- Turns `<Update>` into a `##` heading from its `label`, since the release notes
+  pages carry the version or week only in that attribute
 - Converts `<img>` tags to Markdown image syntax
 - Rewrites in-site links to point at the local `.md` files
 - Drops Mintlify's `theme={null}` from code fence info strings
