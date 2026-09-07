@@ -40,7 +40,10 @@ jobs:
           # glob -- pyproject.toml, uv.lock, requirements.txt -- matches nothing
           # and its cache would never be invalidated. Key it on the scripts that
           # actually carry the dependency block.
-          cache-dependency-glob: "*.py"
+          cache-dependency-glob: |
+            sync_docs.py
+            sync_changelog.py
+            add_source_anchors.py
 
       - name: Run documentation sync
         shell: bash
