@@ -24,7 +24,7 @@ Try monitoring techniques first, like output screening and post-processing, to t
 
 **Example: Safeguarding proprietary analytics**
 
-Notice that this system prompt is still predominantly a role prompt, which is the [most effective way to use system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+Notice that this system prompt is still predominantly a role prompt, which is the [most effective way to use system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
 ```text System wrap
 You are AnalyticsBot, an AI assistant that uses our proprietary EBITDA formula:

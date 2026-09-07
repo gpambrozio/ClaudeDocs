@@ -2,7 +2,7 @@
 
 **GET** `/v1/organizations/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../manage-claude/wif-admin-api.md).
 
 List service accounts in the caller's organization.
 

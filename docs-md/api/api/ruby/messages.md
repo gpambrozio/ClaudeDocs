@@ -10,7 +10,7 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](get-started.md)
+Learn more about the Messages API in our [user guide](../../get-started.md)
 
 ### Parameters
 
@@ -20,9 +20,9 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-  Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+  Set to `0` to populate the [prompt cache](../../build-with-claude/prompt-caching.md#pre-warming-the-cache) without generating a response.
 
-  Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
+  Different models have different maximum values for this parameter.  See [models](../../models/overview.md) for details.
 
   minimum: 0
 
@@ -71,9 +71,9 @@ Learn more about the Messages API in our [user guide](get-started.md)
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](build-with-claude/working-with-messages.md).
+  See [input examples](../../build-with-claude/working-with-messages.md).
 
-  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -106,7 +106,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
             - `:"5m"`
 
@@ -1224,7 +1224,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   - `format_: JSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+    A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
     - `schema: Hash[Symbol, untyped]`
 
@@ -1236,7 +1236,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-  Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](../service-tiers.md) for details.
 
   - `:auto`
 
@@ -1254,13 +1254,13 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](build-with-claude/streaming.md) for details.
+  See [streaming](../../build-with-claude/streaming.md) for details.
 
 - `system_: String | Array[TextBlockParam]`
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
   - `String = String`
 
@@ -1284,7 +1284,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](build-with-claude/extended-thinking.md) for details.
+  See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
   - `class ThinkingConfigEnabled`
 
@@ -1294,7 +1294,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       minimum: 1024
 
@@ -1380,7 +1380,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](../../agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](../../agents-and-tools/tool-use/web-search-tool.md)).
 
   Each tool definition includes:
 
@@ -1436,7 +1436,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+  See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
   - `class Tool`
 
@@ -3183,7 +3183,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
         This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       - `thinking: String`
 
@@ -3199,7 +3199,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
         Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
       - `type: :redacted_thinking`
 
@@ -3765,7 +3765,7 @@ Learn more about the Messages API in our [user guide](get-started.md)
 
       - `:reasoning_extraction`
 
-        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../build-with-claude/thinking-steering-and-cost.md).
 
       - `:general_harms`
 
@@ -4187,7 +4187,7 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](build-with-claude/token-counting.md)
+Learn more about token counting in our [user guide](../../build-with-claude/token-counting.md)
 
 ### Parameters
 
@@ -4236,9 +4236,9 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](build-with-claude/working-with-messages.md).
+  See [input examples](../../build-with-claude/working-with-messages.md).
 
-  Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -4271,7 +4271,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
             - `:"5m"`
 
@@ -5333,7 +5333,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   - `format_: JSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+    A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
     - `schema: Hash[Symbol, untyped]`
 
@@ -5345,7 +5345,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
   - `String = String`
 
@@ -5369,7 +5369,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](build-with-claude/extended-thinking.md) for details.
+  See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
   - `class ThinkingConfigEnabled`
 
@@ -5379,7 +5379,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       minimum: 1024
 
@@ -5465,7 +5465,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](../../agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](../../agents-and-tools/tool-use/web-search-tool.md)).
 
   Each tool definition includes:
 
@@ -5521,7 +5521,7 @@ Learn more about token counting in our [user guide](build-with-claude/token-coun
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+  See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
   - `class Tool`
 
@@ -7235,7 +7235,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -7712,7 +7712,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -8098,7 +8098,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -8939,7 +8939,7 @@ puts(message_tokens_count)
     - `5m`: 5 minutes
     - `1h`: 1 hour
 
-    Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+    Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
     - `:"5m"`
 
@@ -9446,7 +9446,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -9497,7 +9497,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -9550,7 +9550,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -9603,7 +9603,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -9810,7 +9810,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -10126,7 +10126,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -10754,7 +10754,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -10906,7 +10906,7 @@ puts(message_tokens_count)
 
       This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
     - `thinking: String`
 
@@ -10922,7 +10922,7 @@ puts(message_tokens_count)
 
       Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
     - `type: :redacted_thinking`
 
@@ -11407,7 +11407,7 @@ puts(message_tokens_count)
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
         - `:"5m"`
 
@@ -12388,7 +12388,7 @@ puts(message_tokens_count)
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
             - `:"5m"`
 
@@ -12597,7 +12597,7 @@ puts(message_tokens_count)
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
         - `:"5m"`
 
@@ -12876,7 +12876,7 @@ puts(message_tokens_count)
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
                 - `:"5m"`
 
@@ -13197,7 +13197,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -13284,7 +13284,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -13517,7 +13517,7 @@ puts(message_tokens_count)
 
         This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       - `thinking: String`
 
@@ -13533,7 +13533,7 @@ puts(message_tokens_count)
 
         Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
       - `type: :redacted_thinking`
 
@@ -14099,7 +14099,7 @@ puts(message_tokens_count)
 
       - `:reasoning_extraction`
 
-        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../build-with-claude/thinking-steering-and-cost.md).
 
       - `:general_harms`
 
@@ -14312,7 +14312,7 @@ puts(message_tokens_count)
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
         - `:"5m"`
 
@@ -15911,7 +15911,7 @@ puts(message_tokens_count)
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
             - `:"5m"`
 
@@ -16991,7 +16991,7 @@ puts(message_tokens_count)
 
   - `format_: JSONOutputFormat`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+    A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
     - `schema: Hash[Symbol, untyped]`
 
@@ -17492,7 +17492,7 @@ puts(message_tokens_count)
 
         This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       - `thinking: String`
 
@@ -17508,7 +17508,7 @@ puts(message_tokens_count)
 
         Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-        See [extended thinking](build-with-claude/extended-thinking.md) for details.
+        See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
       - `type: :redacted_thinking`
 
@@ -18042,7 +18042,7 @@ puts(message_tokens_count)
 
         - `:reasoning_extraction`
 
-          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../build-with-claude/thinking-steering-and-cost.md).
 
         - `:general_harms`
 
@@ -18367,7 +18367,7 @@ puts(message_tokens_count)
 
           This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+          See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
         - `thinking: String`
 
@@ -18383,7 +18383,7 @@ puts(message_tokens_count)
 
           Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+          See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
         - `type: :redacted_thinking`
 
@@ -18949,7 +18949,7 @@ puts(message_tokens_count)
 
         - `:reasoning_extraction`
 
-          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../build-with-claude/thinking-steering-and-cost.md).
 
         - `:general_harms`
 
@@ -19338,7 +19338,7 @@ puts(message_tokens_count)
 
             This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-            See [extended thinking](build-with-claude/extended-thinking.md) for details.
+            See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
           - `thinking: String`
 
@@ -19354,7 +19354,7 @@ puts(message_tokens_count)
 
             Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-            See [extended thinking](build-with-claude/extended-thinking.md) for details.
+            See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
           - `type: :redacted_thinking`
 
@@ -19920,7 +19920,7 @@ puts(message_tokens_count)
 
           - `:reasoning_extraction`
 
-            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../build-with-claude/thinking-steering-and-cost.md).
 
           - `:general_harms`
 
@@ -20255,7 +20255,7 @@ puts(message_tokens_count)
 
     Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-    See [extended thinking](build-with-claude/extended-thinking.md) for details.
+    See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
   - `type: :redacted_thinking`
 
@@ -20293,7 +20293,7 @@ puts(message_tokens_count)
 
     - `:reasoning_extraction`
 
-      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../build-with-claude/thinking-steering-and-cost.md).
 
     - `:general_harms`
 
@@ -20334,7 +20334,7 @@ puts(message_tokens_count)
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
         - `:"5m"`
 
@@ -20613,7 +20613,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -20860,7 +20860,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -21445,7 +21445,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -21559,7 +21559,7 @@ puts(message_tokens_count)
 
     This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-    See [extended thinking](build-with-claude/extended-thinking.md) for details.
+    See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
   - `thinking: String`
 
@@ -21613,7 +21613,7 @@ puts(message_tokens_count)
 
     Must be ≥1024 and less than `max_tokens`.
 
-    See [extended thinking](build-with-claude/extended-thinking.md) for details.
+    See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
     minimum: 1024
 
@@ -21635,7 +21635,7 @@ puts(message_tokens_count)
 
   When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-  See [extended thinking](build-with-claude/extended-thinking.md) for details.
+  See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
   - `class ThinkingConfigEnabled`
 
@@ -21645,7 +21645,7 @@ puts(message_tokens_count)
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       minimum: 1024
 
@@ -21734,7 +21734,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -21799,7 +21799,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -21958,7 +21958,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -21989,7 +21989,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -22487,7 +22487,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -22542,7 +22542,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -22643,7 +22643,7 @@ puts(message_tokens_count)
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+            Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
             - `:"5m"`
 
@@ -22750,7 +22750,7 @@ puts(message_tokens_count)
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
         - `:"5m"`
 
@@ -22795,7 +22795,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -22848,7 +22848,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -22901,7 +22901,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -22976,7 +22976,7 @@ puts(message_tokens_count)
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+        Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
         - `:"5m"`
 
@@ -24517,7 +24517,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -24804,7 +24804,7 @@ puts(message_tokens_count)
                   - `5m`: 5 minutes
                   - `1h`: 1 hour
 
-                  Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                  Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
                   - `:"5m"`
 
@@ -25071,7 +25071,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -25148,7 +25148,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -25227,7 +25227,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -25308,7 +25308,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -25547,7 +25547,7 @@ puts(message_tokens_count)
                       - `5m`: 5 minutes
                       - `1h`: 1 hour
 
-                      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
                       - `:"5m"`
 
@@ -25954,7 +25954,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -26049,7 +26049,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -26144,7 +26144,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -26383,7 +26383,7 @@ puts(message_tokens_count)
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+      Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
       - `:"5m"`
 
@@ -26499,7 +26499,7 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../build-with-claude/batch-processing.md)
 
 #### Parameters
 
@@ -26521,7 +26521,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
     Messages API creation parameters for the individual request.
 
-    See the [Messages API reference](api/messages.md) for full documentation on available parameters.
+    See the [Messages API reference](../messages.md) for full documentation on available parameters.
 
     - `max_tokens: Integer`
 
@@ -26529,9 +26529,9 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-      Set to `0` to populate the [prompt cache](build-with-claude/prompt-caching.md) without generating a response.
+      Set to `0` to populate the [prompt cache](../../build-with-claude/prompt-caching.md#pre-warming-the-cache) without generating a response.
 
-      Different models have different maximum values for this parameter.  See [models](about-claude/models/overview.md) for details.
+      Different models have different maximum values for this parameter.  See [models](../../models/overview.md) for details.
 
       minimum: 0
 
@@ -26580,9 +26580,9 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
       {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
       ```
 
-      See [input examples](build-with-claude/working-with-messages.md).
+      See [input examples](../../build-with-claude/working-with-messages.md).
 
-      Note that if you want to include a [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+      Note that if you want to include a [system prompt](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
       There is a limit of 100,000 messages in a single request.
 
@@ -26615,7 +26615,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details.
+                Defaults to `5m`. See [prompt caching pricing](../../build-with-claude/prompt-caching.md) for details.
 
                 - `:"5m"`
 
@@ -27733,7 +27733,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       - `format_: JSONOutputFormat`
 
-        A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+        A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
         - `schema: Hash[Symbol, untyped]`
 
@@ -27745,7 +27745,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-      Anthropic offers different levels of service for your API requests. See [service-tiers](api/service-tiers.md) for details.
+      Anthropic offers different levels of service for your API requests. See [service-tiers](../service-tiers.md) for details.
 
       - `:auto`
 
@@ -27763,13 +27763,13 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](build-with-claude/streaming.md) for details.
+      See [streaming](../../build-with-claude/streaming.md) for details.
 
     - `system_: String | Array[TextBlockParam]`
 
       System prompt.
 
-      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
       - `String = String`
 
@@ -27793,7 +27793,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
-      See [extended thinking](build-with-claude/extended-thinking.md) for details.
+      See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       - `class ThinkingConfigEnabled`
 
@@ -27803,7 +27803,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
           Must be ≥1024 and less than `max_tokens`.
 
-          See [extended thinking](build-with-claude/extended-thinking.md) for details.
+          See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
           minimum: 1024
 
@@ -27889,7 +27889,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](agents-and-tools/tool-use/web-search-tool.md)).
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](../../agents-and-tools/tool-use/server-tools.md), see their individual documentation as each has its own behavior (e.g., the [web search tool](../../agents-and-tools/tool-use/web-search-tool.md)).
 
       Each tool definition includes:
 
@@ -27945,7 +27945,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
       Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-      See our [guide](agents-and-tools/tool-use/overview.md) for more details.
+      See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
       - `class Tool`
 
@@ -29623,7 +29623,7 @@ puts(message_batch)
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../build-with-claude/batch-processing.md)
 
 #### Parameters
 
@@ -29772,7 +29772,7 @@ puts(message_batch)
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../build-with-claude/batch-processing.md)
 
 #### Parameters
 
@@ -29942,7 +29942,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../build-with-claude/batch-processing.md)
 
 #### Parameters
 
@@ -30093,7 +30093,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../build-with-claude/batch-processing.md)
 
 #### Parameters
 
@@ -30146,7 +30146,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../build-with-claude/batch-processing.md)
 
 #### Parameters
 
@@ -30389,7 +30389,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
             - `thinking: String`
 
@@ -30405,7 +30405,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
             - `type: :redacted_thinking`
 
@@ -30971,7 +30971,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
             - `:reasoning_extraction`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../build-with-claude/thinking-steering-and-cost.md).
 
             - `:general_harms`
 

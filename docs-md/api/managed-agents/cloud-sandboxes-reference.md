@@ -10,7 +10,7 @@ Cloud sandboxes run as isolated Linux containers on Anthropic-managed infrastruc
 
 These specifications apply to `cloud` environments. Self-hosted sandboxes run on your infrastructure with whatever your worker provides.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Programming languages
 
@@ -82,7 +82,7 @@ The sandbox sets `PLAYWRIGHT_BROWSERS_PATH` to `/opt/pw-browsers`, so the pre-in
 | Architecture     | x86\_64 (amd64)                                                                                                                                                                                               |
 | Memory           | Up to 8 GB                                                                                                                                                                                                    |
 | Disk space       | Up to 10 GB                                                                                                                                                                                                   |
-| Network          | API-created environments default to [`unrestricted` networking](managed-agents/environments.md); sandboxes provisioned through Claude Studio default to `limited` |
+| Network          | API-created environments default to [`unrestricted` networking](environments.md#networking); sandboxes provisioned through Claude Studio default to `limited` |
 
 ---
 

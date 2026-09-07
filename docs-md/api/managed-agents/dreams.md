@@ -8,7 +8,7 @@ description: Let Claude reflect on past sessions to curate an agent's memory and
 
 Dreaming is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
 
-Agents write to their [memory stores](managed-agents/memory.md) as they work, but these writes are local and incremental: over many sessions a memory store accumulates duplicates, contradictions, and stale entries.
+Agents write to their [memory stores](memory.md) as they work, but these writes are local and incremental: over many sessions a memory store accumulates duplicates, contradictions, and stale entries.
 
 **Dreams** let Claude clean that up. A dream reads an existing memory store alongside past session transcripts, then produces a new, reorganized memory store: duplicates merged, stale or contradicted entries replaced with the latest value, and new insights surfaced.
 
@@ -160,7 +160,7 @@ dream = client.beta.dreams.create(
 puts dream.id # drm_01...
 ```
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The selected model runs the dreaming pipeline. During the research preview, `claude-opus-5`, `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process. See [Steer with instructions](managed-agents/dreams.md).
+Dreaming inputs include the pre-existing memory store and an array of sessions. The selected model runs the dreaming pipeline. During the research preview, `claude-opus-5`, `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process. See [Steer with instructions](dreams.md#steer-with-instructions).
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -190,13 +190,13 @@ The response is the full `dream` resource with `status: "pending"`:
 }
 ```
 
-If you only have session transcripts and no existing store, [create an empty memory store](managed-agents/memory.md) first and pass it as the `memory_store` input.
+If you only have session transcripts and no existing store, [create an empty memory store](memory.md#create-a-memory-store) first and pass it as the `memory_store` input.
 
 ### Steer with instructions
 
 The optional `instructions` field steers what the dreaming pipeline synthesizes. It is applied throughout the pipeline: what to read closely, what to merge or drop, and how to structure the output store.
 
-Use `instructions` for high-level synthesis guidance such as focus areas ("focus on coding-style preferences"), content to preserve unchanged, or output conventions you want applied across the store. The pipeline is a synthesis pass over the inputs, not an editor applied to the text of the store, so imperative directives that target specific lines ("change sentence X to Y", "fix the count in section Z") generally produce no change. To make targeted edits to individual memories, use the [Memory Stores API](managed-agents/memory.md) on the output store directly.
+Use `instructions` for high-level synthesis guidance such as focus areas ("focus on coding-style preferences"), content to preserve unchanged, or output conventions you want applied across the store. The pipeline is a synthesis pass over the inputs, not an editor applied to the text of the store, so imperative directives that target specific lines ("change sentence X to Y", "fix the count in section Z") generally produce no change. To make targeted edits to individual memories, use the [Memory Stores API](memory.md#view-and-edit-memories) on the output store directly.
 
 ## Track progress
 
@@ -291,14 +291,14 @@ end
 
 ### Watch the pipeline run
 
-Once a dream is `running`, its `session_id` field points at the underlying [session](managed-agents/sessions.md) running the pipeline. You can stream that session's [events](managed-agents/events-and-streaming.md) to observe what the dream is reading and writing in real time. The session is archived (not deleted) when the dream reaches a terminal state, so the transcript remains available afterward.
+Once a dream is `running`, its `session_id` field points at the underlying [session](sessions.md) running the pipeline. You can stream that session's [events](events-and-streaming.md) to observe what the dream is reading and writing in real time. The session is archived (not deleted) when the dream reaches a terminal state, so the transcript remains available afterward.
 
 ## Use the output
 
-When `status` reaches `completed`, the `memory_store` entry in `outputs[]` references a fully populated store. It's an ordinary memory store in your workspace. Review it with the [Memory Stores API](managed-agents/memory.md) or in the Console, then either:
+When `status` reaches `completed`, the `memory_store` entry in `outputs[]` references a fully populated store. It's an ordinary memory store in your workspace. Review it with the [Memory Stores API](memory.md#view-and-edit-memories) or in the Console, then either:
 
 * **Leverage it:** attach it to future sessions as a `memory_store` resource in place of (or alongside) the input memory store, or
-* **Discard it:** [delete the memory store](api/beta/memory_stores/delete.md) or [archive the memory store](api/beta/memory_stores/archive.md).
+* **Discard it:** [delete the memory store](../api/beta/memory_stores/delete.md) or [archive the memory store](../api/beta/memory_stores/archive.md).
 
 ```bash cURL
 # After the dream ends, the memory_store output holds the rebuilt store
@@ -550,7 +550,7 @@ $client->beta->dreams->archive($dream->id);
 client.beta.dreams.archive(dream.id)
 ```
 
-Archiving a dream does not touch its output memory store; manage that separately through the [Memory Stores API](managed-agents/memory.md).
+Archiving a dream does not touch its output memory store; manage that separately through the [Memory Stores API](memory.md#view-and-edit-memories).
 
 ## List dreams
 

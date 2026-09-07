@@ -2,7 +2,7 @@
 
 > Set up your first self-hosted environment: install Claude Code, create the environment, start a runner, and route a session to it.
 
-Self-hosted environments are in public beta on Team and Enterprise plans; [Availability and limitations](self-hosted-environments.md) covers the enablement path. This page gets your first session running; see [Self-hosted environments](self-hosted-environments.md) for what they are and [Deploy to production](self-hosted-environments-deploy.md) for hardening and fleet recipes.
+Self-hosted environments are in public beta on Team and Enterprise plans; [Availability and limitations](self-hosted-environments.md#availability-and-limitations) covers the enablement path. This page gets your first session running; see [Self-hosted environments](self-hosted-environments.md) for what they are and [Deploy to production](self-hosted-environments-deploy.md) for hardening and fleet recipes.
 
 A [self-hosted environment](self-hosted-environments.md) runs Claude Code [cloud sessions](claude-code-on-the-web.md) on infrastructure your organization operates, executed by runner processes you deploy. This quickstart stands up your first one, the smallest that works: one runner on a single host, running one test session. There are two steps: [create the environment, start a runner, and route a session to it](#set-up-an-environment-and-runner), then [message that session from your terminal](#send-a-follow-up-message-to-a-running-session). You'll move between two surfaces: claude.ai for creating the environment, checking its status, and routing a session, and a terminal on the host for everything the runner does.
 
@@ -14,22 +14,22 @@ By the end you'll have an environment on the [**Cloud environments** admin page]
 
 The claude.ai side needs:
 
-* **Allow self-hosted environments** turned on by an [Owner](cloud-environments.md) on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments); the **New** button doesn't appear until it is. If you don't hold the role, someone who does can create the environment and hand you its secret; the runner and terminal steps on this page need no claude.ai role, and where a step checks status in the admin UI, the runner's own log lines give you the same signal.
-* A [GitHub connection](claude-code-on-the-web.md) for your organization, so developers can pick repositories when they start sessions.
+* **Allow self-hosted environments** turned on by an [Owner](cloud-environments.md#organization-shared-environments) on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments); the **New** button doesn't appear until it is. If you don't hold the role, someone who does can create the environment and hand you its secret; the runner and terminal steps on this page need no claude.ai role, and where a step checks status in the admin UI, the runner's own log lines give you the same signal.
+* A [GitHub connection](claude-code-on-the-web.md#github-authentication-options) for your organization, so developers can pick repositories when they start sessions.
 
 ### Host and network
 
 The runner host needs:
 
-* A Linux or macOS host or container with outbound HTTPS to `api.anthropic.com`, to `claude.ai` and the download hosts it redirects to for the install step below, and to your git host for the clone; the [network requirements table](self-hosted-environments-deploy.md) has the full list. Windows isn't supported as a runner host; run the runner in a Linux container instead. Developer workstations aren't affected, since sessions start from claude.ai in a browser.
-* A clock synchronized to real time, for example with NTP. Authentication fails when the clock is more than five minutes off; see [Troubleshooting](self-hosted-environments-deploy.md).
+* A Linux or macOS host or container with outbound HTTPS to `api.anthropic.com`, to `claude.ai` and the download hosts it redirects to for the install step below, and to your git host for the clone; the [network requirements table](self-hosted-environments-deploy.md#network-requirements) has the full list. Windows isn't supported as a runner host; run the runner in a Linux container instead. Developer workstations aren't affected, since sessions start from claude.ai in a browser.
+* A clock synchronized to real time, for example with NTP. Authentication fails when the clock is more than five minutes off; see [Troubleshooting](self-hosted-environments-deploy.md#troubleshooting).
 
 ### Software on the runner host
 
 Install on the host before you start:
 
-* **Claude Code v2.1.224 or later**, with any of the [standard install methods](setup.md). The runner is part of the standard `claude` binary, and earlier versions don't recognize the `self-hosted-runner` subcommand. The native installer's default `latest` channel carries each release as soon as it's published; the `stable` channel, the Homebrew `claude-code` cask, and the stable apt, dnf, and apk repositories trail by about a week. To pin the exact version your fleet runs, see [Install a specific version](setup.md). For container images, see the Dockerfile in [Deploy to production](self-hosted-environments-deploy.md).
-* **Git 2.24 or newer**. Some git options on the deploy page need newer versions; [Configure git](self-hosted-environments-deploy.md) states each floor.
+* **Claude Code v2.1.224 or later**, with any of the [standard install methods](setup.md). The runner is part of the standard `claude` binary, and earlier versions don't recognize the `self-hosted-runner` subcommand. The native installer's default `latest` channel carries each release as soon as it's published; the `stable` channel, the Homebrew `claude-code` cask, and the stable apt, dnf, and apk repositories trail by about a week. To pin the exact version your fleet runs, see [Install a specific version](setup.md#install-a-specific-version). For container images, see the Dockerfile in [Deploy to production](self-hosted-environments-deploy.md#build-the-runner-image).
+* **Git 2.24 or newer**. Some git options on the deploy page need newer versions; [Configure git](self-hosted-environments-deploy.md#configure-git) states each floor.
 
 Confirm the host is ready:
 
@@ -51,7 +51,7 @@ To set up manually instead:
 
 **Create an environment**
 
-Go to the [**Cloud environments** page](https://claude.ai/admin-settings/cloud-environments) in admin settings. Under **Self-hosted environments**, select **New**, name the environment, and select **Create**. On the wizard's second step, select **Copy environment key** to copy the environment secret, which the admin UI labels an environment key. claude.ai shows the secret once, and you can't retrieve it later; it expires 365 days after creation. The environment's `ccpool_...` ID stays visible in its detail dialog; you'll need it for the `aud` check in [token verification](self-hosted-environments-identity.md) and for dispatching [test sessions from CI](self-hosted-environments-testing.md).
+Go to the [**Cloud environments** page](https://claude.ai/admin-settings/cloud-environments) in admin settings. Under **Self-hosted environments**, select **New**, name the environment, and select **Create**. On the wizard's second step, select **Copy environment key** to copy the environment secret, which the admin UI labels an environment key. claude.ai shows the secret once, and you can't retrieve it later; it expires 365 days after creation. The environment's `ccpool_...` ID stays visible in its detail dialog; you'll need it for the `aud` check in [token verification](self-hosted-environments-identity.md) and for dispatching [test sessions from CI](self-hosted-environments-testing.md#run-the-test-loop).
 
 If you lose the secret or need to rotate it, create a new secret from the environment's **Configuration** tab, roll the new secret out to your runners, then revoke the old one. Runners holding a revoked secret fail their next authenticated poll and exit, logging `poll auth failed`, and your orchestrator restarts them with the new secret.
 
@@ -71,9 +71,9 @@ Write the environment secret to a file. The command below reads from your termin
 
 Choose a base directory, replacing `<writable-dir>` in the runner command below with an absolute path that the runner can write to or create. The runner creates the directory at startup, then checks repositories out and creates per-session directories under it. Without `--base-dir` it uses `/workspace`, which only works if that directory already exists and is writable or you start the runner as root.
 
-If the runner can't create or write to the path, it exits at startup with an error naming the directory instead of registering. See [Troubleshooting](self-hosted-environments-deploy.md).
+If the runner can't create or write to the path, it exits at startup with an error naming the directory instead of registering. See [Troubleshooting](self-hosted-environments-deploy.md#troubleshooting).
 
-Then start the runner with `--environment-secret-file` and `--base-dir`. The runner registers with your environment and begins polling for work. If the runner exits, restart it by hand. Production deployments run the runner under an orchestrator that restarts exited runners, normally with a fresh filesystem per restart; [Reuse a pre-warmed checkout](self-hosted-environments-deploy.md) covers the supported persistent-disk setup.
+Then start the runner with `--environment-secret-file` and `--base-dir`. The runner registers with your environment and begins polling for work. If the runner exits, restart it by hand. Production deployments run the runner under an orchestrator that restarts exited runners, normally with a fresh filesystem per restart; [Reuse a pre-warmed checkout](self-hosted-environments-deploy.md#reuse-a-pre-warmed-checkout) covers the supported persistent-disk setup.
 
 ```bash
 claude self-hosted-runner --environment-secret-file '/etc/claude/environment-secret' --base-dir '<writable-dir>'
@@ -85,9 +85,9 @@ Return to the [**Cloud environments** page](https://claude.ai/admin-settings/clo
 
 **Route a session to the environment**
 
-Start a session at claude.ai/code and select your environment from the environment picker, where self-hosted environments appear alongside Anthropic-hosted ones. The runner clones with whatever git credentials the host already has, so pick a repository this host can already clone, or a public one; credential options for private repositories in production are on [Configure git](self-hosted-environments-deploy.md). The next available runner picks up the queued session and logs `Picked up session <session-id>` along with its active count and capacity, so you can confirm from the runner's own output which host took the session. Watch the session work and read Claude's replies at [claude.ai/code](https://claude.ai/code). If the session sits queued instead, see [Troubleshooting](self-hosted-environments-deploy.md).
+Start a session at claude.ai/code and select your environment from the environment picker, where self-hosted environments appear alongside Anthropic-hosted ones. The runner clones with whatever git credentials the host already has, so pick a repository this host can already clone, or a public one; credential options for private repositories in production are on [Configure git](self-hosted-environments-deploy.md#configure-git). The next available runner picks up the queued session and logs `Picked up session <session-id>` along with its active count and capacity, so you can confirm from the runner's own output which host took the session. Watch the session work and read Claude's replies at [claude.ai/code](https://claude.ai/code). If the session sits queued instead, see [Troubleshooting](self-hosted-environments-deploy.md#troubleshooting).
 
-The runner exits by design once its active sessions finish; see [Runner lifecycle](self-hosted-environments.md). For production, deploy it under an orchestrator that restarts it on exit. See [Deploy to production](self-hosted-environments-deploy.md).
+The runner exits by design once its active sessions finish; see [Runner lifecycle](self-hosted-environments.md#runner-lifecycle). For production, deploy it under an orchestrator that restarts it on exit. See [Deploy to production](self-hosted-environments-deploy.md).
 
 ## Send a follow-up message to a running session
 
@@ -97,7 +97,7 @@ Once a session is running on your environment, send it a follow-up from the `cla
 claude -p "your message" --cloud <session-id>
 ```
 
-For `<session-id>`, pass the bare `session_...` or `cse_...` ID or the session's claude.ai/code URL. A successful send prints `Sent to cloud session.` with the session ID and a view link. Accepted ID forms, JSON output, the account and policy requirements, and the error reference are on [Send follow-ups from the CLI](claude-code-on-the-web.md), since the command works the same against Anthropic-hosted sessions.
+For `<session-id>`, pass the bare `session_...` or `cse_...` ID or the session's claude.ai/code URL. A successful send prints `Sent to cloud session.` with the session ID and a view link. Accepted ID forms, JSON output, the account and policy requirements, and the error reference are on [Send follow-ups from the CLI](claude-code-on-the-web.md#send-follow-ups-from-the-cli), since the command works the same against Anthropic-hosted sessions.
 
 ## What's next
 

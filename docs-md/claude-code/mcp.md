@@ -23,7 +23,7 @@ With MCP servers connected, you can ask Claude Code to:
 
 Browse reviewed connectors in the [Anthropic Directory](https://claude.ai/directory). Directory connectors use the same MCP infrastructure as Claude Code, so you can add any remote server listed there with `claude mcp add`.
 
-Verify you trust each server before connecting it. Servers that fetch external content can expose you to [prompt injection risk](security.md).
+Verify you trust each server before connecting it. Servers that fetch external content can expose you to [prompt injection risk](security.md#protect-against-prompt-injection).
 
 To build your own server, see the [MCP server guide](https://modelcontextprotocol.io/docs/develop/build-server) for protocol fundamentals and the [Claude connector building docs](https://claude.com/docs/connectors/building) for authentication, testing, and Directory submission.
 
@@ -40,7 +40,7 @@ In a Claude Code session, run:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
+* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
 
 Check the install summary: if it reports `Run /reload-plugins to activate.`, run that command.
 
@@ -76,7 +76,7 @@ When configuring MCP servers via JSON in `.mcp.json`, `~/.claude.json`, or `clau
 
 A JSON entry that has a `url` but no `type` is a configuration error, because Claude Code reads an entry with no `type` as a stdio server. Claude Code skips that server and reports `MCP server "<name>" has a "url" but no "type"; add "type": "http" (or "sse" / "ws") to this entry`. Before v2.1.202, Claude Code reported this misconfiguration as `command: expected string, received undefined`.
 
-In `--output-format stream-json` runs, Claude Code also reports a skipped `--mcp-config` entry in the `system/init` event's [`mcp_server_errors` field](headless.md), so scripts can detect that the server never loaded. This requires Claude Code v2.1.219 or later.
+In `--output-format stream-json` runs, Claude Code also reports a skipped `--mcp-config` entry in the `system/init` event's [`mcp_server_errors` field](headless.md#stream-responses), so scripts can detect that the server never loaded. This requires Claude Code v2.1.219 or later.
 
 ### Option 2: Add a remote SSE server
 
@@ -102,7 +102,7 @@ Stdio servers run as local processes on your machine. They're ideal for tools th
 
 Claude Code sets `CLAUDE_PROJECT_DIR` in the spawned server's environment to the project root, so your server can resolve project-relative paths without depending on the working directory. This is the same directory hooks receive in their `CLAUDE_PROJECT_DIR` variable. Read it from inside your server process, for example `process.env.CLAUDE_PROJECT_DIR` in Node or `os.environ["CLAUDE_PROJECT_DIR"]` in Python.
 
-`CLAUDE_PROJECT_DIR` is the stable project root and doesn't change when you add or remove working directories mid-session. A server that limits its own filesystem access to a set of allowed directories should implement the MCP `roots/list` request instead. Claude Code answers `roots/list` with the session's launch directory plus every [additional working directory](permissions.md) you've granted with `--add-dir`, `/add-dir`, or the `additionalDirectories` setting. Claude Code sends `notifications/roots/list_changed` when that set changes. Before v2.1.203, `roots/list` returned only the launch directory and Claude Code didn't send `notifications/roots/list_changed`.
+`CLAUDE_PROJECT_DIR` is the stable project root and doesn't change when you add or remove working directories mid-session. A server that limits its own filesystem access to a set of allowed directories should implement the MCP `roots/list` request instead. Claude Code answers `roots/list` with the session's launch directory plus every [additional working directory](permissions.md#working-directories) you've granted with `--add-dir`, `/add-dir`, or the `additionalDirectories` setting. Claude Code sends `notifications/roots/list_changed` when that set changes. Before v2.1.203, `roots/list` returned only the launch directory and Claude Code didn't send `notifications/roots/list_changed`.
 
 This variable is set in the server's environment, not in Claude Code's own environment, so referencing it via `${VAR}` expansion in the `command` or `args` of a project-scoped `.mcp.json` entry or a local- or user-scoped server entry in `~/.claude.json` requires a default such as `${CLAUDE_PROJECT_DIR:-.}`. Plugin-provided MCP configurations substitute `${CLAUDE_PROJECT_DIR}` directly and don't need the default.
 
@@ -228,14 +228,14 @@ When you remove a remote server, Claude Code also deletes the OAuth tokens and c
 The statuses in this list report a configuration decision rather than a connection attempt, so Claude Code prints them without connecting to the server:
 
 * ``⏸ Pending approval (run `claude` to approve)``: a project-scoped server from `.mcp.json` that you haven't approved yet. Claude Code shows it in both `claude mcp list` and `claude mcp get <name>`. Run `claude` interactively to review and approve it.
-* `✘ Rejected (see disabledMcpjsonServers in settings)`: a `.mcp.json` server that a [`disabledMcpjsonServers`](settings-reference.md) entry rejects. Claude Code shows it only in `claude mcp get <name>`.
+* `✘ Rejected (see disabledMcpjsonServers in settings)`: a `.mcp.json` server that a [`disabledMcpjsonServers`](settings-reference.md#disabledmcpjsonservers) entry rejects. Claude Code shows it only in `claude mcp get <name>`.
 * `⊘ Disabled for this project (re-enable via /mcp)`: a server that the project's [`disabledMcpServers`](#disable-a-server-without-removing-it) list names. Claude Code shows it in both `claude mcp list` and `claude mcp get <name>`. Turn the server back on from the `/mcp` panel. Before v2.1.238, both commands connected to a disabled server to health-check it and reported the connection result.
 
 WebSocket servers don't appear in `claude mcp list` output. Use `claude mcp get <name>` or the `/mcp` panel to check them.
 
 #### Project server approvals and workspace trust
 
-As of v2.1.196, `claude mcp list` and `claude mcp get` read `.mcp.json` approvals only from settings files that aren't checked into the repository until you trust the workspace by running `claude` in it and accepting the workspace trust dialog. A cloned repository can't approve its own servers: [`enableAllProjectMcpServers`](settings-reference.md) or [`enabledMcpjsonServers`](settings-reference.md) committed to the project's `.claude/settings.json` is ignored in an untrusted folder, and the server stays at `⏸ Pending approval` instead of being connected and health-checked.
+As of v2.1.196, `claude mcp list` and `claude mcp get` read `.mcp.json` approvals only from settings files that aren't checked into the repository until you trust the workspace by running `claude` in it and accepting the workspace trust dialog. A cloned repository can't approve its own servers: [`enableAllProjectMcpServers`](settings-reference.md#enableallprojectmcpservers) or [`enabledMcpjsonServers`](settings-reference.md#enabledmcpjsonservers) committed to the project's `.claude/settings.json` is ignored in an untrusted folder, and the server stays at `⏸ Pending approval` instead of being connected and health-checked.
 
 Approvals from these sources still apply in an untrusted folder:
 
@@ -243,7 +243,7 @@ Approvals from these sources still apply in an untrusted folder:
 * managed settings
 * settings passed with `--settings`
 
-Claude Code also applies approvals from an untracked `.claude/settings.local.json`, but it runs git to check whether the file is tracked, and it runs that check only in a [trusted folder](permissions.md). In a folder you've never trusted, Claude Code waits for the trust dialog before applying the file's approvals, unless the folder is your own configuration home: your home directory, or a directory whose `.claude` you've set as [`CLAUDE_CONFIG_DIR`](env-vars.md). Before v2.1.207, Claude Code applied approvals from an untracked `.claude/settings.local.json` even in a folder you'd never trusted.
+Claude Code also applies approvals from an untracked `.claude/settings.local.json`, but it runs git to check whether the file is tracked, and it runs that check only in a [trusted folder](permissions.md#project-allow-rules-and-workspace-trust). In a folder you've never trusted, Claude Code waits for the trust dialog before applying the file's approvals, unless the folder is your own configuration home: your home directory, or a directory whose `.claude` you've set as [`CLAUDE_CONFIG_DIR`](env-vars.md). Before v2.1.207, Claude Code applied approvals from an untracked `.claude/settings.local.json` even in a folder you'd never trusted.
 
 A `disabledMcpjsonServers` entry in any settings file still rejects the server.
 
@@ -276,7 +276,7 @@ Claude Code warns about the configuration problems below. Each entry says what C
 
 * **Hidden whitespace**: Claude Code warns when an MCP config value carries hidden leading or trailing whitespace, which often comes from pasting a token with a trailing newline. Claude Code checks `command`, `url`, each `args` entry, and the values and key names under `env` and `headers`. Claude Code shows the warning in `claude mcp list` output and in `/mcp`, naming the affected fields without echoing their values, for example `Leading or trailing whitespace in: headers.Authorization`. Claude Code doesn't trim the whitespace and uses the values exactly as written, so edit the configuration to remove it.
 * **Same name in more than one scope**: if you define the same server name in more than one [scope](#mcp-installation-scopes) with different endpoints, Claude Code warns about the conflict in `claude mcp list` output and in `/mcp`. Claude Code stores OAuth sign-ins per endpoint, so when you authenticate the definition that loads in one project, you still need to sign in separately in a project where a different definition loads. Keep the endpoint you want and remove the others with `claude mcp remove <name> --scope <scope>`. In the warning, Claude Code quotes each scope's endpoint as written in your configuration, with [`${VAR}` references](#environment-variable-expansion-in-mcp-json) unexpanded, so it never shows a resolved value such as an API key.
-* **Reserved names**: Claude Code reserves the names of its built-in servers, including `workspace`, `claude-in-chrome`, `computer-use`, `Claude Preview`, and `Claude Browser`. If your configuration defines a server with a reserved name, Claude Code skips it at load time and shows a warning asking you to rename it. `claude mcp add` rejects a reserved name with an error. `Claude Preview` and `Claude Browser` both name the built-in server that the [Claude Code desktop app's preview pane](desktop.md) uses. Before v2.1.205, `Claude Browser` wasn't reserved, so a user-configured server could register under that name.
+* **Reserved names**: Claude Code reserves the names of its built-in servers, including `workspace`, `claude-in-chrome`, `computer-use`, `Claude Preview`, and `Claude Browser`. If your configuration defines a server with a reserved name, Claude Code skips it at load time and shows a warning asking you to rename it. `claude mcp add` rejects a reserved name with an error. `Claude Preview` and `Claude Browser` both name the built-in server that the [Claude Code desktop app's preview pane](desktop.md#preview-your-app) uses. Before v2.1.205, `Claude Browser` wasn't reserved, so a user-configured server could register under that name.
 * **Missing environment variable**: if a [`${VAR}` reference](#environment-variable-expansion-in-mcp-json) in a server's configuration names a variable that isn't set and has no `:-default`, Claude Code warns in `claude mcp list` output and in `/mcp`, naming the variable, and still loads the server with the `${VAR}` text unexpanded. Set the variable or add a `${VAR:-default}` fallback.
 
 #### Tool availability
@@ -287,7 +287,7 @@ If your request needs tools from a server that is still connecting in the backgr
 
 * **With [tool search](#scale-with-mcp-tool-search), the default**: the wait happens inside the `ToolSearch` call.
 * **Without tool search**: Claude uses the `WaitForMcpServers` tool instead. Configurations without tool search include a custom `ANTHROPIC_BASE_URL`, `ENABLE_TOOL_SEARCH=false`, and a model earlier than the Claude 4.5 generation on Google Cloud's Agent Platform.
-* **On a Microsoft Foundry [deployment hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md)**: Claude starts on the tool-search path rather than with `WaitForMcpServers`, since Claude Code discovers the deployment's server-side rejection only from the API. After Claude Code switches that deployment to [upfront loading](#scale-with-mcp-tool-search), tools from a server that finishes connecting become available on Claude's next request.
+* **On a Microsoft Foundry [deployment hosted on Azure](../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options)**: Claude starts on the tool-search path rather than with `WaitForMcpServers`, since Claude Code discovers the deployment's server-side rejection only from the API. After Claude Code switches that deployment to [upfront loading](#scale-with-mcp-tool-search), tools from a server that finishes connecting become available on Claude's next request.
 
 With tool search enabled, when a server finishes connecting while Claude is working, Claude Code lists the server's tool names to Claude on its next request in the same turn. Claude can then search for and call those tools without waiting for your next message.
 
@@ -302,7 +302,7 @@ When you toggle a server, Claude Code records your choice per project in `~/.cla
 
 Claude Code consults exactly one of the two lists for each server, so neither list overrides the other. If you add a regular server to `enabledMcpServers`, or a default-off built-in server to `disabledMcpServers`, Claude Code ignores the entry.
 
-`disabledMcpServers` and `enabledMcpServers` are unrelated to [`enabledMcpjsonServers`](settings-reference.md) and [`disabledMcpjsonServers`](settings-reference.md), which control approval of servers defined in a project's `.mcp.json` file.
+`disabledMcpServers` and `enabledMcpServers` are unrelated to [`enabledMcpjsonServers`](settings-reference.md#enabledmcpjsonservers) and [`disabledMcpjsonServers`](settings-reference.md#disabledmcpjsonservers), which control approval of servers defined in a project's `.mcp.json` file.
 
 ### MCP client runtimes
 
@@ -312,7 +312,7 @@ On Claude Code v2.1.232 or later, Claude Code uses the v2 runtime. It picks a ru
 
 * On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry, unless a host platform that embeds Claude Code sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](env-vars.md)
 * Signed in through a [Claude apps gateway](claude-apps-gateway.md)
-* With [feature-flag fetching off](env-vars.md)
+* With [feature-flag fetching off](env-vars.md#features-that-need-feature-flag-fetching)
 
 On v2, Claude Code also:
 
@@ -321,7 +321,7 @@ On v2, Claude Code also:
 * Doesn't register a [channel](#push-messages-with-channels) server that connects on the newer revision, because that revision can't carry channel messages.
 * Fails an [MCP OAuth sign-in](#authenticate-with-remote-mcp-servers) whose authorization response names an unexpected issuer.
 
-Anthropic can keep a specific server on the earlier protocol, or off that stream, with a feature flag Claude Code fetches. In a [Claude Code on the web](cloud-environments.md) session, Claude Code asks its MCP connectors only if you set `MCP_PROTOCOL_NEGOTIATION` to `auto`.
+Anthropic can keep a specific server on the earlier protocol, or off that stream, with a feature flag Claude Code fetches. In a [Claude Code on the web](cloud-environments.md#network-access) session, Claude Code asks its MCP connectors only if you set `MCP_PROTOCOL_NEGOTIATION` to `auto`.
 
 To pick the runtime yourself, set [`MCP_SDK_GENERATION`](env-vars.md) to `v1` or `v2`. To decide whether Claude Code asks, set [`MCP_PROTOCOL_NEGOTIATION`](env-vars.md) to `auto` or `legacy`. Where Claude Code uses v1 by default, pinning `v2` doesn't make it ask, so set `auto` too.
 
@@ -390,7 +390,7 @@ Tips:
 * Claude Code displays a warning when MCP tool output exceeds 10,000 tokens and limits output to 25,000 tokens by default. To raise the limit, set the `MAX_MCP_OUTPUT_TOKENS` environment variable (for example, `MAX_MCP_OUTPUT_TOKENS=50000`); the warning threshold is fixed. See [MCP output limits and warnings](#mcp-output-limits-and-warnings)
 * Use `/mcp` to authenticate with remote servers that require OAuth 2.0 authentication
 
-The per-server `timeout` is a hard wall-clock limit per tool call, and progress notifications from the server don't extend it. Values below 1000 are ignored and fall through to `MCP_TOOL_TIMEOUT`, or to its default of about 28 hours when that variable is unset. For an HTTP, SSE, or [claude.ai connector](mcp.md) server there is also a second, per-request timer that covers each request through to the server's first response byte. Claude Code sets that timer to the greatest of three values: 60 seconds, the tool timeout that applies to the server, and `MCP_TIMEOUT`. The 28-hour default of an unset `MCP_TOOL_TIMEOUT` doesn't enter that comparison, and a value below 60 seconds doesn't shorten the timer. Stdio and WebSocket servers have no per-request timer. Before v2.1.162, values below 1000 were floored to one second instead.
+The per-server `timeout` is a hard wall-clock limit per tool call, and progress notifications from the server don't extend it. Values below 1000 are ignored and fall through to `MCP_TOOL_TIMEOUT`, or to its default of about 28 hours when that variable is unset. For an HTTP, SSE, or [claude.ai connector](mcp.md#use-mcp-servers-from-claude-ai) server there is also a second, per-request timer that covers each request through to the server's first response byte. Claude Code sets that timer to the greatest of three values: 60 seconds, the tool timeout that applies to the server, and `MCP_TIMEOUT`. The 28-hour default of an unset `MCP_TOOL_TIMEOUT` doesn't enter that comparison, and a value below 60 seconds doesn't shorten the timer. Stdio and WebSocket servers have no per-request timer. Before v2.1.162, values below 1000 were floored to one second instead.
 
 A per-server `timeout` of at least 1000 also acts as a floor on the idle timeout described below: Claude Code never aborts that server's tool calls for idleness sooner than the per-server `timeout`. Requires Claude Code v2.1.203 or later.
 
@@ -404,7 +404,7 @@ These timeouts bound how long a call can run, not always how long it blocks the 
 
 An MCP tool call in the main conversation that is still running after two minutes moves to a background task instead of blocking the session. Claude receives the task ID immediately and keeps working, and the result arrives as a task notification when the call settles. Automatic backgrounding requires Claude Code v2.1.212 or later.
 
-The task appears in [`/tasks`](commands.md), where you can also stop it, and it doesn't survive exiting the session. The per-call limits still apply while the call runs in the background: the wall-clock limit set by the per-server `timeout` or [`MCP_TOOL_TIMEOUT`](env-vars.md), and the idle timeout set by [`CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT`](env-vars.md).
+The task appears in [`/tasks`](commands.md#all-commands), where you can also stop it, and it doesn't survive exiting the session. The per-call limits still apply while the call runs in the background: the wall-clock limit set by the per-server `timeout` or [`MCP_TOOL_TIMEOUT`](env-vars.md), and the idle timeout set by [`CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT`](env-vars.md).
 
 Set the [`CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS`](env-vars.md) environment variable in milliseconds to change the threshold, or set it to `0` to turn automatic backgrounding off. Setting `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` to `1` also turns it off, along with all other background task features.
 
@@ -463,10 +463,10 @@ Or inline in `plugin.json`:
 
 * **Automatic lifecycle**: servers connect and disconnect at these points:
   * At session startup, Claude Code connects the servers for enabled plugins automatically. In `/mcp`, a remote (HTTP or SSE) plugin server you've used before can show the [`cached` status](#server-status-detail) instead; Claude Code connects it when Claude first calls one of its tools
-  * If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers. When you reload, Claude Code keeps the live connections of plugin servers whose configuration is unchanged, and does the same when you [replace the session's MCP server list](agent-sdk/typescript.md) from the Agent SDK without naming them
-  * When you [move the session with `/cd`](permissions.md) on v2.1.246 or later, Claude Code connects the servers of plugins the new directory's settings enable and disconnects the servers of plugins that are no longer enabled, so you don't need to run `/reload-plugins` after the move
+  * If you enable or disable a plugin during a session, run `/reload-plugins` to connect or disconnect its MCP servers. When you reload, Claude Code keeps the live connections of plugin servers whose configuration is unchanged, and does the same when you [replace the session's MCP server list](agent-sdk/typescript.md#mcpsetserversresult) from the Agent SDK without naming them
+  * When you [move the session with `/cd`](permissions.md#move-the-session-to-another-directory) on v2.1.246 or later, Claude Code connects the servers of plugins the new directory's settings enable and disconnects the servers of plugins that are no longer enabled, so you don't need to run `/reload-plugins` after the move
   * In [web sessions](claude-code-on-the-web.md), an MCP call to a plugin server that isn't connected yet, such as right after an idle session wakes, starts the server on demand and waits for it to connect
-* **Path placeholders**: `${CLAUDE_PLUGIN_ROOT}` resolves to the plugin's installation directory, `${CLAUDE_PLUGIN_DATA}` to its [persistent state](plugins-reference.md) directory, and `${CLAUDE_PROJECT_DIR}` to the stable project root. Substitution applies to:
+* **Path placeholders**: `${CLAUDE_PLUGIN_ROOT}` resolves to the plugin's installation directory, `${CLAUDE_PLUGIN_DATA}` to its [persistent state](plugins-reference.md#persistent-data-directory) directory, and `${CLAUDE_PROJECT_DIR}` to the stable project root. Substitution applies to:
   * `stdio` servers: `command`, `args`, `env`
   * `http`, `sse`, and `ws` servers: `url`, `headers`, and `headersHelper`. Before v2.1.195, `headersHelper` passed the placeholder through as a literal string
 * **User environment access**: access to the same environment variables as manually configured servers
@@ -482,11 +482,11 @@ Tools from a plugin-bundled MCP server include both the plugin name and the serv
 mcp__plugin_my-plugin_database-tools__query
 ```
 
-Use this full name when referencing the tool in [permission rules](permissions.md), a skill's `allowed-tools` list, a [subagent's `tools` field](sub-agents.md), or a [hook matcher](hooks.md). A hook matcher written against the bare server key, such as `mcp__database-tools__.*`, never fires for a plugin-bundled server.
+Use this full name when referencing the tool in [permission rules](permissions.md), a skill's `allowed-tools` list, a [subagent's `tools` field](sub-agents.md#available-tools), or a [hook matcher](hooks.md#match-mcp-tools). A hook matcher written against the bare server key, such as `mcp__database-tools__.*`, never fires for a plugin-bundled server.
 
-The server itself registers under the scoped name `plugin:<plugin-name>:<server-name>`, such as `plugin:my-plugin:database-tools`. Use that name where a configured server name is expected, such as an [`mcp_tool` hook's `server` field](hooks.md).
+The server itself registers under the scoped name `plugin:<plugin-name>:<server-name>`, such as `plugin:my-plugin:database-tools`. Use that name where a configured server name is expected, such as an [`mcp_tool` hook's `server` field](hooks.md#mcp-tool-hook-fields).
 
-See the [plugin components reference](plugins-reference.md) for details on bundling MCP servers with plugins.
+See the [plugin components reference](plugins-reference.md#mcp-servers) for details on bundling MCP servers with plugins.
 
 ## MCP installation scopes
 
@@ -502,7 +502,7 @@ MCP servers can be configured at three scopes. The scope you choose controls whi
 
 Local scope is the default. A local-scoped server loads only in the project where you added it and stays private to you. Claude Code stores it in `~/.claude.json` under that project's path, so the same server won't appear in your other projects. Use local scope for personal development servers, experimental configurations, or servers with credentials you don't want in version control.
 
-The term "local scope" for MCP servers differs from general local settings. MCP local-scoped servers are stored in `~/.claude.json` (your home directory), while general local settings use `.claude/settings.local.json` (in the project directory). See [Settings](settings.md) for details on settings file locations.
+The term "local scope" for MCP servers differs from general local settings. MCP local-scoped servers are stored in `~/.claude.json` (your home directory), while general local settings use `.claude/settings.local.json` (in the project directory). See [Settings](settings.md#where-settings-live) for details on settings file locations.
 
 ```bash
 # Add a local-scoped server (default)
@@ -553,11 +553,11 @@ The resulting `.mcp.json` file follows a standardized format:
 
 For security reasons, Claude Code prompts for approval in interactive sessions before using project-scoped servers from `.mcp.json` files. To reset those approval choices, run `claude mcp reset-project-choices`.
 
-In `claude -p` runs, [Agent SDK](headless.md) sessions, and [cloud sessions](claude-code-on-the-web.md), Claude Code can't show that prompt: it loads project-scoped servers without asking. Claude Code also skips the prompt in a session you start in `bypassPermissions` mode with [`skipDangerousModePermissionPrompt`](settings-reference.md) set. To keep a server out anyway:
+In `claude -p` runs, [Agent SDK](headless.md) sessions, and [cloud sessions](claude-code-on-the-web.md), Claude Code can't show that prompt: it loads project-scoped servers without asking. Claude Code also skips the prompt in a session you start in `bypassPermissions` mode with [`skipDangerousModePermissionPrompt`](settings-reference.md#skipdangerousmodepermissionprompt) set. To keep a server out anyway:
 
-* Add it to [`disabledMcpjsonServers`](settings-reference.md), which blocks it in every permission mode.
-* Exclude project settings entirely with [`--setting-sources`](cli-reference.md) or the SDK's `settingSources` option.
-* Start the session with [`--strict-mcp-config`](cli-reference.md). Claude Code then uses only the MCP servers you pass with `--mcp-config`. Skipping the approval prompt for the project-scoped servers Claude Code isn't loading requires Claude Code v2.1.246 or later; before v2.1.246, a strict session still waited on approval for them, which left background sessions waiting at startup. See [Exclusive control with managed-mcp.json](managed-mcp.md) for what the flag does under a managed MCP file.
+* Add it to [`disabledMcpjsonServers`](settings-reference.md#disabledmcpjsonservers), which blocks it in every permission mode.
+* Exclude project settings entirely with [`--setting-sources`](cli-reference.md#cli-flags) or the SDK's `settingSources` option.
+* Start the session with [`--strict-mcp-config`](cli-reference.md#cli-flags). Claude Code then uses only the MCP servers you pass with `--mcp-config`. Skipping the approval prompt for the project-scoped servers Claude Code isn't loading requires Claude Code v2.1.246 or later; before v2.1.246, a strict session still waited on approval for them, which left background sessions waiting at startup. See [Exclusive control with managed-mcp.json](managed-mcp.md#exclusive-control-with-managed-mcp-json) for what the flag does under a managed MCP file.
 
 [Project server approvals and workspace trust](#project-server-approvals-and-workspace-trust) covers how approvals committed to the repository interact with workspace trust.
 
@@ -582,7 +582,7 @@ When the same server is defined in more than one place, Claude Code connects to 
 
 The three scopes match duplicates by name. Plugins and connectors match by endpoint, so one that points at the same URL or command as a server above is treated as a duplicate.
 
-If you open a local session in the [Desktop app's Code tab](desktop.md) with the same stdio server name at the top level of `~/.claude.json` (user scope) and in `.mcp.json`, the Code tab uses the `~/.claude.json` definition.
+If you open a local session in the [Desktop app's Code tab](desktop.md#mcp-servers-from-the-claude-desktop-chat-app) with the same stdio server name at the top level of `~/.claude.json` (user scope) and in `.mcp.json`, the Code tab uses the `~/.claude.json` definition.
 
 ### Environment variable expansion in `.mcp.json`
 
@@ -679,7 +679,7 @@ Many cloud-based MCP servers require authentication. Claude Code supports OAuth 
 Claude Code marks a remote server as needing authentication when the server responds with `401 Unauthorized` or `403 Forbidden`. What Claude Code shows depends on the server:
 
 * For a server you haven't signed in to, either status code flags it in `/mcp` so you can complete the OAuth flow.
-* For a [claude.ai connector](#use-mcp-servers-from-claude-ai), a `401` caused by claude.ai rejecting your session token doesn't flag the connector, because re-authorizing the connector can't fix your login. Claude Code shows the [session-token-rejected state](errors.md) instead.
+* For a [claude.ai connector](#use-mcp-servers-from-claude-ai), a `401` caused by claude.ai rejecting your session token doesn't flag the connector, because re-authorizing the connector can't fix your login. Claude Code shows the [session-token-rejected state](errors.md#claude-ai-rejected-the-session-token) instead.
 * For a server whose `Authorization` header you configured, in `headers` or through a [`headersHelper`](#use-dynamic-headers-for-custom-authentication), a `401` or `403` while connecting doesn't flag the server, because the credential to fix is the one you configured. Claude Code reports the connection as failed instead.
 
 When a request to an OAuth server you already signed in to returns `401 Unauthorized`, Claude Code refreshes the stored token, reconnects, and retries the request once. It flags the server in `/mcp` only if that retry also fails. Before v2.1.206, a token refresh that failed for a transient reason, such as a network error, flagged an OAuth server as needing authentication for the rest of the session even though its refresh token was still valid.
@@ -696,7 +696,7 @@ If you configured `headers.Authorization` for the server and the server rejects 
 
 **Add the server that requires authentication**
 
-If you already added the `sentry` server in the [MCP quickstart](mcp-quickstart.md), skip this step: running `claude mcp add` again with the same server name at the same scope fails with `MCP server sentry already exists in local config`. Otherwise, run:
+If you already added the `sentry` server in the [MCP quickstart](mcp-quickstart.md#connect-a-server-that-requires-sign-in), skip this step: running `claude mcp add` again with the same server name at the same scope fails with `MCP server sentry already exists in local config`. Otherwise, run:
 
 ```bash
 claude mcp add --transport http sentry https://mcp.sentry.dev/mcp
@@ -914,21 +914,21 @@ Claude Code sets these environment variables when executing the helper:
 | :---------------------------- | :----------------------------------------------------------------------------------------------------------- |
 | `CLAUDE_CODE_MCP_SERVER_NAME` | the name of the MCP server                                                                                   |
 | `CLAUDE_CODE_MCP_SERVER_URL`  | the URL of the MCP server                                                                                    |
-| `CLAUDE_PLUGIN_ROOT`          | the plugin's root directory. Set only when a [plugin](plugins-reference.md) provides the server |
+| `CLAUDE_PLUGIN_ROOT`          | the plugin's root directory. Set only when a [plugin](plugins-reference.md#mcp-servers) provides the server |
 
 Use these to write a single helper script that serves multiple MCP servers.
 
-A plugin-provided `headersHelper` can't reference the plugin's [`${user_config.*}`](plugins-reference.md) values, because the command runs through a shell. Claude Code reports the server as misconfigured with an [error](errors.md) and doesn't substitute the value. Put `${user_config.KEY}` in the server's `headers` field instead, which isn't shell-parsed, or have the helper script read the value from a config file. Before v2.1.207, `headersHelper` substituted `${user_config.*}` values.
+A plugin-provided `headersHelper` can't reference the plugin's [`${user_config.*}`](plugins-reference.md#user-configuration) values, because the command runs through a shell. Claude Code reports the server as misconfigured with an [error](errors.md#plugin-command-references-user-config) and doesn't substitute the value. Put `${user_config.KEY}` in the server's `headers` field instead, which isn't shell-parsed, or have the helper script read the value from a config file. Before v2.1.207, `headersHelper` substituted `${user_config.*}` values.
 
 #### Where the helper runs
 
-Claude Code picks the `headersHelper` command's working directory from the configuration that declares the server. A `cd` that Claude runs in Bash doesn't move it, and [`/cd`](permissions.md) moves it only for servers that run from the session's primary working directory. Each row below gives the directory that a relative path in your `headersHelper` command resolves against.
+Claude Code picks the `headersHelper` command's working directory from the configuration that declares the server. A `cd` that Claude runs in Bash doesn't move it, and [`/cd`](permissions.md#move-the-session-to-another-directory) moves it only for servers that run from the session's primary working directory. Each row below gives the directory that a relative path in your `headersHelper` command resolves against.
 
 | Where you configured the server                                                                                                                                                                              | Working directory                                                                            |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
-| A [plugin](plugins-reference.md)                                                                                                                                                                | The plugin's root directory. Requires Claude Code v2.1.195 or later                          |
+| A [plugin](plugins-reference.md#mcp-servers)                                                                                                                                                                | The plugin's root directory. Requires Claude Code v2.1.195 or later                          |
 | A project `.mcp.json` or a [local-scope](#local-scope) server                                                                                                                                                | The project directory the server is declared in                                              |
-| An agent file in your project, a server from the SDK's `mcpServers` option or `setMcpServers()` method, or [`--mcp-config`](cli-reference.md)                                                               | The session's [primary working directory](permissions.md)               |
+| An agent file in your project, a server from the SDK's `mcpServers` option or `setMcpServers()` method, or [`--mcp-config`](cli-reference.md)                                                               | The session's [primary working directory](permissions.md#working-directories)               |
 | [User scope](#user-scope), [managed MCP](managed-mcp.md), a [claude.ai connector](#use-mcp-servers-from-claude-ai), or an agent file from outside your project, including one from an `--add-dir` directory | Your configuration directory, `~/.claude` unless you set [`CLAUDE_CONFIG_DIR`](env-vars.md) |
 
 Before v2.1.238, Claude Code also ran the helpers of user-scope, managed, and claude.ai connector servers, and of agent files from outside your project, from the directory you started it in.
@@ -946,13 +946,13 @@ When this applies to your helper, have the script read its credential from a fil
 
 #### Trust a folder before its headersHelper runs
 
-Claude Code executes a `headersHelper` as an arbitrary shell command. For a server in a project `.mcp.json` or at [local scope](#local-scope), it runs the helper only after you accept the [trust dialog](permissions.md) for the project directory the server is declared in. Before v2.1.238, a `claude -p` or SDK session ran these helpers without checking trust, and an interactive session ran them once you had trusted a parent folder.
+Claude Code executes a `headersHelper` as an arbitrary shell command. For a server in a project `.mcp.json` or at [local scope](#local-scope), it runs the helper only after you accept the [trust dialog](permissions.md#project-allow-rules-and-workspace-trust) for the project directory the server is declared in. Before v2.1.238, a `claude -p` or SDK session ran these helpers without checking trust, and an interactive session ran them once you had trusted a parent folder.
 
-* **Trust that doesn't count**: a parent folder's trust, and the automatic trust a `claude -p` or SDK session gets for [hooks in settings files](permissions.md)
-* **Until you trust the folder**: Claude Code connects the server with its static `headers` alone. In a `claude -p` or SDK session it also prints one [`headersHelper not run`](errors.md) line per server to stderr, telling you how to grant the trust.
-* **Trust without a dialog**: set `projects["<path>"].hasTrustDialogAccepted` to `true` in `~/.claude.json`. `<path>` is the folder [Project allow rules and workspace trust](permissions.md) says Claude Code keys the trust on.
+* **Trust that doesn't count**: a parent folder's trust, and the automatic trust a `claude -p` or SDK session gets for [hooks in settings files](permissions.md#what-runs-before-you-trust-a-folder)
+* **Until you trust the folder**: Claude Code connects the server with its static `headers` alone. In a `claude -p` or SDK session it also prints one [`headersHelper not run`](errors.md#headershelper-not-run) line per server to stderr, telling you how to grant the trust.
+* **Trust without a dialog**: set `projects["<path>"].hasTrustDialogAccepted` to `true` in `~/.claude.json`. `<path>` is the folder [Project allow rules and workspace trust](permissions.md#project-allow-rules-and-workspace-trust) says Claude Code keys the trust on.
 
-Claude Code applies the same rule to a server declared inline in an [agent file](sub-agents.md), checking where that agent file came from: your project, for a file in its `.claude/agents/` directory, or an `--add-dir` directory. Until you [trust that project or directory itself](permissions.md), Claude Code doesn't load the server at all, so its helper never runs either.
+Claude Code applies the same rule to a server declared inline in an [agent file](sub-agents.md#scope-mcp-servers-to-a-subagent), checking where that agent file came from: your project, for a file in its `.claude/agents/` directory, or an `--add-dir` directory. Until you [trust that project or directory itself](permissions.md#what-runs-before-you-trust-a-folder), Claude Code doesn't load the server at all, so its helper never runs either.
 
 ## Add MCP servers from JSON configuration
 
@@ -1043,16 +1043,16 @@ Claude Code marks a connector `managed` in `/mcp` and in the [`/plugin`](plugins
 
 Connectors you have never signed in to are collapsed behind a `Show unused connectors` row at the end of the claude.ai section, so an organization-provisioned list doesn't fill the panel. Select the row to expand them. A connector you signed in to before stays visible even when it currently needs re-authentication.
 
-Connectors from claude.ai are fetched only when your active [authentication method](authentication.md) is a claude.ai subscription login. They aren't loaded, even if you previously ran `/login`, when:
+Connectors from claude.ai are fetched only when your active [authentication method](authentication.md#authentication-precedence) is a claude.ai subscription login. They aren't loaded, even if you previously ran `/login`, when:
 
 * `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` is active
 * A third-party provider such as Amazon Bedrock or Google Cloud's Agent Platform is active
-* `ANTHROPIC_PROFILE`, the federation variables, or an active [Anthropic profile](authentication.md) supplies the credential
-* `CLAUDE_CODE_OAUTH_TOKEN` holds a token from [`claude setup-token`](authentication.md), which can only make model requests
+* `ANTHROPIC_PROFILE`, the federation variables, or an active [Anthropic profile](authentication.md#anthropic-profiles-and-federation-credentials) supplies the credential
+* `CLAUDE_CODE_OAUTH_TOKEN` holds a token from [`claude setup-token`](authentication.md#generate-a-long-lived-token), which can only make model requests
 
-If `/mcp` doesn't list a connector you added, run `/status` to confirm which authentication method is active. Unset that environment variable, remove the `apiKeyHelper` setting, or [switch off the profile](authentication.md), then run `/login` to select your claude.ai account.
+If `/mcp` doesn't list a connector you added, run `/status` to confirm which authentication method is active. Unset that environment variable, remove the `apiKeyHelper` setting, or [switch off the profile](authentication.md#anthropic-profiles-and-federation-credentials), then run `/login` to select your claude.ai account.
 
-If `/mcp` shows a connector as `connected · session token rejected`, or its detail view shows [`claude.ai rejected the session token`](errors.md), claude.ai rejected the token from your Claude Code login, usually because the login expired and couldn't be refreshed. Authorizing the connector again doesn't clear this state, because the connector's own authorization in claude.ai isn't what was rejected. To clear it:
+If `/mcp` shows a connector as `connected · session token rejected`, or its detail view shows [`claude.ai rejected the session token`](errors.md#claude-ai-rejected-the-session-token), claude.ai rejected the token from your Claude Code login, usually because the login expired and couldn't be refreshed. Authorizing the connector again doesn't clear this state, because the connector's own authorization in claude.ai isn't what was rejected. To clear it:
 
 1. Run `/login` to sign in again.
 2. Reconnect the connector from `/mcp`.
@@ -1061,35 +1061,35 @@ Before v2.1.222, Claude Code marked connectors as needing authentication instead
 
 A server you've added in Claude Code takes [precedence](#scope-hierarchy-and-precedence) over a claude.ai connector that points at the same URL. When this happens, `/mcp` lists the connector as hidden and shows how to remove the duplicate if you'd rather use the connector.
 
-Some Anthropic-hosted connectors, such as Microsoft 365, Gmail, and Google Calendar, don't support local OAuth from Claude Code because the upstream identity provider only accepts the redirect URL that claude.ai registered. When a server you added with `claude mcp add` or in `.mcp.json` points at one of these hosts and you sign in to it from `/mcp` or with `claude mcp login`, Claude Code shows [`is Anthropic-hosted and doesn't support local OAuth`](errors.md), directing you to connect the service at [claude.ai/customize/connectors](https://claude.ai/customize/connectors) instead.
+Some Anthropic-hosted connectors, such as Microsoft 365, Gmail, and Google Calendar, don't support local OAuth from Claude Code because the upstream identity provider only accepts the redirect URL that claude.ai registered. When a server you added with `claude mcp add` or in `.mcp.json` points at one of these hosts and you sign in to it from `/mcp` or with `claude mcp login`, Claude Code shows [`is Anthropic-hosted and doesn't support local OAuth`](errors.md#anthropic-hosted-and-doesnt-support-local-oauth), directing you to connect the service at [claude.ai/customize/connectors](https://claude.ai/customize/connectors) instead.
 
 After you remove your entry with `claude mcp remove <name>` and connect the service on claude.ai, the connector appears in Claude Code automatically.
 
 ### How connectors reach Claude Code
 
-Which settings govern a claude.ai connector depends on where your session runs, because only some sessions fetch connectors from claude.ai themselves. Each row below names how connectors arrive in one kind of session and what controls them there. The desktop app's [WSL sessions](desktop-wsl.md) have no row because connectors aren't available in them yet.
+Which settings govern a claude.ai connector depends on where your session runs, because only some sessions fetch connectors from claude.ai themselves. Each row below names how connectors arrive in one kind of session and what controls them there. The desktop app's [WSL sessions](desktop-wsl.md#what-works-in-a-wsl-session) have no row because connectors aren't available in them yet.
 
 | Where the session runs                                                                                                     | How connectors arrive                    | What governs them                                                                                                                                                                                                               |
 | :------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Terminal, [VS Code](vs-code.md), [JetBrains](jetbrains.md), and [Agent SDK](agent-sdk/claude-code-features.md) sessions | Claude Code fetches them from claude.ai  | The settings in this section and [managed MCP configuration](managed-mcp.md)                                                                                                                                                   |
-| [Cloud sessions](claude-code-on-the-web.md)                                                                               | The remote host passes them in           | Your claude.ai organization settings, plus the [allowlist and denylist](managed-mcp.md) settings that reach the session and any `managed-mcp.json` on the host that runs it |
+| [Cloud sessions](claude-code-on-the-web.md)                                                                               | The remote host passes them in           | Your claude.ai organization settings, plus the [allowlist and denylist](managed-mcp.md#policy-based-control-with-allowlists-and-denylists) settings that reach the session and any `managed-mcp.json` on the host that runs it |
 | The [desktop app](desktop.md)'s local and SSH sessions                                                                    | The desktop app delivers them in-process | `blocked` entries in your organization's [connector tool controls](#organization-controls-on-connector-tools)                                                                                                                   |
 
-[`disableClaudeAiConnectors`](#disable-claude-ai-connectors), `ENABLE_CLAUDEAI_MCP_SERVERS`, and [`allowAllClaudeAiMcps`](settings-reference.md) act only on the first row, the connectors Claude Code fetches itself. The other two rows differ from it in these ways:
+[`disableClaudeAiConnectors`](#disable-claude-ai-connectors), `ENABLE_CLAUDEAI_MCP_SERVERS`, and [`allowAllClaudeAiMcps`](settings-reference.md#allowallclaudeaimcps) act only on the first row, the connectors Claude Code fetches itself. The other two rows differ from it in these ways:
 
-* **Cloud sessions**: `allowedMcpServers` and `deniedMcpServers` entries that reach the session, for example through [server-managed settings](server-managed-settings.md), filter the delivered connectors too. The session's proxy rewrites each connector's URL, so a `serverUrl` pattern written for the connector's own URL doesn't match it. To admit delivered connectors alongside a URL allowlist in a self-hosted environment, add the `serverUrl` entries listed under [Connector traffic leaves your network](self-hosted-environments-deploy.md). Claude Code drops the delivered connectors when a `managed-mcp.json` is present on the host that runs the session, such as a [self-hosted runner host](self-hosted-environments-configuration.md), whether or not you set `allowAllClaudeAiMcps`.
-* **Desktop app local and SSH sessions**: the desktop app registers the connectors as in-process `type: "sdk"` servers, and no MCP setting or `managed-mcp.json` reaches them. A user keeps a connector out of their own sessions by disconnecting it at [claude.ai/customize/connectors](https://claude.ai/customize/connectors). An organization blocks a connector's [tools](#organization-controls-on-connector-tools) or turns off [Claude Code in the desktop app](desktop.md) entirely.
+* **Cloud sessions**: `allowedMcpServers` and `deniedMcpServers` entries that reach the session, for example through [server-managed settings](server-managed-settings.md), filter the delivered connectors too. The session's proxy rewrites each connector's URL, so a `serverUrl` pattern written for the connector's own URL doesn't match it. To admit delivered connectors alongside a URL allowlist in a self-hosted environment, add the `serverUrl` entries listed under [Connector traffic leaves your network](self-hosted-environments-deploy.md#connector-traffic-leaves-your-network). Claude Code drops the delivered connectors when a `managed-mcp.json` is present on the host that runs the session, such as a [self-hosted runner host](self-hosted-environments-configuration.md#mcp-servers), whether or not you set `allowAllClaudeAiMcps`.
+* **Desktop app local and SSH sessions**: the desktop app registers the connectors as in-process `type: "sdk"` servers, and no MCP setting or `managed-mcp.json` reaches them. A user keeps a connector out of their own sessions by disconnecting it at [claude.ai/customize/connectors](https://claude.ai/customize/connectors). An organization blocks a connector's [tools](#organization-controls-on-connector-tools) or turns off [Claude Code in the desktop app](desktop.md#admin-console-controls) entirely.
 
 ### Organization controls on connector tools
 
 Your organization can set per-tool controls on [claude.ai connectors](https://claude.com/docs/connectors). Claude Code reads these settings at startup and enforces them locally, except in the desktop app's [local and SSH sessions](#how-connectors-reach-claude-code). There, the desktop app withholds `blocked` tools before it delivers a connector, and the `ask` setting doesn't reach Claude Code, so it applies the session's ordinary [permission rules](permissions.md) to those tools instead of prompting on every call. In sessions where Claude Code fetches connectors itself, run `/mcp` to see which setting applies to each tool on a connector.
 
-* **Tool set to `ask`**: Claude Code prompts on every call with the reason `Your organization requires approval for this tool`. The prompt appears even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](permissions.md), and never offers an option to remember your choice. [Allow rules](permissions.md) that match the tool don't skip the prompt either. In `dontAsk` mode, which never prompts, Claude Code denies the call instead.
+* **Tool set to `ask`**: Claude Code prompts on every call with the reason `Your organization requires approval for this tool`. The prompt appears even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](permissions.md#permission-modes), and never offers an option to remember your choice. [Allow rules](permissions.md) that match the tool don't skip the prompt either. In `dontAsk` mode, which never prompts, Claude Code denies the call instead.
 * **Tool set to `blocked`**: Claude Code filters the tool out before Claude sees it, so it never appears in the tool list. The desktop app and claude.ai chat apply the same `blocked` setting, so Claude can't use the tool there either, and you can't withhold a tool from the desktop app's sessions while keeping it available in chat. The desktop app skips a connector whose tools are all blocked.
 
 ### Disable claude.ai connectors
 
-Claude Code applies [`disableClaudeAiConnectors`](settings-reference.md) only to the connectors it [fetches itself](#how-connectors-reach-claude-code), not to the connectors a cloud host or the desktop app delivers. To turn off the connectors it fetches, set the setting to `true` in any settings scope:
+Claude Code applies [`disableClaudeAiConnectors`](settings-reference.md#disableclaudeaiconnectors) only to the connectors it [fetches itself](#how-connectors-reach-claude-code), not to the connectors a cloud host or the desktop app delivers. To turn off the connectors it fetches, set the setting to `true` in any settings scope:
 
 ```json
 {
@@ -1223,7 +1223,7 @@ Claude Code runs the checks after the [root-level combinator rewrite](#tool-inpu
 
 When Claude Code excludes a tool, it records the reason in the server's log and tells Claude which tools it excluded and why, so you can ask Claude why a tool is missing. If you fix the schema on the server, the tool comes back the next time Claude Code loads the server's tools.
 
-Claude Code turns the exclusion on through a feature flag it fetches from Anthropic. On a [deployment where flag fetching is off](env-vars.md), or on a machine whose flags have never arrived, such as an air-gapped machine, Claude Code still runs the checks and records in the server's log which tool would be rejected, but sends the tool's schema to the API anyway. The API rejects a request that includes that schema with [a 400 error naming the tool by its position](errors.md). Before v2.1.216, no deployment ran these checks.
+Claude Code turns the exclusion on through a feature flag it fetches from Anthropic. On a [deployment where flag fetching is off](env-vars.md#features-that-need-feature-flag-fetching), or on a machine whose flags have never arrived, such as an air-gapped machine, Claude Code still runs the checks and records in the server's log which tool would be rejected, but sends the tool's schema to the API anyway. The API rejects a request that includes that schema with [a 400 error naming the tool by its position](errors.md#tool-input-schema-is-invalid). Before v2.1.216, no deployment ran these checks.
 
 The [root-level combinator handling](#tool-input-schemas-with-a-root-level-combinator) is separate and keeps its own behavior when flag fetching is off or the flags have never arrived.
 
@@ -1231,9 +1231,9 @@ The [root-level combinator handling](#tool-input-schemas-with-a-root-level-combi
 
 If you're building an MCP server, you can mark a tool as requiring explicit approval on every call by setting `_meta["anthropic/requiresUserInteraction"]` to `true` in the tool's `tools/list` response entry. The value must be the JSON boolean `true`; any other value is ignored.
 
-Claude Code shows that tool's permission prompt on every call, even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](permissions.md), and doesn't offer a "don't ask again" option for it. [Allow rules](permissions.md) that match the tool don't skip the prompt either. In `dontAsk` mode, which never prompts, Claude Code denies the call instead.
+Claude Code shows that tool's permission prompt on every call, even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](permissions.md#permission-modes), and doesn't offer a "don't ask again" option for it. [Allow rules](permissions.md#permission-rule-syntax) that match the tool don't skip the prompt either. In `dontAsk` mode, which never prompts, Claude Code denies the call instead.
 
-The prompt has to reach a person. In non-interactive mode with [`--permission-prompt-tool`](cli-reference.md), an `allow` result from the prompt tool for a flagged tool is converted to a deny with the message `MCP tool requires user interaction; not supported via --permission-prompt-tool`. The Agent SDK's [`canUseTool` callback](agent-sdk/permissions.md) does receive these calls and can approve them, because your SDK application is expected to show them to a user.
+The prompt has to reach a person. In non-interactive mode with [`--permission-prompt-tool`](cli-reference.md#cli-flags), an `allow` result from the prompt tool for a flagged tool is converted to a deny with the message `MCP tool requires user interaction; not supported via --permission-prompt-tool`. The Agent SDK's [`canUseTool` callback](agent-sdk/permissions.md) does receive these calls and can approve them, because your SDK application is expected to show them to a user.
 
 Use this for tools whose permission prompt is itself the point, such as a consent or access-grant step where auto-approval would mean no human ever agreed. Other tools from the same server keep their normal permission behavior.
 
@@ -1266,7 +1266,7 @@ Servers can request input in two ways:
 
 In URL mode, Claude Code passes the URL as a command-line argument to your system's URL handler, and caps how long that argument can be. When the URL, once escaped for the command line, is over that cap, you can only decline the request. Every character that needs escaping, such as `%` or `&`, counts four times toward the cap: its own character plus three escape characters. A URL with none of them reaches the cap at about 8,000 characters. A URL built largely of percent-escapes, where every third character is a `%`, reaches it at roughly 4,000.
 
-To auto-respond to elicitation requests without showing a dialog, use the [`Elicitation` hook](hooks.md).
+To auto-respond to elicitation requests without showing a dialog, use the [`Elicitation` hook](hooks.md#elicitation).
 
 If you're building an MCP server that uses elicitation, see the [MCP elicitation specification](https://modelcontextprotocol.io/docs/learn/client-concepts#elicitation) for protocol details and schema examples.
 
@@ -1311,7 +1311,7 @@ Tips:
 
 Tool search keeps MCP context usage low by deferring tool definitions until Claude needs them. Only tool names and server instructions load at session start, so adding more MCP servers has minimal impact on your context window. Claude Code doesn't impose a fixed per-server tool cap; the practical limit is your context window budget.
 
-Tool search isn't supported on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md), which reject it server-side: Claude Code detects the rejection and loads MCP tools upfront for that deployment instead. [`ENABLE_TOOL_SEARCH`](#configure-tool-search) can't override this, since the rejection comes from the deployment itself.
+Tool search isn't supported on Microsoft Foundry [deployments hosted on Azure](../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options), which reject it server-side: Claude Code detects the rejection and loads MCP tools upfront for that deployment instead. [`ENABLE_TOOL_SEARCH`](#configure-tool-search) can't override this, since the rejection comes from the deployment itself.
 
 ### For MCP server authors
 
@@ -1329,9 +1329,9 @@ Claude Code truncates tool descriptions and server instructions at 2KB each. Kee
 
 Tool search is enabled by default: MCP tools are deferred and discovered on demand. Claude Code disables it when `ANTHROPIC_BASE_URL` points to a non-first-party host, since most proxies don't forward `tool_reference` blocks. Set `ENABLE_TOOL_SEARCH` explicitly to override that fallback.
 
-Setting [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS`](env-vars.md) keeps tool search off. You can't override it by setting `ENABLE_TOOL_SEARCH` yourself. Your organization can keep tool search on through [managed settings](managed-settings.md), on Claude Code v2.1.227 or later. [Disable pre-release capabilities](llm-gateway-protocol.md) covers where the override applies and what the variable strips.
+Setting [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS`](env-vars.md) keeps tool search off. You can't override it by setting `ENABLE_TOOL_SEARCH` yourself. Your organization can keep tool search on through [managed settings](managed-settings.md), on Claude Code v2.1.227 or later. [Disable pre-release capabilities](llm-gateway-protocol.md#disable-pre-release-capabilities) covers where the override applies and what the variable strips.
 
-Tool search requires a model that supports `tool_reference` blocks: Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models. See [model compatibility in the API docs](agents-and-tools/tool-use/tool-search-tool.md) for the current list.
+Tool search requires a model that supports `tool_reference` blocks: Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models. See [model compatibility in the API docs](../api/agents-and-tools/tool-use/tool-search-tool.md#model-compatibility) for the current list.
 
 On Google Cloud's Agent Platform, Claude Code decides by model generation:
 
@@ -1358,7 +1358,7 @@ ENABLE_TOOL_SEARCH=auto:5 claude
 ENABLE_TOOL_SEARCH=false claude
 ```
 
-Or set the value in your [settings.json `env` field](settings-reference.md).
+Or set the value in your [settings.json `env` field](settings-reference.md#env).
 
 You can also disable the `ToolSearch` tool specifically:
 

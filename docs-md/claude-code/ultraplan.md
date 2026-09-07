@@ -10,7 +10,7 @@ Anthropic has removed the Ultraplan research preview. Research previews are expe
 
 For planning workflows, use:
 
-* [Plan mode](permission-modes.md): in your local session, have Claude research your codebase and present a plan for your approval before it makes any changes
+* [Plan mode](permission-modes.md#analyze-before-you-edit-with-plan-mode): in your local session, have Claude research your codebase and present a plan for your approval before it makes any changes
 * [Claude Code on the web](claude-code-on-the-web.md): run Claude Code sessions in the cloud and review changes in your browser
 
 ---

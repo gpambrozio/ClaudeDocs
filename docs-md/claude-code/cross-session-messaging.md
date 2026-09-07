@@ -6,9 +6,9 @@ Cross-session messaging requires Claude Code v2.1.224 or later on macOS and Linu
 
 Cross-session messaging lets Claude deliver a message from one of your Claude Code sessions to another. When a change in one session breaks what another is building on, Claude can warn that session before you notice. When one session settles a question another is blocked on, Claude can send the answer across.
 
-A message is a piece of text one Claude writes to another, never the sender's conversation history or files. To move a whole conversation or its context, [resume the session](sessions.md) instead.
+A message is a piece of text one Claude writes to another, never the sender's conversation history or files. To move a whole conversation or its context, [resume the session](sessions.md#resume-a-session) instead.
 
-Claude uses two tools for this: `ListAgents` to discover which agents it can reach, and `SendMessage` to deliver a message to one of them by name. With the same `SendMessage` tool, Claude can also message [subagents](sub-agents.md) and [agent team](agent-teams.md) teammates within a single session or team. This page covers messages between your independent sessions.
+Claude uses two tools for this: `ListAgents` to discover which agents it can reach, and `SendMessage` to deliver a message to one of them by name. With the same `SendMessage` tool, Claude can also message [subagents](sub-agents.md#resume-subagents) and [agent team](agent-teams.md) teammates within a single session or team. This page covers messages between your independent sessions.
 
 ## When to use cross-session messaging
 
@@ -21,7 +21,7 @@ Use messaging when one of your sessions has something another session needs mid-
 
 Use messaging between independent sessions that you start and steer yourself. Claude Code has a dedicated feature for each of the other ways to run or reach multiple sessions, so use the one built for what you're doing instead:
 
-* To continue one conversation in another terminal, or share its context with a new session, [resume the session](sessions.md)
+* To continue one conversation in another terminal, or share its context with a new session, [resume the session](sessions.md#resume-a-session)
 * For a coordinated team of sessions Claude spawns and supervises, use [agent teams](agent-teams.md)
 * To watch and steer many sessions from one place, use [agent view](agent-view.md)
 * To steer a session yourself from your phone or another device, rather than have sessions message each other, use [Remote Control](remote-control.md)
@@ -43,7 +43,7 @@ Claude writes the actual message itself, so your prompt can leave the content to
 Explain what we just did to the session working on the payments API
 ```
 
-To name the target yourself, mention the session in your prompt: type `@` followed by the first letters of the session's name and pick the session from the typeahead, the same way you [@-mention a subagent](sub-agents.md). Requires Claude Code v2.1.232 or later. Claude Code inserts the mention, such as `@api-worker`, and tells Claude which session it names, so Claude can message that session without listing your sessions first. This prompt names the target with a mention:
+To name the target yourself, mention the session in your prompt: type `@` followed by the first letters of the session's name and pick the session from the typeahead, the same way you [@-mention a subagent](sub-agents.md#invoke-subagents-explicitly). Requires Claude Code v2.1.232 or later. Claude Code inserts the mention, such as `@api-worker`, and tells Claude which session it names, so Claude can message that session without listing your sessions first. This prompt names the target with a mention:
 
 ```text wrap
 Let @api-worker know the schema migration finished
@@ -62,13 +62,13 @@ For what the message Claude writes looks like when it arrives, including an exam
 
 The receiving Claude reads the message between tool calls during an active turn, so a running tool is never interrupted. When the receiving session is idle, Claude Code starts a new turn with the message.
 
-A message from another session arrives as plain text. If it mentions a file or an [MCP resource](mcp.md) with `@`, Claude sees the mention as written and Claude Code attaches nothing, whether the message starts a new turn or arrives during one. Claude can still open a mentioned path on the receiving machine with its own tools, subject to that session's permissions. Before v2.1.251, an `@` mention in a message that started a new turn attached the file or MCP resource on the receiving side.
+A message from another session arrives as plain text. If it mentions a file or an [MCP resource](mcp.md#use-mcp-resources) with `@`, Claude sees the mention as written and Claude Code attaches nothing, whether the message starts a new turn or arrives during one. Claude can still open a mentioned path on the receiving machine with its own tools, subject to that session's permissions. Before v2.1.251, an `@` mention in a message that started a new turn attached the file or MCP resource on the receiving side.
 
 Claude Code refuses a message in the following cases:
 
 * The message is [over the size cap](#limitations). Claude Code refuses it in the sending session, before it leaves.
 * A rapid burst to a session on this machine has reached [what that session's inbox accepts](#limitations). Claude Code refuses further messages to that session.
-* The reply target on this machine fails a safety check, such as a symlinked target or an endpoint that isn't the expected process. [Refusing to send a cross-session message](errors.md) lists these checks.
+* The reply target on this machine fails a safety check, such as a symlinked target or an endpoint that isn't the expected process. [Refusing to send a cross-session message](errors.md#refusing-to-send-a-cross-session-message) lists these checks.
 * Claude addresses the message to this session's own name, as described under [See which sessions Claude can reach](#see-which-sessions-claude-can-reach).
 
 The receiving session checks each arriving message against its own [inbound controls](#control-inbound-messages), and the check ends in one of three outcomes:
@@ -134,11 +134,11 @@ Claude Code reads your cloud and Remote Control session lists newest first and s
 
 Claude addresses a session beyond this machine by name, the same as a local session. See [Message sessions on other machines](#message-sessions-on-other-machines) for how those messages travel.
 
-A session answers to the name you set with the [`/rename`](commands.md) command or the [`--name`](cli-reference.md) flag. When you don't set one, Claude Code names the session itself. For an interactive session, that is the name shown in [listings of running sessions](sessions.md).
+A session answers to the name you set with the [`/rename`](commands.md) command or the [`--name`](cli-reference.md#cli-flags) flag. When you don't set one, Claude Code names the session itself. For an interactive session, that is the name shown in [listings of running sessions](sessions.md#name-your-sessions).
 
-When you rename a session, Claude Code also updates the shared record your other sessions use to look up the session's name. If it can't update that record, it warns you in the `/rename` output that other sessions may still show the old name. Run the session with [`--debug`](cli-reference.md), and Claude Code logs the cause of the failed update.
+When you rename a session, Claude Code also updates the shared record your other sessions use to look up the session's name. If it can't update that record, it warns you in the `/rename` output that other sessions may still show the old name. Run the session with [`--debug`](cli-reference.md#cli-flags), and Claude Code logs the cause of the failed update.
 
-When you rename a session, or start or resume an interactive one, with a name another live session on this machine already uses, Claude Code leaves the name with the session that already has it and [renames yours to a variant](sessions.md). Sessions can still share a name, for example when one of them runs an earlier version of Claude Code or the shared name is one Claude Code generated. Unless this session is connected to Remote Control, Claude Code shows each local session's working directory in the `/list-agents` output, so you can tell same-named sessions apart when they run in different directories. Claude addresses the message in one of two ways, depending on how many live sessions answer to the name:
+When you rename a session, or start or resume an interactive one, with a name another live session on this machine already uses, Claude Code leaves the name with the session that already has it and [renames yours to a variant](sessions.md#name-your-sessions). Sessions can still share a name, for example when one of them runs an earlier version of Claude Code or the shared name is one Claude Code generated. Unless this session is connected to Remote Control, Claude Code shows each local session's working directory in the `/list-agents` output, so you can tell same-named sessions apart when they run in different directories. Claude addresses the message in one of two ways, depending on how many live sessions answer to the name:
 
 * **One session answers to the name**: Claude Code delivers the message on the name alone.
 * **Several sessions share the name, or Claude Code couldn't check everywhere your sessions run**: Claude adds a short identifier to each row of its listing and uses the identifier in the address.
@@ -182,8 +182,8 @@ When a message arrives, Claude Code shows it in the conversation as a dim one-li
 
 Either of these shows you the full text:
 
-* Press `Ctrl+O` to open the [transcript viewer](interactive-mode.md) and read the full text under the sender's session name.
-* In a session started with [`--verbose`](cli-reference.md), Claude Code shows the full text instead of the preview.
+* Press `Ctrl+O` to open the [transcript viewer](interactive-mode.md#transcript-viewer) and read the full text under the sender's session name.
+* In a session started with [`--verbose`](cli-reference.md#cli-flags), Claude Code shows the full text instead of the preview.
 
 The preview shortens only what you see. Whether or not you expand it, Claude reads the full message.
 
@@ -200,17 +200,17 @@ The new column is tenant_id, and rebasing on main is safe now.
 
 ### Control inbound messages
 
-Set [`crossSessionInbound`](settings-reference.md) to choose what a session does with messages arriving from your other sessions:
+Set [`crossSessionInbound`](settings-reference.md#crosssessioninbound) to choose what a session does with messages arriving from your other sessions:
 
 | Value    | Behavior                                                                                                                                                                                                         |
 | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `accept` | Claude Code delivers each message to Claude                                                                                                                                                                      |
-| `hold`   | Claude Code shows a notice for each message and doesn't deliver it. If an `accept` later applies, per the [precedence rules](settings-reference.md), Claude Code releases the held messages |
+| `hold`   | Claude Code shows a notice for each message and doesn't deliver it. If an `accept` later applies, per the [precedence rules](settings-reference.md#crosssessioninbound), Claude Code releases the held messages |
 | `refuse` | Claude Code drops each message without delivering it                                                                                                                                                             |
 
 Beyond editing a settings file, you can select the value in the `/config` row **Messages from your other sessions**. Claude Code writes the value you select to your user settings. The row requires Claude Code v2.1.232 or later and doesn't appear while managed settings or the `--settings` flag sets the key, since a user-settings value wouldn't apply then. Claude Code rejects the `/config crossSessionInbound=value` shorthand for this key.
 
-To see which value applies, follow the `crossSessionInbound` precedence rules in the [settings reference](settings-reference.md). When no value applies, Claude Code decides per message from the two sessions' permission modes. It groups sessions that [bypass permission prompts](permission-modes.md) into one class, and every other session into the other. Plan mode counts as bypassing in sessions with bypass permissions available, and [auto](permission-modes.md), `acceptEdits`, and `dontAsk` count as prompting:
+To see which value applies, follow the `crossSessionInbound` precedence rules in the [settings reference](settings-reference.md#crosssessioninbound). When no value applies, Claude Code decides per message from the two sessions' permission modes. It groups sessions that [bypass permission prompts](permission-modes.md#skip-all-checks-with-bypasspermissions-mode) into one class, and every other session into the other. Plan mode counts as bypassing in sessions with bypass permissions available, and [auto](permission-modes.md#eliminate-prompts-with-auto-mode), `acceptEdits`, and `dontAsk` count as prompting:
 
 * **The receiving session prompts for permissions**: Claude Code delivers each message. It holds one for your approval only when the sending session identifies itself as bypassing permission prompts.
 * **The receiving session bypasses permission prompts**: Claude Code holds each message for your approval. It delivers one only when the sending session identifies itself as also bypassing.
@@ -219,7 +219,7 @@ When the default holds a message, Claude Code opens an approval dialog in the re
 
 * **Approve** delivers that one message to Claude.
 * **Deny**, or dismissing the dialog, drops it.
-* When the dialog stays unanswered past the [`dialogExpiry`](settings-reference.md) deadline, Claude Code closes it and drops the message. The deadline defaults to five minutes. While no terminal is attached to a [background session](agent-view.md), Claude Code leaves the dialog open past the deadline. After you attach, Claude Code closes the dialog and drops the message only if it stays unanswered for a full deadline period.
+* When the dialog stays unanswered past the [`dialogExpiry`](settings-reference.md#dialogexpiry) deadline, Claude Code closes it and drops the message. The deadline defaults to five minutes. While no terminal is attached to a [background session](agent-view.md), Claude Code leaves the dialog open past the deadline. After you attach, Claude Code closes the dialog and drops the message only if it stays unanswered for a full deadline period.
 * If this session's permission-mode class changes while messages are held, Claude Code re-applies the inbound rules, delivers the messages they now accept, and shows a notice.
 * If a settings change makes `refuse` apply while messages are held, Claude Code drops every held message and reports a refusal to each sender it can reach.
 
@@ -229,9 +229,9 @@ Claude Code holds at most 100 messages, separately from the delivery queue, and 
 
 ### Non-interactive sessions
 
-Claude Code binds an inbox socket for a [`claude -p`](headless.md) session like an interactive one, so a long-running `-p` worker can receive messages and appears in the listing. When you start a session in [bare mode](headless.md), Claude Code doesn't bind the socket, so that session can't receive messages and doesn't appear in the agent list.
+Claude Code binds an inbox socket for a [`claude -p`](headless.md) session like an interactive one, so a long-running `-p` worker can receive messages and appears in the listing. When you start a session in [bare mode](headless.md#start-faster-with-bare-mode), Claude Code doesn't bind the socket, so that session can't receive messages and doesn't appear in the agent list.
 
-A `-p` session can't show the approval dialog. When the [inbound default](#control-inbound-messages) holds a message there, Claude Code keeps it for the same [`dialogExpiry`](settings-reference.md) deadline the dialog uses, five minutes by default:
+A `-p` session can't show the approval dialog. When the [inbound default](#control-inbound-messages) holds a message there, Claude Code keeps it for the same [`dialogExpiry`](settings-reference.md#dialogexpiry) deadline the dialog uses, five minutes by default:
 
 * **Before the deadline**: if a mode or settings change allows the message, Claude Code delivers it.
 * **Past the deadline**: Claude Code drops the message and reports it as expired to a sender it can reach.
@@ -253,15 +253,15 @@ Claude Code binds an inbox socket for each session with cross-session messaging 
 You can find the socket's path in two places:
 
 * `/status` shows it in the `Peer address` row. The path is prefixed with `uds:`.
-* Claude Code exports it to [hooks](hooks.md) and Bash commands as the [`CLAUDE_CODE_MESSAGING_SOCKET`](env-vars.md) environment variable:
+* Claude Code exports it to [hooks](hooks.md) and Bash commands as the [`CLAUDE_CODE_MESSAGING_SOCKET`](env-vars.md#variables) environment variable:
   * In a session that starts with messaging on, Claude Code exports the variable before any hook runs, including `SessionStart`.
   * Each session exports its own socket, never one inherited from a parent session.
 
 On macOS and Linux, Claude Code restricts the socket to your operating-system user. On native Windows, it instead requires each connection to authenticate first with a key that only your operating-system user can read. Either way, on a shared machine another user's sessions can't deliver to it.
 
-On macOS and Linux, Claude Code also refuses to create the socket in a directory it can't accept, for example one that another user owns, and uses a private per-user directory, `/tmp/cc-socks-<uid>`, instead. When it can't accept any directory, the session runs without an inbox: Claude Code shows a notice, `/status` shows `unavailable` and the reason in its `Peer address` row, and the [`--debug`](cli-reference.md) log records the full refusal.
+On macOS and Linux, Claude Code also refuses to create the socket in a directory it can't accept, for example one that another user owns, and uses a private per-user directory, `/tmp/cc-socks-<uid>`, instead. When it can't accept any directory, the session runs without an inbox: Claude Code shows a notice, `/status` shows `unavailable` and the reason in its `Peer address` row, and the [`--debug`](cli-reference.md#cli-flags) log records the full refusal.
 
-Alongside the socket's path, Claude Code exports a per-session token as [`CLAUDE_CODE_MESSAGING_TOKEN`](env-vars.md). A script posting to its own session's socket can send `{"type":"auth","token":"<token>"}` as the first line of its connection, where `<token>` is the value of `CLAUDE_CODE_MESSAGING_TOKEN`. Whether Claude Code requires the line depends on the platform:
+Alongside the socket's path, Claude Code exports a per-session token as [`CLAUDE_CODE_MESSAGING_TOKEN`](env-vars.md#variables). A script posting to its own session's socket can send `{"type":"auth","token":"<token>"}` as the first line of its connection, where `<token>` is the value of `CLAUDE_CODE_MESSAGING_TOKEN`. Whether Claude Code requires the line depends on the platform:
 
 * **macOS and Linux, including WSL 2**: the line is optional. Claude Code accepts a connection with or without it.
 * **Native Windows**: the line is required. Claude Code closes any connection whose first line isn't a valid auth line and delivers nothing from that connection.
@@ -274,9 +274,9 @@ The [own-child rules](#own-child-messages) below say when Claude Code consults t
 
 * **Own-child messages**: when no `crossSessionInbound` value applies, Claude Code delivers a message it verifies came from the session's own child processes, such as a hook or Bash command posting back to its own session's socket.
   * On Linux, including inside WSL 2, Claude Code can verify by process evidence even for a child that has already exited. On macOS it can verify that way only while the posting process is still running, and in a container where Claude Code runs as process ID 1 it has no process evidence at all. On native Windows it also has none.
-  * On macOS after the posting process has exited and in containers where Claude Code runs as process ID 1, that process evidence is missing, and Claude Code instead verifies a child that sent the session's exported [`CLAUDE_CODE_MESSAGING_TOKEN`](env-vars.md) in the auth line that opened its connection. On native Windows, that token is the only way Claude Code verifies an own-child message.
+  * On macOS after the posting process has exited and in containers where Claude Code runs as process ID 1, that process evidence is missing, and Claude Code instead verifies a child that sent the session's exported [`CLAUDE_CODE_MESSAGING_TOKEN`](env-vars.md#variables) in the auth line that opened its connection. On native Windows, that token is the only way Claude Code verifies an own-child message.
   * When Claude Code can verify neither way, it treats the message like any other that asserts no permission class, so a session that bypasses permission prompts holds it for your approval.
-* **Sandboxed sessions**: control whether a Bash command can reach the socket from inside the [sandbox](sandboxing.md) with the sandbox's Unix-socket settings, [`sandbox.network.allowAllUnixSockets` and `sandbox.network.allowUnixSockets`](settings-reference.md).
+* **Sandboxed sessions**: control whether a Bash command can reach the socket from inside the [sandbox](sandboxing.md) with the sandbox's Unix-socket settings, [`sandbox.network.allowAllUnixSockets` and `sandbox.network.allowUnixSockets`](settings-reference.md#sandbox-settings).
 
 ## Restrict cross-session messaging
 
@@ -284,7 +284,7 @@ Beyond the per-message defaults, you can narrow messaging in two ways. Require y
 
 ### Require approval for cross-machine messages
 
-Set [`isolatePeerMachines`](settings-reference.md) to `true` to require your explicit approval before any `SendMessage` reaches a session beyond this machine:
+Set [`isolatePeerMachines`](settings-reference.md#isolatepeermachines) to `true` to require your explicit approval before any `SendMessage` reaches a session beyond this machine:
 
 ```json
 {
@@ -299,7 +299,7 @@ With this set, Claude Code asks for your approval before Claude's message to a s
 Receiving and sending are separate controls, so turn off whichever direction you need, or both. Use `crossSessionInbound` for messages that arrive, and permission rules for what Claude here can send or list:
 
 * **Stop receiving**: set `crossSessionInbound` to `refuse`, and Claude Code drops inbound peer messages without delivering them. From project or local settings, `refuse` applies over every other source, and from your user settings it applies unless managed settings or the `--settings` flag set a value.
-* **Stop sending and listing**: add [permission deny rules](permissions.md) naming `SendMessage` and `ListAgents`. Both take the bare tool name with no specifier.
+* **Stop sending and listing**: add [permission deny rules](permissions.md#tool-specific-permission-rules) naming `SendMessage` and `ListAgents`. Both take the bare tool name with no specifier.
 
 Administrators can turn both sides off for an organization in [managed settings](managed-settings.md), combining the deny rules with the `refuse`:
 
@@ -320,11 +320,11 @@ Cross-session messaging requires Claude Code v2.1.224 or later on macOS, Linux, 
 
 * **Operating system**: available on macOS, Windows, and Linux, including Linux inside WSL 2.
 
-* **Sessions on this machine**: available on every provider, including Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, and in sessions that run with [feature-flag fetching](env-vars.md) off. On those providers, and with flag fetching off, same-machine messaging requires Claude Code v2.1.248 or later. Claude Code delivers these messages over a [per-session socket on your machine](#the-sessions-inbox-socket), never through Anthropic servers.
+* **Sessions on this machine**: available on every provider, including Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, and in sessions that run with [feature-flag fetching](env-vars.md#features-that-need-feature-flag-fetching) off. On those providers, and with flag fetching off, same-machine messaging requires Claude Code v2.1.248 or later. Claude Code delivers these messages over a [per-session socket on your machine](#the-sessions-inbox-socket), never through Anthropic servers.
 
   To stop a session from receiving them, set [`crossSessionInbound`](#turn-off-cross-session-messaging) to `refuse`.
 
-* **Sessions beyond this machine**: Claude finds your [Claude Code on the web](claude-code-on-the-web.md) sessions and your sessions on other machines from a session that is connected to Remote Control, which needs a claude.ai sign-in as this session's active authentication and the other [Remote Control requirements](remote-control.md). Claude can't find those sessions with an API key or on Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry.
+* **Sessions beyond this machine**: Claude finds your [Claude Code on the web](claude-code-on-the-web.md) sessions and your sessions on other machines from a session that is connected to Remote Control, which needs a claude.ai sign-in as this session's active authentication and the other [Remote Control requirements](remote-control.md#requirements). Claude can't find those sessions with an API key or on Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry.
 
 To check a session, type `/list-agents`, also available as `/peers`. The result separates a session that doesn't have the feature from a session where something narrower blocked a message, such as a missing `SendMessage` tool or a refused send:
 
@@ -344,16 +344,16 @@ In a session with messaging, `/status` also shows a `Peer address` row with the 
 The limits here are properties of the messaging channel itself and apply wherever the feature runs. For platform and provider gaps, see [Availability](#availability) instead.
 
 * **Plain text only**: Claude sends only plain text across sessions. Structured [agent team](agent-teams.md) protocol messages stay within a team.
-* **Same-machine message size is capped**: Claude Code refuses a message to a session on this machine once its serialized form passes about a million characters. The refusal [names the exact sizes](errors.md). Nothing reaches the receiving session.
-* **Rapid bursts to one session are refused at the sender**: once a rapid burst of messages to a session on this machine reaches what that session's inbox accepts, Claude Code refuses further sends in the sending session. The [refusal names the burst](errors.md) and tells Claude to batch the rest into one message or wait. Before v2.1.236, Claude Code reported those sends as sent while the receiving session dropped them.
+* **Same-machine message size is capped**: Claude Code refuses a message to a session on this machine once its serialized form passes about a million characters. The refusal [names the exact sizes](errors.md#message-too-large-for-cross-session-delivery). Nothing reaches the receiving session.
+* **Rapid bursts to one session are refused at the sender**: once a rapid burst of messages to a session on this machine reaches what that session's inbox accepts, Claude Code refuses further sends in the sending session. The [refusal names the burst](errors.md#too-many-messages-to-this-session-just-now) and tells Claude to batch the rest into one message or wait. Before v2.1.236, Claude Code reported those sends as sent while the receiving session dropped them.
 * **Message loops are throttled**: in the receiving session, Claude Code rate-limits repeated messages per sender, drops identical repeats arriving within a short window, and queues at most 50 accepted messages for Claude to read. A message loop between two sessions therefore stops on its own. When the rate limit, repeat check, or queue cap drops a message from an interactive session on this machine, Claude Code tells that session which one dropped it and tells its Claude not to resend right away.
 
 ## Related resources
 
-* [Subagents](sub-agents.md) and [agent teams](agent-teams.md): messaging within a single session or team
+* [Subagents](sub-agents.md#resume-subagents) and [agent teams](agent-teams.md#messages-between-agents): messaging within a single session or team
 * [Background agents](agent-view.md): dispatch and monitor the parallel sessions you might message
 * [Remote Control](remote-control.md): connect this session to reach your sessions on other machines
-* [Settings](settings-reference.md): `crossSessionInbound`, `isolatePeerMachines`, and `dialogExpiry`
+* [Settings](settings-reference.md#all-settings): `crossSessionInbound`, `isolatePeerMachines`, and `dialogExpiry`
 * [Permission modes](permission-modes.md): the modes behind the inbound default's two classes
 * [Tools reference](tools-reference.md): the `ListAgents` and `SendMessage` rows in the tools table
 * [Run agents in parallel](agents.md): compare the ways Claude Code runs multiple agents

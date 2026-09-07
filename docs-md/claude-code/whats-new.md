@@ -2,7 +2,7 @@
 
 > A weekly digest of notable Claude Code features, with code snippets, demos, and context on why they matter.
 
-The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the [changelog](changelog.md).
+The weekly dev digest highlights the features most likely to change how you work. Each entry includes runnable code, a short demo, and a link to the full docs. For every bug fix and minor improvement, see the [changelog](https://code.claude.com/docs/en/changelog).
 
 ## Week 34
 

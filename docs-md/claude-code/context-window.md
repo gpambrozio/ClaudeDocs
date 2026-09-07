@@ -1144,26 +1144,26 @@ Claude Code's context window holds everything Claude knows about your session: y
 The session walks through a realistic flow with representative token counts:
 
 * **Before you type anything**: CLAUDE.md, auto memory, MCP tool names, and skill descriptions all load into context. Your own setup may add more here, like an [output style](output-styles.md) or text from [`--append-system-prompt`](cli-reference.md), which both go into the system prompt the same way.
-* **As Claude works**: each file read adds to context, [path-scoped rules](memory.md) load automatically alongside matching files, and a [PostToolUse hook](hooks-guide.md) fires after each edit.
+* **As Claude works**: each file read adds to context, [path-scoped rules](memory.md#path-specific-rules) load automatically alongside matching files, and a [PostToolUse hook](hooks-guide.md) fires after each edit.
 * **The follow-up prompt**: a [subagent](sub-agents.md) handles the research in its own separate context window, so the large file reads stay out of yours. Only the summary and a small metadata trailer come back.
 * **At the end**: `/compact` replaces the conversation with a structured summary. Most startup content reloads automatically; the table below shows what happens to each mechanism.
 
 ## What survives compaction
 
-When a long session compacts, Claude Code summarizes the conversation history to fit the context window. As of v2.1.198, the summarization request inherits your session's [extended thinking](model-config.md) configuration, so it reasons with thinking enabled when your session has it enabled and stays off otherwise. Thinking affects only how the summary is produced; your session settings are unchanged afterward. What happens to each kind of content depends on how it was loaded:
+When a long session compacts, Claude Code summarizes the conversation history to fit the context window. As of v2.1.198, the summarization request inherits your session's [extended thinking](model-config.md#extended-thinking) configuration, so it reasons with thinking enabled when your session has it enabled and stays off otherwise. Thinking affects only how the summary is produced; your session settings are unchanged afterward. What happens to each kind of content depends on how it was loaded:
 
 | Mechanism                                                                                                | After compaction                                                                            |
 | :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
 | System prompt and output style                                                                           | Unchanged; not part of message history                                                      |
 | Project-root CLAUDE.md and unscoped rules                                                                | Re-injected from disk                                                                       |
 | Auto memory                                                                                              | Re-injected from disk                                                                       |
-| The plan Claude wrote in [plan mode](permission-modes.md)        | Re-injected from disk                                                                       |
+| The plan Claude wrote in [plan mode](permission-modes.md#analyze-before-you-edit-with-plan-mode)        | Re-injected from disk                                                                       |
 | Rules with `paths:` frontmatter                                                                          | Claude Code reloads them as Claude reads files they match                                   |
 | Nested CLAUDE.md in subdirectories                                                                       | Claude Code reloads them as Claude reads files in that subdirectory                         |
 | Files Claude read or edited                                                                              | Claude Code re-reads up to five, most recently modified first                               |
 | Invoked skill bodies                                                                                     | Re-injected, capped at 5,000 tokens per skill and 25,000 tokens total; oldest dropped first |
 | Context that hooks added earlier                                                                         | Summarized with the rest of the conversation                                                |
-| [SessionStart hooks](hooks-guide.md) that match the `compact` source | Claude Code runs them and adds their output to the compacted context                        |
+| [SessionStart hooks](hooks-guide.md#re-inject-context-after-compaction) that match the `compact` source | Claude Code runs them and adds their output to the compacted context                        |
 
 Path-scoped rules and nested CLAUDE.md files load into message history when their trigger file is read, so compaction summarizes them away with everything else. Right after compaction, Claude Code re-reads up to five of the files Claude has read or edited in the session, choosing the ones modified most recently, and reloads the rules and nested CLAUDE.md files that apply to those files. A file over 5,000 tokens comes back as a path reference without its content, shown as `Referenced file` instead of `Read`. Its rules still reload. If a rule must persist across compaction, drop the `paths:` frontmatter or move it to the project-root CLAUDE.md.
 
@@ -1171,19 +1171,19 @@ Skill bodies are re-injected after compaction, but large skills are truncated to
 
 ## When your context fills up
 
-Claude Code compacts automatically as you approach the limit, so a full context window doesn't end your session. The automatic pass works the same way as the `/compact` step in the timeline. See [When context fills up](how-claude-code-works.md) for what it preserves.
+Claude Code compacts automatically as you approach the limit, so a full context window doesn't end your session. The automatic pass works the same way as the `/compact` step in the timeline. See [When context fills up](how-claude-code-works.md#when-context-fills-up) for what it preserves.
 
 You can also act before the automatic pass runs:
 
 * **Compact with a focus**: run `/compact` with instructions, like `/compact focus on the auth bug fix`, before starting a long new task. The summary keeps what you choose instead of what the automatic pass guesses is important.
-* **Compact part of the conversation**: run `/rewind`, select a message, and choose **Summarize from here** or **Summarize up to here**. See [Rewind and summarize](checkpointing.md) for what each option keeps and how to guide the summary.
-* **Compact earlier**: run [`/autocompact`](commands.md) with a token count, like `/autocompact 500k`, to set how full the context window gets before the automatic pass runs. See [Set the auto-compact window](model-config.md) for accepted values and overrides.
+* **Compact part of the conversation**: run `/rewind`, select a message, and choose **Summarize from here** or **Summarize up to here**. See [Rewind and summarize](checkpointing.md#rewind-and-summarize) for what each option keeps and how to guide the summary.
+* **Compact earlier**: run [`/autocompact`](commands.md#all-commands) with a token count, like `/autocompact 500k`, to set how full the context window gets before the automatic pass runs. See [Set the auto-compact window](model-config.md#set-the-auto-compact-window) for accepted values and overrides.
 * **Clear between tasks**: run `/clear` when switching to unrelated work. Old conversation crowds out the files you need next and costs tokens on every message.
 * **Delegate large reads**: send research to a [subagent](sub-agents.md) so the file contents stay in its context window, not yours.
 
-If you need a larger window rather than a smaller conversation, Fable 5.1, Fable 5, Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support a 1 million token context window. See [Extended context](model-config.md) for availability by plan and how to select a `[1m]` model variant. Sonnet 5 runs at 1M with no `[1m]` variant to select; see [Sonnet 5 context window](model-config.md) for its auto-compaction thresholds and the LLM gateway exception. Compaction works the same way at the larger limit.
+If you need a larger window rather than a smaller conversation, Fable 5.1, Fable 5, Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support a 1 million token context window. See [Extended context](model-config.md#extended-context) for availability by plan and how to select a `[1m]` model variant. Sonnet 5 runs at 1M with no `[1m]` variant to select; see [Sonnet 5 context window](model-config.md#sonnet-5-context-window) for its auto-compaction thresholds and the LLM gateway exception. Compaction works the same way at the larger limit.
 
-The point where automatic compaction runs depends on your model and configuration. See [Default auto-compact thresholds](model-config.md) for the boundaries per model, and [Correct the window for a gateway or custom model ID](model-config.md) if Claude Code assumes the wrong window for your model ID, such as an [LLM gateway](llm-gateway.md) alias.
+The point where automatic compaction runs depends on your model and configuration. See [Default auto-compact thresholds](model-config.md#default-auto-compact-thresholds) for the boundaries per model, and [Correct the window for a gateway or custom model ID](model-config.md#correct-the-window-for-a-gateway-or-custom-model-id) if Claude Code assumes the wrong window for your model ID, such as an [LLM gateway](llm-gateway.md) alias.
 
 ## Check your own session
 
@@ -1198,7 +1198,7 @@ For deeper coverage of the features shown in the timeline, see these pages:
 * [Subagents](sub-agents.md): delegate research to a separate context window
 * [Best practices](best-practices.md): managing context as your primary constraint
 * [Prompt caching](prompt-caching.md): which actions invalidate the cached prefix
-* [Reduce token usage](costs.md): strategies for keeping context usage low
+* [Reduce token usage](costs.md#reduce-token-usage): strategies for keeping context usage low
 
 ---
 

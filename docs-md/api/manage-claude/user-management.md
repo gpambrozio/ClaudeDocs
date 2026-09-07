@@ -6,27 +6,27 @@ url: https://platform.claude.com/docs/en/manage-claude/user-management
 description: "Manage the people in your Claude Enterprise organization with the Admin API: list members and change roles, send and withdraw invites, manage groups, and read custom roles."
 ---
 
-This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](api/admin.md): list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage your enterprise's groups and their membership, and read your organization's custom roles. For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](manage-claude/admin-api.md).
+This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](../api/admin.md): list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage your enterprise's groups and their membership, and read your organization's custom roles. For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](admin-api.md).
 
-Group and custom-role requests don't require the `anthropic-beta: ce-user-management-2026-07-13` [beta header](api/beta-headers.md). Requests that still send it are accepted and behave identically.
+Group and custom-role requests don't require the `anthropic-beta: ce-user-management-2026-07-13` [beta header](../api/beta-headers.md). Requests that still send it are accepted and behave identically.
 
 ## Which endpoints can your organization use?
 
-The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with [different keys](manage-claude/admin-api-keys.md) and each have access to a different subset of the endpoints:
+The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with [different keys](admin-api-keys.md) and each have access to a different subset of the endpoints:
 
 | Endpoints                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Claude Console (Claude Platform)                                                                  | Claude Enterprise (claude.ai)    |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------- |
-| [Members](manage-claude/user-management.md) and [invites](manage-claude/user-management.md)                                                                                                                                                                                                                                                                             | Available; see the [Admin API guide](manage-claude/admin-api.md) | Available (this page)            |
-| [Groups](manage-claude/user-management.md)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available (this page)            |
-| [Custom roles](manage-claude/user-management.md)                                                                                                                                                                                                                                                                                                                                                            | Not available                                                                                     | Available, read-only (this page) |
-| [Spend limits](manage-claude/spend-limits-api.md)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available                        |
-| [Workspaces](manage-claude/workspaces.md), [API keys](manage-claude/admin-api.md), [usage and cost reports](manage-claude/usage-cost-api.md), [rate limits](manage-claude/rate-limits-api.md), and the other endpoints in the [Admin API guide](manage-claude/admin-api.md) | Available                                                                                         | Not available                    |
+| [Members](user-management.md#members) and [invites](user-management.md#invites)                                                                                                                                                                                                                                                                             | Available; see the [Admin API guide](admin-api.md) | Available (this page)            |
+| [Groups](user-management.md#groups)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available (this page)            |
+| [Custom roles](user-management.md#custom-roles)                                                                                                                                                                                                                                                                                                                                                            | Not available                                                                                     | Available, read-only (this page) |
+| [Spend limits](spend-limits-api.md)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available                        |
+| [Workspaces](workspaces.md), [API keys](admin-api.md#api-keys), [usage and cost reports](usage-cost-api.md), [rate limits](rate-limits-api.md), and the other endpoints in the [Admin API guide](admin-api.md) | Available                                                                                         | Not available                    |
 
-Members and invites are the same endpoints for both organization types; this page documents their Claude Enterprise behavior, including the Claude Enterprise [organization roles](manage-claude/user-management.md). The group and custom-role endpoints exist only for Claude Enterprise.
+Members and invites are the same endpoints for both organization types; this page documents their Claude Enterprise behavior, including the Claude Enterprise [organization roles](user-management.md#organization-roles). The group and custom-role endpoints exist only for Claude Enterprise.
 
 **Scoped Admin API key required**
 
-These endpoints require an Admin API key with the `read:members` scope (member and invite `GET` endpoints, and all custom-role endpoints; there is no separate role scope), the `write:members` scope (member and invite `POST` and `DELETE` endpoints), the `read:rbac_groups` scope (group `GET` endpoints), or the `write:rbac_groups` scope (group `POST` and `DELETE` endpoints). A key carrying the `read:org_audit` scope (a read-only scope for security-audit integrations) can also call every `GET` endpoint on this page and the [Compliance API](manage-claude/compliance-api.md) read endpoints. See [Create an Admin API key](manage-claude/admin-api-keys.md) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request, together with the [`anthropic-version`](api/versioning.md) header.
+These endpoints require an Admin API key with the `read:members` scope (member and invite `GET` endpoints, and all custom-role endpoints; there is no separate role scope), the `write:members` scope (member and invite `POST` and `DELETE` endpoints), the `read:rbac_groups` scope (group `GET` endpoints), or the `write:rbac_groups` scope (group `POST` and `DELETE` endpoints). A key carrying the `read:org_audit` scope (a read-only scope for security-audit integrations) can also call every `GET` endpoint on this page and the [Compliance API](compliance-api.md) read endpoints. See [Create an Admin API key](admin-api-keys.md#create-a-key-for-a-claude-enterprise-organization) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request, together with the [`anthropic-version`](../api/versioning.md) header.
 
 ## Overview
 
@@ -94,11 +94,11 @@ If your organization's plan draws members from a finite pool of purchased seats,
 
 ### Groups and roles
 
-Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups are owned by your enterprise as a whole (the parent organization together with every organization under it) rather than by a single organization, so the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group's `roles` field lists the IDs of the custom roles attached to it; resolve them to names and permissions with the [custom role endpoints](manage-claude/user-management.md), noting that the role catalog is per-organization while groups are enterprise-wide, so fetching a role that belongs to a different organization of your enterprise returns 404 for your key. The field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles.
+Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups are owned by your enterprise as a whole (the parent organization together with every organization under it) rather than by a single organization, so the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group's `roles` field lists the IDs of the custom roles attached to it; resolve them to names and permissions with the [custom role endpoints](user-management.md#custom-roles), noting that the role catalog is per-organization while groups are enterprise-wide, so fetching a role that belongs to a different organization of your enterprise returns 404 for your key. The field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles.
 
 ## Versioning
 
-Send the `anthropic-version` header on every request; see [API versions](api/versioning.md) for the available versions.
+Send the `anthropic-version` header on every request; see [API versions](../api/versioning.md) for the available versions.
 
 ## Rate limits
 
@@ -110,7 +110,7 @@ Member and invite lists use ID-based pagination: pass `limit` (default 20, max 1
 
 ## Error responses
 
-Error responses follow the standard shape documented in [Errors](api/errors.md).
+Error responses follow the standard shape documented in [Errors](../api/errors.md).
 
 ## Members
 
@@ -118,7 +118,7 @@ Error responses follow the standard shape documented in [Errors](api/errors.md).
 
 `GET /v1/organizations/users` returns the organization's members, most recently added first. Filter by `email` to look up a specific member; the match is case-insensitive and tolerates common variants of the same address (for example, `jane+hiring@example.com` matches `jane@example.com`). Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [List users](api/admin/users/list.md) in the API reference.
+For complete parameter details and response schemas, see [List users](../api/admin/users/list.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/users?email=jane@example.com" \
@@ -130,7 +130,7 @@ curl "https://api.anthropic.com/v1/organizations/users?email=jane@example.com" \
 
 `GET /v1/organizations/users/{user_id}` returns one member by ID. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [Get user](api/admin/users/retrieve.md) in the API reference.
+For complete parameter details and response schemas, see [Get user](../api/admin/users/retrieve.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
@@ -142,7 +142,7 @@ curl "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQr
 
 `POST /v1/organizations/users/{user_id}` sets the member's role to `user` or `managed`. Members holding an administrative role (`owner`, `membership_admin`, or `primary_owner`) cannot be changed through this endpoint, and administrative roles cannot be assigned; both return 400 and are managed in claude.ai organization settings. If your organization's identity provider manages roles (advanced SSO or advanced SCIM provisioning), role updates return 400. Requires the `write:members` scope.
 
-For complete parameter details and response schemas, see [Update user](api/admin/users/update.md) in the API reference.
+For complete parameter details and response schemas, see [Update user](../api/admin/users/update.md) in the API reference.
 
 ```bash cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
@@ -156,7 +156,7 @@ curl -X POST "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIj
 
 `DELETE /v1/organizations/users/{user_id}` removes the member from the organization, returning any purchased seat they occupied to the organization's pool. Members holding an administrative role cannot be removed through this endpoint, and if your identity provider manages membership (SCIM), removals return 400. Requires the `write:members` scope.
 
-For complete parameter details and response schemas, see [Remove user](api/admin/users/delete.md) in the API reference.
+For complete parameter details and response schemas, see [Remove user](../api/admin/users/delete.md) in the API reference.
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
@@ -181,7 +181,7 @@ On plans that draw members from a finite seat pool, the invite automatically tak
 
 The optional `rbac_group_ids` field lists groups (by `rbac_group_`-prefixed ID) to assign to the member when they accept. Passing a non-empty `rbac_group_ids` additionally requires the key to carry the `write:rbac_groups` scope, because group assignment can grant the permissions attached to the group's roles.
 
-For complete parameter details and response schemas, see [Create invite](api/admin/invites/create.md) in the API reference.
+For complete parameter details and response schemas, see [Create invite](../api/admin/invites/create.md) in the API reference.
 
 ```bash cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/invites" \
@@ -213,7 +213,7 @@ curl -X POST "https://api.anthropic.com/v1/organizations/invites" \
 
 `GET /v1/organizations/invites` returns the organization's invites, most recent first, across the `pending`, `accepted`, and `expired` states; there is no status filter. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [List invites](api/admin/invites/list.md) in the API reference.
+For complete parameter details and response schemas, see [List invites](../api/admin/invites/list.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/invites?limit=20" \
@@ -225,7 +225,7 @@ curl "https://api.anthropic.com/v1/organizations/invites?limit=20" \
 
 `GET /v1/organizations/invites/{invite_id}` returns one invite by ID. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [Get invite](api/admin/invites/retrieve.md) in the API reference.
+For complete parameter details and response schemas, see [Get invite](../api/admin/invites/retrieve.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/invites/invite_01QrStUvWxYzAbCdEfGhIj" \
@@ -237,7 +237,7 @@ curl "https://api.anthropic.com/v1/organizations/invites/invite_01QrStUvWxYzAbCd
 
 `DELETE /v1/organizations/invites/{invite_id}` withdraws a `pending` invite, deactivating the link in the invitation email. Withdrawing an `accepted` invite returns 400 (remove the member instead); withdrawing an `expired` invite returns 400. Requires the `write:members` scope.
 
-For complete parameter details and response schemas, see [Delete invite](api/admin/invites/delete.md) in the API reference.
+For complete parameter details and response schemas, see [Delete invite](../api/admin/invites/delete.md) in the API reference.
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/organizations/invites/invite_01QrStUvWxYzAbCdEfGhIj" \
@@ -253,7 +253,7 @@ Groups your enterprise creates directly, in [claude.ai organization settings](ht
 
 `GET /v1/organizations/rbac_groups` returns your enterprise's groups, including identity-provider-managed (`scim`) groups. Requires the `read:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [List groups](api/admin/rbac_groups/list.md) in the API reference.
+For complete parameter details and response schemas, see [List groups](../api/admin/rbac_groups/list.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_groups?limit=20" \
@@ -283,7 +283,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_groups?limit=20" \
 
 `GET /v1/organizations/rbac_groups/{group_id}` returns one group by ID. Requires the `read:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Get group](api/admin/rbac_groups/retrieve.md) in the API reference.
+For complete parameter details and response schemas, see [Get group](../api/admin/rbac_groups/retrieve.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
@@ -295,7 +295,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYz
 
 `POST /v1/organizations/rbac_groups` creates a group with the given `name` (1–255 characters) and no roles or members. Requires the `write:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Create group](api/admin/rbac_groups/create.md) in the API reference.
+For complete parameter details and response schemas, see [Create group](../api/admin/rbac_groups/create.md) in the API reference.
 
 ```bash cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups" \
@@ -321,7 +321,7 @@ curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups" \
 
 `POST /v1/organizations/rbac_groups/{group_id}` updates the group. `name` is the only field this endpoint can change. Requires the `write:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Update group](api/admin/rbac_groups/update.md) in the API reference.
+For complete parameter details and response schemas, see [Update group](../api/admin/rbac_groups/update.md) in the API reference.
 
 ```bash cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
@@ -333,9 +333,9 @@ curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_
 
 ### Delete a group
 
-`DELETE /v1/organizations/rbac_groups/{group_id}` deletes the group. Its members remain members of their organizations, but they lose the permissions of its attached roles, and a group [spend limit](manage-claude/spend-limits-api.md), if one existed, stops applying to them. Requires the `write:rbac_groups` scope.
+`DELETE /v1/organizations/rbac_groups/{group_id}` deletes the group. Its members remain members of their organizations, but they lose the permissions of its attached roles, and a group [spend limit](spend-limits-api.md), if one existed, stops applying to them. Requires the `write:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Delete group](api/admin/rbac_groups/delete.md) in the API reference.
+For complete parameter details and response schemas, see [Delete group](../api/admin/rbac_groups/delete.md) in the API reference.
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
@@ -354,7 +354,7 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_grou
 
 `GET /v1/organizations/rbac_groups/{group_id}/members` returns the group's members (each with their `user_id` and email), oldest first. Only current members of your enterprise's organizations are returned, so a page might contain fewer than `limit` entries while `has_more` is `true`. Requires the `read:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [List group members](api/admin/rbac_groups/members/list.md) in the API reference.
+For complete parameter details and response schemas, see [List group members](../api/admin/rbac_groups/members/list.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members?limit=100" \
@@ -380,9 +380,9 @@ curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYz
 
 ### Add a member to a group
 
-`POST /v1/organizations/rbac_groups/{group_id}/members` adds an organization member to the group by `user_id`. The user must already be a member of one of your enterprise's organizations (the request returns 404 otherwise), and adding someone who is already in the group returns 400. For `scim` groups, membership is managed in your identity provider and this request returns 400. To assign groups to a person who has not joined yet, use `rbac_group_ids` on [invite creation](manage-claude/user-management.md) instead. Requires the `write:rbac_groups` scope.
+`POST /v1/organizations/rbac_groups/{group_id}/members` adds an organization member to the group by `user_id`. The user must already be a member of one of your enterprise's organizations (the request returns 404 otherwise), and adding someone who is already in the group returns 400. For `scim` groups, membership is managed in your identity provider and this request returns 400. To assign groups to a person who has not joined yet, use `rbac_group_ids` on [invite creation](user-management.md#create-an-invite) instead. Requires the `write:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Add group member](api/admin/rbac_groups/members/create.md) in the API reference.
+For complete parameter details and response schemas, see [Add group member](../api/admin/rbac_groups/members/create.md) in the API reference.
 
 ```bash cURL
 curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members" \
@@ -406,7 +406,7 @@ curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_
 
 `DELETE /v1/organizations/rbac_groups/{group_id}/members/{user_id}` removes the member from the group; they remain a member of their organization. The request returns 404 if the user is not a member of the group, and 400 for `scim` groups, whose membership is managed in your identity provider. Requires the `write:rbac_groups` scope.
 
-For complete parameter details and response schemas, see [Remove group member](api/admin/rbac_groups/members/delete.md) in the API reference.
+For complete parameter details and response schemas, see [Remove group member](../api/admin/rbac_groups/members/delete.md) in the API reference.
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members/user_01AbCdEfGhIjKlMnOpQrSt" \
@@ -430,7 +430,7 @@ Custom roles are read-only through the API: these endpoints catalog your organiz
 
 `GET /v1/organizations/rbac_roles` returns your organization's custom roles. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [List roles](api/admin/rbac_roles/list.md) in the API reference.
+For complete parameter details and response schemas, see [List roles](../api/admin/rbac_roles/list.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles?limit=20" \
@@ -458,7 +458,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_roles?limit=20" \
 
 `GET /v1/organizations/rbac_roles/{role_id}` returns one role by ID. Requires the `read:members` scope.
 
-For complete parameter details and response schemas, see [Get role](api/admin/rbac_roles/retrieve.md) in the API reference.
+For complete parameter details and response schemas, see [Get role](../api/admin/rbac_roles/retrieve.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv" \
@@ -472,7 +472,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIj
 
 Two `action` values need special care: an `organization` permission whose action is `capability_access_all` (every product feature) or `capability_access_all_ga` (every stable product feature, that is, every feature not labeled beta or research preview) is a blanket grant (one that covers neither model access nor the `permission_`-prefixed admin-panel permissions) and is listed as that single row rather than expanded. When you tally what a role grants, treat a blanket row as covering everything its variant describes, not just the features named in other rows.
 
-For complete parameter details and response schemas, see [List role permissions](api/admin/rbac_roles/permissions/list.md) in the API reference.
+For complete parameter details and response schemas, see [List role permissions](../api/admin/rbac_roles/permissions/list.md) in the API reference.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv/permissions?limit=20" \
@@ -530,13 +530,13 @@ curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIj
 
 3. Remove members who should no longer be in the group with `DELETE /v1/organizations/rbac_groups/{group_id}/members/{user_id}`. For `scim` groups, make the change in your identity provider instead.
 
-For a workflow that combines group membership with a temporary spend limit raise, see [Temporarily raise a member's spend limit during an incident](manage-claude/spend-limits-api.md) on the Spend Limits API page.
+For a workflow that combines group membership with a temporary spend limit raise, see [Temporarily raise a member's spend limit during an incident](spend-limits-api.md#temporarily-raise-a-members-spend-limit-during-an-incident) on the Spend Limits API page.
 
 ## Frequently asked questions
 
 ### Is this a different API from the Admin API?
 
-No. The member and invite endpoints are the same `/v1/organizations/` endpoints that Claude Console organizations use; this page documents their Claude Enterprise behavior. The group and custom-role endpoints are part of the same API and exist only for Claude Enterprise organizations. The [availability table](manage-claude/user-management.md) shows which endpoints each organization type can call.
+No. The member and invite endpoints are the same `/v1/organizations/` endpoints that Claude Console organizations use; this page documents their Claude Enterprise behavior. The group and custom-role endpoints are part of the same API and exist only for Claude Enterprise organizations. The [availability table](user-management.md#which-endpoints-can-your-organization-use) shows which endpoints each organization type can call.
 
 ### Can I assign the owner or membership admin role through the API?
 
@@ -544,7 +544,7 @@ No. The API assigns only `user` and `managed`, on invite creation and role updat
 
 ### Can I create or modify groups through the API?
 
-Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and add or remove their members. Two things the API cannot change: groups provisioned by your identity provider (`source_type: "scim"`), whose name and membership are owned by the identity provider, and custom roles, which are managed in claude.ai organization settings (the API [reads them](manage-claude/user-management.md)).
+Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and add or remove their members. Two things the API cannot change: groups provisioned by your identity provider (`source_type: "scim"`), whose name and membership are owned by the identity provider, and custom roles, which are managed in claude.ai organization settings (the API [reads them](user-management.md#custom-roles)).
 
 ### Does an unaccepted invite consume a seat?
 

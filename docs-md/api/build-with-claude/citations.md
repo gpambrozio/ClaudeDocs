@@ -7,12 +7,12 @@ description: Ground Claude's responses in your source documents. Citations retur
 ---
 
 ## Compatibility
-- [ZDR](manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](manage-claude/api-and-data-retention.md))
+- [ZDR](../manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
-All [active models](models/overview.md) support citations.
+All [active models](../models/overview.md) support citations.
 
 Share your feedback and suggestions about the citations feature using the [citations feedback form](https://forms.gle/9n9hSrKnKe3rpowH9).
 
@@ -314,7 +314,7 @@ Integrate citations with Claude in these steps:
 
 **Provide document(s) and enable citations**
 
-* Include documents in any of the supported formats: [PDFs](build-with-claude/citations.md), [plain text](build-with-claude/citations.md), or [custom content](build-with-claude/citations.md) documents.
+* Include documents in any of the supported formats: [PDFs](citations.md#pdf-documents), [plain text](citations.md#plain-text-documents), or [custom content](citations.md#custom-content-documents) documents.
 * Set `citations.enabled=true` on each of your documents. Currently, citations must be enabled on all or none of the documents within a request.
 * Only text citations are currently supported. Image citations are not yet possible.
 
@@ -322,7 +322,7 @@ Integrate citations with Claude in these steps:
 
 * Document contents are "chunked" to define the minimum granularity of possible citations. For example, sentence chunking lets Claude cite a single sentence or chain together multiple consecutive sentences to cite a paragraph or longer passage.
 
-  * **For PDFs:** Text is extracted as described in [PDF support](build-with-claude/pdf-support.md) and content is chunked into sentences. Citing images from PDFs is not currently supported.
+  * **For PDFs:** Text is extracted as described in [PDF support](pdf-support.md) and content is chunked into sentences. Citing images from PDFs is not currently supported.
   * **For plain text documents:** Content is chunked into sentences that can be cited from.
   * **For custom content documents:** Your provided content blocks are used as-is and no further chunking is done.
 
@@ -340,7 +340,7 @@ Integrate citations with Claude in these steps:
 
 **Automatic chunking vs custom content**
 
-By default, plain text and PDF documents are automatically chunked into sentences. If you need more control over citation granularity (for example, for bullet points or transcripts), use custom content documents instead. See [Document types](build-with-claude/citations.md) for more details.
+By default, plain text and PDF documents are automatically chunked into sentences. If you need more control over citation granularity (for example, for bullet points or transcripts), use custom content documents instead. See [Document types](citations.md#document-types) for more details.
 
 For example, if you want Claude to be able to cite specific sentences from your RAG chunks, you should put each RAG chunk into a plain text document. Otherwise, if you do not want any further chunking to be done, or if you want to customize any additional chunking, you can put RAG chunks into custom content document(s).
 
@@ -365,11 +365,11 @@ For example, if you want Claude to be able to cite specific sentences from your 
 
 ### Feature compatibility
 
-Citations work in conjunction with other API features including [prompt caching](build-with-claude/prompt-caching.md), [token counting](build-with-claude/token-counting.md), and [batch processing](build-with-claude/batch-processing.md).
+Citations work in conjunction with other API features including [prompt caching](prompt-caching.md), [token counting](token-counting.md), and [batch processing](batch-processing.md).
 
 **Citations and structured outputs are incompatible**
 
-Citations cannot be used together with [structured outputs](build-with-claude/structured-outputs.md). If you enable citations on any user-provided document (`document` blocks or `search_result` blocks) and also include the `output_config.format` parameter (or the deprecated `output_format` parameter), the API returns a 400 error.
+Citations cannot be used together with [structured outputs](structured-outputs.md). If you enable citations on any user-provided document (`document` blocks or `search_result` blocks) and also include the `output_config.format` parameter (or the deprecated `output_format` parameter), the API returns a 400 error.
 
 This is because citations require interleaving citation blocks with text output, which is incompatible with the strict JSON schema constraints of structured outputs.
 
@@ -689,7 +689,7 @@ In this example:
 
 ### Choosing a document type
 
-Three document types are supported for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded through the [Files API](build-with-claude/files.md) and referenced by `file_id`:
+Three document types are supported for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded through the [Files API](files.md) and referenced by `file_id`:
 
 | Type           | Best for                                                        | Chunking               | Citation format               |
 | -------------- | --------------------------------------------------------------- | ---------------------- | ----------------------------- |
@@ -697,7 +697,7 @@ Three document types are supported for citations. Documents can be provided dire
 | PDF            | PDF files with text content                                     | Sentence               | Page numbers (1-indexed)      |
 | Custom content | Lists, transcripts, special formatting, more granular citations | No additional chunking | Block indices (0-indexed)     |
 
-For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](build-with-claude/files.md).
+For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](files.md#working-with-other-file-formats).
 
 ### Plain text documents
 
@@ -723,7 +723,7 @@ The intro example at the top of this page shows a complete plain text request in
 
 **Files API**
 
-These examples reference a file uploaded through the [Files API](build-with-claude/files.md) as a `document` source.
+These examples reference a file uploaded through the [Files API](files.md) as a `document` source.
 
 ```bash cURL
 curl -X POST https://api.anthropic.com/v1/messages \
@@ -1536,7 +1536,7 @@ puts response
 
 **Files API**
 
-These examples reference a file uploaded through the [Files API](build-with-claude/files.md) as a `document` source.
+These examples reference a file uploaded through the [Files API](files.md) as a `document` source.
 
 ```bash cURL
 curl -X POST https://api.anthropic.com/v1/messages \

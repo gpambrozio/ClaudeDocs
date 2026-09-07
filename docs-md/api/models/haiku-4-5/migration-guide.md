@@ -6,9 +6,9 @@ url: https://platform.claude.com/docs/en/models/haiku-4-5/migration-guide
 description: "Migrate to Claude Haiku 4.5 from earlier Haiku models: model IDs, breaking changes, and a migration checklist."
 ---
 
-This guide covers migrating [Messages API](build-with-claude/working-with-messages.md) code. If you use [Claude Managed Agents](managed-agents/overview.md), no changes beyond updating the model name are required.
+This guide covers migrating [Messages API](../../build-with-claude/working-with-messages.md) code. If you use [Claude Managed Agents](../../managed-agents/overview.md), no changes beyond updating the model name are required.
 
-**Automate your migration with the Claude API skill.** In Claude Code, run `/claude-api migrate` to invoke the bundled [Claude API skill](agents-and-tools/agent-skills/claude-api-skill.md). It works for any current Claude model as the target:
+**Automate your migration with the Claude API skill.** In Claude Code, run `/claude-api migrate` to invoke the bundled [Claude API skill](../../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model). It works for any current Claude model as the target:
 
 ```text wrap
 /claude-api migrate this project to claude-haiku-4-5
@@ -18,15 +18,15 @@ The skill applies the model ID swap and, as needed, breaking parameter changes, 
 
 Claude Haiku 4.5 is the fastest and most intelligent Haiku model with near-frontier performance, delivering premium model quality for interactive applications and high-volume processing.
 
-For a complete overview of capabilities, see the [models overview](models/overview.md).
+For a complete overview of capabilities, see the [models overview](../overview.md).
 
-For Claude Haiku 4.5 pricing, see [Claude pricing](about-claude/pricing.md).
+For Claude Haiku 4.5 pricing, see [Claude pricing](../../about-claude/pricing.md).
 
 For significant performance improvements on coding and reasoning tasks, consider enabling extended thinking with `thinking: {type: "enabled", budget_tokens: N}`.
 
-Extended thinking impacts [prompt caching](build-with-claude/prompt-caching.md) efficiency.
+Extended thinking impacts [prompt caching](../../build-with-claude/prompt-caching.md#caching-with-thinking-blocks) efficiency.
 
-Extended thinking is deprecated in Claude 4.6 models and removed in Claude Opus 4.7. If using newer models, use [adaptive thinking](build-with-claude/thinking.md) instead.
+Extended thinking is deprecated in Claude 4.6 models and removed in Claude Opus 4.7. If using newer models, use [adaptive thinking](../../build-with-claude/thinking.md) instead.
 
 ## Migrating to Claude Haiku 4.5 from Claude Haiku 3.5 and earlier Haiku models
 
@@ -38,9 +38,9 @@ model = "claude-3-5-haiku-20241022"  # Before
 model = "claude-haiku-4-5-20251001"  # After
 ```
 
-**Review new rate limits:** Haiku 4.5 has separate rate limits from Haiku 3.5. See [Rate limits](api/rate-limits.md) documentation for details.
+**Review new rate limits:** Haiku 4.5 has separate rate limits from Haiku 3.5. See [Rate limits](../../api/rate-limits.md) documentation for details.
 
-**Explore new capabilities:** See the [models overview](models/overview.md) for details on context awareness, increased output capacity (64k tokens), higher intelligence, and improved speed.
+**Explore new capabilities:** See the [models overview](../overview.md) for details on context awareness, increased output capacity (64k tokens), higher intelligence, and improved speed.
 
 ### Breaking changes
 
@@ -60,11 +60,11 @@ These breaking changes apply when migrating from Claude 3.x Haiku models.
 
 3. **Handle the `refusal` stop reason**
 
-   Update your application to [handle `refusal` stop reasons](test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md).
+   Update your application to [handle `refusal` stop reasons](../../test-and-evaluate/strengthen-guardrails/handle-streaming-refusals.md).
 
 4. **Update your prompts for behavioral changes**
 
-   Claude 4 models have a more concise, direct communication style. Review [prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) for optimization guidance.
+   Claude 4 models have a more concise, direct communication style. Review [prompting best practices](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md) for optimization guidance.
 
 ### Haiku 4.5 migration checklist
 
@@ -74,7 +74,7 @@ These breaking changes apply when migrating from Claude 3.x Haiku models.
 * **BREAKING:** Update sampling parameters to use only `temperature` OR `top_p`, not both (setting both returns a 400 error)
 * Handle new `refusal` stop reason in your application
 * Review and adjust for new rate limits (separate from Haiku 3.5)
-* Review and update prompts following [prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
+* Review and update prompts following [prompting best practices](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
 * Consider enabling extended thinking for complex reasoning tasks
 * Test in development environment before production deployment
 

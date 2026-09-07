@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
 description: Agent Skills are modular capabilities that extend Claude's functionality. Each Skill packages instructions, metadata, and optional resources (scripts, templates) that Claude uses automatically when relevant.
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
 ## Why use Skills
 
@@ -24,13 +24,13 @@ For more on the architecture and real-world applications of Agent Skills, see th
 
 Anthropic provides pre-built Agent Skills for common document tasks (PowerPoint, Excel, Word, PDF), and you can create your own custom Skills. Both work the same way: once a Skill is available in your environment, Claude uses it automatically when relevant to your request.
 
-**Pre-built Agent Skills** are available on claude.ai, the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, Agent Skills require a [Hosted on Anthropic deployment](build-with-claude/claude-in-microsoft-foundry.md). See [Available Skills](agents-and-tools/agent-skills/overview.md) for the complete list.
+**Pre-built Agent Skills** are available on claude.ai, the Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, Agent Skills require a [Hosted on Anthropic deployment](../../build-with-claude/claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure). See [Available Skills](overview.md#available-skills) for the complete list.
 
-**Custom Skills** let you package domain expertise and organizational knowledge. They're available across Claude's products: create them in Claude Code, upload them through the Claude API, or add them in claude.ai settings. On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), upload custom Skills through the Skills API.
+**Custom Skills** let you package domain expertise and organizational knowledge. They're available across Claude's products: create them in Claude Code, upload them through the Claude API, or add them in claude.ai settings. On [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) and [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), upload custom Skills through the Skills API.
 
 **Get started:**
 
-* For pre-built Agent Skills: See the [quickstart tutorial](agents-and-tools/agent-skills/quickstart.md) to start using PowerPoint, Excel, Word, and PDF Skills in the API
+* For pre-built Agent Skills: See the [quickstart tutorial](quickstart.md) to start using PowerPoint, Excel, Word, and PDF Skills in the API
 * For custom Skills: See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) to learn how to create your own Skills
 
 ## How Skills work
@@ -72,7 +72,7 @@ with pdfplumber.open("document.pdf") as pdf:
     text = pdf.pages[0].extract_text()
 ```
 
-For advanced form filling, see [FORMS.md](agents-and-tools/agent-skills/FORMS.md.md).
+For advanced form filling, see [FORMS.md](FORMS.md).
 ````
 
 When you request something that matches a Skill's description, Claude reads SKILL.md from the filesystem using bash. Only then does this content enter the context window.
@@ -141,25 +141,25 @@ Claude Platform on AWS and Microsoft Foundry inherit the same Skills behavior as
 
 ### Claude API
 
-The Claude API supports both pre-built Agent Skills and custom Skills. Both work identically: specify the relevant `skill_id` in the `container` parameter along with the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md).
+The Claude API supports both pre-built Agent Skills and custom Skills. Both work identically: specify the relevant `skill_id` in the `container` parameter along with the [code execution tool](../tool-use/code-execution-tool.md).
 
-**Prerequisites:** Using Skills through the API requires the [code execution tool](agents-and-tools/tool-use/code-execution-tool.md), whose container Skills run in.
+**Prerequisites:** Using Skills through the API requires the [code execution tool](../tool-use/code-execution-tool.md), whose container Skills run in.
 
 Use pre-built Agent Skills by referencing their `skill_id` (`pptx`, `xlsx`, `docx`, or `pdf`), or create and upload your own through the Skills API (`/v1/skills` endpoints). Custom Skills are shared workspace-wide: all workspace members can access them.
 
-Skills on the API run in a sandboxed container with no network access and no runtime package installation. See [Limitations and constraints](agents-and-tools/agent-skills/overview.md) for details.
+Skills on the API run in a sandboxed container with no network access and no runtime package installation. See [Limitations and constraints](overview.md#limitations-and-constraints) for details.
 
-To learn more, see [Using Agent Skills with the API](build-with-claude/skills-guide.md).
+To learn more, see [Using Agent Skills with the API](../../build-with-claude/skills-guide.md).
 
 ### Claude Code
 
-[Claude Code](overview.md) supports custom Skills. The pre-built document Skills (PowerPoint, Excel, Word, PDF) are not available in Claude Code, though the open-source [Claude API skill](agents-and-tools/agent-skills/claude-api-skill.md) comes bundled with it. See the full list of [built-in commands and Skills](commands.md) that ship with Claude Code.
+[Claude Code](../../../claude-code/overview.md) supports custom Skills. The pre-built document Skills (PowerPoint, Excel, Word, PDF) are not available in Claude Code, though the open-source [Claude API skill](claude-api-skill.md) comes bundled with it. See the full list of [built-in commands and Skills](../../../claude-code/commands.md) that ship with Claude Code.
 
 **Custom Skills:** Create Skills as directories with SKILL.md files. Claude discovers and uses them automatically.
 
 Custom Skills in Claude Code are filesystem-based and don't require API uploads: place them in `~/.claude/skills/` (personal) or `.claude/skills/` (project).
 
-To learn more, see [Use Skills in Claude Code](skills.md).
+To learn more, see [Use Skills in Claude Code](../../../claude-code/skills.md).
 
 ### claude.ai
 
@@ -212,7 +212,7 @@ description: Brief description of what this Skill does and when to use it
 * Maximum 1024 characters
 * Cannot contain XML tags
 
-The `description` must include both what the Skill does and when Claude should use it. For complete authoring guidance, see [Skill authoring best practices](agents-and-tools/agent-skills/best-practices.md).
+The `description` must include both what the Skill does and when Claude should use it. For complete authoring guidance, see [Skill authoring best practices](best-practices.md).
 
 ## Security considerations
 
@@ -228,7 +228,7 @@ If you must use a Skill from an untrusted or unknown source, exercise extreme ca
 * **Data exposure:** Skills with access to sensitive data could be designed to leak information to external systems
 * **Treat like installing software:** Be especially careful when integrating Skills into production systems with access to sensitive data or critical operations
 
-For organization-scale governance, vetting, and deployment guidance, see [Skills for enterprise](agents-and-tools/agent-skills/enterprise.md). Claude Enterprise organizations can also turn on [Skill content scanning](agents-and-tools/agent-skills/enterprise.md) for custom Skills uploaded in claude.ai and Claude Cowork. Scanning doesn't cover Skills uploaded through the Skills API or the Claude Console.
+For organization-scale governance, vetting, and deployment guidance, see [Skills for enterprise](enterprise.md). Claude Enterprise organizations can also turn on [Skill content scanning](enterprise.md#skill-content-scanning) for custom Skills uploaded in claude.ai and Claude Cowork. Scanning doesn't cover Skills uploaded through the Skills API or the Claude Console.
 
 ## Available Skills
 
@@ -241,13 +241,13 @@ The following pre-built Agent Skills are available for immediate use:
 * **Word (docx):** Create documents, edit content, format text
 * **PDF (pdf):** Generate formatted PDF documents and reports
 
-These Skills are available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), and claude.ai. See the [quickstart tutorial](agents-and-tools/agent-skills/quickstart.md) to start using them in the API.
+These Skills are available on the Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), and claude.ai. See the [quickstart tutorial](quickstart.md) to start using them in the API.
 
 ### Open-source Skills
 
 Anthropic also publishes open-source Skills in the [skills repository](https://github.com/anthropics/skills):
 
-* **[Claude API skill](agents-and-tools/agent-skills/claude-api-skill.md):** Provides Claude with up-to-date API reference material, SDK documentation, and best practices for eight programming languages. Bundled with Claude Code and also available for installation from the skills repository.
+* **[Claude API skill](claude-api-skill.md):** Provides Claude with up-to-date API reference material, SDK documentation, and best practices for eight programming languages. Bundled with Claude Code and also available for installation from the skills repository.
 
 ### Custom Skills examples
 
@@ -257,9 +257,9 @@ For complete examples of custom Skills, see the [Skills cookbook](https://platfo
 
 Agent Skills is not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
 
-For ZDR eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
+For ZDR eligibility across all features, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
-For audit logging of Skills API operations, see [Audit logging](build-with-claude/skills-guide.md) in Using Agent Skills with the API.
+For audit logging of Skills API operations, see [Audit logging](../../build-with-claude/skills-guide.md#audit-logging) in Using Agent Skills with the API.
 
 ## Limitations and constraints
 
@@ -296,7 +296,7 @@ The exact runtime environment available to your Skill depends on the product sur
 
   * **No network access:** Skills cannot make external API calls or access the internet.
   * **No runtime package installation:** Only pre-installed packages are available. You cannot install new packages during execution.
-  * **Pre-configured dependencies only:** Check the [Code execution tool](agents-and-tools/tool-use/code-execution-tool.md) documentation for the list of available packages.
+  * **Pre-configured dependencies only:** Check the [Code execution tool](../tool-use/code-execution-tool.md) documentation for the list of available packages.
 
 * **Claude Code:**
 

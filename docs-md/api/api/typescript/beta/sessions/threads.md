@@ -3523,7 +3523,7 @@ console.log(betaManagedAgentsSessionThread.id);
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -3553,7 +3553,7 @@ console.log(betaManagedAgentsSessionThread.id);
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -4681,7 +4681,7 @@ console.log(betaManagedAgentsSessionThread.id);
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_result"`
 
@@ -5829,7 +5829,7 @@ List Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -5859,7 +5859,7 @@ List Session Thread Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -6987,7 +6987,7 @@ List Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_result"`
 
@@ -8118,7 +8118,7 @@ Stream Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_confirmation"`
 
@@ -8148,7 +8148,7 @@ Stream Session Thread Events
 
     - `custom_tool_use_id: string`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.custom_tool_result"`
 
@@ -9276,7 +9276,7 @@ Stream Session Thread Events
 
     - `tool_use_id: string`
 
-      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](api/beta/sessions/events/list.md) `stop_reason.event_ids` field.
+      The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `type: "user.tool_result"`
 

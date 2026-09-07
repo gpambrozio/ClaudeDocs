@@ -34,11 +34,11 @@ The [comparison table](#compare-the-four-approaches) shows what each customizati
 
 ## Customize agent behavior
 
-Output styles, `append`, and a custom prompt string each change the system prompt directly. CLAUDE.md takes a different path: the SDK reads it and injects its content into the conversation as project context, not into the system prompt, so it shapes behavior alongside whichever system prompt you choose. [Skills](agent-sdk/skills.md), [hooks](agent-sdk/hooks.md), and [permissions](agent-sdk/permissions.md) also shape behavior outside the system prompt and are covered on their own pages.
+Output styles, `append`, and a custom prompt string each change the system prompt directly. CLAUDE.md takes a different path: the SDK reads it and injects its content into the conversation as project context, not into the system prompt, so it shapes behavior alongside whichever system prompt you choose. [Skills](skills.md), [hooks](hooks.md), and [permissions](permissions.md) also shape behavior outside the system prompt and are covered on their own pages.
 
 ### CLAUDE.md files for project-level instructions
 
-CLAUDE.md files give Claude persistent project context and instructions. The SDK injects their content into the conversation and leaves the system prompt untouched, so they work with any system prompt configuration. For what to put in CLAUDE.md, where to place it, and how to write effective instructions, see [When to add to CLAUDE.md](memory.md) and the rest of [How Claude remembers your project](memory.md). This section covers what's specific to the SDK: how CLAUDE.md loads.
+CLAUDE.md files give Claude persistent project context and instructions. The SDK injects their content into the conversation and leaves the system prompt untouched, so they work with any system prompt configuration. For what to put in CLAUDE.md, where to place it, and how to write effective instructions, see [When to add to CLAUDE.md](../memory.md#when-to-add-to-claude-md) and the rest of [How Claude remembers your project](../memory.md). This section covers what's specific to the SDK: how CLAUDE.md loads.
 
 The SDK reads CLAUDE.md when the matching setting source is enabled: `'project'` loads `CLAUDE.md` or `.claude/CLAUDE.md` from the working directory, and `'user'` loads `~/.claude/CLAUDE.md`. Default `query()` options enable both sources, so CLAUDE.md loads automatically. If you set `settingSources` in TypeScript or `setting_sources` in Python explicitly, include the sources you need. CLAUDE.md loading is controlled by setting sources, not by the `claude_code` preset.
 
@@ -102,9 +102,9 @@ Output styles are saved configurations that modify Claude's system prompt. They'
 
 #### Create an output style
 
-An output style is a markdown file with [frontmatter](output-styles.md) for metadata, followed by the prompt content. Save it to `~/.claude/output-styles/` for a user-level style available in every project, or `.claude/output-styles/` in your repository for a project-level style you can commit and share with your team.
+An output style is a markdown file with [frontmatter](../output-styles.md#frontmatter) for metadata, followed by the prompt content. Save it to `~/.claude/output-styles/` for a user-level style available in every project, or `.claude/output-styles/` in your repository for a project-level style you can commit and share with your team.
 
-A custom output style leaves the `claude_code` preset's software engineering instructions out and uses your own. To keep them and layer your instructions on top, set `keep-coding-instructions: true` in the frontmatter. Those instructions are only in Claude Code's full system prompt, so the setting has no effect in a session on the shorter system prompt, which you pin on or off with [`CLAUDE_CODE_SIMPLE_SYSTEM_PROMPT`](env-vars.md). Keep them when your agent is still doing software engineering work. Leave them out when you're replacing the role entirely.
+A custom output style leaves the `claude_code` preset's software engineering instructions out and uses your own. To keep them and layer your instructions on top, set `keep-coding-instructions: true` in the frontmatter. Those instructions are only in Claude Code's full system prompt, so the setting has no effect in a session on the shorter system prompt, which you pin on or off with [`CLAUDE_CODE_SIMPLE_SYSTEM_PROMPT`](../env-vars.md#variables). Keep them when your agent is still doing software engineering work. Leave them out when you're replacing the role entirely.
 
 The example below defines a code-review persona that keeps the coding instructions, since reviewing code still benefits from Claude Code's security and code-quality guidance. Save it as `~/.claude/output-styles/code-reviewer.md` to make it available across projects:
 
@@ -243,7 +243,7 @@ asyncio.run(main())
 
 **Tradeoffs:** the working directory, the git-repo flag, the platform, the active shell, the OS version, and auto memory paths still reach Claude, but as part of the first user message rather than the system prompt. Instructions in the user message carry marginally less weight than the same text in the system prompt, so Claude may rely on them less strongly when reasoning about the current directory or auto memory paths. Enable this option when cross-session cache reuse matters more than maximally authoritative environment context.
 
-For the equivalent flag in non-interactive CLI mode, see [`--exclude-dynamic-system-prompt-sections`](cli-reference.md).
+For the equivalent flag in non-interactive CLI mode, see [`--exclude-dynamic-system-prompt-sections`](../cli-reference.md).
 
 ### Custom system prompts
 
@@ -302,13 +302,13 @@ async def main():
 asyncio.run(main())
 ```
 
-In Python, load a large custom prompt from a file with `system_prompt={"type": "file", "path": "..."}` instead of passing it as a string. The Python SDK passes a string prompt as one command-line argument to the CLI subprocess, so a prompt that exceeds the OS argument-length limit fails at process spawn before any API request is sent. On Linux the error is `Argument list too long`. See [`SystemPromptFile`](agent-sdk/python.md) for the platform thresholds and the Windows behavior.
+In Python, load a large custom prompt from a file with `system_prompt={"type": "file", "path": "..."}` instead of passing it as a string. The Python SDK passes a string prompt as one command-line argument to the CLI subprocess, so a prompt that exceeds the OS argument-length limit fails at process spawn before any API request is sent. On Linux the error is `Argument list too long`. See [`SystemPromptFile`](python.md#systempromptfile) for the platform thresholds and the Windows behavior.
 
 #### Cache the static part of a custom prompt
 
-In the TypeScript SDK, you can pass a custom prompt as an array of strings instead of one string, with the `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` marker between the static part and the rest. Use this when your prompt combines instructions that are the same on every request with context that changes per request, such as the customer or ticket the agent is handling. When you pass both parts as one string, a change to the per-request part changes the whole system prompt, so the static instructions miss the cache too. This form isn't available in the Python SDK, whose `system_prompt` option accepts a string, a preset, or a [file](agent-sdk/python.md).
+In the TypeScript SDK, you can pass a custom prompt as an array of strings instead of one string, with the `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` marker between the static part and the rest. Use this when your prompt combines instructions that are the same on every request with context that changes per request, such as the customer or ticket the agent is handling. When you pass both parts as one string, a change to the per-request part changes the whole system prompt, so the static instructions miss the cache too. This form isn't available in the Python SDK, whose `system_prompt` option accepts a string, a preset, or a [file](python.md#systempromptfile).
 
-The SDK splits the prompt only when it calls the Claude API directly or runs on [Claude Platform on AWS](claude-platform-on-aws.md). In every other configuration, such as Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or an [LLM gateway](llm-gateway-connect.md), and whenever you set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](llm-gateway-protocol.md), the SDK sends the whole prompt as one block, the same as passing one string.
+The SDK splits the prompt only when it calls the Claude API directly or runs on [Claude Platform on AWS](../claude-platform-on-aws.md). In every other configuration, such as Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or an [LLM gateway](../llm-gateway-connect.md), and whenever you set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](../llm-gateway-protocol.md#disable-pre-release-capabilities), the SDK sends the whole prompt as one block, the same as passing one string.
 
 To split the prompt, import `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` from `@anthropic-ai/claude-agent-sdk` and pass it as its own array element between the two parts. The SDK sends the strings before the marker as one text block and the strings after it as a second block, each with its own cache breakpoint. In the example below, a support agent loads its triage instructions from a file and receives details about one ticket on each request, so the instructions stay cached while the ticket details change:
 
@@ -331,7 +331,7 @@ for await (const message of query({
 }
 ```
 
-[Track cache tokens](agent-sdk/cost-tracking.md) describes the `cache_creation_input_tokens` and `cache_read_input_tokens` fields on each result message.
+[Track cache tokens](cost-tracking.md#track-cache-tokens) describes the `cache_creation_input_tokens` and `cache_read_input_tokens` fields on each result message.
 
 The SDK assembles the blocks from the array as follows:
 
@@ -423,11 +423,11 @@ asyncio.run(main())
 
 ## See also
 
-* [Output styles](output-styles.md): create, manage, and share output styles for the CLI, including the file format and storage locations
-* [How Claude remembers your project](memory.md): what to put in CLAUDE.md, where to place it, and how to write effective project instructions
-* [TypeScript SDK reference](agent-sdk/typescript.md): the full `Options` type, including `systemPrompt`, `settingSources`, and `settings`
-* [Python SDK reference](agent-sdk/python.md): the full `ClaudeAgentOptions` type, including `system_prompt` and `setting_sources`
-* [Settings](settings.md): the `settings.json` reference, including where output styles and other configuration are stored
+* [Output styles](../output-styles.md): create, manage, and share output styles for the CLI, including the file format and storage locations
+* [How Claude remembers your project](../memory.md): what to put in CLAUDE.md, where to place it, and how to write effective project instructions
+* [TypeScript SDK reference](typescript.md): the full `Options` type, including `systemPrompt`, `settingSources`, and `settings`
+* [Python SDK reference](python.md): the full `ClaudeAgentOptions` type, including `system_prompt` and `setting_sources`
+* [Settings](../settings.md): the `settings.json` reference, including where output styles and other configuration are stored
 
 ---
 

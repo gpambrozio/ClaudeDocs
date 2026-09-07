@@ -12,7 +12,7 @@ Create Agent
 
   - `required Model model`
 
-    Body param: Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+    Body param: Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
     - `enum BetaManagedAgentsModel:`
 
@@ -216,7 +216,7 @@ Create Agent
 
   - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams> mcpServers`
 
-    Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
+    Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../../managed-agents/mcp-connector.md).
 
     - `required string Name`
 

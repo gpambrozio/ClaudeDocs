@@ -172,7 +172,7 @@ List memory versions
 
   - `required string MemoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../../../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `required string MemoryStoreID`
 
@@ -206,7 +206,7 @@ List memory versions
 
   - `BetaManagedAgentsActor CreatedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `class BetaManagedAgentsSessionActor:`
 
@@ -214,7 +214,7 @@ List memory versions
 
       - `required string SessionID`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -268,7 +268,7 @@ List memory versions
 
   - `BetaManagedAgentsActor RedactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 ### Example
 
@@ -450,7 +450,7 @@ Retrieve a memory version
 
   - `required string MemoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../../../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `required string MemoryStoreID`
 
@@ -484,7 +484,7 @@ Retrieve a memory version
 
   - `BetaManagedAgentsActor CreatedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `class BetaManagedAgentsSessionActor:`
 
@@ -492,7 +492,7 @@ Retrieve a memory version
 
       - `required string SessionID`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -546,7 +546,7 @@ Retrieve a memory version
 
   - `BetaManagedAgentsActor RedactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 ### Example
 
@@ -718,7 +718,7 @@ Redact a memory version
 
   - `required string MemoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../../../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `required string MemoryStoreID`
 
@@ -752,7 +752,7 @@ Redact a memory version
 
   - `BetaManagedAgentsActor CreatedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `class BetaManagedAgentsSessionActor:`
 
@@ -760,7 +760,7 @@ Redact a memory version
 
       - `required string SessionID`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -814,7 +814,7 @@ Redact a memory version
 
   - `BetaManagedAgentsActor RedactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 ### Example
 
@@ -862,7 +862,7 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
 - `class BetaManagedAgentsActor: union`
 
-  Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+  Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
   - `class BetaManagedAgentsSessionActor:`
 
@@ -870,7 +870,7 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
     - `required string SessionID`
 
-      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
       minLength: 1
 
@@ -944,7 +944,7 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
   - `required string MemoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../../../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `required string MemoryStoreID`
 
@@ -978,7 +978,7 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
   - `BetaManagedAgentsActor CreatedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `class BetaManagedAgentsSessionActor:`
 
@@ -986,7 +986,7 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
       - `required string SessionID`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -1040,7 +1040,7 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
   - `BetaManagedAgentsActor RedactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 ### Beta Managed Agents Memory Version Operation
 
@@ -1076,7 +1076,7 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
   - `required string SessionID`
 
-    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
     minLength: 1
 

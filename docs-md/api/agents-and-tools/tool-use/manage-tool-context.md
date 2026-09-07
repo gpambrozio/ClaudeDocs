@@ -14,10 +14,10 @@ Each approach targets a different source of context pressure. Pick the one that 
 
 | Approach                  | What it reduces                         | When it fits                                                         | Learn more                                                                                                                 |
 | ------------------------- | --------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Tool search               | Tool definitions loaded upfront         | Large toolsets (20+ tools) where most tools aren't needed every turn | [Tool search tool](agents-and-tools/tool-use/tool-search-tool.md)                         |
-| Programmatic tool calling | `tool_result` roundtrips                | Chains of tool calls that can execute as a single script             | [Programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md)       |
-| Prompt caching            | Token cost of repeated tool definitions | Stable toolsets across many requests                                 | [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md) |
-| Context editing           | Old `tool_result` blocks in history     | Long conversations where early results are no longer relevant        | [Context editing](build-with-claude/context-editing.md)                                   |
+| Tool search               | Tool definitions loaded upfront         | Large toolsets (20+ tools) where most tools aren't needed every turn | [Tool search tool](tool-search-tool.md)                         |
+| Programmatic tool calling | `tool_result` roundtrips                | Chains of tool calls that can execute as a single script             | [Programmatic tool calling](programmatic-tool-calling.md)       |
+| Prompt caching            | Token cost of repeated tool definitions | Stable toolsets across many requests                                 | [Tool use with prompt caching](tool-use-with-prompt-caching.md) |
+| Context editing           | Old `tool_result` blocks in history     | Long conversations where early results are no longer relevant        | [Context editing](../../build-with-claude/context-editing.md)                                   |
 
 ### Tool search
 

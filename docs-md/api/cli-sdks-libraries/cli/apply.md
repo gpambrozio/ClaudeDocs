@@ -8,7 +8,7 @@ description: Declare agents, environments, skills, memory stores, and deployment
 
 `ant apply` creates and updates Claude API resources from files: agents, environments, skills, memory stores, and deployments. They live in your repository and change through the same review as your code. You describe each resource in a file, run `ant apply`, and approve the plan it shows. Then you commit the `claude-lock.json` it writes, so the next run updates the same resources instead of creating new ones.
 
-To install and authenticate the CLI, see the [CLI quickstart](cli-sdks-libraries/cli/quickstart.md). `ant apply` requires CLI version 1.30.0 or later.
+To install and authenticate the CLI, see the [CLI quickstart](quickstart.md). `ant apply` requires CLI version 1.30.0 or later.
 
 ## Apply your first agent
 
@@ -29,7 +29,7 @@ tools:
 You are a helpful assistant that writes concise summaries.
 ```
 
-The frontmatter holds the agent's configuration (the fields from [Define your agent](managed-agents/agent-setup.md)) and the body is its system prompt. `ant apply` [infers](cli-sdks-libraries/cli/apply.md) that the file is an agent from its path, here the `agents/` directory.
+The frontmatter holds the agent's configuration (the fields from [Define your agent](../../managed-agents/agent-setup.md)) and the body is its system prompt. `ant apply` [infers](apply.md#kind-inference) that the file is an agent from its path, here the `agents/` directory.
 
 In an interactive terminal, `ant apply` prints the plan and waits for your approval:
 
@@ -89,16 +89,16 @@ The first `ant apply` writes `claude-lock.json`, the lockfile, in the directory 
 }
 ```
 
-Commit it with your files. It's how the next run, on your machine or in CI, finds these resources instead of creating them again, and it's where you read an agent's ID to [start a session](managed-agents/sessions.md). The two hashes fingerprint what was last sent and what the API returned. That's how a later run notices an edited file, or a resource changed outside these files.
+Commit it with your files. It's how the next run, on your machine or in CI, finds these resources instead of creating them again, and it's where you read an agent's ID to [start a session](../../managed-agents/sessions.md). The two hashes fingerprint what was last sent and what the API returned. That's how a later run notices an edited file, or a resource changed outside these files.
 
 ## Grow it into a project
 
 You can declaratively define the other resources as files as well. A file holds the request body you would send to that kind's create endpoint:
 
-* An [environment](managed-agents/environments.md) is a YAML file in `environments/`.
-* A [memory store](managed-agents/memory.md) is a YAML file in `memory_stores/`.
-* A [deployment](managed-agents/scheduled-deployments.md) is a Markdown file in `deployments/`: the frontmatter is the request body and the prose becomes the message that starts each session.
-* A [skill](managed-agents/skills.md) is a directory with a `SKILL.md` at its root, conventionally under `skills/`, uploaded as one bundle.
+* An [environment](../../managed-agents/environments.md) is a YAML file in `environments/`.
+* A [memory store](../../managed-agents/memory.md) is a YAML file in `memory_stores/`.
+* A [deployment](../../managed-agents/scheduled-deployments.md) is a Markdown file in `deployments/`: the frontmatter is the request body and the prose becomes the message that starts each session.
+* A [skill](../../managed-agents/skills.md) is a directory with a `SKILL.md` at its root, conventionally under `skills/`, uploaded as one bundle.
 
 Any resource except a skill can be written as YAML, JSON, or Markdown. In Markdown, the frontmatter is the body and the prose fills the kind's text field: an agent's `system`, an environment's or memory store's `description`, a deployment's first message.
 
@@ -210,7 +210,7 @@ Without a terminal, `ant apply` prints the plan and stops with `cannot ask for c
 * On pull requests, run `ant apply --dry-run .` to print the plan for reviewers. It's informational only and exits 0 even when the plan is blocked.
 * Commit the updated `claude-lock.json` at the end of the job, even when the apply step failed partway, because a partial apply still records what it created.
 * Run one apply at a time, because nothing locks the lockfile.
-* Authenticate with [Workload Identity Federation](manage-claude/workload-identity-federation.md) rather than a stored API key, as an identity that reaches the organization and workspace recorded in `claude-lock.json`. `ant apply` refuses credentials that resolve to any other organization or workspace.
+* Authenticate with [Workload Identity Federation](../../manage-claude/workload-identity-federation.md) rather than a stored API key, as an identity that reaches the organization and workspace recorded in `claude-lock.json`. `ant apply` refuses credentials that resolve to any other organization or workspace.
 
 For a complete GitHub Actions workflow, see the [CI example in the CLI README](https://github.com/anthropics/anthropic-cli#in-ci).
 

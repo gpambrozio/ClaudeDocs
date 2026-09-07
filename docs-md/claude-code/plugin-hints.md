@@ -105,7 +105,7 @@ Prompt frequency is bounded, and some sessions never prompt:
 * **Once per plugin**: after the prompt is shown, Claude Code records the plugin and never prompts for it again, regardless of the user's answer.
 * **Once per session**: across all CLIs on the machine, at most one hint prompt appears per Claude Code session.
 * **Main interactive session only**: Claude Code shows the prompt only in the terminal session the user is typing into. Claude Code never prompts for a command that a [subagent](sub-agents.md) runs, and never prompts when the user runs Claude Code in [non-interactive mode](headless.md) with the `-p` flag or through the [Agent SDK](agent-sdk/overview.md). Claude Code still strips the hint line from the command output in all of these cases.
-* **Telemetry opt-outs**: sessions where analytics are disabled never show hint prompts. This includes sessions with `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` set, and sessions on third-party providers such as Amazon Bedrock or Google Cloud's Agent Platform where the [automatic telemetry opt-out](data-usage.md) applies.
+* **Telemetry opt-outs**: sessions where analytics are disabled never show hint prompts. This includes sessions with `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` set, and sessions on third-party providers such as Amazon Bedrock or Google Cloud's Agent Platform where the [automatic telemetry opt-out](data-usage.md#default-behaviors-by-api-provider) applies.
 
 Selecting **Yes** installs the plugin to user scope. Selecting **No, and don't show plugin installation hints again** disables all future hint prompts for the user.
 
@@ -141,7 +141,7 @@ The remaining guidance is recommended but not enforced. Claude Code cannot obser
 
 ## Get your plugin into the official marketplace
 
-The hint protocol only takes effect for plugins listed in the official Anthropic marketplace, `claude-plugins-official`. Anthropic curates that marketplace at its discretion, and the in-app submission forms add plugins to the [community marketplace](plugins.md) instead, which the hint protocol does not check. If you are working with an Anthropic partner contact, reach out to them to coordinate an official-marketplace listing.
+The hint protocol only takes effect for plugins listed in the official Anthropic marketplace, `claude-plugins-official`. Anthropic curates that marketplace at its discretion, and the in-app submission forms add plugins to the [community marketplace](plugins.md#submit-your-plugin-to-the-community-marketplace) instead, which the hint protocol does not check. If you are working with an Anthropic partner contact, reach out to them to coordinate an official-marketplace listing.
 
 ## See also
 

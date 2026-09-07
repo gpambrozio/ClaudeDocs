@@ -6,11 +6,11 @@ url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting
 description: Version-control API resources as files with ant apply, chain ant CLI commands in scripts, operate on resources from Claude Code, and authenticate curl calls with CLI credentials.
 ---
 
-This page covers task-oriented workflows built on the `ant` CLI. For the underlying flags and output options, see [Using the CLI](cli-sdks-libraries/cli/using.md).
+This page covers task-oriented workflows built on the `ant` CLI. For the underlying flags and output options, see [Using the CLI](using.md).
 
 ## Version-controlling API resources
 
-To keep agents, environments, and other Claude Managed Agents resources as files in your repository, see [Manage resources as code with ant apply](cli-sdks-libraries/cli/apply.md).
+To keep agents, environments, and other Claude Managed Agents resources as files in your repository, see [Manage resources as code with ant apply](apply.md).
 
 ### Run the applied agent from the shell
 
@@ -18,7 +18,7 @@ Once an agent and environment exist, you can drive a session from the shell:
 
 **Start a session**
 
-Pass the agent and environment IDs to the session create command. After `ant apply`, read them from `claude-lock.json`: each entry under `resources` has an `id`, and for the project in [Manage resources as code with ant apply](cli-sdks-libraries/cli/apply.md) the entries are `./agents/summarizer.md` and `./environments/cloud.yaml`.
+Pass the agent and environment IDs to the session create command. After `ant apply`, read them from `claude-lock.json`: each entry under `resources` has an `id`, and for the project in [Manage resources as code with ant apply](apply.md) the entries are `./agents/summarizer.md` and `./environments/cloud.yaml`.
 
 ```bash
 ant beta:sessions create \
@@ -96,7 +96,7 @@ Agent not found.
 
 ## Use the CLI from Claude Code
 
-[Claude Code](overview.md) can use the `ant` CLI out of the box. With the CLI installed and authenticated, you can ask Claude Code to operate on your API resources directly. For example:
+[Claude Code](../../../claude-code/overview.md) can use the `ant` CLI out of the box. With the CLI installed and authenticated, you can ask Claude Code to operate on your API resources directly. For example:
 
 * "List my recent agent sessions and summarize which ones errored."
 * "Upload every PDF in `./reports` to the Files API and print the resulting IDs."
@@ -106,7 +106,7 @@ Claude Code shells out to `ant`, parses the structured output, and reasons over 
 
 ## Authenticate curl requests with CLI credentials
 
-Scripts that call the API with `curl` or another HTTP client can use the credentials stored by [`ant auth login`](cli-sdks-libraries/cli/quickstart.md) instead of a static API key. The OAuth access token goes in the `Authorization` header as a bearer token; the `x-api-key` header is only for static API keys.
+Scripts that call the API with `curl` or another HTTP client can use the credentials stored by [`ant auth login`](quickstart.md#authentication) instead of a static API key. The OAuth access token goes in the `Authorization` header as a bearer token; the `x-api-key` header is only for static API keys.
 
 `ant auth print-credentials --access-token` prints the active profile's access token, refreshing it first if it is expired or near expiry:
 
@@ -122,9 +122,9 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-Keep `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` unset when working from a CLI login. Either variable takes precedence over the login for `ant` commands (see [Credential precedence](manage-claude/wif-reference.md)) and can silently route them to a different organization or workspace.
+Keep `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` unset when working from a CLI login. Either variable takes precedence over the login for `ant` commands (see [Credential precedence](../../manage-claude/wif-reference.md#credential-precedence)) and can silently route them to a different organization or workspace.
 
-Run [`ant auth status`](cli-sdks-libraries/cli/authentication.md) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login.
+Run [`ant auth status`](authentication.md#check-authentication-status) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login.
 
 ---
 

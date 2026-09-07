@@ -11,8 +11,8 @@ In the tables below, ✓ means available, ✗ means not available, and "See note
 How you authenticate determines which features Claude Code can reach. For a single list of what is missing on your provider, see the [summary by provider](#summary-by-provider) tabs. To find your column in the tables:
 
 * **Claude subscription**: you sign in with a claude.ai account on the Pro, Max, Team, or Enterprise plan
-* **Anthropic Console**: you authenticate with an Anthropic API key or by [signing in to a Console account without one](authentication.md)
-* **Amazon Bedrock**: you use Claude models from the Amazon Bedrock model catalog and set `CLAUDE_CODE_USE_BEDROCK`. The [Mantle endpoint](amazon-bedrock.md) (`CLAUDE_CODE_USE_MANTLE`) is covered by this column
+* **Anthropic Console**: you authenticate with an Anthropic API key or by [signing in to a Console account without one](authentication.md#sign-in-without-an-api-key)
+* **Amazon Bedrock**: you use Claude models from the Amazon Bedrock model catalog and set `CLAUDE_CODE_USE_BEDROCK`. The [Mantle endpoint](amazon-bedrock.md#use-the-mantle-endpoint) (`CLAUDE_CODE_USE_MANTLE`) is covered by this column
 * **Claude Platform on AWS**: you bought Claude through AWS Marketplace but call the Anthropic API, and set `CLAUDE_CODE_USE_ANTHROPIC_AWS`
 * **Google Cloud's Agent Platform**: Google-operated; you set `CLAUDE_CODE_USE_VERTEX`
 * **Microsoft Foundry**: Anthropic-operated; you set `CLAUDE_CODE_USE_FOUNDRY`
@@ -26,16 +26,16 @@ These work on every provider:
 * [Subagents](sub-agents.md), [hooks](hooks-guide.md), [commands](commands.md), and [skills](skills.md)
 * [CLAUDE.md memory](memory.md), [plugins](plugins.md), and [MCP servers](mcp.md)
 * [Checkpoints](checkpointing.md), [sandboxing](sandboxing.md), and [Workflows](workflows.md)
-* [OpenTelemetry metrics](monitoring-usage.md) and the [managed settings file](managed-settings.md)
+* [OpenTelemetry metrics](monitoring-usage.md) and the [managed settings file](managed-settings.md#delivery-mechanisms)
 
 Three of these have provider-specific differences:
 
-* **MCP servers**: [connectors from claude.ai](mcp.md) load only when your claude.ai subscription is the active authentication method. [Tool search](mcp.md) is off by default when `ANTHROPIC_BASE_URL` points to a non-first-party host, and isn't supported on Google Cloud's Agent Platform models earlier than the Claude 4.5 generation or on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md)
-* **Subagents**: the built-in [Explore subagent](sub-agents.md) caps its inherited model at Opus on the Claude API, and inherits the main conversation's model directly on any other provider, including Claude Platform on AWS
-* **[Commands](commands.md)**:
+* **MCP servers**: [connectors from claude.ai](mcp.md#use-mcp-servers-from-claude-ai) load only when your claude.ai subscription is the active authentication method. [Tool search](mcp.md#configure-tool-search) is off by default when `ANTHROPIC_BASE_URL` points to a non-first-party host, and isn't supported on Google Cloud's Agent Platform models earlier than the Claude 4.5 generation or on Microsoft Foundry [deployments hosted on Azure](../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options)
+* **Subagents**: the built-in [Explore subagent](sub-agents.md#built-in-subagents) caps its inherited model at Opus on the Claude API, and inherits the main conversation's model directly on any other provider, including Claude Platform on AWS
+* **[Commands](commands.md#all-commands)**:
   * `/design-sync` and `/import` with its `claude import` subcommand form are unavailable on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, and Claude Platform on AWS
   * `/voice` requires a claude.ai account
-  * `/list-agents` and its alias `/peers` are available only in sessions where [cross-session messaging is enabled](cross-session-messaging.md)
+  * `/list-agents` and its alias `/peers` are available only in sessions where [cross-session messaging is enabled](cross-session-messaging.md#availability)
 
 ### Features that require a Claude subscription
 
@@ -52,7 +52,7 @@ These require signing in with a claude.ai account and are not reachable with an 
 * [Artifacts](artifacts.md): Pro, Max, Team, and Enterprise plans
 * [Voice dictation](voice-dictation.md)
 
-Desktop is the partial exception: [gateway routing can be configured in the app or by an administrator](llm-gateway-connect.md), Enterprise deployments can route Desktop to Google Cloud's Agent Platform or a gateway provider via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration), and [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview) runs the Code tab on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway. For per-plan availability of these features, see [Availability by subscription plan](#availability-by-subscription-plan).
+Desktop is the partial exception: [gateway routing can be configured in the app or by an administrator](llm-gateway-connect.md#desktop-app), Enterprise deployments can route Desktop to Google Cloud's Agent Platform or a gateway provider via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration), and [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview) runs the Code tab on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway. For per-plan availability of these features, see [Availability by subscription plan](#availability-by-subscription-plan).
 
 ### CLI capabilities that vary by provider
 
@@ -73,18 +73,18 @@ These features work in the local CLI but depend on a server-side capability that
 
   <tbody>
     <tr>
-      <td>[Web search](tools-reference.md)</td>
+      <td>[Web search](tools-reference.md#websearch-tool-behavior)</td>
       <td>✓</td>
       <td>✓</td>
       <td>✗</td>
       <td>✓</td>
       <td>See note <sup><a href="#fn1">1</a></sup></td>
-      <td>✓ ([deployments hosted on Anthropic](build-with-claude/claude-in-microsoft-foundry.md))</td>
+      <td>✓ ([deployments hosted on Anthropic](../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options))</td>
     </tr>
 
     <tr>
       <td>[Fast mode](fast-mode.md)</td>
-      <td>✓ ([Owner-enabled](fast-mode.md) on Team and Enterprise)</td>
+      <td>✓ ([Owner-enabled](fast-mode.md#enable-fast-mode-for-your-organization) on Team and Enterprise)</td>
       <td>✓ (provisioned organizations)</td>
       <td>✗</td>
       <td>✗</td>
@@ -205,20 +205,20 @@ Organization-level controls and usage visibility.
 </table>
 
 <span id="fn1" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>1</sup> On Google Cloud's Agent Platform, web search is available for Claude 4 models and later.<br />
-<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7 or later, and the Fable models. See [Auto mode configuration](auto-mode-config.md). The built-in starting permission mode on these providers is Manual. See [which mode a session starts in](permission-modes.md). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
+<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7 or later, and the Fable models. See [Auto mode configuration](auto-mode-config.md). The built-in starting permission mode on these providers is Manual. See [which mode a session starts in](permission-modes.md#which-mode-a-session-starts-in). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
 <span id="fn3" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>3</sup> Subject to your agreement with the cloud provider.<br />
-<span id="fn4" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>4</sup> Dashboard and API only. [Contribution metrics](analytics.md) requires a claude.ai Team or Enterprise organization.<br />
-<span id="fn5" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>5</sup> Requires Claude Code v2.1.224 or later on macOS and Linux, including Linux inside WSL 2. On native Windows, requires Claude Code v2.1.234 or later. With API key authentication, messaging is same-machine only. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, messaging is same-machine only and requires Claude Code v2.1.248 or later. Claude can find your [Claude Code on the web](claude-code-on-the-web.md) sessions and your sessions on other machines only from a session that is connected to [Remote Control](remote-control.md). To connect, you need a claude.ai sign-in and the other [Remote Control requirements](remote-control.md). See [Message sessions on other machines](cross-session-messaging.md).
+<span id="fn4" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>4</sup> Dashboard and API only. [Contribution metrics](analytics.md#enable-contribution-metrics) requires a claude.ai Team or Enterprise organization.<br />
+<span id="fn5" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>5</sup> Requires Claude Code v2.1.224 or later on macOS and Linux, including Linux inside WSL 2. On native Windows, requires Claude Code v2.1.234 or later. With API key authentication, messaging is same-machine only. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, messaging is same-machine only and requires Claude Code v2.1.248 or later. Claude can find your [Claude Code on the web](claude-code-on-the-web.md) sessions and your sessions on other machines only from a session that is connected to [Remote Control](remote-control.md). To connect, you need a claude.ai sign-in and the other [Remote Control requirements](remote-control.md#requirements). See [Message sessions on other machines](cross-session-messaging.md#message-sessions-on-other-machines).
 
-If you authenticate through an [LLM gateway](llm-gateway.md), feature availability matches the underlying provider the gateway forwards to, except for the features Claude Code itself turns off. Whenever `ANTHROPIC_BASE_URL` points at a host other than `api.anthropic.com`, Claude Code turns off features such as [Remote Control](remote-control.md) and [server-managed settings](server-managed-settings.md), whatever the gateway forwards. Some Anthropic-only features such as the [Advisor](advisor.md) work only if the gateway forwards requests intact to the Anthropic API.
+If you authenticate through an [LLM gateway](llm-gateway.md), feature availability matches the underlying provider the gateway forwards to, except for the features Claude Code itself turns off. Whenever `ANTHROPIC_BASE_URL` points at a host other than `api.anthropic.com`, Claude Code turns off features such as [Remote Control](remote-control.md#requirements) and [server-managed settings](server-managed-settings.md#platform-availability), whatever the gateway forwards. Some Anthropic-only features such as the [Advisor](advisor.md) work only if the gateway forwards requests intact to the Anthropic API.
 
 ### Summary by provider
 
-Each tab lists what is unavailable or partially supported on that provider, with alternatives where one exists. Everything not listed works the same as on a Claude subscription, apart from the [provider-specific differences](#features-available-on-every-provider) noted above. On Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, and Claude Platform on AWS, error reporting and telemetry to Anthropic are off by default. See [default behaviors by API provider](data-usage.md) for what traffic still reaches Anthropic and how to opt out.
+Each tab lists what is unavailable or partially supported on that provider, with alternatives where one exists. Everything not listed works the same as on a Claude subscription, apart from the [provider-specific differences](#features-available-on-every-provider) noted above. On Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, and Claude Platform on AWS, error reporting and telemetry to Anthropic are off by default. See [default behaviors by API provider](data-usage.md#default-behaviors-by-api-provider) for what traffic still reaches Anthropic and how to opt out.
 
 **Amazon Bedrock**
 
-**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [web search](tools-reference.md), [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md).
+**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [web search](tools-reference.md#websearch-tool-behavior), [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md#all-commands).
 
 **Partial support:**
 
@@ -227,13 +227,13 @@ Each tab lists what is unavailable or partially supported on that provider, with
 * [Cross-session messaging](cross-session-messaging.md): between your sessions on this machine only <sup><a href="#fn5">5</a></sup>
 * [Zero Data Retention](zero-data-retention.md): subject to your AWS agreement
 
-**Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md). For web lookups, use the [WebFetch tool](tools-reference.md) with a specific URL.
+**Alternatives:** for scheduling, use [`/loop`](scheduled-tasks.md) instead of `/schedule`. For cloud sessions, use [GitHub Actions](github-actions.md) or [GitLab CI/CD](gitlab-ci-cd.md). For web lookups, use the [WebFetch tool](tools-reference.md#webfetch-tool-behavior) with a specific URL.
 
 **Claude Platform on AWS**
 
-**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitHub Actions](github-actions.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md).
+**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitHub Actions](github-actions.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md#all-commands).
 
-**Available where Amazon Bedrock is not:** [web search](tools-reference.md).
+**Available where Amazon Bedrock is not:** [web search](tools-reference.md#websearch-tool-behavior).
 
 **Partial support:**
 
@@ -243,12 +243,12 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 **Google Cloud's Agent Platform**
 
-**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md).
+**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md#all-commands).
 
 **Partial support:**
 
 * [Desktop](desktop.md): via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration) or [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-* [Web search](tools-reference.md): Claude 4 models and later
+* [Web search](tools-reference.md#websearch-tool-behavior): Claude 4 models and later
 * [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable models only
 * [Cross-session messaging](cross-session-messaging.md): between your sessions on this machine only <sup><a href="#fn5">5</a></sup>
 * [Zero Data Retention](zero-data-retention.md): subject to your Google Cloud agreement
@@ -257,12 +257,12 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 **Microsoft Foundry**
 
-**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitLab CI/CD](gitlab-ci-cd.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md).
+**Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](fast-mode.md), [Advisor](advisor.md), [Channels](channels.md), [GitLab CI/CD](gitlab-ci-cd.md), the [analytics dashboard](analytics.md), [server-managed settings](server-managed-settings.md), and the [`/design-sync` and `/import` commands](commands.md#all-commands).
 
 **Partial support:**
 
 * [Desktop](desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-* [Web search](tools-reference.md): [deployments hosted on Anthropic](build-with-claude/claude-in-microsoft-foundry.md) only
+* [Web search](tools-reference.md#websearch-tool-behavior): [deployments hosted on Anthropic](../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options) only
 * [Auto mode](auto-mode-config.md): Sonnet 5, Opus 4.7 or later, and Fable models only
 * [Cross-session messaging](cross-session-messaging.md): between your sessions on this machine only <sup><a href="#fn5">5</a></sup>
 * [Zero Data Retention](zero-data-retention.md): subject to your Azure agreement
@@ -273,7 +273,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
 **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription).
 
-Everything in [CLI capabilities that vary by provider](#cli-capabilities-that-vary-by-provider) is available, except that [fast mode](fast-mode.md) requires [provisioned access](fast-mode.md). [Server-managed settings](server-managed-settings.md) are also available when your API key belongs to a Team or Enterprise organization.
+Everything in [CLI capabilities that vary by provider](#cli-capabilities-that-vary-by-provider) is available, except that [fast mode](fast-mode.md) requires [provisioned access](fast-mode.md#enable-fast-mode-for-your-organization). [Server-managed settings](server-managed-settings.md) are also available when your API key belongs to a Team or Enterprise organization.
 
 ## Availability by subscription plan
 
@@ -286,15 +286,15 @@ If you authenticate through Amazon Bedrock, Google Cloud's Agent Platform, Micro
 | [Remote Control](remote-control.md)                                        | ✓   | ✓   | Admin-enabled | Admin-enabled                     |
 | [Channels](channels.md)                                                    | ✓   | ✓   | Admin-enabled | Admin-enabled                     |
 | [Computer use](computer-use.md)                                            | ✓   | ✓   | ✗             | ✗                                 |
-| Dispatch ([Desktop](desktop.md))                    | ✓   | ✓   | ✗             | ✗                                 |
+| Dispatch ([Desktop](desktop.md#sessions-from-dispatch))                    | ✓   | ✓   | ✗             | ✗                                 |
 | [Code Review](code-review.md)                                              | ✗   | ✗   | ✓             | ✓                                 |
 | [Artifacts](artifacts.md)                                                  | ✓   | ✓   | ✓             | Admin-enabled                     |
 | [Analytics dashboard and contribution metrics](analytics.md)               | ✗   | ✗   | ✓             | ✓                                 |
-| [Enterprise Analytics API](analytics.md)      | ✗   | ✗   | ✗             | ✓                                 |
+| [Enterprise Analytics API](analytics.md#access-data-programmatically)      | ✗   | ✗   | ✗             | ✓                                 |
 | [Server-managed settings](server-managed-settings.md)                      | ✗   | ✗   | ✓             | ✓                                 |
 | [SSO](https://support.claude.com/en/articles/9266767-what-is-the-team-plan) | ✗   | ✗   | ✓             | ✓                                 |
 | SCIM                                                                        | ✗   | ✗   | ✗             | ✓                                 |
-| [Compliance API](api/compliance.md)        | ✗   | ✗   | ✗             | ✓                                 |
+| [Compliance API](../api/api/compliance.md)        | ✗   | ✗   | ✗             | ✓                                 |
 | [Zero Data Retention](zero-data-retention.md)                              | ✗   | ✗   | ✗             | ✓ <sup><a href="#fn7">7</a></sup> |
 
 <span id="fn6" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>6</sup> On Enterprise, requires a premium seat or a Chat + Claude Code seat. See [Claude Code on the web](claude-code-on-the-web.md).<br />
@@ -304,7 +304,7 @@ For pricing and the full plan comparison, see [Team plans](https://support.claud
 
 ## Model availability
 
-For which Claude models and context-window sizes are available per provider and region, see [Model configuration](model-config.md) and the [Models overview](about-claude/models/overview.md). Vision, PDF input, and extended thinking are model capabilities rather than Claude Code features and work on every provider that offers the model. [Prompt caching](prompt-caching.md) works the same way on most providers; on Amazon Bedrock, support varies by model.
+For which Claude models and context-window sizes are available per provider and region, see [Model configuration](model-config.md) and the [Models overview](../api/models/overview.md). Vision, PDF input, and extended thinking are model capabilities rather than Claude Code features and work on every provider that offers the model. [Prompt caching](prompt-caching.md) works the same way on most providers; on Amazon Bedrock, support varies by model.
 
 ## Related resources
 

@@ -8,7 +8,7 @@ description: Install and configure the Anthropic Go SDK with context-based cance
 
 The Anthropic Go library provides convenient access to the Claude API from applications written in Go.
 
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Go-specific SDK features and configuration.
+For API feature documentation with code examples, see the [API reference](../../api/overview.md). This page covers Go-specific SDK features and configuration.
 
 ## Installation
 
@@ -63,7 +63,7 @@ func main() {
 }
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
+For authentication options including Workload Identity Federation, see [Authentication](../../manage-claude/authentication.md). If your API key is a [personal or service account key](../../manage-claude/authentication.md#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../../manage-claude/authentication.md#select-a-workspace) shows the per-request option for this SDK.
 
 **Conversations**
 
@@ -279,7 +279,7 @@ Request structs contain a `.SetExtraFields(map[string]any)` method which can sen
 
 For security reasons, only use `SetExtraFields` with trusted data.
 
-To send a custom value instead of a struct, use the generic function `param.Override` (for example, `param.Override[anthropic.FooParams](cli-sdks-libraries/sdks/12.md)`).
+To send a custom value instead of a struct, use the generic function `param.Override` (for example, `param.Override[anthropic.FooParams](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/12)`).
 
 ```go
 // In cases where the API specifies a given type,
@@ -289,7 +289,7 @@ p.SetExtraFields(map[string]any{
 })
 
 // Send a number instead of an object
-custom := param.Override[anthropic.FooParams](cli-sdks-libraries/sdks/12.md)
+custom := param.Override[anthropic.FooParams](12)
 ```
 
 ### Request unions
@@ -350,7 +350,7 @@ b2, _ := json.Marshal(params)
 fmt.Println(string(b) == string(b2)) // true
 ```
 
-For this use case, `param.SetJSON` (available since v1.20.0) is preferred over the more general `param.Override[T](cli-sdks-libraries/sdks/any.md)` because it doesn't require spelling out the type parameter and makes the round-trip intent explicit.
+For this use case, `param.SetJSON` (available since v1.20.0) is preferred over the more general `param.Override[T](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/any)` because it doesn't require spelling out the type parameter and makes the round-trip intent explicit.
 
 ## Response objects
 
@@ -511,7 +511,7 @@ client := anthropic.NewClient(
 
 Non-streaming Messages requests time out after 10 minutes by default; other requests have no default timeout. Use context to configure a timeout for a request lifecycle.
 
-Note that if a request is [retried](cli-sdks-libraries/sdks/go.md), the context timeout does not start over. To set a per-retry timeout, use `option.WithRequestTimeout()`.
+Note that if a request is [retried](go.md#retries), the context timeout does not start over. To set a per-retry timeout, use `option.WithRequestTimeout()`.
 
 ```go
 // This sets the timeout for the request, including all the retries.
@@ -541,9 +541,9 @@ defer cancel()
 
 Consider using the streaming Messages API for longer running requests.
 
-Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](cli-sdks-libraries/sdks/go.md) without receiving a response from Anthropic.
+Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](go.md#timeouts) without receiving a response from Anthropic.
 
-This SDK will also return an error if a non-streaming request is expected to be above roughly 10 minutes long. Calling `.Messages.NewStreaming()` or [setting a custom timeout](cli-sdks-libraries/sdks/go.md) disables this error.
+This SDK will also return an error if a non-streaming request is expected to be above roughly 10 minutes long. Calling `.Messages.NewStreaming()` or [setting a custom timeout](go.md#timeouts) disables this error.
 
 ## File uploads
 
@@ -625,23 +625,23 @@ See the [full list of request options](https://pkg.go.dev/github.com/anthropics/
 
 ## HTTP client customization
 
-For request middleware (`option.WithMiddleware`) and replacing the default `http.Client` (`option.WithHTTPClient`), see [SDK middleware](cli-sdks-libraries/middleware.md).
+For request middleware (`option.WithMiddleware`) and replacing the default `http.Client` (`option.WithHTTPClient`), see [SDK middleware](../middleware.md).
 
 ## Platform integrations
 
 For detailed platform setup guides with code examples, see:
 
-* [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-* [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-* [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
+* [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
+* [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)
 
 The Go SDK supports the following platforms:
 
 * **Agent Platform:** `import "github.com/anthropics/anthropic-sdk-go/vertex"`. Use `vertex.WithGoogleAuth(ctx, region, projectID)` or `vertex.WithCredentials(ctx, region, projectID, creds)`.
 * **Bedrock:** `import "github.com/anthropics/anthropic-sdk-go/bedrock"`. Use `bedrock.NewMantleClient` for the Messages-API Bedrock endpoint (streams over SSE), or `bedrock.WithLoadDefaultConfig(ctx)` / `bedrock.WithConfig(cfg)` (`bedrock-runtime` path). Importing the `bedrock` package globally registers a decoder for `application/vnd.amazon.eventstream` with the SDK's streaming layer (through package `init()`). This applies whether you use the `bedrock-runtime` `WithConfig`/`WithLoadDefaultConfig` path or `NewMantleClient`.
 * **Claude Platform on AWS:** `import anthropicaws "github.com/anthropics/anthropic-sdk-go/aws"`. Use `anthropicaws.NewClient(ctx, cfg)` with an `anthropicaws.ClientConfig` value to construct a client; set `WorkspaceID` on the config or the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable. The `anthropicaws` import alias avoids a name collision with `github.com/aws/aws-sdk-go-v2/aws` when both are imported. Available in beta.
-* **Foundry:** Not currently supported in the Go SDK. See [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) for supported SDKs.
+* **Foundry:** Not currently supported in the Go SDK. See [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) for supported SDKs.
 
 Use `bedrock.NewMantleClient` for new projects; `bedrock.WithLoadDefaultConfig`/`WithConfig` remain for existing applications using the Bedrock `InvokeModel` API.
 
@@ -738,8 +738,8 @@ Your feedback is welcome; open an [issue](https://github.com/anthropics/anthropi
 
 * [GitHub repository](https://github.com/anthropics/anthropic-sdk-go)
 * [Go package documentation](https://pkg.go.dev/github.com/anthropics/anthropic-sdk-go)
-* [API reference](api/overview.md)
-* [Streaming Messages](build-with-claude/streaming.md)
+* [API reference](../../api/overview.md)
+* [Streaming Messages](../../build-with-claude/streaming.md)
 
 ---
 

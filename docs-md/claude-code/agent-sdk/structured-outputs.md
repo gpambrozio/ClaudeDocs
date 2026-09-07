@@ -238,7 +238,7 @@ The `outputFormat` (TypeScript) or `output_format` (Python) option accepts an ob
 * `type`: Set to `"json_schema"` for structured outputs
 * `schema`: A [JSON Schema](https://json-schema.org/understanding-json-schema/about) object defining your output structure. You can generate this from a Zod schema with `z.toJSONSchema(schema, { target: "draft-7" })` or a Pydantic model with `.model_json_schema()`
 
-The SDK supports standard JSON Schema features including all basic types (object, array, string, number, boolean, null), `enum`, `const`, `required`, nested objects, and `$ref` definitions. For the full list of supported features and limitations, see [JSON Schema limitations](build-with-claude/structured-outputs.md).
+The SDK supports standard JSON Schema features including all basic types (object, array, string, number, boolean, null), `enum`, `const`, `required`, nested objects, and `$ref` definitions. For the full list of supported features and limitations, see [JSON Schema limitations](../../api/build-with-claude/structured-outputs.md#json-schema-limitations).
 
 A schema that isn't valid JSON Schema fails the run at startup with an error naming the problem. Before v2.1.205, an invalid schema was silently ignored and the agent returned unstructured text.
 
@@ -358,7 +358,7 @@ asyncio.run(main())
 
 ## Error handling
 
-Structured output generation can fail when the agent cannot produce valid JSON matching your schema. This typically happens when the schema is too complex for the task, the task itself is ambiguous, or the agent hits its retry limit trying to fix validation errors. It can also happen without any validation failure: a [model fallback](model-config.md) can retract an already-completed output mid-stream, and if no retry replaces it the run ends with the same error. Check the `errors` list on the result message to tell the two causes apart before debugging your schema.
+Structured output generation can fail when the agent cannot produce valid JSON matching your schema. This typically happens when the schema is too complex for the task, the task itself is ambiguous, or the agent hits its retry limit trying to fix validation errors. It can also happen without any validation failure: a [model fallback](../model-config.md#automatic-model-fallback) can retract an already-completed output mid-stream, and if no retry replaces it the run ends with the same error. Check the `errors` list on the result message to tell the two causes apart before debugging your schema.
 
 When an error occurs, the result message has a `subtype` indicating what went wrong:
 
@@ -367,7 +367,7 @@ When an error occurs, the result message has a `subtype` indicating what went wr
 | `success`                             | Output was generated and validated successfully                                                                                 |
 | `error_max_structured_output_retries` | No valid output remained after multiple attempts (validation failures, or a model-fallback retraction with no successful retry) |
 
-A result can also end with subtype `success` but no `structured_output` value, for example when the run completes without the agent producing a structured output. Treat that case as a failure as well. The troubleshooting entry [structured\_output is None but the result says success](agent-sdk/troubleshooting.md) covers this case. The example below treats a result as successful only when the `subtype` is `success` and `structured_output` is present, and handles every other result as a failure:
+A result can also end with subtype `success` but no `structured_output` value, for example when the run completes without the agent producing a structured output. Treat that case as a failure as well. The troubleshooting entry [structured\_output is None but the result says success](troubleshooting.md#structured_output-is-none-but-the-result-says-success) covers this case. The example below treats a result as successful only when the `subtype` is `success` and `structured_output` is present, and handles every other result as a failure:
 
 ```typescript TypeScript
 import { query } from "@anthropic-ai/claude-agent-sdk";
@@ -457,8 +457,8 @@ asyncio.run(main())
 ## Related resources
 
 * [JSON Schema documentation](https://json-schema.org/): learn JSON Schema syntax for defining complex schemas with nested objects, arrays, enums, and validation constraints
-* [API Structured Outputs](build-with-claude/structured-outputs.md): use structured outputs with the Claude API directly for single-turn requests without tool use
-* [Custom tools](agent-sdk/custom-tools.md): give your agent custom tools to call during execution before returning structured output
+* [API Structured Outputs](../../api/build-with-claude/structured-outputs.md): use structured outputs with the Claude API directly for single-turn requests without tool use
+* [Custom tools](custom-tools.md): give your agent custom tools to call during execution before returning structured output
 
 ---
 

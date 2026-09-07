@@ -295,8 +295,8 @@ Each server-sent event includes a named event type and associated JSON data. Eac
 
 Each stream uses the following event flow:
 
-1. `message_start`: contains a `Message` object with empty `content`. Under the [`thinking-binding-controls-2026-08-01`](build-with-claude/thinking.md) beta header, this `Message` object also carries the `input_transformations` array. After a mid-stream [server-side fallback](build-with-claude/refusals-and-fallback.md), the final `message_delta` event carries the array again with the serving model's entries.
-2. A series of content blocks, each of which has a `content_block_start`, one or more `content_block_delta` events, and a `content_block_stop` event. Each content block has an `index` that corresponds to its index in the final Message `content` array. One exception: during [server-side fallback](build-with-claude/refusals-and-fallback.md) responses, a `fallback` content block arrives at each model boundary as a `content_block_start` and `content_block_stop` pair with no deltas in between.
+1. `message_start`: contains a `Message` object with empty `content`. Under the [`thinking-binding-controls-2026-08-01`](thinking.md#preserved-thinking-controls) beta header, this `Message` object also carries the `input_transformations` array. After a mid-stream [server-side fallback](refusals-and-fallback.md#server-side-fallback), the final `message_delta` event carries the array again with the serving model's entries.
+2. A series of content blocks, each of which has a `content_block_start`, one or more `content_block_delta` events, and a `content_block_stop` event. Each content block has an `index` that corresponds to its index in the final Message `content` array. One exception: during [server-side fallback](refusals-and-fallback.md#server-side-fallback) responses, a `fallback` content block arrives at each model boundary as a `content_block_start` and `content_block_stop` pair with no deltas in between.
 3. One or more `message_delta` events, indicating top-level changes to the final `Message` object.
 4. A final `message_stop` event.
 
@@ -308,7 +308,7 @@ Event streams may also include any number of `ping` events.
 
 ### Error events
 
-The API may occasionally send [errors](api/errors.md) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
+The API may occasionally send [errors](../api/errors.md) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
 
 ```sse Example error
 event: error
@@ -317,7 +317,7 @@ data: {"type": "error", "error": {"type": "overloaded_error", "message": "Overlo
 
 ### Other events
 
-In accordance with the [versioning policy](api/versioning.md), new event types may be added, and your code should handle unknown event types gracefully.
+In accordance with the [versioning policy](../api/versioning.md), new event types may be added, and your code should handle unknown event types gracefully.
 
 ## Content block delta types
 
@@ -336,7 +336,7 @@ data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", 
 
 The deltas for `tool_use` content blocks correspond to updates for the `input` field of the block. To support maximum granularity, the deltas are *partial JSON strings*, whereas the final `tool_use.input` is always an *object*.
 
-You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](cli-sdks-libraries/overview.md), which provide helpers to access parsed incremental values.
+You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](../cli-sdks-libraries/overview.md), which provide helpers to access parsed incremental values.
 
 A `tool_use` content block delta looks like:
 
@@ -349,11 +349,11 @@ Note: Current models only support emitting one complete key and value property f
 
 ### Thinking delta
 
-When using [thinking](build-with-claude/thinking.md) with streaming enabled, you'll receive thinking content through `thinking_delta` events. These deltas correspond to the `thinking` field of the `thinking` content blocks.
+When using [thinking](thinking.md#streaming-thinking) with streaming enabled, you'll receive thinking content through `thinking_delta` events. These deltas correspond to the `thinking` field of the `thinking` content blocks.
 
 For thinking content, a special `signature_delta` event is sent just before the `content_block_stop` event. This signature is used to verify the integrity of the thinking block.
 
-When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. With `display: "updates"` (beta), reasoning blocks stream the same way, and only the [progress updates](build-with-claude/thinking.md) that some models write between tool calls stream `thinking_delta` events. See [Controlling thinking display](build-with-claude/thinking.md).
+When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. With `display: "updates"` (beta), reasoning blocks stream the same way, and only the [progress updates](thinking.md#progress-updates) that some models write between tool calls stream `thinking_delta` events. See [Controlling thinking display](thinking.md#controlling-thinking-display).
 
 A typical thinking delta looks like:
 
@@ -371,7 +371,7 @@ data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_d
 
 ## Full HTTP stream response
 
-Use the [client SDKs](cli-sdks-libraries/overview.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
+Use the [client SDKs](../cli-sdks-libraries/overview.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
 
 A stream response consists of:
 
@@ -387,7 +387,7 @@ A stream response consists of:
 
 4. A `message_stop` event
 
-There may be `ping` events dispersed throughout the response as well. See [Event types](build-with-claude/streaming.md) for more details on the format.
+There may be `ping` events dispersed throughout the response as well. See [Event types](streaming.md#event-types) for more details on the format.
 
 ### Basic streaming request
 
@@ -558,7 +558,7 @@ data: {"type": "message_stop"}
 
 ### Streaming request with tool use
 
-Tool use supports [fine-grained streaming](agents-and-tools/tool-use/fine-grained-tool-streaming.md) for parameter values. Enable it per tool with `eager_input_streaming`.
+Tool use supports [fine-grained streaming](../agents-and-tools/tool-use/fine-grained-tool-streaming.md) for parameter values. Enable it per tool with `eager_input_streaming`.
 
 This request asks Claude to use a tool to report the weather.
 

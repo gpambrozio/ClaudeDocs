@@ -8,7 +8,7 @@ description: Install and configure the Anthropic Python SDK with sync and async 
 
 The Anthropic Python SDK provides convenient access to the Claude API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry.
 
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Python-specific SDK features and configuration.
+For API feature documentation with code examples, see the [API reference](../../api/overview.md). This page covers Python-specific SDK features and configuration.
 
 ## Installation
 
@@ -67,7 +67,7 @@ for block in message.content:
 
 Consider using [python-dotenv](https://pypi.org/project/python-dotenv/) to add `ANTHROPIC_API_KEY="my-anthropic-api-key"` to your `.env` file so that your API key isn't stored in source control.
 
-For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
+For authentication options including Workload Identity Federation, see [Authentication](../../manage-claude/authentication.md). If your API key is a [personal or service account key](../../manage-claude/authentication.md#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../../manage-claude/authentication.md#select-a-workspace) shows the per-request option for this SDK.
 
 ## Async usage
 
@@ -218,7 +218,7 @@ print(count.input_tokens)  # 10
 
 ## Tool use
 
-This SDK provides support for tool use, also known as function calling. For more details, see [Tool use with Claude](agents-and-tools/tool-use/overview.md).
+This SDK provides support for tool use, also known as function calling. For more details, see [Tool use with Claude](../../agents-and-tools/tool-use/overview.md).
 
 ### Tool helpers
 
@@ -264,7 +264,7 @@ On every iteration, an API request is made. If the response includes a call to o
 
 ## Message batches
 
-This SDK provides support for [Batch processing](build-with-claude/batch-processing.md) under `client.messages.batches`.
+This SDK provides support for [Batch processing](../../build-with-claude/batch-processing.md) under `client.messages.batches`.
 
 ### Creating a batch
 
@@ -378,7 +378,7 @@ Error codes are as follows:
 
 ## Request IDs
 
-> For more information on debugging requests, see [Request ID](api/errors.md).
+> For more information on debugging requests, see [Request ID](../../api/errors.md#request-id).
 
 All object responses in the SDK provide a `_request_id` property which is added from the `request-id` response header so that you can quickly log failing requests and report them back to Anthropic.
 
@@ -441,17 +441,17 @@ client.with_options(timeout=5.0).messages.create(
 
 On timeout, the SDK throws an `APITimeoutError`.
 
-Note that requests that time out are [retried twice by default](cli-sdks-libraries/sdks/python.md).
+Note that requests that time out are [retried twice by default](python.md#retries).
 
 ## Long requests
 
-Consider using the streaming [Messages API](cli-sdks-libraries/sdks/python.md) for longer running requests.
+Consider using the streaming [Messages API](python.md#streaming-responses) for longer running requests.
 
-Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](cli-sdks-libraries/sdks/python.md) without receiving a response from Anthropic.
+Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](python.md#timeouts) without receiving a response from Anthropic.
 
 The SDK will throw a `ValueError` if a non-streaming request is expected to take longer than approximately 10 minutes. Passing `stream=True` or overriding the `timeout` option at the client or request level disables this error.
 
-An expected request latency longer than the [timeout](cli-sdks-libraries/sdks/python.md) for a non-streaming request will result in the client terminating the connection and retrying without receiving a response.
+An expected request latency longer than the [timeout](python.md#timeouts) for a non-streaming request will result in the client terminating the connection and retrying without receiving a response.
 
 The SDK sets a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html) option to reduce the impact of idle connection timeouts on some networks. This can be overridden by passing a custom `http_client` option to the client.
 
@@ -691,11 +691,11 @@ with Anthropic() as client:
 
 ## Beta features
 
-Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](build-with-claude/overview.md).
+Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](../../build-with-claude/overview.md).
 
-You can access most beta API features through the `beta` property of the client. To enable a particular beta feature, you need to add the appropriate [beta header](api/beta-headers.md) to the `betas` field when creating a message.
+You can access most beta API features through the `beta` property of the client. To enable a particular beta feature, you need to add the appropriate [beta header](../../api/beta-headers.md) to the `betas` field when creating a message.
 
-For example, to enable [context editing](build-with-claude/context-editing.md):
+For example, to enable [context editing](../../build-with-claude/context-editing.md):
 
 ```python
 client = Anthropic()
@@ -712,11 +712,11 @@ response = client.beta.messages.create(
 
 For detailed platform setup guides with code examples, see:
 
-* [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-* [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-* [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-* [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
+* [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
+* [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)
+* [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)
 
 All five client classes are included in the base `anthropic` package:
 
@@ -751,9 +751,9 @@ print(anthropic.__version__)
 ## Additional resources
 
 * [GitHub repository](https://github.com/anthropics/anthropic-sdk-python)
-* [API reference](api/overview.md)
-* [Streaming Messages](build-with-claude/streaming.md)
-* [Tool use with Claude](agents-and-tools/tool-use/overview.md)
+* [API reference](../../api/overview.md)
+* [Streaming Messages](../../build-with-claude/streaming.md)
+* [Tool use with Claude](../../agents-and-tools/tool-use/overview.md)
 
 ---
 

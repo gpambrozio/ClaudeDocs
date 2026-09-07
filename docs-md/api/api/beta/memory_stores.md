@@ -1311,7 +1311,7 @@ Create a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](memory_stores/memory_versions/list.md).
 
   - `path: string`
 
@@ -1534,7 +1534,7 @@ List memories
 
     - `memory_version_id: string`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](memory_stores/memory_versions/list.md).
 
     - `path: string`
 
@@ -1554,7 +1554,7 @@ List memories
 
   - `BetaManagedAgentsMemoryPrefix object`
 
-    A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    A rolled-up directory marker returned by [List memories](memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
     - `path: string`
 
@@ -1749,7 +1749,7 @@ Retrieve a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](memory_stores/memory_versions/list.md).
 
   - `path: string`
 
@@ -1967,7 +1967,7 @@ Update a memory
 
   - `memory_version_id: string`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](memory_stores/memory_versions/list.md).
 
   - `path: string`
 
@@ -2133,7 +2133,7 @@ Delete a memory
 
 - `BetaManagedAgentsDeletedMemory object`
 
-  Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
+  Tombstone returned by [Delete a memory](memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
   - `id: string`
 
@@ -2346,7 +2346,7 @@ List memory versions
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -2380,7 +2380,7 @@ List memory versions
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor object`
 
@@ -2388,7 +2388,7 @@ List memory versions
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -2442,7 +2442,7 @@ List memory versions
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 - `next_page: optional string or null`
 
@@ -2626,7 +2626,7 @@ Retrieve a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -2660,7 +2660,7 @@ Retrieve a memory version
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor object`
 
@@ -2668,7 +2668,7 @@ Retrieve a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -2722,7 +2722,7 @@ Retrieve a memory version
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 #### Example
 
@@ -2887,7 +2887,7 @@ Redact a memory version
 
   - `memory_id: string`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](api/beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -2921,7 +2921,7 @@ Redact a memory version
 
   - `created_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
     - `BetaManagedAgentsSessionActor object`
 
@@ -2929,7 +2929,7 @@ Redact a memory version
 
       - `session_id: string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](api/sessions-retrieve.md) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
 
         minLength: 1
 
@@ -2983,7 +2983,7 @@ Redact a memory version
 
   - `redacted_by: optional BetaManagedAgentsActor`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
 
 #### Example
 

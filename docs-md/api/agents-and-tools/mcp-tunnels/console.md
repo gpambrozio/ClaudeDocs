@@ -8,18 +8,18 @@ description: Create tunnels, register CA certificates, retrieve the tunnel token
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-This page covers the Console side of an MCP tunnels deployment: creating a tunnel, registering your CA certificate, retrieving the tunnel token, and attaching the [upstream MCP servers](agents-and-tools/mcp-tunnels/concepts.md) to an agent. [Deploy MCP tunnels with Helm](agents-and-tools/mcp-tunnels/deploy-helm.md) and [Deploy MCP tunnels with Docker Compose](agents-and-tools/mcp-tunnels/deploy-compose.md) cover running the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) inside your network.
+This page covers the Console side of an MCP tunnels deployment: creating a tunnel, registering your CA certificate, retrieving the tunnel token, and attaching the [upstream MCP servers](concepts.md#components) to an agent. [Deploy MCP tunnels with Helm](deploy-helm.md) and [Deploy MCP tunnels with Docker Compose](deploy-compose.md) cover running the [tunnel stack](concepts.md#components) inside your network.
 
 ## Prerequisites
 
-* **One or more MCP servers** running in your private network. The tunnel routes traffic to them; it does not host them. See [Remote MCP servers](agents-and-tools/remote-mcp-servers.md) for examples you can deploy.
+* **One or more MCP servers** running in your private network. The tunnel routes traffic to them; it does not host them. See [Remote MCP servers](../remote-mcp-servers.md) for examples you can deploy.
 
 * **A Console role with the Manage tunnels permission**, so you can create and archive tunnels, rotate the token, and manage certificates. Organization admins and owners have it by default; custom roles and per-account grants can also include it. Roles without it have read-only access to the **MCP tunnels** page and tunnel details.
 
 * **A way for your stack to authenticate to the Tunnels API.** Choose one:
 
-  * **[Programmatic access](agents-and-tools/mcp-tunnels/concepts.md) (recommended).** Set up [Workload Identity Federation](manage-claude/workload-identity-federation.md) during tunnel creation so your stack mints short-lived API tokens from your identity provider, fetches the tunnel token, and generates and registers a CA certificate automatically. Requires permission to manage federation rules, a registered OIDC issuer, and a federation rule with the `workspace:manage_tunnels` scope.
-  * **[Manual](agents-and-tools/mcp-tunnels/concepts.md).** Skip programmatic access. After creating the tunnel, [get the tunnel token](agents-and-tools/mcp-tunnels/console.md), generate and [register a CA certificate](agents-and-tools/mcp-tunnels/console.md) yourself, and supply the token and your server certificate to your tunnel stack as secrets.
+  * **[Programmatic access](concepts.md#credential-provisioning) (recommended).** Set up [Workload Identity Federation](../../manage-claude/workload-identity-federation.md) during tunnel creation so your stack mints short-lived API tokens from your identity provider, fetches the tunnel token, and generates and registers a CA certificate automatically. Requires permission to manage federation rules, a registered OIDC issuer, and a federation rule with the `workspace:manage_tunnels` scope.
+  * **[Manual](concepts.md#credential-provisioning).** Skip programmatic access. After creating the tunnel, [get the tunnel token](console.md#get-the-connection-details), generate and [register a CA certificate](console.md#add-a-ca-certificate) yourself, and supply the token and your server certificate to your tunnel stack as secrets.
 
 ## Create a tunnel
 
@@ -35,7 +35,7 @@ Click **New tunnel** and enter a name in the **Create tunnel** dialog. The name 
 
 If your role can manage federation rules, a **Set up programmatic access** toggle appears (off by default). If not, the Console shows a notice in its place and your tunnel stack uses the manual flow instead. The rest of the create flow is the same either way.
 
-Programmatic access relies on [Workload Identity Federation](manage-claude/workload-identity-federation.md); read that page first if federation issuers, rules, and service accounts are unfamiliar. To turn the toggle on you need:
+Programmatic access relies on [Workload Identity Federation](../../manage-claude/workload-identity-federation.md); read that page first if federation issuers, rules, and service accounts are unfamiliar. To turn the toggle on you need:
 
 1. **A registered OIDC issuer** for the identity provider your stack presents tokens from (such as a Kubernetes cluster, AWS IAM, Google Cloud, or GitHub Actions). Register one under **Settings > Workload identity > Issuers** if your organization doesn't have one.
 2. **A federation rule with the `workspace:manage_tunnels` scope.** Turning on the toggle reveals a **Federation rule** picker. Choose an existing rule with that scope, or click **Create federation rule** to create one inline.
@@ -54,12 +54,12 @@ Both deploy paths need:
 * The **tunnel ID** (`tnl_...`), shown on the tunnel detail page.
 * The **tunnel domain** (`abcd1234.tunnel.anthropic.com`), shown on the tunnel detail page. Used as the proxy's `tunnel_domain` and in the server certificate's SAN.
 
-What else you need depends on the [credential-provisioning mode](agents-and-tools/mcp-tunnels/concepts.md):
+What else you need depends on the [credential-provisioning mode](concepts.md#credential-provisioning):
 
 | With programmatic access                                                                                                                                                   | Without programmatic access                                                                                                                                                                                                                         |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The **federation rule ID** (`fdrl_...`) of the rule you selected. The rule is org-level, not stored on the tunnel; find it under **Settings > Workload identity > Rules**. | The **tunnel token**, revealed with the eye icon next to **Token** on the detail page. Treat it as a secret. See [Get the connection details](agents-and-tools/mcp-tunnels/console.md). |
-| The **organization ID** (a UUID), shown under **Settings > Organization**.                                                                                                 | A **CA certificate** that you generate and [register on the tunnel](agents-and-tools/mcp-tunnels/console.md).                                                                                 |
+| The **federation rule ID** (`fdrl_...`) of the rule you selected. The rule is org-level, not stored on the tunnel; find it under **Settings > Workload identity > Rules**. | The **tunnel token**, revealed with the eye icon next to **Token** on the detail page. Treat it as a secret. See [Get the connection details](console.md#get-the-connection-details). |
+| The **organization ID** (a UUID), shown under **Settings > Organization**.                                                                                                 | A **CA certificate** that you generate and [register on the tunnel](console.md#add-a-ca-certificate).                                                                                 |
 
 With programmatic access, your stack fetches the tunnel token through the Tunnels API, generates the CA and server certificate locally (the private key never leaves your environment), and registers only the CA's public certificate with Anthropic. You're still responsible for securing the private keys and renewing the server certificate before it expires.
 
@@ -74,11 +74,11 @@ Open the tunnel. The detail page shows a **Connection** section with the domain 
 | **Domain** | Copy the assigned `abcd1234.tunnel.anthropic.com` value. Your proxy's routes are subdomains of this domain.                                                                                                         |
 | **Token**  | Click the eye icon (**Show token**) to fetch the tunnel token, then use the copy icon to copy it into your tunnel stack's secret store. Click **Rotate token** to invalidate the current token and issue a new one. |
 
-Every reveal and rotation is recorded in your organization's [Compliance API](manage-claude/compliance-api.md) activity log. Rotation does not sever cloudflared connections that are already established, so you can rotate, redeploy with the new value, and let the old connections drain.
+Every reveal and rotation is recorded in your organization's [Compliance API](../../manage-claude/compliance-api.md) activity log. Rotation does not sever cloudflared connections that are already established, so you can rotate, redeploy with the new value, and let the old connections drain.
 
 ## Add a CA certificate
 
-Anthropic verifies [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) to your [proxy](agents-and-tools/mcp-tunnels/concepts.md) against the CA certificates you register on the tunnel. A tunnel with no active certificates cannot accept connections, and does not appear in the agent MCP server picker until one is registered.
+Anthropic verifies [inner TLS](concepts.md#components) to your [proxy](concepts.md#components) against the CA certificates you register on the tunnel. A tunnel with no active certificates cannot accept connections, and does not appear in the agent MCP server picker until one is registered.
 
 **Find the Certificates section**
 
@@ -108,7 +108,7 @@ Run the tunnel stack on a Kubernetes cluster. Both programmatic-access and manua
 
 ## Use the tunnel in an agent
 
-Once your stack is running and has one or more MCP servers configured, attach an upstream MCP server to a Managed Agent session. To call the same servers from the Messages API instead, see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md).
+Once your stack is running and has one or more MCP servers configured, attach an upstream MCP server to a Managed Agent session. To call the same servers from the Messages API instead, see [Use the tunneled MCP servers](overview.md#use-the-tunneled-mcp-servers).
 
 The picker only shows tunnels with at least one active certificate. A tunnel that still shows **Needs certificate** in the **MCP tunnels** list does not appear in the dropdown; register a CA certificate first. The picker is also workspace-scoped: it lists tunnels in the same workspace as the session, not other workspaces.
 

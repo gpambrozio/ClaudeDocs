@@ -4,7 +4,7 @@
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -205,7 +205,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../manage-claude/wif-admin-api.md).
 
 List the workspaces a service account is a member of.
 
@@ -411,7 +411,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](manage-claude/wif-admin-api.md).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../manage-claude/wif-admin-api.md).
 
 Remove a service account from a workspace.
 

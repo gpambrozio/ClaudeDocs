@@ -24,7 +24,7 @@ Claude Code offers three ways to schedule recurring or one-off work:
 
 Use **cloud tasks** for work that should run reliably without your machine. Use **Desktop tasks** when you need access to local files and tools. Use **`/loop`** for quick polling during a session.
 
-By default, scheduled tasks run against whatever state your working directory is in, including uncommitted changes. Enable the worktree toggle when creating the task to give each run its own isolated Git worktree, the same way [parallel sessions](desktop.md) work.
+By default, scheduled tasks run against whatever state your working directory is in, including uncommitted changes. Enable the worktree toggle when creating the task to give each run its own isolated Git worktree, the same way [parallel sessions](desktop.md#work-in-parallel-with-sessions) work.
 
 ## Create a scheduled task
 
@@ -57,7 +57,7 @@ For intervals the picker doesn't offer, such as every 15 minutes, the first of e
 
 Scheduled tasks run on your machine. Desktop checks the schedule every minute while the app is open and starts a fresh session when a task is due, independent of any manual sessions you have open. Each task gets a small delay of a few minutes after the scheduled time to stagger API traffic. The delay is deterministic: the same task always starts at the same offset.
 
-When a task fires, you get a desktop notification and a new session appears under a **Scheduled** section in the sidebar. Open it to see what Claude did, review changes, or respond to permission prompts. Claude can edit files, run commands, create commits, and open pull requests, the same as in a session you start yourself, but can't send or receive [messages between your desktop sessions](desktop.md) through the desktop app's session surface.
+When a task fires, you get a desktop notification and a new session appears under a **Scheduled** section in the sidebar. Open it to see what Claude did, review changes, or respond to permission prompts. Claude can edit files, run commands, create commits, and open pull requests, the same as in a session you start yourself, but can't send or receive [messages between your desktop sessions](desktop.md#work-across-sessions) through the desktop app's session surface.
 
 Tasks only run while the desktop app is running and your computer is awake. If your computer sleeps through a scheduled time, the run is skipped. To prevent idle-sleep, enable **Keep computer awake** in Settings under **Desktop app → General**. Closing the laptop lid still puts it to sleep. For tasks that need to run even when your computer is off, or that should trigger on an API call or GitHub event, create a remote [routine](routines.md) instead.
 
@@ -69,11 +69,11 @@ Keep this in mind when writing prompts. A task scheduled for 9am might run at 11
 
 ## Permissions for scheduled tasks
 
-Each task has its own permission mode, which you set when creating or editing the task. Allow rules from `~/.claude/settings.json` also apply to scheduled task sessions. If a task runs in [Manual mode](desktop.md) and needs to run a tool it doesn't have permission for, the run stalls until you approve it. The session stays open in the sidebar so you can answer later.
+Each task has its own permission mode, which you set when creating or editing the task. Allow rules from `~/.claude/settings.json` also apply to scheduled task sessions. If a task runs in [Manual mode](desktop.md#choose-a-permission-mode) and needs to run a tool it doesn't have permission for, the run stalls until you approve it. The session stays open in the sidebar so you can answer later.
 
 To avoid stalls, click **Run now** after creating a task, watch for permission prompts, and select "always allow" for each one. Future runs of that task auto-approve the same tools without prompting. You can review and revoke these approvals from the task's detail page.
 
-MCP tools marked [`requiresUserInteraction`](mcp.md) prompt on every call and don't offer an always-allow option. Runs that call these tools stall each time.
+MCP tools marked [`requiresUserInteraction`](mcp.md#require-approval-for-a-specific-tool) prompt on every call and don't offer an always-allow option. Runs that call these tools stall each time.
 
 ## Manage scheduled tasks
 

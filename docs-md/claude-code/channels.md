@@ -37,7 +37,7 @@ In Claude Code, run:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
+* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
 
 When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, run that command to activate the plugin's configure command.
 
@@ -113,7 +113,7 @@ In Claude Code, run:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
+* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
 
 When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, run that command to activate the plugin's configure command.
 
@@ -176,7 +176,7 @@ In Claude Code, run:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
+* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
 
 When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. If the install summary reports `Run /reload-plugins to activate.`, you can skip that here, because restarting in the next step picks up the plugin.
 
@@ -212,7 +212,7 @@ Once you install and enable fakechat, you can type in the browser and the messag
 
 To try the fakechat demo, you'll need:
 
-* Claude Code [installed and authenticated](quickstart.md) with a claude.ai account or a Claude Console API key
+* Claude Code [installed and authenticated](quickstart.md#step-1-install-claude-code) with a claude.ai account or a Claude Console API key
 * [Bun](https://bun.sh) installed. The pre-built channel plugins are Bun scripts. Check with `bun --version`; if that fails, [install Bun](https://bun.sh/docs/installation).
 * **Team, Enterprise, or managed Console org**: your admin must [enable channels](#enterprise-controls) in managed settings
 
@@ -227,7 +227,7 @@ Start a Claude Code session and run the install command:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md): check the plugin name.
+* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
 
 When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. If the install summary reports `Run /reload-plugins to activate.`, you can skip that here, because restarting in the next step picks up the plugin.
 
@@ -253,7 +253,7 @@ what's in my working directory?
 
 The message arrives in your Claude Code session. The terminal shows it as an inbound channel line like `← fakechat · web: what's in my working directory?`, while the model receives it as a `<channel source="plugin:fakechat:fakechat">` event, using the plugin's scoped server name. Claude reads it, does the work, and calls fakechat's `reply` tool. If Claude Code asks for permission for the first reply, approve it. The answer shows up in the chat UI.
 
-If Claude hits a permission prompt while you're away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](channels-reference.md) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](permission-modes.md) bypasses most prompts, but only use it in environments you trust. Even then, the [actions no mode auto-approves](permission-modes.md) still apply.
+If Claude hits a permission prompt while you're away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](channels-reference.md#relay-permission-prompts) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](permission-modes.md#skip-all-checks-with-bypasspermissions-mode) bypasses most prompts, but only use it in environments you trust. Even then, the [actions no mode auto-approves](permission-modes.md#actions-no-mode-auto-approves) still apply.
 
 When you run channels in non-interactive mode with `-p`, tools that need terminal input, such as multiple-choice questions and plan mode approval, are disabled so the session never stalls waiting for input.
 
@@ -274,7 +274,7 @@ On top of that, you control which servers are enabled each session with `--chann
 
 Being in `.mcp.json` isn't enough to push messages: a server also has to be named in `--channels`.
 
-The allowlist also gates [permission relay](channels-reference.md) if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority.
+The allowlist also gates [permission relay](channels-reference.md#relay-permission-prompts) if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority.
 
 ## Enterprise controls
 
@@ -315,7 +315,7 @@ By default, any plugin on the Anthropic-maintained allowlist can register as a c
 
 If you set an empty array, you block all channel plugins from the allowlist, but `--dangerously-load-development-channels` can still bypass that block for local testing. To block channels entirely including the development flag, leave `channelsEnabled` unset instead.
 
-This setting requires `channelsEnabled: true`. If a user passes a plugin to `--channels` that isn't on your list, Claude Code starts normally but the channel doesn't register, and the startup notice explains that the plugin isn't on the organization's approved list. If you set `MCP_PROTOCOL_NEGOTIATION` to `auto` on the v2 MCP client runtime, a channel can also fail to register because Claude Code [doesn't register a channel server that negotiates protocol revision 2026-07-28](mcp.md).
+This setting requires `channelsEnabled: true`. If a user passes a plugin to `--channels` that isn't on your list, Claude Code starts normally but the channel doesn't register, and the startup notice explains that the plugin isn't on the organization's approved list. If you set `MCP_PROTOCOL_NEGOTIATION` to `auto` on the v2 MCP client runtime, a channel can also fail to register because Claude Code [doesn't register a channel server that negotiates protocol revision 2026-07-28](mcp.md#push-messages-with-channels).
 
 ## Research preview
 
@@ -325,7 +325,7 @@ Neither `--channels` nor `--dangerously-load-development-channels` appears in `c
 
 During the preview, `--channels` only accepts plugins from an Anthropic-maintained allowlist, or from your organization's allowlist if an admin has set [`allowedChannelPlugins`](#restrict-which-channel-plugins-can-run). The channel plugins in [claude-plugins-official](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins) are the default approved set. If you pass something that isn't on the effective allowlist, Claude Code starts normally but the channel doesn't register, and the startup notice tells you why.
 
-To test a channel you're building, use `--dangerously-load-development-channels`. See [Test during the research preview](channels-reference.md) for information about testing custom channels that you build.
+To test a channel you're building, use `--dangerously-load-development-channels`. See [Test during the research preview](channels-reference.md#test-during-the-research-preview) for information about testing custom channels that you build.
 
 Report issues or feedback on the [Claude Code GitHub repository](https://github.com/anthropics/claude-code/issues).
 
@@ -343,7 +343,7 @@ Several Claude Code features connect to systems outside the terminal, each suite
 Channels fill the gap in that list by pushing events from non-Claude sources into your already-running local session.
 
 * **Chat bridge**: ask Claude something from your phone via Telegram, Discord, or iMessage, and the answer comes back in the same chat while the work runs on your machine against your real files.
-* **[Webhook receiver](channels-reference.md)**: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging.
+* **[Webhook receiver](channels-reference.md#example-build-a-webhook-receiver)**: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging.
 
 ## Next steps
 

@@ -10,7 +10,7 @@ MCP tunnels are in research preview. [Request access](https://claude.com/form/cl
 
 ## Proxy configuration
 
-The [proxy](agents-and-tools/mcp-tunnels/concepts.md) reads its configuration from `/etc/mcp-gateway/config.yaml` (Compose) or the rendered ConfigMap (Helm, populated from `gateway.config.*`).
+The [proxy](concepts.md#components) reads its configuration from `/etc/mcp-gateway/config.yaml` (Compose) or the rendered ConfigMap (Helm, populated from `gateway.config.*`).
 
 | Field                             | Description                                                                                                                                                                                                     | Default                                         |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
@@ -20,7 +20,7 @@ The [proxy](agents-and-tools/mcp-tunnels/concepts.md) reads its configuration fr
 | `tunnel_domain`                   | Base domain assigned to the tunnel. When set, route lookup strips this suffix from incoming hostnames so `routes` keys can be bare subdomains (`wiki`). When empty, `routes` keys must be exact full hostnames. | Required when `routes` keys are bare subdomains |
 | `tls.cert_file`                   | Path to the server TLS certificate.                                                                                                                                                                             | Required                                        |
 | `tls.key_file`                    | Path to the server TLS private key.                                                                                                                                                                             | Required                                        |
-| `routes`                          | Map of subdomain or full hostname to upstream URL. See [Route matching](agents-and-tools/mcp-tunnels/reference.md).                                             | Required                                        |
+| `routes`                          | Map of subdomain or full hostname to upstream URL. See [Route matching](reference.md#route-matching).                                             | Required                                        |
 | `upstream.allowed_ips`            | IPv4 CIDR ranges or single addresses the proxy is permitted to connect to. Mutually exclusive with `disable_ip_validation`.                                                                                     | RFC1918 private ranges                          |
 | `upstream.disable_ip_validation`  | Disable upstream IP validation entirely. Mutually exclusive with `allowed_ips`.                                                                                                                                 | `false`                                         |
 | `upstream.tls.ca_file`            | CA bundle for validating upstream TLS.                                                                                                                                                                          | None                                            |
@@ -30,17 +30,17 @@ For `https://` upstream routes, set at least one of `upstream.tls.ca_file` or `u
 
 ### Route matching
 
-`routes` is a flat string map (`map[string]string`), not a list. The proxy looks up the incoming hostname by exact match first, then by stripping the `tunnel_domain` suffix and matching the remaining subdomain. The match considers only the hostname; the request path and query string are forwarded to the [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) unchanged.
+`routes` is a flat string map (`map[string]string`), not a list. The proxy looks up the incoming hostname by exact match first, then by stripping the `tunnel_domain` suffix and matching the remaining subdomain. The match considers only the hostname; the request path and query string are forwarded to the [upstream MCP server](concepts.md#components) unchanged.
 
 Each upstream value must be exactly `scheme://host:port`. The port is mandatory. Including a path is rejected at config load with `invalid upstream (must be scheme://host:port)`.
 
 ## Tunnels API
 
-The Tunnels REST API lives at `/v1/tunnels` and supports creating, listing, and archiving tunnels, registering CA certificates, and revealing or rotating the tunnel token. See the [Tunnels API reference](api/beta/tunnels/list.md) for all endpoints, request and response schemas, and examples.
+The Tunnels REST API lives at `/v1/tunnels` and supports creating, listing, and archiving tunnels, registering CA certificates, and revealing or rotating the tunnel token. See the [Tunnels API reference](../../api/beta/tunnels/list.md) for all endpoints, request and response schemas, and examples.
 
-The previous Admin API surface at `/v1/organizations/tunnels` (beta header `mcp-tunnels-2026-05-19`, scope `org:manage_tunnels`) continues to work during a migration window and remains documented in the [Admin API reference](api/admin/mcp_tunnels.md) with a deprecation notice. To migrate, update the path to `/v1/tunnels`, the beta header to `mcp-tunnels-2026-06-22`, and your WIF token scope to `workspace:manage_tunnels`.
+The previous Admin API surface at `/v1/organizations/tunnels` (beta header `mcp-tunnels-2026-05-19`, scope `org:manage_tunnels`) continues to work during a migration window and remains documented in the [Admin API reference](../../api/admin/mcp_tunnels.md) with a deprecation notice. To migrate, update the path to `/v1/tunnels`, the beta header to `mcp-tunnels-2026-06-22`, and your WIF token scope to `workspace:manage_tunnels`.
 
-All MCP tunnels endpoints require a bearer token with the `workspace:manage_tunnels` scope obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md). Admin API keys are not accepted.
+All MCP tunnels endpoints require a bearer token with the `workspace:manage_tunnels` scope obtained through [Workload Identity Federation](../../manage-claude/workload-identity-federation.md). Admin API keys are not accepted.
 
 Required headers on every request:
 
@@ -52,7 +52,7 @@ Required headers on every request:
 
 ## Certificate requirements
 
-The [setup component](agents-and-tools/mcp-tunnels/concepts.md) generates compliant certificates automatically. These requirements apply only if you issue certificates through your own PKI.
+The [setup component](concepts.md#components) generates compliant certificates automatically. These requirements apply only if you issue certificates through your own PKI.
 
 ### CA certificate
 
@@ -67,7 +67,7 @@ Upload with `POST /v1/tunnels/{tunnel_id}/certificates`. A tunnel can hold up to
 
 ### Server certificate
 
-Presented by the proxy during [inner TLS](agents-and-tools/mcp-tunnels/concepts.md).
+Presented by the proxy during [inner TLS](concepts.md#components).
 
 * Signed directly by a registered CA (no intermediates).
 * `AuthorityKeyIdentifier` extension present and matching the CA's `SubjectKeyIdentifier`.
@@ -94,7 +94,7 @@ Attaches to an existing tunnel (or creates one when no tunnel ID is supplied), t
 | `--cert-duration` | Server certificate validity period.                                                                                                                                   | `2160h` (90 days)                                                                            |
 | `--token-version` | Change-detection string. A new value triggers token rotation on re-run. The Helm chart and the Compose example both pass `1` as the initial value.                    | None                                                                                         |
 
-The command authenticates through [Workload Identity Federation](manage-claude/workload-identity-federation.md). It reads `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_WORKSPACE_ID` (optional), and exactly one of `ANTHROPIC_IDENTITY_TOKEN_FILE` or `ANTHROPIC_IDENTITY_TOKEN`. See the [WIF reference](manage-claude/wif-reference.md) for the current semantics of these variables; the setup component derives the service account from the federation rule, so it does not require `ANTHROPIC_SERVICE_ACCOUNT_ID` separately.
+The command authenticates through [Workload Identity Federation](../../manage-claude/workload-identity-federation.md). It reads `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_WORKSPACE_ID` (optional), and exactly one of `ANTHROPIC_IDENTITY_TOKEN_FILE` or `ANTHROPIC_IDENTITY_TOKEN`. See the [WIF reference](../../manage-claude/wif-reference.md) for the current semantics of these variables; the setup component derives the service account from the federation rule, so it does not require `ANTHROPIC_SERVICE_ACCOUNT_ID` separately.
 
 ### `setup renew-cert`
 

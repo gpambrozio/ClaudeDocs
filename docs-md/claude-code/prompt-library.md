@@ -1017,10 +1017,10 @@ export const labels = {
   },
   needsLabel: "Needs",
   needs: {
-    tracker: "your issue tracker added as a [claude.ai connector](mcp.md) or [MCP server](mcp.md).",
-    gh: "the [gh CLI](https://cli.github.com) authenticated, or GitHub added as a [claude.ai connector](mcp.md).",
-    browser: "a way for Claude to render and screenshot the result. The [Desktop app](desktop.md) has this built in. In the terminal, install the [Chrome extension](chrome.md) or a Playwright [MCP](mcp.md) server.",
-    db: "your data warehouse or log store added as a [claude.ai connector](mcp.md) or [MCP server](mcp.md)."
+    tracker: "your issue tracker added as a [claude.ai connector](mcp.md#use-mcp-servers-from-claude-ai) or [MCP server](mcp.md).",
+    gh: "the [gh CLI](https://cli.github.com) authenticated, or GitHub added as a [claude.ai connector](mcp.md#use-mcp-servers-from-claude-ai).",
+    browser: "a way for Claude to render and screenshot the result. The [Desktop app](desktop.md#preview-your-app) has this built in. In the terminal, install the [Chrome extension](chrome.md) or a Playwright [MCP](mcp.md) server.",
+    db: "your data warehouse or log store added as a [claude.ai connector](mcp.md#use-mcp-servers-from-claude-ai) or [MCP server](mcp.md)."
   }
 };
 
@@ -1115,7 +1115,7 @@ export const text = {
   },
   "plan-a-multi-file": {
     title: "Plan a multi-file change before touching code",
-    teaches: "Adding \"don't edit yet\" separates exploration from changes, so you see the approach before any code moves. To make plan-first the default on every prompt, press Shift+Tab for [plan mode](permission-modes.md)."
+    teaches: "Adding \"don't edit yet\" separates exploration from changes, so you see the approach before any code moves. To make plan-first the default on every prompt, press Shift+Tab for [plan mode](permission-modes.md#analyze-before-you-edit-with-plan-mode)."
   },
   "draft-a-spec-by": {
     title: "Draft a spec by interview",
@@ -1325,7 +1325,7 @@ The prompts above share a few patterns. Recognizing them helps you adapt any pro
 add rate limiting to the public API and make sure existing tests still pass
 ```
 
-**Give it a way to check its own work.** Ask for run, test, compare, or verify in the same prompt so Claude iterates instead of stopping after one attempt. To check the finished change against the running app, run [`/verify`](skills.md).
+**Give it a way to check its own work.** Ask for run, test, compare, or verify in the same prompt so Claude iterates instead of stopping after one attempt. To check the finished change against the running app, run [`/verify`](skills.md#run-and-verify-your-app).
 
 ```text wrap
 write the migration, run it against the dev database, and confirm the schema matches
@@ -1370,7 +1370,7 @@ For video walkthroughs of these patterns, see the free [Claude Code in Action](h
 
 ## Related resources
 
-The prompts on this page are starting points. Once one works for your project, the next step is making it repeatable: save it as a [skill](skills.md) so anyone on your team can run it as a `/command`, and record the conventions Claude learned in [CLAUDE.md](memory.md) so every session starts with that context instead of Claude relearning it. For larger or riskier changes, [plan mode](permission-modes.md) shows you the file list before any edits happen.
+The prompts on this page are starting points. Once one works for your project, the next step is making it repeatable: save it as a [skill](skills.md) so anyone on your team can run it as a `/command`, and record the conventions Claude learned in [CLAUDE.md](memory.md) so every session starts with that context instead of Claude relearning it. For larger or riskier changes, [plan mode](permission-modes.md#analyze-before-you-edit-with-plan-mode) shows you the file list before any edits happen.
 
 If you're introducing Claude Code across a team, see [administration](admin-setup.md) for managed settings and policy, and [costs and usage](costs.md) for how this work is billed on your plan.
 

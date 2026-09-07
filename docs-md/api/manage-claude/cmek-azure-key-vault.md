@@ -10,9 +10,9 @@ description: Use Azure Key Vault to provide an encryption key for your organizat
 claude "/claude-api help me configure a customer-managed encryption key with Azure Key Vault"
 ```
 
-This guide walks through configuring an Azure Key Vault key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
+This guide walks through configuring an Azure Key Vault key as a [customer-managed encryption key (CMEK)](cmek.md) for your Anthropic organization.
 
-Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you start.
+Enabling CMEK is permanent. If your Key Vault key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](cmek.md) before you start.
 
 ## Prerequisites
 
@@ -409,7 +409,7 @@ If validation fails, the `error` field describes the problem. Common causes are:
 
 **Attach the key to a workspace**
 
-Once the key is validated, attach it to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](manage-claude/cmek.md).
+Once the key is validated, attach it to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](cmek.md#how-it-works).
 
 ```bash cURL
 curl -sS -X POST "https://api.anthropic.com/v1/organizations/workspaces/<workspace-id>" \

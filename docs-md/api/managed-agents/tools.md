@@ -6,15 +6,15 @@ url: https://platform.claude.com/docs/en/managed-agents/tools
 description: Configure tools available to your agent.
 ---
 
-Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a [session](managed-agents/sessions.md). You control which tools are available by specifying them in the agent configuration.
+Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a [session](sessions.md). You control which tools are available by specifying them in the agent configuration.
 
-Claude Managed Agents also supports custom, user-defined tools. Your application executes these tools separately and returns the results to Claude, which uses them to continue the task. To give the agent tools from an MCP server, use the [MCP connector](managed-agents/mcp-connector.md) instead.
+Claude Managed Agents also supports custom, user-defined tools. Your application executes these tools separately and returns the results to Claude, which uses them to continue the task. To give the agent tools from an MCP server, use the [MCP connector](mcp-connector.md) instead.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Available tools
 
-The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration. Each entry in the `configs` array is identified by its `name`, using the values in the Name column, and accepts an optional `type` field with the same value. The `web_search` and `web_fetch` entries accept additional settings; see [Restrict web search and web fetch domains](managed-agents/tools.md).
+The agent toolset includes the following tools. All are enabled by default when you include the toolset in your agent configuration. Each entry in the `configs` array is identified by its `name`, using the values in the Name column, and accepts an optional `type` field with the same value. The `web_search` and `web_fetch` entries accept additional settings; see [Restrict web search and web fetch domains](tools.md#restrict-web-search-and-web-fetch-domains).
 
 | Tool       | Name         | Description                                    |
 | ---------- | ------------ | ---------------------------------------------- |
@@ -27,13 +27,13 @@ The agent toolset includes the following tools. All are enabled by default when 
 | Web fetch  | `web_fetch`  | Fetch content from a URL                       |
 | Web search | `web_search` | Search the web for information                 |
 
-When a tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the [sandbox](managed-agents/environments.md). The model receives a truncated preview with the file path and can read the full content from there.
+When a tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the [sandbox](environments.md). The model receives a truncated preview with the file path and can read the full content from there.
 
 ## Configuring the toolset
 
-Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings. Each config entry can also set a `permission_policy` that controls whether the tool's calls are auto-approved or require confirmation. See [Permission policies](managed-agents/permission-policies.md) for the available policy types.
+Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` array to disable specific tools or override their settings. Each config entry can also set a `permission_policy` that controls whether the tool's calls are auto-approved or require confirmation. See [Permission policies](permission-policies.md) for the available policy types.
 
-Config entries for `web_search` and `web_fetch` also accept domain filters and other web settings; see [Restrict web search and web fetch domains](managed-agents/tools.md).
+Config entries for `web_search` and `web_fetch` also accept domain filters and other web settings; see [Restrict web search and web fetch domains](tools.md#restrict-web-search-and-web-fetch-domains).
 
 ```bash cURL
 agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
@@ -595,10 +595,10 @@ In addition to `enabled` and `permission_policy`, the web tool entries accept th
 | -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `allowed_domains`    | `web_search`, `web_fetch` | The only hosts the tool can reach. Cannot be combined with `blocked_domains` on the same entry.                                                                                                                 |
 | `blocked_domains`    | `web_search`, `web_fetch` | Hosts the tool cannot reach.                                                                                                                                                                                    |
-| `max_content_tokens` | `web_fetch`               | Caps the amount of fetched page content included in the context. Must be a positive integer. See [content limits](agents-and-tools/tool-use/web-fetch-tool.md). |
-| `user_location`      | `web_search`              | Localizes search results. An object with the same fields as the Messages API [`user_location`](agents-and-tools/tool-use/web-search-tool.md) parameter.           |
+| `max_content_tokens` | `web_fetch`               | Caps the amount of fetched page content included in the context. Must be a positive integer. See [content limits](../agents-and-tools/tool-use/web-fetch-tool.md#content-limits). |
+| `user_location`      | `web_search`              | Localizes search results. An object with the same fields as the Messages API [`user_location`](../agents-and-tools/tool-use/web-search-tool.md#localization) parameter.           |
 
-An environment's [`networking`](managed-agents/environments.md) settings control the sandbox's own outbound traffic. They do not affect `web_search` or `web_fetch`, which run on Anthropic's servers whether the environment is a cloud or self-hosted sandbox. The per-tool `allowed_domains` and `blocked_domains` lists are the way to restrict what these tools can reach.
+An environment's [`networking`](environments.md#networking) settings control the sandbox's own outbound traffic. They do not affect `web_search` or `web_fetch`, which run on Anthropic's servers whether the environment is a cloud or self-hosted sandbox. The per-tool `allowed_domains` and `blocked_domains` lists are the way to restrict what these tools can reach.
 
 Organization-level web search and web fetch settings in the Claude Console apply to the Messages API and do not apply to Managed Agents sessions. To restrict an agent's web tools, configure `allowed_domains` or `blocked_domains` on its toolset instead.
 
@@ -617,24 +617,24 @@ Organization-level web search and web fetch settings in the Claude Console apply
 
 #### When settings are validated
 
-Format and limit violations are rejected with a 400 `invalid_request_error` when you [create an agent](managed-agents/agent-setup.md) or [update an agent](managed-agents/agent-setup.md), and when you create or update a session that supplies `tools`. For example, the message for an entry that sets both lists includes `Only one of allowed_domains or blocked_domains may be set.`, and the message for an empty list includes `allowed_domains: Empty list of domains is ambiguous. Provide at least one domain or null.` The message for a domain that breaks a format rule names its list and zero-based position, for example `allowed_domains.0: IP addresses are not supported; provide a plain hostname like "example.com"`.
+Format and limit violations are rejected with a 400 `invalid_request_error` when you [create an agent](agent-setup.md#create-an-agent) or [update an agent](agent-setup.md#update-an-agent), and when you create or update a session that supplies `tools`. For example, the message for an entry that sets both lists includes `Only one of allowed_domains or blocked_domains may be set.`, and the message for an empty list includes `allowed_domains: Empty list of domains is ambiguous. Provide at least one domain or null.` The message for a domain that breaks a format rule names its list and zero-based position, for example `allowed_domains.0: IP addresses are not supported; provide a plain hostname like "example.com"`.
 
-The same requests also reject three settings that depend on the search and fetch providers: a domain in `allowed_domains` that Anthropic's crawler is not permitted to access, a `user_location.country` that the search provider does not support (the message ends in `user_location.country: not a country the search provider supports`), and a `user_location.timezone` that is not a valid IANA name. The session checks the configuration again when it first initializes the tool; if a setting that was accepted earlier is no longer valid at that point, the session emits a [`session.error`](managed-agents/events-and-streaming.md) event and returns to `idle` without retrying. Fix the setting by [updating the session's tools](managed-agents/session-operations.md), update the agent as well so that new sessions start with the corrected configuration, then send a new `user.message` to continue.
+The same requests also reject three settings that depend on the search and fetch providers: a domain in `allowed_domains` that Anthropic's crawler is not permitted to access, a `user_location.country` that the search provider does not support (the message ends in `user_location.country: not a country the search provider supports`), and a `user_location.timezone` that is not a valid IANA name. The session checks the configuration again when it first initializes the tool; if a setting that was accepted earlier is no longer valid at that point, the session emits a [`session.error`](events-and-streaming.md) event and returns to `idle` without retrying. Fix the setting by [updating the session's tools](session-operations.md#updating-the-agent-configuration), update the agent as well so that new sessions start with the corrected configuration, then send a new `user.message` to continue.
 
 #### Multiagent sessions, outcomes, and mid-session updates
 
-In a [multiagent session](managed-agents/multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time: an agent in the roster of the coordinator is bound by its own `allowed_domains` and `blocked_domains`, by those of any agent that called it, and by the coordinator's current lists.
+In a [multiagent session](multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time: an agent in the roster of the coordinator is bound by its own `allowed_domains` and `blocked_domains`, by those of any agent that called it, and by the coordinator's current lists.
 
 * Allowlists combine to the domains that all of them cover, and blocklists add together, so a roster agent can narrow what a tool reaches but never widen it. For example, a roster agent that sets `blocked_domains` keeps the coordinator's `allowed_domains` and blocks those hosts within it, and a roster agent that sets its own `allowed_domains` can reach only the hosts that both its list and the coordinator's list cover.
 * If the combined allowlists have no domain in common, the tool stays available to that agent but every call fails with a `url_not_allowed` error stating that no domain is permitted, and the tool description tells the model so. Keep each roster agent's allowlist inside the coordinator's to avoid this.
 * `max_content_tokens` and `user_location` are not combined: a thread uses the value from its own tool configuration if set, otherwise from the agent that called it, otherwise from the coordinator's current configuration.
 * A `{"type": "self"}` roster entry has no web settings of its own and follows the coordinator's current settings.
-* The grader in [outcome-driven sessions](managed-agents/define-outcomes.md) runs without `web_search` and `web_fetch`, regardless of these settings.
-* You can change the lists on an idle session by [updating its tools](managed-agents/session-operations.md). The new lists apply to the rest of the session; in a multiagent session, every thread applies them from its next turn, while a roster agent's own lists stay as its agent definition set them when the session was created.
+* The grader in [outcome-driven sessions](define-outcomes.md) runs without `web_search` and `web_fetch`, regardless of these settings.
+* You can change the lists on an idle session by [updating its tools](session-operations.md#updating-the-agent-configuration). The new lists apply to the rest of the session; in a multiagent session, every thread applies them from its next turn, while a roster agent's own lists stay as its agent definition set them when the session was created.
 
 #### Differences from the Messages API tools
 
-These settings use the same `allowed_domains` and `blocked_domains` vocabulary as [domain filtering](agents-and-tools/tool-use/server-tools.md) on the Messages API server tools, with the following differences on Managed Agents:
+These settings use the same `allowed_domains` and `blocked_domains` vocabulary as [domain filtering](../agents-and-tools/tool-use/server-tools.md#domain-filtering) on the Messages API server tools, with the following differences on Managed Agents:
 
 * Each list is capped at 64 domains.
 * Domains listed for `web_fetch` cannot include a path.
@@ -643,11 +643,11 @@ These settings use the same `allowed_domains` and `blocked_domains` vocabulary a
 
 ## Custom tools
 
-In addition to built-in tools, you can define custom tools. Custom tools are analogous to [user-defined client tools](agents-and-tools/tool-use/how-tool-use-works.md) in the Messages API.
+In addition to built-in tools, you can define custom tools. Custom tools are analogous to [user-defined client tools](../agents-and-tools/tool-use/how-tool-use-works.md#user-defined-tools-client-executed) in the Messages API.
 
-Each custom tool defines a contract: you specify what operations are available and what they return, and Claude determines when and how to call them. The model never executes anything on its own. It emits a structured request, your code runs the operation, and the result flows back into the conversation. See [Session event stream](managed-agents/events-and-streaming.md) for how to receive custom tool calls and return results during a session.
+Each custom tool defines a contract: you specify what operations are available and what they return, and Claude determines when and how to call them. The model never executes anything on its own. It emits a structured request, your code runs the operation, and the result flows back into the conversation. See [Session event stream](events-and-streaming.md#handling-custom-tool-calls) for how to receive custom tool calls and return results during a session.
 
-If your sessions run in a self-hosted sandbox, the environment worker can [serve custom tools from your sandbox](managed-agents/self-hosted-sandboxes.md), including tools that wrap an MCP server inside your network.
+If your sessions run in a self-hosted sandbox, the environment worker can [serve custom tools from your sandbox](self-hosted-sandboxes.md#serve-custom-tools-from-your-sandbox), including tools that wrap an MCP server inside your network.
 
 ```bash cURL
 agent=$(curl -fsSL https://api.anthropic.com/v1/agents \

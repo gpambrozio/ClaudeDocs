@@ -178,13 +178,13 @@ The Leaderboard helps you find team members with high Claude Code adoption who c
 
 #### Access data programmatically
 
-On the Enterprise plan, the [Claude Enterprise Analytics API](api/admin/analytics.md) returns per-user engagement, usage, and cost reports for your organization across Claude surfaces, including Claude Code. A Primary Owner creates a key with the `read:analytics` scope at [claude.ai/analytics/api-keys](https://claude.ai/analytics/api-keys). The API is not available on the Teams plan.
+On the Enterprise plan, the [Claude Enterprise Analytics API](../api/api/admin/analytics.md) returns per-user engagement, usage, and cost reports for your organization across Claude surfaces, including Claude Code. A Primary Owner creates a key with the `read:analytics` scope at [claude.ai/analytics/api-keys](https://claude.ai/analytics/api-keys). The API is not available on the Teams plan.
 
 To query contribution data through GitHub instead, search for PRs labeled with `claude-code-assisted`.
 
 ## Access analytics for API customers
 
-API customers using the Claude Console can access analytics at [platform.claude.com/claude-code](https://platform.claude.com/claude-code). You need the UsageView permission to access the dashboard, which is granted to Developer, Billing, Admin, Owner, and Primary Owner roles. To pull the same daily per-user metrics programmatically, use the [Claude Code Analytics API](build-with-claude/claude-code-analytics-api.md) with an Admin API key.
+API customers using the Claude Console can access analytics at [platform.claude.com/claude-code](https://platform.claude.com/claude-code). You need the UsageView permission to access the dashboard, which is granted to Developer, Billing, Admin, Owner, and Primary Owner roles. To pull the same daily per-user metrics programmatically, use the [Claude Code Analytics API](https://platform.claude.com/docs/en/build-with-claude/claude-code-analytics-api) with an Admin API key.
 
 Contribution metrics with GitHub integration are not currently available for API customers. The Console dashboard shows usage and spend metrics only.
 

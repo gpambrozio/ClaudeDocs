@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions
 description: IAM action reference for controlling access to Claude Platform on AWS through AWS policies.
 ---
 
-Claude Platform on AWS uses AWS IAM for access control. Every API route maps to an IAM action in the `aws-external-anthropic` namespace. This page lists all actions, the routes each action authorizes, and the managed policies available for common access patterns. For platform setup and authentication, see [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
+Claude Platform on AWS uses AWS IAM for access control. Every API route maps to an IAM action in the `aws-external-anthropic` namespace. This page lists all actions, the routes each action authorizes, and the managed policies available for common access patterns. For platform setup and authentication, see [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md).
 
 ## Service details
 
@@ -119,7 +119,7 @@ Creating, updating, or deleting an individual session sub-resource (events or se
 
 A policy that denies `aws-external-anthropic:Delete*` does not block `ArchiveEnvironment`. `ProcessEnvironmentWork` is not matched by `Create*`, `Update*`, `Delete*`, or `Archive*` wildcards. Deny `ArchiveEnvironment`, `UpdateEnvironment`, `CreateEnvironment`, and `ProcessEnvironmentWork` as well if you need to prevent any environment mutation.
 
-`ProcessEnvironmentWork` authorizes a [self-hosted sandbox](managed-agents/self-hosted-sandboxes.md) worker to poll for, acknowledge, heartbeat, stop, and post results on environment work items. Grant it only to principals that run self-hosted environment workers. The `AnthropicSelfHostedEnvironmentAccess` managed policy includes this action.
+`ProcessEnvironmentWork` authorizes a [self-hosted sandbox](../managed-agents/self-hosted-sandboxes.md) worker to poll for, acknowledge, heartbeat, stop, and post results on environment work items. Grant it only to principals that run self-hosted environment workers. The `AnthropicSelfHostedEnvironmentAccess` managed policy includes this action.
 
 ### Vaults
 
@@ -132,7 +132,7 @@ A policy that denies `aws-external-anthropic:Delete*` does not block `ArchiveEnv
 | `ArchiveVault` | `POST /v1/vaults/{id}/archive`                                                                                                                                                              |
 | `DeleteVault`  | `DELETE /v1/vaults/{id}`                                                                                                                                                                    |
 
-Creating, updating, archiving, or deleting an individual vault credential maps to `UpdateVault`. Reading a credential maps to `GetVault`. Vault credential secrets are not exposed: secret fields are write-only and are never returned by `GetVault` (see [Authenticate with vaults](managed-agents/vaults.md)). A policy that denies `aws-external-anthropic:Delete*` still allows credential deletion, and a policy that denies `aws-external-anthropic:Create*` still allows credential creation. Deny `UpdateVault`, `CreateVault`, and `ArchiveVault` as well if you need to prevent any vault mutation.
+Creating, updating, archiving, or deleting an individual vault credential maps to `UpdateVault`. Reading a credential maps to `GetVault`. Vault credential secrets are not exposed: secret fields are write-only and are never returned by `GetVault` (see [Authenticate with vaults](../managed-agents/vaults.md)). A policy that denies `aws-external-anthropic:Delete*` still allows credential deletion, and a policy that denies `aws-external-anthropic:Create*` still allows credential creation. Deny `UpdateVault`, `CreateVault`, and `ArchiveVault` as well if you need to prevent any vault mutation.
 
 ### Memory stores
 
@@ -197,7 +197,7 @@ Workspaces support only archive, not hard delete. A policy that denies `aws-exte
 | `UpdateKey`   | `POST /v1/organizations/external_keys/{id}`   |
 | `DisableKey`  | `DELETE /v1/organizations/external_keys/{id}` |
 
-These actions manage your organization's [customer-managed encryption key (CMEK)](manage-claude/cmek-aws-kms.md) registrations, the record of which AWS KMS key ARNs are registered. They do not create, change, or disable the keys in AWS KMS. `DisableKey` removes a registration and is rejected while any workspace still uses the key. `RegisterKey` and `DisableKey` are not matched by `Create*`, `Update*`, or `Delete*` wildcards; deny `RegisterKey`, `UpdateKey`, and `DisableKey` if you need to prevent any change to key registrations. In these routes, `{id}` is the URL-encoded KMS key ARN. Attaching a registered key to a workspace is a workspace operation, authorized by `CreateWorkspace` or `UpdateWorkspace`; the principal that attaches a key also needs `kms:DescribeKey`, `kms:Encrypt`, and `kms:Decrypt` on that key (see the [prerequisites](manage-claude/cmek-aws-kms.md)). External key actions are account-scoped: specifying a workspace ARN on them has no effect; use `Resource: "*"`.
+These actions manage your organization's [customer-managed encryption key (CMEK)](../manage-claude/cmek-aws-kms.md#claude-platform-on-aws) registrations, the record of which AWS KMS key ARNs are registered. They do not create, change, or disable the keys in AWS KMS. `DisableKey` removes a registration and is rejected while any workspace still uses the key. `RegisterKey` and `DisableKey` are not matched by `Create*`, `Update*`, or `Delete*` wildcards; deny `RegisterKey`, `UpdateKey`, and `DisableKey` if you need to prevent any change to key registrations. In these routes, `{id}` is the URL-encoded KMS key ARN. Attaching a registered key to a workspace is a workspace operation, authorized by `CreateWorkspace` or `UpdateWorkspace`; the principal that attaches a key also needs `kms:DescribeKey`, `kms:Encrypt`, and `kms:Decrypt` on that key (see the [prerequisites](../manage-claude/cmek-aws-kms.md#claude-platform-on-aws)). External key actions are account-scoped: specifying a workspace ARN on them has no effect; use `Resource: "*"`.
 
 ### Compliance
 
@@ -205,7 +205,7 @@ These actions manage your organization's [customer-managed encryption key (CMEK)
 | -------------------------- | ------------------------------- |
 | `ListComplianceActivities` | `GET /v1/compliance/activities` |
 
-`ListComplianceActivities` authorizes reading the [Compliance API](manage-claude/compliance-api.md) [Activity Feed](manage-claude/compliance-activity-feed.md), the organization-wide audit log that includes access transparency events. The route returns an error until the Compliance API is [enabled for your organization](manage-claude/compliance-api-access.md); enablement is on request through your Anthropic account team. The `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` policies' `List*` wildcards include this action.
+`ListComplianceActivities` authorizes reading the [Compliance API](../manage-claude/compliance-api.md) [Activity Feed](../manage-claude/compliance-activity-feed.md), the organization-wide audit log that includes access transparency events. The route returns an error until the Compliance API is [enabled for your organization](../manage-claude/compliance-api-access.md); enablement is on request through your Anthropic account team. The `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` policies' `List*` wildcards include this action.
 
 `ListComplianceActivities` is account-scoped, like `ListWorkspaces`. Specifying a workspace ARN on this action has no effect; use `Resource: "*"`.
 
@@ -223,7 +223,7 @@ These actions manage your organization's [customer-managed encryption key (CMEK)
 | --------------- | ----------------- |
 | `AssumeConsole` | (none)            |
 
-`AssumeConsole` authorizes a principal to open the Claude Console for a Claude Platform on AWS workspace through the AWS Console federation flow. It does not map to a route. Grant it to principals who should be able to click **Open Claude Console** on the Claude Platform on AWS service page in the AWS Console. The Claude Console role (Admin or Developer) is assigned separately by your Anthropic account representative; it is not derived from the principal's IAM permissions. See [Using the Claude Console](build-with-claude/claude-platform-on-aws.md) for the sign-in flow and role descriptions.
+`AssumeConsole` authorizes a principal to open the Claude Console for a Claude Platform on AWS workspace through the AWS Console federation flow. It does not map to a route. Grant it to principals who should be able to click **Open Claude Console** on the Claude Platform on AWS service page in the AWS Console. The Claude Console role (Admin or Developer) is assigned separately by your Anthropic account representative; it is not derived from the principal's IAM permissions. See [Using the Claude Console](../build-with-claude/claude-platform-on-aws.md#using-the-claude-console) for the sign-in flow and role descriptions.
 
 ## Route-to-action mapping
 
@@ -353,15 +353,15 @@ AWS provides five managed policies for Claude Platform on AWS. All managed polic
 | `AnthropicLimitedAccess`               | All `AnthropicInferenceAccess` actions, plus all Claude Managed Agents actions (agents, sessions, environments, vaults, memory stores, webhooks, and self-hosted environment work) |
 | `AnthropicSelfHostedEnvironmentAccess` | `GetEnvironment`, `ProcessEnvironmentWork`, `GetSession`, `UpdateSession`, `GetSkill`, `CallWithBearerToken`                                                                       |
 
-`AnthropicInferenceAccess` is the narrowest managed policy sufficient to run inference. It covers both synchronous and batch inference and, through the `Get*` and `List*` wildcards, grants read access to every API resource in the namespace, including Claude Managed Agents (CMA) resources (agents, sessions, environments, vaults, memory stores, and webhooks). This includes file content download through `GetFile` (see the [Files](api/claude-platform-on-aws-iam-actions.md) note), skill content download through `GetSkill` (see the [Skills](api/claude-platform-on-aws-iam-actions.md) note), and memory contents through `GetMemoryStore`. Vault credential secrets and webhook signing secrets are not exposed: those fields are write-only and are never returned by `GetVault` or `GetWebhook` (see [Authenticate with vaults](managed-agents/vaults.md)). `AnthropicInferenceAccess` does not grant file creation or deletion, skill management, user profile management, workspace mutation, encryption key management, or any Claude Managed Agents write action (create, update, archive, delete, process, or rotate). To exclude CMA reads, replace `AnthropicInferenceAccess` with a custom policy that enumerates only the specific non-CMA actions you need.
+`AnthropicInferenceAccess` is the narrowest managed policy sufficient to run inference. It covers both synchronous and batch inference and, through the `Get*` and `List*` wildcards, grants read access to every API resource in the namespace, including Claude Managed Agents (CMA) resources (agents, sessions, environments, vaults, memory stores, and webhooks). This includes file content download through `GetFile` (see the [Files](claude-platform-on-aws-iam-actions.md#files) note), skill content download through `GetSkill` (see the [Skills](claude-platform-on-aws-iam-actions.md#skills) note), and memory contents through `GetMemoryStore`. Vault credential secrets and webhook signing secrets are not exposed: those fields are write-only and are never returned by `GetVault` or `GetWebhook` (see [Authenticate with vaults](../managed-agents/vaults.md)). `AnthropicInferenceAccess` does not grant file creation or deletion, skill management, user profile management, workspace mutation, encryption key management, or any Claude Managed Agents write action (create, update, archive, delete, process, or rotate). To exclude CMA reads, replace `AnthropicInferenceAccess` with a custom policy that enumerates only the specific non-CMA actions you need.
 
-`AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` all carry the `Get*` and `List*` wildcards, which grant read access to all content in the workspace: file bytes, skill content, batch results, session conversation history, and memory contents. The wildcards also grant `GetKey` and `ListKeys`, which read the organization's registered encryption key configurations (key ARNs and metadata, never key material). The `List*` wildcard also grants `ListComplianceActivities`, which reads the organization's compliance [Activity Feed](manage-claude/compliance-activity-feed.md) once the Compliance API is enabled for the organization (see [Compliance](api/claude-platform-on-aws-iam-actions.md)). Vault credential secrets and webhook signing secrets are not exposed; those fields are write-only and are never returned by `GetVault` or `GetWebhook`. If your principal should not read existing content, use a custom policy that enumerates only the actions you need.
+`AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` all carry the `Get*` and `List*` wildcards, which grant read access to all content in the workspace: file bytes, skill content, batch results, session conversation history, and memory contents. The wildcards also grant `GetKey` and `ListKeys`, which read the organization's registered encryption key configurations (key ARNs and metadata, never key material). The `List*` wildcard also grants `ListComplianceActivities`, which reads the organization's compliance [Activity Feed](../manage-claude/compliance-activity-feed.md) once the Compliance API is enabled for the organization (see [Compliance](claude-platform-on-aws-iam-actions.md#compliance)). Vault credential secrets and webhook signing secrets are not exposed; those fields are write-only and are never returned by `GetVault` or `GetWebhook`. If your principal should not read existing content, use a custom policy that enumerates only the actions you need.
 
 `AnthropicLimitedAccess` includes all Claude Managed Agents actions in addition to inference actions.
 
-`AnthropicSelfHostedEnvironmentAccess` is the narrowest managed policy sufficient to run a [self-hosted sandbox](managed-agents/self-hosted-sandboxes.md) worker. Attach it to the principal your environment worker authenticates as.
+`AnthropicSelfHostedEnvironmentAccess` is the narrowest managed policy sufficient to run a [self-hosted sandbox](../managed-agents/self-hosted-sandboxes.md) worker. Attach it to the principal your environment worker authenticates as.
 
-`AssumeConsole` is not included in `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, `AnthropicLimitedAccess`, or `AnthropicSelfHostedEnvironmentAccess`. Principals who need Claude Console access require either `AnthropicFullAccess` or a custom policy that grants `aws-external-anthropic:AssumeConsole`. See [Console access](api/claude-platform-on-aws-iam-actions.md).
+`AssumeConsole` is not included in `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, `AnthropicLimitedAccess`, or `AnthropicSelfHostedEnvironmentAccess`. Principals who need Claude Console access require either `AnthropicFullAccess` or a custom policy that grants `aws-external-anthropic:AssumeConsole`. See [Console access](claude-platform-on-aws-iam-actions.md#console-access).
 
 `CreateInference` and `CreateBatchInference` are separate actions. Denying one does not block the other. If you intend to prevent all model calls, deny both.
 
@@ -390,9 +390,9 @@ Grants the minimal permissions for an IAM principal that runs inference against 
 }
 ```
 
-`ListWorkspaces` is account-scoped (see [Provisioning automation](api/claude-platform-on-aws-iam-actions.md)). If your service account needs to enumerate workspaces, add a separate `Allow` statement for `ListWorkspaces` with `Resource: "*"`.
+`ListWorkspaces` is account-scoped (see [Provisioning automation](claude-platform-on-aws-iam-actions.md#provisioning-automation)). If your service account needs to enumerate workspaces, add a separate `Allow` statement for `ListWorkspaces` with `Resource: "*"`.
 
-This policy assumes AWS SigV4 authentication. If the principal authenticates with an API key, add a separate `Allow` statement for `aws-external-anthropic:CallWithBearerToken` with `Resource: "*"`. `CallWithBearerToken` is a route-less action that does not bind to a workspace ARN. See [Per-customer workspace isolation](api/claude-platform-on-aws-iam-actions.md) for the two-statement pattern.
+This policy assumes AWS SigV4 authentication. If the principal authenticates with an API key, add a separate `Allow` statement for `aws-external-anthropic:CallWithBearerToken` with `Resource: "*"`. `CallWithBearerToken` is a route-less action that does not bind to a workspace ARN. See [Per-customer workspace isolation](claude-platform-on-aws-iam-actions.md#per-customer-workspace-isolation) for the two-statement pattern.
 
 ### Per-customer workspace isolation
 
@@ -419,13 +419,13 @@ Restricts a role to a single workspace:
 }
 ```
 
-The `aws-external-anthropic:*` wildcard in the first statement includes account-scoped actions (`CreateWorkspace`, `ListWorkspaces`, `ListComplianceActivities`, and the external key actions) that the workspace ARN constraint silently filters out. This is consistent with the "isolation" intent (the role cannot create workspaces, enumerate workspaces, manage encryption key registrations, or read the compliance Activity Feed; it can still attach an already-registered key to its own workspace through `UpdateWorkspace`), but the policy contains permissions that have no effect. See [Provisioning automation](api/claude-platform-on-aws-iam-actions.md) for the account-scoped pattern.
+The `aws-external-anthropic:*` wildcard in the first statement includes account-scoped actions (`CreateWorkspace`, `ListWorkspaces`, `ListComplianceActivities`, and the external key actions) that the workspace ARN constraint silently filters out. This is consistent with the "isolation" intent (the role cannot create workspaces, enumerate workspaces, manage encryption key registrations, or read the compliance Activity Feed; it can still attach an already-registered key to its own workspace through `UpdateWorkspace`), but the policy contains permissions that have no effect. See [Provisioning automation](claude-platform-on-aws-iam-actions.md#provisioning-automation) for the account-scoped pattern.
 
 `CallWithBearerToken` and `AssumeConsole` are route-less actions that do not bind to a workspace ARN. The second statement grants them on `Resource: "*"` so the role can authenticate with an API key and open the Claude Console. Omit this statement if the role uses SigV4 only and does not need Claude Console access.
 
 ### Feature lockdown for a ZDR-sensitive workspace
 
-Blocks batch processing and file upload on a specific workspace while leaving synchronous inference available. Useful when a workspace handles [Zero Data Retention (ZDR)](manage-claude/api-and-data-retention.md) data that must not persist server-side. Attach this policy alongside an Allow policy such as `AnthropicInferenceAccess` or the [single-workspace example](api/claude-platform-on-aws-iam-actions.md); on its own, a Deny-only policy grants no permissions:
+Blocks batch processing and file upload on a specific workspace while leaving synchronous inference available. Useful when a workspace handles [Zero Data Retention (ZDR)](../manage-claude/api-and-data-retention.md) data that must not persist server-side. Attach this policy alongside an Allow policy such as `AnthropicInferenceAccess` or the [single-workspace example](claude-platform-on-aws-iam-actions.md#synchronous-inference-on-a-single-workspace); on its own, a Deny-only policy grants no permissions:
 
 ```json
 {
@@ -474,7 +474,7 @@ Grants a CI/CD role the actions needed to create and manage workspaces, without 
 
 ## See also
 
-* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) for setup, authentication, and platform overview
+* [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) for setup, authentication, and platform overview
 * [AWS IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) for IAM policy syntax and evaluation logic
 * [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for audit logging configuration
 

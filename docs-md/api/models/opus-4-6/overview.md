@@ -8,7 +8,7 @@ description: "Claude Opus 4.6 reference: lifecycle status, model IDs on every pl
 
 **Legacy.** Released February 5, 2026.
 
-Although Claude Opus 4.6 is still available, you should consider migrating to Claude Opus 5 for improved performance. [See Claude Opus 5](models/opus-5/overview.md) · [Migrate to Claude Opus 5](models/opus-5/migration-guide.md)
+Although Claude Opus 4.6 is still available, you should consider migrating to Claude Opus 5 for improved performance. [See Claude Opus 5](../opus-5/overview.md) · [Migrate to Claude Opus 5](../opus-5/migration-guide.md#migrating-from-claude-opus-46)
 
 Model ID: `claude-opus-4-6`
 
@@ -20,11 +20,11 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok
 
 | Model                                                                             | Context | Max output | Price / MTok | Thinking                       | Default effort | Knowledge cutoff |
 | :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :----------------------------- | :------------- | :--------------- |
-| [Claude Fable 5.1](models/fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Adaptive (always on)           | `high`         | Jun 2026         |
-| [Claude Opus 5](models/opus-5/overview.md)       | 1M      | 128K       | $5 / $25     | Adaptive                       | `high`         | May 2026         |
+| [Claude Fable 5.1](../fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Adaptive (always on)           | `high`         | Jun 2026         |
+| [Claude Opus 5](../opus-5/overview.md)       | 1M      | 128K       | $5 / $25     | Adaptive                       | `high`         | May 2026         |
 | **Claude Opus 4.6** (this model)                                                  | 1M      | 128K       | $5 / $25     | Adaptive (extended deprecated) | `high`         | May 2025         |
-| [Claude Sonnet 5](models/sonnet-5/overview.md)   | 1M      | 128K       | $2 / $10     | Adaptive                       | `high`         | Jan 2026         |
-| [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K    | 64K        | $1 / $5      | Extended                       | —              | Feb 2025         |
+| [Claude Sonnet 5](../sonnet-5/overview.md)   | 1M      | 128K       | $2 / $10     | Adaptive                       | `high`         | Jan 2026         |
+| [Claude Haiku 4.5](../haiku-4-5/overview.md) | 200K    | 64K        | $1 / $5      | Extended                       | —              | Feb 2025         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
@@ -40,10 +40,10 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok
 | Platform                                                                                                              | Model ID                       |
 | :-------------------------------------------------------------------------------------------------------------------- | :----------------------------- |
 | Claude API                                                                                                            | `claude-opus-4-6`              |
-| [Amazon Bedrock (InvokeModel)](build-with-claude/claude-on-amazon-bedrock-legacy.md) | `anthropic.claude-opus-4-6-v1` |
-| [Google Cloud](build-with-claude/claude-on-vertex-ai.md)                             | `claude-opus-4-6`              |
-| [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)                | `claude-opus-4-6`              |
-| [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)                | `claude-opus-4-6`              |
+| [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md) | `anthropic.claude-opus-4-6-v1` |
+| [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)                             | `claude-opus-4-6`              |
+| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)                | `claude-opus-4-6`              |
+| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)                | `claude-opus-4-6`              |
 
 ### Pricing
 
@@ -51,21 +51,21 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok
 | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
 | Input                                                                                  | $5 / MTok                                                           |
 | Output                                                                                 | $25 / MTok                                                          |
-| [5m cache write](build-with-claude/prompt-caching.md) | $6.25 / MTok                                                        |
-| [1h cache write](build-with-claude/prompt-caching.md) | $10 / MTok                                                          |
-| [Cache read](build-with-claude/prompt-caching.md)     | $0.50 / MTok                                                        |
-| [Batch API](build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](about-claude/pricing.md) |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $6.25 / MTok                                                        |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $10 / MTok                                                          |
+| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.50 / MTok                                                        |
+| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
+| Full price list                                                                        | [Pricing](../../about-claude/pricing.md) |
 
 ### Capabilities
 
 | Feature                                                                                                                     | Value                          |
 | :-------------------------------------------------------------------------------------------------------------------------- | :----------------------------- |
-| [Context window](build-with-claude/context-windows.md)                                     | 1M tokens                      |
+| [Context window](../../build-with-claude/context-windows.md)                                     | 1M tokens                      |
 | Max output                                                                                                                  | 128K tokens                    |
-| [Max output (Batch API, beta)](build-with-claude/batch-processing.md) | 300K tokens                    |
-| [Thinking](build-with-claude/thinking.md)                                                  | Adaptive (extended deprecated) |
-| [Default effort](build-with-claude/effort.md)                                              | `high`                         |
+| [Max output (Batch API, beta)](../../build-with-claude/batch-processing.md#extended-output-beta) | 300K tokens                    |
+| [Thinking](../../build-with-claude/thinking.md)                                                  | Adaptive (extended deprecated) |
+| [Default effort](../../build-with-claude/effort.md)                                              | `high`                         |
 | Input → output                                                                                                              | Text and images → text         |
 | Reliable knowledge cutoff                                                                                                   | May 2025                       |
 | Training data cutoff                                                                                                        | Aug 2025                       |
@@ -74,10 +74,10 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](about-claude/model-deprecations.md) | Active (legacy)                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| [Status](../../about-claude/model-deprecations.md) | Active (legacy)                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | Released                                                                      | February 5, 2026                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Retirement                                                                    | Not sooner than February 5, 2027                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Platforms                                                                     | Claude API, [Amazon Bedrock (InvokeModel)](build-with-claude/claude-on-amazon-bedrock-legacy.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) |
+| Platforms                                                                     | Claude API, [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
 
 ## Resources
 

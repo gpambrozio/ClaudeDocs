@@ -19,9 +19,11 @@ Usage:
 # ///
 
 import asyncio
+import os
 import re
+from collections import Counter
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlsplit, urlunsplit
 from xml.etree import ElementTree
 
 import httpx
@@ -65,6 +67,10 @@ SITES = [
         "llms_url": "https://platform.claude.com/llms.txt",
     },
 ]
+
+# The hosts the mirror covers. A link is only a candidate for rewriting if it
+# points at one of them; anything else stays as it was written.
+DOC_HOSTS = {urlparse(site["start_url"]).netloc for site in SITES}
 
 MAX_RETRIES = 2
 CONCURRENCY = 8
@@ -311,8 +317,50 @@ def mdx_to_markdown(text: str) -> str:
     return restore_code_blocks(masked, blocks)
 
 
-def convert_links(text: str, base_url: str) -> str:
-    """Rewrite in-site documentation links to point at the local .md files."""
+def page_url(url: str) -> str:
+    """Normalize a URL to the extensionless form used as the crawl key.
+
+    Drops the query and fragment, the ".md" suffix a fetch adds, and any
+    trailing slash, so that the same page reached by any of those spellings
+    compares equal.
+    """
+    parts = urlsplit(str(url))
+    path = re.sub(r"\.md$", "", parts.path).rstrip("/")
+    return urlunsplit((parts.scheme, parts.netloc, path, "", ""))
+
+
+def resolve_redirect(url: str, redirects: dict[str, str]) -> str:
+    """Follow the {requested -> final} chain recorded during the crawl.
+
+    Renames can chain, and a chain that loops would hang, so each URL is
+    visited at most once.
+    """
+    seen = set()
+    while url in redirects and url not in seen:
+        seen.add(url)
+        url = redirects[url]
+
+    return url
+
+
+def convert_links(
+    text: str,
+    base_url: str,
+    filepath: Path,
+    redirects: dict[str, str],
+    mirrored: dict[str, Path],
+) -> str:
+    """Rewrite in-site documentation links to point at the local .md files.
+
+    A link is rewritten only once its target is known to be mirrored, after
+    following any rename recorded during the crawl, and the path emitted is
+    relative to the linking file -- which is how a Markdown viewer resolves it.
+    A target that is not mirrored, because it 404s upstream or sits in
+    SKIP_URLS, keeps an absolute URL so the reader still reaches the page.
+
+    Links inside code blocks are left alone: there they are sample content, not
+    navigation.
+    """
 
     def replace(match: re.Match) -> str:
         label, href = match.group(1), match.group(2).strip()
@@ -321,15 +369,31 @@ def convert_links(text: str, base_url: str) -> str:
             return match.group(0)
 
         absolute = href if href.startswith(("http://", "https://")) else urljoin(base_url, href)
+        parts = urlsplit(absolute)
 
-        path_match = re.search(r"/docs/en/(.+?)(?:#.*)?$", absolute)
-        if not path_match:
+        # An href that already names a ".md" file refers to a file bundled with
+        # a skill, not to a documentation page. The docs link to those by
+        # relative name and no such file is mirrored.
+        if parts.path.endswith(".md"):
             return match.group(0)
 
-        path = path_match.group(1).rstrip("/") or "index"
-        return f"[{label}]({path}.md)"
+        if parts.netloc not in DOC_HOSTS or not re.match(r"/docs/en/.+", parts.path.rstrip("/")):
+            return match.group(0)
 
-    return LINK_RE.sub(replace, text)
+        target = resolve_redirect(page_url(absolute), redirects)
+        fragment = f"#{parts.fragment}" if parts.fragment else ""
+
+        local = mirrored.get(target)
+        if local is None:
+            return f"[{label}]({target}{fragment})"
+
+        relative = Path(os.path.relpath(local, filepath.parent)).as_posix()
+        return f"[{label}]({relative}{fragment})"
+
+    return "\n".join(
+        segment if is_code else LINK_RE.sub(replace, segment)
+        for segment, is_code in split_code_fences(text)
+    )
 
 
 def extract_links(text: str, base_url: str, pattern: re.Pattern) -> set[str]:
@@ -342,6 +406,12 @@ def extract_links(text: str, base_url: str, pattern: re.Pattern) -> set[str]:
             continue
 
         absolute = href if href.startswith(("http://", "https://")) else urljoin(base_url, href)
+
+        # ".md" hrefs name a file bundled with a skill rather than a page, so
+        # fetching them only produces a 404 for "<name>.md.md".
+        if urlsplit(absolute).path.endswith(".md"):
+            continue
+
         absolute = absolute.split("#")[0].split("?")[0].rstrip("/")
 
         if absolute and pattern.match(absolute):
@@ -432,12 +502,16 @@ async def get_llms_urls(client: httpx.AsyncClient, llms_url: str, pattern: re.Pa
     return urls
 
 
-async def fetch_markdown(client: httpx.AsyncClient, url: str) -> tuple[str, str | None, bool]:
+async def fetch_markdown(
+    client: httpx.AsyncClient, url: str
+) -> tuple[str, str | None, bool, str | None]:
     """Fetch a page's Markdown source.
 
-    Returns (url, markdown, is_gone). `is_gone` distinguishes a 404 -- meaning
-    the page was removed upstream and its local file should go too -- from a
-    transient failure, where the local file is kept.
+    Returns (url, markdown, is_gone, moved_to). `is_gone` distinguishes a 404
+    -- meaning the page was removed upstream and its local file should go too
+    -- from a transient failure, where the local file is kept. `moved_to` is
+    where a redirect landed, which is what lets links still written against the
+    old path be repointed at the page's new home.
     """
     for attempt in range(MAX_RETRIES + 1):
         try:
@@ -445,31 +519,34 @@ async def fetch_markdown(client: httpx.AsyncClient, url: str) -> tuple[str, str 
         except Exception as e:
             if attempt == MAX_RETRIES:
                 print(f"  Error: {url} - {e}")
-                return url, None, False
+                return url, None, False, None
             continue
 
         if response.status_code == 404:
-            return url, None, True
+            return url, None, True, None
 
         if response.status_code >= 400:
             if attempt == MAX_RETRIES:
                 print(f"  Error: {url} - HTTP {response.status_code}")
-                return url, None, False
+                return url, None, False, None
             continue
+
+        final = page_url(response.url)
 
         # A page that has moved redirects to its new location, and a
         # cross-site redirect drops the ".md" suffix and answers with the
         # rendered HTML page. Either way this URL no longer has a source of
-        # its own, so the local file should go.
+        # its own, so the local file should go -- but the response still
+        # reveals where the page went.
         if "markdown" not in response.headers.get("content-type", ""):
-            return url, None, True
+            return url, None, True, final if final != url else None
 
-        if re.sub(r"\.md$", "", str(response.url)).rstrip("/") != url:
-            return url, None, True
+        if final != url:
+            return url, None, True, final
 
-        return url, response.text, False
+        return url, response.text, False, None
 
-    return url, None, False
+    return url, None, False, None
 
 
 async def seed_urls(client: httpx.AsyncClient, site: dict, pattern: re.Pattern) -> set[str]:
@@ -495,16 +572,24 @@ async def seed_urls(client: httpx.AsyncClient, site: dict, pattern: re.Pattern) 
     return {site["start_url"]} | sitemap_urls | llms_urls | existing
 
 
-async def crawl_site(client: httpx.AsyncClient, site: dict) -> tuple[list[tuple[str, str, str]], set[str]]:
+async def crawl_site(
+    client: httpx.AsyncClient, site: dict
+) -> tuple[list[tuple[str, str, str]], set[str], dict[str, str]]:
     """Crawl a documentation site.
 
-    Returns (results, valid_urls), where results is a list of
-    (url, title, markdown) and valid_urls is every URL whose local file should
-    survive cleanup.
+    Returns (results, valid_urls, redirects), where results is a list of
+    (url, title, markdown), valid_urls is every URL whose local file should
+    survive cleanup, and redirects maps each requested URL that moved to where
+    it landed.
+
+    Links are not rewritten here. Resolving one needs to know whether its
+    target was mirrored, and for a cross-site link that is only settled once
+    every site has been crawled.
     """
     pattern = re.compile(site["url_pattern"])
     results: list[tuple[str, str, str]] = []
     valid_urls: set[str] = set()
+    redirects: dict[str, str] = {}
     seen: set[str] = set()
 
     print(f"\nCrawling {site['name']}...")
@@ -523,7 +608,14 @@ async def crawl_site(client: httpx.AsyncClient, site: dict) -> tuple[list[tuple[
         seen |= pending
         pending = set()
 
-        for url, raw, is_gone in await asyncio.gather(*(fetch(url) for url in batch)):
+        for url, raw, is_gone, moved_to in await asyncio.gather(*(fetch(url) for url in batch)):
+            if moved_to:
+                redirects[url] = moved_to
+                # A rename may be the only thing standing between the crawl and
+                # the page's new home, if nothing else links to or indexes it.
+                if moved_to not in seen and moved_to not in SKIP_URLS and pattern.match(moved_to):
+                    pending.add(moved_to)
+
             if raw is None:
                 # Keep the local file on transient failures; drop it on 404
                 if not is_gone:
@@ -534,7 +626,6 @@ async def crawl_site(client: httpx.AsyncClient, site: dict) -> tuple[list[tuple[
 
             body = PREAMBLE_RE.sub("", raw)
             markdown = mdx_to_markdown(body)
-            markdown = convert_links(markdown, url)
             markdown = re.sub(r"\n{3,}", "\n\n", markdown).strip()
 
             if len(markdown) < 100:
@@ -552,7 +643,54 @@ async def crawl_site(client: httpx.AsyncClient, site: dict) -> tuple[list[tuple[
 
         print(f"  {len(results)} pages fetched, {len(pending)} newly discovered")
 
-    return results, valid_urls
+    return results, valid_urls, redirects
+
+
+def check_links() -> None:
+    """Report on the links in the finished mirror.
+
+    Relative links are resolved against the directory of the file holding
+    them, which is how a Markdown viewer resolves them, so this counts what a
+    reader finds by clicking. Code blocks are excluded, for the same reason
+    convert_links does not rewrite them.
+
+    The links left broken are ones the rewriter passed through untouched: the
+    docs name a file bundled with a skill, or one the reader is expected to
+    write, by a relative ".md" path that no mirror can satisfy.
+    """
+    local = broken = 0
+    unresolved: Counter = Counter()
+    dangling: Counter = Counter()
+
+    for filepath in sorted(OUTPUT_DIR.rglob("*.md")):
+        for segment, is_code in split_code_fences(filepath.read_text(encoding="utf-8")):
+            if is_code:
+                continue
+
+            for _, href in LINK_RE.findall(segment):
+                href = href.strip()
+                target = href.split("#")[0]
+
+                if href.startswith(("http://", "https://")):
+                    if urlsplit(href).netloc in DOC_HOSTS:
+                        unresolved[target] += 1
+                    continue
+
+                if not target.endswith(".md"):
+                    continue
+
+                local += 1
+                if not (filepath.parent / target).exists():
+                    broken += 1
+                    dangling[href] += 1
+
+    print(f"\nLinks: {local} local, {broken} dangling, {sum(unresolved.values())} left absolute")
+
+    for href, count in unresolved.most_common(5):
+        print(f"  not mirrored: {href} ({count} links)")
+
+    for href, count in dangling.most_common(5):
+        print(f"  dangling: {href} ({count} links)")
 
 
 async def main():
@@ -561,24 +699,46 @@ async def main():
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    total = 0
-    all_valid_filepaths = set()
-
+    crawled = []
     headers = {"User-Agent": "ClaudeDocs-sync (+https://github.com/marvin-ambrozio/ClaudeDocs)"}
     async with httpx.AsyncClient(follow_redirects=True, headers=headers) as client:
         for site in SITES:
-            results, valid_urls = await crawl_site(client, site)
+            crawled.append((site, *await crawl_site(client, site)))
 
-            for url in valid_urls:
-                all_valid_filepaths.add(url_to_filepath(url, site["name"]))
+    # Index every site before writing any of them. A link is rewritten only
+    # when its target is known to be mirrored, and links cross between the two
+    # sites, so both crawls must be complete first.
+    redirects: dict[str, str] = {}
+    mirrored: dict[str, Path] = {}
+    all_valid_filepaths = set()
 
-            for url, title, markdown in results:
-                filepath = url_to_filepath(url, site["name"])
-                filepath.parent.mkdir(parents=True, exist_ok=True)
-                filepath.write_text(markdown + COPYRIGHT_NOTICE, encoding="utf-8")
+    for site, results, valid_urls, site_redirects in crawled:
+        redirects.update(site_redirects)
 
-            print(f"  Saved {len(results)} files to {site['name']}/")
-            total += len(results)
+        for url in valid_urls:
+            all_valid_filepaths.add(url_to_filepath(url, site["name"]))
+
+        for url, _, _ in results:
+            mirrored[url] = url_to_filepath(url, site["name"])
+
+        # A page that failed transiently keeps the file from a previous run, so
+        # it stays a valid link target. Leaving it out would turn every link to
+        # it absolute for one run and back again on the next.
+        for url in valid_urls:
+            filepath = url_to_filepath(url, site["name"])
+            if url not in mirrored and filepath.exists():
+                mirrored[url] = filepath
+
+    total = 0
+    for site, results, _, _ in crawled:
+        for url, _, markdown in results:
+            filepath = url_to_filepath(url, site["name"])
+            markdown = convert_links(markdown, url, filepath, redirects, mirrored)
+            filepath.parent.mkdir(parents=True, exist_ok=True)
+            filepath.write_text(markdown + COPYRIGHT_NOTICE, encoding="utf-8")
+
+        print(f"  Saved {len(results)} files to {site['name']}/")
+        total += len(results)
 
     # Remove files that are no longer in the docs
     removed = 0
@@ -594,6 +754,18 @@ async def main():
             dirpath.rmdir()
 
     print(f"\nTotal: {total} files saved, {removed} removed from {OUTPUT_DIR}/")
+
+    check_links()
+
+    # Every rewritten link points at a file in the index, so the index all
+    # being on disk is what makes those links resolve. If one is missing the
+    # resolution above is wrong and the mirror should not be published as it
+    # stands.
+    missing = sorted(str(path) for path in set(mirrored.values()) if not path.exists())
+    if missing:
+        for path in missing[:5]:
+            print(f"  MISSING: {path}")
+        raise SystemExit(f"{len(missing)} link targets missing from {OUTPUT_DIR}/")
 
 
 if __name__ == "__main__":

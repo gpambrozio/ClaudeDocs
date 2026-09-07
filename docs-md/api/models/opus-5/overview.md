@@ -14,22 +14,22 @@ Model ID: `claude-opus-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok · Output pricing: $25 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-opus-5) · [What’s new](models/opus-5/whats-new-opus-5.md) · [Migration guide](models/opus-5/migration-guide.md)
+[Announcement](https://www.anthropic.com/news/claude-opus-5) · [What’s new](whats-new-opus-5.md) · [Migration guide](migration-guide.md)
 
 ## Overview
 
 Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the largest gains in deep reasoning, agentic and long-horizon tasks, and test-time compute scaling. This page summarizes everything new in Claude Opus 5, including mid-conversation tool changes and two breaking changes for code running on Claude Opus 4.8: thinking is on by default, and thinking can be disabled only at effort `high` or below.
 
-[What's new in Claude Opus 5](models/opus-5/whats-new-opus-5.md)
+[What's new in Claude Opus 5](whats-new-opus-5.md)
 
 ## How it compares
 
 | Model                                                                             | Context | Max output | Price / MTok | Latency  | Thinking             | Default effort | Knowledge cutoff |
 | :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------- | :------------------- | :------------- | :--------------- |
-| [Claude Fable 5.1](models/fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
+| [Claude Fable 5.1](../fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
 | **Claude Opus 5** (this model)                                                    | 1M      | 128K       | $5 / $25     | Moderate | Adaptive             | `high`         | May 2026         |
-| [Claude Sonnet 5](models/sonnet-5/overview.md)   | 1M      | 128K       | $2 / $10     | Fast     | Adaptive             | `high`         | Jan 2026         |
-| [Claude Haiku 4.5](models/haiku-4-5/overview.md) | 200K    | 64K        | $1 / $5      | Fastest  | Extended             | —              | Feb 2025         |
+| [Claude Sonnet 5](../sonnet-5/overview.md)   | 1M      | 128K       | $2 / $10     | Fast     | Adaptive             | `high`         | Jan 2026         |
+| [Claude Haiku 4.5](../haiku-4-5/overview.md) | 200K    | 64K        | $1 / $5      | Fastest  | Extended             | —              | Feb 2025         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
@@ -46,9 +46,9 @@ Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the larges
 | Platform                                                                                               | Model ID                  |
 | :----------------------------------------------------------------------------------------------------- | :------------------------ |
 | Claude API                                                                                             | `claude-opus-5`           |
-| [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)       | `anthropic.claude-opus-5` |
-| [Google Cloud](build-with-claude/claude-on-vertex-ai.md)              | `claude-opus-5`           |
-| [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) | `claude-opus-5`           |
+| [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)       | `anthropic.claude-opus-5` |
+| [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)              | `claude-opus-5`           |
+| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | `claude-opus-5`           |
 
 ### Pricing
 
@@ -56,21 +56,21 @@ Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the larges
 | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
 | Input                                                                                  | $5 / MTok                                                           |
 | Output                                                                                 | $25 / MTok                                                          |
-| [5m cache write](build-with-claude/prompt-caching.md) | $6.25 / MTok                                                        |
-| [1h cache write](build-with-claude/prompt-caching.md) | $10 / MTok                                                          |
-| [Cache read](build-with-claude/prompt-caching.md)     | $0.50 / MTok                                                        |
-| [Batch API](build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](about-claude/pricing.md) |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $6.25 / MTok                                                        |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $10 / MTok                                                          |
+| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.50 / MTok                                                        |
+| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
+| Full price list                                                                        | [Pricing](../../about-claude/pricing.md) |
 
 ### Capabilities
 
 | Feature                                                                                                                     | Value                  |
 | :-------------------------------------------------------------------------------------------------------------------------- | :--------------------- |
-| [Context window](build-with-claude/context-windows.md)                                     | 1M tokens              |
+| [Context window](../../build-with-claude/context-windows.md)                                     | 1M tokens              |
 | Max output                                                                                                                  | 128K tokens            |
-| [Max output (Batch API, beta)](build-with-claude/batch-processing.md) | 300K tokens            |
-| [Thinking](build-with-claude/thinking.md)                                                  | Adaptive               |
-| [Default effort](build-with-claude/effort.md)                                              | `high`                 |
+| [Max output (Batch API, beta)](../../build-with-claude/batch-processing.md#extended-output-beta) | 300K tokens            |
+| [Thinking](../../build-with-claude/thinking.md)                                                  | Adaptive               |
+| [Default effort](../../build-with-claude/effort.md)                                              | `high`                 |
 | Comparative latency                                                                                                         | Moderate               |
 | Input → output                                                                                                              | Text and images → text |
 | Reliable knowledge cutoff                                                                                                   | May 2026               |
@@ -80,16 +80,16 @@ Claude Opus 5 is a step-change improvement over Claude Opus 4.8, with the larges
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                           |
 | :---------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                 |
+| [Status](../../about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                 |
 | Released                                                                      | July 24, 2026                                                                                                                                                                                                                                                                                                   |
 | Retirement                                                                    | Not sooner than July 24, 2027                                                                                                                                                                                                                                                                                   |
-| Platforms                                                                     | Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) |
+| Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
 
 ## Good to know
 
-* On the [Message Batches API](build-with-claude/batch-processing.md), Claude Opus 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
-* The minimum cacheable prompt length is 512 tokens. See [Prompt caching](build-with-claude/prompt-caching.md).
-* Query limits and capabilities programmatically with the [Models API](api/models/list.md).
+* On the [Message Batches API](../../build-with-claude/batch-processing.md#extended-output-beta), Claude Opus 5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
+* The minimum cacheable prompt length is 512 tokens. See [Prompt caching](../../build-with-claude/prompt-caching.md#cache-limitations).
+* Query limits and capabilities programmatically with the [Models API](../../api/models/list.md).
 
 ## Resources
 

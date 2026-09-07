@@ -13,7 +13,7 @@ Make sure you have:
 * A code project to work with
 * A [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=quickstart_prereq) (Pro, Max, Team, or Enterprise), [Claude Console](https://platform.claude.com/) account, or access through a [supported cloud provider](third-party-integrations.md)
 
-This guide covers the terminal CLI. Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](desktop.md), in [VS Code](vs-code.md) and [JetBrains IDEs](jetbrains.md), in [Slack](slack.md), and in CI/CD with [GitHub Actions](github-actions.md) and [GitLab](gitlab-ci-cd.md). See [all interfaces](overview.md).
+This guide covers the terminal CLI. Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](desktop.md), in [VS Code](vs-code.md) and [JetBrains IDEs](jetbrains.md), in [Slack](slack.md), and in CI/CD with [GitHub Actions](github-actions.md) and [GitLab](gitlab-ci-cd.md). See [all interfaces](overview.md#use-claude-code-everywhere).
 
 ## Step 1: Install Claude Code
 
@@ -41,7 +41,7 @@ curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del in
 
 If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell. Your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
 
-If the install command fails with `syntax error near unexpected token '<'`, a `403`, or another curl error, see [Troubleshoot installation](troubleshoot-install.md) to match the error to a fix and for alternative install methods.
+If the install command fails with `syntax error near unexpected token '<'`, a `403`, or another curl error, see [Troubleshoot installation](troubleshoot-install.md#find-your-error) to match the error to a fix and for alternative install methods.
 
 [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
@@ -65,7 +65,7 @@ winget install Anthropic.ClaudeCode
 
 WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
-You can also install with [apt, dnf, or apk](setup.md) on Debian, Fedora, RHEL, and Alpine.
+You can also install with [apt, dnf, or apk](setup.md#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
 To confirm the installation worked, run:
 
@@ -96,7 +96,7 @@ You can log in using any of these account types:
 * [Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry](third-party-integrations.md) (enterprise cloud providers)
 * A self-hosted [Claude apps gateway](claude-apps-gateway.md), if your organization runs one: your admin pre-configures the gateway URL, and `/login` opens directly on the **Cloud gateway** screen for you to sign in with corporate SSO
 
-Once logged in, your credentials are stored and you won't need to log in again. Learn more in [Credential Management](authentication.md).
+Once logged in, your credentials are stored and you won't need to log in again. Learn more in [Credential Management](authentication.md#credential-management).
 
 ## Step 3: Start your first session
 
@@ -159,9 +159,9 @@ add a hello world function to the main file
 
 Claude Code finds the appropriate file and shows you the change. If it asks before making the change, select **Yes** to approve.
 
-Auto mode is the [built-in starting permission mode](permission-modes.md) for interactive terminal sessions on Pro, Max, and Team plans: a classifier reviews actions instead of you, and Claude edits most files and runs most commands without asking you. On other plans, Manual mode is the built-in starting permission mode. For the session you start right after installing, see [First session after an install or upgrade](env-vars.md).
+Auto mode is the [built-in starting permission mode](permission-modes.md#eliminate-prompts-with-auto-mode) for interactive terminal sessions on Pro, Max, and Team plans: a classifier reviews actions instead of you, and Claude edits most files and runs most commands without asking you. On other plans, Manual mode is the built-in starting permission mode. For the session you start right after installing, see [First session after an install or upgrade](env-vars.md#first-session-after-an-install-or-upgrade).
 
-Your settings or your organization can set a different starting permission mode. [Which permission mode a session starts in](permission-modes.md) lists what does. Press `Shift+Tab` at any time to switch the permission mode of the session you're in.
+Your settings or your organization can set a different starting permission mode. [Which permission mode a session starts in](permission-modes.md#which-mode-a-session-starts-in) lists what does. Press `Shift+Tab` at any time to switch the permission mode of the session you're in.
 
 ## Step 6: Use Git with Claude Code
 

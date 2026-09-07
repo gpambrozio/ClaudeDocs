@@ -8,9 +8,9 @@ description: Authenticate SPIFFE workloads to the Claude API using JWT-SVIDs fro
 
 [SPIFFE](https://spiffe.io/) is the CNCF standard for issuing identity to workloads. [SPIRE](https://spiffe.io/docs/latest/spire-about/) is its open-source reference implementation, and several commercial products also issue SPIFFE-conformant identities. Anthropic federates with any SPIFFE implementation that emits OIDC-compatible JWT-SVIDs. For a current list of implementations, see [Commercial software that implements SPIFFE](https://spiffe.io/docs/latest/spiffe-about/overview/#commercial-software-that-implements-spiffe) on the SPIFFE project site.
 
-Federation works either through an OIDC discovery document at a public HTTPS URL (`discovery` mode, subject to the [URL constraints](manage-claude/wif-reference.md)) or by registering the JWKS directly (`inline` mode).
+Federation works either through an OIDC discovery document at a public HTTPS URL (`discovery` mode, subject to the [URL constraints](../wif-reference.md#url-fields)) or by registering the JWKS directly (`inline` mode).
 
-The JWT-SVID spec defines `sub` as the workload's SPIFFE ID, and the SPIFFE Workload API requires the caller to supply `aud` at fetch time, so those claims are the same across implementations. Anthropic additionally requires `iss` and `iat`, neither of which the JWT-SVID spec mandates, so configure your implementation to populate both (in SPIRE, `iss` is the `jwt_issuer` server setting and `iat` is set automatically). With those in place, the [Configure Anthropic](manage-claude/wif-providers/spiffe.md), [Acquire and use the token](manage-claude/wif-providers/spiffe.md), and [Scope your rule](manage-claude/wif-providers/spiffe.md) sections of this guide apply to any SPIFFE implementation.
+The JWT-SVID spec defines `sub` as the workload's SPIFFE ID, and the SPIFFE Workload API requires the caller to supply `aud` at fetch time, so those claims are the same across implementations. Anthropic additionally requires `iss` and `iat`, neither of which the JWT-SVID spec mandates, so configure your implementation to populate both (in SPIRE, `iss` is the `jwt_issuer` server setting and `iat` is set automatically). With those in place, the [Configure Anthropic](spiffe.md#configure-anthropic), [Acquire and use the token](spiffe.md#acquire-and-use-the-token), and [Scope your rule](spiffe.md#scope-your-rule) sections of this guide apply to any SPIFFE implementation.
 
 SPIFFE assigns every workload a stable identity URI of the form `spiffe://<trust-domain>/<path>`, and SPIRE issues that identity as a JWT-SVID on demand through the Workload API. A JWT-SVID is an ordinary signed JWT whose `sub` claim is the workload's SPIFFE ID and whose `aud` claim is supplied by the workload at fetch time.
 
@@ -18,11 +18,11 @@ The bridge from a SPIRE trust domain to standard OIDC is the [SPIRE OIDC Discove
 
 This page's examples use SPIRE and apply anywhere SPIRE Agent runs: Kubernetes pods, virtual machines, and bare-metal hosts.
 
-If your Kubernetes cluster does not run SPIRE and you want to authenticate with the cluster's native projected service-account tokens instead, see [Use WIF with Kubernetes](manage-claude/wif-providers/kubernetes.md).
+If your Kubernetes cluster does not run SPIRE and you want to authenticate with the cluster's native projected service-account tokens instead, see [Use WIF with Kubernetes](kubernetes.md).
 
 ## Prerequisites
 
-* Familiarity with [WIF concepts](manage-claude/workload-identity-federation.md): service accounts, federation issuers, and federation rules.
+* Familiarity with [WIF concepts](../workload-identity-federation.md#concepts): service accounts, federation issuers, and federation rules.
 * A SPIFFE deployment with workload identities issued (the examples on this page use SPIRE Server and Agent), and registration entries for the workloads that need to call the Claude API.
 * An OIDC discovery endpoint for the trust domain (in SPIRE, the [OIDC Discovery Provider](https://github.com/spiffe/spire/blob/main/support/oidc-discovery-provider/README.md)) running with a publicly reachable HTTPS endpoint, or the JWKS exported for `inline` registration.
 * Your SPIFFE issuer configured to set the `iss` claim on JWT-SVIDs to the value you will register as the federation issuer's `issuer_url`. For `discovery` mode, this is the discovery endpoint's public URL (in SPIRE, the `jwt_issuer` server setting).
@@ -33,7 +33,7 @@ The audience value to request when fetching a JWT-SVID is always `https://api.an
 
 ## Configure SPIRE
 
-The instructions in this section are SPIRE-specific. If you use a different SPIFFE issuer, configure its OIDC discovery endpoint and JWT-SVID retrieval according to its own documentation, then continue at [Configure Anthropic](manage-claude/wif-providers/spiffe.md).
+The instructions in this section are SPIRE-specific. If you use a different SPIFFE issuer, configure its OIDC discovery endpoint and JWT-SVID retrieval according to its own documentation, then continue at [Configure Anthropic](spiffe.md#configure-anthropic).
 
 If you already run SPIRE with the OIDC Discovery Provider, federating with Anthropic requires three things on the SPIRE side: a `jwt_issuer` that matches the discovery URL, a registration entry for the workload that will call the Claude API, and a way for that workload to fetch a JWT-SVID with the Anthropic audience. The following subsections walk through each. The configuration snippets show only the settings relevant to Anthropic federation, not complete SPIRE deployment configs.
 
@@ -45,7 +45,7 @@ Anthropic validates a JWT-SVID by matching its `iss` claim against a registered 
 
 The trust domain and the issuer URL are independent. The trust domain (`spiffe://prod.example.com`) scopes the `sub` claim. The issuer URL (`https://oidc-discovery.prod.example.com`) is where Anthropic fetches signing keys. They do not need to share a hostname.
 
-Confirm `jwt_issuer` is set in SPIRE Server's configuration and points at the discovery provider's public URL. The following example also shows a default JWT-SVID lifetime. SPIRE's built-in default is 5 minutes, which is short enough that continuous rotation is required (see [Run spiffe-helper](manage-claude/wif-providers/spiffe.md)). Anthropic's token-exchange endpoint rejects any identity token whose lifetime exceeds the federation issuer's configured maximum, which is 1 hour by default (see [Validation rules](manage-claude/wif-reference.md)). This check applies to every SPIFFE implementation, not only SPIRE, so keep `default_jwt_svid_ttl` (or any per-entry override) at or below that maximum.
+Confirm `jwt_issuer` is set in SPIRE Server's configuration and points at the discovery provider's public URL. The following example also shows a default JWT-SVID lifetime. SPIRE's built-in default is 5 minutes, which is short enough that continuous rotation is required (see [Run spiffe-helper](spiffe.md#run-spiffe-helper)). Anthropic's token-exchange endpoint rejects any identity token whose lifetime exceeds the federation issuer's configured maximum, which is 1 hour by default (see [Validation rules](../wif-reference.md#validation-rules)). This check applies to every SPIFFE implementation, not only SPIRE, so keep `default_jwt_svid_ttl` (or any per-entry override) at or below that maximum.
 
 ```text server.conf
 server {
@@ -113,7 +113,7 @@ In Kubernetes, run spiffe-helper as a sidecar container that shares a memory-bac
 
 In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select **Custom OIDC**. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
 
-The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](manage-claude/wif-admin-api.md):
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](../wif-admin-api.md):
 
 **Federation issuer:** Register the OIDC Discovery Provider's public URL in `discovery` mode. Anthropic fetches `/.well-known/openid-configuration` from this URL and follows the returned `jwks_uri` to retrieve the trust domain's signing keys.
 
@@ -129,7 +129,7 @@ If the discovery provider is not reachable from the public internet, fetch the J
 
 SPIRE rotates JWT signing keys frequently, by default on the same cadence as the CA (`ca_ttl`, 24 hours). If you register the issuer with an inline JWKS instead of a discovery URL, you must update the JWKS every time SPIRE rotates: add the new key before workloads start presenting it, and **remove superseded keys** once tokens signed with them have expired. Stale keys left in an inline JWKS remain trusted indefinitely.
 
-To automate JWKS updates without exposing a public discovery endpoint, configure a SPIRE Server [BundlePublisher](https://spiffe.io/docs/latest/deploying/spire_server/#built-in-plugins) plugin (`aws_s3`, `gcp_cloudstorage`, or `k8s_configmap`) with `format = "jwks"` to push the JWT signing keys to external storage on every rotation, then update the issuer's inline keys through the [Admin API](manage-claude/wif-admin-api.md).
+To automate JWKS updates without exposing a public discovery endpoint, configure a SPIRE Server [BundlePublisher](https://spiffe.io/docs/latest/deploying/spire_server/#built-in-plugins) plugin (`aws_s3`, `gcp_cloudstorage`, or `k8s_configmap`) with `format = "jwks"` to push the JWT signing keys to external storage on every rotation, then update the issuer's inline keys through the [Admin API](../wif-admin-api.md#federation-issuers).
 
 **Federation rule:** Match the JWT-SVID's `sub` (the SPIFFE ID) and the `aud` you configured spiffe-helper to request. SPIFFE IDs are URI strings and `subject_prefix` matches them as opaque text, so an exact value or a trailing-`*` prefix match both work against them. For more complex patterns, use a CEL `condition`.
 
@@ -161,7 +161,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
 
 **File-based with spiffe-helper**
 
-With spiffe-helper writing a fresh JWT-SVID to `/var/run/secrets/anthropic.com/token`, set `ANTHROPIC_IDENTITY_TOKEN_FILE` to that path along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. The SDK reads the file on every token exchange, so it always picks up the most recently rotated SVID, and refreshes the Anthropic access token automatically before it expires. See [Environment variables](manage-claude/wif-reference.md) for where each value comes from.
+With spiffe-helper writing a fresh JWT-SVID to `/var/run/secrets/anthropic.com/token`, set `ANTHROPIC_IDENTITY_TOKEN_FILE` to that path along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. The SDK reads the file on every token exchange, so it always picks up the most recently rotated SVID, and refreshes the Anthropic access token automatically before it expires. See [Environment variables](../wif-reference.md#environment-variables) for where each value comes from.
 
 ```bash cURL
 JWT=$(cat "$ANTHROPIC_IDENTITY_TOKEN_FILE")
@@ -440,7 +440,7 @@ spire-agent api fetch jwt \
   | jq -rR 'split(".")[1] | gsub("-";"+") | gsub("_";"/") | @base64d | fromjson'
 ```
 
-The `-output json` flag returns the SVID response and bundle response as a two-element JSON array, so `jq -r '.[0].svids[0].svid'` extracts the bare token. On older SPIRE versions without `-output`, the command prints a labeled block instead. In that case, pipe the default output through `awk '/^[[:space:]]*eyJ/{print $1; exit}'` to extract the token line. Check that `iss` is the OIDC Discovery Provider URL you registered, `sub` is the workload's SPIFFE ID, and `aud` contains `https://api.anthropic.com`. Then run the cURL example from [Acquire and use the token](manage-claude/wif-providers/spiffe.md). A successful exchange returns an `access_token` beginning with `sk-ant-oat01-`. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](manage-claude/wif-reference.md). The most common SPIRE-side cause is a mismatch between SPIRE Server's `jwt_issuer` and the URL registered as the federation issuer.
+The `-output json` flag returns the SVID response and bundle response as a two-element JSON array, so `jq -r '.[0].svids[0].svid'` extracts the bare token. On older SPIRE versions without `-output`, the command prints a labeled block instead. In that case, pipe the default output through `awk '/^[[:space:]]*eyJ/{print $1; exit}'` to extract the token line. Check that `iss` is the OIDC Discovery Provider URL you registered, `sub` is the workload's SPIFFE ID, and `aud` contains `https://api.anthropic.com`. Then run the cURL example from [Acquire and use the token](spiffe.md#acquire-and-use-the-token). A successful exchange returns an `access_token` beginning with `sk-ant-oat01-`. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) for the deny reason and see [Troubleshoot a failed exchange](../wif-reference.md#troubleshoot-a-failed-exchange). The most common SPIRE-side cause is a mismatch between SPIRE Server's `jwt_issuer` and the URL registered as the federation issuer.
 
 ## Scope your rule
 

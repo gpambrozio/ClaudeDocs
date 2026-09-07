@@ -8,7 +8,7 @@ description: Detect and handle refusal stop reasons in streaming responses, and 
 
 Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `"refusal"`** when streaming classifiers intervene to handle potential policy violations. This safety feature helps maintain content compliance during real-time streaming.
 
-This page covers how refusals appear in streaming responses. For every `stop_reason` value and how to handle it, see [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md). To retry refused requests on another Claude model, see [Refusals and fallback](build-with-claude/refusals-and-fallback.md).
+This page covers how refusals appear in streaming responses. For every `stop_reason` value and how to handle it, see [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md). To retry refused requests on another Claude model, see [Refusals and fallback](../../build-with-claude/refusals-and-fallback.md).
 
 ## API response format
 
@@ -34,7 +34,7 @@ When streaming classifiers detect content that violates Anthropic's policies, th
 
 In the event stream, `stop_details` arrives on the `message_delta` event alongside `stop_reason`.
 
-A `refusal` response from streaming classifiers includes a `stop_details` object with a `category` and a human-readable `explanation` that you can surface to the user. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md) for the full response shape and the available categories.
+A `refusal` response from streaming classifiers includes a `stop_details` object with a `category` and a human-readable `explanation` that you can surface to the user. See [Refusals and fallback](../../build-with-claude/refusals-and-fallback.md#refusal-response) for the full response shape and the available categories.
 
 On a refusal the `stop_details` object is always present, but its `category` and `explanation` fields can be `null`, for example when the refusal maps to no named category. Branch on `stop_reason` or `stop_details.type` rather than assuming `category` and `explanation` are populated, and provide your own user-facing messaging when they are `null`.
 
@@ -46,7 +46,7 @@ Usage metrics are still provided in the response, even when the response is refu
 
 When a refusal arrives before Claude generates any output, you are not billed for the request on the Claude API, and the usage counts in that response are informational only. When Claude generates output before the refusal, you are billed for that request.
 
-Resetting context is not the only way to recover. You can also retry the refused request on a different Claude model, and the [Refusals and fallback](build-with-claude/refusals-and-fallback.md) page shows how to set that up with server-side fallback, the SDK middleware, or a manual retry.
+Resetting context is not the only way to recover. You can also retry the refused request on a different Claude model, and the [Refusals and fallback](../../build-with-claude/refusals-and-fallback.md) page shows how to set that up with server-side fallback, the SDK middleware, or a manual retry.
 
 ## Implementation guide
 
@@ -307,8 +307,8 @@ The API currently handles refusals in three different ways:
 
 * **Monitor for refusals:** Include **`stop_reason`: `refusal`** checks in your error handling
 * **Reset automatically:** Implement automatic context reset when refusals are detected
-* **Fall back to another model:** Configure [server-side fallback or the SDK middleware](build-with-claude/refusals-and-fallback.md) so refused requests are retried on another Claude model instead of surfacing a refusal to the user
-* **Redeem fallback credit on manual retries:** If you build the retry yourself, pass the refusal's [fallback credit](build-with-claude/fallback-credit.md) token so the retry doesn't pay the prompt-cache cost twice
+* **Fall back to another model:** Configure [server-side fallback or the SDK middleware](../../build-with-claude/refusals-and-fallback.md) so refused requests are retried on another Claude model instead of surfacing a refusal to the user
+* **Redeem fallback credit on manual retries:** If you build the retry yourself, pass the refusal's [fallback credit](../../build-with-claude/fallback-credit.md) token so the retry doesn't pay the prompt-cache cost twice
 * **Provide custom messaging:** Create user-friendly messages for better UX when refusals occur
 * **Track refusal patterns:** Monitor refusal frequency to identify potential issues with your prompts
 
@@ -317,9 +317,9 @@ The API currently handles refusals in three different ways:
 If you built refusal handling when this feature first shipped, or you're adding it to an existing integration, check the following:
 
 * **Refusals are responses, not errors.** A refusal arrives as a successful HTTP 200 response with `stop_reason`: `"refusal"`, so monitoring built only on error rates won't surface it. Track refusals as their own signal.
-* **Refusals include structured detail.** On every model, a refusal also includes a `stop_details` object that identifies the policy category behind the decline. See [Refusals and fallback](build-with-claude/refusals-and-fallback.md) for the full response shape.
-* **Retry on a different model.** Re-sending a refused request to the same model usually results in another refusal. Instead of only resetting context, retry on a fallback model with [server-side fallback, the SDK middleware, or a manual retry](build-with-claude/refusals-and-fallback.md), and redeem [fallback credit](build-with-claude/fallback-credit.md) when you build the retry yourself.
-* **Check batch results for refusals.** A refused request in a [Message Batch](build-with-claude/batch-processing.md) is returned as a succeeded result with `stop_reason`: `"refusal"`, not as an errored result.
+* **Refusals include structured detail.** On every model, a refusal also includes a `stop_details` object that identifies the policy category behind the decline. See [Refusals and fallback](../../build-with-claude/refusals-and-fallback.md#refusal-response) for the full response shape.
+* **Retry on a different model.** Re-sending a refused request to the same model usually results in another refusal. Instead of only resetting context, retry on a fallback model with [server-side fallback, the SDK middleware, or a manual retry](../../build-with-claude/refusals-and-fallback.md), and redeem [fallback credit](../../build-with-claude/fallback-credit.md) when you build the retry yourself.
+* **Check batch results for refusals.** A refused request in a [Message Batch](../../build-with-claude/batch-processing.md) is returned as a succeeded result with `stop_reason`: `"refusal"`, not as an errored result.
 * **Centralize handling on `stop_reason`.** The API continues to consolidate refusal handling around `stop_reason`: `"refusal"`, so branch on the stop reason rather than on model-specific behavior.
 
 ## Next steps

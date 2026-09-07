@@ -139,7 +139,7 @@ If your organization has specific infrastructure requirements, compare the optio
     <tr>
       <td>Authentication</td>
       <td>Claude.ai SSO or email</td>
-      <td>API key or a [Console sign-in without one](authentication.md)</td>
+      <td>API key or a [Console sign-in without one](authentication.md#sign-in-without-an-api-key)</td>
       <td>API key or AWS credentials</td>
       <td>API key or AWS credentials</td>
       <td>GCP credentials</td>
@@ -182,8 +182,8 @@ For a feature-by-feature breakdown of what's available on each option, see [Feat
 
 Select a deployment option to view setup instructions:
 
-* [Claude for Teams or Enterprise](authentication.md)
-* [Anthropic Console](authentication.md)
+* [Claude for Teams or Enterprise](authentication.md#claude-for-teams-or-enterprise)
+* [Anthropic Console](authentication.md#claude-console-authentication)
 * [Claude apps gateway](claude-apps-gateway.md), a self-hosted gateway that adds IdP sign-in in front of Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, Microsoft Foundry, or the Anthropic API
 * [Amazon Bedrock](amazon-bedrock.md)
 * [Claude Platform on AWS](claude-platform-on-aws.md)
@@ -199,9 +199,9 @@ Most organizations can use a cloud provider directly without additional configur
 * **Corporate proxy**: Routes traffic through an HTTP/HTTPS proxy. Use this if your organization requires all outbound traffic to pass through a proxy server for security monitoring, compliance, or network policy enforcement. Configure with the `HTTPS_PROXY` or `HTTP_PROXY` environment variables. Learn more in [Enterprise network configuration](network-config.md).
 * **LLM Gateway**: A service that sits between Claude Code and the cloud provider to handle authentication and routing. Use this if you need centralized usage tracking across teams, custom rate limiting or budgets, or centralized authentication management. Configure with the `ANTHROPIC_BASE_URL`, `ANTHROPIC_BEDROCK_BASE_URL`, `ANTHROPIC_AWS_BASE_URL`, `ANTHROPIC_VERTEX_BASE_URL`, or `ANTHROPIC_FOUNDRY_BASE_URL` environment variables. Learn more in [LLM gateways](llm-gateway.md).
 
-For the per-provider environment variables that route Amazon Bedrock, Microsoft Foundry, or Google Cloud's Agent Platform through an LLM gateway, see [route to a cloud provider through a gateway](llm-gateway-connect.md). Run `/status` in Claude Code to verify which provider, base URL, and proxy a session is using.
+For the per-provider environment variables that route Amazon Bedrock, Microsoft Foundry, or Google Cloud's Agent Platform through an LLM gateway, see [route to a cloud provider through a gateway](llm-gateway-connect.md#route-to-a-cloud-provider-through-a-gateway). Run `/status` in Claude Code to verify which provider, base URL, and proxy a session is using.
 
-If your organization uses [customer-managed encryption keys](manage-claude/cmek.md) (CMEK) and routes Claude Code through an LLM gateway or a custom `ANTHROPIC_BASE_URL`, CMEK doesn't apply to Claude Code's operational telemetry on those sessions. To turn telemetry off for every developer, deliver `DISABLE_TELEMETRY` through managed settings as shown in [Turn telemetry off for your organization](managed-settings.md).
+If your organization uses [customer-managed encryption keys](../api/manage-claude/cmek.md) (CMEK) and routes Claude Code through an LLM gateway or a custom `ANTHROPIC_BASE_URL`, CMEK doesn't apply to Claude Code's operational telemetry on those sessions. To turn telemetry off for every developer, deliver `DISABLE_TELEMETRY` through managed settings as shown in [Turn telemetry off for your organization](managed-settings.md#turn-telemetry-off-for-your-organization).
 
 ## Best practices for organizations
 
@@ -224,7 +224,7 @@ Encourage new users to try Claude Code for codebase Q\&A, or on smaller bug fixe
 
 ### Pin model versions for cloud providers
 
-If you deploy through [Amazon Bedrock](amazon-bedrock.md), [Google Cloud's Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), or [Claude Platform on AWS](claude-platform-on-aws.md), pin specific model versions using `ANTHROPIC_DEFAULT_FABLE_MODEL`, `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. Without pinning, model aliases resolve to Claude Code's built-in default for that provider, which can lag the newest release and may not yet be enabled in your account. Pinning lets you control when your users move to a new model. See [Model configuration](model-config.md) for what each provider does when the default is unavailable.
+If you deploy through [Amazon Bedrock](amazon-bedrock.md), [Google Cloud's Agent Platform](google-vertex-ai.md), [Microsoft Foundry](microsoft-foundry.md), or [Claude Platform on AWS](claude-platform-on-aws.md), pin specific model versions using `ANTHROPIC_DEFAULT_FABLE_MODEL`, `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. Without pinning, model aliases resolve to Claude Code's built-in default for that provider, which can lag the newest release and may not yet be enabled in your account. Pinning lets you control when your users move to a new model. See [Model configuration](model-config.md#pin-models-for-third-party-deployments) for what each provider does when the default is unavailable.
 
 ### Configure security policies
 

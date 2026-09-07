@@ -34,7 +34,7 @@ The following table shows zero-shot chain-of-thought evaluation scores for Claud
 | Swahili                           | 91.1%              | 78.3%             |
 | Yoruba                            | 79.7%              | 52.7%             |
 
-1 With [extended thinking](build-with-claude/extended-thinking.md).
+1 With [extended thinking](extended-thinking.md).
 
 These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI's simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
 
@@ -186,7 +186,7 @@ When working with multilingual content:
 2. **Use native scripts:** Submit text in its native script rather than transliteration for optimal results.
 3. **Consider cultural context:** Effective communication often requires cultural and regional awareness beyond pure translation.
 
-Also follow the general guidance in [Prompt engineering overview](build-with-claude/prompt-engineering/overview.md) to further improve output quality.
+Also follow the general guidance in [Prompt engineering overview](prompt-engineering/overview.md) to further improve output quality.
 
 ***
 

@@ -10,11 +10,11 @@ Inference hooks are in beta and available to Claude Enterprise organizations. Fi
 
 An Inference hooks integration is an AI security server: an HTTPS service that Anthropic calls. For each governed request, your server receives a signed `POST` carrying the conversation transcript and responds with an allow or deny verdict. This page documents the protocol for building that server: the request and verdict schemas, signature verification, and the operational contract.
 
-To turn Inference hooks on and point them at your endpoint, see [Configure Inference hooks](manage-claude/inference-hooks-configuration.md). To learn what Inference hooks are and when to use them, see the [Inference hooks overview](manage-claude/inference-hooks.md).
+To turn Inference hooks on and point them at your endpoint, see [Configure Inference hooks](inference-hooks-configuration.md). To learn what Inference hooks are and when to use them, see the [Inference hooks overview](inference-hooks.md).
 
 ## Get a first verdict round trip
 
-The smallest working integration is a server that reads each request and allows it. Run one of the following servers, expose it at a public `https://` URL (for example, behind a TLS-terminating reverse proxy on a host you control, not a reverse-tunnel service; see [Receive a request](manage-claude/inference-hooks-endpoint.md)), then have your administrator [set it as the endpoint and test the connection](manage-claude/inference-hooks-configuration.md): the **Test connection** result reports the allow verdict your server returned.
+The smallest working integration is a server that reads each request and allows it. Run one of the following servers, expose it at a public `https://` URL (for example, behind a TLS-terminating reverse proxy on a host you control, not a reverse-tunnel service; see [Receive a request](inference-hooks-endpoint.md#receive-a-request)), then have your administrator [set it as the endpoint and test the connection](inference-hooks-configuration.md): the **Test connection** result reports the allow verdict your server returned.
 
 ```python Python
 # Run with: python server.py
@@ -136,15 +136,15 @@ end
 server.start
 ```
 
-These servers accept every request, including unsigned ones. Add [signature verification](manage-claude/inference-hooks-endpoint.md) before you enforce.
+These servers accept every request, including unsigned ones. Add [signature verification](inference-hooks-endpoint.md#verify-the-signature) before you enforce.
 
 ## Receive a request
 
 Anthropic sends an HTTPS `POST` to the URL your administrator configures. The whole configured URL is the endpoint: there is no fixed path suffix, so choose any path that suits your server.
 
-Host your AI security server where Anthropic can reach it: an `https://` URL on port 443, on a publicly routable host (private, loopback, and carrier-grade NAT ranges are refused at connect time), with a certificate that validates against the public CA trust store, responding without redirects. The configured URL must be the final destination. Reverse-tunnel hosts (ngrok and similar tunnel services) are not supported: Anthropic's network policy blocks them. Host your server on a domain you control. [Configure Inference hooks](manage-claude/inference-hooks-configuration.md) covers how your administrator sets and tests the URL.
+Host your AI security server where Anthropic can reach it: an `https://` URL on port 443, on a publicly routable host (private, loopback, and carrier-grade NAT ranges are refused at connect time), with a certificate that validates against the public CA trust store, responding without redirects. The configured URL must be the final destination. Reverse-tunnel hosts (ngrok and similar tunnel services) are not supported: Anthropic's network policy blocks them. Host your server on a domain you control. [Configure Inference hooks](inference-hooks-configuration.md) covers how your administrator sets and tests the URL.
 
-Every request carries these fixed headers, along with any [custom request headers](manage-claude/inference-hooks-configuration.md) your administrator configured and, once your organization has a signing secret, the `webhook-*` signature headers described in [Verify the signature](manage-claude/inference-hooks-endpoint.md):
+Every request carries these fixed headers, along with any [custom request headers](inference-hooks-configuration.md) your administrator configured and, once your organization has a signing secret, the `webhook-*` signature headers described in [Verify the signature](inference-hooks-endpoint.md#verify-the-signature):
 
 | Header            | Value              |
 | ----------------- | ------------------ |
@@ -160,12 +160,12 @@ The request body is a JSON object with these fields:
 
 | Field        | Type           | Description                                                                                                                                                                                                                                                              |
 | ------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`       | string         | The hook event. Always `"prompt"` today; other event types will be introduced in the future, so handle an unrecognized value gracefully (see [Forward compatibility](manage-claude/inference-hooks-endpoint.md)). |
+| `type`       | string         | The hook event. Always `"prompt"` today; other event types will be introduced in the future, so handle an unrecognized value gracefully (see [Forward compatibility](inference-hooks-endpoint.md#forward-compatibility)). |
 | `request_id` | string         | Opaque per-inference-call identifier for correlation. Equals the `webhook-id` header.                                                                                                                                                                                    |
 | `tenant_id`  | string or null | Opaque identifier for the organization the request belongs to.                                                                                                                                                                                                           |
 | `actor`      | object         | The principal the request is attributed to, discriminated on `type` (`"user"` is the only value sent today): `id` (a tagged identifier, stable across requests for the same account) and `email_address` (when available). Both `id` and `email_address` can be null.    |
-| `source`     | object         | The originating application: `application` (see [Source values](manage-claude/inference-hooks-endpoint.md)).                                                                                                              |
-| `messages`   | array          | The conversation transcript up to the point of inference. See [Content blocks](manage-claude/inference-hooks-endpoint.md).                                                                                               |
+| `source`     | object         | The originating application: `application` (see [Source values](inference-hooks-endpoint.md#source-values)).                                                                                                              |
+| `messages`   | array          | The conversation transcript up to the point of inference. See [Content blocks](inference-hooks-endpoint.md#content-blocks).                                                                                               |
 | `session_id` | string or null | Opaque conversation identifier, when one exists. Don't parse it. For Claude Code it is a best-effort, client-asserted session identifier.                                                                                                                                |
 | `model`      | string or null | Public model identifier for this request, when available.                                                                                                                                                                                                                |
 | `metadata`   | object         | Reserved extension map of string keys to string values, sent empty today. Require nothing from it, and tolerate its absence, its presence, and any keys that appear.                                                                                                     |
@@ -234,7 +234,7 @@ Transcripts are sent untruncated, so a long conversation with large attachments 
 
 ### Source values
 
-`source.application` is an open string, not a closed enum. Known values are `claude-ai` and `claude-code`; [connection tests](manage-claude/inference-hooks-configuration.md) use `config-test`. New values may appear, and your server must not reject a request because of one it doesn't recognize.
+`source.application` is an open string, not a closed enum. Known values are `claude-ai` and `claude-code`; [connection tests](inference-hooks-configuration.md) use `config-test`. New values may appear, and your server must not reject a request because of one it doesn't recognize.
 
 Treat `source.application` as advisory routing metadata, not a trust boundary: don't rest a security-critical policy decision on it alone.
 
@@ -262,11 +262,11 @@ To deny it:
 | -------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `action`       | `"allow"` or `"deny"`; required                                 | `allow` lets inference proceed; `deny` rejects it.                                                                                                                                                                                                                                                  |
 | `deny_reason`  | string or null; at most 500 characters, longer values truncated | Shown to the end user when `action` is `deny`; ignored on `allow`.                                                                                                                                                                                                                                  |
-| `reference_id` | string or null; at most 50 characters from `[A-Za-z0-9._:/-]`   | Your own identifier for this evaluation. It's recorded on the denial's `inference_hooks_request_denied` [compliance activity](manage-claude/compliance-activity-feed.md) and never shown to the end user. Keep it opaque: no request content and no personal data. |
+| `reference_id` | string or null; at most 50 characters from `[A-Za-z0-9._:/-]`   | Your own identifier for this evaluation. It's recorded on the denial's `inference_hooks_request_denied` [compliance activity](compliance-activity-feed.md) and never shown to the end user. Keep it opaque: no request content and no personal data. |
 
 A deny is never discarded over a formatting problem: an oversize `deny_reason` is truncated, a malformed `reference_id` is silently dropped, and the `action` is still honored.
 
-The reverse doesn't hold. Anything other than HTTP 200 with a parseable verdict is a webhook failure, and your organization's [failure handling](manage-claude/inference-hooks-configuration.md) applies instead of a verdict. In particular:
+The reverse doesn't hold. Anything other than HTTP 200 with a parseable verdict is a webhook failure, and your organization's [failure handling](inference-hooks-configuration.md) applies instead of a verdict. In particular:
 
 * Don't signal a deny with an error status. A non-200 response is a failure, not a deny.
 * Any `action` value other than `allow` or `deny` is treated as a webhook failure.
@@ -288,9 +288,9 @@ Two details cause most verification bugs:
 * **Verify raw bytes.** Compute the HMAC over the body exactly as received, before any JSON parsing or re-encoding.
 * **Decode the secret with a standard base64 decoder.** The signing secret is the value after the `whsec_` prefix, encoded with the standard base64 alphabet (`+` and `/`), as is the signature in the header. A URL-safe decoder derives the wrong key bytes whenever the secret contains `+` or `/`, which is most of the time.
 
-Once your organization has a signing secret, every request Anthropic sends is signed, and [enabling Inference hooks requires one](manage-claude/inference-hooks-configuration.md), so reject any request that arrives unsigned. One exception: a connection test sent before your organization's first save arrives unsigned, because the signing secret doesn't exist yet. Accept unsigned requests until your administrator confirms the secret exists, then reject them.
+Once your organization has a signing secret, every request Anthropic sends is signed, and [enabling Inference hooks requires one](inference-hooks-configuration.md), so reject any request that arrives unsigned. One exception: a connection test sent before your organization's first save arrives unsigned, because the signing secret doesn't exist yet. Accept unsigned requests until your administrator confirms the secret exists, then reject them.
 
-[Rotating the secret](manage-claude/inference-hooks-configuration.md) is an immediate cutover, but requests signed with the previous secret can still arrive for about a minute afterward, plus anything already in flight. Have your AI security server accept signatures from both secrets during the switchover so those stragglers aren't rejected.
+[Rotating the secret](inference-hooks-configuration.md#rotate-your-signing-secret) is an immediate cutover, but requests signed with the previous secret can still arrive for about a minute afterward, plus anything already in flight. Have your AI security server accept signatures from both secrets during the switchover so those stragglers aren't rejected.
 
 The following samples are server implementations, so there is no shell tab: an AI security server is a long-running HTTPS service rather than a one-shot request. Each sample uses only the language's standard library; the [Standard Webhooks](https://www.standardwebhooks.com/) project also publishes verification libraries for most languages.
 
@@ -672,15 +672,15 @@ Anthropic retries exactly once, after a 100ms delay, and only when the connectio
 
 ### Webhook failures
 
-Timeouts, non-200 statuses (redirects included), unparseable or oversized response bodies, and unreachable endpoints are all webhook failures. A webhook failure never becomes a deny; instead, your organization's [failure handling](manage-claude/inference-hooks-configuration.md) setting decides whether the affected request is blocked or proceeds without inspection.
+Timeouts, non-200 statuses (redirects included), unparseable or oversized response bodies, and unreachable endpoints are all webhook failures. A webhook failure never becomes a deny; instead, your organization's [failure handling](inference-hooks-configuration.md) setting decides whether the affected request is blocked or proceeds without inspection.
 
 ### Circuit breaker
 
 Sustained webhook failures attributable to your AI security server trip a circuit breaker that stops enforcement: Anthropic stops contacting your server, and failure handling applies to every request.
 
-Starting 10 minutes after the trip, Anthropic tests whether your server has recovered: at most about once per minute, one request, carried by your organization's own traffic, is delivered to your server for inspection, signed and shaped like any other. Respond to it normally. A valid verdict, allow or deny, resets the breaker and enforcement resumes. A webhook failure leaves the breaker tripped, and testing continues. Either way, the test request itself proceeds for its user: its verdict is not enforced, and a failed test does not block it, even under **Block the request**. An administrator can also reset the breaker at any time, and administrator configuration changes stop the automatic testing; see [Circuit breaker](manage-claude/inference-hooks-configuration.md).
+Starting 10 minutes after the trip, Anthropic tests whether your server has recovered: at most about once per minute, one request, carried by your organization's own traffic, is delivered to your server for inspection, signed and shaped like any other. Respond to it normally. A valid verdict, allow or deny, resets the breaker and enforcement resumes. A webhook failure leaves the breaker tripped, and testing continues. Either way, the test request itself proceeds for its user: its verdict is not enforced, and a failed test does not block it, even under **Block the request**. An administrator can also reset the breaker at any time, and administrator configuration changes stop the automatic testing; see [Circuit breaker](inference-hooks-configuration.md#circuit-breaker).
 
-Each trip is recorded as an `inference_hooks_circuit_breaker_tripped` activity in the [Activity Feed](manage-claude/compliance-activity-feed.md), one activity per trip. While the breaker is tripped, no per-request Inference hooks activities are recorded, so the trip activity is the feed's only record of the tripped window.
+Each trip is recorded as an `inference_hooks_circuit_breaker_tripped` activity in the [Activity Feed](compliance-activity-feed.md), one activity per trip. While the breaker is tripped, no per-request Inference hooks activities are recorded, so the trip activity is the feed's only record of the tripped window.
 
 ### Latency
 
@@ -688,7 +688,7 @@ Enforcement adds your AI security server's round trip to the latency of every go
 
 ### Source IP addresses
 
-Requests to your AI security server originate from `160.79.106.0/24`, part of Anthropic's published [outbound IP ranges](api/ip-addresses.md). Allowlist that block, not the inbound ranges on the same page, which don't cover it. Allowlisting narrows your server's exposure, but it is not a substitute for signature verification: the block carries Anthropic egress traffic beyond Inference hooks.
+Requests to your AI security server originate from `160.79.106.0/24`, part of Anthropic's published [outbound IP ranges](../api/ip-addresses.md). Allowlist that block, not the inbound ranges on the same page, which don't cover it. Allowlisting narrows your server's exposure, but it is not a substitute for signature verification: the block carries Anthropic egress traffic beyond Inference hooks.
 
 ## Forward compatibility
 
@@ -702,7 +702,7 @@ The protocol grows without breaking correctly written servers. Your server must 
 
 Never reject a request because of an unrecognized block type or field; read the fields you know and skip the rest.
 
-Other hook event types will be introduced in the future. A new event type is an addition your server can't handle by skipping a field: the request still needs a verdict. When the top-level `type` is a value you don't recognize, return an allow verdict rather than an error status; an error response is a [webhook failure](manage-claude/inference-hooks-endpoint.md), and sustained failures trip the [circuit breaker](manage-claude/inference-hooks-endpoint.md).
+Other hook event types will be introduced in the future. A new event type is an addition your server can't handle by skipping a field: the request still needs a verdict. When the top-level `type` is a value you don't recognize, return an allow verdict rather than an error status; an error response is a [webhook failure](inference-hooks-endpoint.md#webhook-failures), and sustained failures trip the [circuit breaker](inference-hooks-endpoint.md#circuit-breaker).
 
 ## Design your integration
 
@@ -710,9 +710,9 @@ A production AI security server makes a few design choices beyond the wire proto
 
 **Deduplicate on `webhook-id`.** The `webhook-id` header is unique per delivery and equals the body's `request_id`, and a connection-failure retry reuses it, so it works as an idempotency key. If you record verdicts, key the records on it.
 
-**Record verdicts and join denials.** Store each verdict you return along with its `reference_id`. Every denial is recorded as an `inference_hooks_request_denied` compliance activity carrying the `reference_id` your server returned, so you can join denials in the [Activity Feed](manage-claude/compliance-activity-feed.md) to the matching records in your own system.
+**Record verdicts and join denials.** Store each verdict you return along with its `reference_id`. Every denial is recorded as an `inference_hooks_request_denied` compliance activity carrying the `reference_id` your server returned, so you can join denials in the [Activity Feed](compliance-activity-feed.md) to the matching records in your own system.
 
-**Archive with an always-allow server.** To capture transcripts in real time without policing them, return `{"action": "allow"}` unconditionally and persist the frame after responding. This is a push-based alternative to polling the [Compliance API](manage-claude/compliance-api.md), and answering before you persist keeps your round trip out of the user's critical path.
+**Archive with an always-allow server.** To capture transcripts in real time without policing them, return `{"action": "allow"}` unconditionally and persist the frame after responding. This is a push-based alternative to polling the [Compliance API](compliance-api.md), and answering before you persist keeps your round trip out of the user's critical path.
 
 **Write `deny_reason` for the end user.** The text you return is what the user sees when their request is blocked, truncated at 500 characters. Tell them what to change, such as which kind of content to remove, rather than emitting a scanner code that only your team can interpret.
 

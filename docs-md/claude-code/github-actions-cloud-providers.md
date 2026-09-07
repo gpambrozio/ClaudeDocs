@@ -4,7 +4,7 @@
 
 [Claude Code GitHub Actions](github-actions.md) calls the Claude API by default. To route inference through your own cloud account instead, set the Claude Code GitHub Action's provider input and configure your cloud to trust the workflow's OpenID Connect (OIDC) token. The workflow authenticates with that token, so you store no long-lived cloud credential in your repository.
 
-This page builds on the [GitHub Actions setup](github-actions.md). It assumes you already know the workflow file and the `anthropics/claude-code-action` step, and covers only what a cloud provider changes.
+This page builds on the [GitHub Actions setup](github-actions.md#setup). It assumes you already know the workflow file and the `anthropics/claude-code-action` step, and covers only what a cloud provider changes.
 
 ## Choose your provider
 
@@ -39,10 +39,10 @@ Beyond the prerequisites, you create four things: a GitHub identity for the Clau
 
 **Choose a GitHub identity**
 
-The Claude Code GitHub Action pushes commits and posts comments through a GitHub identity. The [quick setup](github-actions.md) installs the official Claude GitHub App for this. With a cloud provider, you choose the identity yourself:
+The Claude Code GitHub Action pushes commits and posts comments through a GitHub identity. The [quick setup](github-actions.md#quick-setup) installs the official Claude GitHub App for this. With a cloud provider, you choose the identity yourself:
 
 * **Official [Claude GitHub App](https://github.com/apps/claude)**: install it on the repository, or skip to the next step if it's already installed
-* **Custom GitHub App**: create your own app, described below, when you want only the three permissions the Claude Code GitHub Action uses rather than the [official app's full set](github-actions.md)
+* **Custom GitHub App**: create your own app, described below, when you want only the three permissions the Claude Code GitHub Action uses rather than the [official app's full set](github-actions.md#github-app-permissions)
 * **GitHub's automatic `GITHUB_TOKEN`**: no app to create or install, but GitHub doesn't trigger your CI workflows on commits made with it
 
 The workflow examples in the fourth step authenticate with a custom app. That step also says what to change for the other two options.
@@ -64,7 +64,7 @@ Configure your cloud to trust the OIDC token that GitHub issues to the workflow,
 Create the trust configuration in your AWS account, following the [AWS guide to creating OIDC identity providers](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html):
 
 * Add a GitHub OIDC identity provider with provider URL `https://token.actions.githubusercontent.com` and audience `sts.amazonaws.com`
-* Create an IAM role trusted by that provider as a web identity, and attach the scoped invocation policy from [IAM configuration](amazon-bedrock.md), which grants `bedrock:InvokeModel`, `bedrock:InvokeModelWithResponseStream`, `bedrock:ListInferenceProfiles`, and `bedrock:GetInferenceProfile`, along with two `aws-marketplace` subscription actions
+* Create an IAM role trusted by that provider as a web identity, and attach the scoped invocation policy from [IAM configuration](amazon-bedrock.md#iam-configuration), which grants `bedrock:InvokeModel`, `bedrock:InvokeModelWithResponseStream`, `bedrock:ListInferenceProfiles`, and `bedrock:GetInferenceProfile`, along with two `aws-marketplace` subscription actions
 * Limit the role's trust policy to your repository with a subject condition such as `repo:your-org/your-repo:*`. See [GitHub's OIDC hardening guide](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect) for the claim format
 
 Note the role's ARN. You add it as a secret in the next step.
@@ -84,7 +84,7 @@ Note the provider's full resource name and the service account's email address. 
 Create a Microsoft Entra application with a federated credential for your repository, following [Microsoft's guide to authenticating from GitHub Actions](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect):
 
 * Register a Microsoft Entra application and add a federated identity credential that trusts tokens GitHub issues to your repository. A user-assigned managed identity works in place of an application. Both have the client ID you note below
-* Assign the application the `Azure AI User` role on your Foundry resource. See [Azure RBAC configuration](microsoft-foundry.md) for a narrower custom role
+* Assign the application the `Azure AI User` role on your Foundry resource. See [Azure RBAC configuration](microsoft-foundry.md#azure-rbac-configuration) for a narrower custom role
 
 Note the application's client ID, your tenant ID, and your subscription ID. You add them as secrets in the next step.
 
@@ -281,7 +281,7 @@ jobs:
 
 Use a model ID that matches a Claude deployment in your Foundry resource. See [Claude Code on Microsoft Foundry](microsoft-foundry.md) for model configuration and version pinning.
 
-With any provider, you can bound run length and cost by adding `--max-turns` to `claude_args`. See [Manage costs](github-actions.md).
+With any provider, you can bound run length and cost by adding `--max-turns` to `claude_args`. See [Manage costs](github-actions.md#manage-costs).
 
 **Test the setup**
 
@@ -292,7 +292,7 @@ Mention `@claude` in an issue or PR comment, then watch the run in the repositor
 A failing run usually breaks in one of two places:
 
 * **Authentication errors**: usually an OIDC misconfiguration. Check that the workflow includes the `id-token: write` permission, that the trust configuration's repository condition matches your repository exactly, and that the secret names in your workflow match the ones you added
-* **Trigger and CI problems**: these behave the same as when the Claude Code GitHub Action calls the Claude API. See the main page's [troubleshooting section](github-actions.md) and the Claude Code GitHub Action's [FAQ](https://github.com/anthropics/claude-code-action/blob/main/docs/faq.md)
+* **Trigger and CI problems**: these behave the same as when the Claude Code GitHub Action calls the Claude API. See the main page's [troubleshooting section](github-actions.md#troubleshooting) and the Claude Code GitHub Action's [FAQ](https://github.com/anthropics/claude-code-action/blob/main/docs/faq.md)
 
 ## What's next
 

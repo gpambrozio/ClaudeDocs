@@ -14,15 +14,15 @@ Model ID: `claude-haiku-4-5-20251001`
 
 Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTok · Output pricing: $5 / MTok
 
-[Announcement](https://www.anthropic.com/news/claude-haiku-4-5) · [Migration guide](models/haiku-4-5/migration-guide.md)
+[Announcement](https://www.anthropic.com/news/claude-haiku-4-5) · [Migration guide](migration-guide.md)
 
 ## How it compares
 
 | Model                                                                             | Context | Max output | Price / MTok | Latency  | Thinking             | Default effort | Knowledge cutoff |
 | :-------------------------------------------------------------------------------- | :------ | :--------- | :----------- | :------- | :------------------- | :------------- | :--------------- |
-| [Claude Fable 5.1](models/fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
-| [Claude Opus 5](models/opus-5/overview.md)       | 1M      | 128K       | $5 / $25     | Moderate | Adaptive             | `high`         | May 2026         |
-| [Claude Sonnet 5](models/sonnet-5/overview.md)   | 1M      | 128K       | $2 / $10     | Fast     | Adaptive             | `high`         | Jan 2026         |
+| [Claude Fable 5.1](../fable-5-1/overview.md) | 1M      | 128K       | $10 / $50    | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
+| [Claude Opus 5](../opus-5/overview.md)       | 1M      | 128K       | $5 / $25     | Moderate | Adaptive             | `high`         | May 2026         |
+| [Claude Sonnet 5](../sonnet-5/overview.md)   | 1M      | 128K       | $2 / $10     | Fast     | Adaptive             | `high`         | Jan 2026         |
 | **Claude Haiku 4.5** (this model)                                                 | 200K    | 64K        | $1 / $5      | Fastest  | Extended             | —              | Feb 2025         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
@@ -41,11 +41,11 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTo
 | :-------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
 | Claude API                                                                                                            | `claude-haiku-4-5-20251001`                |
 | Claude API alias                                                                                                      | `claude-haiku-4-5`                         |
-| [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)                      | `anthropic.claude-haiku-4-5`               |
-| [Amazon Bedrock (InvokeModel)](build-with-claude/claude-on-amazon-bedrock-legacy.md) | `anthropic.claude-haiku-4-5-20251001-v1:0` |
-| [Google Cloud](build-with-claude/claude-on-vertex-ai.md)                             | `claude-haiku-4-5@20251001`                |
-| [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)                | `claude-haiku-4-5`                         |
-| [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)                | `claude-haiku-4-5`                         |
+| [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)                      | `anthropic.claude-haiku-4-5`               |
+| [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md) | `anthropic.claude-haiku-4-5-20251001-v1:0` |
+| [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)                             | `claude-haiku-4-5@20251001`                |
+| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)                | `claude-haiku-4-5`                         |
+| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)                | `claude-haiku-4-5`                         |
 
 ### Pricing
 
@@ -53,20 +53,20 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTo
 | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
 | Input                                                                                  | $1 / MTok                                                           |
 | Output                                                                                 | $5 / MTok                                                           |
-| [5m cache write](build-with-claude/prompt-caching.md) | $1.25 / MTok                                                        |
-| [1h cache write](build-with-claude/prompt-caching.md) | $2 / MTok                                                           |
-| [Cache read](build-with-claude/prompt-caching.md)     | $0.10 / MTok                                                        |
-| [Batch API](build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](about-claude/pricing.md) |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $1.25 / MTok                                                        |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $2 / MTok                                                           |
+| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.10 / MTok                                                        |
+| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
+| Full price list                                                                        | [Pricing](../../about-claude/pricing.md) |
 
 ### Capabilities
 
 | Feature                                                                                 | Value                  |
 | :-------------------------------------------------------------------------------------- | :--------------------- |
-| [Context window](build-with-claude/context-windows.md) | 200K tokens            |
+| [Context window](../../build-with-claude/context-windows.md) | 200K tokens            |
 | Max output                                                                              | 64K tokens             |
-| [Thinking](build-with-claude/thinking.md)              | Extended               |
-| [Default effort](build-with-claude/effort.md)          | Not supported          |
+| [Thinking](../../build-with-claude/thinking.md)              | Extended               |
+| [Default effort](../../build-with-claude/effort.md)          | Not supported          |
 | Comparative latency                                                                     | Fastest                |
 | Input → output                                                                          | Text and images → text |
 | Reliable knowledge cutoff                                                               | Feb 2025               |
@@ -76,16 +76,16 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTo
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :---------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [Status](../../about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Released                                                                      | October 15, 2025                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | Retirement                                                                    | Not sooner than October 15, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Platforms                                                                     | Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](build-with-claude/claude-on-amazon-bedrock-legacy.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) |
+| Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
 
 ## Good to know
 
-* `claude-haiku-4-5` is a convenience alias that resolves to the pinned snapshot `claude-haiku-4-5-20251001`. See [Model IDs and versioning](about-claude/models/model-ids-and-versions.md).
+* `claude-haiku-4-5` is a convenience alias that resolves to the pinned snapshot `claude-haiku-4-5-20251001`. See [Model IDs and versioning](../../about-claude/models/model-ids-and-versions.md).
 * Claude Haiku 4.5 uses manual extended thinking (`thinking.type: "enabled"`), not adaptive thinking.
-* Query limits and capabilities programmatically with the [Models API](api/models/list.md).
+* Query limits and capabilities programmatically with the [Models API](../../api/models/list.md).
 
 ## Resources
 

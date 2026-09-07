@@ -289,7 +289,7 @@ for block in response.content:
         print(f"\nResponse: {block.text}")
 ```
 
-Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](build-with-claude/thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](claude_api_primer.md), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
+Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](build-with-claude/thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](claude_api_primer.md#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
 
 ## Thinking with tool use
 
@@ -566,7 +566,7 @@ Client tools are specified in the `tools` top-level parameter of the API request
 * What each parameter means and how it affects the tool's behavior
 * Any important caveats or limitations
 
-**Consider using `input_examples` for complex tools.** For tools with nested objects, optional parameters, or format-sensitive inputs, you can provide concrete examples using the `input_examples` field (beta). This helps Claude understand expected input patterns. See [Providing tool use examples](agents-and-tools/tool-use/define-tools.md) for details.
+**Consider using `input_examples` for complex tools.** For tools with nested objects, optional parameters, or format-sensitive inputs, you can provide concrete examples using the `input_examples` field (beta). This helps Claude understand expected input patterns. See [Providing tool use examples](agents-and-tools/tool-use/define-tools.md#providing-tool-use-examples) for details.
 
 Example of a good tool description:
 

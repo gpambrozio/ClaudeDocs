@@ -6,7 +6,7 @@ Computer use is a research preview on macOS that requires a Pro or Max plan. It 
 
 Computer use lets Claude open apps, control your screen, and work on your machine the way you would. From the CLI, Claude can compile a Swift app, launch it, click through every button, and screenshot the result, all in the same conversation where it wrote the code.
 
-This page covers how computer use works in the CLI. For the Desktop app on macOS or Windows, see [computer use in Desktop](desktop.md).
+This page covers how computer use works in the CLI. For the Desktop app on macOS or Windows, see [computer use in Desktop](desktop.md#let-claude-use-your-computer).
 
 ## What you can do with computer use
 
@@ -84,7 +84,7 @@ These apps aren't blocked. The warning lets you decide whether the task warrants
 
 Approve Finder to let Claude click the desktop, the Dock, or a Finder window.
 
-Claude's level of control also varies by app category: browsers and trading platforms are view-only, terminals and IDEs are click-only, and everything else gets full control. See [app permissions in Desktop](desktop.md) for the complete tier breakdown.
+Claude's level of control also varies by app category: browsers and trading platforms are view-only, terminals and IDEs are click-only, and everything else gets full control. See [app permissions in Desktop](desktop.md#app-permissions) for the complete tier breakdown.
 
 ## How Claude works on your screen
 
@@ -189,14 +189,14 @@ macOS sometimes requires a restart of the requesting process after you grant Scr
 
 The server only appears on eligible setups. Check that:
 
-* You're on macOS. Computer use in the CLI is not available on Linux or Windows. On Windows, use [computer use in Desktop](desktop.md) instead.
+* You're on macOS. Computer use in the CLI is not available on Linux or Windows. On Windows, use [computer use in Desktop](desktop.md#let-claude-use-your-computer) instead.
 * You're on a Pro or Max plan. Run `/status` to confirm your subscription.
 * You're authenticated through claude.ai. Computer use is not available with third-party providers like Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. If you access Claude exclusively through a third-party provider, you need a separate claude.ai account to use this feature.
 * You're in an interactive session. Computer use is not available in non-interactive mode with the `-p` flag.
 
 ## See also
 
-* [Computer use in Desktop](desktop.md): the same capability with a graphical settings page
+* [Computer use in Desktop](desktop.md#let-claude-use-your-computer): the same capability with a graphical settings page
 * [Claude in Chrome](chrome.md): browser automation for web-based tasks
 * [MCP](mcp.md): connect Claude to structured tools and APIs
 * [Sandboxing](sandboxing.md): how Claude's Bash tool isolates filesystem and network access

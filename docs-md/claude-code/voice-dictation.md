@@ -4,7 +4,7 @@
 
 Speak your prompts instead of typing them in the Claude Code CLI. Your speech is transcribed live into the prompt input, so you can mix voice and typing in the same message. Enable dictation with `/voice`, then either hold a key while you speak or tap once to start and again to send.
 
-Dictation also works in [agent view](agent-view.md). Hold or tap your push-to-talk key while the dispatch input or a peek-panel reply is focused to dictate to a background session.
+Dictation also works in [agent view](agent-view.md#peek-and-reply). Hold or tap your push-to-talk key while the dispatch input or a peek-panel reply is focused to dictate to a background session.
 
 ## Requirements
 
@@ -57,7 +57,7 @@ Transcription is tuned for coding vocabulary in both modes. Common development t
 
 Hold mode is push-to-talk: recording runs while you hold the key and stops when you release it. This is the default mode.
 
-Hold `Space` to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows `keep holding…` during warmup, then `listening…` once recording is active. While recording, the prompt cursor becomes a bar that rises and falls with your microphone level, unless you have [`prefersReducedMotion`](settings-reference.md) turned on.
+Hold `Space` to start recording. Claude Code detects a held key by watching for rapid key-repeat events from your terminal, so there is a brief warmup before recording begins. The footer shows `keep holding…` during warmup, then `listening…` once recording is active. While recording, the prompt cursor becomes a bar that rises and falls with your microphone level, unless you have [`prefersReducedMotion`](settings-reference.md#prefersreducedmotion) turned on.
 
 The first couple of key-repeat characters type into the input during warmup and are removed automatically when recording activates. A single `Space` tap still types a space, since hold detection only triggers on rapid repeat.
 
@@ -87,7 +87,7 @@ The first tap only starts recording when the prompt input is empty, so you can s
 
 ## Change the dictation language
 
-Voice dictation uses the same [`language` setting](settings-reference.md) that controls Claude's response language. If that setting is empty, dictation defaults to English. In the VS Code extension, if `language` is empty, dictation uses VS Code's `accessibility.voice.speechLanguage` setting before defaulting to English.
+Voice dictation uses the same [`language` setting](settings-reference.md#language) that controls Claude's response language. If that setting is empty, dictation defaults to English. In the VS Code extension, if `language` is empty, dictation uses VS Code's `accessibility.voice.speechLanguage` setting before defaulting to English.
 
 **Supported dictation languages**
 
@@ -188,7 +188,7 @@ Start Claude Code and run `/voice`. macOS prompts for microphone access; allow i
 ## See also
 
 * [Customize keyboard shortcuts](keybindings.md): rebind `voice:pushToTalk` and other CLI keyboard actions
-* [Settings reference](settings-reference.md): the `voice`, `language`, and other settings keys
+* [Settings reference](settings-reference.md#voice): the `voice`, `language`, and other settings keys
 * [Interactive mode](interactive-mode.md): keyboard shortcuts, input modes, and session controls
 * [Commands](commands.md): reference for `/voice`, `/config`, and all other commands
 

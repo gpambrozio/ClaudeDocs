@@ -4,9 +4,9 @@
 
 The Claude Security plugin runs a multi-agent vulnerability scan of your codebase inside a Claude Code session. A team of Claude agents maps your architecture, builds a threat model, hunts for vulnerabilities, and independently reviews every finding before writing the report. Use the plugin to scan a whole repository or [only a set of changes](#scan-only-your-changes), such as a branch's diff, a pull request's diff, or a single commit, then turn the findings you choose into patches that you review and apply yourself.
 
-The plugin runs locally in your session, uses whichever models you have access to in Claude Code, and each scan counts against your plan's usage limits. If you want a managed service that monitors your repositories, or want to run scans on [Claude Mythos 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md), see the [Claude Security](https://claude.com/product/claude-security) product, available on the Enterprise plan. The plugin reaches code the managed product can't reach, such as repositories hosted on GitLab or Bitbucket, or on networks that don't allow inbound connections.
+The plugin runs locally in your session, uses whichever models you have access to in Claude Code, and each scan counts against your plan's usage limits. If you want a managed service that monitors your repositories, or want to run scans on [Claude Mythos 5](https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5), see the [Claude Security](https://claude.com/product/claude-security) product, available on the Enterprise plan. The plugin reaches code the managed product can't reach, such as repositories hosted on GitLab or Bitbucket, or on networks that don't allow inbound connections.
 
-The plugin is also distinct from the review tools already in Claude Code: the [security guidance plugin](security-guidance.md) reviews code as Claude writes it, [`/security-review`](commands.md) runs a single pass over your branch, and [Code Review](code-review.md) reviews pull requests. For how the layers stack, see [How the plugin fits with other security tools](#how-the-plugin-fits-with-other-security-tools).
+The plugin is also distinct from the review tools already in Claude Code: the [security guidance plugin](security-guidance.md) reviews code as Claude writes it, [`/security-review`](commands.md#all-commands) runs a single pass over your branch, and [Code Review](code-review.md) reviews pull requests. For how the layers stack, see [How the plugin fits with other security tools](#how-the-plugin-fits-with-other-security-tools).
 
 ## Prerequisites
 
@@ -19,18 +19,18 @@ To run the plugin, you need:
 
 ## Install the plugin
 
-In a Claude Code session, install from the [official Anthropic marketplace](discover-plugins.md):
+In a Claude Code session, install from the [official Anthropic marketplace](discover-plugins.md#official-anthropic-marketplace):
 
 ```text
 /plugin install claude-security@claude-plugins-official
 ```
 
-The command opens the plugin's details, where you choose an [installation scope](discover-plugins.md) to start the install.
+The command opens the plugin's details, where you choose an [installation scope](discover-plugins.md#install-plugins) to start the install.
 
 If the install fails, the fix depends on which message Claude Code reports:
 
 * If it reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* If it reports that it [can't find the plugin in the marketplace](discover-plugins.md), check the plugin name for a typo.
+* If it reports that it [can't find the plugin in the marketplace](discover-plugins.md#install-plugins), check the plugin name for a typo.
 
 Check the install summary. If it reports `Run /reload-plugins to activate.`, apply the pending change without a restart:
 
@@ -115,12 +115,12 @@ When the patched code has no tests, the patch's note says so, so you know its re
 
 ## How the plugin fits with other security tools
 
-The Claude Security plugin is the on-demand deep-scan layer in a defense-in-depth stack, alongside the [security guidance plugin](security-guidance.md), [`/security-review`](commands.md), [Code Review](code-review.md), the managed [Claude Security](https://claude.com/product/claude-security) product, and your existing scanners:
+The Claude Security plugin is the on-demand deep-scan layer in a defense-in-depth stack, alongside the [security guidance plugin](security-guidance.md), [`/security-review`](commands.md#all-commands), [Code Review](code-review.md), the managed [Claude Security](https://claude.com/product/claude-security) product, and your existing scanners:
 
 | Stage                  | Tool                                                                           | What it covers                                                                             |
 | :--------------------- | :----------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
 | In session             | [Security guidance plugin](security-guidance.md)                              | Common vulnerabilities in code Claude writes, fixed in the same session                    |
-| On demand, single pass | [`/security-review`](commands.md)                                | One-time security pass on the current branch                                               |
+| On demand, single pass | [`/security-review`](commands.md#all-commands)                                | One-time security pass on the current branch                                               |
 | On demand, deep scan   | Claude Security plugin                                                         | Multi-agent scan of a repository or diff, with independently reviewed findings and patches |
 | On pull request        | [Code Review](code-review.md), Team and Enterprise plans                      | Multi-agent correctness and security review with full codebase context                     |
 | Managed                | [Claude Security](https://claude.com/product/claude-security), Enterprise plan | Hosted scanning that monitors connected repositories                                       |
@@ -142,7 +142,7 @@ To go deeper on the pieces this page touches:
 * [Code Review](code-review.md): set up the PR-time multi-agent review
 * [Claude Security](https://claude.com/product/claude-security): the managed service that monitors connected repositories
 * [Claude Code security](security.md): how Claude Code approaches trust, permissions, and safeguards
-* [Discover and install plugins](discover-plugins.md): browse other official plugins
+* [Discover and install plugins](discover-plugins.md#official-anthropic-marketplace): browse other official plugins
 
 ---
 

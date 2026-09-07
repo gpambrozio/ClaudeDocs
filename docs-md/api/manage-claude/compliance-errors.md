@@ -6,11 +6,11 @@ url: https://platform.claude.com/docs/en/manage-claude/compliance-errors
 description: Every Compliance API error message with cause and fix, organized by HTTP status code.
 ---
 
-To enable the Compliance API, see [Set up the Compliance API](manage-claude/compliance-api-access.md).
+To enable the Compliance API, see [Set up the Compliance API](compliance-api-access.md).
 
 This page lists the response messages each documented Compliance API endpoint returns, the cause, and the fix.
 
-The Compliance API returns errors in the standard [Anthropic error format](api/errors.md): a non-2xx status code, a `request-id` response header, and a JSON body with an `error` object containing `type` and `message`. Include the `request-id` header value when you escalate to support.
+The Compliance API returns errors in the standard [Anthropic error format](../api/errors.md): a non-2xx status code, a `request-id` response header, and a JSON body with an `error` object containing `type` and `message`. Include the `request-id` header value when you escalate to support.
 
 ```json
 {
@@ -21,7 +21,7 @@ The Compliance API returns errors in the standard [Anthropic error format](api/e
 }
 ```
 
-On this page, local sessions run on users' machines and remote sessions run in the cloud; see [Retrieve session transcripts](manage-claude/compliance-sessions.md).
+On this page, local sessions run on users' machines and remote sessions run in the cloud; see [Retrieve session transcripts](compliance-sessions.md).
 
 Match on `error.type`, not on the message string. Messages are stable enough to copy into runbooks but might be reworded over time; the type values are part of the API contract. The local session endpoints have a few documented exceptions where responses that share a type are told apart by their message; each is called out where it applies.
 
@@ -29,14 +29,14 @@ The following table tells you at a glance whether to retry. Each section that fo
 
 | Status                                                                                                                     | Retry?                      | When                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | -------------------------------------------------------------------------------------------------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [400 Bad Request](manage-claude/compliance-errors.md)                     | No                          | Fix the request and resend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| [401 Unauthorized](manage-claude/compliance-errors.md)                   | No                          | Fix or rotate the key, then resend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| [403 Forbidden](manage-claude/compliance-errors.md)                         | No                          | Add the missing scope or use the right key type, then resend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| [404 Not Found](manage-claude/compliance-errors.md)                         | Usually no                  | The resource was deleted or never existed; remove it from your queue. Exceptions: on the local session endpoints, the message `Local sessions are not available.` (returned on every call, including the list) means the endpoints are currently unavailable to your parent organization, not that a session is gone; keep your queued IDs and see [Local session not found](manage-claude/compliance-errors.md). A remote session still in `pending` status 404s on its messages endpoint until it starts; see [Remote session not found](manage-claude/compliance-errors.md). |
-| [409 Conflict](manage-claude/compliance-errors.md)                           | No                          | The request conflicts with the resource's current state; resolve the conflict (such as detaching child resources), then retry.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| [429 Too Many Requests](manage-claude/compliance-errors.md)         | Yes, after `retry-after`    | Wait the seconds in `retry-after`, then retry; do not advance your cursor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| [500 Internal Server Error](manage-claude/compliance-errors.md) | Depends on `x-should-retry` | Check the `x-should-retry` response header before retrying.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| [502, 503, 504, 529](manage-claude/compliance-errors.md)        | Yes, with backoff           | Transient; retry with exponential backoff. Exception: some local session 503s are not transient. See [Local sessions temporarily unavailable](manage-claude/compliance-errors.md).                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [400 Bad Request](compliance-errors.md#400-bad-request)                     | No                          | Fix the request and resend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| [401 Unauthorized](compliance-errors.md#401-unauthorized)                   | No                          | Fix or rotate the key, then resend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [403 Forbidden](compliance-errors.md#403-forbidden)                         | No                          | Add the missing scope or use the right key type, then resend.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [404 Not Found](compliance-errors.md#404-not-found)                         | Usually no                  | The resource was deleted or never existed; remove it from your queue. Exceptions: on the local session endpoints, the message `Local sessions are not available.` (returned on every call, including the list) means the endpoints are currently unavailable to your parent organization, not that a session is gone; keep your queued IDs and see [Local session not found](compliance-errors.md#local-session-not-found). A remote session still in `pending` status 404s on its messages endpoint until it starts; see [Remote session not found](compliance-errors.md#remote-session-not-found). |
+| [409 Conflict](compliance-errors.md#409-conflict)                           | No                          | The request conflicts with the resource's current state; resolve the conflict (such as detaching child resources), then retry.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [429 Too Many Requests](compliance-errors.md#429-too-many-requests)         | Yes, after `retry-after`    | Wait the seconds in `retry-after`, then retry; do not advance your cursor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| [500 Internal Server Error](compliance-errors.md#500-internal-server-error) | Depends on `x-should-retry` | Check the `x-should-retry` response header before retrying.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| [502, 503, 504, 529](compliance-errors.md#500-internal-server-error)        | Yes, with backoff           | Transient; retry with exponential backoff. Exception: some local session 503s are not transient. See [Local sessions temporarily unavailable](compliance-errors.md#local-sessions-temporarily-unavailable).                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ## 400 Bad Request
 
@@ -72,7 +72,7 @@ The limit parameter must be between 1 and 1000, inclusive. Got 1500.
 
 **Cause:** The `limit` query parameter was outside the accepted range. The bound named in the message reflects the maximum for the specific endpoint that was called.
 
-**Fix:** Send a `limit` within the range the endpoint accepts. Each list endpoint has its own `limit` range; see the parameter constraints on the corresponding [Compliance API reference](api/compliance.md) page.
+**Fix:** Send a `limit` within the range the endpoint accepts. Each list endpoint has its own `limit` range; see the parameter constraints on the corresponding [Compliance API reference](../api/compliance.md) page.
 
 The session transcript endpoints (`GET /v1/compliance/apps/sessions/local/{session_id}/messages` and `GET /v1/compliance/apps/sessions/remote/{session_id}/messages`) validate their truncation parameters the same way: `tool_use_input_max_bytes` and `tool_result_max_bytes` each accept a positive byte count or `-1` (the server maximum), so a value such as `0` returns the same 400 `invalid_request_error`.
 
@@ -102,11 +102,11 @@ Cursors on the messages endpoint also expire 24 hours after the walk (one pass t
 The page cursor has expired. Restart the walk without a page parameter; results will reflect the current retention boundary.
 ```
 
-For the first body, resend the unmodified `next_page` value from the previous response to the endpoint and session that issued it. For an expired cursor, restart without a `page` parameter; the new walk reflects the retention boundary in effect when it starts, so messages that aged out of the retention period in the meantime are no longer returned (see [Retrieve a local session transcript](manage-claude/compliance-sessions.md)).
+For the first body, resend the unmodified `next_page` value from the previous response to the endpoint and session that issued it. For an expired cursor, restart without a `page` parameter; the new walk reflects the retention boundary in effect when it starts, so messages that aged out of the retention period in the meantime are no longer returned (see [Retrieve a local session transcript](compliance-sessions.md#retrieve-a-local-session-transcript)).
 
 ## 401 Unauthorized
 
-The `x-api-key` header was missing or did not match a known key. A valid key with the wrong scopes returns [403 Forbidden](manage-claude/compliance-errors.md) instead.
+The `x-api-key` header was missing or did not match a known key. A valid key with the wrong scopes returns [403 Forbidden](compliance-errors.md#403-forbidden) instead.
 
 ### Invalid API key
 
@@ -118,7 +118,7 @@ The API key provided is invalid or has been revoked.
 
 **Cause:** The key in `x-api-key` does not exist, has been deleted, or has been disabled. A missing or empty `x-api-key` header returns the same body, so check both your secret store and the key's revocation status.
 
-**Fix:** Confirm the key value, check that it has not been deleted in claude.ai (Compliance Access Keys) or Claude Console (Admin API keys), and confirm it is enabled. See [Set up the Compliance API](manage-claude/compliance-api-access.md).
+**Fix:** Confirm the key value, check that it has not been deleted in claude.ai (Compliance Access Keys) or Claude Console (Admin API keys), and confirm it is enabled. See [Set up the Compliance API](compliance-api-access.md).
 
 ## 403 Forbidden
 
@@ -135,9 +135,9 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 **Cause:** A key without `read:compliance_activities` was used to call `GET /v1/compliance/activities`. There are two common paths to this error:
 
 * A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_activities` scope.
-* A Claude Console Admin API key (`sk-ant-admin01-...`) was created while the Compliance API was not enabled for the organization. Keys created while the Compliance API was not enabled do not carry the scope; see [Set up the Compliance API](manage-claude/compliance-api-access.md).
+* A Claude Console Admin API key (`sk-ant-admin01-...`) was created while the Compliance API was not enabled for the organization. Keys created while the Compliance API was not enabled do not carry the scope; see [Set up the Compliance API](compliance-api-access.md#set-up-the-compliance-api).
 
-**Fix:** Compliance Access Key scopes are immutable after creation. Create a new key that includes `read:compliance_activities`, or use a Claude Console Admin API key. See [Which key do you need?](manage-claude/compliance-api-access.md) for the conditions under which an Admin API key carries this scope.
+**Fix:** Compliance Access Key scopes are immutable after creation. Create a new key that includes `read:compliance_activities`, or use a Claude Console Admin API key. See [Which key do you need?](compliance-api-access.md#which-key-do-you-need) for the conditions under which an Admin API key carries this scope.
 
 ### Insufficient scope: organization data
 
@@ -152,7 +152,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 * A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_org_data` scope.
 * A Claude Console Admin API key (`sk-ant-admin01-...`) was used. Admin API keys carry only `read:compliance_activities` and cannot read organization metadata.
 
-**Fix:** [Create a new Compliance Access Key](manage-claude/compliance-api-access.md) with `read:compliance_org_data` selected. Admin API keys cannot read organization metadata; the Compliance Access Key is required.
+**Fix:** [Create a new Compliance Access Key](compliance-api-access.md#set-up-the-compliance-api) with `read:compliance_org_data` selected. Admin API keys cannot read organization metadata; the Compliance Access Key is required.
 
 ### Retired scope: organization settings
 
@@ -164,7 +164,7 @@ Missing required scopes. Got: ['read:compliance_org_settings'] Needed: ['read:co
 
 **Cause:** The `read:compliance_org_settings` scope was retired on June 30, 2026. `GET /v1/compliance/organizations/{organization_id}/settings` now requires `read:compliance_org_data`, the same scope as the other organization endpoints, and the retired scope no longer authorizes anything. A Compliance Access Key that carries only `read:compliance_org_settings` returns this error on every call to the settings endpoint, even though the key worked before the retirement. The retired scope can no longer be selected or granted when creating a key.
 
-**Fix:** Compliance Access Key scopes are immutable after creation. [Create a new Compliance Access Key](manage-claude/compliance-api-access.md) with `read:compliance_org_data` selected, update your integration to use it, then delete the old key. A key that already carries `read:compliance_org_data` is unaffected by the retirement.
+**Fix:** Compliance Access Key scopes are immutable after creation. [Create a new Compliance Access Key](compliance-api-access.md#set-up-the-compliance-api) with `read:compliance_org_data` selected, update your integration to use it, then delete the old key. A key that already carries `read:compliance_org_data` is unaffected by the retirement.
 
 ### Insufficient scope: user data
 
@@ -179,7 +179,7 @@ Missing required scopes. Got: ['read:compliance_activities'] Needed: ['read:comp
 * A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_user_data` scope.
 * A Claude Console Admin API key (`sk-ant-admin01-...`) was used. Admin API keys carry only `read:compliance_activities` and cannot be granted `read:compliance_user_data`, so they cannot call the chat, file, project, project attachment, session, user, or group-member endpoints.
 
-**Fix:** Use a [Compliance Access Key](manage-claude/compliance-api-access.md) created in claude.ai with `read:compliance_user_data` selected. If the request really should be Activity Feed only, point the Admin API key at `GET /v1/compliance/activities` instead.
+**Fix:** Use a [Compliance Access Key](compliance-api-access.md#set-up-the-compliance-api) created in claude.ai with `read:compliance_user_data` selected. If the request really should be Activity Feed only, point the Admin API key at `GET /v1/compliance/activities` instead.
 
 ### Insufficient scope: delete
 
@@ -191,11 +191,11 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['delete:com
 
 **Cause:** A Compliance Access Key without `delete:compliance_user_data` was used to call a `DELETE` endpoint on chats, files, or projects.
 
-**Fix:** [Create a new Compliance Access Key](manage-claude/compliance-api-access.md) with `delete:compliance_user_data` selected. The delete scope is separate from `read:compliance_user_data` so that read-only audit keys cannot delete content.
+**Fix:** [Create a new Compliance Access Key](compliance-api-access.md#set-up-the-compliance-api) with `delete:compliance_user_data` selected. The delete scope is separate from `read:compliance_user_data` so that read-only audit keys cannot delete content.
 
 ## 404 Not Found
 
-The endpoint resolved but the resource ID does not exist or has already been deleted. Compliance API deletes are immediate and permanent, so a 404 on a previously known ID usually means the content was hard-deleted through a Compliance API delete call or removed by a retention policy. The session endpoints add two cases. On the local session endpoints, a separate 404 message, `Local sessions are not available.`, is returned on every call (including the list) while the endpoints are unavailable to your parent organization; it does not depend on the session ID and can be temporary. See [Local session not found](manage-claude/compliance-errors.md). On the remote session endpoints, a session that is still being provisioned (`status` of `pending`) has no transcript yet, so its messages endpoint 404s until the session starts. See [Remote session not found](manage-claude/compliance-errors.md). The activity-type strings cited in each Fix (for example, `claude_chat_created`) are values you can pass to the Activity Feed `activity_types[]` filter; see [Query compliance activities](api/compliance/activities/list.md) for every supported value.
+The endpoint resolved but the resource ID does not exist or has already been deleted. Compliance API deletes are immediate and permanent, so a 404 on a previously known ID usually means the content was hard-deleted through a Compliance API delete call or removed by a retention policy. The session endpoints add two cases. On the local session endpoints, a separate 404 message, `Local sessions are not available.`, is returned on every call (including the list) while the endpoints are unavailable to your parent organization; it does not depend on the session ID and can be temporary. See [Local session not found](compliance-errors.md#local-session-not-found). On the remote session endpoints, a session that is still being provisioned (`status` of `pending`) has no transcript yet, so its messages endpoint 404s until the session starts. See [Remote session not found](compliance-errors.md#remote-session-not-found). The activity-type strings cited in each Fix (for example, `claude_chat_created`) are values you can pass to the Activity Feed `activity_types[]` filter; see [Query compliance activities](../api/compliance/activities/list.md) for every supported value.
 
 ### Chat not found
 
@@ -253,11 +253,11 @@ No project document found with provided id, or it has already been deleted.
 Local session not found.
 ```
 
-**Cause:** The session ID passed to `GET /v1/compliance/apps/sessions/local/{session_id}` or `GET /v1/compliance/apps/sessions/local/{session_id}/messages` does not match a local session readable through the Compliance API. Both endpoints return this one message, without distinguishing the cause, when the ID is not a session in an organization your key can read (including IDs that belong to another parent organization), when the session never existed, when [zero data retention](manage-claude/api-and-data-retention.md) is in effect for the session, or when all of the session's activity has aged past the retention period that applies to the organization that ran it. The `Local session not found.` response has no transient form, because local sessions have no provisioning (`pending`) state; compare [Remote session not found](manage-claude/compliance-errors.md), where a `pending` session 404s until it starts. A session ID that is not a well-formed `clls_` identifier returns [400 Bad Request](manage-claude/compliance-errors.md) instead.
+**Cause:** The session ID passed to `GET /v1/compliance/apps/sessions/local/{session_id}` or `GET /v1/compliance/apps/sessions/local/{session_id}/messages` does not match a local session readable through the Compliance API. Both endpoints return this one message, without distinguishing the cause, when the ID is not a session in an organization your key can read (including IDs that belong to another parent organization), when the session never existed, when [zero data retention](api-and-data-retention.md#zero-data-retention-zdr-scope) is in effect for the session, or when all of the session's activity has aged past the retention period that applies to the organization that ran it. The `Local session not found.` response has no transient form, because local sessions have no provisioning (`pending`) state; compare [Remote session not found](compliance-errors.md#remote-session-not-found), where a `pending` session 404s until it starts. A session ID that is not a well-formed `clls_` identifier returns [400 Bad Request](compliance-errors.md#400-bad-request) instead.
 
 The local session endpoints, including the list endpoint, return a different 404 message, `Local sessions are not available.`, while the endpoints themselves are unavailable to your parent organization. That response does not depend on the session ID; no customer-side key, scope, or setting changes it, and it can be temporary. Both responses carry the `not_found_error` type; the message text is what tells them apart.
 
-**Fix:** Confirm the session ID against `GET /v1/compliance/apps/sessions/local`; see [Sessions on users' machines](manage-claude/compliance-sessions.md). If the session no longer appears in the list, its content has aged past retention (or the session is otherwise no longer in an organization your key can read) and its transcript is not retrievable; remove the ID from your queue. If every call, including the list, returns `Local sessions are not available.`, keep your queued session IDs and retry on your next scheduled run; if the response persists, contact your Anthropic representative and include the `request-id` response header.
+**Fix:** Confirm the session ID against `GET /v1/compliance/apps/sessions/local`; see [Sessions on users' machines](compliance-sessions.md#retrieve-local-sessions). If the session no longer appears in the list, its content has aged past retention (or the session is otherwise no longer in an organization your key can read) and its transcript is not retrievable; remove the ID from your queue. If every call, including the list, returns `Local sessions are not available.`, keep your queued session IDs and retry on your next scheduled run; if the response persists, contact your Anthropic representative and include the `request-id` response header.
 
 ### Remote session not found
 
@@ -267,9 +267,9 @@ The local session endpoints, including the list endpoint, return a different 404
 Remote session not found.
 ```
 
-**Cause:** The session ID passed to `GET /v1/compliance/apps/sessions/remote/{session_id}/messages` does not match a session transcript readable through the Compliance API. This occurs when the session ID (`cse_...`) does not exist or the session has been deleted, when the session belongs to an organization your key cannot read, or when the session's `status` is still `pending`: a pending session has no transcript yet, so the messages endpoint returns 404 until the session starts. A session ID that is not a well-formed `cse_` identifier returns [400 Bad Request](manage-claude/compliance-errors.md) instead.
+**Cause:** The session ID passed to `GET /v1/compliance/apps/sessions/remote/{session_id}/messages` does not match a session transcript readable through the Compliance API. This occurs when the session ID (`cse_...`) does not exist or the session has been deleted, when the session belongs to an organization your key cannot read, or when the session's `status` is still `pending`: a pending session has no transcript yet, so the messages endpoint returns 404 until the session starts. A session ID that is not a well-formed `cse_` identifier returns [400 Bad Request](compliance-errors.md#400-bad-request) instead.
 
-**Fix:** Confirm the session ID and its `status` against `GET /v1/compliance/apps/sessions/remote`; see [Sessions in the cloud](manage-claude/compliance-sessions.md). If the session is `pending`, retry after it leaves that status. If the session no longer appears in the list, it has been deleted and its transcript is not retrievable.
+**Fix:** Confirm the session ID and its `status` against `GET /v1/compliance/apps/sessions/remote`; see [Sessions in the cloud](compliance-sessions.md#retrieve-remote-sessions). If the session is `pending`, retry after it leaves that status. If the session no longer appears in the list, it has been deleted and its transcript is not retrievable.
 
 ### Organization, role, or group not found
 
@@ -283,7 +283,7 @@ The organization, role, and group endpoints return a 404 `not_found_error` in th
 
 **Cause:** The ID in the path does not match a record readable through the Compliance API. Roles and groups can be deleted, and organizations can be unlinked from the parent tree.
 
-**Fix:** Verify the ID against the corresponding list endpoint, and reconcile against recent organization, role, or group activities in the [Activity Feed](manage-claude/compliance-activity-feed.md).
+**Fix:** Verify the ID against the corresponding list endpoint, and reconcile against recent organization, role, or group activities in the [Activity Feed](compliance-activity-feed.md).
 
 ### Organization settings not available
 
@@ -295,7 +295,7 @@ organization `91012d09-e48b-438e-a489-1bebfd8fa6f9` not found in this organizati
 
 **Cause:** `GET /v1/compliance/organizations/{organization_id}/settings` returns this 404 in three cases that intentionally share the same body so the response does not reveal whether an organization exists: the `organization_id` is not one of your parent's linked organizations, the value is not a valid UUID, or the settings endpoint is not yet enabled for your parent organization.
 
-**Fix:** Verify the ID against [List organizations](api/compliance/organizations/list.md). If a known-good organization ID still returns 404, the settings endpoint is not yet enabled for your parent organization; contact your Anthropic representative.
+**Fix:** Verify the ID against [List organizations](../api/compliance/organizations/list.md). If a known-good organization ID still returns 404, the settings endpoint is not yet enabled for your parent organization; contact your Anthropic representative.
 
 ## 409 Conflict
 
@@ -311,13 +311,13 @@ The "claude_proj_01KGp4eZNug9ri4kE35RSppq" project cannot be deleted as it has c
 
 **Cause:** `DELETE /v1/compliance/apps/projects/{project_id}` was called on a project that still has chats attached.
 
-**Fix:** List the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the `project_ids[]` filter requires at least one `user_ids[]` value; enumerate IDs through [List organization users](manage-claude/compliance-org-data.md)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}`, and then retry the project delete.
+**Fix:** List the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the `project_ids[]` filter requires at least one `user_ids[]` value; enumerate IDs through [List organization users](compliance-org-data.md#list-organization-users)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}`, and then retry the project delete.
 
 ## 429 Too Many Requests
 
-Requests to the Compliance API are limited to **600 requests per minute per [parent organization](manage-claude/compliance-api.md)**. The limit is one budget shared across every key under the parent (Compliance Access Keys and the Admin API keys of all linked organizations) and across every `/v1/compliance/*` endpoint; the remote session endpoints carry a second request budget on top. For a standalone Claude Console organization, which has no parent organization, the same budget applies to the organization itself and is shared across its Admin API keys. Contact your Anthropic representative if your integration needs a higher limit.
+Requests to the Compliance API are limited to **600 requests per minute per [parent organization](compliance-api.md#how-the-compliance-api-works)**. The limit is one budget shared across every key under the parent (Compliance Access Keys and the Admin API keys of all linked organizations) and across every `/v1/compliance/*` endpoint; the remote session endpoints carry a second request budget on top. For a standalone Claude Console organization, which has no parent organization, the same budget applies to the organization itself and is shared across its Admin API keys. Contact your Anthropic representative if your integration needs a higher limit.
 
-Once your API key authenticates, Compliance API responses report the shared budget through the standard [rate-limit response headers](api/rate-limits.md) so your client can throttle proactively instead of waiting for a 429:
+Once your API key authenticates, Compliance API responses report the shared budget through the standard [rate-limit response headers](../api/rate-limits.md#response-headers) so your client can throttle proactively instead of waiting for a 429:
 
 * `anthropic-ratelimit-requests-limit` is the per-minute request budget.
 * `anthropic-ratelimit-requests-remaining` is the budget left in the current window.
@@ -349,15 +349,15 @@ anthropic-ratelimit-requests-reset: 2026-04-21T14:38:25Z
 
 Requests that fail authentication (a missing or unrecognized key, or a Claude API key rather than a Compliance Access Key or Admin API key) are rejected before the rate limiter and do not consume quota. A valid key that lacks the endpoint's required scope consumes one quota unit before the 403 is returned.
 
-The [local session endpoints](manage-claude/compliance-sessions.md) count only against the shared limit. The [remote session endpoints](manage-claude/compliance-sessions.md) also carry a second request budget, keyed to your parent organization like the shared limit, on top of it. A 429 from that budget carries a `retry-after` header that is always `1` (a minimum wait, not the actual reset time); any `anthropic-ratelimit-*` headers on that response describe the shared limit rather than this budget, so back off exponentially if the 429 repeats.
+The [local session endpoints](compliance-sessions.md#retrieve-local-sessions) count only against the shared limit. The [remote session endpoints](compliance-sessions.md#retrieve-remote-sessions) also carry a second request budget, keyed to your parent organization like the shared limit, on top of it. A 429 from that budget carries a `retry-after` header that is always `1` (a minimum wait, not the actual reset time); any `anthropic-ratelimit-*` headers on that response describe the shared limit rather than this budget, so back off exponentially if the 429 repeats.
 
-If you poll the [Activity Feed](manage-claude/compliance-activity-feed.md) on a schedule, budget your aggregate request rate (across all keys, linked organizations, and concurrent workers) below the shared limit. Watch `anthropic-ratelimit-requests-remaining` to slow down before you reach it. See [Design your compliance integration](manage-claude/compliance-integration-patterns.md) for choosing between window-polling and cursor-driven ingestion.
+If you poll the [Activity Feed](compliance-activity-feed.md) on a schedule, budget your aggregate request rate (across all keys, linked organizations, and concurrent workers) below the shared limit. Watch `anthropic-ratelimit-requests-remaining` to slow down before you reach it. See [Design your compliance integration](compliance-integration-patterns.md#choose-a-feed-consumption-pattern) for choosing between window-polling and cursor-driven ingestion.
 
 ## 500 Internal Server Error
 
 A 500 from the Compliance API carries an `x-should-retry: false` response header when the failure is deterministic. Anthropic SDKs honor this header automatically. If you use a generic HTTP retry library that retries on every 5xx, suppress retries when `x-should-retry` is `false`; retrying this error fails identically on every attempt.
 
-A 500 without the `x-should-retry: false` header is transient: retry with exponential backoff (start at 1 second, double up to 60 seconds). The same applies to 502, 503, 504, and 529 responses. The exception is a small set of local session 503s, described next, that depend on an organization's settings or encryption key rather than on load. See [Errors](api/errors.md) for the platform-wide retry semantics.
+A 500 without the `x-should-retry: false` header is transient: retry with exponential backoff (start at 1 second, double up to 60 seconds). The same applies to 502, 503, 504, and 529 responses. The exception is a small set of local session 503s, described next, that depend on an organization's settings or encryption key rather than on load. See [Errors](../api/errors.md) for the platform-wide retry semantics.
 
 ### Local sessions temporarily unavailable
 
@@ -375,10 +375,10 @@ Captured content is temporarily unavailable. Try again shortly.
 The local-sessions index cannot currently evaluate retention overrides for this page. Try again later.
 ```
 
-**Cause:** The [local session endpoints](manage-claude/compliance-sessions.md) return 503 with one of these bodies. All three share the `overloaded_error` type, so this is one of the few errors on this page where you need the message text, not `error.type`, to tell the conditions apart:
+**Cause:** The [local session endpoints](compliance-sessions.md#retrieve-local-sessions) return 503 with one of these bodies. All three share the `overloaded_error` type, so this is one of the few errors on this page where you need the message text, not `error.type`, to tell the conditions apart:
 
 * The `index is temporarily unavailable` body means session listings are briefly unavailable because of load or a backend condition. This is transient.
-* The `Captured content` body means a session's transcript content cannot be returned right now. This is usually transient too. In organizations that use [customer-managed encryption keys](manage-claude/cmek.md), the messages endpoint also returns this body for every page that contains content your customer-managed key cannot decrypt, for example because you disabled, revoked, or destroyed the key, or because the key cannot be reached. In that case the error persists for as long as the key cannot be used. The message text is the same either way, so the only signal that the key is the cause is that the error keeps recurring for that organization. An unusable key is never reported as `not_captured`.
+* The `Captured content` body means a session's transcript content cannot be returned right now. This is usually transient too. In organizations that use [customer-managed encryption keys](cmek.md), the messages endpoint also returns this body for every page that contains content your customer-managed key cannot decrypt, for example because you disabled, revoked, or destroyed the key, or because the key cannot be reached. In that case the error persists for as long as the key cannot be used. The message text is the same either way, so the only signal that the key is the cause is that the error keeps recurring for that organization. An unusable key is never reported as `not_captured`.
 * The `retention overrides` body means a retention or data-handling setting that applies to one or more sessions in the requested range could not be evaluated yet. On the retrieve and messages endpoints it reads `for this session` instead of `for this page`. It depends on the data and settings of the organization that ran the session rather than on load, and it can persist for an extended period.
 
 **Fix:** Handle each body as follows:

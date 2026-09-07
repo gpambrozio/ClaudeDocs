@@ -8,7 +8,7 @@ description: Install and configure the Anthropic Java SDK with builder patterns 
 
 The Anthropic Java SDK provides convenient access to the Claude API from applications written in Java. It uses the builder pattern for creating requests and supports both synchronous and asynchronous operations.
 
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Java-specific SDK features and configuration.
+For API feature documentation with code examples, see the [API reference](../../api/overview.md). This page covers Java-specific SDK features and configuration.
 
 ## Installation
 
@@ -95,7 +95,7 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
   .build();
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
+For authentication options including Workload Identity Federation, see [Authentication](../../manage-claude/authentication.md). If your API key is a [personal or service account key](../../manage-claude/authentication.md#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../../manage-claude/authentication.md#select-a-workspace) shows the per-request option for this SDK.
 
 ### Configuration options
 
@@ -304,11 +304,11 @@ A `BetaMessageAccumulator` is also available for the accumulation of a `BetaMess
 
 ## Structured outputs
 
-For complete structured outputs documentation including Java examples, see [Structured outputs](build-with-claude/structured-outputs.md).
+For complete structured outputs documentation including Java examples, see [Structured outputs](../../build-with-claude/structured-outputs.md).
 
 ## Tool use
 
-[Tool use with Claude](agents-and-tools/tool-use/overview.md) lets you integrate external tools and functions directly into the AI model's responses. Instead of producing plain text, the model can output instructions (with parameters) for calling a tool or function when appropriate. You define JSON schemas for tools, and the model uses the schemas to determine when and how to use these tools.
+[Tool use with Claude](../../agents-and-tools/tool-use/overview.md) lets you integrate external tools and functions directly into the AI model's responses. Instead of producing plain text, the model can output instructions (with parameters) for calling a tool or function when appropriate. You define JSON schemas for tools, and the model uses the schemas to determine when and how to use these tools.
 
 The tool use feature supports a "strict" mode that guarantees that the JSON output from the AI model will conform to the JSON schema you provide in the input parameters.
 
@@ -450,7 +450,7 @@ You can use annotations to add further information about tools to the JSON schem
 
 ## Message batches
 
-The SDK provides support for [Batch processing](build-with-claude/batch-processing.md) under the `client.messages().batches()` namespace. See [Pagination](cli-sdks-libraries/sdks/java.md) for how to list and paginate through batches.
+The SDK provides support for [Batch processing](../../build-with-claude/batch-processing.md) under the `client.messages().batches()` namespace. See [Pagination](java.md#pagination) for how to list and paginate through batches.
 
 ## File uploads
 
@@ -596,7 +596,7 @@ try {
 
 ## Request IDs
 
-When using [raw responses](cli-sdks-libraries/sdks/java.md), you can access the `request-id` response header using the `requestId()` method:
+When using [raw responses](java.md#raw-response-access), you can access the `request-id` response header using the `requestId()` method:
 
 ```java
 import com.anthropic.core.http.HttpResponseFor;
@@ -607,7 +607,7 @@ HttpResponseFor<Message> message = client.messages().withRawResponse().create(pa
 Optional<String> requestId = message.requestId();
 ```
 
-This can be used to quickly log failing requests and report them back to Anthropic. For more information on debugging requests, see [Request ID](api/errors.md).
+This can be used to quickly log failing requests and report them back to Anthropic. For more information on debugging requests, see [Request ID](../../api/errors.md#request-id).
 
 ## Retries
 
@@ -678,11 +678,11 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 
 ## Long requests
 
-Consider using [streaming](cli-sdks-libraries/sdks/java.md) for longer running requests.
+Consider using [streaming](java.md#streaming) for longer running requests.
 
-Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](cli-sdks-libraries/sdks/java.md) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
+Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](java.md#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
 
-The SDK throws an error if a non-streaming request is expected to take longer than 10 minutes. Using a [streaming method](cli-sdks-libraries/sdks/java.md) or [overriding the timeout](cli-sdks-libraries/sdks/java.md) at the client or request level disables the error.
+The SDK throws an error if a non-streaming request is expected to take longer than 10 minutes. Using a [streaming method](java.md#streaming) or [overriding the timeout](java.md#timeouts) at the client or request level disables the error.
 
 ## Pagination
 
@@ -1031,7 +1031,7 @@ This structure allows replacing the SDK's default HTTP client without pulling in
 
 #### Customized OkHttpClient
 
-Try the available [network options](cli-sdks-libraries/sdks/java.md) before replacing the default client.
+Try the available [network options](java.md#retries) before replacing the default client.
 
 To use a customized `OkHttpClient`:
 
@@ -1051,11 +1051,11 @@ To use a completely custom HTTP client:
 
 For detailed platform setup guides with code examples, see:
 
-* [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-* [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-* [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
-* [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
+* [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
+* [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)
+* [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)
 
 The Java SDK supports the following platforms through separate dependencies that provide platform-specific `Backend` implementations:
 
@@ -1142,11 +1142,11 @@ The SDK is typed for convenient usage of the documented API. However, it also su
 
 #### Undocumented request parameters
 
-To set undocumented request parameters, use the `putAdditionalHeader`, `putAdditionalQueryParam`, or `putAdditionalBodyProperty` methods as described in [Undocumented parameters](cli-sdks-libraries/sdks/java.md).
+To set undocumented request parameters, use the `putAdditionalHeader`, `putAdditionalQueryParam`, or `putAdditionalBodyProperty` methods as described in [Undocumented parameters](java.md#undocumented-parameters).
 
 #### Undocumented response properties
 
-To access undocumented response properties, use the `_additionalProperties()` method as described in [Response properties](cli-sdks-libraries/sdks/java.md).
+To access undocumented response properties, use the `_additionalProperties()` method as described in [Response properties](java.md#response-properties).
 
 #### New or unreleased enum values
 
@@ -1176,11 +1176,11 @@ Prefer the well-typed constants (for example, `Model.CLAUDE_OPUS_5`) so you get 
 
 ## Beta features
 
-Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](build-with-claude/overview.md).
+Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude's capabilities and tools in the [build with Claude overview](../../build-with-claude/overview.md).
 
-You can access most beta API features through the `beta()` method on the client. To enable a particular beta feature, add the appropriate [beta header](api/beta-headers.md) with `.addBeta()` when building the message params.
+You can access most beta API features through the `beta()` method on the client. To enable a particular beta feature, add the appropriate [beta header](../../api/beta-headers.md) with `.addBeta()` when building the message params.
 
-For example, to enable [context editing](build-with-claude/context-editing.md):
+For example, to enable [context editing](../../build-with-claude/context-editing.md):
 
 ```java
 import com.anthropic.models.beta.AnthropicBeta;
@@ -1206,7 +1206,7 @@ void main() {
 
 Java `enum` classes are not trivially forward compatible. Using them in the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.
 
-Because these classes are open, you can also construct them with any string value through their `of(String)` factory method. See [New or unreleased enum values](cli-sdks-libraries/sdks/java.md) if you need to use a value that isn't in your SDK version yet.
+Because these classes are open, you can also construct them with any string value through their `of(String)` factory method. See [New or unreleased enum values](java.md#new-or-unreleased-enum-values) if you need to use a value that isn't in your SDK version yet.
 
 **Why are fields represented using JsonField<T> instead of just plain T?**
 
@@ -1242,9 +1242,9 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 * [GitHub repository](https://github.com/anthropics/anthropic-sdk-java)
 * [Javadocs](https://javadoc.io/doc/com.anthropic/anthropic-java)
-* [API reference](api/overview.md)
-* [Streaming Messages](build-with-claude/streaming.md)
-* [Tool use with Claude](agents-and-tools/tool-use/overview.md)
+* [API reference](../../api/overview.md)
+* [Streaming Messages](../../build-with-claude/streaming.md)
+* [Tool use with Claude](../../agents-and-tools/tool-use/overview.md)
 
 ---
 

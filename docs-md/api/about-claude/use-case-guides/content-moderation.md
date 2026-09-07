@@ -10,7 +10,7 @@ description: Content moderation is a critical aspect of maintaining a safe, resp
 
 This guide is focused on moderating user-generated content within your application. If you're looking for guidance on moderating interactions with Claude, refer to 
 
-[Mitigate jailbreaks and prompt injections](test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md)
+[Mitigate jailbreaks and prompt injections](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md)
 
 .
 
@@ -350,7 +350,7 @@ When selecting a model, it’s important to consider the size of your data. If c
 
 Actual costs may differ from these estimates. These estimates are based on the prompt highlighted in the section on 
 
-[batch processing](about-claude/use-case-guides/content-moderation.md)
+[batch processing](content-moderation.md#consider-batch-processing)
 
 . Output tokens can be reduced even further by removing the 
 
@@ -1432,7 +1432,7 @@ Once you are confident in the quality of your solution, it's time to deploy it t
 
 ## Improve performance
 
-In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](build-with-claude/prompt-engineering/overview.md). Here are some advanced strategies:
+In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](../../build-with-claude/prompt-engineering/overview.md). Here are some advanced strategies:
 
 ### Define topics and provide examples
 
@@ -2707,7 +2707,7 @@ response_obj["violations"].each do |violation|
 end
 ```
 
-In this example, the `batch_moderate_messages` function handles the moderation of an entire batch of messages with a single Claude API call. Inside the function, a prompt is created that includes the list of messages to evaluate and the unsafe content categories. The prompt directs Claude to return a JSON object listing all messages that contain violations. Each message in the response is identified by its `id`, which corresponds to the message's position in the batch. Keep in mind that finding the optimal batch size for your specific needs may require some experimentation. While larger batch sizes can lower costs, they might also lead to a slight decrease in quality. Additionally, you may need to increase the `max_tokens` parameter in the Claude API call to accommodate longer responses. For details on the maximum number of tokens your chosen model can output, refer to the [model comparison table](models/overview.md).
+In this example, the `batch_moderate_messages` function handles the moderation of an entire batch of messages with a single Claude API call. Inside the function, a prompt is created that includes the list of messages to evaluate and the unsafe content categories. The prompt directs Claude to return a JSON object listing all messages that contain violations. Each message in the response is identified by its `id`, which corresponds to the message's position in the batch. Keep in mind that finding the optimal batch size for your specific needs may require some experimentation. While larger batch sizes can lower costs, they might also lead to a slight decrease in quality. Additionally, you may need to increase the `max_tokens` parameter in the Claude API call to accommodate longer responses. For details on the maximum number of tokens your chosen model can output, refer to the [model comparison table](../../models/overview.md#latest-models-comparison).
 
 **Content moderation cookbook**
 

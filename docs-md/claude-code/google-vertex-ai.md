@@ -94,7 +94,7 @@ Run `claude`. At the login prompt, select **3rd-party platform**, then **Google 
 
 Choose how you authenticate to Google Cloud: Application Default Credentials from `gcloud`, a service account key file, or credentials already in your environment. The wizard detects your project and region, verifies which Claude models your project can invoke, and lets you pin them. It saves the result to the `env` block of your [user settings file](settings.md), so you don't need to export environment variables yourself.
 
-After you've signed in, run `/setup-vertex` any time to reopen the wizard and change your credentials, project, region, or model pins. The model pin step starts from your currently pinned models. The wizard writes to `~/.claude/settings.json`, or to `$CLAUDE_CONFIG_DIR/settings.json` when [`CLAUDE_CONFIG_DIR`](env-vars.md) is set.
+After you've signed in, run `/setup-vertex` any time to reopen the wizard and change your credentials, project, region, or model pins. The model pin step starts from your currently pinned models. The wizard writes to `~/.claude/settings.json`, or to `$CLAUDE_CONFIG_DIR/settings.json` when [`CLAUDE_CONFIG_DIR`](env-vars.md#variables) is set.
 
 ## Region configuration
 
@@ -150,7 +150,7 @@ Claude Code supports automatic credential refresh for GCP through the `gcpAuthRe
 }
 ```
 
-Claude Code shows you the command's output, but can't send the command interactive input. This works well for browser-based authentication flows where the CLI shows a URL and you complete authentication in the browser. The refresh command times out after three minutes if authentication does not complete. If you set `gcpAuthRefresh` in project settings such as `.claude/settings.json`, Claude Code runs it under the same [workspace trust rule as hooks in settings files](permissions.md), which includes `-p` sessions in folders you've never trusted.
+Claude Code shows you the command's output, but can't send the command interactive input. This works well for browser-based authentication flows where the CLI shows a URL and you complete authentication in the browser. The refresh command times out after three minutes if authentication does not complete. If you set `gcpAuthRefresh` in project settings such as `.claude/settings.json`, Claude Code runs it under the same [workspace trust rule as hooks in settings files](permissions.md#what-runs-before-you-trust-a-folder), which includes `-p` sessions in folders you've never trusted.
 
 ### 4. Configure Claude Code
 
@@ -177,11 +177,11 @@ If a region value isn't shaped like a region or location name, Claude Code treat
 * `VERTEX_REGION_CLAUDE_*`: Claude Code falls back to `CLOUD_ML_REGION`.
 * `CLOUD_ML_REGION`: Claude Code falls back to `us-east5`.
 
-[Prompt caching](prompt-caching.md) is enabled automatically. To disable it, set `DISABLE_PROMPT_CACHING=1`. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`; cache writes with a 1-hour TTL are billed at a higher rate. To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md).
+[Prompt caching](prompt-caching.md) is enabled automatically. To disable it, set `DISABLE_PROMPT_CACHING=1`. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`; cache writes with a 1-hour TTL are billed at a higher rate. To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md#choose-the-ttl-yourself).
 
 To raise your rate limits, contact Google Cloud support. When using Google Cloud's Agent Platform, the `/logout` command is unavailable since authentication is handled through Google Cloud credentials.
 
-Claude Code decides between [MCP tool search](mcp.md) and upfront loading by model generation:
+Claude Code decides between [MCP tool search](mcp.md#scale-with-mcp-tool-search) and upfront loading by model generation:
 
 * **Claude Opus 4.5, Sonnet 4.5, Haiku 4.5, and later**: Claude Code enables tool search by default.
 * **Earlier models, including all Claude 3.x models**: Claude Code loads MCP tool definitions upfront, because their Agent Platform serving stacks reject the required beta header. Setting `ENABLE_TOOL_SEARCH=true` doesn't override this.
@@ -202,7 +202,7 @@ export ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-5'
 export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'
 ```
 
-For current and legacy model IDs, see [Models overview](about-claude/models/overview.md). See [Model configuration](model-config.md) for the full list of environment variables.
+For current and legacy model IDs, see [Models overview](../api/models/overview.md). See [Model configuration](model-config.md#pin-models-for-third-party-deployments) for the full list of environment variables.
 
 Claude Code uses these default models when no pinning variables are set:
 
@@ -213,7 +213,7 @@ Claude Code uses these default models when no pinning variables are set:
 
 Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Google Cloud's Agent Platform, Claude Code uses the default Sonnet model for background tasks because Haiku may not be enabled in every project or region. Two selections change which model carries them:
 
-* When you select a primary model with `--model`, `ANTHROPIC_MODEL`, or the `model` setting, background tasks use that model. When Claude Code starts the session on the model you set with [`ANTHROPIC_DEFAULT_MODEL`](model-config.md), background tasks use that model too. Setting `ANTHROPIC_DEFAULT_OPUS_MODEL` without `ANTHROPIC_DEFAULT_SONNET_MODEL` also counts as a selection, because the built-in Sonnet model may not be enabled in a project that steers its own Opus.
+* When you select a primary model with `--model`, `ANTHROPIC_MODEL`, or the `model` setting, background tasks use that model. When Claude Code starts the session on the model you set with [`ANTHROPIC_DEFAULT_MODEL`](model-config.md#set-a-default-model-for-new-sessions), background tasks use that model too. Setting `ANTHROPIC_DEFAULT_OPUS_MODEL` without `ANTHROPIC_DEFAULT_SONNET_MODEL` also counts as a selection, because the built-in Sonnet model may not be enabled in a project that steers its own Opus.
 * To use Haiku for background tasks, set `ANTHROPIC_DEFAULT_HAIKU_MODEL` to a model ID that is available in your project.
 
 Opus models have a higher per-token price than Sonnet models, so a deployment that doesn't pin a primary model is billed at the Opus rate once it updates to v2.1.207 or later. To keep Sonnet 4.5 as the primary model, set `ANTHROPIC_MODEL` to its full model ID. A deployment that steers the default with `ANTHROPIC_DEFAULT_SONNET_MODEL` and doesn't set `ANTHROPIC_DEFAULT_OPUS_MODEL` keeps its steered Sonnet model as the default.
@@ -239,7 +239,7 @@ If you have pinned a model version that is older than the current Claude Code de
 
 If you have not pinned a model and the current default is unavailable in your project, Claude Code falls back for the current session and shows a notice. It tries earlier versions of the default model first and, when the default is an Opus model and no Opus version is available, falls back to the default Sonnet model. The fallback is not persisted. Enable the newer model in [Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) or [pin a version](#5-pin-model-versions) to make the choice permanent.
 
-When you start the session on a specific Sonnet or Opus version, for example with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](settings-reference.md), that version acts as the session's pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
+When you start the session on a specific Sonnet or Opus version, for example with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](settings-reference.md#model), that version acts as the session's pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
 
 Model aliases such as `opus` don't act as pins, and neither does a model ID Claude Code doesn't recognize.
 
@@ -257,9 +257,9 @@ Create a dedicated GCP project for Claude Code to simplify cost tracking and acc
 
 ## 1M token context window
 
-Claude Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support the [1M token context window](build-with-claude/context-windows.md) on Google Cloud's Agent Platform. Sonnet 5 always runs with the 1M window, with no `[1m]` variant to select. For the other models, Claude Code automatically enables the extended context window when you select a 1M model variant.
+Claude Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support the [1M token context window](../api/build-with-claude/context-windows.md#context-window-sizes-by-model) on Google Cloud's Agent Platform. Sonnet 5 always runs with the 1M window, with no `[1m]` variant to select. For the other models, Claude Code automatically enables the extended context window when you select a 1M model variant.
 
-The [setup wizard](#sign-in-with-agent-platform) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](model-config.md) for details.
+The [setup wizard](#sign-in-with-agent-platform) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](model-config.md#pin-models-for-third-party-deployments) for details.
 
 ## Troubleshooting
 

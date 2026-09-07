@@ -8,24 +8,24 @@ description: Install the MCP tunnel stack on a VM using Docker Compose.
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-This guide deploys the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
+This guide deploys the [tunnel stack](concepts.md#components) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
 ## Before you begin
 
 You need:
 
-* **A tunnel.** With programmatic access, the [setup component](agents-and-tools/mcp-tunnels/concepts.md) creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](agents-and-tools/mcp-tunnels/console.md) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel.
+* **A tunnel.** With programmatic access, the [setup component](concepts.md#components) creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](console.md#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel.
 
 * **A way for the host to authenticate to the Tunnels API.**
 
   * **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel (or create the federation rule directly under **Settings > Workload identity** if you're letting the setup component create the tunnel) so the setup component can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
-  * **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](agents-and-tools/mcp-tunnels/console.md), generate a CA and server certificate yourself, and [register the CA in the Console](agents-and-tools/mcp-tunnels/console.md).
+  * **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](console.md#get-the-connection-details), generate a CA and server certificate yourself, and [register the CA in the Console](console.md#add-a-ca-certificate).
 
 * **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or later).
 
-* **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
+* **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](concepts.md#components) (7844 TCP and UDP). See the full [network requirements](overview.md#network-requirements).
 
-* **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](agents-and-tools/mcp-tunnels/deploy-compose.md).
+* **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](deploy-compose.md#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
 
@@ -141,7 +141,7 @@ services:
 EOF
 ```
 
-If you're using the [sample MCP server](agents-and-tools/mcp-tunnels/deploy-compose.md), append it as a service:
+If you're using the [sample MCP server](deploy-compose.md#optional-use-a-sample-mcp-server), append it as a service:
 
 ```bash
 cat >> docker-compose.yaml <<'EOF'
@@ -158,7 +158,7 @@ EOF
 
 **Provision the tunnel**
 
-Set the identifiers. Leave `TUNNEL_ID` unset to have the setup component create a tunnel; set it to attach to an existing tunnel from the [Console](agents-and-tools/mcp-tunnels/console.md):
+Set the identifiers. Leave `TUNNEL_ID` unset to have the setup component create a tunnel; set it to attach to an existing tunnel from the [Console](console.md#create-a-tunnel):
 
 ```bash
 # export TUNNEL_ID=tnl_...   # set to attach to an existing tunnel
@@ -168,7 +168,7 @@ export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
 
 If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; the setup component uses the default workspace otherwise. An auto-created tunnel is created in that workspace.
 
-Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](manage-claude/workload-identity-federation.md) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting.
+Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](../../manage-claude/workload-identity-federation.md#identity-providers) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting.
 
 Run the setup component:
 
@@ -178,7 +178,7 @@ docker compose run --rm setup
 
 `setup init` is idempotent over `data/`: re-running it reuses the tunnel ID and CA already stored there and never creates a second tunnel. A new CA is generated and registered only when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
 
-See [Setup component authentication failures](agents-and-tools/mcp-tunnels/troubleshooting.md) if it errors.
+See [Setup component authentication failures](troubleshooting.md#setup-component-authentication-failures) if it errors.
 
 Retrieve your tunnel domain and export it for later steps:
 
@@ -191,7 +191,7 @@ Workload Identity Federation tokens are short-lived (1 hour by default) and expi
 
 **Write the proxy config**
 
-`tunnel_domain` is **required**: the [proxy](agents-and-tools/mcp-tunnels/concepts.md) uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL, not a list.
+`tunnel_domain` is **required**: the [proxy](concepts.md#components) uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL, not a list.
 
 ```bash
 cat > config/mcp-proxy.yaml <<EOF
@@ -207,7 +207,7 @@ routes:
 EOF
 ```
 
-The `echo:` route targets the [sample MCP server](agents-and-tools/mcp-tunnels/deploy-compose.md); replace it with (or add) your own routes. See the [proxy configuration](agents-and-tools/mcp-tunnels/reference.md) reference for all available fields.
+The `echo:` route targets the [sample MCP server](deploy-compose.md#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](reference.md#proxy-configuration) reference for all available fields.
 
 **Start the deployment**
 
@@ -238,7 +238,7 @@ mkdir -p mcp-tunnel/{data,config}
 cd mcp-tunnel
 ```
 
-The proxy listens on `:8080` over plain WebSocket; the [inner TLS](agents-and-tools/mcp-tunnels/concepts.md) handshake happens **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's Subject Alternative Name (SAN) must include `*.<tunnel-domain>` per the [certificate requirements](agents-and-tools/mcp-tunnels/reference.md).
+The proxy listens on `:8080` over plain WebSocket; the [inner TLS](concepts.md#components) handshake happens **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's Subject Alternative Name (SAN) must include `*.<tunnel-domain>` per the [certificate requirements](reference.md#certificate-requirements).
 
 ```bash
 # Self-signed CA. Explicit extensions so it satisfies the certificate
@@ -282,7 +282,7 @@ On the tunnel detail page, scroll to the **Certificates** section and click **Ad
 cat data/ca.crt
 ```
 
-The tunnel's status flips to **Active** once a certificate is registered. See [Add a CA certificate](agents-and-tools/mcp-tunnels/console.md).
+The tunnel's status flips to **Active** once a certificate is registered. See [Add a CA certificate](console.md#add-a-ca-certificate).
 
 **Write the proxy config**
 
@@ -301,11 +301,11 @@ routes:
 EOF
 ```
 
-The `echo:` route targets the [sample MCP server](agents-and-tools/mcp-tunnels/deploy-compose.md); replace it with (or add) your own routes. See the [proxy configuration](agents-and-tools/mcp-tunnels/reference.md) reference for all available fields.
+The `echo:` route targets the [sample MCP server](deploy-compose.md#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](reference.md#proxy-configuration) reference for all available fields.
 
 **Write docker-compose.yaml**
 
-The `network_mode: "service:mcp-proxy"` setting places [cloudflared](agents-and-tools/mcp-tunnels/concepts.md) in the proxy's network namespace so that `localhost:8080` inside the cloudflared container reaches the proxy. The `--url http://localhost:8080` flag gives cloudflared its forwarding target; without that flag, cloudflared has no route for incoming requests and returns a 503.
+The `network_mode: "service:mcp-proxy"` setting places [cloudflared](concepts.md#components) in the proxy's network namespace so that `localhost:8080` inside the cloudflared container reaches the proxy. The `--url http://localhost:8080` flag gives cloudflared its forwarding target; without that flag, cloudflared has no route for incoming requests and returns a 503.
 
 ```bash
 cat > docker-compose.yaml <<'EOF'
@@ -352,7 +352,7 @@ services:
 EOF
 ```
 
-If you're using the [sample MCP server](agents-and-tools/mcp-tunnels/deploy-compose.md), append it as a service:
+If you're using the [sample MCP server](deploy-compose.md#optional-use-a-sample-mcp-server), append it as a service:
 
 ```bash
 cat >> docker-compose.yaml <<'EOF'
@@ -379,7 +379,7 @@ For a multi-VM deployment, copy the `mcp-tunnel/` directory to each host, set `T
 
 ## Verify the deployment
 
-Verify end to end by calling an [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) from Anthropic's side: see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md). With the [sample MCP server](agents-and-tools/mcp-tunnels/deploy-compose.md), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
+Verify end to end by calling an [upstream MCP server](concepts.md#components) from Anthropic's side: see [Use the tunneled MCP servers](overview.md#use-the-tunneled-mcp-servers). With the [sample MCP server](deploy-compose.md#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](troubleshooting.md).
 
 ## Upgrades
 

@@ -6,13 +6,13 @@ url: https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/openai-sdk
 description: Anthropic provides a compatibility layer that enables you to use the OpenAI SDK to test the Claude API. With a few code changes, you can quickly evaluate Anthropic model capabilities.
 ---
 
-This compatibility layer is primarily intended to test and compare model capabilities, and is not considered a long-term or production-ready solution for most use cases. While it is intended to remain fully functional and not have breaking changes, the priority is the reliability and effectiveness of the [Claude API](api/overview.md).
+This compatibility layer is primarily intended to test and compare model capabilities, and is not considered a long-term or production-ready solution for most use cases. While it is intended to remain fully functional and not have breaking changes, the priority is the reliability and effectiveness of the [Claude API](../../api/overview.md).
 
-For more information on known compatibility limitations, see [Important OpenAI compatibility limitations](cli-sdks-libraries/libraries/openai-sdk.md).
+For more information on known compatibility limitations, see [Important OpenAI compatibility limitations](openai-sdk.md#important-openai-compatibility-limitations).
 
 If you encounter any issues with the OpenAI SDK compatibility feature, please share your feedback via this [compatibility feedback form](https://forms.gle/oQV4McQNiuuNbz9n8).
 
-For the best experience and access to Claude API full feature set ([PDF processing](build-with-claude/pdf-support.md), [citations](build-with-claude/citations.md), [thinking](build-with-claude/thinking.md), and [prompt caching](build-with-claude/prompt-caching.md)), use the native [Claude API](api/overview.md).
+For the best experience and access to Claude API full feature set ([PDF processing](../../build-with-claude/pdf-support.md), [citations](../../build-with-claude/citations.md), [thinking](../../build-with-claude/thinking.md), and [prompt caching](../../build-with-claude/prompt-caching.md)), use the native [Claude API](../../api/overview.md).
 
 ## Getting started with the OpenAI SDK
 
@@ -24,8 +24,8 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 
    * Update your base URL to point to the Claude API
    * Replace your API key with a [Claude API key](https://platform.claude.com/settings/keys)
-   * If your key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, also send the `anthropic-workspace-id` header on every request (for example, `default_headers` in the Python SDK or `defaultHeaders` in TypeScript); see [Select a workspace](manage-claude/authentication.md)
-   * Update your model name to use a [Claude model](models/overview.md)
+   * If your key is a [personal or service account key](../../manage-claude/authentication.md#key-types) with access to multiple workspaces, also send the `anthropic-workspace-id` header on every request (for example, `default_headers` in the Python SDK or `defaultHeaders` in TypeScript); see [Select a workspace](../../manage-claude/authentication.md#select-a-workspace)
+   * Update your model name to use a [Claude model](../../models/overview.md)
 
 3. Review the following sections for what features are supported
 
@@ -182,16 +182,16 @@ puts response.choices.first.message.content
 
 Here are the most substantial differences from using OpenAI:
 
-* The `strict` parameter for function calling is ignored, which means the tool use JSON is not guaranteed to follow the supplied schema. For guaranteed schema conformance, use the native [Claude API with Structured Outputs](build-with-claude/structured-outputs.md).
+* The `strict` parameter for function calling is ignored, which means the tool use JSON is not guaranteed to follow the supplied schema. For guaranteed schema conformance, use the native [Claude API with Structured Outputs](../../build-with-claude/structured-outputs.md).
 * Audio input is not supported; it will be ignored and stripped from input
-* Prompt caching is not supported, but it is supported in the [Anthropic SDKs](cli-sdks-libraries/overview.md)
+* Prompt caching is not supported, but it is supported in the [Anthropic SDKs](../overview.md)
 * System/developer messages are hoisted and concatenated to the beginning of the conversation, as Anthropic only supports a single initial system message.
 
 Most unsupported fields are silently ignored rather than producing errors. These are all documented in the following sections.
 
 ### Output quality considerations
 
-If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider reworking it for Claude using the [prompting best practices guide](build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
+If you’ve done lots of tweaking to your prompt, it’s likely to be well-tuned to OpenAI specifically. Consider reworking it for Claude using the [prompting best practices guide](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 ### System / developer message hoisting
 
@@ -199,7 +199,7 @@ Most of the inputs to the OpenAI SDK clearly map directly to Anthropic’s API p
 
 ### Thinking support
 
-You can enable [thinking](build-with-claude/thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude deciding when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
+You can enable [thinking](../../build-with-claude/thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude deciding when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's detailed thought process. For full thinking features, including access to Claude's step-by-step reasoning output, use the native Claude API.
 
 ```python Python
 response = client.chat.completions.create(
@@ -275,7 +275,7 @@ response = openai.chat.completions.create(
 
 ## Rate limits
 
-Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v1/messages` endpoint.
+Rate limits follow Anthropic's [standard limits](../../api/rate-limits.md) for the `/v1/messages` endpoint.
 
 ## Detailed OpenAI compatible API support
 
@@ -297,7 +297,7 @@ Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v
 | `n`                     | Must be exactly 1                                                                                                                                       |
 | `logprobs`              | Ignored                                                                                                                                                 |
 | `metadata`              | Ignored                                                                                                                                                 |
-| `response_format`       | Ignored. For JSON output, use [Structured Outputs](build-with-claude/structured-outputs.md) with the native Claude API |
+| `response_format`       | Ignored. For JSON output, use [Structured Outputs](../../build-with-claude/structured-outputs.md) with the native Claude API |
 | `prediction`            | Ignored                                                                                                                                                 |
 | `presence_penalty`      | Ignored                                                                                                                                                 |
 | `frequency_penalty`     | Ignored                                                                                                                                                 |
@@ -324,7 +324,7 @@ Rate limits follow Anthropic's [standard limits](api/rate-limits.md) for the `/v
 | `name`        | Fully supported                                                                                                                                                 |
 | `description` | Fully supported                                                                                                                                                 |
 | `parameters`  | Fully supported                                                                                                                                                 |
-| `strict`      | Ignored. Use [Structured Outputs](build-with-claude/structured-outputs.md) with native Claude API for strict schema validation |
+| `strict`      | Ignored. Use [Structured Outputs](../../build-with-claude/structured-outputs.md) with native Claude API for strict schema validation |
 
 **Functions**
 
@@ -337,7 +337,7 @@ OpenAI has deprecated the `functions` field and suggests using `tools` instead.
 | `name`        | Fully supported                                                                                                                                                 |
 | `description` | Fully supported                                                                                                                                                 |
 | `parameters`  | Fully supported                                                                                                                                                 |
-| `strict`      | Ignored. Use [Structured Outputs](build-with-claude/structured-outputs.md) with native Claude API for strict schema validation |
+| `strict`      | Ignored. Use [Structured Outputs](../../build-with-claude/structured-outputs.md) with native Claude API for strict schema validation |
 
 #### `messages` array fields
 

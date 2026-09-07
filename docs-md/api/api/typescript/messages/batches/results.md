@@ -8,7 +8,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](build-with-claude/batch-processing.md)
+Learn more about the Message Batches API in our [user guide](../../../../build-with-claude/batch-processing.md)
 
 ## Parameters
 
@@ -263,7 +263,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../../../../build-with-claude/extended-thinking.md) for details.
 
             - `thinking: string`
 
@@ -281,7 +281,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
               Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-              See [extended thinking](build-with-claude/extended-thinking.md) for details.
+              See [extended thinking](../../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
             - `type: "redacted_thinking"`
 
@@ -904,7 +904,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
             - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
             - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
             - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../../../build-with-claude/thinking-steering-and-cost.md).
             - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `"cyber"`
@@ -921,7 +921,7 @@ Learn more about the Message Batches API in our [user guide](build-with-claude/b
 
             - `"reasoning_extraction"`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](build-with-claude/adaptive-thinking.md).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../../../build-with-claude/thinking-steering-and-cost.md).
 
             - `"general_harms"`
 

@@ -44,7 +44,7 @@ List memories
 
 - `BetaManagedAgentsListMemoriesResult: object`
 
-  Response payload for [List memories](api/beta/memory_stores/memories/list.md).
+  Response payload for [List memories](../../../../beta/memory_stores/memories/list.md).
 
   - `data: optional array of BetaManagedAgentsMemoryListItem`
 
@@ -80,7 +80,7 @@ List memories
 
       - `memory_version_id: string`
 
-        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](api/beta/memory_stores/memory_versions/list.md).
+        ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../../../../beta/memory_stores/memory_versions/list.md).
 
       - `path: string`
 
@@ -100,7 +100,7 @@ List memories
 
     - `beta_managed_agents_memory_prefix: object`
 
-      A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+      A rolled-up directory marker returned by [List memories](../../../../beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
       - `path: string`
 

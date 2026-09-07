@@ -8,8 +8,8 @@ description: Server-side context compaction for managing long conversations that
 
 ## Compatibility
 - Status: Beta
-- [Beta header](api/beta-headers.md): `compact-2026-01-12`
-- [ZDR](manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](manage-claude/api-and-data-retention.md))
+- [Beta header](../api/beta-headers.md): `compact-2026-01-12`
+- [ZDR](../manage-claude/api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))
 - Supported models: `claude-fable-5-1`, `claude-mythos-5-1`, `claude-fable-5`, `claude-mythos-5`, `claude-mythos-preview`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-5`, `claude-sonnet-4-6`
 - Platforms: Claude API (beta), Claude Platform on AWS (beta), Amazon Bedrock (beta), Google Cloud (beta), Microsoft Foundry (beta)
 
@@ -1044,7 +1044,7 @@ puts response
 
 When a model works on long tasks with many tool-use iterations, total token consumption can grow significantly. You can combine `pause_after_compaction` with a compaction counter to estimate cumulative usage and gracefully wrap up the task once a budget is reached.
 
-This example appears in the SDK languages only: its value is the budget-tracking logic around the request. The raw request combines the `trigger` from [Trigger configuration](build-with-claude/compaction.md) with `pause_after_compaction` from [Pausing after compaction](build-with-claude/compaction.md).
+This example appears in the SDK languages only: its value is the budget-tracking logic around the request. The raw request combines the `trigger` from [Trigger configuration](compaction.md#trigger-configuration) with `pause_after_compaction` from [Pausing after compaction](compaction.md#pausing-after-compaction).
 
 ```python Python
 client = anthropic.Anthropic()
@@ -1678,7 +1678,7 @@ When the API receives a `compaction` block, all content blocks before it are ign
 * Keep the original messages in your list and let the API handle removing the compacted content
 * Manually drop the compacted messages and only include the compaction block onwards
 
-On Claude Fable 5.1 and Claude Mythos 5.1, thinking blocks from before a `compaction` block aren't carried forward, so the summary is all the model has of that earlier work. If you write your own `instructions`, tell the model what the summary must retain; see [Tell the model what to preserve in compaction summaries](build-with-claude/prompt-engineering/prompting-claude-fable-5-1.md).
+On Claude Fable 5.1 and Claude Mythos 5.1, thinking blocks from before a `compaction` block aren't carried forward, so the summary is all the model has of that earlier work. If you write your own `instructions`, tell the model what the summary must retain; see [Tell the model what to preserve in compaction summaries](prompt-engineering/prompting-claude-fable-5-1.md#tell-the-model-what-to-preserve-in-compaction-summaries).
 
 ### Streaming
 
@@ -1984,7 +1984,7 @@ end
 
 ### Prompt caching
 
-Compaction works well with [prompt caching](build-with-claude/prompt-caching.md). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content.
+Compaction works well with [prompt caching](prompt-caching.md). You can add a `cache_control` breakpoint on compaction blocks to cache the summarized content.
 
 ```json
 {
@@ -2809,7 +2809,7 @@ puts chat(client, messages, "Add support for JavaScript-rendered pages")
 puts chat(client, messages, "Now add rate limiting and error handling")
 ```
 
-On Claude Fable 5.1, remove the `thinking` and `redacted_thinking` blocks from any assistant turn you re-insert after the compaction block, or send `thinking.block_binding.prefix_mismatch_behavior: "drop_block"` with the `thinking-binding-controls-2026-08-01` [beta header](api/beta-headers.md). Those blocks were produced when the full history was present, so they no longer pass the [conversation check](build-with-claude/thinking.md). Where the check is enforced, the continuation request is rejected with a 400 error. The preserved text and tool blocks can stay as they are. Letting the API summarize everything, without re-inserting earlier turns, avoids this.
+On Claude Fable 5.1, remove the `thinking` and `redacted_thinking` blocks from any assistant turn you re-insert after the compaction block, or send `thinking.block_binding.prefix_mismatch_behavior: "drop_block"` with the `thinking-binding-controls-2026-08-01` [beta header](../api/beta-headers.md). Those blocks were produced when the full history was present, so they no longer pass the [conversation check](thinking.md#preserved-in-conversation). Where the check is enforced, the continuation request is rejected with a 400 error. The preserved text and tool blocks can stay as they are. Letting the API summarize everything, without re-inserting earlier turns, avoids this.
 
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
@@ -3373,7 +3373,7 @@ puts chat(client, messages, "Now add rate limiting and error handling")
 
 * **Same model for summarization:** The model specified in your request is used for summarization. There is no option to use a different (for example, cheaper) model for the summary.
 
-* **Compaction might fail when tools are defined:** When your request includes `tools`, the model occasionally calls a tool during the internal summarization step instead of writing a summary. When this occurs, the response contains a `compaction` block with `content: null`. To prevent this, set [`instructions`](build-with-claude/compaction.md) to a prompt that explicitly tells the model not to call tools, for example:
+* **Compaction might fail when tools are defined:** When your request includes `tools`, the model occasionally calls a tool during the internal summarization step instead of writing a summary. When this occurs, the response contains a `compaction` block with `content: null`. To prevent this, set [`instructions`](compaction.md#custom-summarization-instructions) to a prompt that explicitly tells the model not to call tools, for example:
 
   ```text wrap
   Summarize the transcript inside <summary></summary> tags. Include relevant information in the summary for continuing the task in the next context window. Do not call any tools while writing this summary; respond with text only.

@@ -118,7 +118,7 @@ Delete a memory
 
 - `BetaManagedAgentsDeletedMemory object`
 
-  Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
+  Tombstone returned by [Delete a memory](delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](../memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
   - `id: string`
 

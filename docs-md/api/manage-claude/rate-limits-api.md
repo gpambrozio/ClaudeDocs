@@ -13,10 +13,10 @@ The Rate Limits API provides programmatic access to the rate limits configured f
 Use this API to:
 
 * **Keep gateways and proxies in sync:** Read your current limits at startup and on a schedule instead of hardcoding values that drift when Anthropic adjusts them.
-* **Power internal alerting:** Compare usage data from the [Usage and Cost API](manage-claude/usage-cost-api.md) against your configured limits.
+* **Power internal alerting:** Compare usage data from the [Usage and Cost API](usage-cost-api.md) against your configured limits.
 * **Audit workspace configuration:** Verify that workspace overrides match what your provisioning automation expects.
 
-**Admin API credentials required.** These endpoints are part of the Admin API. You can access them using an [Admin API key](manage-claude/admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn't scoped to a workspace; workspace API keys don't work. See [Authentication](manage-claude/admin-api.md) for details.
+**Admin API credentials required.** These endpoints are part of the Admin API. You can access them using an [Admin API key](admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn't scoped to a workspace; workspace API keys don't work. See [Authentication](admin-api.md#authentication) for details.
 
 The SDK and CLI examples on this page construct the default client, which reads the Admin API key from the `ANTHROPIC_API_KEY` environment variable. The SDKs expose these endpoints as `client.beta.organization.rate_limits` and `client.beta.organization.workspaces.rate_limits`; the Python, TypeScript, C#, Go, and Java list methods return an iterator that follows `next_page` for you, while the PHP, Ruby, and curl examples read one page.
 
@@ -143,16 +143,16 @@ end
 
 ## Organization rate limits
 
-The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at the organization level for the Messages API and its supporting resources. Limits for other products, such as [Claude Managed Agents](managed-agents/overview.md), are not included.
+The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at the organization level for the Messages API and its supporting resources. Limits for other products, such as [Claude Managed Agents](../managed-agents/overview.md), are not included.
 
 ### Key concepts
 
 * **Rate limit groups:** Each entry in the response represents one rate limit group. Model rate limits are grouped so that several model versions share a single set of limits, and other groups cover resources such as the Message Batches API, the Files API, the Token Counting API, agent skills, and the web search tool.
-* **`group_type`:** Identifies which category of limits the entry covers. See [Filtering by group type](manage-claude/rate-limits-api.md) for the list of values.
+* **`group_type`:** Identifies which category of limits the entry covers. See [Filtering by group type](rate-limits-api.md#filtering-by-group-type) for the list of values.
 * **`models` list:** For `model_group` entries, the `models` field lists every model ID and alias that counts against that group's limits. Use this list to look up which group any model string falls under. For other group types, `models` is `null`.
-* **`limits` list:** Each group carries a list of `{type, value}` pairs. The `type` field identifies the limiter (such as `requests_per_minute`, `input_tokens_per_minute`, or `output_tokens_per_minute`) and `value` is the configured limit. See [Rate limits](api/rate-limits.md) for how each limiter is measured and enforced.
+* **`limits` list:** Each group carries a list of `{type, value}` pairs. The `type` field identifies the limiter (such as `requests_per_minute`, `input_tokens_per_minute`, or `output_tokens_per_minute`) and `value` is the configured limit. See [Rate limits](../api/rate-limits.md) for how each limiter is measured and enforced.
 
-For complete parameter details and response schemas, see the [Organization Rate Limits API reference](api/admin/rate_limits/list.md).
+For complete parameter details and response schemas, see the [Organization Rate Limits API reference](../api/admin/rate_limits/list.md).
 
 ### List all organization rate limits
 
@@ -463,9 +463,9 @@ The response only includes overrides, so anything missing from it is inherited f
 * Within a group that is present, a limiter type that is absent from `limits[]` has no workspace override for that limiter. The workspace inherits the organization value for it.
 * For each limiter that is present, `org_limit` is the organization-level value for the same limiter, or `null` if the organization has no configured limit for that limiter type.
 
-For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](api/admin/workspaces/rate_limits/list.md).
+For complete parameter details and response schemas, see the [Workspace Rate Limits API reference](../api/admin/workspaces/rate_limits/list.md).
 
-To retrieve your organization's workspace IDs, use the [List Workspaces](api/admin/workspaces/list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
+To retrieve your organization's workspace IDs, use the [List Workspaces](../api/admin/workspaces/list.md) endpoint, or find them in the [Claude Console](https://platform.claude.com/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/rate_limits" \
@@ -793,11 +793,11 @@ No. To set workspace rate limits, open the workspace in the [Claude Console](htt
 
 ## See also
 
-* [Rate limits](api/rate-limits.md)
-* [Admin API](manage-claude/admin-api.md)
-* [Admin API reference](api/admin.md)
-* [Workspaces](manage-claude/workspaces.md)
-* [Usage and Cost API](manage-claude/usage-cost-api.md)
+* [Rate limits](../api/rate-limits.md)
+* [Admin API](admin-api.md)
+* [Admin API reference](../api/admin.md)
+* [Workspaces](workspaces.md)
+* [Usage and Cost API](usage-cost-api.md)
 
 ---
 

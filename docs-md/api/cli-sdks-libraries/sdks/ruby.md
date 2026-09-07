@@ -8,7 +8,7 @@ description: Install and configure the Anthropic Ruby SDK with Sorbet types, str
 
 The Anthropic Ruby library provides convenient access to the Claude API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in Yard, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling through the `connection_pool` gem.
 
-For API feature documentation with code examples, see the [API reference](api/overview.md). This page covers Ruby-specific SDK features and configuration.
+For API feature documentation with code examples, see the [API reference](../../api/overview.md). This page covers Ruby-specific SDK features and configuration.
 
 ## Installation
 
@@ -40,7 +40,7 @@ message.content.each do |block|
 end
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](manage-claude/authentication.md). If your API key is a [personal or service account key](manage-claude/authentication.md) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](manage-claude/authentication.md) shows the per-request option for this SDK.
+For authentication options including Workload Identity Federation, see [Authentication](../../manage-claude/authentication.md). If your API key is a [personal or service account key](../../manage-claude/authentication.md#key-types) with access to multiple workspaces, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](../../manage-claude/authentication.md#select-a-workspace) shows the per-request option for this SDK.
 
 ## Streaming
 
@@ -80,7 +80,7 @@ Streaming with `anthropic.messages.stream(...)` exposes various helpers includin
 
 ## Input schema and tool calling
 
-The SDK provides helper mechanisms to define structured data classes for tools and let Claude automatically execute them. For detailed documentation on tool use patterns including the tool runner, see [Tool Runner (SDK)](agents-and-tools/tool-use/tool-runner.md).
+The SDK provides helper mechanisms to define structured data classes for tools and let Claude automatically execute them. For detailed documentation on tool use patterns including the tool runner, see [Tool Runner (SDK)](../../agents-and-tools/tool-use/tool-runner.md).
 
 ```ruby
 anthropic = Anthropic::Client.new
@@ -109,7 +109,7 @@ anthropic.beta.messages.tool_runner(
 
 ## Structured outputs
 
-For complete structured outputs documentation including Ruby examples, see [Structured outputs](build-with-claude/structured-outputs.md).
+For complete structured outputs documentation including Ruby examples, see [Structured outputs](../../build-with-claude/structured-outputs.md).
 
 ## Handling errors
 
@@ -384,17 +384,17 @@ response = anthropic.request(
 
 For detailed platform setup guides with code examples, see:
 
-* [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md)
-* [Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
-* [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
-* [Google Cloud](build-with-claude/claude-on-vertex-ai.md)
+* [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
+* [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)
 
 The Ruby SDK supports the following platforms:
 
 * **Agent Platform:** `Anthropic::VertexClient`. Requires the `googleauth` gem.
 * **Bedrock:** `Anthropic::BedrockMantleClient`, or `Anthropic::BedrockClient` for the `bedrock-runtime` path. `Anthropic::BedrockMantleClient` requires the `aws-sdk-core` gem; `Anthropic::BedrockClient` requires the `aws-sdk-bedrockruntime` gem.
-* **Claude Platform on AWS:** Part of the main `anthropic` gem (requires the `aws-sdk-core` gem). Provides `Anthropic::AWSClient`. Pass `workspace_id:` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable (see [Workspaces](build-with-claude/claude-platform-on-aws.md)). Available in beta.
-* **Foundry:** Not currently supported in the Ruby SDK. See [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) for supported SDKs.
+* **Claude Platform on AWS:** Part of the main `anthropic` gem (requires the `aws-sdk-core` gem). Provides `Anthropic::AWSClient`. Pass `workspace_id:` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable (see [Workspaces](../../build-with-claude/claude-platform-on-aws.md#workspaces)). Available in beta.
+* **Foundry:** Not currently supported in the Ruby SDK. See [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) for supported SDKs.
 
 Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 
@@ -408,8 +408,8 @@ This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` typ
 
 * [GitHub repository](https://github.com/anthropics/anthropic-sdk-ruby)
 * [YARD documentation](https://gemdocs.org/gems/anthropic)
-* [API reference](api/overview.md)
-* [Streaming Messages](build-with-claude/streaming.md)
+* [API reference](../../api/overview.md)
+* [Streaming Messages](../../build-with-claude/streaming.md)
 
 ---
 

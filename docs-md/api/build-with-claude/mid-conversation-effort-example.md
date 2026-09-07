@@ -10,11 +10,11 @@ An orchestration mode is a session-level switch: when it is on, the model puts m
 
 The mode is not an API parameter. It is built entirely from documented pieces:
 
-1. **An effort level:** requests run at a documented [Effort](build-with-claude/effort.md) value such as `xhigh`. There is no hidden level above the ones on that page. This example sets effort at the top level of each request, which needs no beta header.
-2. **A mode reminder:** a [mid-conversation system message](build-with-claude/mid-conversation-system-messages.md) tells the model the mode is active, with a one-line refresher every several turns and an exit notice when the mode is turned off. The top-level `system` field never changes, so the cached prefix stays intact.
+1. **An effort level:** requests run at a documented [Effort](effort.md) value such as `xhigh`. There is no hidden level above the ones on that page. This example sets effort at the top level of each request, which needs no beta header.
+2. **A mode reminder:** a [mid-conversation system message](mid-conversation-system-messages.md) tells the model the mode is active, with a one-line refresher every several turns and an exit notice when the mode is turned off. The top-level `system` field never changes, so the cached prefix stays intact.
 3. **Standing consent in the tool description:** the orchestration tool's description states that while the mode is on, the model should author and run a workflow for every substantive task without asking first.
 
-This example uses mid-conversation system messages; for the models and platforms that support them, see [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md). The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
+This example uses mid-conversation system messages; for the models and platforms that support them, see [Mid-conversation system messages](mid-conversation-system-messages.md). The fan-out itself multiplies token usage: a single request can spawn many subagent conversations, so reserve the mode for work that justifies the cost.
 
 ## Set up the loop
 

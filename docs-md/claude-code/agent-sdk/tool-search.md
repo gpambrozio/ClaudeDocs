@@ -17,9 +17,9 @@ When it is active, tool definitions are withheld from the context window. The ag
 
 Tool search adds one extra round-trip each time Claude searches for tools, but for large tool sets this is offset by smaller context on every turn. With fewer than \~10 tools whose definitions fit comfortably in the context window, loading everything upfront is typically faster.
 
-For details on the underlying API mechanism, see [Tool search in the API](agents-and-tools/tool-use/tool-search-tool.md).
+For details on the underlying API mechanism, see [Tool search in the API](../../api/agents-and-tools/tool-use/tool-search-tool.md).
 
-Tool search isn't supported on Microsoft Foundry [deployments hosted on Azure](build-with-claude/claude-in-microsoft-foundry.md), which reject it server-side: the SDK detects the rejection and loads tool definitions upfront for that deployment instead. [`ENABLE_TOOL_SEARCH`](#configure-tool-search) can't override this, since the rejection comes from the deployment itself.
+Tool search isn't supported on Microsoft Foundry [deployments hosted on Azure](../../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options), which reject it server-side: the SDK detects the rejection and loads tool definitions upfront for that deployment instead. [`ENABLE_TOOL_SEARCH`](#configure-tool-search) can't override this, since the rejection comes from the deployment itself.
 
 ## Configure tool search
 
@@ -40,9 +40,9 @@ The SDK also disables tool search when `ANTHROPIC_BASE_URL` points to a non-firs
 | `auto:N` | Same as `auto` with a custom percentage. `auto:5` activates when those definitions reach 5% of the context window. Lower values activate sooner.                                                                                                                                                                                                                                                                    |
 | `false`  | Tool search is off. All tool definitions are loaded into context on every turn.                                                                                                                                                                                                                                                                                                                                     |
 
-Setting [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS`](env-vars.md) keeps tool search off. You can't override it by setting `ENABLE_TOOL_SEARCH` yourself. Your organization can keep tool search on through [managed settings](managed-settings.md), on Claude Code v2.1.227 or later. [Disable pre-release capabilities](llm-gateway-protocol.md) covers where the override applies and what the variable strips.
+Setting [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS`](../env-vars.md) keeps tool search off. You can't override it by setting `ENABLE_TOOL_SEARCH` yourself. Your organization can keep tool search on through [managed settings](../managed-settings.md), on Claude Code v2.1.227 or later. [Disable pre-release capabilities](../llm-gateway-protocol.md#disable-pre-release-capabilities) covers where the override applies and what the variable strips.
 
-Tool search applies to all registered tools, whether they come from remote MCP servers or [custom SDK MCP servers](agent-sdk/custom-tools.md). When you use `auto`, the SDK counts every definition that tool search can defer toward one combined threshold: each MCP tool that isn't marked [`alwaysLoad`](mcp.md), from any server, plus the built-in tools that load on demand. The SDK always loads core built-in tools such as Bash, Read, and Edit upfront and doesn't count them toward the threshold.
+Tool search applies to all registered tools, whether they come from remote MCP servers or [custom SDK MCP servers](custom-tools.md). When you use `auto`, the SDK counts every definition that tool search can defer toward one combined threshold: each MCP tool that isn't marked [`alwaysLoad`](../mcp.md#exempt-a-server-from-deferral), from any server, plus the built-in tools that load on demand. The SDK always loads core built-in tools such as Bash, Read, and Edit upfront and doesn't count them toward the threshold.
 
 Set the value in the `env` option on `query()`. In TypeScript, `env` replaces the subprocess environment, so spread `...process.env` to keep inherited variables. In Python, `env` is merged on top of the inherited environment. This example connects to a remote MCP server that exposes many tools, pre-approves all of them with a wildcard, and uses `auto:5` so tool search activates when the definitions it can defer reach 5% of the context window:
 
@@ -113,7 +113,7 @@ asyncio.run(main())
 
 To run this example, replace `https://tools.example.com/mcp` with the URL of your own MCP server. On success the result text prints to the console.
 
-Because this is a single-shot `query()` call, the SDK raises after yielding an error result, so the example wraps the loop in a try block. To see why a run failed, check the result message's `subtype`, such as `error_during_execution`, inside the loop. For more on result messages, see [Handle the result](agent-sdk/agent-loop.md).
+Because this is a single-shot `query()` call, the SDK raises after yielding an error result, so the example wraps the loop in a try block. To see why a run failed, check the result message's `subtype`, such as `error_during_execution`, inside the loop. For more on result messages, see [Handle the result](agent-loop.md#handle-the-result).
 
 ## Optimize tool discovery
 
@@ -141,21 +141,21 @@ options = ClaudeAgentOptions(
 )
 ```
 
-For the full set of system prompt options, see [Modifying system prompts](agent-sdk/modifying-system-prompts.md).
+For the full set of system prompt options, see [Modifying system prompts](modifying-system-prompts.md).
 
 ## Limits
 
 * **Maximum tools:** 10,000 tools in your catalog
 * **Search results:** returns up to five most relevant tools per search by default
-* **Model support:** Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models; see [model compatibility in the API docs](agents-and-tools/tool-use/tool-search-tool.md) for the current list. The same minimums apply on Google Cloud's Agent Platform.
+* **Model support:** Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5, and later models; see [model compatibility in the API docs](../../api/agents-and-tools/tool-use/tool-search-tool.md#model-compatibility) for the current list. The same minimums apply on Google Cloud's Agent Platform.
 
 ## Related documentation
 
-* [Tool search in the API](agents-and-tools/tool-use/tool-search-tool.md): Full API documentation for tool search, including custom implementations
-* [Connect MCP servers](agent-sdk/mcp.md): Connect to external tools via MCP servers
-* [Custom tools](agent-sdk/custom-tools.md): Build your own tools with SDK MCP servers
-* [TypeScript SDK reference](agent-sdk/typescript.md): Full API reference
-* [Python SDK reference](agent-sdk/python.md): Full API reference
+* [Tool search in the API](../../api/agents-and-tools/tool-use/tool-search-tool.md): Full API documentation for tool search, including custom implementations
+* [Connect MCP servers](mcp.md): Connect to external tools via MCP servers
+* [Custom tools](custom-tools.md): Build your own tools with SDK MCP servers
+* [TypeScript SDK reference](typescript.md): Full API reference
+* [Python SDK reference](python.md): Full API reference
 
 ---
 

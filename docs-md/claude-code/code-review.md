@@ -86,7 +86,7 @@ Click **Setup**. This begins the GitHub App installation flow.
 
 Follow the prompts to install the Claude GitHub App: pick the GitHub organization that owns the repositories you want reviewed, choose which repositories the app can access, and approve the requested permissions.
 
-To review a pull request, Claude reads your repository contents through the app's read access, and posts comments and the [check run](#check-run-output) through its write access to pull requests and checks. During installation, you grant a broader permission set shared by other Claude features, such as [GitHub Actions](github-actions.md); see [GitHub App permissions](github-actions.md) for the full list.
+To review a pull request, Claude reads your repository contents through the app's read access, and posts comments and the [check run](#check-run-output) through its write access to pull requests and checks. During installation, you grant a broader permission set shared by other Claude features, such as [GitHub Actions](github-actions.md); see [GitHub App permissions](github-actions.md#github-app-permissions) for the full list.
 
 **Select repositories**
 
@@ -163,7 +163,7 @@ For review-specific guidance that you don't want applied to general Claude Code 
 
 `REVIEW.md` is a file at your repository root that tailors Code Review to your repo. The agents in the review pipeline that find and verify findings receive its contents as your repository's review instructions, alongside Code Review's default review guidance, and the agents that rank and report findings consult it before settling severity and writing the review.
 
-The agents read the file's text as-is, so `REVIEW.md` is plain instructions: [`@` import syntax](memory.md) is not expanded, and referenced files are not read along with it. Put the rules you want enforced directly in the file.
+The agents read the file's text as-is, so `REVIEW.md` is plain instructions: [`@` import syntax](memory.md#import-additional-files) is not expanded, and referenced files are not read along with it. Put the rules you want enforced directly in the file.
 
 #### What you can tune
 
@@ -293,7 +293,7 @@ You can also add flags:
 
 * `--fix`: applies the findings to your working tree after the review
 * `--comment`: posts the findings as inline PR comments
-* `--post`: on an `ultra` cloud review of a `github.com` pull request, preselects posting the finished findings to the PR in the launch dialog; see [Post findings to the pull request](ultrareview.md). Requires Claude Code v2.1.227 or later
+* `--post`: on an `ultra` cloud review of a `github.com` pull request, preselects posting the finished findings to the PR in the launch dialog; see [Post findings to the pull request](ultrareview.md#post-findings-to-the-pull-request). Requires Claude Code v2.1.227 or later
 
 **Keep working**
 
@@ -305,7 +305,7 @@ Ask Claude to fix what the review found. If you passed `--fix` or `--comment`, t
 
 Claude reports the findings as text in the reply in both of these runs, even when a host application requests the findings list described below:
 
-* In a terminal session, where `/code-review` runs the review as a [forked subagent](skills.md)
+* In a terminal session, where `/code-review` runs the review as a [forked subagent](skills.md#run-skills-in-a-subagent)
 * In a `-p` run with text or JSON output
 
 In a host application that requests the findings list, such as the [desktop app](desktop.md), Claude reports the review's findings through the [`ReportFindings` tool](tools-reference.md) instead. Claude Code renders the report as a findings list, and each entry shows the file location, a one-sentence summary, and a category tag such as `correctness` when the finding carries one. A host request applies at every effort level and requires Claude Code v2.1.218 or later.
@@ -314,18 +314,18 @@ When Claude fixes reported findings later in the session, it reports them again,
 
 ### What the review reads and edits
 
-The review follows your `CLAUDE.md` like any Claude Code session, but it doesn't read [`REVIEW.md`](#review-md). A background review applies its `--fix` edits outside your session's [checkpoints](checkpointing.md), so `/rewind` doesn't undo them; use git to revert them. When the review [runs in the foreground](#run-in-the-foreground), it edits your working tree during your own turn, so `/rewind` restores its edits as usual.
+The review follows your `CLAUDE.md` like any Claude Code session, but it doesn't read [`REVIEW.md`](#review-md). A background review applies its `--fix` edits outside your session's [checkpoints](checkpointing.md#subagent-edits-not-restored), so `/rewind` doesn't undo them; use git to revert them. When the review [runs in the foreground](#run-in-the-foreground), it edits your working tree during your own turn, so `/rewind` restores its edits as usual.
 
 ### Tune effort and arguments
 
-Pass an [effort level](model-config.md) to trade coverage for confidence. At `low` and `medium`, the review reports only the findings it's most confident in, so you see fewer false positives; `high` through `max` broaden coverage and may include findings the review is less sure about.
+Pass an [effort level](model-config.md#adjust-effort-level) to trade coverage for confidence. At `low` and `medium`, the review reports only the findings it's most confident in, so you see fewer false positives; `high` through `max` broaden coverage and may include findings the review is less sure about.
 
 When you don't type a level, the review reuses the last level from `low` through `max` you typed, even in an earlier session, and Claude Code shows a notice such as `Reusing high effort, the level you typed last time`. Type a level, like `/code-review high`, to change what later runs reuse; a level you pass in a non-interactive `-p` run doesn't update it. `ultra` neither updates nor uses the remembered level. If you've never typed a level, the review uses the session's current effort. Before v2.1.223, a `/code-review` without a level always used the session's current effort.
 
 After the effort level and flags, Claude Code reads the rest of the line in one of two ways:
 
-* **Without `ultra`**: everything left is the review target, even when it starts with another command name. `/code-review /fix-issue 123` reviews with `/fix-issue 123` as target text instead of loading `/fix-issue` as a second [stacked skill](skills.md). Before v2.1.218, a command stacked after `/code-review` expanded as its own skill.
-* **With `ultra`**: Claude Code reads a single word as a base branch or PR number, and turns longer text that doesn't name a branch or PR into [a note attached to the review](ultrareview.md). `/code-review ultra check my auth changes` reviews your current branch, and Claude relates the findings to your note.
+* **Without `ultra`**: everything left is the review target, even when it starts with another command name. `/code-review /fix-issue 123` reviews with `/fix-issue 123` as target text instead of loading `/fix-issue` as a second [stacked skill](skills.md#pass-arguments-to-skills). Before v2.1.218, a command stacked after `/code-review` expanded as its own skill.
+* **With `ultra`**: Claude Code reads a single word as a base branch or PR number, and turns longer text that doesn't name a branch or PR into [a note attached to the review](ultrareview.md#pass-a-request-in-plain-words). `/code-review ultra check my auth changes` reviews your current branch, and Claude relates the findings to your note.
 
 ### Run in the foreground
 
@@ -341,7 +341,7 @@ Claude can start `/code-review` on its own. Ask it to review your changes in pla
 
 A scheduled task never launches the [cloud review](#escalate-to-ultrareview), so schedule `/code-review` without the `ultra` argument.
 
-To stop both Claude and scheduled tasks from starting the review while keeping `/code-review` available for you to type, add a [`skillOverrides`](skills.md) entry to a [settings file](settings.md) such as `~/.claude/settings.json`:
+To stop both Claude and scheduled tasks from starting the review while keeping `/code-review` available for you to type, add a [`skillOverrides`](skills.md#override-skill-visibility-from-settings) entry to a [settings file](settings.md#where-settings-live) such as `~/.claude/settings.json`:
 
 ```json
 {
@@ -351,21 +351,21 @@ To stop both Claude and scheduled tasks from starting the review while keeping `
 }
 ```
 
-Before v2.1.246, Claude started `/code-review` on its own only where a feature flag fetched from Anthropic turned it on. In [sessions that don't fetch feature flags](env-vars.md), `/code-review` ran only when you typed it, and a scheduled `/code-review` reached Claude as plain text.
+Before v2.1.246, Claude started `/code-review` on its own only where a feature flag fetched from Anthropic turned it on. In [sessions that don't fetch feature flags](env-vars.md#features-that-need-feature-flag-fetching), `/code-review` ran only when you typed it, and a scheduled `/code-review` reached Claude as plain text.
 
 ### Escalate to ultrareview
 
 `/code-review ultra --fix` runs the deeper [ultrareview](ultrareview.md) in the cloud, then applies its findings to your working tree when they arrive back in your session.
 
-Ultrareview uses its own scope: your current branch against the repository's default branch, plus uncommitted and staged changes in the working tree. For uncommitted changes to files named like credentials or keys, such as `.env` and `*.tfvars` files, Claude Code follows the rules for [uploading a local repository to a cloud session](claude-code-on-the-web.md). Pass a branch name, such as `/code-review ultra develop`, to compare against a different base.
+Ultrareview uses its own scope: your current branch against the repository's default branch, plus uncommitted and staged changes in the working tree. For uncommitted changes to files named like credentials or keys, such as `.env` and `*.tfvars` files, Claude Code follows the rules for [uploading a local repository to a cloud session](claude-code-on-the-web.md#send-local-repositories-without-github). Pass a branch name, such as `/code-review ultra develop`, to compare against a different base.
 
-When the target is a `github.com` pull request, you can have Claude [post the finished findings to the PR](ultrareview.md) as a comment from your GitHub account. Requires Claude Code v2.1.227 or later.
+When the target is a `github.com` pull request, you can have Claude [post the finished findings to the PR](ultrareview.md#post-findings-to-the-pull-request) as a comment from your GitHub account. Requires Claude Code v2.1.227 or later.
 
 Ultrareview requires authentication with a claude.ai account and is not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or to organizations with Zero Data Retention enabled. When ultrareview is not available, `/code-review ultra` runs a local review in your session instead.
 
 To start a cloud review from a script or CI, run `claude -p '/code-review ultra'`. Claude Code launches the review and prints a link for tracking it. Requires Claude Code v2.1.218 or later.
 
-When the review would bill [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans), Claude Code stops before launching, because the billing confirmation needs an interactive session. Run the [`claude ultrareview` subcommand](ultrareview.md) instead; by running it, you consent to the charge.
+When the review would bill [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans), Claude Code stops before launching, because the billing confirmation needs an interactive session. Run the [`claude ultrareview` subcommand](ultrareview.md#run-ultrareview-non-interactively) instead; by running it, you consent to the charge.
 
 The command was named `/simplify` before v2.1.147, when it applied fixes by default. `/simplify` runs a separate cleanup-only review that applies fixes without hunting for bugs. If you scripted `/simplify` for bug-finding, switch to `/code-review --fix`.
 

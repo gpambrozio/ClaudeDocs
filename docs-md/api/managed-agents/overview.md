@@ -13,9 +13,9 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 | **What it is** | Direct model prompting access               | Pre-built, configurable agent harness that runs in managed infrastructure |
 | **Best for**   | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work                                  |
 
-Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and run code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs. To build your own agent loop with direct model access instead, see [Using the Messages API](build-with-claude/working-with-messages.md).
+Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and run code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs. To build your own agent loop with direct model access instead, see [Using the Messages API](../build-with-claude/working-with-messages.md).
 
-Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](build-with-claude/claude-platform-on-aws.md) in the Claude Platform on AWS guide.
+Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](../build-with-claude/claude-platform-on-aws.md#claude-managed-agents) in the Claude Platform on AWS guide.
 
 **Quickstart**
 
@@ -48,7 +48,7 @@ Define the model, system prompt, tools, MCP servers, and skills. Create the agen
 
 **Create an environment**
 
-Configure where the agent runs: a cloud sandbox, or a [self-hosted sandbox](managed-agents/self-hosted-sandboxes.md) on your own infrastructure.
+Configure where the agent runs: a cloud sandbox, or a [self-hosted sandbox](self-hosted-sandboxes.md) on your own infrastructure.
 
 **Start a session**
 
@@ -71,7 +71,7 @@ Claude Managed Agents is best for workloads that need:
 * **Self-hosted execution:** Sandboxes on infrastructure you control for compliance or data-residency requirements
 * **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
 * **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
-* **Scheduled execution:** Recurring agent runs on a cron schedule through [scheduled deployments](managed-agents/scheduled-deployments.md)
+* **Scheduled execution:** Recurring agent runs on a cron schedule through [scheduled deployments](scheduled-deployments.md)
 
 ## Supported tools
 
@@ -82,7 +82,7 @@ Claude Managed Agents gives Claude access to a set of built-in tools:
 * **Web search and fetch:** Search the web and retrieve content from URLs, optionally restricted to an allowlist or blocklist of domains
 * **MCP servers:** Connect to external tool providers
 
-See [Tools](managed-agents/tools.md) for the full list and configuration options.
+See [Tools](tools.md) for the full list and configuration options.
 
 ## Beta access
 
@@ -94,11 +94,11 @@ To get started, you need:
 2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Within the beta, [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) and [dreaming](managed-agents/dreams.md) are in a more limited research preview. [Request access](https://claude.com/form/claude-managed-agents) to enable them.
+Within the beta, [MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md) and [dreaming](dreams.md) are in a more limited research preview. [Request access](https://claude.com/form/claude-managed-agents) to enable them.
 
-Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](manage-claude/api-and-data-retention.md) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](managed-agents/session-operations.md), and separately delete any [files](build-with-claude/files.md) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](manage-claude/api-and-data-retention.md).
+Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](../manage-claude/api-and-data-retention.md#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](session-operations.md#deleting-a-session), and separately delete any [files](../build-with-claude/files.md#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md#feature-eligibility).
 
-See [Rate limits](managed-agents/reference.md) and [Branding guidelines](managed-agents/reference.md) in the reference.
+See [Rate limits](reference.md#rate-limits) and [Branding guidelines](reference.md#branding-guidelines) in the reference.
 
 ---
 

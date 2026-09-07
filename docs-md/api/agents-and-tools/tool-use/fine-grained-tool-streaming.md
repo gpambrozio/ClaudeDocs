@@ -6,17 +6,17 @@ url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-
 description: Stream tool inputs without server-side JSON buffering for latency-sensitive applications.
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
-Fine-grained tool streaming delivers a tool's input to your client as Claude generates it, without server-side buffering or JSON validation. Skipping the buffering step reduces the time to the first fragment of a large parameter, such as a document or a block of code, and the fragments arrive through the same [Streaming messages](build-with-claude/streaming.md) events as standard tool use.
+Fine-grained tool streaming delivers a tool's input to your client as Claude generates it, without server-side buffering or JSON validation. Skipping the buffering step reduces the time to the first fragment of a large parameter, such as a document or a block of code, and the fragments arrive through the same [Streaming messages](../../build-with-claude/streaming.md) events as standard tool use.
 
-Because the API does not buffer or validate a tool's input before streaming it, you might receive partial or invalid JSON. A response that ends with the [stop reason](build-with-claude/handling-stop-reasons.md) `max_tokens` can also cut a parameter off midway. Accumulate the fragments, guard the parse, and see [Handling invalid JSON in tool responses](agents-and-tools/tool-use/fine-grained-tool-streaming.md) for how to return unparseable input to Claude.
+Because the API does not buffer or validate a tool's input before streaming it, you might receive partial or invalid JSON. A response that ends with the [stop reason](../../build-with-claude/handling-stop-reasons.md) `max_tokens` can also cut a parameter off midway. Accumulate the fragments, guard the parse, and see [Handling invalid JSON in tool responses](fine-grained-tool-streaming.md#handling-invalid-json-in-tool-responses) for how to return unparseable input to Claude.
 
 ## How to use fine-grained tool streaming
 
-All models support fine-grained tool streaming on the Claude API, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Google Cloud](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
+All models support fine-grained tool streaming on the Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
-The `eager_input_streaming` field is optional. Setting it to `true` turns on fine-grained streaming for that tool, and omitting it gives you standard buffered streaming, in which the API buffers and validates each parameter value before streaming it back. The exception is a request that still sends the legacy `fine-grained-tool-streaming-2025-05-14` beta header, which turns fine-grained streaming on for tools that leave the field unset. The per-tool field replaces that header, and an explicit `false` keeps buffered streaming for a tool even when a request still sends it. The legacy header cannot be combined with a [computer use](agents-and-tools/tool-use/computer-use-tool.md) or [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolset entry: the API rejects a request that sends both, so remove the header and set `eager_input_streaming` on the user-defined tools that need it. See [Tool reference](agents-and-tools/tool-use/tool-reference.md) for the field definition.
+The `eager_input_streaming` field is optional. Setting it to `true` turns on fine-grained streaming for that tool, and omitting it gives you standard buffered streaming, in which the API buffers and validates each parameter value before streaming it back. The exception is a request that still sends the legacy `fine-grained-tool-streaming-2025-05-14` beta header, which turns fine-grained streaming on for tools that leave the field unset. The per-tool field replaces that header, and an explicit `false` keeps buffered streaming for a tool even when a request still sends it. The legacy header cannot be combined with a [computer use](computer-use-tool.md) or [browser use](browser-use-tool.md) toolset entry: the API rejects a request that sends both, so remove the header and set `eager_input_streaming` on the user-defined tools that need it. See [Tool reference](tool-reference.md) for the field definition.
 
 The following example turns on fine-grained streaming for a `make_file` tool and asks Claude for a long poem, so the tool input is large enough to watch it stream in:
 
@@ -475,7 +475,7 @@ Without `eager_input_streaming`, the API buffers and validates each parameter va
 
 ## Accumulating tool input deltas
 
-The accumulation contract is the same as for standard tool-use streaming, so this section applies with and without `eager_input_streaming`. See [Input JSON delta](build-with-claude/streaming.md) in Streaming messages for the event format. Fine-grained tool streaming changes what you can assume about the result: the server streams fragments without validating them, so the accumulated string might not be valid JSON.
+The accumulation contract is the same as for standard tool-use streaming, so this section applies with and without `eager_input_streaming`. See [Input JSON delta](../../build-with-claude/streaming.md#input-json-delta) in Streaming messages for the event format. Fine-grained tool streaming changes what you can assume about the result: the server streams fragments without validating them, so the accumulated string might not be valid JSON.
 
 When a `tool_use` content block streams, the initial `content_block_start` event contains `input: {}` (an empty object). This is a placeholder. The actual input arrives as a series of `input_json_delta` events, each carrying a `partial_json` string fragment. To assemble the full input, concatenate these fragments and parse the result when the block closes.
 
@@ -487,7 +487,7 @@ The accumulation contract:
 2. For each `content_block_delta` with `type: "input_json_delta"`, append: `input_json += event.delta.partial_json`
 3. On `content_block_stop`, parse the accumulated string
 
-Guard the parse, as the following SDK examples do. A response can also stop at `max_tokens` midway through a parameter. Check the [stop reason](build-with-claude/handling-stop-reasons.md) and decide whether to retry the request with a higher `max_tokens` or repair the partial input.
+Guard the parse, as the following SDK examples do. A response can also stop at `max_tokens` midway through a parameter. Check the [stop reason](../../build-with-claude/handling-stop-reasons.md) and decide whether to retry the request with a higher `max_tokens` or repair the partial input.
 
 The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array. The delta strings build the real value.
 
@@ -884,7 +884,7 @@ With fine-grained tool streaming, the accumulated input for a tool call might be
 }
 ```
 
-Return the wrapper, serialized to a string, as the `content` of a [tool result](agents-and-tools/tool-use/handle-tool-calls.md) content block with `is_error` set to `true`:
+Return the wrapper, serialized to a string, as the `content` of a [tool result](handle-tool-calls.md#handling-errors-with-is-error) content block with `is_error` set to `true`:
 
 ```json
 {

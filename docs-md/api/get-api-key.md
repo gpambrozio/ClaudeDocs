@@ -10,7 +10,7 @@ API keys for the Claude API (also called Anthropic API keys) live in the Claude 
 
 ## Choose a key type
 
-When you create a key, you choose its type, which determines what the key can do, where it works, and when it stops working. A **personal key** acts as you, and stops working if you leave an organization. A **service account key** represents a [service account](manage-claude/workload-identity-federation.md) which can be used by workloads such as CI pipelines, production services, or agents. Use a personal key for your own development, and a service account key for anything shared.
+When you create a key, you choose its type, which determines what the key can do, where it works, and when it stops working. A **personal key** acts as you, and stops working if you leave an organization. A **service account key** represents a [service account](manage-claude/workload-identity-federation.md#service-accounts) which can be used by workloads such as CI pipelines, production services, or agents. Use a personal key for your own development, and a service account key for anything shared.
 
 You can also create a **workspace key**, a legacy key without an owner: it belongs to the workspace you create it in and keeps working after its creator leaves. It is preferable to use a personal or service account key, as these stop working automatically when their associated account is removed from the organization.
 
@@ -26,7 +26,7 @@ Go to [Settings → API keys](https://platform.claude.com/settings/keys).
 
 **Create a key**
 
-Click **Create key**, name the key, choose an [expiration](manage-claude/authentication.md), and set **Linked account** to yourself or a service account. You can also choose a [workspace](https://platform.claude.com/settings/workspaces) to scope the key to.
+Click **Create key**, name the key, choose an [expiration](manage-claude/authentication.md#key-expiration), and set **Linked account** to yourself or a service account. You can also choose a [workspace](https://platform.claude.com/settings/workspaces) to scope the key to.
 
 **Copy and store the key**
 
@@ -42,7 +42,7 @@ Set the key as an environment variable:
 export ANTHROPIC_API_KEY="sk-ant-api03-..."
 ```
 
-The [client SDKs](cli-sdks-libraries/overview.md) read `ANTHROPIC_API_KEY` automatically. Direct HTTP requests send the key in the `x-api-key` header. If your API key works on multiple workspaces, you must also send the `anthropic-workspace-id` header on each Claude API request, as shown in [Select a workspace](manage-claude/authentication.md). For the Admin API, see [API keys and the Admin API](get-api-key.md).
+The [client SDKs](cli-sdks-libraries/overview.md) read `ANTHROPIC_API_KEY` automatically. Direct HTTP requests send the key in the `x-api-key` header. If your API key works on multiple workspaces, you must also send the `anthropic-workspace-id` header on each Claude API request, as shown in [Select a workspace](manage-claude/authentication.md#select-a-workspace). For the Admin API, see [API keys and the Admin API](get-api-key.md#api-keys-and-the-admin-api).
 
 To make your first request, follow the [Quickstart](get-started.md), and see [Authentication](manage-claude/authentication.md) for the full picture, including short-lived credentials with Workload Identity Federation.
 

@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/api/ip-addresses
 description: Anthropic services use fixed IP addresses for both inbound and outbound connections. You can use these addresses to configure your firewall rules for secure access to the Claude API and Console. These addresses will not change without notice.
 ---
 
-**[Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md):** The inbound endpoint (`aws-external-anthropic.{region}.api.aws`) resolves to AWS IP ranges. Outbound tool calls (MCP connector, web search, and web fetch) originate from the Anthropic ranges listed on this page. See the [AWS IP address ranges](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html) for inbound allowlisting.
+**[Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md):** The inbound endpoint (`aws-external-anthropic.{region}.api.aws`) resolves to AWS IP ranges. Outbound tool calls (MCP connector, web search, and web fetch) originate from the Anthropic ranges listed on this page. See the [AWS IP address ranges](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html) for inbound allowlisting.
 
 ## Inbound IP addresses
 

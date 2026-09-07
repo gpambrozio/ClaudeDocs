@@ -180,9 +180,9 @@ export const Experiment = ({flag, treatment, children}) => {
 
 Claude Platform on AWS is the Anthropic-operated Claude API with AWS authentication, IAM access control, and AWS Marketplace billing. Requests reach Anthropic's API directly, so you get the same models and API features as the [Claude API](https://platform.claude.com/docs) on the same release schedule. You authenticate with AWS credentials or a workspace API key, and you pay through AWS Marketplace.
 
-Client-side features that Claude Code turns on through Anthropic's feature-flag service are off by default, and the [advisor tool](advisor.md) isn't available. See the [feature availability matrix](feature-availability.md) for the full list.
+Client-side features that Claude Code turns on through Anthropic's feature-flag service are off by default, and the [advisor tool](advisor.md) isn't available. See the [feature availability matrix](feature-availability.md#summary-by-provider) for the full list.
 
-Use this guide to point Claude Code at a workspace you've already provisioned through Claude Platform on AWS. For the AWS subscription and workspace setup that comes before this, see the [Claude Platform on AWS documentation](build-with-claude/claude-platform-on-aws.md).
+Use this guide to point Claude Code at a workspace you've already provisioned through Claude Platform on AWS. For the AWS subscription and workspace setup that comes before this, see the [Claude Platform on AWS documentation](../api/build-with-claude/claude-platform-on-aws.md).
 
 Subscribing through AWS Marketplace provisions a new Anthropic organization tied to your AWS account. This organization is separate from any organization you already have with Anthropic, and credentials don't transfer between them. Use the workspace ID and API keys from the AWS-linked organization, not from a pre-existing Claude Console account.
 
@@ -214,7 +214,7 @@ export AWS_PROFILE=my-profile
 
 For CI and automation, give the runner an IAM role with permission to invoke the Anthropic service and set `AWS_REGION`. The credential chain picks the role up automatically.
 
-If your SSO credentials expire mid-session, configure [`awsAuthRefresh`](amazon-bedrock.md) so Claude Code re-runs your login command and retries instead of failing. Automatic refresh on Claude Platform on AWS requires Claude Code v2.1.198 or later; earlier versions stop with a prompt to run `/login`, which can't refresh AWS credentials. Add the command to your [settings file](settings.md), such as `~/.claude/settings.json`:
+If your SSO credentials expire mid-session, configure [`awsAuthRefresh`](amazon-bedrock.md#advanced-credential-configuration) so Claude Code re-runs your login command and retries instead of failing. Automatic refresh on Claude Platform on AWS requires Claude Code v2.1.198 or later; earlier versions stop with a prompt to run `/login`, which can't refresh AWS credentials. Add the command to your [settings file](settings.md), such as `~/.claude/settings.json`:
 
 ```json
 {
@@ -252,7 +252,7 @@ export AWS_REGION=us-east-1
 
 `ANTHROPIC_AWS_WORKSPACE_ID` is required. Claude Code sends it on every request as the `anthropic-workspace-id` header. Replace the example `wrkspc_01ABCDEFGHIJKLMN` value with your own workspace ID from your Claude Platform on AWS setup.
 
-Claude Code computes the base URL as `https://aws-external-anthropic.{region}.api.aws` from the AWS region, which it resolves with the [same precedence as Amazon Bedrock](amazon-bedrock.md). To override the URL directly, set `ANTHROPIC_AWS_BASE_URL`.
+Claude Code computes the base URL as `https://aws-external-anthropic.{region}.api.aws` from the AWS region, which it resolves with the [same precedence as Amazon Bedrock](amazon-bedrock.md#3-configure-claude-code). To override the URL directly, set `ANTHROPIC_AWS_BASE_URL`.
 
 Claude Platform on AWS is opt-in even when AWS credentials are present in your environment. Amazon Bedrock and Microsoft Foundry take precedence in provider routing, so unset `CLAUDE_CODE_USE_BEDROCK` and `CLAUDE_CODE_USE_FOUNDRY` if they're set.
 
@@ -271,11 +271,11 @@ export ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-5
 export ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-haiku-4-5
 ```
 
-For the full list of model IDs and aliases, see [Models overview](about-claude/models/overview.md). For other model-related variables, see [Model configuration](model-config.md).
+For the full list of model IDs and aliases, see [Models overview](../api/models/overview.md). For other model-related variables, see [Model configuration](model-config.md).
 
-[Prompt caching](prompt-caching.md) is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`. The API bills 1-hour cache writes at a higher rate. See [prompt caching pricing](build-with-claude/prompt-caching.md) for the rates.
+[Prompt caching](prompt-caching.md) is enabled automatically. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`. The API bills 1-hour cache writes at a higher rate. See [prompt caching pricing](../api/build-with-claude/prompt-caching.md#pricing) for the rates.
 
-To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md).
+To set different TTLs for your main conversation and for the requests Claude Code makes outside it, [choose the TTL yourself](prompt-caching.md#choose-the-ttl-yourself).
 
 ### 4. Launch and verify
 
@@ -330,7 +330,7 @@ Run `/status` to see the resolved provider and any explicitly configured workspa
 
 ### `403 Forbidden` or `AccessDenied` on every request
 
-The IAM principal Claude Code resolved likely lacks permission to invoke the Anthropic service in your workspace. Check the role attached to your AWS profile or the runner that started Claude Code, and verify it has the `aws-external-anthropic` actions documented in the [IAM action reference](api/claude-platform-on-aws-iam-actions.md).
+The IAM principal Claude Code resolved likely lacks permission to invoke the Anthropic service in your workspace. Check the role attached to your AWS profile or the runner that started Claude Code, and verify it has the `aws-external-anthropic` actions documented in the [IAM action reference](../api/api/claude-platform-on-aws-iam-actions.md).
 
 If you set `ANTHROPIC_AWS_API_KEY`, the key takes precedence over SigV4 and a stale key produces the same error. Regenerate the key in the AWS Console under **Claude Platform on AWS → API keys** or unset the variable to fall back to your AWS credentials.
 
@@ -346,8 +346,8 @@ If you set `ANTHROPIC_AWS_API_KEY`, the key takes precedence over SigV4 and a st
 
 The Claude Platform on AWS subscription, workspace, and IAM setup that comes before configuring Claude Code is covered in the platform documentation:
 
-* [Claude Platform on AWS overview](build-with-claude/claude-platform-on-aws.md): subscription, workspace setup, and product reference
-* [IAM action reference](api/claude-platform-on-aws-iam-actions.md): permissions and managed policies
+* [Claude Platform on AWS overview](../api/build-with-claude/claude-platform-on-aws.md): subscription, workspace setup, and product reference
+* [IAM action reference](../api/api/claude-platform-on-aws-iam-actions.md): permissions and managed policies
 
 ---
 

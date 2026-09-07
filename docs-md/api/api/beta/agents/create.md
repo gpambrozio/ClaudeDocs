@@ -106,7 +106,7 @@ Create Agent
 
 - `model: BetaManagedAgentsModel or BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
   - `BetaManagedAgentsModel = "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
 
@@ -262,7 +262,7 @@ Create Agent
 
 - `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams`
 
-  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](managed-agents/mcp-connector.md).
+  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../managed-agents/mcp-connector.md).
 
   - `name: string`
 

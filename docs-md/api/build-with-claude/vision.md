@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/build-with-claude/vision
 description: Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
 ---
 
-This guide describes how to send images to Claude, the limits and costs that apply, and where to find guidance for [coordinate-based workflows](build-with-claude/vision-coordinates.md).
+This guide describes how to send images to Claude, the limits and costs that apply, and where to find guidance for [coordinate-based workflows](vision-coordinates.md).
 
 ***
 
@@ -22,11 +22,11 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 
 1. A base64-encoded image embedded in the request body
 2. A URL reference to an image hosted online
-3. A `file_id` returned by the [Files API](build-with-claude/files.md) (upload once, reference many times)
+3. A `file_id` returned by the [Files API](files.md) (upload once, reference many times)
 
 On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
 
-Just as [placing long documents before your query](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
+Just as [placing long documents before your query](prompt-engineering/claude-prompting-best-practices.md#long-context-prompting) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 
 ### Base64-encoded image example
 
@@ -523,7 +523,7 @@ puts message
 
 ### Files API image example
 
-For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
+For images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](files.md). Upload the image once, then reference the returned `file_id` in subsequent messages instead of resending base64 data.
 
 In multi-turn conversations and agentic workflows, each request resends the full conversation history. If images are base64-encoded, the full image bytes are included in the payload on every turn, which can significantly increase request size and latency as the conversation grows. Uploading images to the Files API and referencing them by `file_id` keeps request payloads small regardless of how many images accumulate in the conversation history.
 
@@ -845,7 +845,7 @@ message = client.messages.create(
 puts message.content
 ```
 
-See [Messages API examples](api/messages/create.md) for more example code and parameter details.
+See [Messages API examples](../api/messages/create.md) for more example code and parameter details.
 
 ### Multiple images
 
@@ -1231,9 +1231,9 @@ The maximum size per image is:
 * 5 MB (base64-encoded) on Amazon Bedrock and Google Cloud.
 * 10 MB on [claude.ai](https://claude.ai/).
 
-Although the API supports up to 600 images per request, [request size limits](api/overview.md) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](build-with-claude/vision.md) and referencing by `file_id` to keep request payloads small.
+Although the API supports up to 600 images per request, [request size limits](../api/overview.md#request-size-limits) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](vision.md#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
-Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](build-with-claude/vision.md)).
+Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](vision.md#evaluate-image-size)).
 
 ### Supported formats
 
@@ -1243,7 +1243,7 @@ Claude supports JPEG, PNG, GIF, and WebP images (`image/jpeg`, `image/png`, `ima
 
 Claude views images in patches instead of pixels. Each patch is a 28×28-pixel block of the image, referred to as a visual token. An image, therefore, costs `⌈width / 28⌉ × ⌈height / 28⌉` visual tokens.
 
-Each model has a maximum native image resolution, expressed as a long-edge limit and a visual-token limit. Images larger than either limit are downscaled before processing; see [How Claude resizes and pads images](build-with-claude/vision-coordinates.md) for the exact rule. The exception is screenshots and zoom images that you return to the [computer use](agents-and-tools/tool-use/computer-use-tool.md) and [browser use](agents-and-tools/tool-use/browser-use-tool.md) toolsets: the API rejects a `tool_result` image that exceeds the model's limits with a validation error instead of downscaling it, so resize those images in your application before returning them. To have any other oversized image rejected with an error instead of downscaled, set the image block's [`transformations` field](build-with-claude/vision-coordinates.md).
+Each model has a maximum native image resolution, expressed as a long-edge limit and a visual-token limit. Images larger than either limit are downscaled before processing; see [How Claude resizes and pads images](vision-coordinates.md#how-claude-resizes-and-pads-images) for the exact rule. The exception is screenshots and zoom images that you return to the [computer use](../agents-and-tools/tool-use/computer-use-tool.md#handle-coordinate-scaling-for-higher-resolutions) and [browser use](../agents-and-tools/tool-use/browser-use-tool.md#targets-and-coordinates) toolsets: the API rejects a `tool_result` image that exceeds the model's limits with a validation error instead of downscaling it, so resize those images in your application before returning them. To have any other oversized image rejected with an error instead of downscaled, set the image block's [`transformations` field](vision-coordinates.md#oversized-image-error).
 
 | Resolution tier | Models                      | Max long edge | Max visual tokens |
 | --------------- | --------------------------- | ------------- | ----------------- |
@@ -1263,11 +1263,11 @@ The following table shows the downsized resolution and visual-token cost for sev
 | 2000x1500 px (3 megapixels)    | 1269x952 px                 | 1564                  | Not resized                        | 3888                         |
 | 3840x2160 px (8.29 megapixels) | 1456x819 px                 | 1560                  | 2576x1449 px                       | 4784                         |
 
-When an image is downsized, Claude scales it to the largest size that fits the tier's limits while preserving its aspect ratio. This caps the token cost. For the precise rule and a reference implementation, see [How Claude resizes and pads images](build-with-claude/vision-coordinates.md).
+When an image is downsized, Claude scales it to the largest size that fits the tier's limits while preserving its aspect ratio. This caps the token cost. For the precise rule and a reference implementation, see [How Claude resizes and pads images](vision-coordinates.md#how-claude-resizes-and-pads-images).
 
 To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Haiku 4.5's $1 USD per million input tokens (standard tier), the 1000×1000 image costs about $1.30 USD per thousand images. At Claude Opus 5's $5 USD per million (high-resolution tier), the same image costs about $6.48 USD per thousand and the 4K image about $23.92 USD per thousand.
 
-High-resolution images can use up to roughly three times more visual tokens than the same image on a standard-tier model. If you don't need the additional fidelity that high resolution provides for computer use, screenshot understanding, and dense documents, downsample images before sending to control token costs. To minimize latency and to simplify [coordinate-based workflows](build-with-claude/vision-coordinates.md), prefer resizing images before uploading them.
+High-resolution images can use up to roughly three times more visual tokens than the same image on a standard-tier model. If you don't need the additional fidelity that high resolution provides for computer use, screenshot understanding, and dense documents, downsample images before sending to control token costs. To minimize latency and to simplify [coordinate-based workflows](vision-coordinates.md), prefer resizing images before uploading them.
 
 ### Image quality guidance
 
@@ -1275,14 +1275,14 @@ When providing images to Claude, keep the following in mind for best results:
 
 * **Image clarity:** Ensure images are clear and not too blurry or pixelated.
 * **Text:** If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context solely to enlarge the text.
-* **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](build-with-claude/vision.md)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both. To have an oversized image rejected with an error instead of resized (important for [coordinate workflows](build-with-claude/vision-coordinates.md)), mark the image block with [`"oversized_image": "error"`](build-with-claude/vision-coordinates.md).
+* **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](vision.md#evaluate-image-size)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both. To have an oversized image rejected with an error instead of resized (important for [coordinate workflows](vision-coordinates.md)), mark the image block with [`"oversized_image": "error"`](vision-coordinates.md#oversized-image-error).
 * **Image compression:** Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
 
 ***
 
 ## Coordinates and bounding boxes
 
-For bounding boxes, points, and pixel coordinates, see [Coordinates and bounding boxes](build-with-claude/vision-coordinates.md). Claude returns absolute pixel coordinates relative to the image it sees after resizing; that guide covers how Claude resizes and pads images and how to pre-resize or rescale so coordinates line up with your original image.
+For bounding boxes, points, and pixel coordinates, see [Coordinates and bounding boxes](vision-coordinates.md). Claude returns absolute pixel coordinates relative to the image it sees after resizing; that guide covers how Claude resizes and pads images and how to pre-resize or rescale so coordinates line up with your original image.
 
 ***
 
@@ -1292,7 +1292,7 @@ Although Claude's image understanding capabilities are cutting-edge, there are s
 
 * **People identification:** Claude [cannot be used](https://www.anthropic.com/legal/aup) to name people in images and refuses to do so.
 * **Accuracy:** Claude might hallucinate or make mistakes when interpreting low-quality, rotated, or very small images under 200 pixels.
-* **Spatial reasoning:** Claude's coordinate and localization outputs are approximate. Follow the guidance in [Coordinates and bounding boxes](build-with-claude/vision-coordinates.md) and verify outputs before relying on them.
+* **Spatial reasoning:** Claude's coordinate and localization outputs are approximate. Follow the guidance in [Coordinates and bounding boxes](vision-coordinates.md) and verify outputs before relying on them.
 * **Counting:** Claude can give approximate counts of objects in an image but might not always be precisely accurate, especially with large numbers of small objects.
 * **AI-generated images:** Claude cannot determine whether an image is AI-generated and might be incorrect if asked. Do not rely on it to detect fake or synthetic images.
 * **Inappropriate content:** Claude does not process inappropriate or explicit images that violate the [Acceptable Use Policy](https://www.anthropic.com/legal/aup).
@@ -1306,19 +1306,19 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 **What image file types does Claude support?**
 
-JPEG, PNG, GIF, and WebP. See [Supported formats](build-with-claude/vision.md).
+JPEG, PNG, GIF, and WebP. See [Supported formats](vision.md#supported-formats).
 
 **Can Claude read image URLs?**
 
-Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](build-with-claude/vision.md).
+Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](vision.md#url-based-image-example).
 
 **Is there a limit to the image file size I can upload?**
 
-Yes. See [Request limits](build-with-claude/vision.md) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
+Yes. See [Request limits](vision.md#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
 
 **How many images can I include in one request?**
 
-Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](build-with-claude/vision.md) for details and the lower per-image dimension limit that applies above 20 images.
+Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](vision.md#request-limits) for details and the lower per-image dimension limit that applies above 20 images.
 
 **Does Claude read image metadata?**
 

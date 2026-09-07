@@ -211,7 +211,7 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
-Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](build-with-claude/embeddings.md).
+Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](embeddings.md#voyage-python-library).
 
 The output is the fifth document, which is indeed the most relevant to the query:
 
@@ -290,7 +290,7 @@ Quantization in embeddings converts high-precision values, such as 32-bit single
 
 * `float`: Each returned embedding is a list of 32-bit (4-byte) single-precision floating-point numbers. This is the default and provides the highest precision / retrieval accuracy.
 * `int8` and `uint8`: Each returned embedding is a list of 8-bit (1-byte) integers ranging from -128 to 127 and 0 to 255, respectively.
-* `binary` and `ubinary`: Each returned embedding is a list of 8-bit integers that represent bit-packed, quantized single-bit embedding values: `int8` for `binary` and `uint8` for `ubinary`. The length of the returned list of integers is 1/8 of the actual dimension of the embedding. The binary type uses the offset binary method, which you can learn more about in the [embeddings FAQ](build-with-claude/embeddings.md).
+* `binary` and `ubinary`: Each returned embedding is a list of 8-bit integers that represent bit-packed, quantized single-bit embedding values: `int8` for `binary` and `uint8` for `ubinary`. The length of the returned list of integers is 1/8 of the actual dimension of the embedding. The binary type uses the offset binary method, which you can learn more about in the [embeddings FAQ](embeddings.md#faq).
 
 > **Binary quantization example**
 >

@@ -8,9 +8,9 @@
 
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](api/messages.md) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](../messages.md) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](build-with-claude/working-with-messages.md) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](../../build-with-claude/working-with-messages.md) for guidance in migrating from Text Completions to Messages.
 
 ### Parameters
 
@@ -122,7 +122,7 @@ Future models and features will not be compatible with Text Completions. See our
       Assistant:"
       ```
 
-      See [prompt validation](build-with-claude/working-with-messages.md) and our guide to [prompt design](build-with-claude/prompt-engineering/overview.md) for more details.
+      See [prompt validation](../../build-with-claude/working-with-messages.md) and our guide to [prompt design](../../build-with-claude/prompt-engineering/overview.md) for more details.
 
       minLength: 1
 
@@ -150,7 +150,7 @@ Future models and features will not be compatible with Text Completions. See our
 
       Body param: Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](build-with-claude/streaming.md) for details.
+      See [streaming](../../build-with-claude/streaming.md) for details.
 
     - `betas?: Array<AnthropicBeta>`
 
@@ -290,7 +290,7 @@ Future models and features will not be compatible with Text Completions. See our
 
       Body param: Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](build-with-claude/streaming.md) for details.
+      See [streaming](../../build-with-claude/streaming.md) for details.
 
   - `CompletionCreateParamsStreaming extends  CompletionCreateParamsBase`
 
@@ -298,7 +298,7 @@ Future models and features will not be compatible with Text Completions. See our
 
       Body param: Whether to incrementally stream the response using server-sent events.
 
-      See [streaming](build-with-claude/streaming.md) for details.
+      See [streaming](../../build-with-claude/streaming.md) for details.
 
 ### Returns
 

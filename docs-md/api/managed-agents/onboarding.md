@@ -8,7 +8,7 @@ description: Create, test, and iterate on agents visually in Console, then run t
 
 [Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## How to build an agent
 
@@ -29,8 +29,8 @@ Console includes an inline session runner. After configuring your agent, you can
 
 Once your agent works as expected:
 
-1. Copy the agent ID and [environment ID](managed-agents/environments.md) from Console.
-2. Reference them in your code when [creating sessions](managed-agents/sessions.md):
+1. Copy the agent ID and [environment ID](environments.md) from Console.
+2. Reference them in your code when [creating sessions](sessions.md):
 
 ```bash cURL
 session=$(curl -fsSL https://api.anthropic.com/v1/sessions \

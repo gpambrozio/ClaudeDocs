@@ -10,11 +10,11 @@ description: Use AWS KMS to provide an encryption key for your organization.
 claude "/claude-api help me configure a customer-managed encryption key with AWS KMS"
 ```
 
-This guide walks through configuring an [AWS KMS](https://aws.amazon.com/kms/) key as a [customer-managed encryption key (CMEK)](manage-claude/cmek.md) for your Anthropic organization.
+This guide walks through configuring an [AWS KMS](https://aws.amazon.com/kms/) key as a [customer-managed encryption key (CMEK)](cmek.md) for your Anthropic organization.
 
-Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](manage-claude/cmek.md) before you begin.
+Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic cannot recover the data encrypted under it. Review the [warnings and limitations](cmek.md) before you begin.
 
-**Claude Platform on AWS:** On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), your key policy grants access to an AWS service principal instead of Anthropic's IAM role, there is no separate validation step, and you register and attach the key in the Claude Console. Follow [Set up CMEK on Claude Platform on AWS](manage-claude/cmek-aws-kms.md) on this page instead of the steps in the next sections.
+**Claude Platform on AWS:** On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), your key policy grants access to an AWS service principal instead of Anthropic's IAM role, there is no separate validation step, and you register and attach the key in the Claude Console. Follow [Set up CMEK on Claude Platform on AWS](cmek-aws-kms.md#claude-platform-on-aws) on this page instead of the steps in the next sections.
 
 ## Prerequisites
 
@@ -107,9 +107,9 @@ How you register the key depends on which product you use.
 
 **Claude Platform**
 
-**Claude Platform on AWS:** The principal, key policy, and registration flow differ, and there is no separate validation step. Follow [Set up CMEK on Claude Platform on AWS](manage-claude/cmek-aws-kms.md) instead of this tab.
+**Claude Platform on AWS:** The principal, key policy, and registration flow differ, and there is no separate validation step. Follow [Set up CMEK on Claude Platform on AWS](cmek-aws-kms.md#claude-platform-on-aws) instead of this tab.
 
-**Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](api/admin-api/workspaces/get-workspace.md) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
+**Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](../api/admin/workspaces/retrieve.md) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
 
 Key validation always sends the all-zeros compartment UUID (`00000000-0000-0000-0000-000000000000`) as the encryption context, because validation runs before the key is attached to any workspace. Live traffic sends the compartment ID of each attached workspace.
 
@@ -378,7 +378,7 @@ If validation fails, common causes are:
 
 **Attach the key to a workspace**
 
-Once the key is validated, attach it to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](manage-claude/cmek.md).
+Once the key is validated, attach it to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](cmek.md#how-it-works).
 
 ```bash cURL
 curl -sS -X POST "https://api.anthropic.com/v1/organizations/workspaces/<workspace-id>" \
@@ -499,28 +499,28 @@ On Claude Enterprise, CMEK applies to the whole organization, so there is no sep
 
 ## Set up CMEK on Claude Platform on AWS
 
-On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), CMEK uses AWS KMS keys only, and setup differs from the preceding sections in these ways:
+On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), CMEK uses AWS KMS keys only, and setup differs from the preceding sections in these ways:
 
-* **Principal:** Your key policy grants access to the AWS service principal `aws-external-anthropic.amazonaws.com`. Anthropic's IAM role and account ID are not used, so the [ARN for Anthropic](manage-claude/cmek-aws-kms.md) does not apply.
+* **Principal:** Your key policy grants access to the AWS service principal `aws-external-anthropic.amazonaws.com`. Anthropic's IAM role and account ID are not used, so the [ARN for Anthropic](cmek-aws-kms.md#amazon-resource-name-arn-for-anthropic) does not apply.
 * **Key requirements:** The key must be a symmetric KMS key with encrypt and decrypt usage, single-region, and in the same AWS account and region as the workspace you attach it to. Cross-account keys are not supported: the key must be in the AWS account that hosts your organization. Multi-region keys (key IDs that begin with `mrk-`) and alias ARNs are rejected when you register the key; use the key ARN.
 * **No separate validation step:** Apart from those checks on the key ARN at registration, the key is validated when you attach it to a workspace. The attach call performs an encrypt/decrypt round against the key with that workspace's compartment ID as the encryption context, so a key policy problem surfaces at attach time rather than at registration. Unlike the Claude Platform policy earlier on this page, an `EncryptionContext` condition therefore needs no all-zeros entry.
-* **Where you manage keys:** Register and attach keys in the Claude Console, signed in through AWS with the Admin role. The external key endpoints are also available on Claude Platform on AWS, authorized through [IAM actions](api/claude-platform-on-aws-iam-actions.md); there, a key is identified by its KMS key ARN rather than an `ekey_` ID.
+* **Where you manage keys:** Register and attach keys in the Claude Console, signed in through AWS with the Admin role. The external key endpoints are also available on Claude Platform on AWS, authorized through [IAM actions](../api/claude-platform-on-aws-iam-actions.md#encryption-keys); there, a key is identified by its KMS key ARN rather than an `ekey_` ID.
 
 Use only this published service principal name. Never trust an identifier provided over email, chat, or any onboarding channel.
 
 ### Prerequisites
 
 * The AWS account that hosts your Claude Platform on AWS organization, with permissions to create KMS keys and set key policies (`kms:CreateKey` and `kms:PutKeyPolicy`).
-* The **Admin** role in the Claude Console for Claude Platform on AWS. See [Using the Claude Console](build-with-claude/claude-platform-on-aws.md).
-* For the IAM principal you sign in to the Claude Console with: besides `aws-external-anthropic:AssumeConsole`, the [IAM actions](api/claude-platform-on-aws-iam-actions.md) for the operations you perform there, because the Encryption keys page and key attachment go through the AWS gateway. Registering a key is `RegisterKey` (with `ListKeys` and `GetKey` to view registrations), and attaching one is `UpdateWorkspace` or `CreateWorkspace`. The external key actions (and `CreateWorkspace`) are account-scoped, so grant them on `Resource: "*"`; a policy limited to workspace ARNs does not include them.
+* The **Admin** role in the Claude Console for Claude Platform on AWS. See [Using the Claude Console](../build-with-claude/claude-platform-on-aws.md#using-the-claude-console).
+* For the IAM principal you sign in to the Claude Console with: besides `aws-external-anthropic:AssumeConsole`, the [IAM actions](../api/claude-platform-on-aws-iam-actions.md#encryption-keys) for the operations you perform there, because the Encryption keys page and key attachment go through the AWS gateway. Registering a key is `RegisterKey` (with `ListKeys` and `GetKey` to view registrations), and attaching one is `UpdateWorkspace` or `CreateWorkspace`. The external key actions (and `CreateWorkspace`) are account-scoped, so grant them on `Resource: "*"`; a policy limited to workspace ARNs does not include them.
 * For the IAM principal that attaches the key to a workspace (the identity you signed in to the Claude Console with): `kms:DescribeKey`, `kms:Encrypt`, and `kms:Decrypt` on the key. Your principal's access to the key is checked when you attach it, in addition to the service principal's.
 * Optional, for the key picker in the Claude Console: `kms:ListKeys` and `kms:DescribeKey` for the principal you sign in with. Without them, paste the key ARN instead.
 
 ### Create the KMS key
 
-The key policy has three statements: your account's root admin statement; a statement that lets the Claude Platform on AWS service principal encrypt, decrypt, and generate data keys; and a separate statement for `kms:DescribeKey`. Both service-principal statements carry a recommended `aws:SourceArn` condition: the service calls your key on behalf of a specific workspace and passes that [workspace's ARN](api/claude-platform-on-aws-iam-actions.md) as the source ARN, so the pattern shown limits the grant to workspaces in your own AWS account. `DescribeKey` is granted separately because it has no `EncryptionContext` parameter, so an `EncryptionContext` condition on that action would always deny.
+The key policy has three statements: your account's root admin statement; a statement that lets the Claude Platform on AWS service principal encrypt, decrypt, and generate data keys; and a separate statement for `kms:DescribeKey`. Both service-principal statements carry a recommended `aws:SourceArn` condition: the service calls your key on behalf of a specific workspace and passes that [workspace's ARN](../api/claude-platform-on-aws-iam-actions.md#service-details) as the source ARN, so the pattern shown limits the grant to workspaces in your own AWS account. `DescribeKey` is granted separately because it has no `EncryptionContext` parameter, so an `EncryptionContext` condition on that action would always deny.
 
-If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key) and copy its compartment ID from the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or from the `compartment_id` field returned by the [Get Workspace](api/admin-api/workspaces/get-workspace.md) endpoint. Substitute it for `<compartment-uuid>`. Otherwise, delete the `StringEquals` entry from that statement's `Condition` block and keep the `ArnLike` entry.
+If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key) and copy its compartment ID from the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or from the `compartment_id` field returned by the [Get Workspace](../api/admin/workspaces/retrieve.md) endpoint. Substitute it for `<compartment-uuid>`. Otherwise, delete the `StringEquals` entry from that statement's `Condition` block and keep the `ArnLike` entry.
 
 ```bash
 export YOUR_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
@@ -586,7 +586,7 @@ In the Claude Console, open **Settings > Encryption keys** and click **Add key**
 
 **Attach the key to a workspace**
 
-Attach the key to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](manage-claude/cmek.md). In the Claude Console, open the workspace and, under **Security**, select the key in **Encryption key**, save, and confirm. You can also select a key when you create a workspace in the Claude Console, but only if your key policy does not yet name specific workspaces (no `EncryptionContext` condition, and the account-wide `aws:SourceArn` pattern rather than individual workspace ARNs), because the workspace's ID and compartment ID are assigned at creation. Once attached, a workspace's key can't be changed.
+Attach the key to a new workspace before you send any requests to that workspace. For a workspace that already receives requests, the key can take [up to a day to take effect](cmek.md#how-it-works). In the Claude Console, open the workspace and, under **Security**, select the key in **Encryption key**, save, and confirm. You can also select a key when you create a workspace in the Claude Console, but only if your key policy does not yet name specific workspaces (no `EncryptionContext` condition, and the account-wide `aws:SourceArn` pattern rather than individual workspace ARNs), because the workspace's ID and compartment ID are assigned at creation. Once attached, a workspace's key can't be changed.
 
 This is when the key is validated: the attach call checks your principal's access to the key and performs an encrypt/decrypt round against it with the workspace's compartment ID as the encryption context, so a problem with either the key policy or your principal's permissions surfaces as an error on that call. If the attach fails with a KMS access error, check the following:
 

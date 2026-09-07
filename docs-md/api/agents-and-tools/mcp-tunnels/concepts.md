@@ -8,7 +8,7 @@ description: Canonical names for the parts of an MCP tunnel deployment, the two 
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-This page defines the terms used throughout the [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) documentation. Several components appear under different names in configuration files, container images, and prose; the following tables give one canonical name for each and list the aliases you may encounter.
+This page defines the terms used throughout the [MCP tunnels](overview.md) documentation. Several components appear under different names in configuration files, container images, and prose; the following tables give one canonical name for each and list the aliases you may encounter.
 
 ## Components
 
@@ -28,7 +28,7 @@ The tunnel stack needs two credentials at runtime: the **tunnel token**, which a
 
 | Mode                    | How credentials reach the stack                                                                                                                                                                                                                                                                                                                                                           | Helm chart name                                   | Tab label                       |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------- |
-| **Programmatic access** | The setup component authenticates to the Tunnels API through [Workload Identity Federation](manage-claude/workload-identity-federation.md), fetches the tunnel token, generates a CA and server certificate locally, and registers the CA. No long-lived secret is copied by hand. Requires a federation rule with the `workspace:manage_tunnels` scope. | Managed mode (`setup.enabled: true`, the default) | **With programmatic access**    |
+| **Programmatic access** | The setup component authenticates to the Tunnels API through [Workload Identity Federation](../../manage-claude/workload-identity-federation.md), fetches the tunnel token, generates a CA and server certificate locally, and registers the CA. No long-lived secret is copied by hand. Requires a federation rule with the `workspace:manage_tunnels` scope. | Managed mode (`setup.enabled: true`, the default) | **With programmatic access**    |
 | **Manual**              | You copy the tunnel token from the Claude Console, generate a CA and server certificate yourself (for example with `openssl`), register the CA in the Console, and supply the token and certificate to the stack as secrets. No setup component runs.                                                                                                                                     | External mode (`setup.enabled: false`)            | **Without programmatic access** |
 
 These modes are also referred to as **the programmatic flow** and **the manual flow** in the deploy guides.
@@ -68,8 +68,8 @@ sequenceDiagram
 
 ## See also
 
-* [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) for the security model and shared-responsibility table.
-* [MCP tunnels reference](agents-and-tools/mcp-tunnels/reference.md) for proxy configuration fields, certificate requirements, and the setup component.
+* [MCP tunnels](overview.md) for the security model and shared-responsibility table.
+* [MCP tunnels reference](reference.md) for proxy configuration fields, certificate requirements, and the setup component.
 
 ---
 

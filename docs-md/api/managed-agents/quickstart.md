@@ -121,7 +121,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
 ## Create your first session
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](api/beta-headers.md).
+Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 **Create an agent**
 
@@ -322,9 +322,9 @@ agent = client.beta.agents.create(
 puts "Agent ID: #{agent.id}, version: #{agent.version}"
 ```
 
-The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](managed-agents/tools.md) for the complete list and per-tool configuration options.
+The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](tools.md) for the complete list and per-tool configuration options.
 
-Save the returned `agent.id` (the CLI's [`ant apply`](cli-sdks-libraries/cli/scripting.md) prints it and records it in `claude-lock.json`). You'll reference it in every session you create.
+Save the returned `agent.id` (the CLI's [`ant apply`](../cli-sdks-libraries/cli/scripting.md#version-controlling-api-resources) prints it and records it in `claude-lock.json`). You'll reference it in every session you create.
 
 **Create an environment**
 
@@ -450,7 +450,7 @@ Save the returned `environment.id` (also in `claude-lock.json` if you used `ant 
 
 To run the sandbox on your own infrastructure instead of a cloud sandbox, see 
 
-[Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md)
+[Self-hosted sandboxes](self-hosted-sandboxes.md)
 
 .
 

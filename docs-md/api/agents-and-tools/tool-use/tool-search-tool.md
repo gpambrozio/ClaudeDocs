@@ -13,19 +13,19 @@ Loading every tool definition up front causes two problems as a tool library gro
 * **Context bloat:** A typical multiserver setup (GitHub, Slack, Sentry, Grafana, and Splunk) can consume \~55k tokens in definitions before Claude does any work. Tool search typically reduces this by over 85 percent, loading only the 3–5 tools Claude needs for a given request.
 * **Tool selection accuracy:** Claude's ability to pick the right tool degrades once you exceed 30–50 available tools. Because tool search loads only a focused set of relevant tools on demand, selection accuracy stays high even across thousands of tools.
 
-For the models that support tool search, see [Model compatibility](agents-and-tools/tool-use/tool-search-tool.md).
+For the models that support tool search, see [Model compatibility](tool-search-tool.md#model-compatibility).
 
 For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
 
-Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](agents-and-tools/tool-use/tool-search-tool.md) for details.
+Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](tool-search-tool.md#custom-tool-search-implementation) for details.
 
 Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](manage-claude/api-and-data-retention.md).
+To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
 On Amazon Bedrock, server-side tool search is available only through the [InvokeModel API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html), not the Converse API.
 
-On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), server-side tool search works identically to the Claude API. Claude Platform on AWS uses the Anthropic Messages API directly, so there is no InvokeModel or Converse distinction.
+On [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), server-side tool search works identically to the Claude API. Claude Platform on AWS uses the Anthropic Messages API directly, so there is no InvokeModel or Converse distinction.
 
 ## Model compatibility
 
@@ -519,7 +519,7 @@ message = client.messages.create(
 puts message
 ```
 
-Claude searches the catalog, discovers `get_weather`, and calls it. The response ends with `stop_reason: "tool_use"`. Execute the discovered tool and return a `tool_result` as in [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md). [Response format](agents-and-tools/tool-use/tool-search-tool.md) shows the blocks you get back and what to send next.
+Claude searches the catalog, discovers `get_weather`, and calls it. The response ends with `stop_reason: "tool_use"`. Execute the discovered tool and return a `tool_result` as in [Handle tool calls](handle-tool-calls.md). [Response format](tool-search-tool.md#response-format) shows the blocks you get back and what to send next.
 
 ## Tool definition
 
@@ -581,11 +581,11 @@ Mark tools for on-demand loading by adding `defer_loading: true`:
 * Never set `defer_loading: true` on the tool search tool itself.
 * Keep your 3–5 most frequently used tools non-deferred so Claude can call them without searching first.
 
-The computer use and browser use toolsets (`computer_toolset_20260801` and `browser_toolset_20260801`) take `defer_loading` per member tool inside the entry's `configs` object, not on the entry itself; a request that sets it at the entry level is rejected. Because a toolset defers and expands as a unit, `defer_loading` must resolve to the same value on every enabled member, and when Claude discovers the toolset through search, every enabled member loads at once. See [Client toolsets](agents-and-tools/tool-use/tool-reference.md) for the `configs` format.
+The computer use and browser use toolsets (`computer_toolset_20260801` and `browser_toolset_20260801`) take `defer_loading` per member tool inside the entry's `configs` object, not on the entry itself; a request that sets it at the entry level is rejected. Because a toolset defers and expands as a unit, `defer_loading` must resolve to the same value on every enabled member, and when Claude discovers the toolset through search, every enabled member loads at once. See [Client toolsets](tool-reference.md#client-toolsets) for the `configs` format.
 
 Both tool search variants (`regex` and `bm25`) search tool names, descriptions, argument names, and argument descriptions.
 
-Internally, the API excludes deferred tools from the system-prompt prefix. When Claude discovers a deferred tool through tool search, the API appends a `tool_reference` block inline in the conversation, then expands it into the full tool definition before passing it to Claude. The prefix is untouched, so prompt caching is preserved. The grammar for [strict mode](agents-and-tools/tool-use/strict-tool-use.md) (the rules that constrain tool-call output to match your schemas) builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
+Internally, the API excludes deferred tools from the system-prompt prefix. When Claude discovers a deferred tool through tool search, the API appends a `tool_reference` block inline in the conversation, then expands it into the full tool definition before passing it to Claude. The prefix is untouched, so prompt caching is preserved. The grammar for [strict mode](strict-tool-use.md) (the rules that constrain tool-call output to match your schemas) builds from the full toolset, so `defer_loading` and strict mode compose without grammar recompilation.
 
 ## Response format
 
@@ -646,7 +646,7 @@ On the next request, pass the assistant's content back unchanged, including the 
 
 ## MCP integration
 
-If your tools come from MCP servers through the [MCP connector](agents-and-tools/mcp-connector.md), you don't set `defer_loading` on individual tool definitions. Instead, set it once on the `mcp_toolset` entry's `default_config` for the whole server, or per tool in its `configs`. See [MCP toolset configuration](agents-and-tools/mcp-connector.md).
+If your tools come from MCP servers through the [MCP connector](../mcp-connector.md), you don't set `defer_loading` on individual tool definitions. Instead, set it once on the `mcp_toolset` entry's `default_config` for the whole server, or per tool in its `configs`. See [MCP toolset configuration](../mcp-connector.md#mcp-toolset-configuration).
 
 ## Custom tool search implementation
 
@@ -662,13 +662,13 @@ You can implement your own tool search logic (for example, using embeddings or s
 
 Every tool referenced must have a corresponding tool definition in the top-level `tools` parameter, normally with `defer_loading: true`. This lets you use search methods the built-in variants don't provide, such as embedding-based retrieval, and the API expands the returned `tool_reference` blocks the same way.
 
-The `tool_search_tool_result` format shown in the [Response format](agents-and-tools/tool-use/tool-search-tool.md) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown in the preceding example.
+The `tool_search_tool_result` format shown in the [Response format](tool-search-tool.md#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown in the preceding example.
 
 For a complete example using embeddings, see the [tool search with embeddings](https://platform.claude.com/cookbook/tool-use-tool-search-with-embeddings) recipe.
 
 ## Error handling
 
-[Tool use examples](agents-and-tools/tool-use/define-tools.md) work with tool search: when Claude discovers a deferred tool, the API expands its `input_examples` along with its definition.
+[Tool use examples](define-tools.md#providing-tool-use-examples) work with tool search: when Claude discovers a deferred tool, the API expands its `input_examples` along with its definition.
 
 ### HTTP errors (400 status)
 
@@ -768,7 +768,7 @@ The `error_code` field has four possible values:
 
 ## Prompt caching
 
-To learn how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+To learn how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](tool-use-with-prompt-caching.md).
 
 A tool with `defer_loading: true` can't also carry `cache_control`: the API returns a 400. Put the cache breakpoint on a non-deferred tool.
 
@@ -795,7 +795,7 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "too
 
 ## Batch requests
 
-You can include the tool search tool in the [Messages Batches API](build-with-claude/batch-processing.md).
+You can include the tool search tool in the [Messages Batches API](../../build-with-claude/batch-processing.md).
 
 ## Limits and best practices
 
@@ -804,7 +804,7 @@ You can include the tool search tool in the [Messages Batches API](build-with-cl
 * **Maximum deferred tools:** 10,000 tools with `defer_loading: true` per request
 * **Search results:** each search returns up to 5 matching tools by default; Claude can set `limit` in its search input to any integer from 1 to 10,000
 * **Pattern and query length:** maximum 200 characters for regex patterns and 500 characters for BM25 queries
-* **Model support:** see [Model compatibility](agents-and-tools/tool-use/tool-search-tool.md)
+* **Model support:** see [Model compatibility](tool-search-tool.md#model-compatibility)
 
 ### When to use tool search
 
