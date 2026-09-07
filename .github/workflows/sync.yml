@@ -14,6 +14,11 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # The sync runs in a couple of minutes now that pages are fetched as
+    # Markdown rather than rendered. Without this the job would inherit the
+    # six-hour default sized for the old Playwright crawl, and a hang would
+    # hold a runner for the whole of it.
+    timeout-minutes: 30
     permissions:
       actions: write
       contents: write
@@ -30,7 +35,23 @@ jobs:
         uses: astral-sh/setup-uv@v4
 
       - name: Run documentation sync
-        run: ./sync_docs.sh
+        shell: bash
+        run: |
+          set -o pipefail
+          ./sync_docs.sh | tee /tmp/sync.log
+
+      # The link audit is the signal that a rename upstream has stranded links,
+      # so it belongs on the run page rather than buried in step output.
+      - name: Report link audit
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '### Link audit'
+            echo '```'
+            sed -n '/^Links:/,/^$/p' /tmp/sync.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Check for changes
         id: changes
