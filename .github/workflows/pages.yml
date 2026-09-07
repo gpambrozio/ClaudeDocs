@@ -31,6 +31,11 @@ jobs:
         uses: astral-sh/setup-uv@v10.0.1
         with:
           version: "latest"
+          # Dependencies are declared inline (PEP 723), so setup-uv's default
+          # glob -- pyproject.toml, uv.lock, requirements.txt -- matches nothing
+          # and its cache would never be invalidated. Key it on the scripts that
+          # actually carry the dependency block.
+          cache-dependency-glob: "site/build_site.py"
 
       - name: Build site
         run: uv run site/build_site.py
