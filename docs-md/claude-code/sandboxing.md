@@ -686,7 +686,7 @@ Effective sandboxing requires both filesystem and network isolation. Without net
 * [Sandbox environments](sandbox-environments.md): compare the built-in sandbox with dev containers, containers, and VMs
 * [Security](security.md): comprehensive security features and best practices
 * [Permissions](permissions.md): permission configuration and access control
-* [Settings reference](settings-reference.md): every settings key
+* [All settings](settings-reference.md): every settings key
 * [CLI reference](cli-reference.md): command-line options
 
 ---

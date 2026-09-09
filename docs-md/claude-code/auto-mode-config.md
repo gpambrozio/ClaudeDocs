@@ -384,7 +384,7 @@ To react to denials programmatically, use the [`PermissionDenied` hook](hooks.md
 * [Permission modes](permission-modes.md#eliminate-prompts-with-auto-mode): what auto mode is, what it blocks by default, and which sessions start in it
 * [Managed settings](server-managed-settings.md): deploy `autoMode` configuration across your organization
 * [Permissions](permissions.md): allow, ask, and deny rules that apply before the classifier runs
-* [Settings reference](settings-reference.md#automode): every settings key, including `autoMode`
+* [All settings](settings-reference.md#automode): every settings key, including `autoMode`
 
 ---
 

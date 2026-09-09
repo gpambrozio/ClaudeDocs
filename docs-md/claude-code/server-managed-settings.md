@@ -307,7 +307,7 @@ To restrict which organizations your users can access with credentials the clien
 
 Related pages for managing Claude Code configuration:
 
-* [Settings reference](settings-reference.md): every settings key
+* [All settings](settings-reference.md): every settings key
 * [Endpoint-managed settings](managed-settings.md#delivery-mechanisms): managed settings deployed to devices by IT
 * [Authentication](authentication.md): set up user access to Claude Code
 * [Security](security.md): security safeguards and best practices

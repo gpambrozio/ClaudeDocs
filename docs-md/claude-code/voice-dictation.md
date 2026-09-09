@@ -188,7 +188,7 @@ Start Claude Code and run `/voice`. macOS prompts for microphone access; allow i
 ## See also
 
 * [Customize keyboard shortcuts](keybindings.md): rebind `voice:pushToTalk` and other CLI keyboard actions
-* [Settings reference](settings-reference.md#voice): the `voice`, `language`, and other settings keys
+* [All settings](settings-reference.md#voice): the `voice`, `language`, and other settings keys
 * [Interactive mode](interactive-mode.md): keyboard shortcuts, input modes, and session controls
 * [Commands](commands.md): reference for `/voice`, `/config`, and all other commands
 

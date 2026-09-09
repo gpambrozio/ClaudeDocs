@@ -384,7 +384,7 @@ If your organization uses customer-managed encryption keys and routes Claude Cod
 * [Set up Claude Code for your organization](admin-setup.md): decide what to enforce and how
 * [Server-managed settings](server-managed-settings.md): deliver policy from the claude.ai console or a gateway
 * [Managed MCP configuration](managed-mcp.md): control which MCP servers developers can use
-* [Settings reference](settings-reference.md): every key, with whether a managed source can set it
+* [All settings](settings-reference.md): every key, with whether a managed source can set it
 * [Example settings files](settings-example.md#an-organizations-managed-settings): a complete `managed-settings.json` showing the shape of the managed keys
 
 ---

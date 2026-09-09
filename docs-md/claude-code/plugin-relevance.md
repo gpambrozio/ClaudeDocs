@@ -159,7 +159,7 @@ The validator reports unknown keys under `relevance` and `relevance.signals` as 
 
 * [Create and distribute a plugin marketplace](plugin-marketplaces.md): build the marketplace that hosts your plugins
 * [Recommend your plugin from your CLI](plugin-hints.md): prompt users from your own CLI instead of from Claude Code's session signals
-* [Settings reference](settings-reference.md#pluginsuggestionmarketplaces): `pluginSuggestionMarketplaces` and `extraKnownMarketplaces`
+* [All settings](settings-reference.md#pluginsuggestionmarketplaces): `pluginSuggestionMarketplaces` and `extraKnownMarketplaces`
 
 ---
 

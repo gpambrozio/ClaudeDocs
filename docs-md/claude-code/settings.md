@@ -1,4 +1,4 @@
-# Claude Code settings
+# Settings files and precedence
 
 > Change Claude Code settings, pick the scope a key belongs in, verify the change, and learn which value Claude Code uses when a key is set in several places.
 
@@ -341,77 +341,13 @@ export const SettingsScope = ({defaultSelected = 'project'}) => {
     ;
 };
 
-This page covers Claude Code running on your machine: the terminal, the [VS Code](vs-code.md) and [JetBrains](jetbrains.md) extensions, and the [desktop app](desktop.md), which all read the same settings files. A cloud session on [Claude Code on the web](claude-code-on-the-web.md) runs on a different machine and reads only some of them; see [Settings in cloud sessions](#settings-in-cloud-sessions).
-
 Settings are the JSON keys that change how Claude Code behaves: which model it starts with, what it can run without asking, which files it can't read, how it looks in your terminal, and what your organization enforces.
 
-Claude Code reads settings from JSON settings files such as `~/.claude/settings.json`. It looks for them in a few locations, and [the file it reads a setting from decides who the setting applies to](#settings-files-and-who-they-affect).
+To look up a specific key, go to [All settings](settings-reference.md), which lists every key with the file you set it in, its default, and an example.
 
-Use this page to pick the settings file that reaches the people you want a setting to apply to, change a setting and confirm it applied, and see which value Claude Code uses when the same key is set in more than one file.
+Claude Code reads settings from JSON settings files such as `~/.claude/settings.json`. It looks for them in a few locations, and [the file it reads a setting from decides who the setting applies to](#settings-files-and-who-they-affect). This page covers those files: which one to put a setting in, how to change a setting and confirm it applied, and which value Claude Code uses when the same key is set in more than one file. [Configure permissions](permissions.md) covers what Claude Code can run without asking and how to write `allow`, `ask`, and `deny` rules.
 
-<span id="available-settings" />
-
-<span id="permission-rule-syntax" />
-
-<span id="marketplace-key-aliases" />
-
-<span id="environment-variables" />
-
-<span id="sandbox-settings" />
-
-<span id="permission-settings" />
-
-<span id="hook-configuration" />
-
-<span id="plugin-settings" />
-
-<span id="global-config-settings" />
-
-<span id="compute-managed-settings-with-a-policy-helper" />
-
-<span id="attribution-settings" />
-
-<span id="authentication-and-login" />
-
-<span id="context-and-memory" />
-
-<span id="data-and-privacy" />
-
-<span id="exclude-sensitive-files" />
-
-<span id="file-suggestion-settings" />
-
-<span id="footer-link-badges" />
-
-<span id="hook-and-skill-settings" />
-
-<span id="manage-plugins" />
-
-<span id="managed-policy" />
-
-<span id="plugin-configuration" />
-
-<span id="tools-available-to-claude" />
-
-<span id="worktree-settings" />
-
-<span id="invalid-entries-in-managed-settings" />
-
-<span id="sandbox-path-prefixes" />
-
-<span id="owner-wildcards" />
-
-<span id="enabledplugins" />
-
-<span id="pluginconfigs" />
-
-<span id="extraknownmarketplaces" />
-
-<span id="strictknownmarketplaces" />
-
-<span id="strictpluginonlycustomization" />
-
-The [settings reference](settings-reference.md) lists every key you can set, with the file you set it in, its type, and its default. [Configure permissions](permissions.md) covers what Claude Code can run without asking and how to write `allow`, `ask`, and `deny` rules.
+This page covers Claude Code running on your machine: the terminal, the [VS Code](vs-code.md) and [JetBrains](jetbrains.md) extensions, and the [desktop app](desktop.md), which all read the same settings files. A cloud session on [Claude Code on the web](claude-code-on-the-web.md) runs on a different machine and reads only some of them; see [Settings in cloud sessions](#settings-in-cloud-sessions).
 
 <span id="settings-files" />
 
@@ -612,7 +548,6 @@ Claude Code reads some keys only once, at session start, so an edit to one of th
 
 * [`model`](settings-reference.md#model): use [`/model`](model-config.md#setting-your-model) to switch mid-session. Each model has its own prompt cache, so the first request after a switch re-reads the whole conversation uncached; see [Switching models](prompt-caching.md#switching-models)
 * [`effortLevel`](settings-reference.md#effortlevel) and [`modelSettings`](settings-reference.md#modelsettings): use [`/effort`](model-config.md#adjust-effort-level) to change effort mid-session
-* [`outputStyle`](settings-reference.md#outputstyle): part of the system prompt, so Claude Code applies the edit after `/clear` or a restart
 
 <span id="verify-active-settings" />
 
@@ -735,7 +670,7 @@ Managed sources reach a running session on the schedule in the [delivery table](
 
 Two things keep a key in `.claude/settings.json` from applying for everyone who clones it:
 
-* **Claude Code ignores the key in a repository file.** Look for `User, local, or managed`, `User or managed`, `Managed`, or `Global config` in the Scope column of the [All settings](settings-reference.md#all-settings) index; those keys never apply from the shared file, apart from [`autoContinueAtUsageLimit`](settings-reference.md#autocontinueatusagelimit), which a repository file can still switch off: while the file sets the key and no user, `--settings`, or managed value does, Claude Code reads the setting as off. `Global config` keys apply only from `~/.claude.json`.
+* **Claude Code ignores the key in a repository file.** Look for `User, local, or managed`, `User or managed`, `Managed`, or `Global config` in the Scope column of the [settings index](settings-reference.md#settings-index); those keys never apply from the shared file, apart from [`autoContinueAtUsageLimit`](settings-reference.md#autocontinueatusagelimit), which a repository file can still switch off: while the file sets the key and no user, `--settings`, or managed value does, Claude Code reads the setting as off. `Global config` keys apply only from `~/.claude.json`.
 * **The key waits for trust.** `permissions.allow` rules, `permissions.additionalDirectories`, `extraKnownMarketplaces`, and most [`env`](settings-reference.md#env) values apply only after each teammate [trusts the folder](permissions.md#project-allow-rules-and-workspace-trust). Until then they still see prompts and don't get plugins from a marketplace the file declares. `deny` and `ask` rules apply right away.
 
 #### Permission rules combine differently than you expected
@@ -774,7 +709,7 @@ A cloud session, on [Claude Code on the web](claude-code-on-the-web.md) or from 
 
 ## What's next
 
-* [Settings reference](settings-reference.md): every key, with where you set it and an example
+* [All settings](settings-reference.md): every key, with where you set it and an example
 * [Example settings files](settings-example.md): a personal file, a team file, and an organization's managed file
 * [Configure permissions](permissions.md): allow, ask, and deny rules, and what Claude Code runs without asking
 * [Environment variables](env-vars.md): the variables Claude Code reads and the `env` block

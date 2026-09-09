@@ -1,4 +1,4 @@
-# Claude Code settings reference
+# All settings
 
 > Complete reference for every Claude Code settings.json key: where each one goes, its type and default, and a paste-ready example, with an index of every key.
 
@@ -514,13 +514,15 @@ export const ReferenceFilter = ({placeholder, noun, facets, facetOrder, columnHe
     </>;
 };
 
-This reference page lists each key Claude Code reads from a settings file, plus the [short group of keys](#global-config-settings) it keeps in `~/.claude.json` instead. To pick a file, or check precedence, start with [Claude Code settings](settings.md).
+This reference page lists each key Claude Code reads from a settings file, plus the [short group of keys](#global-config-settings) it keeps in `~/.claude.json` instead. To pick a file, or check precedence, start with [Settings files and precedence](settings.md).
 
 <span id="available-settings" />
 
 <span id="scopes" />
 
-## All settings
+<span id="all-settings" />
+
+## Settings index
 
 Every key below links to its entry. Scope lists the [files](settings.md#settings-files-and-who-they-affect) it can go in: `User` is `~/.claude/settings.json`, `Project` is `.claude/settings.json`, `Local` is `.claude/settings.local.json`, and `Managed` is [what your organization deploys](managed-settings.md). `Any file` means all four, and `Global config` means [`~/.claude.json`](#global-config-settings).
 
@@ -1104,7 +1106,7 @@ Run `/effort auto` to clear your saved level for the model you're using. Claude 
 
 Select an [output style](output-styles.md) by name. An output style is a saved set of instructions that Claude Code adds to the system prompt to change Claude's role, tone, and output format, such as the built-in Explanatory and Learning styles or one you wrote yourself.
 
-Claude Code builds the style into the system prompt once per conversation. An edit to this key takes effect after you run `/clear` or start a new session.
+If you change this key during a session, Claude uses the new style starting with your next message. That message rebuilds the [prompt cache](prompt-caching.md#changing-output-style) once, because the style is part of the system prompt. Before v2.1.251, the edit applied only after you ran `/clear` or started a new session.
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: string, the name of a [built-in](output-styles.md#built-in-output-styles) or [custom](output-styles.md#create-a-custom-output-style) output style
@@ -3856,7 +3858,7 @@ The allowlist applies to hooks from every source, including managed settings.
 
 ### `workflowKeywordTriggerEnabled`
 
-Choose whether typing the keyword `ultracode` in a prompt triggers a [dynamic workflow](workflows.md#ask-for-a-workflow-in-your-prompt). Set it to `false` to type the word without triggering one. Requires Claude Code v2.1.157 or later.
+Choose whether typing the keyword `ultracode` in a prompt triggers a [dynamic workflow](workflows.md#ask-for-a-workflow-in-your-prompt). Set it to `false` to type the word without triggering one.
 
 * **Scope**: [`Any file`](#scopes). Appears in `/config` as **Ultracode keyword trigger**.
 * **Type**: Boolean
@@ -3870,7 +3872,7 @@ Choose whether typing the keyword `ultracode` in a prompt triggers a [dynamic wo
 }
 ```
 
-The `ultracode` effort setting, `/workflows`, and saved workflow commands are unaffected. Requires Claude Code v2.1.157 or later. Before v2.1.160, the trigger keyword was `workflow`.
+The `ultracode` effort setting, `/workflows`, and saved workflow commands are unaffected.
 
 ### `workflowSizeGuideline`
 
@@ -5278,7 +5280,7 @@ Set the newest Claude Code version your organization allows to start. When the r
 }
 ```
 
-Background auto-updates and `claude update` skip versions above the ceiling, so an installation inside the range stays inside it. `claude update`, `claude install`, and `claude doctor` keep working above the ceiling so users can recover. Pair it with [`requiredMinimumVersion`](#requiredminimumversion) to enforce a range. Requires Claude Code v2.1.163 or later.
+Background auto-updates and `claude update` skip versions above the ceiling, so an installation inside the range stays inside it. `claude update`, `claude install`, and `claude doctor` keep working above the ceiling so users can recover. Pair it with [`requiredMinimumVersion`](#requiredminimumversion) to enforce a range.
 
 ### `requiredMinimumVersion`
 
@@ -5294,7 +5296,7 @@ Set the oldest Claude Code version your organization allows to start. When the r
 }
 ```
 
-`claude update`, `claude install`, and `claude doctor` keep working below the floor so users can recover. Unlike [`minimumVersion`](#minimumversion), which only prevents downgrades, this key blocks startup. Pair it with [`requiredMaximumVersion`](#requiredmaximumversion) to enforce a range. Requires Claude Code v2.1.163 or later.
+`claude update`, `claude install`, and `claude doctor` keep working below the floor so users can recover. Unlike [`minimumVersion`](#minimumversion), which only prevents downgrades, this key blocks startup. Pair it with [`requiredMaximumVersion`](#requiredmaximumversion) to enforce a range.
 
 ## Tools
 
