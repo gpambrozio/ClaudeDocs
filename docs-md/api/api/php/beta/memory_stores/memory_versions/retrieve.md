@@ -1,6 +1,13 @@
 # Retrieve a memory version
 
-`$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
+---
+title: Retrieve a memory version
+url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/memory_versions/retrieve
+---
+
+# Retrieve a memory version
+
+`$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemoryVersion`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
@@ -20,9 +27,13 @@ Retrieve a memory version
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ## Returns
 
 - `ManagedAgentsMemoryVersion`
+
+  - `Type type`
 
   - `string id`
 
@@ -44,8 +55,6 @@ Retrieve a memory version
 
     The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-  - `Type type`
-
   - `?string content`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -60,7 +69,7 @@ Retrieve a memory version
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../../../beta/sessions/retrieve.md).
 
   - `?string path`
 
@@ -72,7 +81,7 @@ Retrieve a memory version
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../../../beta/sessions/retrieve.md).
 
 ## Example
 
@@ -92,6 +101,7 @@ $betaManagedAgentsMemoryVersion = $client
   memoryStoreID: 'memory_store_id',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemoryVersion);

@@ -1,5 +1,12 @@
 # Upload File
 
+---
+title: Upload File
+url: https://platform.claude.com/docs/en/api/ruby/beta/files/upload
+---
+
+# Upload File
+
 `beta.files.upload(**kwargs) -> BetaFileMetadata`
 
 **POST** `/v1/files`
@@ -10,7 +17,7 @@ Upload File
 
 - `file: String`
 
-  The file to upload
+  The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
   format: binary
 
@@ -26,7 +33,7 @@ Upload File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -74,6 +81,8 @@ Upload File
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -116,9 +125,17 @@ Upload File
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ## Returns
 
 - `class BetaFileMetadata`
+
+  - `type: :file`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: String`
 
@@ -150,12 +167,6 @@ Upload File
 
     minimum: 0
 
-  - `type: :file`
-
-    Object type.
-
-    For files, this is always `"file"`.
-
   - `downloadable: bool`
 
     Whether the file can be downloaded.
@@ -170,13 +181,13 @@ Upload File
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
-    - `id: String`
-
-      The ID of the scoping resource (e.g., the session ID).
-
     - `type: :session`
 
       The type of scope (e.g., `"session"`).
+
+    - `id: String`
+
+      The ID of the scoping resource (e.g., the session ID).
 
 ## Example
 

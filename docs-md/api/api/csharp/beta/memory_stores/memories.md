@@ -1,5 +1,12 @@
 # Memories
 
+---
+title: Memories
+url: https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/memories
+---
+
+# Memories
+
 ## Create a memory
 
 `BetaManagedAgentsMemory Beta.MemoryStores.Memories.Create(parameters, cancellationToken = default)`
@@ -80,6 +87,8 @@ Create a memory
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -122,11 +131,19 @@ Create a memory
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -159,8 +176,6 @@ Create a memory
   - `required string Path`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -294,6 +309,8 @@ List memories
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -336,6 +353,12 @@ List memories
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryListItem: union`
@@ -345,6 +368,8 @@ List memories
   - `class BetaManagedAgentsMemory:`
 
     A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+    - `required Type Type`
 
     - `required string ID`
 
@@ -378,8 +403,6 @@ List memories
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `required Type Type`
-
     - `required DateTimeOffset UpdatedAt`
 
       A timestamp in RFC 3339 format
@@ -394,11 +417,11 @@ List memories
 
     A rolled-up directory marker returned by [List memories](../../../beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
+    - `required Type Type`
+
     - `required string Path`
 
       The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-    - `required Type Type`
 
 ### Example
 
@@ -508,6 +531,8 @@ Retrieve a memory
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -550,11 +575,19 @@ Retrieve a memory
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -587,8 +620,6 @@ Retrieve a memory
   - `required string Path`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -719,6 +750,8 @@ Update a memory
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -761,11 +794,19 @@ Update a memory
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -798,8 +839,6 @@ Update a memory
   - `required string Path`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `required Type Type`
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -916,6 +955,8 @@ Delete a memory
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -958,17 +999,23 @@ Delete a memory
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemory:`
 
   Tombstone returned by [Delete a memory](../../../beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](../../../beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
+  - `required Type Type`
+
   - `required string ID`
 
     ID of the deleted memory (a `mem_...` value).
-
-  - `required Type Type`
 
 ### Example
 
@@ -1021,11 +1068,11 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   Tombstone returned by [Delete a memory](../../../beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](../../../beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
+  - `required Type Type`
+
   - `required string ID`
 
     ID of the deleted memory (a `mem_...` value).
-
-  - `required Type Type`
 
 ### Beta Managed Agents Error
 
@@ -1033,57 +1080,57 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   - `class BetaInvalidRequestError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "invalid_request_error"`
+
+    - `required string Message`
 
   - `class BetaAuthenticationError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "authentication_error"`
+
+    - `required string Message`
 
   - `class BetaBillingError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "billing_error"`
+
+    - `required string Message`
 
   - `class BetaPermissionError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "permission_error"`
+
+    - `required string Message`
 
   - `class BetaNotFoundError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "not_found_error"`
+
+    - `required string Message`
 
   - `class BetaRateLimitError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "rate_limit_error"`
+
+    - `required string Message`
 
   - `class BetaGatewayTimeoutError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "timeout_error"`
+
+    - `required string Message`
 
   - `class BetaApiError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "api_error"`
+
+    - `required string Message`
 
   - `class BetaOverloadedError:`
 
-    - `required string Message`
-
     - `JsonElement Type = "overloaded_error"`
+
+    - `required string Message`
 
   - `class BetaManagedAgentsMemoryPreconditionFailedError:`
 
@@ -1112,6 +1159,8 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 - `class BetaManagedAgentsMemory:`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `required Type Type`
 
   - `required string ID`
 
@@ -1145,8 +1194,6 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `required Type Type`
-
   - `required DateTimeOffset UpdatedAt`
 
     A timestamp in RFC 3339 format
@@ -1166,6 +1213,8 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
   - `class BetaManagedAgentsMemory:`
 
     A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+    - `required Type Type`
 
     - `required string ID`
 
@@ -1199,8 +1248,6 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `required Type Type`
-
     - `required DateTimeOffset UpdatedAt`
 
       A timestamp in RFC 3339 format
@@ -1215,11 +1262,11 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
     A rolled-up directory marker returned by [List memories](../../../beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
+    - `required Type Type`
+
     - `required string Path`
 
       The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-    - `required Type Type`
 
 ### Beta Managed Agents Memory Path Conflict Error
 
@@ -1247,11 +1294,11 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   A rolled-up directory marker returned by [List memories](../../../beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
+  - `required Type Type`
+
   - `required string Path`
 
     The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-  - `required Type Type`
 
 ### Beta Managed Agents Memory View
 

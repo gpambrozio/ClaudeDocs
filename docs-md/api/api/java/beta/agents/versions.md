@@ -1,5 +1,12 @@
 # Versions
 
+---
+title: Versions
+url: https://platform.claude.com/docs/en/api/java/beta/agents/versions
+---
+
+# Versions
+
 ## List Agent Versions
 
 `VersionListPage beta().agents().versions().list(params = VersionListParams.none(), requestOptions = RequestOptions.none())`
@@ -74,6 +81,8 @@ List Agent Versions
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -116,11 +125,15 @@ List Agent Versions
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
 
   A Managed Agents `agent`.
+
+  - `Type type`
 
   - `String id`
 
@@ -140,9 +153,9 @@ List Agent Versions
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-    - `String name`
-
     - `Type type`
+
+    - `String name`
 
     - `String url`
 
@@ -264,6 +277,8 @@ List Agent Versions
 
     Resolved coordinator topology with a concrete agent roster.
 
+    - `Type type`
+
     - `List<Agent> agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
@@ -272,9 +287,9 @@ List Agent Versions
 
         A resolved agent reference with a concrete version.
 
-        - `String id`
-
         - `Type type`
+
+        - `String id`
 
         - `long version`
 
@@ -284,13 +299,11 @@ List Agent Versions
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+        - `Type type`
+
         - `String model`
 
           The advisor model id.
-
-        - `Type type`
-
-    - `Type type`
 
   - `String name`
 
@@ -300,9 +313,9 @@ List Agent Versions
 
       A resolved Anthropic-managed skill.
 
-      - `String skillId`
-
       - `Type type`
+
+      - `String skillId`
 
       - `String version`
 
@@ -310,9 +323,9 @@ List Agent Versions
 
       A resolved user-created custom skill.
 
-      - `String skillId`
-
       - `Type type`
+
+      - `String skillId`
 
       - `String version`
 
@@ -322,11 +335,15 @@ List Agent Versions
 
     - `class BetaManagedAgentsAgentToolset20260401:`
 
+      - `Type type`
+
       - `List<BetaManagedAgentsAgentToolConfig> configs`
 
         - `class BetaManagedAgentsBashToolConfig:`
 
           Configuration for the bash tool.
+
+          - `JsonValue type = "bash"`
 
           - `boolean enabled`
 
@@ -348,11 +365,17 @@ List Agent Versions
 
               - `Type type`
 
-          - `JsonValue type = "bash"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `JsonValue type = "auto"`
 
         - `class BetaManagedAgentsEditToolConfig:`
 
           Configuration for the edit tool.
+
+          - `JsonValue type = "edit"`
 
           - `boolean enabled`
 
@@ -370,11 +393,15 @@ List Agent Versions
 
               Tool calls require user confirmation before execution.
 
-          - `JsonValue type = "edit"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsReadToolConfig:`
 
           Configuration for the read tool.
+
+          - `JsonValue type = "read"`
 
           - `boolean enabled`
 
@@ -392,11 +419,15 @@ List Agent Versions
 
               Tool calls require user confirmation before execution.
 
-          - `JsonValue type = "read"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWriteToolConfig:`
 
           Configuration for the write tool.
+
+          - `JsonValue type = "write"`
 
           - `boolean enabled`
 
@@ -414,11 +445,15 @@ List Agent Versions
 
               Tool calls require user confirmation before execution.
 
-          - `JsonValue type = "write"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGlobToolConfig:`
 
           Configuration for the glob tool.
+
+          - `JsonValue type = "glob"`
 
           - `boolean enabled`
 
@@ -436,11 +471,15 @@ List Agent Versions
 
               Tool calls require user confirmation before execution.
 
-          - `JsonValue type = "glob"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGrepToolConfig:`
 
           Configuration for the grep tool.
+
+          - `JsonValue type = "grep"`
 
           - `boolean enabled`
 
@@ -458,11 +497,15 @@ List Agent Versions
 
               Tool calls require user confirmation before execution.
 
-          - `JsonValue type = "grep"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebFetchToolConfig:`
 
           Configuration for the web_fetch tool.
+
+          - `JsonValue type = "web_fetch"`
 
           - `boolean enabled`
 
@@ -480,7 +523,9 @@ List Agent Versions
 
               Tool calls require user confirmation before execution.
 
-          - `JsonValue type = "web_fetch"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `Optional<List<String>> allowedDomains`
 
@@ -493,6 +538,8 @@ List Agent Versions
         - `class BetaManagedAgentsWebSearchToolConfig:`
 
           Configuration for the web_search tool.
+
+          - `JsonValue type = "web_search"`
 
           - `boolean enabled`
 
@@ -510,7 +557,9 @@ List Agent Versions
 
               Tool calls require user confirmation before execution.
 
-          - `JsonValue type = "web_search"`
+            - `class BetaManagedAgentsAutoPolicy:`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `Optional<List<String>> allowedDomains`
 
@@ -564,9 +613,13 @@ List Agent Versions
 
             Tool calls require user confirmation before execution.
 
-      - `Type type`
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
     - `class BetaManagedAgentsMcpToolset:`
+
+      - `Type type`
 
       - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -586,6 +639,10 @@ List Agent Versions
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy:`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
       - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
         Resolved default configuration for all tools from an MCP server.
@@ -604,13 +661,17 @@ List Agent Versions
 
             Tool calls require user confirmation before execution.
 
-      - `String mcpServerName`
+          - `class BetaManagedAgentsAutoPolicy:`
 
-      - `Type type`
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+      - `String mcpServerName`
 
     - `class BetaManagedAgentsCustomTool:`
 
       A custom tool as returned in API responses.
+
+      - `Type type`
 
       - `String description`
 
@@ -625,10 +686,6 @@ List Agent Versions
         - `Optional<List<String>> required`
 
       - `String name`
-
-      - `Type type`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 

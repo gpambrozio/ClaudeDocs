@@ -1,5 +1,12 @@
 # Count tokens in a Message
 
+---
+title: Count tokens in a Message
+url: https://platform.claude.com/docs/en/api/messages/count_tokens
+---
+
+# Count tokens in a Message
+
 **POST** `/v1/messages/count_tokens`
 
 Count the number of tokens in a Message.
@@ -13,6 +20,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+- `"anthropic-workspace-id": optional string`
 
 ## Body parameters
 
@@ -75,11 +84,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `TextBlockParam object`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -106,6 +115,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `CitationCharLocationParam object`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -122,9 +133,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `CitationPageLocationParam object`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -142,9 +153,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `CitationContentBlockLocationParam object`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -172,9 +183,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `CitationWebSearchResultLocationParam object`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -184,13 +195,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `CitationSearchResultLocationParam object`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -222,13 +233,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `title: string or null`
 
-            - `type: "search_result_location"`
-
       - `ImageBlockParam object`
+
+        - `type: "image"`
 
         - `source: Base64ImageSource or URLImageSource or FileImageSource`
 
           - `Base64ImageSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -244,8 +257,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `URLImageSource object`
 
             - `type: "url"`
@@ -254,11 +265,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `FileImageSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -278,9 +287,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `DocumentBlockParam object`
 
+        - `type: "document"`
+
         - `source: Base64PDFSource or PlainTextSource or ContentBlockSource or 2 more`
 
           - `Base64PDFSource object`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -288,17 +301,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `PlainTextSource object`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `ContentBlockSource object`
+
+            - `type: "content"`
 
             - `content: string or array of ContentBlockSourceContent`
 
@@ -310,8 +323,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `ImageBlockParam object`
 
-            - `type: "content"`
-
           - `URLPDFSource object`
 
             - `type: "url"`
@@ -320,11 +331,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `FileDocumentSource object`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -344,13 +353,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `SearchResultBlockParam object`
 
+        - `type: "search_result"`
+
         - `content: array of TextBlockParam`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control: optional CacheControlEphemeral or null`
 
@@ -362,8 +373,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control: optional CacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
@@ -371,6 +380,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         - `citations: optional CitationsConfigParam`
 
       - `ThinkingBlockParam object`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -382,17 +393,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: "thinking"`
-
       - `RedactedThinkingBlockParam object`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: "redacted_thinking"`
-
       - `ToolUseBlockParam object`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -403,8 +414,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         - `name: string`
 
           maxLength: 200, minLength: 1
-
-        - `type: "tool_use"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -424,19 +433,19 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `ServerToolCaller20260120 object`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name: optional string or null`
 
@@ -446,11 +455,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `ToolResultBlockParam object`
 
+        - `type: "tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "tool_result"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -474,11 +483,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: "tool_reference"`
+
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
 
               - `cache_control: optional CacheControlEphemeral or null`
 
@@ -493,6 +502,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: "browser_state"`
 
               - `tabs: array of BrowserStateTabEntry`
 
@@ -522,8 +533,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: "browser_state"`
-
               - `cache_control: optional CacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
@@ -544,25 +553,25 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: "tab_opened"`
+
                   - `tab_id: string`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: "tab_opened"`
-
                 - `BrowserStateChangeDownloadStarted object`
 
                   A file download that started during this call.
+
+                  - `type: "download_started"`
 
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_started"`
 
                   - `url: string`
 
@@ -577,13 +586,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: "download_completed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_completed"`
 
                   - `url: string`
 
@@ -607,13 +616,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: "download_failed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_failed"`
 
                   - `url: string`
 
@@ -637,6 +646,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `ServerToolUseBlockParam object`
 
+        - `type: "server_tool_use"`
+
         - `id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -659,8 +670,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
         - `cache_control: optional CacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
@@ -681,21 +690,25 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `WebSearchToolResultBlockParam object`
 
+        - `type: "web_search_tool_result"`
+
         - `content: WebSearchToolResultBlockParamContent`
 
           - `WebSearchToolResultBlockItem = array of WebSearchResultBlockParam`
 
+            - `type: "web_search_result"`
+
             - `encrypted_content: string`
 
             - `title: string`
-
-            - `type: "web_search_result"`
 
             - `url: string`
 
             - `page_age: optional string or null`
 
           - `WebSearchToolRequestError object`
+
+            - `type: "web_search_tool_result_error"`
 
             - `error_code: WebSearchToolResultErrorCode`
 
@@ -711,13 +724,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -739,9 +748,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `WebFetchToolResultBlockParam object`
 
+        - `type: "web_fetch_tool_result"`
+
         - `content: WebFetchToolResultErrorBlockParam or WebFetchBlockParam`
 
           - `WebFetchToolResultErrorBlockParam object`
+
+            - `type: "web_fetch_tool_result_error"`
 
             - `error_code: WebFetchToolResultErrorCode`
 
@@ -763,13 +776,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `WebFetchBlockParam object`
 
-            - `content: DocumentBlockParam`
-
             - `type: "web_fetch_result"`
+
+            - `content: DocumentBlockParam`
 
             - `url: string`
 
@@ -782,8 +795,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_fetch_tool_result"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -805,11 +816,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `CodeExecutionToolResultBlockParam object`
 
+        - `type: "code_execution_tool_result"`
+
         - `content: CodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultErrorParam object`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -821,15 +836,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `CodeExecutionResultBlockParam object`
+
+            - `type: "code_execution_result"`
 
             - `content: array of CodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -837,17 +852,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `EncryptedCodeExecutionResultBlockParam object`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: array of CodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -855,13 +870,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_tool_result"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -869,9 +880,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `BashCodeExecutionToolResultBlockParam object`
 
+        - `type: "bash_code_execution_tool_result"`
+
         - `content: BashCodeExecutionToolResultErrorParam or BashCodeExecutionResultBlockParam`
 
           - `BashCodeExecutionToolResultErrorParam object`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -885,15 +900,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `BashCodeExecutionResultBlockParam object`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: array of BashCodeExecutionOutputBlockParam`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -901,13 +916,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "bash_code_execution_tool_result"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -915,9 +926,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `TextEditorCodeExecutionToolResultBlockParam object`
 
+        - `type: "text_editor_code_execution_tool_result"`
+
         - `content: TextEditorCodeExecutionToolResultErrorParam or TextEditorCodeExecutionViewResultBlockParam or TextEditorCodeExecutionCreateResultBlockParam or TextEditorCodeExecutionStrReplaceResultBlockParam`
 
           - `TextEditorCodeExecutionToolResultErrorParam object`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -931,11 +946,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"file_not_found"`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `TextEditorCodeExecutionViewResultBlockParam object`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -947,8 +962,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"pdf"`
 
-            - `type: "text_editor_code_execution_view_result"`
-
             - `num_lines: optional number or null`
 
             - `start_line: optional number or null`
@@ -957,9 +970,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `TextEditorCodeExecutionCreateResultBlockParam object`
 
-            - `is_file_update: boolean`
-
             - `type: "text_editor_code_execution_create_result"`
+
+            - `is_file_update: boolean`
 
           - `TextEditorCodeExecutionStrReplaceResultBlockParam object`
 
@@ -979,17 +992,19 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
         - `cache_control: optional CacheControlEphemeral or null`
 
           Create a cache control breakpoint at this content block.
 
       - `ToolSearchToolResultBlockParam object`
 
+        - `type: "tool_search_tool_result"`
+
         - `content: ToolSearchToolResultErrorParam or ToolSearchToolSearchResultBlockParam`
 
           - `ToolSearchToolResultErrorParam object`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -1001,31 +1016,27 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `"execution_time_exceeded"`
 
-            - `type: "tool_search_tool_result_error"`
-
             - `error_message: optional string or null`
 
           - `ToolSearchToolSearchResultBlockParam object`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: array of ToolReferenceBlockParam`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
               - `cache_control: optional CacheControlEphemeral or null`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -1036,9 +1047,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
         - `cache_control: optional CacheControlEphemeral or null`
 
@@ -1160,11 +1171,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
+    - `type: "json_schema"`
+
     - `schema: map[unknown]`
 
       The JSON schema of the format
-
-    - `type: "json_schema"`
 
 - `system: optional string or array of TextBlockParam`
 
@@ -1176,11 +1187,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `array of TextBlockParam`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control: optional CacheControlEphemeral or null`
 
@@ -1198,6 +1209,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `ThinkingConfigEnabled object`
 
+    - `type: "enabled"`
+
     - `budget_tokens: number`
 
       Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1207,8 +1220,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
       See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       minimum: 1024
-
-    - `type: "enabled"`
 
     - `display: optional "summarized" or "omitted" or null`
 
@@ -1266,11 +1277,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: "tool"`
+
     - `name: string`
 
       The name of the tool to use.
-
-    - `type: "tool"`
 
     - `disable_parallel_tool_use: optional boolean`
 
@@ -1350,6 +1361,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `Tool object`
 
+    - `type: optional "custom" or null`
+
     - `input_schema: object`
 
       [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -1404,17 +1417,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type: optional "custom" or null`
-
   - `ToolBash20250124 object`
+
+    - `type: "bash_20250124"`
 
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -1442,13 +1453,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `CodeExecutionTool20250522 object`
 
+    - `type: "code_execution_20250522"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250522"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -1474,13 +1485,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `CodeExecutionTool20250825 object`
 
+    - `type: "code_execution_20250825"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250825"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -1508,13 +1519,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: "code_execution_20260120"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260120"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -1542,13 +1553,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     Code execution tool with REPL state persistence.
 
+    - `type: "code_execution_20260521"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260521"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -1593,6 +1604,18 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional BrowserTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab: optional BrowserCloseTabConfig or null`
 
@@ -1930,18 +1953,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional BrowserTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional BrowserWaitConfig or null`
 
         `wait`'s config overrides.
@@ -1968,13 +1979,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `MemoryTool20250818 object`
 
+    - `type: "memory_20250818"`
+
     - `name: "memory"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "memory_20250818"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2025,6 +2036,18 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type: optional ComputerTypeConfig or null`
+
+        `type`'s config overrides.
+
+        - `defer_loading: optional boolean or null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled: optional boolean or null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position: optional ComputerCursorPositionConfig or null`
 
@@ -2194,18 +2217,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type: optional ComputerTypeConfig or null`
-
-        `type`'s config overrides.
-
-        - `defer_loading: optional boolean or null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled: optional boolean or null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait: optional ComputerWaitConfig or null`
 
         `wait`'s config overrides.
@@ -2232,13 +2243,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `ToolTextEditor20250124 object`
 
+    - `type: "text_editor_20250124"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250124"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2266,13 +2277,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `ToolTextEditor20250429 object`
 
+    - `type: "text_editor_20250429"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250429"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2300,13 +2311,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `ToolTextEditor20250728 object`
 
+    - `type: "text_editor_20250728"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250728"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2340,13 +2351,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `WebSearchTool20250305 object`
 
+    - `type: "web_search_20250305"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20250305"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2416,13 +2427,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `WebFetchTool20250910 object`
 
+    - `type: "web_fetch_20250910"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20250910"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2472,13 +2483,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `WebSearchTool20260209 object`
 
+    - `type: "web_search_20260209"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2522,13 +2533,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `WebFetchTool20260209 object`
 
+    - `type: "web_fetch_20260209"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260209"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2580,13 +2591,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: "web_fetch_20260309"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260309"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2640,13 +2651,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `WebSearchTool20260318 object`
 
+    - `type: "web_search_20260318"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2698,13 +2709,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `WebFetchTool20260318 object`
 
+    - `type: "web_fetch_20260318"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260318"`
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2766,17 +2777,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `ToolSearchToolBm25_20251119 object`
 
-    - `name: "tool_search_tool_bm25"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_bm25_20251119" or "tool_search_tool_bm25"`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: "tool_search_tool_bm25"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 
@@ -2802,17 +2813,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `ToolSearchToolRegex20251119 object`
 
-    - `name: "tool_search_tool_regex"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_regex_20251119" or "tool_search_tool_regex"`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: "tool_search_tool_regex"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers: optional array of "direct" or "code_execution_20250825" or "code_execution_20260120" or "code_execution_20260521"`
 

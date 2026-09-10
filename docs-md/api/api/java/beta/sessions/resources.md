@@ -1,5 +1,12 @@
 # Resources
 
+---
+title: Resources
+url: https://platform.claude.com/docs/en/api/java/beta/sessions/resources
+---
+
+# Resources
+
 ## Add Session Resource
 
 `BetaManagedAgentsFileResource beta().sessions().resources().add(params, requestOptions = RequestOptions.none())`
@@ -64,6 +71,8 @@ Add Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -106,6 +115,8 @@ Add Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 
     Mount a file uploaded via the Files API into the session.
@@ -113,6 +124,8 @@ Add Session Resource
 ### Returns
 
 - `class BetaManagedAgentsFileResource:`
+
+  - `Type type`
 
   - `String id`
 
@@ -125,8 +138,6 @@ Add Session Resource
   - `String fileId`
 
   - `String mountPath`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -250,6 +261,8 @@ List Session Resources
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -292,6 +305,8 @@ List Session Resources
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionResource: union`
@@ -299,6 +314,8 @@ List Session Resources
   A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -309,8 +326,6 @@ List Session Resources
       format: date-time
 
     - `String mountPath`
-
-    - `Type type`
 
     - `LocalDateTime updatedAt`
 
@@ -324,15 +339,17 @@ List Session Resources
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
@@ -340,9 +357,9 @@ List Session Resources
 
           minLength: 7, maxLength: 64
 
-        - `Type type`
-
   - `class BetaManagedAgentsFileResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -356,8 +373,6 @@ List Session Resources
 
     - `String mountPath`
 
-    - `Type type`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -368,11 +383,11 @@ List Session Resources
 
     A memory store attached to an agent session.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 
@@ -517,6 +532,8 @@ Get Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -559,6 +576,8 @@ Get Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class ResourceRetrieveResponse: union`
@@ -566,6 +585,8 @@ Get Session Resource
   The requested session resource.
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -576,8 +597,6 @@ Get Session Resource
       format: date-time
 
     - `String mountPath`
-
-    - `Type type`
 
     - `LocalDateTime updatedAt`
 
@@ -591,15 +610,17 @@ Get Session Resource
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
@@ -607,9 +628,9 @@ Get Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `Type type`
-
   - `class BetaManagedAgentsFileResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -623,8 +644,6 @@ Get Session Resource
 
     - `String mountPath`
 
-    - `Type type`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -635,11 +654,11 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 
@@ -775,6 +794,8 @@ Update Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -817,6 +838,8 @@ Update Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `String authorizationToken`
 
     New authorization token for the resource. Currently only `github_repository` resources support token rotation.
@@ -831,6 +854,8 @@ Update Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
 
+    - `Type type`
+
     - `String id`
 
     - `LocalDateTime createdAt`
@@ -840,8 +865,6 @@ Update Session Resource
       format: date-time
 
     - `String mountPath`
-
-    - `Type type`
 
     - `LocalDateTime updatedAt`
 
@@ -855,15 +878,17 @@ Update Session Resource
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
@@ -871,9 +896,9 @@ Update Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `Type type`
-
   - `class BetaManagedAgentsFileResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -887,8 +912,6 @@ Update Session Resource
 
     - `String mountPath`
 
-    - `Type type`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -899,11 +922,11 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 
@@ -1040,6 +1063,8 @@ Delete Session Resource
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1082,15 +1107,17 @@ Delete Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeleteSessionResource:`
 
   Confirmation of resource deletion.
 
-  - `String id`
-
   - `Type type`
+
+  - `String id`
 
 ### Example
 
@@ -1134,13 +1161,15 @@ public final class Main {
 
   Confirmation of resource deletion.
 
-  - `String id`
-
   - `Type type`
+
+  - `String id`
 
 ### Beta Managed Agents File Resource
 
 - `class BetaManagedAgentsFileResource:`
+
+  - `Type type`
 
   - `String id`
 
@@ -1154,8 +1183,6 @@ public final class Main {
 
   - `String mountPath`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -1166,6 +1193,8 @@ public final class Main {
 
 - `class BetaManagedAgentsGitHubRepositoryResource:`
 
+  - `Type type`
+
   - `String id`
 
   - `LocalDateTime createdAt`
@@ -1175,8 +1204,6 @@ public final class Main {
     format: date-time
 
   - `String mountPath`
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -1190,15 +1217,17 @@ public final class Main {
 
     - `class BetaManagedAgentsBranchCheckout:`
 
+      - `Type type`
+
       - `String name`
 
         Branch name to check out.
 
         minLength: 1, maxLength: 255
 
-      - `Type type`
-
     - `class BetaManagedAgentsCommitCheckout:`
+
+      - `Type type`
 
       - `String sha`
 
@@ -1206,19 +1235,17 @@ public final class Main {
 
         minLength: 7, maxLength: 64
 
-      - `Type type`
-
 ### Beta Managed Agents Memory Store Resource
 
 - `class BetaManagedAgentsMemoryStoreResource:`
 
   A memory store attached to an agent session.
 
+  - `Type type`
+
   - `String memoryStoreId`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-  - `Type type`
 
   - `Optional<Access> access`
 
@@ -1254,6 +1281,8 @@ public final class Main {
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
 
+    - `Type type`
+
     - `String id`
 
     - `LocalDateTime createdAt`
@@ -1263,8 +1292,6 @@ public final class Main {
       format: date-time
 
     - `String mountPath`
-
-    - `Type type`
 
     - `LocalDateTime updatedAt`
 
@@ -1278,15 +1305,17 @@ public final class Main {
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
@@ -1294,9 +1323,9 @@ public final class Main {
 
           minLength: 7, maxLength: 64
 
-        - `Type type`
-
   - `class BetaManagedAgentsFileResource:`
+
+    - `Type type`
 
     - `String id`
 
@@ -1310,8 +1339,6 @@ public final class Main {
 
     - `String mountPath`
 
-    - `Type type`
-
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -1322,11 +1349,11 @@ public final class Main {
 
     A memory store attached to an agent session.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 

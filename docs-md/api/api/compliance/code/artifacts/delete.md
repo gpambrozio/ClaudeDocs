@@ -1,5 +1,12 @@
 # Delete Code Artifact
 
+---
+title: Delete Code Artifact
+url: https://platform.claude.com/docs/en/api/compliance/code/artifacts/delete
+---
+
+# Delete Code Artifact
+
 **DELETE** `/v1/compliance/apps/code/artifacts/{artifact_id}`
 
 Permanently deletes a Code Artifact and all its versions. This is a
@@ -19,19 +26,25 @@ Artifact.
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 - `"x-api-key": optional string`
 
 ## Returns
-
-- `id: string`
-
-  The ID of the Artifact that was deleted
 
 - `type: "code_artifact_deleted"`
 
   Constant string confirming deletion
 
   default: code_artifact_deleted
+
+- `id: string`
+
+  The ID of the Artifact that was deleted
 
 ## Example
 

@@ -1,5 +1,12 @@
 # Remove User
 
+---
+title: Remove User
+url: https://platform.claude.com/docs/en/api/beta/organization/users/remove
+---
+
+# Remove User
+
 **DELETE** `/v1/organizations/users/{user_id}`
 
 Remove a member from the organization.
@@ -12,10 +19,6 @@ Remove a member from the organization.
 
 ## Returns
 
-- `id: string`
-
-  ID of the User.
-
 - `type: "user_deleted"`
 
   Deleted object type.
@@ -23,6 +26,10 @@ Remove a member from the organization.
   For Users, this is always `"user_deleted"`.
 
   default: user_deleted
+
+- `id: string`
+
+  ID of the User.
 
 ## Example
 

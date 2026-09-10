@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/manage-claude/inference-hooks-configura
 description: Allow Inference hooks for your Claude Enterprise organization, connect your AI security server, and control enforcement, failure handling, and rollout.
 ---
 
-Inference hooks are in beta and available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission, which the built-in Admin, Owner, and Primary owner roles hold, as does any custom role granted it.
+Inference hooks are in beta and available to Claude Enterprise organizations. Configuring them requires the `organization:manage` permission, which only the Owner and Primary owner roles hold.
 
 Inference hooks send prompts from your organization to an AI security server you choose, and hold each request for an allow or deny verdict before Claude processes it. This page walks through turning the feature on, connecting your server, and controlling enforcement. To learn what Inference hooks are and when to use them, see the [Inference hooks overview](inference-hooks.md). To build the AI security server itself, see [Develop an Inference hooks integration](inference-hooks-endpoint.md).
 
@@ -14,7 +14,7 @@ Inference hooks send prompts from your organization to an AI security server you
 
 You need:
 
-* The `organization:manage` permission in claude.ai. The built-in **Admin**, **Owner**, and **Primary owner** roles hold it, as does any custom role it has been granted.
+* The `organization:manage` permission in claude.ai, which only the **Owner** and **Primary owner** roles hold. The **Admin** role doesn't have it.
 * An AI security server HTTPS endpoint that accepts verdict requests: an `https://` URL on port 443, on a publicly routable host, reachable without redirects. Reverse-tunnel hosts (ngrok and similar tunnel services) are not supported: Anthropic's network policy blocks them. Don't test through a tunnel; host your server on a domain you control. For the full [hosting requirements](inference-hooks-endpoint.md#receive-a-request), and to build the server and verify signed requests, see [Develop an Inference hooks integration](inference-hooks-endpoint.md).
 
 ## Set up Inference hooks

@@ -1,5 +1,12 @@
 # Credentials
 
+---
+title: Credentials
+url: https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials
+---
+
+# Credentials
+
 ## Create Credential
 
 `$ ant beta:vaults:credentials create`
@@ -32,11 +39,19 @@ Create Credential
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_managed_agents_credential: object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: "vault_credential"`
 
   - `id: string`
 
@@ -56,11 +71,11 @@ Create Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: "mcp_oauth"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: "mcp_oauth"`
 
       - `expires_at: optional string`
 
@@ -114,15 +129,17 @@ Create Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: "static_bearer"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "static_bearer"`
-
     - `beta_managed_agents_environment_variable_auth_response: object`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: "environment_variable"`
 
       - `injection_location: object`
 
@@ -150,17 +167,15 @@ Create Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: "limited"`
+
           - `allowed_hosts: array of string`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: "limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
-
-      - `type: "environment_variable"`
 
   - `created_at: string`
 
@@ -171,8 +186,6 @@ Create Credential
   - `metadata: map[string]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: "vault_credential"`
 
   - `updated_at: string`
 
@@ -250,6 +263,12 @@ List Credentials
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `BetaManagedAgentsListCredentialsResponse: object`
@@ -259,6 +278,8 @@ List Credentials
   - `data: optional array of BetaManagedAgentsCredential`
 
     List of credentials.
+
+    - `type: "vault_credential"`
 
     - `id: string`
 
@@ -278,11 +299,11 @@ List Credentials
 
         OAuth credential details for an MCP server.
 
+        - `type: "mcp_oauth"`
+
         - `mcp_server_url: string`
 
           URL of the MCP server this credential authenticates against.
-
-        - `type: "mcp_oauth"`
 
         - `expires_at: optional string`
 
@@ -336,15 +357,17 @@ List Credentials
 
         Static bearer token credential details for an MCP server.
 
+        - `type: "static_bearer"`
+
         - `mcp_server_url: string`
 
           URL of the MCP server this credential authenticates against.
 
-        - `type: "static_bearer"`
-
       - `beta_managed_agents_environment_variable_auth_response: object`
 
         Environment variable credential details. The secret value is never returned.
+
+        - `type: "environment_variable"`
 
         - `injection_location: object`
 
@@ -372,17 +395,15 @@ List Credentials
 
             The secret is substituted only on requests to the listed hosts.
 
+            - `type: "limited"`
+
             - `allowed_hosts: array of string`
 
               Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-            - `type: "limited"`
-
         - `secret_name: string`
 
           Name of the environment variable.
-
-        - `type: "environment_variable"`
 
     - `created_at: string`
 
@@ -393,8 +414,6 @@ List Credentials
     - `metadata: map[string]`
 
       Arbitrary key-value metadata attached to the credential.
-
-    - `type: "vault_credential"`
 
     - `updated_at: string`
 
@@ -470,11 +489,19 @@ Get Credential
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_managed_agents_credential: object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: "vault_credential"`
 
   - `id: string`
 
@@ -494,11 +521,11 @@ Get Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: "mcp_oauth"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: "mcp_oauth"`
 
       - `expires_at: optional string`
 
@@ -552,15 +579,17 @@ Get Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: "static_bearer"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "static_bearer"`
-
     - `beta_managed_agents_environment_variable_auth_response: object`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: "environment_variable"`
 
       - `injection_location: object`
 
@@ -588,17 +617,15 @@ Get Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: "limited"`
+
           - `allowed_hosts: array of string`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: "limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
-
-      - `type: "environment_variable"`
 
   - `created_at: string`
 
@@ -609,8 +636,6 @@ Get Credential
   - `metadata: map[string]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: "vault_credential"`
 
   - `updated_at: string`
 
@@ -692,11 +717,19 @@ Update Credential
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_managed_agents_credential: object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: "vault_credential"`
 
   - `id: string`
 
@@ -716,11 +749,11 @@ Update Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: "mcp_oauth"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: "mcp_oauth"`
 
       - `expires_at: optional string`
 
@@ -774,15 +807,17 @@ Update Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: "static_bearer"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "static_bearer"`
-
     - `beta_managed_agents_environment_variable_auth_response: object`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: "environment_variable"`
 
       - `injection_location: object`
 
@@ -810,17 +845,15 @@ Update Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: "limited"`
+
           - `allowed_hosts: array of string`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: "limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
-
-      - `type: "environment_variable"`
 
   - `created_at: string`
 
@@ -831,8 +864,6 @@ Update Credential
   - `metadata: map[string]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: "vault_credential"`
 
   - `updated_at: string`
 
@@ -900,17 +931,23 @@ Delete Credential
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_managed_agents_deleted_credential: object`
 
   Confirmation of a deleted credential.
 
+  - `type: "vault_credential_deleted"`
+
   - `id: string`
 
     Unique identifier of the deleted credential.
-
-  - `type: "vault_credential_deleted"`
 
 ### Example
 
@@ -952,11 +989,19 @@ Archive Credential
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_managed_agents_credential: object`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: "vault_credential"`
 
   - `id: string`
 
@@ -976,11 +1021,11 @@ Archive Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: "mcp_oauth"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: "mcp_oauth"`
 
       - `expires_at: optional string`
 
@@ -1034,15 +1079,17 @@ Archive Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: "static_bearer"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "static_bearer"`
-
     - `beta_managed_agents_environment_variable_auth_response: object`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: "environment_variable"`
 
       - `injection_location: object`
 
@@ -1070,17 +1117,15 @@ Archive Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: "limited"`
+
           - `allowed_hosts: array of string`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: "limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
-
-      - `type: "environment_variable"`
 
   - `created_at: string`
 
@@ -1091,8 +1136,6 @@ Archive Credential
   - `metadata: map[string]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: "vault_credential"`
 
   - `updated_at: string`
 
@@ -1160,11 +1203,19 @@ Validate Credential
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `beta_managed_agents_credential_validation: object`
 
   Result of live-probing a credential against its configured MCP server.
+
+  - `type: "vault_credential_validation"`
 
   - `credential_id: string`
 
@@ -1251,8 +1302,6 @@ Validate Credential
     - `"invalid"`
 
     - `"unknown"`
-
-  - `type: "vault_credential_validation"`
 
   - `validated_at: string`
 
@@ -1312,6 +1361,8 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
+  - `type: "vault_credential"`
+
   - `id: string`
 
     Unique identifier for the credential.
@@ -1330,11 +1381,11 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       OAuth credential details for an MCP server.
 
+      - `type: "mcp_oauth"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: "mcp_oauth"`
 
       - `expires_at: optional string`
 
@@ -1388,15 +1439,17 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       Static bearer token credential details for an MCP server.
 
+      - `type: "static_bearer"`
+
       - `mcp_server_url: string`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: "static_bearer"`
-
     - `beta_managed_agents_environment_variable_auth_response: object`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: "environment_variable"`
 
       - `injection_location: object`
 
@@ -1424,17 +1477,15 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: "limited"`
+
           - `allowed_hosts: array of string`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: "limited"`
-
       - `secret_name: string`
 
         Name of the environment variable.
-
-      - `type: "environment_variable"`
 
   - `created_at: string`
 
@@ -1445,8 +1496,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
   - `metadata: map[string]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: "vault_credential"`
 
   - `updated_at: string`
 
@@ -1478,17 +1527,19 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
     Substitute the secret only on requests to the listed hosts.
 
+    - `type: "limited"`
+
     - `allowed_hosts: array of string`
 
       Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-    - `type: "limited"`
 
 ### Beta Managed Agents Credential Validation
 
 - `beta_managed_agents_credential_validation: object`
 
   Result of live-probing a credential against its configured MCP server.
+
+  - `type: "vault_credential_validation"`
 
   - `credential_id: string`
 
@@ -1576,8 +1627,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
     - `"unknown"`
 
-  - `type: "vault_credential_validation"`
-
   - `validated_at: string`
 
     A timestamp in RFC 3339 format
@@ -1606,17 +1655,19 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   Confirmation of a deleted credential.
 
+  - `type: "vault_credential_deleted"`
+
   - `id: string`
 
     Unique identifier of the deleted credential.
-
-  - `type: "vault_credential_deleted"`
 
 ### Beta Managed Agents Environment Variable Auth Response
 
 - `beta_managed_agents_environment_variable_auth_response: object`
 
   Environment variable credential details. The secret value is never returned.
+
+  - `type: "environment_variable"`
 
   - `injection_location: object`
 
@@ -1644,23 +1695,23 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       The secret is substituted only on requests to the listed hosts.
 
+      - `type: "limited"`
+
       - `allowed_hosts: array of string`
 
         Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-      - `type: "limited"`
-
   - `secret_name: string`
 
     Name of the environment variable.
-
-  - `type: "environment_variable"`
 
 ### Beta Managed Agents Environment Variable Create Params
 
 - `beta_managed_agents_environment_variable_create_params: object`
 
   Parameters for creating an environment variable credential.
+
+  - `type: "environment_variable"`
 
   - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
 
@@ -1676,11 +1727,11 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       Substitute the secret only on requests to the listed hosts.
 
+      - `type: "limited"`
+
       - `allowed_hosts: array of string`
 
         Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-      - `type: "limited"`
 
   - `secret_name: string`
 
@@ -1693,8 +1744,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
     Secret value. Write-only; never returned in responses.
 
     minLength: 1, maxLength: 4096
-
-  - `type: "environment_variable"`
 
   - `injection_location: optional object`
 
@@ -1742,11 +1791,11 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       Substitute the secret only on requests to the listed hosts.
 
+      - `type: "limited"`
+
       - `allowed_hosts: array of string`
 
         Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-      - `type: "limited"`
 
   - `secret_value: optional string`
 
@@ -1802,11 +1851,11 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   Substitute the secret only on requests to the listed hosts.
 
+  - `type: "limited"`
+
   - `allowed_hosts: array of string`
 
     Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-  - `type: "limited"`
 
 ### Beta Managed Agents Limited Credential Networking Response
 
@@ -1814,11 +1863,11 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   The secret is substituted only on requests to the listed hosts.
 
+  - `type: "limited"`
+
   - `allowed_hosts: array of string`
 
     Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
-
-  - `type: "limited"`
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -1826,11 +1875,11 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   OAuth credential details for an MCP server.
 
+  - `type: "mcp_oauth"`
+
   - `mcp_server_url: string`
 
     URL of the MCP server this credential authenticates against.
-
-  - `type: "mcp_oauth"`
 
   - `expires_at: optional string`
 
@@ -1886,6 +1935,8 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   Parameters for creating an MCP OAuth credential.
 
+  - `type: "mcp_oauth"`
+
   - `access_token: string`
 
     OAuth access token.
@@ -1897,8 +1948,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
     URL of the MCP server this credential authenticates against.
 
     minLength: 1, maxLength: 2047
-
-  - `type: "mcp_oauth"`
 
   - `expires_at: optional string`
 
@@ -1920,7 +1969,7 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       OAuth refresh token.
 
-      minLength: 1, maxLength: 4096
+      minLength: 1, maxLength: 8192
 
     - `token_endpoint: string`
 
@@ -1942,25 +1991,25 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
+        - `type: "client_secret_basic"`
+
         - `client_secret: string`
 
           OAuth client secret.
 
           minLength: 1, maxLength: 512
-
-        - `type: "client_secret_basic"`
 
       - `beta_managed_agents_token_endpoint_auth_post_param: object`
 
         Token endpoint uses POST body authentication with client credentials.
 
+        - `type: "client_secret_post"`
+
         - `client_secret: string`
 
           OAuth client secret.
 
           minLength: 1, maxLength: 512
-
-        - `type: "client_secret_post"`
 
     - `resource: optional string`
 
@@ -1990,7 +2039,7 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
     OAuth refresh token.
 
-    minLength: 1, maxLength: 4096
+    minLength: 1, maxLength: 8192
 
   - `token_endpoint: string`
 
@@ -2012,25 +2061,25 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
+      - `type: "client_secret_basic"`
+
       - `client_secret: string`
 
         OAuth client secret.
 
         minLength: 1, maxLength: 512
-
-      - `type: "client_secret_basic"`
 
     - `beta_managed_agents_token_endpoint_auth_post_param: object`
 
       Token endpoint uses POST body authentication with client credentials.
 
+      - `type: "client_secret_post"`
+
       - `client_secret: string`
 
         OAuth client secret.
 
         minLength: 1, maxLength: 512
-
-      - `type: "client_secret_post"`
 
   - `resource: optional string`
 
@@ -2098,7 +2147,7 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
     Updated OAuth refresh token.
 
-    minLength: 1, maxLength: 4096
+    minLength: 1, maxLength: 8192
 
   - `scope: optional string`
 
@@ -2162,7 +2211,7 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
       Updated OAuth refresh token.
 
-      minLength: 1, maxLength: 4096
+      minLength: 1, maxLength: 8192
 
     - `scope: optional string`
 
@@ -2300,17 +2349,19 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   Static bearer token credential details for an MCP server.
 
+  - `type: "static_bearer"`
+
   - `mcp_server_url: string`
 
     URL of the MCP server this credential authenticates against.
-
-  - `type: "static_bearer"`
 
 ### Beta Managed Agents Static Bearer Create Params
 
 - `beta_managed_agents_static_bearer_create_params: object`
 
   Parameters for creating a static bearer token credential.
+
+  - `type: "static_bearer"`
 
   - `token: string`
 
@@ -2323,8 +2374,6 @@ ant beta:vaults:credentials mcp-oauth-validate \
     URL of the MCP server this credential authenticates against.
 
     minLength: 1, maxLength: 2047
-
-  - `type: "static_bearer"`
 
 ### Beta Managed Agents Static Bearer Update Params
 
@@ -2346,13 +2395,13 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
+  - `type: "client_secret_basic"`
+
   - `client_secret: string`
 
     OAuth client secret.
 
     minLength: 1, maxLength: 512
-
-  - `type: "client_secret_basic"`
 
 ### Beta Managed Agents Token Endpoint Auth Basic Response
 
@@ -2398,13 +2447,13 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
   Token endpoint uses POST body authentication with client credentials.
 
+  - `type: "client_secret_post"`
+
   - `client_secret: string`
 
     OAuth client secret.
 
     minLength: 1, maxLength: 512
-
-  - `type: "client_secret_post"`
 
 ### Beta Managed Agents Token Endpoint Auth Post Response
 

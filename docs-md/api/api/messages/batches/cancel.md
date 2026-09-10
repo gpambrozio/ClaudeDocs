@@ -1,5 +1,12 @@
 # Cancel a Message Batch
 
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/messages/batches/cancel
+---
+
+# Cancel a Message Batch
+
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
 Batches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.
@@ -14,9 +21,21 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   ID of the Message Batch.
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `MessageBatch object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -115,14 +134,6 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 ## Example
 

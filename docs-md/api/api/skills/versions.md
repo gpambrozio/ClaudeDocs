@@ -1,5 +1,12 @@
 # Versions
 
+---
+title: Versions
+url: https://platform.claude.com/docs/en/api/skills/versions
+---
+
+# Versions
+
 ## Create Skill Version
 
 **POST** `/v1/skills/{skill_id}/versions`
@@ -14,6 +21,10 @@ Create Skill Version
 
   The format and length of IDs may change over time.
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Body parameters (form-data)
 
 - `files: array of string`
@@ -25,6 +36,14 @@ Create Skill Version
 ### Returns
 
 - `SkillVersion object`
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
 
   - `id: string`
 
@@ -55,14 +74,6 @@ Create Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `type: "skill_version"`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
-    default: skill_version
 
 ### Example
 
@@ -115,11 +126,23 @@ List Skill Versions
 
   Optionally set to the `next_page` token from the previous response.
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `data: array of SkillVersion`
 
   List of skills.
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
 
   - `id: string`
 
@@ -150,14 +173,6 @@ List Skill Versions
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `type: "skill_version"`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
-    default: skill_version
 
 - `next_page: string or null`
 
@@ -211,9 +226,21 @@ Get Skill Version
 
   Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `SkillVersion object`
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
 
   - `id: string`
 
@@ -244,14 +271,6 @@ Get Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `type: "skill_version"`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
-    default: skill_version
 
 ### Example
 
@@ -294,14 +313,13 @@ Delete Skill Version
 
   Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `DeletedSkillVersion object`
-
-  - `id: string`
-
-    Unique identifier for this Skill Version. The id addresses the version in
-    paths and pins it in references.
 
   - `type: "skill_version_deleted"`
 
@@ -310,6 +328,11 @@ Delete Skill Version
     For Skill Versions, this is always `"skill_version_deleted"`.
 
     default: skill_version_deleted
+
+  - `id: string`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
 ### Example
 
@@ -335,11 +358,6 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
 
 - `DeletedSkillVersion object`
 
-  - `id: string`
-
-    Unique identifier for this Skill Version. The id addresses the version in
-    paths and pins it in references.
-
   - `type: "skill_version_deleted"`
 
     Deleted object type.
@@ -348,9 +366,22 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
 
     default: skill_version_deleted
 
+  - `id: string`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
+
 ### Skill Version
 
 - `SkillVersion object`
+
+  - `type: "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
+
+    default: skill_version
 
   - `id: string`
 
@@ -381,14 +412,6 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `type: "skill_version"`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
-
-    default: skill_version
 
 ---
 

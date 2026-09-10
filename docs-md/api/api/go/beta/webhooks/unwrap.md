@@ -1,5 +1,12 @@
 # Unwrap
 
+---
+title: Unwrap
+url: https://platform.claude.com/docs/en/api/go/beta/webhooks/unwrap
+---
+
+# Unwrap
+
 `client.Beta.Webhooks.Unwrap(ctx) error`
 
 Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`

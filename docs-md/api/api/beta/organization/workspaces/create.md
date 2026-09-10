@@ -1,5 +1,12 @@
 # Create Workspace
 
+---
+title: Create Workspace
+url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/create
+---
+
+# Create Workspace
+
 **POST** `/v1/organizations/workspaces`
 
 Create Workspace
@@ -12,7 +19,7 @@ Create Workspace
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -59,6 +66,8 @@ Create Workspace
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -166,6 +175,14 @@ Create Workspace
 
 - `BetaWorkspace object`
 
+  - `type: "workspace"`
+
+    Object type.
+
+    For Workspaces, this is always `"workspace"`.
+
+    default: workspace
+
   - `id: string`
 
     ID of the Workspace.
@@ -241,14 +258,6 @@ Create Workspace
   - `tags: map[string]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
-
-  - `type: "workspace"`
-
-    Object type.
-
-    For Workspaces, this is always `"workspace"`.
-
-    default: workspace
 
 ## Example
 

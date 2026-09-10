@@ -1,5 +1,12 @@
 # Skills
 
+---
+title: Skills
+url: https://platform.claude.com/docs/en/api/ruby/beta/skills
+---
+
+# Skills
+
 ## Create Skill
 
 `beta.skills.create(**kwargs) -> BetaSkill`
@@ -28,7 +35,7 @@ Create Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -76,6 +83,8 @@ Create Skill
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -118,9 +127,17 @@ Create Skill
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaSkill`
+
+  - `type: :skill`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `id: String`
 
@@ -173,12 +190,6 @@ Create Skill
       - `:anthropic_example`
 
       - `:plugin`
-
-  - `type: :skill`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `updated_at: Time`
 
@@ -253,7 +264,7 @@ List Skills
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -301,6 +312,8 @@ List Skills
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -343,9 +356,17 @@ List Skills
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaSkill`
+
+  - `type: :skill`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `id: String`
 
@@ -398,12 +419,6 @@ List Skills
       - `:anthropic_example`
 
       - `:plugin`
-
-  - `type: :skill`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `updated_at: Time`
 
@@ -466,7 +481,7 @@ Get Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -514,6 +529,8 @@ Get Skill
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -556,9 +573,17 @@ Get Skill
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaSkill`
+
+  - `type: :skill`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `id: String`
 
@@ -611,12 +636,6 @@ Get Skill
       - `:anthropic_example`
 
       - `:plugin`
-
-  - `type: :skill`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `updated_at: Time`
 
@@ -674,7 +693,7 @@ Delete Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -722,6 +741,8 @@ Delete Skill
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -764,21 +785,23 @@ Delete Skill
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaDeletedSkill`
-
-  - `id: String`
-
-    Unique identifier for the skill.
-
-    The format and length of IDs may change over time.
 
   - `type: :skill_deleted`
 
     Deleted object type.
 
     For Skills, this is always `"skill_deleted"`.
+
+  - `id: String`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
 
 ### Example
 
@@ -807,21 +830,27 @@ puts(beta_deleted_skill)
 
 - `class BetaDeletedSkill`
 
-  - `id: String`
-
-    Unique identifier for the skill.
-
-    The format and length of IDs may change over time.
-
   - `type: :skill_deleted`
 
     Deleted object type.
 
     For Skills, this is always `"skill_deleted"`.
 
+  - `id: String`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
 ### Beta Skill
 
 - `class BetaSkill`
+
+  - `type: :skill`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `id: String`
 
@@ -874,12 +903,6 @@ puts(beta_deleted_skill)
       - `:anthropic_example`
 
       - `:plugin`
-
-  - `type: :skill`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `updated_at: Time`
 
@@ -940,7 +963,7 @@ Create Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -988,6 +1011,8 @@ Create Skill Version
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -1030,9 +1055,17 @@ Create Skill Version
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaSkillVersion`
+
+  - `type: :skill_version`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `id: String`
 
@@ -1063,12 +1096,6 @@ Create Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `type: :skill_version`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
 
 #### Example
 
@@ -1129,7 +1156,7 @@ List Skill Versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1177,6 +1204,8 @@ List Skill Versions
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -1219,9 +1248,17 @@ List Skill Versions
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaSkillVersion`
+
+  - `type: :skill_version`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `id: String`
 
@@ -1252,12 +1289,6 @@ List Skill Versions
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `type: :skill_version`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
 
 #### Example
 
@@ -1317,7 +1348,7 @@ Download a skill version's content as a zip archive.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1365,6 +1396,8 @@ Download a skill version's content as a zip archive.
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -1406,6 +1439,8 @@ Download a skill version's content as a zip archive.
     - `:"thinking-binding-controls-2026-08-01"`
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+- `workspace_id: String`
 
 #### Returns
 
@@ -1451,7 +1486,7 @@ Get Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1499,6 +1534,8 @@ Get Skill Version
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -1541,9 +1578,17 @@ Get Skill Version
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaSkillVersion`
+
+  - `type: :skill_version`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `id: String`
 
@@ -1574,12 +1619,6 @@ Get Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `type: :skill_version`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
 
 #### Example
 
@@ -1634,7 +1673,7 @@ Delete Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1682,6 +1721,8 @@ Delete Skill Version
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -1724,20 +1765,22 @@ Delete Skill Version
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaDeletedSkillVersion`
-
-  - `id: String`
-
-    Unique identifier for this Skill Version. The id addresses the version in
-    paths and pins it in references.
 
   - `type: :skill_version_deleted`
 
     Deleted object type.
 
     For Skill Versions, this is always `"skill_version_deleted"`.
+
+  - `id: String`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
 #### Example
 

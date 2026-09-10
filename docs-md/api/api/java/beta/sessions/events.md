@@ -1,5 +1,12 @@
 # Events
 
+---
+title: Events
+url: https://platform.claude.com/docs/en/api/java/beta/sessions/events
+---
+
+# Events
+
 ## List Events
 
 `EventListPage beta().sessions().events().list(params = EventListParams.none(), requestOptions = RequestOptions.none())`
@@ -110,6 +117,8 @@ List Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -152,6 +161,8 @@ List Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionEvent: union`
@@ -161,6 +172,8 @@ List Events
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -174,17 +187,19 @@ List Events
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -193,6 +208,8 @@ List Events
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -205,8 +222,6 @@ List Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -224,19 +239,19 @@ List Events
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -245,6 +260,8 @@ List Events
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -258,11 +275,11 @@ List Events
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -273,8 +290,6 @@ List Events
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -292,15 +307,13 @@ List Events
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -316,8 +329,6 @@ List Events
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -328,11 +339,11 @@ List Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -347,6 +358,8 @@ List Events
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -363,8 +376,6 @@ List Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -386,6 +397,8 @@ List Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -393,8 +406,6 @@ List Events
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -416,6 +427,8 @@ List Events
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -428,13 +441,13 @@ List Events
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -447,8 +460,6 @@ List Events
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -468,6 +479,8 @@ List Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -486,8 +499,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -495,6 +506,8 @@ List Events
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -518,11 +531,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -534,11 +547,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -562,8 +575,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -574,6 +585,62 @@ List Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -581,6 +648,8 @@ List Events
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -595,8 +664,6 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -626,6 +693,8 @@ List Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -644,8 +713,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -656,6 +723,10 @@ List Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -663,6 +734,8 @@ List Events
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -677,8 +750,6 @@ List Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -707,6 +778,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -742,8 +815,6 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -751,6 +822,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -786,8 +859,6 @@ List Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -795,6 +866,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -806,11 +879,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -824,6 +897,8 @@ List Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -849,13 +924,13 @@ List Events
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -875,13 +950,13 @@ List Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -901,13 +976,13 @@ List Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -928,11 +1003,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -958,11 +1033,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -988,11 +1063,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -1014,11 +1089,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -1044,8 +1119,6 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -1056,11 +1129,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -1071,13 +1144,13 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -1088,11 +1161,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -1118,11 +1191,11 @@ List Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -1136,11 +1209,11 @@ List Events
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -1152,11 +1225,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -1176,11 +1249,11 @@ List Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -1202,11 +1275,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -1239,8 +1312,6 @@ List Events
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -1282,6 +1353,8 @@ List Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -1292,11 +1365,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -1320,11 +1393,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -1346,11 +1419,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -1384,27 +1457,27 @@ List Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -1416,11 +1489,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -1440,11 +1513,11 @@ List Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -1484,11 +1557,11 @@ List Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -1508,11 +1581,11 @@ List Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -1521,8 +1594,6 @@ List Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -1562,6 +1633,8 @@ List Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -1580,11 +1653,11 @@ List Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -1596,11 +1669,11 @@ List Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -1608,9 +1681,9 @@ List Events
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -1730,6 +1803,8 @@ List Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -1738,15 +1813,17 @@ List Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -1762,9 +1839,9 @@ List Events
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -1772,9 +1849,9 @@ List Events
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -1784,11 +1861,15 @@ List Events
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -1810,11 +1891,17 @@ List Events
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -1832,11 +1919,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -1854,11 +1945,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -1876,11 +1971,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -1898,11 +1997,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -1920,11 +2023,15 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -1942,7 +2049,9 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -1955,6 +2064,8 @@ List Events
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -1972,7 +2083,9 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -2026,9 +2139,13 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -2048,6 +2165,10 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -2066,13 +2187,17 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -2088,10 +2213,6 @@ List Events
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -2100,13 +2221,11 @@ List Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -2132,8 +2251,6 @@ List Events
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -2141,6 +2258,8 @@ List Events
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -2154,8 +2273,6 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -2168,6 +2285,8 @@ List Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -2176,15 +2295,13 @@ List Events
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -2196,6 +2313,8 @@ List Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -2205,8 +2324,6 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -2393,6 +2510,8 @@ Send Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2435,6 +2554,8 @@ Send Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `List<BetaManagedAgentsEventParams> events`
 
     Events to send to the `session`.
@@ -2442,6 +2563,8 @@ Send Events
     - `class BetaManagedAgentsUserMessageEventParams:`
 
       Parameters for sending a user message to the session.
+
+      - `Type type`
 
       - `List<Content> content`
 
@@ -2451,17 +2574,19 @@ Send Events
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2470,6 +2595,8 @@ Send Events
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2482,8 +2609,6 @@ Send Events
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -2501,19 +2626,19 @@ Send Events
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2522,6 +2647,8 @@ Send Events
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2535,11 +2662,11 @@ Send Events
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -2550,8 +2677,6 @@ Send Events
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -2569,15 +2694,13 @@ Send Events
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -2593,8 +2716,6 @@ Send Events
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsUserInterruptEventParams:`
 
       Parameters for sending an interrupt to pause the agent.
@@ -2608,6 +2729,8 @@ Send Events
     - `class BetaManagedAgentsUserToolConfirmationEventParams:`
 
       Parameters for confirming or denying a tool execution request.
+
+      - `Type type`
 
       - `Result result`
 
@@ -2623,8 +2746,6 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `Type type`
-
       - `Optional<String> denyMessage`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
@@ -2635,13 +2756,13 @@ Send Events
 
       Parameters for providing the result of a custom tool execution.
 
+      - `Type type`
+
       - `String customToolUseId`
 
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -2663,6 +2784,8 @@ Send Events
 
           A block containing a web search result.
 
+          - `Type type`
+
           - `BetaManagedAgentsSearchResultCitations citations`
 
             Citation settings for a search result.
@@ -2675,13 +2798,13 @@ Send Events
 
             Array of text content blocks from the search result.
 
+            - `Type type`
+
             - `String text`
 
               The text content.
 
               minLength: 1
-
-            - `Type type`
 
           - `String source`
 
@@ -2695,8 +2818,6 @@ Send Events
 
             minLength: 1
 
-          - `Type type`
-
       - `Optional<Boolean> isError`
 
         Whether the tool execution resulted in an error.
@@ -2704,6 +2825,8 @@ Send Events
     - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -2717,25 +2840,23 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
 
-          - `Type type`
-
         - `class BetaManagedAgentsTextRubricParams:`
 
           Rubric content provided inline as text.
+
+          - `Type type`
 
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
             maxLength: 262144
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -2747,13 +2868,13 @@ Send Events
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
+      - `Type type`
+
       - `String toolUseId`
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -2783,19 +2904,19 @@ Send Events
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
 ### Returns
 
@@ -2811,6 +2932,8 @@ Send Events
 
       A user message event in the session conversation.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -2823,17 +2946,19 @@ Send Events
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2842,6 +2967,8 @@ Send Events
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2854,8 +2981,6 @@ Send Events
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -2873,19 +2998,19 @@ Send Events
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2894,6 +3019,8 @@ Send Events
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2907,11 +3034,11 @@ Send Events
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -2922,8 +3049,6 @@ Send Events
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -2941,15 +3066,13 @@ Send Events
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -2965,8 +3088,6 @@ Send Events
 
           - `Type type`
 
-      - `Type type`
-
       - `Optional<LocalDateTime> processedAt`
 
         A timestamp in RFC 3339 format
@@ -2977,11 +3098,11 @@ Send Events
 
       An interrupt event that pauses agent execution and returns control to the user.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> processedAt`
 
@@ -2996,6 +3117,8 @@ Send Events
     - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
       A tool confirmation event that approves or denies a pending tool execution.
+
+      - `Type type`
 
       - `String id`
 
@@ -3012,8 +3135,6 @@ Send Events
       - `String toolUseId`
 
         The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<String> denyMessage`
 
@@ -3035,6 +3156,8 @@ Send Events
 
       Event sent by the client providing the result of a custom tool execution.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -3042,8 +3165,6 @@ Send Events
       - `String customToolUseId`
 
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -3065,6 +3186,8 @@ Send Events
 
           A block containing a web search result.
 
+          - `Type type`
+
           - `BetaManagedAgentsSearchResultCitations citations`
 
             Citation settings for a search result.
@@ -3077,13 +3200,13 @@ Send Events
 
             Array of text content blocks from the search result.
 
+            - `Type type`
+
             - `String text`
 
               The text content.
 
               minLength: 1
-
-            - `Type type`
 
           - `String source`
 
@@ -3096,8 +3219,6 @@ Send Events
             The title of the search result.
 
             minLength: 1
-
-          - `Type type`
 
       - `Optional<Boolean> isError`
 
@@ -3116,6 +3237,8 @@ Send Events
     - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `Type type`
 
       - `String id`
 
@@ -3149,27 +3272,27 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsUserToolResultEvent:`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+      - `Type type`
 
       - `String id`
 
@@ -3178,8 +3301,6 @@ Send Events
       - `String toolUseId`
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -3219,6 +3340,8 @@ Send Events
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -3227,15 +3350,13 @@ Send Events
 
         System content blocks. Text-only.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
       - `Optional<LocalDateTime> processedAt`
 
@@ -3366,6 +3487,8 @@ Stream Events
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -3408,6 +3531,8 @@ Stream Events
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsStreamSessionEvents: union`
@@ -3417,6 +3542,8 @@ Stream Events
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -3430,17 +3557,19 @@ Stream Events
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -3449,6 +3578,8 @@ Stream Events
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -3461,8 +3592,6 @@ Stream Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -3480,19 +3609,19 @@ Stream Events
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -3501,6 +3630,8 @@ Stream Events
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -3514,11 +3645,11 @@ Stream Events
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -3529,8 +3660,6 @@ Stream Events
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -3548,15 +3677,13 @@ Stream Events
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -3572,8 +3699,6 @@ Stream Events
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -3584,11 +3709,11 @@ Stream Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -3603,6 +3728,8 @@ Stream Events
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -3619,8 +3746,6 @@ Stream Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -3642,6 +3767,8 @@ Stream Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -3649,8 +3776,6 @@ Stream Events
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -3672,6 +3797,8 @@ Stream Events
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -3684,13 +3811,13 @@ Stream Events
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -3703,8 +3830,6 @@ Stream Events
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -3724,6 +3849,8 @@ Stream Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -3742,8 +3869,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -3751,6 +3876,8 @@ Stream Events
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -3774,11 +3901,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -3790,11 +3917,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -3818,8 +3945,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -3830,6 +3955,62 @@ Stream Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -3837,6 +4018,8 @@ Stream Events
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -3851,8 +4034,6 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -3882,6 +4063,8 @@ Stream Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -3900,8 +4083,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -3912,6 +4093,10 @@ Stream Events
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -3919,6 +4104,8 @@ Stream Events
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -3933,8 +4120,6 @@ Stream Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -3963,6 +4148,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -3998,8 +4185,6 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -4007,6 +4192,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -4042,8 +4229,6 @@ Stream Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -4051,6 +4236,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -4062,11 +4249,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -4080,6 +4267,8 @@ Stream Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -4105,13 +4294,13 @@ Stream Events
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -4131,13 +4320,13 @@ Stream Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -4157,13 +4346,13 @@ Stream Events
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -4184,11 +4373,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -4214,11 +4403,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -4244,11 +4433,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -4270,11 +4459,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -4300,8 +4489,6 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -4312,11 +4499,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -4327,13 +4514,13 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -4344,11 +4531,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -4374,11 +4561,11 @@ Stream Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -4392,11 +4579,11 @@ Stream Events
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -4408,11 +4595,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -4432,11 +4619,11 @@ Stream Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -4458,11 +4645,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -4495,8 +4682,6 @@ Stream Events
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -4538,6 +4723,8 @@ Stream Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -4548,11 +4735,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -4576,11 +4763,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -4602,11 +4789,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -4640,27 +4827,27 @@ Stream Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -4672,11 +4859,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -4696,11 +4883,11 @@ Stream Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -4740,11 +4927,11 @@ Stream Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -4764,11 +4951,11 @@ Stream Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -4777,8 +4964,6 @@ Stream Events
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -4818,6 +5003,8 @@ Stream Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -4836,11 +5023,11 @@ Stream Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -4852,11 +5039,11 @@ Stream Events
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -4864,9 +5051,9 @@ Stream Events
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -4986,6 +5173,8 @@ Stream Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -4994,15 +5183,17 @@ Stream Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -5018,9 +5209,9 @@ Stream Events
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -5028,9 +5219,9 @@ Stream Events
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -5040,11 +5231,15 @@ Stream Events
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -5066,11 +5261,17 @@ Stream Events
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -5088,11 +5289,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -5110,11 +5315,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -5132,11 +5341,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -5154,11 +5367,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -5176,11 +5393,15 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -5198,7 +5419,9 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -5211,6 +5434,8 @@ Stream Events
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -5228,7 +5453,9 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -5282,9 +5509,13 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -5304,6 +5535,10 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -5322,13 +5557,17 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -5344,10 +5583,6 @@ Stream Events
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -5356,13 +5591,11 @@ Stream Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -5388,8 +5621,6 @@ Stream Events
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -5397,6 +5628,8 @@ Stream Events
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -5410,8 +5643,6 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -5424,41 +5655,43 @@ Stream Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+    - `Type type`
+
     - `BetaManagedAgentsStartEventPreview event`
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
       - `class BetaManagedAgentsAgentMessagePreview:`
 
+        - `Type type`
+
         - `String id`
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-        - `Type type`
-
       - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `Type type`
 
         - `String id`
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsDeltaEvent:`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Type type`
 
     - `BetaManagedAgentsDeltaContent delta`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+      - `Type type`
+
       - `BetaManagedAgentsTextBlock content`
 
         Regular text content.
-
-      - `Type type`
 
       - `Optional<Long> index`
 
@@ -5470,11 +5703,11 @@ Stream Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSystemMessageEvent:`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -5484,15 +5717,13 @@ Stream Events
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -5504,6 +5735,8 @@ Stream Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -5513,8 +5746,6 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -5624,11 +5855,85 @@ public final class Main {
 
 ## Domain types
 
+### Beta Managed Agents Agent Auto Evaluated Permission
+
+- `class BetaManagedAgentsAgentAutoEvaluatedPermission: union`
+
+  The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+    The server judged the invocation safe to execute without client approval.
+
+    - `JsonValue type = "allow"`
+
+  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+    The server reached no judgement; the invocation is held for client approval.
+
+    - `JsonValue type = "ask"`
+
+    - `String reasonCode`
+
+      The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+      maxLength: 64
+
+  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+    The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+    - `JsonValue type = "deny"`
+
+    - `String reasonCode`
+
+      The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+      maxLength: 64
+
+### Beta Managed Agents Agent Auto Evaluated Permission Allow
+
+- `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+  The server judged the invocation safe to execute without client approval.
+
+  - `JsonValue type = "allow"`
+
+### Beta Managed Agents Agent Auto Evaluated Permission Ask
+
+- `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+  The server reached no judgement; the invocation is held for client approval.
+
+  - `JsonValue type = "ask"`
+
+  - `String reasonCode`
+
+    The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+    maxLength: 64
+
+### Beta Managed Agents Agent Auto Evaluated Permission Deny
+
+- `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+  The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+  - `JsonValue type = "deny"`
+
+  - `String reasonCode`
+
+    The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+    maxLength: 64
+
 ### Beta Managed Agents Agent Custom Tool Use Event
 
 - `class BetaManagedAgentsAgentCustomToolUseEvent:`
 
   Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+  - `Type type`
 
   - `String id`
 
@@ -5648,8 +5953,6 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
   - `Optional<String> sessionThreadId`
 
     When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -5659,6 +5962,8 @@ public final class Main {
 - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
   Event representing the result of an MCP tool execution.
+
+  - `Type type`
 
   - `String id`
 
@@ -5674,8 +5979,6 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
   - `Optional<List<Content>> content`
 
     The result content returned by the tool.
@@ -5684,17 +5987,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -5703,6 +6008,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -5715,8 +6022,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -5734,19 +6039,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -5755,6 +6060,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -5768,11 +6075,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -5783,8 +6090,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -5802,15 +6107,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -5824,6 +6127,8 @@ public final class Main {
 
       A block containing a web search result.
 
+      - `Type type`
+
       - `BetaManagedAgentsSearchResultCitations citations`
 
         Citation settings for a search result.
@@ -5836,13 +6141,13 @@ public final class Main {
 
         Array of text content blocks from the search result.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
 
       - `String source`
 
@@ -5856,8 +6161,6 @@ public final class Main {
 
         minLength: 1
 
-      - `Type type`
-
   - `Optional<Boolean> isError`
 
     Whether the tool execution resulted in an error.
@@ -5867,6 +6170,8 @@ public final class Main {
 - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
   Event emitted when the agent invokes a tool provided by an MCP server.
+
+  - `Type type`
 
   - `String id`
 
@@ -5890,8 +6195,6 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
   - `Optional<EvaluatedPermission> evaluatedPermission`
 
     AgentEvaluatedPermission enum
@@ -5902,6 +6205,62 @@ public final class Main {
 
     - `DENY("deny")`
 
+  - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+    Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+      The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+      - `JsonValue type = "always_allow"`
+
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+      The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+      - `JsonValue type = "always_ask"`
+
+    - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+      The resolved permission_policy was auto: the server judged this invocation individually.
+
+      - `JsonValue type = "auto"`
+
+      - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+        The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+          The server judged the invocation safe to execute without client approval.
+
+          - `JsonValue type = "allow"`
+
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+          The server reached no judgement; the invocation is held for client approval.
+
+          - `JsonValue type = "ask"`
+
+          - `String reasonCode`
+
+            The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+            maxLength: 64
+
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+          The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+          - `JsonValue type = "deny"`
+
+          - `String reasonCode`
+
+            The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+            maxLength: 64
+
   - `Optional<String> sessionThreadId`
 
     When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -5911,6 +6270,8 @@ public final class Main {
 - `class BetaManagedAgentsAgentMessageEvent:`
 
   An agent response event in the session conversation.
+
+  - `Type type`
 
   - `String id`
 
@@ -5924,13 +6285,13 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
 
     - `class BetaManagedAgentsRedactedBlock:`
 
@@ -5944,13 +6305,13 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
 ### Beta Managed Agents Agent Thinking Event
 
 - `class BetaManagedAgentsAgentThinkingEvent:`
 
   Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+  - `Type type`
 
   - `String id`
 
@@ -5961,8 +6322,6 @@ public final class Main {
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `Type type`
 
 ### Beta Managed Agents Agent Thread Context Compacted Event
 
@@ -5970,6 +6329,8 @@ public final class Main {
 
   Indicates that context compaction (summarization) occurred during the session.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -5980,13 +6341,13 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
 ### Beta Managed Agents Agent Thread Message Received Event
 
 - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
   Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+  - `Type type`
 
   - `String id`
 
@@ -6000,17 +6361,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -6019,6 +6382,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -6031,8 +6396,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -6050,19 +6413,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -6071,6 +6434,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -6084,11 +6449,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -6099,8 +6464,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -6118,15 +6481,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -6152,8 +6513,6 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
   - `Optional<String> fromAgentName`
 
     Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -6163,6 +6522,8 @@ public final class Main {
 - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
   Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+  - `Type type`
 
   - `String id`
 
@@ -6176,17 +6537,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -6195,6 +6558,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -6207,8 +6572,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -6226,19 +6589,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -6247,6 +6610,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -6260,11 +6625,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -6275,8 +6640,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -6294,15 +6657,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -6328,17 +6689,133 @@ public final class Main {
 
     Public `sthr_` ID of the thread the message was sent to.
 
-  - `Type type`
-
   - `Optional<String> toAgentName`
 
     Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+### Beta Managed Agents Agent Tool Evaluation
+
+- `class BetaManagedAgentsAgentToolEvaluation: union`
+
+  Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+  - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+    The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+    - `JsonValue type = "always_allow"`
+
+  - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+    The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+    - `JsonValue type = "always_ask"`
+
+  - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+    The resolved permission_policy was auto: the server judged this invocation individually.
+
+    - `JsonValue type = "auto"`
+
+    - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+      The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+        The server judged the invocation safe to execute without client approval.
+
+        - `JsonValue type = "allow"`
+
+      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+        The server reached no judgement; the invocation is held for client approval.
+
+        - `JsonValue type = "ask"`
+
+        - `String reasonCode`
+
+          The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+          maxLength: 64
+
+      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+        The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+        - `JsonValue type = "deny"`
+
+        - `String reasonCode`
+
+          The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+          maxLength: 64
+
+### Beta Managed Agents Agent Tool Evaluation Always Allow
+
+- `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+  The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+  - `JsonValue type = "always_allow"`
+
+### Beta Managed Agents Agent Tool Evaluation Always Ask
+
+- `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+  The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+  - `JsonValue type = "always_ask"`
+
+### Beta Managed Agents Agent Tool Evaluation Auto
+
+- `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+  The resolved permission_policy was auto: the server judged this invocation individually.
+
+  - `JsonValue type = "auto"`
+
+  - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+    The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+      The server judged the invocation safe to execute without client approval.
+
+      - `JsonValue type = "allow"`
+
+    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+      The server reached no judgement; the invocation is held for client approval.
+
+      - `JsonValue type = "ask"`
+
+      - `String reasonCode`
+
+        The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+        maxLength: 64
+
+    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+      The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+      - `JsonValue type = "deny"`
+
+      - `String reasonCode`
+
+        The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+        maxLength: 64
 
 ### Beta Managed Agents Agent Tool Result Event
 
 - `class BetaManagedAgentsAgentToolResultEvent:`
 
   Event representing the result of an agent tool execution.
+
+  - `Type type`
 
   - `String id`
 
@@ -6354,8 +6831,6 @@ public final class Main {
 
     The id of the `agent.tool_use` event this result corresponds to.
 
-  - `Type type`
-
   - `Optional<List<Content>> content`
 
     The result content returned by the tool.
@@ -6364,17 +6839,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -6383,6 +6860,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -6395,8 +6874,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -6414,19 +6891,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -6435,6 +6912,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -6448,11 +6927,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -6463,8 +6942,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -6482,15 +6959,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -6504,6 +6979,8 @@ public final class Main {
 
       A block containing a web search result.
 
+      - `Type type`
+
       - `BetaManagedAgentsSearchResultCitations citations`
 
         Citation settings for a search result.
@@ -6516,13 +6993,13 @@ public final class Main {
 
         Array of text content blocks from the search result.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
 
       - `String source`
 
@@ -6536,8 +7013,6 @@ public final class Main {
 
         minLength: 1
 
-      - `Type type`
-
   - `Optional<Boolean> isError`
 
     Whether the tool execution resulted in an error.
@@ -6547,6 +7022,8 @@ public final class Main {
 - `class BetaManagedAgentsAgentToolUseEvent:`
 
   Event emitted when the agent invokes a built-in agent tool.
+
+  - `Type type`
 
   - `String id`
 
@@ -6566,8 +7043,6 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
   - `Optional<EvaluatedPermission> evaluatedPermission`
 
     AgentEvaluatedPermission enum
@@ -6578,6 +7053,62 @@ public final class Main {
 
     - `DENY("deny")`
 
+  - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+    Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+      The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+      - `JsonValue type = "always_allow"`
+
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+      The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+      - `JsonValue type = "always_ask"`
+
+    - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+      The resolved permission_policy was auto: the server judged this invocation individually.
+
+      - `JsonValue type = "auto"`
+
+      - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+        The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+          The server judged the invocation safe to execute without client approval.
+
+          - `JsonValue type = "allow"`
+
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+          The server reached no judgement; the invocation is held for client approval.
+
+          - `JsonValue type = "ask"`
+
+          - `String reasonCode`
+
+            The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+            maxLength: 64
+
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+          The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+          - `JsonValue type = "deny"`
+
+          - `String reasonCode`
+
+            The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+            maxLength: 64
+
   - `Optional<String> sessionThreadId`
 
     When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -6587,6 +7118,8 @@ public final class Main {
 - `class BetaManagedAgentsBase64DocumentSource:`
 
   Base64-encoded document data.
+
+  - `Type type`
 
   - `String data`
 
@@ -6600,13 +7133,13 @@ public final class Main {
 
     minLength: 1
 
-  - `Type type`
-
 ### Beta Managed Agents Base64 Image Source
 
 - `class BetaManagedAgentsBase64ImageSource:`
 
   Base64-encoded image data.
+
+  - `Type type`
 
   - `String data`
 
@@ -6620,13 +7153,13 @@ public final class Main {
 
     minLength: 1
 
-  - `Type type`
-
 ### Beta Managed Agents Billing Error
 
 - `class BetaManagedAgentsBillingError:`
 
   The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+  - `Type type`
 
   - `String message`
 
@@ -6654,13 +7187,13 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents Credential Host Unreachable Error
 
 - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
   An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+  - `Type type`
 
   - `String credentialId`
 
@@ -6692,8 +7225,6 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
   - `String vaultId`
 
     ID of the vault containing the affected credential.
@@ -6704,6 +7235,8 @@ public final class Main {
 
   Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
+  - `Type type`
+
   - `Source source`
 
     Union type for document source variants.
@@ -6711,6 +7244,8 @@ public final class Main {
     - `class BetaManagedAgentsBase64DocumentSource:`
 
       Base64-encoded document data.
+
+      - `Type type`
 
       - `String data`
 
@@ -6724,11 +7259,11 @@ public final class Main {
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsPlainTextDocumentSource:`
 
       Plain text document content.
+
+      - `Type type`
 
       - `String data`
 
@@ -6739,8 +7274,6 @@ public final class Main {
       - `MediaType mediaType`
 
         MIME type of the text content. Must be "text/plain".
-
-      - `Type type`
 
     - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -6758,15 +7291,13 @@ public final class Main {
 
       Document referenced by file ID.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
 
         minLength: 1
-
-      - `Type type`
-
-  - `Type type`
 
   - `Optional<String> context`
 
@@ -6786,6 +7317,8 @@ public final class Main {
 
     Parameters for sending a user message to the session.
 
+    - `Type type`
+
     - `List<Content> content`
 
       Array of content blocks for the user message.
@@ -6794,17 +7327,19 @@ public final class Main {
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -6813,6 +7348,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -6825,8 +7362,6 @@ public final class Main {
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -6844,19 +7379,19 @@ public final class Main {
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -6865,6 +7400,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -6878,11 +7415,11 @@ public final class Main {
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -6893,8 +7430,6 @@ public final class Main {
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -6912,15 +7447,13 @@ public final class Main {
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -6936,8 +7469,6 @@ public final class Main {
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserInterruptEventParams:`
 
     Parameters for sending an interrupt to pause the agent.
@@ -6951,6 +7482,8 @@ public final class Main {
   - `class BetaManagedAgentsUserToolConfirmationEventParams:`
 
     Parameters for confirming or denying a tool execution request.
+
+    - `Type type`
 
     - `Result result`
 
@@ -6966,8 +7499,6 @@ public final class Main {
 
       minLength: 1, maxLength: 128
 
-    - `Type type`
-
     - `Optional<String> denyMessage`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
@@ -6978,13 +7509,13 @@ public final class Main {
 
     Parameters for providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       minLength: 1, maxLength: 128
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -7006,6 +7537,8 @@ public final class Main {
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -7018,13 +7551,13 @@ public final class Main {
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -7038,8 +7571,6 @@ public final class Main {
 
           minLength: 1
 
-        - `Type type`
-
     - `Optional<Boolean> isError`
 
       Whether the tool execution resulted in an error.
@@ -7047,6 +7578,8 @@ public final class Main {
   - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `Type type`
 
     - `String description`
 
@@ -7060,25 +7593,23 @@ public final class Main {
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
 
-        - `Type type`
-
       - `class BetaManagedAgentsTextRubricParams:`
 
         Rubric content provided inline as text.
+
+        - `Type type`
 
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
           maxLength: 262144
-
-        - `Type type`
-
-    - `Type type`
 
     - `Optional<Long> maxIterations`
 
@@ -7090,13 +7621,13 @@ public final class Main {
 
     Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
+    - `Type type`
+
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       minLength: 1, maxLength: 128
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -7126,9 +7657,13 @@ public final class Main {
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+    - `Type type`
+
     - `List<BetaManagedAgentsSystemContentBlock> content`
 
       System content blocks to append. Text-only.
+
+      - `Type type`
 
       - `String text`
 
@@ -7136,23 +7671,19 @@ public final class Main {
 
         minLength: 1
 
-      - `Type type`
-
-    - `Type type`
-
 ### Beta Managed Agents File Document Source
 
 - `class BetaManagedAgentsFileDocumentSource:`
 
   Document referenced by file ID.
 
+  - `Type type`
+
   - `String fileId`
 
     ID of a previously uploaded file.
 
     minLength: 1
-
-  - `Type type`
 
 ### Beta Managed Agents File Image Source
 
@@ -7160,13 +7691,13 @@ public final class Main {
 
   Image referenced by file ID.
 
+  - `Type type`
+
   - `String fileId`
 
     ID of a previously uploaded file.
 
     minLength: 1
-
-  - `Type type`
 
 ### Beta Managed Agents File Rubric
 
@@ -7174,11 +7705,11 @@ public final class Main {
 
   Rubric referenced by a file uploaded via the Files API.
 
+  - `Type type`
+
   - `String fileId`
 
     ID of the rubric file.
-
-  - `Type type`
 
 ### Beta Managed Agents File Rubric Params
 
@@ -7186,17 +7717,19 @@ public final class Main {
 
   Rubric referenced by a file uploaded via the Files API.
 
+  - `Type type`
+
   - `String fileId`
 
     ID of the rubric file.
-
-  - `Type type`
 
 ### Beta Managed Agents Image Block
 
 - `class BetaManagedAgentsImageBlock:`
 
   Image content specified directly as base64 data or as a reference via a URL.
+
+  - `Type type`
 
   - `Source source`
 
@@ -7205,6 +7738,8 @@ public final class Main {
     - `class BetaManagedAgentsBase64ImageSource:`
 
       Base64-encoded image data.
+
+      - `Type type`
 
       - `String data`
 
@@ -7217,8 +7752,6 @@ public final class Main {
         MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
         minLength: 1
-
-      - `Type type`
 
     - `class BetaManagedAgentsUrlImageSource:`
 
@@ -7236,21 +7769,21 @@ public final class Main {
 
       Image referenced by file ID.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
 
         minLength: 1
 
-      - `Type type`
-
-  - `Type type`
-
 ### Beta Managed Agents MCP Authentication Failed Error
 
 - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
   Authentication to an MCP server failed.
+
+  - `Type type`
 
   - `String mcpServerName`
 
@@ -7282,13 +7815,13 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents MCP Connection Failed Error
 
 - `class BetaManagedAgentsMcpConnectionFailedError:`
 
   Failed to connect to an MCP server.
+
+  - `Type type`
 
   - `String mcpServerName`
 
@@ -7320,13 +7853,13 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents Model Overloaded Error
 
 - `class BetaManagedAgentsModelOverloadedError:`
 
   The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+  - `Type type`
 
   - `String message`
 
@@ -7353,8 +7886,6 @@ public final class Main {
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents Model Rate Limited Error
 
@@ -7362,6 +7893,8 @@ public final class Main {
 
   The model request was rate-limited.
 
+  - `Type type`
+
   - `String message`
 
     Human-readable error description.
@@ -7387,8 +7920,6 @@ public final class Main {
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents Model Request Failed Error
 
@@ -7396,6 +7927,8 @@ public final class Main {
 
   A model request failed for a reason other than overload or rate-limiting.
 
+  - `Type type`
+
   - `String message`
 
     Human-readable error description.
@@ -7422,13 +7955,13 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents Plain Text Document Source
 
 - `class BetaManagedAgentsPlainTextDocumentSource:`
 
   Plain text document content.
+
+  - `Type type`
 
   - `String data`
 
@@ -7439,8 +7972,6 @@ public final class Main {
   - `MediaType mediaType`
 
     MIME type of the text content. Must be "text/plain".
-
-  - `Type type`
 
 ### Beta Managed Agents Redacted Block
 
@@ -7480,6 +8011,8 @@ public final class Main {
 
   A block containing a web search result.
 
+  - `Type type`
+
   - `BetaManagedAgentsSearchResultCitations citations`
 
     Citation settings for a search result.
@@ -7492,13 +8025,13 @@ public final class Main {
 
     Array of text content blocks from the search result.
 
+    - `Type type`
+
     - `String text`
 
       The text content.
 
       minLength: 1
-
-    - `Type type`
 
   - `String source`
 
@@ -7511,8 +8044,6 @@ public final class Main {
     The title of the search result.
 
     minLength: 1
-
-  - `Type type`
 
 ### Beta Managed Agents Search Result Citations
 
@@ -7530,13 +8061,13 @@ public final class Main {
 
   Text content within a search result.
 
+  - `Type type`
+
   - `String text`
 
     The text content.
 
     minLength: 1
-
-  - `Type type`
 
 ### Beta Managed Agents Send Session Events
 
@@ -7552,6 +8083,8 @@ public final class Main {
 
       A user message event in the session conversation.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -7564,17 +8097,19 @@ public final class Main {
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -7583,6 +8118,8 @@ public final class Main {
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -7595,8 +8132,6 @@ public final class Main {
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -7614,19 +8149,19 @@ public final class Main {
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -7635,6 +8170,8 @@ public final class Main {
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -7648,11 +8185,11 @@ public final class Main {
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -7663,8 +8200,6 @@ public final class Main {
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -7682,15 +8217,13 @@ public final class Main {
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -7706,8 +8239,6 @@ public final class Main {
 
           - `Type type`
 
-      - `Type type`
-
       - `Optional<LocalDateTime> processedAt`
 
         A timestamp in RFC 3339 format
@@ -7718,11 +8249,11 @@ public final class Main {
 
       An interrupt event that pauses agent execution and returns control to the user.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> processedAt`
 
@@ -7737,6 +8268,8 @@ public final class Main {
     - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
       A tool confirmation event that approves or denies a pending tool execution.
+
+      - `Type type`
 
       - `String id`
 
@@ -7753,8 +8286,6 @@ public final class Main {
       - `String toolUseId`
 
         The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<String> denyMessage`
 
@@ -7776,6 +8307,8 @@ public final class Main {
 
       Event sent by the client providing the result of a custom tool execution.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -7783,8 +8316,6 @@ public final class Main {
       - `String customToolUseId`
 
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -7806,6 +8337,8 @@ public final class Main {
 
           A block containing a web search result.
 
+          - `Type type`
+
           - `BetaManagedAgentsSearchResultCitations citations`
 
             Citation settings for a search result.
@@ -7818,13 +8351,13 @@ public final class Main {
 
             Array of text content blocks from the search result.
 
+            - `Type type`
+
             - `String text`
 
               The text content.
 
               minLength: 1
-
-            - `Type type`
 
           - `String source`
 
@@ -7837,8 +8370,6 @@ public final class Main {
             The title of the search result.
 
             minLength: 1
-
-          - `Type type`
 
       - `Optional<Boolean> isError`
 
@@ -7857,6 +8388,8 @@ public final class Main {
     - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `Type type`
 
       - `String id`
 
@@ -7890,27 +8423,27 @@ public final class Main {
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsUserToolResultEvent:`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+      - `Type type`
 
       - `String id`
 
@@ -7919,8 +8452,6 @@ public final class Main {
       - `String toolUseId`
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `Type type`
 
       - `Optional<List<Content>> content`
 
@@ -7960,6 +8491,8 @@ public final class Main {
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+      - `Type type`
+
       - `String id`
 
         Unique identifier for this event.
@@ -7968,15 +8501,13 @@ public final class Main {
 
         System content blocks. Text-only.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
       - `Optional<LocalDateTime> processedAt`
 
@@ -7998,6 +8529,8 @@ public final class Main {
 
   Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -8007,8 +8540,6 @@ public final class Main {
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `Type type`
 
 ### Beta Managed Agents Session End Turn
 
@@ -8024,6 +8555,8 @@ public final class Main {
 
   An error event indicating a problem occurred during session execution.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -8036,6 +8569,8 @@ public final class Main {
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
@@ -8061,13 +8596,13 @@ public final class Main {
           The session encountered a terminal error and will transition to `terminated` state.
 
           - `Type type`
-
-      - `Type type`
 
     - `class BetaManagedAgentsModelOverloadedError:`
 
       The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
@@ -8087,13 +8622,13 @@ public final class Main {
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-      - `Type type`
 
     - `class BetaManagedAgentsModelRateLimitedError:`
 
       The model request was rate-limited.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
@@ -8113,13 +8648,13 @@ public final class Main {
         - `class BetaManagedAgentsRetryStatusTerminal:`
 
           The session encountered a terminal error and will transition to `terminated` state.
-
-      - `Type type`
 
     - `class BetaManagedAgentsModelRequestFailedError:`
 
       A model request failed for a reason other than overload or rate-limiting.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
@@ -8140,11 +8675,11 @@ public final class Main {
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-      - `Type type`
-
     - `class BetaManagedAgentsMcpConnectionFailedError:`
 
       Failed to connect to an MCP server.
+
+      - `Type type`
 
       - `String mcpServerName`
 
@@ -8170,11 +8705,11 @@ public final class Main {
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-      - `Type type`
-
     - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
       Authentication to an MCP server failed.
+
+      - `Type type`
 
       - `String mcpServerName`
 
@@ -8200,11 +8735,11 @@ public final class Main {
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-      - `Type type`
-
     - `class BetaManagedAgentsBillingError:`
 
       The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+      - `Type type`
 
       - `String message`
 
@@ -8226,11 +8761,11 @@ public final class Main {
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-      - `Type type`
-
     - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
       An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+      - `Type type`
 
       - `String credentialId`
 
@@ -8256,8 +8791,6 @@ public final class Main {
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-      - `Type type`
-
       - `String vaultId`
 
         ID of the vault containing the affected credential.
@@ -8268,8 +8801,6 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
 ### Beta Managed Agents Session Event
 
 - `class BetaManagedAgentsSessionEvent: union`
@@ -8279,6 +8810,8 @@ public final class Main {
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -8292,17 +8825,19 @@ public final class Main {
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -8311,6 +8846,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -8323,8 +8860,6 @@ public final class Main {
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -8342,19 +8877,19 @@ public final class Main {
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -8363,6 +8898,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -8376,11 +8913,11 @@ public final class Main {
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -8391,8 +8928,6 @@ public final class Main {
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -8410,15 +8945,13 @@ public final class Main {
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -8434,8 +8967,6 @@ public final class Main {
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -8446,11 +8977,11 @@ public final class Main {
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -8465,6 +8996,8 @@ public final class Main {
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -8481,8 +9014,6 @@ public final class Main {
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -8504,6 +9035,8 @@ public final class Main {
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -8511,8 +9044,6 @@ public final class Main {
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -8534,6 +9065,8 @@ public final class Main {
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -8546,13 +9079,13 @@ public final class Main {
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -8565,8 +9098,6 @@ public final class Main {
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -8586,6 +9117,8 @@ public final class Main {
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -8604,8 +9137,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -8613,6 +9144,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -8636,11 +9169,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -8652,11 +9185,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -8680,8 +9213,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -8692,6 +9223,62 @@ public final class Main {
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -8699,6 +9286,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -8713,8 +9302,6 @@ public final class Main {
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -8744,6 +9331,8 @@ public final class Main {
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -8762,8 +9351,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -8774,6 +9361,10 @@ public final class Main {
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -8781,6 +9372,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -8795,8 +9388,6 @@ public final class Main {
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -8825,6 +9416,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -8860,8 +9453,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -8869,6 +9460,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -8904,8 +9497,6 @@ public final class Main {
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -8913,6 +9504,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -8924,11 +9517,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -8942,6 +9535,8 @@ public final class Main {
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -8967,13 +9562,13 @@ public final class Main {
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -8993,13 +9588,13 @@ public final class Main {
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -9019,13 +9614,13 @@ public final class Main {
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -9046,11 +9641,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -9076,11 +9671,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -9106,11 +9701,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -9132,11 +9727,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -9162,8 +9757,6 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -9174,11 +9767,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -9189,13 +9782,13 @@ public final class Main {
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -9206,11 +9799,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -9236,11 +9829,11 @@ public final class Main {
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -9254,11 +9847,11 @@ public final class Main {
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -9270,11 +9863,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -9294,11 +9887,11 @@ public final class Main {
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -9320,11 +9913,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -9357,8 +9950,6 @@ public final class Main {
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -9400,6 +9991,8 @@ public final class Main {
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -9410,11 +10003,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -9438,11 +10031,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -9464,11 +10057,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -9502,27 +10095,27 @@ public final class Main {
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -9534,11 +10127,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -9558,11 +10151,11 @@ public final class Main {
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -9602,11 +10195,11 @@ public final class Main {
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -9626,11 +10219,11 @@ public final class Main {
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -9639,8 +10232,6 @@ public final class Main {
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -9680,6 +10271,8 @@ public final class Main {
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -9698,11 +10291,11 @@ public final class Main {
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -9714,11 +10307,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -9726,9 +10319,9 @@ public final class Main {
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -9848,6 +10441,8 @@ public final class Main {
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -9856,15 +10451,17 @@ public final class Main {
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -9880,9 +10477,9 @@ public final class Main {
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -9890,9 +10487,9 @@ public final class Main {
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -9902,11 +10499,15 @@ public final class Main {
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -9928,11 +10529,17 @@ public final class Main {
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -9950,11 +10557,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -9972,11 +10583,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -9994,11 +10609,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -10016,11 +10635,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -10038,11 +10661,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -10060,7 +10687,9 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -10073,6 +10702,8 @@ public final class Main {
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -10090,7 +10721,9 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -10144,9 +10777,13 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -10166,6 +10803,10 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -10184,13 +10825,17 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -10206,10 +10851,6 @@ public final class Main {
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -10218,13 +10859,11 @@ public final class Main {
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -10250,8 +10889,6 @@ public final class Main {
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -10259,6 +10896,8 @@ public final class Main {
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -10272,8 +10911,6 @@ public final class Main {
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -10286,6 +10923,8 @@ public final class Main {
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -10294,15 +10933,13 @@ public final class Main {
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -10314,6 +10951,8 @@ public final class Main {
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -10323,8 +10962,6 @@ public final class Main {
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -10400,11 +11037,11 @@ public final class Main {
 
   The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+  - `Type type`
+
   - `List<String> eventIds`
 
     The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-  - `Type type`
 
 ### Beta Managed Agents Session Retries Exhausted
 
@@ -10419,6 +11056,8 @@ public final class Main {
 - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
   Indicates the agent has paused and is awaiting user input.
+
+  - `Type type`
 
   - `String id`
 
@@ -10444,11 +11083,11 @@ public final class Main {
 
       The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+      - `Type type`
+
       - `List<String> eventIds`
 
         The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-      - `Type type`
 
     - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -10462,13 +11101,13 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents Session Status Rescheduled Event
 
 - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
   Indicates the session is recovering from an error state and is rescheduled for execution.
+
+  - `Type type`
 
   - `String id`
 
@@ -10479,8 +11118,6 @@ public final class Main {
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `Type type`
 
 ### Beta Managed Agents Session Status Running Event
 
@@ -10488,6 +11125,8 @@ public final class Main {
 
   Indicates the session is actively running and the agent is working.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -10497,8 +11136,6 @@ public final class Main {
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `Type type`
 
 ### Beta Managed Agents Session Status Terminated Event
 
@@ -10506,6 +11143,8 @@ public final class Main {
 
   Indicates the session has terminated, either due to an error or completion.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -10516,13 +11155,13 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
 ### Beta Managed Agents Session Thread Created Event
 
 - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
   Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+  - `Type type`
 
   - `String id`
 
@@ -10542,13 +11181,13 @@ public final class Main {
 
     Public `sthr_` ID of the newly created thread.
 
-  - `Type type`
-
 ### Beta Managed Agents Session Thread Status Idle Event
 
 - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
   A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `Type type`
 
   - `String id`
 
@@ -10582,11 +11221,11 @@ public final class Main {
 
       The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+      - `Type type`
+
       - `List<String> eventIds`
 
         The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-      - `Type type`
 
     - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -10600,13 +11239,13 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents Session Thread Status Rescheduled Event
 
 - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
 
   A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `Type type`
 
   - `String id`
 
@@ -10626,13 +11265,13 @@ public final class Main {
 
     Public sthr_ ID of the thread that is retrying.
 
-  - `Type type`
-
 ### Beta Managed Agents Session Thread Status Running Event
 
 - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
   A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `Type type`
 
   - `String id`
 
@@ -10652,13 +11291,13 @@ public final class Main {
 
     Public sthr_ ID of the thread that started running.
 
-  - `Type type`
-
 ### Beta Managed Agents Session Thread Status Terminated Event
 
 - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
   A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `Type type`
 
   - `String id`
 
@@ -10677,8 +11316,6 @@ public final class Main {
   - `String sessionThreadId`
 
     Public sthr_ ID of the thread that terminated.
-
-  - `Type type`
 
 ### Beta Managed Agents Session Usage Snapshot
 
@@ -10760,6 +11397,8 @@ public final class Main {
 
   Emitted when a model request completes.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -10814,13 +11453,13 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
 ### Beta Managed Agents Span Model Request Start Event
 
 - `class BetaManagedAgentsSpanModelRequestStartEvent:`
 
   Emitted when a model request is initiated by the agent.
+
+  - `Type type`
 
   - `String id`
 
@@ -10831,8 +11470,6 @@ public final class Main {
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `Type type`
 
 ### Beta Managed Agents Span Model Usage
 
@@ -10878,6 +11515,8 @@ public final class Main {
 
   Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -10909,8 +11548,6 @@ public final class Main {
   - `String result`
 
     Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-  - `Type type`
 
   - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -10954,6 +11591,8 @@ public final class Main {
 
   Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -10974,13 +11613,13 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
 ### Beta Managed Agents Span Outcome Evaluation Start Event
 
 - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
   Emitted when an outcome evaluation cycle begins.
+
+  - `Type type`
 
   - `String id`
 
@@ -11002,8 +11641,6 @@ public final class Main {
 
     format: date-time
 
-  - `Type type`
-
 ### Beta Managed Agents Stream Session Events
 
 - `class BetaManagedAgentsStreamSessionEvents: union`
@@ -11013,6 +11650,8 @@ public final class Main {
   - `class BetaManagedAgentsUserMessageEvent:`
 
     A user message event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -11026,17 +11665,19 @@ public final class Main {
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -11045,6 +11686,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -11057,8 +11700,6 @@ public final class Main {
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -11076,19 +11717,19 @@ public final class Main {
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -11097,6 +11738,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -11110,11 +11753,11 @@ public final class Main {
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -11125,8 +11768,6 @@ public final class Main {
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -11144,15 +11785,13 @@ public final class Main {
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -11168,8 +11807,6 @@ public final class Main {
 
         - `Type type`
 
-    - `Type type`
-
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
@@ -11180,11 +11817,11 @@ public final class Main {
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -11199,6 +11836,8 @@ public final class Main {
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -11215,8 +11854,6 @@ public final class Main {
     - `String toolUseId`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<String> denyMessage`
 
@@ -11238,6 +11875,8 @@ public final class Main {
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -11245,8 +11884,6 @@ public final class Main {
     - `String customToolUseId`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -11268,6 +11905,8 @@ public final class Main {
 
         A block containing a web search result.
 
+        - `Type type`
+
         - `BetaManagedAgentsSearchResultCitations citations`
 
           Citation settings for a search result.
@@ -11280,13 +11919,13 @@ public final class Main {
 
           Array of text content blocks from the search result.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
-
-          - `Type type`
 
         - `String source`
 
@@ -11299,8 +11938,6 @@ public final class Main {
           The title of the search result.
 
           minLength: 1
-
-        - `Type type`
 
     - `Optional<Boolean> isError`
 
@@ -11320,6 +11957,8 @@ public final class Main {
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -11338,8 +11977,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -11347,6 +11984,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentMessageEvent:`
 
     An agent response event in the session conversation.
+
+    - `Type type`
 
     - `String id`
 
@@ -11370,11 +12009,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentThinkingEvent:`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `Type type`
 
     - `String id`
 
@@ -11386,11 +12025,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsAgentMcpToolUseEvent:`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `Type type`
 
     - `String id`
 
@@ -11414,8 +12053,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -11426,6 +12063,62 @@ public final class Main {
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow:`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `JsonValue type = "always_allow"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk:`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `JsonValue type = "always_ask"`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto:`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `JsonValue type = "auto"`
+
+        - `BetaManagedAgentsAgentAutoEvaluatedPermission evaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow:`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `JsonValue type = "allow"`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk:`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `JsonValue type = "ask"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny:`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `JsonValue type = "deny"`
+
+            - `String reasonCode`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -11433,6 +12126,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
     Event representing the result of an MCP tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -11447,8 +12142,6 @@ public final class Main {
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -11478,6 +12171,8 @@ public final class Main {
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -11496,8 +12191,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<EvaluatedPermission> evaluatedPermission`
 
       AgentEvaluatedPermission enum
@@ -11508,6 +12201,10 @@ public final class Main {
 
       - `DENY("deny")`
 
+    - `Optional<BetaManagedAgentsAgentToolEvaluation> evaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `Optional<String> sessionThreadId`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -11515,6 +12212,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -11529,8 +12228,6 @@ public final class Main {
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -11559,6 +12256,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `Type type`
 
     - `String id`
 
@@ -11594,8 +12293,6 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<String> fromAgentName`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -11603,6 +12300,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `Type type`
 
     - `String id`
 
@@ -11638,8 +12337,6 @@ public final class Main {
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `Type type`
-
     - `Optional<String> toAgentName`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -11647,6 +12344,8 @@ public final class Main {
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `Type type`
 
     - `String id`
 
@@ -11658,11 +12357,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionErrorEvent:`
 
     An error event indicating a problem occurred during session execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -11676,6 +12375,8 @@ public final class Main {
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -11701,13 +12402,13 @@ public final class Main {
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type type`
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelOverloadedError:`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -11727,13 +12428,13 @@ public final class Main {
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRateLimitedError:`
 
         The model request was rate-limited.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -11753,13 +12454,13 @@ public final class Main {
           - `class BetaManagedAgentsRetryStatusTerminal:`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `Type type`
 
       - `class BetaManagedAgentsModelRequestFailedError:`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `Type type`
+
         - `String message`
 
           Human-readable error description.
@@ -11780,11 +12481,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpConnectionFailedError:`
 
         Failed to connect to an MCP server.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -11810,11 +12511,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsMcpAuthenticationFailedError:`
 
         Authentication to an MCP server failed.
+
+        - `Type type`
 
         - `String mcpServerName`
 
@@ -11840,11 +12541,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsBillingError:`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `Type type`
 
         - `String message`
 
@@ -11866,11 +12567,11 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError:`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `Type type`
 
         - `String credentialId`
 
@@ -11896,8 +12597,6 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `Type type`
-
         - `String vaultId`
 
           ID of the vault containing the affected credential.
@@ -11908,11 +12607,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `Type type`
 
     - `String id`
 
@@ -11923,13 +12622,13 @@ public final class Main {
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent:`
 
     Indicates the session is actively running and the agent is working.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -11940,11 +12639,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent:`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `Type type`
 
     - `String id`
 
@@ -11970,11 +12669,11 @@ public final class Main {
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `Type type`
+
         - `List<String> eventIds`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `Type type`
 
       - `class BetaManagedAgentsSessionRetriesExhausted:`
 
@@ -11988,11 +12687,11 @@ public final class Main {
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `Type type`
 
     - `String id`
 
@@ -12004,11 +12703,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent:`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `Type type`
 
     - `String id`
 
@@ -12028,11 +12727,11 @@ public final class Main {
 
       Public `sthr_` ID of the newly created thread.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `Type type`
 
     - `String id`
 
@@ -12054,11 +12753,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `Type type`
 
     - `String id`
 
@@ -12091,8 +12790,6 @@ public final class Main {
     - `String result`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `Type type`
 
     - `BetaManagedAgentsSpanModelUsage usage`
 
@@ -12134,6 +12831,8 @@ public final class Main {
 
     Emitted when a model request is initiated by the agent.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -12144,11 +12843,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent:`
 
     Emitted when a model request completes.
+
+    - `Type type`
 
     - `String id`
 
@@ -12172,11 +12871,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `Type type`
 
     - `String id`
 
@@ -12198,11 +12897,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `Type type`
 
     - `String id`
 
@@ -12236,27 +12935,27 @@ public final class Main {
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `Type type`
 
     - `String id`
 
@@ -12268,11 +12967,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -12292,11 +12991,11 @@ public final class Main {
 
       Public sthr_ ID of the thread that started running.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -12336,11 +13035,11 @@ public final class Main {
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `Type type`
 
     - `String id`
 
@@ -12360,11 +13059,11 @@ public final class Main {
 
       Public sthr_ ID of the thread that terminated.
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserToolResultEvent:`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `Type type`
 
     - `String id`
 
@@ -12373,8 +13072,6 @@ public final class Main {
     - `String toolUseId`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `Type type`
 
     - `Optional<List<Content>> content`
 
@@ -12414,6 +13111,8 @@ public final class Main {
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -12432,11 +13131,11 @@ public final class Main {
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSessionUpdatedEvent:`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -12448,11 +13147,11 @@ public final class Main {
 
       format: date-time
 
-    - `Type type`
-
     - `Optional<BetaManagedAgentsSessionAgent> agent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `Type type`
 
       - `String id`
 
@@ -12460,9 +13159,9 @@ public final class Main {
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-        - `String name`
-
         - `Type type`
+
+        - `String name`
 
         - `String url`
 
@@ -12582,6 +13281,8 @@ public final class Main {
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `Type type`
+
         - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -12590,15 +13291,17 @@ public final class Main {
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `Type type`
+
             - `String id`
 
             - `Optional<String> description`
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-              - `String name`
-
               - `Type type`
+
+              - `String name`
 
               - `String url`
 
@@ -12614,9 +13317,9 @@ public final class Main {
 
                 A resolved Anthropic-managed skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -12624,9 +13327,9 @@ public final class Main {
 
                 A resolved user-created custom skill.
 
-                - `String skillId`
-
                 - `Type type`
+
+                - `String skillId`
 
                 - `String version`
 
@@ -12636,11 +13339,15 @@ public final class Main {
 
               - `class BetaManagedAgentsAgentToolset20260401:`
 
+                - `Type type`
+
                 - `List<BetaManagedAgentsAgentToolConfig> configs`
 
                   - `class BetaManagedAgentsBashToolConfig:`
 
                     Configuration for the bash tool.
+
+                    - `JsonValue type = "bash"`
 
                     - `boolean enabled`
 
@@ -12662,11 +13369,17 @@ public final class Main {
 
                         - `Type type`
 
-                    - `JsonValue type = "bash"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `JsonValue type = "auto"`
 
                   - `class BetaManagedAgentsEditToolConfig:`
 
                     Configuration for the edit tool.
+
+                    - `JsonValue type = "edit"`
 
                     - `boolean enabled`
 
@@ -12684,11 +13397,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "edit"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig:`
 
                     Configuration for the read tool.
+
+                    - `JsonValue type = "read"`
 
                     - `boolean enabled`
 
@@ -12706,11 +13423,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "read"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig:`
 
                     Configuration for the write tool.
+
+                    - `JsonValue type = "write"`
 
                     - `boolean enabled`
 
@@ -12728,11 +13449,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "write"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig:`
 
                     Configuration for the glob tool.
+
+                    - `JsonValue type = "glob"`
 
                     - `boolean enabled`
 
@@ -12750,11 +13475,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "glob"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig:`
 
                     Configuration for the grep tool.
+
+                    - `JsonValue type = "grep"`
 
                     - `boolean enabled`
 
@@ -12772,11 +13501,15 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "grep"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig:`
 
                     Configuration for the web_fetch tool.
+
+                    - `JsonValue type = "web_fetch"`
 
                     - `boolean enabled`
 
@@ -12794,7 +13527,9 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_fetch"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -12807,6 +13542,8 @@ public final class Main {
                   - `class BetaManagedAgentsWebSearchToolConfig:`
 
                     Configuration for the web_search tool.
+
+                    - `JsonValue type = "web_search"`
 
                     - `boolean enabled`
 
@@ -12824,7 +13561,9 @@ public final class Main {
 
                         Tool calls require user confirmation before execution.
 
-                    - `JsonValue type = "web_search"`
+                      - `class BetaManagedAgentsAutoPolicy:`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `Optional<List<String>> allowedDomains`
 
@@ -12878,9 +13617,13 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                - `Type type`
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMcpToolset:`
+
+                - `Type type`
 
                 - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -12900,6 +13643,10 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
+                    - `class BetaManagedAgentsAutoPolicy:`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
                 - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
 
                   Resolved default configuration for all tools from an MCP server.
@@ -12918,13 +13665,17 @@ public final class Main {
 
                       Tool calls require user confirmation before execution.
 
-                - `String mcpServerName`
+                    - `class BetaManagedAgentsAutoPolicy:`
 
-                - `Type type`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `String mcpServerName`
 
               - `class BetaManagedAgentsCustomTool:`
 
                 A custom tool as returned in API responses.
+
+                - `Type type`
 
                 - `String description`
 
@@ -12940,10 +13691,6 @@ public final class Main {
 
                 - `String name`
 
-                - `Type type`
-
-            - `Type type`
-
             - `long version`
 
               format: int32
@@ -12952,13 +13699,11 @@ public final class Main {
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `Type type`
+
             - `String model`
 
               The advisor model id.
-
-            - `Type type`
-
-        - `Type type`
 
       - `String name`
 
@@ -12984,8 +13729,6 @@ public final class Main {
 
           A custom tool as returned in API responses.
 
-      - `Type type`
-
       - `long version`
 
         format: int32
@@ -12993,6 +13736,8 @@ public final class Main {
     - `Optional<BetaManagedAgentsBudgetLimit> budget`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `Type type`
 
       - `BetaMonetaryAmount maxListCost`
 
@@ -13006,8 +13751,6 @@ public final class Main {
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `Type type`
-
     - `Optional<Metadata> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -13020,41 +13763,43 @@ public final class Main {
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+    - `Type type`
+
     - `BetaManagedAgentsStartEventPreview event`
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
       - `class BetaManagedAgentsAgentMessagePreview:`
 
+        - `Type type`
+
         - `String id`
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-        - `Type type`
-
       - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `Type type`
 
         - `String id`
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-        - `Type type`
-
-    - `Type type`
-
   - `class BetaManagedAgentsDeltaEvent:`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `Type type`
 
     - `BetaManagedAgentsDeltaContent delta`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+      - `Type type`
+
       - `BetaManagedAgentsTextBlock content`
 
         Regular text content.
-
-      - `Type type`
 
       - `Optional<Long> index`
 
@@ -13066,11 +13811,11 @@ public final class Main {
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-    - `Type type`
-
   - `class BetaManagedAgentsSystemMessageEvent:`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `Type type`
 
     - `String id`
 
@@ -13080,15 +13825,13 @@ public final class Main {
 
       System content blocks. Text-only.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
     - `Optional<LocalDateTime> processedAt`
 
@@ -13100,6 +13843,8 @@ public final class Main {
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `Type type`
+
     - `String id`
 
       Unique identifier for this event.
@@ -13109,8 +13854,6 @@ public final class Main {
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `Type type`
 
     - `BetaManagedAgentsSessionUsageSnapshot usage`
 
@@ -13186,9 +13929,13 @@ public final class Main {
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+  - `Type type`
+
   - `List<BetaManagedAgentsSystemContentBlock> content`
 
     System content blocks to append. Text-only.
+
+    - `Type type`
 
     - `String text`
 
@@ -13196,15 +13943,13 @@ public final class Main {
 
       minLength: 1
 
-    - `Type type`
-
-  - `Type type`
-
 ### Beta Managed Agents Text Block
 
 - `class BetaManagedAgentsTextBlock:`
 
   Regular text content.
+
+  - `Type type`
 
   - `String text`
 
@@ -13212,19 +13957,17 @@ public final class Main {
 
     minLength: 1
 
-  - `Type type`
-
 ### Beta Managed Agents Text Rubric
 
 - `class BetaManagedAgentsTextRubric:`
 
   Rubric content provided inline as text.
 
+  - `Type type`
+
   - `String content`
 
     Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-  - `Type type`
 
 ### Beta Managed Agents Text Rubric Params
 
@@ -13232,19 +13975,21 @@ public final class Main {
 
   Rubric content provided inline as text.
 
+  - `Type type`
+
   - `String content`
 
     Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
     maxLength: 262144
 
-  - `Type type`
-
 ### Beta Managed Agents Unknown Error
 
 - `class BetaManagedAgentsUnknownError:`
 
   An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+  - `Type type`
 
   - `String message`
 
@@ -13271,8 +14016,6 @@ public final class Main {
       The session encountered a terminal error and will transition to `terminated` state.
 
       - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents URL Document Source
 
@@ -13308,6 +14051,8 @@ public final class Main {
 
   Event sent by the client providing the result of a custom tool execution.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -13315,8 +14060,6 @@ public final class Main {
   - `String customToolUseId`
 
     The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-  - `Type type`
 
   - `Optional<List<Content>> content`
 
@@ -13326,17 +14069,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -13345,6 +14090,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -13357,8 +14104,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -13376,19 +14121,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -13397,6 +14142,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -13410,11 +14157,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -13425,8 +14172,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -13444,15 +14189,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -13466,6 +14209,8 @@ public final class Main {
 
       A block containing a web search result.
 
+      - `Type type`
+
       - `BetaManagedAgentsSearchResultCitations citations`
 
         Citation settings for a search result.
@@ -13478,13 +14223,13 @@ public final class Main {
 
         Array of text content blocks from the search result.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
 
       - `String source`
 
@@ -13497,8 +14242,6 @@ public final class Main {
         The title of the search result.
 
         minLength: 1
-
-      - `Type type`
 
   - `Optional<Boolean> isError`
 
@@ -13520,13 +14263,13 @@ public final class Main {
 
   Parameters for providing the result of a custom tool execution.
 
+  - `Type type`
+
   - `String customToolUseId`
 
     The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     minLength: 1, maxLength: 128
-
-  - `Type type`
 
   - `Optional<List<Content>> content`
 
@@ -13536,17 +14279,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -13555,6 +14300,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -13567,8 +14314,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -13586,19 +14331,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -13607,6 +14352,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -13620,11 +14367,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -13635,8 +14382,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -13654,15 +14399,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -13676,6 +14419,8 @@ public final class Main {
 
       A block containing a web search result.
 
+      - `Type type`
+
       - `BetaManagedAgentsSearchResultCitations citations`
 
         Citation settings for a search result.
@@ -13688,13 +14433,13 @@ public final class Main {
 
         Array of text content blocks from the search result.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
 
       - `String source`
 
@@ -13708,8 +14453,6 @@ public final class Main {
 
         minLength: 1
 
-      - `Type type`
-
   - `Optional<Boolean> isError`
 
     Whether the tool execution resulted in an error.
@@ -13719,6 +14462,8 @@ public final class Main {
 - `class BetaManagedAgentsUserDefineOutcomeEvent:`
 
   Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+  - `Type type`
 
   - `String id`
 
@@ -13752,29 +14497,29 @@ public final class Main {
 
       Rubric referenced by a file uploaded via the Files API.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of the rubric file.
-
-      - `Type type`
 
     - `class BetaManagedAgentsTextRubric:`
 
       Rubric content provided inline as text.
 
+      - `Type type`
+
       - `String content`
 
         Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-      - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents User Define Outcome Event Params
 
 - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
   Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+  - `Type type`
 
   - `String description`
 
@@ -13788,25 +14533,23 @@ public final class Main {
 
       Rubric referenced by a file uploaded via the Files API.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of the rubric file.
 
-      - `Type type`
-
     - `class BetaManagedAgentsTextRubricParams:`
 
       Rubric content provided inline as text.
+
+      - `Type type`
 
       - `String content`
 
         Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
         maxLength: 262144
-
-      - `Type type`
-
-  - `Type type`
 
   - `Optional<Long> maxIterations`
 
@@ -13820,11 +14563,11 @@ public final class Main {
 
   An interrupt event that pauses agent execution and returns control to the user.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
-
-  - `Type type`
 
   - `Optional<LocalDateTime> processedAt`
 
@@ -13854,6 +14597,8 @@ public final class Main {
 
   A user message event in the session conversation.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this event.
@@ -13866,17 +14611,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -13885,6 +14632,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -13897,8 +14646,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -13916,19 +14663,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -13937,6 +14684,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -13950,11 +14699,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -13965,8 +14714,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -13984,15 +14731,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -14007,8 +14752,6 @@ public final class Main {
       Placeholder for content withheld by Anthropic model policy.
 
       - `Type type`
-
-  - `Type type`
 
   - `Optional<LocalDateTime> processedAt`
 
@@ -14022,6 +14765,8 @@ public final class Main {
 
   Parameters for sending a user message to the session.
 
+  - `Type type`
+
   - `List<Content> content`
 
     Array of content blocks for the user message.
@@ -14030,17 +14775,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -14049,6 +14796,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -14061,8 +14810,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -14080,19 +14827,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -14101,6 +14848,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -14114,11 +14863,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -14129,8 +14878,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -14148,15 +14895,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -14172,13 +14917,13 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents User Tool Confirmation Event
 
 - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
   A tool confirmation event that approves or denies a pending tool execution.
+
+  - `Type type`
 
   - `String id`
 
@@ -14195,8 +14940,6 @@ public final class Main {
   - `String toolUseId`
 
     The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-  - `Type type`
 
   - `Optional<String> denyMessage`
 
@@ -14220,6 +14963,8 @@ public final class Main {
 
   Parameters for confirming or denying a tool execution request.
 
+  - `Type type`
+
   - `Result result`
 
     UserToolConfirmationResult enum
@@ -14234,8 +14979,6 @@ public final class Main {
 
     minLength: 1, maxLength: 128
 
-  - `Type type`
-
   - `Optional<String> denyMessage`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
@@ -14248,13 +14991,13 @@ public final class Main {
 
   Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
+  - `Type type`
+
   - `String toolUseId`
 
     The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     minLength: 1, maxLength: 128
-
-  - `Type type`
 
   - `Optional<List<Content>> content`
 
@@ -14264,17 +15007,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -14283,6 +15028,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -14295,8 +15042,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -14314,19 +15059,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -14335,6 +15080,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -14348,11 +15095,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -14363,8 +15110,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -14382,15 +15127,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -14404,6 +15147,8 @@ public final class Main {
 
       A block containing a web search result.
 
+      - `Type type`
+
       - `BetaManagedAgentsSearchResultCitations citations`
 
         Citation settings for a search result.
@@ -14416,13 +15161,13 @@ public final class Main {
 
         Array of text content blocks from the search result.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
 
       - `String source`
 
@@ -14435,8 +15180,6 @@ public final class Main {
         The title of the search result.
 
         minLength: 1
-
-      - `Type type`
 
   - `Optional<Boolean> isError`
 

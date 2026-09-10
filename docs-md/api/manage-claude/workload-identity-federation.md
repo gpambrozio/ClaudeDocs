@@ -79,7 +79,7 @@ Optionally select **Verify issuer** to dry-run the issuer configuration before a
 
 The wizard creates the issuer, service account, and federation rule, then listens for a successful token exchange for 15 minutes. Trigger an exchange from your workload within that window (see [Authenticate from your workload](workload-identity-federation.md#authenticate-from-your-workload)) to confirm the setup works. If the window elapses, the resources persist; you can re-run the test from the federation rule's detail page. Note the rule's ID (`fdrl_...`) and the service account ID (`svac_...`) the wizard creates: your workload passes both, along with your organization ID (and your workspace ID when the rule covers more than one workspace), in every token-exchange request.
 
-To manage these resources programmatically, see [Manage WIF with the Admin API](wif-admin-api.md) for the curl walkthrough, or see the [Service accounts API reference](../api/admin/service_accounts.md), [Federation issuers API reference](../api/admin/federation_issuers.md), and [Federation rules API reference](../api/admin/federation_rules.md) for complete parameter details and response schemas.
+To manage these resources programmatically, see [Manage WIF with the Admin API](wif-admin-api.md) for the curl walkthrough, or see the [Service accounts API reference](../api/beta/organization/service_accounts.md), [Federation issuers API reference](../api/beta/organization/federation/issuers.md), and [Federation rules API reference](../api/beta/organization/federation/rules.md) for complete parameter details and response schemas.
 
 ## Authenticate from your workload
 
@@ -396,7 +396,7 @@ Okta service applications using client-credentials flow.
 * [Manage WIF with the Admin API](wif-admin-api.md): create issuers, service accounts, and rules from infrastructure as code
 * [WIF reference](wif-reference.md): environment variables, profile file schema, validation rules, and error codes
 * [Authentication](authentication.md): all authentication options across the Anthropic SDKs
-* [Admin API reference](../api/admin.md): generated request and response schemas for every Admin API endpoint
+* [Admin API reference](../api/beta/organization.md): generated request and response schemas for every Admin API endpoint
 
 ---
 

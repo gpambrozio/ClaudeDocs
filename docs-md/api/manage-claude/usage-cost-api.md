@@ -31,7 +31,7 @@ Anthropic provides cost and usage reporting through two APIs, depending on which
 | Your organization                | API                                                                                                                     | Key type                                                                                                                                           |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Claude Console (Claude Platform) | The Usage and Cost Admin API described on this page                                                                     | Admin API key (`sk-ant-admin01-...`) or another [Admin API credential](admin-api.md#authentication) |
-| Claude Enterprise (claude.ai)    | The [Claude Enterprise Analytics API](../api/admin/analytics.md) cost and usage endpoints | Analytics API key                                                                                                                                  |
+| Claude Enterprise (claude.ai)    | The [Claude Enterprise Analytics API](../api/beta/organization/analytics.md) cost and usage endpoints | Analytics API key                                                                                                                                  |
 
 Claude Enterprise parent organizations do not appear in Claude Console and carry no Admin API keys, so for them the Analytics API key is the only path to this data. See [Analytics APIs](analytics-api.md) for how to create each key type and which plans the Claude Enterprise cost data applies to.
 
@@ -95,7 +95,7 @@ Track token consumption across your organization with detailed breakdowns by mod
 * **Filtering & grouping:** Filter by API key, workspace, model, service tier, context window, [data residency](data-residency.md), or speed (beta), and group results by these dimensions
 * **Server tool usage:** Track usage of server-side tools such as web search
 
-For complete parameter details and response schemas, see the [Usage API reference](../api/admin/usage_report/retrieve_messages.md).
+For complete parameter details and response schemas, see the [Usage API reference](../api/beta/organization/usage_report/retrieve_messages.md).
 
 ### Basic examples
 
@@ -140,9 +140,9 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-To retrieve your organization's API key IDs, use the [List API Keys](../api/admin/api_keys/list.md) endpoint.
+To retrieve your organization's API key IDs, use the [List API Keys](../api/beta/organization/api_keys/list.md) endpoint.
 
-To retrieve your organization's workspace IDs, use the [List Workspaces](../api/admin/workspaces/list.md) endpoint, or find your organization's workspace IDs in the Claude Console.
+To retrieve your organization's workspace IDs, use the [List Workspaces](../api/beta/organization/workspaces/list.md) endpoint, or find your organization's workspace IDs in the Claude Console.
 
 #### Data residency
 
@@ -225,7 +225,7 @@ Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_r
 * **Grouping:** Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields such as `model` and `inference_geo`
 * **Time buckets:** Daily granularity only (`1d`)
 
-For complete parameter details and response schemas, see the [Cost API reference](../api/admin/cost_report/retrieve.md).
+For complete parameter details and response schemas, see the [Cost API reference](../api/beta/organization/cost_report/retrieve.md).
 
 Priority Tier costs use a different billing model and are not included in the cost endpoint. Track Priority Tier usage through the usage endpoint instead.
 
@@ -315,7 +315,7 @@ Use the [Claude Code Analytics API](claude-code-analytics-api.md), which provide
 Use the Usage and Cost APIs to deliver a better experience for your users, manage costs, and preserve your rate limit. Learn more about some of these other features:
 
 * [Admin API](admin-api.md)
-* [Admin API reference](../api/admin.md)
+* [Admin API reference](../api/beta/organization.md)
 * [Analytics APIs](analytics-api.md) - Which analytics API and key type your organization needs
 * [Pricing](../about-claude/pricing.md)
 * [Prompt caching](../build-with-claude/prompt-caching.md) - Optimize costs with caching

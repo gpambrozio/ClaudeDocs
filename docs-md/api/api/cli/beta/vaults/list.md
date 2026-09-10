@@ -1,5 +1,12 @@
 # List Vaults
 
+---
+title: List Vaults
+url: https://platform.claude.com/docs/en/api/cli/beta/vaults/list
+---
+
+# List Vaults
+
 `$ ant beta:vaults list`
 
 **GET** `/v1/vaults`
@@ -26,6 +33,12 @@ List Vaults
 
   Header param: Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `BetaManagedAgentsListVaultsResponse: object`
@@ -35,6 +48,8 @@ List Vaults
   - `data: optional array of BetaManagedAgentsVault`
 
     List of vaults.
+
+    - `type: "vault"`
 
     - `id: string`
 
@@ -59,8 +74,6 @@ List Vaults
     - `metadata: map[string]`
 
       Arbitrary key-value metadata attached to the vault.
-
-    - `type: "vault"`
 
     - `updated_at: string`
 

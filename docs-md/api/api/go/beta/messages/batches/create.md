@@ -1,5 +1,12 @@
 # Create a Message Batch
 
+---
+title: Create a Message Batch
+url: https://platform.claude.com/docs/en/api/go/beta/messages/batches/create
+---
+
+# Create a Message Batch
+
 `client.Beta.Messages.Batches.New(ctx, params) (*BetaMessageBatch, error)`
 
 **POST** `/v1/messages/batches`
@@ -103,11 +110,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaTextBlockParamResp struct{…}`
 
+              - `Type Text`
+
               - `Text string`
 
                 minLength: 1
-
-              - `Type Text`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -134,6 +141,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `type BetaCitationCharLocationParamResp struct{…}`
 
+                  - `Type CharLocation`
+
                   - `CitedText string`
 
                   - `DocumentIndex int64`
@@ -150,9 +159,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     minimum: 0
 
-                  - `Type CharLocation`
-
                 - `type BetaCitationPageLocationParamResp struct{…}`
+
+                  - `Type PageLocation`
 
                   - `CitedText string`
 
@@ -170,9 +179,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     minimum: 1
 
-                  - `Type PageLocation`
-
                 - `type BetaCitationContentBlockLocationParamResp struct{…}`
+
+                  - `Type ContentBlockLocation`
 
                   - `CitedText string`
 
@@ -200,9 +209,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     minimum: 0
 
-                  - `Type ContentBlockLocation`
-
                 - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+
+                  - `Type WebSearchResultLocation`
 
                   - `CitedText string`
 
@@ -212,13 +221,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     maxLength: 512, minLength: 1
 
-                  - `Type WebSearchResultLocation`
-
                   - `URL string`
 
                     minLength: 1
 
                 - `type BetaCitationSearchResultLocationParamResp struct{…}`
+
+                  - `Type SearchResultLocation`
 
                   - `CitedText string`
 
@@ -250,13 +259,15 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `Title string`
 
-                  - `Type SearchResultLocation`
-
             - `type BetaImageBlockParamResp struct{…}`
+
+              - `Type Image`
 
               - `Source BetaImageBlockParamSourceUnionResp`
 
                 - `type BetaBase64ImageSource struct{…}`
+
+                  - `Type Base64`
 
                   - `Data string`
 
@@ -272,8 +283,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-                  - `Type Base64`
-
                 - `type BetaURLImageSource struct{…}`
 
                   - `Type URL`
@@ -282,11 +291,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `type BetaFileImageSource struct{…}`
 
-                  - `FileID string`
-
                   - `Type File`
 
-              - `Type Image`
+                  - `FileID string`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -306,9 +313,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaRequestDocumentBlock struct{…}`
 
+              - `Type Document`
+
               - `Source BetaRequestDocumentBlockSourceUnion`
 
                 - `type BetaBase64PDFSource struct{…}`
+
+                  - `Type Base64`
 
                   - `Data string`
 
@@ -316,17 +327,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `MediaType ApplicationPDF`
 
-                  - `Type Base64`
-
                 - `type BetaPlainTextSource struct{…}`
+
+                  - `Type Text`
 
                   - `Data string`
 
                   - `MediaType TextPlain`
 
-                  - `Type Text`
-
                 - `type BetaContentBlockSource struct{…}`
+
+                  - `Type Content`
 
                   - `Content BetaContentBlockSourceContentUnion`
 
@@ -338,8 +349,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                       - `type BetaImageBlockParamResp struct{…}`
 
-                  - `Type Content`
-
                 - `type BetaURLPDFSource struct{…}`
 
                   - `Type URL`
@@ -348,11 +357,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `type BetaFileDocumentSource struct{…}`
 
-                  - `FileID string`
-
                   - `Type File`
 
-              - `Type Document`
+                  - `FileID string`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -372,13 +379,15 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaSearchResultBlockParamResp struct{…}`
 
+              - `Type SearchResult`
+
               - `Content []BetaTextBlockParamResp`
+
+                - `Type Text`
 
                 - `Text string`
 
                   minLength: 1
-
-                - `Type Text`
 
                 - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -390,8 +399,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `Title string`
 
-              - `Type SearchResult`
-
               - `CacheControl BetaCacheControlEphemeral Optional`
 
                 Create a cache control breakpoint at this content block.
@@ -399,6 +406,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               - `Citations BetaCitationsConfigParamResp Optional`
 
             - `type BetaThinkingBlockParamResp struct{…}`
+
+              - `Type Thinking`
 
               - `Signature string`
 
@@ -410,17 +419,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 The `thinking` text of this block as returned by the API.
 
-              - `Type Thinking`
-
             - `type BetaRedactedThinkingBlockParamResp struct{…}`
+
+              - `Type RedactedThinking`
 
               - `Data string`
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-              - `Type RedactedThinking`
-
             - `type BetaToolUseBlockParamResp struct{…}`
+
+              - `Type ToolUse`
 
               - `ID string`
 
@@ -431,8 +440,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               - `Name string`
 
                 maxLength: 200, minLength: 1
-
-              - `Type ToolUse`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -452,19 +459,19 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   Tool invocation generated by a server-side tool.
 
+                  - `Type CodeExecution20250825`
+
                   - `ToolID string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `Type CodeExecution20250825`
 
                 - `type BetaServerToolCaller20260120 struct{…}`
 
+                  - `Type CodeExecution20260120`
+
                   - `ToolID string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `Type CodeExecution20260120`
 
               - `ToolsetName string Optional`
 
@@ -474,11 +481,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaToolResultBlockParamResp struct{…}`
 
+              - `Type ToolResult`
+
               - `ToolUseID string`
 
                 pattern: ^[a-zA-Z0-9_-]+$
-
-              - `Type ToolResult`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -500,11 +507,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     Tool reference block that can be included in tool_result content.
 
+                    - `Type ToolReference`
+
                     - `ToolName string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                    - `Type ToolReference`
 
                     - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -519,6 +526,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                     At most one per `tool_result`, only on a non-error result answering a
                     browser toolset member `tool_use`. The server renders the
                     model-visible text from it; the model never sees the raw fields.
+
+                    - `Type BrowserState`
 
                     - `Tabs []BetaBrowserStateTabEntry`
 
@@ -548,8 +557,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                         Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                    - `Type BrowserState`
-
                     - `CacheControl BetaCacheControlEphemeral Optional`
 
                       Create a cache control breakpoint at this content block.
@@ -570,25 +577,25 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                         during a failed call gets no deferred `tab_opened`; it simply appears
                         in the next result's `tabs` inventory.
 
+                        - `Type TabOpened`
+
                         - `TabID string`
 
                           The `tab_id` of the opened tab, present in `tabs`.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `Type TabOpened`
-
                       - `type BetaBrowserStateChangeDownloadStarted struct{…}`
 
                         A file download that started during this call.
+
+                        - `Type DownloadStarted`
 
                         - `DownloadID string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `Type DownloadStarted`
 
                         - `URL string`
 
@@ -603,13 +610,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                         `download_started`, when the download finished during the call that
                         started it (at most one state change per `download_id` per result).
 
+                        - `Type DownloadCompleted`
+
                         - `DownloadID string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `Type DownloadCompleted`
 
                         - `URL string`
 
@@ -633,13 +640,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                         A file download that failed — or was cancelled — during this call.
 
+                        - `Type DownloadFailed`
+
                         - `DownloadID string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `Type DownloadFailed`
 
                         - `URL string`
 
@@ -662,6 +669,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
             - `type BetaServerToolUseBlockParamResp struct{…}`
+
+              - `Type ServerToolUse`
 
               - `ID string`
 
@@ -687,8 +696,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockParamName = "tool_search_tool_bm25"`
 
-              - `Type ServerToolUse`
-
               - `CacheControl BetaCacheControlEphemeral Optional`
 
                 Create a cache control breakpoint at this content block.
@@ -709,21 +716,25 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaWebSearchToolResultBlockParamResp struct{…}`
 
+              - `Type WebSearchToolResult`
+
               - `Content BetaWebSearchToolResultBlockParamContentUnionResp`
 
                 - `[]BetaWebSearchResultBlockParamResp`
 
+                  - `Type WebSearchResult`
+
                   - `EncryptedContent string`
 
                   - `Title string`
-
-                  - `Type WebSearchResult`
 
                   - `URL string`
 
                   - `PageAge string Optional`
 
                 - `type BetaWebSearchToolRequestError struct{…}`
+
+                  - `Type WebSearchToolResultError`
 
                   - `ErrorCode BetaWebSearchToolResultErrorCode`
 
@@ -739,13 +750,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaWebSearchToolResultErrorCodeRequestTooLarge BetaWebSearchToolResultErrorCode = "request_too_large"`
 
-                  - `Type WebSearchToolResultError`
-
               - `ToolUseID string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `Type WebSearchToolResult`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -767,9 +774,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaWebFetchToolResultBlockParamResp struct{…}`
 
+              - `Type WebFetchToolResult`
+
               - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
                 - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+
+                  - `Type WebFetchToolResultError`
 
                   - `ErrorCode BetaWebFetchToolResultErrorCode`
 
@@ -791,13 +802,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaWebFetchToolResultErrorCodeUnavailable BetaWebFetchToolResultErrorCode = "unavailable"`
 
-                  - `Type WebFetchToolResultError`
+                    - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
                 - `type BetaWebFetchBlockParamResp struct{…}`
 
-                  - `Content BetaRequestDocumentBlock`
-
                   - `Type WebFetchResult`
+
+                  - `Content BetaRequestDocumentBlock`
 
                   - `URL string`
 
@@ -810,8 +821,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               - `ToolUseID string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `Type WebFetchToolResult`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -833,9 +842,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaAdvisorToolResultBlockParamResp struct{…}`
 
+              - `Type AdvisorToolResult`
+
               - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
                 - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+
+                  - `Type AdvisorToolResultError`
 
                   - `ErrorCode BetaAdvisorToolResultErrorParamErrorCode`
 
@@ -853,23 +866,21 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-                  - `Type AdvisorToolResultError`
-
                 - `type BetaAdvisorResultBlockParamResp struct{…}`
 
-                  - `Text string`
-
                   - `Type AdvisorResult`
+
+                  - `Text string`
 
                   - `StopReason string Optional`
 
                 - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
+                  - `Type AdvisorRedactedResult`
+
                   - `EncryptedContent string`
 
                     Opaque blob produced by a prior response; must be round-tripped verbatim.
-
-                  - `Type AdvisorRedactedResult`
 
                   - `StopReason string Optional`
 
@@ -877,19 +888,21 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `Type AdvisorToolResult`
-
               - `CacheControl BetaCacheControlEphemeral Optional`
 
                 Create a cache control breakpoint at this content block.
 
             - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
 
+              - `Type CodeExecutionToolResult`
+
               - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+
+                  - `Type CodeExecutionToolResultError`
 
                   - `ErrorCode BetaCodeExecutionToolResultErrorCode`
 
@@ -901,15 +914,15 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-                  - `Type CodeExecutionToolResultError`
-
                 - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+
+                  - `Type CodeExecutionResult`
 
                   - `Content []BetaCodeExecutionOutputBlockParamResp`
 
-                    - `FileID string`
-
                     - `Type CodeExecutionOutput`
+
+                    - `FileID string`
 
                   - `ReturnCode int64`
 
@@ -917,17 +930,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `Stdout string`
 
-                  - `Type CodeExecutionResult`
-
                 - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
+                  - `Type EncryptedCodeExecutionResult`
+
                   - `Content []BetaCodeExecutionOutputBlockParamResp`
 
-                    - `FileID string`
-
                     - `Type CodeExecutionOutput`
+
+                    - `FileID string`
 
                   - `EncryptedStdout string`
 
@@ -935,13 +948,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `Stderr string`
 
-                  - `Type EncryptedCodeExecutionResult`
-
               - `ToolUseID string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `Type CodeExecutionToolResult`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -949,9 +958,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
 
+              - `Type BashCodeExecutionToolResult`
+
               - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
                 - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+
+                  - `Type BashCodeExecutionToolResultError`
 
                   - `ErrorCode BetaBashCodeExecutionToolResultErrorParamErrorCode`
 
@@ -965,15 +978,15 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-                  - `Type BashCodeExecutionToolResultError`
-
                 - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+
+                  - `Type BashCodeExecutionResult`
 
                   - `Content []BetaBashCodeExecutionOutputBlockParamResp`
 
-                    - `FileID string`
-
                     - `Type BashCodeExecutionOutput`
+
+                    - `FileID string`
 
                   - `ReturnCode int64`
 
@@ -981,13 +994,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `Stdout string`
 
-                  - `Type BashCodeExecutionResult`
-
               - `ToolUseID string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `Type BashCodeExecutionToolResult`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -995,9 +1004,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
 
+              - `Type TextEditorCodeExecutionToolResult`
+
               - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
                 - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+
+                  - `Type TextEditorCodeExecutionToolResultError`
 
                   - `ErrorCode BetaTextEditorCodeExecutionToolResultErrorParamErrorCode`
 
@@ -1011,11 +1024,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeFileNotFound BetaTextEditorCodeExecutionToolResultErrorParamErrorCode = "file_not_found"`
 
-                  - `Type TextEditorCodeExecutionToolResultError`
-
                   - `ErrorMessage string Optional`
 
                 - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+
+                  - `Type TextEditorCodeExecutionViewResult`
 
                   - `Content string`
 
@@ -1027,8 +1040,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaTextEditorCodeExecutionViewResultBlockParamFileTypePDF BetaTextEditorCodeExecutionViewResultBlockParamFileType = "pdf"`
 
-                  - `Type TextEditorCodeExecutionViewResult`
-
                   - `NumLines int64 Optional`
 
                   - `StartLine int64 Optional`
@@ -1037,9 +1048,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
 
-                  - `IsFileUpdate bool`
-
                   - `Type TextEditorCodeExecutionCreateResult`
+
+                  - `IsFileUpdate bool`
 
                 - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
 
@@ -1059,17 +1070,19 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `Type TextEditorCodeExecutionToolResult`
-
               - `CacheControl BetaCacheControlEphemeral Optional`
 
                 Create a cache control breakpoint at this content block.
 
             - `type BetaToolSearchToolResultBlockParamResp struct{…}`
 
+              - `Type ToolSearchToolResult`
+
               - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
                 - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+
+                  - `Type ToolSearchToolResultError`
 
                   - `ErrorCode BetaToolSearchToolResultErrorParamErrorCode`
 
@@ -1081,37 +1094,35 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `const BetaToolSearchToolResultErrorParamErrorCodeExecutionTimeExceeded BetaToolSearchToolResultErrorParamErrorCode = "execution_time_exceeded"`
 
-                  - `Type ToolSearchToolResultError`
-
                   - `ErrorMessage string Optional`
 
                 - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
 
+                  - `Type ToolSearchToolSearchResult`
+
                   - `ToolReferences []BetaToolReferenceBlockParamResp`
+
+                    - `Type ToolReference`
 
                     - `ToolName string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `Type ToolReference`
-
                     - `CacheControl BetaCacheControlEphemeral Optional`
 
                       Create a cache control breakpoint at this content block.
 
-                  - `Type ToolSearchToolSearchResult`
-
               - `ToolUseID string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `Type ToolSearchToolResult`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
                 Create a cache control breakpoint at this content block.
 
             - `type BetaMCPToolUseBlockParamResp struct{…}`
+
+              - `Type MCPToolUse`
 
               - `ID string`
 
@@ -1125,19 +1136,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 The name of the MCP server
 
-              - `Type MCPToolUse`
-
               - `CacheControl BetaCacheControlEphemeral Optional`
 
                 Create a cache control breakpoint at this content block.
 
             - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
 
+              - `Type MCPToolResult`
+
               - `ToolUseID string`
 
                 pattern: ^[a-zA-Z0-9_-]+$
-
-              - `Type MCPToolResult`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -1149,11 +1158,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `[]BetaTextBlockParamResp`
 
+                  - `Type Text`
+
                   - `Text string`
 
                     minLength: 1
-
-                  - `Type Text`
 
                   - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -1168,9 +1177,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
 
-              - `FileID string`
-
               - `Type ContainerUpload`
+
+              - `FileID string`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -1208,6 +1217,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               `tools`; it is offered to the model from this point in the
               conversation onward.
 
+              - `Type ToolAddition`
+
               - `Tool BetaRequestToolAdditionBlockToolUnion`
 
                 Reference to a single tool the caller declared directly in
@@ -1222,32 +1233,30 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
+                  - `Type ToolReference`
+
                   - `Name string`
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
-
-                  - `Type ToolReference`
 
                 - `type BetaToolChangeMCPToolReference struct{…}`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
+                  - `Type MCPToolReference`
+
                   - `Name string`
 
                   - `ServerName string`
-
-                  - `Type MCPToolReference`
 
                 - `type BetaToolChangeMCPToolsetReference struct{…}`
 
                   Reference to every tool in the named MCP server's toolset.
 
-                  - `ServerName string`
-
                   - `Type MCPToolsetReference`
 
-              - `Type ToolAddition`
+                  - `ServerName string`
 
               - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -1260,6 +1269,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               `tool` references a tool (or MCP toolset) by name from the request's
               `tools`; it is no longer offered to the model from this point in the
               conversation onward.
+
+              - `Type ToolRemoval`
 
               - `Tool BetaRequestToolRemovalBlockToolUnion`
 
@@ -1284,8 +1295,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   Reference to every tool in the named MCP server's toolset.
 
-              - `Type ToolRemoval`
-
               - `CacheControl BetaCacheControlEphemeral Optional`
 
                 Create a cache control breakpoint at this content block.
@@ -1305,6 +1314,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               request is rejected), and moving it into the middle of a single run is
               likewise rejected; between non-thinking blocks the block's placement has
               no validation effect.
+
+              - `Type Fallback`
 
               - `From BetaFallbackInfoParamResp`
 
@@ -1396,8 +1407,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Identifies one hop of a fallback transition.
 
-              - `Type Fallback`
-
               - `Trigger any Optional`
 
                 The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
@@ -1468,12 +1477,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             maxItems: 20
 
-            - `SkillID string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `Type BetaSkillParamsType`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1481,6 +1484,12 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
               - `const BetaSkillParamsTypeAnthropic BetaSkillParamsType = "anthropic"`
 
               - `const BetaSkillParamsTypeCustom BetaSkillParamsType = "custom"`
+
+            - `SkillID string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `Version string Optional`
 
@@ -1692,25 +1701,25 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               A schema to specify Claude's output format in responses. See [structured outputs](../../../../../build-with-claude/structured-outputs.md)
 
+              - `Type JSONSchema`
+
               - `Schema map[string, any]`
 
                 The JSON schema of the format
 
-              - `Type JSONSchema`
-
             - `TaskBudget BetaTokenTaskBudget Optional`
 
               User-configurable total token budget across contexts.
+
+              - `Type Tokens`
+
+                The budget type. Currently only 'tokens' is supported.
 
               - `Total int64`
 
                 Total token budget across all contexts in the session.
 
                 minimum: 1024
-
-              - `Type Tokens`
-
-                The budget type. Currently only 'tokens' is supported.
 
               - `Remaining int64 Optional`
 
@@ -1730,6 +1739,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `type BetaThinkingConfigEnabled struct{…}`
 
+              - `Type Enabled`
+
               - `BudgetTokens int64`
 
                 Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1739,8 +1750,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                 See [extended thinking](../../../../../build-with-claude/extended-thinking.md) for details.
 
                 minimum: 1024
-
-              - `Type Enabled`
 
               - `BlockBinding BetaThinkingBlockBinding Optional`
 
@@ -1806,9 +1815,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         maxItems: 20
 
-        - `Name string`
-
         - `Type URL`
+
+        - `Name string`
 
         - `URL string`
 
@@ -1876,11 +1885,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `[]BetaTextBlockParam`
 
+          - `Type Text`
+
           - `Text string`
 
             minLength: 1
-
-          - `Type Text`
 
           - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -1934,11 +1943,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
           The model will use the specified tool with `tool_choice.name`.
 
+          - `Type Tool`
+
           - `Name string`
 
             The name of the tool to use.
-
-          - `Type Tool`
 
           - `DisableParallelToolUse bool Optional`
 
@@ -2018,6 +2027,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaTool struct{…}`
 
+          - `Type BetaToolType Optional`
+
           - `InputSchema BetaToolInputSchema`
 
             [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -2072,17 +2083,15 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-          - `Type BetaToolType Optional`
-
         - `type BetaToolBash20241022 struct{…}`
+
+          - `Type Bash20241022`
 
           - `Name Bash`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type Bash20241022`
 
           - `AllowedCallers []string Optional`
 
@@ -2110,13 +2119,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolBash20250124 struct{…}`
 
+          - `Type Bash20250124`
+
           - `Name Bash`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type Bash20250124`
 
           - `AllowedCallers []string Optional`
 
@@ -2144,13 +2153,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaCodeExecutionTool20250522 struct{…}`
 
+          - `Type CodeExecution20250522`
+
           - `Name CodeExecution`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type CodeExecution20250522`
 
           - `AllowedCallers []string Optional`
 
@@ -2176,13 +2185,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaCodeExecutionTool20250825 struct{…}`
 
+          - `Type CodeExecution20250825`
+
           - `Name CodeExecution`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type CodeExecution20250825`
 
           - `AllowedCallers []string Optional`
 
@@ -2210,13 +2219,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+          - `Type CodeExecution20260120`
+
           - `Name CodeExecution`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type CodeExecution20260120`
 
           - `AllowedCallers []string Optional`
 
@@ -2244,13 +2253,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
           Code execution tool with REPL state persistence.
 
+          - `Type CodeExecution20260521`
+
           - `Name CodeExecution`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type CodeExecution20260521`
 
           - `AllowedCallers []string Optional`
 
@@ -2295,6 +2304,18 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `Type BetaBrowserTypeConfig Optional`
+
+              `type`'s config overrides.
+
+              - `DeferLoading bool Optional`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool Optional`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `CloseTab BetaBrowserCloseTabConfig Optional`
 
@@ -2632,18 +2653,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `Type BetaBrowserTypeConfig Optional`
-
-              `type`'s config overrides.
-
-              - `DeferLoading bool Optional`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `Enabled bool Optional`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `Wait BetaBrowserWaitConfig Optional`
 
               `wait`'s config overrides.
@@ -2670,6 +2679,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolComputerUse20241022 struct{…}`
 
+          - `Type Computer20241022`
+
           - `DisplayHeightPx int64`
 
             The height of the display in pixels.
@@ -2687,8 +2698,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type Computer20241022`
 
           - `AllowedCallers []string Optional`
 
@@ -2722,13 +2731,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaMemoryTool20250818 struct{…}`
 
+          - `Type Memory20250818`
+
           - `Name Memory`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type Memory20250818`
 
           - `AllowedCallers []string Optional`
 
@@ -2756,6 +2765,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolComputerUse20250124 struct{…}`
 
+          - `Type Computer20250124`
+
           - `DisplayHeightPx int64`
 
             The height of the display in pixels.
@@ -2773,8 +2784,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type Computer20250124`
 
           - `AllowedCallers []string Optional`
 
@@ -2808,13 +2817,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolTextEditor20241022 struct{…}`
 
+          - `Type TextEditor20241022`
+
           - `Name StrReplaceEditor`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type TextEditor20241022`
 
           - `AllowedCallers []string Optional`
 
@@ -2842,6 +2851,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolComputerUse20251124 struct{…}`
 
+          - `Type Computer20251124`
+
           - `DisplayHeightPx int64`
 
             The height of the display in pixels.
@@ -2859,8 +2870,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type Computer20251124`
 
           - `AllowedCallers []string Optional`
 
@@ -2921,6 +2930,18 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `Type BetaComputerTypeConfig Optional`
+
+              `type`'s config overrides.
+
+              - `DeferLoading bool Optional`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool Optional`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `CursorPosition BetaComputerCursorPositionConfig Optional`
 
@@ -3090,18 +3111,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `Type BetaComputerTypeConfig Optional`
-
-              `type`'s config overrides.
-
-              - `DeferLoading bool Optional`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `Enabled bool Optional`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `Wait BetaComputerWaitConfig Optional`
 
               `wait`'s config overrides.
@@ -3128,13 +3137,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolTextEditor20250124 struct{…}`
 
+          - `Type TextEditor20250124`
+
           - `Name StrReplaceEditor`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type TextEditor20250124`
 
           - `AllowedCallers []string Optional`
 
@@ -3162,13 +3171,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolTextEditor20250429 struct{…}`
 
+          - `Type TextEditor20250429`
+
           - `Name StrReplaceBasedEditTool`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type TextEditor20250429`
 
           - `AllowedCallers []string Optional`
 
@@ -3196,13 +3205,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolTextEditor20250728 struct{…}`
 
+          - `Type TextEditor20250728`
+
           - `Name StrReplaceBasedEditTool`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type TextEditor20250728`
 
           - `AllowedCallers []string Optional`
 
@@ -3236,13 +3245,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaWebSearchTool20250305 struct{…}`
 
+          - `Type WebSearch20250305`
+
           - `Name WebSearch`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type WebSearch20250305`
 
           - `AllowedCallers []string Optional`
 
@@ -3312,13 +3321,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaWebFetchTool20250910 struct{…}`
 
+          - `Type WebFetch20250910`
+
           - `Name WebFetch`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type WebFetch20250910`
 
           - `AllowedCallers []string Optional`
 
@@ -3368,13 +3377,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaWebSearchTool20260209 struct{…}`
 
+          - `Type WebSearch20260209`
+
           - `Name WebSearch`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type WebSearch20260209`
 
           - `AllowedCallers []string Optional`
 
@@ -3418,13 +3427,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaWebFetchTool20260209 struct{…}`
 
+          - `Type WebFetch20260209`
+
           - `Name WebFetch`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type WebFetch20260209`
 
           - `AllowedCallers []string Optional`
 
@@ -3476,13 +3485,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
+          - `Type WebFetch20260309`
+
           - `Name WebFetch`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type WebFetch20260309`
 
           - `AllowedCallers []string Optional`
 
@@ -3536,13 +3545,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaWebSearchTool20260318 struct{…}`
 
+          - `Type WebSearch20260318`
+
           - `Name WebSearch`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type WebSearch20260318`
 
           - `AllowedCallers []string Optional`
 
@@ -3594,13 +3603,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaWebFetchTool20260318 struct{…}`
 
+          - `Type WebFetch20260318`
+
           - `Name WebFetch`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type WebFetch20260318`
 
           - `AllowedCallers []string Optional`
 
@@ -3662,6 +3671,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaAdvisorTool20260301 struct{…}`
 
+          - `Type Advisor20260301`
+
           - `Model Model`
 
             The model that will complete your prompt.
@@ -3673,8 +3684,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `Type Advisor20260301`
 
           - `AllowedCallers []string Optional`
 
@@ -3716,17 +3725,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolSearchToolBm25_20251119 struct{…}`
 
-          - `Name ToolSearchToolBm25`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `Type BetaToolSearchToolBm25_20251119Type`
 
             - `const BetaToolSearchToolBm25_20251119TypeToolSearchToolBm25_20251119 BetaToolSearchToolBm25_20251119Type = "tool_search_tool_bm25_20251119"`
 
             - `const BetaToolSearchToolBm25_20251119TypeToolSearchToolBm25 BetaToolSearchToolBm25_20251119Type = "tool_search_tool_bm25"`
+
+          - `Name ToolSearchToolBm25`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `AllowedCallers []string Optional`
 
@@ -3752,17 +3761,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `type BetaToolSearchToolRegex20251119 struct{…}`
 
-          - `Name ToolSearchToolRegex`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `Type BetaToolSearchToolRegex20251119Type`
 
             - `const BetaToolSearchToolRegex20251119TypeToolSearchToolRegex20251119 BetaToolSearchToolRegex20251119Type = "tool_search_tool_regex_20251119"`
 
             - `const BetaToolSearchToolRegex20251119TypeToolSearchToolRegex BetaToolSearchToolRegex20251119Type = "tool_search_tool_regex"`
+
+          - `Name ToolSearchToolRegex`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `AllowedCallers []string Optional`
 
@@ -3793,13 +3802,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
           Allows configuring enabled status and defer_loading for all tools
           from an MCP server, with optional per-tool overrides.
 
+          - `Type MCPToolset`
+
           - `MCPServerName string`
 
             Name of the MCP server to configure tools for
 
             maxLength: 255, minLength: 1
-
-          - `Type MCPToolset`
 
           - `CacheControl BetaCacheControlEphemeral Optional`
 
@@ -3919,6 +3928,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -3965,9 +3976,23 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `type BetaMessageBatch struct{…}`
+
+  - `Type MessageBatch`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `ID string`
 
@@ -4066,14 +4091,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `Type MessageBatch`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 ## Example
 

@@ -1,5 +1,12 @@
 # Resources
 
+---
+title: Resources
+url: https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources
+---
+
+# Resources
+
 ## Add Session Resource
 
 `beta.sessions.resources.add(session_id, **kwargs) -> BetaManagedAgentsFileResource`
@@ -32,7 +39,7 @@ Add Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80,6 +87,8 @@ Add Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -122,9 +131,13 @@ Add Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsFileResource`
+
+  - `type: :file`
 
   - `id: String`
 
@@ -137,8 +150,6 @@ Add Session Resource
   - `file_id: String`
 
   - `mount_path: String`
-
-  - `type: :file`
 
   - `updated_at: Time`
 
@@ -203,7 +214,7 @@ List Session Resources
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -251,6 +262,8 @@ List Session Resources
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -293,6 +306,8 @@ List Session Resources
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
@@ -300,6 +315,8 @@ List Session Resources
   A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
+
+    - `type: :github_repository`
 
     - `id: String`
 
@@ -310,8 +327,6 @@ List Session Resources
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -325,15 +340,17 @@ List Session Resources
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -341,9 +358,9 @@ List Session Resources
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -357,8 +374,6 @@ List Session Resources
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -369,11 +384,11 @@ List Session Resources
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -463,7 +478,7 @@ Get Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -511,6 +526,8 @@ Get Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -553,6 +570,8 @@ Get Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `ResourceRetrieveResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
@@ -560,6 +579,8 @@ Get Session Resource
   The requested session resource.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
+
+    - `type: :github_repository`
 
     - `id: String`
 
@@ -570,8 +591,6 @@ Get Session Resource
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -585,15 +604,17 @@ Get Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -601,9 +622,9 @@ Get Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -617,8 +638,6 @@ Get Session Resource
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -629,11 +648,11 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -719,7 +738,7 @@ Update Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -767,6 +786,8 @@ Update Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -809,6 +830,8 @@ Update Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
@@ -816,6 +839,8 @@ Update Session Resource
   The updated session resource.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
+
+    - `type: :github_repository`
 
     - `id: String`
 
@@ -826,8 +851,6 @@ Update Session Resource
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -841,15 +864,17 @@ Update Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -857,9 +882,9 @@ Update Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -873,8 +898,6 @@ Update Session Resource
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -885,11 +908,11 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -970,7 +993,7 @@ Delete Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1018,6 +1041,8 @@ Delete Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -1060,15 +1085,17 @@ Delete Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsDeleteSessionResource`
 
   Confirmation of resource deletion.
 
-  - `id: String`
-
   - `type: :session_resource_deleted`
+
+  - `id: String`
 
 ### Example
 
@@ -1102,13 +1129,15 @@ puts(beta_managed_agents_delete_session_resource)
 
   Confirmation of resource deletion.
 
-  - `id: String`
-
   - `type: :session_resource_deleted`
+
+  - `id: String`
 
 ### Beta Managed Agents File Resource
 
 - `class BetaManagedAgentsFileResource`
+
+  - `type: :file`
 
   - `id: String`
 
@@ -1122,8 +1151,6 @@ puts(beta_managed_agents_delete_session_resource)
 
   - `mount_path: String`
 
-  - `type: :file`
-
   - `updated_at: Time`
 
     A timestamp in RFC 3339 format
@@ -1134,6 +1161,8 @@ puts(beta_managed_agents_delete_session_resource)
 
 - `class BetaManagedAgentsGitHubRepositoryResource`
 
+  - `type: :github_repository`
+
   - `id: String`
 
   - `created_at: Time`
@@ -1143,8 +1172,6 @@ puts(beta_managed_agents_delete_session_resource)
     format: date-time
 
   - `mount_path: String`
-
-  - `type: :github_repository`
 
   - `updated_at: Time`
 
@@ -1158,15 +1185,17 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `class BetaManagedAgentsBranchCheckout`
 
+      - `type: :branch`
+
       - `name: String`
 
         Branch name to check out.
 
         minLength: 1, maxLength: 255
 
-      - `type: :branch`
-
     - `class BetaManagedAgentsCommitCheckout`
+
+      - `type: :commit`
 
       - `sha: String`
 
@@ -1174,19 +1203,17 @@ puts(beta_managed_agents_delete_session_resource)
 
         minLength: 7, maxLength: 64
 
-      - `type: :commit`
-
 ### Beta Managed Agents Memory Store Resource
 
 - `class BetaManagedAgentsMemoryStoreResource`
 
   A memory store attached to an agent session.
 
+  - `type: :memory_store`
+
   - `memory_store_id: String`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-  - `type: :memory_store`
 
   - `access: :read_write | :read_only`
 
@@ -1222,6 +1249,8 @@ puts(beta_managed_agents_delete_session_resource)
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
+    - `type: :github_repository`
+
     - `id: String`
 
     - `created_at: Time`
@@ -1231,8 +1260,6 @@ puts(beta_managed_agents_delete_session_resource)
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -1246,15 +1273,17 @@ puts(beta_managed_agents_delete_session_resource)
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -1262,9 +1291,9 @@ puts(beta_managed_agents_delete_session_resource)
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -1278,8 +1307,6 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -1290,11 +1317,11 @@ puts(beta_managed_agents_delete_session_resource)
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -1330,6 +1357,8 @@ puts(beta_managed_agents_delete_session_resource)
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
+    - `type: :github_repository`
+
     - `id: String`
 
     - `created_at: Time`
@@ -1339,8 +1368,6 @@ puts(beta_managed_agents_delete_session_resource)
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -1354,15 +1381,17 @@ puts(beta_managed_agents_delete_session_resource)
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -1370,9 +1399,9 @@ puts(beta_managed_agents_delete_session_resource)
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -1386,8 +1415,6 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -1398,11 +1425,11 @@ puts(beta_managed_agents_delete_session_resource)
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -1438,6 +1465,8 @@ puts(beta_managed_agents_delete_session_resource)
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
+    - `type: :github_repository`
+
     - `id: String`
 
     - `created_at: Time`
@@ -1447,8 +1476,6 @@ puts(beta_managed_agents_delete_session_resource)
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -1462,15 +1489,17 @@ puts(beta_managed_agents_delete_session_resource)
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -1478,9 +1507,9 @@ puts(beta_managed_agents_delete_session_resource)
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -1494,8 +1523,6 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -1506,11 +1533,11 @@ puts(beta_managed_agents_delete_session_resource)
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 

@@ -1,5 +1,12 @@
 # Create a Message Batch
 
+---
+title: Create a Message Batch
+url: https://platform.claude.com/docs/en/api/typescript/messages/batches/create
+---
+
+# Create a Message Batch
+
 `client.messages.batches.create(params, options?): MessageBatch`
 
 **POST** `/v1/messages/batches`
@@ -105,11 +112,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `TextBlockParam`
 
+              - `type: "text"`
+
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -136,6 +143,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `CitationCharLocationParam`
 
+                  - `type: "char_location"`
+
                   - `cited_text: string`
 
                   - `document_index: number`
@@ -152,9 +161,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     minimum: 0
 
-                  - `type: "char_location"`
-
                 - `CitationPageLocationParam`
+
+                  - `type: "page_location"`
 
                   - `cited_text: string`
 
@@ -172,9 +181,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     minimum: 1
 
-                  - `type: "page_location"`
-
                 - `CitationContentBlockLocationParam`
+
+                  - `type: "content_block_location"`
 
                   - `cited_text: string`
 
@@ -202,9 +211,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     minimum: 0
 
-                  - `type: "content_block_location"`
-
                 - `CitationWebSearchResultLocationParam`
+
+                  - `type: "web_search_result_location"`
 
                   - `cited_text: string`
 
@@ -214,13 +223,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     maxLength: 512, minLength: 1
 
-                  - `type: "web_search_result_location"`
-
                   - `url: string`
 
                     minLength: 1
 
                 - `CitationSearchResultLocationParam`
+
+                  - `type: "search_result_location"`
 
                   - `cited_text: string`
 
@@ -252,13 +261,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `title: string | null`
 
-                  - `type: "search_result_location"`
-
             - `ImageBlockParam`
+
+              - `type: "image"`
 
               - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
                 - `Base64ImageSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -274,8 +285,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"image/webp"`
 
-                  - `type: "base64"`
-
                 - `URLImageSource`
 
                   - `type: "url"`
@@ -284,11 +293,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `FileImageSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "image"`
+                  - `file_id: string`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -308,9 +315,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `DocumentBlockParam`
 
+              - `type: "document"`
+
               - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
                 - `Base64PDFSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -318,17 +329,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `PlainTextSource`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
                 - `ContentBlockSource`
+
+                  - `type: "content"`
 
                   - `content: string | Array<ContentBlockSourceContent>`
 
@@ -340,8 +351,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       - `ImageBlockParam`
 
-                  - `type: "content"`
-
                 - `URLPDFSource`
 
                   - `type: "url"`
@@ -350,11 +359,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `FileDocumentSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "document"`
+                  - `file_id: string`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -374,13 +381,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `SearchResultBlockParam`
 
+              - `type: "search_result"`
+
               - `content: Array<TextBlockParam>`
+
+                - `type: "text"`
 
                 - `text: string`
 
                   minLength: 1
-
-                - `type: "text"`
 
                 - `cache_control?: CacheControlEphemeral | null`
 
@@ -392,8 +401,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `title: string`
 
-              - `type: "search_result"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -401,6 +408,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               - `citations?: CitationsConfigParam`
 
             - `ThinkingBlockParam`
+
+              - `type: "thinking"`
 
               - `signature: string`
 
@@ -412,17 +421,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 The `thinking` text of this block as returned by the API.
 
-              - `type: "thinking"`
-
             - `RedactedThinkingBlockParam`
+
+              - `type: "redacted_thinking"`
 
               - `data: string`
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-              - `type: "redacted_thinking"`
-
             - `ToolUseBlockParam`
+
+              - `type: "tool_use"`
 
               - `id: string`
 
@@ -433,8 +442,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               - `name: string`
 
                 maxLength: 200, minLength: 1
-
-              - `type: "tool_use"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -454,19 +461,19 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Tool invocation generated by a server-side tool.
 
+                  - `type: "code_execution_20250825"`
+
                   - `tool_id: string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `type: "code_execution_20250825"`
 
                 - `ServerToolCaller20260120`
 
+                  - `type: "code_execution_20260120"`
+
                   - `tool_id: string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `type: "code_execution_20260120"`
 
               - `toolset_name?: string | null`
 
@@ -476,11 +483,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `ToolResultBlockParam`
 
+              - `type: "tool_result"`
+
               - `tool_use_id: string`
 
                 pattern: ^[a-zA-Z0-9_-]+$
-
-              - `type: "tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -504,11 +511,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     Tool reference block that can be included in tool_result content.
 
+                    - `type: "tool_reference"`
+
                     - `tool_name: string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                    - `type: "tool_reference"`
 
                     - `cache_control?: CacheControlEphemeral | null`
 
@@ -523,6 +530,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
                     At most one per `tool_result`, only on a non-error result answering a
                     browser toolset member `tool_use`. The server renders the
                     model-visible text from it; the model never sees the raw fields.
+
+                    - `type: "browser_state"`
 
                     - `tabs: Array<BrowserStateTabEntry>`
 
@@ -552,8 +561,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                         Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                    - `type: "browser_state"`
-
                     - `cache_control?: CacheControlEphemeral | null`
 
                       Create a cache control breakpoint at this content block.
@@ -574,25 +581,25 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
                         during a failed call gets no deferred `tab_opened`; it simply appears
                         in the next result's `tabs` inventory.
 
+                        - `type: "tab_opened"`
+
                         - `tab_id: string`
 
                           The `tab_id` of the opened tab, present in `tabs`.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `type: "tab_opened"`
-
                       - `BrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
+
+                        - `type: "download_started"`
 
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_started"`
 
                         - `url: string`
 
@@ -607,13 +614,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
                         `download_started`, when the download finished during the call that
                         started it (at most one state change per `download_id` per result).
 
+                        - `type: "download_completed"`
+
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_completed"`
 
                         - `url: string`
 
@@ -637,13 +644,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                         A file download that failed — or was cancelled — during this call.
 
+                        - `type: "download_failed"`
+
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_failed"`
 
                         - `url: string`
 
@@ -667,6 +674,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `ServerToolUseBlockParam`
 
+              - `type: "server_tool_use"`
+
               - `id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -689,8 +698,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `"tool_search_tool_bm25"`
 
-              - `type: "server_tool_use"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -711,21 +718,25 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `WebSearchToolResultBlockParam`
 
+              - `type: "web_search_tool_result"`
+
               - `content: WebSearchToolResultBlockParamContent`
 
                 - `Array<WebSearchResultBlockParam>`
 
+                  - `type: "web_search_result"`
+
                   - `encrypted_content: string`
 
                   - `title: string`
-
-                  - `type: "web_search_result"`
 
                   - `url: string`
 
                   - `page_age?: string | null`
 
                 - `WebSearchToolRequestError`
+
+                  - `type: "web_search_tool_result_error"`
 
                   - `error_code: WebSearchToolResultErrorCode`
 
@@ -741,13 +752,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"request_too_large"`
 
-                  - `type: "web_search_tool_result_error"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "web_search_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -769,9 +776,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `WebFetchToolResultBlockParam`
 
+              - `type: "web_fetch_tool_result"`
+
               - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
                 - `WebFetchToolResultErrorBlockParam`
+
+                  - `type: "web_fetch_tool_result_error"`
 
                   - `error_code: WebFetchToolResultErrorCode`
 
@@ -793,13 +804,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"unavailable"`
 
-                  - `type: "web_fetch_tool_result_error"`
+                    - `"content_too_large"`
 
                 - `WebFetchBlockParam`
 
-                  - `content: DocumentBlockParam`
-
                   - `type: "web_fetch_result"`
+
+                  - `content: DocumentBlockParam`
 
                   - `url: string`
 
@@ -812,8 +823,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "web_fetch_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -835,11 +844,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `CodeExecutionToolResultBlockParam`
 
+              - `type: "code_execution_tool_result"`
+
               - `content: CodeExecutionToolResultBlockParamContent`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `CodeExecutionToolResultErrorParam`
+
+                  - `type: "code_execution_tool_result_error"`
 
                   - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -851,15 +864,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"execution_time_exceeded"`
 
-                  - `type: "code_execution_tool_result_error"`
-
                 - `CodeExecutionResultBlockParam`
+
+                  - `type: "code_execution_result"`
 
                   - `content: Array<CodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "code_execution_output"`
+
+                    - `file_id: string`
 
                   - `return_code: number`
 
@@ -867,17 +880,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `stdout: string`
 
-                  - `type: "code_execution_result"`
-
                 - `EncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
+                  - `type: "encrypted_code_execution_result"`
+
                   - `content: Array<CodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "code_execution_output"`
+
+                    - `file_id: string`
 
                   - `encrypted_stdout: string`
 
@@ -885,13 +898,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `stderr: string`
 
-                  - `type: "encrypted_code_execution_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -899,9 +908,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `BashCodeExecutionToolResultBlockParam`
 
+              - `type: "bash_code_execution_tool_result"`
+
               - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
                 - `BashCodeExecutionToolResultErrorParam`
+
+                  - `type: "bash_code_execution_tool_result_error"`
 
                   - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -915,15 +928,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"output_file_too_large"`
 
-                  - `type: "bash_code_execution_tool_result_error"`
-
                 - `BashCodeExecutionResultBlockParam`
+
+                  - `type: "bash_code_execution_result"`
 
                   - `content: Array<BashCodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "bash_code_execution_output"`
+
+                    - `file_id: string`
 
                   - `return_code: number`
 
@@ -931,13 +944,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `stdout: string`
 
-                  - `type: "bash_code_execution_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "bash_code_execution_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -945,9 +954,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `TextEditorCodeExecutionToolResultBlockParam`
 
+              - `type: "text_editor_code_execution_tool_result"`
+
               - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
                 - `TextEditorCodeExecutionToolResultErrorParam`
+
+                  - `type: "text_editor_code_execution_tool_result_error"`
 
                   - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -961,11 +974,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"file_not_found"`
 
-                  - `type: "text_editor_code_execution_tool_result_error"`
-
                   - `error_message?: string | null`
 
                 - `TextEditorCodeExecutionViewResultBlockParam`
+
+                  - `type: "text_editor_code_execution_view_result"`
 
                   - `content: string`
 
@@ -977,8 +990,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"pdf"`
 
-                  - `type: "text_editor_code_execution_view_result"`
-
                   - `num_lines?: number | null`
 
                   - `start_line?: number | null`
@@ -987,9 +998,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `TextEditorCodeExecutionCreateResultBlockParam`
 
-                  - `is_file_update: boolean`
-
                   - `type: "text_editor_code_execution_create_result"`
+
+                  - `is_file_update: boolean`
 
                 - `TextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -1009,17 +1020,19 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type: "text_editor_code_execution_tool_result"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
             - `ToolSearchToolResultBlockParam`
 
+              - `type: "tool_search_tool_result"`
+
               - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
                 - `ToolSearchToolResultErrorParam`
+
+                  - `type: "tool_search_tool_result_error"`
 
                   - `error_code: ToolSearchToolResultErrorCode`
 
@@ -1031,31 +1044,27 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `"execution_time_exceeded"`
 
-                  - `type: "tool_search_tool_result_error"`
-
                   - `error_message?: string | null`
 
                 - `ToolSearchToolSearchResultBlockParam`
 
+                  - `type: "tool_search_tool_search_result"`
+
                   - `tool_references: Array<ToolReferenceBlockParam>`
+
+                    - `type: "tool_reference"`
 
                     - `tool_name: string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `type: "tool_reference"`
-
                     - `cache_control?: CacheControlEphemeral | null`
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type: "tool_search_tool_search_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "tool_search_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -1066,9 +1075,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
 
-              - `file_id: string`
-
               - `type: "container_upload"`
+
+              - `file_id: string`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -1182,12 +1191,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             maxItems: 20
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" | "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1195,6 +1198,12 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version?: string`
 
@@ -1242,11 +1251,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           A schema to specify Claude's output format in responses. See [structured outputs](../../../../build-with-claude/structured-outputs.md)
 
+          - `type: "json_schema"`
+
           - `schema: Record<string, unknown>`
 
             The JSON schema of the format
-
-          - `type: "json_schema"`
 
       - `service_tier?: "auto" | "standard_only"`
 
@@ -1282,11 +1291,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `Array<TextBlockParam>`
 
+          - `type: "text"`
+
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -1304,6 +1313,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `ThinkingConfigEnabled`
 
+          - `type: "enabled"`
+
           - `budget_tokens: number`
 
             Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1313,8 +1324,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
             See [extended thinking](../../../../build-with-claude/extended-thinking.md) for details.
 
             minimum: 1024
-
-          - `type: "enabled"`
 
           - `display?: "summarized" | "omitted" | null`
 
@@ -1372,11 +1381,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           The model will use the specified tool with `tool_choice.name`.
 
+          - `type: "tool"`
+
           - `name: string`
 
             The name of the tool to use.
-
-          - `type: "tool"`
 
           - `disable_parallel_tool_use?: boolean`
 
@@ -1456,6 +1465,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `Tool`
 
+          - `type?: "custom" | null`
+
           - `input_schema: InputSchema`
 
             [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -1510,17 +1521,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-          - `type?: "custom" | null`
-
         - `ToolBash20250124`
+
+          - `type: "bash_20250124"`
 
           - `name: "bash"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "bash_20250124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1548,13 +1557,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `CodeExecutionTool20250522`
 
+          - `type: "code_execution_20250522"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20250522"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1580,13 +1589,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `CodeExecutionTool20250825`
 
+          - `type: "code_execution_20250825"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20250825"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1614,13 +1623,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+          - `type: "code_execution_20260120"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20260120"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1648,13 +1657,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           Code execution tool with REPL state persistence.
 
+          - `type: "code_execution_20260521"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20260521"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1699,6 +1708,18 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `type?: BrowserTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -2036,18 +2057,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `type?: BrowserTypeConfig | null`
-
-              `type`'s config overrides.
-
-              - `defer_loading?: boolean | null`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `enabled?: boolean | null`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `wait?: BrowserWaitConfig | null`
 
               `wait`'s config overrides.
@@ -2074,13 +2083,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `MemoryTool20250818`
 
+          - `type: "memory_20250818"`
+
           - `name: "memory"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "memory_20250818"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2131,6 +2140,18 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `type?: ComputerTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `cursor_position?: ComputerCursorPositionConfig | null`
 
@@ -2300,18 +2321,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `type?: ComputerTypeConfig | null`
-
-              `type`'s config overrides.
-
-              - `defer_loading?: boolean | null`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `enabled?: boolean | null`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `wait?: ComputerWaitConfig | null`
 
               `wait`'s config overrides.
@@ -2338,13 +2347,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `ToolTextEditor20250124`
 
+          - `type: "text_editor_20250124"`
+
           - `name: "str_replace_editor"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2372,13 +2381,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `ToolTextEditor20250429`
 
+          - `type: "text_editor_20250429"`
+
           - `name: "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250429"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2406,13 +2415,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `ToolTextEditor20250728`
 
+          - `type: "text_editor_20250728"`
+
           - `name: "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250728"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2446,13 +2455,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `WebSearchTool20250305`
 
+          - `type: "web_search_20250305"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20250305"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2522,13 +2531,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `WebFetchTool20250910`
 
+          - `type: "web_fetch_20250910"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20250910"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2578,13 +2587,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `WebSearchTool20260209`
 
+          - `type: "web_search_20260209"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20260209"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2628,13 +2637,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `WebFetchTool20260209`
 
+          - `type: "web_fetch_20260209"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260209"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2686,13 +2695,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
+          - `type: "web_fetch_20260309"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260309"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2746,13 +2755,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `WebSearchTool20260318`
 
+          - `type: "web_search_20260318"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20260318"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2804,13 +2813,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `WebFetchTool20260318`
 
+          - `type: "web_fetch_20260318"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260318"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2872,17 +2881,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `ToolSearchToolBm25_20251119`
 
-          - `name: "tool_search_tool_bm25"`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
             - `"tool_search_tool_bm25_20251119"`
 
             - `"tool_search_tool_bm25"`
+
+          - `name: "tool_search_tool_bm25"`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2908,17 +2917,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `ToolSearchToolRegex20251119`
 
-          - `name: "tool_search_tool_regex"`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
             - `"tool_search_tool_regex_20251119"`
 
             - `"tool_search_tool_regex"`
+
+          - `name: "tool_search_tool_regex"`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2982,9 +2991,23 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `MessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -3083,14 +3106,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 ## Example
 

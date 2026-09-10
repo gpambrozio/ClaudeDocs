@@ -1,5 +1,12 @@
 # Delete file
 
+---
+title: Delete file
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/delete
+---
+
+# Delete file
+
 **DELETE** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
 Permanently deletes a specific file. This is a destructive
@@ -13,19 +20,25 @@ operation that cannot be undone.
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../../versioning.md).
+
 - `"x-api-key": optional string`
 
 ## Returns
-
-- `id: string`
-
-  The ID of the file that was deleted
 
 - `type: optional "claude_file_deleted"`
 
   Constant string confirming deletion
 
   default: claude_file_deleted
+
+- `id: string`
+
+  The ID of the file that was deleted
 
 ## Example
 

@@ -1,8 +1,19 @@
 # Create Skill
 
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/skills/create
+---
+
+# Create Skill
+
 **POST** `/v1/skills`
 
 Create Skill
+
+## Headers
+
+- `"anthropic-workspace-id": optional string`
 
 ## Body parameters (form-data)
 
@@ -21,6 +32,14 @@ Create Skill
 ## Returns
 
 - `Skill object`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
+
+    default: skill
 
   - `id: string`
 
@@ -73,14 +92,6 @@ Create Skill
       - `"anthropic_example"`
 
       - `"plugin"`
-
-  - `type: "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
-
-    default: skill
 
   - `updated_at: string`
 

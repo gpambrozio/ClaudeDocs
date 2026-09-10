@@ -1,5 +1,12 @@
 # Delete File
 
+---
+title: Delete File
+url: https://platform.claude.com/docs/en/api/python/beta/files/delete
+---
+
+# Delete File
+
 `beta.files.delete(file_id, **kwargs)  -> BetaDeletedFile`
 
 **DELETE** `/v1/files/{file_id}`
@@ -18,7 +25,7 @@ Delete File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -66,6 +73,8 @@ Delete File
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -108,13 +117,11 @@ Delete File
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ## Returns
 
 - `class BetaDeletedFile: …`
-
-  - `id: str`
-
-    ID of the deleted file.
 
   - `type: Optional[Literal["file_deleted"]]`
 
@@ -123,6 +130,10 @@ Delete File
     For file deletion, this is always `"file_deleted"`.
 
     default: file_deleted
+
+  - `id: str`
+
+    ID of the deleted file.
 
 ## Example
 

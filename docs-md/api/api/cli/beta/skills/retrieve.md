@@ -1,5 +1,12 @@
 # Get Skill
 
+---
+title: Get Skill
+url: https://platform.claude.com/docs/en/api/cli/beta/skills/retrieve
+---
+
+# Get Skill
+
 `$ ant beta:skills retrieve`
 
 **GET** `/v1/skills/{skill_id}`
@@ -18,9 +25,21 @@ Get Skill
 
   Optional header to specify the beta version(s) you want to use.
 
+- `--workspace-id: optional string`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `beta_skill: object`
+
+  - `type: "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `id: string`
 
@@ -73,12 +92,6 @@ Get Skill
       - `"anthropic_example"`
 
       - `"plugin"`
-
-  - `type: "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `updated_at: string`
 

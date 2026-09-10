@@ -1,5 +1,12 @@
 # Retrieve a Message Batch
 
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/java/beta/messages/batches/retrieve
+---
+
+# Retrieve a Message Batch
+
 `BetaMessageBatch beta().messages().batches().retrieve(params = BatchRetrieveParams.none(), requestOptions = RequestOptions.none())`
 
 **GET** `/v1/messages/batches/{message_batch_id}`
@@ -66,6 +73,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -108,9 +117,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ## Returns
 
 - `class BetaMessageBatch:`
+
+  - `JsonValue type = "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `String id`
 
@@ -199,12 +216,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `JsonValue type = "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ## Example
 

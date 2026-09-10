@@ -1,5 +1,12 @@
 # Webhooks
 
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/python/beta/webhooks
+---
+
+# Webhooks
+
 ## Unwrap
 
 `beta.webhooks.unwrap()`
@@ -49,13 +56,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookAgentArchivedEventData: …`
 
+  - `type: Literal["agent.archived"]`
+
   - `id: str`
 
     ID of the agent that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["agent.archived"]`
 
   - `workspace_id: str`
 
@@ -63,13 +70,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookAgentCreatedEventData: …`
 
+  - `type: Literal["agent.created"]`
+
   - `id: str`
 
     ID of the agent that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["agent.created"]`
 
   - `workspace_id: str`
 
@@ -77,13 +84,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookAgentDeletedEventData: …`
 
+  - `type: Literal["agent.deleted"]`
+
   - `id: str`
 
     ID of the agent that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["agent.deleted"]`
 
   - `workspace_id: str`
 
@@ -91,13 +98,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookAgentUpdatedEventData: …`
 
+  - `type: Literal["agent.updated"]`
+
   - `id: str`
 
     ID of the agent that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["agent.updated"]`
 
   - `workspace_id: str`
 
@@ -105,13 +112,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentArchivedEventData: …`
 
+  - `type: Literal["deployment.archived"]`
+
   - `id: str`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment.archived"]`
 
   - `workspace_id: str`
 
@@ -119,13 +126,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentCreatedEventData: …`
 
+  - `type: Literal["deployment.created"]`
+
   - `id: str`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment.created"]`
 
   - `workspace_id: str`
 
@@ -133,13 +140,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentDeletedEventData: …`
 
+  - `type: Literal["deployment.deleted"]`
+
   - `id: str`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment.deleted"]`
 
   - `workspace_id: str`
 
@@ -147,13 +154,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentPausedEventData: …`
 
+  - `type: Literal["deployment.paused"]`
+
   - `id: str`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment.paused"]`
 
   - `workspace_id: str`
 
@@ -161,13 +168,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentRunFailedEventData: …`
 
+  - `type: Literal["deployment_run.failed"]`
+
   - `id: str`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment_run.failed"]`
 
   - `workspace_id: str`
 
@@ -175,13 +182,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentRunStartedEventData: …`
 
+  - `type: Literal["deployment_run.started"]`
+
   - `id: str`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment_run.started"]`
 
   - `workspace_id: str`
 
@@ -189,13 +196,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentRunSucceededEventData: …`
 
+  - `type: Literal["deployment_run.succeeded"]`
+
   - `id: str`
 
     ID of the deployment run that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment_run.succeeded"]`
 
   - `workspace_id: str`
 
@@ -203,13 +210,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentUnpausedEventData: …`
 
+  - `type: Literal["deployment.unpaused"]`
+
   - `id: str`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment.unpaused"]`
 
   - `workspace_id: str`
 
@@ -217,13 +224,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookDeploymentUpdatedEventData: …`
 
+  - `type: Literal["deployment.updated"]`
+
   - `id: str`
 
     ID of the deployment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["deployment.updated"]`
 
   - `workspace_id: str`
 
@@ -231,13 +238,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookEnvironmentArchivedEventData: …`
 
+  - `type: Literal["environment.archived"]`
+
   - `id: str`
 
     ID of the environment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["environment.archived"]`
 
   - `workspace_id: str`
 
@@ -245,13 +252,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookEnvironmentCreatedEventData: …`
 
+  - `type: Literal["environment.created"]`
+
   - `id: str`
 
     ID of the environment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["environment.created"]`
 
   - `workspace_id: str`
 
@@ -259,13 +266,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookEnvironmentDeletedEventData: …`
 
+  - `type: Literal["environment.deleted"]`
+
   - `id: str`
 
     ID of the environment that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["environment.deleted"]`
 
   - `workspace_id: str`
 
@@ -273,19 +280,23 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookEnvironmentUpdatedEventData: …`
 
+  - `type: Literal["environment.updated"]`
+
   - `id: str`
 
     ID of the environment that triggered the event.
 
   - `organization_id: str`
 
-  - `type: Literal["environment.updated"]`
-
   - `workspace_id: str`
 
 ### Beta Webhook Event
 
 - `class BetaWebhookEvent: …`
+
+  - `type: Literal["event"]`
+
+    Object type. Always `event` for webhook payloads.
 
   - `id: str`
 
@@ -301,138 +312,140 @@ client.beta.webhooks.parse_unverified()
 
     - `class BetaWebhookSessionCreatedEventData: …`
 
+      - `type: Literal["session.created"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.created"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionPendingEventData: …`
 
+      - `type: Literal["session.pending"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.pending"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionRunningEventData: …`
 
+      - `type: Literal["session.running"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.running"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionIdledEventData: …`
 
+      - `type: Literal["session.idled"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.idled"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionRequiresActionEventData: …`
 
+      - `type: Literal["session.requires_action"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.requires_action"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionArchivedEventData: …`
 
+      - `type: Literal["session.archived"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.archived"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionDeletedEventData: …`
 
+      - `type: Literal["session.deleted"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.deleted"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionStatusRescheduledEventData: …`
 
+      - `type: Literal["session.status_rescheduled"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.status_rescheduled"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionStatusRunStartedEventData: …`
 
+      - `type: Literal["session.status_run_started"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.status_run_started"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionStatusIdledEventData: …`
 
+      - `type: Literal["session.status_idled"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.status_idled"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionStatusTerminatedEventData: …`
 
+      - `type: Literal["session.status_terminated"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.status_terminated"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionThreadCreatedEventData: …`
 
+      - `type: Literal["session.thread_created"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
@@ -442,13 +455,13 @@ client.beta.webhooks.parse_unverified()
       - `session_thread_id: str`
 
         ID of the session thread this event refers to.
-
-      - `type: Literal["session.thread_created"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionThreadIdledEventData: …`
 
+      - `type: Literal["session.thread_idled"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
@@ -458,13 +471,13 @@ client.beta.webhooks.parse_unverified()
       - `session_thread_id: str`
 
         ID of the session thread this event refers to.
-
-      - `type: Literal["session.thread_idled"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookSessionThreadTerminatedEventData: …`
 
+      - `type: Literal["session.thread_terminated"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
@@ -475,11 +488,11 @@ client.beta.webhooks.parse_unverified()
 
         ID of the session thread this event refers to.
 
-      - `type: Literal["session.thread_terminated"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookSessionOutcomeEvaluationEndedEventData: …`
+
+      - `type: Literal["session.outcome_evaluation_ended"]`
 
       - `id: str`
 
@@ -487,55 +500,53 @@ client.beta.webhooks.parse_unverified()
 
       - `organization_id: str`
 
-      - `type: Literal["session.outcome_evaluation_ended"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookVaultCreatedEventData: …`
+
+      - `type: Literal["vault.created"]`
 
       - `id: str`
 
         ID of the vault that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["vault.created"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookVaultArchivedEventData: …`
 
+      - `type: Literal["vault.archived"]`
+
       - `id: str`
 
         ID of the vault that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["vault.archived"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookVaultDeletedEventData: …`
 
+      - `type: Literal["vault.deleted"]`
+
       - `id: str`
 
         ID of the vault that triggered the event.
 
       - `organization_id: str`
 
-      - `type: Literal["vault.deleted"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookVaultCredentialCreatedEventData: …`
+
+      - `type: Literal["vault_credential.created"]`
 
       - `id: str`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["vault_credential.created"]`
 
       - `vault_id: str`
 
@@ -545,13 +556,13 @@ client.beta.webhooks.parse_unverified()
 
     - `class BetaWebhookVaultCredentialArchivedEventData: …`
 
+      - `type: Literal["vault_credential.archived"]`
+
       - `id: str`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["vault_credential.archived"]`
 
       - `vault_id: str`
 
@@ -561,13 +572,13 @@ client.beta.webhooks.parse_unverified()
 
     - `class BetaWebhookVaultCredentialDeletedEventData: …`
 
+      - `type: Literal["vault_credential.deleted"]`
+
       - `id: str`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["vault_credential.deleted"]`
 
       - `vault_id: str`
 
@@ -577,13 +588,13 @@ client.beta.webhooks.parse_unverified()
 
     - `class BetaWebhookVaultCredentialRefreshFailedEventData: …`
 
+      - `type: Literal["vault_credential.refresh_failed"]`
+
       - `id: str`
 
         ID of the vault credential that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["vault_credential.refresh_failed"]`
 
       - `vault_id: str`
 
@@ -593,65 +604,67 @@ client.beta.webhooks.parse_unverified()
 
     - `class BetaWebhookSessionUpdatedEventData: …`
 
+      - `type: Literal["session.updated"]`
+
       - `id: str`
 
         ID of the session that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["session.updated"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookAgentCreatedEventData: …`
 
+      - `type: Literal["agent.created"]`
+
       - `id: str`
 
         ID of the agent that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["agent.created"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookAgentArchivedEventData: …`
 
+      - `type: Literal["agent.archived"]`
+
       - `id: str`
 
         ID of the agent that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["agent.archived"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookAgentDeletedEventData: …`
 
+      - `type: Literal["agent.deleted"]`
+
       - `id: str`
 
         ID of the agent that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["agent.deleted"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentPausedEventData: …`
 
+      - `type: Literal["deployment.paused"]`
+
       - `id: str`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: str`
 
-      - `type: Literal["deployment.paused"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentRunFailedEventData: …`
+
+      - `type: Literal["deployment_run.failed"]`
 
       - `id: str`
 
@@ -659,47 +672,47 @@ client.beta.webhooks.parse_unverified()
 
       - `organization_id: str`
 
-      - `type: Literal["deployment_run.failed"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentCreatedEventData: …`
+
+      - `type: Literal["deployment.created"]`
 
       - `id: str`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["deployment.created"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentUpdatedEventData: …`
 
+      - `type: Literal["deployment.updated"]`
+
       - `id: str`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["deployment.updated"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentUnpausedEventData: …`
 
+      - `type: Literal["deployment.unpaused"]`
+
       - `id: str`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: str`
 
-      - `type: Literal["deployment.unpaused"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookAgentUpdatedEventData: …`
+
+      - `type: Literal["agent.updated"]`
 
       - `id: str`
 
@@ -707,35 +720,35 @@ client.beta.webhooks.parse_unverified()
 
       - `organization_id: str`
 
-      - `type: Literal["agent.updated"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentArchivedEventData: …`
+
+      - `type: Literal["deployment.archived"]`
 
       - `id: str`
 
         ID of the deployment that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["deployment.archived"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentRunStartedEventData: …`
 
+      - `type: Literal["deployment_run.started"]`
+
       - `id: str`
 
         ID of the deployment run that triggered the event.
 
       - `organization_id: str`
 
-      - `type: Literal["deployment_run.started"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentDeletedEventData: …`
+
+      - `type: Literal["deployment.deleted"]`
 
       - `id: str`
 
@@ -743,11 +756,11 @@ client.beta.webhooks.parse_unverified()
 
       - `organization_id: str`
 
-      - `type: Literal["deployment.deleted"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookDeploymentRunSucceededEventData: …`
+
+      - `type: Literal["deployment_run.succeeded"]`
 
       - `id: str`
 
@@ -755,95 +768,95 @@ client.beta.webhooks.parse_unverified()
 
       - `organization_id: str`
 
-      - `type: Literal["deployment_run.succeeded"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookEnvironmentCreatedEventData: …`
+
+      - `type: Literal["environment.created"]`
 
       - `id: str`
 
         ID of the environment that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["environment.created"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookEnvironmentUpdatedEventData: …`
 
+      - `type: Literal["environment.updated"]`
+
       - `id: str`
 
         ID of the environment that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["environment.updated"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookEnvironmentArchivedEventData: …`
 
+      - `type: Literal["environment.archived"]`
+
       - `id: str`
 
         ID of the environment that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["environment.archived"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookEnvironmentDeletedEventData: …`
 
+      - `type: Literal["environment.deleted"]`
+
       - `id: str`
 
         ID of the environment that triggered the event.
 
       - `organization_id: str`
 
-      - `type: Literal["environment.deleted"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookMemoryStoreCreatedEventData: …`
+
+      - `type: Literal["memory_store.created"]`
 
       - `id: str`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["memory_store.created"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookMemoryStoreArchivedEventData: …`
 
+      - `type: Literal["memory_store.archived"]`
+
       - `id: str`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: str`
-
-      - `type: Literal["memory_store.archived"]`
 
       - `workspace_id: str`
 
     - `class BetaWebhookMemoryStoreDeletedEventData: …`
 
+      - `type: Literal["memory_store.deleted"]`
+
       - `id: str`
 
         ID of the memory store that triggered the event.
 
       - `organization_id: str`
 
-      - `type: Literal["memory_store.deleted"]`
-
       - `workspace_id: str`
 
     - `class BetaWebhookSessionBudgetReachedEventData: …`
+
+      - `type: Literal["session.budget_reached"]`
 
       - `id: str`
 
@@ -851,13 +864,7 @@ client.beta.webhooks.parse_unverified()
 
       - `organization_id: str`
 
-      - `type: Literal["session.budget_reached"]`
-
       - `workspace_id: str`
-
-  - `type: Literal["event"]`
-
-    Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
@@ -865,138 +872,140 @@ client.beta.webhooks.parse_unverified()
 
   - `class BetaWebhookSessionCreatedEventData: …`
 
+    - `type: Literal["session.created"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.created"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionPendingEventData: …`
 
+    - `type: Literal["session.pending"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.pending"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionRunningEventData: …`
 
+    - `type: Literal["session.running"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.running"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionIdledEventData: …`
 
+    - `type: Literal["session.idled"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.idled"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionRequiresActionEventData: …`
 
+    - `type: Literal["session.requires_action"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.requires_action"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionArchivedEventData: …`
 
+    - `type: Literal["session.archived"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.archived"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionDeletedEventData: …`
 
+    - `type: Literal["session.deleted"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.deleted"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionStatusRescheduledEventData: …`
 
+    - `type: Literal["session.status_rescheduled"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.status_rescheduled"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionStatusRunStartedEventData: …`
 
+    - `type: Literal["session.status_run_started"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.status_run_started"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionStatusIdledEventData: …`
 
+    - `type: Literal["session.status_idled"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.status_idled"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionStatusTerminatedEventData: …`
 
+    - `type: Literal["session.status_terminated"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.status_terminated"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionThreadCreatedEventData: …`
 
+    - `type: Literal["session.thread_created"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
@@ -1006,13 +1015,13 @@ client.beta.webhooks.parse_unverified()
     - `session_thread_id: str`
 
       ID of the session thread this event refers to.
-
-    - `type: Literal["session.thread_created"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionThreadIdledEventData: …`
 
+    - `type: Literal["session.thread_idled"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
@@ -1022,13 +1031,13 @@ client.beta.webhooks.parse_unverified()
     - `session_thread_id: str`
 
       ID of the session thread this event refers to.
-
-    - `type: Literal["session.thread_idled"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookSessionThreadTerminatedEventData: …`
 
+    - `type: Literal["session.thread_terminated"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
@@ -1039,11 +1048,11 @@ client.beta.webhooks.parse_unverified()
 
       ID of the session thread this event refers to.
 
-    - `type: Literal["session.thread_terminated"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookSessionOutcomeEvaluationEndedEventData: …`
+
+    - `type: Literal["session.outcome_evaluation_ended"]`
 
     - `id: str`
 
@@ -1051,55 +1060,53 @@ client.beta.webhooks.parse_unverified()
 
     - `organization_id: str`
 
-    - `type: Literal["session.outcome_evaluation_ended"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookVaultCreatedEventData: …`
+
+    - `type: Literal["vault.created"]`
 
     - `id: str`
 
       ID of the vault that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["vault.created"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookVaultArchivedEventData: …`
 
+    - `type: Literal["vault.archived"]`
+
     - `id: str`
 
       ID of the vault that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["vault.archived"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookVaultDeletedEventData: …`
 
+    - `type: Literal["vault.deleted"]`
+
     - `id: str`
 
       ID of the vault that triggered the event.
 
     - `organization_id: str`
 
-    - `type: Literal["vault.deleted"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookVaultCredentialCreatedEventData: …`
+
+    - `type: Literal["vault_credential.created"]`
 
     - `id: str`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["vault_credential.created"]`
 
     - `vault_id: str`
 
@@ -1109,13 +1116,13 @@ client.beta.webhooks.parse_unverified()
 
   - `class BetaWebhookVaultCredentialArchivedEventData: …`
 
+    - `type: Literal["vault_credential.archived"]`
+
     - `id: str`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["vault_credential.archived"]`
 
     - `vault_id: str`
 
@@ -1125,13 +1132,13 @@ client.beta.webhooks.parse_unverified()
 
   - `class BetaWebhookVaultCredentialDeletedEventData: …`
 
+    - `type: Literal["vault_credential.deleted"]`
+
     - `id: str`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["vault_credential.deleted"]`
 
     - `vault_id: str`
 
@@ -1141,13 +1148,13 @@ client.beta.webhooks.parse_unverified()
 
   - `class BetaWebhookVaultCredentialRefreshFailedEventData: …`
 
+    - `type: Literal["vault_credential.refresh_failed"]`
+
     - `id: str`
 
       ID of the vault credential that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["vault_credential.refresh_failed"]`
 
     - `vault_id: str`
 
@@ -1157,65 +1164,67 @@ client.beta.webhooks.parse_unverified()
 
   - `class BetaWebhookSessionUpdatedEventData: …`
 
+    - `type: Literal["session.updated"]`
+
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.updated"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookAgentCreatedEventData: …`
 
+    - `type: Literal["agent.created"]`
+
     - `id: str`
 
       ID of the agent that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["agent.created"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookAgentArchivedEventData: …`
 
+    - `type: Literal["agent.archived"]`
+
     - `id: str`
 
       ID of the agent that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["agent.archived"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookAgentDeletedEventData: …`
 
+    - `type: Literal["agent.deleted"]`
+
     - `id: str`
 
       ID of the agent that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["agent.deleted"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentPausedEventData: …`
 
+    - `type: Literal["deployment.paused"]`
+
     - `id: str`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: str`
 
-    - `type: Literal["deployment.paused"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentRunFailedEventData: …`
+
+    - `type: Literal["deployment_run.failed"]`
 
     - `id: str`
 
@@ -1223,47 +1232,47 @@ client.beta.webhooks.parse_unverified()
 
     - `organization_id: str`
 
-    - `type: Literal["deployment_run.failed"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentCreatedEventData: …`
+
+    - `type: Literal["deployment.created"]`
 
     - `id: str`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["deployment.created"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentUpdatedEventData: …`
 
+    - `type: Literal["deployment.updated"]`
+
     - `id: str`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["deployment.updated"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentUnpausedEventData: …`
 
+    - `type: Literal["deployment.unpaused"]`
+
     - `id: str`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: str`
 
-    - `type: Literal["deployment.unpaused"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookAgentUpdatedEventData: …`
+
+    - `type: Literal["agent.updated"]`
 
     - `id: str`
 
@@ -1271,35 +1280,35 @@ client.beta.webhooks.parse_unverified()
 
     - `organization_id: str`
 
-    - `type: Literal["agent.updated"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentArchivedEventData: …`
+
+    - `type: Literal["deployment.archived"]`
 
     - `id: str`
 
       ID of the deployment that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["deployment.archived"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentRunStartedEventData: …`
 
+    - `type: Literal["deployment_run.started"]`
+
     - `id: str`
 
       ID of the deployment run that triggered the event.
 
     - `organization_id: str`
 
-    - `type: Literal["deployment_run.started"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentDeletedEventData: …`
+
+    - `type: Literal["deployment.deleted"]`
 
     - `id: str`
 
@@ -1307,11 +1316,11 @@ client.beta.webhooks.parse_unverified()
 
     - `organization_id: str`
 
-    - `type: Literal["deployment.deleted"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookDeploymentRunSucceededEventData: …`
+
+    - `type: Literal["deployment_run.succeeded"]`
 
     - `id: str`
 
@@ -1319,103 +1328,101 @@ client.beta.webhooks.parse_unverified()
 
     - `organization_id: str`
 
-    - `type: Literal["deployment_run.succeeded"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookEnvironmentCreatedEventData: …`
+
+    - `type: Literal["environment.created"]`
 
     - `id: str`
 
       ID of the environment that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["environment.created"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookEnvironmentUpdatedEventData: …`
 
+    - `type: Literal["environment.updated"]`
+
     - `id: str`
 
       ID of the environment that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["environment.updated"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookEnvironmentArchivedEventData: …`
 
+    - `type: Literal["environment.archived"]`
+
     - `id: str`
 
       ID of the environment that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["environment.archived"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookEnvironmentDeletedEventData: …`
 
+    - `type: Literal["environment.deleted"]`
+
     - `id: str`
 
       ID of the environment that triggered the event.
 
     - `organization_id: str`
 
-    - `type: Literal["environment.deleted"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookMemoryStoreCreatedEventData: …`
+
+    - `type: Literal["memory_store.created"]`
 
     - `id: str`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["memory_store.created"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookMemoryStoreArchivedEventData: …`
 
+    - `type: Literal["memory_store.archived"]`
+
     - `id: str`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["memory_store.archived"]`
 
     - `workspace_id: str`
 
   - `class BetaWebhookMemoryStoreDeletedEventData: …`
 
+    - `type: Literal["memory_store.deleted"]`
+
     - `id: str`
 
       ID of the memory store that triggered the event.
 
     - `organization_id: str`
 
-    - `type: Literal["memory_store.deleted"]`
-
     - `workspace_id: str`
 
   - `class BetaWebhookSessionBudgetReachedEventData: …`
+
+    - `type: Literal["session.budget_reached"]`
 
     - `id: str`
 
       ID of the session that triggered the event.
 
     - `organization_id: str`
-
-    - `type: Literal["session.budget_reached"]`
 
     - `workspace_id: str`
 
@@ -1423,13 +1430,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookMemoryStoreArchivedEventData: …`
 
+  - `type: Literal["memory_store.archived"]`
+
   - `id: str`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["memory_store.archived"]`
 
   - `workspace_id: str`
 
@@ -1437,13 +1444,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookMemoryStoreCreatedEventData: …`
 
+  - `type: Literal["memory_store.created"]`
+
   - `id: str`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["memory_store.created"]`
 
   - `workspace_id: str`
 
@@ -1451,13 +1458,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookMemoryStoreDeletedEventData: …`
 
+  - `type: Literal["memory_store.deleted"]`
+
   - `id: str`
 
     ID of the memory store that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["memory_store.deleted"]`
 
   - `workspace_id: str`
 
@@ -1465,13 +1472,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionArchivedEventData: …`
 
+  - `type: Literal["session.archived"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.archived"]`
 
   - `workspace_id: str`
 
@@ -1479,13 +1486,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionBudgetReachedEventData: …`
 
+  - `type: Literal["session.budget_reached"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.budget_reached"]`
 
   - `workspace_id: str`
 
@@ -1493,13 +1500,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionCreatedEventData: …`
 
+  - `type: Literal["session.created"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.created"]`
 
   - `workspace_id: str`
 
@@ -1507,13 +1514,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionDeletedEventData: …`
 
+  - `type: Literal["session.deleted"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.deleted"]`
 
   - `workspace_id: str`
 
@@ -1521,13 +1528,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionIdledEventData: …`
 
+  - `type: Literal["session.idled"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.idled"]`
 
   - `workspace_id: str`
 
@@ -1535,13 +1542,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionOutcomeEvaluationEndedEventData: …`
 
+  - `type: Literal["session.outcome_evaluation_ended"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.outcome_evaluation_ended"]`
 
   - `workspace_id: str`
 
@@ -1549,13 +1556,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionPendingEventData: …`
 
+  - `type: Literal["session.pending"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.pending"]`
 
   - `workspace_id: str`
 
@@ -1563,13 +1570,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionRequiresActionEventData: …`
 
+  - `type: Literal["session.requires_action"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.requires_action"]`
 
   - `workspace_id: str`
 
@@ -1577,13 +1584,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionRunningEventData: …`
 
+  - `type: Literal["session.running"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.running"]`
 
   - `workspace_id: str`
 
@@ -1591,13 +1598,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionStatusIdledEventData: …`
 
+  - `type: Literal["session.status_idled"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.status_idled"]`
 
   - `workspace_id: str`
 
@@ -1605,13 +1612,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionStatusRescheduledEventData: …`
 
+  - `type: Literal["session.status_rescheduled"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.status_rescheduled"]`
 
   - `workspace_id: str`
 
@@ -1619,13 +1626,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionStatusRunStartedEventData: …`
 
+  - `type: Literal["session.status_run_started"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.status_run_started"]`
 
   - `workspace_id: str`
 
@@ -1633,13 +1640,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionStatusTerminatedEventData: …`
 
+  - `type: Literal["session.status_terminated"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["session.status_terminated"]`
 
   - `workspace_id: str`
 
@@ -1647,6 +1654,8 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionThreadCreatedEventData: …`
 
+  - `type: Literal["session.thread_created"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
@@ -1656,8 +1665,6 @@ client.beta.webhooks.parse_unverified()
   - `session_thread_id: str`
 
     ID of the session thread this event refers to.
-
-  - `type: Literal["session.thread_created"]`
 
   - `workspace_id: str`
 
@@ -1665,6 +1672,8 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionThreadIdledEventData: …`
 
+  - `type: Literal["session.thread_idled"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
@@ -1674,8 +1683,6 @@ client.beta.webhooks.parse_unverified()
   - `session_thread_id: str`
 
     ID of the session thread this event refers to.
-
-  - `type: Literal["session.thread_idled"]`
 
   - `workspace_id: str`
 
@@ -1683,6 +1690,8 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookSessionThreadTerminatedEventData: …`
 
+  - `type: Literal["session.thread_terminated"]`
+
   - `id: str`
 
     ID of the session that triggered the event.
@@ -1693,13 +1702,13 @@ client.beta.webhooks.parse_unverified()
 
     ID of the session thread this event refers to.
 
-  - `type: Literal["session.thread_terminated"]`
-
   - `workspace_id: str`
 
 ### Beta Webhook Session Updated Event Data
 
 - `class BetaWebhookSessionUpdatedEventData: …`
+
+  - `type: Literal["session.updated"]`
 
   - `id: str`
 
@@ -1707,21 +1716,19 @@ client.beta.webhooks.parse_unverified()
 
   - `organization_id: str`
 
-  - `type: Literal["session.updated"]`
-
   - `workspace_id: str`
 
 ### Beta Webhook Vault Archived Event Data
 
 - `class BetaWebhookVaultArchivedEventData: …`
 
+  - `type: Literal["vault.archived"]`
+
   - `id: str`
 
     ID of the vault that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["vault.archived"]`
 
   - `workspace_id: str`
 
@@ -1729,13 +1736,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookVaultCreatedEventData: …`
 
+  - `type: Literal["vault.created"]`
+
   - `id: str`
 
     ID of the vault that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["vault.created"]`
 
   - `workspace_id: str`
 
@@ -1743,13 +1750,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookVaultCredentialArchivedEventData: …`
 
+  - `type: Literal["vault_credential.archived"]`
+
   - `id: str`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["vault_credential.archived"]`
 
   - `vault_id: str`
 
@@ -1761,13 +1768,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookVaultCredentialCreatedEventData: …`
 
+  - `type: Literal["vault_credential.created"]`
+
   - `id: str`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["vault_credential.created"]`
 
   - `vault_id: str`
 
@@ -1779,13 +1786,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookVaultCredentialDeletedEventData: …`
 
+  - `type: Literal["vault_credential.deleted"]`
+
   - `id: str`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["vault_credential.deleted"]`
 
   - `vault_id: str`
 
@@ -1797,13 +1804,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookVaultCredentialRefreshFailedEventData: …`
 
+  - `type: Literal["vault_credential.refresh_failed"]`
+
   - `id: str`
 
     ID of the vault credential that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["vault_credential.refresh_failed"]`
 
   - `vault_id: str`
 
@@ -1815,13 +1822,13 @@ client.beta.webhooks.parse_unverified()
 
 - `class BetaWebhookVaultDeletedEventData: …`
 
+  - `type: Literal["vault.deleted"]`
+
   - `id: str`
 
     ID of the vault that triggered the event.
 
   - `organization_id: str`
-
-  - `type: Literal["vault.deleted"]`
 
   - `workspace_id: str`
 

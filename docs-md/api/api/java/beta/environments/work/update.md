@@ -1,5 +1,12 @@
 # Update Work Item
 
+---
+title: Update Work Item
+url: https://platform.claude.com/docs/en/api/java/beta/environments/work/update
+---
+
+# Update Work Item
+
 `BetaSelfHostedWork beta().environments().work().update(params, requestOptions = RequestOptions.none())`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}`
@@ -66,6 +73,8 @@ Update work item metadata with merge semantics.
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -108,6 +117,8 @@ Update work item metadata with merge semantics.
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `BetaSelfHostedWorkUpdateRequest betaSelfHostedWorkUpdateRequest`
 
     Request to update work item metadata.
@@ -121,6 +132,10 @@ Update work item metadata with merge semantics.
   Work items are queued when sessions are created or when long-dormant sessions
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
+
+  - `JsonValue type = "work"`
+
+    The type of object (always 'work')
 
   - `String id`
 
@@ -138,13 +153,13 @@ Update work item metadata with merge semantics.
 
     The actual work to be performed
 
-    - `String id`
-
-      Session identifier (e.g., 'session_...')
-
     - `JsonValue type = "session"`
 
       Type of work data
+
+    - `String id`
+
+      Session identifier (e.g., 'session_...')
 
   - `String environmentId`
 
@@ -187,10 +202,6 @@ Update work item metadata with merge semantics.
   - `Optional<String> stoppedAt`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `JsonValue type = "work"`
-
-    The type of object (always 'work')
 
 ## Example
 

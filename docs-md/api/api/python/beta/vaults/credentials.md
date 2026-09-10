@@ -1,5 +1,12 @@
 # Credentials
 
+---
+title: Credentials
+url: https://platform.claude.com/docs/en/api/python/beta/vaults/credentials
+---
+
+# Credentials
+
 ## Create Credential
 
 `beta.vaults.credentials.create(vault_id, **kwargs)  -> BetaManagedAgentsCredential`
@@ -20,6 +27,8 @@ Create Credential
 
     Parameters for creating an MCP OAuth credential.
 
+    - `type: Literal["mcp_oauth"]`
+
     - `access_token: str`
 
       OAuth access token.
@@ -31,8 +40,6 @@ Create Credential
       URL of the MCP server this credential authenticates against.
 
       minLength: 1, maxLength: 2047
-
-    - `type: Literal["mcp_oauth"]`
 
     - `expires_at: Optional[datetime]`
 
@@ -54,7 +61,7 @@ Create Credential
 
         OAuth refresh token.
 
-        minLength: 1, maxLength: 4096
+        minLength: 1, maxLength: 8192
 
       - `token_endpoint: str`
 
@@ -76,25 +83,25 @@ Create Credential
 
           Token endpoint uses HTTP Basic authentication with client credentials.
 
+          - `type: Literal["client_secret_basic"]`
+
           - `client_secret: str`
 
             OAuth client secret.
 
             minLength: 1, maxLength: 512
-
-          - `type: Literal["client_secret_basic"]`
 
         - `class BetaManagedAgentsTokenEndpointAuthPostParam: …`
 
           Token endpoint uses POST body authentication with client credentials.
 
+          - `type: Literal["client_secret_post"]`
+
           - `client_secret: str`
 
             OAuth client secret.
 
             minLength: 1, maxLength: 512
-
-          - `type: Literal["client_secret_post"]`
 
       - `resource: Optional[str]`
 
@@ -112,6 +119,8 @@ Create Credential
 
     Parameters for creating a static bearer token credential.
 
+    - `type: Literal["static_bearer"]`
+
     - `token: str`
 
       Static bearer token value.
@@ -124,11 +133,11 @@ Create Credential
 
       minLength: 1, maxLength: 2047
 
-    - `type: Literal["static_bearer"]`
-
   - `class BetaManagedAgentsEnvironmentVariableCreateParams: …`
 
     Parameters for creating an environment variable credential.
+
+    - `type: Literal["environment_variable"]`
 
     - `networking: BetaManagedAgentsCredentialNetworkingParams`
 
@@ -144,11 +153,11 @@ Create Credential
 
         Substitute the secret only on requests to the listed hosts.
 
+        - `type: Literal["limited"]`
+
         - `allowed_hosts: List[str]`
 
           Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-        - `type: Literal["limited"]`
 
     - `secret_name: str`
 
@@ -161,8 +170,6 @@ Create Credential
       Secret value. Write-only; never returned in responses.
 
       minLength: 1, maxLength: 4096
-
-    - `type: Literal["environment_variable"]`
 
     - `injection_location: Optional[BetaManagedAgentsInjectionLocationParams]`
 
@@ -192,7 +199,7 @@ Create Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -240,6 +247,8 @@ Create Credential
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -282,11 +291,15 @@ Create Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential: …`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: Literal["vault_credential"]`
 
   - `id: str`
 
@@ -306,11 +319,11 @@ Create Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: Literal["mcp_oauth"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: Literal["mcp_oauth"]`
 
       - `expires_at: Optional[datetime]`
 
@@ -364,15 +377,17 @@ Create Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: Literal["static_bearer"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: Literal["static_bearer"]`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: Literal["environment_variable"]`
 
       - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -400,17 +415,15 @@ Create Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: Literal["limited"]`
+
           - `allowed_hosts: List[str]`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: Literal["limited"]`
-
       - `secret_name: str`
 
         Name of the environment variable.
-
-      - `type: Literal["environment_variable"]`
 
   - `created_at: datetime`
 
@@ -421,8 +434,6 @@ Create Credential
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: Literal["vault_credential"]`
 
   - `updated_at: datetime`
 
@@ -513,7 +524,7 @@ List Credentials
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -561,6 +572,8 @@ List Credentials
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -603,11 +616,15 @@ List Credentials
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential: …`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: Literal["vault_credential"]`
 
   - `id: str`
 
@@ -627,11 +644,11 @@ List Credentials
 
       OAuth credential details for an MCP server.
 
+      - `type: Literal["mcp_oauth"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: Literal["mcp_oauth"]`
 
       - `expires_at: Optional[datetime]`
 
@@ -685,15 +702,17 @@ List Credentials
 
       Static bearer token credential details for an MCP server.
 
+      - `type: Literal["static_bearer"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: Literal["static_bearer"]`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: Literal["environment_variable"]`
 
       - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -721,17 +740,15 @@ List Credentials
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: Literal["limited"]`
+
           - `allowed_hosts: List[str]`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: Literal["limited"]`
-
       - `secret_name: str`
 
         Name of the environment variable.
-
-      - `type: Literal["environment_variable"]`
 
   - `created_at: datetime`
 
@@ -742,8 +759,6 @@ List Credentials
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: Literal["vault_credential"]`
 
   - `updated_at: datetime`
 
@@ -823,7 +838,7 @@ Get Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -871,6 +886,8 @@ Get Credential
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -913,11 +930,15 @@ Get Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential: …`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: Literal["vault_credential"]`
 
   - `id: str`
 
@@ -937,11 +958,11 @@ Get Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: Literal["mcp_oauth"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: Literal["mcp_oauth"]`
 
       - `expires_at: Optional[datetime]`
 
@@ -995,15 +1016,17 @@ Get Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: Literal["static_bearer"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: Literal["static_bearer"]`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: Literal["environment_variable"]`
 
       - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -1031,17 +1054,15 @@ Get Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: Literal["limited"]`
+
           - `allowed_hosts: List[str]`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: Literal["limited"]`
-
       - `secret_name: str`
 
         Name of the environment variable.
-
-      - `type: Literal["environment_variable"]`
 
   - `created_at: datetime`
 
@@ -1052,8 +1073,6 @@ Get Credential
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: Literal["vault_credential"]`
 
   - `updated_at: datetime`
 
@@ -1152,7 +1171,7 @@ Update Credential
 
         Updated OAuth refresh token.
 
-        minLength: 1, maxLength: 4096
+        minLength: 1, maxLength: 8192
 
       - `scope: Optional[str]`
 
@@ -1232,11 +1251,11 @@ Update Credential
 
         Substitute the secret only on requests to the listed hosts.
 
+        - `type: Literal["limited"]`
+
         - `allowed_hosts: List[str]`
 
           Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-        - `type: Literal["limited"]`
 
     - `secret_value: Optional[str]`
 
@@ -1260,7 +1279,7 @@ Update Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1308,6 +1327,8 @@ Update Credential
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1350,11 +1371,15 @@ Update Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential: …`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: Literal["vault_credential"]`
 
   - `id: str`
 
@@ -1374,11 +1399,11 @@ Update Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: Literal["mcp_oauth"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: Literal["mcp_oauth"]`
 
       - `expires_at: Optional[datetime]`
 
@@ -1432,15 +1457,17 @@ Update Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: Literal["static_bearer"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: Literal["static_bearer"]`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: Literal["environment_variable"]`
 
       - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -1468,17 +1495,15 @@ Update Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: Literal["limited"]`
+
           - `allowed_hosts: List[str]`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: Literal["limited"]`
-
       - `secret_name: str`
 
         Name of the environment variable.
-
-      - `type: Literal["environment_variable"]`
 
   - `created_at: datetime`
 
@@ -1489,8 +1514,6 @@ Update Credential
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: Literal["vault_credential"]`
 
   - `updated_at: datetime`
 
@@ -1565,7 +1588,7 @@ Delete Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1613,6 +1636,8 @@ Delete Credential
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1655,17 +1680,19 @@ Delete Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential: …`
 
   Confirmation of a deleted credential.
 
+  - `type: Literal["vault_credential_deleted"]`
+
   - `id: str`
 
     Unique identifier of the deleted credential.
-
-  - `type: Literal["vault_credential_deleted"]`
 
 ### Example
 
@@ -1714,7 +1741,7 @@ Archive Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1762,6 +1789,8 @@ Archive Credential
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -1804,11 +1833,15 @@ Archive Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential: …`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `type: Literal["vault_credential"]`
 
   - `id: str`
 
@@ -1828,11 +1861,11 @@ Archive Credential
 
       OAuth credential details for an MCP server.
 
+      - `type: Literal["mcp_oauth"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: Literal["mcp_oauth"]`
 
       - `expires_at: Optional[datetime]`
 
@@ -1886,15 +1919,17 @@ Archive Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `type: Literal["static_bearer"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: Literal["static_bearer"]`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: Literal["environment_variable"]`
 
       - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -1922,17 +1957,15 @@ Archive Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: Literal["limited"]`
+
           - `allowed_hosts: List[str]`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: Literal["limited"]`
-
       - `secret_name: str`
 
         Name of the environment variable.
-
-      - `type: Literal["environment_variable"]`
 
   - `created_at: datetime`
 
@@ -1943,8 +1976,6 @@ Archive Credential
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: Literal["vault_credential"]`
 
   - `updated_at: datetime`
 
@@ -2019,7 +2050,7 @@ Validate Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2067,6 +2098,8 @@ Validate Credential
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -2109,11 +2142,15 @@ Validate Credential
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaManagedAgentsCredentialValidation: …`
 
   Result of live-probing a credential against its configured MCP server.
+
+  - `type: Literal["vault_credential_validation"]`
 
   - `credential_id: str`
 
@@ -2182,8 +2219,6 @@ Validate Credential
     - `"invalid"`
 
     - `"unknown"`
-
-  - `type: Literal["vault_credential_validation"]`
 
   - `validated_at: datetime`
 
@@ -2254,6 +2289,8 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
+  - `type: Literal["vault_credential"]`
+
   - `id: str`
 
     Unique identifier for the credential.
@@ -2272,11 +2309,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       OAuth credential details for an MCP server.
 
+      - `type: Literal["mcp_oauth"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
-
-      - `type: Literal["mcp_oauth"]`
 
       - `expires_at: Optional[datetime]`
 
@@ -2330,15 +2367,17 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       Static bearer token credential details for an MCP server.
 
+      - `type: Literal["static_bearer"]`
+
       - `mcp_server_url: str`
 
         URL of the MCP server this credential authenticates against.
 
-      - `type: Literal["static_bearer"]`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `type: Literal["environment_variable"]`
 
       - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -2366,17 +2405,15 @@ print(beta_managed_agents_credential_validation.credential_id)
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `type: Literal["limited"]`
+
           - `allowed_hosts: List[str]`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `type: Literal["limited"]`
-
       - `secret_name: str`
 
         Name of the environment variable.
-
-      - `type: Literal["environment_variable"]`
 
   - `created_at: datetime`
 
@@ -2387,8 +2424,6 @@ print(beta_managed_agents_credential_validation.credential_id)
   - `metadata: Dict[str, str]`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `type: Literal["vault_credential"]`
 
   - `updated_at: datetime`
 
@@ -2420,17 +2455,19 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     Substitute the secret only on requests to the listed hosts.
 
+    - `type: Literal["limited"]`
+
     - `allowed_hosts: List[str]`
 
       Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-    - `type: Literal["limited"]`
 
 ### Beta Managed Agents Credential Validation
 
 - `class BetaManagedAgentsCredentialValidation: …`
 
   Result of live-probing a credential against its configured MCP server.
+
+  - `type: Literal["vault_credential_validation"]`
 
   - `credential_id: str`
 
@@ -2500,8 +2537,6 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `"unknown"`
 
-  - `type: Literal["vault_credential_validation"]`
-
   - `validated_at: datetime`
 
     A timestamp in RFC 3339 format
@@ -2530,17 +2565,19 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   Confirmation of a deleted credential.
 
+  - `type: Literal["vault_credential_deleted"]`
+
   - `id: str`
 
     Unique identifier of the deleted credential.
-
-  - `type: Literal["vault_credential_deleted"]`
 
 ### Beta Managed Agents Environment Variable Auth Response
 
 - `class BetaManagedAgentsEnvironmentVariableAuthResponse: …`
 
   Environment variable credential details. The secret value is never returned.
+
+  - `type: Literal["environment_variable"]`
 
   - `injection_location: BetaManagedAgentsInjectionLocationResponse`
 
@@ -2568,23 +2605,23 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       The secret is substituted only on requests to the listed hosts.
 
+      - `type: Literal["limited"]`
+
       - `allowed_hosts: List[str]`
 
         Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-      - `type: Literal["limited"]`
-
   - `secret_name: str`
 
     Name of the environment variable.
-
-  - `type: Literal["environment_variable"]`
 
 ### Beta Managed Agents Environment Variable Create Params
 
 - `class BetaManagedAgentsEnvironmentVariableCreateParams: …`
 
   Parameters for creating an environment variable credential.
+
+  - `type: Literal["environment_variable"]`
 
   - `networking: BetaManagedAgentsCredentialNetworkingParams`
 
@@ -2600,11 +2637,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       Substitute the secret only on requests to the listed hosts.
 
+      - `type: Literal["limited"]`
+
       - `allowed_hosts: List[str]`
 
         Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-      - `type: Literal["limited"]`
 
   - `secret_name: str`
 
@@ -2617,8 +2654,6 @@ print(beta_managed_agents_credential_validation.credential_id)
     Secret value. Write-only; never returned in responses.
 
     minLength: 1, maxLength: 4096
-
-  - `type: Literal["environment_variable"]`
 
   - `injection_location: Optional[BetaManagedAgentsInjectionLocationParams]`
 
@@ -2666,11 +2701,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       Substitute the secret only on requests to the listed hosts.
 
+      - `type: Literal["limited"]`
+
       - `allowed_hosts: List[str]`
 
         Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-      - `type: Literal["limited"]`
 
   - `secret_value: Optional[str]`
 
@@ -2726,11 +2761,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   Substitute the secret only on requests to the listed hosts.
 
+  - `type: Literal["limited"]`
+
   - `allowed_hosts: List[str]`
 
     Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-  - `type: Literal["limited"]`
 
 ### Beta Managed Agents Limited Credential Networking Response
 
@@ -2738,11 +2773,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   The secret is substituted only on requests to the listed hosts.
 
+  - `type: Literal["limited"]`
+
   - `allowed_hosts: List[str]`
 
     Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
-
-  - `type: Literal["limited"]`
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -2750,11 +2785,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   OAuth credential details for an MCP server.
 
+  - `type: Literal["mcp_oauth"]`
+
   - `mcp_server_url: str`
 
     URL of the MCP server this credential authenticates against.
-
-  - `type: Literal["mcp_oauth"]`
 
   - `expires_at: Optional[datetime]`
 
@@ -2810,6 +2845,8 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   Parameters for creating an MCP OAuth credential.
 
+  - `type: Literal["mcp_oauth"]`
+
   - `access_token: str`
 
     OAuth access token.
@@ -2821,8 +2858,6 @@ print(beta_managed_agents_credential_validation.credential_id)
     URL of the MCP server this credential authenticates against.
 
     minLength: 1, maxLength: 2047
-
-  - `type: Literal["mcp_oauth"]`
 
   - `expires_at: Optional[datetime]`
 
@@ -2844,7 +2879,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       OAuth refresh token.
 
-      minLength: 1, maxLength: 4096
+      minLength: 1, maxLength: 8192
 
     - `token_endpoint: str`
 
@@ -2866,25 +2901,25 @@ print(beta_managed_agents_credential_validation.credential_id)
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
+        - `type: Literal["client_secret_basic"]`
+
         - `client_secret: str`
 
           OAuth client secret.
 
           minLength: 1, maxLength: 512
-
-        - `type: Literal["client_secret_basic"]`
 
       - `class BetaManagedAgentsTokenEndpointAuthPostParam: …`
 
         Token endpoint uses POST body authentication with client credentials.
 
+        - `type: Literal["client_secret_post"]`
+
         - `client_secret: str`
 
           OAuth client secret.
 
           minLength: 1, maxLength: 512
-
-        - `type: Literal["client_secret_post"]`
 
     - `resource: Optional[str]`
 
@@ -2914,7 +2949,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     OAuth refresh token.
 
-    minLength: 1, maxLength: 4096
+    minLength: 1, maxLength: 8192
 
   - `token_endpoint: str`
 
@@ -2936,25 +2971,25 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
+      - `type: Literal["client_secret_basic"]`
+
       - `client_secret: str`
 
         OAuth client secret.
 
         minLength: 1, maxLength: 512
-
-      - `type: Literal["client_secret_basic"]`
 
     - `class BetaManagedAgentsTokenEndpointAuthPostParam: …`
 
       Token endpoint uses POST body authentication with client credentials.
 
+      - `type: Literal["client_secret_post"]`
+
       - `client_secret: str`
 
         OAuth client secret.
 
         minLength: 1, maxLength: 512
-
-      - `type: Literal["client_secret_post"]`
 
   - `resource: Optional[str]`
 
@@ -3022,7 +3057,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     Updated OAuth refresh token.
 
-    minLength: 1, maxLength: 4096
+    minLength: 1, maxLength: 8192
 
   - `scope: Optional[str]`
 
@@ -3086,7 +3121,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       Updated OAuth refresh token.
 
-      minLength: 1, maxLength: 4096
+      minLength: 1, maxLength: 8192
 
     - `scope: Optional[str]`
 
@@ -3224,17 +3259,19 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   Static bearer token credential details for an MCP server.
 
+  - `type: Literal["static_bearer"]`
+
   - `mcp_server_url: str`
 
     URL of the MCP server this credential authenticates against.
-
-  - `type: Literal["static_bearer"]`
 
 ### Beta Managed Agents Static Bearer Create Params
 
 - `class BetaManagedAgentsStaticBearerCreateParams: …`
 
   Parameters for creating a static bearer token credential.
+
+  - `type: Literal["static_bearer"]`
 
   - `token: str`
 
@@ -3247,8 +3284,6 @@ print(beta_managed_agents_credential_validation.credential_id)
     URL of the MCP server this credential authenticates against.
 
     minLength: 1, maxLength: 2047
-
-  - `type: Literal["static_bearer"]`
 
 ### Beta Managed Agents Static Bearer Update Params
 
@@ -3270,13 +3305,13 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
+  - `type: Literal["client_secret_basic"]`
+
   - `client_secret: str`
 
     OAuth client secret.
 
     minLength: 1, maxLength: 512
-
-  - `type: Literal["client_secret_basic"]`
 
 ### Beta Managed Agents Token Endpoint Auth Basic Response
 
@@ -3322,13 +3357,13 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   Token endpoint uses POST body authentication with client credentials.
 
+  - `type: Literal["client_secret_post"]`
+
   - `client_secret: str`
 
     OAuth client secret.
 
     minLength: 1, maxLength: 512
-
-  - `type: Literal["client_secret_post"]`
 
 ### Beta Managed Agents Token Endpoint Auth Post Response
 

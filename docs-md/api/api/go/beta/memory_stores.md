@@ -1,5 +1,12 @@
 # Memory Stores
 
+---
+title: Memory Stores
+url: https://platform.claude.com/docs/en/api/go/beta/memory_stores
+---
+
+# Memory Stores
+
 ## Create a memory store
 
 `client.Beta.MemoryStores.New(ctx, params) (*BetaManagedAgentsMemoryStore, error)`
@@ -82,6 +89,8 @@ Create a memory store
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -124,11 +133,19 @@ Create a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
+  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `ID string`
 
@@ -143,8 +160,6 @@ Create a memory store
   - `Name string`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `UpdatedAt Time`
 
@@ -302,6 +317,8 @@ List memory stores
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -344,11 +361,19 @@ List memory stores
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
+  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `ID string`
 
@@ -363,8 +388,6 @@ List memory stores
   - `Name string`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `UpdatedAt Time`
 
@@ -501,6 +524,8 @@ Retrieve a memory store
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -543,11 +568,19 @@ Retrieve a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
+  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `ID string`
 
@@ -562,8 +595,6 @@ Retrieve a memory store
   - `Name string`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `UpdatedAt Time`
 
@@ -715,6 +746,8 @@ Update a memory store
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -757,11 +790,19 @@ Update a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
+  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `ID string`
 
@@ -776,8 +817,6 @@ Update a memory store
   - `Name string`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `UpdatedAt Time`
 
@@ -913,6 +952,8 @@ Delete a memory store
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -955,17 +996,23 @@ Delete a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsDeletedMemoryStore struct{…}`
 
   Confirmation that a `memory_store` was deleted.
 
+  - `Type BetaManagedAgentsDeletedMemoryStoreType`
+
   - `ID string`
 
     ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
-
-  - `Type BetaManagedAgentsDeletedMemoryStoreType`
 
 ### Example
 
@@ -1073,6 +1120,8 @@ Archive a memory store
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -1115,11 +1164,19 @@ Archive a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
+  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `ID string`
 
@@ -1134,8 +1191,6 @@ Archive a memory store
   - `Name string`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `UpdatedAt Time`
 
@@ -1211,17 +1266,19 @@ func main() {
 
   Confirmation that a `memory_store` was deleted.
 
+  - `Type BetaManagedAgentsDeletedMemoryStoreType`
+
   - `ID string`
 
     ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
-
-  - `Type BetaManagedAgentsDeletedMemoryStoreType`
 
 ### Beta Managed Agents Memory Store
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
+
+  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `ID string`
 
@@ -1236,8 +1293,6 @@ func main() {
   - `Name string`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type BetaManagedAgentsMemoryStoreType`
 
   - `UpdatedAt Time`
 
@@ -1343,6 +1398,8 @@ Create a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -1385,11 +1442,19 @@ Create a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `Type BetaManagedAgentsMemoryType`
 
   - `ID string`
 
@@ -1422,8 +1487,6 @@ Create a memory
   - `Path string`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `Type BetaManagedAgentsMemoryType`
 
   - `UpdatedAt Time`
 
@@ -1576,6 +1639,8 @@ List memories
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -1618,6 +1683,12 @@ List memories
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsMemoryListItemUnion interface{…}`
@@ -1627,6 +1698,8 @@ List memories
   - `type BetaManagedAgentsMemory struct{…}`
 
     A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+    - `Type BetaManagedAgentsMemoryType`
 
     - `ID string`
 
@@ -1660,8 +1733,6 @@ List memories
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `Type BetaManagedAgentsMemoryType`
-
     - `UpdatedAt Time`
 
       A timestamp in RFC 3339 format
@@ -1676,11 +1747,11 @@ List memories
 
     A rolled-up directory marker returned by [List memories](../../beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
+    - `Type BetaManagedAgentsMemoryPrefixType`
+
     - `Path string`
 
       The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-    - `Type BetaManagedAgentsMemoryPrefixType`
 
 #### Example
 
@@ -1809,6 +1880,8 @@ Retrieve a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -1851,11 +1924,19 @@ Retrieve a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `Type BetaManagedAgentsMemoryType`
 
   - `ID string`
 
@@ -1888,8 +1969,6 @@ Retrieve a memory
   - `Path string`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `Type BetaManagedAgentsMemoryType`
 
   - `UpdatedAt Time`
 
@@ -2039,6 +2118,8 @@ Update a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -2081,11 +2162,19 @@ Update a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+
+  - `Type BetaManagedAgentsMemoryType`
 
   - `ID string`
 
@@ -2118,8 +2207,6 @@ Update a memory
   - `Path string`
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
-
-  - `Type BetaManagedAgentsMemoryType`
 
   - `UpdatedAt Time`
 
@@ -2255,6 +2342,8 @@ Delete a memory
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -2297,17 +2386,23 @@ Delete a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsDeletedMemory struct{…}`
 
   Tombstone returned by [Delete a memory](../../beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](../../beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
+  - `Type BetaManagedAgentsDeletedMemoryType`
+
   - `ID string`
 
     ID of the deleted memory (a `mem_...` value).
-
-  - `Type BetaManagedAgentsDeletedMemoryType`
 
 #### Example
 
@@ -2465,6 +2560,8 @@ List memory versions
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -2507,11 +2604,19 @@ List memory versions
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
+  - `Type BetaManagedAgentsMemoryVersionType`
 
   - `ID string`
 
@@ -2541,8 +2646,6 @@ List memory versions
 
     - `const BetaManagedAgentsMemoryVersionOperationDeleted BetaManagedAgentsMemoryVersionOperation = "deleted"`
 
-  - `Type BetaManagedAgentsMemoryVersionType`
-
   - `Content string Optional`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -2559,31 +2662,31 @@ List memory versions
 
   - `CreatedBy BetaManagedAgentsActorUnion Optional`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
     - `type BetaManagedAgentsSessionActor struct{…}`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
+      - `Type BetaManagedAgentsSessionActorType`
+
       - `SessionID string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](../../beta/sessions/retrieve.md) for further provenance.
 
         minLength: 1
-
-      - `Type BetaManagedAgentsSessionActorType`
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
       Attribution for a write made directly via the public API (outside of any session).
+
+      - `Type BetaManagedAgentsAPIActorType`
 
       - `APIKeyID string`
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
         minLength: 1
-
-      - `Type BetaManagedAgentsAPIActorType`
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
@@ -2601,13 +2704,13 @@ List memory versions
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
+      - `Type ServiceAccountActor`
+
       - `ServiceAccountID string`
 
         ID of the service account that performed the write (a `svac_...` value).
 
         minLength: 1
-
-      - `Type ServiceAccountActor`
 
   - `Path string Optional`
 
@@ -2621,7 +2724,7 @@ List memory versions
 
   - `RedactedBy BetaManagedAgentsActorUnion Optional`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
 #### Example
 
@@ -2759,6 +2862,8 @@ Retrieve a memory version
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -2801,11 +2906,19 @@ Retrieve a memory version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
+  - `Type BetaManagedAgentsMemoryVersionType`
 
   - `ID string`
 
@@ -2835,8 +2948,6 @@ Retrieve a memory version
 
     - `const BetaManagedAgentsMemoryVersionOperationDeleted BetaManagedAgentsMemoryVersionOperation = "deleted"`
 
-  - `Type BetaManagedAgentsMemoryVersionType`
-
   - `Content string Optional`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -2853,31 +2964,31 @@ Retrieve a memory version
 
   - `CreatedBy BetaManagedAgentsActorUnion Optional`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
     - `type BetaManagedAgentsSessionActor struct{…}`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
+      - `Type BetaManagedAgentsSessionActorType`
+
       - `SessionID string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](../../beta/sessions/retrieve.md) for further provenance.
 
         minLength: 1
-
-      - `Type BetaManagedAgentsSessionActorType`
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
       Attribution for a write made directly via the public API (outside of any session).
+
+      - `Type BetaManagedAgentsAPIActorType`
 
       - `APIKeyID string`
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
         minLength: 1
-
-      - `Type BetaManagedAgentsAPIActorType`
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
@@ -2895,13 +3006,13 @@ Retrieve a memory version
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
+      - `Type ServiceAccountActor`
+
       - `ServiceAccountID string`
 
         ID of the service account that performed the write (a `svac_...` value).
 
         minLength: 1
-
-      - `Type ServiceAccountActor`
 
   - `Path string Optional`
 
@@ -2915,7 +3026,7 @@ Retrieve a memory version
 
   - `RedactedBy BetaManagedAgentsActorUnion Optional`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
 #### Example
 
@@ -3046,6 +3157,8 @@ Redact a memory version
 
       - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
+      - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -3088,11 +3201,19 @@ Redact a memory version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
+  - `Type BetaManagedAgentsMemoryVersionType`
 
   - `ID string`
 
@@ -3122,8 +3243,6 @@ Redact a memory version
 
     - `const BetaManagedAgentsMemoryVersionOperationDeleted BetaManagedAgentsMemoryVersionOperation = "deleted"`
 
-  - `Type BetaManagedAgentsMemoryVersionType`
-
   - `Content string Optional`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -3140,31 +3259,31 @@ Redact a memory version
 
   - `CreatedBy BetaManagedAgentsActorUnion Optional`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
     - `type BetaManagedAgentsSessionActor struct{…}`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
+      - `Type BetaManagedAgentsSessionActorType`
+
       - `SessionID string`
 
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve) for further provenance.
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](../../beta/sessions/retrieve.md) for further provenance.
 
         minLength: 1
-
-      - `Type BetaManagedAgentsSessionActorType`
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
       Attribution for a write made directly via the public API (outside of any session).
+
+      - `Type BetaManagedAgentsAPIActorType`
 
       - `APIKeyID string`
 
         ID of the API key that performed the write. This identifies the key, not the secret.
 
         minLength: 1
-
-      - `Type BetaManagedAgentsAPIActorType`
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
@@ -3182,13 +3301,13 @@ Redact a memory version
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
+      - `Type ServiceAccountActor`
+
       - `ServiceAccountID string`
 
         ID of the service account that performed the write (a `svac_...` value).
 
         minLength: 1
-
-      - `Type ServiceAccountActor`
 
   - `Path string Optional`
 
@@ -3202,7 +3321,7 @@ Redact a memory version
 
   - `RedactedBy BetaManagedAgentsActorUnion Optional`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
 #### Example
 

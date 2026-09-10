@@ -1,6 +1,13 @@
 # Cancel a Message Batch
 
-`messages.batches.cancel(message_batch_id) -> MessageBatch`
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/ruby/messages/batches/cancel
+---
+
+# Cancel a Message Batch
+
+`messages.batches.cancel(message_batch_id, **kwargs) -> MessageBatch`
 
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
@@ -16,9 +23,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   ID of the Message Batch.
 
+- `workspace_id: String`
+
 ## Returns
 
 - `class MessageBatch`
+
+  - `type: :message_batch`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `id: String`
 
@@ -107,12 +122,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: :message_batch`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ## Example
 

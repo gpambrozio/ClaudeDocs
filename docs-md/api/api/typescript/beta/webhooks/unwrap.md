@@ -1,5 +1,12 @@
 # Unwrap
 
+---
+title: Unwrap
+url: https://platform.claude.com/docs/en/api/typescript/beta/webhooks/unwrap
+---
+
+# Unwrap
+
 `client.beta.webhooks.unwrap(options?): void`
 
 Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`

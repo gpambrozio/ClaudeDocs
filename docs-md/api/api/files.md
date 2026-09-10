@@ -1,16 +1,27 @@
 # Files
 
+---
+title: Files
+url: https://platform.claude.com/docs/en/api/files
+---
+
+# Files
+
 ## Upload File
 
 **POST** `/v1/files`
 
 Upload File
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Body parameters (form-data)
 
 - `file: string`
 
-  The file to upload
+  The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
   format: binary
 
@@ -23,6 +34,12 @@ Upload File
 ### Returns
 
 - `FileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -53,12 +70,6 @@ Upload File
     Size of the file in bytes.
 
     minimum: 0
-
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
 
   - `downloadable: optional boolean`
 
@@ -121,11 +132,21 @@ List Files
 
   Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `data: array of FileMetadata`
 
   List of file metadata objects.
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -156,12 +177,6 @@ List Files
     Size of the file in bytes.
 
     minimum: 0
-
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
 
   - `downloadable: optional boolean`
 
@@ -219,6 +234,10 @@ Download File
 
   ID of the File.
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Example
 
 ```bash
@@ -239,9 +258,19 @@ Get File Metadata
 
   ID of the File.
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `FileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -272,12 +301,6 @@ Get File Metadata
     Size of the file in bytes.
 
     minimum: 0
-
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
 
   - `downloadable: optional boolean`
 
@@ -326,13 +349,13 @@ Delete File
 
   ID of the File.
 
+### Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `DeletedFile object`
-
-  - `id: string`
-
-    ID of the deleted file.
 
   - `type: optional "file_deleted"`
 
@@ -341,6 +364,10 @@ Delete File
     For file deletion, this is always `"file_deleted"`.
 
     default: file_deleted
+
+  - `id: string`
+
+    ID of the deleted file.
 
 ### Example
 
@@ -366,10 +393,6 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
 - `DeletedFile object`
 
-  - `id: string`
-
-    ID of the deleted file.
-
   - `type: optional "file_deleted"`
 
     Deleted object type.
@@ -378,9 +401,19 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
     default: file_deleted
 
+  - `id: string`
+
+    ID of the deleted file.
+
 ### File Metadata
 
 - `FileMetadata object`
+
+  - `type: "file"`
+
+    Object type.
+
+    For files, this is always `"file"`.
 
   - `id: string`
 
@@ -411,12 +444,6 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
     Size of the file in bytes.
 
     minimum: 0
-
-  - `type: "file"`
-
-    Object type.
-
-    For files, this is always `"file"`.
 
   - `downloadable: optional boolean`
 

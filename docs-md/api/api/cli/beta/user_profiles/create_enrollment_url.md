@@ -1,5 +1,12 @@
 # Create Enrollment URL
 
+---
+title: Create Enrollment URL
+url: https://platform.claude.com/docs/en/api/cli/beta/user_profiles/create_enrollment_url
+---
+
+# Create Enrollment URL
+
 `$ ant beta:user-profiles create-enrollment-url`
 
 **POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
@@ -20,15 +27,15 @@ Create Enrollment URL
 
 - `beta_user_profile_enrollment_url: object`
 
+  - `type: "enrollment_url"`
+
+    Object type. Always `enrollment_url`.
+
   - `expires_at: string`
 
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `type: "enrollment_url"`
-
-    Object type. Always `enrollment_url`.
 
   - `url: string`
 

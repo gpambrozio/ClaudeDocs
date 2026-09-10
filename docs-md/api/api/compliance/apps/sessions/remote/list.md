@@ -1,5 +1,12 @@
 # List remote sessions
 
+---
+title: List remote sessions
+url: https://platform.claude.com/docs/en/api/compliance/apps/sessions/remote/list
+---
+
+# List remote sessions
+
 **GET** `/v1/compliance/apps/sessions/remote`
 
 List remote sessions (Cowork sessions that run in Anthropic-managed
@@ -71,6 +78,12 @@ retrieve the next page, and stop when `next_page` is null.
   maxItems: 10
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"x-api-key": optional string`
 

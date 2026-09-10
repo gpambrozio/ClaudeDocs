@@ -1,5 +1,12 @@
 # Acknowledge Work
 
+---
+title: Acknowledge Work
+url: https://platform.claude.com/docs/en/api/ruby/beta/environments/work/ack
+---
+
+# Acknowledge Work
+
 `beta.environments.work.ack(work_id, **kwargs) -> BetaSelfHostedWork`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
@@ -20,7 +27,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -67,6 +74,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `:"user-profiles-2026-03-24"`
 
     - `:"user-profiles-2026-08-18"`
+
+    - `:"user-profiles-2026-09-04"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -120,6 +129,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   receive new messages. The environment worker polls for work to execute in a
   self-hosted sandbox.
 
+  - `type: :work`
+
+    The type of object (always 'work')
+
   - `id: String`
 
     Work identifier (e.g., 'work_...')
@@ -136,13 +149,13 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     The actual work to be performed
 
-    - `id: String`
-
-      Session identifier (e.g., 'session_...')
-
     - `type: :session`
 
       Type of work data
+
+    - `id: String`
+
+      Session identifier (e.g., 'session_...')
 
   - `environment_id: String`
 
@@ -185,10 +198,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `stopped_at: String`
 
     RFC 3339 timestamp when work execution stopped
-
-  - `type: :work`
-
-    The type of object (always 'work')
 
 ## Example
 

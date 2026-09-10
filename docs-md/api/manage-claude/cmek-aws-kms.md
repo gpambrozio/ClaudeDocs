@@ -109,7 +109,7 @@ How you register the key depends on which product you use.
 
 **Claude Platform on AWS:** The principal, key policy, and registration flow differ, and there is no separate validation step. Follow [Set up CMEK on Claude Platform on AWS](cmek-aws-kms.md#claude-platform-on-aws) instead of this tab.
 
-**Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](../api/admin/workspaces/retrieve.md) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
+**Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. Find it in the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or read the `compartment_id` field returned by the [Get Workspace](../api/beta/organization/workspaces/retrieve.md) endpoint. Substitute that value for `<compartment-uuid>` in the preceding key policy.
 
 Key validation always sends the all-zeros compartment UUID (`00000000-0000-0000-0000-000000000000`) as the encryption context, because validation runs before the key is attached to any workspace. Live traffic sends the compartment ID of each attached workspace.
 
@@ -520,7 +520,7 @@ Use only this published service principal name. Never trust an identifier provid
 
 The key policy has three statements: your account's root admin statement; a statement that lets the Claude Platform on AWS service principal encrypt, decrypt, and generate data keys; and a separate statement for `kms:DescribeKey`. Both service-principal statements carry a recommended `aws:SourceArn` condition: the service calls your key on behalf of a specific workspace and passes that [workspace's ARN](../api/claude-platform-on-aws-iam-actions.md#service-details) as the source ARN, so the pattern shown limits the grant to workspaces in your own AWS account. `DescribeKey` is granted separately because it has no `EncryptionContext` parameter, so an `EncryptionContext` condition on that action would always deny.
 
-If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key) and copy its compartment ID from the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or from the `compartment_id` field returned by the [Get Workspace](../api/admin/workspaces/retrieve.md) endpoint. Substitute it for `<compartment-uuid>`. Otherwise, delete the `StringEquals` entry from that statement's `Condition` block and keep the `ArnLike` entry.
+If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key) and copy its compartment ID from the Claude Console under **Workspace > Security**, under **Encryption key** (the **Compartment ID** field), or from the `compartment_id` field returned by the [Get Workspace](../api/beta/organization/workspaces/retrieve.md) endpoint. Substitute it for `<compartment-uuid>`. Otherwise, delete the `StringEquals` entry from that statement's `Condition` block and keep the `ArnLike` entry.
 
 ```bash
 export YOUR_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)

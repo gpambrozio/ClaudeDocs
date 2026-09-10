@@ -475,7 +475,7 @@ The create endpoint returns the new service account:
 
 To read or update a single service account, use `GET` and `POST` on `/v1/organizations/service_accounts/{service_account_id}`. A service account must be a member of a workspace before federated tokens can act in it. Every service account has an implicit membership in your organization's default workspace; add explicit memberships for other workspaces with `GET`, `POST`, and `DELETE` on `/v1/organizations/service_accounts/{service_account_id}/workspaces`, where `DELETE` targets `.../workspaces/{workspace_id}`.
 
-For complete parameter details and response schemas, see the [Service accounts API reference](../api/admin/service_accounts.md).
+For complete parameter details and response schemas, see the [Service accounts API reference](../api/beta/organization/service_accounts.md).
 
 ## Federation issuers
 
@@ -808,7 +808,7 @@ puts "archived_at: #{issuer.archived_at}"
 
 To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/federation_issuers/{issuer_id}`. An OAuth caller cannot update an issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference`; see [Permissions and constraints](wif-admin-api.md#permissions-and-constraints).
 
-For complete parameter details and response schemas, see the [Federation issuers API reference](../api/admin/federation_issuers.md).
+For complete parameter details and response schemas, see the [Federation issuers API reference](../api/beta/organization/federation/issuers.md).
 
 ## Federation rules
 
@@ -1234,7 +1234,7 @@ The list endpoint returns a page of rules and the cursor for the next page:
 
 To read or update a single rule, use `GET` and `POST` on `/v1/organizations/federation_rules/{rule_id}`. To manage the workspaces a rule can mint tokens in, use `GET` and `POST` on `/v1/organizations/federation_rules/{rule_id}/workspaces`, and `DELETE` on `/v1/organizations/federation_rules/{rule_id}/workspaces/{workspace_id}`.
 
-For complete parameter details and response schemas, see the [Federation rules API reference](../api/admin/federation_rules.md).
+For complete parameter details and response schemas, see the [Federation rules API reference](../api/beta/organization/federation/rules.md).
 
 ## Permissions and constraints
 
@@ -1255,7 +1255,7 @@ Archiving is a soft delete and is idempotent: archiving an already-archived reso
 * [Workload Identity Federation](workload-identity-federation.md): concepts and the Console setup walkthrough
 * [WIF reference](wif-reference.md): environment variables, validation rules, OAuth scopes, and error codes
 * [Admin API](admin-api.md): the rest of the organization management surface
-* [Admin API reference](../api/admin.md): generated request and response schemas for every Admin API endpoint
+* [Admin API reference](../api/beta/organization.md): generated request and response schemas for every Admin API endpoint
 
 ---
 

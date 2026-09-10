@@ -1,5 +1,12 @@
 # Unwrap
 
+---
+title: Unwrap
+url: https://platform.claude.com/docs/en/api/python/beta/webhooks/unwrap
+---
+
+# Unwrap
+
 `beta.webhooks.unwrap()`
 
 Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`

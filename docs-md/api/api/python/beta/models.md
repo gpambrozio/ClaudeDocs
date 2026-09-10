@@ -1,5 +1,12 @@
 # Models
 
+---
+title: Models
+url: https://platform.claude.com/docs/en/api/python/beta/models
+---
+
+# Models
+
 ## List Models
 
 `beta.models.list(**kwargs)  -> SyncPage[BetaModelInfo]`
@@ -34,7 +41,7 @@ The Models API response can be used to determine which models are available for 
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -82,6 +89,8 @@ The Models API response can be used to determine which models are available for 
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -124,9 +133,19 @@ The Models API response can be used to determine which models are available for 
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaModelInfo: …`
+
+  - `type: Literal["model"]`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
 
   - `id: str`
 
@@ -253,14 +272,6 @@ The Models API response can be used to determine which models are available for 
   - `max_tokens: Optional[int]`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: Literal["model"]`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
-    default: model
 
 ### Example
 
@@ -384,7 +395,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 41 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -432,6 +443,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -474,9 +487,19 @@ The Models API response can be used to determine information about a specific mo
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: Optional[str]`
+
 ### Returns
 
 - `class BetaModelInfo: …`
+
+  - `type: Literal["model"]`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
 
   - `id: str`
 
@@ -603,14 +626,6 @@ The Models API response can be used to determine information about a specific mo
   - `max_tokens: Optional[int]`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: Literal["model"]`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
-    default: model
 
 ### Example
 
@@ -884,6 +899,14 @@ print(beta_model_info.id)
 
 - `class BetaModelInfo: …`
 
+  - `type: Literal["model"]`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
+
   - `id: str`
 
     Unique model identifier.
@@ -1009,14 +1032,6 @@ print(beta_model_info.id)
   - `max_tokens: Optional[int]`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: Literal["model"]`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
-    default: model
 
 ### Beta Thinking Capability
 

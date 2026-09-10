@@ -1,5 +1,12 @@
 # Unwrap
 
+---
+title: Unwrap
+url: https://platform.claude.com/docs/en/api/ruby/beta/webhooks/unwrap
+---
+
+# Unwrap
+
 `beta.webhooks.unwrap() -> void`
 
 Verifies the webhook signature from the `webhook-id`, `webhook-timestamp` and `webhook-signature`

@@ -20,7 +20,7 @@ The two APIs use different key types, created in different places by different r
 | **Claude Code Analytics API**       | Admin API key (`sk-ant-admin01-...`) | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | Organization admin | Daily Claude Code metrics per user: sessions, lines of code, commits, pull requests, tool acceptance, and estimated cost by model                  |
 | **Claude Enterprise Analytics API** | Analytics API key                    | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | Primary owner      | Organization-wide engagement and adoption (user activity, active-user summaries, project, skill, and connector usage), plus cost and usage reports |
 
-The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. Both APIs appear under the [Admin API reference](../api/admin.md), but they are separate APIs with separate key types. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
+The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. Both APIs appear under the [Admin API reference](../api/beta/organization.md), but they are separate APIs with separate key types. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
 
 Looking for API usage and cost data rather than product analytics? See the [Usage and Cost API](usage-cost-api.md), which explains the right path for both Claude Console and Claude Enterprise organizations.
 
@@ -44,7 +44,7 @@ curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?starti
   --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-For the available metrics, request parameters, and response schema, see the [Claude Code Analytics API guide](claude-code-analytics-api.md) and the [API reference](../api/admin/usage_report/retrieve_claude_code.md).
+For the available metrics, request parameters, and response schema, see the [Claude Code Analytics API guide](claude-code-analytics-api.md) and the [API reference](../api/beta/organization/usage_report/retrieve_claude_code.md).
 
 ## Get access to the Claude Enterprise Analytics API
 
@@ -60,7 +60,7 @@ Go to [claude.ai > Organization settings > API](https://claude.ai/admin-settings
 
 **Call the API**
 
-Pass the key in the `x-api-key` header and include the [`anthropic-version`](../api/versioning.md) header on every request. Endpoints live under `https://api.anthropic.com/v1/organizations/analytics/`. For request examples, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](../api/admin/analytics.md).
+Pass the key in the `x-api-key` header and include the [`anthropic-version`](../api/versioning.md) header on every request. Endpoints live under `https://api.anthropic.com/v1/organizations/analytics/`. For request examples, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](../api/beta/organization/analytics.md).
 
 The Claude Enterprise Analytics API provides:
 
@@ -69,7 +69,7 @@ The Claude Enterprise Analytics API provides:
 * **Project, skill, and connector usage:** adoption breakdowns for chat projects, skills, and connectors
 * **Cost and usage reports:** per-user and organization-level token usage and cost over time (usage-based Enterprise plans)
 
-For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](../api/admin/analytics.md). The following sections cover data freshness, metric definitions, and operational guidance that apply across those endpoints.
+For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](../api/beta/organization/analytics.md). The following sections cover data freshness, metric definitions, and operational guidance that apply across those endpoints.
 
 ## Data availability and freshness
 

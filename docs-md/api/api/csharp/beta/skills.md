@@ -1,5 +1,12 @@
 # Skills
 
+---
+title: Skills
+url: https://platform.claude.com/docs/en/api/csharp/beta/skills
+---
+
+# Skills
+
 ## Create Skill
 
 `BetaSkill Beta.Skills.Create(parameters, cancellationToken = default)`
@@ -74,6 +81,8 @@ Create Skill
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -116,9 +125,21 @@ Create Skill
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaSkill:`
+
+  - `JsonElement Type = "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `required string ID`
 
@@ -171,12 +192,6 @@ Create Skill
       - `AnthropicExample("anthropic_example")`
 
       - `Plugin("plugin")`
-
-  - `JsonElement Type = "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -301,6 +316,8 @@ List Skills
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -343,9 +360,21 @@ List Skills
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaSkill:`
+
+  - `JsonElement Type = "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `required string ID`
 
@@ -398,12 +427,6 @@ List Skills
       - `AnthropicExample("anthropic_example")`
 
       - `Plugin("plugin")`
-
-  - `JsonElement Type = "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -512,6 +535,8 @@ Get Skill
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -554,9 +579,21 @@ Get Skill
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaSkill:`
+
+  - `JsonElement Type = "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `required string ID`
 
@@ -609,12 +646,6 @@ Get Skill
       - `AnthropicExample("anthropic_example")`
 
       - `Plugin("plugin")`
-
-  - `JsonElement Type = "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -716,6 +747,8 @@ Delete Skill
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -758,21 +791,27 @@ Delete Skill
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaDeletedSkill:`
-
-  - `required string ID`
-
-    Unique identifier for the skill.
-
-    The format and length of IDs may change over time.
 
   - `JsonElement Type = "skill_deleted"`
 
     Deleted object type.
 
     For Skills, this is always `"skill_deleted"`.
+
+  - `required string ID`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
 
 ### Example
 
@@ -799,21 +838,27 @@ Console.WriteLine(betaDeletedSkill);
 
 - `class BetaDeletedSkill:`
 
-  - `required string ID`
-
-    Unique identifier for the skill.
-
-    The format and length of IDs may change over time.
-
   - `JsonElement Type = "skill_deleted"`
 
     Deleted object type.
 
     For Skills, this is always `"skill_deleted"`.
 
+  - `required string ID`
+
+    Unique identifier for the skill.
+
+    The format and length of IDs may change over time.
+
 ### Beta Skill
 
 - `class BetaSkill:`
+
+  - `JsonElement Type = "skill"`
+
+    Object type.
+
+    For Skills, this is always `"skill"`.
 
   - `required string ID`
 
@@ -866,12 +911,6 @@ Console.WriteLine(betaDeletedSkill);
       - `AnthropicExample("anthropic_example")`
 
       - `Plugin("plugin")`
-
-  - `JsonElement Type = "skill"`
-
-    Object type.
-
-    For Skills, this is always `"skill"`.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -978,6 +1017,8 @@ Create Skill Version
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1020,9 +1061,21 @@ Create Skill Version
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaSkillVersion:`
+
+  - `JsonElement Type = "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `required string ID`
 
@@ -1053,12 +1106,6 @@ Create Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `JsonElement Type = "skill_version"`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
 
 #### Example
 
@@ -1170,6 +1217,8 @@ List Skill Versions
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1212,9 +1261,21 @@ List Skill Versions
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaSkillVersion:`
+
+  - `JsonElement Type = "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `required string ID`
 
@@ -1245,12 +1306,6 @@ List Skill Versions
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `JsonElement Type = "skill_version"`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
 
 #### Example
 
@@ -1356,6 +1411,8 @@ Download a skill version's content as a zip archive.
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1397,6 +1454,12 @@ Download a skill version's content as a zip archive.
     - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Example
 
@@ -1486,6 +1549,8 @@ Get Skill Version
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1528,9 +1593,21 @@ Get Skill Version
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaSkillVersion:`
+
+  - `JsonElement Type = "skill_version"`
+
+    Object type.
+
+    For Skill Versions, this is always `"skill_version"`.
 
   - `required string ID`
 
@@ -1561,12 +1638,6 @@ Get Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
-
-  - `JsonElement Type = "skill_version"`
-
-    Object type.
-
-    For Skill Versions, this is always `"skill_version"`.
 
 #### Example
 
@@ -1669,6 +1740,8 @@ Delete Skill Version
 
     - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
 
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
     - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
 
     - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
@@ -1711,20 +1784,26 @@ Delete Skill Version
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `string workspaceID`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaDeletedSkillVersion:`
-
-  - `required string ID`
-
-    Unique identifier for this Skill Version. The id addresses the version in
-    paths and pins it in references.
 
   - `JsonElement Type = "skill_version_deleted"`
 
     Deleted object type.
 
     For Skill Versions, this is always `"skill_version_deleted"`.
+
+  - `required string ID`
+
+    Unique identifier for this Skill Version. The id addresses the version in
+    paths and pins it in references.
 
 #### Example
 

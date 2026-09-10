@@ -1,5 +1,12 @@
 # Retrieve a Message Batch
 
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/messages/batches/retrieve
+---
+
+# Retrieve a Message Batch
+
 **GET** `/v1/messages/batches/{message_batch_id}`
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
@@ -12,9 +19,21 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   ID of the Message Batch.
 
+## Headers
+
+- `"anthropic-workspace-id": optional string`
+
 ## Returns
 
 - `MessageBatch object`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -113,14 +132,6 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 ## Example
 

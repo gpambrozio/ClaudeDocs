@@ -1,5 +1,12 @@
 # Update Federation Issuer
 
+---
+title: Update Federation Issuer
+url: https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/update
+---
+
+# Update Federation Issuer
+
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
 **Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../../manage-claude/wif-admin-api.md).
@@ -27,7 +34,7 @@ session.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -74,6 +81,8 @@ session.
     - `"user-profiles-2026-03-24"`
 
     - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -171,13 +180,13 @@ session.
 
     JWKS supplied directly; no network fetch.
 
+    - `type: "inline"`
+
     - `keys: array of map[unknown]`
 
       Inline JWK objects.
 
       minItems: 1
-
-    - `type: "inline"`
 
 - `jwks_polling_disabled: optional boolean or null`
 
@@ -203,6 +212,10 @@ session.
 
   Records an external IdP the organization trusts for the RFC 7523
   jwt-bearer grant. The `issuer_url` must match the JWT `iss` claim exactly.
+
+  - `type: "federation_issuer"`
+
+    default: federation_issuer
 
   - `id: string`
 
@@ -278,13 +291,13 @@ session.
 
       JWKS supplied directly; no network fetch.
 
+      - `type: "inline"`
+
       - `keys: array of map[unknown]`
 
         Inline JWK objects.
 
         minItems: 1
-
-      - `type: "inline"`
 
   - `jwks_polling_disabled_at: string or null`
 
@@ -323,10 +336,6 @@ session.
       When the next fetch is scheduled. Null if paused.
 
       format: date-time
-
-  - `type: "federation_issuer"`
-
-    default: federation_issuer
 
   - `updated_at: string`
 

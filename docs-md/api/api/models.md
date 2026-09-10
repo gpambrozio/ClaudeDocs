@@ -1,5 +1,12 @@
 # Models
 
+---
+title: Models
+url: https://platform.claude.com/docs/en/api/models
+---
+
+# Models
+
 ## List Models
 
 **GET** `/v1/models`
@@ -34,7 +41,7 @@ The Models API response can be used to determine which models are available for 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -82,6 +89,8 @@ The Models API response can be used to determine which models are available for 
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -124,9 +133,19 @@ The Models API response can be used to determine which models are available for 
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `data: array of ModelInfo`
+
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
 
   - `id: string`
 
@@ -249,14 +268,6 @@ The Models API response can be used to determine which models are available for 
   - `max_tokens: number or null`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: "model"`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
-    default: model
 
 - `first_id: string or null`
 
@@ -381,7 +392,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 41 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 42 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -429,6 +440,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `"user-profiles-2026-08-18"`
 
+    - `"user-profiles-2026-09-04"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -471,9 +484,19 @@ The Models API response can be used to determine information about a specific mo
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+- `"anthropic-workspace-id": optional string`
+
 ### Returns
 
 - `ModelInfo object`
+
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
 
   - `id: string`
 
@@ -596,14 +619,6 @@ The Models API response can be used to determine information about a specific mo
   - `max_tokens: number or null`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: "model"`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
-    default: model
 
 ### Example
 
@@ -865,6 +880,14 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
 
 - `ModelInfo object`
 
+  - `type: "model"`
+
+    Object type.
+
+    For Models, this is always `"model"`.
+
+    default: model
+
   - `id: string`
 
     Unique model identifier.
@@ -986,14 +1009,6 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
   - `max_tokens: number or null`
 
     Maximum value for the `max_tokens` parameter when using this model.
-
-  - `type: "model"`
-
-    Object type.
-
-    For Models, this is always `"model"`.
-
-    default: model
 
 ### Thinking Capability
 

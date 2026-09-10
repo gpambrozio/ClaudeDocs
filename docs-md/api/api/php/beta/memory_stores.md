@@ -1,8 +1,15 @@
 # Memory Stores
 
+---
+title: Memory Stores
+url: https://platform.claude.com/docs/en/api/php/beta/memory_stores
+---
+
+# Memory Stores
+
 ## Create a memory store
 
-`$client->beta->memoryStores->create(string name, ?string description, ?array<string,string> metadata, ?list<AnthropicBeta> betas): BetaManagedAgentsMemoryStore`
+`$client->beta->memoryStores->create(string name, ?string description, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores`
 
@@ -26,9 +33,13 @@ Create a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsMemoryStore`
+
+  - `Type type`
 
   - `string id`
 
@@ -41,8 +52,6 @@ Create a memory store
   - `string name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -74,6 +83,7 @@ $betaManagedAgentsMemoryStore = $client->beta->memoryStores->create(
   description: 'description',
   metadata: ['foo' => 'string'],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemoryStore);
@@ -98,7 +108,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 ## List memory stores
 
-`$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaManagedAgentsMemoryStore>`
+`$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaManagedAgentsMemoryStore>`
 
 **GET** `/v1/memory_stores`
 
@@ -130,9 +140,13 @@ List memory stores
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsMemoryStore`
+
+  - `Type type`
 
   - `string id`
 
@@ -145,8 +159,6 @@ List memory stores
   - `string name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -180,6 +192,7 @@ $page = $client->beta->memoryStores->list(
   limit: 0,
   page: 'page',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -209,7 +222,7 @@ var_dump($page);
 
 ## Retrieve a memory store
 
-`$client->beta->memoryStores->retrieve(string memoryStoreID, ?list<AnthropicBeta> betas): BetaManagedAgentsMemoryStore`
+`$client->beta->memoryStores->retrieve(string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **GET** `/v1/memory_stores/{memory_store_id}`
 
@@ -223,9 +236,13 @@ Retrieve a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsMemoryStore`
+
+  - `Type type`
 
   - `string id`
 
@@ -238,8 +255,6 @@ Retrieve a memory store
   - `string name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -267,7 +282,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsMemoryStore = $client->beta->memoryStores->retrieve(
-  'memory_store_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'memory_store_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemoryStore);
@@ -292,7 +309,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 ## Update a memory store
 
-`$client->beta->memoryStores->update(string memoryStoreID, ?string description, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas): BetaManagedAgentsMemoryStore`
+`$client->beta->memoryStores->update(string memoryStoreID, ?string description, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores/{memory_store_id}`
 
@@ -318,9 +335,13 @@ Update a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsMemoryStore`
+
+  - `Type type`
 
   - `string id`
 
@@ -333,8 +354,6 @@ Update a memory store
   - `string name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -367,6 +386,7 @@ $betaManagedAgentsMemoryStore = $client->beta->memoryStores->update(
   metadata: ['foo' => 'string'],
   name: 'x',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemoryStore);
@@ -391,7 +411,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 ## Delete a memory store
 
-`$client->beta->memoryStores->delete(string memoryStoreID, ?list<AnthropicBeta> betas): BetaManagedAgentsDeletedMemoryStore`
+`$client->beta->memoryStores->delete(string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsDeletedMemoryStore`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}`
 
@@ -405,15 +425,17 @@ Delete a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsDeletedMemoryStore`
 
+  - `Type type`
+
   - `string id`
 
     ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
-
-  - `Type type`
 
 ### Example
 
@@ -425,7 +447,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeletedMemoryStore = $client->beta->memoryStores->delete(
-  'memory_store_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'memory_store_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsDeletedMemoryStore);
@@ -442,7 +466,7 @@ var_dump($betaManagedAgentsDeletedMemoryStore);
 
 ## Archive a memory store
 
-`$client->beta->memoryStores->archive(string memoryStoreID, ?list<AnthropicBeta> betas): BetaManagedAgentsMemoryStore`
+`$client->beta->memoryStores->archive(string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores/{memory_store_id}/archive`
 
@@ -456,9 +480,13 @@ Archive a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 ### Returns
 
 - `BetaManagedAgentsMemoryStore`
+
+  - `Type type`
 
   - `string id`
 
@@ -471,8 +499,6 @@ Archive a memory store
   - `string name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -500,7 +526,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsMemoryStore = $client->beta->memoryStores->archive(
-  'memory_store_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+  'memory_store_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemoryStore);
@@ -529,15 +557,17 @@ var_dump($betaManagedAgentsMemoryStore);
 
 - `BetaManagedAgentsDeletedMemoryStore`
 
+  - `Type type`
+
   - `string id`
 
     ID of the deleted memory store (a `memstore_...` identifier). The store and all its memories and versions are no longer retrievable.
 
-  - `Type type`
-
 ### Beta Managed Agents Memory Store
 
 - `BetaManagedAgentsMemoryStore`
+
+  - `Type type`
 
   - `string id`
 
@@ -550,8 +580,6 @@ var_dump($betaManagedAgentsMemoryStore);
   - `string name`
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
-
-  - `Type type`
 
   - `\Datetime updatedAt`
 
@@ -573,7 +601,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 ### Create a memory
 
-`$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemory`
+`$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories`
 
@@ -599,9 +627,13 @@ Create a memory
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsMemory`
+
+  - `Type type`
 
   - `string id`
 
@@ -631,8 +663,6 @@ Create a memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -656,6 +686,7 @@ $betaManagedAgentsMemory = $client->beta->memoryStores->memories->create(
   path: 'xx',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemory);
@@ -680,7 +711,7 @@ var_dump($betaManagedAgentsMemory);
 
 ### List memories
 
-`$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?string page, ?string pathPrefix, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsMemoryListItem>`
+`$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?string page, ?string pathPrefix, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsMemoryListItem>`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories`
 
@@ -714,11 +745,15 @@ List memories
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsMemoryListItem`
 
   - `ManagedAgentsMemory`
+
+    - `Type type`
 
     - `string id`
 
@@ -748,8 +783,6 @@ List memories
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `Type type`
-
     - `\Datetime updatedAt`
 
       A timestamp in RFC 3339 format
@@ -760,11 +793,11 @@ List memories
 
   - `ManagedAgentsMemoryPrefix`
 
+    - `Type type`
+
     - `string path`
 
       The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
-
-    - `Type type`
 
 #### Example
 
@@ -783,6 +816,7 @@ $page = $client->beta->memoryStores->memories->list(
   pathPrefix: 'path_prefix',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -812,7 +846,7 @@ var_dump($page);
 
 ### Retrieve a memory
 
-`$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemory`
+`$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemory`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -832,9 +866,13 @@ Retrieve a memory
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsMemory`
+
+  - `Type type`
 
   - `string id`
 
@@ -864,8 +902,6 @@ Retrieve a memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -888,6 +924,7 @@ $betaManagedAgentsMemory = $client->beta->memoryStores->memories->retrieve(
   memoryStoreID: 'memory_store_id',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemory);
@@ -912,7 +949,7 @@ var_dump($betaManagedAgentsMemory);
 
 ### Update a memory
 
-`$client->beta->memoryStores->memories->update(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?string content, ?string path, ?ManagedAgentsPrecondition precondition, ?list<AnthropicBeta> betas): ManagedAgentsMemory`
+`$client->beta->memoryStores->memories->update(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?string content, ?string path, ?ManagedAgentsPrecondition precondition, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -944,9 +981,13 @@ Update a memory
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsMemory`
+
+  - `Type type`
 
   - `string id`
 
@@ -976,8 +1017,6 @@ Update a memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `Type type`
-
   - `\Datetime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -1005,6 +1044,7 @@ $betaManagedAgentsMemory = $client->beta->memoryStores->memories->update(
     'type' => 'content_sha256', 'contentSha256' => 'content_sha256'
   ],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemory);
@@ -1029,7 +1069,7 @@ var_dump($betaManagedAgentsMemory);
 
 ### Delete a memory
 
-`$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas): ManagedAgentsDeletedMemory`
+`$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsDeletedMemory`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -1049,15 +1089,17 @@ Delete a memory
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsDeletedMemory`
 
+  - `Type type`
+
   - `string id`
 
     ID of the deleted memory (a `mem_...` value).
-
-  - `Type type`
 
 #### Example
 
@@ -1073,6 +1115,7 @@ $betaManagedAgentsDeletedMemory = $client->beta->memoryStores->memories->delete(
   memoryStoreID: 'memory_store_id',
   expectedContentSha256: 'expected_content_sha256',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsDeletedMemory);
@@ -1091,7 +1134,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ### List memory versions
 
-`$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?ManagedAgentsMemoryVersionOperation operation, ?string page, ?string serviceAccountID, ?string sessionID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsMemoryVersion>`
+`$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?ManagedAgentsMemoryVersionOperation operation, ?string page, ?string serviceAccountID, ?string sessionID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsMemoryVersion>`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
@@ -1145,9 +1188,13 @@ List memory versions
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsMemoryVersion`
+
+  - `Type type`
 
   - `string id`
 
@@ -1169,8 +1216,6 @@ List memory versions
 
     The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-  - `Type type`
-
   - `?string content`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -1185,7 +1230,7 @@ List memory versions
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
   - `?string path`
 
@@ -1197,7 +1242,7 @@ List memory versions
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
 #### Example
 
@@ -1221,6 +1266,7 @@ $page = $client->beta->memoryStores->memoryVersions->list(
   sessionID: 'session_id',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -1259,7 +1305,7 @@ var_dump($page);
 
 ### Retrieve a memory version
 
-`$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
+`$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemoryVersion`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
@@ -1279,9 +1325,13 @@ Retrieve a memory version
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsMemoryVersion`
+
+  - `Type type`
 
   - `string id`
 
@@ -1303,8 +1353,6 @@ Retrieve a memory version
 
     The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-  - `Type type`
-
   - `?string content`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -1319,7 +1367,7 @@ Retrieve a memory version
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
   - `?string path`
 
@@ -1331,7 +1379,7 @@ Retrieve a memory version
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
 #### Example
 
@@ -1351,6 +1399,7 @@ $betaManagedAgentsMemoryVersion = $client
   memoryStoreID: 'memory_store_id',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemoryVersion);
@@ -1384,7 +1433,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
 ### Redact a memory version
 
-`$client->beta->memoryStores->memoryVersions->redact(string memoryVersionID, string memoryStoreID, ?list<AnthropicBeta> betas): ManagedAgentsMemoryVersion`
+`$client->beta->memoryStores->memoryVersions->redact(string memoryVersionID, string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemoryVersion`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
@@ -1400,9 +1449,13 @@ Redact a memory version
 
   Optional header to specify the beta version(s) you want to use.
 
+- `workspaceID?:optional string`
+
 #### Returns
 
 - `ManagedAgentsMemoryVersion`
+
+  - `Type type`
 
   - `string id`
 
@@ -1424,8 +1477,6 @@ Redact a memory version
 
     The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-  - `Type type`
-
   - `?string content`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
@@ -1440,7 +1491,7 @@ Redact a memory version
 
   - `?ManagedAgentsActor createdBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
   - `?string path`
 
@@ -1452,7 +1503,7 @@ Redact a memory version
 
   - `?ManagedAgentsActor redactedBy`
 
-    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve).
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../beta/sessions/retrieve.md).
 
 #### Example
 
@@ -1471,6 +1522,7 @@ $betaManagedAgentsMemoryVersion = $client
   'memory_version_id',
   memoryStoreID: 'memory_store_id',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaManagedAgentsMemoryVersion);

@@ -1,5 +1,12 @@
 # Deployments
 
+---
+title: Deployments
+url: https://platform.claude.com/docs/en/api/java/beta/deployments
+---
+
+# Deployments
+
 ## Create Deployment
 
 `BetaManagedAgentsDeployment beta().deployments().create(params, requestOptions = RequestOptions.none())`
@@ -62,6 +69,8 @@ Create Deployment
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -104,6 +113,8 @@ Create Deployment
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Agent agent`
 
     Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
@@ -114,13 +125,13 @@ Create Deployment
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+      - `Type type`
+
       - `String id`
 
         The `agent` ID.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<Long> version`
 
@@ -142,6 +153,8 @@ Create Deployment
 
       Parameters for sending a user message to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -150,17 +163,19 @@ Create Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -169,6 +184,8 @@ Create Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -181,8 +198,6 @@ Create Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -200,19 +215,19 @@ Create Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -221,6 +236,8 @@ Create Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -234,11 +251,11 @@ Create Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -249,8 +266,6 @@ Create Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -268,15 +283,13 @@ Create Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -292,11 +305,11 @@ Create Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -310,25 +323,23 @@ Create Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
 
-          - `Type type`
-
         - `class BetaManagedAgentsTextRubricParams:`
 
           Rubric content provided inline as text.
+
+          - `Type type`
 
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
             maxLength: 262144
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -340,19 +351,19 @@ Create Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `String name`
 
@@ -382,12 +393,6 @@ Create Deployment
 
       Mount a GitHub repository into the session's container.
 
-      - `String authorizationToken`
-
-        GitHub authorization token used to clone the repository.
-
-        minLength: 1, maxLength: 4096
-
       - `Type type`
 
       - `String url`
@@ -396,11 +401,19 @@ Create Deployment
 
         minLength: 1, maxLength: 2048
 
+      - `Optional<String> authorizationToken`
+
+        GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
+
+        minLength: 1, maxLength: 4096
+
       - `Optional<Checkout> checkout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
         - `class BetaManagedAgentsBranchCheckout:`
+
+          - `Type type`
 
           - `String name`
 
@@ -408,17 +421,15 @@ Create Deployment
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -430,13 +441,13 @@ Create Deployment
 
       Mount a file uploaded via the Files API into the session.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -448,11 +459,11 @@ Create Deployment
 
       Parameters for attaching a memory store to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -482,6 +493,8 @@ Create Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this deployment.
@@ -490,9 +503,9 @@ Create Deployment
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -526,6 +539,8 @@ Create Deployment
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -534,17 +549,19 @@ Create Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -553,6 +570,8 @@ Create Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -565,8 +584,6 @@ Create Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -584,19 +601,19 @@ Create Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -605,6 +622,8 @@ Create Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -618,11 +637,11 @@ Create Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -633,8 +652,6 @@ Create Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -652,15 +669,13 @@ Create Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -676,11 +691,11 @@ Create Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -694,23 +709,21 @@ Create Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -722,19 +735,19 @@ Create Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -757,6 +770,8 @@ Create Deployment
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -846,8 +861,6 @@ Create Deployment
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -868,23 +881,23 @@ Create Deployment
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -894,11 +907,11 @@ Create Deployment
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -908,11 +921,11 @@ Create Deployment
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -930,6 +943,8 @@ Create Deployment
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -941,8 +956,6 @@ Create Deployment
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -962,8 +975,6 @@ Create Deployment
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -978,6 +989,8 @@ Create Deployment
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -989,8 +1002,6 @@ Create Deployment
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
 ### Example
 
@@ -1188,6 +1199,8 @@ List Deployments
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1230,11 +1243,15 @@ List Deployments
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `Type type`
 
   - `String id`
 
@@ -1244,9 +1261,9 @@ List Deployments
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -1280,6 +1297,8 @@ List Deployments
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -1288,17 +1307,19 @@ List Deployments
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -1307,6 +1328,8 @@ List Deployments
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -1319,8 +1342,6 @@ List Deployments
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -1338,19 +1359,19 @@ List Deployments
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -1359,6 +1380,8 @@ List Deployments
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -1372,11 +1395,11 @@ List Deployments
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -1387,8 +1410,6 @@ List Deployments
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -1406,15 +1427,13 @@ List Deployments
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -1430,11 +1449,11 @@ List Deployments
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -1448,23 +1467,21 @@ List Deployments
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -1476,19 +1493,19 @@ List Deployments
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -1511,6 +1528,8 @@ List Deployments
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -1600,8 +1619,6 @@ List Deployments
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -1622,23 +1639,23 @@ List Deployments
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -1648,11 +1665,11 @@ List Deployments
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -1662,11 +1679,11 @@ List Deployments
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -1684,6 +1701,8 @@ List Deployments
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -1695,8 +1714,6 @@ List Deployments
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -1716,8 +1733,6 @@ List Deployments
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -1732,6 +1747,8 @@ List Deployments
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -1743,8 +1760,6 @@ List Deployments
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
 ### Example
 
@@ -1903,6 +1918,8 @@ Get Deployment
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1945,11 +1962,15 @@ Get Deployment
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `Type type`
 
   - `String id`
 
@@ -1959,9 +1980,9 @@ Get Deployment
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -1995,6 +2016,8 @@ Get Deployment
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -2003,17 +2026,19 @@ Get Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2022,6 +2047,8 @@ Get Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2034,8 +2061,6 @@ Get Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -2053,19 +2078,19 @@ Get Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2074,6 +2099,8 @@ Get Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2087,11 +2114,11 @@ Get Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -2102,8 +2129,6 @@ Get Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -2121,15 +2146,13 @@ Get Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -2145,11 +2168,11 @@ Get Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -2163,23 +2186,21 @@ Get Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -2191,19 +2212,19 @@ Get Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -2226,6 +2247,8 @@ Get Deployment
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -2315,8 +2338,6 @@ Get Deployment
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -2337,23 +2358,23 @@ Get Deployment
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -2363,11 +2384,11 @@ Get Deployment
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -2377,11 +2398,11 @@ Get Deployment
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -2399,6 +2420,8 @@ Get Deployment
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -2410,8 +2433,6 @@ Get Deployment
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -2431,8 +2452,6 @@ Get Deployment
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -2447,6 +2466,8 @@ Get Deployment
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -2458,8 +2479,6 @@ Get Deployment
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
 ### Example
 
@@ -2613,6 +2632,8 @@ Update Deployment
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2655,6 +2676,8 @@ Update Deployment
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Optional<Agent> agent`
 
     Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
@@ -2665,13 +2688,13 @@ Update Deployment
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+      - `Type type`
+
       - `String id`
 
         The `agent` ID.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<Long> version`
 
@@ -2703,6 +2726,8 @@ Update Deployment
 
       Parameters for sending a user message to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -2711,17 +2736,19 @@ Update Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2730,6 +2757,8 @@ Update Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2742,8 +2771,6 @@ Update Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -2761,19 +2788,19 @@ Update Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -2782,6 +2809,8 @@ Update Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -2795,11 +2824,11 @@ Update Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -2810,8 +2839,6 @@ Update Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -2829,15 +2856,13 @@ Update Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -2853,11 +2878,11 @@ Update Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -2871,25 +2896,23 @@ Update Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
 
-          - `Type type`
-
         - `class BetaManagedAgentsTextRubricParams:`
 
           Rubric content provided inline as text.
+
+          - `Type type`
 
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
             maxLength: 262144
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -2901,19 +2924,19 @@ Update Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Optional<Metadata> metadata`
 
@@ -2933,12 +2956,6 @@ Update Deployment
 
       Mount a GitHub repository into the session's container.
 
-      - `String authorizationToken`
-
-        GitHub authorization token used to clone the repository.
-
-        minLength: 1, maxLength: 4096
-
       - `Type type`
 
       - `String url`
@@ -2947,11 +2964,19 @@ Update Deployment
 
         minLength: 1, maxLength: 2048
 
+      - `Optional<String> authorizationToken`
+
+        GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
+
+        minLength: 1, maxLength: 4096
+
       - `Optional<Checkout> checkout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
         - `class BetaManagedAgentsBranchCheckout:`
+
+          - `Type type`
 
           - `String name`
 
@@ -2959,17 +2984,15 @@ Update Deployment
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -2981,13 +3004,13 @@ Update Deployment
 
       Mount a file uploaded via the Files API into the session.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
 
         minLength: 1, maxLength: 128
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -2999,11 +3022,11 @@ Update Deployment
 
       Parameters for attaching a memory store to an agent session.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -3033,6 +3056,8 @@ Update Deployment
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for this deployment.
@@ -3041,9 +3066,9 @@ Update Deployment
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -3077,6 +3102,8 @@ Update Deployment
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -3085,17 +3112,19 @@ Update Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -3104,6 +3133,8 @@ Update Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -3116,8 +3147,6 @@ Update Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -3135,19 +3164,19 @@ Update Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -3156,6 +3185,8 @@ Update Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -3169,11 +3200,11 @@ Update Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -3184,8 +3215,6 @@ Update Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -3203,15 +3232,13 @@ Update Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -3227,11 +3254,11 @@ Update Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -3245,23 +3272,21 @@ Update Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -3273,19 +3298,19 @@ Update Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -3308,6 +3333,8 @@ Update Deployment
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -3397,8 +3424,6 @@ Update Deployment
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -3419,23 +3444,23 @@ Update Deployment
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -3445,11 +3470,11 @@ Update Deployment
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -3459,11 +3484,11 @@ Update Deployment
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -3481,6 +3506,8 @@ Update Deployment
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -3492,8 +3519,6 @@ Update Deployment
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -3513,8 +3538,6 @@ Update Deployment
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -3529,6 +3552,8 @@ Update Deployment
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -3540,8 +3565,6 @@ Update Deployment
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
 ### Example
 
@@ -3695,6 +3718,8 @@ Archive Deployment
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -3737,11 +3762,15 @@ Archive Deployment
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `Type type`
 
   - `String id`
 
@@ -3751,9 +3780,9 @@ Archive Deployment
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -3787,6 +3816,8 @@ Archive Deployment
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -3795,17 +3826,19 @@ Archive Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -3814,6 +3847,8 @@ Archive Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -3826,8 +3861,6 @@ Archive Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -3845,19 +3878,19 @@ Archive Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -3866,6 +3899,8 @@ Archive Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -3879,11 +3914,11 @@ Archive Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -3894,8 +3929,6 @@ Archive Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -3913,15 +3946,13 @@ Archive Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -3937,11 +3968,11 @@ Archive Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -3955,23 +3986,21 @@ Archive Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -3983,19 +4012,19 @@ Archive Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -4018,6 +4047,8 @@ Archive Deployment
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -4107,8 +4138,6 @@ Archive Deployment
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -4129,23 +4158,23 @@ Archive Deployment
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -4155,11 +4184,11 @@ Archive Deployment
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -4169,11 +4198,11 @@ Archive Deployment
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -4191,6 +4220,8 @@ Archive Deployment
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -4202,8 +4233,6 @@ Archive Deployment
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -4223,8 +4252,6 @@ Archive Deployment
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -4239,6 +4266,8 @@ Archive Deployment
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -4250,8 +4279,6 @@ Archive Deployment
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
 ### Example
 
@@ -4405,6 +4432,8 @@ Run Deployment Now
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -4447,11 +4476,15 @@ Run Deployment Now
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeploymentRun:`
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `Type type`
 
   - `String id`
 
@@ -4461,9 +4494,9 @@ Run Deployment Now
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -4487,161 +4520,161 @@ Run Deployment Now
 
       The deployment's environment was archived.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsAgentArchivedRunError:`
 
       The deployment's agent was archived.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsEnvironmentNotFoundRunError:`
 
       The deployment's environment no longer exists.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsVaultNotFoundRunError:`
 
       A vault referenced by the deployment no longer exists.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsVaultArchivedRunError:`
 
       A vault referenced by the deployment is archived.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsFileNotFoundRunError:`
 
       A file resource referenced by the deployment no longer exists.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsMemoryStoreArchivedRunError:`
 
       A memory store referenced by the deployment is archived.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsSkillNotFoundRunError:`
 
       A skill referenced by the deployment's agent no longer exists.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsSessionResourceNotFoundRunError:`
 
       A referenced resource no longer exists and its kind was not reported.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsWorkspaceArchivedRunError:`
 
       The deployment's workspace was archived.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsOrganizationDisabledRunError:`
 
       The deployment's organization is disabled.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsSessionRateLimitedRunError:`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsSessionCreationRejectedRunError:`
 
       The session create request was rejected with a non-retryable validation error.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsUnknownRunError:`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError:`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
     - `class BetaManagedAgentsMcpEgressBlockedRunError:`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
+      - `Type type`
+
       - `String message`
 
         Human-readable error description.
-
-      - `Type type`
 
   - `Optional<String> sessionId`
 
@@ -4655,21 +4688,19 @@ Run Deployment Now
 
       The run was fired by the deployment's cron schedule.
 
+      - `Type type`
+
       - `LocalDateTime scheduledAt`
 
         A timestamp in RFC 3339 format
 
         format: date-time
 
-      - `Type type`
-
     - `class BetaManagedAgentsManualTriggerContext:`
 
       The run was started manually by creating a session directly against the deployment.
 
       - `Type type`
-
-  - `Type type`
 
 ### Example
 
@@ -4781,6 +4812,8 @@ Pause Deployment
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -4823,11 +4856,15 @@ Pause Deployment
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `Type type`
 
   - `String id`
 
@@ -4837,9 +4874,9 @@ Pause Deployment
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -4873,6 +4910,8 @@ Pause Deployment
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -4881,17 +4920,19 @@ Pause Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -4900,6 +4941,8 @@ Pause Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -4912,8 +4955,6 @@ Pause Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -4931,19 +4972,19 @@ Pause Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -4952,6 +4993,8 @@ Pause Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -4965,11 +5008,11 @@ Pause Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -4980,8 +5023,6 @@ Pause Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -4999,15 +5040,13 @@ Pause Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -5023,11 +5062,11 @@ Pause Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -5041,23 +5080,21 @@ Pause Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -5069,19 +5106,19 @@ Pause Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -5104,6 +5141,8 @@ Pause Deployment
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -5193,8 +5232,6 @@ Pause Deployment
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -5215,23 +5252,23 @@ Pause Deployment
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -5241,11 +5278,11 @@ Pause Deployment
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -5255,11 +5292,11 @@ Pause Deployment
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -5277,6 +5314,8 @@ Pause Deployment
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -5288,8 +5327,6 @@ Pause Deployment
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -5309,8 +5346,6 @@ Pause Deployment
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -5325,6 +5360,8 @@ Pause Deployment
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -5336,8 +5373,6 @@ Pause Deployment
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
 ### Example
 
@@ -5491,6 +5526,8 @@ Unpause Deployment
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -5533,11 +5570,15 @@ Unpause Deployment
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeployment:`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `Type type`
 
   - `String id`
 
@@ -5547,9 +5588,9 @@ Unpause Deployment
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -5583,6 +5624,8 @@ Unpause Deployment
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -5591,17 +5634,19 @@ Unpause Deployment
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -5610,6 +5655,8 @@ Unpause Deployment
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -5622,8 +5669,6 @@ Unpause Deployment
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -5641,19 +5686,19 @@ Unpause Deployment
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -5662,6 +5707,8 @@ Unpause Deployment
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -5675,11 +5722,11 @@ Unpause Deployment
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -5690,8 +5737,6 @@ Unpause Deployment
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -5709,15 +5754,13 @@ Unpause Deployment
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -5733,11 +5776,11 @@ Unpause Deployment
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -5751,23 +5794,21 @@ Unpause Deployment
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -5779,19 +5820,19 @@ Unpause Deployment
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -5814,6 +5855,8 @@ Unpause Deployment
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -5903,8 +5946,6 @@ Unpause Deployment
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -5925,23 +5966,23 @@ Unpause Deployment
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -5951,11 +5992,11 @@ Unpause Deployment
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -5965,11 +6006,11 @@ Unpause Deployment
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -5987,6 +6028,8 @@ Unpause Deployment
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -5998,8 +6041,6 @@ Unpause Deployment
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -6019,8 +6060,6 @@ Unpause Deployment
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -6035,6 +6074,8 @@ Unpause Deployment
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -6046,8 +6087,6 @@ Unpause Deployment
       - `BetaCurrency currency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `Type type`
 
 ### Example
 
@@ -6153,6 +6192,8 @@ public final class Main {
 
   5-field POSIX cron schedule with computed runtime timestamps.
 
+  - `Type type`
+
   - `String expression`
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -6164,8 +6205,6 @@ public final class Main {
     IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
     minLength: 1
-
-  - `Type type`
 
   - `Optional<LocalDateTime> lastRunAt`
 
@@ -6183,6 +6222,8 @@ public final class Main {
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
+  - `Type type`
+
   - `String expression`
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -6195,13 +6236,13 @@ public final class Main {
 
     minLength: 1
 
-  - `Type type`
-
 ### Beta Managed Agents Deployment
 
 - `class BetaManagedAgentsDeployment:`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `Type type`
 
   - `String id`
 
@@ -6211,9 +6252,9 @@ public final class Main {
 
     A resolved agent reference with a concrete version.
 
-    - `String id`
-
     - `Type type`
+
+    - `String id`
 
     - `long version`
 
@@ -6247,6 +6288,8 @@ public final class Main {
 
       A user message sent to the session.
 
+      - `Type type`
+
       - `List<Content> content`
 
         Array of content blocks for the user message.
@@ -6255,17 +6298,19 @@ public final class Main {
 
           Regular text content.
 
+          - `Type type`
+
           - `String text`
 
             The text content.
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsImageBlock:`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -6274,6 +6319,8 @@ public final class Main {
             - `class BetaManagedAgentsBase64ImageSource:`
 
               Base64-encoded image data.
+
+              - `Type type`
 
               - `String data`
 
@@ -6286,8 +6333,6 @@ public final class Main {
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlImageSource:`
 
@@ -6305,19 +6350,19 @@ public final class Main {
 
               Image referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `Type type`
-
-          - `Type type`
-
         - `class BetaManagedAgentsDocumentBlock:`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `Type type`
 
           - `Source source`
 
@@ -6326,6 +6371,8 @@ public final class Main {
             - `class BetaManagedAgentsBase64DocumentSource:`
 
               Base64-encoded document data.
+
+              - `Type type`
 
               - `String data`
 
@@ -6339,11 +6386,11 @@ public final class Main {
 
                 minLength: 1
 
-              - `Type type`
-
             - `class BetaManagedAgentsPlainTextDocumentSource:`
 
               Plain text document content.
+
+              - `Type type`
 
               - `String data`
 
@@ -6354,8 +6401,6 @@ public final class Main {
               - `MediaType mediaType`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `Type type`
 
             - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -6373,15 +6418,13 @@ public final class Main {
 
               Document referenced by file ID.
 
+              - `Type type`
+
               - `String fileId`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `Type type`
-
-          - `Type type`
 
           - `Optional<String> context`
 
@@ -6397,11 +6440,11 @@ public final class Main {
 
           - `Type type`
 
-      - `Type type`
-
     - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
       An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `Type type`
 
       - `String description`
 
@@ -6415,23 +6458,21 @@ public final class Main {
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of the rubric file.
-
-          - `Type type`
 
         - `class BetaManagedAgentsTextRubric:`
 
           Rubric content provided inline as text.
 
+          - `Type type`
+
           - `String content`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<Long> maxIterations`
 
@@ -6443,19 +6484,19 @@ public final class Main {
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+      - `Type type`
+
       - `List<BetaManagedAgentsSystemContentBlock> content`
 
         System content blocks to append. Text-only.
+
+        - `Type type`
 
         - `String text`
 
           The text content.
 
           minLength: 1
-
-        - `Type type`
-
-      - `Type type`
 
   - `Metadata metadata`
 
@@ -6478,6 +6519,8 @@ public final class Main {
     - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `Type type`
 
       - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -6567,8 +6610,6 @@ public final class Main {
 
           - `Type type`
 
-      - `Type type`
-
   - `List<BetaManagedAgentsSessionResourceConfig> resources`
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
@@ -6589,23 +6630,23 @@ public final class Main {
 
         - `class BetaManagedAgentsBranchCheckout:`
 
+          - `Type type`
+
           - `String name`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `Type type`
-
         - `class BetaManagedAgentsCommitCheckout:`
+
+          - `Type type`
 
           - `String sha`
 
             Full commit SHA to check out.
 
             minLength: 7, maxLength: 64
-
-          - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -6615,11 +6656,11 @@ public final class Main {
 
       A file mounted into each session's container.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of a previously uploaded file.
-
-      - `Type type`
 
       - `Optional<String> mountPath`
 
@@ -6629,11 +6670,11 @@ public final class Main {
 
       A memory store attached to each session created from this deployment.
 
+      - `Type type`
+
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
 
       - `Optional<Access> access`
 
@@ -6651,6 +6692,8 @@ public final class Main {
 
     5-field POSIX cron schedule with computed runtime timestamps.
 
+    - `Type type`
+
     - `String expression`
 
       5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -6662,8 +6705,6 @@ public final class Main {
       IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
       minLength: 1
-
-    - `Type type`
 
     - `Optional<LocalDateTime> lastRunAt`
 
@@ -6683,8 +6724,6 @@ public final class Main {
 
     - `PAUSED("paused")`
 
-  - `Type type`
-
   - `LocalDateTime updatedAt`
 
     A timestamp in RFC 3339 format
@@ -6699,6 +6738,8 @@ public final class Main {
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `Type type`
+
     - `BetaMonetaryAmount maxListCost`
 
       A monetary amount in a specific currency.
@@ -6711,8 +6752,6 @@ public final class Main {
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Type type`
-
 ### Beta Managed Agents Deployment Initial Event
 
 - `class BetaManagedAgentsDeploymentInitialEvent: union`
@@ -6723,6 +6762,8 @@ public final class Main {
 
     A user message sent to the session.
 
+    - `Type type`
+
     - `List<Content> content`
 
       Array of content blocks for the user message.
@@ -6731,17 +6772,19 @@ public final class Main {
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -6750,6 +6793,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -6762,8 +6807,6 @@ public final class Main {
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -6781,19 +6824,19 @@ public final class Main {
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -6802,6 +6845,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -6815,11 +6860,11 @@ public final class Main {
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -6830,8 +6875,6 @@ public final class Main {
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -6849,15 +6892,13 @@ public final class Main {
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -6873,11 +6914,11 @@ public final class Main {
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
     An outcome the agent should work toward. The agent begins work on receipt.
+
+    - `Type type`
 
     - `String description`
 
@@ -6891,23 +6932,21 @@ public final class Main {
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
-
-        - `Type type`
 
       - `class BetaManagedAgentsTextRubric:`
 
         Rubric content provided inline as text.
 
+        - `Type type`
+
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-        - `Type type`
-
-    - `Type type`
 
     - `Optional<Long> maxIterations`
 
@@ -6919,19 +6958,19 @@ public final class Main {
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+    - `Type type`
+
     - `List<BetaManagedAgentsSystemContentBlock> content`
 
       System content blocks to append. Text-only.
+
+      - `Type type`
 
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
 ### Beta Managed Agents Deployment Initial Event Params
 
@@ -6943,6 +6982,8 @@ public final class Main {
 
     Parameters for sending a user message to the session.
 
+    - `Type type`
+
     - `List<Content> content`
 
       Array of content blocks for the user message.
@@ -6951,17 +6992,19 @@ public final class Main {
 
         Regular text content.
 
+        - `Type type`
+
         - `String text`
 
           The text content.
 
           minLength: 1
 
-        - `Type type`
-
       - `class BetaManagedAgentsImageBlock:`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -6970,6 +7013,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64ImageSource:`
 
             Base64-encoded image data.
+
+            - `Type type`
 
             - `String data`
 
@@ -6982,8 +7027,6 @@ public final class Main {
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlImageSource:`
 
@@ -7001,19 +7044,19 @@ public final class Main {
 
             Image referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `Type type`
-
-        - `Type type`
-
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Type type`
 
         - `Source source`
 
@@ -7022,6 +7065,8 @@ public final class Main {
           - `class BetaManagedAgentsBase64DocumentSource:`
 
             Base64-encoded document data.
+
+            - `Type type`
 
             - `String data`
 
@@ -7035,11 +7080,11 @@ public final class Main {
 
               minLength: 1
 
-            - `Type type`
-
           - `class BetaManagedAgentsPlainTextDocumentSource:`
 
             Plain text document content.
+
+            - `Type type`
 
             - `String data`
 
@@ -7050,8 +7095,6 @@ public final class Main {
             - `MediaType mediaType`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `Type type`
 
           - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -7069,15 +7112,13 @@ public final class Main {
 
             Document referenced by file ID.
 
+            - `Type type`
+
             - `String fileId`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `Type type`
-
-        - `Type type`
 
         - `Optional<String> context`
 
@@ -7093,11 +7134,11 @@ public final class Main {
 
         - `Type type`
 
-    - `Type type`
-
   - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `Type type`
 
     - `String description`
 
@@ -7111,25 +7152,23 @@ public final class Main {
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `Type type`
+
         - `String fileId`
 
           ID of the rubric file.
 
-        - `Type type`
-
       - `class BetaManagedAgentsTextRubricParams:`
 
         Rubric content provided inline as text.
+
+        - `Type type`
 
         - `String content`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
           maxLength: 262144
-
-        - `Type type`
-
-    - `Type type`
 
     - `Optional<Long> maxIterations`
 
@@ -7141,19 +7180,19 @@ public final class Main {
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+    - `Type type`
+
     - `List<BetaManagedAgentsSystemContentBlock> content`
 
       System content blocks to append. Text-only.
+
+      - `Type type`
 
       - `String text`
 
         The text content.
 
         minLength: 1
-
-      - `Type type`
-
-    - `Type type`
 
 ### Beta Managed Agents Deployment Paused Reason
 
@@ -7170,6 +7209,8 @@ public final class Main {
   - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
     A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+    - `Type type`
 
     - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -7258,8 +7299,6 @@ public final class Main {
         An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
         - `Type type`
-
-    - `Type type`
 
 ### Beta Managed Agents Deployment Paused Reason Error
 
@@ -7367,9 +7406,13 @@ public final class Main {
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
+  - `Type type`
+
   - `List<BetaManagedAgentsSystemContentBlock> content`
 
     System content blocks to append. Text-only.
+
+    - `Type type`
 
     - `String text`
 
@@ -7377,15 +7420,13 @@ public final class Main {
 
       minLength: 1
 
-    - `Type type`
-
-  - `Type type`
-
 ### Beta Managed Agents Deployment User Define Outcome Event
 
 - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent:`
 
   An outcome the agent should work toward. The agent begins work on receipt.
+
+  - `Type type`
 
   - `String description`
 
@@ -7399,23 +7440,21 @@ public final class Main {
 
       Rubric referenced by a file uploaded via the Files API.
 
+      - `Type type`
+
       - `String fileId`
 
         ID of the rubric file.
-
-      - `Type type`
 
     - `class BetaManagedAgentsTextRubric:`
 
       Rubric content provided inline as text.
 
+      - `Type type`
+
       - `String content`
 
         Rubric content. Plain text or markdown — the grader treats it as freeform text.
-
-      - `Type type`
-
-  - `Type type`
 
   - `Optional<Long> maxIterations`
 
@@ -7429,6 +7468,8 @@ public final class Main {
 
   A user message sent to the session.
 
+  - `Type type`
+
   - `List<Content> content`
 
     Array of content blocks for the user message.
@@ -7437,17 +7478,19 @@ public final class Main {
 
       Regular text content.
 
+      - `Type type`
+
       - `String text`
 
         The text content.
 
         minLength: 1
 
-      - `Type type`
-
     - `class BetaManagedAgentsImageBlock:`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -7456,6 +7499,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64ImageSource:`
 
           Base64-encoded image data.
+
+          - `Type type`
 
           - `String data`
 
@@ -7468,8 +7513,6 @@ public final class Main {
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlImageSource:`
 
@@ -7487,19 +7530,19 @@ public final class Main {
 
           Image referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `Type type`
-
-      - `Type type`
-
     - `class BetaManagedAgentsDocumentBlock:`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Type type`
 
       - `Source source`
 
@@ -7508,6 +7551,8 @@ public final class Main {
         - `class BetaManagedAgentsBase64DocumentSource:`
 
           Base64-encoded document data.
+
+          - `Type type`
 
           - `String data`
 
@@ -7521,11 +7566,11 @@ public final class Main {
 
             minLength: 1
 
-          - `Type type`
-
         - `class BetaManagedAgentsPlainTextDocumentSource:`
 
           Plain text document content.
+
+          - `Type type`
 
           - `String data`
 
@@ -7536,8 +7581,6 @@ public final class Main {
           - `MediaType mediaType`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `Type type`
 
         - `class BetaManagedAgentsUrlDocumentSource:`
 
@@ -7555,15 +7598,13 @@ public final class Main {
 
           Document referenced by file ID.
 
+          - `Type type`
+
           - `String fileId`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `Type type`
-
-      - `Type type`
 
       - `Optional<String> context`
 
@@ -7578,8 +7619,6 @@ public final class Main {
       Placeholder for content withheld by Anthropic model policy.
 
       - `Type type`
-
-  - `Type type`
 
 ### Beta Managed Agents Environment Archived Deployment Paused Reason Error
 
@@ -7602,6 +7641,8 @@ public final class Main {
 - `class BetaManagedAgentsErrorDeploymentPausedReason:`
 
   A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+  - `Type type`
 
   - `BetaManagedAgentsDeploymentPausedReasonError error`
 
@@ -7691,8 +7732,6 @@ public final class Main {
 
       - `Type type`
 
-  - `Type type`
-
 ### Beta Managed Agents File Not Found Deployment Paused Reason Error
 
 - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError:`
@@ -7707,11 +7746,11 @@ public final class Main {
 
   A file mounted into each session's container.
 
+  - `Type type`
+
   - `String fileId`
 
     ID of a previously uploaded file.
-
-  - `Type type`
 
   - `Optional<String> mountPath`
 
@@ -7735,23 +7774,23 @@ public final class Main {
 
     - `class BetaManagedAgentsBranchCheckout:`
 
+      - `Type type`
+
       - `String name`
 
         Branch name to check out.
 
         minLength: 1, maxLength: 255
 
-      - `Type type`
-
     - `class BetaManagedAgentsCommitCheckout:`
+
+      - `Type type`
 
       - `String sha`
 
         Full commit SHA to check out.
 
         minLength: 7, maxLength: 64
-
-      - `Type type`
 
   - `Optional<String> mountPath`
 
@@ -7787,11 +7826,11 @@ public final class Main {
 
   A memory store attached to each session created from this deployment.
 
+  - `Type type`
+
   - `String memoryStoreId`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-  - `Type type`
 
   - `Optional<Access> access`
 
@@ -7819,6 +7858,8 @@ public final class Main {
 
   5-field POSIX cron schedule with computed runtime timestamps.
 
+  - `Type type`
+
   - `String expression`
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -7830,8 +7871,6 @@ public final class Main {
     IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
 
     minLength: 1
-
-  - `Type type`
 
   - `Optional<LocalDateTime> lastRunAt`
 
@@ -7849,6 +7888,8 @@ public final class Main {
 
   5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
 
+  - `Type type`
+
   - `String expression`
 
     5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
@@ -7860,8 +7901,6 @@ public final class Main {
     Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
 
     minLength: 1
-
-  - `Type type`
 
 ### Beta Managed Agents Self Hosted Resources Unsupported Deployment Paused Reason Error
 
@@ -7893,23 +7932,23 @@ public final class Main {
 
       - `class BetaManagedAgentsBranchCheckout:`
 
+        - `Type type`
+
         - `String name`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `Type type`
-
       - `class BetaManagedAgentsCommitCheckout:`
+
+        - `Type type`
 
         - `String sha`
 
           Full commit SHA to check out.
 
           minLength: 7, maxLength: 64
-
-        - `Type type`
 
     - `Optional<String> mountPath`
 
@@ -7919,11 +7958,11 @@ public final class Main {
 
     A file mounted into each session's container.
 
+    - `Type type`
+
     - `String fileId`
 
       ID of a previously uploaded file.
-
-    - `Type type`
 
     - `Optional<String> mountPath`
 
@@ -7933,11 +7972,11 @@ public final class Main {
 
     A memory store attached to each session created from this deployment.
 
+    - `Type type`
+
     - `String memoryStoreId`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `Type type`
 
     - `Optional<Access> access`
 

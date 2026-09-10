@@ -1,5 +1,12 @@
 # Download File
 
+---
+title: Download File
+url: https://platform.claude.com/docs/en/api/files/download
+---
+
+# Download File
+
 **GET** `/v1/files/{file_id}/content`
 
 Download File
@@ -9,6 +16,10 @@ Download File
 - `file_id: string`
 
   ID of the File.
+
+## Headers
+
+- `"anthropic-workspace-id": optional string`
 
 ## Example
 

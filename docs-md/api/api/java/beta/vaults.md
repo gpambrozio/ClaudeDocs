@@ -1,5 +1,12 @@
 # Vaults
 
+---
+title: Vaults
+url: https://platform.claude.com/docs/en/api/java/beta/vaults
+---
+
+# Vaults
+
 ## Create Vault
 
 `BetaManagedAgentsVault beta().vaults().create(params, requestOptions = RequestOptions.none())`
@@ -62,6 +69,8 @@ Create Vault
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -104,6 +113,8 @@ Create Vault
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `String displayName`
 
     Human-readable name for the vault. 1-255 characters.
@@ -119,6 +130,8 @@ Create Vault
 - `class BetaManagedAgentsVault:`
 
   A vault that stores credentials for use by agents during sessions.
+
+  - `Type type`
 
   - `String id`
 
@@ -143,8 +156,6 @@ Create Vault
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the vault.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -268,6 +279,8 @@ List Vaults
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -310,11 +323,15 @@ List Vaults
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
 
   A vault that stores credentials for use by agents during sessions.
+
+  - `Type type`
 
   - `String id`
 
@@ -339,8 +356,6 @@ List Vaults
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the vault.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -454,6 +469,8 @@ Get Vault
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -496,11 +513,15 @@ Get Vault
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
 
   A vault that stores credentials for use by agents during sessions.
+
+  - `Type type`
 
   - `String id`
 
@@ -525,8 +546,6 @@ Get Vault
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the vault.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -635,6 +654,8 @@ Update Vault
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -677,6 +698,8 @@ Update Vault
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Optional<String> displayName`
 
     Updated human-readable name for the vault. 1-255 characters.
@@ -692,6 +715,8 @@ Update Vault
 - `class BetaManagedAgentsVault:`
 
   A vault that stores credentials for use by agents during sessions.
+
+  - `Type type`
 
   - `String id`
 
@@ -716,8 +741,6 @@ Update Vault
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the vault.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -826,6 +849,8 @@ Delete Vault
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -868,17 +893,19 @@ Delete Vault
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
 
   Confirmation of a deleted vault.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier of the deleted vault.
-
-  - `Type type`
 
 ### Example
 
@@ -974,6 +1001,8 @@ Archive Vault
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1016,11 +1045,15 @@ Archive Vault
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
 
   A vault that stores credentials for use by agents during sessions.
+
+  - `Type type`
 
   - `String id`
 
@@ -1045,8 +1078,6 @@ Archive Vault
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the vault.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -1099,17 +1130,19 @@ public final class Main {
 
   Confirmation of a deleted vault.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier of the deleted vault.
-
-  - `Type type`
 
 ### Beta Managed Agents Vault
 
 - `class BetaManagedAgentsVault:`
 
   A vault that stores credentials for use by agents during sessions.
+
+  - `Type type`
 
   - `String id`
 
@@ -1134,8 +1167,6 @@ public final class Main {
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the vault.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -1209,6 +1240,8 @@ Create Credential
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1251,6 +1284,8 @@ Create Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Auth auth`
 
     Authentication details for creating a credential.
@@ -1258,6 +1293,8 @@ Create Credential
     - `class BetaManagedAgentsMcpOAuthCreateParams:`
 
       Parameters for creating an MCP OAuth credential.
+
+      - `Type type`
 
       - `String accessToken`
 
@@ -1270,8 +1307,6 @@ Create Credential
         URL of the MCP server this credential authenticates against.
 
         minLength: 1, maxLength: 2047
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -1293,7 +1328,7 @@ Create Credential
 
           OAuth refresh token.
 
-          minLength: 1, maxLength: 4096
+          minLength: 1, maxLength: 8192
 
         - `String tokenEndpoint`
 
@@ -1315,25 +1350,25 @@ Create Credential
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
+            - `Type type`
+
             - `String clientSecret`
 
               OAuth client secret.
 
               minLength: 1, maxLength: 512
-
-            - `Type type`
 
           - `class BetaManagedAgentsTokenEndpointAuthPostParam:`
 
             Token endpoint uses POST body authentication with client credentials.
 
+            - `Type type`
+
             - `String clientSecret`
 
               OAuth client secret.
 
               minLength: 1, maxLength: 512
-
-            - `Type type`
 
         - `Optional<String> resource`
 
@@ -1351,6 +1386,8 @@ Create Credential
 
       Parameters for creating a static bearer token credential.
 
+      - `Type type`
+
       - `String token`
 
         Static bearer token value.
@@ -1363,11 +1400,11 @@ Create Credential
 
         minLength: 1, maxLength: 2047
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableCreateParams:`
 
       Parameters for creating an environment variable credential.
+
+      - `Type type`
 
       - `BetaManagedAgentsCredentialNetworkingParams networking`
 
@@ -1383,11 +1420,11 @@ Create Credential
 
           Substitute the secret only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-          - `Type type`
 
       - `String secretName`
 
@@ -1400,8 +1437,6 @@ Create Credential
         Secret value. Write-only; never returned in responses.
 
         minLength: 1, maxLength: 4096
-
-      - `Type type`
 
       - `Optional<BetaManagedAgentsInjectionLocationParams> injectionLocation`
 
@@ -1431,6 +1466,8 @@ Create Credential
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for the credential.
@@ -1449,11 +1486,11 @@ Create Credential
 
       OAuth credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -1507,15 +1544,17 @@ Create Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `Type type`
 
       - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -1543,17 +1582,15 @@ Create Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `Type type`
-
       - `String secretName`
 
         Name of the environment variable.
-
-      - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -1564,8 +1601,6 @@ Create Credential
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -1710,6 +1745,8 @@ List Credentials
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1752,11 +1789,15 @@ List Credentials
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `Type type`
 
   - `String id`
 
@@ -1776,11 +1817,11 @@ List Credentials
 
       OAuth credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -1834,15 +1875,17 @@ List Credentials
 
       Static bearer token credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `Type type`
 
       - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -1870,17 +1913,15 @@ List Credentials
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `Type type`
-
       - `String secretName`
 
         Name of the environment variable.
-
-      - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -1891,8 +1932,6 @@ List Credentials
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -2021,6 +2060,8 @@ Get Credential
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2063,11 +2104,15 @@ Get Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `Type type`
 
   - `String id`
 
@@ -2087,11 +2132,11 @@ Get Credential
 
       OAuth credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -2145,15 +2190,17 @@ Get Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `Type type`
 
       - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -2181,17 +2228,15 @@ Get Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `Type type`
-
       - `String secretName`
 
         Name of the environment variable.
-
-      - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -2202,8 +2247,6 @@ Get Credential
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -2331,6 +2374,8 @@ Update Credential
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2373,6 +2418,8 @@ Update Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
   - `Optional<Auth> auth`
 
     Updated authentication details for a credential.
@@ -2403,7 +2450,7 @@ Update Credential
 
           Updated OAuth refresh token.
 
-          minLength: 1, maxLength: 4096
+          minLength: 1, maxLength: 8192
 
         - `Optional<String> scope`
 
@@ -2483,11 +2530,11 @@ Update Credential
 
           Substitute the secret only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
-
-          - `Type type`
 
       - `Optional<String> secretValue`
 
@@ -2511,6 +2558,8 @@ Update Credential
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier for the credential.
@@ -2529,11 +2578,11 @@ Update Credential
 
       OAuth credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -2587,15 +2636,17 @@ Update Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `Type type`
 
       - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -2623,17 +2674,15 @@ Update Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `Type type`
-
       - `String secretName`
 
         Name of the environment variable.
-
-      - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -2644,8 +2693,6 @@ Update Credential
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -2773,6 +2820,8 @@ Delete Credential
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2815,17 +2864,19 @@ Delete Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
 
   Confirmation of a deleted credential.
 
+  - `Type type`
+
   - `String id`
 
     Unique identifier of the deleted credential.
-
-  - `Type type`
 
 #### Example
 
@@ -2927,6 +2978,8 @@ Archive Credential
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2969,11 +3022,15 @@ Archive Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsCredential:`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
+
+  - `Type type`
 
   - `String id`
 
@@ -2993,11 +3050,11 @@ Archive Credential
 
       OAuth credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
-
-      - `Type type`
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -3051,15 +3108,17 @@ Archive Credential
 
       Static bearer token credential details for an MCP server.
 
+      - `Type type`
+
       - `String mcpServerUrl`
 
         URL of the MCP server this credential authenticates against.
 
-      - `Type type`
-
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `Type type`
 
       - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -3087,17 +3146,15 @@ Archive Credential
 
           The secret is substituted only on requests to the listed hosts.
 
+          - `Type type`
+
           - `List<String> allowedHosts`
 
             Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
-          - `Type type`
-
       - `String secretName`
 
         Name of the environment variable.
-
-      - `Type type`
 
   - `LocalDateTime createdAt`
 
@@ -3108,8 +3165,6 @@ Archive Credential
   - `Metadata metadata`
 
     Arbitrary key-value metadata attached to the credential.
-
-  - `Type type`
 
   - `LocalDateTime updatedAt`
 
@@ -3237,6 +3292,8 @@ Validate Credential
 
     - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -3279,11 +3336,15 @@ Validate Credential
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+  - `Optional<String> workspaceId`
+
 #### Returns
 
 - `class BetaManagedAgentsCredentialValidation:`
 
   Result of live-probing a credential against its configured MCP server.
+
+  - `Type type`
 
   - `String credentialId`
 
@@ -3352,8 +3413,6 @@ Validate Credential
     - `INVALID("invalid")`
 
     - `UNKNOWN("unknown")`
-
-  - `Type type`
 
   - `LocalDateTime validatedAt`
 

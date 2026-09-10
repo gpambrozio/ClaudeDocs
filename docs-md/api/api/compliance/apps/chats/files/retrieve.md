@@ -1,5 +1,12 @@
 # Get file metadata
 
+---
+title: Get file metadata
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/retrieve
+---
+
+# Get file metadata
+
 **GET** `/v1/compliance/apps/chats/files/{claude_file_id}`
 
 Retrieves metadata for a file referenced in chat messages, without
@@ -13,6 +20,12 @@ download the bytes.
   The file ID (tagged ID, e.g., claude_file_abc123)
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"x-api-key": optional string`
 

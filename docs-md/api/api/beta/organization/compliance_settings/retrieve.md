@@ -1,5 +1,12 @@
 # Get Compliance Settings
 
+---
+title: Get Compliance Settings
+url: https://platform.claude.com/docs/en/api/beta/organization/compliance_settings/retrieve
+---
+
+# Get Compliance Settings
+
 **GET** `/v1/organizations/compliance_settings`
 
 Retrieve your organization's Compliance Settings.
@@ -13,7 +20,11 @@ organization reads the state inherited from the parent's configuration.
 
 - `BetaComplianceSettings object`
 
-  - `state: BetaComplianceSettingsStateEnabled or BetaComplianceSettingsStateDisabled`
+  - `type: "compliance_settings"`
+
+    default: compliance_settings
+
+  - `state: BetaComplianceSettingsState`
 
     Whether the Compliance API is enabled for this organization.
 
@@ -28,10 +39,6 @@ organization reads the state inherited from the parent's configuration.
       - `type: "disabled"`
 
         default: disabled
-
-  - `type: "compliance_settings"`
-
-    default: compliance_settings
 
 ## Example
 

@@ -1,5 +1,12 @@
 # Messages
 
+---
+title: Messages
+url: https://platform.claude.com/docs/en/api/typescript/messages
+---
+
+# Messages
+
 ## Create a Message
 
 `client.messages.create(params, options?): Message | Stream<RawMessageStreamEvent>`
@@ -89,11 +96,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `TextBlockParam`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -120,6 +127,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `CitationCharLocationParam`
 
+                - `type: "char_location"`
+
                 - `cited_text: string`
 
                 - `document_index: number`
@@ -136,9 +145,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `CitationPageLocationParam`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -156,9 +165,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `CitationContentBlockLocationParam`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -186,9 +195,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `CitationWebSearchResultLocationParam`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -198,13 +207,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   maxLength: 512, minLength: 1
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
                   minLength: 1
 
               - `CitationSearchResultLocationParam`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -236,13 +245,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `title: string | null`
 
-                - `type: "search_result_location"`
-
           - `ImageBlockParam`
+
+            - `type: "image"`
 
             - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
               - `Base64ImageSource`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -258,8 +269,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"image/webp"`
 
-                - `type: "base64"`
-
               - `URLImageSource`
 
                 - `type: "url"`
@@ -268,11 +277,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `FileImageSource`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "image"`
+                - `file_id: string`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -292,9 +299,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `DocumentBlockParam`
 
+            - `type: "document"`
+
             - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
               - `Base64PDFSource`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -302,17 +313,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `PlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
               - `ContentBlockSource`
+
+                - `type: "content"`
 
                 - `content: string | Array<ContentBlockSourceContent>`
 
@@ -324,8 +335,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     - `ImageBlockParam`
 
-                - `type: "content"`
-
               - `URLPDFSource`
 
                 - `type: "url"`
@@ -334,11 +343,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `FileDocumentSource`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "document"`
+                - `file_id: string`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -358,13 +365,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `SearchResultBlockParam`
 
+            - `type: "search_result"`
+
             - `content: Array<TextBlockParam>`
+
+              - `type: "text"`
 
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -376,8 +385,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `title: string`
 
-            - `type: "search_result"`
-
             - `cache_control?: CacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
@@ -385,6 +392,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
             - `citations?: CitationsConfigParam`
 
           - `ThinkingBlockParam`
+
+            - `type: "thinking"`
 
             - `signature: string`
 
@@ -396,17 +405,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               The `thinking` text of this block as returned by the API.
 
-            - `type: "thinking"`
-
           - `RedactedThinkingBlockParam`
+
+            - `type: "redacted_thinking"`
 
             - `data: string`
 
               The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type: "redacted_thinking"`
-
           - `ToolUseBlockParam`
+
+            - `type: "tool_use"`
 
             - `id: string`
 
@@ -417,8 +426,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
             - `name: string`
 
               maxLength: 200, minLength: 1
-
-            - `type: "tool_use"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -438,19 +445,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `ServerToolCaller20260120`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `toolset_name?: string | null`
 
@@ -460,11 +467,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `ToolResultBlockParam`
 
+            - `type: "tool_result"`
+
             - `tool_use_id: string`
 
               pattern: ^[a-zA-Z0-9_-]+$
-
-            - `type: "tool_result"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -488,11 +495,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   Tool reference block that can be included in tool_result content.
 
+                  - `type: "tool_reference"`
+
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                  - `type: "tool_reference"`
 
                   - `cache_control?: CacheControlEphemeral | null`
 
@@ -507,6 +514,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
                   At most one per `tool_result`, only on a non-error result answering a
                   browser toolset member `tool_use`. The server renders the
                   model-visible text from it; the model never sees the raw fields.
+
+                  - `type: "browser_state"`
 
                   - `tabs: Array<BrowserStateTabEntry>`
 
@@ -536,8 +545,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                  - `type: "browser_state"`
-
                   - `cache_control?: CacheControlEphemeral | null`
 
                     Create a cache control breakpoint at this content block.
@@ -558,25 +565,25 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
                       during a failed call gets no deferred `tab_opened`; it simply appears
                       in the next result's `tabs` inventory.
 
+                      - `type: "tab_opened"`
+
                       - `tab_id: string`
 
                         The `tab_id` of the opened tab, present in `tabs`.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type: "tab_opened"`
-
                     - `BrowserStateChangeDownloadStarted`
 
                       A file download that started during this call.
+
+                      - `type: "download_started"`
 
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_started"`
 
                       - `url: string`
 
@@ -591,13 +598,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
                       `download_started`, when the download finished during the call that
                       started it (at most one state change per `download_id` per result).
 
+                      - `type: "download_completed"`
+
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_completed"`
 
                       - `url: string`
 
@@ -621,13 +628,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       A file download that failed — or was cancelled — during this call.
 
+                      - `type: "download_failed"`
+
                       - `download_id: string`
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                      - `type: "download_failed"`
 
                       - `url: string`
 
@@ -651,6 +658,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `ServerToolUseBlockParam`
 
+            - `type: "server_tool_use"`
+
             - `id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -673,8 +682,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
             - `cache_control?: CacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
@@ -695,21 +702,25 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `WebSearchToolResultBlockParam`
 
+            - `type: "web_search_tool_result"`
+
             - `content: WebSearchToolResultBlockParamContent`
 
               - `Array<WebSearchResultBlockParam>`
 
+                - `type: "web_search_result"`
+
                 - `encrypted_content: string`
 
                 - `title: string`
-
-                - `type: "web_search_result"`
 
                 - `url: string`
 
                 - `page_age?: string | null`
 
               - `WebSearchToolRequestError`
+
+                - `type: "web_search_tool_result_error"`
 
                 - `error_code: WebSearchToolResultErrorCode`
 
@@ -725,13 +736,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_search_tool_result"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -753,9 +760,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `WebFetchToolResultBlockParam`
 
+            - `type: "web_fetch_tool_result"`
+
             - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
               - `WebFetchToolResultErrorBlockParam`
+
+                - `type: "web_fetch_tool_result_error"`
 
                 - `error_code: WebFetchToolResultErrorCode`
 
@@ -777,13 +788,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
+                  - `"content_too_large"`
 
               - `WebFetchBlockParam`
 
-                - `content: DocumentBlockParam`
-
                 - `type: "web_fetch_result"`
+
+                - `content: DocumentBlockParam`
 
                 - `url: string`
 
@@ -796,8 +807,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "web_fetch_tool_result"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -819,11 +828,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `CodeExecutionToolResultBlockParam`
 
+            - `type: "code_execution_tool_result"`
+
             - `content: CodeExecutionToolResultBlockParamContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `CodeExecutionToolResultErrorParam`
+
+                - `type: "code_execution_tool_result_error"`
 
                 - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -835,15 +848,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
               - `CodeExecutionResultBlockParam`
+
+                - `type: "code_execution_result"`
 
                 - `content: Array<CodeExecutionOutputBlockParam>`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -851,17 +864,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
               - `EncryptedCodeExecutionResultBlockParam`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
+                - `type: "encrypted_code_execution_result"`
+
                 - `content: Array<CodeExecutionOutputBlockParam>`
 
-                  - `file_id: string`
-
                   - `type: "code_execution_output"`
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -869,13 +882,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_tool_result"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -883,9 +892,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `BashCodeExecutionToolResultBlockParam`
 
+            - `type: "bash_code_execution_tool_result"`
+
             - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
               - `BashCodeExecutionToolResultErrorParam`
+
+                - `type: "bash_code_execution_tool_result_error"`
 
                 - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -899,15 +912,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
               - `BashCodeExecutionResultBlockParam`
+
+                - `type: "bash_code_execution_result"`
 
                 - `content: Array<BashCodeExecutionOutputBlockParam>`
 
-                  - `file_id: string`
-
                   - `type: "bash_code_execution_output"`
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -915,13 +928,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "bash_code_execution_tool_result"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -929,9 +938,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `TextEditorCodeExecutionToolResultBlockParam`
 
+            - `type: "text_editor_code_execution_tool_result"`
+
             - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
               - `TextEditorCodeExecutionToolResultErrorParam`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
 
                 - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -945,11 +958,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"file_not_found"`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
                 - `error_message?: string | null`
 
               - `TextEditorCodeExecutionViewResultBlockParam`
+
+                - `type: "text_editor_code_execution_view_result"`
 
                 - `content: string`
 
@@ -961,8 +974,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"pdf"`
 
-                - `type: "text_editor_code_execution_view_result"`
-
                 - `num_lines?: number | null`
 
                 - `start_line?: number | null`
@@ -971,9 +982,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `TextEditorCodeExecutionCreateResultBlockParam`
 
-                - `is_file_update: boolean`
-
                 - `type: "text_editor_code_execution_create_result"`
+
+                - `is_file_update: boolean`
 
               - `TextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -993,17 +1004,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
             - `cache_control?: CacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
 
           - `ToolSearchToolResultBlockParam`
 
+            - `type: "tool_search_tool_result"`
+
             - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
               - `ToolSearchToolResultErrorParam`
+
+                - `type: "tool_search_tool_result_error"`
 
                 - `error_code: ToolSearchToolResultErrorCode`
 
@@ -1015,31 +1028,27 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `"execution_time_exceeded"`
 
-                - `type: "tool_search_tool_result_error"`
-
                 - `error_message?: string | null`
 
               - `ToolSearchToolSearchResultBlockParam`
 
+                - `type: "tool_search_tool_search_result"`
+
                 - `tool_references: Array<ToolReferenceBlockParam>`
+
+                  - `type: "tool_reference"`
 
                   - `tool_name: string`
 
                     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                  - `type: "tool_reference"`
-
                   - `cache_control?: CacheControlEphemeral | null`
 
                     Create a cache control breakpoint at this content block.
 
-                - `type: "tool_search_tool_search_result"`
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "tool_search_tool_result"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -1050,9 +1059,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
             A content block that represents a file to be uploaded to the container
             Files uploaded via this block will be available in the container's input directory.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
+
+            - `file_id: string`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -1166,12 +1175,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           maxItems: 20
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" | "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -1179,6 +1182,12 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version?: string`
 
@@ -1226,11 +1235,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
+        - `type: "json_schema"`
+
         - `schema: Record<string, unknown>`
 
           The JSON schema of the format
-
-        - `type: "json_schema"`
 
     - `service_tier?: "auto" | "standard_only"`
 
@@ -1266,11 +1275,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Array<TextBlockParam>`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -1288,6 +1297,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `ThinkingConfigEnabled`
 
+        - `type: "enabled"`
+
         - `budget_tokens: number`
 
           Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -1297,8 +1308,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
           minimum: 1024
-
-        - `type: "enabled"`
 
         - `display?: "summarized" | "omitted" | null`
 
@@ -1356,11 +1365,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The model will use the specified tool with `tool_choice.name`.
 
+        - `type: "tool"`
+
         - `name: string`
 
           The name of the tool to use.
-
-        - `type: "tool"`
 
         - `disable_parallel_tool_use?: boolean`
 
@@ -1440,6 +1449,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Tool`
 
+        - `type?: "custom" | null`
+
         - `input_schema: InputSchema`
 
           [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -1494,17 +1505,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
-        - `type?: "custom" | null`
-
       - `ToolBash20250124`
+
+        - `type: "bash_20250124"`
 
         - `name: "bash"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "bash_20250124"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1532,13 +1541,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `CodeExecutionTool20250522`
 
+        - `type: "code_execution_20250522"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20250522"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1564,13 +1573,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `CodeExecutionTool20250825`
 
+        - `type: "code_execution_20250825"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20250825"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1598,13 +1607,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+        - `type: "code_execution_20260120"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20260120"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1632,13 +1641,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Code execution tool with REPL state persistence.
 
+        - `type: "code_execution_20260521"`
+
         - `name: "code_execution"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "code_execution_20260521"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -1683,6 +1692,18 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           accepted key, and a member's defaults apply wherever its key is
           absent. Unknown keys are rejected: the field set is this toolset
           version's complete member set.
+
+          - `type?: BrowserTypeConfig | null`
+
+            `type`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
           - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -2020,18 +2041,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-          - `type?: BrowserTypeConfig | null`
-
-            `type`'s config overrides.
-
-            - `defer_loading?: boolean | null`
-
-              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-            - `enabled?: boolean | null`
-
-              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
           - `wait?: BrowserWaitConfig | null`
 
             `wait`'s config overrides.
@@ -2058,13 +2067,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `MemoryTool20250818`
 
+        - `type: "memory_20250818"`
+
         - `name: "memory"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "memory_20250818"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2115,6 +2124,18 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           accepted key, and a member's defaults apply wherever its key is
           absent. Unknown keys are rejected: the field set is this toolset
           version's complete member set.
+
+          - `type?: ComputerTypeConfig | null`
+
+            `type`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
           - `cursor_position?: ComputerCursorPositionConfig | null`
 
@@ -2284,18 +2305,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-          - `type?: ComputerTypeConfig | null`
-
-            `type`'s config overrides.
-
-            - `defer_loading?: boolean | null`
-
-              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-            - `enabled?: boolean | null`
-
-              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
           - `wait?: ComputerWaitConfig | null`
 
             `wait`'s config overrides.
@@ -2322,13 +2331,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `ToolTextEditor20250124`
 
+        - `type: "text_editor_20250124"`
+
         - `name: "str_replace_editor"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250124"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2356,13 +2365,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `ToolTextEditor20250429`
 
+        - `type: "text_editor_20250429"`
+
         - `name: "str_replace_based_edit_tool"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250429"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2390,13 +2399,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `ToolTextEditor20250728`
 
+        - `type: "text_editor_20250728"`
+
         - `name: "str_replace_based_edit_tool"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "text_editor_20250728"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2430,13 +2439,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebSearchTool20250305`
 
+        - `type: "web_search_20250305"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20250305"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2506,13 +2515,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebFetchTool20250910`
 
+        - `type: "web_fetch_20250910"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20250910"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2562,13 +2571,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebSearchTool20260209`
 
+        - `type: "web_search_20260209"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20260209"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2612,13 +2621,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebFetchTool20260209`
 
+        - `type: "web_fetch_20260209"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260209"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2670,13 +2679,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Web fetch tool with use_cache parameter for bypassing cached content.
 
+        - `type: "web_fetch_20260309"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260309"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2730,13 +2739,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebSearchTool20260318`
 
+        - `type: "web_search_20260318"`
+
         - `name: "web_search"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_search_20260318"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2788,13 +2797,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebFetchTool20260318`
 
+        - `type: "web_fetch_20260318"`
+
         - `name: "web_fetch"`
 
           Name of the tool.
 
           This is how the tool will be called by the model and in `tool_use` blocks.
-
-        - `type: "web_fetch_20260318"`
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2856,17 +2865,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `ToolSearchToolBm25_20251119`
 
-        - `name: "tool_search_tool_bm25"`
-
-          Name of the tool.
-
-          This is how the tool will be called by the model and in `tool_use` blocks.
-
         - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
           - `"tool_search_tool_bm25_20251119"`
 
           - `"tool_search_tool_bm25"`
+
+        - `name: "tool_search_tool_bm25"`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2892,17 +2901,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `ToolSearchToolRegex20251119`
 
-        - `name: "tool_search_tool_regex"`
-
-          Name of the tool.
-
-          This is how the tool will be called by the model and in `tool_use` blocks.
-
         - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
           - `"tool_search_tool_regex_20251119"`
 
           - `"tool_search_tool_regex"`
+
+        - `name: "tool_search_tool_regex"`
+
+          Name of the tool.
+
+          This is how the tool will be called by the model and in `tool_use` blocks.
 
         - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -2929,6 +2938,12 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     - `user_profile_id?: string`
 
       Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+    - `workspace_id?: string`
+
+      Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+      Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
     - `temperature?: number`
 
@@ -2986,6 +3001,14 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 - `Message`
 
+  - `type: "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
+    default: message
+
   - `id: string`
 
     Unique object identifier.
@@ -3010,12 +3033,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       Skills loaded in the container
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" | "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -3023,6 +3040,12 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: string`
 
@@ -3061,6 +3084,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `TextBlock`
 
+      - `type: "text"`
+
+        default: text
+
       - `citations: Array<TextCitation> | null`
 
         Citations supporting the text block.
@@ -3068,6 +3095,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `CitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -3085,11 +3116,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `CitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -3107,11 +3138,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `CitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -3139,11 +3170,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `CitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -3153,13 +3184,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `CitationsSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -3191,19 +3222,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `ThinkingBlock`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -3217,11 +3244,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `RedactedThinkingBlock`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -3231,11 +3258,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `ToolUseBlock`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -3257,29 +3284,25 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `ServerToolCaller20260120`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `input: Record<string, unknown>`
 
       - `name: string`
 
         minLength: 1
-
-      - `type: "tool_use"`
-
-        default: tool_use
 
       - `toolset_name?: string | null`
 
@@ -3288,6 +3311,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `ServerToolUseBlock`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -3327,11 +3354,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
     - `WebSearchToolResultBlock`
+
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -3353,6 +3380,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `WebSearchToolResultError`
 
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
+
           - `error_code: WebSearchToolResultErrorCode`
 
             - `"invalid_tool_input"`
@@ -3367,11 +3398,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `Array<WebSearchResultBlock>`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -3379,21 +3410,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
-
     - `WebFetchToolResultBlock`
+
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -3415,6 +3442,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `WebFetchToolResultErrorBlock`
 
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
+
           - `error_code: WebFetchToolResultErrorCode`
 
             - `"invalid_tool_input"`
@@ -3435,13 +3466,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `WebFetchBlock`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: DocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: CitationsConfig | null`
 
@@ -3455,37 +3492,29 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Base64PDFSource`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `PlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string | null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string | null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -3495,17 +3524,21 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
-
     - `CodeExecutionToolResultBlock`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -3517,19 +3550,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `CodeExecutionResultBlock`
 
-          - `content: Array<CodeExecutionOutputBlock>`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: Array<CodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -3537,21 +3570,21 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: Array<CodeExecutionOutputBlock>`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: Array<CodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -3559,23 +3592,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BashCodeExecutionToolResultBlock`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
         - `BashCodeExecutionToolResultError`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -3589,19 +3622,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BashCodeExecutionResultBlock`
 
-          - `content: Array<BashCodeExecutionOutputBlock>`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: Array<BashCodeExecutionOutputBlock>`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -3609,23 +3642,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `TextEditorCodeExecutionToolResultBlock`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
         - `TextEditorCodeExecutionToolResultError`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -3641,11 +3674,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `error_message: string | null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `TextEditorCodeExecutionViewResultBlock`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -3663,19 +3696,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `total_lines: number | null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `TextEditorCodeExecutionCreateResultBlock`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: Array<string> | null`
 
@@ -3687,23 +3720,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `old_start: number | null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `ToolSearchToolResultBlock`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
         - `ToolSearchToolResultError`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: ToolSearchToolResultErrorCode`
 
@@ -3717,43 +3750,35 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `error_message: string | null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `ToolSearchToolSearchResultBlock`
-
-          - `tool_references: Array<ToolReferenceBlock>`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: Array<ToolReferenceBlock>`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
 
     - `ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
   - `model: Model`
 
@@ -3845,6 +3870,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Structured information about a refusal.
 
+    - `type: "refusal"`
+
+      default: refusal
+
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
       The policy category that triggered a refusal.
@@ -3881,10 +3910,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-    - `type: "refusal"`
-
-      default: refusal
-
   - `stop_reason: StopReason | null`
 
     The reason that we stopped.
@@ -3920,14 +3945,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
-    default: message
 
   - `usage: Usage`
 
@@ -4037,13 +4054,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `RawMessageStartEvent`
 
-    - `message: Message`
-
     - `type: "message_start"`
 
       default: message_start
 
+    - `message: Message`
+
   - `RawMessageDeltaEvent`
+
+    - `type: "message_delta"`
+
+      default: message_delta
 
     - `delta: Delta`
 
@@ -4058,10 +4079,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
       - `stop_reason: StopReason | null`
 
       - `stop_sequence: string | null`
-
-    - `type: "message_delta"`
-
-      default: message_delta
 
     - `usage: MessageDeltaUsage`
 
@@ -4118,6 +4135,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `RawContentBlockStartEvent`
 
+    - `type: "content_block_start"`
+
+      default: content_block_start
+
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
       Response model for a file uploaded to the container.
@@ -4150,31 +4171,35 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `index: number`
 
-    - `type: "content_block_start"`
-
-      default: content_block_start
-
   - `RawContentBlockDeltaEvent`
+
+    - `type: "content_block_delta"`
+
+      default: content_block_delta
 
     - `delta: RawContentBlockDelta`
 
       - `TextDelta`
 
-        - `text: string`
-
         - `type: "text_delta"`
 
           default: text_delta
 
-      - `InputJSONDelta`
+        - `text: string`
 
-        - `partial_json: string`
+      - `InputJSONDelta`
 
         - `type: "input_json_delta"`
 
           default: input_json_delta
 
+        - `partial_json: string`
+
       - `CitationsDelta`
+
+        - `type: "citations_delta"`
+
+          default: citations_delta
 
         - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
@@ -4188,43 +4213,35 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `CitationsSearchResultLocation`
 
-        - `type: "citations_delta"`
-
-          default: citations_delta
-
       - `ThinkingDelta`
-
-        - `thinking: string`
-
-          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
         - `type: "thinking_delta"`
 
           default: thinking_delta
 
+        - `thinking: string`
+
+          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
       - `SignatureDelta`
-
-        - `signature: string`
-
-          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
         - `type: "signature_delta"`
 
           default: signature_delta
 
+        - `signature: string`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
     - `index: number`
-
-    - `type: "content_block_delta"`
-
-      default: content_block_delta
 
   - `RawContentBlockStopEvent`
-
-    - `index: number`
 
     - `type: "content_block_stop"`
 
       default: content_block_stop
+
+    - `index: number`
 
 ### Example
 
@@ -4384,11 +4401,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `TextBlockParam`
 
+          - `type: "text"`
+
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -4415,6 +4432,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `CitationCharLocationParam`
 
+              - `type: "char_location"`
+
               - `cited_text: string`
 
               - `document_index: number`
@@ -4431,9 +4450,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-              - `type: "char_location"`
-
             - `CitationPageLocationParam`
+
+              - `type: "page_location"`
 
               - `cited_text: string`
 
@@ -4451,9 +4470,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 1
 
-              - `type: "page_location"`
-
             - `CitationContentBlockLocationParam`
+
+              - `type: "content_block_location"`
 
               - `cited_text: string`
 
@@ -4481,9 +4500,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-              - `type: "content_block_location"`
-
             - `CitationWebSearchResultLocationParam`
+
+              - `type: "web_search_result_location"`
 
               - `cited_text: string`
 
@@ -4493,13 +4512,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 maxLength: 512, minLength: 1
 
-              - `type: "web_search_result_location"`
-
               - `url: string`
 
                 minLength: 1
 
             - `CitationSearchResultLocationParam`
+
+              - `type: "search_result_location"`
 
               - `cited_text: string`
 
@@ -4531,13 +4550,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `title: string | null`
 
-              - `type: "search_result_location"`
-
         - `ImageBlockParam`
+
+          - `type: "image"`
 
           - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
             - `Base64ImageSource`
+
+              - `type: "base64"`
 
               - `data: string`
 
@@ -4553,8 +4574,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"image/webp"`
 
-              - `type: "base64"`
-
             - `URLImageSource`
 
               - `type: "url"`
@@ -4563,11 +4582,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `FileImageSource`
 
-              - `file_id: string`
-
               - `type: "file"`
 
-          - `type: "image"`
+              - `file_id: string`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -4587,9 +4604,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `DocumentBlockParam`
 
+          - `type: "document"`
+
           - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
             - `Base64PDFSource`
+
+              - `type: "base64"`
 
               - `data: string`
 
@@ -4597,17 +4618,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `media_type: "application/pdf"`
 
-              - `type: "base64"`
-
             - `PlainTextSource`
+
+              - `type: "text"`
 
               - `data: string`
 
               - `media_type: "text/plain"`
 
-              - `type: "text"`
-
             - `ContentBlockSource`
+
+              - `type: "content"`
 
               - `content: string | Array<ContentBlockSourceContent>`
 
@@ -4619,8 +4640,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   - `ImageBlockParam`
 
-              - `type: "content"`
-
             - `URLPDFSource`
 
               - `type: "url"`
@@ -4629,11 +4648,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `FileDocumentSource`
 
-              - `file_id: string`
-
               - `type: "file"`
 
-          - `type: "document"`
+              - `file_id: string`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -4653,13 +4670,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `SearchResultBlockParam`
 
+          - `type: "search_result"`
+
           - `content: Array<TextBlockParam>`
+
+            - `type: "text"`
 
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -4671,8 +4690,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `title: string`
 
-          - `type: "search_result"`
-
           - `cache_control?: CacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
@@ -4680,6 +4697,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
           - `citations?: CitationsConfigParam`
 
         - `ThinkingBlockParam`
+
+          - `type: "thinking"`
 
           - `signature: string`
 
@@ -4691,17 +4710,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The `thinking` text of this block as returned by the API.
 
-          - `type: "thinking"`
-
         - `RedactedThinkingBlockParam`
+
+          - `type: "redacted_thinking"`
 
           - `data: string`
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-          - `type: "redacted_thinking"`
-
         - `ToolUseBlockParam`
+
+          - `type: "tool_use"`
 
           - `id: string`
 
@@ -4712,8 +4731,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
           - `name: string`
 
             maxLength: 200, minLength: 1
-
-          - `type: "tool_use"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -4733,19 +4750,19 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Tool invocation generated by a server-side tool.
 
+              - `type: "code_execution_20250825"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20250825"`
 
             - `ServerToolCaller20260120`
 
+              - `type: "code_execution_20260120"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20260120"`
 
           - `toolset_name?: string | null`
 
@@ -4755,11 +4772,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `ToolResultBlockParam`
 
+          - `type: "tool_result"`
+
           - `tool_use_id: string`
 
             pattern: ^[a-zA-Z0-9_-]+$
-
-          - `type: "tool_result"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -4783,11 +4800,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 Tool reference block that can be included in tool_result content.
 
+                - `type: "tool_reference"`
+
                 - `tool_name: string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                - `type: "tool_reference"`
 
                 - `cache_control?: CacheControlEphemeral | null`
 
@@ -4802,6 +4819,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
                 At most one per `tool_result`, only on a non-error result answering a
                 browser toolset member `tool_use`. The server renders the
                 model-visible text from it; the model never sees the raw fields.
+
+                - `type: "browser_state"`
 
                 - `tabs: Array<BrowserStateTabEntry>`
 
@@ -4831,8 +4850,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `type: "browser_state"`
-
                 - `cache_control?: CacheControlEphemeral | null`
 
                   Create a cache control breakpoint at this content block.
@@ -4853,25 +4870,25 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
                     during a failed call gets no deferred `tab_opened`; it simply appears
                     in the next result's `tabs` inventory.
 
+                    - `type: "tab_opened"`
+
                     - `tab_id: string`
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                    - `type: "tab_opened"`
-
                   - `BrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
+
+                    - `type: "download_started"`
 
                     - `download_id: string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `type: "download_started"`
 
                     - `url: string`
 
@@ -4886,13 +4903,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
                     `download_started`, when the download finished during the call that
                     started it (at most one state change per `download_id` per result).
 
+                    - `type: "download_completed"`
+
                     - `download_id: string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `type: "download_completed"`
 
                     - `url: string`
 
@@ -4916,13 +4933,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                     A file download that failed — or was cancelled — during this call.
 
+                    - `type: "download_failed"`
+
                     - `download_id: string`
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                    - `type: "download_failed"`
 
                     - `url: string`
 
@@ -4946,6 +4963,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `ServerToolUseBlockParam`
 
+          - `type: "server_tool_use"`
+
           - `id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -4968,8 +4987,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `"tool_search_tool_bm25"`
 
-          - `type: "server_tool_use"`
-
           - `cache_control?: CacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
@@ -4990,21 +5007,25 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `WebSearchToolResultBlockParam`
 
+          - `type: "web_search_tool_result"`
+
           - `content: WebSearchToolResultBlockParamContent`
 
             - `Array<WebSearchResultBlockParam>`
 
+              - `type: "web_search_result"`
+
               - `encrypted_content: string`
 
               - `title: string`
-
-              - `type: "web_search_result"`
 
               - `url: string`
 
               - `page_age?: string | null`
 
             - `WebSearchToolRequestError`
+
+              - `type: "web_search_tool_result_error"`
 
               - `error_code: WebSearchToolResultErrorCode`
 
@@ -5020,13 +5041,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"request_too_large"`
 
-              - `type: "web_search_tool_result_error"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_search_tool_result"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -5048,9 +5065,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `WebFetchToolResultBlockParam`
 
+          - `type: "web_fetch_tool_result"`
+
           - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
             - `WebFetchToolResultErrorBlockParam`
+
+              - `type: "web_fetch_tool_result_error"`
 
               - `error_code: WebFetchToolResultErrorCode`
 
@@ -5072,13 +5093,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"unavailable"`
 
-              - `type: "web_fetch_tool_result_error"`
+                - `"content_too_large"`
 
             - `WebFetchBlockParam`
 
-              - `content: DocumentBlockParam`
-
               - `type: "web_fetch_result"`
+
+              - `content: DocumentBlockParam`
 
               - `url: string`
 
@@ -5091,8 +5112,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "web_fetch_tool_result"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -5114,11 +5133,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `CodeExecutionToolResultBlockParam`
 
+          - `type: "code_execution_tool_result"`
+
           - `content: CodeExecutionToolResultBlockParamContent`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `CodeExecutionToolResultErrorParam`
+
+              - `type: "code_execution_tool_result_error"`
 
               - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -5130,15 +5153,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"execution_time_exceeded"`
 
-              - `type: "code_execution_tool_result_error"`
-
             - `CodeExecutionResultBlockParam`
+
+              - `type: "code_execution_result"`
 
               - `content: Array<CodeExecutionOutputBlockParam>`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -5146,17 +5169,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `stdout: string`
 
-              - `type: "code_execution_result"`
-
             - `EncryptedCodeExecutionResultBlockParam`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
+              - `type: "encrypted_code_execution_result"`
+
               - `content: Array<CodeExecutionOutputBlockParam>`
 
-                - `file_id: string`
-
                 - `type: "code_execution_output"`
+
+                - `file_id: string`
 
               - `encrypted_stdout: string`
 
@@ -5164,13 +5187,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `stderr: string`
 
-              - `type: "encrypted_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_tool_result"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -5178,9 +5197,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `BashCodeExecutionToolResultBlockParam`
 
+          - `type: "bash_code_execution_tool_result"`
+
           - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
             - `BashCodeExecutionToolResultErrorParam`
+
+              - `type: "bash_code_execution_tool_result_error"`
 
               - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -5194,15 +5217,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"output_file_too_large"`
 
-              - `type: "bash_code_execution_tool_result_error"`
-
             - `BashCodeExecutionResultBlockParam`
+
+              - `type: "bash_code_execution_result"`
 
               - `content: Array<BashCodeExecutionOutputBlockParam>`
 
-                - `file_id: string`
-
                 - `type: "bash_code_execution_output"`
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -5210,13 +5233,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `stdout: string`
 
-              - `type: "bash_code_execution_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "bash_code_execution_tool_result"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -5224,9 +5243,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `TextEditorCodeExecutionToolResultBlockParam`
 
+          - `type: "text_editor_code_execution_tool_result"`
+
           - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
             - `TextEditorCodeExecutionToolResultErrorParam`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
 
               - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -5240,11 +5263,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"file_not_found"`
 
-              - `type: "text_editor_code_execution_tool_result_error"`
-
               - `error_message?: string | null`
 
             - `TextEditorCodeExecutionViewResultBlockParam`
+
+              - `type: "text_editor_code_execution_view_result"`
 
               - `content: string`
 
@@ -5256,8 +5279,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"pdf"`
 
-              - `type: "text_editor_code_execution_view_result"`
-
               - `num_lines?: number | null`
 
               - `start_line?: number | null`
@@ -5266,9 +5287,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `TextEditorCodeExecutionCreateResultBlockParam`
 
-              - `is_file_update: boolean`
-
               - `type: "text_editor_code_execution_create_result"`
+
+              - `is_file_update: boolean`
 
             - `TextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -5288,17 +5309,19 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "text_editor_code_execution_tool_result"`
-
           - `cache_control?: CacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
 
         - `ToolSearchToolResultBlockParam`
 
+          - `type: "tool_search_tool_result"`
+
           - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
             - `ToolSearchToolResultErrorParam`
+
+              - `type: "tool_search_tool_result_error"`
 
               - `error_code: ToolSearchToolResultErrorCode`
 
@@ -5310,31 +5333,27 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `"execution_time_exceeded"`
 
-              - `type: "tool_search_tool_result_error"`
-
               - `error_message?: string | null`
 
             - `ToolSearchToolSearchResultBlockParam`
 
+              - `type: "tool_search_tool_search_result"`
+
               - `tool_references: Array<ToolReferenceBlockParam>`
+
+                - `type: "tool_reference"`
 
                 - `tool_name: string`
 
                   maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `type: "tool_reference"`
-
                 - `cache_control?: CacheControlEphemeral | null`
 
                   Create a cache control breakpoint at this content block.
 
-              - `type: "tool_search_tool_search_result"`
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "tool_search_tool_result"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -5345,9 +5364,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
 
-          - `file_id: string`
-
           - `type: "container_upload"`
+
+          - `file_id: string`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -5465,11 +5484,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
+      - `type: "json_schema"`
+
       - `schema: Record<string, unknown>`
 
         The JSON schema of the format
-
-      - `type: "json_schema"`
 
   - `system?: string | Array<TextBlockParam>`
 
@@ -5481,11 +5500,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `Array<TextBlockParam>`
 
+      - `type: "text"`
+
       - `text: string`
 
         minLength: 1
-
-      - `type: "text"`
 
       - `cache_control?: CacheControlEphemeral | null`
 
@@ -5503,6 +5522,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `ThinkingConfigEnabled`
 
+      - `type: "enabled"`
+
       - `budget_tokens: number`
 
         Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -5512,8 +5533,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
         minimum: 1024
-
-      - `type: "enabled"`
 
       - `display?: "summarized" | "omitted" | null`
 
@@ -5571,11 +5590,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       The model will use the specified tool with `tool_choice.name`.
 
+      - `type: "tool"`
+
       - `name: string`
 
         The name of the tool to use.
-
-      - `type: "tool"`
 
       - `disable_parallel_tool_use?: boolean`
 
@@ -5655,6 +5674,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `Tool`
 
+      - `type?: "custom" | null`
+
       - `input_schema: InputSchema`
 
         [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -5709,17 +5730,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-      - `type?: "custom" | null`
-
     - `ToolBash20250124`
+
+      - `type: "bash_20250124"`
 
       - `name: "bash"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "bash_20250124"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -5747,13 +5766,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `CodeExecutionTool20250522`
 
+      - `type: "code_execution_20250522"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20250522"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -5779,13 +5798,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `CodeExecutionTool20250825`
 
+      - `type: "code_execution_20250825"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20250825"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -5813,13 +5832,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+      - `type: "code_execution_20260120"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20260120"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -5847,13 +5866,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       Code execution tool with REPL state persistence.
 
+      - `type: "code_execution_20260521"`
+
       - `name: "code_execution"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "code_execution_20260521"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -5898,6 +5917,18 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `type?: BrowserTypeConfig | null`
+
+          `type`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -6235,18 +6266,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type?: BrowserTypeConfig | null`
-
-          `type`'s config overrides.
-
-          - `defer_loading?: boolean | null`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `enabled?: boolean | null`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `wait?: BrowserWaitConfig | null`
 
           `wait`'s config overrides.
@@ -6273,13 +6292,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `MemoryTool20250818`
 
+      - `type: "memory_20250818"`
+
       - `name: "memory"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "memory_20250818"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6330,6 +6349,18 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         accepted key, and a member's defaults apply wherever its key is
         absent. Unknown keys are rejected: the field set is this toolset
         version's complete member set.
+
+        - `type?: ComputerTypeConfig | null`
+
+          `type`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `cursor_position?: ComputerCursorPositionConfig | null`
 
@@ -6499,18 +6530,6 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type?: ComputerTypeConfig | null`
-
-          `type`'s config overrides.
-
-          - `defer_loading?: boolean | null`
-
-            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-          - `enabled?: boolean | null`
-
-            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
         - `wait?: ComputerWaitConfig | null`
 
           `wait`'s config overrides.
@@ -6537,13 +6556,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `ToolTextEditor20250124`
 
+      - `type: "text_editor_20250124"`
+
       - `name: "str_replace_editor"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "text_editor_20250124"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6571,13 +6590,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `ToolTextEditor20250429`
 
+      - `type: "text_editor_20250429"`
+
       - `name: "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "text_editor_20250429"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6605,13 +6624,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `ToolTextEditor20250728`
 
+      - `type: "text_editor_20250728"`
+
       - `name: "str_replace_based_edit_tool"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "text_editor_20250728"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6645,13 +6664,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `WebSearchTool20250305`
 
+      - `type: "web_search_20250305"`
+
       - `name: "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_search_20250305"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6721,13 +6740,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `WebFetchTool20250910`
 
+      - `type: "web_fetch_20250910"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20250910"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6777,13 +6796,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `WebSearchTool20260209`
 
+      - `type: "web_search_20260209"`
+
       - `name: "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_search_20260209"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6827,13 +6846,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `WebFetchTool20260209`
 
+      - `type: "web_fetch_20260209"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20260209"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6885,13 +6904,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
+      - `type: "web_fetch_20260309"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20260309"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -6945,13 +6964,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `WebSearchTool20260318`
 
+      - `type: "web_search_20260318"`
+
       - `name: "web_search"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_search_20260318"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -7003,13 +7022,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `WebFetchTool20260318`
 
+      - `type: "web_fetch_20260318"`
+
       - `name: "web_fetch"`
 
         Name of the tool.
 
         This is how the tool will be called by the model and in `tool_use` blocks.
-
-      - `type: "web_fetch_20260318"`
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -7071,17 +7090,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `ToolSearchToolBm25_20251119`
 
-      - `name: "tool_search_tool_bm25"`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
         - `"tool_search_tool_bm25_20251119"`
 
         - `"tool_search_tool_bm25"`
+
+      - `name: "tool_search_tool_bm25"`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -7107,17 +7126,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `ToolSearchToolRegex20251119`
 
-      - `name: "tool_search_tool_regex"`
-
-        Name of the tool.
-
-        This is how the tool will be called by the model and in `tool_use` blocks.
-
       - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
         - `"tool_search_tool_regex_20251119"`
 
         - `"tool_search_tool_regex"`
+
+      - `name: "tool_search_tool_regex"`
+
+        Name of the tool.
+
+        This is how the tool will be called by the model and in `tool_use` blocks.
 
       - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -7144,6 +7163,12 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
   - `user_profile_id?: string`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -7184,6 +7209,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `Base64ImageSource`
 
+  - `type: "base64"`
+
   - `data: string`
 
     format: byte
@@ -7198,11 +7225,11 @@ console.log(messageTokensCount.input_tokens);
 
     - `"image/webp"`
 
-  - `type: "base64"`
-
 ### Base64 PDF Source
 
 - `Base64PDFSource`
+
+  - `type: "base64"`
 
   - `data: string`
 
@@ -7210,57 +7237,57 @@ console.log(messageTokensCount.input_tokens);
 
   - `media_type: "application/pdf"`
 
-  - `type: "base64"`
-
 ### Bash Code Execution Output Block
 
 - `BashCodeExecutionOutputBlock`
-
-  - `file_id: string`
 
   - `type: "bash_code_execution_output"`
 
     default: bash_code_execution_output
 
+  - `file_id: string`
+
 ### Bash Code Execution Output Block Param
 
 - `BashCodeExecutionOutputBlockParam`
 
-  - `file_id: string`
-
   - `type: "bash_code_execution_output"`
+
+  - `file_id: string`
 
 ### Bash Code Execution Result Block
 
 - `BashCodeExecutionResultBlock`
 
-  - `content: Array<BashCodeExecutionOutputBlock>`
+  - `type: "bash_code_execution_result"`
 
-    - `file_id: string`
+    default: bash_code_execution_result
+
+  - `content: Array<BashCodeExecutionOutputBlock>`
 
     - `type: "bash_code_execution_output"`
 
       default: bash_code_execution_output
 
+    - `file_id: string`
+
   - `return_code: number`
 
   - `stderr: string`
 
   - `stdout: string`
-
-  - `type: "bash_code_execution_result"`
-
-    default: bash_code_execution_result
 
 ### Bash Code Execution Result Block Param
 
 - `BashCodeExecutionResultBlockParam`
 
+  - `type: "bash_code_execution_result"`
+
   - `content: Array<BashCodeExecutionOutputBlockParam>`
 
-    - `file_id: string`
-
     - `type: "bash_code_execution_output"`
+
+    - `file_id: string`
 
   - `return_code: number`
 
@@ -7268,67 +7295,21 @@ console.log(messageTokensCount.input_tokens);
 
   - `stdout: string`
 
-  - `type: "bash_code_execution_result"`
-
 ### Bash Code Execution Tool Result Block
 
 - `BashCodeExecutionToolResultBlock`
-
-  - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
-
-    - `BashCodeExecutionToolResultError`
-
-      - `error_code: BashCodeExecutionToolResultErrorCode`
-
-        - `"invalid_tool_input"`
-
-        - `"unavailable"`
-
-        - `"too_many_requests"`
-
-        - `"execution_time_exceeded"`
-
-        - `"output_file_too_large"`
-
-      - `type: "bash_code_execution_tool_result_error"`
-
-        default: bash_code_execution_tool_result_error
-
-    - `BashCodeExecutionResultBlock`
-
-      - `content: Array<BashCodeExecutionOutputBlock>`
-
-        - `file_id: string`
-
-        - `type: "bash_code_execution_output"`
-
-          default: bash_code_execution_output
-
-      - `return_code: number`
-
-      - `stderr: string`
-
-      - `stdout: string`
-
-      - `type: "bash_code_execution_result"`
-
-        default: bash_code_execution_result
-
-  - `tool_use_id: string`
-
-    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
   - `type: "bash_code_execution_tool_result"`
 
     default: bash_code_execution_tool_result
 
-### Bash Code Execution Tool Result Block Param
+  - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-- `BashCodeExecutionToolResultBlockParam`
+    - `BashCodeExecutionToolResultError`
 
-  - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
+      - `type: "bash_code_execution_tool_result_error"`
 
-    - `BashCodeExecutionToolResultErrorParam`
+        default: bash_code_execution_tool_result_error
 
       - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -7342,15 +7323,19 @@ console.log(messageTokensCount.input_tokens);
 
         - `"output_file_too_large"`
 
-      - `type: "bash_code_execution_tool_result_error"`
+    - `BashCodeExecutionResultBlock`
 
-    - `BashCodeExecutionResultBlockParam`
+      - `type: "bash_code_execution_result"`
 
-      - `content: Array<BashCodeExecutionOutputBlockParam>`
+        default: bash_code_execution_result
 
-        - `file_id: string`
+      - `content: Array<BashCodeExecutionOutputBlock>`
 
         - `type: "bash_code_execution_output"`
+
+          default: bash_code_execution_output
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -7358,13 +7343,53 @@ console.log(messageTokensCount.input_tokens);
 
       - `stdout: string`
 
-      - `type: "bash_code_execution_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
+### Bash Code Execution Tool Result Block Param
+
+- `BashCodeExecutionToolResultBlockParam`
+
   - `type: "bash_code_execution_tool_result"`
+
+  - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
+
+    - `BashCodeExecutionToolResultErrorParam`
+
+      - `type: "bash_code_execution_tool_result_error"`
+
+      - `error_code: BashCodeExecutionToolResultErrorCode`
+
+        - `"invalid_tool_input"`
+
+        - `"unavailable"`
+
+        - `"too_many_requests"`
+
+        - `"execution_time_exceeded"`
+
+        - `"output_file_too_large"`
+
+    - `BashCodeExecutionResultBlockParam`
+
+      - `type: "bash_code_execution_result"`
+
+      - `content: Array<BashCodeExecutionOutputBlockParam>`
+
+        - `type: "bash_code_execution_output"`
+
+        - `file_id: string`
+
+      - `return_code: number`
+
+      - `stderr: string`
+
+      - `stdout: string`
+
+  - `tool_use_id: string`
+
+    pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -7391,6 +7416,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `BashCodeExecutionToolResultError`
 
+  - `type: "bash_code_execution_tool_result_error"`
+
+    default: bash_code_execution_tool_result_error
+
   - `error_code: BashCodeExecutionToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -7402,10 +7431,6 @@ console.log(messageTokensCount.input_tokens);
     - `"execution_time_exceeded"`
 
     - `"output_file_too_large"`
-
-  - `type: "bash_code_execution_tool_result_error"`
-
-    default: bash_code_execution_tool_result_error
 
 ### Bash Code Execution Tool Result Error Code
 
@@ -7425,6 +7450,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `BashCodeExecutionToolResultErrorParam`
 
+  - `type: "bash_code_execution_tool_result_error"`
+
   - `error_code: BashCodeExecutionToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -7436,8 +7463,6 @@ console.log(messageTokensCount.input_tokens);
     - `"execution_time_exceeded"`
 
     - `"output_file_too_large"`
-
-  - `type: "bash_code_execution_tool_result_error"`
 
 ### Browser Close Tab Config
 
@@ -7815,6 +7840,8 @@ console.log(messageTokensCount.input_tokens);
   browser toolset member `tool_use`. The server renders the
   model-visible text from it; the model never sees the raw fields.
 
+  - `type: "browser_state"`
+
   - `tabs: Array<BrowserStateTabEntry>`
 
     All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
@@ -7842,8 +7869,6 @@ console.log(messageTokensCount.input_tokens);
     - `active?: boolean`
 
       Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
-
-  - `type: "browser_state"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -7882,25 +7907,25 @@ console.log(messageTokensCount.input_tokens);
       during a failed call gets no deferred `tab_opened`; it simply appears
       in the next result's `tabs` inventory.
 
+      - `type: "tab_opened"`
+
       - `tab_id: string`
 
         The `tab_id` of the opened tab, present in `tabs`.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-      - `type: "tab_opened"`
-
     - `BrowserStateChangeDownloadStarted`
 
       A file download that started during this call.
+
+      - `type: "download_started"`
 
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_started"`
 
       - `url: string`
 
@@ -7915,13 +7940,13 @@ console.log(messageTokensCount.input_tokens);
       `download_started`, when the download finished during the call that
       started it (at most one state change per `download_id` per result).
 
+      - `type: "download_completed"`
+
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_completed"`
 
       - `url: string`
 
@@ -7945,13 +7970,13 @@ console.log(messageTokensCount.input_tokens);
 
       A file download that failed — or was cancelled — during this call.
 
+      - `type: "download_failed"`
+
       - `download_id: string`
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-      - `type: "download_failed"`
 
       - `url: string`
 
@@ -7987,25 +8012,25 @@ console.log(messageTokensCount.input_tokens);
     during a failed call gets no deferred `tab_opened`; it simply appears
     in the next result's `tabs` inventory.
 
+    - `type: "tab_opened"`
+
     - `tab_id: string`
 
       The `tab_id` of the opened tab, present in `tabs`.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `type: "tab_opened"`
-
   - `BrowserStateChangeDownloadStarted`
 
     A file download that started during this call.
+
+    - `type: "download_started"`
 
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_started"`
 
     - `url: string`
 
@@ -8020,13 +8045,13 @@ console.log(messageTokensCount.input_tokens);
     `download_started`, when the download finished during the call that
     started it (at most one state change per `download_id` per result).
 
+    - `type: "download_completed"`
+
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_completed"`
 
     - `url: string`
 
@@ -8050,13 +8075,13 @@ console.log(messageTokensCount.input_tokens);
 
     A file download that failed — or was cancelled — during this call.
 
+    - `type: "download_failed"`
+
     - `download_id: string`
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-    - `type: "download_failed"`
 
     - `url: string`
 
@@ -8079,13 +8104,13 @@ console.log(messageTokensCount.input_tokens);
   `download_started`, when the download finished during the call that
   started it (at most one state change per `download_id` per result).
 
+  - `type: "download_completed"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_completed"`
 
   - `url: string`
 
@@ -8111,13 +8136,13 @@ console.log(messageTokensCount.input_tokens);
 
   A file download that failed — or was cancelled — during this call.
 
+  - `type: "download_failed"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_failed"`
 
   - `url: string`
 
@@ -8137,13 +8162,13 @@ console.log(messageTokensCount.input_tokens);
 
   A file download that started during this call.
 
+  - `type: "download_started"`
+
   - `download_id: string`
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "download_started"`
 
   - `url: string`
 
@@ -8163,13 +8188,13 @@ console.log(messageTokensCount.input_tokens);
   during a failed call gets no deferred `tab_opened`; it simply appears
   in the next result's `tabs` inventory.
 
+  - `type: "tab_opened"`
+
   - `tab_id: string`
 
     The `tab_id` of the opened tab, present in `tabs`.
 
     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-  - `type: "tab_opened"`
 
 ### Browser State Tab Entry
 
@@ -8260,6 +8285,18 @@ console.log(messageTokensCount.input_tokens);
     accepted key, and a member's defaults apply wherever its key is
     absent. Unknown keys are rejected: the field set is this toolset
     version's complete member set.
+
+    - `type?: BrowserTypeConfig | null`
+
+      `type`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -8597,18 +8634,6 @@ console.log(messageTokensCount.input_tokens);
 
         Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type?: BrowserTypeConfig | null`
-
-      `type`'s config overrides.
-
-      - `defer_loading?: boolean | null`
-
-        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-      - `enabled?: boolean | null`
-
-        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
     - `wait?: BrowserWaitConfig | null`
 
       `wait`'s config overrides.
@@ -8643,6 +8668,18 @@ console.log(messageTokensCount.input_tokens);
   accepted key, and a member's defaults apply wherever its key is
   absent. Unknown keys are rejected: the field set is this toolset
   version's complete member set.
+
+  - `type?: BrowserTypeConfig | null`
+
+    `type`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -8980,18 +9017,6 @@ console.log(messageTokensCount.input_tokens);
 
       Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type?: BrowserTypeConfig | null`
-
-    `type`'s config overrides.
-
-    - `defer_loading?: boolean | null`
-
-      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-    - `enabled?: boolean | null`
-
-      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
   - `wait?: BrowserWaitConfig | null`
 
     `wait`'s config overrides.
@@ -9113,6 +9138,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `CitationCharLocation`
 
+  - `type: "char_location"`
+
+    default: char_location
+
   - `cited_text: string`
 
   - `document_index: number`
@@ -9128,15 +9157,13 @@ console.log(messageTokensCount.input_tokens);
   - `start_char_index: number`
 
     minimum: 0
-
-  - `type: "char_location"`
-
-    default: char_location
 
 ### Citation Char Location Param
 
 - `CitationCharLocationParam`
 
+  - `type: "char_location"`
+
   - `cited_text: string`
 
   - `document_index: number`
@@ -9153,45 +9180,45 @@ console.log(messageTokensCount.input_tokens);
 
     minimum: 0
 
-  - `type: "char_location"`
-
 ### Citation Content Block Location
 
 - `CitationContentBlockLocation`
-
-  - `cited_text: string`
-
-    The full text of the cited block range, concatenated.
-
-    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-  - `document_index: number`
-
-    minimum: 0
-
-  - `document_title: string | null`
-
-  - `end_block_index: number`
-
-    Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-  - `file_id: string | null`
-
-  - `start_block_index: number`
-
-    0-based index of the first cited block in the source's `content` array.
-
-    minimum: 0
 
   - `type: "content_block_location"`
 
     default: content_block_location
 
+  - `cited_text: string`
+
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+  - `document_index: number`
+
+    minimum: 0
+
+  - `document_title: string | null`
+
+  - `end_block_index: number`
+
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+  - `file_id: string | null`
+
+  - `start_block_index: number`
+
+    0-based index of the first cited block in the source's `content` array.
+
+    minimum: 0
+
 ### Citation Content Block Location Param
 
 - `CitationContentBlockLocationParam`
+
+  - `type: "content_block_location"`
 
   - `cited_text: string`
 
@@ -9219,11 +9246,13 @@ console.log(messageTokensCount.input_tokens);
 
     minimum: 0
 
-  - `type: "content_block_location"`
-
 ### Citation Page Location
 
 - `CitationPageLocation`
+
+  - `type: "page_location"`
+
+    default: page_location
 
   - `cited_text: string`
 
@@ -9241,13 +9270,11 @@ console.log(messageTokensCount.input_tokens);
 
     minimum: 1
 
-  - `type: "page_location"`
-
-    default: page_location
-
 ### Citation Page Location Param
 
 - `CitationPageLocationParam`
+
+  - `type: "page_location"`
 
   - `cited_text: string`
 
@@ -9265,11 +9292,11 @@ console.log(messageTokensCount.input_tokens);
 
     minimum: 1
 
-  - `type: "page_location"`
-
 ### Citation Search Result Location Param
 
 - `CitationSearchResultLocationParam`
+
+  - `type: "search_result_location"`
 
   - `cited_text: string`
 
@@ -9301,11 +9328,11 @@ console.log(messageTokensCount.input_tokens);
 
   - `title: string | null`
 
-  - `type: "search_result_location"`
-
 ### Citation Web Search Result Location Param
 
 - `CitationWebSearchResultLocationParam`
+
+  - `type: "web_search_result_location"`
 
   - `cited_text: string`
 
@@ -9314,8 +9341,6 @@ console.log(messageTokensCount.input_tokens);
   - `title: string | null`
 
     maxLength: 512, minLength: 1
-
-  - `type: "web_search_result_location"`
 
   - `url: string`
 
@@ -9339,9 +9364,17 @@ console.log(messageTokensCount.input_tokens);
 
 - `CitationsDelta`
 
+  - `type: "citations_delta"`
+
+    default: citations_delta
+
   - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
     - `CitationCharLocation`
+
+      - `type: "char_location"`
+
+        default: char_location
 
       - `cited_text: string`
 
@@ -9359,11 +9392,11 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-      - `type: "char_location"`
-
-        default: char_location
-
     - `CitationPageLocation`
+
+      - `type: "page_location"`
+
+        default: page_location
 
       - `cited_text: string`
 
@@ -9381,11 +9414,11 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 1
 
-      - `type: "page_location"`
-
-        default: page_location
-
     - `CitationContentBlockLocation`
+
+      - `type: "content_block_location"`
+
+        default: content_block_location
 
       - `cited_text: string`
 
@@ -9413,11 +9446,11 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
-        default: content_block_location
-
     - `CitationsWebSearchResultLocation`
+
+      - `type: "web_search_result_location"`
+
+        default: web_search_result_location
 
       - `cited_text: string`
 
@@ -9427,13 +9460,13 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 512
 
-      - `type: "web_search_result_location"`
-
-        default: web_search_result_location
-
       - `url: string`
 
     - `CitationsSearchResultLocation`
+
+      - `type: "search_result_location"`
+
+        default: search_result_location
 
       - `cited_text: string`
 
@@ -9465,17 +9498,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `title: string | null`
 
-      - `type: "search_result_location"`
-
-        default: search_result_location
-
-  - `type: "citations_delta"`
-
-    default: citations_delta
-
 ### Citations Search Result Location
 
 - `CitationsSearchResultLocation`
+
+  - `type: "search_result_location"`
+
+    default: search_result_location
 
   - `cited_text: string`
 
@@ -9507,13 +9536,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `title: string | null`
 
-  - `type: "search_result_location"`
-
-    default: search_result_location
-
 ### Citations Web Search Result Location
 
 - `CitationsWebSearchResultLocation`
+
+  - `type: "web_search_result_location"`
+
+    default: web_search_result_location
 
   - `cited_text: string`
 
@@ -9523,61 +9552,59 @@ console.log(messageTokensCount.input_tokens);
 
     maxLength: 512
 
-  - `type: "web_search_result_location"`
-
-    default: web_search_result_location
-
   - `url: string`
 
 ### Code Execution Output Block
 
 - `CodeExecutionOutputBlock`
 
-  - `file_id: string`
-
   - `type: "code_execution_output"`
 
     default: code_execution_output
+
+  - `file_id: string`
 
 ### Code Execution Output Block Param
 
 - `CodeExecutionOutputBlockParam`
 
-  - `file_id: string`
-
   - `type: "code_execution_output"`
+
+  - `file_id: string`
 
 ### Code Execution Result Block
 
 - `CodeExecutionResultBlock`
 
-  - `content: Array<CodeExecutionOutputBlock>`
+  - `type: "code_execution_result"`
 
-    - `file_id: string`
+    default: code_execution_result
+
+  - `content: Array<CodeExecutionOutputBlock>`
 
     - `type: "code_execution_output"`
 
       default: code_execution_output
 
+    - `file_id: string`
+
   - `return_code: number`
 
   - `stderr: string`
 
   - `stdout: string`
-
-  - `type: "code_execution_result"`
-
-    default: code_execution_result
 
 ### Code Execution Result Block Param
 
 - `CodeExecutionResultBlockParam`
 
+  - `type: "code_execution_result"`
+
   - `content: Array<CodeExecutionOutputBlockParam>`
 
-    - `file_id: string`
-
     - `type: "code_execution_output"`
+
+    - `file_id: string`
 
   - `return_code: number`
 
@@ -9585,19 +9612,17 @@ console.log(messageTokensCount.input_tokens);
 
   - `stdout: string`
 
-  - `type: "code_execution_result"`
-
 ### Code Execution Tool 20250522
 
 - `CodeExecutionTool20250522`
+
+  - `type: "code_execution_20250522"`
 
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20250522"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9642,13 +9667,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `CodeExecutionTool20250825`
 
+  - `type: "code_execution_20250825"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20250825"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9695,13 +9720,13 @@ console.log(messageTokensCount.input_tokens);
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+  - `type: "code_execution_20260120"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20260120"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9748,13 +9773,13 @@ console.log(messageTokensCount.input_tokens);
 
   Code execution tool with REPL state persistence.
 
+  - `type: "code_execution_20260521"`
+
   - `name: "code_execution"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "code_execution_20260521"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -9799,11 +9824,19 @@ console.log(messageTokensCount.input_tokens);
 
 - `CodeExecutionToolResultBlock`
 
+  - `type: "code_execution_tool_result"`
+
+    default: code_execution_tool_result
+
   - `content: CodeExecutionToolResultBlockContent`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
     - `CodeExecutionToolResultError`
+
+      - `type: "code_execution_tool_result_error"`
+
+        default: code_execution_tool_result_error
 
       - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -9815,19 +9848,19 @@ console.log(messageTokensCount.input_tokens);
 
         - `"execution_time_exceeded"`
 
-      - `type: "code_execution_tool_result_error"`
-
-        default: code_execution_tool_result_error
-
     - `CodeExecutionResultBlock`
 
-      - `content: Array<CodeExecutionOutputBlock>`
+      - `type: "code_execution_result"`
 
-        - `file_id: string`
+        default: code_execution_result
+
+      - `content: Array<CodeExecutionOutputBlock>`
 
         - `type: "code_execution_output"`
 
           default: code_execution_output
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -9835,21 +9868,21 @@ console.log(messageTokensCount.input_tokens);
 
       - `stdout: string`
 
-      - `type: "code_execution_result"`
-
-        default: code_execution_result
-
     - `EncryptedCodeExecutionResultBlock`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
-      - `content: Array<CodeExecutionOutputBlock>`
+      - `type: "encrypted_code_execution_result"`
 
-        - `file_id: string`
+        default: encrypted_code_execution_result
+
+      - `content: Array<CodeExecutionOutputBlock>`
 
         - `type: "code_execution_output"`
 
           default: code_execution_output
+
+        - `file_id: string`
 
       - `encrypted_stdout: string`
 
@@ -9857,17 +9890,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `stderr: string`
 
-      - `type: "encrypted_code_execution_result"`
-
-        default: encrypted_code_execution_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_tool_result"`
-
-    default: code_execution_tool_result
 
 ### Code Execution Tool Result Block Content
 
@@ -9876,6 +9901,10 @@ console.log(messageTokensCount.input_tokens);
   Code execution result with encrypted stdout for PFC + web_search results.
 
   - `CodeExecutionToolResultError`
+
+    - `type: "code_execution_tool_result_error"`
+
+      default: code_execution_tool_result_error
 
     - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -9887,19 +9916,19 @@ console.log(messageTokensCount.input_tokens);
 
       - `"execution_time_exceeded"`
 
-    - `type: "code_execution_tool_result_error"`
-
-      default: code_execution_tool_result_error
-
   - `CodeExecutionResultBlock`
 
-    - `content: Array<CodeExecutionOutputBlock>`
+    - `type: "code_execution_result"`
 
-      - `file_id: string`
+      default: code_execution_result
+
+    - `content: Array<CodeExecutionOutputBlock>`
 
       - `type: "code_execution_output"`
 
         default: code_execution_output
+
+      - `file_id: string`
 
     - `return_code: number`
 
@@ -9907,21 +9936,21 @@ console.log(messageTokensCount.input_tokens);
 
     - `stdout: string`
 
-    - `type: "code_execution_result"`
-
-      default: code_execution_result
-
   - `EncryptedCodeExecutionResultBlock`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
-    - `content: Array<CodeExecutionOutputBlock>`
+    - `type: "encrypted_code_execution_result"`
 
-      - `file_id: string`
+      default: encrypted_code_execution_result
+
+    - `content: Array<CodeExecutionOutputBlock>`
 
       - `type: "code_execution_output"`
 
         default: code_execution_output
+
+      - `file_id: string`
 
     - `encrypted_stdout: string`
 
@@ -9929,19 +9958,19 @@ console.log(messageTokensCount.input_tokens);
 
     - `stderr: string`
 
-    - `type: "encrypted_code_execution_result"`
-
-      default: encrypted_code_execution_result
-
 ### Code Execution Tool Result Block Param
 
 - `CodeExecutionToolResultBlockParam`
+
+  - `type: "code_execution_tool_result"`
 
   - `content: CodeExecutionToolResultBlockParamContent`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
     - `CodeExecutionToolResultErrorParam`
+
+      - `type: "code_execution_tool_result_error"`
 
       - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -9953,15 +9982,15 @@ console.log(messageTokensCount.input_tokens);
 
         - `"execution_time_exceeded"`
 
-      - `type: "code_execution_tool_result_error"`
-
     - `CodeExecutionResultBlockParam`
+
+      - `type: "code_execution_result"`
 
       - `content: Array<CodeExecutionOutputBlockParam>`
 
-        - `file_id: string`
-
         - `type: "code_execution_output"`
+
+        - `file_id: string`
 
       - `return_code: number`
 
@@ -9969,17 +9998,17 @@ console.log(messageTokensCount.input_tokens);
 
       - `stdout: string`
 
-      - `type: "code_execution_result"`
-
     - `EncryptedCodeExecutionResultBlockParam`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
+      - `type: "encrypted_code_execution_result"`
+
       - `content: Array<CodeExecutionOutputBlockParam>`
 
-        - `file_id: string`
-
         - `type: "code_execution_output"`
+
+        - `file_id: string`
 
       - `encrypted_stdout: string`
 
@@ -9987,13 +10016,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `stderr: string`
 
-      - `type: "encrypted_code_execution_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_tool_result"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -10024,6 +10049,8 @@ console.log(messageTokensCount.input_tokens);
 
   - `CodeExecutionToolResultErrorParam`
 
+    - `type: "code_execution_tool_result_error"`
+
     - `error_code: CodeExecutionToolResultErrorCode`
 
       - `"invalid_tool_input"`
@@ -10034,15 +10061,15 @@ console.log(messageTokensCount.input_tokens);
 
       - `"execution_time_exceeded"`
 
-    - `type: "code_execution_tool_result_error"`
-
   - `CodeExecutionResultBlockParam`
+
+    - `type: "code_execution_result"`
 
     - `content: Array<CodeExecutionOutputBlockParam>`
 
-      - `file_id: string`
-
       - `type: "code_execution_output"`
+
+      - `file_id: string`
 
     - `return_code: number`
 
@@ -10050,17 +10077,17 @@ console.log(messageTokensCount.input_tokens);
 
     - `stdout: string`
 
-    - `type: "code_execution_result"`
-
   - `EncryptedCodeExecutionResultBlockParam`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
+    - `type: "encrypted_code_execution_result"`
+
     - `content: Array<CodeExecutionOutputBlockParam>`
 
-      - `file_id: string`
-
       - `type: "code_execution_output"`
+
+      - `file_id: string`
 
     - `encrypted_stdout: string`
 
@@ -10068,11 +10095,13 @@ console.log(messageTokensCount.input_tokens);
 
     - `stderr: string`
 
-    - `type: "encrypted_code_execution_result"`
-
 ### Code Execution Tool Result Error
 
 - `CodeExecutionToolResultError`
+
+  - `type: "code_execution_tool_result_error"`
+
+    default: code_execution_tool_result_error
 
   - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -10083,10 +10112,6 @@ console.log(messageTokensCount.input_tokens);
     - `"too_many_requests"`
 
     - `"execution_time_exceeded"`
-
-  - `type: "code_execution_tool_result_error"`
-
-    default: code_execution_tool_result_error
 
 ### Code Execution Tool Result Error Code
 
@@ -10104,6 +10129,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `CodeExecutionToolResultErrorParam`
 
+  - `type: "code_execution_tool_result_error"`
+
   - `error_code: CodeExecutionToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -10113,8 +10140,6 @@ console.log(messageTokensCount.input_tokens);
     - `"too_many_requests"`
 
     - `"execution_time_exceeded"`
-
-  - `type: "code_execution_tool_result_error"`
 
 ### Computer Cursor Position Config
 
@@ -10343,6 +10368,18 @@ console.log(messageTokensCount.input_tokens);
     absent. Unknown keys are rejected: the field set is this toolset
     version's complete member set.
 
+    - `type?: ComputerTypeConfig | null`
+
+      `type`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `cursor_position?: ComputerCursorPositionConfig | null`
 
       `cursor_position`'s config overrides.
@@ -10511,18 +10548,6 @@ console.log(messageTokensCount.input_tokens);
 
         Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type?: ComputerTypeConfig | null`
-
-      `type`'s config overrides.
-
-      - `defer_loading?: boolean | null`
-
-        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-      - `enabled?: boolean | null`
-
-        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
     - `wait?: ComputerWaitConfig | null`
 
       `wait`'s config overrides.
@@ -10557,6 +10582,18 @@ console.log(messageTokensCount.input_tokens);
   accepted key, and a member's defaults apply wherever its key is
   absent. Unknown keys are rejected: the field set is this toolset
   version's complete member set.
+
+  - `type?: ComputerTypeConfig | null`
+
+    `type`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `cursor_position?: ComputerCursorPositionConfig | null`
 
@@ -10726,18 +10763,6 @@ console.log(messageTokensCount.input_tokens);
 
       Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type?: ComputerTypeConfig | null`
-
-    `type`'s config overrides.
-
-    - `defer_loading?: boolean | null`
-
-      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-    - `enabled?: boolean | null`
-
-      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
   - `wait?: ComputerWaitConfig | null`
 
     `wait`'s config overrides.
@@ -10838,12 +10863,6 @@ console.log(messageTokensCount.input_tokens);
 
     Skills loaded in the container
 
-    - `skill_id: string`
-
-      Skill ID
-
-      maxLength: 64, minLength: 1
-
     - `type: "anthropic" | "custom"`
 
       Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -10851,6 +10870,12 @@ console.log(messageTokensCount.input_tokens);
       - `"anthropic"`
 
       - `"custom"`
+
+    - `skill_id: string`
+
+      Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `version: string`
 
@@ -10874,12 +10899,6 @@ console.log(messageTokensCount.input_tokens);
 
     maxItems: 20
 
-    - `skill_id: string`
-
-      Skill ID
-
-      maxLength: 64, minLength: 1
-
     - `type: "anthropic" | "custom"`
 
       Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -10887,6 +10906,12 @@ console.log(messageTokensCount.input_tokens);
       - `"anthropic"`
 
       - `"custom"`
+
+    - `skill_id: string`
+
+      Skill ID
+
+      maxLength: 64, minLength: 1
 
     - `version?: string`
 
@@ -10900,12 +10925,6 @@ console.log(messageTokensCount.input_tokens);
 
   A skill that was loaded in a container (response model).
 
-  - `skill_id: string`
-
-    Skill ID
-
-    maxLength: 64, minLength: 1
-
   - `type: "anthropic" | "custom"`
 
     Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -10913,6 +10932,12 @@ console.log(messageTokensCount.input_tokens);
     - `"anthropic"`
 
     - `"custom"`
+
+  - `skill_id: string`
+
+    Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `version: string`
 
@@ -10926,11 +10951,11 @@ console.log(messageTokensCount.input_tokens);
 
   Response model for a file uploaded to the container.
 
-  - `file_id: string`
-
   - `type: "container_upload"`
 
     default: container_upload
+
+  - `file_id: string`
 
 ### Container Upload Block Param
 
@@ -10939,9 +10964,9 @@ console.log(messageTokensCount.input_tokens);
   A content block that represents a file to be uploaded to the container
   Files uploaded via this block will be available in the container's input directory.
 
-  - `file_id: string`
-
   - `type: "container_upload"`
+
+  - `file_id: string`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -10972,6 +10997,10 @@ console.log(messageTokensCount.input_tokens);
 
   - `TextBlock`
 
+    - `type: "text"`
+
+      default: text
+
     - `citations: Array<TextCitation> | null`
 
       Citations supporting the text block.
@@ -10979,6 +11008,10 @@ console.log(messageTokensCount.input_tokens);
       The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
       - `CitationCharLocation`
+
+        - `type: "char_location"`
+
+          default: char_location
 
         - `cited_text: string`
 
@@ -10996,11 +11029,11 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "char_location"`
-
-          default: char_location
-
       - `CitationPageLocation`
+
+        - `type: "page_location"`
+
+          default: page_location
 
         - `cited_text: string`
 
@@ -11018,11 +11051,11 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-        - `type: "page_location"`
-
-          default: page_location
-
       - `CitationContentBlockLocation`
+
+        - `type: "content_block_location"`
+
+          default: content_block_location
 
         - `cited_text: string`
 
@@ -11050,11 +11083,11 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
-          default: content_block_location
-
       - `CitationsWebSearchResultLocation`
+
+        - `type: "web_search_result_location"`
+
+          default: web_search_result_location
 
         - `cited_text: string`
 
@@ -11064,13 +11097,13 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 512
 
-        - `type: "web_search_result_location"`
-
-          default: web_search_result_location
-
         - `url: string`
 
       - `CitationsSearchResultLocation`
+
+        - `type: "search_result_location"`
+
+          default: search_result_location
 
         - `cited_text: string`
 
@@ -11102,19 +11135,15 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
-          default: search_result_location
-
     - `text: string`
 
-      maxLength: 5000000, minLength: 0
-
-    - `type: "text"`
-
-      default: text
+      minLength: 0
 
   - `ThinkingBlock`
+
+    - `type: "thinking"`
+
+      default: thinking
 
     - `signature: string`
 
@@ -11128,11 +11157,11 @@ console.log(messageTokensCount.input_tokens);
 
       The text of Claude's thinking process for this block.
 
-    - `type: "thinking"`
-
-      default: thinking
-
   - `RedactedThinkingBlock`
+
+    - `type: "redacted_thinking"`
+
+      default: redacted_thinking
 
     - `data: string`
 
@@ -11142,11 +11171,11 @@ console.log(messageTokensCount.input_tokens);
 
       See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type: "redacted_thinking"`
-
-      default: redacted_thinking
-
   - `ToolUseBlock`
+
+    - `type: "tool_use"`
+
+      default: tool_use
 
     - `id: string`
 
@@ -11168,29 +11197,25 @@ console.log(messageTokensCount.input_tokens);
 
         Tool invocation generated by a server-side tool.
 
+        - `type: "code_execution_20250825"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20250825"`
 
       - `ServerToolCaller20260120`
 
+        - `type: "code_execution_20260120"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20260120"`
 
     - `input: Record<string, unknown>`
 
     - `name: string`
 
       minLength: 1
-
-    - `type: "tool_use"`
-
-      default: tool_use
 
     - `toolset_name?: string | null`
 
@@ -11199,6 +11224,10 @@ console.log(messageTokensCount.input_tokens);
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
   - `ServerToolUseBlock`
+
+    - `type: "server_tool_use"`
+
+      default: server_tool_use
 
     - `id: string`
 
@@ -11238,11 +11267,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `"tool_search_tool_bm25"`
 
-    - `type: "server_tool_use"`
-
-      default: server_tool_use
-
   - `WebSearchToolResultBlock`
+
+    - `type: "web_search_tool_result"`
+
+      default: web_search_tool_result
 
     - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -11264,6 +11293,10 @@ console.log(messageTokensCount.input_tokens);
 
       - `WebSearchToolResultError`
 
+        - `type: "web_search_tool_result_error"`
+
+          default: web_search_tool_result_error
+
         - `error_code: WebSearchToolResultErrorCode`
 
           - `"invalid_tool_input"`
@@ -11278,11 +11311,11 @@ console.log(messageTokensCount.input_tokens);
 
           - `"request_too_large"`
 
-        - `type: "web_search_tool_result_error"`
-
-          default: web_search_tool_result_error
-
       - `Array<WebSearchResultBlock>`
+
+        - `type: "web_search_result"`
+
+          default: web_search_result
 
         - `encrypted_content: string`
 
@@ -11290,21 +11323,17 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string`
 
-        - `type: "web_search_result"`
-
-          default: web_search_result
-
         - `url: string`
 
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "web_search_tool_result"`
-
-      default: web_search_tool_result
-
   - `WebFetchToolResultBlock`
+
+    - `type: "web_fetch_tool_result"`
+
+      default: web_fetch_tool_result
 
     - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -11326,6 +11355,10 @@ console.log(messageTokensCount.input_tokens);
 
       - `WebFetchToolResultErrorBlock`
 
+        - `type: "web_fetch_tool_result_error"`
+
+          default: web_fetch_tool_result_error
+
         - `error_code: WebFetchToolResultErrorCode`
 
           - `"invalid_tool_input"`
@@ -11346,13 +11379,19 @@ console.log(messageTokensCount.input_tokens);
 
           - `"unavailable"`
 
-        - `type: "web_fetch_tool_result_error"`
-
-          default: web_fetch_tool_result_error
+          - `"content_too_large"`
 
       - `WebFetchBlock`
 
+        - `type: "web_fetch_result"`
+
+          default: web_fetch_result
+
         - `content: DocumentBlock`
+
+          - `type: "document"`
+
+            default: document
 
           - `citations: CitationsConfig | null`
 
@@ -11366,37 +11405,29 @@ console.log(messageTokensCount.input_tokens);
 
             - `Base64PDFSource`
 
+              - `type: "base64"`
+
               - `data: string`
 
                 format: byte
 
               - `media_type: "application/pdf"`
 
-              - `type: "base64"`
-
             - `PlainTextSource`
+
+              - `type: "text"`
 
               - `data: string`
 
               - `media_type: "text/plain"`
 
-              - `type: "text"`
-
           - `title: string | null`
 
             The title of the document
 
-          - `type: "document"`
-
-            default: document
-
         - `retrieved_at: string | null`
 
           ISO 8601 timestamp when the content was retrieved
-
-        - `type: "web_fetch_result"`
-
-          default: web_fetch_result
 
         - `url: string`
 
@@ -11406,17 +11437,21 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "web_fetch_tool_result"`
-
-      default: web_fetch_tool_result
-
   - `CodeExecutionToolResultBlock`
+
+    - `type: "code_execution_tool_result"`
+
+      default: code_execution_tool_result
 
     - `content: CodeExecutionToolResultBlockContent`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
       - `CodeExecutionToolResultError`
+
+        - `type: "code_execution_tool_result_error"`
+
+          default: code_execution_tool_result_error
 
         - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -11428,19 +11463,19 @@ console.log(messageTokensCount.input_tokens);
 
           - `"execution_time_exceeded"`
 
-        - `type: "code_execution_tool_result_error"`
-
-          default: code_execution_tool_result_error
-
       - `CodeExecutionResultBlock`
 
-        - `content: Array<CodeExecutionOutputBlock>`
+        - `type: "code_execution_result"`
 
-          - `file_id: string`
+          default: code_execution_result
+
+        - `content: Array<CodeExecutionOutputBlock>`
 
           - `type: "code_execution_output"`
 
             default: code_execution_output
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -11448,21 +11483,21 @@ console.log(messageTokensCount.input_tokens);
 
         - `stdout: string`
 
-        - `type: "code_execution_result"`
-
-          default: code_execution_result
-
       - `EncryptedCodeExecutionResultBlock`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
-        - `content: Array<CodeExecutionOutputBlock>`
+        - `type: "encrypted_code_execution_result"`
 
-          - `file_id: string`
+          default: encrypted_code_execution_result
+
+        - `content: Array<CodeExecutionOutputBlock>`
 
           - `type: "code_execution_output"`
 
             default: code_execution_output
+
+          - `file_id: string`
 
         - `encrypted_stdout: string`
 
@@ -11470,23 +11505,23 @@ console.log(messageTokensCount.input_tokens);
 
         - `stderr: string`
 
-        - `type: "encrypted_code_execution_result"`
-
-          default: encrypted_code_execution_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "code_execution_tool_result"`
-
-      default: code_execution_tool_result
-
   - `BashCodeExecutionToolResultBlock`
+
+    - `type: "bash_code_execution_tool_result"`
+
+      default: bash_code_execution_tool_result
 
     - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
       - `BashCodeExecutionToolResultError`
+
+        - `type: "bash_code_execution_tool_result_error"`
+
+          default: bash_code_execution_tool_result_error
 
         - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -11500,19 +11535,19 @@ console.log(messageTokensCount.input_tokens);
 
           - `"output_file_too_large"`
 
-        - `type: "bash_code_execution_tool_result_error"`
-
-          default: bash_code_execution_tool_result_error
-
       - `BashCodeExecutionResultBlock`
 
-        - `content: Array<BashCodeExecutionOutputBlock>`
+        - `type: "bash_code_execution_result"`
 
-          - `file_id: string`
+          default: bash_code_execution_result
+
+        - `content: Array<BashCodeExecutionOutputBlock>`
 
           - `type: "bash_code_execution_output"`
 
             default: bash_code_execution_output
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -11520,23 +11555,23 @@ console.log(messageTokensCount.input_tokens);
 
         - `stdout: string`
 
-        - `type: "bash_code_execution_result"`
-
-          default: bash_code_execution_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "bash_code_execution_tool_result"`
-
-      default: bash_code_execution_tool_result
-
   - `TextEditorCodeExecutionToolResultBlock`
+
+    - `type: "text_editor_code_execution_tool_result"`
+
+      default: text_editor_code_execution_tool_result
 
     - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
       - `TextEditorCodeExecutionToolResultError`
+
+        - `type: "text_editor_code_execution_tool_result_error"`
+
+          default: text_editor_code_execution_tool_result_error
 
         - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -11552,11 +11587,11 @@ console.log(messageTokensCount.input_tokens);
 
         - `error_message: string | null`
 
-        - `type: "text_editor_code_execution_tool_result_error"`
-
-          default: text_editor_code_execution_tool_result_error
-
       - `TextEditorCodeExecutionViewResultBlock`
+
+        - `type: "text_editor_code_execution_view_result"`
+
+          default: text_editor_code_execution_view_result
 
         - `content: string`
 
@@ -11574,19 +11609,19 @@ console.log(messageTokensCount.input_tokens);
 
         - `total_lines: number | null`
 
-        - `type: "text_editor_code_execution_view_result"`
-
-          default: text_editor_code_execution_view_result
-
       - `TextEditorCodeExecutionCreateResultBlock`
-
-        - `is_file_update: boolean`
 
         - `type: "text_editor_code_execution_create_result"`
 
           default: text_editor_code_execution_create_result
 
+        - `is_file_update: boolean`
+
       - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+        - `type: "text_editor_code_execution_str_replace_result"`
+
+          default: text_editor_code_execution_str_replace_result
 
         - `lines: Array<string> | null`
 
@@ -11598,23 +11633,23 @@ console.log(messageTokensCount.input_tokens);
 
         - `old_start: number | null`
 
-        - `type: "text_editor_code_execution_str_replace_result"`
-
-          default: text_editor_code_execution_str_replace_result
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "text_editor_code_execution_tool_result"`
-
-      default: text_editor_code_execution_tool_result
-
   - `ToolSearchToolResultBlock`
+
+    - `type: "tool_search_tool_result"`
+
+      default: tool_search_tool_result
 
     - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
       - `ToolSearchToolResultError`
+
+        - `type: "tool_search_tool_result_error"`
+
+          default: tool_search_tool_result_error
 
         - `error_code: ToolSearchToolResultErrorCode`
 
@@ -11628,43 +11663,35 @@ console.log(messageTokensCount.input_tokens);
 
         - `error_message: string | null`
 
-        - `type: "tool_search_tool_result_error"`
-
-          default: tool_search_tool_result_error
-
       - `ToolSearchToolSearchResultBlock`
-
-        - `tool_references: Array<ToolReferenceBlock>`
-
-          - `tool_name: string`
-
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-          - `type: "tool_reference"`
-
-            default: tool_reference
 
         - `type: "tool_search_tool_search_result"`
 
           default: tool_search_tool_search_result
 
+        - `tool_references: Array<ToolReferenceBlock>`
+
+          - `type: "tool_reference"`
+
+            default: tool_reference
+
+          - `tool_name: string`
+
+            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "tool_search_tool_result"`
-
-      default: tool_search_tool_result
 
   - `ContainerUploadBlock`
 
     Response model for a file uploaded to the container.
 
-    - `file_id: string`
-
     - `type: "container_upload"`
 
       default: container_upload
+
+    - `file_id: string`
 
 ### Content Block Param
 
@@ -11674,11 +11701,11 @@ console.log(messageTokensCount.input_tokens);
 
   - `TextBlockParam`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -11705,6 +11732,8 @@ console.log(messageTokensCount.input_tokens);
 
       - `CitationCharLocationParam`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -11721,9 +11750,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `CitationPageLocationParam`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -11741,9 +11770,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `CitationContentBlockLocationParam`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -11771,9 +11800,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `CitationWebSearchResultLocationParam`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -11783,13 +11812,13 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `CitationSearchResultLocationParam`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -11821,13 +11850,15 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
   - `ImageBlockParam`
+
+    - `type: "image"`
 
     - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
       - `Base64ImageSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -11843,8 +11874,6 @@ console.log(messageTokensCount.input_tokens);
 
           - `"image/webp"`
 
-        - `type: "base64"`
-
       - `URLImageSource`
 
         - `type: "url"`
@@ -11853,11 +11882,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `FileImageSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "image"`
+        - `file_id: string`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -11877,9 +11904,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `DocumentBlockParam`
 
+    - `type: "document"`
+
     - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
       - `Base64PDFSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -11887,17 +11918,17 @@ console.log(messageTokensCount.input_tokens);
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `PlainTextSource`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
       - `ContentBlockSource`
+
+        - `type: "content"`
 
         - `content: string | Array<ContentBlockSourceContent>`
 
@@ -11909,8 +11940,6 @@ console.log(messageTokensCount.input_tokens);
 
             - `ImageBlockParam`
 
-        - `type: "content"`
-
       - `URLPDFSource`
 
         - `type: "url"`
@@ -11919,11 +11948,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `FileDocumentSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "document"`
+        - `file_id: string`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -11943,13 +11970,15 @@ console.log(messageTokensCount.input_tokens);
 
   - `SearchResultBlockParam`
 
+    - `type: "search_result"`
+
     - `content: Array<TextBlockParam>`
+
+      - `type: "text"`
 
       - `text: string`
 
         minLength: 1
-
-      - `type: "text"`
 
       - `cache_control?: CacheControlEphemeral | null`
 
@@ -11961,8 +11990,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `title: string`
 
-    - `type: "search_result"`
-
     - `cache_control?: CacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
@@ -11970,6 +11997,8 @@ console.log(messageTokensCount.input_tokens);
     - `citations?: CitationsConfigParam`
 
   - `ThinkingBlockParam`
+
+    - `type: "thinking"`
 
     - `signature: string`
 
@@ -11981,17 +12010,17 @@ console.log(messageTokensCount.input_tokens);
 
       The `thinking` text of this block as returned by the API.
 
-    - `type: "thinking"`
-
   - `RedactedThinkingBlockParam`
+
+    - `type: "redacted_thinking"`
 
     - `data: string`
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-    - `type: "redacted_thinking"`
-
   - `ToolUseBlockParam`
+
+    - `type: "tool_use"`
 
     - `id: string`
 
@@ -12002,8 +12031,6 @@ console.log(messageTokensCount.input_tokens);
     - `name: string`
 
       maxLength: 200, minLength: 1
-
-    - `type: "tool_use"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12023,19 +12050,19 @@ console.log(messageTokensCount.input_tokens);
 
         Tool invocation generated by a server-side tool.
 
+        - `type: "code_execution_20250825"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20250825"`
 
       - `ServerToolCaller20260120`
 
+        - `type: "code_execution_20260120"`
+
         - `tool_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_20260120"`
 
     - `toolset_name?: string | null`
 
@@ -12045,11 +12072,11 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolResultBlockParam`
 
+    - `type: "tool_result"`
+
     - `tool_use_id: string`
 
       pattern: ^[a-zA-Z0-9_-]+$
-
-    - `type: "tool_result"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12073,11 +12100,11 @@ console.log(messageTokensCount.input_tokens);
 
           Tool reference block that can be included in tool_result content.
 
+          - `type: "tool_reference"`
+
           - `tool_name: string`
 
             maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-          - `type: "tool_reference"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -12092,6 +12119,8 @@ console.log(messageTokensCount.input_tokens);
           At most one per `tool_result`, only on a non-error result answering a
           browser toolset member `tool_use`. The server renders the
           model-visible text from it; the model never sees the raw fields.
+
+          - `type: "browser_state"`
 
           - `tabs: Array<BrowserStateTabEntry>`
 
@@ -12121,8 +12150,6 @@ console.log(messageTokensCount.input_tokens);
 
               Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-          - `type: "browser_state"`
-
           - `cache_control?: CacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
@@ -12143,25 +12170,25 @@ console.log(messageTokensCount.input_tokens);
               during a failed call gets no deferred `tab_opened`; it simply appears
               in the next result's `tabs` inventory.
 
+              - `type: "tab_opened"`
+
               - `tab_id: string`
 
                 The `tab_id` of the opened tab, present in `tabs`.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-              - `type: "tab_opened"`
-
             - `BrowserStateChangeDownloadStarted`
 
               A file download that started during this call.
+
+              - `type: "download_started"`
 
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_started"`
 
               - `url: string`
 
@@ -12176,13 +12203,13 @@ console.log(messageTokensCount.input_tokens);
               `download_started`, when the download finished during the call that
               started it (at most one state change per `download_id` per result).
 
+              - `type: "download_completed"`
+
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_completed"`
 
               - `url: string`
 
@@ -12206,13 +12233,13 @@ console.log(messageTokensCount.input_tokens);
 
               A file download that failed — or was cancelled — during this call.
 
+              - `type: "download_failed"`
+
               - `download_id: string`
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-              - `type: "download_failed"`
 
               - `url: string`
 
@@ -12236,6 +12263,8 @@ console.log(messageTokensCount.input_tokens);
 
   - `ServerToolUseBlockParam`
 
+    - `type: "server_tool_use"`
+
     - `id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -12258,8 +12287,6 @@ console.log(messageTokensCount.input_tokens);
 
       - `"tool_search_tool_bm25"`
 
-    - `type: "server_tool_use"`
-
     - `cache_control?: CacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
@@ -12280,21 +12307,25 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebSearchToolResultBlockParam`
 
+    - `type: "web_search_tool_result"`
+
     - `content: WebSearchToolResultBlockParamContent`
 
       - `Array<WebSearchResultBlockParam>`
 
+        - `type: "web_search_result"`
+
         - `encrypted_content: string`
 
         - `title: string`
-
-        - `type: "web_search_result"`
 
         - `url: string`
 
         - `page_age?: string | null`
 
       - `WebSearchToolRequestError`
+
+        - `type: "web_search_tool_result_error"`
 
         - `error_code: WebSearchToolResultErrorCode`
 
@@ -12310,13 +12341,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `"request_too_large"`
 
-        - `type: "web_search_tool_result_error"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "web_search_tool_result"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12338,9 +12365,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebFetchToolResultBlockParam`
 
+    - `type: "web_fetch_tool_result"`
+
     - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
       - `WebFetchToolResultErrorBlockParam`
+
+        - `type: "web_fetch_tool_result_error"`
 
         - `error_code: WebFetchToolResultErrorCode`
 
@@ -12362,13 +12393,13 @@ console.log(messageTokensCount.input_tokens);
 
           - `"unavailable"`
 
-        - `type: "web_fetch_tool_result_error"`
+          - `"content_too_large"`
 
       - `WebFetchBlockParam`
 
-        - `content: DocumentBlockParam`
-
         - `type: "web_fetch_result"`
+
+        - `content: DocumentBlockParam`
 
         - `url: string`
 
@@ -12381,8 +12412,6 @@ console.log(messageTokensCount.input_tokens);
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "web_fetch_tool_result"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12404,11 +12433,15 @@ console.log(messageTokensCount.input_tokens);
 
   - `CodeExecutionToolResultBlockParam`
 
+    - `type: "code_execution_tool_result"`
+
     - `content: CodeExecutionToolResultBlockParamContent`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
       - `CodeExecutionToolResultErrorParam`
+
+        - `type: "code_execution_tool_result_error"`
 
         - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -12420,15 +12453,15 @@ console.log(messageTokensCount.input_tokens);
 
           - `"execution_time_exceeded"`
 
-        - `type: "code_execution_tool_result_error"`
-
       - `CodeExecutionResultBlockParam`
+
+        - `type: "code_execution_result"`
 
         - `content: Array<CodeExecutionOutputBlockParam>`
 
-          - `file_id: string`
-
           - `type: "code_execution_output"`
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -12436,17 +12469,17 @@ console.log(messageTokensCount.input_tokens);
 
         - `stdout: string`
 
-        - `type: "code_execution_result"`
-
       - `EncryptedCodeExecutionResultBlockParam`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
+        - `type: "encrypted_code_execution_result"`
+
         - `content: Array<CodeExecutionOutputBlockParam>`
 
-          - `file_id: string`
-
           - `type: "code_execution_output"`
+
+          - `file_id: string`
 
         - `encrypted_stdout: string`
 
@@ -12454,13 +12487,9 @@ console.log(messageTokensCount.input_tokens);
 
         - `stderr: string`
 
-        - `type: "encrypted_code_execution_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "code_execution_tool_result"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12468,9 +12497,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `BashCodeExecutionToolResultBlockParam`
 
+    - `type: "bash_code_execution_tool_result"`
+
     - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
       - `BashCodeExecutionToolResultErrorParam`
+
+        - `type: "bash_code_execution_tool_result_error"`
 
         - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -12484,15 +12517,15 @@ console.log(messageTokensCount.input_tokens);
 
           - `"output_file_too_large"`
 
-        - `type: "bash_code_execution_tool_result_error"`
-
       - `BashCodeExecutionResultBlockParam`
+
+        - `type: "bash_code_execution_result"`
 
         - `content: Array<BashCodeExecutionOutputBlockParam>`
 
-          - `file_id: string`
-
           - `type: "bash_code_execution_output"`
+
+          - `file_id: string`
 
         - `return_code: number`
 
@@ -12500,13 +12533,9 @@ console.log(messageTokensCount.input_tokens);
 
         - `stdout: string`
 
-        - `type: "bash_code_execution_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "bash_code_execution_tool_result"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12514,9 +12543,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `TextEditorCodeExecutionToolResultBlockParam`
 
+    - `type: "text_editor_code_execution_tool_result"`
+
     - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
       - `TextEditorCodeExecutionToolResultErrorParam`
+
+        - `type: "text_editor_code_execution_tool_result_error"`
 
         - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -12530,11 +12563,11 @@ console.log(messageTokensCount.input_tokens);
 
           - `"file_not_found"`
 
-        - `type: "text_editor_code_execution_tool_result_error"`
-
         - `error_message?: string | null`
 
       - `TextEditorCodeExecutionViewResultBlockParam`
+
+        - `type: "text_editor_code_execution_view_result"`
 
         - `content: string`
 
@@ -12546,8 +12579,6 @@ console.log(messageTokensCount.input_tokens);
 
           - `"pdf"`
 
-        - `type: "text_editor_code_execution_view_result"`
-
         - `num_lines?: number | null`
 
         - `start_line?: number | null`
@@ -12556,9 +12587,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `TextEditorCodeExecutionCreateResultBlockParam`
 
-        - `is_file_update: boolean`
-
         - `type: "text_editor_code_execution_create_result"`
+
+        - `is_file_update: boolean`
 
       - `TextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -12578,17 +12609,19 @@ console.log(messageTokensCount.input_tokens);
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type: "text_editor_code_execution_tool_result"`
-
     - `cache_control?: CacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
 
   - `ToolSearchToolResultBlockParam`
 
+    - `type: "tool_search_tool_result"`
+
     - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
       - `ToolSearchToolResultErrorParam`
+
+        - `type: "tool_search_tool_result_error"`
 
         - `error_code: ToolSearchToolResultErrorCode`
 
@@ -12600,31 +12633,27 @@ console.log(messageTokensCount.input_tokens);
 
           - `"execution_time_exceeded"`
 
-        - `type: "tool_search_tool_result_error"`
-
         - `error_message?: string | null`
 
       - `ToolSearchToolSearchResultBlockParam`
 
+        - `type: "tool_search_tool_search_result"`
+
         - `tool_references: Array<ToolReferenceBlockParam>`
+
+          - `type: "tool_reference"`
 
           - `tool_name: string`
 
             maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-          - `type: "tool_reference"`
-
           - `cache_control?: CacheControlEphemeral | null`
 
             Create a cache control breakpoint at this content block.
 
-        - `type: "tool_search_tool_search_result"`
-
     - `tool_use_id: string`
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-    - `type: "tool_search_tool_result"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12635,9 +12664,9 @@ console.log(messageTokensCount.input_tokens);
     A content block that represents a file to be uploaded to the container
     Files uploaded via this block will be available in the container's input directory.
 
-    - `file_id: string`
-
     - `type: "container_upload"`
+
+    - `file_id: string`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12647,6 +12676,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `ContentBlockSource`
 
+  - `type: "content"`
+
   - `content: string | Array<ContentBlockSourceContent>`
 
     - `string`
@@ -12655,11 +12686,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `TextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -12686,6 +12717,8 @@ console.log(messageTokensCount.input_tokens);
 
           - `CitationCharLocationParam`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -12702,9 +12735,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `CitationPageLocationParam`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -12722,9 +12755,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `CitationContentBlockLocationParam`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -12752,9 +12785,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `CitationWebSearchResultLocationParam`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -12764,13 +12797,13 @@ console.log(messageTokensCount.input_tokens);
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `CitationSearchResultLocationParam`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -12802,13 +12835,15 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
       - `ImageBlockParam`
+
+        - `type: "image"`
 
         - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
           - `Base64ImageSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -12824,8 +12859,6 @@ console.log(messageTokensCount.input_tokens);
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `URLImageSource`
 
             - `type: "url"`
@@ -12834,11 +12867,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `FileImageSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -12856,19 +12887,17 @@ console.log(messageTokensCount.input_tokens);
 
             - `"error"`
 
-  - `type: "content"`
-
 ### Content Block Source Content
 
 - `ContentBlockSourceContent = TextBlockParam | ImageBlockParam`
 
   - `TextBlockParam`
 
+    - `type: "text"`
+
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -12895,6 +12924,8 @@ console.log(messageTokensCount.input_tokens);
 
       - `CitationCharLocationParam`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -12911,9 +12942,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `CitationPageLocationParam`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -12931,9 +12962,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `CitationContentBlockLocationParam`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -12961,9 +12992,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `CitationWebSearchResultLocationParam`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -12973,13 +13004,13 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `CitationSearchResultLocationParam`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -13011,13 +13042,15 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
   - `ImageBlockParam`
+
+    - `type: "image"`
 
     - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
       - `Base64ImageSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -13033,8 +13066,6 @@ console.log(messageTokensCount.input_tokens);
 
           - `"image/webp"`
 
-        - `type: "base64"`
-
       - `URLImageSource`
 
         - `type: "url"`
@@ -13043,11 +13074,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `FileImageSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "image"`
+        - `file_id: string`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -13077,6 +13106,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `DocumentBlock`
 
+  - `type: "document"`
+
+    default: document
+
   - `citations: CitationsConfig | null`
 
     Citation configuration for the document
@@ -13089,37 +13122,37 @@ console.log(messageTokensCount.input_tokens);
 
     - `Base64PDFSource`
 
+      - `type: "base64"`
+
       - `data: string`
 
         format: byte
 
       - `media_type: "application/pdf"`
 
-      - `type: "base64"`
-
     - `PlainTextSource`
+
+      - `type: "text"`
 
       - `data: string`
 
       - `media_type: "text/plain"`
-
-      - `type: "text"`
 
   - `title: string | null`
 
     The title of the document
 
-  - `type: "document"`
-
-    default: document
-
 ### Document Block Param
 
 - `DocumentBlockParam`
 
+  - `type: "document"`
+
   - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
     - `Base64PDFSource`
+
+      - `type: "base64"`
 
       - `data: string`
 
@@ -13127,17 +13160,17 @@ console.log(messageTokensCount.input_tokens);
 
       - `media_type: "application/pdf"`
 
-      - `type: "base64"`
-
     - `PlainTextSource`
+
+      - `type: "text"`
 
       - `data: string`
 
       - `media_type: "text/plain"`
 
-      - `type: "text"`
-
     - `ContentBlockSource`
+
+      - `type: "content"`
 
       - `content: string | Array<ContentBlockSourceContent>`
 
@@ -13147,11 +13180,11 @@ console.log(messageTokensCount.input_tokens);
 
           - `TextBlockParam`
 
+            - `type: "text"`
+
             - `text: string`
 
               minLength: 1
-
-            - `type: "text"`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -13178,6 +13211,8 @@ console.log(messageTokensCount.input_tokens);
 
               - `CitationCharLocationParam`
 
+                - `type: "char_location"`
+
                 - `cited_text: string`
 
                 - `document_index: number`
@@ -13194,9 +13229,9 @@ console.log(messageTokensCount.input_tokens);
 
                   minimum: 0
 
-                - `type: "char_location"`
-
               - `CitationPageLocationParam`
+
+                - `type: "page_location"`
 
                 - `cited_text: string`
 
@@ -13214,9 +13249,9 @@ console.log(messageTokensCount.input_tokens);
 
                   minimum: 1
 
-                - `type: "page_location"`
-
               - `CitationContentBlockLocationParam`
+
+                - `type: "content_block_location"`
 
                 - `cited_text: string`
 
@@ -13244,9 +13279,9 @@ console.log(messageTokensCount.input_tokens);
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
               - `CitationWebSearchResultLocationParam`
+
+                - `type: "web_search_result_location"`
 
                 - `cited_text: string`
 
@@ -13256,13 +13291,13 @@ console.log(messageTokensCount.input_tokens);
 
                   maxLength: 512, minLength: 1
 
-                - `type: "web_search_result_location"`
-
                 - `url: string`
 
                   minLength: 1
 
               - `CitationSearchResultLocationParam`
+
+                - `type: "search_result_location"`
 
                 - `cited_text: string`
 
@@ -13294,13 +13329,15 @@ console.log(messageTokensCount.input_tokens);
 
                 - `title: string | null`
 
-                - `type: "search_result_location"`
-
           - `ImageBlockParam`
+
+            - `type: "image"`
 
             - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
               - `Base64ImageSource`
+
+                - `type: "base64"`
 
                 - `data: string`
 
@@ -13316,8 +13353,6 @@ console.log(messageTokensCount.input_tokens);
 
                   - `"image/webp"`
 
-                - `type: "base64"`
-
               - `URLImageSource`
 
                 - `type: "url"`
@@ -13326,11 +13361,9 @@ console.log(messageTokensCount.input_tokens);
 
               - `FileImageSource`
 
-                - `file_id: string`
-
                 - `type: "file"`
 
-            - `type: "image"`
+                - `file_id: string`
 
             - `cache_control?: CacheControlEphemeral | null`
 
@@ -13348,8 +13381,6 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"error"`
 
-      - `type: "content"`
-
     - `URLPDFSource`
 
       - `type: "url"`
@@ -13358,11 +13389,9 @@ console.log(messageTokensCount.input_tokens);
 
     - `FileDocumentSource`
 
-      - `file_id: string`
-
       - `type: "file"`
 
-  - `type: "document"`
+      - `file_id: string`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -13386,23 +13415,23 @@ console.log(messageTokensCount.input_tokens);
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
-  - `content: Array<CodeExecutionOutputBlock>`
+  - `type: "encrypted_code_execution_result"`
 
-    - `file_id: string`
+    default: encrypted_code_execution_result
+
+  - `content: Array<CodeExecutionOutputBlock>`
 
     - `type: "code_execution_output"`
 
       default: code_execution_output
+
+    - `file_id: string`
 
   - `encrypted_stdout: string`
 
   - `return_code: number`
 
   - `stderr: string`
-
-  - `type: "encrypted_code_execution_result"`
-
-    default: encrypted_code_execution_result
 
 ### Encrypted Code Execution Result Block Param
 
@@ -13410,11 +13439,13 @@ console.log(messageTokensCount.input_tokens);
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
+  - `type: "encrypted_code_execution_result"`
+
   - `content: Array<CodeExecutionOutputBlockParam>`
 
-    - `file_id: string`
-
     - `type: "code_execution_output"`
+
+    - `file_id: string`
 
   - `encrypted_stdout: string`
 
@@ -13422,31 +13453,33 @@ console.log(messageTokensCount.input_tokens);
 
   - `stderr: string`
 
-  - `type: "encrypted_code_execution_result"`
-
 ### File Document Source
 
 - `FileDocumentSource`
 
-  - `file_id: string`
-
   - `type: "file"`
+
+  - `file_id: string`
 
 ### File Image Source
 
 - `FileImageSource`
 
-  - `file_id: string`
-
   - `type: "file"`
+
+  - `file_id: string`
 
 ### Image Block Param
 
 - `ImageBlockParam`
 
+  - `type: "image"`
+
   - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
     - `Base64ImageSource`
+
+      - `type: "base64"`
 
       - `data: string`
 
@@ -13462,8 +13495,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `"image/webp"`
 
-      - `type: "base64"`
-
     - `URLImageSource`
 
       - `type: "url"`
@@ -13472,11 +13503,9 @@ console.log(messageTokensCount.input_tokens);
 
     - `FileImageSource`
 
-      - `file_id: string`
-
       - `type: "file"`
 
-  - `type: "image"`
+      - `file_id: string`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -13529,33 +13558,33 @@ console.log(messageTokensCount.input_tokens);
 
 - `InputJSONDelta`
 
-  - `partial_json: string`
-
   - `type: "input_json_delta"`
 
     default: input_json_delta
+
+  - `partial_json: string`
 
 ### JSON Output Format
 
 - `JSONOutputFormat`
 
+  - `type: "json_schema"`
+
   - `schema: Record<string, unknown>`
 
     The JSON schema of the format
 
-  - `type: "json_schema"`
-
 ### Memory Tool 20250818
 
 - `MemoryTool20250818`
+
+  - `type: "memory_20250818"`
 
   - `name: "memory"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "memory_20250818"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -13602,6 +13631,14 @@ console.log(messageTokensCount.input_tokens);
 
 - `Message`
 
+  - `type: "message"`
+
+    Object type.
+
+    For Messages, this is always `"message"`.
+
+    default: message
+
   - `id: string`
 
     Unique object identifier.
@@ -13626,12 +13663,6 @@ console.log(messageTokensCount.input_tokens);
 
       Skills loaded in the container
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" | "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -13639,6 +13670,12 @@ console.log(messageTokensCount.input_tokens);
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version: string`
 
@@ -13677,6 +13714,10 @@ console.log(messageTokensCount.input_tokens);
 
     - `TextBlock`
 
+      - `type: "text"`
+
+        default: text
+
       - `citations: Array<TextCitation> | null`
 
         Citations supporting the text block.
@@ -13684,6 +13725,10 @@ console.log(messageTokensCount.input_tokens);
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
         - `CitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -13701,11 +13746,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `CitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -13723,11 +13768,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `CitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -13755,11 +13800,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `CitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -13769,13 +13814,13 @@ console.log(messageTokensCount.input_tokens);
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `CitationsSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -13807,19 +13852,15 @@ console.log(messageTokensCount.input_tokens);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `ThinkingBlock`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -13833,11 +13874,11 @@ console.log(messageTokensCount.input_tokens);
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `RedactedThinkingBlock`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -13847,11 +13888,11 @@ console.log(messageTokensCount.input_tokens);
 
         See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `ToolUseBlock`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -13873,29 +13914,25 @@ console.log(messageTokensCount.input_tokens);
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `ServerToolCaller20260120`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `input: Record<string, unknown>`
 
       - `name: string`
 
         minLength: 1
-
-      - `type: "tool_use"`
-
-        default: tool_use
 
       - `toolset_name?: string | null`
 
@@ -13904,6 +13941,10 @@ console.log(messageTokensCount.input_tokens);
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `ServerToolUseBlock`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -13943,11 +13984,11 @@ console.log(messageTokensCount.input_tokens);
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
     - `WebSearchToolResultBlock`
+
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -13969,6 +14010,10 @@ console.log(messageTokensCount.input_tokens);
 
         - `WebSearchToolResultError`
 
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
+
           - `error_code: WebSearchToolResultErrorCode`
 
             - `"invalid_tool_input"`
@@ -13983,11 +14028,11 @@ console.log(messageTokensCount.input_tokens);
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `Array<WebSearchResultBlock>`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -13995,21 +14040,17 @@ console.log(messageTokensCount.input_tokens);
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
-
     - `WebFetchToolResultBlock`
+
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -14031,6 +14072,10 @@ console.log(messageTokensCount.input_tokens);
 
         - `WebFetchToolResultErrorBlock`
 
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
+
           - `error_code: WebFetchToolResultErrorCode`
 
             - `"invalid_tool_input"`
@@ -14051,13 +14096,19 @@ console.log(messageTokensCount.input_tokens);
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `WebFetchBlock`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: DocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: CitationsConfig | null`
 
@@ -14071,37 +14122,29 @@ console.log(messageTokensCount.input_tokens);
 
               - `Base64PDFSource`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `PlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string | null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string | null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -14111,17 +14154,21 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
-
     - `CodeExecutionToolResultBlock`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -14133,19 +14180,19 @@ console.log(messageTokensCount.input_tokens);
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `CodeExecutionResultBlock`
 
-          - `content: Array<CodeExecutionOutputBlock>`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: Array<CodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -14153,21 +14200,21 @@ console.log(messageTokensCount.input_tokens);
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: Array<CodeExecutionOutputBlock>`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: Array<CodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -14175,23 +14222,23 @@ console.log(messageTokensCount.input_tokens);
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BashCodeExecutionToolResultBlock`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
         - `BashCodeExecutionToolResultError`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -14205,19 +14252,19 @@ console.log(messageTokensCount.input_tokens);
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BashCodeExecutionResultBlock`
 
-          - `content: Array<BashCodeExecutionOutputBlock>`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: Array<BashCodeExecutionOutputBlock>`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -14225,23 +14272,23 @@ console.log(messageTokensCount.input_tokens);
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `TextEditorCodeExecutionToolResultBlock`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
         - `TextEditorCodeExecutionToolResultError`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -14257,11 +14304,11 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `TextEditorCodeExecutionViewResultBlock`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -14279,19 +14326,19 @@ console.log(messageTokensCount.input_tokens);
 
           - `total_lines: number | null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `TextEditorCodeExecutionCreateResultBlock`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: Array<string> | null`
 
@@ -14303,23 +14350,23 @@ console.log(messageTokensCount.input_tokens);
 
           - `old_start: number | null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `ToolSearchToolResultBlock`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
         - `ToolSearchToolResultError`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: ToolSearchToolResultErrorCode`
 
@@ -14333,43 +14380,35 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `ToolSearchToolSearchResultBlock`
-
-          - `tool_references: Array<ToolReferenceBlock>`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: Array<ToolReferenceBlock>`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
 
     - `ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
+
+      - `file_id: string`
 
   - `model: Model`
 
@@ -14461,6 +14500,10 @@ console.log(messageTokensCount.input_tokens);
 
     Structured information about a refusal.
 
+    - `type: "refusal"`
+
+      default: refusal
+
     - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
       The policy category that triggered a refusal.
@@ -14497,10 +14540,6 @@ console.log(messageTokensCount.input_tokens);
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-    - `type: "refusal"`
-
-      default: refusal
-
   - `stop_reason: StopReason | null`
 
     The reason that we stopped.
@@ -14536,14 +14575,6 @@ console.log(messageTokensCount.input_tokens);
     Which custom stop sequence was generated, if any.
 
     This value will be a non-null string if one of your custom stop sequences was generated.
-
-  - `type: "message"`
-
-    Object type.
-
-    For Messages, this is always `"message"`.
-
-    default: message
 
   - `usage: Usage`
 
@@ -14657,6 +14688,8 @@ console.log(messageTokensCount.input_tokens);
 
   - `Tool`
 
+    - `type?: "custom" | null`
+
     - `input_schema: InputSchema`
 
       [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -14728,17 +14761,15 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type?: "custom" | null`
-
   - `ToolBash20250124`
+
+    - `type: "bash_20250124"`
 
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20250124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -14766,13 +14797,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `CodeExecutionTool20250522`
 
+    - `type: "code_execution_20250522"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250522"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -14798,13 +14829,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `CodeExecutionTool20250825`
 
+    - `type: "code_execution_20250825"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250825"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -14832,13 +14863,13 @@ console.log(messageTokensCount.input_tokens);
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: "code_execution_20260120"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260120"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -14866,13 +14897,13 @@ console.log(messageTokensCount.input_tokens);
 
     Code execution tool with REPL state persistence.
 
+    - `type: "code_execution_20260521"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260521"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -14917,6 +14948,18 @@ console.log(messageTokensCount.input_tokens);
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type?: BrowserTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -15254,18 +15297,6 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type?: BrowserTypeConfig | null`
-
-        `type`'s config overrides.
-
-        - `defer_loading?: boolean | null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled?: boolean | null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait?: BrowserWaitConfig | null`
 
         `wait`'s config overrides.
@@ -15292,13 +15323,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `MemoryTool20250818`
 
+    - `type: "memory_20250818"`
+
     - `name: "memory"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "memory_20250818"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15349,6 +15380,18 @@ console.log(messageTokensCount.input_tokens);
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type?: ComputerTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position?: ComputerCursorPositionConfig | null`
 
@@ -15518,18 +15561,6 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type?: ComputerTypeConfig | null`
-
-        `type`'s config overrides.
-
-        - `defer_loading?: boolean | null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled?: boolean | null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait?: ComputerWaitConfig | null`
 
         `wait`'s config overrides.
@@ -15556,13 +15587,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolTextEditor20250124`
 
+    - `type: "text_editor_20250124"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15590,13 +15621,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolTextEditor20250429`
 
+    - `type: "text_editor_20250429"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250429"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15624,13 +15655,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolTextEditor20250728`
 
+    - `type: "text_editor_20250728"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250728"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15664,13 +15695,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebSearchTool20250305`
 
+    - `type: "web_search_20250305"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20250305"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15740,13 +15771,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebFetchTool20250910`
 
+    - `type: "web_fetch_20250910"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20250910"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15798,13 +15829,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebSearchTool20260209`
 
+    - `type: "web_search_20260209"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260209"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15848,13 +15879,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebFetchTool20260209`
 
+    - `type: "web_fetch_20260209"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260209"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15906,13 +15937,13 @@ console.log(messageTokensCount.input_tokens);
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: "web_fetch_20260309"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260309"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -15966,13 +15997,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebSearchTool20260318`
 
+    - `type: "web_search_20260318"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260318"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -16024,13 +16055,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebFetchTool20260318`
 
+    - `type: "web_fetch_20260318"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260318"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -16092,17 +16123,17 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolSearchToolBm25_20251119`
 
-    - `name: "tool_search_tool_bm25"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: "tool_search_tool_bm25"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -16128,17 +16159,17 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolSearchToolRegex20251119`
 
-    - `name: "tool_search_tool_regex"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: "tool_search_tool_regex"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -16182,12 +16213,6 @@ console.log(messageTokensCount.input_tokens);
 
       maxItems: 20
 
-      - `skill_id: string`
-
-        Skill ID
-
-        maxLength: 64, minLength: 1
-
       - `type: "anthropic" | "custom"`
 
         Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -16195,6 +16220,12 @@ console.log(messageTokensCount.input_tokens);
         - `"anthropic"`
 
         - `"custom"`
+
+      - `skill_id: string`
+
+        Skill ID
+
+        maxLength: 64, minLength: 1
 
       - `version?: string`
 
@@ -16280,11 +16311,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `TextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -16311,6 +16342,8 @@ console.log(messageTokensCount.input_tokens);
 
           - `CitationCharLocationParam`
 
+            - `type: "char_location"`
+
             - `cited_text: string`
 
             - `document_index: number`
@@ -16327,9 +16360,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `CitationPageLocationParam`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -16347,9 +16380,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `CitationContentBlockLocationParam`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -16377,9 +16410,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `CitationWebSearchResultLocationParam`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -16389,13 +16422,13 @@ console.log(messageTokensCount.input_tokens);
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `CitationSearchResultLocationParam`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -16427,13 +16460,15 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
       - `ImageBlockParam`
+
+        - `type: "image"`
 
         - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
           - `Base64ImageSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -16449,8 +16484,6 @@ console.log(messageTokensCount.input_tokens);
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `URLImageSource`
 
             - `type: "url"`
@@ -16459,11 +16492,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `FileImageSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -16483,9 +16514,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `DocumentBlockParam`
 
+        - `type: "document"`
+
         - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
           - `Base64PDFSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -16493,17 +16528,17 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `PlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `ContentBlockSource`
+
+            - `type: "content"`
 
             - `content: string | Array<ContentBlockSourceContent>`
 
@@ -16515,8 +16550,6 @@ console.log(messageTokensCount.input_tokens);
 
                 - `ImageBlockParam`
 
-            - `type: "content"`
-
           - `URLPDFSource`
 
             - `type: "url"`
@@ -16525,11 +16558,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `FileDocumentSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -16549,13 +16580,15 @@ console.log(messageTokensCount.input_tokens);
 
       - `SearchResultBlockParam`
 
+        - `type: "search_result"`
+
         - `content: Array<TextBlockParam>`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -16567,8 +16600,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control?: CacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -16576,6 +16607,8 @@ console.log(messageTokensCount.input_tokens);
         - `citations?: CitationsConfigParam`
 
       - `ThinkingBlockParam`
+
+        - `type: "thinking"`
 
         - `signature: string`
 
@@ -16587,17 +16620,17 @@ console.log(messageTokensCount.input_tokens);
 
           The `thinking` text of this block as returned by the API.
 
-        - `type: "thinking"`
-
       - `RedactedThinkingBlockParam`
+
+        - `type: "redacted_thinking"`
 
         - `data: string`
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type: "redacted_thinking"`
-
       - `ToolUseBlockParam`
+
+        - `type: "tool_use"`
 
         - `id: string`
 
@@ -16608,8 +16641,6 @@ console.log(messageTokensCount.input_tokens);
         - `name: string`
 
           maxLength: 200, minLength: 1
-
-        - `type: "tool_use"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -16629,19 +16660,19 @@ console.log(messageTokensCount.input_tokens);
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `ServerToolCaller20260120`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `toolset_name?: string | null`
 
@@ -16651,11 +16682,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `ToolResultBlockParam`
 
+        - `type: "tool_result"`
+
         - `tool_use_id: string`
 
           pattern: ^[a-zA-Z0-9_-]+$
-
-        - `type: "tool_result"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -16679,11 +16710,11 @@ console.log(messageTokensCount.input_tokens);
 
               Tool reference block that can be included in tool_result content.
 
+              - `type: "tool_reference"`
+
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -16698,6 +16729,8 @@ console.log(messageTokensCount.input_tokens);
               At most one per `tool_result`, only on a non-error result answering a
               browser toolset member `tool_use`. The server renders the
               model-visible text from it; the model never sees the raw fields.
+
+              - `type: "browser_state"`
 
               - `tabs: Array<BrowserStateTabEntry>`
 
@@ -16727,8 +16760,6 @@ console.log(messageTokensCount.input_tokens);
 
                   Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-              - `type: "browser_state"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -16749,25 +16780,25 @@ console.log(messageTokensCount.input_tokens);
                   during a failed call gets no deferred `tab_opened`; it simply appears
                   in the next result's `tabs` inventory.
 
+                  - `type: "tab_opened"`
+
                   - `tab_id: string`
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type: "tab_opened"`
-
                 - `BrowserStateChangeDownloadStarted`
 
                   A file download that started during this call.
+
+                  - `type: "download_started"`
 
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_started"`
 
                   - `url: string`
 
@@ -16782,13 +16813,13 @@ console.log(messageTokensCount.input_tokens);
                   `download_started`, when the download finished during the call that
                   started it (at most one state change per `download_id` per result).
 
+                  - `type: "download_completed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_completed"`
 
                   - `url: string`
 
@@ -16812,13 +16843,13 @@ console.log(messageTokensCount.input_tokens);
 
                   A file download that failed — or was cancelled — during this call.
 
+                  - `type: "download_failed"`
+
                   - `download_id: string`
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                  - `type: "download_failed"`
 
                   - `url: string`
 
@@ -16842,6 +16873,8 @@ console.log(messageTokensCount.input_tokens);
 
       - `ServerToolUseBlockParam`
 
+        - `type: "server_tool_use"`
+
         - `id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -16864,8 +16897,6 @@ console.log(messageTokensCount.input_tokens);
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
         - `cache_control?: CacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -16886,21 +16917,25 @@ console.log(messageTokensCount.input_tokens);
 
       - `WebSearchToolResultBlockParam`
 
+        - `type: "web_search_tool_result"`
+
         - `content: WebSearchToolResultBlockParamContent`
 
           - `Array<WebSearchResultBlockParam>`
 
+            - `type: "web_search_result"`
+
             - `encrypted_content: string`
 
             - `title: string`
-
-            - `type: "web_search_result"`
 
             - `url: string`
 
             - `page_age?: string | null`
 
           - `WebSearchToolRequestError`
+
+            - `type: "web_search_tool_result_error"`
 
             - `error_code: WebSearchToolResultErrorCode`
 
@@ -16916,13 +16951,9 @@ console.log(messageTokensCount.input_tokens);
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_search_tool_result"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -16944,9 +16975,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `WebFetchToolResultBlockParam`
 
+        - `type: "web_fetch_tool_result"`
+
         - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
           - `WebFetchToolResultErrorBlockParam`
+
+            - `type: "web_fetch_tool_result_error"`
 
             - `error_code: WebFetchToolResultErrorCode`
 
@@ -16968,13 +17003,13 @@ console.log(messageTokensCount.input_tokens);
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
+              - `"content_too_large"`
 
           - `WebFetchBlockParam`
 
-            - `content: DocumentBlockParam`
-
             - `type: "web_fetch_result"`
+
+            - `content: DocumentBlockParam`
 
             - `url: string`
 
@@ -16987,8 +17022,6 @@ console.log(messageTokensCount.input_tokens);
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "web_fetch_tool_result"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -17010,11 +17043,15 @@ console.log(messageTokensCount.input_tokens);
 
       - `CodeExecutionToolResultBlockParam`
 
+        - `type: "code_execution_tool_result"`
+
         - `content: CodeExecutionToolResultBlockParamContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultErrorParam`
+
+            - `type: "code_execution_tool_result_error"`
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -17026,15 +17063,15 @@ console.log(messageTokensCount.input_tokens);
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
           - `CodeExecutionResultBlockParam`
+
+            - `type: "code_execution_result"`
 
             - `content: Array<CodeExecutionOutputBlockParam>`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -17042,17 +17079,17 @@ console.log(messageTokensCount.input_tokens);
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
           - `EncryptedCodeExecutionResultBlockParam`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
+            - `type: "encrypted_code_execution_result"`
+
             - `content: Array<CodeExecutionOutputBlockParam>`
 
-              - `file_id: string`
-
               - `type: "code_execution_output"`
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -17060,13 +17097,9 @@ console.log(messageTokensCount.input_tokens);
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "code_execution_tool_result"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -17074,9 +17107,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `BashCodeExecutionToolResultBlockParam`
 
+        - `type: "bash_code_execution_tool_result"`
+
         - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
           - `BashCodeExecutionToolResultErrorParam`
+
+            - `type: "bash_code_execution_tool_result_error"`
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -17090,15 +17127,15 @@ console.log(messageTokensCount.input_tokens);
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
           - `BashCodeExecutionResultBlockParam`
+
+            - `type: "bash_code_execution_result"`
 
             - `content: Array<BashCodeExecutionOutputBlockParam>`
 
-              - `file_id: string`
-
               - `type: "bash_code_execution_output"`
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -17106,13 +17143,9 @@ console.log(messageTokensCount.input_tokens);
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "bash_code_execution_tool_result"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -17120,9 +17153,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `TextEditorCodeExecutionToolResultBlockParam`
 
+        - `type: "text_editor_code_execution_tool_result"`
+
         - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
           - `TextEditorCodeExecutionToolResultErrorParam`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -17136,11 +17173,11 @@ console.log(messageTokensCount.input_tokens);
 
               - `"file_not_found"`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
             - `error_message?: string | null`
 
           - `TextEditorCodeExecutionViewResultBlockParam`
+
+            - `type: "text_editor_code_execution_view_result"`
 
             - `content: string`
 
@@ -17152,8 +17189,6 @@ console.log(messageTokensCount.input_tokens);
 
               - `"pdf"`
 
-            - `type: "text_editor_code_execution_view_result"`
-
             - `num_lines?: number | null`
 
             - `start_line?: number | null`
@@ -17162,9 +17197,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `TextEditorCodeExecutionCreateResultBlockParam`
 
-            - `is_file_update: boolean`
-
             - `type: "text_editor_code_execution_create_result"`
+
+            - `is_file_update: boolean`
 
           - `TextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -17184,17 +17219,19 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
         - `cache_control?: CacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
 
       - `ToolSearchToolResultBlockParam`
 
+        - `type: "tool_search_tool_result"`
+
         - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
           - `ToolSearchToolResultErrorParam`
+
+            - `type: "tool_search_tool_result_error"`
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -17206,31 +17243,27 @@ console.log(messageTokensCount.input_tokens);
 
               - `"execution_time_exceeded"`
 
-            - `type: "tool_search_tool_result_error"`
-
             - `error_message?: string | null`
 
           - `ToolSearchToolSearchResultBlockParam`
 
+            - `type: "tool_search_tool_search_result"`
+
             - `tool_references: Array<ToolReferenceBlockParam>`
+
+              - `type: "tool_reference"`
 
               - `tool_name: string`
 
                 maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-              - `type: "tool_reference"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type: "tool_search_tool_search_result"`
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -17241,9 +17274,9 @@ console.log(messageTokensCount.input_tokens);
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
+
+        - `file_id: string`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -17379,11 +17412,11 @@ console.log(messageTokensCount.input_tokens);
 
     A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
+    - `type: "json_schema"`
+
     - `schema: Record<string, unknown>`
 
       The JSON schema of the format
-
-    - `type: "json_schema"`
 
 ### Output Tokens Details
 
@@ -17406,11 +17439,11 @@ console.log(messageTokensCount.input_tokens);
 
 - `PlainTextSource`
 
+  - `type: "text"`
+
   - `data: string`
 
   - `media_type: "text/plain"`
-
-  - `type: "text"`
 
 ### Raw Content Block Delta
 
@@ -17418,25 +17451,33 @@ console.log(messageTokensCount.input_tokens);
 
   - `TextDelta`
 
-    - `text: string`
-
     - `type: "text_delta"`
 
       default: text_delta
 
-  - `InputJSONDelta`
+    - `text: string`
 
-    - `partial_json: string`
+  - `InputJSONDelta`
 
     - `type: "input_json_delta"`
 
       default: input_json_delta
 
+    - `partial_json: string`
+
   - `CitationsDelta`
+
+    - `type: "citations_delta"`
+
+      default: citations_delta
 
     - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
       - `CitationCharLocation`
+
+        - `type: "char_location"`
+
+          default: char_location
 
         - `cited_text: string`
 
@@ -17454,11 +17495,11 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "char_location"`
-
-          default: char_location
-
       - `CitationPageLocation`
+
+        - `type: "page_location"`
+
+          default: page_location
 
         - `cited_text: string`
 
@@ -17476,11 +17517,11 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-        - `type: "page_location"`
-
-          default: page_location
-
       - `CitationContentBlockLocation`
+
+        - `type: "content_block_location"`
+
+          default: content_block_location
 
         - `cited_text: string`
 
@@ -17508,11 +17549,11 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
-          default: content_block_location
-
       - `CitationsWebSearchResultLocation`
+
+        - `type: "web_search_result_location"`
+
+          default: web_search_result_location
 
         - `cited_text: string`
 
@@ -17522,13 +17563,13 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 512
 
-        - `type: "web_search_result_location"`
-
-          default: web_search_result_location
-
         - `url: string`
 
       - `CitationsSearchResultLocation`
+
+        - `type: "search_result_location"`
+
+          default: search_result_location
 
         - `cited_text: string`
 
@@ -17560,61 +17601,65 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
-          default: search_result_location
-
-    - `type: "citations_delta"`
-
-      default: citations_delta
-
   - `ThinkingDelta`
-
-    - `thinking: string`
-
-      The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
     - `type: "thinking_delta"`
 
       default: thinking_delta
 
+    - `thinking: string`
+
+      The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
   - `SignatureDelta`
-
-    - `signature: string`
-
-      The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
     - `type: "signature_delta"`
 
       default: signature_delta
 
+    - `signature: string`
+
+      The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
 ### Raw Content Block Delta Event
 
 - `RawContentBlockDeltaEvent`
+
+  - `type: "content_block_delta"`
+
+    default: content_block_delta
 
   - `delta: RawContentBlockDelta`
 
     - `TextDelta`
 
-      - `text: string`
-
       - `type: "text_delta"`
 
         default: text_delta
 
-    - `InputJSONDelta`
+      - `text: string`
 
-      - `partial_json: string`
+    - `InputJSONDelta`
 
       - `type: "input_json_delta"`
 
         default: input_json_delta
 
+      - `partial_json: string`
+
     - `CitationsDelta`
+
+      - `type: "citations_delta"`
+
+        default: citations_delta
 
       - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
         - `CitationCharLocation`
+
+          - `type: "char_location"`
+
+            default: char_location
 
           - `cited_text: string`
 
@@ -17632,11 +17677,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `CitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -17654,11 +17699,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `CitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -17686,11 +17731,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `CitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -17700,13 +17745,13 @@ console.log(messageTokensCount.input_tokens);
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `CitationsSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -17738,49 +17783,45 @@ console.log(messageTokensCount.input_tokens);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
-      - `type: "citations_delta"`
-
-        default: citations_delta
-
     - `ThinkingDelta`
-
-      - `thinking: string`
-
-        The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
       - `type: "thinking_delta"`
 
         default: thinking_delta
 
+      - `thinking: string`
+
+        The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
     - `SignatureDelta`
-
-      - `signature: string`
-
-        The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
       - `type: "signature_delta"`
 
         default: signature_delta
 
+      - `signature: string`
+
+        The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
   - `index: number`
-
-  - `type: "content_block_delta"`
-
-    default: content_block_delta
 
 ### Raw Content Block Start Event
 
 - `RawContentBlockStartEvent`
+
+  - `type: "content_block_start"`
+
+    default: content_block_start
 
   - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
     Response model for a file uploaded to the container.
 
     - `TextBlock`
+
+      - `type: "text"`
+
+        default: text
 
       - `citations: Array<TextCitation> | null`
 
@@ -17790,6 +17831,10 @@ console.log(messageTokensCount.input_tokens);
 
         - `CitationCharLocation`
 
+          - `type: "char_location"`
+
+            default: char_location
+
           - `cited_text: string`
 
           - `document_index: number`
@@ -17806,11 +17851,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-          - `type: "char_location"`
-
-            default: char_location
-
         - `CitationPageLocation`
+
+          - `type: "page_location"`
+
+            default: page_location
 
           - `cited_text: string`
 
@@ -17828,11 +17873,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 1
 
-          - `type: "page_location"`
-
-            default: page_location
-
         - `CitationContentBlockLocation`
+
+          - `type: "content_block_location"`
+
+            default: content_block_location
 
           - `cited_text: string`
 
@@ -17860,11 +17905,11 @@ console.log(messageTokensCount.input_tokens);
 
             minimum: 0
 
-          - `type: "content_block_location"`
-
-            default: content_block_location
-
         - `CitationsWebSearchResultLocation`
+
+          - `type: "web_search_result_location"`
+
+            default: web_search_result_location
 
           - `cited_text: string`
 
@@ -17874,13 +17919,13 @@ console.log(messageTokensCount.input_tokens);
 
             maxLength: 512
 
-          - `type: "web_search_result_location"`
-
-            default: web_search_result_location
-
           - `url: string`
 
         - `CitationsSearchResultLocation`
+
+          - `type: "search_result_location"`
+
+            default: search_result_location
 
           - `cited_text: string`
 
@@ -17912,19 +17957,15 @@ console.log(messageTokensCount.input_tokens);
 
           - `title: string | null`
 
-          - `type: "search_result_location"`
-
-            default: search_result_location
-
       - `text: string`
 
-        maxLength: 5000000, minLength: 0
-
-      - `type: "text"`
-
-        default: text
+        minLength: 0
 
     - `ThinkingBlock`
+
+      - `type: "thinking"`
+
+        default: thinking
 
       - `signature: string`
 
@@ -17938,11 +17979,11 @@ console.log(messageTokensCount.input_tokens);
 
         The text of Claude's thinking process for this block.
 
-      - `type: "thinking"`
-
-        default: thinking
-
     - `RedactedThinkingBlock`
+
+      - `type: "redacted_thinking"`
+
+        default: redacted_thinking
 
       - `data: string`
 
@@ -17952,11 +17993,11 @@ console.log(messageTokensCount.input_tokens);
 
         See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type: "redacted_thinking"`
-
-        default: redacted_thinking
-
     - `ToolUseBlock`
+
+      - `type: "tool_use"`
+
+        default: tool_use
 
       - `id: string`
 
@@ -17978,29 +18019,25 @@ console.log(messageTokensCount.input_tokens);
 
           Tool invocation generated by a server-side tool.
 
+          - `type: "code_execution_20250825"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20250825"`
 
         - `ServerToolCaller20260120`
 
+          - `type: "code_execution_20260120"`
+
           - `tool_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "code_execution_20260120"`
 
       - `input: Record<string, unknown>`
 
       - `name: string`
 
         minLength: 1
-
-      - `type: "tool_use"`
-
-        default: tool_use
 
       - `toolset_name?: string | null`
 
@@ -18009,6 +18046,10 @@ console.log(messageTokensCount.input_tokens);
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
     - `ServerToolUseBlock`
+
+      - `type: "server_tool_use"`
+
+        default: server_tool_use
 
       - `id: string`
 
@@ -18048,11 +18089,11 @@ console.log(messageTokensCount.input_tokens);
 
         - `"tool_search_tool_bm25"`
 
-      - `type: "server_tool_use"`
-
-        default: server_tool_use
-
     - `WebSearchToolResultBlock`
+
+      - `type: "web_search_tool_result"`
+
+        default: web_search_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -18074,6 +18115,10 @@ console.log(messageTokensCount.input_tokens);
 
         - `WebSearchToolResultError`
 
+          - `type: "web_search_tool_result_error"`
+
+            default: web_search_tool_result_error
+
           - `error_code: WebSearchToolResultErrorCode`
 
             - `"invalid_tool_input"`
@@ -18088,11 +18133,11 @@ console.log(messageTokensCount.input_tokens);
 
             - `"request_too_large"`
 
-          - `type: "web_search_tool_result_error"`
-
-            default: web_search_tool_result_error
-
         - `Array<WebSearchResultBlock>`
+
+          - `type: "web_search_result"`
+
+            default: web_search_result
 
           - `encrypted_content: string`
 
@@ -18100,21 +18145,17 @@ console.log(messageTokensCount.input_tokens);
 
           - `title: string`
 
-          - `type: "web_search_result"`
-
-            default: web_search_result
-
           - `url: string`
 
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_search_tool_result"`
-
-        default: web_search_tool_result
-
     - `WebFetchToolResultBlock`
+
+      - `type: "web_fetch_tool_result"`
+
+        default: web_fetch_tool_result
 
       - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -18136,6 +18177,10 @@ console.log(messageTokensCount.input_tokens);
 
         - `WebFetchToolResultErrorBlock`
 
+          - `type: "web_fetch_tool_result_error"`
+
+            default: web_fetch_tool_result_error
+
           - `error_code: WebFetchToolResultErrorCode`
 
             - `"invalid_tool_input"`
@@ -18156,13 +18201,19 @@ console.log(messageTokensCount.input_tokens);
 
             - `"unavailable"`
 
-          - `type: "web_fetch_tool_result_error"`
-
-            default: web_fetch_tool_result_error
+            - `"content_too_large"`
 
         - `WebFetchBlock`
 
+          - `type: "web_fetch_result"`
+
+            default: web_fetch_result
+
           - `content: DocumentBlock`
+
+            - `type: "document"`
+
+              default: document
 
             - `citations: CitationsConfig | null`
 
@@ -18176,37 +18227,29 @@ console.log(messageTokensCount.input_tokens);
 
               - `Base64PDFSource`
 
+                - `type: "base64"`
+
                 - `data: string`
 
                   format: byte
 
                 - `media_type: "application/pdf"`
 
-                - `type: "base64"`
-
               - `PlainTextSource`
+
+                - `type: "text"`
 
                 - `data: string`
 
                 - `media_type: "text/plain"`
 
-                - `type: "text"`
-
             - `title: string | null`
 
               The title of the document
 
-            - `type: "document"`
-
-              default: document
-
           - `retrieved_at: string | null`
 
             ISO 8601 timestamp when the content was retrieved
-
-          - `type: "web_fetch_result"`
-
-            default: web_fetch_result
 
           - `url: string`
 
@@ -18216,17 +18259,21 @@ console.log(messageTokensCount.input_tokens);
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "web_fetch_tool_result"`
-
-        default: web_fetch_tool_result
-
     - `CodeExecutionToolResultBlock`
+
+      - `type: "code_execution_tool_result"`
+
+        default: code_execution_tool_result
 
       - `content: CodeExecutionToolResultBlockContent`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
         - `CodeExecutionToolResultError`
+
+          - `type: "code_execution_tool_result_error"`
+
+            default: code_execution_tool_result_error
 
           - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -18238,19 +18285,19 @@ console.log(messageTokensCount.input_tokens);
 
             - `"execution_time_exceeded"`
 
-          - `type: "code_execution_tool_result_error"`
-
-            default: code_execution_tool_result_error
-
         - `CodeExecutionResultBlock`
 
-          - `content: Array<CodeExecutionOutputBlock>`
+          - `type: "code_execution_result"`
 
-            - `file_id: string`
+            default: code_execution_result
+
+          - `content: Array<CodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -18258,21 +18305,21 @@ console.log(messageTokensCount.input_tokens);
 
           - `stdout: string`
 
-          - `type: "code_execution_result"`
-
-            default: code_execution_result
-
         - `EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
-          - `content: Array<CodeExecutionOutputBlock>`
+          - `type: "encrypted_code_execution_result"`
 
-            - `file_id: string`
+            default: encrypted_code_execution_result
+
+          - `content: Array<CodeExecutionOutputBlock>`
 
             - `type: "code_execution_output"`
 
               default: code_execution_output
+
+            - `file_id: string`
 
           - `encrypted_stdout: string`
 
@@ -18280,23 +18327,23 @@ console.log(messageTokensCount.input_tokens);
 
           - `stderr: string`
 
-          - `type: "encrypted_code_execution_result"`
-
-            default: encrypted_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "code_execution_tool_result"`
-
-        default: code_execution_tool_result
-
     - `BashCodeExecutionToolResultBlock`
+
+      - `type: "bash_code_execution_tool_result"`
+
+        default: bash_code_execution_tool_result
 
       - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
         - `BashCodeExecutionToolResultError`
+
+          - `type: "bash_code_execution_tool_result_error"`
+
+            default: bash_code_execution_tool_result_error
 
           - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -18310,19 +18357,19 @@ console.log(messageTokensCount.input_tokens);
 
             - `"output_file_too_large"`
 
-          - `type: "bash_code_execution_tool_result_error"`
-
-            default: bash_code_execution_tool_result_error
-
         - `BashCodeExecutionResultBlock`
 
-          - `content: Array<BashCodeExecutionOutputBlock>`
+          - `type: "bash_code_execution_result"`
 
-            - `file_id: string`
+            default: bash_code_execution_result
+
+          - `content: Array<BashCodeExecutionOutputBlock>`
 
             - `type: "bash_code_execution_output"`
 
               default: bash_code_execution_output
+
+            - `file_id: string`
 
           - `return_code: number`
 
@@ -18330,23 +18377,23 @@ console.log(messageTokensCount.input_tokens);
 
           - `stdout: string`
 
-          - `type: "bash_code_execution_result"`
-
-            default: bash_code_execution_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "bash_code_execution_tool_result"`
-
-        default: bash_code_execution_tool_result
-
     - `TextEditorCodeExecutionToolResultBlock`
+
+      - `type: "text_editor_code_execution_tool_result"`
+
+        default: text_editor_code_execution_tool_result
 
       - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
         - `TextEditorCodeExecutionToolResultError`
+
+          - `type: "text_editor_code_execution_tool_result_error"`
+
+            default: text_editor_code_execution_tool_result_error
 
           - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -18362,11 +18409,11 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-          - `type: "text_editor_code_execution_tool_result_error"`
-
-            default: text_editor_code_execution_tool_result_error
-
         - `TextEditorCodeExecutionViewResultBlock`
+
+          - `type: "text_editor_code_execution_view_result"`
+
+            default: text_editor_code_execution_view_result
 
           - `content: string`
 
@@ -18384,19 +18431,19 @@ console.log(messageTokensCount.input_tokens);
 
           - `total_lines: number | null`
 
-          - `type: "text_editor_code_execution_view_result"`
-
-            default: text_editor_code_execution_view_result
-
         - `TextEditorCodeExecutionCreateResultBlock`
-
-          - `is_file_update: boolean`
 
           - `type: "text_editor_code_execution_create_result"`
 
             default: text_editor_code_execution_create_result
 
+          - `is_file_update: boolean`
+
         - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+          - `type: "text_editor_code_execution_str_replace_result"`
+
+            default: text_editor_code_execution_str_replace_result
 
           - `lines: Array<string> | null`
 
@@ -18408,23 +18455,23 @@ console.log(messageTokensCount.input_tokens);
 
           - `old_start: number | null`
 
-          - `type: "text_editor_code_execution_str_replace_result"`
-
-            default: text_editor_code_execution_str_replace_result
-
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type: "text_editor_code_execution_tool_result"`
-
-        default: text_editor_code_execution_tool_result
-
     - `ToolSearchToolResultBlock`
+
+      - `type: "tool_search_tool_result"`
+
+        default: tool_search_tool_result
 
       - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
         - `ToolSearchToolResultError`
+
+          - `type: "tool_search_tool_result_error"`
+
+            default: tool_search_tool_result_error
 
           - `error_code: ToolSearchToolResultErrorCode`
 
@@ -18438,63 +18485,55 @@ console.log(messageTokensCount.input_tokens);
 
           - `error_message: string | null`
 
-          - `type: "tool_search_tool_result_error"`
-
-            default: tool_search_tool_result_error
-
         - `ToolSearchToolSearchResultBlock`
-
-          - `tool_references: Array<ToolReferenceBlock>`
-
-            - `tool_name: string`
-
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-            - `type: "tool_reference"`
-
-              default: tool_reference
 
           - `type: "tool_search_tool_search_result"`
 
             default: tool_search_tool_search_result
 
+          - `tool_references: Array<ToolReferenceBlock>`
+
+            - `type: "tool_reference"`
+
+              default: tool_reference
+
+            - `tool_name: string`
+
+              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
       - `tool_use_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "tool_search_tool_result"`
-
-        default: tool_search_tool_result
 
     - `ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
-      - `file_id: string`
-
       - `type: "container_upload"`
 
         default: container_upload
 
+      - `file_id: string`
+
   - `index: number`
-
-  - `type: "content_block_start"`
-
-    default: content_block_start
 
 ### Raw Content Block Stop Event
 
 - `RawContentBlockStopEvent`
 
-  - `index: number`
-
   - `type: "content_block_stop"`
 
     default: content_block_stop
 
+  - `index: number`
+
 ### Raw Message Delta Event
 
 - `RawMessageDeltaEvent`
+
+  - `type: "message_delta"`
+
+    default: message_delta
 
   - `delta: Delta`
 
@@ -18516,12 +18555,6 @@ console.log(messageTokensCount.input_tokens);
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" | "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -18529,6 +18562,12 @@ console.log(messageTokensCount.input_tokens);
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -18539,6 +18578,10 @@ console.log(messageTokensCount.input_tokens);
     - `stop_details: RefusalStopDetails | null`
 
       Structured information about a refusal.
+
+      - `type: "refusal"`
+
+        default: refusal
 
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -18576,10 +18619,6 @@ console.log(messageTokensCount.input_tokens);
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-      - `type: "refusal"`
-
-        default: refusal
-
     - `stop_reason: StopReason | null`
 
       - `"end_turn"`
@@ -18597,10 +18636,6 @@ console.log(messageTokensCount.input_tokens);
       - `"model_context_window_exceeded"`
 
     - `stop_sequence: string | null`
-
-  - `type: "message_delta"`
-
-    default: message_delta
 
   - `usage: MessageDeltaUsage`
 
@@ -18678,7 +18713,19 @@ console.log(messageTokensCount.input_tokens);
 
 - `RawMessageStartEvent`
 
+  - `type: "message_start"`
+
+    default: message_start
+
   - `message: Message`
+
+    - `type: "message"`
+
+      Object type.
+
+      For Messages, this is always `"message"`.
+
+      default: message
 
     - `id: string`
 
@@ -18704,12 +18751,6 @@ console.log(messageTokensCount.input_tokens);
 
         Skills loaded in the container
 
-        - `skill_id: string`
-
-          Skill ID
-
-          maxLength: 64, minLength: 1
-
         - `type: "anthropic" | "custom"`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -18717,6 +18758,12 @@ console.log(messageTokensCount.input_tokens);
           - `"anthropic"`
 
           - `"custom"`
+
+        - `skill_id: string`
+
+          Skill ID
+
+          maxLength: 64, minLength: 1
 
         - `version: string`
 
@@ -18755,6 +18802,10 @@ console.log(messageTokensCount.input_tokens);
 
       - `TextBlock`
 
+        - `type: "text"`
+
+          default: text
+
         - `citations: Array<TextCitation> | null`
 
           Citations supporting the text block.
@@ -18762,6 +18813,10 @@ console.log(messageTokensCount.input_tokens);
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
           - `CitationCharLocation`
+
+            - `type: "char_location"`
+
+              default: char_location
 
             - `cited_text: string`
 
@@ -18779,11 +18834,11 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "char_location"`
-
-              default: char_location
-
           - `CitationPageLocation`
+
+            - `type: "page_location"`
+
+              default: page_location
 
             - `cited_text: string`
 
@@ -18801,11 +18856,11 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-            - `type: "page_location"`
-
-              default: page_location
-
           - `CitationContentBlockLocation`
+
+            - `type: "content_block_location"`
+
+              default: content_block_location
 
             - `cited_text: string`
 
@@ -18833,11 +18888,11 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
-              default: content_block_location
-
           - `CitationsWebSearchResultLocation`
+
+            - `type: "web_search_result_location"`
+
+              default: web_search_result_location
 
             - `cited_text: string`
 
@@ -18847,13 +18902,13 @@ console.log(messageTokensCount.input_tokens);
 
               maxLength: 512
 
-            - `type: "web_search_result_location"`
-
-              default: web_search_result_location
-
             - `url: string`
 
           - `CitationsSearchResultLocation`
+
+            - `type: "search_result_location"`
+
+              default: search_result_location
 
             - `cited_text: string`
 
@@ -18885,19 +18940,15 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
-              default: search_result_location
-
         - `text: string`
 
-          maxLength: 5000000, minLength: 0
-
-        - `type: "text"`
-
-          default: text
+          minLength: 0
 
       - `ThinkingBlock`
+
+        - `type: "thinking"`
+
+          default: thinking
 
         - `signature: string`
 
@@ -18911,11 +18962,11 @@ console.log(messageTokensCount.input_tokens);
 
           The text of Claude's thinking process for this block.
 
-        - `type: "thinking"`
-
-          default: thinking
-
       - `RedactedThinkingBlock`
+
+        - `type: "redacted_thinking"`
+
+          default: redacted_thinking
 
         - `data: string`
 
@@ -18925,11 +18976,11 @@ console.log(messageTokensCount.input_tokens);
 
           See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type: "redacted_thinking"`
-
-          default: redacted_thinking
-
       - `ToolUseBlock`
+
+        - `type: "tool_use"`
+
+          default: tool_use
 
         - `id: string`
 
@@ -18951,29 +19002,25 @@ console.log(messageTokensCount.input_tokens);
 
             Tool invocation generated by a server-side tool.
 
+            - `type: "code_execution_20250825"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20250825"`
 
           - `ServerToolCaller20260120`
 
+            - `type: "code_execution_20260120"`
+
             - `tool_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "code_execution_20260120"`
 
         - `input: Record<string, unknown>`
 
         - `name: string`
 
           minLength: 1
-
-        - `type: "tool_use"`
-
-          default: tool_use
 
         - `toolset_name?: string | null`
 
@@ -18982,6 +19029,10 @@ console.log(messageTokensCount.input_tokens);
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
       - `ServerToolUseBlock`
+
+        - `type: "server_tool_use"`
+
+          default: server_tool_use
 
         - `id: string`
 
@@ -19021,11 +19072,11 @@ console.log(messageTokensCount.input_tokens);
 
           - `"tool_search_tool_bm25"`
 
-        - `type: "server_tool_use"`
-
-          default: server_tool_use
-
       - `WebSearchToolResultBlock`
+
+        - `type: "web_search_tool_result"`
+
+          default: web_search_tool_result
 
         - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -19047,6 +19098,10 @@ console.log(messageTokensCount.input_tokens);
 
           - `WebSearchToolResultError`
 
+            - `type: "web_search_tool_result_error"`
+
+              default: web_search_tool_result_error
+
             - `error_code: WebSearchToolResultErrorCode`
 
               - `"invalid_tool_input"`
@@ -19061,11 +19116,11 @@ console.log(messageTokensCount.input_tokens);
 
               - `"request_too_large"`
 
-            - `type: "web_search_tool_result_error"`
-
-              default: web_search_tool_result_error
-
           - `Array<WebSearchResultBlock>`
+
+            - `type: "web_search_result"`
+
+              default: web_search_result
 
             - `encrypted_content: string`
 
@@ -19073,21 +19128,17 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string`
 
-            - `type: "web_search_result"`
-
-              default: web_search_result
-
             - `url: string`
 
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_search_tool_result"`
-
-          default: web_search_tool_result
-
       - `WebFetchToolResultBlock`
+
+        - `type: "web_fetch_tool_result"`
+
+          default: web_fetch_tool_result
 
         - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -19109,6 +19160,10 @@ console.log(messageTokensCount.input_tokens);
 
           - `WebFetchToolResultErrorBlock`
 
+            - `type: "web_fetch_tool_result_error"`
+
+              default: web_fetch_tool_result_error
+
             - `error_code: WebFetchToolResultErrorCode`
 
               - `"invalid_tool_input"`
@@ -19129,13 +19184,19 @@ console.log(messageTokensCount.input_tokens);
 
               - `"unavailable"`
 
-            - `type: "web_fetch_tool_result_error"`
-
-              default: web_fetch_tool_result_error
+              - `"content_too_large"`
 
           - `WebFetchBlock`
 
+            - `type: "web_fetch_result"`
+
+              default: web_fetch_result
+
             - `content: DocumentBlock`
+
+              - `type: "document"`
+
+                default: document
 
               - `citations: CitationsConfig | null`
 
@@ -19149,37 +19210,29 @@ console.log(messageTokensCount.input_tokens);
 
                 - `Base64PDFSource`
 
+                  - `type: "base64"`
+
                   - `data: string`
 
                     format: byte
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `PlainTextSource`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
               - `title: string | null`
 
                 The title of the document
 
-              - `type: "document"`
-
-                default: document
-
             - `retrieved_at: string | null`
 
               ISO 8601 timestamp when the content was retrieved
-
-            - `type: "web_fetch_result"`
-
-              default: web_fetch_result
 
             - `url: string`
 
@@ -19189,17 +19242,21 @@ console.log(messageTokensCount.input_tokens);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "web_fetch_tool_result"`
-
-          default: web_fetch_tool_result
-
       - `CodeExecutionToolResultBlock`
+
+        - `type: "code_execution_tool_result"`
+
+          default: code_execution_tool_result
 
         - `content: CodeExecutionToolResultBlockContent`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
           - `CodeExecutionToolResultError`
+
+            - `type: "code_execution_tool_result_error"`
+
+              default: code_execution_tool_result_error
 
             - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -19211,19 +19268,19 @@ console.log(messageTokensCount.input_tokens);
 
               - `"execution_time_exceeded"`
 
-            - `type: "code_execution_tool_result_error"`
-
-              default: code_execution_tool_result_error
-
           - `CodeExecutionResultBlock`
 
-            - `content: Array<CodeExecutionOutputBlock>`
+            - `type: "code_execution_result"`
 
-              - `file_id: string`
+              default: code_execution_result
+
+            - `content: Array<CodeExecutionOutputBlock>`
 
               - `type: "code_execution_output"`
 
                 default: code_execution_output
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -19231,21 +19288,21 @@ console.log(messageTokensCount.input_tokens);
 
             - `stdout: string`
 
-            - `type: "code_execution_result"`
-
-              default: code_execution_result
-
           - `EncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
-            - `content: Array<CodeExecutionOutputBlock>`
+            - `type: "encrypted_code_execution_result"`
 
-              - `file_id: string`
+              default: encrypted_code_execution_result
+
+            - `content: Array<CodeExecutionOutputBlock>`
 
               - `type: "code_execution_output"`
 
                 default: code_execution_output
+
+              - `file_id: string`
 
             - `encrypted_stdout: string`
 
@@ -19253,23 +19310,23 @@ console.log(messageTokensCount.input_tokens);
 
             - `stderr: string`
 
-            - `type: "encrypted_code_execution_result"`
-
-              default: encrypted_code_execution_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "code_execution_tool_result"`
-
-          default: code_execution_tool_result
-
       - `BashCodeExecutionToolResultBlock`
+
+        - `type: "bash_code_execution_tool_result"`
+
+          default: bash_code_execution_tool_result
 
         - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
           - `BashCodeExecutionToolResultError`
+
+            - `type: "bash_code_execution_tool_result_error"`
+
+              default: bash_code_execution_tool_result_error
 
             - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -19283,19 +19340,19 @@ console.log(messageTokensCount.input_tokens);
 
               - `"output_file_too_large"`
 
-            - `type: "bash_code_execution_tool_result_error"`
-
-              default: bash_code_execution_tool_result_error
-
           - `BashCodeExecutionResultBlock`
 
-            - `content: Array<BashCodeExecutionOutputBlock>`
+            - `type: "bash_code_execution_result"`
 
-              - `file_id: string`
+              default: bash_code_execution_result
+
+            - `content: Array<BashCodeExecutionOutputBlock>`
 
               - `type: "bash_code_execution_output"`
 
                 default: bash_code_execution_output
+
+              - `file_id: string`
 
             - `return_code: number`
 
@@ -19303,23 +19360,23 @@ console.log(messageTokensCount.input_tokens);
 
             - `stdout: string`
 
-            - `type: "bash_code_execution_result"`
-
-              default: bash_code_execution_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "bash_code_execution_tool_result"`
-
-          default: bash_code_execution_tool_result
-
       - `TextEditorCodeExecutionToolResultBlock`
+
+        - `type: "text_editor_code_execution_tool_result"`
+
+          default: text_editor_code_execution_tool_result
 
         - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `TextEditorCodeExecutionToolResultError`
+
+            - `type: "text_editor_code_execution_tool_result_error"`
+
+              default: text_editor_code_execution_tool_result_error
 
             - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -19335,11 +19392,11 @@ console.log(messageTokensCount.input_tokens);
 
             - `error_message: string | null`
 
-            - `type: "text_editor_code_execution_tool_result_error"`
-
-              default: text_editor_code_execution_tool_result_error
-
           - `TextEditorCodeExecutionViewResultBlock`
+
+            - `type: "text_editor_code_execution_view_result"`
+
+              default: text_editor_code_execution_view_result
 
             - `content: string`
 
@@ -19357,19 +19414,19 @@ console.log(messageTokensCount.input_tokens);
 
             - `total_lines: number | null`
 
-            - `type: "text_editor_code_execution_view_result"`
-
-              default: text_editor_code_execution_view_result
-
           - `TextEditorCodeExecutionCreateResultBlock`
-
-            - `is_file_update: boolean`
 
             - `type: "text_editor_code_execution_create_result"`
 
               default: text_editor_code_execution_create_result
 
+            - `is_file_update: boolean`
+
           - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+            - `type: "text_editor_code_execution_str_replace_result"`
+
+              default: text_editor_code_execution_str_replace_result
 
             - `lines: Array<string> | null`
 
@@ -19381,23 +19438,23 @@ console.log(messageTokensCount.input_tokens);
 
             - `old_start: number | null`
 
-            - `type: "text_editor_code_execution_str_replace_result"`
-
-              default: text_editor_code_execution_str_replace_result
-
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type: "text_editor_code_execution_tool_result"`
-
-          default: text_editor_code_execution_tool_result
-
       - `ToolSearchToolResultBlock`
+
+        - `type: "tool_search_tool_result"`
+
+          default: tool_search_tool_result
 
         - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
           - `ToolSearchToolResultError`
+
+            - `type: "tool_search_tool_result_error"`
+
+              default: tool_search_tool_result_error
 
             - `error_code: ToolSearchToolResultErrorCode`
 
@@ -19411,43 +19468,35 @@ console.log(messageTokensCount.input_tokens);
 
             - `error_message: string | null`
 
-            - `type: "tool_search_tool_result_error"`
-
-              default: tool_search_tool_result_error
-
           - `ToolSearchToolSearchResultBlock`
-
-            - `tool_references: Array<ToolReferenceBlock>`
-
-              - `tool_name: string`
-
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-              - `type: "tool_reference"`
-
-                default: tool_reference
 
             - `type: "tool_search_tool_search_result"`
 
               default: tool_search_tool_search_result
 
+            - `tool_references: Array<ToolReferenceBlock>`
+
+              - `type: "tool_reference"`
+
+                default: tool_reference
+
+              - `tool_name: string`
+
+                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
         - `tool_use_id: string`
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-        - `type: "tool_search_tool_result"`
-
-          default: tool_search_tool_result
 
       - `ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
-        - `file_id: string`
-
         - `type: "container_upload"`
 
           default: container_upload
+
+        - `file_id: string`
 
     - `model: Model`
 
@@ -19539,6 +19588,10 @@ console.log(messageTokensCount.input_tokens);
 
       Structured information about a refusal.
 
+      - `type: "refusal"`
+
+        default: refusal
+
       - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
         The policy category that triggered a refusal.
@@ -19575,10 +19628,6 @@ console.log(messageTokensCount.input_tokens);
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-      - `type: "refusal"`
-
-        default: refusal
-
     - `stop_reason: StopReason | null`
 
       The reason that we stopped.
@@ -19614,14 +19663,6 @@ console.log(messageTokensCount.input_tokens);
       Which custom stop sequence was generated, if any.
 
       This value will be a non-null string if one of your custom stop sequences was generated.
-
-    - `type: "message"`
-
-      Object type.
-
-      For Messages, this is always `"message"`.
-
-      default: message
 
     - `usage: Usage`
 
@@ -19727,10 +19768,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `"batch"`
 
-  - `type: "message_start"`
-
-    default: message_start
-
 ### Raw Message Stop Event
 
 - `RawMessageStopEvent`
@@ -19745,7 +19782,19 @@ console.log(messageTokensCount.input_tokens);
 
   - `RawMessageStartEvent`
 
+    - `type: "message_start"`
+
+      default: message_start
+
     - `message: Message`
+
+      - `type: "message"`
+
+        Object type.
+
+        For Messages, this is always `"message"`.
+
+        default: message
 
       - `id: string`
 
@@ -19771,12 +19820,6 @@ console.log(messageTokensCount.input_tokens);
 
           Skills loaded in the container
 
-          - `skill_id: string`
-
-            Skill ID
-
-            maxLength: 64, minLength: 1
-
           - `type: "anthropic" | "custom"`
 
             Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -19784,6 +19827,12 @@ console.log(messageTokensCount.input_tokens);
             - `"anthropic"`
 
             - `"custom"`
+
+          - `skill_id: string`
+
+            Skill ID
+
+            maxLength: 64, minLength: 1
 
           - `version: string`
 
@@ -19822,6 +19871,10 @@ console.log(messageTokensCount.input_tokens);
 
         - `TextBlock`
 
+          - `type: "text"`
+
+            default: text
+
           - `citations: Array<TextCitation> | null`
 
             Citations supporting the text block.
@@ -19829,6 +19882,10 @@ console.log(messageTokensCount.input_tokens);
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
             - `CitationCharLocation`
+
+              - `type: "char_location"`
+
+                default: char_location
 
               - `cited_text: string`
 
@@ -19846,11 +19903,11 @@ console.log(messageTokensCount.input_tokens);
 
                 minimum: 0
 
-              - `type: "char_location"`
-
-                default: char_location
-
             - `CitationPageLocation`
+
+              - `type: "page_location"`
+
+                default: page_location
 
               - `cited_text: string`
 
@@ -19868,11 +19925,11 @@ console.log(messageTokensCount.input_tokens);
 
                 minimum: 1
 
-              - `type: "page_location"`
-
-                default: page_location
-
             - `CitationContentBlockLocation`
+
+              - `type: "content_block_location"`
+
+                default: content_block_location
 
               - `cited_text: string`
 
@@ -19900,11 +19957,11 @@ console.log(messageTokensCount.input_tokens);
 
                 minimum: 0
 
-              - `type: "content_block_location"`
-
-                default: content_block_location
-
             - `CitationsWebSearchResultLocation`
+
+              - `type: "web_search_result_location"`
+
+                default: web_search_result_location
 
               - `cited_text: string`
 
@@ -19914,13 +19971,13 @@ console.log(messageTokensCount.input_tokens);
 
                 maxLength: 512
 
-              - `type: "web_search_result_location"`
-
-                default: web_search_result_location
-
               - `url: string`
 
             - `CitationsSearchResultLocation`
+
+              - `type: "search_result_location"`
+
+                default: search_result_location
 
               - `cited_text: string`
 
@@ -19952,19 +20009,15 @@ console.log(messageTokensCount.input_tokens);
 
               - `title: string | null`
 
-              - `type: "search_result_location"`
-
-                default: search_result_location
-
           - `text: string`
 
-            maxLength: 5000000, minLength: 0
-
-          - `type: "text"`
-
-            default: text
+            minLength: 0
 
         - `ThinkingBlock`
+
+          - `type: "thinking"`
+
+            default: thinking
 
           - `signature: string`
 
@@ -19978,11 +20031,11 @@ console.log(messageTokensCount.input_tokens);
 
             The text of Claude's thinking process for this block.
 
-          - `type: "thinking"`
-
-            default: thinking
-
         - `RedactedThinkingBlock`
+
+          - `type: "redacted_thinking"`
+
+            default: redacted_thinking
 
           - `data: string`
 
@@ -19992,11 +20045,11 @@ console.log(messageTokensCount.input_tokens);
 
             See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type: "redacted_thinking"`
-
-            default: redacted_thinking
-
         - `ToolUseBlock`
+
+          - `type: "tool_use"`
+
+            default: tool_use
 
           - `id: string`
 
@@ -20018,29 +20071,25 @@ console.log(messageTokensCount.input_tokens);
 
               Tool invocation generated by a server-side tool.
 
+              - `type: "code_execution_20250825"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20250825"`
 
             - `ServerToolCaller20260120`
 
+              - `type: "code_execution_20260120"`
+
               - `tool_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_20260120"`
 
           - `input: Record<string, unknown>`
 
           - `name: string`
 
             minLength: 1
-
-          - `type: "tool_use"`
-
-            default: tool_use
 
           - `toolset_name?: string | null`
 
@@ -20049,6 +20098,10 @@ console.log(messageTokensCount.input_tokens);
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
         - `ServerToolUseBlock`
+
+          - `type: "server_tool_use"`
+
+            default: server_tool_use
 
           - `id: string`
 
@@ -20088,11 +20141,11 @@ console.log(messageTokensCount.input_tokens);
 
             - `"tool_search_tool_bm25"`
 
-          - `type: "server_tool_use"`
-
-            default: server_tool_use
-
         - `WebSearchToolResultBlock`
+
+          - `type: "web_search_tool_result"`
+
+            default: web_search_tool_result
 
           - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -20114,6 +20167,10 @@ console.log(messageTokensCount.input_tokens);
 
             - `WebSearchToolResultError`
 
+              - `type: "web_search_tool_result_error"`
+
+                default: web_search_tool_result_error
+
               - `error_code: WebSearchToolResultErrorCode`
 
                 - `"invalid_tool_input"`
@@ -20128,11 +20185,11 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"request_too_large"`
 
-              - `type: "web_search_tool_result_error"`
-
-                default: web_search_tool_result_error
-
             - `Array<WebSearchResultBlock>`
+
+              - `type: "web_search_result"`
+
+                default: web_search_result
 
               - `encrypted_content: string`
 
@@ -20140,21 +20197,17 @@ console.log(messageTokensCount.input_tokens);
 
               - `title: string`
 
-              - `type: "web_search_result"`
-
-                default: web_search_result
-
               - `url: string`
 
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "web_search_tool_result"`
-
-            default: web_search_tool_result
-
         - `WebFetchToolResultBlock`
+
+          - `type: "web_fetch_tool_result"`
+
+            default: web_fetch_tool_result
 
           - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -20176,6 +20229,10 @@ console.log(messageTokensCount.input_tokens);
 
             - `WebFetchToolResultErrorBlock`
 
+              - `type: "web_fetch_tool_result_error"`
+
+                default: web_fetch_tool_result_error
+
               - `error_code: WebFetchToolResultErrorCode`
 
                 - `"invalid_tool_input"`
@@ -20196,13 +20253,19 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"unavailable"`
 
-              - `type: "web_fetch_tool_result_error"`
-
-                default: web_fetch_tool_result_error
+                - `"content_too_large"`
 
             - `WebFetchBlock`
 
+              - `type: "web_fetch_result"`
+
+                default: web_fetch_result
+
               - `content: DocumentBlock`
+
+                - `type: "document"`
+
+                  default: document
 
                 - `citations: CitationsConfig | null`
 
@@ -20216,37 +20279,29 @@ console.log(messageTokensCount.input_tokens);
 
                   - `Base64PDFSource`
 
+                    - `type: "base64"`
+
                     - `data: string`
 
                       format: byte
 
                     - `media_type: "application/pdf"`
 
-                    - `type: "base64"`
-
                   - `PlainTextSource`
+
+                    - `type: "text"`
 
                     - `data: string`
 
                     - `media_type: "text/plain"`
 
-                    - `type: "text"`
-
                 - `title: string | null`
 
                   The title of the document
 
-                - `type: "document"`
-
-                  default: document
-
               - `retrieved_at: string | null`
 
                 ISO 8601 timestamp when the content was retrieved
-
-              - `type: "web_fetch_result"`
-
-                default: web_fetch_result
 
               - `url: string`
 
@@ -20256,17 +20311,21 @@ console.log(messageTokensCount.input_tokens);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "web_fetch_tool_result"`
-
-            default: web_fetch_tool_result
-
         - `CodeExecutionToolResultBlock`
+
+          - `type: "code_execution_tool_result"`
+
+            default: code_execution_tool_result
 
           - `content: CodeExecutionToolResultBlockContent`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
             - `CodeExecutionToolResultError`
+
+              - `type: "code_execution_tool_result_error"`
+
+                default: code_execution_tool_result_error
 
               - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -20278,19 +20337,19 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"execution_time_exceeded"`
 
-              - `type: "code_execution_tool_result_error"`
-
-                default: code_execution_tool_result_error
-
             - `CodeExecutionResultBlock`
 
-              - `content: Array<CodeExecutionOutputBlock>`
+              - `type: "code_execution_result"`
 
-                - `file_id: string`
+                default: code_execution_result
+
+              - `content: Array<CodeExecutionOutputBlock>`
 
                 - `type: "code_execution_output"`
 
                   default: code_execution_output
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -20298,21 +20357,21 @@ console.log(messageTokensCount.input_tokens);
 
               - `stdout: string`
 
-              - `type: "code_execution_result"`
-
-                default: code_execution_result
-
             - `EncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
-              - `content: Array<CodeExecutionOutputBlock>`
+              - `type: "encrypted_code_execution_result"`
 
-                - `file_id: string`
+                default: encrypted_code_execution_result
+
+              - `content: Array<CodeExecutionOutputBlock>`
 
                 - `type: "code_execution_output"`
 
                   default: code_execution_output
+
+                - `file_id: string`
 
               - `encrypted_stdout: string`
 
@@ -20320,23 +20379,23 @@ console.log(messageTokensCount.input_tokens);
 
               - `stderr: string`
 
-              - `type: "encrypted_code_execution_result"`
-
-                default: encrypted_code_execution_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "code_execution_tool_result"`
-
-            default: code_execution_tool_result
-
         - `BashCodeExecutionToolResultBlock`
+
+          - `type: "bash_code_execution_tool_result"`
+
+            default: bash_code_execution_tool_result
 
           - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
             - `BashCodeExecutionToolResultError`
+
+              - `type: "bash_code_execution_tool_result_error"`
+
+                default: bash_code_execution_tool_result_error
 
               - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -20350,19 +20409,19 @@ console.log(messageTokensCount.input_tokens);
 
                 - `"output_file_too_large"`
 
-              - `type: "bash_code_execution_tool_result_error"`
-
-                default: bash_code_execution_tool_result_error
-
             - `BashCodeExecutionResultBlock`
 
-              - `content: Array<BashCodeExecutionOutputBlock>`
+              - `type: "bash_code_execution_result"`
 
-                - `file_id: string`
+                default: bash_code_execution_result
+
+              - `content: Array<BashCodeExecutionOutputBlock>`
 
                 - `type: "bash_code_execution_output"`
 
                   default: bash_code_execution_output
+
+                - `file_id: string`
 
               - `return_code: number`
 
@@ -20370,23 +20429,23 @@ console.log(messageTokensCount.input_tokens);
 
               - `stdout: string`
 
-              - `type: "bash_code_execution_result"`
-
-                default: bash_code_execution_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "bash_code_execution_tool_result"`
-
-            default: bash_code_execution_tool_result
-
         - `TextEditorCodeExecutionToolResultBlock`
+
+          - `type: "text_editor_code_execution_tool_result"`
+
+            default: text_editor_code_execution_tool_result
 
           - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
             - `TextEditorCodeExecutionToolResultError`
+
+              - `type: "text_editor_code_execution_tool_result_error"`
+
+                default: text_editor_code_execution_tool_result_error
 
               - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -20402,11 +20461,11 @@ console.log(messageTokensCount.input_tokens);
 
               - `error_message: string | null`
 
-              - `type: "text_editor_code_execution_tool_result_error"`
-
-                default: text_editor_code_execution_tool_result_error
-
             - `TextEditorCodeExecutionViewResultBlock`
+
+              - `type: "text_editor_code_execution_view_result"`
+
+                default: text_editor_code_execution_view_result
 
               - `content: string`
 
@@ -20424,19 +20483,19 @@ console.log(messageTokensCount.input_tokens);
 
               - `total_lines: number | null`
 
-              - `type: "text_editor_code_execution_view_result"`
-
-                default: text_editor_code_execution_view_result
-
             - `TextEditorCodeExecutionCreateResultBlock`
-
-              - `is_file_update: boolean`
 
               - `type: "text_editor_code_execution_create_result"`
 
                 default: text_editor_code_execution_create_result
 
+              - `is_file_update: boolean`
+
             - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+              - `type: "text_editor_code_execution_str_replace_result"`
+
+                default: text_editor_code_execution_str_replace_result
 
               - `lines: Array<string> | null`
 
@@ -20448,23 +20507,23 @@ console.log(messageTokensCount.input_tokens);
 
               - `old_start: number | null`
 
-              - `type: "text_editor_code_execution_str_replace_result"`
-
-                default: text_editor_code_execution_str_replace_result
-
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type: "text_editor_code_execution_tool_result"`
-
-            default: text_editor_code_execution_tool_result
-
         - `ToolSearchToolResultBlock`
+
+          - `type: "tool_search_tool_result"`
+
+            default: tool_search_tool_result
 
           - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
             - `ToolSearchToolResultError`
+
+              - `type: "tool_search_tool_result_error"`
+
+                default: tool_search_tool_result_error
 
               - `error_code: ToolSearchToolResultErrorCode`
 
@@ -20478,43 +20537,35 @@ console.log(messageTokensCount.input_tokens);
 
               - `error_message: string | null`
 
-              - `type: "tool_search_tool_result_error"`
-
-                default: tool_search_tool_result_error
-
             - `ToolSearchToolSearchResultBlock`
-
-              - `tool_references: Array<ToolReferenceBlock>`
-
-                - `tool_name: string`
-
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                - `type: "tool_reference"`
-
-                  default: tool_reference
 
               - `type: "tool_search_tool_search_result"`
 
                 default: tool_search_tool_search_result
 
+              - `tool_references: Array<ToolReferenceBlock>`
+
+                - `type: "tool_reference"`
+
+                  default: tool_reference
+
+                - `tool_name: string`
+
+                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
           - `tool_use_id: string`
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-          - `type: "tool_search_tool_result"`
-
-            default: tool_search_tool_result
 
         - `ContainerUploadBlock`
 
           Response model for a file uploaded to the container.
 
-          - `file_id: string`
-
           - `type: "container_upload"`
 
             default: container_upload
+
+          - `file_id: string`
 
       - `model: Model`
 
@@ -20606,6 +20657,10 @@ console.log(messageTokensCount.input_tokens);
 
         Structured information about a refusal.
 
+        - `type: "refusal"`
+
+          default: refusal
+
         - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
           The policy category that triggered a refusal.
@@ -20642,10 +20697,6 @@ console.log(messageTokensCount.input_tokens);
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-        - `type: "refusal"`
-
-          default: refusal
-
       - `stop_reason: StopReason | null`
 
         The reason that we stopped.
@@ -20681,14 +20732,6 @@ console.log(messageTokensCount.input_tokens);
         Which custom stop sequence was generated, if any.
 
         This value will be a non-null string if one of your custom stop sequences was generated.
-
-      - `type: "message"`
-
-        Object type.
-
-        For Messages, this is always `"message"`.
-
-        default: message
 
       - `usage: Usage`
 
@@ -20794,11 +20837,11 @@ console.log(messageTokensCount.input_tokens);
 
           - `"batch"`
 
-    - `type: "message_start"`
-
-      default: message_start
-
   - `RawMessageDeltaEvent`
+
+    - `type: "message_delta"`
+
+      default: message_delta
 
     - `delta: Delta`
 
@@ -20813,10 +20856,6 @@ console.log(messageTokensCount.input_tokens);
       - `stop_reason: StopReason | null`
 
       - `stop_sequence: string | null`
-
-    - `type: "message_delta"`
-
-      default: message_delta
 
     - `usage: MessageDeltaUsage`
 
@@ -20873,6 +20912,10 @@ console.log(messageTokensCount.input_tokens);
 
   - `RawContentBlockStartEvent`
 
+    - `type: "content_block_start"`
+
+      default: content_block_start
+
     - `content_block: TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
       Response model for a file uploaded to the container.
@@ -20905,31 +20948,35 @@ console.log(messageTokensCount.input_tokens);
 
     - `index: number`
 
-    - `type: "content_block_start"`
-
-      default: content_block_start
-
   - `RawContentBlockDeltaEvent`
+
+    - `type: "content_block_delta"`
+
+      default: content_block_delta
 
     - `delta: RawContentBlockDelta`
 
       - `TextDelta`
 
-        - `text: string`
-
         - `type: "text_delta"`
 
           default: text_delta
 
-      - `InputJSONDelta`
+        - `text: string`
 
-        - `partial_json: string`
+      - `InputJSONDelta`
 
         - `type: "input_json_delta"`
 
           default: input_json_delta
 
+        - `partial_json: string`
+
       - `CitationsDelta`
+
+        - `type: "citations_delta"`
+
+          default: citations_delta
 
         - `citation: CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
@@ -20943,47 +20990,43 @@ console.log(messageTokensCount.input_tokens);
 
           - `CitationsSearchResultLocation`
 
-        - `type: "citations_delta"`
-
-          default: citations_delta
-
       - `ThinkingDelta`
-
-        - `thinking: string`
-
-          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
         - `type: "thinking_delta"`
 
           default: thinking_delta
 
+        - `thinking: string`
+
+          The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
       - `SignatureDelta`
-
-        - `signature: string`
-
-          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
         - `type: "signature_delta"`
 
           default: signature_delta
 
+        - `signature: string`
+
+          The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
+
     - `index: number`
-
-    - `type: "content_block_delta"`
-
-      default: content_block_delta
 
   - `RawContentBlockStopEvent`
-
-    - `index: number`
 
     - `type: "content_block_stop"`
 
       default: content_block_stop
 
+    - `index: number`
+
 ### Redacted Thinking Block
 
 - `RedactedThinkingBlock`
+
+  - `type: "redacted_thinking"`
+
+    default: redacted_thinking
 
   - `data: string`
 
@@ -20993,25 +21036,25 @@ console.log(messageTokensCount.input_tokens);
 
     See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-  - `type: "redacted_thinking"`
-
-    default: redacted_thinking
-
 ### Redacted Thinking Block Param
 
 - `RedactedThinkingBlockParam`
 
+  - `type: "redacted_thinking"`
+
   - `data: string`
 
     The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
-
-  - `type: "redacted_thinking"`
 
 ### Refusal Stop Details
 
 - `RefusalStopDetails`
 
   Structured information about a refusal.
+
+  - `type: "refusal"`
+
+    default: refusal
 
   - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
@@ -21049,21 +21092,19 @@ console.log(messageTokensCount.input_tokens);
 
     This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-  - `type: "refusal"`
-
-    default: refusal
-
 ### Search Result Block Param
 
 - `SearchResultBlockParam`
 
+  - `type: "search_result"`
+
   - `content: Array<TextBlockParam>`
+
+    - `type: "text"`
 
     - `text: string`
 
       minLength: 1
-
-    - `type: "text"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -21090,6 +21131,8 @@ console.log(messageTokensCount.input_tokens);
 
       - `CitationCharLocationParam`
 
+        - `type: "char_location"`
+
         - `cited_text: string`
 
         - `document_index: number`
@@ -21106,9 +21149,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "char_location"`
-
       - `CitationPageLocationParam`
+
+        - `type: "page_location"`
 
         - `cited_text: string`
 
@@ -21126,9 +21169,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 1
 
-        - `type: "page_location"`
-
       - `CitationContentBlockLocationParam`
+
+        - `type: "content_block_location"`
 
         - `cited_text: string`
 
@@ -21156,9 +21199,9 @@ console.log(messageTokensCount.input_tokens);
 
           minimum: 0
 
-        - `type: "content_block_location"`
-
       - `CitationWebSearchResultLocationParam`
+
+        - `type: "web_search_result_location"`
 
         - `cited_text: string`
 
@@ -21168,13 +21211,13 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 512, minLength: 1
 
-        - `type: "web_search_result_location"`
-
         - `url: string`
 
           minLength: 1
 
       - `CitationSearchResultLocationParam`
+
+        - `type: "search_result_location"`
 
         - `cited_text: string`
 
@@ -21206,13 +21249,9 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string | null`
 
-        - `type: "search_result_location"`
-
   - `source: string`
 
   - `title: string`
-
-  - `type: "search_result"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -21228,21 +21267,21 @@ console.log(messageTokensCount.input_tokens);
 
   Tool invocation generated by a server-side tool.
 
+  - `type: "code_execution_20250825"`
+
   - `tool_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_20250825"`
 
 ### Server Tool Caller 20260120
 
 - `ServerToolCaller20260120`
 
+  - `type: "code_execution_20260120"`
+
   - `tool_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "code_execution_20260120"`
 
 ### Server Tool Usage
 
@@ -21264,6 +21303,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `ServerToolUseBlock`
 
+  - `type: "server_tool_use"`
+
+    default: server_tool_use
+
   - `id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -21284,19 +21327,19 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `input: Record<string, unknown>`
 
@@ -21316,13 +21359,11 @@ console.log(messageTokensCount.input_tokens);
 
     - `"tool_search_tool_bm25"`
 
-  - `type: "server_tool_use"`
-
-    default: server_tool_use
-
 ### Server Tool Use Block Param
 
 - `ServerToolUseBlockParam`
+
+  - `type: "server_tool_use"`
 
   - `id: string`
 
@@ -21345,8 +21386,6 @@ console.log(messageTokensCount.input_tokens);
     - `"tool_search_tool_regex"`
 
     - `"tool_search_tool_bm25"`
-
-  - `type: "server_tool_use"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -21383,43 +21422,37 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Signature Delta
 
 - `SignatureDelta`
 
-  - `signature: string`
-
-    The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
-
   - `type: "signature_delta"`
 
     default: signature_delta
+
+  - `signature: string`
+
+    The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
 ### Skill Params
 
 - `SkillParams`
 
   Specification for a skill to be loaded in a container (request model).
-
-  - `skill_id: string`
-
-    Skill ID
-
-    maxLength: 64, minLength: 1
 
   - `type: "anthropic" | "custom"`
 
@@ -21428,6 +21461,12 @@ console.log(messageTokensCount.input_tokens);
     - `"anthropic"`
 
     - `"custom"`
+
+  - `skill_id: string`
+
+    Skill ID
+
+    maxLength: 64, minLength: 1
 
   - `version?: string`
 
@@ -21457,6 +21496,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `TextBlock`
 
+  - `type: "text"`
+
+    default: text
+
   - `citations: Array<TextCitation> | null`
 
     Citations supporting the text block.
@@ -21464,6 +21507,10 @@ console.log(messageTokensCount.input_tokens);
     The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
     - `CitationCharLocation`
+
+      - `type: "char_location"`
+
+        default: char_location
 
       - `cited_text: string`
 
@@ -21481,11 +21528,11 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-      - `type: "char_location"`
-
-        default: char_location
-
     - `CitationPageLocation`
+
+      - `type: "page_location"`
+
+        default: page_location
 
       - `cited_text: string`
 
@@ -21503,11 +21550,11 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 1
 
-      - `type: "page_location"`
-
-        default: page_location
-
     - `CitationContentBlockLocation`
+
+      - `type: "content_block_location"`
+
+        default: content_block_location
 
       - `cited_text: string`
 
@@ -21535,11 +21582,11 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
-        default: content_block_location
-
     - `CitationsWebSearchResultLocation`
+
+      - `type: "web_search_result_location"`
+
+        default: web_search_result_location
 
       - `cited_text: string`
 
@@ -21549,13 +21596,13 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 512
 
-      - `type: "web_search_result_location"`
-
-        default: web_search_result_location
-
       - `url: string`
 
     - `CitationsSearchResultLocation`
+
+      - `type: "search_result_location"`
+
+        default: search_result_location
 
       - `cited_text: string`
 
@@ -21587,27 +21634,19 @@ console.log(messageTokensCount.input_tokens);
 
       - `title: string | null`
 
-      - `type: "search_result_location"`
-
-        default: search_result_location
-
   - `text: string`
 
-    maxLength: 5000000, minLength: 0
-
-  - `type: "text"`
-
-    default: text
+    minLength: 0
 
 ### Text Block Param
 
 - `TextBlockParam`
 
+  - `type: "text"`
+
   - `text: string`
 
     minLength: 1
-
-  - `type: "text"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -21634,6 +21673,8 @@ console.log(messageTokensCount.input_tokens);
 
     - `CitationCharLocationParam`
 
+      - `type: "char_location"`
+
       - `cited_text: string`
 
       - `document_index: number`
@@ -21650,9 +21691,9 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-      - `type: "char_location"`
-
     - `CitationPageLocationParam`
+
+      - `type: "page_location"`
 
       - `cited_text: string`
 
@@ -21670,9 +21711,9 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 1
 
-      - `type: "page_location"`
-
     - `CitationContentBlockLocationParam`
+
+      - `type: "content_block_location"`
 
       - `cited_text: string`
 
@@ -21700,9 +21741,9 @@ console.log(messageTokensCount.input_tokens);
 
         minimum: 0
 
-      - `type: "content_block_location"`
-
     - `CitationWebSearchResultLocationParam`
+
+      - `type: "web_search_result_location"`
 
       - `cited_text: string`
 
@@ -21712,13 +21753,13 @@ console.log(messageTokensCount.input_tokens);
 
         maxLength: 512, minLength: 1
 
-      - `type: "web_search_result_location"`
-
       - `url: string`
 
         minLength: 1
 
     - `CitationSearchResultLocationParam`
+
+      - `type: "search_result_location"`
 
       - `cited_text: string`
 
@@ -21750,13 +21791,15 @@ console.log(messageTokensCount.input_tokens);
 
       - `title: string | null`
 
-      - `type: "search_result_location"`
-
 ### Text Citation
 
 - `TextCitation = CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
   - `CitationCharLocation`
+
+    - `type: "char_location"`
+
+      default: char_location
 
     - `cited_text: string`
 
@@ -21774,11 +21817,11 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-    - `type: "char_location"`
-
-      default: char_location
-
   - `CitationPageLocation`
+
+    - `type: "page_location"`
+
+      default: page_location
 
     - `cited_text: string`
 
@@ -21796,11 +21839,11 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 1
 
-    - `type: "page_location"`
-
-      default: page_location
-
   - `CitationContentBlockLocation`
+
+    - `type: "content_block_location"`
+
+      default: content_block_location
 
     - `cited_text: string`
 
@@ -21828,11 +21871,11 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-    - `type: "content_block_location"`
-
-      default: content_block_location
-
   - `CitationsWebSearchResultLocation`
+
+    - `type: "web_search_result_location"`
+
+      default: web_search_result_location
 
     - `cited_text: string`
 
@@ -21842,13 +21885,13 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 512
 
-    - `type: "web_search_result_location"`
-
-      default: web_search_result_location
-
     - `url: string`
 
   - `CitationsSearchResultLocation`
+
+    - `type: "search_result_location"`
+
+      default: search_result_location
 
     - `cited_text: string`
 
@@ -21880,15 +21923,13 @@ console.log(messageTokensCount.input_tokens);
 
     - `title: string | null`
 
-    - `type: "search_result_location"`
-
-      default: search_result_location
-
 ### Text Citation Param
 
 - `TextCitationParam = CitationCharLocationParam | CitationPageLocationParam | CitationContentBlockLocationParam | 2 more`
 
   - `CitationCharLocationParam`
+
+    - `type: "char_location"`
 
     - `cited_text: string`
 
@@ -21906,9 +21947,9 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-    - `type: "char_location"`
-
   - `CitationPageLocationParam`
+
+    - `type: "page_location"`
 
     - `cited_text: string`
 
@@ -21926,9 +21967,9 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 1
 
-    - `type: "page_location"`
-
   - `CitationContentBlockLocationParam`
+
+    - `type: "content_block_location"`
 
     - `cited_text: string`
 
@@ -21956,9 +21997,9 @@ console.log(messageTokensCount.input_tokens);
 
       minimum: 0
 
-    - `type: "content_block_location"`
-
   - `CitationWebSearchResultLocationParam`
+
+    - `type: "web_search_result_location"`
 
     - `cited_text: string`
 
@@ -21968,13 +22009,13 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 512, minLength: 1
 
-    - `type: "web_search_result_location"`
-
     - `url: string`
 
       minLength: 1
 
   - `CitationSearchResultLocationParam`
+
+    - `type: "search_result_location"`
 
     - `cited_text: string`
 
@@ -22006,39 +22047,41 @@ console.log(messageTokensCount.input_tokens);
 
     - `title: string | null`
 
-    - `type: "search_result_location"`
-
 ### Text Delta
 
 - `TextDelta`
-
-  - `text: string`
 
   - `type: "text_delta"`
 
     default: text_delta
 
+  - `text: string`
+
 ### Text Editor Code Execution Create Result Block
 
 - `TextEditorCodeExecutionCreateResultBlock`
-
-  - `is_file_update: boolean`
 
   - `type: "text_editor_code_execution_create_result"`
 
     default: text_editor_code_execution_create_result
 
+  - `is_file_update: boolean`
+
 ### Text Editor Code Execution Create Result Block Param
 
 - `TextEditorCodeExecutionCreateResultBlockParam`
 
-  - `is_file_update: boolean`
-
   - `type: "text_editor_code_execution_create_result"`
+
+  - `is_file_update: boolean`
 
 ### Text Editor Code Execution Str Replace Result Block
 
 - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+  - `type: "text_editor_code_execution_str_replace_result"`
+
+    default: text_editor_code_execution_str_replace_result
 
   - `lines: Array<string> | null`
 
@@ -22049,10 +22092,6 @@ console.log(messageTokensCount.input_tokens);
   - `old_lines: number | null`
 
   - `old_start: number | null`
-
-  - `type: "text_editor_code_execution_str_replace_result"`
-
-    default: text_editor_code_execution_str_replace_result
 
 ### Text Editor Code Execution Str Replace Result Block Param
 
@@ -22074,9 +22113,17 @@ console.log(messageTokensCount.input_tokens);
 
 - `TextEditorCodeExecutionToolResultBlock`
 
+  - `type: "text_editor_code_execution_tool_result"`
+
+    default: text_editor_code_execution_tool_result
+
   - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
     - `TextEditorCodeExecutionToolResultError`
+
+      - `type: "text_editor_code_execution_tool_result_error"`
+
+        default: text_editor_code_execution_tool_result_error
 
       - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -22092,11 +22139,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `error_message: string | null`
 
-      - `type: "text_editor_code_execution_tool_result_error"`
-
-        default: text_editor_code_execution_tool_result_error
-
     - `TextEditorCodeExecutionViewResultBlock`
+
+      - `type: "text_editor_code_execution_view_result"`
+
+        default: text_editor_code_execution_view_result
 
       - `content: string`
 
@@ -22114,19 +22161,19 @@ console.log(messageTokensCount.input_tokens);
 
       - `total_lines: number | null`
 
-      - `type: "text_editor_code_execution_view_result"`
-
-        default: text_editor_code_execution_view_result
-
     - `TextEditorCodeExecutionCreateResultBlock`
-
-      - `is_file_update: boolean`
 
       - `type: "text_editor_code_execution_create_result"`
 
         default: text_editor_code_execution_create_result
 
+      - `is_file_update: boolean`
+
     - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+      - `type: "text_editor_code_execution_str_replace_result"`
+
+        default: text_editor_code_execution_str_replace_result
 
       - `lines: Array<string> | null`
 
@@ -22138,25 +22185,21 @@ console.log(messageTokensCount.input_tokens);
 
       - `old_start: number | null`
 
-      - `type: "text_editor_code_execution_str_replace_result"`
-
-        default: text_editor_code_execution_str_replace_result
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "text_editor_code_execution_tool_result"`
-
-    default: text_editor_code_execution_tool_result
 
 ### Text Editor Code Execution Tool Result Block Param
 
 - `TextEditorCodeExecutionToolResultBlockParam`
 
+  - `type: "text_editor_code_execution_tool_result"`
+
   - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
     - `TextEditorCodeExecutionToolResultErrorParam`
+
+      - `type: "text_editor_code_execution_tool_result_error"`
 
       - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -22170,11 +22213,11 @@ console.log(messageTokensCount.input_tokens);
 
         - `"file_not_found"`
 
-      - `type: "text_editor_code_execution_tool_result_error"`
-
       - `error_message?: string | null`
 
     - `TextEditorCodeExecutionViewResultBlockParam`
+
+      - `type: "text_editor_code_execution_view_result"`
 
       - `content: string`
 
@@ -22186,8 +22229,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `"pdf"`
 
-      - `type: "text_editor_code_execution_view_result"`
-
       - `num_lines?: number | null`
 
       - `start_line?: number | null`
@@ -22196,9 +22237,9 @@ console.log(messageTokensCount.input_tokens);
 
     - `TextEditorCodeExecutionCreateResultBlockParam`
 
-      - `is_file_update: boolean`
-
       - `type: "text_editor_code_execution_create_result"`
+
+      - `is_file_update: boolean`
 
     - `TextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -22217,8 +22258,6 @@ console.log(messageTokensCount.input_tokens);
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "text_editor_code_execution_tool_result"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -22245,6 +22284,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `TextEditorCodeExecutionToolResultError`
 
+  - `type: "text_editor_code_execution_tool_result_error"`
+
+    default: text_editor_code_execution_tool_result_error
+
   - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -22258,10 +22301,6 @@ console.log(messageTokensCount.input_tokens);
     - `"file_not_found"`
 
   - `error_message: string | null`
-
-  - `type: "text_editor_code_execution_tool_result_error"`
-
-    default: text_editor_code_execution_tool_result_error
 
 ### Text Editor Code Execution Tool Result Error Code
 
@@ -22281,6 +22320,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `TextEditorCodeExecutionToolResultErrorParam`
 
+  - `type: "text_editor_code_execution_tool_result_error"`
+
   - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -22293,13 +22334,15 @@ console.log(messageTokensCount.input_tokens);
 
     - `"file_not_found"`
 
-  - `type: "text_editor_code_execution_tool_result_error"`
-
   - `error_message?: string | null`
 
 ### Text Editor Code Execution View Result Block
 
 - `TextEditorCodeExecutionViewResultBlock`
+
+  - `type: "text_editor_code_execution_view_result"`
+
+    default: text_editor_code_execution_view_result
 
   - `content: string`
 
@@ -22317,13 +22360,11 @@ console.log(messageTokensCount.input_tokens);
 
   - `total_lines: number | null`
 
-  - `type: "text_editor_code_execution_view_result"`
-
-    default: text_editor_code_execution_view_result
-
 ### Text Editor Code Execution View Result Block Param
 
 - `TextEditorCodeExecutionViewResultBlockParam`
+
+  - `type: "text_editor_code_execution_view_result"`
 
   - `content: string`
 
@@ -22335,8 +22376,6 @@ console.log(messageTokensCount.input_tokens);
 
     - `"pdf"`
 
-  - `type: "text_editor_code_execution_view_result"`
-
   - `num_lines?: number | null`
 
   - `start_line?: number | null`
@@ -22346,6 +22385,10 @@ console.log(messageTokensCount.input_tokens);
 ### Thinking Block
 
 - `ThinkingBlock`
+
+  - `type: "thinking"`
+
+    default: thinking
 
   - `signature: string`
 
@@ -22359,13 +22402,11 @@ console.log(messageTokensCount.input_tokens);
 
     The text of Claude's thinking process for this block.
 
-  - `type: "thinking"`
-
-    default: thinking
-
 ### Thinking Block Param
 
 - `ThinkingBlockParam`
+
+  - `type: "thinking"`
 
   - `signature: string`
 
@@ -22376,8 +22417,6 @@ console.log(messageTokensCount.input_tokens);
   - `thinking: string`
 
     The `thinking` text of this block as returned by the API.
-
-  - `type: "thinking"`
 
 ### Thinking Config Adaptive
 
@@ -22403,6 +22442,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `ThinkingConfigEnabled`
 
+  - `type: "enabled"`
+
   - `budget_tokens: number`
 
     Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -22412,8 +22453,6 @@ console.log(messageTokensCount.input_tokens);
     See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
     minimum: 1024
-
-  - `type: "enabled"`
 
   - `display?: "summarized" | "omitted" | null`
 
@@ -22435,6 +22474,8 @@ console.log(messageTokensCount.input_tokens);
 
   - `ThinkingConfigEnabled`
 
+    - `type: "enabled"`
+
     - `budget_tokens: number`
 
       Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -22444,8 +22485,6 @@ console.log(messageTokensCount.input_tokens);
       See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
       minimum: 1024
-
-    - `type: "enabled"`
 
     - `display?: "summarized" | "omitted" | null`
 
@@ -22475,17 +22514,19 @@ console.log(messageTokensCount.input_tokens);
 
 - `ThinkingDelta`
 
-  - `thinking: string`
-
-    The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
-
   - `type: "thinking_delta"`
 
     default: thinking_delta
 
+  - `thinking: string`
+
+    The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
+
 ### Tool
 
 - `Tool`
+
+  - `type?: "custom" | null`
 
   - `input_schema: InputSchema`
 
@@ -22558,19 +22599,17 @@ console.log(messageTokensCount.input_tokens);
 
     When true, guarantees schema validation on tool names and inputs
 
-  - `type?: "custom" | null`
-
 ### Tool Bash 20250124
 
 - `ToolBash20250124`
+
+  - `type: "bash_20250124"`
 
   - `name: "bash"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "bash_20250124"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -22647,11 +22686,11 @@ console.log(messageTokensCount.input_tokens);
 
     The model will use the specified tool with `tool_choice.name`.
 
+    - `type: "tool"`
+
     - `name: string`
 
       The name of the tool to use.
-
-    - `type: "tool"`
 
     - `disable_parallel_tool_use?: boolean`
 
@@ -22707,11 +22746,11 @@ console.log(messageTokensCount.input_tokens);
 
   The model will use the specified tool with `tool_choice.name`.
 
+  - `type: "tool"`
+
   - `name: string`
 
     The name of the tool to use.
-
-  - `type: "tool"`
 
   - `disable_parallel_tool_use?: boolean`
 
@@ -22723,13 +22762,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolReferenceBlock`
 
-  - `tool_name: string`
-
-    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
   - `type: "tool_reference"`
 
     default: tool_reference
+
+  - `tool_name: string`
+
+    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Tool Reference Block Param
 
@@ -22737,11 +22776,11 @@ console.log(messageTokensCount.input_tokens);
 
   Tool reference block that can be included in tool_result content.
 
+  - `type: "tool_reference"`
+
   - `tool_name: string`
 
     maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-  - `type: "tool_reference"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -22768,11 +22807,11 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolResultBlockParam`
 
+  - `type: "tool_result"`
+
   - `tool_use_id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
-
-  - `type: "tool_result"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -22803,11 +22842,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `TextBlockParam`
 
+        - `type: "text"`
+
         - `text: string`
 
           minLength: 1
-
-        - `type: "text"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -22816,6 +22855,8 @@ console.log(messageTokensCount.input_tokens);
         - `citations?: Array<TextCitationParam> | null`
 
           - `CitationCharLocationParam`
+
+            - `type: "char_location"`
 
             - `cited_text: string`
 
@@ -22833,9 +22874,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "char_location"`
-
           - `CitationPageLocationParam`
+
+            - `type: "page_location"`
 
             - `cited_text: string`
 
@@ -22853,9 +22894,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 1
 
-            - `type: "page_location"`
-
           - `CitationContentBlockLocationParam`
+
+            - `type: "content_block_location"`
 
             - `cited_text: string`
 
@@ -22883,9 +22924,9 @@ console.log(messageTokensCount.input_tokens);
 
               minimum: 0
 
-            - `type: "content_block_location"`
-
           - `CitationWebSearchResultLocationParam`
+
+            - `type: "web_search_result_location"`
 
             - `cited_text: string`
 
@@ -22895,13 +22936,13 @@ console.log(messageTokensCount.input_tokens);
 
               maxLength: 512, minLength: 1
 
-            - `type: "web_search_result_location"`
-
             - `url: string`
 
               minLength: 1
 
           - `CitationSearchResultLocationParam`
+
+            - `type: "search_result_location"`
 
             - `cited_text: string`
 
@@ -22933,13 +22974,15 @@ console.log(messageTokensCount.input_tokens);
 
             - `title: string | null`
 
-            - `type: "search_result_location"`
-
       - `ImageBlockParam`
+
+        - `type: "image"`
 
         - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
           - `Base64ImageSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -22955,8 +22998,6 @@ console.log(messageTokensCount.input_tokens);
 
               - `"image/webp"`
 
-            - `type: "base64"`
-
           - `URLImageSource`
 
             - `type: "url"`
@@ -22965,11 +23006,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `FileImageSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "image"`
+            - `file_id: string`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -22989,13 +23028,15 @@ console.log(messageTokensCount.input_tokens);
 
       - `SearchResultBlockParam`
 
+        - `type: "search_result"`
+
         - `content: Array<TextBlockParam>`
+
+          - `type: "text"`
 
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -23007,8 +23048,6 @@ console.log(messageTokensCount.input_tokens);
 
         - `title: string`
 
-        - `type: "search_result"`
-
         - `cache_control?: CacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -23019,9 +23058,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `DocumentBlockParam`
 
+        - `type: "document"`
+
         - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
           - `Base64PDFSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -23029,17 +23072,17 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `PlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `ContentBlockSource`
+
+            - `type: "content"`
 
             - `content: string | Array<ContentBlockSourceContent>`
 
@@ -23051,8 +23094,6 @@ console.log(messageTokensCount.input_tokens);
 
                 - `ImageBlockParam`
 
-            - `type: "content"`
-
           - `URLPDFSource`
 
             - `type: "url"`
@@ -23061,11 +23102,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `FileDocumentSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -23085,11 +23124,11 @@ console.log(messageTokensCount.input_tokens);
 
         Tool reference block that can be included in tool_result content.
 
+        - `type: "tool_reference"`
+
         - `tool_name: string`
 
           maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -23104,6 +23143,8 @@ console.log(messageTokensCount.input_tokens);
         At most one per `tool_result`, only on a non-error result answering a
         browser toolset member `tool_use`. The server renders the
         model-visible text from it; the model never sees the raw fields.
+
+        - `type: "browser_state"`
 
         - `tabs: Array<BrowserStateTabEntry>`
 
@@ -23133,8 +23174,6 @@ console.log(messageTokensCount.input_tokens);
 
             Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-        - `type: "browser_state"`
-
         - `cache_control?: CacheControlEphemeral | null`
 
           Create a cache control breakpoint at this content block.
@@ -23155,25 +23194,25 @@ console.log(messageTokensCount.input_tokens);
             during a failed call gets no deferred `tab_opened`; it simply appears
             in the next result's `tabs` inventory.
 
+            - `type: "tab_opened"`
+
             - `tab_id: string`
 
               The `tab_id` of the opened tab, present in `tabs`.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `type: "tab_opened"`
-
           - `BrowserStateChangeDownloadStarted`
 
             A file download that started during this call.
+
+            - `type: "download_started"`
 
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_started"`
 
             - `url: string`
 
@@ -23188,13 +23227,13 @@ console.log(messageTokensCount.input_tokens);
             `download_started`, when the download finished during the call that
             started it (at most one state change per `download_id` per result).
 
+            - `type: "download_completed"`
+
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_completed"`
 
             - `url: string`
 
@@ -23218,13 +23257,13 @@ console.log(messageTokensCount.input_tokens);
 
             A file download that failed — or was cancelled — during this call.
 
+            - `type: "download_failed"`
+
             - `download_id: string`
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-            - `type: "download_failed"`
 
             - `url: string`
 
@@ -23250,17 +23289,17 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolSearchToolBm25_20251119`
 
-  - `name: "tool_search_tool_bm25"`
-
-    Name of the tool.
-
-    This is how the tool will be called by the model and in `tool_use` blocks.
-
   - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
     - `"tool_search_tool_bm25_20251119"`
 
     - `"tool_search_tool_bm25"`
+
+  - `name: "tool_search_tool_bm25"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23305,17 +23344,17 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolSearchToolRegex20251119`
 
-  - `name: "tool_search_tool_regex"`
-
-    Name of the tool.
-
-    This is how the tool will be called by the model and in `tool_use` blocks.
-
   - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
     - `"tool_search_tool_regex_20251119"`
 
     - `"tool_search_tool_regex"`
+
+  - `name: "tool_search_tool_regex"`
+
+    Name of the tool.
+
+    This is how the tool will be called by the model and in `tool_use` blocks.
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23360,9 +23399,17 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolSearchToolResultBlock`
 
+  - `type: "tool_search_tool_result"`
+
+    default: tool_search_tool_result
+
   - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
     - `ToolSearchToolResultError`
+
+      - `type: "tool_search_tool_result_error"`
+
+        default: tool_search_tool_result_error
 
       - `error_code: ToolSearchToolResultErrorCode`
 
@@ -23376,41 +23423,37 @@ console.log(messageTokensCount.input_tokens);
 
       - `error_message: string | null`
 
-      - `type: "tool_search_tool_result_error"`
-
-        default: tool_search_tool_result_error
-
     - `ToolSearchToolSearchResultBlock`
-
-      - `tool_references: Array<ToolReferenceBlock>`
-
-        - `tool_name: string`
-
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
-
-          default: tool_reference
 
       - `type: "tool_search_tool_search_result"`
 
         default: tool_search_tool_search_result
 
+      - `tool_references: Array<ToolReferenceBlock>`
+
+        - `type: "tool_reference"`
+
+          default: tool_reference
+
+        - `tool_name: string`
+
+          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "tool_search_tool_result"`
-
-    default: tool_search_tool_result
 
 ### Tool Search Tool Result Block Param
 
 - `ToolSearchToolResultBlockParam`
 
+  - `type: "tool_search_tool_result"`
+
   - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
     - `ToolSearchToolResultErrorParam`
+
+      - `type: "tool_search_tool_result_error"`
 
       - `error_code: ToolSearchToolResultErrorCode`
 
@@ -23422,19 +23465,19 @@ console.log(messageTokensCount.input_tokens);
 
         - `"execution_time_exceeded"`
 
-      - `type: "tool_search_tool_result_error"`
-
       - `error_message?: string | null`
 
     - `ToolSearchToolSearchResultBlockParam`
 
+      - `type: "tool_search_tool_search_result"`
+
       - `tool_references: Array<ToolReferenceBlockParam>`
+
+        - `type: "tool_reference"`
 
         - `tool_name: string`
 
           maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-        - `type: "tool_reference"`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -23457,13 +23500,9 @@ console.log(messageTokensCount.input_tokens);
 
             - `"1h"`
 
-      - `type: "tool_search_tool_search_result"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "tool_search_tool_result"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -23472,6 +23511,10 @@ console.log(messageTokensCount.input_tokens);
 ### Tool Search Tool Result Error
 
 - `ToolSearchToolResultError`
+
+  - `type: "tool_search_tool_result_error"`
+
+    default: tool_search_tool_result_error
 
   - `error_code: ToolSearchToolResultErrorCode`
 
@@ -23484,10 +23527,6 @@ console.log(messageTokensCount.input_tokens);
     - `"execution_time_exceeded"`
 
   - `error_message: string | null`
-
-  - `type: "tool_search_tool_result_error"`
-
-    default: tool_search_tool_result_error
 
 ### Tool Search Tool Result Error Code
 
@@ -23505,6 +23544,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolSearchToolResultErrorParam`
 
+  - `type: "tool_search_tool_result_error"`
+
   - `error_code: ToolSearchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -23515,39 +23556,39 @@ console.log(messageTokensCount.input_tokens);
 
     - `"execution_time_exceeded"`
 
-  - `type: "tool_search_tool_result_error"`
-
   - `error_message?: string | null`
 
 ### Tool Search Tool Search Result Block
 
 - `ToolSearchToolSearchResultBlock`
 
+  - `type: "tool_search_tool_search_result"`
+
+    default: tool_search_tool_search_result
+
   - `tool_references: Array<ToolReferenceBlock>`
-
-    - `tool_name: string`
-
-      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
     - `type: "tool_reference"`
 
       default: tool_reference
 
-  - `type: "tool_search_tool_search_result"`
+    - `tool_name: string`
 
-    default: tool_search_tool_search_result
+      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Tool Search Tool Search Result Block Param
 
 - `ToolSearchToolSearchResultBlockParam`
 
+  - `type: "tool_search_tool_search_result"`
+
   - `tool_references: Array<ToolReferenceBlockParam>`
+
+    - `type: "tool_reference"`
 
     - `tool_name: string`
 
       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-    - `type: "tool_reference"`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -23570,19 +23611,17 @@ console.log(messageTokensCount.input_tokens);
 
         - `"1h"`
 
-  - `type: "tool_search_tool_search_result"`
-
 ### Tool Text Editor 20250124
 
 - `ToolTextEditor20250124`
+
+  - `type: "text_editor_20250124"`
 
   - `name: "str_replace_editor"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250124"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23629,13 +23668,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolTextEditor20250429`
 
+  - `type: "text_editor_20250429"`
+
   - `name: "str_replace_based_edit_tool"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250429"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23682,13 +23721,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolTextEditor20250728`
 
+  - `type: "text_editor_20250728"`
+
   - `name: "str_replace_based_edit_tool"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "text_editor_20250728"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23744,6 +23783,8 @@ console.log(messageTokensCount.input_tokens);
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
   - `Tool`
+
+    - `type?: "custom" | null`
 
     - `input_schema: InputSchema`
 
@@ -23816,17 +23857,15 @@ console.log(messageTokensCount.input_tokens);
 
       When true, guarantees schema validation on tool names and inputs
 
-    - `type?: "custom" | null`
-
   - `ToolBash20250124`
+
+    - `type: "bash_20250124"`
 
     - `name: "bash"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "bash_20250124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23854,13 +23893,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `CodeExecutionTool20250522`
 
+    - `type: "code_execution_20250522"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250522"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23886,13 +23925,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `CodeExecutionTool20250825`
 
+    - `type: "code_execution_20250825"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20250825"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23920,13 +23959,13 @@ console.log(messageTokensCount.input_tokens);
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+    - `type: "code_execution_20260120"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260120"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -23954,13 +23993,13 @@ console.log(messageTokensCount.input_tokens);
 
     Code execution tool with REPL state persistence.
 
+    - `type: "code_execution_20260521"`
+
     - `name: "code_execution"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "code_execution_20260521"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24005,6 +24044,18 @@ console.log(messageTokensCount.input_tokens);
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type?: BrowserTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -24342,18 +24393,6 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type?: BrowserTypeConfig | null`
-
-        `type`'s config overrides.
-
-        - `defer_loading?: boolean | null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled?: boolean | null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait?: BrowserWaitConfig | null`
 
         `wait`'s config overrides.
@@ -24380,13 +24419,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `MemoryTool20250818`
 
+    - `type: "memory_20250818"`
+
     - `name: "memory"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "memory_20250818"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24437,6 +24476,18 @@ console.log(messageTokensCount.input_tokens);
       accepted key, and a member's defaults apply wherever its key is
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
+
+      - `type?: ComputerTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `cursor_position?: ComputerCursorPositionConfig | null`
 
@@ -24606,18 +24657,6 @@ console.log(messageTokensCount.input_tokens);
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-      - `type?: ComputerTypeConfig | null`
-
-        `type`'s config overrides.
-
-        - `defer_loading?: boolean | null`
-
-          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-        - `enabled?: boolean | null`
-
-          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
       - `wait?: ComputerWaitConfig | null`
 
         `wait`'s config overrides.
@@ -24644,13 +24683,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolTextEditor20250124`
 
+    - `type: "text_editor_20250124"`
+
     - `name: "str_replace_editor"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250124"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24678,13 +24717,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolTextEditor20250429`
 
+    - `type: "text_editor_20250429"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250429"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24712,13 +24751,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolTextEditor20250728`
 
+    - `type: "text_editor_20250728"`
+
     - `name: "str_replace_based_edit_tool"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "text_editor_20250728"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24752,13 +24791,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebSearchTool20250305`
 
+    - `type: "web_search_20250305"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20250305"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24828,13 +24867,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebFetchTool20250910`
 
+    - `type: "web_fetch_20250910"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20250910"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24886,13 +24925,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebSearchTool20260209`
 
+    - `type: "web_search_20260209"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260209"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24936,13 +24975,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebFetchTool20260209`
 
+    - `type: "web_fetch_20260209"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260209"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -24994,13 +25033,13 @@ console.log(messageTokensCount.input_tokens);
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
+    - `type: "web_fetch_20260309"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260309"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -25054,13 +25093,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebSearchTool20260318`
 
+    - `type: "web_search_20260318"`
+
     - `name: "web_search"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_search_20260318"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -25112,13 +25151,13 @@ console.log(messageTokensCount.input_tokens);
 
   - `WebFetchTool20260318`
 
+    - `type: "web_fetch_20260318"`
+
     - `name: "web_fetch"`
 
       Name of the tool.
 
       This is how the tool will be called by the model and in `tool_use` blocks.
-
-    - `type: "web_fetch_20260318"`
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -25180,17 +25219,17 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolSearchToolBm25_20251119`
 
-    - `name: "tool_search_tool_bm25"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
       - `"tool_search_tool_bm25_20251119"`
 
       - `"tool_search_tool_bm25"`
+
+    - `name: "tool_search_tool_bm25"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -25216,17 +25255,17 @@ console.log(messageTokensCount.input_tokens);
 
   - `ToolSearchToolRegex20251119`
 
-    - `name: "tool_search_tool_regex"`
-
-      Name of the tool.
-
-      This is how the tool will be called by the model and in `tool_use` blocks.
-
     - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
       - `"tool_search_tool_regex_20251119"`
 
       - `"tool_search_tool_regex"`
+
+    - `name: "tool_search_tool_regex"`
+
+      Name of the tool.
+
+      This is how the tool will be called by the model and in `tool_use` blocks.
 
     - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -25254,6 +25293,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolUseBlock`
 
+  - `type: "tool_use"`
+
+    default: tool_use
+
   - `id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
@@ -25274,29 +25317,25 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `input: Record<string, unknown>`
 
   - `name: string`
 
     minLength: 1
-
-  - `type: "tool_use"`
-
-    default: tool_use
 
   - `toolset_name?: string | null`
 
@@ -25308,6 +25347,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `ToolUseBlockParam`
 
+  - `type: "tool_use"`
+
   - `id: string`
 
     pattern: ^[a-zA-Z0-9_-]+$
@@ -25317,8 +25358,6 @@ console.log(messageTokensCount.input_tokens);
   - `name: string`
 
     maxLength: 200, minLength: 1
-
-  - `type: "tool_use"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -25355,19 +25394,19 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `toolset_name?: string | null`
 
@@ -25521,7 +25560,15 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebFetchBlock`
 
+  - `type: "web_fetch_result"`
+
+    default: web_fetch_result
+
   - `content: DocumentBlock`
+
+    - `type: "document"`
+
+      default: document
 
     - `citations: CitationsConfig | null`
 
@@ -25535,37 +25582,29 @@ console.log(messageTokensCount.input_tokens);
 
       - `Base64PDFSource`
 
+        - `type: "base64"`
+
         - `data: string`
 
           format: byte
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `PlainTextSource`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
     - `title: string | null`
 
       The title of the document
 
-    - `type: "document"`
-
-      default: document
-
   - `retrieved_at: string | null`
 
     ISO 8601 timestamp when the content was retrieved
-
-  - `type: "web_fetch_result"`
-
-    default: web_fetch_result
 
   - `url: string`
 
@@ -25575,11 +25614,17 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebFetchBlockParam`
 
+  - `type: "web_fetch_result"`
+
   - `content: DocumentBlockParam`
+
+    - `type: "document"`
 
     - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
       - `Base64PDFSource`
+
+        - `type: "base64"`
 
         - `data: string`
 
@@ -25587,17 +25632,17 @@ console.log(messageTokensCount.input_tokens);
 
         - `media_type: "application/pdf"`
 
-        - `type: "base64"`
-
       - `PlainTextSource`
+
+        - `type: "text"`
 
         - `data: string`
 
         - `media_type: "text/plain"`
 
-        - `type: "text"`
-
       - `ContentBlockSource`
+
+        - `type: "content"`
 
         - `content: string | Array<ContentBlockSourceContent>`
 
@@ -25607,11 +25652,11 @@ console.log(messageTokensCount.input_tokens);
 
             - `TextBlockParam`
 
+              - `type: "text"`
+
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -25638,6 +25683,8 @@ console.log(messageTokensCount.input_tokens);
 
                 - `CitationCharLocationParam`
 
+                  - `type: "char_location"`
+
                   - `cited_text: string`
 
                   - `document_index: number`
@@ -25654,9 +25701,9 @@ console.log(messageTokensCount.input_tokens);
 
                     minimum: 0
 
-                  - `type: "char_location"`
-
                 - `CitationPageLocationParam`
+
+                  - `type: "page_location"`
 
                   - `cited_text: string`
 
@@ -25674,9 +25721,9 @@ console.log(messageTokensCount.input_tokens);
 
                     minimum: 1
 
-                  - `type: "page_location"`
-
                 - `CitationContentBlockLocationParam`
+
+                  - `type: "content_block_location"`
 
                   - `cited_text: string`
 
@@ -25704,9 +25751,9 @@ console.log(messageTokensCount.input_tokens);
 
                     minimum: 0
 
-                  - `type: "content_block_location"`
-
                 - `CitationWebSearchResultLocationParam`
+
+                  - `type: "web_search_result_location"`
 
                   - `cited_text: string`
 
@@ -25716,13 +25763,13 @@ console.log(messageTokensCount.input_tokens);
 
                     maxLength: 512, minLength: 1
 
-                  - `type: "web_search_result_location"`
-
                   - `url: string`
 
                     minLength: 1
 
                 - `CitationSearchResultLocationParam`
+
+                  - `type: "search_result_location"`
 
                   - `cited_text: string`
 
@@ -25754,13 +25801,15 @@ console.log(messageTokensCount.input_tokens);
 
                   - `title: string | null`
 
-                  - `type: "search_result_location"`
-
             - `ImageBlockParam`
+
+              - `type: "image"`
 
               - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
                 - `Base64ImageSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -25776,8 +25825,6 @@ console.log(messageTokensCount.input_tokens);
 
                     - `"image/webp"`
 
-                  - `type: "base64"`
-
                 - `URLImageSource`
 
                   - `type: "url"`
@@ -25786,11 +25833,9 @@ console.log(messageTokensCount.input_tokens);
 
                 - `FileImageSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "image"`
+                  - `file_id: string`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -25808,8 +25853,6 @@ console.log(messageTokensCount.input_tokens);
 
                   - `"error"`
 
-        - `type: "content"`
-
       - `URLPDFSource`
 
         - `type: "url"`
@@ -25818,11 +25861,9 @@ console.log(messageTokensCount.input_tokens);
 
       - `FileDocumentSource`
 
-        - `file_id: string`
-
         - `type: "file"`
 
-    - `type: "document"`
+        - `file_id: string`
 
     - `cache_control?: CacheControlEphemeral | null`
 
@@ -25840,8 +25881,6 @@ console.log(messageTokensCount.input_tokens);
 
       maxLength: 500, minLength: 1
 
-  - `type: "web_fetch_result"`
-
   - `url: string`
 
     Fetched content URL
@@ -25854,13 +25893,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebFetchTool20250910`
 
+  - `type: "web_fetch_20250910"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20250910"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -25931,13 +25970,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebFetchTool20260209`
 
+  - `type: "web_fetch_20260209"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260209"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -26010,13 +26049,13 @@ console.log(messageTokensCount.input_tokens);
 
   Web fetch tool with use_cache parameter for bypassing cached content.
 
+  - `type: "web_fetch_20260309"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260309"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -26091,13 +26130,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebFetchTool20260318`
 
+  - `type: "web_fetch_20260318"`
+
   - `name: "web_fetch"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_fetch_20260318"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -26180,6 +26219,10 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebFetchToolResultBlock`
 
+  - `type: "web_fetch_tool_result"`
+
+    default: web_fetch_tool_result
+
   - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
     Tool invocation directly from the model.
@@ -26196,23 +26239,27 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
     - `WebFetchToolResultErrorBlock`
+
+      - `type: "web_fetch_tool_result_error"`
+
+        default: web_fetch_tool_result_error
 
       - `error_code: WebFetchToolResultErrorCode`
 
@@ -26234,13 +26281,19 @@ console.log(messageTokensCount.input_tokens);
 
         - `"unavailable"`
 
-      - `type: "web_fetch_tool_result_error"`
-
-        default: web_fetch_tool_result_error
+        - `"content_too_large"`
 
     - `WebFetchBlock`
 
+      - `type: "web_fetch_result"`
+
+        default: web_fetch_result
+
       - `content: DocumentBlock`
+
+        - `type: "document"`
+
+          default: document
 
         - `citations: CitationsConfig | null`
 
@@ -26254,37 +26307,29 @@ console.log(messageTokensCount.input_tokens);
 
           - `Base64PDFSource`
 
+            - `type: "base64"`
+
             - `data: string`
 
               format: byte
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `PlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
         - `title: string | null`
 
           The title of the document
 
-        - `type: "document"`
-
-          default: document
-
       - `retrieved_at: string | null`
 
         ISO 8601 timestamp when the content was retrieved
-
-      - `type: "web_fetch_result"`
-
-        default: web_fetch_result
 
       - `url: string`
 
@@ -26294,17 +26339,17 @@ console.log(messageTokensCount.input_tokens);
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type: "web_fetch_tool_result"`
-
-    default: web_fetch_tool_result
-
 ### Web Fetch Tool Result Block Param
 
 - `WebFetchToolResultBlockParam`
 
+  - `type: "web_fetch_tool_result"`
+
   - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
     - `WebFetchToolResultErrorBlockParam`
+
+      - `type: "web_fetch_tool_result_error"`
 
       - `error_code: WebFetchToolResultErrorCode`
 
@@ -26326,15 +26371,21 @@ console.log(messageTokensCount.input_tokens);
 
         - `"unavailable"`
 
-      - `type: "web_fetch_tool_result_error"`
+        - `"content_too_large"`
 
     - `WebFetchBlockParam`
 
+      - `type: "web_fetch_result"`
+
       - `content: DocumentBlockParam`
+
+        - `type: "document"`
 
         - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
           - `Base64PDFSource`
+
+            - `type: "base64"`
 
             - `data: string`
 
@@ -26342,17 +26393,17 @@ console.log(messageTokensCount.input_tokens);
 
             - `media_type: "application/pdf"`
 
-            - `type: "base64"`
-
           - `PlainTextSource`
+
+            - `type: "text"`
 
             - `data: string`
 
             - `media_type: "text/plain"`
 
-            - `type: "text"`
-
           - `ContentBlockSource`
+
+            - `type: "content"`
 
             - `content: string | Array<ContentBlockSourceContent>`
 
@@ -26362,11 +26413,11 @@ console.log(messageTokensCount.input_tokens);
 
                 - `TextBlockParam`
 
+                  - `type: "text"`
+
                   - `text: string`
 
                     minLength: 1
-
-                  - `type: "text"`
 
                   - `cache_control?: CacheControlEphemeral | null`
 
@@ -26393,6 +26444,8 @@ console.log(messageTokensCount.input_tokens);
 
                     - `CitationCharLocationParam`
 
+                      - `type: "char_location"`
+
                       - `cited_text: string`
 
                       - `document_index: number`
@@ -26409,9 +26462,9 @@ console.log(messageTokensCount.input_tokens);
 
                         minimum: 0
 
-                      - `type: "char_location"`
-
                     - `CitationPageLocationParam`
+
+                      - `type: "page_location"`
 
                       - `cited_text: string`
 
@@ -26429,9 +26482,9 @@ console.log(messageTokensCount.input_tokens);
 
                         minimum: 1
 
-                      - `type: "page_location"`
-
                     - `CitationContentBlockLocationParam`
+
+                      - `type: "content_block_location"`
 
                       - `cited_text: string`
 
@@ -26459,9 +26512,9 @@ console.log(messageTokensCount.input_tokens);
 
                         minimum: 0
 
-                      - `type: "content_block_location"`
-
                     - `CitationWebSearchResultLocationParam`
+
+                      - `type: "web_search_result_location"`
 
                       - `cited_text: string`
 
@@ -26471,13 +26524,13 @@ console.log(messageTokensCount.input_tokens);
 
                         maxLength: 512, minLength: 1
 
-                      - `type: "web_search_result_location"`
-
                       - `url: string`
 
                         minLength: 1
 
                     - `CitationSearchResultLocationParam`
+
+                      - `type: "search_result_location"`
 
                       - `cited_text: string`
 
@@ -26509,13 +26562,15 @@ console.log(messageTokensCount.input_tokens);
 
                       - `title: string | null`
 
-                      - `type: "search_result_location"`
-
                 - `ImageBlockParam`
+
+                  - `type: "image"`
 
                   - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
                     - `Base64ImageSource`
+
+                      - `type: "base64"`
 
                       - `data: string`
 
@@ -26531,8 +26586,6 @@ console.log(messageTokensCount.input_tokens);
 
                         - `"image/webp"`
 
-                      - `type: "base64"`
-
                     - `URLImageSource`
 
                       - `type: "url"`
@@ -26541,11 +26594,9 @@ console.log(messageTokensCount.input_tokens);
 
                     - `FileImageSource`
 
-                      - `file_id: string`
-
                       - `type: "file"`
 
-                  - `type: "image"`
+                      - `file_id: string`
 
                   - `cache_control?: CacheControlEphemeral | null`
 
@@ -26563,8 +26614,6 @@ console.log(messageTokensCount.input_tokens);
 
                       - `"error"`
 
-            - `type: "content"`
-
           - `URLPDFSource`
 
             - `type: "url"`
@@ -26573,11 +26622,9 @@ console.log(messageTokensCount.input_tokens);
 
           - `FileDocumentSource`
 
-            - `file_id: string`
-
             - `type: "file"`
 
-        - `type: "document"`
+            - `file_id: string`
 
         - `cache_control?: CacheControlEphemeral | null`
 
@@ -26595,8 +26642,6 @@ console.log(messageTokensCount.input_tokens);
 
           maxLength: 500, minLength: 1
 
-      - `type: "web_fetch_result"`
-
       - `url: string`
 
         Fetched content URL
@@ -26608,8 +26653,6 @@ console.log(messageTokensCount.input_tokens);
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "web_fetch_tool_result"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -26629,24 +26672,28 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Web Fetch Tool Result Error Block
 
 - `WebFetchToolResultErrorBlock`
 
+  - `type: "web_fetch_tool_result_error"`
+
+    default: web_fetch_tool_result_error
+
   - `error_code: WebFetchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -26667,14 +26714,14 @@ console.log(messageTokensCount.input_tokens);
 
     - `"unavailable"`
 
-  - `type: "web_fetch_tool_result_error"`
-
-    default: web_fetch_tool_result_error
+    - `"content_too_large"`
 
 ### Web Fetch Tool Result Error Block Param
 
 - `WebFetchToolResultErrorBlockParam`
 
+  - `type: "web_fetch_tool_result_error"`
+
   - `error_code: WebFetchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -26695,11 +26742,11 @@ console.log(messageTokensCount.input_tokens);
 
     - `"unavailable"`
 
-  - `type: "web_fetch_tool_result_error"`
+    - `"content_too_large"`
 
 ### Web Fetch Tool Result Error Code
 
-- `WebFetchToolResultErrorCode = "invalid_tool_input" | "url_too_long" | "url_not_allowed" | 6 more`
+- `WebFetchToolResultErrorCode = "invalid_tool_input" | "url_too_long" | "url_not_allowed" | 7 more`
 
   - `"invalid_tool_input"`
 
@@ -26719,9 +26766,15 @@ console.log(messageTokensCount.input_tokens);
 
   - `"unavailable"`
 
+  - `"content_too_large"`
+
 ### Web Search Result Block
 
 - `WebSearchResultBlock`
+
+  - `type: "web_search_result"`
+
+    default: web_search_result
 
   - `encrypted_content: string`
 
@@ -26729,21 +26782,17 @@ console.log(messageTokensCount.input_tokens);
 
   - `title: string`
 
-  - `type: "web_search_result"`
-
-    default: web_search_result
-
   - `url: string`
 
 ### Web Search Result Block Param
 
 - `WebSearchResultBlockParam`
 
+  - `type: "web_search_result"`
+
   - `encrypted_content: string`
 
   - `title: string`
-
-  - `type: "web_search_result"`
 
   - `url: string`
 
@@ -26753,13 +26802,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebSearchTool20250305`
 
+  - `type: "web_search_20250305"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20250305"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -26848,13 +26897,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebSearchTool20260209`
 
+  - `type: "web_search_20260209"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20260209"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -26943,13 +26992,13 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebSearchTool20260318`
 
+  - `type: "web_search_20260318"`
+
   - `name: "web_search"`
 
     Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
-
-  - `type: "web_search_20260318"`
 
   - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -27046,6 +27095,8 @@ console.log(messageTokensCount.input_tokens);
 
 - `WebSearchToolRequestError`
 
+  - `type: "web_search_tool_result_error"`
+
   - `error_code: WebSearchToolResultErrorCode`
 
     - `"invalid_tool_input"`
@@ -27060,11 +27111,13 @@ console.log(messageTokensCount.input_tokens);
 
     - `"request_too_large"`
 
-  - `type: "web_search_tool_result_error"`
-
 ### Web Search Tool Result Block
 
 - `WebSearchToolResultBlock`
+
+  - `type: "web_search_tool_result"`
+
+    default: web_search_tool_result
 
   - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -27082,23 +27135,27 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
   - `content: WebSearchToolResultBlockContent`
 
     - `WebSearchToolResultError`
+
+      - `type: "web_search_tool_result_error"`
+
+        default: web_search_tool_result_error
 
       - `error_code: WebSearchToolResultErrorCode`
 
@@ -27114,11 +27171,11 @@ console.log(messageTokensCount.input_tokens);
 
         - `"request_too_large"`
 
-      - `type: "web_search_tool_result_error"`
-
-        default: web_search_tool_result_error
-
     - `Array<WebSearchResultBlock>`
+
+      - `type: "web_search_result"`
+
+        default: web_search_result
 
       - `encrypted_content: string`
 
@@ -27126,25 +27183,21 @@ console.log(messageTokensCount.input_tokens);
 
       - `title: string`
 
-      - `type: "web_search_result"`
-
-        default: web_search_result
-
       - `url: string`
 
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type: "web_search_tool_result"`
-
-    default: web_search_tool_result
-
 ### Web Search Tool Result Block Content
 
 - `WebSearchToolResultBlockContent = WebSearchToolResultError | Array<WebSearchResultBlock>`
 
   - `WebSearchToolResultError`
+
+    - `type: "web_search_tool_result_error"`
+
+      default: web_search_tool_result_error
 
     - `error_code: WebSearchToolResultErrorCode`
 
@@ -27160,11 +27213,11 @@ console.log(messageTokensCount.input_tokens);
 
       - `"request_too_large"`
 
-    - `type: "web_search_tool_result_error"`
-
-      default: web_search_tool_result_error
-
   - `Array<WebSearchResultBlock>`
+
+    - `type: "web_search_result"`
+
+      default: web_search_result
 
     - `encrypted_content: string`
 
@@ -27172,31 +27225,31 @@ console.log(messageTokensCount.input_tokens);
 
     - `title: string`
 
-    - `type: "web_search_result"`
-
-      default: web_search_result
-
     - `url: string`
 
 ### Web Search Tool Result Block Param
 
 - `WebSearchToolResultBlockParam`
 
+  - `type: "web_search_tool_result"`
+
   - `content: WebSearchToolResultBlockParamContent`
 
     - `Array<WebSearchResultBlockParam>`
 
+      - `type: "web_search_result"`
+
       - `encrypted_content: string`
 
       - `title: string`
-
-      - `type: "web_search_result"`
 
       - `url: string`
 
       - `page_age?: string | null`
 
     - `WebSearchToolRequestError`
+
+      - `type: "web_search_tool_result_error"`
 
       - `error_code: WebSearchToolResultErrorCode`
 
@@ -27212,13 +27265,9 @@ console.log(messageTokensCount.input_tokens);
 
         - `"request_too_large"`
 
-      - `type: "web_search_tool_result_error"`
-
   - `tool_use_id: string`
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-  - `type: "web_search_tool_result"`
 
   - `cache_control?: CacheControlEphemeral | null`
 
@@ -27255,19 +27304,19 @@ console.log(messageTokensCount.input_tokens);
 
       Tool invocation generated by a server-side tool.
 
+      - `type: "code_execution_20250825"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20250825"`
 
     - `ServerToolCaller20260120`
 
+      - `type: "code_execution_20260120"`
+
       - `tool_id: string`
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-      - `type: "code_execution_20260120"`
 
 ### Web Search Tool Result Block Param Content
 
@@ -27275,17 +27324,19 @@ console.log(messageTokensCount.input_tokens);
 
   - `Array<WebSearchResultBlockParam>`
 
+    - `type: "web_search_result"`
+
     - `encrypted_content: string`
 
     - `title: string`
-
-    - `type: "web_search_result"`
 
     - `url: string`
 
     - `page_age?: string | null`
 
   - `WebSearchToolRequestError`
+
+    - `type: "web_search_tool_result_error"`
 
     - `error_code: WebSearchToolResultErrorCode`
 
@@ -27301,11 +27352,13 @@ console.log(messageTokensCount.input_tokens);
 
       - `"request_too_large"`
 
-    - `type: "web_search_tool_result_error"`
-
 ### Web Search Tool Result Error
 
 - `WebSearchToolResultError`
+
+  - `type: "web_search_tool_result_error"`
+
+    default: web_search_tool_result_error
 
   - `error_code: WebSearchToolResultErrorCode`
 
@@ -27320,10 +27373,6 @@ console.log(messageTokensCount.input_tokens);
     - `"query_too_long"`
 
     - `"request_too_large"`
-
-  - `type: "web_search_tool_result_error"`
-
-    default: web_search_tool_result_error
 
 ### Web Search Tool Result Error Code
 
@@ -27450,11 +27499,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `TextBlockParam`
 
+              - `type: "text"`
+
               - `text: string`
 
                 minLength: 1
-
-              - `type: "text"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -27481,6 +27530,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `CitationCharLocationParam`
 
+                  - `type: "char_location"`
+
                   - `cited_text: string`
 
                   - `document_index: number`
@@ -27497,9 +27548,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                  - `type: "char_location"`
-
                 - `CitationPageLocationParam`
+
+                  - `type: "page_location"`
 
                   - `cited_text: string`
 
@@ -27517,9 +27568,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 1
 
-                  - `type: "page_location"`
-
                 - `CitationContentBlockLocationParam`
+
+                  - `type: "content_block_location"`
 
                   - `cited_text: string`
 
@@ -27547,9 +27598,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                  - `type: "content_block_location"`
-
                 - `CitationWebSearchResultLocationParam`
+
+                  - `type: "web_search_result_location"`
 
                   - `cited_text: string`
 
@@ -27559,13 +27610,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     maxLength: 512, minLength: 1
 
-                  - `type: "web_search_result_location"`
-
                   - `url: string`
 
                     minLength: 1
 
                 - `CitationSearchResultLocationParam`
+
+                  - `type: "search_result_location"`
 
                   - `cited_text: string`
 
@@ -27597,13 +27648,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `title: string | null`
 
-                  - `type: "search_result_location"`
-
             - `ImageBlockParam`
+
+              - `type: "image"`
 
               - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
                 - `Base64ImageSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -27619,8 +27672,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"image/webp"`
 
-                  - `type: "base64"`
-
                 - `URLImageSource`
 
                   - `type: "url"`
@@ -27629,11 +27680,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `FileImageSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "image"`
+                  - `file_id: string`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -27653,9 +27702,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `DocumentBlockParam`
 
+              - `type: "document"`
+
               - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
                 - `Base64PDFSource`
+
+                  - `type: "base64"`
 
                   - `data: string`
 
@@ -27663,17 +27716,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `media_type: "application/pdf"`
 
-                  - `type: "base64"`
-
                 - `PlainTextSource`
+
+                  - `type: "text"`
 
                   - `data: string`
 
                   - `media_type: "text/plain"`
 
-                  - `type: "text"`
-
                 - `ContentBlockSource`
+
+                  - `type: "content"`
 
                   - `content: string | Array<ContentBlockSourceContent>`
 
@@ -27685,8 +27738,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `ImageBlockParam`
 
-                  - `type: "content"`
-
                 - `URLPDFSource`
 
                   - `type: "url"`
@@ -27695,11 +27746,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `FileDocumentSource`
 
-                  - `file_id: string`
-
                   - `type: "file"`
 
-              - `type: "document"`
+                  - `file_id: string`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -27719,13 +27768,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `SearchResultBlockParam`
 
+              - `type: "search_result"`
+
               - `content: Array<TextBlockParam>`
+
+                - `type: "text"`
 
                 - `text: string`
 
                   minLength: 1
-
-                - `type: "text"`
 
                 - `cache_control?: CacheControlEphemeral | null`
 
@@ -27737,8 +27788,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `title: string`
 
-              - `type: "search_result"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -27746,6 +27795,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               - `citations?: CitationsConfigParam`
 
             - `ThinkingBlockParam`
+
+              - `type: "thinking"`
 
               - `signature: string`
 
@@ -27757,17 +27808,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The `thinking` text of this block as returned by the API.
 
-              - `type: "thinking"`
-
             - `RedactedThinkingBlockParam`
+
+              - `type: "redacted_thinking"`
 
               - `data: string`
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-              - `type: "redacted_thinking"`
-
             - `ToolUseBlockParam`
+
+              - `type: "tool_use"`
 
               - `id: string`
 
@@ -27778,8 +27829,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               - `name: string`
 
                 maxLength: 200, minLength: 1
-
-              - `type: "tool_use"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -27799,19 +27848,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   Tool invocation generated by a server-side tool.
 
+                  - `type: "code_execution_20250825"`
+
                   - `tool_id: string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `type: "code_execution_20250825"`
 
                 - `ServerToolCaller20260120`
 
+                  - `type: "code_execution_20260120"`
+
                   - `tool_id: string`
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                  - `type: "code_execution_20260120"`
 
               - `toolset_name?: string | null`
 
@@ -27821,11 +27870,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `ToolResultBlockParam`
 
+              - `type: "tool_result"`
+
               - `tool_use_id: string`
 
                 pattern: ^[a-zA-Z0-9_-]+$
-
-              - `type: "tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -27849,11 +27898,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     Tool reference block that can be included in tool_result content.
 
+                    - `type: "tool_reference"`
+
                     - `tool_name: string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                    - `type: "tool_reference"`
 
                     - `cache_control?: CacheControlEphemeral | null`
 
@@ -27868,6 +27917,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                     At most one per `tool_result`, only on a non-error result answering a
                     browser toolset member `tool_use`. The server renders the
                     model-visible text from it; the model never sees the raw fields.
+
+                    - `type: "browser_state"`
 
                     - `tabs: Array<BrowserStateTabEntry>`
 
@@ -27897,8 +27948,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                    - `type: "browser_state"`
-
                     - `cache_control?: CacheControlEphemeral | null`
 
                       Create a cache control breakpoint at this content block.
@@ -27919,25 +27968,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                         during a failed call gets no deferred `tab_opened`; it simply appears
                         in the next result's `tabs` inventory.
 
+                        - `type: "tab_opened"`
+
                         - `tab_id: string`
 
                           The `tab_id` of the opened tab, present in `tabs`.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                        - `type: "tab_opened"`
-
                       - `BrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
+
+                        - `type: "download_started"`
 
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_started"`
 
                         - `url: string`
 
@@ -27952,13 +28001,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                         `download_started`, when the download finished during the call that
                         started it (at most one state change per `download_id` per result).
 
+                        - `type: "download_completed"`
+
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_completed"`
 
                         - `url: string`
 
@@ -27982,13 +28031,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         A file download that failed — or was cancelled — during this call.
 
+                        - `type: "download_failed"`
+
                         - `download_id: string`
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
-
-                        - `type: "download_failed"`
 
                         - `url: string`
 
@@ -28012,6 +28061,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `ServerToolUseBlockParam`
 
+              - `type: "server_tool_use"`
+
               - `id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
@@ -28034,8 +28085,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `"tool_search_tool_bm25"`
 
-              - `type: "server_tool_use"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
@@ -28056,21 +28105,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `WebSearchToolResultBlockParam`
 
+              - `type: "web_search_tool_result"`
+
               - `content: WebSearchToolResultBlockParamContent`
 
                 - `Array<WebSearchResultBlockParam>`
 
+                  - `type: "web_search_result"`
+
                   - `encrypted_content: string`
 
                   - `title: string`
-
-                  - `type: "web_search_result"`
 
                   - `url: string`
 
                   - `page_age?: string | null`
 
                 - `WebSearchToolRequestError`
+
+                  - `type: "web_search_tool_result_error"`
 
                   - `error_code: WebSearchToolResultErrorCode`
 
@@ -28086,13 +28139,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"request_too_large"`
 
-                  - `type: "web_search_tool_result_error"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "web_search_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -28114,9 +28163,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `WebFetchToolResultBlockParam`
 
+              - `type: "web_fetch_tool_result"`
+
               - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
                 - `WebFetchToolResultErrorBlockParam`
+
+                  - `type: "web_fetch_tool_result_error"`
 
                   - `error_code: WebFetchToolResultErrorCode`
 
@@ -28138,13 +28191,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"unavailable"`
 
-                  - `type: "web_fetch_tool_result_error"`
+                    - `"content_too_large"`
 
                 - `WebFetchBlockParam`
 
-                  - `content: DocumentBlockParam`
-
                   - `type: "web_fetch_result"`
+
+                  - `content: DocumentBlockParam`
 
                   - `url: string`
 
@@ -28157,8 +28210,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "web_fetch_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -28180,11 +28231,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `CodeExecutionToolResultBlockParam`
 
+              - `type: "code_execution_tool_result"`
+
               - `content: CodeExecutionToolResultBlockParamContent`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
                 - `CodeExecutionToolResultErrorParam`
+
+                  - `type: "code_execution_tool_result_error"`
 
                   - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -28196,15 +28251,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"execution_time_exceeded"`
 
-                  - `type: "code_execution_tool_result_error"`
-
                 - `CodeExecutionResultBlockParam`
+
+                  - `type: "code_execution_result"`
 
                   - `content: Array<CodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "code_execution_output"`
+
+                    - `file_id: string`
 
                   - `return_code: number`
 
@@ -28212,17 +28267,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `stdout: string`
 
-                  - `type: "code_execution_result"`
-
                 - `EncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
+                  - `type: "encrypted_code_execution_result"`
+
                   - `content: Array<CodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "code_execution_output"`
+
+                    - `file_id: string`
 
                   - `encrypted_stdout: string`
 
@@ -28230,13 +28285,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `stderr: string`
 
-                  - `type: "encrypted_code_execution_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "code_execution_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -28244,9 +28295,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `BashCodeExecutionToolResultBlockParam`
 
+              - `type: "bash_code_execution_tool_result"`
+
               - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
                 - `BashCodeExecutionToolResultErrorParam`
+
+                  - `type: "bash_code_execution_tool_result_error"`
 
                   - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -28260,15 +28315,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"output_file_too_large"`
 
-                  - `type: "bash_code_execution_tool_result_error"`
-
                 - `BashCodeExecutionResultBlockParam`
+
+                  - `type: "bash_code_execution_result"`
 
                   - `content: Array<BashCodeExecutionOutputBlockParam>`
 
-                    - `file_id: string`
-
                     - `type: "bash_code_execution_output"`
+
+                    - `file_id: string`
 
                   - `return_code: number`
 
@@ -28276,13 +28331,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `stdout: string`
 
-                  - `type: "bash_code_execution_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "bash_code_execution_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -28290,9 +28341,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `TextEditorCodeExecutionToolResultBlockParam`
 
+              - `type: "text_editor_code_execution_tool_result"`
+
               - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
                 - `TextEditorCodeExecutionToolResultErrorParam`
+
+                  - `type: "text_editor_code_execution_tool_result_error"`
 
                   - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -28306,11 +28361,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"file_not_found"`
 
-                  - `type: "text_editor_code_execution_tool_result_error"`
-
                   - `error_message?: string | null`
 
                 - `TextEditorCodeExecutionViewResultBlockParam`
+
+                  - `type: "text_editor_code_execution_view_result"`
 
                   - `content: string`
 
@@ -28322,8 +28377,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"pdf"`
 
-                  - `type: "text_editor_code_execution_view_result"`
-
                   - `num_lines?: number | null`
 
                   - `start_line?: number | null`
@@ -28332,9 +28385,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `TextEditorCodeExecutionCreateResultBlockParam`
 
-                  - `is_file_update: boolean`
-
                   - `type: "text_editor_code_execution_create_result"`
+
+                  - `is_file_update: boolean`
 
                 - `TextEditorCodeExecutionStrReplaceResultBlockParam`
 
@@ -28354,17 +28407,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type: "text_editor_code_execution_tool_result"`
-
               - `cache_control?: CacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
 
             - `ToolSearchToolResultBlockParam`
 
+              - `type: "tool_search_tool_result"`
+
               - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
                 - `ToolSearchToolResultErrorParam`
+
+                  - `type: "tool_search_tool_result_error"`
 
                   - `error_code: ToolSearchToolResultErrorCode`
 
@@ -28376,31 +28431,27 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `"execution_time_exceeded"`
 
-                  - `type: "tool_search_tool_result_error"`
-
                   - `error_message?: string | null`
 
                 - `ToolSearchToolSearchResultBlockParam`
 
+                  - `type: "tool_search_tool_search_result"`
+
                   - `tool_references: Array<ToolReferenceBlockParam>`
+
+                    - `type: "tool_reference"`
 
                     - `tool_name: string`
 
                       maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `type: "tool_reference"`
-
                     - `cache_control?: CacheControlEphemeral | null`
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type: "tool_search_tool_search_result"`
-
               - `tool_use_id: string`
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-              - `type: "tool_search_tool_result"`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -28411,9 +28462,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
 
-              - `file_id: string`
-
               - `type: "container_upload"`
+
+              - `file_id: string`
 
               - `cache_control?: CacheControlEphemeral | null`
 
@@ -28527,12 +28578,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             maxItems: 20
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" | "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -28540,6 +28585,12 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version?: string`
 
@@ -28587,11 +28638,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
+          - `type: "json_schema"`
+
           - `schema: Record<string, unknown>`
 
             The JSON schema of the format
-
-          - `type: "json_schema"`
 
       - `service_tier?: "auto" | "standard_only"`
 
@@ -28627,11 +28678,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `Array<TextBlockParam>`
 
+          - `type: "text"`
+
           - `text: string`
 
             minLength: 1
-
-          - `type: "text"`
 
           - `cache_control?: CacheControlEphemeral | null`
 
@@ -28649,6 +28700,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `ThinkingConfigEnabled`
 
+          - `type: "enabled"`
+
           - `budget_tokens: number`
 
             Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
@@ -28658,8 +28711,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
             minimum: 1024
-
-          - `type: "enabled"`
 
           - `display?: "summarized" | "omitted" | null`
 
@@ -28717,11 +28768,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           The model will use the specified tool with `tool_choice.name`.
 
+          - `type: "tool"`
+
           - `name: string`
 
             The name of the tool to use.
-
-          - `type: "tool"`
 
           - `disable_parallel_tool_use?: boolean`
 
@@ -28801,6 +28852,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `Tool`
 
+          - `type?: "custom" | null`
+
           - `input_schema: InputSchema`
 
             [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -28855,17 +28908,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-          - `type?: "custom" | null`
-
         - `ToolBash20250124`
+
+          - `type: "bash_20250124"`
 
           - `name: "bash"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "bash_20250124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -28893,13 +28944,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `CodeExecutionTool20250522`
 
+          - `type: "code_execution_20250522"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20250522"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -28925,13 +28976,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `CodeExecutionTool20250825`
 
+          - `type: "code_execution_20250825"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20250825"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -28959,13 +29010,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
+          - `type: "code_execution_20260120"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20260120"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -28993,13 +29044,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           Code execution tool with REPL state persistence.
 
+          - `type: "code_execution_20260521"`
+
           - `name: "code_execution"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "code_execution_20260521"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29044,6 +29095,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `type?: BrowserTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `close_tab?: BrowserCloseTabConfig | null`
 
@@ -29381,18 +29444,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `type?: BrowserTypeConfig | null`
-
-              `type`'s config overrides.
-
-              - `defer_loading?: boolean | null`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `enabled?: boolean | null`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `wait?: BrowserWaitConfig | null`
 
               `wait`'s config overrides.
@@ -29419,13 +29470,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `MemoryTool20250818`
 
+          - `type: "memory_20250818"`
+
           - `name: "memory"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "memory_20250818"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29476,6 +29527,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             accepted key, and a member's defaults apply wherever its key is
             absent. Unknown keys are rejected: the field set is this toolset
             version's complete member set.
+
+            - `type?: ComputerTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
             - `cursor_position?: ComputerCursorPositionConfig | null`
 
@@ -29645,18 +29708,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-            - `type?: ComputerTypeConfig | null`
-
-              `type`'s config overrides.
-
-              - `defer_loading?: boolean | null`
-
-                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
-
-              - `enabled?: boolean | null`
-
-                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
-
             - `wait?: ComputerWaitConfig | null`
 
               `wait`'s config overrides.
@@ -29683,13 +29734,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `ToolTextEditor20250124`
 
+          - `type: "text_editor_20250124"`
+
           - `name: "str_replace_editor"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250124"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29717,13 +29768,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `ToolTextEditor20250429`
 
+          - `type: "text_editor_20250429"`
+
           - `name: "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250429"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29751,13 +29802,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `ToolTextEditor20250728`
 
+          - `type: "text_editor_20250728"`
+
           - `name: "str_replace_based_edit_tool"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "text_editor_20250728"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29791,13 +29842,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `WebSearchTool20250305`
 
+          - `type: "web_search_20250305"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20250305"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29867,13 +29918,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `WebFetchTool20250910`
 
+          - `type: "web_fetch_20250910"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20250910"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29923,13 +29974,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `WebSearchTool20260209`
 
+          - `type: "web_search_20260209"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20260209"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -29973,13 +30024,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `WebFetchTool20260209`
 
+          - `type: "web_fetch_20260209"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260209"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -30031,13 +30082,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
+          - `type: "web_fetch_20260309"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260309"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -30091,13 +30142,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `WebSearchTool20260318`
 
+          - `type: "web_search_20260318"`
+
           - `name: "web_search"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_search_20260318"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -30149,13 +30200,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `WebFetchTool20260318`
 
+          - `type: "web_fetch_20260318"`
+
           - `name: "web_fetch"`
 
             Name of the tool.
 
             This is how the tool will be called by the model and in `tool_use` blocks.
-
-          - `type: "web_fetch_20260318"`
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -30217,17 +30268,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `ToolSearchToolBm25_20251119`
 
-          - `name: "tool_search_tool_bm25"`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
             - `"tool_search_tool_bm25_20251119"`
 
             - `"tool_search_tool_bm25"`
+
+          - `name: "tool_search_tool_bm25"`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -30253,17 +30304,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `ToolSearchToolRegex20251119`
 
-          - `name: "tool_search_tool_regex"`
-
-            Name of the tool.
-
-            This is how the tool will be called by the model and in `tool_use` blocks.
-
           - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
             - `"tool_search_tool_regex_20251119"`
 
             - `"tool_search_tool_regex"`
+
+          - `name: "tool_search_tool_regex"`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
 
           - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
 
@@ -30327,9 +30378,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `MessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -30428,14 +30493,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -30487,7 +30544,7 @@ console.log(messageBatch.id);
 
 ### Retrieve a Message Batch
 
-`client.messages.batches.retrieve(messageBatchID, options?): MessageBatch`
+`client.messages.batches.retrieve(messageBatchID, params?, options?): MessageBatch`
 
 **GET** `/v1/messages/batches/{message_batch_id}`
 
@@ -30501,9 +30558,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
   ID of the Message Batch.
 
+- `params: BatchRetrieveParams`
+
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `MessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -30602,14 +30675,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -30650,7 +30715,7 @@ console.log(messageBatch.id);
 
 ### List Message Batches
 
-`client.messages.batches.list(query?, options?): Page<MessageBatch>`
+`client.messages.batches.list(params?, options?): Page<MessageBatch>`
 
 **GET** `/v1/messages/batches`
 
@@ -30660,27 +30725,41 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Parameters
 
-- `query: BatchListParams`
+- `params: BatchListParams`
 
   - `after_id?: string`
 
-    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
   - `before_id?: string`
 
-    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
   - `limit?: number`
 
-    Number of items to return per page.
+    Query param: Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     maximum: 1000, minimum: 1
 
+  - `workspace_id?: string`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `MessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -30779,14 +30858,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
 
 #### Example
 
@@ -30835,7 +30906,7 @@ for await (const messageBatch of client.messages.batches.list()) {
 
 ### Cancel a Message Batch
 
-`client.messages.batches.cancel(messageBatchID, options?): MessageBatch`
+`client.messages.batches.cancel(messageBatchID, params?, options?): MessageBatch`
 
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
@@ -30851,9 +30922,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
   ID of the Message Batch.
 
+- `params: BatchCancelParams`
+
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `MessageBatch`
+
+  - `type: "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: string`
 
@@ -30953,14 +31040,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `type: "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
-
 #### Example
 
 ```typescript
@@ -31000,7 +31079,7 @@ console.log(messageBatch.id);
 
 ### Delete a Message Batch
 
-`client.messages.batches.delete(messageBatchID, options?): DeletedMessageBatch`
+`client.messages.batches.delete(messageBatchID, params?, options?): DeletedMessageBatch`
 
 **DELETE** `/v1/messages/batches/{message_batch_id}`
 
@@ -31016,13 +31095,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
   ID of the Message Batch.
 
+- `params: BatchDeleteParams`
+
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `DeletedMessageBatch`
-
-  - `id: string`
-
-    ID of the Message Batch.
 
   - `type: "message_batch_deleted"`
 
@@ -31031,6 +31114,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     For Message Batches, this is always `"message_batch_deleted"`.
 
     default: message_batch_deleted
+
+  - `id: string`
+
+    ID of the Message Batch.
 
 #### Example
 
@@ -31057,7 +31144,7 @@ console.log(deletedMessageBatch.id);
 
 ### Retrieve Message Batch results
 
-`client.messages.batches.results(messageBatchID, options?): MessageBatchIndividualResponse | Stream<MessageBatchIndividualResponse>`
+`client.messages.batches.results(messageBatchID, params?, options?): MessageBatchIndividualResponse | Stream<MessageBatchIndividualResponse>`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -31072,6 +31159,14 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 - `messageBatchID: string`
 
   ID of the Message Batch.
+
+- `params: BatchResultsParams`
+
+  - `workspace_id?: string`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -31093,7 +31188,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `MessageBatchSucceededResult`
 
+      - `type: "succeeded"`
+
+        default: succeeded
+
       - `message: Message`
+
+        - `type: "message"`
+
+          Object type.
+
+          For Messages, this is always `"message"`.
+
+          default: message
 
         - `id: string`
 
@@ -31119,12 +31226,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Skills loaded in the container
 
-            - `skill_id: string`
-
-              Skill ID
-
-              maxLength: 64, minLength: 1
-
             - `type: "anthropic" | "custom"`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
@@ -31132,6 +31233,12 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               - `"anthropic"`
 
               - `"custom"`
+
+            - `skill_id: string`
+
+              Skill ID
+
+              maxLength: 64, minLength: 1
 
             - `version: string`
 
@@ -31170,6 +31277,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `TextBlock`
 
+            - `type: "text"`
+
+              default: text
+
             - `citations: Array<TextCitation> | null`
 
               Citations supporting the text block.
@@ -31177,6 +31288,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
               - `CitationCharLocation`
+
+                - `type: "char_location"`
+
+                  default: char_location
 
                 - `cited_text: string`
 
@@ -31194,11 +31309,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 0
 
-                - `type: "char_location"`
-
-                  default: char_location
-
               - `CitationPageLocation`
+
+                - `type: "page_location"`
+
+                  default: page_location
 
                 - `cited_text: string`
 
@@ -31216,11 +31331,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-                - `type: "page_location"`
-
-                  default: page_location
-
               - `CitationContentBlockLocation`
+
+                - `type: "content_block_location"`
+
+                  default: content_block_location
 
                 - `cited_text: string`
 
@@ -31248,11 +31363,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 0
 
-                - `type: "content_block_location"`
-
-                  default: content_block_location
-
               - `CitationsWebSearchResultLocation`
+
+                - `type: "web_search_result_location"`
+
+                  default: web_search_result_location
 
                 - `cited_text: string`
 
@@ -31262,13 +31377,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   maxLength: 512
 
-                - `type: "web_search_result_location"`
-
-                  default: web_search_result_location
-
                 - `url: string`
 
               - `CitationsSearchResultLocation`
+
+                - `type: "search_result_location"`
+
+                  default: search_result_location
 
                 - `cited_text: string`
 
@@ -31300,19 +31415,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `title: string | null`
 
-                - `type: "search_result_location"`
-
-                  default: search_result_location
-
             - `text: string`
 
-              maxLength: 5000000, minLength: 0
-
-            - `type: "text"`
-
-              default: text
+              minLength: 0
 
           - `ThinkingBlock`
+
+            - `type: "thinking"`
+
+              default: thinking
 
             - `signature: string`
 
@@ -31326,11 +31437,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               The text of Claude's thinking process for this block.
 
-            - `type: "thinking"`
-
-              default: thinking
-
           - `RedactedThinkingBlock`
+
+            - `type: "redacted_thinking"`
+
+              default: redacted_thinking
 
             - `data: string`
 
@@ -31340,11 +31451,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-            - `type: "redacted_thinking"`
-
-              default: redacted_thinking
-
           - `ToolUseBlock`
+
+            - `type: "tool_use"`
+
+              default: tool_use
 
             - `id: string`
 
@@ -31366,29 +31477,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Tool invocation generated by a server-side tool.
 
+                - `type: "code_execution_20250825"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20250825"`
 
               - `ServerToolCaller20260120`
 
+                - `type: "code_execution_20260120"`
+
                 - `tool_id: string`
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-                - `type: "code_execution_20260120"`
 
             - `input: Record<string, unknown>`
 
             - `name: string`
 
               minLength: 1
-
-            - `type: "tool_use"`
-
-              default: tool_use
 
             - `toolset_name?: string | null`
 
@@ -31397,6 +31504,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
           - `ServerToolUseBlock`
+
+            - `type: "server_tool_use"`
+
+              default: server_tool_use
 
             - `id: string`
 
@@ -31436,11 +31547,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `"tool_search_tool_bm25"`
 
-            - `type: "server_tool_use"`
-
-              default: server_tool_use
-
           - `WebSearchToolResultBlock`
+
+            - `type: "web_search_tool_result"`
+
+              default: web_search_tool_result
 
             - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -31462,6 +31573,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `WebSearchToolResultError`
 
+                - `type: "web_search_tool_result_error"`
+
+                  default: web_search_tool_result_error
+
                 - `error_code: WebSearchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
@@ -31476,11 +31591,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `"request_too_large"`
 
-                - `type: "web_search_tool_result_error"`
-
-                  default: web_search_tool_result_error
-
               - `Array<WebSearchResultBlock>`
+
+                - `type: "web_search_result"`
+
+                  default: web_search_result
 
                 - `encrypted_content: string`
 
@@ -31488,21 +31603,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `title: string`
 
-                - `type: "web_search_result"`
-
-                  default: web_search_result
-
                 - `url: string`
 
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_search_tool_result"`
-
-              default: web_search_tool_result
-
           - `WebFetchToolResultBlock`
+
+            - `type: "web_fetch_tool_result"`
+
+              default: web_fetch_tool_result
 
             - `caller: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
@@ -31524,6 +31635,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `WebFetchToolResultErrorBlock`
 
+                - `type: "web_fetch_tool_result_error"`
+
+                  default: web_fetch_tool_result_error
+
                 - `error_code: WebFetchToolResultErrorCode`
 
                   - `"invalid_tool_input"`
@@ -31544,13 +31659,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `"unavailable"`
 
-                - `type: "web_fetch_tool_result_error"`
-
-                  default: web_fetch_tool_result_error
+                  - `"content_too_large"`
 
               - `WebFetchBlock`
 
+                - `type: "web_fetch_result"`
+
+                  default: web_fetch_result
+
                 - `content: DocumentBlock`
+
+                  - `type: "document"`
+
+                    default: document
 
                   - `citations: CitationsConfig | null`
 
@@ -31564,37 +31685,29 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `Base64PDFSource`
 
+                      - `type: "base64"`
+
                       - `data: string`
 
                         format: byte
 
                       - `media_type: "application/pdf"`
 
-                      - `type: "base64"`
-
                     - `PlainTextSource`
+
+                      - `type: "text"`
 
                       - `data: string`
 
                       - `media_type: "text/plain"`
 
-                      - `type: "text"`
-
                   - `title: string | null`
 
                     The title of the document
 
-                  - `type: "document"`
-
-                    default: document
-
                 - `retrieved_at: string | null`
 
                   ISO 8601 timestamp when the content was retrieved
-
-                - `type: "web_fetch_result"`
-
-                  default: web_fetch_result
 
                 - `url: string`
 
@@ -31604,17 +31717,21 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "web_fetch_tool_result"`
-
-              default: web_fetch_tool_result
-
           - `CodeExecutionToolResultBlock`
+
+            - `type: "code_execution_tool_result"`
+
+              default: code_execution_tool_result
 
             - `content: CodeExecutionToolResultBlockContent`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `CodeExecutionToolResultError`
+
+                - `type: "code_execution_tool_result_error"`
+
+                  default: code_execution_tool_result_error
 
                 - `error_code: CodeExecutionToolResultErrorCode`
 
@@ -31626,19 +31743,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `"execution_time_exceeded"`
 
-                - `type: "code_execution_tool_result_error"`
-
-                  default: code_execution_tool_result_error
-
               - `CodeExecutionResultBlock`
 
-                - `content: Array<CodeExecutionOutputBlock>`
+                - `type: "code_execution_result"`
 
-                  - `file_id: string`
+                  default: code_execution_result
+
+                - `content: Array<CodeExecutionOutputBlock>`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -31646,21 +31763,21 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `stdout: string`
 
-                - `type: "code_execution_result"`
-
-                  default: code_execution_result
-
               - `EncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
-                - `content: Array<CodeExecutionOutputBlock>`
+                - `type: "encrypted_code_execution_result"`
 
-                  - `file_id: string`
+                  default: encrypted_code_execution_result
+
+                - `content: Array<CodeExecutionOutputBlock>`
 
                   - `type: "code_execution_output"`
 
                     default: code_execution_output
+
+                  - `file_id: string`
 
                 - `encrypted_stdout: string`
 
@@ -31668,23 +31785,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `stderr: string`
 
-                - `type: "encrypted_code_execution_result"`
-
-                  default: encrypted_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "code_execution_tool_result"`
-
-              default: code_execution_tool_result
-
           - `BashCodeExecutionToolResultBlock`
+
+            - `type: "bash_code_execution_tool_result"`
+
+              default: bash_code_execution_tool_result
 
             - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
               - `BashCodeExecutionToolResultError`
+
+                - `type: "bash_code_execution_tool_result_error"`
+
+                  default: bash_code_execution_tool_result_error
 
                 - `error_code: BashCodeExecutionToolResultErrorCode`
 
@@ -31698,19 +31815,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `"output_file_too_large"`
 
-                - `type: "bash_code_execution_tool_result_error"`
-
-                  default: bash_code_execution_tool_result_error
-
               - `BashCodeExecutionResultBlock`
 
-                - `content: Array<BashCodeExecutionOutputBlock>`
+                - `type: "bash_code_execution_result"`
 
-                  - `file_id: string`
+                  default: bash_code_execution_result
+
+                - `content: Array<BashCodeExecutionOutputBlock>`
 
                   - `type: "bash_code_execution_output"`
 
                     default: bash_code_execution_output
+
+                  - `file_id: string`
 
                 - `return_code: number`
 
@@ -31718,23 +31835,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `stdout: string`
 
-                - `type: "bash_code_execution_result"`
-
-                  default: bash_code_execution_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "bash_code_execution_tool_result"`
-
-              default: bash_code_execution_tool_result
-
           - `TextEditorCodeExecutionToolResultBlock`
+
+            - `type: "text_editor_code_execution_tool_result"`
+
+              default: text_editor_code_execution_tool_result
 
             - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
               - `TextEditorCodeExecutionToolResultError`
+
+                - `type: "text_editor_code_execution_tool_result_error"`
+
+                  default: text_editor_code_execution_tool_result_error
 
                 - `error_code: TextEditorCodeExecutionToolResultErrorCode`
 
@@ -31750,11 +31867,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `error_message: string | null`
 
-                - `type: "text_editor_code_execution_tool_result_error"`
-
-                  default: text_editor_code_execution_tool_result_error
-
               - `TextEditorCodeExecutionViewResultBlock`
+
+                - `type: "text_editor_code_execution_view_result"`
+
+                  default: text_editor_code_execution_view_result
 
                 - `content: string`
 
@@ -31772,19 +31889,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `total_lines: number | null`
 
-                - `type: "text_editor_code_execution_view_result"`
-
-                  default: text_editor_code_execution_view_result
-
               - `TextEditorCodeExecutionCreateResultBlock`
-
-                - `is_file_update: boolean`
 
                 - `type: "text_editor_code_execution_create_result"`
 
                   default: text_editor_code_execution_create_result
 
+                - `is_file_update: boolean`
+
               - `TextEditorCodeExecutionStrReplaceResultBlock`
+
+                - `type: "text_editor_code_execution_str_replace_result"`
+
+                  default: text_editor_code_execution_str_replace_result
 
                 - `lines: Array<string> | null`
 
@@ -31796,23 +31913,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `old_start: number | null`
 
-                - `type: "text_editor_code_execution_str_replace_result"`
-
-                  default: text_editor_code_execution_str_replace_result
-
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type: "text_editor_code_execution_tool_result"`
-
-              default: text_editor_code_execution_tool_result
-
           - `ToolSearchToolResultBlock`
+
+            - `type: "tool_search_tool_result"`
+
+              default: tool_search_tool_result
 
             - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
               - `ToolSearchToolResultError`
+
+                - `type: "tool_search_tool_result_error"`
+
+                  default: tool_search_tool_result_error
 
                 - `error_code: ToolSearchToolResultErrorCode`
 
@@ -31826,43 +31943,35 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `error_message: string | null`
 
-                - `type: "tool_search_tool_result_error"`
-
-                  default: tool_search_tool_result_error
-
               - `ToolSearchToolSearchResultBlock`
-
-                - `tool_references: Array<ToolReferenceBlock>`
-
-                  - `tool_name: string`
-
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
-
-                  - `type: "tool_reference"`
-
-                    default: tool_reference
 
                 - `type: "tool_search_tool_search_result"`
 
                   default: tool_search_tool_search_result
 
+                - `tool_references: Array<ToolReferenceBlock>`
+
+                  - `type: "tool_reference"`
+
+                    default: tool_reference
+
+                  - `tool_name: string`
+
+                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+
             - `tool_use_id: string`
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
-
-            - `type: "tool_search_tool_result"`
-
-              default: tool_search_tool_result
 
           - `ContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
-            - `file_id: string`
-
             - `type: "container_upload"`
 
               default: container_upload
+
+            - `file_id: string`
 
         - `model: Model`
 
@@ -31954,6 +32063,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           Structured information about a refusal.
 
+          - `type: "refusal"`
+
+            default: refusal
+
           - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
             The policy category that triggered a refusal.
@@ -31990,10 +32103,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-          - `type: "refusal"`
-
-            default: refusal
-
         - `stop_reason: StopReason | null`
 
           The reason that we stopped.
@@ -32029,14 +32138,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
           Which custom stop sequence was generated, if any.
 
           This value will be a non-null string if one of your custom stop sequences was generated.
-
-        - `type: "message"`
-
-          Object type.
-
-          For Messages, this is always `"message"`.
-
-          default: message
 
         - `usage: Usage`
 
@@ -32142,115 +32243,111 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `"batch"`
 
-      - `type: "succeeded"`
-
-        default: succeeded
-
     - `MessageBatchErroredResult`
 
+      - `type: "errored"`
+
+        default: errored
+
       - `error: ErrorResponse`
-
-        - `error: ErrorObject`
-
-          - `InvalidRequestError`
-
-            - `message: string`
-
-              default: Invalid request
-
-            - `type: "invalid_request_error"`
-
-              default: invalid_request_error
-
-          - `AuthenticationError`
-
-            - `message: string`
-
-              default: Authentication error
-
-            - `type: "authentication_error"`
-
-              default: authentication_error
-
-          - `BillingError`
-
-            - `message: string`
-
-              default: Billing error
-
-            - `type: "billing_error"`
-
-              default: billing_error
-
-          - `PermissionError`
-
-            - `message: string`
-
-              default: Permission denied
-
-            - `type: "permission_error"`
-
-              default: permission_error
-
-          - `NotFoundError`
-
-            - `message: string`
-
-              default: Not found
-
-            - `type: "not_found_error"`
-
-              default: not_found_error
-
-          - `RateLimitError`
-
-            - `message: string`
-
-              default: Rate limited
-
-            - `type: "rate_limit_error"`
-
-              default: rate_limit_error
-
-          - `GatewayTimeoutError`
-
-            - `message: string`
-
-              default: Request timeout
-
-            - `type: "timeout_error"`
-
-              default: timeout_error
-
-          - `APIErrorObject`
-
-            - `message: string`
-
-              default: Internal server error
-
-            - `type: "api_error"`
-
-              default: api_error
-
-          - `OverloadedError`
-
-            - `message: string`
-
-              default: Overloaded
-
-            - `type: "overloaded_error"`
-
-              default: overloaded_error
-
-        - `request_id: string | null`
 
         - `type: "error"`
 
           default: error
 
-      - `type: "errored"`
+        - `error: ErrorObject`
 
-        default: errored
+          - `InvalidRequestError`
+
+            - `type: "invalid_request_error"`
+
+              default: invalid_request_error
+
+            - `message: string`
+
+              default: Invalid request
+
+          - `AuthenticationError`
+
+            - `type: "authentication_error"`
+
+              default: authentication_error
+
+            - `message: string`
+
+              default: Authentication error
+
+          - `BillingError`
+
+            - `type: "billing_error"`
+
+              default: billing_error
+
+            - `message: string`
+
+              default: Billing error
+
+          - `PermissionError`
+
+            - `type: "permission_error"`
+
+              default: permission_error
+
+            - `message: string`
+
+              default: Permission denied
+
+          - `NotFoundError`
+
+            - `type: "not_found_error"`
+
+              default: not_found_error
+
+            - `message: string`
+
+              default: Not found
+
+          - `RateLimitError`
+
+            - `type: "rate_limit_error"`
+
+              default: rate_limit_error
+
+            - `message: string`
+
+              default: Rate limited
+
+          - `GatewayTimeoutError`
+
+            - `type: "timeout_error"`
+
+              default: timeout_error
+
+            - `message: string`
+
+              default: Request timeout
+
+          - `APIErrorObject`
+
+            - `type: "api_error"`
+
+              default: api_error
+
+            - `message: string`
+
+              default: Internal server error
+
+          - `OverloadedError`
+
+            - `type: "overloaded_error"`
+
+              default: overloaded_error
+
+            - `message: string`
+
+              default: Overloaded
+
+        - `request_id: string | null`
 
     - `MessageBatchCanceledResult`
 

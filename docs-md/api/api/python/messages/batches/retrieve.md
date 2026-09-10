@@ -1,6 +1,13 @@
 # Retrieve a Message Batch
 
-`messages.batches.retrieve(message_batch_id)  -> MessageBatch`
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/python/messages/batches/retrieve
+---
+
+# Retrieve a Message Batch
+
+`messages.batches.retrieve(message_batch_id, **kwargs)  -> MessageBatch`
 
 **GET** `/v1/messages/batches/{message_batch_id}`
 
@@ -14,9 +21,19 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   ID of the Message Batch.
 
+- `workspace_id: Optional[str]`
+
 ## Returns
 
 - `class MessageBatch: …`
+
+  - `type: Literal["message_batch"]`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
+
+    default: message_batch
 
   - `id: str`
 
@@ -116,14 +133,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-  - `type: Literal["message_batch"]`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
-
-    default: message_batch
-
 ## Example
 
 ```python
@@ -136,7 +145,7 @@ client = Anthropic(
     ),  # This is the default and can be omitted
 )
 message_batch = client.messages.batches.retrieve(
-    "message_batch_id",
+    message_batch_id="message_batch_id",
 )
 print(message_batch.id)
 ```

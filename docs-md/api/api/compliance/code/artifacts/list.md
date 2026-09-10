@@ -1,5 +1,12 @@
 # List Code Artifacts
 
+---
+title: List Code Artifacts
+url: https://platform.claude.com/docs/en/api/compliance/code/artifacts/list
+---
+
+# List Code Artifacts
+
 **GET** `/v1/compliance/apps/code/artifacts`
 
 List Claude Code Artifacts owned by organizations under the parent
@@ -66,6 +73,12 @@ returned.
   maxItems: 200
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"x-api-key": optional string`
 

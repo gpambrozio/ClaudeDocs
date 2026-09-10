@@ -1,5 +1,12 @@
 # Sessions
 
+---
+title: Sessions
+url: https://platform.claude.com/docs/en/api/ruby/beta/sessions
+---
+
+# Sessions
+
 ## Create Session
 
 `beta.sessions.create(**kwargs) -> BetaManagedAgentsSession`
@@ -20,13 +27,13 @@ Create Session
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+    - `type: :agent`
+
     - `id: String`
 
       The `agent` ID.
 
       minLength: 1, maxLength: 128
-
-    - `type: :agent`
 
     - `version: Integer`
 
@@ -38,25 +45,25 @@ Create Session
 
     Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
+    - `type: :agent_with_overrides`
+
     - `id: String`
 
       The `agent` ID.
 
       minLength: 1, maxLength: 128
 
-    - `type: :agent_with_overrides`
-
     - `mcp_servers: Array[BetaManagedAgentsURLMCPServerParams]`
 
       Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+      - `type: :url`
 
       - `name: String`
 
         Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
         minLength: 1, maxLength: 255
-
-      - `type: :url`
 
       - `url: String`
 
@@ -216,13 +223,13 @@ Create Session
 
         An Anthropic-managed skill.
 
+        - `type: :anthropic`
+
         - `skill_id: String`
 
           Identifier of the Anthropic skill (e.g., "xlsx").
 
           minLength: 1, maxLength: 64
-
-        - `type: :anthropic`
 
         - `version: String`
 
@@ -234,13 +241,13 @@ Create Session
 
         A user-created custom skill.
 
+        - `type: :custom`
+
         - `skill_id: String`
 
           Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
           minLength: 1, maxLength: 64
-
-        - `type: :custom`
 
         - `version: String`
 
@@ -272,6 +279,8 @@ Create Session
 
             Configuration override for the bash tool.
 
+            - `type: :bash`
+
             - `name: :bash`
 
               Must be "bash".
@@ -280,7 +289,7 @@ Create Session
 
               Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -296,11 +305,17 @@ Create Session
 
                 - `type: :always_ask`
 
-            - `type: :bash`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `type: :auto`
 
           - `class BetaManagedAgentsEditToolConfigParams`
 
             Configuration override for the edit tool.
+
+            - `type: :edit`
 
             - `name: :edit`
 
@@ -310,7 +325,7 @@ Create Session
 
               Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -322,11 +337,15 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
-            - `type: :edit`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsReadToolConfigParams`
 
             Configuration override for the read tool.
+
+            - `type: :read`
 
             - `name: :read`
 
@@ -336,7 +355,7 @@ Create Session
 
               Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -348,11 +367,15 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
-            - `type: :read`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsWriteToolConfigParams`
 
             Configuration override for the write tool.
+
+            - `type: :write`
 
             - `name: :write`
 
@@ -362,7 +385,7 @@ Create Session
 
               Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -374,11 +397,15 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
-            - `type: :write`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsGlobToolConfigParams`
 
             Configuration override for the glob tool.
+
+            - `type: :glob`
 
             - `name: :glob`
 
@@ -388,7 +415,7 @@ Create Session
 
               Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -400,11 +427,15 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
-            - `type: :glob`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsGrepToolConfigParams`
 
             Configuration override for the grep tool.
+
+            - `type: :grep`
 
             - `name: :grep`
 
@@ -414,7 +445,7 @@ Create Session
 
               Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -426,11 +457,15 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
-            - `type: :grep`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsWebFetchToolConfigParams`
 
             Configuration override for the web_fetch tool.
+
+            - `type: :web_fetch`
 
             - `name: :web_fetch`
 
@@ -454,7 +489,7 @@ Create Session
 
               format: int32
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -466,11 +501,15 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
-            - `type: :web_fetch`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsWebSearchToolConfigParams`
 
             Configuration override for the web_search tool.
+
+            - `type: :web_search`
 
             - `name: :web_search`
 
@@ -488,7 +527,7 @@ Create Session
 
               Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -500,7 +539,9 @@ Create Session
 
                 Tool calls require user confirmation before execution.
 
-            - `type: :web_search`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `user_location: BetaManagedAgentsUserLocation`
 
@@ -540,7 +581,7 @@ Create Session
 
             Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -552,17 +593,21 @@ Create Session
 
               Tool calls require user confirmation before execution.
 
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
       - `class BetaManagedAgentsMCPToolsetParams`
 
         Configuration for tools from an MCP server defined in `mcp_servers`.
+
+        - `type: :mcp_toolset`
 
         - `mcp_server_name: String`
 
           Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
           minLength: 1, maxLength: 255
-
-        - `type: :mcp_toolset`
 
         - `configs: Array[BetaManagedAgentsMCPToolConfigParams]`
 
@@ -578,7 +623,7 @@ Create Session
 
             Whether this tool is enabled. Overrides the `default_config` setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -589,6 +634,10 @@ Create Session
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
+
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `default_config: BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
@@ -598,7 +647,7 @@ Create Session
 
             Whether tools are enabled by default. Defaults to true if not specified.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -610,9 +659,15 @@ Create Session
 
               Tool calls require user confirmation before execution.
 
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
       - `class BetaManagedAgentsCustomToolParams`
 
         A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+        - `type: :custom`
 
         - `description: String`
 
@@ -636,8 +691,6 @@ Create Session
 
           minLength: 1, maxLength: 128
 
-        - `type: :custom`
-
     - `version: Integer`
 
       The specific `agent` version to use. Omit to use the latest version.
@@ -654,6 +707,8 @@ Create Session
 
   A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+  - `type: :limit`
+
   - `max_list_cost: BetaMonetaryAmount`
 
     A monetary amount in a specific currency.
@@ -666,8 +721,6 @@ Create Session
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `type: :limit`
-
 - `initial_events: Array[BetaManagedAgentsUserMessageEventParams | BetaManagedAgentsUserDefineOutcomeEventParams]`
 
   Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
@@ -675,6 +728,8 @@ Create Session
   - `class BetaManagedAgentsUserMessageEventParams`
 
     Parameters for sending a user message to the session.
+
+    - `type: :"user.message"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsRedactedBlock]`
 
@@ -684,17 +739,19 @@ Create Session
 
         Regular text content.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
 
-        - `type: :text`
-
       - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `type: :image`
 
         - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -703,6 +760,8 @@ Create Session
           - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -715,8 +774,6 @@ Create Session
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `type: :base64`
 
           - `class BetaManagedAgentsURLImageSource`
 
@@ -734,19 +791,19 @@ Create Session
 
             Image referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `type: :file`
-
-        - `type: :image`
-
       - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `type: :document`
 
         - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -755,6 +812,8 @@ Create Session
           - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -768,11 +827,11 @@ Create Session
 
               minLength: 1
 
-            - `type: :base64`
-
           - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
+
+            - `type: :text`
 
             - `data: String`
 
@@ -783,8 +842,6 @@ Create Session
             - `media_type: :"text/plain"`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `type: :text`
 
           - `class BetaManagedAgentsURLDocumentSource`
 
@@ -802,15 +859,13 @@ Create Session
 
             Document referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `type: :file`
-
-        - `type: :document`
 
         - `context: String`
 
@@ -826,11 +881,11 @@ Create Session
 
         - `type: :redacted`
 
-    - `type: :"user.message"`
-
   - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `type: :"user.define_outcome"`
 
     - `description: String`
 
@@ -844,25 +899,23 @@ Create Session
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `type: :file`
+
         - `file_id: String`
 
           ID of the rubric file.
 
-        - `type: :file`
-
       - `class BetaManagedAgentsTextRubricParams`
 
         Rubric content provided inline as text.
+
+        - `type: :text`
 
         - `content: String`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
           maxLength: 262144
-
-        - `type: :text`
-
-    - `type: :"user.define_outcome"`
 
     - `max_iterations: Integer`
 
@@ -882,12 +935,6 @@ Create Session
 
     Mount a GitHub repository into the session's container.
 
-    - `authorization_token: String`
-
-      GitHub authorization token used to clone the repository.
-
-      minLength: 1, maxLength: 4096
-
     - `type: :github_repository`
 
     - `url: String`
@@ -896,11 +943,19 @@ Create Session
 
       minLength: 1, maxLength: 2048
 
+    - `authorization_token: String`
+
+      GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
+
+      minLength: 1, maxLength: 4096
+
     - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
       - `class BetaManagedAgentsBranchCheckout`
+
+        - `type: :branch`
 
         - `name: String`
 
@@ -908,17 +963,15 @@ Create Session
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
           Full commit SHA to check out.
 
           minLength: 7, maxLength: 64
-
-        - `type: :commit`
 
     - `mount_path: String`
 
@@ -930,13 +983,13 @@ Create Session
 
     Mount a file uploaded via the Files API into the session.
 
+    - `type: :file`
+
     - `file_id: String`
 
       ID of a previously uploaded file.
 
       minLength: 1, maxLength: 128
-
-    - `type: :file`
 
     - `mount_path: String`
 
@@ -948,11 +1001,11 @@ Create Session
 
     Parameters for attaching a memory store to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -984,7 +1037,7 @@ Create Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1032,6 +1085,8 @@ Create Session
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -1074,11 +1129,15 @@ Create Session
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
 
   A Managed Agents `session`.
+
+  - `type: :session`
 
   - `id: String`
 
@@ -1086,15 +1145,17 @@ Create Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `type: :agent`
+
     - `id: String`
 
     - `description: String`
 
     - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-      - `name: String`
-
       - `type: :url`
+
+      - `name: String`
 
       - `url: String`
 
@@ -1222,6 +1283,8 @@ Create Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `type: :coordinator`
+
       - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -1230,15 +1293,17 @@ Create Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `type: :agent`
+
           - `id: String`
 
           - `description: String`
 
           - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-            - `name: String`
-
             - `type: :url`
+
+            - `name: String`
 
             - `url: String`
 
@@ -1254,9 +1319,9 @@ Create Session
 
               A resolved Anthropic-managed skill.
 
-              - `skill_id: String`
-
               - `type: :anthropic`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -1264,9 +1329,9 @@ Create Session
 
               A resolved user-created custom skill.
 
-              - `skill_id: String`
-
               - `type: :custom`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -1276,17 +1341,21 @@ Create Session
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
+              - `type: :agent_toolset_20260401`
+
               - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                 - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
+                  - `type: :bash`
+
                   - `enabled: bool`
 
                   - `name: :bash`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1302,17 +1371,23 @@ Create Session
 
                       - `type: :always_ask`
 
-                  - `type: :bash`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `type: :auto`
 
                 - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
+                  - `type: :edit`
+
                   - `enabled: bool`
 
                   - `name: :edit`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1324,17 +1399,21 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :edit`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
+                  - `type: :read`
+
                   - `enabled: bool`
 
                   - `name: :read`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1346,17 +1425,21 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :read`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
+                  - `type: :write`
+
                   - `enabled: bool`
 
                   - `name: :write`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1368,17 +1451,21 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :write`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
+                  - `type: :glob`
+
                   - `enabled: bool`
 
                   - `name: :glob`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1390,17 +1477,21 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :glob`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
+                  - `type: :grep`
+
                   - `enabled: bool`
 
                   - `name: :grep`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1412,17 +1503,21 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :grep`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
+                  - `type: :web_fetch`
+
                   - `enabled: bool`
 
                   - `name: :web_fetch`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1434,7 +1529,9 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_fetch`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -1448,11 +1545,13 @@ Create Session
 
                   Configuration for the web_search tool.
 
+                  - `type: :web_search`
+
                   - `enabled: bool`
 
                   - `name: :web_search`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -1464,7 +1563,9 @@ Create Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_search`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -1506,7 +1607,7 @@ Create Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -1518,9 +1619,13 @@ Create Session
 
                     Tool calls require user confirmation before execution.
 
-              - `type: :agent_toolset_20260401`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMCPToolset`
+
+              - `type: :mcp_toolset`
 
               - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -1528,7 +1633,7 @@ Create Session
 
                 - `name: String`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -1539,6 +1644,10 @@ Create Session
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
+
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -1546,7 +1655,7 @@ Create Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -1558,13 +1667,17 @@ Create Session
 
                     Tool calls require user confirmation before execution.
 
-              - `mcp_server_name: String`
+                  - `class BetaManagedAgentsAutoPolicy`
 
-              - `type: :mcp_toolset`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `mcp_server_name: String`
 
             - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
+
+              - `type: :custom`
 
               - `description: String`
 
@@ -1580,10 +1693,6 @@ Create Session
 
               - `name: String`
 
-              - `type: :custom`
-
-          - `type: :agent`
-
           - `version: Integer`
 
             format: int32
@@ -1592,13 +1701,11 @@ Create Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `type: :advisor`
+
           - `model: String`
 
             The advisor model id.
-
-          - `type: :advisor`
-
-      - `type: :coordinator`
 
     - `name: String`
 
@@ -1624,8 +1731,6 @@ Create Session
 
         A custom tool as returned in API responses.
 
-    - `type: :agent`
-
     - `version: Integer`
 
       format: int32
@@ -1640,6 +1745,8 @@ Create Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `type: :limit`
+
     - `max_list_cost: BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
@@ -1651,8 +1758,6 @@ Create Session
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `type: :limit`
 
   - `created_at: Time`
 
@@ -1667,6 +1772,8 @@ Create Session
   - `outcome_evaluations: Array[BetaManagedAgentsOutcomeEvaluationResource]`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `type: :outcome_evaluation`
 
     - `completed_at: Time`
 
@@ -1696,11 +1803,11 @@ Create Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `type: :outcome_evaluation`
-
   - `resources: Array[BetaManagedAgentsSessionResource]`
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
+
+      - `type: :github_repository`
 
       - `id: String`
 
@@ -1711,8 +1818,6 @@ Create Session
         format: date-time
 
       - `mount_path: String`
-
-      - `type: :github_repository`
 
       - `updated_at: Time`
 
@@ -1726,15 +1831,17 @@ Create Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
+          - `type: :branch`
+
           - `name: String`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `type: :branch`
-
         - `class BetaManagedAgentsCommitCheckout`
+
+          - `type: :commit`
 
           - `sha: String`
 
@@ -1742,9 +1849,9 @@ Create Session
 
             minLength: 7, maxLength: 64
 
-          - `type: :commit`
-
     - `class BetaManagedAgentsFileResource`
+
+      - `type: :file`
 
       - `id: String`
 
@@ -1758,8 +1865,6 @@ Create Session
 
       - `mount_path: String`
 
-      - `type: :file`
-
       - `updated_at: Time`
 
         A timestamp in RFC 3339 format
@@ -1770,11 +1875,11 @@ Create Session
 
       A memory store attached to an agent session.
 
+      - `type: :memory_store`
+
       - `memory_store_id: String`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `type: :memory_store`
 
       - `access: :read_write | :read_only`
 
@@ -1831,8 +1936,6 @@ Create Session
     - `:terminated`
 
   - `title: String`
-
-  - `type: :session`
 
   - `updated_at: Time`
 
@@ -2213,7 +2316,7 @@ List Sessions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2261,6 +2364,8 @@ List Sessions
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -2303,11 +2408,15 @@ List Sessions
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
 
   A Managed Agents `session`.
+
+  - `type: :session`
 
   - `id: String`
 
@@ -2315,15 +2424,17 @@ List Sessions
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `type: :agent`
+
     - `id: String`
 
     - `description: String`
 
     - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-      - `name: String`
-
       - `type: :url`
+
+      - `name: String`
 
       - `url: String`
 
@@ -2451,6 +2562,8 @@ List Sessions
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `type: :coordinator`
+
       - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -2459,15 +2572,17 @@ List Sessions
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `type: :agent`
+
           - `id: String`
 
           - `description: String`
 
           - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-            - `name: String`
-
             - `type: :url`
+
+            - `name: String`
 
             - `url: String`
 
@@ -2483,9 +2598,9 @@ List Sessions
 
               A resolved Anthropic-managed skill.
 
-              - `skill_id: String`
-
               - `type: :anthropic`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -2493,9 +2608,9 @@ List Sessions
 
               A resolved user-created custom skill.
 
-              - `skill_id: String`
-
               - `type: :custom`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -2505,17 +2620,21 @@ List Sessions
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
+              - `type: :agent_toolset_20260401`
+
               - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                 - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
+                  - `type: :bash`
+
                   - `enabled: bool`
 
                   - `name: :bash`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2531,17 +2650,23 @@ List Sessions
 
                       - `type: :always_ask`
 
-                  - `type: :bash`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `type: :auto`
 
                 - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
+                  - `type: :edit`
+
                   - `enabled: bool`
 
                   - `name: :edit`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2553,17 +2678,21 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :edit`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
+                  - `type: :read`
+
                   - `enabled: bool`
 
                   - `name: :read`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2575,17 +2704,21 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :read`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
+                  - `type: :write`
+
                   - `enabled: bool`
 
                   - `name: :write`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2597,17 +2730,21 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :write`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
+                  - `type: :glob`
+
                   - `enabled: bool`
 
                   - `name: :glob`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2619,17 +2756,21 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :glob`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
+                  - `type: :grep`
+
                   - `enabled: bool`
 
                   - `name: :grep`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2641,17 +2782,21 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :grep`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
+                  - `type: :web_fetch`
+
                   - `enabled: bool`
 
                   - `name: :web_fetch`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2663,7 +2808,9 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_fetch`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -2677,11 +2824,13 @@ List Sessions
 
                   Configuration for the web_search tool.
 
+                  - `type: :web_search`
+
                   - `enabled: bool`
 
                   - `name: :web_search`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -2693,7 +2842,9 @@ List Sessions
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_search`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -2735,7 +2886,7 @@ List Sessions
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -2747,9 +2898,13 @@ List Sessions
 
                     Tool calls require user confirmation before execution.
 
-              - `type: :agent_toolset_20260401`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMCPToolset`
+
+              - `type: :mcp_toolset`
 
               - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -2757,7 +2912,7 @@ List Sessions
 
                 - `name: String`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -2768,6 +2923,10 @@ List Sessions
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
+
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -2775,7 +2934,7 @@ List Sessions
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -2787,13 +2946,17 @@ List Sessions
 
                     Tool calls require user confirmation before execution.
 
-              - `mcp_server_name: String`
+                  - `class BetaManagedAgentsAutoPolicy`
 
-              - `type: :mcp_toolset`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `mcp_server_name: String`
 
             - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
+
+              - `type: :custom`
 
               - `description: String`
 
@@ -2809,10 +2972,6 @@ List Sessions
 
               - `name: String`
 
-              - `type: :custom`
-
-          - `type: :agent`
-
           - `version: Integer`
 
             format: int32
@@ -2821,13 +2980,11 @@ List Sessions
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `type: :advisor`
+
           - `model: String`
 
             The advisor model id.
-
-          - `type: :advisor`
-
-      - `type: :coordinator`
 
     - `name: String`
 
@@ -2853,8 +3010,6 @@ List Sessions
 
         A custom tool as returned in API responses.
 
-    - `type: :agent`
-
     - `version: Integer`
 
       format: int32
@@ -2869,6 +3024,8 @@ List Sessions
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `type: :limit`
+
     - `max_list_cost: BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
@@ -2880,8 +3037,6 @@ List Sessions
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `type: :limit`
 
   - `created_at: Time`
 
@@ -2896,6 +3051,8 @@ List Sessions
   - `outcome_evaluations: Array[BetaManagedAgentsOutcomeEvaluationResource]`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `type: :outcome_evaluation`
 
     - `completed_at: Time`
 
@@ -2925,11 +3082,11 @@ List Sessions
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `type: :outcome_evaluation`
-
   - `resources: Array[BetaManagedAgentsSessionResource]`
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
+
+      - `type: :github_repository`
 
       - `id: String`
 
@@ -2940,8 +3097,6 @@ List Sessions
         format: date-time
 
       - `mount_path: String`
-
-      - `type: :github_repository`
 
       - `updated_at: Time`
 
@@ -2955,15 +3110,17 @@ List Sessions
 
         - `class BetaManagedAgentsBranchCheckout`
 
+          - `type: :branch`
+
           - `name: String`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `type: :branch`
-
         - `class BetaManagedAgentsCommitCheckout`
+
+          - `type: :commit`
 
           - `sha: String`
 
@@ -2971,9 +3128,9 @@ List Sessions
 
             minLength: 7, maxLength: 64
 
-          - `type: :commit`
-
     - `class BetaManagedAgentsFileResource`
+
+      - `type: :file`
 
       - `id: String`
 
@@ -2987,8 +3144,6 @@ List Sessions
 
       - `mount_path: String`
 
-      - `type: :file`
-
       - `updated_at: Time`
 
         A timestamp in RFC 3339 format
@@ -2999,11 +3154,11 @@ List Sessions
 
       A memory store attached to an agent session.
 
+      - `type: :memory_store`
+
       - `memory_store_id: String`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `type: :memory_store`
 
       - `access: :read_write | :read_only`
 
@@ -3060,8 +3215,6 @@ List Sessions
     - `:terminated`
 
   - `title: String`
-
-  - `type: :session`
 
   - `updated_at: Time`
 
@@ -3371,7 +3524,7 @@ Get Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3419,6 +3572,8 @@ Get Session
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -3461,11 +3616,15 @@ Get Session
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
 
   A Managed Agents `session`.
+
+  - `type: :session`
 
   - `id: String`
 
@@ -3473,15 +3632,17 @@ Get Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `type: :agent`
+
     - `id: String`
 
     - `description: String`
 
     - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-      - `name: String`
-
       - `type: :url`
+
+      - `name: String`
 
       - `url: String`
 
@@ -3609,6 +3770,8 @@ Get Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `type: :coordinator`
+
       - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -3617,15 +3780,17 @@ Get Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `type: :agent`
+
           - `id: String`
 
           - `description: String`
 
           - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-            - `name: String`
-
             - `type: :url`
+
+            - `name: String`
 
             - `url: String`
 
@@ -3641,9 +3806,9 @@ Get Session
 
               A resolved Anthropic-managed skill.
 
-              - `skill_id: String`
-
               - `type: :anthropic`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -3651,9 +3816,9 @@ Get Session
 
               A resolved user-created custom skill.
 
-              - `skill_id: String`
-
               - `type: :custom`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -3663,17 +3828,21 @@ Get Session
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
+              - `type: :agent_toolset_20260401`
+
               - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                 - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
+                  - `type: :bash`
+
                   - `enabled: bool`
 
                   - `name: :bash`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3689,17 +3858,23 @@ Get Session
 
                       - `type: :always_ask`
 
-                  - `type: :bash`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `type: :auto`
 
                 - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
+                  - `type: :edit`
+
                   - `enabled: bool`
 
                   - `name: :edit`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3711,17 +3886,21 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :edit`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
+                  - `type: :read`
+
                   - `enabled: bool`
 
                   - `name: :read`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3733,17 +3912,21 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :read`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
+                  - `type: :write`
+
                   - `enabled: bool`
 
                   - `name: :write`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3755,17 +3938,21 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :write`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
+                  - `type: :glob`
+
                   - `enabled: bool`
 
                   - `name: :glob`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3777,17 +3964,21 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :glob`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
+                  - `type: :grep`
+
                   - `enabled: bool`
 
                   - `name: :grep`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3799,17 +3990,21 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :grep`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
+                  - `type: :web_fetch`
+
                   - `enabled: bool`
 
                   - `name: :web_fetch`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3821,7 +4016,9 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_fetch`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -3835,11 +4032,13 @@ Get Session
 
                   Configuration for the web_search tool.
 
+                  - `type: :web_search`
+
                   - `enabled: bool`
 
                   - `name: :web_search`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -3851,7 +4050,9 @@ Get Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_search`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -3893,7 +4094,7 @@ Get Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -3905,9 +4106,13 @@ Get Session
 
                     Tool calls require user confirmation before execution.
 
-              - `type: :agent_toolset_20260401`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMCPToolset`
+
+              - `type: :mcp_toolset`
 
               - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -3915,7 +4120,7 @@ Get Session
 
                 - `name: String`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -3926,6 +4131,10 @@ Get Session
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
+
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -3933,7 +4142,7 @@ Get Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -3945,13 +4154,17 @@ Get Session
 
                     Tool calls require user confirmation before execution.
 
-              - `mcp_server_name: String`
+                  - `class BetaManagedAgentsAutoPolicy`
 
-              - `type: :mcp_toolset`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `mcp_server_name: String`
 
             - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
+
+              - `type: :custom`
 
               - `description: String`
 
@@ -3967,10 +4180,6 @@ Get Session
 
               - `name: String`
 
-              - `type: :custom`
-
-          - `type: :agent`
-
           - `version: Integer`
 
             format: int32
@@ -3979,13 +4188,11 @@ Get Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `type: :advisor`
+
           - `model: String`
 
             The advisor model id.
-
-          - `type: :advisor`
-
-      - `type: :coordinator`
 
     - `name: String`
 
@@ -4011,8 +4218,6 @@ Get Session
 
         A custom tool as returned in API responses.
 
-    - `type: :agent`
-
     - `version: Integer`
 
       format: int32
@@ -4027,6 +4232,8 @@ Get Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `type: :limit`
+
     - `max_list_cost: BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
@@ -4038,8 +4245,6 @@ Get Session
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `type: :limit`
 
   - `created_at: Time`
 
@@ -4054,6 +4259,8 @@ Get Session
   - `outcome_evaluations: Array[BetaManagedAgentsOutcomeEvaluationResource]`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `type: :outcome_evaluation`
 
     - `completed_at: Time`
 
@@ -4083,11 +4290,11 @@ Get Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `type: :outcome_evaluation`
-
   - `resources: Array[BetaManagedAgentsSessionResource]`
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
+
+      - `type: :github_repository`
 
       - `id: String`
 
@@ -4098,8 +4305,6 @@ Get Session
         format: date-time
 
       - `mount_path: String`
-
-      - `type: :github_repository`
 
       - `updated_at: Time`
 
@@ -4113,15 +4318,17 @@ Get Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
+          - `type: :branch`
+
           - `name: String`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `type: :branch`
-
         - `class BetaManagedAgentsCommitCheckout`
+
+          - `type: :commit`
 
           - `sha: String`
 
@@ -4129,9 +4336,9 @@ Get Session
 
             minLength: 7, maxLength: 64
 
-          - `type: :commit`
-
     - `class BetaManagedAgentsFileResource`
+
+      - `type: :file`
 
       - `id: String`
 
@@ -4145,8 +4352,6 @@ Get Session
 
       - `mount_path: String`
 
-      - `type: :file`
-
       - `updated_at: Time`
 
         A timestamp in RFC 3339 format
@@ -4157,11 +4362,11 @@ Get Session
 
       A memory store attached to an agent session.
 
+      - `type: :memory_store`
+
       - `memory_store_id: String`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `type: :memory_store`
 
       - `access: :read_write | :read_only`
 
@@ -4218,8 +4423,6 @@ Get Session
     - `:terminated`
 
   - `title: String`
-
-  - `type: :session`
 
   - `updated_at: Time`
 
@@ -4525,13 +4728,13 @@ Update Session
 
     Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
+    - `type: :url`
+
     - `name: String`
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
       minLength: 1, maxLength: 255
-
-    - `type: :url`
 
     - `url: String`
 
@@ -4557,6 +4760,8 @@ Update Session
 
           Configuration override for the bash tool.
 
+          - `type: :bash`
+
           - `name: :bash`
 
             Must be "bash".
@@ -4565,7 +4770,7 @@ Update Session
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4581,11 +4786,17 @@ Update Session
 
               - `type: :always_ask`
 
-          - `type: :bash`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `type: :auto`
 
         - `class BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
+
+          - `type: :edit`
 
           - `name: :edit`
 
@@ -4595,7 +4806,7 @@ Update Session
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4607,11 +4818,15 @@ Update Session
 
               Tool calls require user confirmation before execution.
 
-          - `type: :edit`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
+
+          - `type: :read`
 
           - `name: :read`
 
@@ -4621,7 +4836,7 @@ Update Session
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4633,11 +4848,15 @@ Update Session
 
               Tool calls require user confirmation before execution.
 
-          - `type: :read`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
+
+          - `type: :write`
 
           - `name: :write`
 
@@ -4647,7 +4866,7 @@ Update Session
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4659,11 +4878,15 @@ Update Session
 
               Tool calls require user confirmation before execution.
 
-          - `type: :write`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
+
+          - `type: :glob`
 
           - `name: :glob`
 
@@ -4673,7 +4896,7 @@ Update Session
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4685,11 +4908,15 @@ Update Session
 
               Tool calls require user confirmation before execution.
 
-          - `type: :glob`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
+
+          - `type: :grep`
 
           - `name: :grep`
 
@@ -4699,7 +4926,7 @@ Update Session
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4711,11 +4938,15 @@ Update Session
 
               Tool calls require user confirmation before execution.
 
-          - `type: :grep`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
+
+          - `type: :web_fetch`
 
           - `name: :web_fetch`
 
@@ -4739,7 +4970,7 @@ Update Session
 
             format: int32
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4751,11 +4982,15 @@ Update Session
 
               Tool calls require user confirmation before execution.
 
-          - `type: :web_fetch`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
+
+          - `type: :web_search`
 
           - `name: :web_search`
 
@@ -4773,7 +5008,7 @@ Update Session
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -4785,7 +5020,9 @@ Update Session
 
               Tool calls require user confirmation before execution.
 
-          - `type: :web_search`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `user_location: BetaManagedAgentsUserLocation`
 
@@ -4825,7 +5062,7 @@ Update Session
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -4837,17 +5074,21 @@ Update Session
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `type: :mcp_toolset`
 
       - `mcp_server_name: String`
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
         minLength: 1, maxLength: 255
-
-      - `type: :mcp_toolset`
 
       - `configs: Array[BetaManagedAgentsMCPToolConfigParams]`
 
@@ -4863,7 +5104,7 @@ Update Session
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -4874,6 +5115,10 @@ Update Session
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
+
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
@@ -4883,7 +5128,7 @@ Update Session
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -4895,9 +5140,15 @@ Update Session
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `type: :custom`
 
       - `description: String`
 
@@ -4921,11 +5172,11 @@ Update Session
 
         minLength: 1, maxLength: 128
 
-      - `type: :custom`
-
 - `budget: BetaManagedAgentsBudgetLimit`
 
   A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `type: :limit`
 
   - `max_list_cost: BetaMonetaryAmount`
 
@@ -4938,8 +5189,6 @@ Update Session
     - `currency: BetaCurrency`
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-  - `type: :limit`
 
 - `metadata: Hash[Symbol, String]`
 
@@ -4961,7 +5210,7 @@ Update Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5009,6 +5258,8 @@ Update Session
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -5051,11 +5302,15 @@ Update Session
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
 
   A Managed Agents `session`.
+
+  - `type: :session`
 
   - `id: String`
 
@@ -5063,15 +5318,17 @@ Update Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `type: :agent`
+
     - `id: String`
 
     - `description: String`
 
     - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-      - `name: String`
-
       - `type: :url`
+
+      - `name: String`
 
       - `url: String`
 
@@ -5199,6 +5456,8 @@ Update Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `type: :coordinator`
+
       - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -5207,15 +5466,17 @@ Update Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `type: :agent`
+
           - `id: String`
 
           - `description: String`
 
           - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-            - `name: String`
-
             - `type: :url`
+
+            - `name: String`
 
             - `url: String`
 
@@ -5231,9 +5492,9 @@ Update Session
 
               A resolved Anthropic-managed skill.
 
-              - `skill_id: String`
-
               - `type: :anthropic`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -5241,9 +5502,9 @@ Update Session
 
               A resolved user-created custom skill.
 
-              - `skill_id: String`
-
               - `type: :custom`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -5253,17 +5514,21 @@ Update Session
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
+              - `type: :agent_toolset_20260401`
+
               - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                 - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
+                  - `type: :bash`
+
                   - `enabled: bool`
 
                   - `name: :bash`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5279,17 +5544,23 @@ Update Session
 
                       - `type: :always_ask`
 
-                  - `type: :bash`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `type: :auto`
 
                 - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
+                  - `type: :edit`
+
                   - `enabled: bool`
 
                   - `name: :edit`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5301,17 +5572,21 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :edit`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
+                  - `type: :read`
+
                   - `enabled: bool`
 
                   - `name: :read`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5323,17 +5598,21 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :read`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
+                  - `type: :write`
+
                   - `enabled: bool`
 
                   - `name: :write`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5345,17 +5624,21 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :write`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
+                  - `type: :glob`
+
                   - `enabled: bool`
 
                   - `name: :glob`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5367,17 +5650,21 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :glob`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
+                  - `type: :grep`
+
                   - `enabled: bool`
 
                   - `name: :grep`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5389,17 +5676,21 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :grep`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
+                  - `type: :web_fetch`
+
                   - `enabled: bool`
 
                   - `name: :web_fetch`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5411,7 +5702,9 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_fetch`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -5425,11 +5718,13 @@ Update Session
 
                   Configuration for the web_search tool.
 
+                  - `type: :web_search`
+
                   - `enabled: bool`
 
                   - `name: :web_search`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -5441,7 +5736,9 @@ Update Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_search`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -5483,7 +5780,7 @@ Update Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -5495,9 +5792,13 @@ Update Session
 
                     Tool calls require user confirmation before execution.
 
-              - `type: :agent_toolset_20260401`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMCPToolset`
+
+              - `type: :mcp_toolset`
 
               - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -5505,7 +5806,7 @@ Update Session
 
                 - `name: String`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -5516,6 +5817,10 @@ Update Session
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
+
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -5523,7 +5828,7 @@ Update Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -5535,13 +5840,17 @@ Update Session
 
                     Tool calls require user confirmation before execution.
 
-              - `mcp_server_name: String`
+                  - `class BetaManagedAgentsAutoPolicy`
 
-              - `type: :mcp_toolset`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `mcp_server_name: String`
 
             - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
+
+              - `type: :custom`
 
               - `description: String`
 
@@ -5557,10 +5866,6 @@ Update Session
 
               - `name: String`
 
-              - `type: :custom`
-
-          - `type: :agent`
-
           - `version: Integer`
 
             format: int32
@@ -5569,13 +5874,11 @@ Update Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `type: :advisor`
+
           - `model: String`
 
             The advisor model id.
-
-          - `type: :advisor`
-
-      - `type: :coordinator`
 
     - `name: String`
 
@@ -5601,8 +5904,6 @@ Update Session
 
         A custom tool as returned in API responses.
 
-    - `type: :agent`
-
     - `version: Integer`
 
       format: int32
@@ -5617,6 +5918,8 @@ Update Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `type: :limit`
+
     - `max_list_cost: BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
@@ -5628,8 +5931,6 @@ Update Session
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `type: :limit`
 
   - `created_at: Time`
 
@@ -5644,6 +5945,8 @@ Update Session
   - `outcome_evaluations: Array[BetaManagedAgentsOutcomeEvaluationResource]`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `type: :outcome_evaluation`
 
     - `completed_at: Time`
 
@@ -5673,11 +5976,11 @@ Update Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `type: :outcome_evaluation`
-
   - `resources: Array[BetaManagedAgentsSessionResource]`
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
+
+      - `type: :github_repository`
 
       - `id: String`
 
@@ -5688,8 +5991,6 @@ Update Session
         format: date-time
 
       - `mount_path: String`
-
-      - `type: :github_repository`
 
       - `updated_at: Time`
 
@@ -5703,15 +6004,17 @@ Update Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
+          - `type: :branch`
+
           - `name: String`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `type: :branch`
-
         - `class BetaManagedAgentsCommitCheckout`
+
+          - `type: :commit`
 
           - `sha: String`
 
@@ -5719,9 +6022,9 @@ Update Session
 
             minLength: 7, maxLength: 64
 
-          - `type: :commit`
-
     - `class BetaManagedAgentsFileResource`
+
+      - `type: :file`
 
       - `id: String`
 
@@ -5735,8 +6038,6 @@ Update Session
 
       - `mount_path: String`
 
-      - `type: :file`
-
       - `updated_at: Time`
 
         A timestamp in RFC 3339 format
@@ -5747,11 +6048,11 @@ Update Session
 
       A memory store attached to an agent session.
 
+      - `type: :memory_store`
+
       - `memory_store_id: String`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `type: :memory_store`
 
       - `access: :read_write | :read_only`
 
@@ -5808,8 +6109,6 @@ Update Session
     - `:terminated`
 
   - `title: String`
-
-  - `type: :session`
 
   - `updated_at: Time`
 
@@ -6113,7 +6412,7 @@ Delete Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -6161,6 +6460,8 @@ Delete Session
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -6203,15 +6504,17 @@ Delete Session
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession`
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `id: String`
-
   - `type: :session_deleted`
+
+  - `id: String`
 
 ### Example
 
@@ -6252,7 +6555,7 @@ Archive Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -6300,6 +6603,8 @@ Archive Session
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -6342,11 +6647,15 @@ Archive Session
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
 
   A Managed Agents `session`.
+
+  - `type: :session`
 
   - `id: String`
 
@@ -6354,15 +6663,17 @@ Archive Session
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `type: :agent`
+
     - `id: String`
 
     - `description: String`
 
     - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-      - `name: String`
-
       - `type: :url`
+
+      - `name: String`
 
       - `url: String`
 
@@ -6490,6 +6801,8 @@ Archive Session
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `type: :coordinator`
+
       - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -6498,15 +6811,17 @@ Archive Session
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `type: :agent`
+
           - `id: String`
 
           - `description: String`
 
           - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-            - `name: String`
-
             - `type: :url`
+
+            - `name: String`
 
             - `url: String`
 
@@ -6522,9 +6837,9 @@ Archive Session
 
               A resolved Anthropic-managed skill.
 
-              - `skill_id: String`
-
               - `type: :anthropic`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -6532,9 +6847,9 @@ Archive Session
 
               A resolved user-created custom skill.
 
-              - `skill_id: String`
-
               - `type: :custom`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -6544,17 +6859,21 @@ Archive Session
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
+              - `type: :agent_toolset_20260401`
+
               - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                 - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
+                  - `type: :bash`
+
                   - `enabled: bool`
 
                   - `name: :bash`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6570,17 +6889,23 @@ Archive Session
 
                       - `type: :always_ask`
 
-                  - `type: :bash`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `type: :auto`
 
                 - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
+                  - `type: :edit`
+
                   - `enabled: bool`
 
                   - `name: :edit`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6592,17 +6917,21 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :edit`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
+                  - `type: :read`
+
                   - `enabled: bool`
 
                   - `name: :read`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6614,17 +6943,21 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :read`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
+                  - `type: :write`
+
                   - `enabled: bool`
 
                   - `name: :write`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6636,17 +6969,21 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :write`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
+                  - `type: :glob`
+
                   - `enabled: bool`
 
                   - `name: :glob`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6658,17 +6995,21 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :glob`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
+                  - `type: :grep`
+
                   - `enabled: bool`
 
                   - `name: :grep`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6680,17 +7021,21 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :grep`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
+                  - `type: :web_fetch`
+
                   - `enabled: bool`
 
                   - `name: :web_fetch`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6702,7 +7047,9 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_fetch`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -6716,11 +7063,13 @@ Archive Session
 
                   Configuration for the web_search tool.
 
+                  - `type: :web_search`
+
                   - `enabled: bool`
 
                   - `name: :web_search`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -6732,7 +7081,9 @@ Archive Session
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_search`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -6774,7 +7125,7 @@ Archive Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -6786,9 +7137,13 @@ Archive Session
 
                     Tool calls require user confirmation before execution.
 
-              - `type: :agent_toolset_20260401`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMCPToolset`
+
+              - `type: :mcp_toolset`
 
               - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -6796,7 +7151,7 @@ Archive Session
 
                 - `name: String`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -6807,6 +7162,10 @@ Archive Session
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
+
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -6814,7 +7173,7 @@ Archive Session
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -6826,13 +7185,17 @@ Archive Session
 
                     Tool calls require user confirmation before execution.
 
-              - `mcp_server_name: String`
+                  - `class BetaManagedAgentsAutoPolicy`
 
-              - `type: :mcp_toolset`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `mcp_server_name: String`
 
             - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
+
+              - `type: :custom`
 
               - `description: String`
 
@@ -6848,10 +7211,6 @@ Archive Session
 
               - `name: String`
 
-              - `type: :custom`
-
-          - `type: :agent`
-
           - `version: Integer`
 
             format: int32
@@ -6860,13 +7219,11 @@ Archive Session
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `type: :advisor`
+
           - `model: String`
 
             The advisor model id.
-
-          - `type: :advisor`
-
-      - `type: :coordinator`
 
     - `name: String`
 
@@ -6892,8 +7249,6 @@ Archive Session
 
         A custom tool as returned in API responses.
 
-    - `type: :agent`
-
     - `version: Integer`
 
       format: int32
@@ -6908,6 +7263,8 @@ Archive Session
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `type: :limit`
+
     - `max_list_cost: BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
@@ -6919,8 +7276,6 @@ Archive Session
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `type: :limit`
 
   - `created_at: Time`
 
@@ -6935,6 +7290,8 @@ Archive Session
   - `outcome_evaluations: Array[BetaManagedAgentsOutcomeEvaluationResource]`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `type: :outcome_evaluation`
 
     - `completed_at: Time`
 
@@ -6964,11 +7321,11 @@ Archive Session
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `type: :outcome_evaluation`
-
   - `resources: Array[BetaManagedAgentsSessionResource]`
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
+
+      - `type: :github_repository`
 
       - `id: String`
 
@@ -6979,8 +7336,6 @@ Archive Session
         format: date-time
 
       - `mount_path: String`
-
-      - `type: :github_repository`
 
       - `updated_at: Time`
 
@@ -6994,15 +7349,17 @@ Archive Session
 
         - `class BetaManagedAgentsBranchCheckout`
 
+          - `type: :branch`
+
           - `name: String`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `type: :branch`
-
         - `class BetaManagedAgentsCommitCheckout`
+
+          - `type: :commit`
 
           - `sha: String`
 
@@ -7010,9 +7367,9 @@ Archive Session
 
             minLength: 7, maxLength: 64
 
-          - `type: :commit`
-
     - `class BetaManagedAgentsFileResource`
+
+      - `type: :file`
 
       - `id: String`
 
@@ -7026,8 +7383,6 @@ Archive Session
 
       - `mount_path: String`
 
-      - `type: :file`
-
       - `updated_at: Time`
 
         A timestamp in RFC 3339 format
@@ -7038,11 +7393,11 @@ Archive Session
 
       A memory store attached to an agent session.
 
+      - `type: :memory_store`
+
       - `memory_store_id: String`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `type: :memory_store`
 
       - `access: :read_write | :read_only`
 
@@ -7099,8 +7454,6 @@ Archive Session
     - `:terminated`
 
   - `title: String`
-
-  - `type: :session`
 
   - `updated_at: Time`
 
@@ -7394,23 +7747,23 @@ puts(beta_managed_agents_session)
 
   Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
+  - `type: :advisor`
+
   - `model: String`
 
     A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
     minLength: 1, maxLength: 256
 
-  - `type: :advisor`
-
 ### Beta Managed Agents Agent Message Preview
 
 - `class BetaManagedAgentsAgentMessagePreview`
 
+  - `type: :"agent.message"`
+
   - `id: String`
 
     The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
-
-  - `type: :"agent.message"`
 
 ### Beta Managed Agents Agent Params
 
@@ -7418,13 +7771,13 @@ puts(beta_managed_agents_session)
 
   Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+  - `type: :agent`
+
   - `id: String`
 
     The `agent` ID.
 
     minLength: 1, maxLength: 128
-
-  - `type: :agent`
 
   - `version: Integer`
 
@@ -7436,11 +7789,11 @@ puts(beta_managed_agents_session)
 
 - `class BetaManagedAgentsAgentThinkingPreview`
 
+  - `type: :"agent.thinking"`
+
   - `id: String`
 
     The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
-
-  - `type: :"agent.thinking"`
 
 ### Beta Managed Agents Agent With Overrides Params
 
@@ -7448,25 +7801,25 @@ puts(beta_managed_agents_session)
 
   Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
+  - `type: :agent_with_overrides`
+
   - `id: String`
 
     The `agent` ID.
 
     minLength: 1, maxLength: 128
 
-  - `type: :agent_with_overrides`
-
   - `mcp_servers: Array[BetaManagedAgentsURLMCPServerParams]`
 
     Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+    - `type: :url`
 
     - `name: String`
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
       minLength: 1, maxLength: 255
-
-    - `type: :url`
 
     - `url: String`
 
@@ -7626,13 +7979,13 @@ puts(beta_managed_agents_session)
 
       An Anthropic-managed skill.
 
+      - `type: :anthropic`
+
       - `skill_id: String`
 
         Identifier of the Anthropic skill (e.g., "xlsx").
 
         minLength: 1, maxLength: 64
-
-      - `type: :anthropic`
 
       - `version: String`
 
@@ -7644,13 +7997,13 @@ puts(beta_managed_agents_session)
 
       A user-created custom skill.
 
+      - `type: :custom`
+
       - `skill_id: String`
 
         Tagged ID of the custom skill (e.g., "skill_01XJ5...").
 
         minLength: 1, maxLength: 64
-
-      - `type: :custom`
 
       - `version: String`
 
@@ -7682,6 +8035,8 @@ puts(beta_managed_agents_session)
 
           Configuration override for the bash tool.
 
+          - `type: :bash`
+
           - `name: :bash`
 
             Must be "bash".
@@ -7690,7 +8045,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7706,11 +8061,17 @@ puts(beta_managed_agents_session)
 
               - `type: :always_ask`
 
-          - `type: :bash`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `type: :auto`
 
         - `class BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
+
+          - `type: :edit`
 
           - `name: :edit`
 
@@ -7720,7 +8081,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7732,11 +8093,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :edit`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
+
+          - `type: :read`
 
           - `name: :read`
 
@@ -7746,7 +8111,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7758,11 +8123,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :read`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
+
+          - `type: :write`
 
           - `name: :write`
 
@@ -7772,7 +8141,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7784,11 +8153,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :write`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
+
+          - `type: :glob`
 
           - `name: :glob`
 
@@ -7798,7 +8171,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7810,11 +8183,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :glob`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
+
+          - `type: :grep`
 
           - `name: :grep`
 
@@ -7824,7 +8201,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7836,11 +8213,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :grep`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
+
+          - `type: :web_fetch`
 
           - `name: :web_fetch`
 
@@ -7864,7 +8245,7 @@ puts(beta_managed_agents_session)
 
             format: int32
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7876,11 +8257,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :web_fetch`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
+
+          - `type: :web_search`
 
           - `name: :web_search`
 
@@ -7898,7 +8283,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -7910,7 +8295,9 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :web_search`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `user_location: BetaManagedAgentsUserLocation`
 
@@ -7950,7 +8337,7 @@ puts(beta_managed_agents_session)
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -7962,17 +8349,21 @@ puts(beta_managed_agents_session)
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `type: :mcp_toolset`
 
       - `mcp_server_name: String`
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
         minLength: 1, maxLength: 255
-
-      - `type: :mcp_toolset`
 
       - `configs: Array[BetaManagedAgentsMCPToolConfigParams]`
 
@@ -7988,7 +8379,7 @@ puts(beta_managed_agents_session)
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -7999,6 +8390,10 @@ puts(beta_managed_agents_session)
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
+
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
@@ -8008,7 +8403,7 @@ puts(beta_managed_agents_session)
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -8020,9 +8415,15 @@ puts(beta_managed_agents_session)
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `type: :custom`
 
       - `description: String`
 
@@ -8046,8 +8447,6 @@ puts(beta_managed_agents_session)
 
         minLength: 1, maxLength: 128
 
-      - `type: :custom`
-
   - `version: Integer`
 
     The specific `agent` version to use. Omit to use the latest version.
@@ -8058,19 +8457,21 @@ puts(beta_managed_agents_session)
 
 - `class BetaManagedAgentsBranchCheckout`
 
+  - `type: :branch`
+
   - `name: String`
 
     Branch name to check out.
 
     minLength: 1, maxLength: 255
 
-  - `type: :branch`
-
 ### Beta Managed Agents Budget Limit
 
 - `class BetaManagedAgentsBudgetLimit`
 
   A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+  - `type: :limit`
 
   - `max_list_cost: BetaMonetaryAmount`
 
@@ -8083,8 +8484,6 @@ puts(beta_managed_agents_session)
     - `currency: BetaCurrency`
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-  - `type: :limit`
 
 ### Beta Managed Agents Cache Creation Usage
 
@@ -8108,13 +8507,13 @@ puts(beta_managed_agents_session)
 
 - `class BetaManagedAgentsCommitCheckout`
 
+  - `type: :commit`
+
   - `sha: String`
 
     Full commit SHA to check out.
 
     minLength: 7, maxLength: 64
-
-  - `type: :commit`
 
 ### Beta Managed Agents Deleted Session
 
@@ -8122,27 +8521,27 @@ puts(beta_managed_agents_session)
 
   Confirmation that a `session` has been permanently deleted.
 
-  - `id: String`
-
   - `type: :session_deleted`
+
+  - `id: String`
 
 ### Beta Managed Agents Delta Content
 
 - `class BetaManagedAgentsDeltaContent`
 
+  - `type: :content_delta`
+
   - `content: BetaManagedAgentsTextBlock`
 
     Regular text content.
+
+    - `type: :text`
 
     - `text: String`
 
       The text content.
 
       minLength: 1
-
-    - `type: :text`
-
-  - `type: :content_delta`
 
   - `index: Integer`
 
@@ -8156,23 +8555,25 @@ puts(beta_managed_agents_session)
 
   An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+  - `type: :event_delta`
+
   - `delta: BetaManagedAgentsDeltaContent`
 
     One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+    - `type: :content_delta`
+
     - `content: BetaManagedAgentsTextBlock`
 
       Regular text content.
+
+      - `type: :text`
 
       - `text: String`
 
         The text content.
 
         minLength: 1
-
-      - `type: :text`
-
-    - `type: :content_delta`
 
     - `index: Integer`
 
@@ -8183,8 +8584,6 @@ puts(beta_managed_agents_session)
   - `event_id: String`
 
     The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
-
-  - `type: :event_delta`
 
 ### Beta Managed Agents Delta Type
 
@@ -8202,13 +8601,13 @@ puts(beta_managed_agents_session)
 
   Mount a file uploaded via the Files API into the session.
 
+  - `type: :file`
+
   - `file_id: String`
 
     ID of a previously uploaded file.
 
     minLength: 1, maxLength: 128
-
-  - `type: :file`
 
   - `mount_path: String`
 
@@ -8222,12 +8621,6 @@ puts(beta_managed_agents_session)
 
   Mount a GitHub repository into the session's container.
 
-  - `authorization_token: String`
-
-    GitHub authorization token used to clone the repository.
-
-    minLength: 1, maxLength: 4096
-
   - `type: :github_repository`
 
   - `url: String`
@@ -8236,11 +8629,19 @@ puts(beta_managed_agents_session)
 
     minLength: 1, maxLength: 2048
 
+  - `authorization_token: String`
+
+    GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
+
+    minLength: 1, maxLength: 4096
+
   - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
     Branch or commit to check out. Defaults to the repository's default branch.
 
     - `class BetaManagedAgentsBranchCheckout`
+
+      - `type: :branch`
 
       - `name: String`
 
@@ -8248,17 +8649,15 @@ puts(beta_managed_agents_session)
 
         minLength: 1, maxLength: 255
 
-      - `type: :branch`
-
     - `class BetaManagedAgentsCommitCheckout`
+
+      - `type: :commit`
 
       - `sha: String`
 
         Full commit SHA to check out.
 
         minLength: 7, maxLength: 64
-
-      - `type: :commit`
 
   - `mount_path: String`
 
@@ -8272,11 +8671,11 @@ puts(beta_managed_agents_session)
 
   Parameters for attaching a memory store to an agent session.
 
+  - `type: :memory_store`
+
   - `memory_store_id: String`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-  - `type: :memory_store`
 
   - `access: :read_write | :read_only`
 
@@ -8298,6 +8697,8 @@ puts(beta_managed_agents_session)
 
   Resolved coordinator topology with a concrete agent roster.
 
+  - `type: :coordinator`
+
   - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
     Agents the coordinator may spawn as session threads, each resolved to a specific version.
@@ -8306,9 +8707,9 @@ puts(beta_managed_agents_session)
 
       A resolved agent reference with a concrete version.
 
-      - `id: String`
-
       - `type: :agent`
+
+      - `id: String`
 
       - `version: Integer`
 
@@ -8318,19 +8719,19 @@ puts(beta_managed_agents_session)
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `type: :advisor`
+
       - `model: String`
 
         The advisor model id.
-
-      - `type: :advisor`
-
-  - `type: :coordinator`
 
 ### Beta Managed Agents Multiagent Params
 
 - `class BetaManagedAgentsMultiagentParams`
 
   A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `type: :coordinator`
 
   - `agents: Array[BetaManagedAgentsMultiagentRosterEntryParams]`
 
@@ -8342,13 +8743,13 @@ puts(beta_managed_agents_session)
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+      - `type: :agent`
+
       - `id: String`
 
         The `agent` ID.
 
         minLength: 1, maxLength: 128
-
-      - `type: :agent`
 
       - `version: Integer`
 
@@ -8366,15 +8767,13 @@ puts(beta_managed_agents_session)
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
+      - `type: :advisor`
+
       - `model: String`
 
         A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
         minLength: 1, maxLength: 256
-
-      - `type: :advisor`
-
-  - `type: :coordinator`
 
 ### Beta Managed Agents Multiagent Roster Entry Params
 
@@ -8388,13 +8787,13 @@ puts(beta_managed_agents_session)
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
+    - `type: :agent`
+
     - `id: String`
 
       The `agent` ID.
 
       minLength: 1, maxLength: 128
-
-    - `type: :agent`
 
     - `version: Integer`
 
@@ -8412,19 +8811,21 @@ puts(beta_managed_agents_session)
 
     Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
+    - `type: :advisor`
+
     - `model: String`
 
       A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
 
       minLength: 1, maxLength: 256
 
-    - `type: :advisor`
-
 ### Beta Managed Agents Outcome Evaluation Resource
 
 - `class BetaManagedAgentsOutcomeEvaluationResource`
 
   Evaluation state for a single outcome defined via a `define_outcome` event.
+
+  - `type: :outcome_evaluation`
 
   - `completed_at: Time`
 
@@ -8454,8 +8855,6 @@ puts(beta_managed_agents_session)
 
     Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-  - `type: :outcome_evaluation`
-
 ### Beta Managed Agents Server Tool Usage
 
 - `class BetaManagedAgentsServerToolUsage`
@@ -8480,11 +8879,15 @@ puts(beta_managed_agents_session)
 
   A Managed Agents `session`.
 
+  - `type: :session`
+
   - `id: String`
 
   - `agent: BetaManagedAgentsSessionAgent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `type: :agent`
 
     - `id: String`
 
@@ -8492,9 +8895,9 @@ puts(beta_managed_agents_session)
 
     - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-      - `name: String`
-
       - `type: :url`
+
+      - `name: String`
 
       - `url: String`
 
@@ -8622,6 +9025,8 @@ puts(beta_managed_agents_session)
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `type: :coordinator`
+
       - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -8630,15 +9035,17 @@ puts(beta_managed_agents_session)
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `type: :agent`
+
           - `id: String`
 
           - `description: String`
 
           - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-            - `name: String`
-
             - `type: :url`
+
+            - `name: String`
 
             - `url: String`
 
@@ -8654,9 +9061,9 @@ puts(beta_managed_agents_session)
 
               A resolved Anthropic-managed skill.
 
-              - `skill_id: String`
-
               - `type: :anthropic`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -8664,9 +9071,9 @@ puts(beta_managed_agents_session)
 
               A resolved user-created custom skill.
 
-              - `skill_id: String`
-
               - `type: :custom`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -8676,17 +9083,21 @@ puts(beta_managed_agents_session)
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
+              - `type: :agent_toolset_20260401`
+
               - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                 - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
+                  - `type: :bash`
+
                   - `enabled: bool`
 
                   - `name: :bash`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8702,17 +9113,23 @@ puts(beta_managed_agents_session)
 
                       - `type: :always_ask`
 
-                  - `type: :bash`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `type: :auto`
 
                 - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
+                  - `type: :edit`
+
                   - `enabled: bool`
 
                   - `name: :edit`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8724,17 +9141,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :edit`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
+                  - `type: :read`
+
                   - `enabled: bool`
 
                   - `name: :read`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8746,17 +9167,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :read`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
+                  - `type: :write`
+
                   - `enabled: bool`
 
                   - `name: :write`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8768,17 +9193,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :write`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
+                  - `type: :glob`
+
                   - `enabled: bool`
 
                   - `name: :glob`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8790,17 +9219,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :glob`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
+                  - `type: :grep`
+
                   - `enabled: bool`
 
                   - `name: :grep`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8812,17 +9245,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :grep`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
+                  - `type: :web_fetch`
+
                   - `enabled: bool`
 
                   - `name: :web_fetch`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8834,7 +9271,9 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_fetch`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -8848,11 +9287,13 @@ puts(beta_managed_agents_session)
 
                   Configuration for the web_search tool.
 
+                  - `type: :web_search`
+
                   - `enabled: bool`
 
                   - `name: :web_search`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -8864,7 +9305,9 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_search`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -8906,7 +9349,7 @@ puts(beta_managed_agents_session)
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -8918,9 +9361,13 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-              - `type: :agent_toolset_20260401`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMCPToolset`
+
+              - `type: :mcp_toolset`
 
               - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -8928,7 +9375,7 @@ puts(beta_managed_agents_session)
 
                 - `name: String`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -8939,6 +9386,10 @@ puts(beta_managed_agents_session)
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
+
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -8946,7 +9397,7 @@ puts(beta_managed_agents_session)
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -8958,13 +9409,17 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-              - `mcp_server_name: String`
+                  - `class BetaManagedAgentsAutoPolicy`
 
-              - `type: :mcp_toolset`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `mcp_server_name: String`
 
             - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
+
+              - `type: :custom`
 
               - `description: String`
 
@@ -8980,10 +9435,6 @@ puts(beta_managed_agents_session)
 
               - `name: String`
 
-              - `type: :custom`
-
-          - `type: :agent`
-
           - `version: Integer`
 
             format: int32
@@ -8992,13 +9443,11 @@ puts(beta_managed_agents_session)
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `type: :advisor`
+
           - `model: String`
 
             The advisor model id.
-
-          - `type: :advisor`
-
-      - `type: :coordinator`
 
     - `name: String`
 
@@ -9024,8 +9473,6 @@ puts(beta_managed_agents_session)
 
         A custom tool as returned in API responses.
 
-    - `type: :agent`
-
     - `version: Integer`
 
       format: int32
@@ -9040,6 +9487,8 @@ puts(beta_managed_agents_session)
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `type: :limit`
+
     - `max_list_cost: BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
@@ -9051,8 +9500,6 @@ puts(beta_managed_agents_session)
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `type: :limit`
 
   - `created_at: Time`
 
@@ -9067,6 +9514,8 @@ puts(beta_managed_agents_session)
   - `outcome_evaluations: Array[BetaManagedAgentsOutcomeEvaluationResource]`
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
+
+    - `type: :outcome_evaluation`
 
     - `completed_at: Time`
 
@@ -9096,11 +9545,11 @@ puts(beta_managed_agents_session)
 
       Current evaluation state. `pending` before the agent begins work; `running` while producing or revising; `evaluating` while the grader scores; `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
 
-    - `type: :outcome_evaluation`
-
   - `resources: Array[BetaManagedAgentsSessionResource]`
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
+
+      - `type: :github_repository`
 
       - `id: String`
 
@@ -9111,8 +9560,6 @@ puts(beta_managed_agents_session)
         format: date-time
 
       - `mount_path: String`
-
-      - `type: :github_repository`
 
       - `updated_at: Time`
 
@@ -9126,15 +9573,17 @@ puts(beta_managed_agents_session)
 
         - `class BetaManagedAgentsBranchCheckout`
 
+          - `type: :branch`
+
           - `name: String`
 
             Branch name to check out.
 
             minLength: 1, maxLength: 255
 
-          - `type: :branch`
-
         - `class BetaManagedAgentsCommitCheckout`
+
+          - `type: :commit`
 
           - `sha: String`
 
@@ -9142,9 +9591,9 @@ puts(beta_managed_agents_session)
 
             minLength: 7, maxLength: 64
 
-          - `type: :commit`
-
     - `class BetaManagedAgentsFileResource`
+
+      - `type: :file`
 
       - `id: String`
 
@@ -9158,8 +9607,6 @@ puts(beta_managed_agents_session)
 
       - `mount_path: String`
 
-      - `type: :file`
-
       - `updated_at: Time`
 
         A timestamp in RFC 3339 format
@@ -9170,11 +9617,11 @@ puts(beta_managed_agents_session)
 
       A memory store attached to an agent session.
 
+      - `type: :memory_store`
+
       - `memory_store_id: String`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `type: :memory_store`
 
       - `access: :read_write | :read_only`
 
@@ -9231,8 +9678,6 @@ puts(beta_managed_agents_session)
     - `:terminated`
 
   - `title: String`
-
-  - `type: :session`
 
   - `updated_at: Time`
 
@@ -9318,15 +9763,17 @@ puts(beta_managed_agents_session)
 
   Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+  - `type: :agent`
+
   - `id: String`
 
   - `description: String`
 
   - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-    - `name: String`
-
     - `type: :url`
+
+    - `name: String`
 
     - `url: String`
 
@@ -9454,6 +9901,8 @@ puts(beta_managed_agents_session)
 
     Resolved coordinator topology with full agent definitions for each roster member.
 
+    - `type: :coordinator`
+
     - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
       Full `agent` definitions the coordinator may spawn as session threads.
@@ -9462,15 +9911,17 @@ puts(beta_managed_agents_session)
 
         Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+        - `type: :agent`
+
         - `id: String`
 
         - `description: String`
 
         - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-          - `name: String`
-
           - `type: :url`
+
+          - `name: String`
 
           - `url: String`
 
@@ -9486,9 +9937,9 @@ puts(beta_managed_agents_session)
 
             A resolved Anthropic-managed skill.
 
-            - `skill_id: String`
-
             - `type: :anthropic`
+
+            - `skill_id: String`
 
             - `version: String`
 
@@ -9496,9 +9947,9 @@ puts(beta_managed_agents_session)
 
             A resolved user-created custom skill.
 
-            - `skill_id: String`
-
             - `type: :custom`
+
+            - `skill_id: String`
 
             - `version: String`
 
@@ -9508,17 +9959,21 @@ puts(beta_managed_agents_session)
 
           - `class BetaManagedAgentsAgentToolset20260401`
 
+            - `type: :agent_toolset_20260401`
+
             - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
               - `class BetaManagedAgentsBashToolConfig`
 
                 Configuration for the bash tool.
 
+                - `type: :bash`
+
                 - `enabled: bool`
 
                 - `name: :bash`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9534,17 +9989,23 @@ puts(beta_managed_agents_session)
 
                     - `type: :always_ask`
 
-                - `type: :bash`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                    - `type: :auto`
 
               - `class BetaManagedAgentsEditToolConfig`
 
                 Configuration for the edit tool.
 
+                - `type: :edit`
+
                 - `enabled: bool`
 
                 - `name: :edit`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9556,17 +10017,21 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-                - `type: :edit`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsReadToolConfig`
 
                 Configuration for the read tool.
 
+                - `type: :read`
+
                 - `enabled: bool`
 
                 - `name: :read`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9578,17 +10043,21 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-                - `type: :read`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsWriteToolConfig`
 
                 Configuration for the write tool.
 
+                - `type: :write`
+
                 - `enabled: bool`
 
                 - `name: :write`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9600,17 +10069,21 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-                - `type: :write`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsGlobToolConfig`
 
                 Configuration for the glob tool.
 
+                - `type: :glob`
+
                 - `enabled: bool`
 
                 - `name: :glob`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9622,17 +10095,21 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-                - `type: :glob`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsGrepToolConfig`
 
                 Configuration for the grep tool.
 
+                - `type: :grep`
+
                 - `enabled: bool`
 
                 - `name: :grep`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9644,17 +10121,21 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-                - `type: :grep`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsWebFetchToolConfig`
 
                 Configuration for the web_fetch tool.
 
+                - `type: :web_fetch`
+
                 - `enabled: bool`
 
                 - `name: :web_fetch`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9666,7 +10147,9 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-                - `type: :web_fetch`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `allowed_domains: Array[String]`
 
@@ -9680,11 +10163,13 @@ puts(beta_managed_agents_session)
 
                 Configuration for the web_search tool.
 
+                - `type: :web_search`
+
                 - `enabled: bool`
 
                 - `name: :web_search`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -9696,7 +10181,9 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-                - `type: :web_search`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `allowed_domains: Array[String]`
 
@@ -9738,7 +10225,7 @@ puts(beta_managed_agents_session)
 
               - `enabled: bool`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -9750,9 +10237,13 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-            - `type: :agent_toolset_20260401`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `class BetaManagedAgentsMCPToolset`
+
+            - `type: :mcp_toolset`
 
             - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -9760,7 +10251,7 @@ puts(beta_managed_agents_session)
 
               - `name: String`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -9771,6 +10262,10 @@ puts(beta_managed_agents_session)
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
+
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -9778,7 +10273,7 @@ puts(beta_managed_agents_session)
 
               - `enabled: bool`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -9790,13 +10285,17 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-            - `mcp_server_name: String`
+                - `class BetaManagedAgentsAutoPolicy`
 
-            - `type: :mcp_toolset`
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+            - `mcp_server_name: String`
 
           - `class BetaManagedAgentsCustomTool`
 
             A custom tool as returned in API responses.
+
+            - `type: :custom`
 
             - `description: String`
 
@@ -9812,10 +10311,6 @@ puts(beta_managed_agents_session)
 
             - `name: String`
 
-            - `type: :custom`
-
-        - `type: :agent`
-
         - `version: Integer`
 
           format: int32
@@ -9824,13 +10319,11 @@ puts(beta_managed_agents_session)
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+        - `type: :advisor`
+
         - `model: String`
 
           The advisor model id.
-
-        - `type: :advisor`
-
-    - `type: :coordinator`
 
   - `name: String`
 
@@ -9856,8 +10349,6 @@ puts(beta_managed_agents_session)
 
       A custom tool as returned in API responses.
 
-  - `type: :agent`
-
   - `version: Integer`
 
     format: int32
@@ -9872,13 +10363,13 @@ puts(beta_managed_agents_session)
 
     Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
+    - `type: :url`
+
     - `name: String`
 
       Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
 
       minLength: 1, maxLength: 255
-
-    - `type: :url`
 
     - `url: String`
 
@@ -9904,6 +10395,8 @@ puts(beta_managed_agents_session)
 
           Configuration override for the bash tool.
 
+          - `type: :bash`
+
           - `name: :bash`
 
             Must be "bash".
@@ -9912,7 +10405,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -9928,11 +10421,17 @@ puts(beta_managed_agents_session)
 
               - `type: :always_ask`
 
-          - `type: :bash`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `type: :auto`
 
         - `class BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
+
+          - `type: :edit`
 
           - `name: :edit`
 
@@ -9942,7 +10441,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -9954,11 +10453,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :edit`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
+
+          - `type: :read`
 
           - `name: :read`
 
@@ -9968,7 +10471,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -9980,11 +10483,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :read`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
+
+          - `type: :write`
 
           - `name: :write`
 
@@ -9994,7 +10501,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -10006,11 +10513,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :write`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
+
+          - `type: :glob`
 
           - `name: :glob`
 
@@ -10020,7 +10531,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -10032,11 +10543,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :glob`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
+
+          - `type: :grep`
 
           - `name: :grep`
 
@@ -10046,7 +10561,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -10058,11 +10573,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :grep`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
+
+          - `type: :web_fetch`
 
           - `name: :web_fetch`
 
@@ -10086,7 +10605,7 @@ puts(beta_managed_agents_session)
 
             format: int32
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -10098,11 +10617,15 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :web_fetch`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
+
+          - `type: :web_search`
 
           - `name: :web_search`
 
@@ -10120,7 +10643,7 @@ puts(beta_managed_agents_session)
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
             Permission policy for tool execution.
 
@@ -10132,7 +10655,9 @@ puts(beta_managed_agents_session)
 
               Tool calls require user confirmation before execution.
 
-          - `type: :web_search`
+            - `class BetaManagedAgentsAutoPolicy`
+
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `user_location: BetaManagedAgentsUserLocation`
 
@@ -10172,7 +10697,7 @@ puts(beta_managed_agents_session)
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -10184,17 +10709,21 @@ puts(beta_managed_agents_session)
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `type: :mcp_toolset`
 
       - `mcp_server_name: String`
 
         Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
 
         minLength: 1, maxLength: 255
-
-      - `type: :mcp_toolset`
 
       - `configs: Array[BetaManagedAgentsMCPToolConfigParams]`
 
@@ -10210,7 +10739,7 @@ puts(beta_managed_agents_session)
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -10221,6 +10750,10 @@ puts(beta_managed_agents_session)
           - `class BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
+
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
@@ -10230,7 +10763,7 @@ puts(beta_managed_agents_session)
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
           Permission policy for tool execution.
 
@@ -10242,9 +10775,15 @@ puts(beta_managed_agents_session)
 
             Tool calls require user confirmation before execution.
 
+          - `class BetaManagedAgentsAutoPolicy`
+
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
     - `class BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `type: :custom`
 
       - `description: String`
 
@@ -10268,13 +10807,13 @@ puts(beta_managed_agents_session)
 
         minLength: 1, maxLength: 128
 
-      - `type: :custom`
-
 ### Beta Managed Agents Session Multiagent Coordinator
 
 - `class BetaManagedAgentsSessionMultiagentCoordinator`
 
   Resolved coordinator topology with full agent definitions for each roster member.
+
+  - `type: :coordinator`
 
   - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
@@ -10284,15 +10823,17 @@ puts(beta_managed_agents_session)
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `type: :agent`
+
       - `id: String`
 
       - `description: String`
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -10424,9 +10965,9 @@ puts(beta_managed_agents_session)
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: String`
-
           - `type: :anthropic`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -10434,9 +10975,9 @@ puts(beta_managed_agents_session)
 
           A resolved user-created custom skill.
 
-          - `skill_id: String`
-
           - `type: :custom`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -10446,17 +10987,21 @@ puts(beta_managed_agents_session)
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
+          - `type: :agent_toolset_20260401`
+
           - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
             - `class BetaManagedAgentsBashToolConfig`
 
               Configuration for the bash tool.
 
+              - `type: :bash`
+
               - `enabled: bool`
 
               - `name: :bash`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10472,17 +11017,23 @@ puts(beta_managed_agents_session)
 
                   - `type: :always_ask`
 
-              - `type: :bash`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `type: :auto`
 
             - `class BetaManagedAgentsEditToolConfig`
 
               Configuration for the edit tool.
 
+              - `type: :edit`
+
               - `enabled: bool`
 
               - `name: :edit`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10494,17 +11045,21 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :edit`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
 
+              - `type: :read`
+
               - `enabled: bool`
 
               - `name: :read`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10516,17 +11071,21 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :read`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
 
+              - `type: :write`
+
               - `enabled: bool`
 
               - `name: :write`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10538,17 +11097,21 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :write`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
 
+              - `type: :glob`
+
               - `enabled: bool`
 
               - `name: :glob`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10560,17 +11123,21 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :glob`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
 
+              - `type: :grep`
+
               - `enabled: bool`
 
               - `name: :grep`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10582,17 +11149,21 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :grep`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
 
+              - `type: :web_fetch`
+
               - `enabled: bool`
 
               - `name: :web_fetch`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10604,7 +11175,9 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_fetch`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -10618,11 +11191,13 @@ puts(beta_managed_agents_session)
 
               Configuration for the web_search tool.
 
+              - `type: :web_search`
+
               - `enabled: bool`
 
               - `name: :web_search`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -10634,7 +11209,9 @@ puts(beta_managed_agents_session)
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_search`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -10676,7 +11253,7 @@ puts(beta_managed_agents_session)
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -10688,9 +11265,13 @@ puts(beta_managed_agents_session)
 
                 Tool calls require user confirmation before execution.
 
-          - `type: :agent_toolset_20260401`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMCPToolset`
+
+          - `type: :mcp_toolset`
 
           - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -10698,7 +11279,7 @@ puts(beta_managed_agents_session)
 
             - `name: String`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -10709,6 +11290,10 @@ puts(beta_managed_agents_session)
               - `class BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
+
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -10716,7 +11301,7 @@ puts(beta_managed_agents_session)
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -10728,13 +11313,17 @@ puts(beta_managed_agents_session)
 
                 Tool calls require user confirmation before execution.
 
-          - `mcp_server_name: String`
+              - `class BetaManagedAgentsAutoPolicy`
 
-          - `type: :mcp_toolset`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `mcp_server_name: String`
 
         - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
+
+          - `type: :custom`
 
           - `description: String`
 
@@ -10750,10 +11339,6 @@ puts(beta_managed_agents_session)
 
           - `name: String`
 
-          - `type: :custom`
-
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -10762,13 +11347,11 @@ puts(beta_managed_agents_session)
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `type: :advisor`
+
       - `model: String`
 
         The advisor model id.
-
-      - `type: :advisor`
-
-  - `type: :coordinator`
 
 ### Beta Managed Agents Session Stats
 
@@ -10794,6 +11377,8 @@ puts(beta_managed_agents_session)
 
   Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
+  - `type: :"session.updated"`
+
   - `id: String`
 
     Unique identifier for this event.
@@ -10804,11 +11389,11 @@ puts(beta_managed_agents_session)
 
     format: date-time
 
-  - `type: :"session.updated"`
-
   - `agent: BetaManagedAgentsSessionAgent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `type: :agent`
 
     - `id: String`
 
@@ -10816,9 +11401,9 @@ puts(beta_managed_agents_session)
 
     - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-      - `name: String`
-
       - `type: :url`
+
+      - `name: String`
 
       - `url: String`
 
@@ -10946,6 +11531,8 @@ puts(beta_managed_agents_session)
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
+      - `type: :coordinator`
+
       - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
         Full `agent` definitions the coordinator may spawn as session threads.
@@ -10954,15 +11541,17 @@ puts(beta_managed_agents_session)
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+          - `type: :agent`
+
           - `id: String`
 
           - `description: String`
 
           - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-            - `name: String`
-
             - `type: :url`
+
+            - `name: String`
 
             - `url: String`
 
@@ -10978,9 +11567,9 @@ puts(beta_managed_agents_session)
 
               A resolved Anthropic-managed skill.
 
-              - `skill_id: String`
-
               - `type: :anthropic`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -10988,9 +11577,9 @@ puts(beta_managed_agents_session)
 
               A resolved user-created custom skill.
 
-              - `skill_id: String`
-
               - `type: :custom`
+
+              - `skill_id: String`
 
               - `version: String`
 
@@ -11000,17 +11589,21 @@ puts(beta_managed_agents_session)
 
             - `class BetaManagedAgentsAgentToolset20260401`
 
+              - `type: :agent_toolset_20260401`
+
               - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                 - `class BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
+                  - `type: :bash`
+
                   - `enabled: bool`
 
                   - `name: :bash`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11026,17 +11619,23 @@ puts(beta_managed_agents_session)
 
                       - `type: :always_ask`
 
-                  - `type: :bash`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                      - `type: :auto`
 
                 - `class BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
+                  - `type: :edit`
+
                   - `enabled: bool`
 
                   - `name: :edit`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11048,17 +11647,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :edit`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
+                  - `type: :read`
+
                   - `enabled: bool`
 
                   - `name: :read`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11070,17 +11673,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :read`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
+                  - `type: :write`
+
                   - `enabled: bool`
 
                   - `name: :write`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11092,17 +11699,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :write`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
+                  - `type: :glob`
+
                   - `enabled: bool`
 
                   - `name: :glob`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11114,17 +11725,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :glob`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
+                  - `type: :grep`
+
                   - `enabled: bool`
 
                   - `name: :grep`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11136,17 +11751,21 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :grep`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `class BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
+                  - `type: :web_fetch`
+
                   - `enabled: bool`
 
                   - `name: :web_fetch`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11158,7 +11777,9 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_fetch`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -11172,11 +11793,13 @@ puts(beta_managed_agents_session)
 
                   Configuration for the web_search tool.
 
+                  - `type: :web_search`
+
                   - `enabled: bool`
 
                   - `name: :web_search`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -11188,7 +11811,9 @@ puts(beta_managed_agents_session)
 
                       Tool calls require user confirmation before execution.
 
-                  - `type: :web_search`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `allowed_domains: Array[String]`
 
@@ -11230,7 +11855,7 @@ puts(beta_managed_agents_session)
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -11242,9 +11867,13 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-              - `type: :agent_toolset_20260401`
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsMCPToolset`
+
+              - `type: :mcp_toolset`
 
               - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -11252,7 +11881,7 @@ puts(beta_managed_agents_session)
 
                 - `name: String`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -11263,6 +11892,10 @@ puts(beta_managed_agents_session)
                   - `class BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
+
+                  - `class BetaManagedAgentsAutoPolicy`
+
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -11270,7 +11903,7 @@ puts(beta_managed_agents_session)
 
                 - `enabled: bool`
 
-                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                   Permission policy for tool execution.
 
@@ -11282,13 +11915,17 @@ puts(beta_managed_agents_session)
 
                     Tool calls require user confirmation before execution.
 
-              - `mcp_server_name: String`
+                  - `class BetaManagedAgentsAutoPolicy`
 
-              - `type: :mcp_toolset`
+                    The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `mcp_server_name: String`
 
             - `class BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
+
+              - `type: :custom`
 
               - `description: String`
 
@@ -11304,10 +11941,6 @@ puts(beta_managed_agents_session)
 
               - `name: String`
 
-              - `type: :custom`
-
-          - `type: :agent`
-
           - `version: Integer`
 
             format: int32
@@ -11316,13 +11949,11 @@ puts(beta_managed_agents_session)
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+          - `type: :advisor`
+
           - `model: String`
 
             The advisor model id.
-
-          - `type: :advisor`
-
-      - `type: :coordinator`
 
     - `name: String`
 
@@ -11348,8 +11979,6 @@ puts(beta_managed_agents_session)
 
         A custom tool as returned in API responses.
 
-    - `type: :agent`
-
     - `version: Integer`
 
       format: int32
@@ -11357,6 +11986,8 @@ puts(beta_managed_agents_session)
   - `budget: BetaManagedAgentsBudgetLimit`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+    - `type: :limit`
 
     - `max_list_cost: BetaMonetaryAmount`
 
@@ -11369,8 +12000,6 @@ puts(beta_managed_agents_session)
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
-    - `type: :limit`
 
   - `metadata: Hash[Symbol, String]`
 
@@ -11460,6 +12089,8 @@ puts(beta_managed_agents_session)
 
   Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+  - `type: :"session.usage"`
+
   - `id: String`
 
     Unique identifier for this event.
@@ -11469,8 +12100,6 @@ puts(beta_managed_agents_session)
     A timestamp in RFC 3339 format
 
     format: date-time
-
-  - `type: :"session.usage"`
 
   - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -11548,11 +12177,11 @@ puts(beta_managed_agents_session)
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
+    - `type: :limit`
+
     - `max_list_cost: BetaMonetaryAmount`
 
       A monetary amount in a specific currency.
-
-    - `type: :limit`
 
 ### Beta Managed Agents Start Event
 
@@ -11560,27 +12189,27 @@ puts(beta_managed_agents_session)
 
   Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+  - `type: :event_start`
+
   - `event: BetaManagedAgentsStartEventPreview`
 
     The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
     - `class BetaManagedAgentsAgentMessagePreview`
 
+      - `type: :"agent.message"`
+
       - `id: String`
 
         The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-      - `type: :"agent.message"`
-
     - `class BetaManagedAgentsAgentThinkingPreview`
+
+      - `type: :"agent.thinking"`
 
       - `id: String`
 
         The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
-
-      - `type: :"agent.thinking"`
-
-  - `type: :event_start`
 
 ### Beta Managed Agents Start Event Preview
 
@@ -11588,19 +12217,19 @@ puts(beta_managed_agents_session)
 
   - `class BetaManagedAgentsAgentMessagePreview`
 
+    - `type: :"agent.message"`
+
     - `id: String`
 
       The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-    - `type: :"agent.message"`
-
   - `class BetaManagedAgentsAgentThinkingPreview`
+
+    - `type: :"agent.thinking"`
 
     - `id: String`
 
       The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
-
-    - `type: :"agent.thinking"`
 
 ### Beta Managed Agents System Content Block
 
@@ -11608,19 +12237,21 @@ puts(beta_managed_agents_session)
 
   Regular text content.
 
+  - `type: :text`
+
   - `text: String`
 
     The text content.
 
     minLength: 1
 
-  - `type: :text`
-
 ### Beta Managed Agents System Message Event
 
 - `class BetaManagedAgentsSystemMessageEvent`
 
   A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+  - `type: :"system.message"`
 
   - `id: String`
 
@@ -11630,15 +12261,13 @@ puts(beta_managed_agents_session)
 
     System content blocks. Text-only.
 
+    - `type: :text`
+
     - `text: String`
 
       The text content.
 
       minLength: 1
-
-    - `type: :text`
-
-  - `type: :"system.message"`
 
   - `processed_at: Time`
 
@@ -11652,6 +12281,8 @@ puts(beta_managed_agents_session)
 
   Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
+  - `type: :"user.tool_result"`
+
   - `id: String`
 
     Unique identifier for this event.
@@ -11659,8 +12290,6 @@ puts(beta_managed_agents_session)
   - `tool_use_id: String`
 
     The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-  - `type: :"user.tool_result"`
 
   - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -11670,17 +12299,19 @@ puts(beta_managed_agents_session)
 
       Regular text content.
 
+      - `type: :text`
+
       - `text: String`
 
         The text content.
 
         minLength: 1
 
-      - `type: :text`
-
     - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
+
+      - `type: :image`
 
       - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -11689,6 +12320,8 @@ puts(beta_managed_agents_session)
         - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
+
+          - `type: :base64`
 
           - `data: String`
 
@@ -11701,8 +12334,6 @@ puts(beta_managed_agents_session)
             MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
             minLength: 1
-
-          - `type: :base64`
 
         - `class BetaManagedAgentsURLImageSource`
 
@@ -11720,19 +12351,19 @@ puts(beta_managed_agents_session)
 
           Image referenced by file ID.
 
+          - `type: :file`
+
           - `file_id: String`
 
             ID of a previously uploaded file.
 
             minLength: 1
 
-          - `type: :file`
-
-      - `type: :image`
-
     - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `type: :document`
 
       - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -11741,6 +12372,8 @@ puts(beta_managed_agents_session)
         - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
+
+          - `type: :base64`
 
           - `data: String`
 
@@ -11754,11 +12387,11 @@ puts(beta_managed_agents_session)
 
             minLength: 1
 
-          - `type: :base64`
-
         - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
+
+          - `type: :text`
 
           - `data: String`
 
@@ -11769,8 +12402,6 @@ puts(beta_managed_agents_session)
           - `media_type: :"text/plain"`
 
             MIME type of the text content. Must be "text/plain".
-
-          - `type: :text`
 
         - `class BetaManagedAgentsURLDocumentSource`
 
@@ -11788,15 +12419,13 @@ puts(beta_managed_agents_session)
 
           Document referenced by file ID.
 
+          - `type: :file`
+
           - `file_id: String`
 
             ID of a previously uploaded file.
 
             minLength: 1
-
-          - `type: :file`
-
-      - `type: :document`
 
       - `context: String`
 
@@ -11810,6 +12439,8 @@ puts(beta_managed_agents_session)
 
       A block containing a web search result.
 
+      - `type: :search_result`
+
       - `citations: BetaManagedAgentsSearchResultCitations`
 
         Citation settings for a search result.
@@ -11822,13 +12453,13 @@ puts(beta_managed_agents_session)
 
         Array of text content blocks from the search result.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
-
-        - `type: :text`
 
       - `source: String`
 
@@ -11841,8 +12472,6 @@ puts(beta_managed_agents_session)
         The title of the search result.
 
         minLength: 1
-
-      - `type: :search_result`
 
   - `is_error: bool`
 
@@ -11924,7 +12553,7 @@ List Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -11972,6 +12601,8 @@ List Events
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -12014,6 +12645,8 @@ List Events
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 32 more`
@@ -12023,6 +12656,8 @@ List Events
   - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
+
+    - `type: :"user.message"`
 
     - `id: String`
 
@@ -12036,17 +12671,19 @@ List Events
 
         Regular text content.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
 
-        - `type: :text`
-
       - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `type: :image`
 
         - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -12055,6 +12692,8 @@ List Events
           - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -12067,8 +12706,6 @@ List Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `type: :base64`
 
           - `class BetaManagedAgentsURLImageSource`
 
@@ -12086,19 +12723,19 @@ List Events
 
             Image referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `type: :file`
-
-        - `type: :image`
-
       - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `type: :document`
 
         - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -12107,6 +12744,8 @@ List Events
           - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -12120,11 +12759,11 @@ List Events
 
               minLength: 1
 
-            - `type: :base64`
-
           - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
+
+            - `type: :text`
 
             - `data: String`
 
@@ -12135,8 +12774,6 @@ List Events
             - `media_type: :"text/plain"`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `type: :text`
 
           - `class BetaManagedAgentsURLDocumentSource`
 
@@ -12154,15 +12791,13 @@ List Events
 
             Document referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `type: :file`
-
-        - `type: :document`
 
         - `context: String`
 
@@ -12178,8 +12813,6 @@ List Events
 
         - `type: :redacted`
 
-    - `type: :"user.message"`
-
     - `processed_at: Time`
 
       A timestamp in RFC 3339 format
@@ -12190,11 +12823,11 @@ List Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `type: :"user.interrupt"`
+
     - `id: String`
 
       Unique identifier for this event.
-
-    - `type: :"user.interrupt"`
 
     - `processed_at: Time`
 
@@ -12209,6 +12842,8 @@ List Events
   - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `type: :"user.tool_confirmation"`
 
     - `id: String`
 
@@ -12225,8 +12860,6 @@ List Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_confirmation"`
 
     - `deny_message: String`
 
@@ -12248,6 +12881,8 @@ List Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `type: :"user.custom_tool_result"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -12255,8 +12890,6 @@ List Events
     - `custom_tool_use_id: String`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.custom_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -12278,6 +12911,8 @@ List Events
 
         A block containing a web search result.
 
+        - `type: :search_result`
+
         - `citations: BetaManagedAgentsSearchResultCitations`
 
           Citation settings for a search result.
@@ -12290,13 +12925,13 @@ List Events
 
           Array of text content blocks from the search result.
 
+          - `type: :text`
+
           - `text: String`
 
             The text content.
 
             minLength: 1
-
-          - `type: :text`
 
         - `source: String`
 
@@ -12309,8 +12944,6 @@ List Events
           The title of the search result.
 
           minLength: 1
-
-        - `type: :search_result`
 
     - `is_error: bool`
 
@@ -12330,6 +12963,8 @@ List Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `type: :"agent.custom_tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -12348,8 +12983,6 @@ List Events
 
       format: date-time
 
-    - `type: :"agent.custom_tool_use"`
-
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -12357,6 +12990,8 @@ List Events
   - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
+
+    - `type: :"agent.message"`
 
     - `id: String`
 
@@ -12380,11 +13015,11 @@ List Events
 
       format: date-time
 
-    - `type: :"agent.message"`
-
   - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `type: :"agent.thinking"`
 
     - `id: String`
 
@@ -12396,11 +13031,11 @@ List Events
 
       format: date-time
 
-    - `type: :"agent.thinking"`
-
   - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `type: :"agent.mcp_tool_use"`
 
     - `id: String`
 
@@ -12424,8 +13059,6 @@ List Events
 
       format: date-time
 
-    - `type: :"agent.mcp_tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -12436,6 +13069,62 @@ List Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `type: :always_allow`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `type: :always_ask`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `type: :auto`
+
+        - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `type: :allow`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `type: :ask`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `type: :deny`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -12443,6 +13132,8 @@ List Events
   - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
+
+    - `type: :"agent.mcp_tool_result"`
 
     - `id: String`
 
@@ -12457,8 +13148,6 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"agent.mcp_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -12488,6 +13177,8 @@ List Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `type: :"agent.tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -12506,8 +13197,6 @@ List Events
 
       format: date-time
 
-    - `type: :"agent.tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -12518,6 +13207,10 @@ List Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -12525,6 +13218,8 @@ List Events
   - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
+
+    - `type: :"agent.tool_result"`
 
     - `id: String`
 
@@ -12539,8 +13234,6 @@ List Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `type: :"agent.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -12569,6 +13262,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `type: :"agent.thread_message_received"`
 
     - `id: String`
 
@@ -12604,8 +13299,6 @@ List Events
 
       format: date-time
 
-    - `type: :"agent.thread_message_received"`
-
     - `from_agent_name: String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -12613,6 +13306,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `type: :"agent.thread_message_sent"`
 
     - `id: String`
 
@@ -12648,8 +13343,6 @@ List Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `type: :"agent.thread_message_sent"`
-
     - `to_agent_name: String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -12657,6 +13350,8 @@ List Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `type: :"agent.thread_context_compacted"`
 
     - `id: String`
 
@@ -12668,11 +13363,11 @@ List Events
 
       format: date-time
 
-    - `type: :"agent.thread_context_compacted"`
-
   - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
+
+    - `type: :"session.error"`
 
     - `id: String`
 
@@ -12685,6 +13380,8 @@ List Events
       - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `type: :unknown_error`
 
         - `message: String`
 
@@ -12712,11 +13409,11 @@ List Events
 
             - `type: :terminal`
 
-        - `type: :unknown_error`
-
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `type: :model_overloaded_error`
 
         - `message: String`
 
@@ -12737,13 +13434,13 @@ List Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_overloaded_error`
 
       - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
+        - `type: :model_rate_limited_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -12763,13 +13460,13 @@ List Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_rate_limited_error`
 
       - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `type: :model_request_failed_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -12790,11 +13487,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :model_request_failed_error`
-
       - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
+
+        - `type: :mcp_connection_failed_error`
 
         - `mcp_server_name: String`
 
@@ -12820,11 +13517,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_connection_failed_error`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
+
+        - `type: :mcp_authentication_failed_error`
 
         - `mcp_server_name: String`
 
@@ -12850,11 +13547,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_authentication_failed_error`
-
       - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `type: :billing_error`
 
         - `message: String`
 
@@ -12876,11 +13573,11 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :billing_error`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `type: :credential_host_unreachable_error`
 
         - `credential_id: String`
 
@@ -12906,8 +13603,6 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :credential_host_unreachable_error`
-
         - `vault_id: String`
 
           ID of the vault containing the affected credential.
@@ -12918,11 +13613,11 @@ List Events
 
       format: date-time
 
-    - `type: :"session.error"`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `type: :"session.status_rescheduled"`
 
     - `id: String`
 
@@ -12933,13 +13628,13 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.status_rescheduled"`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
+    - `type: :"session.status_running"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -12950,11 +13645,11 @@ List Events
 
       format: date-time
 
-    - `type: :"session.status_running"`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `type: :"session.status_idle"`
 
     - `id: String`
 
@@ -12980,11 +13675,11 @@ List Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `type: :requires_action`
+
         - `event_ids: Array[String]`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: :requires_action`
 
       - `class BetaManagedAgentsSessionRetriesExhausted`
 
@@ -12998,11 +13693,11 @@ List Events
 
         - `type: :budget_reached`
 
-    - `type: :"session.status_idle"`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `type: :"session.status_terminated"`
 
     - `id: String`
 
@@ -13014,11 +13709,11 @@ List Events
 
       format: date-time
 
-    - `type: :"session.status_terminated"`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `type: :"session.thread_created"`
 
     - `id: String`
 
@@ -13038,11 +13733,11 @@ List Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `type: :"session.thread_created"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `type: :"span.outcome_evaluation_start"`
 
     - `id: String`
 
@@ -13064,11 +13759,11 @@ List Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_start"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `type: :"span.outcome_evaluation_end"`
 
     - `id: String`
 
@@ -13101,8 +13796,6 @@ List Events
     - `result: String`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `type: :"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -13144,6 +13837,8 @@ List Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `type: :"span.model_request_start"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -13154,11 +13849,11 @@ List Events
 
       format: date-time
 
-    - `type: :"span.model_request_start"`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
+
+    - `type: :"span.model_request_end"`
 
     - `id: String`
 
@@ -13182,11 +13877,11 @@ List Events
 
       format: date-time
 
-    - `type: :"span.model_request_end"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `type: :"span.outcome_evaluation_ongoing"`
 
     - `id: String`
 
@@ -13208,11 +13903,11 @@ List Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_ongoing"`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `type: :"user.define_outcome"`
 
     - `id: String`
 
@@ -13246,27 +13941,27 @@ List Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `type: :file`
+
         - `file_id: String`
 
           ID of the rubric file.
-
-        - `type: :file`
 
       - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
+        - `type: :text`
+
         - `content: String`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `type: :text`
-
-    - `type: :"user.define_outcome"`
-
   - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `type: :"session.deleted"`
 
     - `id: String`
 
@@ -13278,11 +13973,11 @@ List Events
 
       format: date-time
 
-    - `type: :"session.deleted"`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_running"`
 
     - `id: String`
 
@@ -13302,11 +13997,11 @@ List Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `type: :"session.thread_status_running"`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_idle"`
 
     - `id: String`
 
@@ -13346,11 +14041,11 @@ List Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `type: :"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_terminated"`
 
     - `id: String`
 
@@ -13370,11 +14065,11 @@ List Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `type: :"session.thread_status_terminated"`
-
   - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `type: :"user.tool_result"`
 
     - `id: String`
 
@@ -13383,8 +14078,6 @@ List Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -13424,6 +14117,8 @@ List Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `type: :"session.thread_status_rescheduled"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -13442,11 +14137,11 @@ List Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `type: :"session.thread_status_rescheduled"`
-
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `type: :"session.updated"`
 
     - `id: String`
 
@@ -13458,11 +14153,11 @@ List Events
 
       format: date-time
 
-    - `type: :"session.updated"`
-
     - `agent: BetaManagedAgentsSessionAgent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `type: :agent`
 
       - `id: String`
 
@@ -13470,9 +14165,9 @@ List Events
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -13600,6 +14295,8 @@ List Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `type: :coordinator`
+
         - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -13608,15 +14305,17 @@ List Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `type: :agent`
+
             - `id: String`
 
             - `description: String`
 
             - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-              - `name: String`
-
               - `type: :url`
+
+              - `name: String`
 
               - `url: String`
 
@@ -13632,9 +14331,9 @@ List Events
 
                 A resolved Anthropic-managed skill.
 
-                - `skill_id: String`
-
                 - `type: :anthropic`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -13642,9 +14341,9 @@ List Events
 
                 A resolved user-created custom skill.
 
-                - `skill_id: String`
-
                 - `type: :custom`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -13654,17 +14353,21 @@ List Events
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
+                - `type: :agent_toolset_20260401`
+
                 - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                   - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
+                    - `type: :bash`
+
                     - `enabled: bool`
 
                     - `name: :bash`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13680,17 +14383,23 @@ List Events
 
                         - `type: :always_ask`
 
-                    - `type: :bash`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `type: :auto`
 
                   - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
+                    - `type: :edit`
+
                     - `enabled: bool`
 
                     - `name: :edit`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13702,17 +14411,21 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :edit`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
+                    - `type: :read`
+
                     - `enabled: bool`
 
                     - `name: :read`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13724,17 +14437,21 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :read`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
+                    - `type: :write`
+
                     - `enabled: bool`
 
                     - `name: :write`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13746,17 +14463,21 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :write`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
+                    - `type: :glob`
+
                     - `enabled: bool`
 
                     - `name: :glob`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13768,17 +14489,21 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :glob`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
+                    - `type: :grep`
+
                     - `enabled: bool`
 
                     - `name: :grep`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13790,17 +14515,21 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :grep`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
+                    - `type: :web_fetch`
+
                     - `enabled: bool`
 
                     - `name: :web_fetch`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13812,7 +14541,9 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_fetch`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -13826,11 +14557,13 @@ List Events
 
                     Configuration for the web_search tool.
 
+                    - `type: :web_search`
+
                     - `enabled: bool`
 
                     - `name: :web_search`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -13842,7 +14575,9 @@ List Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_search`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -13884,7 +14619,7 @@ List Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -13896,9 +14631,13 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
-                - `type: :agent_toolset_20260401`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMCPToolset`
+
+                - `type: :mcp_toolset`
 
                 - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -13906,7 +14645,7 @@ List Events
 
                   - `name: String`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -13917,6 +14656,10 @@ List Events
                     - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
+
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -13924,7 +14667,7 @@ List Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -13936,13 +14679,17 @@ List Events
 
                       Tool calls require user confirmation before execution.
 
-                - `mcp_server_name: String`
+                    - `class BetaManagedAgentsAutoPolicy`
 
-                - `type: :mcp_toolset`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `mcp_server_name: String`
 
               - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
+
+                - `type: :custom`
 
                 - `description: String`
 
@@ -13958,10 +14705,6 @@ List Events
 
                 - `name: String`
 
-                - `type: :custom`
-
-            - `type: :agent`
-
             - `version: Integer`
 
               format: int32
@@ -13970,13 +14713,11 @@ List Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `type: :advisor`
+
             - `model: String`
 
               The advisor model id.
-
-            - `type: :advisor`
-
-        - `type: :coordinator`
 
       - `name: String`
 
@@ -14002,8 +14743,6 @@ List Events
 
           A custom tool as returned in API responses.
 
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -14011,6 +14750,8 @@ List Events
     - `budget: BetaManagedAgentsBudgetLimit`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `type: :limit`
 
       - `max_list_cost: BetaMonetaryAmount`
 
@@ -14024,8 +14765,6 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `type: :limit`
-
     - `metadata: Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -14038,6 +14777,8 @@ List Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+    - `type: :"system.message"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -14046,15 +14787,13 @@ List Events
 
       System content blocks. Text-only.
 
+      - `type: :text`
+
       - `text: String`
 
         The text content.
 
         minLength: 1
-
-      - `type: :text`
-
-    - `type: :"system.message"`
 
     - `processed_at: Time`
 
@@ -14066,6 +14805,8 @@ List Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `type: :"session.usage"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -14075,8 +14816,6 @@ List Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -14210,6 +14949,8 @@ Send Events
 
     Parameters for sending a user message to the session.
 
+    - `type: :"user.message"`
+
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsRedactedBlock]`
 
       Array of content blocks for the user message.
@@ -14218,17 +14959,19 @@ Send Events
 
         Regular text content.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
 
-        - `type: :text`
-
       - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `type: :image`
 
         - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -14237,6 +14980,8 @@ Send Events
           - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -14249,8 +14994,6 @@ Send Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `type: :base64`
 
           - `class BetaManagedAgentsURLImageSource`
 
@@ -14268,19 +15011,19 @@ Send Events
 
             Image referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `type: :file`
-
-        - `type: :image`
-
       - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `type: :document`
 
         - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -14289,6 +15032,8 @@ Send Events
           - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -14302,11 +15047,11 @@ Send Events
 
               minLength: 1
 
-            - `type: :base64`
-
           - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
+
+            - `type: :text`
 
             - `data: String`
 
@@ -14317,8 +15062,6 @@ Send Events
             - `media_type: :"text/plain"`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `type: :text`
 
           - `class BetaManagedAgentsURLDocumentSource`
 
@@ -14336,15 +15079,13 @@ Send Events
 
             Document referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `type: :file`
-
-        - `type: :document`
 
         - `context: String`
 
@@ -14360,8 +15101,6 @@ Send Events
 
         - `type: :redacted`
 
-    - `type: :"user.message"`
-
   - `class BetaManagedAgentsUserInterruptEventParams`
 
     Parameters for sending an interrupt to pause the agent.
@@ -14375,6 +15114,8 @@ Send Events
   - `class BetaManagedAgentsUserToolConfirmationEventParams`
 
     Parameters for confirming or denying a tool execution request.
+
+    - `type: :"user.tool_confirmation"`
 
     - `result: :allow | :deny`
 
@@ -14390,8 +15131,6 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `type: :"user.tool_confirmation"`
-
     - `deny_message: String`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
@@ -14402,13 +15141,13 @@ Send Events
 
     Parameters for providing the result of a custom tool execution.
 
+    - `type: :"user.custom_tool_result"`
+
     - `custom_tool_use_id: String`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       minLength: 1, maxLength: 128
-
-    - `type: :"user.custom_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -14430,6 +15169,8 @@ Send Events
 
         A block containing a web search result.
 
+        - `type: :search_result`
+
         - `citations: BetaManagedAgentsSearchResultCitations`
 
           Citation settings for a search result.
@@ -14442,13 +15183,13 @@ Send Events
 
           Array of text content blocks from the search result.
 
+          - `type: :text`
+
           - `text: String`
 
             The text content.
 
             minLength: 1
-
-          - `type: :text`
 
         - `source: String`
 
@@ -14462,8 +15203,6 @@ Send Events
 
           minLength: 1
 
-        - `type: :search_result`
-
     - `is_error: bool`
 
       Whether the tool execution resulted in an error.
@@ -14471,6 +15210,8 @@ Send Events
   - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `type: :"user.define_outcome"`
 
     - `description: String`
 
@@ -14484,25 +15225,23 @@ Send Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `type: :file`
+
         - `file_id: String`
 
           ID of the rubric file.
 
-        - `type: :file`
-
       - `class BetaManagedAgentsTextRubricParams`
 
         Rubric content provided inline as text.
+
+        - `type: :text`
 
         - `content: String`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
           maxLength: 262144
-
-        - `type: :text`
-
-    - `type: :"user.define_outcome"`
 
     - `max_iterations: Integer`
 
@@ -14514,13 +15253,13 @@ Send Events
 
     Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
+    - `type: :"user.tool_result"`
+
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
       minLength: 1, maxLength: 128
-
-    - `type: :"user.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -14550,9 +15289,13 @@ Send Events
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
+    - `type: :"system.message"`
+
     - `content: Array[BetaManagedAgentsSystemContentBlock]`
 
       System content blocks to append. Text-only.
+
+      - `type: :text`
 
       - `text: String`
 
@@ -14560,17 +15303,13 @@ Send Events
 
         minLength: 1
 
-      - `type: :text`
-
-    - `type: :"system.message"`
-
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -14618,6 +15357,8 @@ Send Events
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -14660,6 +15401,8 @@ Send Events
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaManagedAgentsSendSessionEvents`
@@ -14674,6 +15417,8 @@ Send Events
 
       A user message event in the session conversation.
 
+      - `type: :"user.message"`
+
       - `id: String`
 
         Unique identifier for this event.
@@ -14686,17 +15431,19 @@ Send Events
 
           Regular text content.
 
+          - `type: :text`
+
           - `text: String`
 
             The text content.
 
             minLength: 1
 
-          - `type: :text`
-
         - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
+
+          - `type: :image`
 
           - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -14705,6 +15452,8 @@ Send Events
             - `class BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
+
+              - `type: :base64`
 
               - `data: String`
 
@@ -14717,8 +15466,6 @@ Send Events
                 MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
                 minLength: 1
-
-              - `type: :base64`
 
             - `class BetaManagedAgentsURLImageSource`
 
@@ -14736,19 +15483,19 @@ Send Events
 
               Image referenced by file ID.
 
+              - `type: :file`
+
               - `file_id: String`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
 
-              - `type: :file`
-
-          - `type: :image`
-
         - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `type: :document`
 
           - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -14757,6 +15504,8 @@ Send Events
             - `class BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
+
+              - `type: :base64`
 
               - `data: String`
 
@@ -14770,11 +15519,11 @@ Send Events
 
                 minLength: 1
 
-              - `type: :base64`
-
             - `class BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
+
+              - `type: :text`
 
               - `data: String`
 
@@ -14785,8 +15534,6 @@ Send Events
               - `media_type: :"text/plain"`
 
                 MIME type of the text content. Must be "text/plain".
-
-              - `type: :text`
 
             - `class BetaManagedAgentsURLDocumentSource`
 
@@ -14804,15 +15551,13 @@ Send Events
 
               Document referenced by file ID.
 
+              - `type: :file`
+
               - `file_id: String`
 
                 ID of a previously uploaded file.
 
                 minLength: 1
-
-              - `type: :file`
-
-          - `type: :document`
 
           - `context: String`
 
@@ -14828,8 +15573,6 @@ Send Events
 
           - `type: :redacted`
 
-      - `type: :"user.message"`
-
       - `processed_at: Time`
 
         A timestamp in RFC 3339 format
@@ -14840,11 +15583,11 @@ Send Events
 
       An interrupt event that pauses agent execution and returns control to the user.
 
+      - `type: :"user.interrupt"`
+
       - `id: String`
 
         Unique identifier for this event.
-
-      - `type: :"user.interrupt"`
 
       - `processed_at: Time`
 
@@ -14859,6 +15602,8 @@ Send Events
     - `class BetaManagedAgentsUserToolConfirmationEvent`
 
       A tool confirmation event that approves or denies a pending tool execution.
+
+      - `type: :"user.tool_confirmation"`
 
       - `id: String`
 
@@ -14875,8 +15620,6 @@ Send Events
       - `tool_use_id: String`
 
         The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `type: :"user.tool_confirmation"`
 
       - `deny_message: String`
 
@@ -14898,6 +15641,8 @@ Send Events
 
       Event sent by the client providing the result of a custom tool execution.
 
+      - `type: :"user.custom_tool_result"`
+
       - `id: String`
 
         Unique identifier for this event.
@@ -14905,8 +15650,6 @@ Send Events
       - `custom_tool_use_id: String`
 
         The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `type: :"user.custom_tool_result"`
 
       - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -14928,6 +15671,8 @@ Send Events
 
           A block containing a web search result.
 
+          - `type: :search_result`
+
           - `citations: BetaManagedAgentsSearchResultCitations`
 
             Citation settings for a search result.
@@ -14940,13 +15685,13 @@ Send Events
 
             Array of text content blocks from the search result.
 
+            - `type: :text`
+
             - `text: String`
 
               The text content.
 
               minLength: 1
-
-            - `type: :text`
 
           - `source: String`
 
@@ -14959,8 +15704,6 @@ Send Events
             The title of the search result.
 
             minLength: 1
-
-          - `type: :search_result`
 
       - `is_error: bool`
 
@@ -14979,6 +15722,8 @@ Send Events
     - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `type: :"user.define_outcome"`
 
       - `id: String`
 
@@ -15012,27 +15757,27 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
+          - `type: :file`
+
           - `file_id: String`
 
             ID of the rubric file.
-
-          - `type: :file`
 
         - `class BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
+          - `type: :text`
+
           - `content: String`
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-          - `type: :text`
-
-      - `type: :"user.define_outcome"`
-
     - `class BetaManagedAgentsUserToolResultEvent`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+      - `type: :"user.tool_result"`
 
       - `id: String`
 
@@ -15041,8 +15786,6 @@ Send Events
       - `tool_use_id: String`
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-      - `type: :"user.tool_result"`
 
       - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -15082,6 +15825,8 @@ Send Events
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+      - `type: :"system.message"`
+
       - `id: String`
 
         Unique identifier for this event.
@@ -15090,15 +15835,13 @@ Send Events
 
         System content blocks. Text-only.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
-
-        - `type: :text`
-
-      - `type: :"system.message"`
 
       - `processed_at: Time`
 
@@ -15167,7 +15910,7 @@ Stream Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -15215,6 +15958,8 @@ Stream Events
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -15257,6 +16002,8 @@ Stream Events
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 34 more`
@@ -15266,6 +16013,8 @@ Stream Events
   - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
+
+    - `type: :"user.message"`
 
     - `id: String`
 
@@ -15279,17 +16028,19 @@ Stream Events
 
         Regular text content.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
 
-        - `type: :text`
-
       - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `type: :image`
 
         - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -15298,6 +16049,8 @@ Stream Events
           - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -15310,8 +16063,6 @@ Stream Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `type: :base64`
 
           - `class BetaManagedAgentsURLImageSource`
 
@@ -15329,19 +16080,19 @@ Stream Events
 
             Image referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `type: :file`
-
-        - `type: :image`
-
       - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `type: :document`
 
         - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -15350,6 +16101,8 @@ Stream Events
           - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -15363,11 +16116,11 @@ Stream Events
 
               minLength: 1
 
-            - `type: :base64`
-
           - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
+
+            - `type: :text`
 
             - `data: String`
 
@@ -15378,8 +16131,6 @@ Stream Events
             - `media_type: :"text/plain"`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `type: :text`
 
           - `class BetaManagedAgentsURLDocumentSource`
 
@@ -15397,15 +16148,13 @@ Stream Events
 
             Document referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `type: :file`
-
-        - `type: :document`
 
         - `context: String`
 
@@ -15421,8 +16170,6 @@ Stream Events
 
         - `type: :redacted`
 
-    - `type: :"user.message"`
-
     - `processed_at: Time`
 
       A timestamp in RFC 3339 format
@@ -15433,11 +16180,11 @@ Stream Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `type: :"user.interrupt"`
+
     - `id: String`
 
       Unique identifier for this event.
-
-    - `type: :"user.interrupt"`
 
     - `processed_at: Time`
 
@@ -15452,6 +16199,8 @@ Stream Events
   - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `type: :"user.tool_confirmation"`
 
     - `id: String`
 
@@ -15468,8 +16217,6 @@ Stream Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_confirmation"`
 
     - `deny_message: String`
 
@@ -15491,6 +16238,8 @@ Stream Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `type: :"user.custom_tool_result"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -15498,8 +16247,6 @@ Stream Events
     - `custom_tool_use_id: String`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.custom_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -15521,6 +16268,8 @@ Stream Events
 
         A block containing a web search result.
 
+        - `type: :search_result`
+
         - `citations: BetaManagedAgentsSearchResultCitations`
 
           Citation settings for a search result.
@@ -15533,13 +16282,13 @@ Stream Events
 
           Array of text content blocks from the search result.
 
+          - `type: :text`
+
           - `text: String`
 
             The text content.
 
             minLength: 1
-
-          - `type: :text`
 
         - `source: String`
 
@@ -15552,8 +16301,6 @@ Stream Events
           The title of the search result.
 
           minLength: 1
-
-        - `type: :search_result`
 
     - `is_error: bool`
 
@@ -15573,6 +16320,8 @@ Stream Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `type: :"agent.custom_tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -15591,8 +16340,6 @@ Stream Events
 
       format: date-time
 
-    - `type: :"agent.custom_tool_use"`
-
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -15600,6 +16347,8 @@ Stream Events
   - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
+
+    - `type: :"agent.message"`
 
     - `id: String`
 
@@ -15623,11 +16372,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"agent.message"`
-
   - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `type: :"agent.thinking"`
 
     - `id: String`
 
@@ -15639,11 +16388,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"agent.thinking"`
-
   - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `type: :"agent.mcp_tool_use"`
 
     - `id: String`
 
@@ -15667,8 +16416,6 @@ Stream Events
 
       format: date-time
 
-    - `type: :"agent.mcp_tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -15679,6 +16426,62 @@ Stream Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `type: :always_allow`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `type: :always_ask`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `type: :auto`
+
+        - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `type: :allow`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `type: :ask`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `type: :deny`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -15686,6 +16489,8 @@ Stream Events
   - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
+
+    - `type: :"agent.mcp_tool_result"`
 
     - `id: String`
 
@@ -15700,8 +16505,6 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"agent.mcp_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -15731,6 +16534,8 @@ Stream Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `type: :"agent.tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -15749,8 +16554,6 @@ Stream Events
 
       format: date-time
 
-    - `type: :"agent.tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -15761,6 +16564,10 @@ Stream Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -15768,6 +16575,8 @@ Stream Events
   - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
+
+    - `type: :"agent.tool_result"`
 
     - `id: String`
 
@@ -15782,8 +16591,6 @@ Stream Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `type: :"agent.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -15812,6 +16619,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `type: :"agent.thread_message_received"`
 
     - `id: String`
 
@@ -15847,8 +16656,6 @@ Stream Events
 
       format: date-time
 
-    - `type: :"agent.thread_message_received"`
-
     - `from_agent_name: String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -15856,6 +16663,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `type: :"agent.thread_message_sent"`
 
     - `id: String`
 
@@ -15891,8 +16700,6 @@ Stream Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `type: :"agent.thread_message_sent"`
-
     - `to_agent_name: String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -15900,6 +16707,8 @@ Stream Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `type: :"agent.thread_context_compacted"`
 
     - `id: String`
 
@@ -15911,11 +16720,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"agent.thread_context_compacted"`
-
   - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
+
+    - `type: :"session.error"`
 
     - `id: String`
 
@@ -15928,6 +16737,8 @@ Stream Events
       - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `type: :unknown_error`
 
         - `message: String`
 
@@ -15955,11 +16766,11 @@ Stream Events
 
             - `type: :terminal`
 
-        - `type: :unknown_error`
-
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `type: :model_overloaded_error`
 
         - `message: String`
 
@@ -15980,13 +16791,13 @@ Stream Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_overloaded_error`
 
       - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
+        - `type: :model_rate_limited_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -16006,13 +16817,13 @@ Stream Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_rate_limited_error`
 
       - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `type: :model_request_failed_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -16033,11 +16844,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :model_request_failed_error`
-
       - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
+
+        - `type: :mcp_connection_failed_error`
 
         - `mcp_server_name: String`
 
@@ -16063,11 +16874,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_connection_failed_error`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
+
+        - `type: :mcp_authentication_failed_error`
 
         - `mcp_server_name: String`
 
@@ -16093,11 +16904,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_authentication_failed_error`
-
       - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `type: :billing_error`
 
         - `message: String`
 
@@ -16119,11 +16930,11 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :billing_error`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `type: :credential_host_unreachable_error`
 
         - `credential_id: String`
 
@@ -16149,8 +16960,6 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :credential_host_unreachable_error`
-
         - `vault_id: String`
 
           ID of the vault containing the affected credential.
@@ -16161,11 +16970,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"session.error"`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `type: :"session.status_rescheduled"`
 
     - `id: String`
 
@@ -16176,13 +16985,13 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.status_rescheduled"`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
+    - `type: :"session.status_running"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -16193,11 +17002,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"session.status_running"`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `type: :"session.status_idle"`
 
     - `id: String`
 
@@ -16223,11 +17032,11 @@ Stream Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `type: :requires_action`
+
         - `event_ids: Array[String]`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: :requires_action`
 
       - `class BetaManagedAgentsSessionRetriesExhausted`
 
@@ -16241,11 +17050,11 @@ Stream Events
 
         - `type: :budget_reached`
 
-    - `type: :"session.status_idle"`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `type: :"session.status_terminated"`
 
     - `id: String`
 
@@ -16257,11 +17066,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"session.status_terminated"`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `type: :"session.thread_created"`
 
     - `id: String`
 
@@ -16281,11 +17090,11 @@ Stream Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `type: :"session.thread_created"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `type: :"span.outcome_evaluation_start"`
 
     - `id: String`
 
@@ -16307,11 +17116,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_start"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `type: :"span.outcome_evaluation_end"`
 
     - `id: String`
 
@@ -16344,8 +17153,6 @@ Stream Events
     - `result: String`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `type: :"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -16387,6 +17194,8 @@ Stream Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `type: :"span.model_request_start"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -16397,11 +17206,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"span.model_request_start"`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
+
+    - `type: :"span.model_request_end"`
 
     - `id: String`
 
@@ -16425,11 +17234,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"span.model_request_end"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `type: :"span.outcome_evaluation_ongoing"`
 
     - `id: String`
 
@@ -16451,11 +17260,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_ongoing"`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `type: :"user.define_outcome"`
 
     - `id: String`
 
@@ -16489,27 +17298,27 @@ Stream Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `type: :file`
+
         - `file_id: String`
 
           ID of the rubric file.
-
-        - `type: :file`
 
       - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
+        - `type: :text`
+
         - `content: String`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `type: :text`
-
-    - `type: :"user.define_outcome"`
-
   - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `type: :"session.deleted"`
 
     - `id: String`
 
@@ -16521,11 +17330,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"session.deleted"`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_running"`
 
     - `id: String`
 
@@ -16545,11 +17354,11 @@ Stream Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `type: :"session.thread_status_running"`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_idle"`
 
     - `id: String`
 
@@ -16589,11 +17398,11 @@ Stream Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `type: :"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_terminated"`
 
     - `id: String`
 
@@ -16613,11 +17422,11 @@ Stream Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `type: :"session.thread_status_terminated"`
-
   - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `type: :"user.tool_result"`
 
     - `id: String`
 
@@ -16626,8 +17435,6 @@ Stream Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -16667,6 +17474,8 @@ Stream Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `type: :"session.thread_status_rescheduled"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -16685,11 +17494,11 @@ Stream Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `type: :"session.thread_status_rescheduled"`
-
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `type: :"session.updated"`
 
     - `id: String`
 
@@ -16701,11 +17510,11 @@ Stream Events
 
       format: date-time
 
-    - `type: :"session.updated"`
-
     - `agent: BetaManagedAgentsSessionAgent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `type: :agent`
 
       - `id: String`
 
@@ -16713,9 +17522,9 @@ Stream Events
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -16843,6 +17652,8 @@ Stream Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `type: :coordinator`
+
         - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -16851,15 +17662,17 @@ Stream Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `type: :agent`
+
             - `id: String`
 
             - `description: String`
 
             - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-              - `name: String`
-
               - `type: :url`
+
+              - `name: String`
 
               - `url: String`
 
@@ -16875,9 +17688,9 @@ Stream Events
 
                 A resolved Anthropic-managed skill.
 
-                - `skill_id: String`
-
                 - `type: :anthropic`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -16885,9 +17698,9 @@ Stream Events
 
                 A resolved user-created custom skill.
 
-                - `skill_id: String`
-
                 - `type: :custom`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -16897,17 +17710,21 @@ Stream Events
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
+                - `type: :agent_toolset_20260401`
+
                 - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                   - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
+                    - `type: :bash`
+
                     - `enabled: bool`
 
                     - `name: :bash`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -16923,17 +17740,23 @@ Stream Events
 
                         - `type: :always_ask`
 
-                    - `type: :bash`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `type: :auto`
 
                   - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
+                    - `type: :edit`
+
                     - `enabled: bool`
 
                     - `name: :edit`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -16945,17 +17768,21 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :edit`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
+                    - `type: :read`
+
                     - `enabled: bool`
 
                     - `name: :read`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -16967,17 +17794,21 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :read`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
+                    - `type: :write`
+
                     - `enabled: bool`
 
                     - `name: :write`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -16989,17 +17820,21 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :write`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
+                    - `type: :glob`
+
                     - `enabled: bool`
 
                     - `name: :glob`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -17011,17 +17846,21 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :glob`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
+                    - `type: :grep`
+
                     - `enabled: bool`
 
                     - `name: :grep`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -17033,17 +17872,21 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :grep`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
+                    - `type: :web_fetch`
+
                     - `enabled: bool`
 
                     - `name: :web_fetch`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -17055,7 +17898,9 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_fetch`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -17069,11 +17914,13 @@ Stream Events
 
                     Configuration for the web_search tool.
 
+                    - `type: :web_search`
+
                     - `enabled: bool`
 
                     - `name: :web_search`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -17085,7 +17932,9 @@ Stream Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_search`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -17127,7 +17976,7 @@ Stream Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -17139,9 +17988,13 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
-                - `type: :agent_toolset_20260401`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMCPToolset`
+
+                - `type: :mcp_toolset`
 
                 - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -17149,7 +18002,7 @@ Stream Events
 
                   - `name: String`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -17160,6 +18013,10 @@ Stream Events
                     - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
+
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -17167,7 +18024,7 @@ Stream Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -17179,13 +18036,17 @@ Stream Events
 
                       Tool calls require user confirmation before execution.
 
-                - `mcp_server_name: String`
+                    - `class BetaManagedAgentsAutoPolicy`
 
-                - `type: :mcp_toolset`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `mcp_server_name: String`
 
               - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
+
+                - `type: :custom`
 
                 - `description: String`
 
@@ -17201,10 +18062,6 @@ Stream Events
 
                 - `name: String`
 
-                - `type: :custom`
-
-            - `type: :agent`
-
             - `version: Integer`
 
               format: int32
@@ -17213,13 +18070,11 @@ Stream Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `type: :advisor`
+
             - `model: String`
 
               The advisor model id.
-
-            - `type: :advisor`
-
-        - `type: :coordinator`
 
       - `name: String`
 
@@ -17245,8 +18100,6 @@ Stream Events
 
           A custom tool as returned in API responses.
 
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -17254,6 +18107,8 @@ Stream Events
     - `budget: BetaManagedAgentsBudgetLimit`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `type: :limit`
 
       - `max_list_cost: BetaMonetaryAmount`
 
@@ -17267,8 +18122,6 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `type: :limit`
-
     - `metadata: Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -17281,41 +18134,43 @@ Stream Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+    - `type: :event_start`
+
     - `event: BetaManagedAgentsStartEventPreview`
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
       - `class BetaManagedAgentsAgentMessagePreview`
 
+        - `type: :"agent.message"`
+
         - `id: String`
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-        - `type: :"agent.message"`
-
       - `class BetaManagedAgentsAgentThinkingPreview`
+
+        - `type: :"agent.thinking"`
 
         - `id: String`
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-        - `type: :"agent.thinking"`
-
-    - `type: :event_start`
-
   - `class BetaManagedAgentsDeltaEvent`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `type: :event_delta`
 
     - `delta: BetaManagedAgentsDeltaContent`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+      - `type: :content_delta`
+
       - `content: BetaManagedAgentsTextBlock`
 
         Regular text content.
-
-      - `type: :content_delta`
 
       - `index: Integer`
 
@@ -17327,11 +18182,11 @@ Stream Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-    - `type: :event_delta`
-
   - `class BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `type: :"system.message"`
 
     - `id: String`
 
@@ -17341,15 +18196,13 @@ Stream Events
 
       System content blocks. Text-only.
 
+      - `type: :text`
+
       - `text: String`
 
         The text content.
 
         minLength: 1
-
-      - `type: :text`
-
-    - `type: :"system.message"`
 
     - `processed_at: Time`
 
@@ -17361,6 +18214,8 @@ Stream Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `type: :"session.usage"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -17370,8 +18225,6 @@ Stream Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -17503,7 +18356,7 @@ Add Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -17551,6 +18404,8 @@ Add Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -17593,9 +18448,13 @@ Add Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaManagedAgentsFileResource`
+
+  - `type: :file`
 
   - `id: String`
 
@@ -17608,8 +18467,6 @@ Add Session Resource
   - `file_id: String`
 
   - `mount_path: String`
-
-  - `type: :file`
 
   - `updated_at: Time`
 
@@ -17674,7 +18531,7 @@ List Session Resources
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -17722,6 +18579,8 @@ List Session Resources
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -17764,6 +18623,8 @@ List Session Resources
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `BetaManagedAgentsSessionResource = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
@@ -17771,6 +18632,8 @@ List Session Resources
   A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
+
+    - `type: :github_repository`
 
     - `id: String`
 
@@ -17781,8 +18644,6 @@ List Session Resources
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -17796,15 +18657,17 @@ List Session Resources
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -17812,9 +18675,9 @@ List Session Resources
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -17828,8 +18691,6 @@ List Session Resources
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -17840,11 +18701,11 @@ List Session Resources
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -17934,7 +18795,7 @@ Get Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -17982,6 +18843,8 @@ Get Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -18024,6 +18887,8 @@ Get Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `ResourceRetrieveResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
@@ -18031,6 +18896,8 @@ Get Session Resource
   The requested session resource.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
+
+    - `type: :github_repository`
 
     - `id: String`
 
@@ -18041,8 +18908,6 @@ Get Session Resource
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -18056,15 +18921,17 @@ Get Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -18072,9 +18939,9 @@ Get Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -18088,8 +18955,6 @@ Get Session Resource
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -18100,11 +18965,11 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -18190,7 +19055,7 @@ Update Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -18238,6 +19103,8 @@ Update Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -18280,6 +19147,8 @@ Update Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `ResourceUpdateResponse = BetaManagedAgentsGitHubRepositoryResource | BetaManagedAgentsFileResource | BetaManagedAgentsMemoryStoreResource`
@@ -18287,6 +19156,8 @@ Update Session Resource
   The updated session resource.
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
+
+    - `type: :github_repository`
 
     - `id: String`
 
@@ -18297,8 +19168,6 @@ Update Session Resource
       format: date-time
 
     - `mount_path: String`
-
-    - `type: :github_repository`
 
     - `updated_at: Time`
 
@@ -18312,15 +19181,17 @@ Update Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
+        - `type: :branch`
+
         - `name: String`
 
           Branch name to check out.
 
           minLength: 1, maxLength: 255
 
-        - `type: :branch`
-
       - `class BetaManagedAgentsCommitCheckout`
+
+        - `type: :commit`
 
         - `sha: String`
 
@@ -18328,9 +19199,9 @@ Update Session Resource
 
           minLength: 7, maxLength: 64
 
-        - `type: :commit`
-
   - `class BetaManagedAgentsFileResource`
+
+    - `type: :file`
 
     - `id: String`
 
@@ -18344,8 +19215,6 @@ Update Session Resource
 
     - `mount_path: String`
 
-    - `type: :file`
-
     - `updated_at: Time`
 
       A timestamp in RFC 3339 format
@@ -18356,11 +19225,11 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
+    - `type: :memory_store`
+
     - `memory_store_id: String`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-    - `type: :memory_store`
 
     - `access: :read_write | :read_only`
 
@@ -18441,7 +19310,7 @@ Delete Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -18489,6 +19358,8 @@ Delete Session Resource
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -18531,15 +19402,17 @@ Delete Session Resource
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaManagedAgentsDeleteSessionResource`
 
   Confirmation of resource deletion.
 
-  - `id: String`
-
   - `type: :session_resource_deleted`
+
+  - `id: String`
 
 #### Example
 
@@ -18595,7 +19468,7 @@ List Session Threads
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -18643,6 +19516,8 @@ List Session Threads
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -18685,11 +19560,15 @@ List Session Threads
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `type: :session_thread`
 
   - `id: String`
 
@@ -18703,15 +19582,17 @@ List Session Threads
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `type: :agent`
+
       - `id: String`
 
       - `description: String`
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -18843,9 +19724,9 @@ List Session Threads
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: String`
-
           - `type: :anthropic`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -18853,9 +19734,9 @@ List Session Threads
 
           A resolved user-created custom skill.
 
-          - `skill_id: String`
-
           - `type: :custom`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -18865,17 +19746,21 @@ List Session Threads
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
+          - `type: :agent_toolset_20260401`
+
           - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
             - `class BetaManagedAgentsBashToolConfig`
 
               Configuration for the bash tool.
 
+              - `type: :bash`
+
               - `enabled: bool`
 
               - `name: :bash`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -18891,17 +19776,23 @@ List Session Threads
 
                   - `type: :always_ask`
 
-              - `type: :bash`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `type: :auto`
 
             - `class BetaManagedAgentsEditToolConfig`
 
               Configuration for the edit tool.
 
+              - `type: :edit`
+
               - `enabled: bool`
 
               - `name: :edit`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -18913,17 +19804,21 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :edit`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
 
+              - `type: :read`
+
               - `enabled: bool`
 
               - `name: :read`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -18935,17 +19830,21 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :read`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
 
+              - `type: :write`
+
               - `enabled: bool`
 
               - `name: :write`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -18957,17 +19856,21 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :write`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
 
+              - `type: :glob`
+
               - `enabled: bool`
 
               - `name: :glob`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -18979,17 +19882,21 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :glob`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
 
+              - `type: :grep`
+
               - `enabled: bool`
 
               - `name: :grep`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19001,17 +19908,21 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :grep`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
 
+              - `type: :web_fetch`
+
               - `enabled: bool`
 
               - `name: :web_fetch`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19023,7 +19934,9 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_fetch`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -19037,11 +19950,13 @@ List Session Threads
 
               Configuration for the web_search tool.
 
+              - `type: :web_search`
+
               - `enabled: bool`
 
               - `name: :web_search`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19053,7 +19968,9 @@ List Session Threads
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_search`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -19095,7 +20012,7 @@ List Session Threads
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -19107,9 +20024,13 @@ List Session Threads
 
                 Tool calls require user confirmation before execution.
 
-          - `type: :agent_toolset_20260401`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMCPToolset`
+
+          - `type: :mcp_toolset`
 
           - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -19117,7 +20038,7 @@ List Session Threads
 
             - `name: String`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -19128,6 +20049,10 @@ List Session Threads
               - `class BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
+
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -19135,7 +20060,7 @@ List Session Threads
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -19147,13 +20072,17 @@ List Session Threads
 
                 Tool calls require user confirmation before execution.
 
-          - `mcp_server_name: String`
+              - `class BetaManagedAgentsAutoPolicy`
 
-          - `type: :mcp_toolset`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `mcp_server_name: String`
 
         - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
+
+          - `type: :custom`
 
           - `description: String`
 
@@ -19169,10 +20098,6 @@ List Session Threads
 
           - `name: String`
 
-          - `type: :custom`
-
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -19181,11 +20106,11 @@ List Session Threads
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `type: :advisor`
+
       - `model: String`
 
         The advisor model id.
-
-      - `type: :advisor`
 
   - `archived_at: Time`
 
@@ -19240,8 +20165,6 @@ List Session Threads
     - `:rescheduling`
 
     - `:terminated`
-
-  - `type: :session_thread`
 
   - `updated_at: Time`
 
@@ -19447,7 +20370,7 @@ Get Session Thread
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -19495,6 +20418,8 @@ Get Session Thread
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -19537,11 +20462,15 @@ Get Session Thread
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `type: :session_thread`
 
   - `id: String`
 
@@ -19555,15 +20484,17 @@ Get Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `type: :agent`
+
       - `id: String`
 
       - `description: String`
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -19695,9 +20626,9 @@ Get Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: String`
-
           - `type: :anthropic`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -19705,9 +20636,9 @@ Get Session Thread
 
           A resolved user-created custom skill.
 
-          - `skill_id: String`
-
           - `type: :custom`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -19717,17 +20648,21 @@ Get Session Thread
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
+          - `type: :agent_toolset_20260401`
+
           - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
             - `class BetaManagedAgentsBashToolConfig`
 
               Configuration for the bash tool.
 
+              - `type: :bash`
+
               - `enabled: bool`
 
               - `name: :bash`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19743,17 +20678,23 @@ Get Session Thread
 
                   - `type: :always_ask`
 
-              - `type: :bash`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `type: :auto`
 
             - `class BetaManagedAgentsEditToolConfig`
 
               Configuration for the edit tool.
 
+              - `type: :edit`
+
               - `enabled: bool`
 
               - `name: :edit`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19765,17 +20706,21 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :edit`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
 
+              - `type: :read`
+
               - `enabled: bool`
 
               - `name: :read`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19787,17 +20732,21 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :read`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
 
+              - `type: :write`
+
               - `enabled: bool`
 
               - `name: :write`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19809,17 +20758,21 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :write`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
 
+              - `type: :glob`
+
               - `enabled: bool`
 
               - `name: :glob`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19831,17 +20784,21 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :glob`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
 
+              - `type: :grep`
+
               - `enabled: bool`
 
               - `name: :grep`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19853,17 +20810,21 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :grep`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
 
+              - `type: :web_fetch`
+
               - `enabled: bool`
 
               - `name: :web_fetch`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19875,7 +20836,9 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_fetch`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -19889,11 +20852,13 @@ Get Session Thread
 
               Configuration for the web_search tool.
 
+              - `type: :web_search`
+
               - `enabled: bool`
 
               - `name: :web_search`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -19905,7 +20870,9 @@ Get Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_search`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -19947,7 +20914,7 @@ Get Session Thread
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -19959,9 +20926,13 @@ Get Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `type: :agent_toolset_20260401`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMCPToolset`
+
+          - `type: :mcp_toolset`
 
           - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -19969,7 +20940,7 @@ Get Session Thread
 
             - `name: String`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -19980,6 +20951,10 @@ Get Session Thread
               - `class BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
+
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -19987,7 +20962,7 @@ Get Session Thread
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -19999,13 +20974,17 @@ Get Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `mcp_server_name: String`
+              - `class BetaManagedAgentsAutoPolicy`
 
-          - `type: :mcp_toolset`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `mcp_server_name: String`
 
         - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
+
+          - `type: :custom`
 
           - `description: String`
 
@@ -20021,10 +21000,6 @@ Get Session Thread
 
           - `name: String`
 
-          - `type: :custom`
-
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -20033,11 +21008,11 @@ Get Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `type: :advisor`
+
       - `model: String`
 
         The advisor model id.
-
-      - `type: :advisor`
 
   - `archived_at: Time`
 
@@ -20092,8 +21067,6 @@ Get Session Thread
     - `:rescheduling`
 
     - `:terminated`
-
-  - `type: :session_thread`
 
   - `updated_at: Time`
 
@@ -20297,7 +21270,7 @@ Archive Session Thread
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -20345,6 +21318,8 @@ Archive Session Thread
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -20387,11 +21362,15 @@ Archive Session Thread
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `class BetaManagedAgentsSessionThread`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `type: :session_thread`
 
   - `id: String`
 
@@ -20405,15 +21384,17 @@ Archive Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+      - `type: :agent`
+
       - `id: String`
 
       - `description: String`
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -20545,9 +21526,9 @@ Archive Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `skill_id: String`
-
           - `type: :anthropic`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -20555,9 +21536,9 @@ Archive Session Thread
 
           A resolved user-created custom skill.
 
-          - `skill_id: String`
-
           - `type: :custom`
+
+          - `skill_id: String`
 
           - `version: String`
 
@@ -20567,17 +21548,21 @@ Archive Session Thread
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
+          - `type: :agent_toolset_20260401`
+
           - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
             - `class BetaManagedAgentsBashToolConfig`
 
               Configuration for the bash tool.
 
+              - `type: :bash`
+
               - `enabled: bool`
 
               - `name: :bash`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20593,17 +21578,23 @@ Archive Session Thread
 
                   - `type: :always_ask`
 
-              - `type: :bash`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `type: :auto`
 
             - `class BetaManagedAgentsEditToolConfig`
 
               Configuration for the edit tool.
 
+              - `type: :edit`
+
               - `enabled: bool`
 
               - `name: :edit`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20615,17 +21606,21 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :edit`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
 
+              - `type: :read`
+
               - `enabled: bool`
 
               - `name: :read`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20637,17 +21632,21 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :read`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
 
+              - `type: :write`
+
               - `enabled: bool`
 
               - `name: :write`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20659,17 +21658,21 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :write`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
 
+              - `type: :glob`
+
               - `enabled: bool`
 
               - `name: :glob`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20681,17 +21684,21 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :glob`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
 
+              - `type: :grep`
+
               - `enabled: bool`
 
               - `name: :grep`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20703,17 +21710,21 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :grep`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
             - `class BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
 
+              - `type: :web_fetch`
+
               - `enabled: bool`
 
               - `name: :web_fetch`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20725,7 +21736,9 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_fetch`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -20739,11 +21752,13 @@ Archive Session Thread
 
               Configuration for the web_search tool.
 
+              - `type: :web_search`
+
               - `enabled: bool`
 
               - `name: :web_search`
 
-              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+              - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                 Permission policy for tool execution.
 
@@ -20755,7 +21770,9 @@ Archive Session Thread
 
                   Tool calls require user confirmation before execution.
 
-              - `type: :web_search`
+                - `class BetaManagedAgentsAutoPolicy`
+
+                  The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `allowed_domains: Array[String]`
 
@@ -20797,7 +21814,7 @@ Archive Session Thread
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -20809,9 +21826,13 @@ Archive Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `type: :agent_toolset_20260401`
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
         - `class BetaManagedAgentsMCPToolset`
+
+          - `type: :mcp_toolset`
 
           - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -20819,7 +21840,7 @@ Archive Session Thread
 
             - `name: String`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -20830,6 +21851,10 @@ Archive Session Thread
               - `class BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
+
+              - `class BetaManagedAgentsAutoPolicy`
+
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -20837,7 +21862,7 @@ Archive Session Thread
 
             - `enabled: bool`
 
-            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+            - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
               Permission policy for tool execution.
 
@@ -20849,13 +21874,17 @@ Archive Session Thread
 
                 Tool calls require user confirmation before execution.
 
-          - `mcp_server_name: String`
+              - `class BetaManagedAgentsAutoPolicy`
 
-          - `type: :mcp_toolset`
+                The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `mcp_server_name: String`
 
         - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
+
+          - `type: :custom`
 
           - `description: String`
 
@@ -20871,10 +21900,6 @@ Archive Session Thread
 
           - `name: String`
 
-          - `type: :custom`
-
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -20883,11 +21908,11 @@ Archive Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+      - `type: :advisor`
+
       - `model: String`
 
         The advisor model id.
-
-      - `type: :advisor`
 
   - `archived_at: Time`
 
@@ -20942,8 +21967,6 @@ Archive Session Thread
     - `:rescheduling`
 
     - `:terminated`
-
-  - `type: :session_thread`
 
   - `updated_at: Time`
 
@@ -21159,7 +22182,7 @@ List Session Thread Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -21207,6 +22230,8 @@ List Session Thread Events
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -21249,6 +22274,8 @@ List Session Thread Events
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 32 more`
@@ -21258,6 +22285,8 @@ List Session Thread Events
   - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
+
+    - `type: :"user.message"`
 
     - `id: String`
 
@@ -21271,17 +22300,19 @@ List Session Thread Events
 
         Regular text content.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
 
-        - `type: :text`
-
       - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `type: :image`
 
         - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -21290,6 +22321,8 @@ List Session Thread Events
           - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -21302,8 +22335,6 @@ List Session Thread Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `type: :base64`
 
           - `class BetaManagedAgentsURLImageSource`
 
@@ -21321,19 +22352,19 @@ List Session Thread Events
 
             Image referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `type: :file`
-
-        - `type: :image`
-
       - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `type: :document`
 
         - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -21342,6 +22373,8 @@ List Session Thread Events
           - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -21355,11 +22388,11 @@ List Session Thread Events
 
               minLength: 1
 
-            - `type: :base64`
-
           - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
+
+            - `type: :text`
 
             - `data: String`
 
@@ -21370,8 +22403,6 @@ List Session Thread Events
             - `media_type: :"text/plain"`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `type: :text`
 
           - `class BetaManagedAgentsURLDocumentSource`
 
@@ -21389,15 +22420,13 @@ List Session Thread Events
 
             Document referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `type: :file`
-
-        - `type: :document`
 
         - `context: String`
 
@@ -21413,8 +22442,6 @@ List Session Thread Events
 
         - `type: :redacted`
 
-    - `type: :"user.message"`
-
     - `processed_at: Time`
 
       A timestamp in RFC 3339 format
@@ -21425,11 +22452,11 @@ List Session Thread Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `type: :"user.interrupt"`
+
     - `id: String`
 
       Unique identifier for this event.
-
-    - `type: :"user.interrupt"`
 
     - `processed_at: Time`
 
@@ -21444,6 +22471,8 @@ List Session Thread Events
   - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `type: :"user.tool_confirmation"`
 
     - `id: String`
 
@@ -21460,8 +22489,6 @@ List Session Thread Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_confirmation"`
 
     - `deny_message: String`
 
@@ -21483,6 +22510,8 @@ List Session Thread Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `type: :"user.custom_tool_result"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -21490,8 +22519,6 @@ List Session Thread Events
     - `custom_tool_use_id: String`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.custom_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -21513,6 +22540,8 @@ List Session Thread Events
 
         A block containing a web search result.
 
+        - `type: :search_result`
+
         - `citations: BetaManagedAgentsSearchResultCitations`
 
           Citation settings for a search result.
@@ -21525,13 +22554,13 @@ List Session Thread Events
 
           Array of text content blocks from the search result.
 
+          - `type: :text`
+
           - `text: String`
 
             The text content.
 
             minLength: 1
-
-          - `type: :text`
 
         - `source: String`
 
@@ -21544,8 +22573,6 @@ List Session Thread Events
           The title of the search result.
 
           minLength: 1
-
-        - `type: :search_result`
 
     - `is_error: bool`
 
@@ -21565,6 +22592,8 @@ List Session Thread Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `type: :"agent.custom_tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -21583,8 +22612,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.custom_tool_use"`
-
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -21592,6 +22619,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
+
+    - `type: :"agent.message"`
 
     - `id: String`
 
@@ -21615,11 +22644,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.message"`
-
   - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `type: :"agent.thinking"`
 
     - `id: String`
 
@@ -21631,11 +22660,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.thinking"`
-
   - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `type: :"agent.mcp_tool_use"`
 
     - `id: String`
 
@@ -21659,8 +22688,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.mcp_tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -21671,6 +22698,62 @@ List Session Thread Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `type: :always_allow`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `type: :always_ask`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `type: :auto`
+
+        - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `type: :allow`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `type: :ask`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `type: :deny`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -21678,6 +22761,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
+
+    - `type: :"agent.mcp_tool_result"`
 
     - `id: String`
 
@@ -21692,8 +22777,6 @@ List Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"agent.mcp_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -21723,6 +22806,8 @@ List Session Thread Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `type: :"agent.tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -21741,8 +22826,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -21753,6 +22836,10 @@ List Session Thread Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -21760,6 +22847,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
+
+    - `type: :"agent.tool_result"`
 
     - `id: String`
 
@@ -21774,8 +22863,6 @@ List Session Thread Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `type: :"agent.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -21804,6 +22891,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `type: :"agent.thread_message_received"`
 
     - `id: String`
 
@@ -21839,8 +22928,6 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.thread_message_received"`
-
     - `from_agent_name: String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -21848,6 +22935,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `type: :"agent.thread_message_sent"`
 
     - `id: String`
 
@@ -21883,8 +22972,6 @@ List Session Thread Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `type: :"agent.thread_message_sent"`
-
     - `to_agent_name: String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -21892,6 +22979,8 @@ List Session Thread Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `type: :"agent.thread_context_compacted"`
 
     - `id: String`
 
@@ -21903,11 +22992,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.thread_context_compacted"`
-
   - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
+
+    - `type: :"session.error"`
 
     - `id: String`
 
@@ -21920,6 +23009,8 @@ List Session Thread Events
       - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `type: :unknown_error`
 
         - `message: String`
 
@@ -21947,11 +23038,11 @@ List Session Thread Events
 
             - `type: :terminal`
 
-        - `type: :unknown_error`
-
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `type: :model_overloaded_error`
 
         - `message: String`
 
@@ -21972,13 +23063,13 @@ List Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_overloaded_error`
 
       - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
+        - `type: :model_rate_limited_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -21998,13 +23089,13 @@ List Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_rate_limited_error`
 
       - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `type: :model_request_failed_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -22025,11 +23116,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :model_request_failed_error`
-
       - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
+
+        - `type: :mcp_connection_failed_error`
 
         - `mcp_server_name: String`
 
@@ -22055,11 +23146,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_connection_failed_error`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
+
+        - `type: :mcp_authentication_failed_error`
 
         - `mcp_server_name: String`
 
@@ -22085,11 +23176,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_authentication_failed_error`
-
       - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `type: :billing_error`
 
         - `message: String`
 
@@ -22111,11 +23202,11 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :billing_error`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `type: :credential_host_unreachable_error`
 
         - `credential_id: String`
 
@@ -22141,8 +23232,6 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :credential_host_unreachable_error`
-
         - `vault_id: String`
 
           ID of the vault containing the affected credential.
@@ -22153,11 +23242,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"session.error"`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `type: :"session.status_rescheduled"`
 
     - `id: String`
 
@@ -22168,13 +23257,13 @@ List Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.status_rescheduled"`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
+    - `type: :"session.status_running"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -22185,11 +23274,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"session.status_running"`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `type: :"session.status_idle"`
 
     - `id: String`
 
@@ -22215,11 +23304,11 @@ List Session Thread Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `type: :requires_action`
+
         - `event_ids: Array[String]`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: :requires_action`
 
       - `class BetaManagedAgentsSessionRetriesExhausted`
 
@@ -22233,11 +23322,11 @@ List Session Thread Events
 
         - `type: :budget_reached`
 
-    - `type: :"session.status_idle"`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `type: :"session.status_terminated"`
 
     - `id: String`
 
@@ -22249,11 +23338,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"session.status_terminated"`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `type: :"session.thread_created"`
 
     - `id: String`
 
@@ -22273,11 +23362,11 @@ List Session Thread Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `type: :"session.thread_created"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `type: :"span.outcome_evaluation_start"`
 
     - `id: String`
 
@@ -22299,11 +23388,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_start"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `type: :"span.outcome_evaluation_end"`
 
     - `id: String`
 
@@ -22336,8 +23425,6 @@ List Session Thread Events
     - `result: String`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `type: :"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -22379,6 +23466,8 @@ List Session Thread Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `type: :"span.model_request_start"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -22389,11 +23478,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"span.model_request_start"`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
+
+    - `type: :"span.model_request_end"`
 
     - `id: String`
 
@@ -22417,11 +23506,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"span.model_request_end"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `type: :"span.outcome_evaluation_ongoing"`
 
     - `id: String`
 
@@ -22443,11 +23532,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_ongoing"`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `type: :"user.define_outcome"`
 
     - `id: String`
 
@@ -22481,27 +23570,27 @@ List Session Thread Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `type: :file`
+
         - `file_id: String`
 
           ID of the rubric file.
-
-        - `type: :file`
 
       - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
+        - `type: :text`
+
         - `content: String`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `type: :text`
-
-    - `type: :"user.define_outcome"`
-
   - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `type: :"session.deleted"`
 
     - `id: String`
 
@@ -22513,11 +23602,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"session.deleted"`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_running"`
 
     - `id: String`
 
@@ -22537,11 +23626,11 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `type: :"session.thread_status_running"`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_idle"`
 
     - `id: String`
 
@@ -22581,11 +23670,11 @@ List Session Thread Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `type: :"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_terminated"`
 
     - `id: String`
 
@@ -22605,11 +23694,11 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `type: :"session.thread_status_terminated"`
-
   - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `type: :"user.tool_result"`
 
     - `id: String`
 
@@ -22618,8 +23707,6 @@ List Session Thread Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -22659,6 +23746,8 @@ List Session Thread Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `type: :"session.thread_status_rescheduled"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -22677,11 +23766,11 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `type: :"session.thread_status_rescheduled"`
-
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `type: :"session.updated"`
 
     - `id: String`
 
@@ -22693,11 +23782,11 @@ List Session Thread Events
 
       format: date-time
 
-    - `type: :"session.updated"`
-
     - `agent: BetaManagedAgentsSessionAgent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `type: :agent`
 
       - `id: String`
 
@@ -22705,9 +23794,9 @@ List Session Thread Events
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -22835,6 +23924,8 @@ List Session Thread Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `type: :coordinator`
+
         - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -22843,15 +23934,17 @@ List Session Thread Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `type: :agent`
+
             - `id: String`
 
             - `description: String`
 
             - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-              - `name: String`
-
               - `type: :url`
+
+              - `name: String`
 
               - `url: String`
 
@@ -22867,9 +23960,9 @@ List Session Thread Events
 
                 A resolved Anthropic-managed skill.
 
-                - `skill_id: String`
-
                 - `type: :anthropic`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -22877,9 +23970,9 @@ List Session Thread Events
 
                 A resolved user-created custom skill.
 
-                - `skill_id: String`
-
                 - `type: :custom`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -22889,17 +23982,21 @@ List Session Thread Events
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
+                - `type: :agent_toolset_20260401`
+
                 - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                   - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
+                    - `type: :bash`
+
                     - `enabled: bool`
 
                     - `name: :bash`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -22915,17 +24012,23 @@ List Session Thread Events
 
                         - `type: :always_ask`
 
-                    - `type: :bash`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `type: :auto`
 
                   - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
+                    - `type: :edit`
+
                     - `enabled: bool`
 
                     - `name: :edit`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -22937,17 +24040,21 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :edit`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
+                    - `type: :read`
+
                     - `enabled: bool`
 
                     - `name: :read`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -22959,17 +24066,21 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :read`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
+                    - `type: :write`
+
                     - `enabled: bool`
 
                     - `name: :write`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -22981,17 +24092,21 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :write`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
+                    - `type: :glob`
+
                     - `enabled: bool`
 
                     - `name: :glob`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -23003,17 +24118,21 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :glob`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
+                    - `type: :grep`
+
                     - `enabled: bool`
 
                     - `name: :grep`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -23025,17 +24144,21 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :grep`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
+                    - `type: :web_fetch`
+
                     - `enabled: bool`
 
                     - `name: :web_fetch`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -23047,7 +24170,9 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_fetch`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -23061,11 +24186,13 @@ List Session Thread Events
 
                     Configuration for the web_search tool.
 
+                    - `type: :web_search`
+
                     - `enabled: bool`
 
                     - `name: :web_search`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -23077,7 +24204,9 @@ List Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_search`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -23119,7 +24248,7 @@ List Session Thread Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -23131,9 +24260,13 @@ List Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `type: :agent_toolset_20260401`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMCPToolset`
+
+                - `type: :mcp_toolset`
 
                 - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -23141,7 +24274,7 @@ List Session Thread Events
 
                   - `name: String`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -23152,6 +24285,10 @@ List Session Thread Events
                     - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
+
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -23159,7 +24296,7 @@ List Session Thread Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -23171,13 +24308,17 @@ List Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `mcp_server_name: String`
+                    - `class BetaManagedAgentsAutoPolicy`
 
-                - `type: :mcp_toolset`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `mcp_server_name: String`
 
               - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
+
+                - `type: :custom`
 
                 - `description: String`
 
@@ -23193,10 +24334,6 @@ List Session Thread Events
 
                 - `name: String`
 
-                - `type: :custom`
-
-            - `type: :agent`
-
             - `version: Integer`
 
               format: int32
@@ -23205,13 +24342,11 @@ List Session Thread Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `type: :advisor`
+
             - `model: String`
 
               The advisor model id.
-
-            - `type: :advisor`
-
-        - `type: :coordinator`
 
       - `name: String`
 
@@ -23237,8 +24372,6 @@ List Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -23246,6 +24379,8 @@ List Session Thread Events
     - `budget: BetaManagedAgentsBudgetLimit`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `type: :limit`
 
       - `max_list_cost: BetaMonetaryAmount`
 
@@ -23259,8 +24394,6 @@ List Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `type: :limit`
-
     - `metadata: Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -23273,6 +24406,8 @@ List Session Thread Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
+    - `type: :"system.message"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -23281,15 +24416,13 @@ List Session Thread Events
 
       System content blocks. Text-only.
 
+      - `type: :text`
+
       - `text: String`
 
         The text content.
 
         minLength: 1
-
-      - `type: :text`
-
-    - `type: :"system.message"`
 
     - `processed_at: Time`
 
@@ -23301,6 +24434,8 @@ List Session Thread Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `type: :"session.usage"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -23310,8 +24445,6 @@ List Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 
@@ -23445,7 +24578,7 @@ Stream Session Thread Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 41 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 42 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -23493,6 +24626,8 @@ Stream Session Thread Events
 
     - `:"user-profiles-2026-08-18"`
 
+    - `:"user-profiles-2026-09-04"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -23535,6 +24670,8 @@ Stream Session Thread Events
 
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
+- `workspace_id: String`
+
 #### Returns
 
 - `BetaManagedAgentsStreamSessionThreadEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 34 more`
@@ -23544,6 +24681,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
+
+    - `type: :"user.message"`
 
     - `id: String`
 
@@ -23557,17 +24696,19 @@ Stream Session Thread Events
 
         Regular text content.
 
+        - `type: :text`
+
         - `text: String`
 
           The text content.
 
           minLength: 1
 
-        - `type: :text`
-
       - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
+
+        - `type: :image`
 
         - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
 
@@ -23576,6 +24717,8 @@ Stream Session Thread Events
           - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -23588,8 +24731,6 @@ Stream Session Thread Events
               MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
 
               minLength: 1
-
-            - `type: :base64`
 
           - `class BetaManagedAgentsURLImageSource`
 
@@ -23607,19 +24748,19 @@ Stream Session Thread Events
 
             Image referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
 
-            - `type: :file`
-
-        - `type: :image`
-
       - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `type: :document`
 
         - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
 
@@ -23628,6 +24769,8 @@ Stream Session Thread Events
           - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
+
+            - `type: :base64`
 
             - `data: String`
 
@@ -23641,11 +24784,11 @@ Stream Session Thread Events
 
               minLength: 1
 
-            - `type: :base64`
-
           - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
+
+            - `type: :text`
 
             - `data: String`
 
@@ -23656,8 +24799,6 @@ Stream Session Thread Events
             - `media_type: :"text/plain"`
 
               MIME type of the text content. Must be "text/plain".
-
-            - `type: :text`
 
           - `class BetaManagedAgentsURLDocumentSource`
 
@@ -23675,15 +24816,13 @@ Stream Session Thread Events
 
             Document referenced by file ID.
 
+            - `type: :file`
+
             - `file_id: String`
 
               ID of a previously uploaded file.
 
               minLength: 1
-
-            - `type: :file`
-
-        - `type: :document`
 
         - `context: String`
 
@@ -23699,8 +24838,6 @@ Stream Session Thread Events
 
         - `type: :redacted`
 
-    - `type: :"user.message"`
-
     - `processed_at: Time`
 
       A timestamp in RFC 3339 format
@@ -23711,11 +24848,11 @@ Stream Session Thread Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
+    - `type: :"user.interrupt"`
+
     - `id: String`
 
       Unique identifier for this event.
-
-    - `type: :"user.interrupt"`
 
     - `processed_at: Time`
 
@@ -23730,6 +24867,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
+
+    - `type: :"user.tool_confirmation"`
 
     - `id: String`
 
@@ -23746,8 +24885,6 @@ Stream Session Thread Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_confirmation"`
 
     - `deny_message: String`
 
@@ -23769,6 +24906,8 @@ Stream Session Thread Events
 
     Event sent by the client providing the result of a custom tool execution.
 
+    - `type: :"user.custom_tool_result"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -23776,8 +24915,6 @@ Stream Session Thread Events
     - `custom_tool_use_id: String`
 
       The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.custom_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -23799,6 +24936,8 @@ Stream Session Thread Events
 
         A block containing a web search result.
 
+        - `type: :search_result`
+
         - `citations: BetaManagedAgentsSearchResultCitations`
 
           Citation settings for a search result.
@@ -23811,13 +24950,13 @@ Stream Session Thread Events
 
           Array of text content blocks from the search result.
 
+          - `type: :text`
+
           - `text: String`
 
             The text content.
 
             minLength: 1
-
-          - `type: :text`
 
         - `source: String`
 
@@ -23830,8 +24969,6 @@ Stream Session Thread Events
           The title of the search result.
 
           minLength: 1
-
-        - `type: :search_result`
 
     - `is_error: bool`
 
@@ -23851,6 +24988,8 @@ Stream Session Thread Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
+    - `type: :"agent.custom_tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -23869,8 +25008,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.custom_tool_use"`
-
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
@@ -23878,6 +25015,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
+
+    - `type: :"agent.message"`
 
     - `id: String`
 
@@ -23901,11 +25040,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.message"`
-
   - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `type: :"agent.thinking"`
 
     - `id: String`
 
@@ -23917,11 +25056,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.thinking"`
-
   - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `type: :"agent.mcp_tool_use"`
 
     - `id: String`
 
@@ -23945,8 +25084,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.mcp_tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -23957,6 +25094,62 @@ Stream Session Thread Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
+
+        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
+
+        - `type: :always_allow`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
+
+        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
+
+        - `type: :always_ask`
+
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
+
+        The resolved permission_policy was auto: the server judged this invocation individually.
+
+        - `type: :auto`
+
+        - `evaluated_permission: BetaManagedAgentsAgentAutoEvaluatedPermission`
+
+          The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
+
+            The server judged the invocation safe to execute without client approval.
+
+            - `type: :allow`
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
+
+            The server reached no judgement; the invocation is held for client approval.
+
+            - `type: :ask`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
+
+            The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
+
+            - `type: :deny`
+
+            - `reason_code: String`
+
+              The judgement's grounds in registry-bound terms. Open registry; currently "high_risk" (judged high-risk; the call does not run). Clients must tolerate values outside this set.
+
+              maxLength: 64
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -23964,6 +25157,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
+
+    - `type: :"agent.mcp_tool_result"`
 
     - `id: String`
 
@@ -23978,8 +25173,6 @@ Stream Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"agent.mcp_tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -24009,6 +25202,8 @@ Stream Session Thread Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
+    - `type: :"agent.tool_use"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -24027,8 +25222,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.tool_use"`
-
     - `evaluated_permission: :allow | :ask | :deny`
 
       AgentEvaluatedPermission enum
@@ -24039,6 +25232,10 @@ Stream Session Thread Events
 
       - `:deny`
 
+    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+
+      Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
+
     - `session_thread_id: String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
@@ -24046,6 +25243,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
+
+    - `type: :"agent.tool_result"`
 
     - `id: String`
 
@@ -24060,8 +25259,6 @@ Stream Session Thread Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to.
-
-    - `type: :"agent.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -24090,6 +25287,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `type: :"agent.thread_message_received"`
 
     - `id: String`
 
@@ -24125,8 +25324,6 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.thread_message_received"`
-
     - `from_agent_name: String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
@@ -24134,6 +25331,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `type: :"agent.thread_message_sent"`
 
     - `id: String`
 
@@ -24169,8 +25368,6 @@ Stream Session Thread Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `type: :"agent.thread_message_sent"`
-
     - `to_agent_name: String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
@@ -24178,6 +25375,8 @@ Stream Session Thread Events
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
+
+    - `type: :"agent.thread_context_compacted"`
 
     - `id: String`
 
@@ -24189,11 +25388,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"agent.thread_context_compacted"`
-
   - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
+
+    - `type: :"session.error"`
 
     - `id: String`
 
@@ -24206,6 +25405,8 @@ Stream Session Thread Events
       - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `type: :unknown_error`
 
         - `message: String`
 
@@ -24233,11 +25434,11 @@ Stream Session Thread Events
 
             - `type: :terminal`
 
-        - `type: :unknown_error`
-
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `type: :model_overloaded_error`
 
         - `message: String`
 
@@ -24258,13 +25459,13 @@ Stream Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_overloaded_error`
 
       - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
+        - `type: :model_rate_limited_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -24284,13 +25485,13 @@ Stream Session Thread Events
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
-
-        - `type: :model_rate_limited_error`
 
       - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
+        - `type: :model_request_failed_error`
+
         - `message: String`
 
           Human-readable error description.
@@ -24311,11 +25512,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :model_request_failed_error`
-
       - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
+
+        - `type: :mcp_connection_failed_error`
 
         - `mcp_server_name: String`
 
@@ -24341,11 +25542,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_connection_failed_error`
-
       - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
+
+        - `type: :mcp_authentication_failed_error`
 
         - `mcp_server_name: String`
 
@@ -24371,11 +25572,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :mcp_authentication_failed_error`
-
       - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `type: :billing_error`
 
         - `message: String`
 
@@ -24397,11 +25598,11 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :billing_error`
-
       - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `type: :credential_host_unreachable_error`
 
         - `credential_id: String`
 
@@ -24427,8 +25628,6 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-        - `type: :credential_host_unreachable_error`
-
         - `vault_id: String`
 
           ID of the vault containing the affected credential.
@@ -24439,11 +25638,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"session.error"`
-
   - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `type: :"session.status_rescheduled"`
 
     - `id: String`
 
@@ -24454,13 +25653,13 @@ Stream Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.status_rescheduled"`
 
   - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
+    - `type: :"session.status_running"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -24471,11 +25670,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"session.status_running"`
-
   - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
+
+    - `type: :"session.status_idle"`
 
     - `id: String`
 
@@ -24501,11 +25700,11 @@ Stream Session Thread Events
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
+        - `type: :requires_action`
+
         - `event_ids: Array[String]`
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
-
-        - `type: :requires_action`
 
       - `class BetaManagedAgentsSessionRetriesExhausted`
 
@@ -24519,11 +25718,11 @@ Stream Session Thread Events
 
         - `type: :budget_reached`
 
-    - `type: :"session.status_idle"`
-
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
+
+    - `type: :"session.status_terminated"`
 
     - `id: String`
 
@@ -24535,11 +25734,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"session.status_terminated"`
-
   - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `type: :"session.thread_created"`
 
     - `id: String`
 
@@ -24559,11 +25758,11 @@ Stream Session Thread Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `type: :"session.thread_created"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
+
+    - `type: :"span.outcome_evaluation_start"`
 
     - `id: String`
 
@@ -24585,11 +25784,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_start"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `type: :"span.outcome_evaluation_end"`
 
     - `id: String`
 
@@ -24622,8 +25821,6 @@ Stream Session Thread Events
     - `result: String`
 
       Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
-
-    - `type: :"span.outcome_evaluation_end"`
 
     - `usage: BetaManagedAgentsSpanModelUsage`
 
@@ -24665,6 +25862,8 @@ Stream Session Thread Events
 
     Emitted when a model request is initiated by the agent.
 
+    - `type: :"span.model_request_start"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -24675,11 +25874,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"span.model_request_start"`
-
   - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
+
+    - `type: :"span.model_request_end"`
 
     - `id: String`
 
@@ -24703,11 +25902,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"span.model_request_end"`
-
   - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `type: :"span.outcome_evaluation_ongoing"`
 
     - `id: String`
 
@@ -24729,11 +25928,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"span.outcome_evaluation_ongoing"`
-
   - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `type: :"user.define_outcome"`
 
     - `id: String`
 
@@ -24767,27 +25966,27 @@ Stream Session Thread Events
 
         Rubric referenced by a file uploaded via the Files API.
 
+        - `type: :file`
+
         - `file_id: String`
 
           ID of the rubric file.
-
-        - `type: :file`
 
       - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
+        - `type: :text`
+
         - `content: String`
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-        - `type: :text`
-
-    - `type: :"user.define_outcome"`
-
   - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `type: :"session.deleted"`
 
     - `id: String`
 
@@ -24799,11 +25998,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"session.deleted"`
-
   - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_running"`
 
     - `id: String`
 
@@ -24823,11 +26022,11 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that started running.
 
-    - `type: :"session.thread_status_running"`
-
   - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_idle"`
 
     - `id: String`
 
@@ -24867,11 +26066,11 @@ Stream Session Thread Events
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-    - `type: :"session.thread_status_idle"`
-
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `type: :"session.thread_status_terminated"`
 
     - `id: String`
 
@@ -24891,11 +26090,11 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that terminated.
 
-    - `type: :"session.thread_status_terminated"`
-
   - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
+
+    - `type: :"user.tool_result"`
 
     - `id: String`
 
@@ -24904,8 +26103,6 @@ Stream Session Thread Events
     - `tool_use_id: String`
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
-
-    - `type: :"user.tool_result"`
 
     - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
@@ -24945,6 +26142,8 @@ Stream Session Thread Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
+    - `type: :"session.thread_status_rescheduled"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -24963,11 +26162,11 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that is retrying.
 
-    - `type: :"session.thread_status_rescheduled"`
-
   - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
+
+    - `type: :"session.updated"`
 
     - `id: String`
 
@@ -24979,11 +26178,11 @@ Stream Session Thread Events
 
       format: date-time
 
-    - `type: :"session.updated"`
-
     - `agent: BetaManagedAgentsSessionAgent`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+      - `type: :agent`
 
       - `id: String`
 
@@ -24991,9 +26190,9 @@ Stream Session Thread Events
 
       - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-        - `name: String`
-
         - `type: :url`
+
+        - `name: String`
 
         - `url: String`
 
@@ -25121,6 +26320,8 @@ Stream Session Thread Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
+        - `type: :coordinator`
+
         - `agents: Array[BetaManagedAgentsSessionThreadAgent | BetaManagedAgentsAdvisor]`
 
           Full `agent` definitions the coordinator may spawn as session threads.
@@ -25129,15 +26330,17 @@ Stream Session Thread Events
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
+            - `type: :agent`
+
             - `id: String`
 
             - `description: String`
 
             - `mcp_servers: Array[BetaManagedAgentsMCPServerURLDefinition]`
 
-              - `name: String`
-
               - `type: :url`
+
+              - `name: String`
 
               - `url: String`
 
@@ -25153,9 +26356,9 @@ Stream Session Thread Events
 
                 A resolved Anthropic-managed skill.
 
-                - `skill_id: String`
-
                 - `type: :anthropic`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -25163,9 +26366,9 @@ Stream Session Thread Events
 
                 A resolved user-created custom skill.
 
-                - `skill_id: String`
-
                 - `type: :custom`
+
+                - `skill_id: String`
 
                 - `version: String`
 
@@ -25175,17 +26378,21 @@ Stream Session Thread Events
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
+                - `type: :agent_toolset_20260401`
+
                 - `configs: Array[BetaManagedAgentsAgentToolConfig]`
 
                   - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
+                    - `type: :bash`
+
                     - `enabled: bool`
 
                     - `name: :bash`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25201,17 +26408,23 @@ Stream Session Thread Events
 
                         - `type: :always_ask`
 
-                    - `type: :bash`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                        - `type: :auto`
 
                   - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
+                    - `type: :edit`
+
                     - `enabled: bool`
 
                     - `name: :edit`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25223,17 +26436,21 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :edit`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
+                    - `type: :read`
+
                     - `enabled: bool`
 
                     - `name: :read`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25245,17 +26462,21 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :read`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
+                    - `type: :write`
+
                     - `enabled: bool`
 
                     - `name: :write`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25267,17 +26488,21 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :write`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
+                    - `type: :glob`
+
                     - `enabled: bool`
 
                     - `name: :glob`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25289,17 +26514,21 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :glob`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
+                    - `type: :grep`
+
                     - `enabled: bool`
 
                     - `name: :grep`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25311,17 +26540,21 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :grep`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
+                    - `type: :web_fetch`
+
                     - `enabled: bool`
 
                     - `name: :web_fetch`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25333,7 +26566,9 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_fetch`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -25347,11 +26582,13 @@ Stream Session Thread Events
 
                     Configuration for the web_search tool.
 
+                    - `type: :web_search`
+
                     - `enabled: bool`
 
                     - `name: :web_search`
 
-                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                    - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                       Permission policy for tool execution.
 
@@ -25363,7 +26600,9 @@ Stream Session Thread Events
 
                         Tool calls require user confirmation before execution.
 
-                    - `type: :web_search`
+                      - `class BetaManagedAgentsAutoPolicy`
+
+                        The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                     - `allowed_domains: Array[String]`
 
@@ -25405,7 +26644,7 @@ Stream Session Thread Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -25417,9 +26656,13 @@ Stream Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `type: :agent_toolset_20260401`
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `class BetaManagedAgentsMCPToolset`
+
+                - `type: :mcp_toolset`
 
                 - `configs: Array[BetaManagedAgentsMCPToolConfig]`
 
@@ -25427,7 +26670,7 @@ Stream Session Thread Events
 
                   - `name: String`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -25438,6 +26681,10 @@ Stream Session Thread Events
                     - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
+
+                    - `class BetaManagedAgentsAutoPolicy`
+
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -25445,7 +26692,7 @@ Stream Session Thread Events
 
                   - `enabled: bool`
 
-                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy`
+                  - `permission_policy: BetaManagedAgentsAlwaysAllowPolicy | BetaManagedAgentsAlwaysAskPolicy | BetaManagedAgentsAutoPolicy`
 
                     Permission policy for tool execution.
 
@@ -25457,13 +26704,17 @@ Stream Session Thread Events
 
                       Tool calls require user confirmation before execution.
 
-                - `mcp_server_name: String`
+                    - `class BetaManagedAgentsAutoPolicy`
 
-                - `type: :mcp_toolset`
+                      The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                - `mcp_server_name: String`
 
               - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
+
+                - `type: :custom`
 
                 - `description: String`
 
@@ -25479,10 +26730,6 @@ Stream Session Thread Events
 
                 - `name: String`
 
-                - `type: :custom`
-
-            - `type: :agent`
-
             - `version: Integer`
 
               format: int32
@@ -25491,13 +26738,11 @@ Stream Session Thread Events
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
+            - `type: :advisor`
+
             - `model: String`
 
               The advisor model id.
-
-            - `type: :advisor`
-
-        - `type: :coordinator`
 
       - `name: String`
 
@@ -25523,8 +26768,6 @@ Stream Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `type: :agent`
-
       - `version: Integer`
 
         format: int32
@@ -25532,6 +26775,8 @@ Stream Session Thread Events
     - `budget: BetaManagedAgentsBudgetLimit`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `type: :limit`
 
       - `max_list_cost: BetaMonetaryAmount`
 
@@ -25545,8 +26790,6 @@ Stream Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-      - `type: :limit`
-
     - `metadata: Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -25559,41 +26802,43 @@ Stream Session Thread Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
+    - `type: :event_start`
+
     - `event: BetaManagedAgentsStartEventPreview`
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
       - `class BetaManagedAgentsAgentMessagePreview`
 
+        - `type: :"agent.message"`
+
         - `id: String`
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-        - `type: :"agent.message"`
-
       - `class BetaManagedAgentsAgentThinkingPreview`
+
+        - `type: :"agent.thinking"`
 
         - `id: String`
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-        - `type: :"agent.thinking"`
-
-    - `type: :event_start`
-
   - `class BetaManagedAgentsDeltaEvent`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `type: :event_delta`
 
     - `delta: BetaManagedAgentsDeltaContent`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
+      - `type: :content_delta`
+
       - `content: BetaManagedAgentsTextBlock`
 
         Regular text content.
-
-      - `type: :content_delta`
 
       - `index: Integer`
 
@@ -25605,11 +26850,11 @@ Stream Session Thread Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-    - `type: :event_delta`
-
   - `class BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `type: :"system.message"`
 
     - `id: String`
 
@@ -25619,15 +26864,13 @@ Stream Session Thread Events
 
       System content blocks. Text-only.
 
+      - `type: :text`
+
       - `text: String`
 
         The text content.
 
         minLength: 1
-
-      - `type: :text`
-
-    - `type: :"system.message"`
 
     - `processed_at: Time`
 
@@ -25639,6 +26882,8 @@ Stream Session Thread Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
+    - `type: :"session.usage"`
+
     - `id: String`
 
       Unique identifier for this event.
@@ -25648,8 +26893,6 @@ Stream Session Thread Events
       A timestamp in RFC 3339 format
 
       format: date-time
-
-    - `type: :"session.usage"`
 
     - `usage: BetaManagedAgentsSessionUsageSnapshot`
 

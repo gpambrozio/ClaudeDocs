@@ -1,5 +1,12 @@
 # Invites
 
+---
+title: Invites
+url: https://platform.claude.com/docs/en/api/beta/organization/invites
+---
+
+# Invites
+
 ## Create Invite
 
 **POST** `/v1/organizations/invites`
@@ -41,6 +48,14 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 ### Returns
 
 - `BetaOrganizationInvite object`
+
+  - `type: "invite"`
+
+    Object type.
+
+    For Invites, this is always `"invite"`.
+
+    default: invite
 
   - `id: string`
 
@@ -105,14 +120,6 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
     - `"expired"`
 
     - `"pending"`
-
-  - `type: "invite"`
-
-    Object type.
-
-    For Invites, this is always `"invite"`.
-
-    default: invite
 
 ### Example
 
@@ -195,6 +202,14 @@ List the organization's invites.
 
 - `data: array of BetaOrganizationInvite`
 
+  - `type: "invite"`
+
+    Object type.
+
+    For Invites, this is always `"invite"`.
+
+    default: invite
+
   - `id: string`
 
     ID of the Invite.
@@ -258,14 +273,6 @@ List the organization's invites.
     - `"expired"`
 
     - `"pending"`
-
-  - `type: "invite"`
-
-    Object type.
-
-    For Invites, this is always `"invite"`.
-
-    default: invite
 
 - `first_id: string or null`
 
@@ -328,6 +335,14 @@ Retrieve an invite by ID.
 
 - `BetaOrganizationInvite object`
 
+  - `type: "invite"`
+
+    Object type.
+
+    For Invites, this is always `"invite"`.
+
+    default: invite
+
   - `id: string`
 
     ID of the Invite.
@@ -391,14 +406,6 @@ Retrieve an invite by ID.
     - `"expired"`
 
     - `"pending"`
-
-  - `type: "invite"`
-
-    Object type.
-
-    For Invites, this is always `"invite"`.
-
-    default: invite
 
 ### Example
 
@@ -440,10 +447,6 @@ Delete a pending invite.
 
 ### Returns
 
-- `id: string`
-
-  ID of the Invite.
-
 - `type: "invite_deleted"`
 
   Deleted object type.
@@ -451,6 +454,10 @@ Delete a pending invite.
   For Invites, this is always `"invite_deleted"`.
 
   default: invite_deleted
+
+- `id: string`
+
+  ID of the Invite.
 
 ### Example
 
@@ -475,6 +482,14 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 ### Beta Organization Invite
 
 - `BetaOrganizationInvite object`
+
+  - `type: "invite"`
+
+    Object type.
+
+    For Invites, this is always `"invite"`.
+
+    default: invite
 
   - `id: string`
 
@@ -540,21 +555,9 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
     - `"pending"`
 
-  - `type: "invite"`
-
-    Object type.
-
-    For Invites, this is always `"invite"`.
-
-    default: invite
-
 ### Invite Delete Response
 
 - `InviteDeleteResponse object`
-
-  - `id: string`
-
-    ID of the Invite.
 
   - `type: "invite_deleted"`
 
@@ -563,6 +566,10 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     For Invites, this is always `"invite_deleted"`.
 
     default: invite_deleted
+
+  - `id: string`
+
+    ID of the Invite.
 
 ---
 

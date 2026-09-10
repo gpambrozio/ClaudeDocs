@@ -1,5 +1,12 @@
 # Cancel a Message Batch
 
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/csharp/messages/batches/cancel
+---
+
+# Cancel a Message Batch
+
 `MessageBatch Messages.Batches.Cancel(parameters, cancellationToken = default)`
 
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
@@ -18,9 +25,21 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     ID of the Message Batch.
 
+  - `string workspaceID`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ## Returns
 
 - `class MessageBatch:`
+
+  - `JsonElement Type = "message_batch"`
+
+    Object type.
+
+    For Message Batches, this is always `"message_batch"`.
 
   - `required string ID`
 
@@ -109,12 +128,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
-
-  - `JsonElement Type = "message_batch"`
-
-    Object type.
-
-    For Message Batches, this is always `"message_batch"`.
 
 ## Example
 
