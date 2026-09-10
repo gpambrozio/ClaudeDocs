@@ -144,17 +144,87 @@ jobs:
 
       - name: Run Claude Code for changelog
         if: steps.changes.outputs.has_changes == 'true'
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: ${{ steps.prompt.outputs.content }}
           # Read-only git only: the model must not be able to alter commit history.
+          # Only Bash needs listing here. Read, Glob, Grep and TodoWrite never ask
+          # for permission, so naming them would change nothing -- every denial
+          # this step records is a shell command that matched no prefix below.
+          #
+          # The non-git entries are the text-processing companions of a diff this
+          # size, each read-only by construction (`sed -n`, not `sed`) so the
+          # invariant above holds no matter what gets piped into what. Write
+          # creates parent directories itself, but the model tends to reach for
+          # `mkdir -p` first and a denial there costs it a turn.
+          #
           # The value MUST be quoted: patterns like "Bash(git show:*)" contain a
           # space, and the action tokenizes claude_args on whitespace. Without the
           # quotes the allowlist is split into garbage ("Bash(git", "show:*)", ...)
           # and the model loses all git access.
           claude_args: |
-            --allowedTools "Read,Write,Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git rev-parse:*),Bash(git ls-files:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(grep:*),Bash(find:*),Bash(wc:*)"
+            --allowedTools "Read,Write,Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git rev-parse:*),Bash(git ls-files:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(tail:*),Bash(grep:*),Bash(find:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(cut:*),Bash(tr:*),Bash(diff:*),Bash(sed -n:*),Bash(basename:*),Bash(dirname:*),Bash(echo:*),Bash(mkdir -p:*)"
+
+      # The action hides Claude's output ("full output hidden for security"),
+      # so a run that ends without writing the changelog leaves nothing behind to
+      # explain itself -- only a warning that the file is missing. The execution
+      # file holds the raw transcript, so put the parts that account for a no-op
+      # run on the run page: the tools Claude called, the calls the allowlist
+      # denied, and its closing message.
+      #
+      # Tool *inputs* are summarised, never tool results. Results carry whatever
+      # the command printed, and this log is public.
+      - name: Report changelog run
+        if: always() && steps.changes.outputs.has_changes == 'true'
+        shell: bash
+        env:
+          EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          exec >> "$GITHUB_STEP_SUMMARY"
+          echo '### Changelog run'
+          if [ ! -f "$EXECUTION_FILE" ]; then
+            echo 'Claude Code produced no execution file.'
+            exit 0
+          fi
+
+          echo '<details><summary>Tool calls</summary>'
+          echo
+          echo '```'
+          jq -r '.[] | select(.type == "assistant") | .message.content[]?
+                 | select(.type == "tool_use")
+                 | "\(.name) \(.input | tostring | .[0:200])"' "$EXECUTION_FILE" || echo '(unreadable transcript)'
+          echo '```'
+          echo '</details>'
+          echo
+
+          echo '**Permission denials**'
+          echo
+          echo '```'
+          jq -r '.[] | select(.type == "result") | (.permission_denials // [])[]
+                 | "\(.tool_name) \(.tool_input | tostring | .[0:200])"' "$EXECUTION_FILE" || echo '(unreadable transcript)'
+          echo '```'
+          echo
+
+          echo '**Final message**'
+          echo
+          echo '```'
+          jq -r '[.[] | select(.type == "assistant") | .message.content[]?
+                  | select(.type == "text") | .text] | last // "(no closing message)"' "$EXECUTION_FILE" || echo '(unreadable transcript)'
+          echo '```'
+
+      # The full transcript, for when the summary above is not enough. Kept as an
+      # artifact rather than `show_full_output: true`, which would inline every
+      # tool result -- including the whole documentation diff -- into the log.
+      - name: Upload changelog transcript
+        if: always() && steps.claude.outputs.execution_file != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: changelog-transcript-${{ steps.date.outputs.iso }}
+          path: ${{ steps.claude.outputs.execution_file }}
+          if-no-files-found: ignore
+          retention-days: 30
 
       - name: Add source links, commit changelog, and push
         if: steps.changes.outputs.has_changes == 'true'
