@@ -500,7 +500,10 @@ await foreach (var streamEvent in stream.Enumerate())
     {
         foreach (var block in message.Content)
         {
-            Console.Write(block.Text);
+            if (block.Value is BetaManagedAgentsTextBlock textBlock)
+            {
+                Console.Write(textBlock.Text);
+            }
         }
     }
     else if (streamEvent.Value is BetaManagedAgentsSessionStatusIdleEvent)
@@ -770,7 +773,10 @@ await foreach (var streamEvent in stream.Enumerate())
     {
         foreach (var block in message.Content)
         {
-            Console.Write(block.Text);
+            if (block.Value is BetaManagedAgentsTextBlock textBlock)
+            {
+                Console.Write(textBlock.Text);
+            }
         }
     }
     else if (streamEvent.Value is BetaManagedAgentsSessionStatusIdleEvent)
@@ -1263,14 +1269,18 @@ for await (const event of stream) {
     const preview = accumulateManagedAgentsEvent(previews.get(event.event_id), event);
     if (preview) {
       previews.set(event.event_id, preview);
-      const text = preview.content.map((block) => block.text).join("");
+      const text = preview.content
+        .map((block) => (block.type === "text" ? block.text : ""))
+        .join("");
       console.log(`event_delta             preview: ${JSON.stringify(text)}`);
     }
   } else if (event.type === "agent.message") {
     // 3. The buffered event is the record: it replaces and closes the preview
     const message = accumulateManagedAgentsEvent(previews.get(event.id), event);
     previews.delete(event.id);
-    const text = message.content.map((block) => block.text).join("");
+    const text = message.content
+      .map((block) => (block.type === "text" ? block.text : ""))
+      .join("");
     console.log(`agent.message           ${event.id} ${JSON.stringify(text)}`);
   } else if (event.type === "span.model_request_end") {
     // 4. No more deltas are coming. Close any preview that was never reconciled.
@@ -1342,7 +1352,9 @@ await foreach (var streamEvent in stream.Enumerate())
     {
         // Deltas are best-effort: discard the preview and use the buffered event
         previews.Remove(message.ID);
-        Console.WriteLine($"agent.message           {message.ID} {string.Concat(message.Content.Select(block => block.Text))}");
+        var text = string.Concat(message.Content.Select(block =>
+            block.TryPickBetaManagedAgentsTextBlock(out var textBlock) ? textBlock.Text : ""));
+        Console.WriteLine($"agent.message           {message.ID} {text}");
     }
     else if (streamEvent.TryPickSpanModelRequestEndEvent(out _))
     {
@@ -1669,7 +1681,9 @@ for await (const event of stream) {
   } else if (event.type === "agent.message") {
     // The buffered event is the authoritative record; render its content.
     process.stdout.write("\n");
-    const text = event.content.map((block) => block.text).join("");
+    const text = event.content
+      .map((block) => (block.type === "text" ? block.text : ""))
+      .join("");
     console.log(text);
   } else if (event.type === "session.thread_status_idle") {
     break;
@@ -1701,7 +1715,9 @@ await foreach (var streamEvent in stream.Enumerate())
     {
         // The buffered event is the authoritative record; render its content.
         Console.WriteLine();
-        Console.WriteLine(string.Concat(message.Content.Select(block => block.Text)));
+        var text = string.Concat(message.Content.Select(block =>
+            block.TryPickBetaManagedAgentsTextBlock(out var textBlock) ? textBlock.Text : ""));
+        Console.WriteLine(text);
     }
     else if (streamEvent.TryPickSessionThreadStatusIdleEvent(out _))
     {

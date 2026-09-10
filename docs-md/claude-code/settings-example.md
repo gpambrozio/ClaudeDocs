@@ -86,11 +86,12 @@ The same file with a comment above each key. Read it here; copy from the other t
   A team's shared settings
 </h2>
 
-One team's shared settings, committed to the repository so everyone who clones it gets the same permissions, hooks, telemetry, and plugin marketplace. Save a file like this at `.claude/settings.json` at the top of the repository. Three things to know before you commit one:
+One team's shared settings, committed to the repository so everyone who clones it gets the same permissions, hooks, telemetry, and plugin marketplace. Save a file like this at `.claude/settings.json` at the top of the repository. What to know before you commit one:
 
 * **Cloud sessions read it too.** A [cloud session](settings.md#settings-in-cloud-sessions) on Claude Code on the web starts from a clone of the repository, so the committed file applies there as well.
 * **Allow rules wait for trust.** Allow rules and `extraKnownMarketplaces` entries take effect after each person [trusts this folder itself](permissions.md#project-allow-rules-and-workspace-trust), not only a parent folder; deny and ask rules apply in every session, trusted or not.
 * **The hook is a script in the repo.** This file's hook runs `.claude/hooks/block-rm.sh`; [How a hook resolves](hooks.md#how-a-hook-resolves) walks through writing it.
+* **Rules match the command and path as written.** `Bash(git push *)` doesn't match [`git -C . push`](permissions.md#bash-rule-limits). `Read(./.env)` on its own stops the file tools and commands that name the file, such as `cat .env`, but not [`grep -r` run over the directory](permissions.md#read-and-edit); the `sandbox` block in this file closes that gap, because the sandbox [adds your `Read` deny paths](settings-reference.md#sandbox-filesystem-denyread) to what every sandboxed command can't read.
 
 **Copyable settings file**
 
@@ -170,11 +171,11 @@ The same file with a comment above each key. Read it here; copy from the other t
     "allow": [
       "Bash(npm run *)"
     ],
-    // Always confirm before pushing
+    // Confirm before git push commands
     "ask": [
       "Bash(git push *)"
     ],
-    // Never read env files or the secrets folder
+    // Deny reads of env files and the secrets folder by the file tools and file-reading commands
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
@@ -243,7 +244,7 @@ A `managed-settings.json` file that shows the shape of the managed keys, with on
 
 * `forceLoginMethod` and `forceLoginOrgUUID` pin the login method and organization
 * `availableModels` and `enforceAvailableModels` restrict which models sessions can use
-* `permissions.deny` blocks two file reads and `curl`, and `disableBypassPermissionsMode` removes the bypass permission mode
+* `permissions.deny` denies two file reads and `curl` commands [as Claude writes them](permissions.md#bash-rule-limits), and `disableBypassPermissionsMode` removes the bypass permission mode
 * [`allowManagedPermissionRulesOnly`](settings-reference.md#allowmanagedpermissionrulesonly) and [`allowManagedMcpServersOnly`](settings-reference.md#allowmanagedmcpserversonly) make the managed permission and MCP allowlists the only ones that apply
 * `allowedMcpServers` pins the MCP server by URL
 * `strictKnownMarketplaces` allows one plugin marketplace
@@ -328,7 +329,7 @@ The same file with a comment above each key. Read it here; copy from the other t
   ],
   "enforceAvailableModels": true,
   "permissions": {
-    // Block curl, the project's .env file, and its secrets folder on every machine
+    // Deny curl commands and reads of the project's .env file and secrets folder on every machine
     "deny": [
       "Bash(curl *)",
       "Read(./.env)",
@@ -340,9 +341,9 @@ The same file with a comment above each key. Read it here; copy from the other t
   // Ignore permission rules from user, project, and local settings
   "allowManagedPermissionRulesOnly": true,
   // Only the GitHub MCP server, matched by URL rather than by name, since a user can
-  // name any server "github". Servers that don't match don't load, which includes every
-  // stdio server when the list has only URL entries; the lock below makes this managed
-  // list the only allowlist that counts
+  // name any server "github". User-added servers that don't match don't load, including
+  // every stdio server when the list has only URL entries. The allowManagedMcpServersOnly
+  // key below makes this managed list the only allowlist that applies
   "allowedMcpServers": [
     {
       "serverUrl": "https://api.githubcopilot.com/*"

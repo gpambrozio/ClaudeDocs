@@ -109,7 +109,7 @@ config/secrets.json`,
           oneLiner: 'Permissions, hooks, and configuration',
           when: <>Overrides global ~/.claude/settings.json. Local settings, CLI flags, and managed settings override this</>,
           description: 'Settings that Claude Code applies directly. Permissions control which commands and tools Claude can use; hooks run your scripts at specific points in a session. Unlike CLAUDE.md, which Claude reads as guidance, these are enforced whether Claude follows them or not.',
-          contains: [<>permissions: allow, deny, or prompt before Claude uses specific tools or commands</>, <>hooks: run your own scripts on events like before a tool call or after a file edit</>, <>statusLine: customize the line shown at the bottom while Claude works</>, <>model: pick a default model for this project</>, <>env: environment variables set in every session</>, <>outputStyle: select a custom system-prompt style from output-styles/</>],
+          contains: [<>permissions: allow, deny, or prompt before Claude uses specific tools or commands</>, <>hooks: run your own scripts on events like before a tool call or after a file edit</>, <>statusLine: customize the line shown at the bottom while Claude works</>, <>model: pick a default model for this project</>, <>env: environment variables set in every session</>, <>outputStyle: select a custom output style from output-styles/</>],
           tips: [<>Bash permission patterns support wildcards: Bash(npm test *) matches any command starting with npm test</>, <>Array settings like permissions.allow combine across all scopes; scalar settings like model use the most specific value</>],
           exampleIntro: <>This example allows npm test and npm run commands without prompting, blocks rm -rf, and runs Prettier on files after Claude edits or writes them.</>,
           example: `{
@@ -318,7 +318,7 @@ Investigate and fix the issue above.
           icon: 'folder',
           color: '#5AA7A7',
           oneLiner: 'Project-scoped output styles, if your team shares any',
-          when: 'Files read at startup; the style you select with outputStyle is added to the system prompt every turn',
+          when: 'Files read at startup; the style you select with outputStyle applies to every response',
           description: <>Output styles are usually personal, so most live in ~/.claude/output-styles/. Put one here if your team shares a style, like a review mode everyone uses. See the Global tab for the full explanation and example.</>,
           docsLink: '/en/output-styles',
           children: []
@@ -634,10 +634,10 @@ type: reference
           type: 'folder',
           icon: 'folder',
           color: '#5AA7A7',
-          oneLiner: 'Custom system-prompt sections that adjust how Claude works',
-          when: 'Files read at startup; the style you select with outputStyle is added to the system prompt every turn',
-          description: [<>Each markdown file defines an output style: a section appended to the system prompt that, by default, also drops the built-in software-engineering task instructions. Use this to adapt Claude Code for uses beyond coding, or to add teaching or review modes.</>, <>Select a built-in or custom style with /config or the outputStyle key in settings. Styles here are available in every project; project-level styles with the same name take precedence.</>],
-          tips: ['Built-in styles Default, Proactive, Concise, Explanatory, and Learning are included with Claude Code; custom styles go here', <>Set keep-coding-instructions: true in frontmatter to keep the default task instructions alongside your additions</>, 'Switching styles mid-session applies from your next message and rebuilds the prompt cache once; in the terminal, a style file you create or edit mid-session is picked up after a restart'],
+          oneLiner: 'Custom instruction sets that adjust how Claude works',
+          when: 'Files read at startup; the style you select with outputStyle applies to every response',
+          description: [<>Each markdown file defines an output style: a set of instructions for Claude that, by default, also replaces the built-in software-engineering task instructions. Use this to adapt Claude Code for uses beyond coding, or to add teaching or review modes.</>, <>Select a built-in or custom style with /config or the outputStyle key in settings. Styles here are available in every project; project-level styles with the same name take precedence.</>],
+          tips: ['Built-in styles Default, Proactive, Concise, Explanatory, and Learning are included with Claude Code; custom styles go here', <>Set keep-coding-instructions: true in frontmatter to keep the default task instructions alongside your additions</>, 'Switching styles mid-session applies from your next message; in the terminal, a style file you create or edit mid-session is picked up after a restart'],
           docsLink: '/en/output-styles',
           children: [{
             id: 'output-style-example',
@@ -648,7 +648,7 @@ type: reference
             badge: 'local',
             oneLiner: 'Example style that adds explanations and leaves small changes for you',
             when: <>Active when outputStyle in settings is set to teaching</>,
-            description: <>This style appends instructions to the system prompt: Claude adds a "Why this approach" note after each task and leaves TODO(human) markers for changes under 10 lines instead of writing them itself. Select it by setting outputStyle to the filename without .md, or to the name field if you set one in frontmatter.</>,
+            description: <>With this style, Claude adds a "Why this approach" note after each task and leaves TODO(human) markers for changes under 10 lines instead of writing them itself. Select it by setting outputStyle to the filename without .md, or to the name field if you set one in frontmatter.</>,
             example: `---
 description: Explains reasoning and asks you to implement small pieces
 keep-coding-instructions: true
@@ -1273,7 +1273,7 @@ Click a filename to open that node in the explorer above.
 | [`.worktreeinclude`](#ce-worktreeinclude)           | Project only       | ✓      | Gitignored files to copy into new worktrees                                                                   | [Worktrees](worktrees.md#copy-gitignored-files-into-worktrees) |
 | [`skills/<name>/SKILL.md`](#ce-skills)              | Project and global | ✓      | Reusable prompts invoked with `/name` or auto-invoked                                                         | [Skills](skills.md)                                            |
 | [`commands/*.md`](#ce-commands)                     | Project and global | ✓      | Single-file prompts; same mechanism as skills                                                                 | [Skills](skills.md)                                            |
-| [`output-styles/*.md`](#ce-output-styles)           | Project and global | ✓      | Custom system-prompt sections                                                                                 | [Output styles](output-styles.md)                              |
+| [`output-styles/*.md`](#ce-output-styles)           | Project and global | ✓      | Custom instruction sets that adjust how Claude works                                                          | [Output styles](output-styles.md)                              |
 | [`agents/*.md`](#ce-agents)                         | Project and global | ✓      | Subagent definitions with their own prompt and tools                                                          | [Subagents](sub-agents.md)                                     |
 | [`workflows/*.js`](#ce-workflows)                   | Project and global | ✓      | Dynamic workflow scripts written by Claude and saved from `/workflows`; each file becomes a `/<name>` command | [Dynamic workflows](workflows.md)                              |
 | [`agent-memory/<name>/`](#ce-agent-memory)          | Project and global | ✓      | Persistent memory for subagents                                                                               | [Persistent memory](sub-agents.md#enable-persistent-memory)    |

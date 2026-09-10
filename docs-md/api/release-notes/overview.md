@@ -15,6 +15,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 ### September 3, 2026
 
 * Version 1.30.0 of the `ant` CLI adds `ant apply`, which creates and updates agents, environments, skills, memory stores, and deployments from files in your repository. Describe each resource in a file, run `ant apply`, and approve the plan it prints. Commit the `claude-lock.json` lockfile it writes so that later runs, on your machine or in CI, update the same resources instead of creating new ones. See [Manage resources as code with ant apply](../cli-sdks-libraries/cli/apply.md).
+* [Per-message effort](../build-with-claude/effort.md#change-effort-mid-conversation-beta) changes, in beta, are also available on [Google Cloud](../build-with-claude/claude-on-vertex-ai.md) for Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5, with the same `mid-conversation-output-config-2026-07-01` beta header.
 
 ### September 1, 2026
 

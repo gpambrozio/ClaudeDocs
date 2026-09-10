@@ -892,7 +892,9 @@ await foreach (var streamEvent in stream.Enumerate())
 {
     if (streamEvent.Value is BetaManagedAgentsAgentMessageEvent message)
     {
-        Console.WriteLine(string.Concat(message.Content.Select(block => block.Text)));
+        var text = string.Concat(message.Content.Select(block =>
+            block.Value is BetaManagedAgentsTextBlock textBlock ? textBlock.Text : ""));
+        Console.WriteLine(text);
     }
     else if (streamEvent.Value is BetaManagedAgentsAgentCustomToolUseEvent toolUse)
     {

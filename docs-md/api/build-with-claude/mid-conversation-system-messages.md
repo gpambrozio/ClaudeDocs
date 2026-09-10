@@ -469,7 +469,7 @@ Add a message with `"role": "system"` to the `messages` array. Use a plain strin
 
 You can still set the top-level `system` field for instructions that should apply to the entire conversation. Reserve mid-conversation system messages for instructions that only become relevant later, or that you want to add without invalidating the cached prefix.
 
-A `role: "system"` message can also carry `output_config.effort` to change the [effort](effort.md) level from the next `user` turn on. This is in beta on Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5 on the Claude API and requires the `mid-conversation-output-config-2026-07-01` beta header. See [Per-message effort](effort.md#change-effort-mid-conversation-beta).
+A `role: "system"` message can also carry `output_config.effort` to change the [effort](effort.md) level from the next `user` turn on. This is in beta on Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5 on the Claude API and Google Cloud, and requires the `mid-conversation-output-config-2026-07-01` beta header. See [Per-message effort](effort.md#change-effort-mid-conversation-beta).
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \

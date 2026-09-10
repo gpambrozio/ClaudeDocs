@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console
 description: Create tunnels, register CA certificates, retrieve the tunnel token, and attach tunneled MCP servers to agents from the Claude Console.
 ---
 
-MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+MCP tunnels are in research preview. [Request access](https://claude.com/form/mcp-tunnels) to try them.
 
 This page covers the Console side of an MCP tunnels deployment: creating a tunnel, registering your CA certificate, retrieving the tunnel token, and attaching the [upstream MCP servers](concepts.md#components) to an agent. [Deploy MCP tunnels with Helm](deploy-helm.md) and [Deploy MCP tunnels with Docker Compose](deploy-compose.md) cover running the [tunnel stack](concepts.md#components) inside your network.
 
