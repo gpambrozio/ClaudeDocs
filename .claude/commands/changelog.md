@@ -27,7 +27,7 @@ For files in the `docs-md` folder:
 - If there is not, summarize the file
 * For modified files, look at the diff and for every significant change create a quick bullet point about it. Ignore very small changes that do not add any new relevant information in the context of technical documents. Examples of changes that should be ignores include, but are not limited to, spelling fixes, capitalization changes, company name changes, small url changes, etc.
 
-After determining all changes commit changes to the `docs-md` and `versions` folders. Note the new commit hash.
+The `docs-md` and `versions` changes are already committed. Note that commit's hash; the format below refers to it as `{commit-hash}`.
 
 Then create a markdown in this format. Files in `docs-md/claude-code` go in the `Claude Code changes` section and files in `docs-md/api` go in the `API changes` section.
 
@@ -102,6 +102,4 @@ New file that describes the new X feature. It shows how to use it and how to con
 
 File names on link descriptions should not include the .md extension. Order files by name in the doc.
 
-Save this summary to a markdown named `changelog-YYYY-mm-dd.md` with today's date in the `changelogs/YYYY/mm` folder.
-
-Commit this file (do not push).
+Save this summary to a markdown named `changelog-YYYY-mm-dd.md` with today's date in the `changelogs/YYYY/mm` folder. Do not commit it.
