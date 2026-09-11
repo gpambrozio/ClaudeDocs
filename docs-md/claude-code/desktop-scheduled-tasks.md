@@ -10,17 +10,17 @@ The Desktop app's **Routines** page lets you create both local scheduled tasks a
 
 Claude Code offers three ways to schedule recurring or one-off work:
 
-|                            | [Cloud](routines.md)               | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md)      |
-| :------------------------- | :---------------------------------- | :------------------------------------- | :---------------------------------- |
-| Runs on                    | Cloud, Anthropic-managed by default | Your machine                           | Your machine                        |
-| Requires machine on        | No                                  | Yes                                    | Yes                                 |
-| Requires open session      | No                                  | No                                     | Yes                                 |
-| Persistent across restarts | Yes                                 | Yes                                    | Restored on `--resume` if unexpired |
-| Access to local files      | No (fresh clone)                    | Yes                                    | Yes                                 |
-| MCP servers                | Connectors configured per task      | [Config files](mcp.md) and connectors | Inherits from session               |
-| Permission prompts         | No (runs autonomously)              | Configurable per task                  | Inherits from session               |
-| Customizable schedule      | Via `/schedule` in the CLI          | Yes                                    | Yes                                 |
-| Minimum interval           | 1 hour                              | 1 minute                               | 1 minute                            |
+|                            | [Cloud](routines.md)               | [Desktop](desktop-scheduled-tasks.md) | [`/loop`](scheduled-tasks.md)                                             |
+| :------------------------- | :---------------------------------- | :------------------------------------- | :------------------------------------------------------------------------- |
+| Runs on                    | Cloud, Anthropic-managed by default | Your machine                           | Your machine                                                               |
+| Requires machine on        | No                                  | Yes                                    | Yes                                                                        |
+| Requires open session      | No                                  | No                                     | Yes                                                                        |
+| Persistent across restarts | Yes                                 | Yes                                    | Restored on `--resume`, with [exceptions](scheduled-tasks.md#limitations) |
+| Access to local files      | No (fresh clone)                    | Yes                                    | Yes                                                                        |
+| MCP servers                | Connectors configured per task      | [Config files](mcp.md) and connectors | Inherits from session                                                      |
+| Permission prompts         | No (runs autonomously)              | Configurable per task                  | Inherits from session                                                      |
+| Customizable schedule      | Via `/schedule` in the CLI          | Yes                                    | Yes                                                                        |
+| Minimum interval           | 1 hour                              | 1 minute                               | 1 minute                                                                   |
 
 Use **cloud tasks** for work that should run reliably without your machine. Use **Desktop tasks** when you need access to local files and tools. Use **`/loop`** for quick polling during a session.
 

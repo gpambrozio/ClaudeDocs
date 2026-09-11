@@ -207,12 +207,7 @@ If your organization uses [customer-managed encryption keys](../api/manage-claud
 
 ### Invest in documentation and memory
 
-We strongly recommend investing in documentation so that Claude Code understands your codebase. Organizations can deploy CLAUDE.md files at multiple levels:
-
-* **Organization-wide**: Deploy to system directories such as `/Library/Application Support/ClaudeCode/CLAUDE.md` (macOS), `/etc/claude-code/CLAUDE.md` (Linux and WSL), or `C:\Program Files\ClaudeCode\CLAUDE.md` (Windows) for company-wide standards
-* **Repository-level**: Create `CLAUDE.md` files in repository roots containing project architecture, build commands, and contribution guidelines. Check these into source control so all users benefit
-
-Learn more in [Memory and CLAUDE.md files](memory.md).
+We strongly recommend investing in documentation so that Claude Code understands your codebase. Organizations can deploy CLAUDE.md files at multiple levels. See [where CLAUDE.md files can live](memory.md#choose-where-to-put-claude-md-files) and [how to deploy an organization-wide CLAUDE.md](memory.md#deploy-organization-wide-claude-md).
 
 ### Simplify deployment
 
