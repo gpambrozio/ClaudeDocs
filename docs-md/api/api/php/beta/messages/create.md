@@ -488,8 +488,6 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
     - `ContentBlock contentBlock`
 
-      Response model for a file uploaded to the container.
-
     - `int index`
 
   - `BetaRawContentBlockDeltaEvent`
