@@ -117,7 +117,7 @@ Choose a feed-consumption pattern, plan SIEM correlation, and decide your retent
 
 **Handle Compliance API errors**
 
-Every 400, 401, 403, 404, 409, 429, and 5xx response the Compliance API returns, with the fix for each.
+Common 400, 401, 403, 404, 409, 429, and 5xx responses from the Compliance API, with the cause and fix for each.
 
 **API reference**
 

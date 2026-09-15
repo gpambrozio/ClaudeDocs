@@ -863,7 +863,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 - `temperature?:optional float`
 
-  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
   Amount of randomness injected into the response.
 
@@ -7041,7 +7041,7 @@ List Events
 
     - `?string sessionThreadID`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsUserCustomToolResultEvent`
 
@@ -7069,7 +7069,7 @@ List Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsAgentCustomToolUseEvent`
 
@@ -7093,7 +7093,7 @@ List Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMessageEvent`
 
@@ -7157,7 +7157,7 @@ List Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMCPToolResultEvent`
 
@@ -7213,7 +7213,7 @@ List Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentToolResultEvent`
 
@@ -7623,7 +7623,7 @@ List Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsSessionThreadStatusRescheduledEvent`
 
@@ -7925,7 +7925,7 @@ Stream Events
 
     - `?string sessionThreadID`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsUserCustomToolResultEvent`
 
@@ -7953,7 +7953,7 @@ Stream Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsAgentCustomToolUseEvent`
 
@@ -7977,7 +7977,7 @@ Stream Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMessageEvent`
 
@@ -8041,7 +8041,7 @@ Stream Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMCPToolResultEvent`
 
@@ -8097,7 +8097,7 @@ Stream Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentToolResultEvent`
 
@@ -8507,7 +8507,7 @@ Stream Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsSessionThreadStatusRescheduledEvent`
 
@@ -9827,7 +9827,7 @@ List Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsUserCustomToolResultEvent`
 
@@ -9855,7 +9855,7 @@ List Session Thread Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsAgentCustomToolUseEvent`
 
@@ -9879,7 +9879,7 @@ List Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMessageEvent`
 
@@ -9943,7 +9943,7 @@ List Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMCPToolResultEvent`
 
@@ -9999,7 +9999,7 @@ List Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentToolResultEvent`
 
@@ -10409,7 +10409,7 @@ List Session Thread Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsSessionThreadStatusRescheduledEvent`
 
@@ -10623,7 +10623,7 @@ Stream Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsUserCustomToolResultEvent`
 
@@ -10651,7 +10651,7 @@ Stream Session Thread Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsAgentCustomToolUseEvent`
 
@@ -10675,7 +10675,7 @@ Stream Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMessageEvent`
 
@@ -10739,7 +10739,7 @@ Stream Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentMCPToolResultEvent`
 
@@ -10795,7 +10795,7 @@ Stream Session Thread Events
 
     - `?string sessionThreadID`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `ManagedAgentsAgentToolResultEvent`
 
@@ -11205,7 +11205,7 @@ Stream Session Thread Events
 
     - `?string sessionThreadID`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `ManagedAgentsSessionThreadStatusRescheduledEvent`
 
@@ -17070,7 +17070,7 @@ var_dump($betaDeletedSkillVersion);
 
 ### Create User Profile
 
-`$client->beta->userProfiles->create(?AccessType accessType, ?string externalID, ?BetaUserProfileExternalUserDetailsParams externalUserDetails, ?\Datetime externalUserOnboardedAt, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas): BetaUserProfile`
+`$client->beta->userProfiles->create(?AccessType accessType, ?string externalID, ?BetaUserProfileExternalUserDetailsParams externalUserDetails, ?\Datetime externalUserOnboardedAt, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas, ?string workspaceID): BetaUserProfile`
 
 **POST** `/v1/user_profiles`
 
@@ -17105,6 +17105,8 @@ Create User Profile
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string`
 
 #### Returns
 
@@ -17179,6 +17181,7 @@ $betaUserProfile = $client->beta->userProfiles->create(
   metadata: [],
   name: 'x',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaUserProfile);
@@ -17216,7 +17219,7 @@ var_dump($betaUserProfile);
 
 ### List User Profiles
 
-`$client->beta->userProfiles->list(?int limit, ?Order order, ?OrderBy orderBy, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaUserProfile>`
+`$client->beta->userProfiles->list(?int limit, ?Order order, ?OrderBy orderBy, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaUserProfile>`
 
 **GET** `/v1/user_profiles`
 
@@ -17243,6 +17246,8 @@ List User Profiles
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string`
 
 #### Returns
 
@@ -17307,6 +17312,7 @@ $page = $client->beta->userProfiles->list(
   orderBy: 'created_at',
   page: 'page',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($page);
@@ -17349,7 +17355,7 @@ var_dump($page);
 
 ### Get User Profile
 
-`$client->beta->userProfiles->retrieve(string userProfileID, ?list<AnthropicBeta> betas): BetaUserProfile`
+`$client->beta->userProfiles->retrieve(string userProfileID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaUserProfile`
 
 **GET** `/v1/user_profiles/{user_profile_id}`
 
@@ -17362,6 +17368,8 @@ Get User Profile
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string`
 
 #### Returns
 
@@ -17423,6 +17431,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaUserProfile = $client->beta->userProfiles->retrieve(
   'uprof_011CZkZCu8hGbp5mYRQgUmz9',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaUserProfile);
@@ -17460,7 +17469,7 @@ var_dump($betaUserProfile);
 
 ### Update User Profile
 
-`$client->beta->userProfiles->update(string userProfileID, ?AccessType accessType, ?string externalID, ?BetaUserProfileExternalUserDetailsParams externalUserDetails, ?\Datetime externalUserOnboardedAt, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas): BetaUserProfile`
+`$client->beta->userProfiles->update(string userProfileID, ?AccessType accessType, ?string externalID, ?BetaUserProfileExternalUserDetailsParams externalUserDetails, ?\Datetime externalUserOnboardedAt, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas, ?string workspaceID): BetaUserProfile`
 
 **POST** `/v1/user_profiles/{user_profile_id}`
 
@@ -17497,6 +17506,8 @@ Update User Profile
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string`
 
 #### Returns
 
@@ -17572,6 +17583,7 @@ $betaUserProfile = $client->beta->userProfiles->update(
   metadata: ['foo' => 'string'],
   name: 'x',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaUserProfile);
@@ -17609,7 +17621,7 @@ var_dump($betaUserProfile);
 
 ### Create Enrollment URL
 
-`$client->beta->userProfiles->createEnrollmentURL(string userProfileID, ?list<AnthropicBeta> betas): BetaUserProfileEnrollmentURL`
+`$client->beta->userProfiles->createEnrollmentURL(string userProfileID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaUserProfileEnrollmentURL`
 
 **POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
@@ -17622,6 +17634,8 @@ Create Enrollment URL
 - `betas?:optional list<AnthropicBeta>`
 
   Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string`
 
 #### Returns
 
@@ -17654,6 +17668,7 @@ $betaUserProfileEnrollmentURL = $client
   ->createEnrollmentURL(
   'uprof_011CZkZCu8hGbp5mYRQgUmz9',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
 
 var_dump($betaUserProfileEnrollmentURL);
@@ -23774,8 +23789,8 @@ var_dump($page);
       "created_at": "2024-10-30T23:58:27.427722Z",
       "data_residency": {
         "allowed_inference_geos": "unrestricted",
-        "default_inference_geo": "default_inference_geo",
-        "workspace_geo": "workspace_geo"
+        "default_inference_geo": "global",
+        "workspace_geo": "us"
       },
       "display_color": "#6C5BB9",
       "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -23938,8 +23953,8 @@ var_dump($betaWorkspace);
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -24058,8 +24073,8 @@ var_dump($betaWorkspace);
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -24213,8 +24228,8 @@ var_dump($betaWorkspace);
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -24331,8 +24346,8 @@ var_dump($betaWorkspace);
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",

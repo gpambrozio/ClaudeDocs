@@ -4775,7 +4775,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `Temperature param.Field[float64] Optional`
 
-    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
     Body param: Amount of randomness injected into the response.
 
@@ -6364,10 +6364,12 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
-        Produced in place of a `message` entry for whichever hop served the
-        response. A declined hop produces the existing `message` entry. Whether
-        a fallback model served the response is signalled by the presence of this
-        entry in `usage.iterations`.
+        The terminal entry of a fallback-served turn: when a fallback hop's
+        output is the returned message, the entry for the iteration that
+        completed it carries this type in place of `message`. A declined hop
+        and the serving hop's earlier tool-loop iterations produce `message`
+        entries. Whether a fallback model served the response is signalled by
+        the presence of this entry in `usage.iterations`.
 
         - `Type FallbackMessage`
 
@@ -14310,7 +14312,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `Temperature float64 Optional`
 
-        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
         Amount of randomness injected into the response.
 
@@ -17374,10 +17376,12 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Token usage for the fallback-model attempt of a server-side fallback request.
 
-              Produced in place of a `message` entry for whichever hop served the
-              response. A declined hop produces the existing `message` entry. Whether
-              a fallback model served the response is signalled by the presence of this
-              entry in `usage.iterations`.
+              The terminal entry of a fallback-served turn: when a fallback hop's
+              output is the returned message, the entry for the iteration that
+              completed it carries this type in place of `message`. A declined hop
+              and the serving hop's earlier tool-loop iterations produce `message`
+              entries. Whether a fallback model served the response is signalled by
+              the presence of this entry in `usage.iterations`.
 
               - `Type FallbackMessage`
 
@@ -35702,7 +35706,7 @@ List Events
 
     - `SessionThreadID string Optional`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -35784,7 +35788,7 @@ List Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
@@ -35812,7 +35816,7 @@ List Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -35954,7 +35958,7 @@ List Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -36040,7 +36044,7 @@ List Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
@@ -36932,7 +36936,7 @@ List Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
 
@@ -38479,7 +38483,7 @@ Send Events
 
       - `SessionThreadID string Optional`
 
-        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+        Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
     - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -38561,7 +38565,7 @@ Send Events
 
       - `SessionThreadID string Optional`
 
-        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+        Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
     - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
 
@@ -38663,7 +38667,7 @@ Send Events
 
       - `SessionThreadID string Optional`
 
-        Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+        Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
     - `type BetaManagedAgentsSystemMessageEvent struct{…}`
 
@@ -39108,7 +39112,7 @@ Stream Events
 
     - `SessionThreadID string Optional`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -39190,7 +39194,7 @@ Stream Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
@@ -39218,7 +39222,7 @@ Stream Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -39360,7 +39364,7 @@ Stream Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -39446,7 +39450,7 @@ Stream Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
@@ -40338,7 +40342,7 @@ Stream Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
 
@@ -45580,7 +45584,7 @@ List Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -45662,7 +45666,7 @@ List Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
@@ -45690,7 +45694,7 @@ List Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -45832,7 +45836,7 @@ List Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -45918,7 +45922,7 @@ List Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
@@ -46810,7 +46814,7 @@ List Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
 
@@ -47994,7 +47998,7 @@ Stream Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+      Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
 
@@ -48076,7 +48080,7 @@ Stream Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
 
@@ -48104,7 +48108,7 @@ Stream Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMessageEvent struct{…}`
 
@@ -48246,7 +48250,7 @@ Stream Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
 
@@ -48332,7 +48336,7 @@ Stream Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
   - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
 
@@ -49224,7 +49228,7 @@ Stream Session Thread Events
 
     - `SessionThreadID string Optional`
 
-      Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+      Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
   - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
 
@@ -67275,6 +67279,12 @@ Create User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -67578,6 +67588,12 @@ List User Profiles
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -67861,6 +67877,12 @@ Get User Profile
       - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -68179,6 +68201,12 @@ Update User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -68461,6 +68489,12 @@ Create Enrollment URL
       - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -80951,15 +80985,23 @@ List Workspaces
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []string`
+      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+
+        - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
+
+        - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
       - `type Unrestricted string`
 
-    - `DefaultInferenceGeo string`
+    - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
       Default inference geo applied when requests omit the parameter.
 
-    - `WorkspaceGeo string`
+      - `const BetaDataResidencyDefaultInferenceGeoGlobal BetaDataResidencyDefaultInferenceGeo = "global"`
+
+      - `const BetaDataResidencyDefaultInferenceGeoUs BetaDataResidencyDefaultInferenceGeo = "us"`
+
+    - `WorkspaceGeo BetaDataResidencyWorkspaceGeo`
 
       Geographic region for workspace data storage. Immutable after creation.
 
@@ -81026,8 +81068,8 @@ func main() {
       "created_at": "2024-10-30T23:58:27.427722Z",
       "data_residency": {
         "allowed_inference_geos": "unrestricted",
-        "default_inference_geo": "default_inference_geo",
-        "workspace_geo": "workspace_geo"
+        "default_inference_geo": "global",
+        "workspace_geo": "us"
       },
       "display_color": "#6C5BB9",
       "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -81239,15 +81281,23 @@ Create Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []string`
+      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+
+        - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
+
+        - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
       - `type Unrestricted string`
 
-    - `DefaultInferenceGeo string`
+    - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
       Default inference geo applied when requests omit the parameter.
 
-    - `WorkspaceGeo string`
+      - `const BetaDataResidencyDefaultInferenceGeoGlobal BetaDataResidencyDefaultInferenceGeo = "global"`
+
+      - `const BetaDataResidencyDefaultInferenceGeoUs BetaDataResidencyDefaultInferenceGeo = "us"`
+
+    - `WorkspaceGeo BetaDataResidencyWorkspaceGeo`
 
       Geographic region for workspace data storage. Immutable after creation.
 
@@ -81314,8 +81364,8 @@ func main() {
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -81392,15 +81442,23 @@ Get Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []string`
+      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+
+        - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
+
+        - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
       - `type Unrestricted string`
 
-    - `DefaultInferenceGeo string`
+    - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
       Default inference geo applied when requests omit the parameter.
 
-    - `WorkspaceGeo string`
+      - `const BetaDataResidencyDefaultInferenceGeoGlobal BetaDataResidencyDefaultInferenceGeo = "global"`
+
+      - `const BetaDataResidencyDefaultInferenceGeoUs BetaDataResidencyDefaultInferenceGeo = "us"`
+
+    - `WorkspaceGeo BetaDataResidencyWorkspaceGeo`
 
       Geographic region for workspace data storage. Immutable after creation.
 
@@ -81465,8 +81523,8 @@ func main() {
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -81577,15 +81635,23 @@ Update Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []string`
+      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+
+        - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
+
+        - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
       - `type Unrestricted string`
 
-    - `DefaultInferenceGeo string`
+    - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
       Default inference geo applied when requests omit the parameter.
 
-    - `WorkspaceGeo string`
+      - `const BetaDataResidencyDefaultInferenceGeoGlobal BetaDataResidencyDefaultInferenceGeo = "global"`
+
+      - `const BetaDataResidencyDefaultInferenceGeoUs BetaDataResidencyDefaultInferenceGeo = "us"`
+
+    - `WorkspaceGeo BetaDataResidencyWorkspaceGeo`
 
       Geographic region for workspace data storage. Immutable after creation.
 
@@ -81654,8 +81720,8 @@ func main() {
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
@@ -81730,15 +81796,23 @@ Archive Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []string`
+      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+
+        - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
+
+        - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
       - `type Unrestricted string`
 
-    - `DefaultInferenceGeo string`
+    - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
       Default inference geo applied when requests omit the parameter.
 
-    - `WorkspaceGeo string`
+      - `const BetaDataResidencyDefaultInferenceGeoGlobal BetaDataResidencyDefaultInferenceGeo = "global"`
+
+      - `const BetaDataResidencyDefaultInferenceGeoUs BetaDataResidencyDefaultInferenceGeo = "us"`
+
+    - `WorkspaceGeo BetaDataResidencyWorkspaceGeo`
 
       Geographic region for workspace data storage. Immutable after creation.
 
@@ -81803,8 +81877,8 @@ func main() {
   "created_at": "2024-10-30T23:58:27.427722Z",
   "data_residency": {
     "allowed_inference_geos": "unrestricted",
-    "default_inference_geo": "default_inference_geo",
-    "workspace_geo": "workspace_geo"
+    "default_inference_geo": "global",
+    "workspace_geo": "us"
   },
   "display_color": "#6C5BB9",
   "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",

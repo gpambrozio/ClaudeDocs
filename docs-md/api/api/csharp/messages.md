@@ -2705,7 +2705,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `double temperature`
 
-    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
     Body param: Amount of randomness injected into the response.
 
@@ -28808,7 +28808,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `double Temperature`
 
-        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
         Amount of randomness injected into the response.
 

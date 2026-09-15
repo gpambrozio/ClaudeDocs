@@ -57,7 +57,7 @@ On a Pro, Max, Team, or Enterprise plan, `/usage` also shows a breakdown of what
 
 Press `d` or `w` to switch between the last 24 hours and the last 7 days. The figures are approximate and computed from local session history on this machine, so usage from other devices or claude.ai is not included.
 
-In the [VS Code extension](vs-code.md#check-account-and-usage), the attribution shares and behavior flags appear in the Account & usage dialog with a Day and Week toggle, without the Loops rows. Requires Claude Code v2.1.174 or later.
+In the [VS Code extension](vs-code.md#check-account-and-usage), the attribution shares and behavior flags appear in the Account & usage dialog with a Day and Week toggle, without the Loops rows.
 
 #### Check your usage-credits spend
 
@@ -120,7 +120,7 @@ Enter the per-million-token rates from your contract. Claude Code doesn't fetch 
 
 **Write the setting**
 
-Set `multiplier` for a flat percentage off list price, list each model's four per-token rates under `overrides`, or do both. The [`modelPricing` entry](settings-reference.md#modelpricing) has the shape and a paste-ready example.
+Set `multiplier` below 1 for a flat discount or above 1 for a markup, list each model's four per-token rates under `overrides`, or do both. A markup requires Claude Code v2.1.271 or later. The [`modelPricing` entry](settings-reference.md#modelpricing) has the shape and a paste-ready example.
 
 **Deploy it through managed settings**
 

@@ -3592,7 +3592,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   - `Optional<Double> temperature`
 
-    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+    **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
     Amount of randomness injected into the response.
 
@@ -4949,7 +4949,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-        - `Model model`
+        - `Optional<Model> model`
 
           The model that will complete your prompt.
 
@@ -5043,10 +5043,12 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
-        Produced in place of a `message` entry for whichever hop served the
-        response. A declined hop produces the existing `message` entry. Whether
-        a fallback model served the response is signalled by the presence of this
-        entry in `usage.iterations`.
+        The terminal entry of a fallback-served turn: when a fallback hop's
+        output is the returned message, the entry for the iteration that
+        completed it carries this type in place of `message`. A declined hop
+        and the serving hop's earlier tool-loop iterations produce `message`
+        entries. Whether a fallback model served the response is signalled by
+        the presence of this entry in `usage.iterations`.
 
         - `JsonValue type = "fallback_message"`
 
@@ -5292,10 +5294,12 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           Token usage for the fallback-model attempt of a server-side fallback request.
 
-          Produced in place of a `message` entry for whichever hop served the
-          response. A declined hop produces the existing `message` entry. Whether
-          a fallback model served the response is signalled by the presence of this
-          entry in `usage.iterations`.
+          The terminal entry of a fallback-served turn: when a fallback hop's
+          output is the returned message, the entry for the iteration that
+          completed it carries this type in place of `message`. A declined hop
+          and the serving hop's earlier tool-loop iterations produce `message`
+          entries. Whether a fallback model served the response is signalled by
+          the presence of this entry in `usage.iterations`.
 
       - `long outputTokens`
 
@@ -17050,10 +17054,12 @@ public final class Main {
 
   Token usage for the fallback-model attempt of a server-side fallback request.
 
-  Produced in place of a `message` entry for whichever hop served the
-  response. A declined hop produces the existing `message` entry. Whether
-  a fallback model served the response is signalled by the presence of this
-  entry in `usage.iterations`.
+  The terminal entry of a fallback-served turn: when a fallback hop's
+  output is the returned message, the entry for the iteration that
+  completed it carries this type in place of `message`. A declined hop
+  and the serving hop's earlier tool-loop iterations produce `message`
+  entries. Whether a fallback model served the response is signalled by
+  the presence of this entry in `usage.iterations`.
 
   - `JsonValue type = "fallback_message"`
 
@@ -19618,7 +19624,7 @@ public final class Main {
 
           minimum: 0
 
-        - `Model model`
+        - `Optional<Model> model`
 
           The model that will complete your prompt.
 
@@ -19712,10 +19718,12 @@ public final class Main {
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
-        Produced in place of a `message` entry for whichever hop served the
-        response. A declined hop produces the existing `message` entry. Whether
-        a fallback model served the response is signalled by the presence of this
-        entry in `usage.iterations`.
+        The terminal entry of a fallback-served turn: when a fallback hop's
+        output is the returned message, the entry for the iteration that
+        completed it carries this type in place of `message`. A declined hop
+        and the serving hop's earlier tool-loop iterations produce `message`
+        entries. Whether a fallback model served the response is signalled by
+        the presence of this entry in `usage.iterations`.
 
         - `JsonValue type = "fallback_message"`
 
@@ -20013,7 +20021,7 @@ public final class Main {
 
         minimum: 0
 
-      - `Model model`
+      - `Optional<Model> model`
 
         The model that will complete your prompt.
 
@@ -20175,10 +20183,12 @@ public final class Main {
 
       Token usage for the fallback-model attempt of a server-side fallback request.
 
-      Produced in place of a `message` entry for whichever hop served the
-      response. A declined hop produces the existing `message` entry. Whether
-      a fallback model served the response is signalled by the presence of this
-      entry in `usage.iterations`.
+      The terminal entry of a fallback-served turn: when a fallback hop's
+      output is the returned message, the entry for the iteration that
+      completed it carries this type in place of `message`. A declined hop
+      and the serving hop's earlier tool-loop iterations produce `message`
+      entries. Whether a fallback model served the response is signalled by
+      the presence of this entry in `usage.iterations`.
 
       - `JsonValue type = "fallback_message"`
 
@@ -20304,7 +20314,7 @@ public final class Main {
 
     minimum: 0
 
-  - `Model model`
+  - `Optional<Model> model`
 
     The model that will complete your prompt.
 
@@ -23373,7 +23383,7 @@ public final class Main {
 
           minimum: 0
 
-        - `Model model`
+        - `Optional<Model> model`
 
           The model that will complete your prompt.
 
@@ -23535,10 +23545,12 @@ public final class Main {
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
-        Produced in place of a `message` entry for whichever hop served the
-        response. A declined hop produces the existing `message` entry. Whether
-        a fallback model served the response is signalled by the presence of this
-        entry in `usage.iterations`.
+        The terminal entry of a fallback-served turn: when a fallback hop's
+        output is the returned message, the entry for the iteration that
+        completed it carries this type in place of `message`. A declined hop
+        and the serving hop's earlier tool-loop iterations produce `message`
+        entries. Whether a fallback model served the response is signalled by
+        the presence of this entry in `usage.iterations`.
 
         - `JsonValue type = "fallback_message"`
 
@@ -24999,7 +25011,7 @@ public final class Main {
 
             minimum: 0
 
-          - `Model model`
+          - `Optional<Model> model`
 
             The model that will complete your prompt.
 
@@ -25093,10 +25105,12 @@ public final class Main {
 
           Token usage for the fallback-model attempt of a server-side fallback request.
 
-          Produced in place of a `message` entry for whichever hop served the
-          response. A declined hop produces the existing `message` entry. Whether
-          a fallback model served the response is signalled by the presence of this
-          entry in `usage.iterations`.
+          The terminal entry of a fallback-served turn: when a fallback hop's
+          output is the returned message, the entry for the iteration that
+          completed it carries this type in place of `message`. A declined hop
+          and the serving hop's earlier tool-loop iterations produce `message`
+          entries. Whether a fallback model served the response is signalled by
+          the presence of this entry in `usage.iterations`.
 
           - `JsonValue type = "fallback_message"`
 
@@ -26585,7 +26599,7 @@ public final class Main {
 
               minimum: 0
 
-            - `Model model`
+            - `Optional<Model> model`
 
               The model that will complete your prompt.
 
@@ -26679,10 +26693,12 @@ public final class Main {
 
             Token usage for the fallback-model attempt of a server-side fallback request.
 
-            Produced in place of a `message` entry for whichever hop served the
-            response. A declined hop produces the existing `message` entry. Whether
-            a fallback model served the response is signalled by the presence of this
-            entry in `usage.iterations`.
+            The terminal entry of a fallback-served turn: when a fallback hop's
+            output is the returned message, the entry for the iteration that
+            completed it carries this type in place of `message`. A declined hop
+            and the serving hop's earlier tool-loop iterations produce `message`
+            entries. Whether a fallback model served the response is signalled by
+            the presence of this entry in `usage.iterations`.
 
             - `JsonValue type = "fallback_message"`
 
@@ -26920,10 +26936,12 @@ public final class Main {
 
           Token usage for the fallback-model attempt of a server-side fallback request.
 
-          Produced in place of a `message` entry for whichever hop served the
-          response. A declined hop produces the existing `message` entry. Whether
-          a fallback model served the response is signalled by the presence of this
-          entry in `usage.iterations`.
+          The terminal entry of a fallback-served turn: when a fallback hop's
+          output is the returned message, the entry for the iteration that
+          completed it carries this type in place of `message`. A declined hop
+          and the serving hop's earlier tool-loop iterations produce `message`
+          entries. Whether a fallback model served the response is signalled by
+          the presence of this entry in `usage.iterations`.
 
       - `long outputTokens`
 
@@ -33187,7 +33205,7 @@ public final class Main {
 
         minimum: 0
 
-      - `Model model`
+      - `Optional<Model> model`
 
         The model that will complete your prompt.
 
@@ -33349,10 +33367,12 @@ public final class Main {
 
       Token usage for the fallback-model attempt of a server-side fallback request.
 
-      Produced in place of a `message` entry for whichever hop served the
-      response. A declined hop produces the existing `message` entry. Whether
-      a fallback model served the response is signalled by the presence of this
-      entry in `usage.iterations`.
+      The terminal entry of a fallback-served turn: when a fallback hop's
+      output is the returned message, the entry for the iteration that
+      completed it carries this type in place of `message`. A declined hop
+      and the serving hop's earlier tool-loop iterations produce `message`
+      entries. Whether a fallback model served the response is signalled by
+      the presence of this entry in `usage.iterations`.
 
       - `JsonValue type = "fallback_message"`
 
@@ -39189,7 +39209,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `Optional<Double> temperature`
 
-        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 of will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+        **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
         Amount of randomness injected into the response.
 
@@ -41784,7 +41804,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-              - `Model model`
+              - `Optional<Model> model`
 
                 The model that will complete your prompt.
 
@@ -41878,10 +41898,12 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Token usage for the fallback-model attempt of a server-side fallback request.
 
-              Produced in place of a `message` entry for whichever hop served the
-              response. A declined hop produces the existing `message` entry. Whether
-              a fallback model served the response is signalled by the presence of this
-              entry in `usage.iterations`.
+              The terminal entry of a fallback-served turn: when a fallback hop's
+              output is the returned message, the entry for the iteration that
+              completed it carries this type in place of `message`. A declined hop
+              and the serving hop's earlier tool-loop iterations produce `message`
+              entries. Whether a fallback model served the response is signalled by
+              the presence of this entry in `usage.iterations`.
 
               - `JsonValue type = "fallback_message"`
 
