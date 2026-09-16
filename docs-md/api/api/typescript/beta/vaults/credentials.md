@@ -25,7 +25,7 @@ Create Credential
 
     Body param: Authentication details for creating a credential.
 
-    - `BetaManagedAgentsMCPOAuthCreateParams`
+    - `interface BetaManagedAgentsMCPOAuthCreateParams`
 
       Parameters for creating an MCP OAuth credential.
 
@@ -73,13 +73,13 @@ Create Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam | BetaManagedAgentsTokenEndpointAuthBasicParam | BetaManagedAgentsTokenEndpointAuthPostParam`
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneParam`
+          - `interface BetaManagedAgentsTokenEndpointAuthNoneParam`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicParam`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicParam`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -91,7 +91,7 @@ Create Credential
 
               minLength: 1, maxLength: 512
 
-          - `BetaManagedAgentsTokenEndpointAuthPostParam`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostParam`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -115,7 +115,7 @@ Create Credential
 
           minLength: 1, maxLength: 8192
 
-    - `BetaManagedAgentsStaticBearerCreateParams`
+    - `interface BetaManagedAgentsStaticBearerCreateParams`
 
       Parameters for creating a static bearer token credential.
 
@@ -133,7 +133,7 @@ Create Credential
 
         minLength: 1, maxLength: 2047
 
-    - `BetaManagedAgentsEnvironmentVariableCreateParams`
+    - `interface BetaManagedAgentsEnvironmentVariableCreateParams`
 
       Parameters for creating an environment variable credential.
 
@@ -143,13 +143,13 @@ Create Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingParams`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -199,7 +199,7 @@ Create Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -291,6 +291,8 @@ Create Credential
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -299,7 +301,7 @@ Create Credential
 
 ### Returns
 
-- `BetaManagedAgentsCredential`
+- `interface BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -319,7 +321,7 @@ Create Credential
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse`
+    - `interface BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -349,19 +351,19 @@ Create Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -375,7 +377,7 @@ Create Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse`
+    - `interface BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -385,7 +387,7 @@ Create Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse`
+    - `interface BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -407,13 +409,13 @@ Create Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -529,7 +531,7 @@ List Credentials
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -621,6 +623,8 @@ List Credentials
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -629,7 +633,7 @@ List Credentials
 
 ### Returns
 
-- `BetaManagedAgentsCredential`
+- `interface BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -649,7 +653,7 @@ List Credentials
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse`
+    - `interface BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -679,19 +683,19 @@ List Credentials
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -705,7 +709,7 @@ List Credentials
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse`
+    - `interface BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -715,7 +719,7 @@ List Credentials
 
         URL of the MCP server this credential authenticates against.
 
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse`
+    - `interface BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -737,13 +741,13 @@ List Credentials
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -848,7 +852,7 @@ Get Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -940,6 +944,8 @@ Get Credential
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -948,7 +954,7 @@ Get Credential
 
 ### Returns
 
-- `BetaManagedAgentsCredential`
+- `interface BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -968,7 +974,7 @@ Get Credential
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse`
+    - `interface BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -998,19 +1004,19 @@ Get Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -1024,7 +1030,7 @@ Get Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse`
+    - `interface BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -1034,7 +1040,7 @@ Get Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse`
+    - `interface BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -1056,13 +1062,13 @@ Get Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -1160,7 +1166,7 @@ Update Credential
 
     Body param: Updated authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthUpdateParams`
+    - `interface BetaManagedAgentsMCPOAuthUpdateParams`
 
       Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -1196,7 +1202,7 @@ Update Credential
 
         - `token_endpoint_auth?: BetaManagedAgentsTokenEndpointAuthBasicUpdateParam | BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
             Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -1208,7 +1214,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-          - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
             Updated POST body authentication parameters for the token endpoint.
 
@@ -1220,7 +1226,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-    - `BetaManagedAgentsStaticBearerUpdateParams`
+    - `interface BetaManagedAgentsStaticBearerUpdateParams`
 
       Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -1232,7 +1238,7 @@ Update Credential
 
         minLength: 1, maxLength: 8192
 
-    - `BetaManagedAgentsEnvironmentVariableUpdateParams`
+    - `interface BetaManagedAgentsEnvironmentVariableUpdateParams`
 
       Parameters for updating an environment variable credential. `secret_name` is immutable.
 
@@ -1254,13 +1260,13 @@ Update Credential
 
         Updated networking scope. Full replacement.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingParams`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -1292,7 +1298,7 @@ Update Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1384,6 +1390,8 @@ Update Credential
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1392,7 +1400,7 @@ Update Credential
 
 ### Returns
 
-- `BetaManagedAgentsCredential`
+- `interface BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -1412,7 +1420,7 @@ Update Credential
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse`
+    - `interface BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -1442,19 +1450,19 @@ Update Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -1468,7 +1476,7 @@ Update Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse`
+    - `interface BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -1478,7 +1486,7 @@ Update Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse`
+    - `interface BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -1500,13 +1508,13 @@ Update Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -1606,7 +1614,7 @@ Delete Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1698,6 +1706,8 @@ Delete Credential
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1706,7 +1716,7 @@ Delete Credential
 
 ### Returns
 
-- `BetaManagedAgentsDeletedCredential`
+- `interface BetaManagedAgentsDeletedCredential`
 
   Confirmation of a deleted credential.
 
@@ -1766,7 +1776,7 @@ Archive Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1858,6 +1868,8 @@ Archive Credential
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1866,7 +1878,7 @@ Archive Credential
 
 ### Returns
 
-- `BetaManagedAgentsCredential`
+- `interface BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -1886,7 +1898,7 @@ Archive Credential
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse`
+    - `interface BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -1916,19 +1928,19 @@ Archive Credential
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -1942,7 +1954,7 @@ Archive Credential
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse`
+    - `interface BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -1952,7 +1964,7 @@ Archive Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse`
+    - `interface BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -1974,13 +1986,13 @@ Archive Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -2080,7 +2092,7 @@ Validate Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2172,6 +2184,8 @@ Validate Credential
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2180,7 +2194,7 @@ Validate Credential
 
 ### Returns
 
-- `BetaManagedAgentsCredentialValidation`
+- `interface BetaManagedAgentsCredentialValidation`
 
   Result of live-probing a credential against its configured MCP server.
 
@@ -2316,7 +2330,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Credential
 
-- `BetaManagedAgentsCredential`
+- `interface BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -2336,7 +2350,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     Authentication details for a credential.
 
-    - `BetaManagedAgentsMCPOAuthAuthResponse`
+    - `interface BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -2366,19 +2380,19 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-          - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `type: "none"`
 
-          - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `type: "client_secret_basic"`
 
-          - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+          - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -2392,7 +2406,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
           OAuth scope for the refresh request.
 
-    - `BetaManagedAgentsStaticBearerAuthResponse`
+    - `interface BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -2402,7 +2416,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         URL of the MCP server this credential authenticates against.
 
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse`
+    - `interface BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -2424,13 +2438,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         Outbound hosts the secret value is substituted on.
 
-        - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `type: "unrestricted"`
 
-        - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+        - `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -2470,15 +2484,15 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Credential Networking Params
 
-- `BetaManagedAgentsCredentialNetworkingParams = BetaManagedAgentsUnrestrictedCredentialNetworkingParams | BetaManagedAgentsLimitedCredentialNetworkingParams`
+- `type BetaManagedAgentsCredentialNetworkingParams = BetaManagedAgentsUnrestrictedCredentialNetworkingParams | BetaManagedAgentsLimitedCredentialNetworkingParams`
 
-  - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+  - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
     Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
     - `type: "unrestricted"`
 
-  - `BetaManagedAgentsLimitedCredentialNetworkingParams`
+  - `interface BetaManagedAgentsLimitedCredentialNetworkingParams`
 
     Substitute the secret only on requests to the listed hosts.
 
@@ -2490,7 +2504,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Credential Validation
 
-- `BetaManagedAgentsCredentialValidation`
+- `interface BetaManagedAgentsCredentialValidation`
 
   Result of live-probing a credential against its configured MCP server.
 
@@ -2576,7 +2590,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Credential Validation Status
 
-- `BetaManagedAgentsCredentialValidationStatus = "valid" | "invalid" | "unknown"`
+- `type BetaManagedAgentsCredentialValidationStatus = "valid" | "invalid" | "unknown"`
 
   Overall verdict of a credential validation probe.
 
@@ -2588,7 +2602,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Deleted Credential
 
-- `BetaManagedAgentsDeletedCredential`
+- `interface BetaManagedAgentsDeletedCredential`
 
   Confirmation of a deleted credential.
 
@@ -2600,7 +2614,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Environment Variable Auth Response
 
-- `BetaManagedAgentsEnvironmentVariableAuthResponse`
+- `interface BetaManagedAgentsEnvironmentVariableAuthResponse`
 
   Environment variable credential details. The secret value is never returned.
 
@@ -2622,13 +2636,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     Outbound hosts the secret value is substituted on.
 
-    - `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+    - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
       The secret is substituted on any host the session's Environment network policy permits egress to.
 
       - `type: "unrestricted"`
 
-    - `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+    - `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
       The secret is substituted only on requests to the listed hosts.
 
@@ -2644,7 +2658,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Environment Variable Create Params
 
-- `BetaManagedAgentsEnvironmentVariableCreateParams`
+- `interface BetaManagedAgentsEnvironmentVariableCreateParams`
 
   Parameters for creating an environment variable credential.
 
@@ -2654,13 +2668,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     Outbound hosts the secret value is substituted on.
 
-    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+    - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
       Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
       - `type: "unrestricted"`
 
-    - `BetaManagedAgentsLimitedCredentialNetworkingParams`
+    - `interface BetaManagedAgentsLimitedCredentialNetworkingParams`
 
       Substitute the secret only on requests to the listed hosts.
 
@@ -2696,7 +2710,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Environment Variable Update Params
 
-- `BetaManagedAgentsEnvironmentVariableUpdateParams`
+- `interface BetaManagedAgentsEnvironmentVariableUpdateParams`
 
   Parameters for updating an environment variable credential. `secret_name` is immutable.
 
@@ -2718,13 +2732,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     Updated networking scope. Full replacement.
 
-    - `BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+    - `interface BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
       Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
       - `type: "unrestricted"`
 
-    - `BetaManagedAgentsLimitedCredentialNetworkingParams`
+    - `interface BetaManagedAgentsLimitedCredentialNetworkingParams`
 
       Substitute the secret only on requests to the listed hosts.
 
@@ -2742,7 +2756,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Injection Location Params
 
-- `BetaManagedAgentsInjectionLocationParams`
+- `interface BetaManagedAgentsInjectionLocationParams`
 
   Where in the outbound request the secret value may be substituted.
 
@@ -2756,7 +2770,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Injection Location Response
 
-- `BetaManagedAgentsInjectionLocationResponse`
+- `interface BetaManagedAgentsInjectionLocationResponse`
 
   Where in the outbound request the secret value is substituted.
 
@@ -2770,7 +2784,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Injection Location Update Params
 
-- `BetaManagedAgentsInjectionLocationUpdateParams`
+- `interface BetaManagedAgentsInjectionLocationUpdateParams`
 
   Updated injection location.
 
@@ -2784,7 +2798,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Limited Credential Networking Params
 
-- `BetaManagedAgentsLimitedCredentialNetworkingParams`
+- `interface BetaManagedAgentsLimitedCredentialNetworkingParams`
 
   Substitute the secret only on requests to the listed hosts.
 
@@ -2796,7 +2810,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Limited Credential Networking Response
 
-- `BetaManagedAgentsLimitedCredentialNetworkingResponse`
+- `interface BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
   The secret is substituted only on requests to the listed hosts.
 
@@ -2808,7 +2822,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
-- `BetaManagedAgentsMCPOAuthAuthResponse`
+- `interface BetaManagedAgentsMCPOAuthAuthResponse`
 
   OAuth credential details for an MCP server.
 
@@ -2838,19 +2852,19 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-      - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+      - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
         Token endpoint requires no client authentication.
 
         - `type: "none"`
 
-      - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+      - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
         - `type: "client_secret_basic"`
 
-      - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+      - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
         Token endpoint uses POST body authentication with client credentials.
 
@@ -2866,7 +2880,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents MCP OAuth Create Params
 
-- `BetaManagedAgentsMCPOAuthCreateParams`
+- `interface BetaManagedAgentsMCPOAuthCreateParams`
 
   Parameters for creating an MCP OAuth credential.
 
@@ -2914,13 +2928,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam | BetaManagedAgentsTokenEndpointAuthBasicParam | BetaManagedAgentsTokenEndpointAuthPostParam`
 
-      - `BetaManagedAgentsTokenEndpointAuthNoneParam`
+      - `interface BetaManagedAgentsTokenEndpointAuthNoneParam`
 
         Token endpoint requires no client authentication.
 
         - `type: "none"`
 
-      - `BetaManagedAgentsTokenEndpointAuthBasicParam`
+      - `interface BetaManagedAgentsTokenEndpointAuthBasicParam`
 
         Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -2932,7 +2946,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
           minLength: 1, maxLength: 512
 
-      - `BetaManagedAgentsTokenEndpointAuthPostParam`
+      - `interface BetaManagedAgentsTokenEndpointAuthPostParam`
 
         Token endpoint uses POST body authentication with client credentials.
 
@@ -2958,7 +2972,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents MCP OAuth Refresh Params
 
-- `BetaManagedAgentsMCPOAuthRefreshParams`
+- `interface BetaManagedAgentsMCPOAuthRefreshParams`
 
   OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -2982,13 +2996,13 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneParam | BetaManagedAgentsTokenEndpointAuthBasicParam | BetaManagedAgentsTokenEndpointAuthPostParam`
 
-    - `BetaManagedAgentsTokenEndpointAuthNoneParam`
+    - `interface BetaManagedAgentsTokenEndpointAuthNoneParam`
 
       Token endpoint requires no client authentication.
 
       - `type: "none"`
 
-    - `BetaManagedAgentsTokenEndpointAuthBasicParam`
+    - `interface BetaManagedAgentsTokenEndpointAuthBasicParam`
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -3000,7 +3014,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         minLength: 1, maxLength: 512
 
-    - `BetaManagedAgentsTokenEndpointAuthPostParam`
+    - `interface BetaManagedAgentsTokenEndpointAuthPostParam`
 
       Token endpoint uses POST body authentication with client credentials.
 
@@ -3026,7 +3040,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents MCP OAuth Refresh Response
 
-- `BetaManagedAgentsMCPOAuthRefreshResponse`
+- `interface BetaManagedAgentsMCPOAuthRefreshResponse`
 
   OAuth refresh token configuration returned in credential responses.
 
@@ -3040,19 +3054,19 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `token_endpoint_auth: BetaManagedAgentsTokenEndpointAuthNoneResponse | BetaManagedAgentsTokenEndpointAuthBasicResponse | BetaManagedAgentsTokenEndpointAuthPostResponse`
 
-    - `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+    - `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
       Token endpoint requires no client authentication.
 
       - `type: "none"`
 
-    - `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+    - `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
       Token endpoint uses HTTP Basic authentication with client credentials.
 
       - `type: "client_secret_basic"`
 
-    - `BetaManagedAgentsTokenEndpointAuthPostResponse`
+    - `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
       Token endpoint uses POST body authentication with client credentials.
 
@@ -3068,7 +3082,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents MCP OAuth Refresh Update Params
 
-- `BetaManagedAgentsMCPOAuthRefreshUpdateParams`
+- `interface BetaManagedAgentsMCPOAuthRefreshUpdateParams`
 
   Parameters for updating OAuth refresh token configuration.
 
@@ -3086,7 +3100,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   - `token_endpoint_auth?: BetaManagedAgentsTokenEndpointAuthBasicUpdateParam | BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
-    - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
+    - `interface BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
       Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -3098,7 +3112,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
         minLength: 1, maxLength: 512
 
-    - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
+    - `interface BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
       Updated POST body authentication parameters for the token endpoint.
 
@@ -3112,7 +3126,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents MCP OAuth Update Params
 
-- `BetaManagedAgentsMCPOAuthUpdateParams`
+- `interface BetaManagedAgentsMCPOAuthUpdateParams`
 
   Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -3148,7 +3162,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     - `token_endpoint_auth?: BetaManagedAgentsTokenEndpointAuthBasicUpdateParam | BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
-      - `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
+      - `interface BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
         Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -3160,7 +3174,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
           minLength: 1, maxLength: 512
 
-      - `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
+      - `interface BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
         Updated POST body authentication parameters for the token endpoint.
 
@@ -3174,7 +3188,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents MCP Probe
 
-- `BetaManagedAgentsMCPProbe`
+- `interface BetaManagedAgentsMCPProbe`
 
   The failing step of an MCP validation probe.
 
@@ -3206,7 +3220,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Refresh HTTP Response
 
-- `BetaManagedAgentsRefreshHTTPResponse`
+- `interface BetaManagedAgentsRefreshHTTPResponse`
 
   An HTTP response captured during a credential validation probe.
 
@@ -3230,7 +3244,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Refresh Object
 
-- `BetaManagedAgentsRefreshObject`
+- `interface BetaManagedAgentsRefreshObject`
 
   Outcome of a refresh-token exchange attempted during credential validation.
 
@@ -3270,7 +3284,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Static Bearer Auth Response
 
-- `BetaManagedAgentsStaticBearerAuthResponse`
+- `interface BetaManagedAgentsStaticBearerAuthResponse`
 
   Static bearer token credential details for an MCP server.
 
@@ -3282,7 +3296,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Static Bearer Create Params
 
-- `BetaManagedAgentsStaticBearerCreateParams`
+- `interface BetaManagedAgentsStaticBearerCreateParams`
 
   Parameters for creating a static bearer token credential.
 
@@ -3302,7 +3316,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Static Bearer Update Params
 
-- `BetaManagedAgentsStaticBearerUpdateParams`
+- `interface BetaManagedAgentsStaticBearerUpdateParams`
 
   Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -3316,7 +3330,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth Basic Param
 
-- `BetaManagedAgentsTokenEndpointAuthBasicParam`
+- `interface BetaManagedAgentsTokenEndpointAuthBasicParam`
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -3330,7 +3344,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth Basic Response
 
-- `BetaManagedAgentsTokenEndpointAuthBasicResponse`
+- `interface BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
   Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -3338,7 +3352,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth Basic Update Param
 
-- `BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
+- `interface BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
   Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -3352,7 +3366,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth None Param
 
-- `BetaManagedAgentsTokenEndpointAuthNoneParam`
+- `interface BetaManagedAgentsTokenEndpointAuthNoneParam`
 
   Token endpoint requires no client authentication.
 
@@ -3360,7 +3374,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth None Response
 
-- `BetaManagedAgentsTokenEndpointAuthNoneResponse`
+- `interface BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
   Token endpoint requires no client authentication.
 
@@ -3368,7 +3382,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth Post Param
 
-- `BetaManagedAgentsTokenEndpointAuthPostParam`
+- `interface BetaManagedAgentsTokenEndpointAuthPostParam`
 
   Token endpoint uses POST body authentication with client credentials.
 
@@ -3382,7 +3396,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth Post Response
 
-- `BetaManagedAgentsTokenEndpointAuthPostResponse`
+- `interface BetaManagedAgentsTokenEndpointAuthPostResponse`
 
   Token endpoint uses POST body authentication with client credentials.
 
@@ -3390,7 +3404,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Token Endpoint Auth Post Update Param
 
-- `BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
+- `interface BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
   Updated POST body authentication parameters for the token endpoint.
 
@@ -3404,7 +3418,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Unrestricted Credential Networking Params
 
-- `BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+- `interface BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
   Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
@@ -3412,7 +3426,7 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
 ### Beta Managed Agents Unrestricted Credential Networking Response
 
-- `BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+- `interface BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
   The secret is substituted on any host the session's Environment network policy permits egress to.
 

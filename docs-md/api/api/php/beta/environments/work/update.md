@@ -33,7 +33,7 @@ Update work item metadata with merge semantics.
 
 ## Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 

@@ -35,7 +35,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 ## Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 

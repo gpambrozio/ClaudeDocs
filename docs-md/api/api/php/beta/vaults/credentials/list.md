@@ -37,7 +37,7 @@ List Credentials
 
 ## Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 

@@ -25,7 +25,7 @@ Get Deployment
 
 ## Returns
 
-- `BetaManagedAgentsDeployment`
+- `class BetaManagedAgentsDeployment`
 
   - `Type type`
 

@@ -35,7 +35,7 @@ Create Skill
 
 ## Returns
 
-- `BetaSkill`
+- `class BetaSkill`
 
   - `"skill" type`
 

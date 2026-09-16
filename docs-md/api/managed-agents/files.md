@@ -6,9 +6,11 @@ url: https://platform.claude.com/docs/en/managed-agents/files
 description: Upload files and mount them in your sandbox for reading and processing.
 ---
 
-You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
+## Compatibility
+- Status: Beta
+- [Beta header](../api/beta-headers.md): `managed-agents-2026-04-01`
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
+You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
 ## Uploading files
 
@@ -632,7 +634,7 @@ if err != nil {
 }
 
 // Download a file
-resp, err := client.Files.Download(ctx, files.Data[0].ID)
+resp, err := client.Files.Download(ctx, files.Data[0].ID, anthropic.FileDownloadParams{})
 if err != nil {
 	panic(err)
 }

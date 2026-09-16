@@ -59,7 +59,7 @@ List Deployment Runs
 
 ## Returns
 
-- `BetaManagedAgentsDeploymentRun`
+- `class BetaManagedAgentsDeploymentRun`
 
   - `Type type`
 

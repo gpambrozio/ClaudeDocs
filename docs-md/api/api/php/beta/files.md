@@ -33,7 +33,7 @@ Upload File
 
 ### Returns
 
-- `BetaFileMetadata`
+- `class BetaFileMetadata`
 
   - `"file" type`
 
@@ -151,7 +151,7 @@ List Files
 
 ### Returns
 
-- `BetaFileMetadata`
+- `class BetaFileMetadata`
 
   - `"file" type`
 
@@ -302,7 +302,7 @@ Get File Metadata
 
 ### Returns
 
-- `BetaFileMetadata`
+- `class BetaFileMetadata`
 
   - `"file" type`
 
@@ -403,7 +403,7 @@ Delete File
 
 ### Returns
 
-- `BetaDeletedFile`
+- `class BetaDeletedFile`
 
   - `?Type type`
 
@@ -446,7 +446,7 @@ var_dump($betaDeletedFile);
 
 ### Beta Deleted File
 
-- `BetaDeletedFile`
+- `class BetaDeletedFile`
 
   - `?Type type`
 
@@ -460,7 +460,7 @@ var_dump($betaDeletedFile);
 
 ### Beta File Metadata
 
-- `BetaFileMetadata`
+- `class BetaFileMetadata`
 
   - `"file" type`
 
@@ -504,7 +504,7 @@ var_dump($betaDeletedFile);
 
 ### Beta File Scope
 
-- `BetaFileScope`
+- `class BetaFileScope`
 
   - `"session" type`
 

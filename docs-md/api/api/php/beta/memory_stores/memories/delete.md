@@ -31,7 +31,7 @@ Delete a memory
 
 ## Returns
 
-- `ManagedAgentsDeletedMemory`
+- `class ManagedAgentsDeletedMemory`
 
   - `Type type`
 

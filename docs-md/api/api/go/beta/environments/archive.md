@@ -117,6 +117,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -125,7 +127,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 ## Returns
 
-- `type BetaEnvironment struct{…}`
+- `type BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -147,7 +149,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `type BetaCloudConfig struct{…}`
+    - `type BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -159,7 +161,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
         Network configuration policy.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -167,7 +169,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Network policy type
 
-        - `type BetaLimitedNetwork struct{…}`
+        - `type BetaLimitedNetwork`
 
           Limited network access.
 
@@ -221,7 +223,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Python packages to install
 
-    - `type BetaSelfHostedConfig struct{…}`
+    - `type BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 

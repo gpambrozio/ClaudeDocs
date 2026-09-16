@@ -27,7 +27,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ## Returns
 
-- `DeletedMessageBatch`
+- `class DeletedMessageBatch`
 
   - `"message_batch_deleted" type`
 

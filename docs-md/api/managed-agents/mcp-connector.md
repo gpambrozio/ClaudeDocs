@@ -6,6 +6,10 @@ url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
 description: Connect MCP servers to your agents for access to external tools and data sources.
 ---
 
+## Compatibility
+- Status: Beta
+- [Beta header](../api/beta-headers.md): `managed-agents-2026-04-01`
+
 Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers to your agents. This gives the agent access to external tools, data sources, and services through a standardized protocol.
 
 MCP configuration is split across two steps:
@@ -14,8 +18,6 @@ MCP configuration is split across two steps:
 2. **Session creation** supplies authentication for those servers by referencing a pre-registered vault (see [Authenticate with vaults](vaults.md)).
 
 This separation keeps secrets out of reusable agent definitions while letting each session authenticate with its own credentials.
-
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
 
 ## Declare MCP servers on the agent
 

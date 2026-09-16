@@ -49,7 +49,7 @@ Create User Profile
 
 ### Returns
 
-- `BetaUserProfile`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -190,7 +190,7 @@ List User Profiles
 
 ### Returns
 
-- `BetaUserProfile`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -312,7 +312,7 @@ Get User Profile
 
 ### Returns
 
-- `BetaUserProfile`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -450,7 +450,7 @@ Update User Profile
 
 ### Returns
 
-- `BetaUserProfile`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -578,7 +578,7 @@ Create Enrollment URL
 
 ### Returns
 
-- `BetaUserProfileEnrollmentURL`
+- `class BetaUserProfileEnrollmentURL`
 
   - `Type type`
 
@@ -627,7 +627,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 ### Beta User Profile
 
-- `BetaUserProfile`
+- `class BetaUserProfile`
 
   - `Type type`
 
@@ -675,7 +675,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 ### Beta User Profile Enrollment URL
 
-- `BetaUserProfileEnrollmentURL`
+- `class BetaUserProfileEnrollmentURL`
 
   - `Type type`
 
@@ -691,7 +691,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 ### Beta User Profile External User Details
 
-- `BetaUserProfileExternalUserDetails`
+- `class BetaUserProfileExternalUserDetails`
 
   - `?AccountStatus accountStatus`
 
@@ -723,7 +723,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 ### Beta User Profile External User Details Params
 
-- `BetaUserProfileExternalUserDetailsParams`
+- `class BetaUserProfileExternalUserDetailsParams`
 
   - `?AccountStatus accountStatus`
 
@@ -755,7 +755,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 ### Beta User Profile Trust Grant
 
-- `BetaUserProfileTrustGrant`
+- `class BetaUserProfileTrustGrant`
 
   - `Status status`
 

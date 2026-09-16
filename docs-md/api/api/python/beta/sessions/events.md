@@ -71,7 +71,7 @@ List Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -163,15 +163,17 @@ List Events
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `BetaManagedAgentsSessionEvent`
+- `type BetaManagedAgentsSessionEvent = ...`
 
   Union type for all event types in a session.
 
-  - `class BetaManagedAgentsUserMessageEvent: …`
+  - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -185,7 +187,7 @@ List Events
 
       Array of content blocks comprising the user message.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -197,7 +199,7 @@ List Events
 
           minLength: 1
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -207,7 +209,7 @@ List Events
 
           Union type for image source variants.
 
-          - `class BetaManagedAgentsBase64ImageSource: …`
+          - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -225,7 +227,7 @@ List Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsURLImageSource: …`
+          - `class BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -237,7 +239,7 @@ List Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileImageSource: …`
+          - `class BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -249,7 +251,7 @@ List Events
 
               minLength: 1
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -259,7 +261,7 @@ List Events
 
           Union type for document source variants.
 
-          - `class BetaManagedAgentsBase64DocumentSource: …`
+          - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -277,7 +279,7 @@ List Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+          - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -293,7 +295,7 @@ List Events
 
               MIME type of the text content. Must be "text/plain".
 
-          - `class BetaManagedAgentsURLDocumentSource: …`
+          - `class BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -305,7 +307,7 @@ List Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileDocumentSource: …`
+          - `class BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -325,7 +327,7 @@ List Events
 
           The title of the document.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -337,7 +339,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsUserInterruptEvent: …`
+  - `class BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -357,7 +359,7 @@ List Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `class BetaManagedAgentsUserToolConfirmationEvent: …`
+  - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -395,7 +397,7 @@ List Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsUserCustomToolResultEvent: …`
+  - `class BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -413,19 +415,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -477,7 +479,7 @@ List Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsAgentCustomToolUseEvent: …`
+  - `class BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -505,7 +507,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMessageEvent: …`
+  - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -519,11 +521,11 @@ List Events
 
       Array of text blocks comprising the agent response.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -533,7 +535,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentThinkingEvent: …`
+  - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -549,7 +551,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -591,19 +593,19 @@ List Events
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `type: Literal["always_allow"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `type: Literal["always_ask"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -613,13 +615,13 @@ List Events
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `type: Literal["allow"]`
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -631,7 +633,7 @@ List Events
 
               maxLength: 64
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -647,7 +649,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMCPToolResultEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -671,19 +673,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -691,7 +693,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentToolUseEvent: …`
+  - `class BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -733,7 +735,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentToolResultEvent: …`
+  - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -757,19 +759,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -777,7 +779,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -791,19 +793,19 @@ List Events
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -821,7 +823,7 @@ List Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadMessageSentEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -835,19 +837,19 @@ List Events
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -865,7 +867,7 @@ List Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadContextCompactedEvent: …`
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -881,7 +883,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionErrorEvent: …`
+  - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -893,7 +895,7 @@ List Events
 
     - `error: Error`
 
-      - `class BetaManagedAgentsUnknownError: …`
+      - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -907,25 +909,25 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: Literal["retrying"]`
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: Literal["terminal"]`
 
-      - `class BetaManagedAgentsModelOverloadedError: …`
+      - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -939,19 +941,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRateLimitedError: …`
+      - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -965,19 +967,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRequestFailedError: …`
+      - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -991,19 +993,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPConnectionFailedError: …`
+      - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -1021,19 +1023,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
+      - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -1051,19 +1053,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsBillingError: …`
+      - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -1077,19 +1079,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -1107,15 +1109,15 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -1129,7 +1131,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -1145,7 +1147,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -1161,7 +1163,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -1179,13 +1181,13 @@ List Events
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -1195,19 +1197,19 @@ List Events
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: Literal["budget_reached"]`
 
-  - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -1223,7 +1225,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -1247,7 +1249,7 @@ List Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -1273,7 +1275,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -1347,7 +1349,7 @@ List Events
 
         - `"fast"`
 
-  - `class BetaManagedAgentsSpanModelRequestStartEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -1363,7 +1365,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -1391,7 +1393,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -1417,7 +1419,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
+  - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -1451,7 +1453,7 @@ List Events
 
       Rubric for grading the quality of an outcome.
 
-      - `class BetaManagedAgentsFileRubric: …`
+      - `class BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -1461,7 +1463,7 @@ List Events
 
           ID of the rubric file.
 
-      - `class BetaManagedAgentsTextRubric: …`
+      - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -1471,7 +1473,7 @@ List Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `class BetaManagedAgentsSessionDeletedEvent: …`
+  - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -1487,7 +1489,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1511,7 +1513,7 @@ List Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1537,23 +1539,23 @@ List Events
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1577,7 +1579,7 @@ List Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `class BetaManagedAgentsUserToolResultEvent: …`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -1595,19 +1597,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -1625,7 +1627,7 @@ List Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -1649,7 +1651,7 @@ List Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `class BetaManagedAgentsSessionUpdatedEvent: …`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -1776,31 +1778,31 @@ List Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `class BetaManagedAgentsEffortLow: …`
+          - `class BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: Literal["low"]`
 
-          - `class BetaManagedAgentsEffortMedium: …`
+          - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
 
-          - `class BetaManagedAgentsEffortHigh: …`
+          - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `type: Literal["high"]`
 
-          - `class BetaManagedAgentsEffortXhigh: …`
+          - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-          - `class BetaManagedAgentsEffortMax: …`
+          - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -1828,7 +1830,7 @@ List Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `class BetaManagedAgentsSessionThreadAgent: …`
+          - `class BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -1854,7 +1856,7 @@ List Events
 
             - `skills: List[Skill]`
 
-              - `class BetaManagedAgentsAnthropicSkill: …`
+              - `class BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -1864,7 +1866,7 @@ List Events
 
                 - `version: str`
 
-              - `class BetaManagedAgentsCustomSkill: …`
+              - `class BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -1878,13 +1880,13 @@ List Events
 
             - `tools: List[Tool]`
 
-              - `class BetaManagedAgentsAgentToolset20260401: …`
+              - `class BetaManagedAgentsAgentToolset20260401`
 
                 - `type: Literal["agent_toolset_20260401"]`
 
                 - `configs: List[BetaManagedAgentsAgentToolConfig]`
 
-                  - `class BetaManagedAgentsBashToolConfig: …`
+                  - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -1898,25 +1900,25 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: Literal["always_allow"]`
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `type: Literal["auto"]`
 
-                  - `class BetaManagedAgentsEditToolConfig: …`
+                  - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -1930,19 +1932,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsReadToolConfig: …`
+                  - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -1956,19 +1958,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWriteToolConfig: …`
+                  - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -1982,19 +1984,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGlobToolConfig: …`
+                  - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -2008,19 +2010,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGrepToolConfig: …`
+                  - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -2034,19 +2036,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWebFetchToolConfig: …`
+                  - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -2060,15 +2062,15 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -2080,7 +2082,7 @@ List Events
 
                       format: int32
 
-                  - `class BetaManagedAgentsWebSearchToolConfig: …`
+                  - `class BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -2094,15 +2096,15 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -2150,19 +2152,19 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `class BetaManagedAgentsMCPToolset: …`
+              - `class BetaManagedAgentsMCPToolset`
 
                 - `type: Literal["mcp_toolset"]`
 
@@ -2176,15 +2178,15 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -2198,21 +2200,21 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `mcp_server_name: str`
 
-              - `class BetaManagedAgentsCustomTool: …`
+              - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -2236,7 +2238,7 @@ List Events
 
               format: int32
 
-          - `class BetaManagedAgentsAdvisor: …`
+          - `class BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -2250,11 +2252,11 @@ List Events
 
       - `skills: List[Skill]`
 
-        - `class BetaManagedAgentsAnthropicSkill: …`
+        - `class BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `class BetaManagedAgentsCustomSkill: …`
+        - `class BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -2262,11 +2264,11 @@ List Events
 
       - `tools: List[Tool]`
 
-        - `class BetaManagedAgentsAgentToolset20260401: …`
+        - `class BetaManagedAgentsAgentToolset20260401`
 
-        - `class BetaManagedAgentsMCPToolset: …`
+        - `class BetaManagedAgentsMCPToolset`
 
-        - `class BetaManagedAgentsCustomTool: …`
+        - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -2300,7 +2302,7 @@ List Events
 
       The session's new title. Present only when the update changed it.
 
-  - `class BetaManagedAgentsSystemMessageEvent: …`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -2328,7 +2330,7 @@ List Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionUsageEvent: …`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -2478,7 +2480,7 @@ Send Events
 
   Events to send to the `session`.
 
-  - `class BetaManagedAgentsUserMessageEventParams: …`
+  - `class BetaManagedAgentsUserMessageEventParams`
 
     Parameters for sending a user message to the session.
 
@@ -2488,7 +2490,7 @@ Send Events
 
       Array of content blocks for the user message.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -2500,7 +2502,7 @@ Send Events
 
           minLength: 1
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2510,7 +2512,7 @@ Send Events
 
           Union type for image source variants.
 
-          - `class BetaManagedAgentsBase64ImageSource: …`
+          - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -2528,7 +2530,7 @@ Send Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsURLImageSource: …`
+          - `class BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -2540,7 +2542,7 @@ Send Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileImageSource: …`
+          - `class BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -2552,7 +2554,7 @@ Send Events
 
               minLength: 1
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2562,7 +2564,7 @@ Send Events
 
           Union type for document source variants.
 
-          - `class BetaManagedAgentsBase64DocumentSource: …`
+          - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -2580,7 +2582,7 @@ Send Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+          - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -2596,7 +2598,7 @@ Send Events
 
               MIME type of the text content. Must be "text/plain".
 
-          - `class BetaManagedAgentsURLDocumentSource: …`
+          - `class BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -2608,7 +2610,7 @@ Send Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileDocumentSource: …`
+          - `class BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -2628,13 +2630,13 @@ Send Events
 
           The title of the document.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: Literal["redacted"]`
 
-  - `class BetaManagedAgentsUserInterruptEventParams: …`
+  - `class BetaManagedAgentsUserInterruptEventParams`
 
     Parameters for sending an interrupt to pause the agent.
 
@@ -2644,7 +2646,7 @@ Send Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `class BetaManagedAgentsUserToolConfirmationEventParams: …`
+  - `class BetaManagedAgentsUserToolConfirmationEventParams`
 
     Parameters for confirming or denying a tool execution request.
 
@@ -2670,7 +2672,7 @@ Send Events
 
       maxLength: 10000
 
-  - `class BetaManagedAgentsUserCustomToolResultEventParams: …`
+  - `class BetaManagedAgentsUserCustomToolResultEventParams`
 
     Parameters for providing the result of a custom tool execution.
 
@@ -2686,19 +2688,19 @@ Send Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -2740,7 +2742,7 @@ Send Events
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsUserDefineOutcomeEventParams: …`
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -2754,7 +2756,7 @@ Send Events
 
       Rubric for grading the quality of an outcome.
 
-      - `class BetaManagedAgentsFileRubricParams: …`
+      - `class BetaManagedAgentsFileRubricParams`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -2764,7 +2766,7 @@ Send Events
 
           ID of the rubric file.
 
-      - `class BetaManagedAgentsTextRubricParams: …`
+      - `class BetaManagedAgentsTextRubricParams`
 
         Rubric content provided inline as text.
 
@@ -2782,7 +2784,7 @@ Send Events
 
       format: int32
 
-  - `class BetaManagedAgentsUserToolResultEventParams: …`
+  - `class BetaManagedAgentsUserToolResultEventParams`
 
     Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -2798,19 +2800,19 @@ Send Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -2818,7 +2820,7 @@ Send Events
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsSystemMessageEventParams: …`
+  - `class BetaManagedAgentsSystemMessageEventParams`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -2842,7 +2844,7 @@ Send Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2934,11 +2936,13 @@ Send Events
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaManagedAgentsSendSessionEvents: …`
+- `class BetaManagedAgentsSendSessionEvents`
 
   Events that were successfully sent to the session.
 
@@ -2946,7 +2950,7 @@ Send Events
 
     Sent events
 
-    - `class BetaManagedAgentsUserMessageEvent: …`
+    - `class BetaManagedAgentsUserMessageEvent`
 
       A user message event in the session conversation.
 
@@ -2960,7 +2964,7 @@ Send Events
 
         Array of content blocks comprising the user message.
 
-        - `class BetaManagedAgentsTextBlock: …`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -2972,7 +2976,7 @@ Send Events
 
             minLength: 1
 
-        - `class BetaManagedAgentsImageBlock: …`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2982,7 +2986,7 @@ Send Events
 
             Union type for image source variants.
 
-            - `class BetaManagedAgentsBase64ImageSource: …`
+            - `class BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -3000,7 +3004,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsURLImageSource: …`
+            - `class BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -3012,7 +3016,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileImageSource: …`
+            - `class BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -3024,7 +3028,7 @@ Send Events
 
                 minLength: 1
 
-        - `class BetaManagedAgentsDocumentBlock: …`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3034,7 +3038,7 @@ Send Events
 
             Union type for document source variants.
 
-            - `class BetaManagedAgentsBase64DocumentSource: …`
+            - `class BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -3052,7 +3056,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsPlainTextDocumentSource: …`
+            - `class BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -3068,7 +3072,7 @@ Send Events
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `class BetaManagedAgentsURLDocumentSource: …`
+            - `class BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -3080,7 +3084,7 @@ Send Events
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileDocumentSource: …`
+            - `class BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -3100,7 +3104,7 @@ Send Events
 
             The title of the document.
 
-        - `class BetaManagedAgentsRedactedBlock: …`
+        - `class BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -3112,7 +3116,7 @@ Send Events
 
         format: date-time
 
-    - `class BetaManagedAgentsUserInterruptEvent: …`
+    - `class BetaManagedAgentsUserInterruptEvent`
 
       An interrupt event that pauses agent execution and returns control to the user.
 
@@ -3132,7 +3136,7 @@ Send Events
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `class BetaManagedAgentsUserToolConfirmationEvent: …`
+    - `class BetaManagedAgentsUserToolConfirmationEvent`
 
       A tool confirmation event that approves or denies a pending tool execution.
 
@@ -3170,7 +3174,7 @@ Send Events
 
         Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsUserCustomToolResultEvent: …`
+    - `class BetaManagedAgentsUserCustomToolResultEvent`
 
       Event sent by the client providing the result of a custom tool execution.
 
@@ -3188,19 +3192,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock: …`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock: …`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock: …`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock: …`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -3252,7 +3256,7 @@ Send Events
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
+    - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -3286,7 +3290,7 @@ Send Events
 
         Rubric for grading the quality of an outcome.
 
-        - `class BetaManagedAgentsFileRubric: …`
+        - `class BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -3296,7 +3300,7 @@ Send Events
 
             ID of the rubric file.
 
-        - `class BetaManagedAgentsTextRubric: …`
+        - `class BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -3306,7 +3310,7 @@ Send Events
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-    - `class BetaManagedAgentsUserToolResultEvent: …`
+    - `class BetaManagedAgentsUserToolResultEvent`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -3324,19 +3328,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock: …`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock: …`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock: …`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock: …`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -3354,7 +3358,7 @@ Send Events
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsSystemMessageEvent: …`
+    - `class BetaManagedAgentsSystemMessageEvent`
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -3456,7 +3460,7 @@ Stream Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3548,15 +3552,17 @@ Stream Events
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `BetaManagedAgentsStreamSessionEvents`
+- `type BetaManagedAgentsStreamSessionEvents = ...`
 
   Server-sent event in the session stream.
 
-  - `class BetaManagedAgentsUserMessageEvent: …`
+  - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -3570,7 +3576,7 @@ Stream Events
 
       Array of content blocks comprising the user message.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -3582,7 +3588,7 @@ Stream Events
 
           minLength: 1
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3592,7 +3598,7 @@ Stream Events
 
           Union type for image source variants.
 
-          - `class BetaManagedAgentsBase64ImageSource: …`
+          - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -3610,7 +3616,7 @@ Stream Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsURLImageSource: …`
+          - `class BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -3622,7 +3628,7 @@ Stream Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileImageSource: …`
+          - `class BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -3634,7 +3640,7 @@ Stream Events
 
               minLength: 1
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3644,7 +3650,7 @@ Stream Events
 
           Union type for document source variants.
 
-          - `class BetaManagedAgentsBase64DocumentSource: …`
+          - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -3662,7 +3668,7 @@ Stream Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+          - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -3678,7 +3684,7 @@ Stream Events
 
               MIME type of the text content. Must be "text/plain".
 
-          - `class BetaManagedAgentsURLDocumentSource: …`
+          - `class BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -3690,7 +3696,7 @@ Stream Events
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileDocumentSource: …`
+          - `class BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -3710,7 +3716,7 @@ Stream Events
 
           The title of the document.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -3722,7 +3728,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsUserInterruptEvent: …`
+  - `class BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -3742,7 +3748,7 @@ Stream Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `class BetaManagedAgentsUserToolConfirmationEvent: …`
+  - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -3780,7 +3786,7 @@ Stream Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsUserCustomToolResultEvent: …`
+  - `class BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -3798,19 +3804,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -3862,7 +3868,7 @@ Stream Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsAgentCustomToolUseEvent: …`
+  - `class BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -3890,7 +3896,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMessageEvent: …`
+  - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -3904,11 +3910,11 @@ Stream Events
 
       Array of text blocks comprising the agent response.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -3918,7 +3924,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentThinkingEvent: …`
+  - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -3934,7 +3940,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -3976,19 +3982,19 @@ Stream Events
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `type: Literal["always_allow"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `type: Literal["always_ask"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -3998,13 +4004,13 @@ Stream Events
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `type: Literal["allow"]`
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -4016,7 +4022,7 @@ Stream Events
 
               maxLength: 64
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -4032,7 +4038,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMCPToolResultEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -4056,19 +4062,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -4076,7 +4082,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentToolUseEvent: …`
+  - `class BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -4118,7 +4124,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentToolResultEvent: …`
+  - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -4142,19 +4148,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -4162,7 +4168,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -4176,19 +4182,19 @@ Stream Events
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -4206,7 +4212,7 @@ Stream Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadMessageSentEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -4220,19 +4226,19 @@ Stream Events
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -4250,7 +4256,7 @@ Stream Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadContextCompactedEvent: …`
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -4266,7 +4272,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionErrorEvent: …`
+  - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -4278,7 +4284,7 @@ Stream Events
 
     - `error: Error`
 
-      - `class BetaManagedAgentsUnknownError: …`
+      - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -4292,25 +4298,25 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: Literal["retrying"]`
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: Literal["terminal"]`
 
-      - `class BetaManagedAgentsModelOverloadedError: …`
+      - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -4324,19 +4330,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRateLimitedError: …`
+      - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -4350,19 +4356,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRequestFailedError: …`
+      - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -4376,19 +4382,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPConnectionFailedError: …`
+      - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -4406,19 +4412,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
+      - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -4436,19 +4442,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsBillingError: …`
+      - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -4462,19 +4468,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -4492,15 +4498,15 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4514,7 +4520,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -4530,7 +4536,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -4546,7 +4552,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -4564,13 +4570,13 @@ Stream Events
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -4580,19 +4586,19 @@ Stream Events
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: Literal["budget_reached"]`
 
-  - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -4608,7 +4614,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -4632,7 +4638,7 @@ Stream Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -4658,7 +4664,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -4732,7 +4738,7 @@ Stream Events
 
         - `"fast"`
 
-  - `class BetaManagedAgentsSpanModelRequestStartEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -4748,7 +4754,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -4776,7 +4782,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -4802,7 +4808,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
+  - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -4836,7 +4842,7 @@ Stream Events
 
       Rubric for grading the quality of an outcome.
 
-      - `class BetaManagedAgentsFileRubric: …`
+      - `class BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -4846,7 +4852,7 @@ Stream Events
 
           ID of the rubric file.
 
-      - `class BetaManagedAgentsTextRubric: …`
+      - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -4856,7 +4862,7 @@ Stream Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `class BetaManagedAgentsSessionDeletedEvent: …`
+  - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -4872,7 +4878,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4896,7 +4902,7 @@ Stream Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4922,23 +4928,23 @@ Stream Events
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4962,7 +4968,7 @@ Stream Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `class BetaManagedAgentsUserToolResultEvent: …`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -4980,19 +4986,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -5010,7 +5016,7 @@ Stream Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -5034,7 +5040,7 @@ Stream Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `class BetaManagedAgentsSessionUpdatedEvent: …`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -5161,31 +5167,31 @@ Stream Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `class BetaManagedAgentsEffortLow: …`
+          - `class BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: Literal["low"]`
 
-          - `class BetaManagedAgentsEffortMedium: …`
+          - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
 
-          - `class BetaManagedAgentsEffortHigh: …`
+          - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `type: Literal["high"]`
 
-          - `class BetaManagedAgentsEffortXhigh: …`
+          - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-          - `class BetaManagedAgentsEffortMax: …`
+          - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -5213,7 +5219,7 @@ Stream Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `class BetaManagedAgentsSessionThreadAgent: …`
+          - `class BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -5239,7 +5245,7 @@ Stream Events
 
             - `skills: List[Skill]`
 
-              - `class BetaManagedAgentsAnthropicSkill: …`
+              - `class BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -5249,7 +5255,7 @@ Stream Events
 
                 - `version: str`
 
-              - `class BetaManagedAgentsCustomSkill: …`
+              - `class BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -5263,13 +5269,13 @@ Stream Events
 
             - `tools: List[Tool]`
 
-              - `class BetaManagedAgentsAgentToolset20260401: …`
+              - `class BetaManagedAgentsAgentToolset20260401`
 
                 - `type: Literal["agent_toolset_20260401"]`
 
                 - `configs: List[BetaManagedAgentsAgentToolConfig]`
 
-                  - `class BetaManagedAgentsBashToolConfig: …`
+                  - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -5283,25 +5289,25 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: Literal["always_allow"]`
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `type: Literal["auto"]`
 
-                  - `class BetaManagedAgentsEditToolConfig: …`
+                  - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -5315,19 +5321,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsReadToolConfig: …`
+                  - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -5341,19 +5347,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWriteToolConfig: …`
+                  - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -5367,19 +5373,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGlobToolConfig: …`
+                  - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -5393,19 +5399,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGrepToolConfig: …`
+                  - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -5419,19 +5425,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWebFetchToolConfig: …`
+                  - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -5445,15 +5451,15 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -5465,7 +5471,7 @@ Stream Events
 
                       format: int32
 
-                  - `class BetaManagedAgentsWebSearchToolConfig: …`
+                  - `class BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -5479,15 +5485,15 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -5535,19 +5541,19 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `class BetaManagedAgentsMCPToolset: …`
+              - `class BetaManagedAgentsMCPToolset`
 
                 - `type: Literal["mcp_toolset"]`
 
@@ -5561,15 +5567,15 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -5583,21 +5589,21 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `mcp_server_name: str`
 
-              - `class BetaManagedAgentsCustomTool: …`
+              - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -5621,7 +5627,7 @@ Stream Events
 
               format: int32
 
-          - `class BetaManagedAgentsAdvisor: …`
+          - `class BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -5635,11 +5641,11 @@ Stream Events
 
       - `skills: List[Skill]`
 
-        - `class BetaManagedAgentsAnthropicSkill: …`
+        - `class BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `class BetaManagedAgentsCustomSkill: …`
+        - `class BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -5647,11 +5653,11 @@ Stream Events
 
       - `tools: List[Tool]`
 
-        - `class BetaManagedAgentsAgentToolset20260401: …`
+        - `class BetaManagedAgentsAgentToolset20260401`
 
-        - `class BetaManagedAgentsMCPToolset: …`
+        - `class BetaManagedAgentsMCPToolset`
 
-        - `class BetaManagedAgentsCustomTool: …`
+        - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -5685,7 +5691,7 @@ Stream Events
 
       The session's new title. Present only when the update changed it.
 
-  - `class BetaManagedAgentsStartEvent: …`
+  - `class BetaManagedAgentsStartEvent`
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -5695,7 +5701,7 @@ Stream Events
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-      - `class BetaManagedAgentsAgentMessagePreview: …`
+      - `class BetaManagedAgentsAgentMessagePreview`
 
         - `type: Literal["agent.message"]`
 
@@ -5703,7 +5709,7 @@ Stream Events
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-      - `class BetaManagedAgentsAgentThinkingPreview: …`
+      - `class BetaManagedAgentsAgentThinkingPreview`
 
         - `type: Literal["agent.thinking"]`
 
@@ -5711,7 +5717,7 @@ Stream Events
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-  - `class BetaManagedAgentsDeltaEvent: …`
+  - `class BetaManagedAgentsDeltaEvent`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -5737,7 +5743,7 @@ Stream Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-  - `class BetaManagedAgentsSystemMessageEvent: …`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -5765,7 +5771,7 @@ Stream Events
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionUsageEvent: …`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -5886,17 +5892,17 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Auto Evaluated Permission
 
-- `BetaManagedAgentsAgentAutoEvaluatedPermission`
+- `type BetaManagedAgentsAgentAutoEvaluatedPermission = ...`
 
   The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
     The server judged the invocation safe to execute without client approval.
 
     - `type: Literal["allow"]`
 
-  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
     The server reached no judgement; the invocation is held for client approval.
 
@@ -5908,7 +5914,7 @@ for event in client.beta.sessions.events.stream(
 
       maxLength: 64
 
-  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+  - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
     The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -5922,7 +5928,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Auto Evaluated Permission Allow
 
-- `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+- `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
   The server judged the invocation safe to execute without client approval.
 
@@ -5930,7 +5936,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Auto Evaluated Permission Ask
 
-- `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+- `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
   The server reached no judgement; the invocation is held for client approval.
 
@@ -5944,7 +5950,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Auto Evaluated Permission Deny
 
-- `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+- `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
   The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -5958,7 +5964,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Custom Tool Use Event
 
-- `class BetaManagedAgentsAgentCustomToolUseEvent: …`
+- `class BetaManagedAgentsAgentCustomToolUseEvent`
 
   Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -5988,7 +5994,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent MCP Tool Result Event
 
-- `class BetaManagedAgentsAgentMCPToolResultEvent: …`
+- `class BetaManagedAgentsAgentMCPToolResultEvent`
 
   Event representing the result of an MCP tool execution.
 
@@ -6012,7 +6018,7 @@ for event in client.beta.sessions.events.stream(
 
     The result content returned by the tool.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -6024,7 +6030,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6034,7 +6040,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -6052,7 +6058,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -6064,7 +6070,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -6076,7 +6082,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6086,7 +6092,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -6104,7 +6110,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -6120,7 +6126,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -6132,7 +6138,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -6152,7 +6158,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsSearchResultBlock: …`
+    - `class BetaManagedAgentsSearchResultBlock`
 
       A block containing a web search result.
 
@@ -6196,7 +6202,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent MCP Tool Use Event
 
-- `class BetaManagedAgentsAgentMCPToolUseEvent: …`
+- `class BetaManagedAgentsAgentMCPToolUseEvent`
 
   Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -6238,19 +6244,19 @@ for event in client.beta.sessions.events.stream(
 
     Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
       The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
       - `type: Literal["always_allow"]`
 
-    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
       The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
       - `type: Literal["always_ask"]`
 
-    - `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+    - `class BetaManagedAgentsAgentToolEvaluationAuto`
 
       The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -6260,13 +6266,13 @@ for event in client.beta.sessions.events.stream(
 
         The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
           The server judged the invocation safe to execute without client approval.
 
           - `type: Literal["allow"]`
 
-        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
           The server reached no judgement; the invocation is held for client approval.
 
@@ -6278,7 +6284,7 @@ for event in client.beta.sessions.events.stream(
 
             maxLength: 64
 
-        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
           The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -6296,7 +6302,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Message Event
 
-- `class BetaManagedAgentsAgentMessageEvent: …`
+- `class BetaManagedAgentsAgentMessageEvent`
 
   An agent response event in the session conversation.
 
@@ -6310,7 +6316,7 @@ for event in client.beta.sessions.events.stream(
 
     Array of text blocks comprising the agent response.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -6322,7 +6328,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsRedactedBlock: …`
+    - `class BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -6336,7 +6342,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Thinking Event
 
-- `class BetaManagedAgentsAgentThinkingEvent: …`
+- `class BetaManagedAgentsAgentThinkingEvent`
 
   Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -6354,7 +6360,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Thread Context Compacted Event
 
-- `class BetaManagedAgentsAgentThreadContextCompactedEvent: …`
+- `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
   Indicates that context compaction (summarization) occurred during the session.
 
@@ -6372,7 +6378,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Thread Message Received Event
 
-- `class BetaManagedAgentsAgentThreadMessageReceivedEvent: …`
+- `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
   Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -6386,7 +6392,7 @@ for event in client.beta.sessions.events.stream(
 
     Message content blocks.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -6398,7 +6404,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6408,7 +6414,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -6426,7 +6432,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -6438,7 +6444,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -6450,7 +6456,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6460,7 +6466,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -6478,7 +6484,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -6494,7 +6500,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -6506,7 +6512,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -6526,7 +6532,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsRedactedBlock: …`
+    - `class BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -6548,7 +6554,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Thread Message Sent Event
 
-- `class BetaManagedAgentsAgentThreadMessageSentEvent: …`
+- `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
   Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -6562,7 +6568,7 @@ for event in client.beta.sessions.events.stream(
 
     Message content blocks.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -6574,7 +6580,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6584,7 +6590,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -6602,7 +6608,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -6614,7 +6620,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -6626,7 +6632,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6636,7 +6642,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -6654,7 +6660,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -6670,7 +6676,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -6682,7 +6688,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -6702,7 +6708,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsRedactedBlock: …`
+    - `class BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -6724,23 +6730,23 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Tool Evaluation
 
-- `BetaManagedAgentsAgentToolEvaluation`
+- `type BetaManagedAgentsAgentToolEvaluation = ...`
 
   Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-  - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+  - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
     The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
     - `type: Literal["always_allow"]`
 
-  - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+  - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
     The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
     - `type: Literal["always_ask"]`
 
-  - `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+  - `class BetaManagedAgentsAgentToolEvaluationAuto`
 
     The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -6750,13 +6756,13 @@ for event in client.beta.sessions.events.stream(
 
       The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
         The server judged the invocation safe to execute without client approval.
 
         - `type: Literal["allow"]`
 
-      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
         The server reached no judgement; the invocation is held for client approval.
 
@@ -6768,7 +6774,7 @@ for event in client.beta.sessions.events.stream(
 
           maxLength: 64
 
-      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+      - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
         The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -6782,7 +6788,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Tool Evaluation Always Allow
 
-- `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+- `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
   The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
@@ -6790,7 +6796,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Tool Evaluation Always Ask
 
-- `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+- `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
   The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
@@ -6798,7 +6804,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Tool Evaluation Auto
 
-- `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+- `class BetaManagedAgentsAgentToolEvaluationAuto`
 
   The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -6808,13 +6814,13 @@ for event in client.beta.sessions.events.stream(
 
     The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
       The server judged the invocation safe to execute without client approval.
 
       - `type: Literal["allow"]`
 
-    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
       The server reached no judgement; the invocation is held for client approval.
 
@@ -6826,7 +6832,7 @@ for event in client.beta.sessions.events.stream(
 
         maxLength: 64
 
-    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+    - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
       The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -6840,7 +6846,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Tool Result Event
 
-- `class BetaManagedAgentsAgentToolResultEvent: …`
+- `class BetaManagedAgentsAgentToolResultEvent`
 
   Event representing the result of an agent tool execution.
 
@@ -6864,7 +6870,7 @@ for event in client.beta.sessions.events.stream(
 
     The result content returned by the tool.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -6876,7 +6882,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6886,7 +6892,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -6904,7 +6910,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -6916,7 +6922,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -6928,7 +6934,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6938,7 +6944,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -6956,7 +6962,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -6972,7 +6978,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -6984,7 +6990,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -7004,7 +7010,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsSearchResultBlock: …`
+    - `class BetaManagedAgentsSearchResultBlock`
 
       A block containing a web search result.
 
@@ -7048,7 +7054,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Agent Tool Use Event
 
-- `class BetaManagedAgentsAgentToolUseEvent: …`
+- `class BetaManagedAgentsAgentToolUseEvent`
 
   Event emitted when the agent invokes a built-in agent tool.
 
@@ -7086,19 +7092,19 @@ for event in client.beta.sessions.events.stream(
 
     Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
       The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
       - `type: Literal["always_allow"]`
 
-    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+    - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
       The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
       - `type: Literal["always_ask"]`
 
-    - `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+    - `class BetaManagedAgentsAgentToolEvaluationAuto`
 
       The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -7108,13 +7114,13 @@ for event in client.beta.sessions.events.stream(
 
         The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
           The server judged the invocation safe to execute without client approval.
 
           - `type: Literal["allow"]`
 
-        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
           The server reached no judgement; the invocation is held for client approval.
 
@@ -7126,7 +7132,7 @@ for event in client.beta.sessions.events.stream(
 
             maxLength: 64
 
-        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+        - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
           The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -7144,7 +7150,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Base64 Document Source
 
-- `class BetaManagedAgentsBase64DocumentSource: …`
+- `class BetaManagedAgentsBase64DocumentSource`
 
   Base64-encoded document data.
 
@@ -7164,7 +7170,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Base64 Image Source
 
-- `class BetaManagedAgentsBase64ImageSource: …`
+- `class BetaManagedAgentsBase64ImageSource`
 
   Base64-encoded image data.
 
@@ -7184,7 +7190,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Billing Error
 
-- `class BetaManagedAgentsBillingError: …`
+- `class BetaManagedAgentsBillingError`
 
   The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -7198,19 +7204,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7218,7 +7224,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Credential Host Unreachable Error
 
-- `class BetaManagedAgentsCredentialHostUnreachableError: …`
+- `class BetaManagedAgentsCredentialHostUnreachableError`
 
   An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -7236,19 +7242,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7260,7 +7266,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Document Block
 
-- `class BetaManagedAgentsDocumentBlock: …`
+- `class BetaManagedAgentsDocumentBlock`
 
   Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7270,7 +7276,7 @@ for event in client.beta.sessions.events.stream(
 
     Union type for document source variants.
 
-    - `class BetaManagedAgentsBase64DocumentSource: …`
+    - `class BetaManagedAgentsBase64DocumentSource`
 
       Base64-encoded document data.
 
@@ -7288,7 +7294,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsPlainTextDocumentSource: …`
+    - `class BetaManagedAgentsPlainTextDocumentSource`
 
       Plain text document content.
 
@@ -7304,7 +7310,7 @@ for event in client.beta.sessions.events.stream(
 
         MIME type of the text content. Must be "text/plain".
 
-    - `class BetaManagedAgentsURLDocumentSource: …`
+    - `class BetaManagedAgentsURLDocumentSource`
 
       Document referenced by URL.
 
@@ -7316,7 +7322,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsFileDocumentSource: …`
+    - `class BetaManagedAgentsFileDocumentSource`
 
       Document referenced by file ID.
 
@@ -7338,11 +7344,11 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Event Params
 
-- `BetaManagedAgentsEventParams`
+- `type BetaManagedAgentsEventParams = ...`
 
   Union type for event parameters that can be sent to a session.
 
-  - `class BetaManagedAgentsUserMessageEventParams: …`
+  - `class BetaManagedAgentsUserMessageEventParams`
 
     Parameters for sending a user message to the session.
 
@@ -7352,7 +7358,7 @@ for event in client.beta.sessions.events.stream(
 
       Array of content blocks for the user message.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -7364,7 +7370,7 @@ for event in client.beta.sessions.events.stream(
 
           minLength: 1
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7374,7 +7380,7 @@ for event in client.beta.sessions.events.stream(
 
           Union type for image source variants.
 
-          - `class BetaManagedAgentsBase64ImageSource: …`
+          - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -7392,7 +7398,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsURLImageSource: …`
+          - `class BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -7404,7 +7410,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileImageSource: …`
+          - `class BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -7416,7 +7422,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7426,7 +7432,7 @@ for event in client.beta.sessions.events.stream(
 
           Union type for document source variants.
 
-          - `class BetaManagedAgentsBase64DocumentSource: …`
+          - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -7444,7 +7450,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+          - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -7460,7 +7466,7 @@ for event in client.beta.sessions.events.stream(
 
               MIME type of the text content. Must be "text/plain".
 
-          - `class BetaManagedAgentsURLDocumentSource: …`
+          - `class BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -7472,7 +7478,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileDocumentSource: …`
+          - `class BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -7492,13 +7498,13 @@ for event in client.beta.sessions.events.stream(
 
           The title of the document.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `type: Literal["redacted"]`
 
-  - `class BetaManagedAgentsUserInterruptEventParams: …`
+  - `class BetaManagedAgentsUserInterruptEventParams`
 
     Parameters for sending an interrupt to pause the agent.
 
@@ -7508,7 +7514,7 @@ for event in client.beta.sessions.events.stream(
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `class BetaManagedAgentsUserToolConfirmationEventParams: …`
+  - `class BetaManagedAgentsUserToolConfirmationEventParams`
 
     Parameters for confirming or denying a tool execution request.
 
@@ -7534,7 +7540,7 @@ for event in client.beta.sessions.events.stream(
 
       maxLength: 10000
 
-  - `class BetaManagedAgentsUserCustomToolResultEventParams: …`
+  - `class BetaManagedAgentsUserCustomToolResultEventParams`
 
     Parameters for providing the result of a custom tool execution.
 
@@ -7550,19 +7556,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -7604,7 +7610,7 @@ for event in client.beta.sessions.events.stream(
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsUserDefineOutcomeEventParams: …`
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
     Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -7618,7 +7624,7 @@ for event in client.beta.sessions.events.stream(
 
       Rubric for grading the quality of an outcome.
 
-      - `class BetaManagedAgentsFileRubricParams: …`
+      - `class BetaManagedAgentsFileRubricParams`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -7628,7 +7634,7 @@ for event in client.beta.sessions.events.stream(
 
           ID of the rubric file.
 
-      - `class BetaManagedAgentsTextRubricParams: …`
+      - `class BetaManagedAgentsTextRubricParams`
 
         Rubric content provided inline as text.
 
@@ -7646,7 +7652,7 @@ for event in client.beta.sessions.events.stream(
 
       format: int32
 
-  - `class BetaManagedAgentsUserToolResultEventParams: …`
+  - `class BetaManagedAgentsUserToolResultEventParams`
 
     Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -7662,19 +7668,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -7682,7 +7688,7 @@ for event in client.beta.sessions.events.stream(
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsSystemMessageEventParams: …`
+  - `class BetaManagedAgentsSystemMessageEventParams`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -7702,7 +7708,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents File Document Source
 
-- `class BetaManagedAgentsFileDocumentSource: …`
+- `class BetaManagedAgentsFileDocumentSource`
 
   Document referenced by file ID.
 
@@ -7716,7 +7722,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents File Image Source
 
-- `class BetaManagedAgentsFileImageSource: …`
+- `class BetaManagedAgentsFileImageSource`
 
   Image referenced by file ID.
 
@@ -7730,7 +7736,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents File Rubric
 
-- `class BetaManagedAgentsFileRubric: …`
+- `class BetaManagedAgentsFileRubric`
 
   Rubric referenced by a file uploaded via the Files API.
 
@@ -7742,7 +7748,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents File Rubric Params
 
-- `class BetaManagedAgentsFileRubricParams: …`
+- `class BetaManagedAgentsFileRubricParams`
 
   Rubric referenced by a file uploaded via the Files API.
 
@@ -7754,7 +7760,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Image Block
 
-- `class BetaManagedAgentsImageBlock: …`
+- `class BetaManagedAgentsImageBlock`
 
   Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7764,7 +7770,7 @@ for event in client.beta.sessions.events.stream(
 
     Union type for image source variants.
 
-    - `class BetaManagedAgentsBase64ImageSource: …`
+    - `class BetaManagedAgentsBase64ImageSource`
 
       Base64-encoded image data.
 
@@ -7782,7 +7788,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsURLImageSource: …`
+    - `class BetaManagedAgentsURLImageSource`
 
       Image referenced by URL.
 
@@ -7794,7 +7800,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsFileImageSource: …`
+    - `class BetaManagedAgentsFileImageSource`
 
       Image referenced by file ID.
 
@@ -7808,7 +7814,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents MCP Authentication Failed Error
 
-- `class BetaManagedAgentsMCPAuthenticationFailedError: …`
+- `class BetaManagedAgentsMCPAuthenticationFailedError`
 
   Authentication to an MCP server failed.
 
@@ -7826,19 +7832,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7846,7 +7852,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents MCP Connection Failed Error
 
-- `class BetaManagedAgentsMCPConnectionFailedError: …`
+- `class BetaManagedAgentsMCPConnectionFailedError`
 
   Failed to connect to an MCP server.
 
@@ -7864,19 +7870,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7884,7 +7890,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Model Overloaded Error
 
-- `class BetaManagedAgentsModelOverloadedError: …`
+- `class BetaManagedAgentsModelOverloadedError`
 
   The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -7898,19 +7904,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7918,7 +7924,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Model Rate Limited Error
 
-- `class BetaManagedAgentsModelRateLimitedError: …`
+- `class BetaManagedAgentsModelRateLimitedError`
 
   The model request was rate-limited.
 
@@ -7932,19 +7938,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7952,7 +7958,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Model Request Failed Error
 
-- `class BetaManagedAgentsModelRequestFailedError: …`
+- `class BetaManagedAgentsModelRequestFailedError`
 
   A model request failed for a reason other than overload or rate-limiting.
 
@@ -7966,19 +7972,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7986,7 +7992,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Plain Text Document Source
 
-- `class BetaManagedAgentsPlainTextDocumentSource: …`
+- `class BetaManagedAgentsPlainTextDocumentSource`
 
   Plain text document content.
 
@@ -8004,7 +8010,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Redacted Block
 
-- `class BetaManagedAgentsRedactedBlock: …`
+- `class BetaManagedAgentsRedactedBlock`
 
   Placeholder for content withheld by Anthropic model policy.
 
@@ -8012,7 +8018,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Retry Status Exhausted
 
-- `class BetaManagedAgentsRetryStatusExhausted: …`
+- `class BetaManagedAgentsRetryStatusExhausted`
 
   This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
@@ -8020,7 +8026,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Retry Status Retrying
 
-- `class BetaManagedAgentsRetryStatusRetrying: …`
+- `class BetaManagedAgentsRetryStatusRetrying`
 
   The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
@@ -8028,7 +8034,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Retry Status Terminal
 
-- `class BetaManagedAgentsRetryStatusTerminal: …`
+- `class BetaManagedAgentsRetryStatusTerminal`
 
   The session encountered a terminal error and will transition to `terminated` state.
 
@@ -8036,7 +8042,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Search Result Block
 
-- `class BetaManagedAgentsSearchResultBlock: …`
+- `class BetaManagedAgentsSearchResultBlock`
 
   A block containing a web search result.
 
@@ -8076,7 +8082,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Search Result Citations
 
-- `class BetaManagedAgentsSearchResultCitations: …`
+- `class BetaManagedAgentsSearchResultCitations`
 
   Citation settings for a search result.
 
@@ -8086,7 +8092,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Search Result Content
 
-- `class BetaManagedAgentsSearchResultContent: …`
+- `class BetaManagedAgentsSearchResultContent`
 
   Text content within a search result.
 
@@ -8100,7 +8106,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Send Session Events
 
-- `class BetaManagedAgentsSendSessionEvents: …`
+- `class BetaManagedAgentsSendSessionEvents`
 
   Events that were successfully sent to the session.
 
@@ -8108,7 +8114,7 @@ for event in client.beta.sessions.events.stream(
 
     Sent events
 
-    - `class BetaManagedAgentsUserMessageEvent: …`
+    - `class BetaManagedAgentsUserMessageEvent`
 
       A user message event in the session conversation.
 
@@ -8122,7 +8128,7 @@ for event in client.beta.sessions.events.stream(
 
         Array of content blocks comprising the user message.
 
-        - `class BetaManagedAgentsTextBlock: …`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -8134,7 +8140,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsImageBlock: …`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -8144,7 +8150,7 @@ for event in client.beta.sessions.events.stream(
 
             Union type for image source variants.
 
-            - `class BetaManagedAgentsBase64ImageSource: …`
+            - `class BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -8162,7 +8168,7 @@ for event in client.beta.sessions.events.stream(
 
                 minLength: 1
 
-            - `class BetaManagedAgentsURLImageSource: …`
+            - `class BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -8174,7 +8180,7 @@ for event in client.beta.sessions.events.stream(
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileImageSource: …`
+            - `class BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -8186,7 +8192,7 @@ for event in client.beta.sessions.events.stream(
 
                 minLength: 1
 
-        - `class BetaManagedAgentsDocumentBlock: …`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -8196,7 +8202,7 @@ for event in client.beta.sessions.events.stream(
 
             Union type for document source variants.
 
-            - `class BetaManagedAgentsBase64DocumentSource: …`
+            - `class BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -8214,7 +8220,7 @@ for event in client.beta.sessions.events.stream(
 
                 minLength: 1
 
-            - `class BetaManagedAgentsPlainTextDocumentSource: …`
+            - `class BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -8230,7 +8236,7 @@ for event in client.beta.sessions.events.stream(
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `class BetaManagedAgentsURLDocumentSource: …`
+            - `class BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -8242,7 +8248,7 @@ for event in client.beta.sessions.events.stream(
 
                 minLength: 1
 
-            - `class BetaManagedAgentsFileDocumentSource: …`
+            - `class BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -8262,7 +8268,7 @@ for event in client.beta.sessions.events.stream(
 
             The title of the document.
 
-        - `class BetaManagedAgentsRedactedBlock: …`
+        - `class BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -8274,7 +8280,7 @@ for event in client.beta.sessions.events.stream(
 
         format: date-time
 
-    - `class BetaManagedAgentsUserInterruptEvent: …`
+    - `class BetaManagedAgentsUserInterruptEvent`
 
       An interrupt event that pauses agent execution and returns control to the user.
 
@@ -8294,7 +8300,7 @@ for event in client.beta.sessions.events.stream(
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `class BetaManagedAgentsUserToolConfirmationEvent: …`
+    - `class BetaManagedAgentsUserToolConfirmationEvent`
 
       A tool confirmation event that approves or denies a pending tool execution.
 
@@ -8332,7 +8338,7 @@ for event in client.beta.sessions.events.stream(
 
         Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsUserCustomToolResultEvent: …`
+    - `class BetaManagedAgentsUserCustomToolResultEvent`
 
       Event sent by the client providing the result of a custom tool execution.
 
@@ -8350,19 +8356,19 @@ for event in client.beta.sessions.events.stream(
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock: …`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock: …`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock: …`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock: …`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -8414,7 +8420,7 @@ for event in client.beta.sessions.events.stream(
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
+    - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -8448,7 +8454,7 @@ for event in client.beta.sessions.events.stream(
 
         Rubric for grading the quality of an outcome.
 
-        - `class BetaManagedAgentsFileRubric: …`
+        - `class BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -8458,7 +8464,7 @@ for event in client.beta.sessions.events.stream(
 
             ID of the rubric file.
 
-        - `class BetaManagedAgentsTextRubric: …`
+        - `class BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -8468,7 +8474,7 @@ for event in client.beta.sessions.events.stream(
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-    - `class BetaManagedAgentsUserToolResultEvent: …`
+    - `class BetaManagedAgentsUserToolResultEvent`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -8486,19 +8492,19 @@ for event in client.beta.sessions.events.stream(
 
         The result content returned by the tool.
 
-        - `class BetaManagedAgentsTextBlock: …`
+        - `class BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `class BetaManagedAgentsImageBlock: …`
+        - `class BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `class BetaManagedAgentsDocumentBlock: …`
+        - `class BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `class BetaManagedAgentsSearchResultBlock: …`
+        - `class BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -8516,7 +8522,7 @@ for event in client.beta.sessions.events.stream(
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `class BetaManagedAgentsSystemMessageEvent: …`
+    - `class BetaManagedAgentsSystemMessageEvent`
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -8546,7 +8552,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Budget Reached
 
-- `class BetaManagedAgentsSessionBudgetReached: …`
+- `class BetaManagedAgentsSessionBudgetReached`
 
   The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
@@ -8554,7 +8560,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Deleted Event
 
-- `class BetaManagedAgentsSessionDeletedEvent: …`
+- `class BetaManagedAgentsSessionDeletedEvent`
 
   Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -8572,7 +8578,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session End Turn
 
-- `class BetaManagedAgentsSessionEndTurn: …`
+- `class BetaManagedAgentsSessionEndTurn`
 
   The agent completed its turn naturally and is ready for the next user message.
 
@@ -8580,7 +8586,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Error Event
 
-- `class BetaManagedAgentsSessionErrorEvent: …`
+- `class BetaManagedAgentsSessionErrorEvent`
 
   An error event indicating a problem occurred during session execution.
 
@@ -8592,7 +8598,7 @@ for event in client.beta.sessions.events.stream(
 
   - `error: Error`
 
-    - `class BetaManagedAgentsUnknownError: …`
+    - `class BetaManagedAgentsUnknownError`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -8606,25 +8612,25 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
           - `type: Literal["retrying"]`
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
           - `type: Literal["exhausted"]`
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
           - `type: Literal["terminal"]`
 
-    - `class BetaManagedAgentsModelOverloadedError: …`
+    - `class BetaManagedAgentsModelOverloadedError`
 
       The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -8638,19 +8644,19 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-    - `class BetaManagedAgentsModelRateLimitedError: …`
+    - `class BetaManagedAgentsModelRateLimitedError`
 
       The model request was rate-limited.
 
@@ -8664,19 +8670,19 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-    - `class BetaManagedAgentsModelRequestFailedError: …`
+    - `class BetaManagedAgentsModelRequestFailedError`
 
       A model request failed for a reason other than overload or rate-limiting.
 
@@ -8690,19 +8696,19 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-    - `class BetaManagedAgentsMCPConnectionFailedError: …`
+    - `class BetaManagedAgentsMCPConnectionFailedError`
 
       Failed to connect to an MCP server.
 
@@ -8720,19 +8726,19 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-    - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
+    - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
       Authentication to an MCP server failed.
 
@@ -8750,19 +8756,19 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-    - `class BetaManagedAgentsBillingError: …`
+    - `class BetaManagedAgentsBillingError`
 
       The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -8776,19 +8782,19 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
-    - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+    - `class BetaManagedAgentsCredentialHostUnreachableError`
 
       An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -8806,15 +8812,15 @@ for event in client.beta.sessions.events.stream(
 
         What the client should do next in response to this error.
 
-        - `class BetaManagedAgentsRetryStatusRetrying: …`
+        - `class BetaManagedAgentsRetryStatusRetrying`
 
           The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-        - `class BetaManagedAgentsRetryStatusExhausted: …`
+        - `class BetaManagedAgentsRetryStatusExhausted`
 
           This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-        - `class BetaManagedAgentsRetryStatusTerminal: …`
+        - `class BetaManagedAgentsRetryStatusTerminal`
 
           The session encountered a terminal error and will transition to `terminated` state.
 
@@ -8830,11 +8836,11 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Event
 
-- `BetaManagedAgentsSessionEvent`
+- `type BetaManagedAgentsSessionEvent = ...`
 
   Union type for all event types in a session.
 
-  - `class BetaManagedAgentsUserMessageEvent: …`
+  - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -8848,7 +8854,7 @@ for event in client.beta.sessions.events.stream(
 
       Array of content blocks comprising the user message.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -8860,7 +8866,7 @@ for event in client.beta.sessions.events.stream(
 
           minLength: 1
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -8870,7 +8876,7 @@ for event in client.beta.sessions.events.stream(
 
           Union type for image source variants.
 
-          - `class BetaManagedAgentsBase64ImageSource: …`
+          - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -8888,7 +8894,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsURLImageSource: …`
+          - `class BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -8900,7 +8906,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileImageSource: …`
+          - `class BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -8912,7 +8918,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -8922,7 +8928,7 @@ for event in client.beta.sessions.events.stream(
 
           Union type for document source variants.
 
-          - `class BetaManagedAgentsBase64DocumentSource: …`
+          - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -8940,7 +8946,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+          - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -8956,7 +8962,7 @@ for event in client.beta.sessions.events.stream(
 
               MIME type of the text content. Must be "text/plain".
 
-          - `class BetaManagedAgentsURLDocumentSource: …`
+          - `class BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -8968,7 +8974,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileDocumentSource: …`
+          - `class BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -8988,7 +8994,7 @@ for event in client.beta.sessions.events.stream(
 
           The title of the document.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -9000,7 +9006,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsUserInterruptEvent: …`
+  - `class BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -9020,7 +9026,7 @@ for event in client.beta.sessions.events.stream(
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `class BetaManagedAgentsUserToolConfirmationEvent: …`
+  - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -9058,7 +9064,7 @@ for event in client.beta.sessions.events.stream(
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsUserCustomToolResultEvent: …`
+  - `class BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -9076,19 +9082,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -9140,7 +9146,7 @@ for event in client.beta.sessions.events.stream(
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsAgentCustomToolUseEvent: …`
+  - `class BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -9168,7 +9174,7 @@ for event in client.beta.sessions.events.stream(
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMessageEvent: …`
+  - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -9182,11 +9188,11 @@ for event in client.beta.sessions.events.stream(
 
       Array of text blocks comprising the agent response.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -9196,7 +9202,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentThinkingEvent: …`
+  - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -9212,7 +9218,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -9254,19 +9260,19 @@ for event in client.beta.sessions.events.stream(
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `type: Literal["always_allow"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `type: Literal["always_ask"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -9276,13 +9282,13 @@ for event in client.beta.sessions.events.stream(
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `type: Literal["allow"]`
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -9294,7 +9300,7 @@ for event in client.beta.sessions.events.stream(
 
               maxLength: 64
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -9310,7 +9316,7 @@ for event in client.beta.sessions.events.stream(
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMCPToolResultEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -9334,19 +9340,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -9354,7 +9360,7 @@ for event in client.beta.sessions.events.stream(
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentToolUseEvent: …`
+  - `class BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -9396,7 +9402,7 @@ for event in client.beta.sessions.events.stream(
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentToolResultEvent: …`
+  - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -9420,19 +9426,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -9440,7 +9446,7 @@ for event in client.beta.sessions.events.stream(
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -9454,19 +9460,19 @@ for event in client.beta.sessions.events.stream(
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -9484,7 +9490,7 @@ for event in client.beta.sessions.events.stream(
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadMessageSentEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -9498,19 +9504,19 @@ for event in client.beta.sessions.events.stream(
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -9528,7 +9534,7 @@ for event in client.beta.sessions.events.stream(
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadContextCompactedEvent: …`
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -9544,7 +9550,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionErrorEvent: …`
+  - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -9556,7 +9562,7 @@ for event in client.beta.sessions.events.stream(
 
     - `error: Error`
 
-      - `class BetaManagedAgentsUnknownError: …`
+      - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -9570,25 +9576,25 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: Literal["retrying"]`
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: Literal["terminal"]`
 
-      - `class BetaManagedAgentsModelOverloadedError: …`
+      - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -9602,19 +9608,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRateLimitedError: …`
+      - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -9628,19 +9634,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRequestFailedError: …`
+      - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -9654,19 +9660,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPConnectionFailedError: …`
+      - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -9684,19 +9690,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
+      - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -9714,19 +9720,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsBillingError: …`
+      - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -9740,19 +9746,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -9770,15 +9776,15 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -9792,7 +9798,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -9808,7 +9814,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -9824,7 +9830,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -9842,13 +9848,13 @@ for event in client.beta.sessions.events.stream(
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -9858,19 +9864,19 @@ for event in client.beta.sessions.events.stream(
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: Literal["budget_reached"]`
 
-  - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -9886,7 +9892,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -9910,7 +9916,7 @@ for event in client.beta.sessions.events.stream(
 
       Public `sthr_` ID of the newly created thread.
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -9936,7 +9942,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -10010,7 +10016,7 @@ for event in client.beta.sessions.events.stream(
 
         - `"fast"`
 
-  - `class BetaManagedAgentsSpanModelRequestStartEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -10026,7 +10032,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -10054,7 +10060,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -10080,7 +10086,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
+  - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -10114,7 +10120,7 @@ for event in client.beta.sessions.events.stream(
 
       Rubric for grading the quality of an outcome.
 
-      - `class BetaManagedAgentsFileRubric: …`
+      - `class BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -10124,7 +10130,7 @@ for event in client.beta.sessions.events.stream(
 
           ID of the rubric file.
 
-      - `class BetaManagedAgentsTextRubric: …`
+      - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -10134,7 +10140,7 @@ for event in client.beta.sessions.events.stream(
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `class BetaManagedAgentsSessionDeletedEvent: …`
+  - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -10150,7 +10156,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10174,7 +10180,7 @@ for event in client.beta.sessions.events.stream(
 
       Public sthr_ ID of the thread that started running.
 
-  - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10200,23 +10206,23 @@ for event in client.beta.sessions.events.stream(
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10240,7 +10246,7 @@ for event in client.beta.sessions.events.stream(
 
       Public sthr_ ID of the thread that terminated.
 
-  - `class BetaManagedAgentsUserToolResultEvent: …`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -10258,19 +10264,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -10288,7 +10294,7 @@ for event in client.beta.sessions.events.stream(
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -10312,7 +10318,7 @@ for event in client.beta.sessions.events.stream(
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `class BetaManagedAgentsSessionUpdatedEvent: …`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -10439,31 +10445,31 @@ for event in client.beta.sessions.events.stream(
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `class BetaManagedAgentsEffortLow: …`
+          - `class BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: Literal["low"]`
 
-          - `class BetaManagedAgentsEffortMedium: …`
+          - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
 
-          - `class BetaManagedAgentsEffortHigh: …`
+          - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `type: Literal["high"]`
 
-          - `class BetaManagedAgentsEffortXhigh: …`
+          - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-          - `class BetaManagedAgentsEffortMax: …`
+          - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -10491,7 +10497,7 @@ for event in client.beta.sessions.events.stream(
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `class BetaManagedAgentsSessionThreadAgent: …`
+          - `class BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -10517,7 +10523,7 @@ for event in client.beta.sessions.events.stream(
 
             - `skills: List[Skill]`
 
-              - `class BetaManagedAgentsAnthropicSkill: …`
+              - `class BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -10527,7 +10533,7 @@ for event in client.beta.sessions.events.stream(
 
                 - `version: str`
 
-              - `class BetaManagedAgentsCustomSkill: …`
+              - `class BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -10541,13 +10547,13 @@ for event in client.beta.sessions.events.stream(
 
             - `tools: List[Tool]`
 
-              - `class BetaManagedAgentsAgentToolset20260401: …`
+              - `class BetaManagedAgentsAgentToolset20260401`
 
                 - `type: Literal["agent_toolset_20260401"]`
 
                 - `configs: List[BetaManagedAgentsAgentToolConfig]`
 
-                  - `class BetaManagedAgentsBashToolConfig: …`
+                  - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -10561,25 +10567,25 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: Literal["always_allow"]`
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `type: Literal["auto"]`
 
-                  - `class BetaManagedAgentsEditToolConfig: …`
+                  - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -10593,19 +10599,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsReadToolConfig: …`
+                  - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -10619,19 +10625,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWriteToolConfig: …`
+                  - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -10645,19 +10651,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGlobToolConfig: …`
+                  - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -10671,19 +10677,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGrepToolConfig: …`
+                  - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -10697,19 +10703,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWebFetchToolConfig: …`
+                  - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -10723,15 +10729,15 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -10743,7 +10749,7 @@ for event in client.beta.sessions.events.stream(
 
                       format: int32
 
-                  - `class BetaManagedAgentsWebSearchToolConfig: …`
+                  - `class BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -10757,15 +10763,15 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -10813,19 +10819,19 @@ for event in client.beta.sessions.events.stream(
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `class BetaManagedAgentsMCPToolset: …`
+              - `class BetaManagedAgentsMCPToolset`
 
                 - `type: Literal["mcp_toolset"]`
 
@@ -10839,15 +10845,15 @@ for event in client.beta.sessions.events.stream(
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -10861,21 +10867,21 @@ for event in client.beta.sessions.events.stream(
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `mcp_server_name: str`
 
-              - `class BetaManagedAgentsCustomTool: …`
+              - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -10899,7 +10905,7 @@ for event in client.beta.sessions.events.stream(
 
               format: int32
 
-          - `class BetaManagedAgentsAdvisor: …`
+          - `class BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -10913,11 +10919,11 @@ for event in client.beta.sessions.events.stream(
 
       - `skills: List[Skill]`
 
-        - `class BetaManagedAgentsAnthropicSkill: …`
+        - `class BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `class BetaManagedAgentsCustomSkill: …`
+        - `class BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -10925,11 +10931,11 @@ for event in client.beta.sessions.events.stream(
 
       - `tools: List[Tool]`
 
-        - `class BetaManagedAgentsAgentToolset20260401: …`
+        - `class BetaManagedAgentsAgentToolset20260401`
 
-        - `class BetaManagedAgentsMCPToolset: …`
+        - `class BetaManagedAgentsMCPToolset`
 
-        - `class BetaManagedAgentsCustomTool: …`
+        - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -10963,7 +10969,7 @@ for event in client.beta.sessions.events.stream(
 
       The session's new title. Present only when the update changed it.
 
-  - `class BetaManagedAgentsSystemMessageEvent: …`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -10991,7 +10997,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionUsageEvent: …`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -11077,7 +11083,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Requires Action
 
-- `class BetaManagedAgentsSessionRequiresAction: …`
+- `class BetaManagedAgentsSessionRequiresAction`
 
   The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -11089,7 +11095,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Retries Exhausted
 
-- `class BetaManagedAgentsSessionRetriesExhausted: …`
+- `class BetaManagedAgentsSessionRetriesExhausted`
 
   The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
@@ -11097,7 +11103,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Status Idle Event
 
-- `class BetaManagedAgentsSessionStatusIdleEvent: …`
+- `class BetaManagedAgentsSessionStatusIdleEvent`
 
   Indicates the agent has paused and is awaiting user input.
 
@@ -11115,13 +11121,13 @@ for event in client.beta.sessions.events.stream(
 
   - `stop_reason: StopReason`
 
-    - `class BetaManagedAgentsSessionEndTurn: …`
+    - `class BetaManagedAgentsSessionEndTurn`
 
       The agent completed its turn naturally and is ready for the next user message.
 
       - `type: Literal["end_turn"]`
 
-    - `class BetaManagedAgentsSessionRequiresAction: …`
+    - `class BetaManagedAgentsSessionRequiresAction`
 
       The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -11131,13 +11137,13 @@ for event in client.beta.sessions.events.stream(
 
         The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-    - `class BetaManagedAgentsSessionRetriesExhausted: …`
+    - `class BetaManagedAgentsSessionRetriesExhausted`
 
       The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
 
-    - `class BetaManagedAgentsSessionBudgetReached: …`
+    - `class BetaManagedAgentsSessionBudgetReached`
 
       The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
@@ -11145,7 +11151,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Status Rescheduled Event
 
-- `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
+- `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
   Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -11163,7 +11169,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Status Running Event
 
-- `class BetaManagedAgentsSessionStatusRunningEvent: …`
+- `class BetaManagedAgentsSessionStatusRunningEvent`
 
   Indicates the session is actively running and the agent is working.
 
@@ -11181,7 +11187,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Status Terminated Event
 
-- `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
+- `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
   Indicates the session has terminated, either due to an error or completion.
 
@@ -11199,7 +11205,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Thread Created Event
 
-- `class BetaManagedAgentsSessionThreadCreatedEvent: …`
+- `class BetaManagedAgentsSessionThreadCreatedEvent`
 
   Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -11225,7 +11231,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Thread Status Idle Event
 
-- `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
+- `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
   A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -11251,13 +11257,13 @@ for event in client.beta.sessions.events.stream(
 
   - `stop_reason: StopReason`
 
-    - `class BetaManagedAgentsSessionEndTurn: …`
+    - `class BetaManagedAgentsSessionEndTurn`
 
       The agent completed its turn naturally and is ready for the next user message.
 
       - `type: Literal["end_turn"]`
 
-    - `class BetaManagedAgentsSessionRequiresAction: …`
+    - `class BetaManagedAgentsSessionRequiresAction`
 
       The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -11267,13 +11273,13 @@ for event in client.beta.sessions.events.stream(
 
         The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-    - `class BetaManagedAgentsSessionRetriesExhausted: …`
+    - `class BetaManagedAgentsSessionRetriesExhausted`
 
       The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
 
-    - `class BetaManagedAgentsSessionBudgetReached: …`
+    - `class BetaManagedAgentsSessionBudgetReached`
 
       The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
@@ -11281,7 +11287,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Thread Status Rescheduled Event
 
-- `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
+- `class BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
   A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -11307,7 +11313,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Thread Status Running Event
 
-- `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
+- `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
   A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -11333,7 +11339,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Thread Status Terminated Event
 
-- `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
+- `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
   A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -11359,7 +11365,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Session Usage Snapshot
 
-- `class BetaManagedAgentsSessionUsageSnapshot: …`
+- `class BetaManagedAgentsSessionUsageSnapshot`
 
   Point-in-time snapshot of a session's cumulative usage.
 
@@ -11433,7 +11439,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Span Model Request End Event
 
-- `class BetaManagedAgentsSpanModelRequestEndEvent: …`
+- `class BetaManagedAgentsSpanModelRequestEndEvent`
 
   Emitted when a model request completes.
 
@@ -11495,7 +11501,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Span Model Request Start Event
 
-- `class BetaManagedAgentsSpanModelRequestStartEvent: …`
+- `class BetaManagedAgentsSpanModelRequestStartEvent`
 
   Emitted when a model request is initiated by the agent.
 
@@ -11513,7 +11519,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Span Model Usage
 
-- `class BetaManagedAgentsSpanModelUsage: …`
+- `class BetaManagedAgentsSpanModelUsage`
 
   Token usage for a single model request.
 
@@ -11551,7 +11557,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Span Outcome Evaluation End Event
 
-- `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
+- `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
   Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -11627,7 +11633,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Span Outcome Evaluation Ongoing Event
 
-- `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
+- `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
   Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -11655,7 +11661,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Span Outcome Evaluation Start Event
 
-- `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
+- `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
   Emitted when an outcome evaluation cycle begins.
 
@@ -11683,11 +11689,11 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Stream Session Events
 
-- `BetaManagedAgentsStreamSessionEvents`
+- `type BetaManagedAgentsStreamSessionEvents = ...`
 
   Server-sent event in the session stream.
 
-  - `class BetaManagedAgentsUserMessageEvent: …`
+  - `class BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -11701,7 +11707,7 @@ for event in client.beta.sessions.events.stream(
 
       Array of content blocks comprising the user message.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -11713,7 +11719,7 @@ for event in client.beta.sessions.events.stream(
 
           minLength: 1
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -11723,7 +11729,7 @@ for event in client.beta.sessions.events.stream(
 
           Union type for image source variants.
 
-          - `class BetaManagedAgentsBase64ImageSource: …`
+          - `class BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -11741,7 +11747,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsURLImageSource: …`
+          - `class BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -11753,7 +11759,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileImageSource: …`
+          - `class BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -11765,7 +11771,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -11775,7 +11781,7 @@ for event in client.beta.sessions.events.stream(
 
           Union type for document source variants.
 
-          - `class BetaManagedAgentsBase64DocumentSource: …`
+          - `class BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -11793,7 +11799,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+          - `class BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -11809,7 +11815,7 @@ for event in client.beta.sessions.events.stream(
 
               MIME type of the text content. Must be "text/plain".
 
-          - `class BetaManagedAgentsURLDocumentSource: …`
+          - `class BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -11821,7 +11827,7 @@ for event in client.beta.sessions.events.stream(
 
               minLength: 1
 
-          - `class BetaManagedAgentsFileDocumentSource: …`
+          - `class BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -11841,7 +11847,7 @@ for event in client.beta.sessions.events.stream(
 
           The title of the document.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -11853,7 +11859,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsUserInterruptEvent: …`
+  - `class BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -11873,7 +11879,7 @@ for event in client.beta.sessions.events.stream(
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `class BetaManagedAgentsUserToolConfirmationEvent: …`
+  - `class BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -11911,7 +11917,7 @@ for event in client.beta.sessions.events.stream(
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsUserCustomToolResultEvent: …`
+  - `class BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -11929,19 +11935,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -11993,7 +11999,7 @@ for event in client.beta.sessions.events.stream(
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsAgentCustomToolUseEvent: …`
+  - `class BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -12021,7 +12027,7 @@ for event in client.beta.sessions.events.stream(
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMessageEvent: …`
+  - `class BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -12035,11 +12041,11 @@ for event in client.beta.sessions.events.stream(
 
       Array of text blocks comprising the agent response.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -12049,7 +12055,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentThinkingEvent: …`
+  - `class BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -12065,7 +12071,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsAgentMCPToolUseEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -12107,19 +12113,19 @@ for event in client.beta.sessions.events.stream(
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `type: Literal["always_allow"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `type: Literal["always_ask"]`
 
-      - `class BetaManagedAgentsAgentToolEvaluationAuto: …`
+      - `class BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -12129,13 +12135,13 @@ for event in client.beta.sessions.events.stream(
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `type: Literal["allow"]`
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -12147,7 +12153,7 @@ for event in client.beta.sessions.events.stream(
 
               maxLength: 64
 
-          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny: …`
+          - `class BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -12163,7 +12169,7 @@ for event in client.beta.sessions.events.stream(
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentMCPToolResultEvent: …`
+  - `class BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -12187,19 +12193,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -12207,7 +12213,7 @@ for event in client.beta.sessions.events.stream(
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentToolUseEvent: …`
+  - `class BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -12249,7 +12255,7 @@ for event in client.beta.sessions.events.stream(
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `class BetaManagedAgentsAgentToolResultEvent: …`
+  - `class BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -12273,19 +12279,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -12293,7 +12299,7 @@ for event in client.beta.sessions.events.stream(
 
       Whether the tool execution resulted in an error.
 
-  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -12307,19 +12313,19 @@ for event in client.beta.sessions.events.stream(
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -12337,7 +12343,7 @@ for event in client.beta.sessions.events.stream(
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadMessageSentEvent: …`
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -12351,19 +12357,19 @@ for event in client.beta.sessions.events.stream(
 
       Message content blocks.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsRedactedBlock: …`
+      - `class BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -12381,7 +12387,7 @@ for event in client.beta.sessions.events.stream(
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `class BetaManagedAgentsAgentThreadContextCompactedEvent: …`
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -12397,7 +12403,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionErrorEvent: …`
+  - `class BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -12409,7 +12415,7 @@ for event in client.beta.sessions.events.stream(
 
     - `error: Error`
 
-      - `class BetaManagedAgentsUnknownError: …`
+      - `class BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -12423,25 +12429,25 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `type: Literal["retrying"]`
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `type: Literal["exhausted"]`
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `type: Literal["terminal"]`
 
-      - `class BetaManagedAgentsModelOverloadedError: …`
+      - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -12455,19 +12461,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRateLimitedError: …`
+      - `class BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -12481,19 +12487,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsModelRequestFailedError: …`
+      - `class BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -12507,19 +12513,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPConnectionFailedError: …`
+      - `class BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -12537,19 +12543,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsMCPAuthenticationFailedError: …`
+      - `class BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -12567,19 +12573,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsBillingError: …`
+      - `class BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -12593,19 +12599,19 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `class BetaManagedAgentsCredentialHostUnreachableError: …`
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -12623,15 +12629,15 @@ for event in client.beta.sessions.events.stream(
 
           What the client should do next in response to this error.
 
-          - `class BetaManagedAgentsRetryStatusRetrying: …`
+          - `class BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `class BetaManagedAgentsRetryStatusExhausted: …`
+          - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `class BetaManagedAgentsRetryStatusTerminal: …`
+          - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -12645,7 +12651,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -12661,7 +12667,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -12677,7 +12683,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -12695,13 +12701,13 @@ for event in client.beta.sessions.events.stream(
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `type: Literal["end_turn"]`
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -12711,19 +12717,19 @@ for event in client.beta.sessions.events.stream(
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: Literal["budget_reached"]`
 
-  - `class BetaManagedAgentsSessionStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -12739,7 +12745,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadCreatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -12763,7 +12769,7 @@ for event in client.beta.sessions.events.stream(
 
       Public `sthr_` ID of the newly created thread.
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -12789,7 +12795,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -12863,7 +12869,7 @@ for event in client.beta.sessions.events.stream(
 
         - `"fast"`
 
-  - `class BetaManagedAgentsSpanModelRequestStartEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -12879,7 +12885,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanModelRequestEndEvent: …`
+  - `class BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -12907,7 +12913,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent: …`
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -12933,7 +12939,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsUserDefineOutcomeEvent: …`
+  - `class BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -12967,7 +12973,7 @@ for event in client.beta.sessions.events.stream(
 
       Rubric for grading the quality of an outcome.
 
-      - `class BetaManagedAgentsFileRubric: …`
+      - `class BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -12977,7 +12983,7 @@ for event in client.beta.sessions.events.stream(
 
           ID of the rubric file.
 
-      - `class BetaManagedAgentsTextRubric: …`
+      - `class BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -12987,7 +12993,7 @@ for event in client.beta.sessions.events.stream(
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `class BetaManagedAgentsSessionDeletedEvent: …`
+  - `class BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -13003,7 +13009,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionThreadStatusRunningEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -13027,7 +13033,7 @@ for event in client.beta.sessions.events.stream(
 
       Public sthr_ ID of the thread that started running.
 
-  - `class BetaManagedAgentsSessionThreadStatusIdleEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -13053,23 +13059,23 @@ for event in client.beta.sessions.events.stream(
 
     - `stop_reason: StopReason`
 
-      - `class BetaManagedAgentsSessionEndTurn: …`
+      - `class BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `class BetaManagedAgentsSessionRequiresAction: …`
+      - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `class BetaManagedAgentsSessionRetriesExhausted: …`
+      - `class BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `class BetaManagedAgentsSessionBudgetReached: …`
+      - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -13093,7 +13099,7 @@ for event in client.beta.sessions.events.stream(
 
       Public sthr_ ID of the thread that terminated.
 
-  - `class BetaManagedAgentsUserToolResultEvent: …`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -13111,19 +13117,19 @@ for event in client.beta.sessions.events.stream(
 
       The result content returned by the tool.
 
-      - `class BetaManagedAgentsTextBlock: …`
+      - `class BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `class BetaManagedAgentsImageBlock: …`
+      - `class BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `class BetaManagedAgentsDocumentBlock: …`
+      - `class BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `class BetaManagedAgentsSearchResultBlock: …`
+      - `class BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -13141,7 +13147,7 @@ for event in client.beta.sessions.events.stream(
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent: …`
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -13165,7 +13171,7 @@ for event in client.beta.sessions.events.stream(
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `class BetaManagedAgentsSessionUpdatedEvent: …`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -13292,31 +13298,31 @@ for event in client.beta.sessions.events.stream(
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `class BetaManagedAgentsEffortLow: …`
+          - `class BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `type: Literal["low"]`
 
-          - `class BetaManagedAgentsEffortMedium: …`
+          - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `type: Literal["medium"]`
 
-          - `class BetaManagedAgentsEffortHigh: …`
+          - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `type: Literal["high"]`
 
-          - `class BetaManagedAgentsEffortXhigh: …`
+          - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `type: Literal["xhigh"]`
 
-          - `class BetaManagedAgentsEffortMax: …`
+          - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -13344,7 +13350,7 @@ for event in client.beta.sessions.events.stream(
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `class BetaManagedAgentsSessionThreadAgent: …`
+          - `class BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -13370,7 +13376,7 @@ for event in client.beta.sessions.events.stream(
 
             - `skills: List[Skill]`
 
-              - `class BetaManagedAgentsAnthropicSkill: …`
+              - `class BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -13380,7 +13386,7 @@ for event in client.beta.sessions.events.stream(
 
                 - `version: str`
 
-              - `class BetaManagedAgentsCustomSkill: …`
+              - `class BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -13394,13 +13400,13 @@ for event in client.beta.sessions.events.stream(
 
             - `tools: List[Tool]`
 
-              - `class BetaManagedAgentsAgentToolset20260401: …`
+              - `class BetaManagedAgentsAgentToolset20260401`
 
                 - `type: Literal["agent_toolset_20260401"]`
 
                 - `configs: List[BetaManagedAgentsAgentToolConfig]`
 
-                  - `class BetaManagedAgentsBashToolConfig: …`
+                  - `class BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -13414,25 +13420,25 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `type: Literal["always_allow"]`
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `type: Literal["always_ask"]`
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `type: Literal["auto"]`
 
-                  - `class BetaManagedAgentsEditToolConfig: …`
+                  - `class BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -13446,19 +13452,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsReadToolConfig: …`
+                  - `class BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -13472,19 +13478,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWriteToolConfig: …`
+                  - `class BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -13498,19 +13504,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGlobToolConfig: …`
+                  - `class BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -13524,19 +13530,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsGrepToolConfig: …`
+                  - `class BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -13550,19 +13556,19 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `class BetaManagedAgentsWebFetchToolConfig: …`
+                  - `class BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -13576,15 +13582,15 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -13596,7 +13602,7 @@ for event in client.beta.sessions.events.stream(
 
                       format: int32
 
-                  - `class BetaManagedAgentsWebSearchToolConfig: …`
+                  - `class BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -13610,15 +13616,15 @@ for event in client.beta.sessions.events.stream(
 
                       Permission policy for tool execution.
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                      - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `class BetaManagedAgentsAutoPolicy: …`
+                      - `class BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -13666,19 +13672,19 @@ for event in client.beta.sessions.events.stream(
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `class BetaManagedAgentsMCPToolset: …`
+              - `class BetaManagedAgentsMCPToolset`
 
                 - `type: Literal["mcp_toolset"]`
 
@@ -13692,15 +13698,15 @@ for event in client.beta.sessions.events.stream(
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -13714,21 +13720,21 @@ for event in client.beta.sessions.events.stream(
 
                     Permission policy for tool execution.
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy: …`
+                    - `class BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `class BetaManagedAgentsAutoPolicy: …`
+                    - `class BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `mcp_server_name: str`
 
-              - `class BetaManagedAgentsCustomTool: …`
+              - `class BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -13752,7 +13758,7 @@ for event in client.beta.sessions.events.stream(
 
               format: int32
 
-          - `class BetaManagedAgentsAdvisor: …`
+          - `class BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -13766,11 +13772,11 @@ for event in client.beta.sessions.events.stream(
 
       - `skills: List[Skill]`
 
-        - `class BetaManagedAgentsAnthropicSkill: …`
+        - `class BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `class BetaManagedAgentsCustomSkill: …`
+        - `class BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -13778,11 +13784,11 @@ for event in client.beta.sessions.events.stream(
 
       - `tools: List[Tool]`
 
-        - `class BetaManagedAgentsAgentToolset20260401: …`
+        - `class BetaManagedAgentsAgentToolset20260401`
 
-        - `class BetaManagedAgentsMCPToolset: …`
+        - `class BetaManagedAgentsMCPToolset`
 
-        - `class BetaManagedAgentsCustomTool: …`
+        - `class BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -13816,7 +13822,7 @@ for event in client.beta.sessions.events.stream(
 
       The session's new title. Present only when the update changed it.
 
-  - `class BetaManagedAgentsStartEvent: …`
+  - `class BetaManagedAgentsStartEvent`
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -13826,7 +13832,7 @@ for event in client.beta.sessions.events.stream(
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-      - `class BetaManagedAgentsAgentMessagePreview: …`
+      - `class BetaManagedAgentsAgentMessagePreview`
 
         - `type: Literal["agent.message"]`
 
@@ -13834,7 +13840,7 @@ for event in client.beta.sessions.events.stream(
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-      - `class BetaManagedAgentsAgentThinkingPreview: …`
+      - `class BetaManagedAgentsAgentThinkingPreview`
 
         - `type: Literal["agent.thinking"]`
 
@@ -13842,7 +13848,7 @@ for event in client.beta.sessions.events.stream(
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-  - `class BetaManagedAgentsDeltaEvent: …`
+  - `class BetaManagedAgentsDeltaEvent`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -13868,7 +13874,7 @@ for event in client.beta.sessions.events.stream(
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-  - `class BetaManagedAgentsSystemMessageEvent: …`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -13896,7 +13902,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-  - `class BetaManagedAgentsSessionUsageEvent: …`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -13982,7 +13988,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents System Message Event Params
 
-- `class BetaManagedAgentsSystemMessageEventParams: …`
+- `class BetaManagedAgentsSystemMessageEventParams`
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -14002,7 +14008,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Text Block
 
-- `class BetaManagedAgentsTextBlock: …`
+- `class BetaManagedAgentsTextBlock`
 
   Regular text content.
 
@@ -14016,7 +14022,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Text Rubric
 
-- `class BetaManagedAgentsTextRubric: …`
+- `class BetaManagedAgentsTextRubric`
 
   Rubric content provided inline as text.
 
@@ -14028,7 +14034,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Text Rubric Params
 
-- `class BetaManagedAgentsTextRubricParams: …`
+- `class BetaManagedAgentsTextRubricParams`
 
   Rubric content provided inline as text.
 
@@ -14042,7 +14048,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents Unknown Error
 
-- `class BetaManagedAgentsUnknownError: …`
+- `class BetaManagedAgentsUnknownError`
 
   An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -14056,19 +14062,19 @@ for event in client.beta.sessions.events.stream(
 
     What the client should do next in response to this error.
 
-    - `class BetaManagedAgentsRetryStatusRetrying: …`
+    - `class BetaManagedAgentsRetryStatusRetrying`
 
       The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
       - `type: Literal["retrying"]`
 
-    - `class BetaManagedAgentsRetryStatusExhausted: …`
+    - `class BetaManagedAgentsRetryStatusExhausted`
 
       This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
       - `type: Literal["exhausted"]`
 
-    - `class BetaManagedAgentsRetryStatusTerminal: …`
+    - `class BetaManagedAgentsRetryStatusTerminal`
 
       The session encountered a terminal error and will transition to `terminated` state.
 
@@ -14076,7 +14082,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents URL Document Source
 
-- `class BetaManagedAgentsURLDocumentSource: …`
+- `class BetaManagedAgentsURLDocumentSource`
 
   Document referenced by URL.
 
@@ -14090,7 +14096,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents URL Image Source
 
-- `class BetaManagedAgentsURLImageSource: …`
+- `class BetaManagedAgentsURLImageSource`
 
   Image referenced by URL.
 
@@ -14104,7 +14110,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Custom Tool Result Event
 
-- `class BetaManagedAgentsUserCustomToolResultEvent: …`
+- `class BetaManagedAgentsUserCustomToolResultEvent`
 
   Event sent by the client providing the result of a custom tool execution.
 
@@ -14122,7 +14128,7 @@ for event in client.beta.sessions.events.stream(
 
     The result content returned by the tool.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -14134,7 +14140,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -14144,7 +14150,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -14162,7 +14168,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -14174,7 +14180,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -14186,7 +14192,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -14196,7 +14202,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -14214,7 +14220,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -14230,7 +14236,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -14242,7 +14248,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -14262,7 +14268,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsSearchResultBlock: …`
+    - `class BetaManagedAgentsSearchResultBlock`
 
       A block containing a web search result.
 
@@ -14316,7 +14322,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Custom Tool Result Event Params
 
-- `class BetaManagedAgentsUserCustomToolResultEventParams: …`
+- `class BetaManagedAgentsUserCustomToolResultEventParams`
 
   Parameters for providing the result of a custom tool execution.
 
@@ -14332,7 +14338,7 @@ for event in client.beta.sessions.events.stream(
 
     The result content returned by the tool.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -14344,7 +14350,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -14354,7 +14360,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -14372,7 +14378,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -14384,7 +14390,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -14396,7 +14402,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -14406,7 +14412,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -14424,7 +14430,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -14440,7 +14446,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -14452,7 +14458,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -14472,7 +14478,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsSearchResultBlock: …`
+    - `class BetaManagedAgentsSearchResultBlock`
 
       A block containing a web search result.
 
@@ -14516,7 +14522,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Define Outcome Event
 
-- `class BetaManagedAgentsUserDefineOutcomeEvent: …`
+- `class BetaManagedAgentsUserDefineOutcomeEvent`
 
   Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -14550,7 +14556,7 @@ for event in client.beta.sessions.events.stream(
 
     Rubric for grading the quality of an outcome.
 
-    - `class BetaManagedAgentsFileRubric: …`
+    - `class BetaManagedAgentsFileRubric`
 
       Rubric referenced by a file uploaded via the Files API.
 
@@ -14560,7 +14566,7 @@ for event in client.beta.sessions.events.stream(
 
         ID of the rubric file.
 
-    - `class BetaManagedAgentsTextRubric: …`
+    - `class BetaManagedAgentsTextRubric`
 
       Rubric content provided inline as text.
 
@@ -14572,7 +14578,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Define Outcome Event Params
 
-- `class BetaManagedAgentsUserDefineOutcomeEventParams: …`
+- `class BetaManagedAgentsUserDefineOutcomeEventParams`
 
   Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -14586,7 +14592,7 @@ for event in client.beta.sessions.events.stream(
 
     Rubric for grading the quality of an outcome.
 
-    - `class BetaManagedAgentsFileRubricParams: …`
+    - `class BetaManagedAgentsFileRubricParams`
 
       Rubric referenced by a file uploaded via the Files API.
 
@@ -14596,7 +14602,7 @@ for event in client.beta.sessions.events.stream(
 
         ID of the rubric file.
 
-    - `class BetaManagedAgentsTextRubricParams: …`
+    - `class BetaManagedAgentsTextRubricParams`
 
       Rubric content provided inline as text.
 
@@ -14616,7 +14622,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Interrupt Event
 
-- `class BetaManagedAgentsUserInterruptEvent: …`
+- `class BetaManagedAgentsUserInterruptEvent`
 
   An interrupt event that pauses agent execution and returns control to the user.
 
@@ -14638,7 +14644,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Interrupt Event Params
 
-- `class BetaManagedAgentsUserInterruptEventParams: …`
+- `class BetaManagedAgentsUserInterruptEventParams`
 
   Parameters for sending an interrupt to pause the agent.
 
@@ -14650,7 +14656,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Message Event
 
-- `class BetaManagedAgentsUserMessageEvent: …`
+- `class BetaManagedAgentsUserMessageEvent`
 
   A user message event in the session conversation.
 
@@ -14664,7 +14670,7 @@ for event in client.beta.sessions.events.stream(
 
     Array of content blocks comprising the user message.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -14676,7 +14682,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -14686,7 +14692,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -14704,7 +14710,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -14716,7 +14722,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -14728,7 +14734,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -14738,7 +14744,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -14756,7 +14762,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -14772,7 +14778,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -14784,7 +14790,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -14804,7 +14810,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsRedactedBlock: …`
+    - `class BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -14818,7 +14824,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Message Event Params
 
-- `class BetaManagedAgentsUserMessageEventParams: …`
+- `class BetaManagedAgentsUserMessageEventParams`
 
   Parameters for sending a user message to the session.
 
@@ -14828,7 +14834,7 @@ for event in client.beta.sessions.events.stream(
 
     Array of content blocks for the user message.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -14840,7 +14846,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -14850,7 +14856,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -14868,7 +14874,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -14880,7 +14886,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -14892,7 +14898,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -14902,7 +14908,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -14920,7 +14926,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -14936,7 +14942,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -14948,7 +14954,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -14968,7 +14974,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsRedactedBlock: …`
+    - `class BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -14976,7 +14982,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Tool Confirmation Event
 
-- `class BetaManagedAgentsUserToolConfirmationEvent: …`
+- `class BetaManagedAgentsUserToolConfirmationEvent`
 
   A tool confirmation event that approves or denies a pending tool execution.
 
@@ -15016,7 +15022,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Tool Confirmation Event Params
 
-- `class BetaManagedAgentsUserToolConfirmationEventParams: …`
+- `class BetaManagedAgentsUserToolConfirmationEventParams`
 
   Parameters for confirming or denying a tool execution request.
 
@@ -15044,7 +15050,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Beta Managed Agents User Tool Result Event Params
 
-- `class BetaManagedAgentsUserToolResultEventParams: …`
+- `class BetaManagedAgentsUserToolResultEventParams`
 
   Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -15060,7 +15066,7 @@ for event in client.beta.sessions.events.stream(
 
     The result content returned by the tool.
 
-    - `class BetaManagedAgentsTextBlock: …`
+    - `class BetaManagedAgentsTextBlock`
 
       Regular text content.
 
@@ -15072,7 +15078,7 @@ for event in client.beta.sessions.events.stream(
 
         minLength: 1
 
-    - `class BetaManagedAgentsImageBlock: …`
+    - `class BetaManagedAgentsImageBlock`
 
       Image content specified directly as base64 data or as a reference via a URL.
 
@@ -15082,7 +15088,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for image source variants.
 
-        - `class BetaManagedAgentsBase64ImageSource: …`
+        - `class BetaManagedAgentsBase64ImageSource`
 
           Base64-encoded image data.
 
@@ -15100,7 +15106,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsURLImageSource: …`
+        - `class BetaManagedAgentsURLImageSource`
 
           Image referenced by URL.
 
@@ -15112,7 +15118,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileImageSource: …`
+        - `class BetaManagedAgentsFileImageSource`
 
           Image referenced by file ID.
 
@@ -15124,7 +15130,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-    - `class BetaManagedAgentsDocumentBlock: …`
+    - `class BetaManagedAgentsDocumentBlock`
 
       Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -15134,7 +15140,7 @@ for event in client.beta.sessions.events.stream(
 
         Union type for document source variants.
 
-        - `class BetaManagedAgentsBase64DocumentSource: …`
+        - `class BetaManagedAgentsBase64DocumentSource`
 
           Base64-encoded document data.
 
@@ -15152,7 +15158,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsPlainTextDocumentSource: …`
+        - `class BetaManagedAgentsPlainTextDocumentSource`
 
           Plain text document content.
 
@@ -15168,7 +15174,7 @@ for event in client.beta.sessions.events.stream(
 
             MIME type of the text content. Must be "text/plain".
 
-        - `class BetaManagedAgentsURLDocumentSource: …`
+        - `class BetaManagedAgentsURLDocumentSource`
 
           Document referenced by URL.
 
@@ -15180,7 +15186,7 @@ for event in client.beta.sessions.events.stream(
 
             minLength: 1
 
-        - `class BetaManagedAgentsFileDocumentSource: …`
+        - `class BetaManagedAgentsFileDocumentSource`
 
           Document referenced by file ID.
 
@@ -15200,7 +15206,7 @@ for event in client.beta.sessions.events.stream(
 
         The title of the document.
 
-    - `class BetaManagedAgentsSearchResultBlock: …`
+    - `class BetaManagedAgentsSearchResultBlock`
 
       A block containing a web search result.
 

@@ -39,7 +39,7 @@ List User Profiles
 
 ## Returns
 
-- `BetaUserProfile`
+- `class BetaUserProfile`
 
   - `Type type`
 

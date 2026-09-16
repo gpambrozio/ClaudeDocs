@@ -29,7 +29,7 @@ Fetches a tunnel certificate by ID.
 
 ## Returns
 
-- `TunnelCertificate`
+- `class TunnelCertificate`
 
   - `"tunnel_certificate" type`
 

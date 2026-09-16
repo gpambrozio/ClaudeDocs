@@ -246,7 +246,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
 ## Returns
 
-- `Message`
+- `class Message`
 
   - `"message" type`
 
@@ -343,15 +343,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-- `RawMessageStreamEvent`
+- `class RawMessageStreamEvent`
 
-  - `RawMessageStartEvent`
+  - `class RawMessageStartEvent`
 
     - `"message_start" type`
 
     - `Message message`
 
-  - `RawMessageDeltaEvent`
+  - `class RawMessageDeltaEvent`
 
     - `"message_delta" type`
 
@@ -369,11 +369,11 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-  - `RawMessageStopEvent`
+  - `class RawMessageStopEvent`
 
     - `"message_stop" type`
 
-  - `RawContentBlockStartEvent`
+  - `class RawContentBlockStartEvent`
 
     - `"content_block_start" type`
 
@@ -381,7 +381,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `int index`
 
-  - `RawContentBlockDeltaEvent`
+  - `class RawContentBlockDeltaEvent`
 
     - `"content_block_delta" type`
 
@@ -389,7 +389,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `int index`
 
-  - `RawContentBlockStopEvent`
+  - `class RawContentBlockStopEvent`
 
     - `"content_block_stop" type`
 

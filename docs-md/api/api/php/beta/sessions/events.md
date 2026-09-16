@@ -59,9 +59,9 @@ List Events
 
 ### Returns
 
-- `ManagedAgentsSessionEvent`
+- `class ManagedAgentsSessionEvent`
 
-  - `ManagedAgentsUserMessageEvent`
+  - `class ManagedAgentsUserMessageEvent`
 
     - `Type type`
 
@@ -77,7 +77,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserInterruptEvent`
+  - `class ManagedAgentsUserInterruptEvent`
 
     - `Type type`
 
@@ -93,7 +93,7 @@ List Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `ManagedAgentsUserToolConfirmationEvent`
+  - `class ManagedAgentsUserToolConfirmationEvent`
 
     - `Type type`
 
@@ -121,7 +121,7 @@ List Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsUserCustomToolResultEvent`
+  - `class ManagedAgentsUserCustomToolResultEvent`
 
     - `Type type`
 
@@ -149,7 +149,7 @@ List Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsAgentCustomToolUseEvent`
+  - `class ManagedAgentsAgentCustomToolUseEvent`
 
     - `Type type`
 
@@ -173,7 +173,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMessageEvent`
+  - `class ManagedAgentsAgentMessageEvent`
 
     - `Type type`
 
@@ -189,7 +189,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentThinkingEvent`
+  - `class ManagedAgentsAgentThinkingEvent`
 
     - `Type type`
 
@@ -201,7 +201,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentMCPToolUseEvent`
+  - `class ManagedAgentsAgentMCPToolUseEvent`
 
     - `Type type`
 
@@ -237,7 +237,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMCPToolResultEvent`
+  - `class ManagedAgentsAgentMCPToolResultEvent`
 
     - `Type type`
 
@@ -261,7 +261,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentToolUseEvent`
+  - `class ManagedAgentsAgentToolUseEvent`
 
     - `Type type`
 
@@ -293,7 +293,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentToolResultEvent`
+  - `class ManagedAgentsAgentToolResultEvent`
 
     - `Type type`
 
@@ -317,7 +317,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+  - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
     - `Type type`
 
@@ -341,7 +341,7 @@ List Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `ManagedAgentsAgentThreadMessageSentEvent`
+  - `class ManagedAgentsAgentThreadMessageSentEvent`
 
     - `Type type`
 
@@ -365,7 +365,7 @@ List Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `ManagedAgentsAgentThreadContextCompactedEvent`
+  - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
     - `Type type`
 
@@ -377,7 +377,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionErrorEvent`
+  - `class ManagedAgentsSessionErrorEvent`
 
     - `Type type`
 
@@ -391,7 +391,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRescheduledEvent`
+  - `class ManagedAgentsSessionStatusRescheduledEvent`
 
     - `Type type`
 
@@ -403,7 +403,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRunningEvent`
+  - `class ManagedAgentsSessionStatusRunningEvent`
 
     - `Type type`
 
@@ -415,7 +415,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusIdleEvent`
+  - `class ManagedAgentsSessionStatusIdleEvent`
 
     - `Type type`
 
@@ -429,7 +429,7 @@ List Events
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionStatusTerminatedEvent`
+  - `class ManagedAgentsSessionStatusTerminatedEvent`
 
     - `Type type`
 
@@ -441,7 +441,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadCreatedEvent`
+  - `class ManagedAgentsSessionThreadCreatedEvent`
 
     - `Type type`
 
@@ -461,7 +461,7 @@ List Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     - `Type type`
 
@@ -481,7 +481,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     - `Type type`
 
@@ -517,7 +517,7 @@ List Events
 
       Token usage for a single model request.
 
-  - `ManagedAgentsSpanModelRequestStartEvent`
+  - `class ManagedAgentsSpanModelRequestStartEvent`
 
     - `Type type`
 
@@ -529,7 +529,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanModelRequestEndEvent`
+  - `class ManagedAgentsSpanModelRequestEndEvent`
 
     - `Type type`
 
@@ -553,7 +553,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     - `Type type`
 
@@ -573,7 +573,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserDefineOutcomeEvent`
+  - `class ManagedAgentsUserDefineOutcomeEvent`
 
     - `Type type`
 
@@ -601,7 +601,7 @@ List Events
 
       Rubric for grading the quality of an outcome.
 
-  - `ManagedAgentsSessionDeletedEvent`
+  - `class ManagedAgentsSessionDeletedEvent`
 
     - `Type type`
 
@@ -613,7 +613,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadStatusRunningEvent`
+  - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
     - `Type type`
 
@@ -633,7 +633,7 @@ List Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `ManagedAgentsSessionThreadStatusIdleEvent`
+  - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
     - `Type type`
 
@@ -655,7 +655,7 @@ List Events
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+  - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
     - `Type type`
 
@@ -675,7 +675,7 @@ List Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `BetaManagedAgentsUserToolResultEvent`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     - `Type type`
 
@@ -703,7 +703,7 @@ List Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+  - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
     - `Type type`
 
@@ -723,7 +723,7 @@ List Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `BetaManagedAgentsSessionUpdatedEvent`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     - `Type type`
 
@@ -751,7 +751,7 @@ List Events
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsSystemMessageEvent`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     - `Type type`
 
@@ -767,7 +767,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     - `Type type`
 
@@ -869,7 +869,7 @@ Send Events
 
 ### Returns
 
-- `ManagedAgentsSendSessionEvents`
+- `class ManagedAgentsSendSessionEvents`
 
   - `?list<Data> data`
 
@@ -943,9 +943,9 @@ Stream Events
 
 ### Returns
 
-- `ManagedAgentsStreamSessionEvents`
+- `class ManagedAgentsStreamSessionEvents`
 
-  - `ManagedAgentsUserMessageEvent`
+  - `class ManagedAgentsUserMessageEvent`
 
     - `Type type`
 
@@ -961,7 +961,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserInterruptEvent`
+  - `class ManagedAgentsUserInterruptEvent`
 
     - `Type type`
 
@@ -977,7 +977,7 @@ Stream Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `ManagedAgentsUserToolConfirmationEvent`
+  - `class ManagedAgentsUserToolConfirmationEvent`
 
     - `Type type`
 
@@ -1005,7 +1005,7 @@ Stream Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsUserCustomToolResultEvent`
+  - `class ManagedAgentsUserCustomToolResultEvent`
 
     - `Type type`
 
@@ -1033,7 +1033,7 @@ Stream Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsAgentCustomToolUseEvent`
+  - `class ManagedAgentsAgentCustomToolUseEvent`
 
     - `Type type`
 
@@ -1057,7 +1057,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMessageEvent`
+  - `class ManagedAgentsAgentMessageEvent`
 
     - `Type type`
 
@@ -1073,7 +1073,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentThinkingEvent`
+  - `class ManagedAgentsAgentThinkingEvent`
 
     - `Type type`
 
@@ -1085,7 +1085,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentMCPToolUseEvent`
+  - `class ManagedAgentsAgentMCPToolUseEvent`
 
     - `Type type`
 
@@ -1121,7 +1121,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMCPToolResultEvent`
+  - `class ManagedAgentsAgentMCPToolResultEvent`
 
     - `Type type`
 
@@ -1145,7 +1145,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentToolUseEvent`
+  - `class ManagedAgentsAgentToolUseEvent`
 
     - `Type type`
 
@@ -1177,7 +1177,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentToolResultEvent`
+  - `class ManagedAgentsAgentToolResultEvent`
 
     - `Type type`
 
@@ -1201,7 +1201,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+  - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
     - `Type type`
 
@@ -1225,7 +1225,7 @@ Stream Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `ManagedAgentsAgentThreadMessageSentEvent`
+  - `class ManagedAgentsAgentThreadMessageSentEvent`
 
     - `Type type`
 
@@ -1249,7 +1249,7 @@ Stream Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `ManagedAgentsAgentThreadContextCompactedEvent`
+  - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
     - `Type type`
 
@@ -1261,7 +1261,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionErrorEvent`
+  - `class ManagedAgentsSessionErrorEvent`
 
     - `Type type`
 
@@ -1275,7 +1275,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRescheduledEvent`
+  - `class ManagedAgentsSessionStatusRescheduledEvent`
 
     - `Type type`
 
@@ -1287,7 +1287,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRunningEvent`
+  - `class ManagedAgentsSessionStatusRunningEvent`
 
     - `Type type`
 
@@ -1299,7 +1299,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusIdleEvent`
+  - `class ManagedAgentsSessionStatusIdleEvent`
 
     - `Type type`
 
@@ -1313,7 +1313,7 @@ Stream Events
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionStatusTerminatedEvent`
+  - `class ManagedAgentsSessionStatusTerminatedEvent`
 
     - `Type type`
 
@@ -1325,7 +1325,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadCreatedEvent`
+  - `class ManagedAgentsSessionThreadCreatedEvent`
 
     - `Type type`
 
@@ -1345,7 +1345,7 @@ Stream Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     - `Type type`
 
@@ -1365,7 +1365,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     - `Type type`
 
@@ -1401,7 +1401,7 @@ Stream Events
 
       Token usage for a single model request.
 
-  - `ManagedAgentsSpanModelRequestStartEvent`
+  - `class ManagedAgentsSpanModelRequestStartEvent`
 
     - `Type type`
 
@@ -1413,7 +1413,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanModelRequestEndEvent`
+  - `class ManagedAgentsSpanModelRequestEndEvent`
 
     - `Type type`
 
@@ -1437,7 +1437,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     - `Type type`
 
@@ -1457,7 +1457,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserDefineOutcomeEvent`
+  - `class ManagedAgentsUserDefineOutcomeEvent`
 
     - `Type type`
 
@@ -1485,7 +1485,7 @@ Stream Events
 
       Rubric for grading the quality of an outcome.
 
-  - `ManagedAgentsSessionDeletedEvent`
+  - `class ManagedAgentsSessionDeletedEvent`
 
     - `Type type`
 
@@ -1497,7 +1497,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadStatusRunningEvent`
+  - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
     - `Type type`
 
@@ -1517,7 +1517,7 @@ Stream Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `ManagedAgentsSessionThreadStatusIdleEvent`
+  - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
     - `Type type`
 
@@ -1539,7 +1539,7 @@ Stream Events
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+  - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
     - `Type type`
 
@@ -1559,7 +1559,7 @@ Stream Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `BetaManagedAgentsUserToolResultEvent`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     - `Type type`
 
@@ -1587,7 +1587,7 @@ Stream Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+  - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
     - `Type type`
 
@@ -1607,7 +1607,7 @@ Stream Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `BetaManagedAgentsSessionUpdatedEvent`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     - `Type type`
 
@@ -1635,7 +1635,7 @@ Stream Events
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsStartEvent`
+  - `class BetaManagedAgentsStartEvent`
 
     - `Type type`
 
@@ -1643,7 +1643,7 @@ Stream Events
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-  - `BetaManagedAgentsDeltaEvent`
+  - `class BetaManagedAgentsDeltaEvent`
 
     - `Type type`
 
@@ -1655,7 +1655,7 @@ Stream Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-  - `BetaManagedAgentsSystemMessageEvent`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     - `Type type`
 
@@ -1671,7 +1671,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     - `Type type`
 
@@ -1734,13 +1734,13 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Auto Evaluated Permission
 
-- `ManagedAgentsAgentAutoEvaluatedPermission`
+- `class ManagedAgentsAgentAutoEvaluatedPermission`
 
-  - `ManagedAgentsAgentAutoEvaluatedPermissionAllow`
+  - `class ManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
     - `"allow" type`
 
-  - `ManagedAgentsAgentAutoEvaluatedPermissionAsk`
+  - `class ManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
     - `"ask" type`
 
@@ -1748,7 +1748,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       The judgement's grounds in registry-bound terms, for client branching and audit rather than end-user display. Open registry; currently "indeterminate" (no judgement was reached). Clients must tolerate values outside this set.
 
-  - `ManagedAgentsAgentAutoEvaluatedPermissionDeny`
+  - `class ManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
     - `"deny" type`
 
@@ -1758,13 +1758,13 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Auto Evaluated Permission Allow
 
-- `ManagedAgentsAgentAutoEvaluatedPermissionAllow`
+- `class ManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
   - `"allow" type`
 
 ### Beta Managed Agents Agent Auto Evaluated Permission Ask
 
-- `ManagedAgentsAgentAutoEvaluatedPermissionAsk`
+- `class ManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
   - `"ask" type`
 
@@ -1774,7 +1774,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Auto Evaluated Permission Deny
 
-- `ManagedAgentsAgentAutoEvaluatedPermissionDeny`
+- `class ManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
   - `"deny" type`
 
@@ -1784,7 +1784,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Custom Tool Use Event
 
-- `ManagedAgentsAgentCustomToolUseEvent`
+- `class ManagedAgentsAgentCustomToolUseEvent`
 
   - `Type type`
 
@@ -1810,7 +1810,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent MCP Tool Result Event
 
-- `ManagedAgentsAgentMCPToolResultEvent`
+- `class ManagedAgentsAgentMCPToolResultEvent`
 
   - `Type type`
 
@@ -1836,7 +1836,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent MCP Tool Use Event
 
-- `ManagedAgentsAgentMCPToolUseEvent`
+- `class ManagedAgentsAgentMCPToolUseEvent`
 
   - `Type type`
 
@@ -1874,7 +1874,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Message Event
 
-- `ManagedAgentsAgentMessageEvent`
+- `class ManagedAgentsAgentMessageEvent`
 
   - `Type type`
 
@@ -1892,7 +1892,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Thinking Event
 
-- `ManagedAgentsAgentThinkingEvent`
+- `class ManagedAgentsAgentThinkingEvent`
 
   - `Type type`
 
@@ -1906,7 +1906,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Thread Context Compacted Event
 
-- `ManagedAgentsAgentThreadContextCompactedEvent`
+- `class ManagedAgentsAgentThreadContextCompactedEvent`
 
   - `Type type`
 
@@ -1920,7 +1920,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Thread Message Received Event
 
-- `ManagedAgentsAgentThreadMessageReceivedEvent`
+- `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
   - `Type type`
 
@@ -1946,7 +1946,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Thread Message Sent Event
 
-- `ManagedAgentsAgentThreadMessageSentEvent`
+- `class ManagedAgentsAgentThreadMessageSentEvent`
 
   - `Type type`
 
@@ -1972,17 +1972,17 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Tool Evaluation
 
-- `ManagedAgentsAgentToolEvaluation`
+- `class ManagedAgentsAgentToolEvaluation`
 
-  - `ManagedAgentsAgentToolEvaluationAlwaysAllow`
+  - `class ManagedAgentsAgentToolEvaluationAlwaysAllow`
 
     - `"always_allow" type`
 
-  - `ManagedAgentsAgentToolEvaluationAlwaysAsk`
+  - `class ManagedAgentsAgentToolEvaluationAlwaysAsk`
 
     - `"always_ask" type`
 
-  - `ManagedAgentsAgentToolEvaluationAuto`
+  - `class ManagedAgentsAgentToolEvaluationAuto`
 
     - `"auto" type`
 
@@ -1992,19 +1992,19 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Tool Evaluation Always Allow
 
-- `ManagedAgentsAgentToolEvaluationAlwaysAllow`
+- `class ManagedAgentsAgentToolEvaluationAlwaysAllow`
 
   - `"always_allow" type`
 
 ### Beta Managed Agents Agent Tool Evaluation Always Ask
 
-- `ManagedAgentsAgentToolEvaluationAlwaysAsk`
+- `class ManagedAgentsAgentToolEvaluationAlwaysAsk`
 
   - `"always_ask" type`
 
 ### Beta Managed Agents Agent Tool Evaluation Auto
 
-- `ManagedAgentsAgentToolEvaluationAuto`
+- `class ManagedAgentsAgentToolEvaluationAuto`
 
   - `"auto" type`
 
@@ -2014,7 +2014,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Tool Result Event
 
-- `ManagedAgentsAgentToolResultEvent`
+- `class ManagedAgentsAgentToolResultEvent`
 
   - `Type type`
 
@@ -2040,7 +2040,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Agent Tool Use Event
 
-- `ManagedAgentsAgentToolUseEvent`
+- `class ManagedAgentsAgentToolUseEvent`
 
   - `Type type`
 
@@ -2074,7 +2074,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Base64 Document Source
 
-- `ManagedAgentsBase64DocumentSource`
+- `class ManagedAgentsBase64DocumentSource`
 
   - `Type type`
 
@@ -2088,7 +2088,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Base64 Image Source
 
-- `ManagedAgentsBase64ImageSource`
+- `class ManagedAgentsBase64ImageSource`
 
   - `Type type`
 
@@ -2102,7 +2102,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Billing Error
 
-- `ManagedAgentsBillingError`
+- `class ManagedAgentsBillingError`
 
   - `Type type`
 
@@ -2116,7 +2116,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Credential Host Unreachable Error
 
-- `ManagedAgentsCredentialHostUnreachableError`
+- `class ManagedAgentsCredentialHostUnreachableError`
 
   - `Type type`
 
@@ -2138,7 +2138,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Document Block
 
-- `ManagedAgentsDocumentBlock`
+- `class ManagedAgentsDocumentBlock`
 
   - `Type type`
 
@@ -2156,9 +2156,9 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Event Params
 
-- `ManagedAgentsEventParams`
+- `class ManagedAgentsEventParams`
 
-  - `ManagedAgentsUserMessageEventParams`
+  - `class ManagedAgentsUserMessageEventParams`
 
     - `Type type`
 
@@ -2166,7 +2166,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Array of content blocks for the user message.
 
-  - `ManagedAgentsUserInterruptEventParams`
+  - `class ManagedAgentsUserInterruptEventParams`
 
     - `Type type`
 
@@ -2174,7 +2174,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `ManagedAgentsUserToolConfirmationEventParams`
+  - `class ManagedAgentsUserToolConfirmationEventParams`
 
     - `Type type`
 
@@ -2190,7 +2190,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-  - `ManagedAgentsUserCustomToolResultEventParams`
+  - `class ManagedAgentsUserCustomToolResultEventParams`
 
     - `Type type`
 
@@ -2206,7 +2206,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsUserDefineOutcomeEventParams`
+  - `class ManagedAgentsUserDefineOutcomeEventParams`
 
     - `Type type`
 
@@ -2222,7 +2222,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
-  - `ManagedAgentsUserToolResultEventParams`
+  - `class ManagedAgentsUserToolResultEventParams`
 
     - `Type type`
 
@@ -2238,7 +2238,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsSystemMessageEventParams`
+  - `class ManagedAgentsSystemMessageEventParams`
 
     - `Type type`
 
@@ -2248,7 +2248,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents File Document Source
 
-- `ManagedAgentsFileDocumentSource`
+- `class ManagedAgentsFileDocumentSource`
 
   - `Type type`
 
@@ -2258,7 +2258,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents File Image Source
 
-- `ManagedAgentsFileImageSource`
+- `class ManagedAgentsFileImageSource`
 
   - `Type type`
 
@@ -2268,7 +2268,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents File Rubric
 
-- `ManagedAgentsFileRubric`
+- `class ManagedAgentsFileRubric`
 
   - `Type type`
 
@@ -2278,7 +2278,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents File Rubric Params
 
-- `ManagedAgentsFileRubricParams`
+- `class ManagedAgentsFileRubricParams`
 
   - `Type type`
 
@@ -2288,7 +2288,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Image Block
 
-- `ManagedAgentsImageBlock`
+- `class ManagedAgentsImageBlock`
 
   - `Type type`
 
@@ -2298,7 +2298,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents MCP Authentication Failed Error
 
-- `ManagedAgentsMCPAuthenticationFailedError`
+- `class ManagedAgentsMCPAuthenticationFailedError`
 
   - `Type type`
 
@@ -2316,7 +2316,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents MCP Connection Failed Error
 
-- `ManagedAgentsMCPConnectionFailedError`
+- `class ManagedAgentsMCPConnectionFailedError`
 
   - `Type type`
 
@@ -2334,7 +2334,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Model Overloaded Error
 
-- `ManagedAgentsModelOverloadedError`
+- `class ManagedAgentsModelOverloadedError`
 
   - `Type type`
 
@@ -2348,7 +2348,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Model Rate Limited Error
 
-- `ManagedAgentsModelRateLimitedError`
+- `class ManagedAgentsModelRateLimitedError`
 
   - `Type type`
 
@@ -2362,7 +2362,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Model Request Failed Error
 
-- `ManagedAgentsModelRequestFailedError`
+- `class ManagedAgentsModelRequestFailedError`
 
   - `Type type`
 
@@ -2376,7 +2376,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Plain Text Document Source
 
-- `ManagedAgentsPlainTextDocumentSource`
+- `class ManagedAgentsPlainTextDocumentSource`
 
   - `Type type`
 
@@ -2390,31 +2390,31 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Redacted Block
 
-- `ManagedAgentsRedactedBlock`
+- `class ManagedAgentsRedactedBlock`
 
   - `Type type`
 
 ### Beta Managed Agents Retry Status Exhausted
 
-- `ManagedAgentsRetryStatusExhausted`
+- `class ManagedAgentsRetryStatusExhausted`
 
   - `Type type`
 
 ### Beta Managed Agents Retry Status Retrying
 
-- `ManagedAgentsRetryStatusRetrying`
+- `class ManagedAgentsRetryStatusRetrying`
 
   - `Type type`
 
 ### Beta Managed Agents Retry Status Terminal
 
-- `ManagedAgentsRetryStatusTerminal`
+- `class ManagedAgentsRetryStatusTerminal`
 
   - `Type type`
 
 ### Beta Managed Agents Search Result Block
 
-- `ManagedAgentsSearchResultBlock`
+- `class ManagedAgentsSearchResultBlock`
 
   - `Type type`
 
@@ -2436,7 +2436,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Search Result Citations
 
-- `ManagedAgentsSearchResultCitations`
+- `class ManagedAgentsSearchResultCitations`
 
   - `bool enabled`
 
@@ -2444,7 +2444,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Search Result Content
 
-- `ManagedAgentsSearchResultContent`
+- `class ManagedAgentsSearchResultContent`
 
   - `Type type`
 
@@ -2454,7 +2454,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Send Session Events
 
-- `ManagedAgentsSendSessionEvents`
+- `class ManagedAgentsSendSessionEvents`
 
   - `?list<Data> data`
 
@@ -2462,13 +2462,13 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Budget Reached
 
-- `ManagedAgentsSessionBudgetReached`
+- `class ManagedAgentsSessionBudgetReached`
 
   - `Type type`
 
 ### Beta Managed Agents Session Deleted Event
 
-- `ManagedAgentsSessionDeletedEvent`
+- `class ManagedAgentsSessionDeletedEvent`
 
   - `Type type`
 
@@ -2482,13 +2482,13 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session End Turn
 
-- `ManagedAgentsSessionEndTurn`
+- `class ManagedAgentsSessionEndTurn`
 
   - `Type type`
 
 ### Beta Managed Agents Session Error Event
 
-- `ManagedAgentsSessionErrorEvent`
+- `class ManagedAgentsSessionErrorEvent`
 
   - `Type type`
 
@@ -2504,9 +2504,9 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Event
 
-- `ManagedAgentsSessionEvent`
+- `class ManagedAgentsSessionEvent`
 
-  - `ManagedAgentsUserMessageEvent`
+  - `class ManagedAgentsUserMessageEvent`
 
     - `Type type`
 
@@ -2522,7 +2522,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserInterruptEvent`
+  - `class ManagedAgentsUserInterruptEvent`
 
     - `Type type`
 
@@ -2538,7 +2538,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `ManagedAgentsUserToolConfirmationEvent`
+  - `class ManagedAgentsUserToolConfirmationEvent`
 
     - `Type type`
 
@@ -2566,7 +2566,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsUserCustomToolResultEvent`
+  - `class ManagedAgentsUserCustomToolResultEvent`
 
     - `Type type`
 
@@ -2594,7 +2594,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsAgentCustomToolUseEvent`
+  - `class ManagedAgentsAgentCustomToolUseEvent`
 
     - `Type type`
 
@@ -2618,7 +2618,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMessageEvent`
+  - `class ManagedAgentsAgentMessageEvent`
 
     - `Type type`
 
@@ -2634,7 +2634,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentThinkingEvent`
+  - `class ManagedAgentsAgentThinkingEvent`
 
     - `Type type`
 
@@ -2646,7 +2646,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentMCPToolUseEvent`
+  - `class ManagedAgentsAgentMCPToolUseEvent`
 
     - `Type type`
 
@@ -2682,7 +2682,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMCPToolResultEvent`
+  - `class ManagedAgentsAgentMCPToolResultEvent`
 
     - `Type type`
 
@@ -2706,7 +2706,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentToolUseEvent`
+  - `class ManagedAgentsAgentToolUseEvent`
 
     - `Type type`
 
@@ -2738,7 +2738,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentToolResultEvent`
+  - `class ManagedAgentsAgentToolResultEvent`
 
     - `Type type`
 
@@ -2762,7 +2762,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+  - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
     - `Type type`
 
@@ -2786,7 +2786,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `ManagedAgentsAgentThreadMessageSentEvent`
+  - `class ManagedAgentsAgentThreadMessageSentEvent`
 
     - `Type type`
 
@@ -2810,7 +2810,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `ManagedAgentsAgentThreadContextCompactedEvent`
+  - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
     - `Type type`
 
@@ -2822,7 +2822,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionErrorEvent`
+  - `class ManagedAgentsSessionErrorEvent`
 
     - `Type type`
 
@@ -2836,7 +2836,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRescheduledEvent`
+  - `class ManagedAgentsSessionStatusRescheduledEvent`
 
     - `Type type`
 
@@ -2848,7 +2848,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRunningEvent`
+  - `class ManagedAgentsSessionStatusRunningEvent`
 
     - `Type type`
 
@@ -2860,7 +2860,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusIdleEvent`
+  - `class ManagedAgentsSessionStatusIdleEvent`
 
     - `Type type`
 
@@ -2874,7 +2874,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionStatusTerminatedEvent`
+  - `class ManagedAgentsSessionStatusTerminatedEvent`
 
     - `Type type`
 
@@ -2886,7 +2886,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadCreatedEvent`
+  - `class ManagedAgentsSessionThreadCreatedEvent`
 
     - `Type type`
 
@@ -2906,7 +2906,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public `sthr_` ID of the newly created thread.
 
-  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     - `Type type`
 
@@ -2926,7 +2926,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     - `Type type`
 
@@ -2962,7 +2962,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Token usage for a single model request.
 
-  - `ManagedAgentsSpanModelRequestStartEvent`
+  - `class ManagedAgentsSpanModelRequestStartEvent`
 
     - `Type type`
 
@@ -2974,7 +2974,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanModelRequestEndEvent`
+  - `class ManagedAgentsSpanModelRequestEndEvent`
 
     - `Type type`
 
@@ -2998,7 +2998,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     - `Type type`
 
@@ -3018,7 +3018,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserDefineOutcomeEvent`
+  - `class ManagedAgentsUserDefineOutcomeEvent`
 
     - `Type type`
 
@@ -3046,7 +3046,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Rubric for grading the quality of an outcome.
 
-  - `ManagedAgentsSessionDeletedEvent`
+  - `class ManagedAgentsSessionDeletedEvent`
 
     - `Type type`
 
@@ -3058,7 +3058,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadStatusRunningEvent`
+  - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
     - `Type type`
 
@@ -3078,7 +3078,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public sthr_ ID of the thread that started running.
 
-  - `ManagedAgentsSessionThreadStatusIdleEvent`
+  - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
     - `Type type`
 
@@ -3100,7 +3100,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+  - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
     - `Type type`
 
@@ -3120,7 +3120,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public sthr_ ID of the thread that terminated.
 
-  - `BetaManagedAgentsUserToolResultEvent`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     - `Type type`
 
@@ -3148,7 +3148,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+  - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
     - `Type type`
 
@@ -3168,7 +3168,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `BetaManagedAgentsSessionUpdatedEvent`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     - `Type type`
 
@@ -3196,7 +3196,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsSystemMessageEvent`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     - `Type type`
 
@@ -3212,7 +3212,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     - `Type type`
 
@@ -3234,7 +3234,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Requires Action
 
-- `ManagedAgentsSessionRequiresAction`
+- `class ManagedAgentsSessionRequiresAction`
 
   - `Type type`
 
@@ -3244,13 +3244,13 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Retries Exhausted
 
-- `ManagedAgentsSessionRetriesExhausted`
+- `class ManagedAgentsSessionRetriesExhausted`
 
   - `Type type`
 
 ### Beta Managed Agents Session Status Idle Event
 
-- `ManagedAgentsSessionStatusIdleEvent`
+- `class ManagedAgentsSessionStatusIdleEvent`
 
   - `Type type`
 
@@ -3266,7 +3266,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Status Rescheduled Event
 
-- `ManagedAgentsSessionStatusRescheduledEvent`
+- `class ManagedAgentsSessionStatusRescheduledEvent`
 
   - `Type type`
 
@@ -3280,7 +3280,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Status Running Event
 
-- `ManagedAgentsSessionStatusRunningEvent`
+- `class ManagedAgentsSessionStatusRunningEvent`
 
   - `Type type`
 
@@ -3294,7 +3294,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Status Terminated Event
 
-- `ManagedAgentsSessionStatusTerminatedEvent`
+- `class ManagedAgentsSessionStatusTerminatedEvent`
 
   - `Type type`
 
@@ -3308,7 +3308,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Thread Created Event
 
-- `ManagedAgentsSessionThreadCreatedEvent`
+- `class ManagedAgentsSessionThreadCreatedEvent`
 
   - `Type type`
 
@@ -3330,7 +3330,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Thread Status Idle Event
 
-- `ManagedAgentsSessionThreadStatusIdleEvent`
+- `class ManagedAgentsSessionThreadStatusIdleEvent`
 
   - `Type type`
 
@@ -3354,7 +3354,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Thread Status Rescheduled Event
 
-- `ManagedAgentsSessionThreadStatusRescheduledEvent`
+- `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
   - `Type type`
 
@@ -3376,7 +3376,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Thread Status Running Event
 
-- `ManagedAgentsSessionThreadStatusRunningEvent`
+- `class ManagedAgentsSessionThreadStatusRunningEvent`
 
   - `Type type`
 
@@ -3398,7 +3398,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Thread Status Terminated Event
 
-- `ManagedAgentsSessionThreadStatusTerminatedEvent`
+- `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
   - `Type type`
 
@@ -3420,7 +3420,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Session Usage Snapshot
 
-- `ManagedAgentsSessionUsageSnapshot`
+- `class ManagedAgentsSessionUsageSnapshot`
 
   - `?float activeSeconds`
 
@@ -3452,7 +3452,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Span Model Request End Event
 
-- `ManagedAgentsSpanModelRequestEndEvent`
+- `class ManagedAgentsSpanModelRequestEndEvent`
 
   - `Type type`
 
@@ -3478,7 +3478,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Span Model Request Start Event
 
-- `ManagedAgentsSpanModelRequestStartEvent`
+- `class ManagedAgentsSpanModelRequestStartEvent`
 
   - `Type type`
 
@@ -3492,7 +3492,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Span Model Usage
 
-- `ManagedAgentsSpanModelUsage`
+- `class ManagedAgentsSpanModelUsage`
 
   - `int cacheCreationInputTokens`
 
@@ -3516,7 +3516,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Span Outcome Evaluation End Event
 
-- `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+- `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
   - `Type type`
 
@@ -3554,7 +3554,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Span Outcome Evaluation Ongoing Event
 
-- `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+- `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
   - `Type type`
 
@@ -3576,7 +3576,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Span Outcome Evaluation Start Event
 
-- `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+- `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
   - `Type type`
 
@@ -3598,9 +3598,9 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Stream Session Events
 
-- `ManagedAgentsStreamSessionEvents`
+- `class ManagedAgentsStreamSessionEvents`
 
-  - `ManagedAgentsUserMessageEvent`
+  - `class ManagedAgentsUserMessageEvent`
 
     - `Type type`
 
@@ -3616,7 +3616,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserInterruptEvent`
+  - `class ManagedAgentsUserInterruptEvent`
 
     - `Type type`
 
@@ -3632,7 +3632,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `ManagedAgentsUserToolConfirmationEvent`
+  - `class ManagedAgentsUserToolConfirmationEvent`
 
     - `Type type`
 
@@ -3660,7 +3660,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsUserCustomToolResultEvent`
+  - `class ManagedAgentsUserCustomToolResultEvent`
 
     - `Type type`
 
@@ -3688,7 +3688,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsAgentCustomToolUseEvent`
+  - `class ManagedAgentsAgentCustomToolUseEvent`
 
     - `Type type`
 
@@ -3712,7 +3712,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMessageEvent`
+  - `class ManagedAgentsAgentMessageEvent`
 
     - `Type type`
 
@@ -3728,7 +3728,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentThinkingEvent`
+  - `class ManagedAgentsAgentThinkingEvent`
 
     - `Type type`
 
@@ -3740,7 +3740,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsAgentMCPToolUseEvent`
+  - `class ManagedAgentsAgentMCPToolUseEvent`
 
     - `Type type`
 
@@ -3776,7 +3776,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentMCPToolResultEvent`
+  - `class ManagedAgentsAgentMCPToolResultEvent`
 
     - `Type type`
 
@@ -3800,7 +3800,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentToolUseEvent`
+  - `class ManagedAgentsAgentToolUseEvent`
 
     - `Type type`
 
@@ -3832,7 +3832,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `ManagedAgentsAgentToolResultEvent`
+  - `class ManagedAgentsAgentToolResultEvent`
 
     - `Type type`
 
@@ -3856,7 +3856,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Whether the tool execution resulted in an error.
 
-  - `ManagedAgentsAgentThreadMessageReceivedEvent`
+  - `class ManagedAgentsAgentThreadMessageReceivedEvent`
 
     - `Type type`
 
@@ -3880,7 +3880,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `ManagedAgentsAgentThreadMessageSentEvent`
+  - `class ManagedAgentsAgentThreadMessageSentEvent`
 
     - `Type type`
 
@@ -3904,7 +3904,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `ManagedAgentsAgentThreadContextCompactedEvent`
+  - `class ManagedAgentsAgentThreadContextCompactedEvent`
 
     - `Type type`
 
@@ -3916,7 +3916,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionErrorEvent`
+  - `class ManagedAgentsSessionErrorEvent`
 
     - `Type type`
 
@@ -3930,7 +3930,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRescheduledEvent`
+  - `class ManagedAgentsSessionStatusRescheduledEvent`
 
     - `Type type`
 
@@ -3942,7 +3942,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusRunningEvent`
+  - `class ManagedAgentsSessionStatusRunningEvent`
 
     - `Type type`
 
@@ -3954,7 +3954,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionStatusIdleEvent`
+  - `class ManagedAgentsSessionStatusIdleEvent`
 
     - `Type type`
 
@@ -3968,7 +3968,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionStatusTerminatedEvent`
+  - `class ManagedAgentsSessionStatusTerminatedEvent`
 
     - `Type type`
 
@@ -3980,7 +3980,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadCreatedEvent`
+  - `class ManagedAgentsSessionThreadCreatedEvent`
 
     - `Type type`
 
@@ -4000,7 +4000,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public `sthr_` ID of the newly created thread.
 
-  - `ManagedAgentsSpanOutcomeEvaluationStartEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     - `Type type`
 
@@ -4020,7 +4020,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationEndEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     - `Type type`
 
@@ -4056,7 +4056,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Token usage for a single model request.
 
-  - `ManagedAgentsSpanModelRequestStartEvent`
+  - `class ManagedAgentsSpanModelRequestStartEvent`
 
     - `Type type`
 
@@ -4068,7 +4068,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanModelRequestEndEvent`
+  - `class ManagedAgentsSpanModelRequestEndEvent`
 
     - `Type type`
 
@@ -4092,7 +4092,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
+  - `class ManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     - `Type type`
 
@@ -4112,7 +4112,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsUserDefineOutcomeEvent`
+  - `class ManagedAgentsUserDefineOutcomeEvent`
 
     - `Type type`
 
@@ -4140,7 +4140,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Rubric for grading the quality of an outcome.
 
-  - `ManagedAgentsSessionDeletedEvent`
+  - `class ManagedAgentsSessionDeletedEvent`
 
     - `Type type`
 
@@ -4152,7 +4152,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `ManagedAgentsSessionThreadStatusRunningEvent`
+  - `class ManagedAgentsSessionThreadStatusRunningEvent`
 
     - `Type type`
 
@@ -4172,7 +4172,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public sthr_ ID of the thread that started running.
 
-  - `ManagedAgentsSessionThreadStatusIdleEvent`
+  - `class ManagedAgentsSessionThreadStatusIdleEvent`
 
     - `Type type`
 
@@ -4194,7 +4194,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     - `StopReason stopReason`
 
-  - `ManagedAgentsSessionThreadStatusTerminatedEvent`
+  - `class ManagedAgentsSessionThreadStatusTerminatedEvent`
 
     - `Type type`
 
@@ -4214,7 +4214,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public sthr_ ID of the thread that terminated.
 
-  - `BetaManagedAgentsUserToolResultEvent`
+  - `class BetaManagedAgentsUserToolResultEvent`
 
     - `Type type`
 
@@ -4242,7 +4242,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `ManagedAgentsSessionThreadStatusRescheduledEvent`
+  - `class ManagedAgentsSessionThreadStatusRescheduledEvent`
 
     - `Type type`
 
@@ -4262,7 +4262,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `BetaManagedAgentsSessionUpdatedEvent`
+  - `class BetaManagedAgentsSessionUpdatedEvent`
 
     - `Type type`
 
@@ -4290,7 +4290,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       The session's new title. Present only when the update changed it.
 
-  - `BetaManagedAgentsStartEvent`
+  - `class BetaManagedAgentsStartEvent`
 
     - `Type type`
 
@@ -4298,7 +4298,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-  - `BetaManagedAgentsDeltaEvent`
+  - `class BetaManagedAgentsDeltaEvent`
 
     - `Type type`
 
@@ -4310,7 +4310,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-  - `BetaManagedAgentsSystemMessageEvent`
+  - `class BetaManagedAgentsSystemMessageEvent`
 
     - `Type type`
 
@@ -4326,7 +4326,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsSessionUsageEvent`
+  - `class BetaManagedAgentsSessionUsageEvent`
 
     - `Type type`
 
@@ -4348,7 +4348,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents System Message Event Params
 
-- `ManagedAgentsSystemMessageEventParams`
+- `class ManagedAgentsSystemMessageEventParams`
 
   - `Type type`
 
@@ -4358,7 +4358,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Text Block
 
-- `ManagedAgentsTextBlock`
+- `class ManagedAgentsTextBlock`
 
   - `Type type`
 
@@ -4368,7 +4368,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Text Rubric
 
-- `ManagedAgentsTextRubric`
+- `class ManagedAgentsTextRubric`
 
   - `Type type`
 
@@ -4378,7 +4378,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Text Rubric Params
 
-- `ManagedAgentsTextRubricParams`
+- `class ManagedAgentsTextRubricParams`
 
   - `Type type`
 
@@ -4388,7 +4388,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents Unknown Error
 
-- `ManagedAgentsUnknownError`
+- `class ManagedAgentsUnknownError`
 
   - `Type type`
 
@@ -4402,7 +4402,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents URL Document Source
 
-- `ManagedAgentsURLDocumentSource`
+- `class ManagedAgentsURLDocumentSource`
 
   - `Type type`
 
@@ -4412,7 +4412,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents URL Image Source
 
-- `ManagedAgentsURLImageSource`
+- `class ManagedAgentsURLImageSource`
 
   - `Type type`
 
@@ -4422,7 +4422,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Custom Tool Result Event
 
-- `ManagedAgentsUserCustomToolResultEvent`
+- `class ManagedAgentsUserCustomToolResultEvent`
 
   - `Type type`
 
@@ -4452,7 +4452,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Custom Tool Result Event Params
 
-- `ManagedAgentsUserCustomToolResultEventParams`
+- `class ManagedAgentsUserCustomToolResultEventParams`
 
   - `Type type`
 
@@ -4470,7 +4470,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Define Outcome Event
 
-- `ManagedAgentsUserDefineOutcomeEvent`
+- `class ManagedAgentsUserDefineOutcomeEvent`
 
   - `Type type`
 
@@ -4500,7 +4500,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Define Outcome Event Params
 
-- `ManagedAgentsUserDefineOutcomeEventParams`
+- `class ManagedAgentsUserDefineOutcomeEventParams`
 
   - `Type type`
 
@@ -4518,7 +4518,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Interrupt Event
 
-- `ManagedAgentsUserInterruptEvent`
+- `class ManagedAgentsUserInterruptEvent`
 
   - `Type type`
 
@@ -4536,7 +4536,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Interrupt Event Params
 
-- `ManagedAgentsUserInterruptEventParams`
+- `class ManagedAgentsUserInterruptEventParams`
 
   - `Type type`
 
@@ -4546,7 +4546,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Message Event
 
-- `ManagedAgentsUserMessageEvent`
+- `class ManagedAgentsUserMessageEvent`
 
   - `Type type`
 
@@ -4564,7 +4564,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Message Event Params
 
-- `ManagedAgentsUserMessageEventParams`
+- `class ManagedAgentsUserMessageEventParams`
 
   - `Type type`
 
@@ -4574,7 +4574,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Tool Confirmation Event
 
-- `ManagedAgentsUserToolConfirmationEvent`
+- `class ManagedAgentsUserToolConfirmationEvent`
 
   - `Type type`
 
@@ -4604,7 +4604,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Tool Confirmation Event Params
 
-- `ManagedAgentsUserToolConfirmationEventParams`
+- `class ManagedAgentsUserToolConfirmationEventParams`
 
   - `Type type`
 
@@ -4622,7 +4622,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
 ### Beta Managed Agents User Tool Result Event Params
 
-- `ManagedAgentsUserToolResultEventParams`
+- `class ManagedAgentsUserToolResultEventParams`
 
   - `Type type`
 

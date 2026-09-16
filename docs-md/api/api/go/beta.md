@@ -107,9 +107,11 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 ### Beta API Error
 
-- `type BetaAPIError struct{…}`
+- `type BetaAPIError`
 
   - `Type APIError`
 
@@ -121,7 +123,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Authentication Error
 
-- `type BetaAuthenticationError struct{…}`
+- `type BetaAuthenticationError`
 
   - `Type AuthenticationError`
 
@@ -133,7 +135,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Billing Error
 
-- `type BetaBillingError struct{…}`
+- `type BetaBillingError`
 
   - `Type BillingError`
 
@@ -151,7 +153,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 - `type BetaErrorUnion interface{…}`
 
-  - `type BetaInvalidRequestError struct{…}`
+  - `type BetaInvalidRequestError`
 
     - `Type InvalidRequestError`
 
@@ -161,7 +163,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Invalid request
 
-  - `type BetaAuthenticationError struct{…}`
+  - `type BetaAuthenticationError`
 
     - `Type AuthenticationError`
 
@@ -171,7 +173,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Authentication error
 
-  - `type BetaBillingError struct{…}`
+  - `type BetaBillingError`
 
     - `Type BillingError`
 
@@ -181,7 +183,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Billing error
 
-  - `type BetaPermissionError struct{…}`
+  - `type BetaPermissionError`
 
     - `Type PermissionError`
 
@@ -191,7 +193,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Permission denied
 
-  - `type BetaNotFoundError struct{…}`
+  - `type BetaNotFoundError`
 
     - `Type NotFoundError`
 
@@ -201,7 +203,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Not found
 
-  - `type BetaRateLimitError struct{…}`
+  - `type BetaRateLimitError`
 
     - `Type RateLimitError`
 
@@ -211,7 +213,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Rate limited
 
-  - `type BetaGatewayTimeoutError struct{…}`
+  - `type BetaGatewayTimeoutError`
 
     - `Type TimeoutError`
 
@@ -221,7 +223,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Request timeout
 
-  - `type BetaAPIError struct{…}`
+  - `type BetaAPIError`
 
     - `Type APIError`
 
@@ -231,7 +233,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Internal server error
 
-  - `type BetaOverloadedError struct{…}`
+  - `type BetaOverloadedError`
 
     - `Type OverloadedError`
 
@@ -243,7 +245,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Error Response
 
-- `type BetaErrorResponse struct{…}`
+- `type BetaErrorResponse`
 
   - `Type Error`
 
@@ -251,7 +253,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
   - `Error BetaErrorUnion`
 
-    - `type BetaInvalidRequestError struct{…}`
+    - `type BetaInvalidRequestError`
 
       - `Type InvalidRequestError`
 
@@ -261,7 +263,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Invalid request
 
-    - `type BetaAuthenticationError struct{…}`
+    - `type BetaAuthenticationError`
 
       - `Type AuthenticationError`
 
@@ -271,7 +273,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Authentication error
 
-    - `type BetaBillingError struct{…}`
+    - `type BetaBillingError`
 
       - `Type BillingError`
 
@@ -281,7 +283,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Billing error
 
-    - `type BetaPermissionError struct{…}`
+    - `type BetaPermissionError`
 
       - `Type PermissionError`
 
@@ -291,7 +293,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Permission denied
 
-    - `type BetaNotFoundError struct{…}`
+    - `type BetaNotFoundError`
 
       - `Type NotFoundError`
 
@@ -301,7 +303,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Not found
 
-    - `type BetaRateLimitError struct{…}`
+    - `type BetaRateLimitError`
 
       - `Type RateLimitError`
 
@@ -311,7 +313,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Rate limited
 
-    - `type BetaGatewayTimeoutError struct{…}`
+    - `type BetaGatewayTimeoutError`
 
       - `Type TimeoutError`
 
@@ -321,7 +323,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Request timeout
 
-    - `type BetaAPIError struct{…}`
+    - `type BetaAPIError`
 
       - `Type APIError`
 
@@ -331,7 +333,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Internal server error
 
-    - `type BetaOverloadedError struct{…}`
+    - `type BetaOverloadedError`
 
       - `Type OverloadedError`
 
@@ -345,7 +347,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Gateway Timeout Error
 
-- `type BetaGatewayTimeoutError struct{…}`
+- `type BetaGatewayTimeoutError`
 
   - `Type TimeoutError`
 
@@ -357,7 +359,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Invalid Request Error
 
-- `type BetaInvalidRequestError struct{…}`
+- `type BetaInvalidRequestError`
 
   - `Type InvalidRequestError`
 
@@ -369,7 +371,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Monetary Amount
 
-- `type BetaMonetaryAmount struct{…}`
+- `type BetaMonetaryAmount`
 
   A monetary amount in a specific currency.
 
@@ -383,7 +385,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Not Found Error
 
-- `type BetaNotFoundError struct{…}`
+- `type BetaNotFoundError`
 
   - `Type NotFoundError`
 
@@ -395,7 +397,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Overloaded Error
 
-- `type BetaOverloadedError struct{…}`
+- `type BetaOverloadedError`
 
   - `Type OverloadedError`
 
@@ -407,7 +409,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Permission Error
 
-- `type BetaPermissionError struct{…}`
+- `type BetaPermissionError`
 
   - `Type PermissionError`
 
@@ -419,7 +421,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 ### Beta Rate Limit Error
 
-- `type BetaRateLimitError struct{…}`
+- `type BetaRateLimitError`
 
   - `Type RateLimitError`
 
@@ -559,6 +561,8 @@ The Models API response can be used to determine which models are available for 
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -567,7 +571,7 @@ The Models API response can be used to determine which models are available for 
 
 #### Returns
 
-- `type BetaModelInfo struct{…}`
+- `type BetaModelInfo`
 
   - `Type Model`
 
@@ -604,6 +608,20 @@ The Models API response can be used to determine which models are available for 
     - `CodeExecution BetaCapabilitySupport`
 
       Whether the model supports code execution tools.
+
+    - `Compaction BetaCompactionCapability`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `Summarize BetaCapabilitySupport`
+
+        Whether the summarize compaction type is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
 
     - `ContextManagement BetaContextManagementCapability`
 
@@ -746,6 +764,12 @@ func main() {
           "supported": true
         },
         "code_execution": {
+          "supported": true
+        },
+        "compaction": {
+          "summarize": {
+            "supported": true
+          },
           "supported": true
         },
         "context_management": {
@@ -928,6 +952,8 @@ The Models API response can be used to determine information about a specific mo
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -936,7 +962,7 @@ The Models API response can be used to determine information about a specific mo
 
 #### Returns
 
-- `type BetaModelInfo struct{…}`
+- `type BetaModelInfo`
 
   - `Type Model`
 
@@ -973,6 +999,20 @@ The Models API response can be used to determine information about a specific mo
     - `CodeExecution BetaCapabilitySupport`
 
       Whether the model supports code execution tools.
+
+    - `Compaction BetaCompactionCapability`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `Summarize BetaCapabilitySupport`
+
+        Whether the summarize compaction type is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
 
     - `ContextManagement BetaContextManagementCapability`
 
@@ -1119,6 +1159,12 @@ func main() {
     "code_execution": {
       "supported": true
     },
+    "compaction": {
+      "summarize": {
+        "supported": true
+      },
+      "supported": true
+    },
     "context_management": {
       "clear_thinking_20251015": {
         "supported": true
@@ -1263,7 +1309,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `[]BetaContentBlockParamUnionResp`
 
-        - `type BetaTextBlockParamResp struct{…}`
+        - `type BetaTextBlockParamResp`
 
           - `Type Text`
 
@@ -1294,7 +1340,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Citations []BetaTextCitationParamUnionResp Optional`
 
-            - `type BetaCitationCharLocationParamResp struct{…}`
+            - `type BetaCitationCharLocationParamResp`
 
               - `Type CharLocation`
 
@@ -1314,7 +1360,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 0
 
-            - `type BetaCitationPageLocationParamResp struct{…}`
+            - `type BetaCitationPageLocationParamResp`
 
               - `Type PageLocation`
 
@@ -1334,7 +1380,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocationParamResp struct{…}`
+            - `type BetaCitationContentBlockLocationParamResp`
 
               - `Type ContentBlockLocation`
 
@@ -1364,7 +1410,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 0
 
-            - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationWebSearchResultLocationParamResp`
 
               - `Type WebSearchResultLocation`
 
@@ -1380,7 +1426,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minLength: 1
 
-            - `type BetaCitationSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationSearchResultLocationParamResp`
 
               - `Type SearchResultLocation`
 
@@ -1414,13 +1460,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Title string`
 
-        - `type BetaImageBlockParamResp struct{…}`
+        - `type BetaImageBlockParamResp`
 
           - `Type Image`
 
           - `Source BetaImageBlockParamSourceUnionResp`
 
-            - `type BetaBase64ImageSource struct{…}`
+            - `type BetaBase64ImageSource`
 
               - `Type Base64`
 
@@ -1438,13 +1484,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-            - `type BetaURLImageSource struct{…}`
+            - `type BetaURLImageSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileImageSource struct{…}`
+            - `type BetaFileImageSource`
 
               - `Type File`
 
@@ -1466,13 +1512,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-        - `type BetaRequestDocumentBlock struct{…}`
+        - `type BetaRequestDocumentBlock`
 
           - `Type Document`
 
           - `Source BetaRequestDocumentBlockSourceUnion`
 
-            - `type BetaBase64PDFSource struct{…}`
+            - `type BetaBase64PDFSource`
 
               - `Type Base64`
 
@@ -1482,7 +1528,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `MediaType ApplicationPDF`
 
-            - `type BetaPlainTextSource struct{…}`
+            - `type BetaPlainTextSource`
 
               - `Type Text`
 
@@ -1490,7 +1536,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `MediaType TextPlain`
 
-            - `type BetaContentBlockSource struct{…}`
+            - `type BetaContentBlockSource`
 
               - `Type Content`
 
@@ -1500,17 +1546,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `[]BetaContentBlockSourceContentUnion`
 
-                  - `type BetaTextBlockParamResp struct{…}`
+                  - `type BetaTextBlockParamResp`
 
-                  - `type BetaImageBlockParamResp struct{…}`
+                  - `type BetaImageBlockParamResp`
 
-            - `type BetaURLPDFSource struct{…}`
+            - `type BetaURLPDFSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileDocumentSource struct{…}`
+            - `type BetaFileDocumentSource`
 
               - `Type File`
 
@@ -1532,7 +1578,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             maxLength: 500, minLength: 1
 
-        - `type BetaSearchResultBlockParamResp struct{…}`
+        - `type BetaSearchResultBlockParamResp`
 
           - `Type SearchResult`
 
@@ -1560,7 +1606,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Citations BetaCitationsConfigParamResp Optional`
 
-        - `type BetaThinkingBlockParamResp struct{…}`
+        - `type BetaThinkingBlockParamResp`
 
           - `Type Thinking`
 
@@ -1574,7 +1620,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The `thinking` text of this block as returned by the API.
 
-        - `type BetaRedactedThinkingBlockParamResp struct{…}`
+        - `type BetaRedactedThinkingBlockParamResp`
 
           - `Type RedactedThinking`
 
@@ -1582,7 +1628,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type BetaToolUseBlockParamResp struct{…}`
+        - `type BetaToolUseBlockParamResp`
 
           - `Type ToolUse`
 
@@ -1602,13 +1648,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -1618,7 +1664,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -1632,7 +1678,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaToolResultBlockParamResp struct{…}`
+        - `type BetaToolResultBlockParamResp`
 
           - `Type ToolResult`
 
@@ -1648,15 +1694,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `[]BetaToolResultBlockParamContentUnionResp`
 
-              - `type BetaTextBlockParamResp struct{…}`
+              - `type BetaTextBlockParamResp`
 
-              - `type BetaImageBlockParamResp struct{…}`
+              - `type BetaImageBlockParamResp`
 
-              - `type BetaSearchResultBlockParamResp struct{…}`
+              - `type BetaSearchResultBlockParamResp`
 
-              - `type BetaRequestDocumentBlock struct{…}`
+              - `type BetaRequestDocumentBlock`
 
-              - `type BetaToolReferenceBlockParamResp struct{…}`
+              - `type BetaToolReferenceBlockParamResp`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -1670,7 +1716,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BetaBrowserStateBlockParamResp struct{…}`
+              - `type BetaBrowserStateBlockParamResp`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -1720,7 +1766,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   maxItems: 200, minItems: 1
 
-                  - `type BetaBrowserStateChangeTabOpened struct{…}`
+                  - `type BetaBrowserStateChangeTabOpened`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -1738,7 +1784,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
 
@@ -1756,7 +1802,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadCompleted`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -1789,7 +1835,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       minimum: 0
 
-                  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                  - `type BetaBrowserStateChangeDownloadFailed`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -1821,7 +1867,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlockParamResp struct{…}`
+        - `type BetaServerToolUseBlockParamResp`
 
           - `Type ServerToolUse`
 
@@ -1855,17 +1901,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+        - `type BetaWebSearchToolResultBlockParamResp`
 
           - `Type WebSearchToolResult`
 
@@ -1883,7 +1929,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `PageAge string Optional`
 
-            - `type BetaWebSearchToolRequestError struct{…}`
+            - `type BetaWebSearchToolRequestError`
 
               - `Type WebSearchToolResultError`
 
@@ -1911,23 +1957,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+        - `type BetaWebFetchToolResultBlockParamResp`
 
           - `Type WebFetchToolResult`
 
           - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-            - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+            - `type BetaWebFetchToolResultErrorBlockParamResp`
 
               - `Type WebFetchToolResultError`
 
@@ -1953,7 +1999,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlockParamResp struct{…}`
+            - `type BetaWebFetchBlockParamResp`
 
               - `Type WebFetchResult`
 
@@ -1977,23 +2023,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+        - `type BetaAdvisorToolResultBlockParamResp`
 
           - `Type AdvisorToolResult`
 
           - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-            - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+            - `type BetaAdvisorToolResultErrorParamResp`
 
               - `Type AdvisorToolResultError`
 
@@ -2013,7 +2059,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlockParamResp struct{…}`
+            - `type BetaAdvisorResultBlockParamResp`
 
               - `Type AdvisorResult`
 
@@ -2021,7 +2067,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `StopReason string Optional`
 
-            - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+            - `type BetaAdvisorRedactedResultBlockParamResp`
 
               - `Type AdvisorRedactedResult`
 
@@ -2039,13 +2085,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaCodeExecutionToolResultBlockParamResp`
 
           - `Type CodeExecutionToolResult`
 
           - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaCodeExecutionToolResultErrorParamResp`
 
               - `Type CodeExecutionToolResultError`
 
@@ -2059,7 +2105,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaCodeExecutionResultBlockParamResp`
 
               - `Type CodeExecutionResult`
 
@@ -2075,7 +2121,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -2101,13 +2147,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
           - `Type BashCodeExecutionToolResult`
 
           - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -2123,7 +2169,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaBashCodeExecutionResultBlockParamResp`
 
               - `Type BashCodeExecutionResult`
 
@@ -2147,13 +2193,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
           - `Type TextEditorCodeExecutionToolResult`
 
           - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -2171,7 +2217,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -2191,13 +2237,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `TotalLines int64 Optional`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -2219,13 +2265,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+        - `type BetaToolSearchToolResultBlockParamResp`
 
           - `Type ToolSearchToolResult`
 
           - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-            - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+            - `type BetaToolSearchToolResultErrorParamResp`
 
               - `Type ToolSearchToolResultError`
 
@@ -2241,7 +2287,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+            - `type BetaToolSearchToolSearchResultBlockParamResp`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -2265,7 +2311,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaMCPToolUseBlockParamResp struct{…}`
+        - `type BetaMCPToolUseBlockParamResp`
 
           - `Type MCPToolUse`
 
@@ -2285,7 +2331,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+        - `type BetaRequestMCPToolResultBlockParamResp`
 
           - `Type MCPToolResult`
 
@@ -2317,7 +2363,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `IsError bool Optional`
 
-        - `type BetaContainerUploadBlockParamResp struct{…}`
+        - `type BetaContainerUploadBlockParamResp`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -2330,7 +2376,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCompactionBlockParamResp struct{…}`
+        - `type BetaCompactionBlockParamResp`
 
           A compaction block containing summary of previous context.
 
@@ -2354,7 +2400,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaRequestToolAdditionBlock struct{…}`
+          - `Signature string Optional`
+
+            The block's signature as returned, to be sent back verbatim
+
+        - `type BetaRequestToolAdditionBlock`
 
           Mid-conversation directive to surface a declared tool.
 
@@ -2366,7 +2416,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -2379,7 +2429,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -2390,7 +2440,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `ServerName string`
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -2402,7 +2452,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestToolRemovalBlock struct{…}`
+        - `type BetaRequestToolRemovalBlock`
 
           Mid-conversation directive to withdraw a tool.
 
@@ -2414,19 +2464,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
               server assigns to MCP-resolved tools — use `mcp_tool_reference` or
               `mcp_toolset_reference` for those.
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -2434,7 +2484,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaFallbackBlockParamResp struct{…}`
+        - `type BetaFallbackBlockParamResp`
 
           A `fallback` block echoed back from a prior response.
 
@@ -2594,11 +2644,22 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+  - `Compaction param.Field[BetaCompactionConfig] Optional`
+
+    Body param: Compact the whole conversation and return a signed `compaction` block,
+    alone, that a later request sends back first in `messages`, in place of
+    the messages it summarizes. There is no trigger and no pause flag: sending
+    the parameter compacts, and nothing is sampled after the block.
+
+    The summarization prompt is the server's own unless `instructions` are
+    given, which then replace it for this request; a value that is empty or
+    only whitespace counts as absent.
+
   - `Container param.Field[BetaMessageNewParamsContainerUnion] Optional`
 
     Body param: Container identifier for reuse across requests.
 
-    - `type BetaContainerParamsResp struct{…}`
+    - `type BetaContainerParamsResp`
 
       Container parameters with skills to be loaded.
 
@@ -2670,7 +2731,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `string`
 
-    - `type BetaFallbackCreditTokenParamResp struct{…}`
+    - `type BetaFallbackCreditTokenParamResp`
 
       Object form of `fallback_credit_token`: the token plus a redemption
       mode.
@@ -2852,7 +2913,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type BetaTool struct{…}`
+    - `type BetaTool`
 
       - `Type BetaToolType Optional`
 
@@ -2910,7 +2971,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20241022 struct{…}`
+    - `type BetaToolBash20241022`
 
       - `Type Bash20241022`
 
@@ -2944,7 +3005,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20250124 struct{…}`
+    - `type BetaToolBash20250124`
 
       - `Type Bash20250124`
 
@@ -2978,7 +3039,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250522 struct{…}`
+    - `type BetaCodeExecutionTool20250522`
 
       - `Type CodeExecution20250522`
 
@@ -3010,7 +3071,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250825 struct{…}`
+    - `type BetaCodeExecutionTool20250825`
 
       - `Type CodeExecution20250825`
 
@@ -3042,7 +3103,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260120 struct{…}`
+    - `type BetaCodeExecutionTool20260120`
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -3076,7 +3137,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260521 struct{…}`
+    - `type BetaCodeExecutionTool20260521`
 
       Code execution tool with REPL state persistence.
 
@@ -3110,7 +3171,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaBrowserToolset20260801 struct{…}`
+    - `type BetaBrowserToolset20260801`
 
       The browser toolset: a single `tools[]` entry (carrying no
       `name`) that declares the browser tool family. The model is served
@@ -3504,7 +3565,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolComputerUse20241022 struct{…}`
+    - `type BetaToolComputerUse20241022`
 
       - `Type Computer20241022`
 
@@ -3556,7 +3617,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMemoryTool20250818 struct{…}`
+    - `type BetaMemoryTool20250818`
 
       - `Type Memory20250818`
 
@@ -3590,7 +3651,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20250124 struct{…}`
+    - `type BetaToolComputerUse20250124`
 
       - `Type Computer20250124`
 
@@ -3642,7 +3703,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20241022 struct{…}`
+    - `type BetaToolTextEditor20241022`
 
       - `Type TextEditor20241022`
 
@@ -3676,7 +3737,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20251124 struct{…}`
+    - `type BetaToolComputerUse20251124`
 
       - `Type Computer20251124`
 
@@ -3732,7 +3793,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaComputerToolset20260801 struct{…}`
+    - `type BetaComputerToolset20260801`
 
       The computer toolset: a single `tools[]` entry (carrying no
       `name`) that declares the computer tool family. The model is
@@ -3962,7 +4023,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolTextEditor20250124 struct{…}`
+    - `type BetaToolTextEditor20250124`
 
       - `Type TextEditor20250124`
 
@@ -3996,7 +4057,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250429 struct{…}`
+    - `type BetaToolTextEditor20250429`
 
       - `Type TextEditor20250429`
 
@@ -4030,7 +4091,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250728 struct{…}`
+    - `type BetaToolTextEditor20250728`
 
       - `Type TextEditor20250728`
 
@@ -4070,7 +4131,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20250305 struct{…}`
+    - `type BetaWebSearchTool20250305`
 
       - `Type WebSearch20250305`
 
@@ -4146,7 +4207,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           maxLength: 255, minLength: 1
 
-    - `type BetaWebFetchTool20250910 struct{…}`
+    - `type BetaWebFetchTool20250910`
 
       - `Type WebFetch20250910`
 
@@ -4202,7 +4263,98 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20260209 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+        - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+          Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+            - `Type All`
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+            - `Type None`
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+            - `Type Only`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+            - `Type Except`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+        - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+          Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+        - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+          Whether URLs in user messages are fetchable: "all" or "none".
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+    - `type BetaWebSearchTool20260209`
 
       - `Type WebSearch20260209`
 
@@ -4252,7 +4404,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260209 struct{…}`
+    - `type BetaWebFetchTool20260209`
 
       - `Type WebFetch20260209`
 
@@ -4308,7 +4460,16 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebFetchTool20260309 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+    - `type BetaWebFetchTool20260309`
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -4366,11 +4527,20 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaWebSearchTool20260318 struct{…}`
+    - `type BetaWebSearchTool20260318`
 
       - `Type WebSearch20260318`
 
@@ -4428,7 +4598,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260318 struct{…}`
+    - `type BetaWebFetchTool20260318`
 
       - `Type WebFetch20260318`
 
@@ -4492,11 +4662,20 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaAdvisorTool20260301 struct{…}`
+    - `type BetaAdvisorTool20260301`
 
       - `Type Advisor20260301`
 
@@ -4550,7 +4729,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolBm25_20251119 struct{…}`
+    - `type BetaToolSearchToolBm25_20251119`
 
       - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -4586,7 +4765,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolRegex20251119 struct{…}`
+    - `type BetaToolSearchToolRegex20251119`
 
       - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -4622,7 +4801,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMCPToolset struct{…}`
+    - `type BetaMCPToolset`
 
       Configuration for a group of tools from an MCP server.
 
@@ -4755,6 +4934,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
@@ -4811,7 +4992,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 #### Returns
 
-- `type BetaMessage struct{…}`
+- `type BetaMessage`
 
   - `Type Message`
 
@@ -4894,7 +5075,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `type BetaTextBlock struct{…}`
+    - `type BetaTextBlock`
 
       - `Type Text`
 
@@ -4906,7 +5087,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type BetaCitationCharLocation struct{…}`
+        - `type BetaCitationCharLocation`
 
           - `Type CharLocation`
 
@@ -4928,7 +5109,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 0
 
-        - `type BetaCitationPageLocation struct{…}`
+        - `type BetaCitationPageLocation`
 
           - `Type PageLocation`
 
@@ -4950,7 +5131,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 1
 
-        - `type BetaCitationContentBlockLocation struct{…}`
+        - `type BetaCitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -4982,7 +5163,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 0
 
-        - `type BetaCitationsWebSearchResultLocation struct{…}`
+        - `type BetaCitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -4998,7 +5179,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `URL string`
 
-        - `type BetaCitationSearchResultLocation struct{…}`
+        - `type BetaCitationSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -5038,7 +5219,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         minLength: 0
 
-    - `type BetaThinkingBlock struct{…}`
+    - `type BetaThinkingBlock`
 
       - `Type Thinking`
 
@@ -5056,7 +5237,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The text of Claude's thinking process for this block.
 
-    - `type BetaRedactedThinkingBlock struct{…}`
+    - `type BetaRedactedThinkingBlock`
 
       - `Type RedactedThinking`
 
@@ -5070,7 +5251,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type BetaToolUseBlock struct{…}`
+    - `type BetaToolUseBlock`
 
       - `Type ToolUse`
 
@@ -5088,13 +5269,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Caller BetaToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
           - `Type Direct`
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -5104,7 +5285,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
           - `Type CodeExecution20260120`
 
@@ -5118,7 +5299,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaServerToolUseBlock struct{…}`
+    - `type BetaServerToolUseBlock`
 
       - `Type ServerToolUse`
 
@@ -5150,17 +5331,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebSearchToolResultBlock struct{…}`
+    - `type BetaWebSearchToolResultBlock`
 
       - `Type WebSearchToolResult`
 
@@ -5168,7 +5349,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaWebSearchToolResultBlockContentUnion`
 
-        - `type BetaWebSearchToolResultError struct{…}`
+        - `type BetaWebSearchToolResultError`
 
           - `Type WebSearchToolResultError`
 
@@ -5208,17 +5389,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebFetchToolResultBlock struct{…}`
+    - `type BetaWebFetchToolResultBlock`
 
       - `Type WebFetchToolResult`
 
@@ -5226,7 +5407,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaWebFetchToolResultBlockContentUnion`
 
-        - `type BetaWebFetchToolResultErrorBlock struct{…}`
+        - `type BetaWebFetchToolResultErrorBlock`
 
           - `Type WebFetchToolResultError`
 
@@ -5254,7 +5435,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-        - `type BetaWebFetchBlock struct{…}`
+        - `type BetaWebFetchBlock`
 
           - `Type WebFetchResult`
 
@@ -5276,7 +5457,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `Source BetaDocumentBlockSourceUnion`
 
-              - `type BetaBase64PDFSource struct{…}`
+              - `type BetaBase64PDFSource`
 
                 - `Type Base64`
 
@@ -5286,7 +5467,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `MediaType ApplicationPDF`
 
-              - `type BetaPlainTextSource struct{…}`
+              - `type BetaPlainTextSource`
 
                 - `Type Text`
 
@@ -5312,17 +5493,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaAdvisorToolResultBlock struct{…}`
+    - `type BetaAdvisorToolResultBlock`
 
       - `Type AdvisorToolResult`
 
@@ -5330,7 +5511,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaAdvisorToolResultBlockContentUnion`
 
-        - `type BetaAdvisorToolResultError struct{…}`
+        - `type BetaAdvisorToolResultError`
 
           - `Type AdvisorToolResultError`
 
@@ -5352,7 +5533,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-        - `type BetaAdvisorResultBlock struct{…}`
+        - `type BetaAdvisorResultBlock`
 
           - `Type AdvisorResult`
 
@@ -5364,7 +5545,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Text string`
 
-        - `type BetaAdvisorRedactedResultBlock struct{…}`
+        - `type BetaAdvisorRedactedResultBlock`
 
           - `Type AdvisorRedactedResult`
 
@@ -5382,7 +5563,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaCodeExecutionToolResultBlock struct{…}`
+    - `type BetaCodeExecutionToolResultBlock`
 
       - `Type CodeExecutionToolResult`
 
@@ -5390,7 +5571,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaCodeExecutionToolResultError struct{…}`
+        - `type BetaCodeExecutionToolResultError`
 
           - `Type CodeExecutionToolResultError`
 
@@ -5406,7 +5587,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-        - `type BetaCodeExecutionResultBlock struct{…}`
+        - `type BetaCodeExecutionResultBlock`
 
           - `Type CodeExecutionResult`
 
@@ -5426,7 +5607,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Stdout string`
 
-        - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+        - `type BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -5452,7 +5633,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+    - `type BetaBashCodeExecutionToolResultBlock`
 
       - `Type BashCodeExecutionToolResult`
 
@@ -5460,7 +5641,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaBashCodeExecutionToolResultError struct{…}`
+        - `type BetaBashCodeExecutionToolResultError`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -5478,7 +5659,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-        - `type BetaBashCodeExecutionResultBlock struct{…}`
+        - `type BetaBashCodeExecutionResultBlock`
 
           - `Type BashCodeExecutionResult`
 
@@ -5502,7 +5683,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+    - `type BetaTextEditorCodeExecutionToolResultBlock`
 
       - `Type TextEditorCodeExecutionToolResult`
 
@@ -5510,7 +5691,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultError`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -5530,7 +5711,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `ErrorMessage string`
 
-        - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionViewResultBlock`
 
           - `Type TextEditorCodeExecutionViewResult`
 
@@ -5552,7 +5733,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `TotalLines int64`
 
-        - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
           - `Type TextEditorCodeExecutionCreateResult`
 
@@ -5560,7 +5741,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `IsFileUpdate bool`
 
-        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
           - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -5580,7 +5761,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaToolSearchToolResultBlock struct{…}`
+    - `type BetaToolSearchToolResultBlock`
 
       - `Type ToolSearchToolResult`
 
@@ -5588,7 +5769,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaToolSearchToolResultBlockContentUnion`
 
-        - `type BetaToolSearchToolResultError struct{…}`
+        - `type BetaToolSearchToolResultError`
 
           - `Type ToolSearchToolResultError`
 
@@ -5606,7 +5787,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `ErrorMessage string`
 
-        - `type BetaToolSearchToolSearchResultBlock struct{…}`
+        - `type BetaToolSearchToolSearchResultBlock`
 
           - `Type ToolSearchToolSearchResult`
 
@@ -5626,7 +5807,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaMCPToolUseBlock struct{…}`
+    - `type BetaMCPToolUseBlock`
 
       - `Type MCPToolUse`
 
@@ -5646,7 +5827,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The name of the MCP server
 
-    - `type BetaMCPToolResultBlock struct{…}`
+    - `type BetaMCPToolResultBlock`
 
       - `Type MCPToolResult`
 
@@ -5680,7 +5861,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaContainerUploadBlock struct{…}`
+    - `type BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -5690,7 +5871,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `FileID string`
 
-    - `type BetaCompactionBlock struct{…}`
+    - `type BetaCompactionBlock`
 
       A compaction block returned when autocompact is triggered.
 
@@ -5710,7 +5891,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `type BetaFallbackBlock struct{…}`
+      - `Signature string Optional`
+
+        Signature over the summary, to be sent back with the block verbatim
+
+    - `type BetaFallbackBlock`
 
       Marks the point in `content` where one model's output gives way to the next.
 
@@ -5860,7 +6045,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       List of context management edits that were applied.
 
-      - `type BetaClearToolUses20250919EditResponse struct{…}`
+      - `type BetaClearToolUses20250919EditResponse`
 
         - `Type ClearToolUses20250919`
 
@@ -5880,7 +6065,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           minimum: 0
 
-      - `type BetaClearThinking20251015EditResponse struct{…}`
+      - `type BetaClearThinking20251015EditResponse`
 
         - `Type ClearThinking20251015`
 
@@ -5909,7 +6094,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-      - `type BetaCacheMissModelChanged struct{…}`
+      - `type BetaCacheMissModelChanged`
 
         - `Type ModelChanged`
 
@@ -5919,7 +6104,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissSystemChanged struct{…}`
+      - `type BetaCacheMissSystemChanged`
 
         - `Type SystemChanged`
 
@@ -5929,7 +6114,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissToolsChanged struct{…}`
+      - `type BetaCacheMissToolsChanged`
 
         - `Type ToolsChanged`
 
@@ -5939,7 +6124,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissMessagesChanged struct{…}`
+      - `type BetaCacheMissMessagesChanged`
 
         - `Type MessagesChanged`
 
@@ -5949,13 +6134,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+      - `type BetaCacheMissPreviousMessageNotFound`
 
         - `Type PreviousMessageNotFound`
 
           default: previous_message_not_found
 
-      - `type BetaCacheMissUnavailable struct{…}`
+      - `type BetaCacheMissUnavailable`
 
         - `Type Unavailable`
 
@@ -6153,7 +6338,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         resulting shift is zero because there was nothing to move. `not_applied`:
         no reprice was applied; the arm's `reason` says why.
 
-        - `type BetaFallbackCreditRedeemed struct{…}`
+        - `type BetaFallbackCreditRedeemed`
 
           The reprice was applied: the retry is billed as if the conversation
           had been on the retry model all along.
@@ -6162,7 +6347,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             default: redeemed
 
-        - `type BetaFallbackCreditNotApplied struct{…}`
+        - `type BetaFallbackCreditNotApplied`
 
           No reprice was applied; `reason` says why.
 
@@ -6234,7 +6419,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-      - `type BetaMessageIterationUsage struct{…}`
+      - `type BetaMessageIterationUsage`
 
         Token usage for a sampling iteration.
 
@@ -6278,7 +6463,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           minimum: 0
 
-      - `type BetaCompactionIterationUsage struct{…}`
+      - `type BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
 
@@ -6316,7 +6501,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           minimum: 0
 
-      - `type BetaAdvisorMessageIterationUsage struct{…}`
+      - `type BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
 
@@ -6360,7 +6545,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           minimum: 0
 
-      - `type BetaFallbackMessageIterationUsage struct{…}`
+      - `type BetaFallbackMessageIterationUsage`
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -6473,63 +6658,105 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-  - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+  - `InputTransformations []BetaInputTransformationUnion Optional`
 
-    Changes the API made to the request's input before showing it to the model:
-    one entry per change, in request order. Today the only entry type is
-    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-    block from the request's `messages` that was removed from the prompt instead
-    of being shown to the model because it failed a binding check. More entry
-    types may be added over time; ignore types you do not recognize.
+    Changes the API made to the request's input before showing it to the model,
+    and blocks that failed a binding check but were left unchanged: one entry per
+    block, in request order. Two entry types today. `thinking_dropped` — a
+    `thinking`, `redacted_thinking` or `connector_text` block from the request's
+    `messages` that was removed from the prompt instead of being shown to the
+    model because it failed a binding check. `thinking_mismatch_allowed` — a
+    `thinking` or `redacted_thinking` block that failed the conversation check
+    (the conversation before it differs from the one it was created in, or it
+    carries no record of one on a model that requires it) and was shown to the
+    model all the same, because that check is not enforced for this request.
+    More entry types may be added over time; ignore types you do not recognize.
 
     Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
     every such response from a model that supports extended thinking, as `[]`
-    when nothing was changed; without the beta, blocks are removed all the same
-    but nothing is reported. Removed blocks contribute nothing to
-    `usage.input_tokens`. When streaming, the array is final in `message_start`;
-    the final `message_delta` event carries it only when a server-side model
-    fallback happened mid-stream, in which case it holds the serving model's
-    entries and replaces the one in `message_start`.
+    when there is no entry to report; without the beta, blocks are removed or
+    left in place all the same but nothing is reported. Removed blocks contribute
+    nothing to `usage.input_tokens`; blocks left in place count as sent. When
+    streaming, the array is final in `message_start`; the final `message_delta`
+    event carries it only when a server-side model fallback happened mid-stream,
+    in which case it holds the serving model's entries and replaces the one in
+    `message_start`.
 
-    - `Type ThinkingDropped`
+    - `type BetaThinkingDroppedInputTransformation`
 
-      Always `thinking_dropped` for this entry type.
+      - `Type ThinkingDropped`
 
-      default: thinking_dropped
+        Always `thinking_dropped` for this entry type.
 
-    - `Path string`
+        default: thinking_dropped
 
-      Where the removed block was in your request, as `messages.{i}.content.{j}`:
-      `i` indexes the `messages` array you sent and `j` that message's `content`
-      array — the same form error messages use.
+      - `Path string`
 
-    - `Reason BetaThinkingDroppedInputTransformationReason`
+        Where the removed block was in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
 
-      Which binding check removed the block: `model_binding_mismatch` — it was
-      created by a model whose reasoning the requested model may not read;
-      `prefix_binding_mismatch` — the conversation before it differs from the
-      conversation it was created in (the rest of that turn's consecutive thinking
-      blocks are removed with it, each with this reason);
-      `organization_binding_mismatch` — it was created under a different
-      organization (an Anthropic organization, AWS account or Google Cloud project)
-      and this organization is not one of its additional organizations;
-      `end_user_binding_mismatch` — it was created for a different end user, or
-      was removed by the consumer-organization binding. A block that would fail
-      several checks reports one reason, in this order of precedence:
-      `organization_binding_mismatch`, `end_user_binding_mismatch`,
-      `model_binding_mismatch`, `prefix_binding_mismatch`.
+      - `Reason BetaThinkingDroppedInputTransformationReason`
 
-      - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+        Which binding check removed the block: `model_binding_mismatch` — it was
+        created by a model whose reasoning the requested model may not read;
+        `prefix_binding_mismatch` — the conversation before it differs from the
+        conversation it was created in (the rest of that turn's consecutive thinking
+        blocks are removed with it, each with this reason);
+        `organization_binding_mismatch` — it was created under a different
+        organization (an Anthropic organization, AWS account or Google Cloud project)
+        and this organization is not one of its additional organizations;
+        `end_user_binding_mismatch` — it was created for a different end user, or
+        was removed by the consumer-organization binding. A block that would fail
+        several checks reports one reason, in this order of precedence:
+        `organization_binding_mismatch`, `end_user_binding_mismatch`,
+        `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaThinkingMismatchAllowedInputTransformation`
+
+      - `Type ThinkingMismatchAllowed`
+
+        Always `thinking_mismatch_allowed` for this entry type.
+
+        default: thinking_mismatch_allowed
+
+      - `Path string`
+
+        Where the block is in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
+
+      - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+        Which binding check the block failed; the block was shown to the model all
+        the same. Always `prefix_binding_mismatch` today — the conversation before
+        the block differs from the conversation it was created in, or the block
+        carries no record of one on a model that requires it. Were the check
+        enforced for this request, the block would have been removed or the request
+        rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+        takes the rest of that turn's consecutive thinking blocks, whereas here each
+        block is checked on its own, so `thinking_mismatch_allowed` entries are a
+        lower bound on what enforcement would remove.
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
 
 - `type BetaRawMessageStreamEventUnion interface{…}`
 
-  - `type BetaRawMessageStartEvent struct{…}`
+  - `type BetaRawMessageStartEvent`
 
     - `Type MessageStart`
 
@@ -6537,7 +6764,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `Message BetaMessage`
 
-  - `type BetaRawMessageDeltaEvent struct{…}`
+  - `type BetaRawMessageDeltaEvent`
 
     - `Type MessageDelta`
 
@@ -6624,59 +6851,41 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The number of server tool requests.
 
-    - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+    - `InputTransformations []BetaInputTransformationUnion Optional`
 
-      Changes the API made to the request's input before showing it to the model:
-      one entry per change, in request order. Today the only entry type is
-      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-      block from the request's `messages` that was removed from the prompt instead
-      of being shown to the model because it failed a binding check. More entry
-      types may be added over time; ignore types you do not recognize.
+      Changes the API made to the request's input before showing it to the model,
+      and blocks that failed a binding check but were left unchanged: one entry per
+      block, in request order. Two entry types today. `thinking_dropped` — a
+      `thinking`, `redacted_thinking` or `connector_text` block from the request's
+      `messages` that was removed from the prompt instead of being shown to the
+      model because it failed a binding check. `thinking_mismatch_allowed` — a
+      `thinking` or `redacted_thinking` block that failed the conversation check
+      (the conversation before it differs from the one it was created in, or it
+      carries no record of one on a model that requires it) and was shown to the
+      model all the same, because that check is not enforced for this request.
+      More entry types may be added over time; ignore types you do not recognize.
 
       Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
       every such response from a model that supports extended thinking, as `[]`
-      when nothing was changed; without the beta, blocks are removed all the same
-      but nothing is reported. Removed blocks contribute nothing to
-      `usage.input_tokens`. When streaming, the array is final in `message_start`;
-      the final `message_delta` event carries it only when a server-side model
-      fallback happened mid-stream, in which case it holds the serving model's
-      entries and replaces the one in `message_start`.
+      when there is no entry to report; without the beta, blocks are removed or
+      left in place all the same but nothing is reported. Removed blocks contribute
+      nothing to `usage.input_tokens`; blocks left in place count as sent. When
+      streaming, the array is final in `message_start`; the final `message_delta`
+      event carries it only when a server-side model fallback happened mid-stream,
+      in which case it holds the serving model's entries and replaces the one in
+      `message_start`.
 
-      - `Type ThinkingDropped`
+      - `type BetaThinkingDroppedInputTransformation`
 
-        Always `thinking_dropped` for this entry type.
+      - `type BetaThinkingMismatchAllowedInputTransformation`
 
-        default: thinking_dropped
-
-      - `Path string`
-
-        Where the removed block was in your request, as `messages.{i}.content.{j}`:
-        `i` indexes the `messages` array you sent and `j` that message's `content`
-        array — the same form error messages use.
-
-      - `Reason BetaThinkingDroppedInputTransformationReason`
-
-        Which binding check removed the block: `model_binding_mismatch` — it was
-        created by a model whose reasoning the requested model may not read;
-        `prefix_binding_mismatch` — the conversation before it differs from the
-        conversation it was created in (the rest of that turn's consecutive thinking
-        blocks are removed with it, each with this reason);
-        `organization_binding_mismatch` — it was created under a different
-        organization (an Anthropic organization, AWS account or Google Cloud project)
-        and this organization is not one of its additional organizations;
-        `end_user_binding_mismatch` — it was created for a different end user, or
-        was removed by the consumer-organization binding. A block that would fail
-        several checks reports one reason, in this order of precedence:
-        `organization_binding_mismatch`, `end_user_binding_mismatch`,
-        `model_binding_mismatch`, `prefix_binding_mismatch`.
-
-  - `type BetaRawMessageStopEvent struct{…}`
+  - `type BetaRawMessageStopEvent`
 
     - `Type MessageStop`
 
       default: message_stop
 
-  - `type BetaRawContentBlockStartEvent struct{…}`
+  - `type BetaRawContentBlockStartEvent`
 
     - `Type ContentBlockStart`
 
@@ -6684,39 +6893,39 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `ContentBlock BetaRawContentBlockStartEventContentBlockUnion`
 
-      - `type BetaTextBlock struct{…}`
+      - `type BetaTextBlock`
 
-      - `type BetaThinkingBlock struct{…}`
+      - `type BetaThinkingBlock`
 
-      - `type BetaRedactedThinkingBlock struct{…}`
+      - `type BetaRedactedThinkingBlock`
 
-      - `type BetaToolUseBlock struct{…}`
+      - `type BetaToolUseBlock`
 
-      - `type BetaServerToolUseBlock struct{…}`
+      - `type BetaServerToolUseBlock`
 
-      - `type BetaWebSearchToolResultBlock struct{…}`
+      - `type BetaWebSearchToolResultBlock`
 
-      - `type BetaWebFetchToolResultBlock struct{…}`
+      - `type BetaWebFetchToolResultBlock`
 
-      - `type BetaAdvisorToolResultBlock struct{…}`
+      - `type BetaAdvisorToolResultBlock`
 
-      - `type BetaCodeExecutionToolResultBlock struct{…}`
+      - `type BetaCodeExecutionToolResultBlock`
 
-      - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+      - `type BetaBashCodeExecutionToolResultBlock`
 
-      - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultBlock`
 
-      - `type BetaToolSearchToolResultBlock struct{…}`
+      - `type BetaToolSearchToolResultBlock`
 
-      - `type BetaMCPToolUseBlock struct{…}`
+      - `type BetaMCPToolUseBlock`
 
-      - `type BetaMCPToolResultBlock struct{…}`
+      - `type BetaMCPToolResultBlock`
 
-      - `type BetaContainerUploadBlock struct{…}`
+      - `type BetaContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
-      - `type BetaCompactionBlock struct{…}`
+      - `type BetaCompactionBlock`
 
         A compaction block returned when autocompact is triggered.
 
@@ -6724,7 +6933,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
 
-      - `type BetaFallbackBlock struct{…}`
+      - `type BetaFallbackBlock`
 
         Marks the point in `content` where one model's output gives way to the next.
 
@@ -6740,7 +6949,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `Index int64`
 
-  - `type BetaRawContentBlockDeltaEvent struct{…}`
+  - `type BetaRawContentBlockDeltaEvent`
 
     - `Type ContentBlockDelta`
 
@@ -6748,7 +6957,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `Delta BetaRawContentBlockDeltaUnion`
 
-      - `type BetaTextDelta struct{…}`
+      - `type BetaTextDelta`
 
         - `Type TextDelta`
 
@@ -6756,7 +6965,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `Text string`
 
-      - `type BetaInputJSONDelta struct{…}`
+      - `type BetaInputJSONDelta`
 
         - `Type InputJSONDelta`
 
@@ -6764,7 +6973,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `PartialJSON string`
 
-      - `type BetaCitationsDelta struct{…}`
+      - `type BetaCitationsDelta`
 
         - `Type CitationsDelta`
 
@@ -6772,17 +6981,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `Citation BetaCitationsDeltaCitationUnion`
 
-          - `type BetaCitationCharLocation struct{…}`
+          - `type BetaCitationCharLocation`
 
-          - `type BetaCitationPageLocation struct{…}`
+          - `type BetaCitationPageLocation`
 
-          - `type BetaCitationContentBlockLocation struct{…}`
+          - `type BetaCitationContentBlockLocation`
 
-          - `type BetaCitationsWebSearchResultLocation struct{…}`
+          - `type BetaCitationsWebSearchResultLocation`
 
-          - `type BetaCitationSearchResultLocation struct{…}`
+          - `type BetaCitationSearchResultLocation`
 
-      - `type BetaThinkingDelta struct{…}`
+      - `type BetaThinkingDelta`
 
         - `Type ThinkingDelta`
 
@@ -6796,7 +7005,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `type BetaSignatureDelta struct{…}`
+      - `type BetaSignatureDelta`
 
         - `Type SignatureDelta`
 
@@ -6806,7 +7015,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-      - `type BetaCompactionContentBlockDelta struct{…}`
+      - `type BetaCompactionContentBlockDelta`
 
         - `Type CompactionDelta`
 
@@ -6820,7 +7029,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `Index int64`
 
-  - `type BetaRawContentBlockStopEvent struct{…}`
+  - `type BetaRawContentBlockStopEvent`
 
     - `Type ContentBlockStop`
 
@@ -7045,7 +7254,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `[]BetaContentBlockParamUnionResp`
 
-        - `type BetaTextBlockParamResp struct{…}`
+        - `type BetaTextBlockParamResp`
 
           - `Type Text`
 
@@ -7076,7 +7285,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Citations []BetaTextCitationParamUnionResp Optional`
 
-            - `type BetaCitationCharLocationParamResp struct{…}`
+            - `type BetaCitationCharLocationParamResp`
 
               - `Type CharLocation`
 
@@ -7096,7 +7305,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-            - `type BetaCitationPageLocationParamResp struct{…}`
+            - `type BetaCitationPageLocationParamResp`
 
               - `Type PageLocation`
 
@@ -7116,7 +7325,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocationParamResp struct{…}`
+            - `type BetaCitationContentBlockLocationParamResp`
 
               - `Type ContentBlockLocation`
 
@@ -7146,7 +7355,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-            - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationWebSearchResultLocationParamResp`
 
               - `Type WebSearchResultLocation`
 
@@ -7162,7 +7371,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minLength: 1
 
-            - `type BetaCitationSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationSearchResultLocationParamResp`
 
               - `Type SearchResultLocation`
 
@@ -7196,13 +7405,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Title string`
 
-        - `type BetaImageBlockParamResp struct{…}`
+        - `type BetaImageBlockParamResp`
 
           - `Type Image`
 
           - `Source BetaImageBlockParamSourceUnionResp`
 
-            - `type BetaBase64ImageSource struct{…}`
+            - `type BetaBase64ImageSource`
 
               - `Type Base64`
 
@@ -7220,13 +7429,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-            - `type BetaURLImageSource struct{…}`
+            - `type BetaURLImageSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileImageSource struct{…}`
+            - `type BetaFileImageSource`
 
               - `Type File`
 
@@ -7248,13 +7457,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-        - `type BetaRequestDocumentBlock struct{…}`
+        - `type BetaRequestDocumentBlock`
 
           - `Type Document`
 
           - `Source BetaRequestDocumentBlockSourceUnion`
 
-            - `type BetaBase64PDFSource struct{…}`
+            - `type BetaBase64PDFSource`
 
               - `Type Base64`
 
@@ -7264,7 +7473,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `MediaType ApplicationPDF`
 
-            - `type BetaPlainTextSource struct{…}`
+            - `type BetaPlainTextSource`
 
               - `Type Text`
 
@@ -7272,7 +7481,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `MediaType TextPlain`
 
-            - `type BetaContentBlockSource struct{…}`
+            - `type BetaContentBlockSource`
 
               - `Type Content`
 
@@ -7282,17 +7491,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `[]BetaContentBlockSourceContentUnion`
 
-                  - `type BetaTextBlockParamResp struct{…}`
+                  - `type BetaTextBlockParamResp`
 
-                  - `type BetaImageBlockParamResp struct{…}`
+                  - `type BetaImageBlockParamResp`
 
-            - `type BetaURLPDFSource struct{…}`
+            - `type BetaURLPDFSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileDocumentSource struct{…}`
+            - `type BetaFileDocumentSource`
 
               - `Type File`
 
@@ -7314,7 +7523,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             maxLength: 500, minLength: 1
 
-        - `type BetaSearchResultBlockParamResp struct{…}`
+        - `type BetaSearchResultBlockParamResp`
 
           - `Type SearchResult`
 
@@ -7342,7 +7551,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Citations BetaCitationsConfigParamResp Optional`
 
-        - `type BetaThinkingBlockParamResp struct{…}`
+        - `type BetaThinkingBlockParamResp`
 
           - `Type Thinking`
 
@@ -7356,7 +7565,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The `thinking` text of this block as returned by the API.
 
-        - `type BetaRedactedThinkingBlockParamResp struct{…}`
+        - `type BetaRedactedThinkingBlockParamResp`
 
           - `Type RedactedThinking`
 
@@ -7364,7 +7573,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type BetaToolUseBlockParamResp struct{…}`
+        - `type BetaToolUseBlockParamResp`
 
           - `Type ToolUse`
 
@@ -7384,13 +7593,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -7400,7 +7609,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -7414,7 +7623,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaToolResultBlockParamResp struct{…}`
+        - `type BetaToolResultBlockParamResp`
 
           - `Type ToolResult`
 
@@ -7430,15 +7639,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `[]BetaToolResultBlockParamContentUnionResp`
 
-              - `type BetaTextBlockParamResp struct{…}`
+              - `type BetaTextBlockParamResp`
 
-              - `type BetaImageBlockParamResp struct{…}`
+              - `type BetaImageBlockParamResp`
 
-              - `type BetaSearchResultBlockParamResp struct{…}`
+              - `type BetaSearchResultBlockParamResp`
 
-              - `type BetaRequestDocumentBlock struct{…}`
+              - `type BetaRequestDocumentBlock`
 
-              - `type BetaToolReferenceBlockParamResp struct{…}`
+              - `type BetaToolReferenceBlockParamResp`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -7452,7 +7661,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BetaBrowserStateBlockParamResp struct{…}`
+              - `type BetaBrowserStateBlockParamResp`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -7502,7 +7711,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   maxItems: 200, minItems: 1
 
-                  - `type BetaBrowserStateChangeTabOpened struct{…}`
+                  - `type BetaBrowserStateChangeTabOpened`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -7520,7 +7729,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
 
@@ -7538,7 +7747,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadCompleted`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -7571,7 +7780,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       minimum: 0
 
-                  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                  - `type BetaBrowserStateChangeDownloadFailed`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -7603,7 +7812,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlockParamResp struct{…}`
+        - `type BetaServerToolUseBlockParamResp`
 
           - `Type ServerToolUse`
 
@@ -7637,17 +7846,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+        - `type BetaWebSearchToolResultBlockParamResp`
 
           - `Type WebSearchToolResult`
 
@@ -7665,7 +7874,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `PageAge string Optional`
 
-            - `type BetaWebSearchToolRequestError struct{…}`
+            - `type BetaWebSearchToolRequestError`
 
               - `Type WebSearchToolResultError`
 
@@ -7693,23 +7902,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+        - `type BetaWebFetchToolResultBlockParamResp`
 
           - `Type WebFetchToolResult`
 
           - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-            - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+            - `type BetaWebFetchToolResultErrorBlockParamResp`
 
               - `Type WebFetchToolResultError`
 
@@ -7735,7 +7944,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlockParamResp struct{…}`
+            - `type BetaWebFetchBlockParamResp`
 
               - `Type WebFetchResult`
 
@@ -7759,23 +7968,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+        - `type BetaAdvisorToolResultBlockParamResp`
 
           - `Type AdvisorToolResult`
 
           - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-            - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+            - `type BetaAdvisorToolResultErrorParamResp`
 
               - `Type AdvisorToolResultError`
 
@@ -7795,7 +8004,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlockParamResp struct{…}`
+            - `type BetaAdvisorResultBlockParamResp`
 
               - `Type AdvisorResult`
 
@@ -7803,7 +8012,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `StopReason string Optional`
 
-            - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+            - `type BetaAdvisorRedactedResultBlockParamResp`
 
               - `Type AdvisorRedactedResult`
 
@@ -7821,13 +8030,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaCodeExecutionToolResultBlockParamResp`
 
           - `Type CodeExecutionToolResult`
 
           - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaCodeExecutionToolResultErrorParamResp`
 
               - `Type CodeExecutionToolResultError`
 
@@ -7841,7 +8050,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaCodeExecutionResultBlockParamResp`
 
               - `Type CodeExecutionResult`
 
@@ -7857,7 +8066,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -7883,13 +8092,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
           - `Type BashCodeExecutionToolResult`
 
           - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -7905,7 +8114,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaBashCodeExecutionResultBlockParamResp`
 
               - `Type BashCodeExecutionResult`
 
@@ -7929,13 +8138,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
           - `Type TextEditorCodeExecutionToolResult`
 
           - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -7953,7 +8162,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `ErrorMessage string Optional`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -7973,13 +8182,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `TotalLines int64 Optional`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -8001,13 +8210,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+        - `type BetaToolSearchToolResultBlockParamResp`
 
           - `Type ToolSearchToolResult`
 
           - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-            - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+            - `type BetaToolSearchToolResultErrorParamResp`
 
               - `Type ToolSearchToolResultError`
 
@@ -8023,7 +8232,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `ErrorMessage string Optional`
 
-            - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+            - `type BetaToolSearchToolSearchResultBlockParamResp`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -8047,7 +8256,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaMCPToolUseBlockParamResp struct{…}`
+        - `type BetaMCPToolUseBlockParamResp`
 
           - `Type MCPToolUse`
 
@@ -8067,7 +8276,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+        - `type BetaRequestMCPToolResultBlockParamResp`
 
           - `Type MCPToolResult`
 
@@ -8099,7 +8308,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `IsError bool Optional`
 
-        - `type BetaContainerUploadBlockParamResp struct{…}`
+        - `type BetaContainerUploadBlockParamResp`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -8112,7 +8321,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCompactionBlockParamResp struct{…}`
+        - `type BetaCompactionBlockParamResp`
 
           A compaction block containing summary of previous context.
 
@@ -8136,7 +8345,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaRequestToolAdditionBlock struct{…}`
+          - `Signature string Optional`
+
+            The block's signature as returned, to be sent back verbatim
+
+        - `type BetaRequestToolAdditionBlock`
 
           Mid-conversation directive to surface a declared tool.
 
@@ -8148,7 +8361,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -8161,7 +8374,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -8172,7 +8385,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `ServerName string`
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -8184,7 +8397,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestToolRemovalBlock struct{…}`
+        - `type BetaRequestToolRemovalBlock`
 
           Mid-conversation directive to withdraw a tool.
 
@@ -8196,19 +8409,19 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
               server assigns to MCP-resolved tools — use `mcp_tool_reference` or
               `mcp_toolset_reference` for those.
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -8216,7 +8429,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaFallbackBlockParamResp struct{…}`
+        - `type BetaFallbackBlockParamResp`
 
           A `fallback` block echoed back from a prior response.
 
@@ -8376,6 +8589,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+  - `Compaction param.Field[BetaCompactionConfig] Optional`
+
+    Body param: Compact the whole conversation and return a signed `compaction` block,
+    alone, that a later request sends back first in `messages`, in place of
+    the messages it summarizes. There is no trigger and no pause flag: sending
+    the parameter compacts, and nothing is sampled after the block.
+
+    The summarization prompt is the server's own unless `instructions` are
+    given, which then replace it for this request; a value that is empty or
+    only whitespace counts as absent.
+
   - `ContextManagement param.Field[BetaContextManagementConfig] Optional`
 
     Body param: Context management configuration.
@@ -8512,7 +8736,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type BetaTool struct{…}`
+    - `type BetaTool`
 
       - `Type BetaToolType Optional`
 
@@ -8570,7 +8794,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20241022 struct{…}`
+    - `type BetaToolBash20241022`
 
       - `Type Bash20241022`
 
@@ -8604,7 +8828,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20250124 struct{…}`
+    - `type BetaToolBash20250124`
 
       - `Type Bash20250124`
 
@@ -8638,7 +8862,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250522 struct{…}`
+    - `type BetaCodeExecutionTool20250522`
 
       - `Type CodeExecution20250522`
 
@@ -8670,7 +8894,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250825 struct{…}`
+    - `type BetaCodeExecutionTool20250825`
 
       - `Type CodeExecution20250825`
 
@@ -8702,7 +8926,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260120 struct{…}`
+    - `type BetaCodeExecutionTool20260120`
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -8736,7 +8960,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260521 struct{…}`
+    - `type BetaCodeExecutionTool20260521`
 
       Code execution tool with REPL state persistence.
 
@@ -8770,7 +8994,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaBrowserToolset20260801 struct{…}`
+    - `type BetaBrowserToolset20260801`
 
       The browser toolset: a single `tools[]` entry (carrying no
       `name`) that declares the browser tool family. The model is served
@@ -9164,7 +9388,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolComputerUse20241022 struct{…}`
+    - `type BetaToolComputerUse20241022`
 
       - `Type Computer20241022`
 
@@ -9216,7 +9440,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMemoryTool20250818 struct{…}`
+    - `type BetaMemoryTool20250818`
 
       - `Type Memory20250818`
 
@@ -9250,7 +9474,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20250124 struct{…}`
+    - `type BetaToolComputerUse20250124`
 
       - `Type Computer20250124`
 
@@ -9302,7 +9526,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20241022 struct{…}`
+    - `type BetaToolTextEditor20241022`
 
       - `Type TextEditor20241022`
 
@@ -9336,7 +9560,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20251124 struct{…}`
+    - `type BetaToolComputerUse20251124`
 
       - `Type Computer20251124`
 
@@ -9392,7 +9616,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaComputerToolset20260801 struct{…}`
+    - `type BetaComputerToolset20260801`
 
       The computer toolset: a single `tools[]` entry (carrying no
       `name`) that declares the computer tool family. The model is
@@ -9622,7 +9846,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolTextEditor20250124 struct{…}`
+    - `type BetaToolTextEditor20250124`
 
       - `Type TextEditor20250124`
 
@@ -9656,7 +9880,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250429 struct{…}`
+    - `type BetaToolTextEditor20250429`
 
       - `Type TextEditor20250429`
 
@@ -9690,7 +9914,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250728 struct{…}`
+    - `type BetaToolTextEditor20250728`
 
       - `Type TextEditor20250728`
 
@@ -9730,7 +9954,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20250305 struct{…}`
+    - `type BetaWebSearchTool20250305`
 
       - `Type WebSearch20250305`
 
@@ -9806,7 +10030,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           maxLength: 255, minLength: 1
 
-    - `type BetaWebFetchTool20250910 struct{…}`
+    - `type BetaWebFetchTool20250910`
 
       - `Type WebFetch20250910`
 
@@ -9862,7 +10086,98 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20260209 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+        - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+          Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+            - `Type All`
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+            - `Type None`
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+            - `Type Only`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+            - `Type Except`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+        - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+          Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+        - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+          Whether URLs in user messages are fetchable: "all" or "none".
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+    - `type BetaWebSearchTool20260209`
 
       - `Type WebSearch20260209`
 
@@ -9912,7 +10227,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260209 struct{…}`
+    - `type BetaWebFetchTool20260209`
 
       - `Type WebFetch20260209`
 
@@ -9968,7 +10283,16 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebFetchTool20260309 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+    - `type BetaWebFetchTool20260309`
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -10026,11 +10350,20 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaWebSearchTool20260318 struct{…}`
+    - `type BetaWebSearchTool20260318`
 
       - `Type WebSearch20260318`
 
@@ -10088,7 +10421,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260318 struct{…}`
+    - `type BetaWebFetchTool20260318`
 
       - `Type WebFetch20260318`
 
@@ -10152,11 +10485,20 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaAdvisorTool20260301 struct{…}`
+    - `type BetaAdvisorTool20260301`
 
       - `Type Advisor20260301`
 
@@ -10210,7 +10552,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolBm25_20251119 struct{…}`
+    - `type BetaToolSearchToolBm25_20251119`
 
       - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -10246,7 +10588,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolRegex20251119 struct{…}`
+    - `type BetaToolSearchToolRegex20251119`
 
       - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -10282,7 +10624,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMCPToolset struct{…}`
+    - `type BetaMCPToolset`
 
       Configuration for a group of tools from an MCP server.
 
@@ -10415,6 +10757,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
@@ -10435,7 +10779,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
 #### Returns
 
-- `type BetaMessageTokensCount struct{…}`
+- `type BetaMessageTokensCount`
 
   - `ContextManagement BetaCountTokensContextManagementResponse`
 
@@ -10600,7 +10944,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `[]BetaContentBlockParamUnionResp`
 
-            - `type BetaTextBlockParamResp struct{…}`
+            - `type BetaTextBlockParamResp`
 
               - `Type Text`
 
@@ -10631,7 +10975,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Citations []BetaTextCitationParamUnionResp Optional`
 
-                - `type BetaCitationCharLocationParamResp struct{…}`
+                - `type BetaCitationCharLocationParamResp`
 
                   - `Type CharLocation`
 
@@ -10651,7 +10995,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                - `type BetaCitationPageLocationParamResp struct{…}`
+                - `type BetaCitationPageLocationParamResp`
 
                   - `Type PageLocation`
 
@@ -10671,7 +11015,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 1
 
-                - `type BetaCitationContentBlockLocationParamResp struct{…}`
+                - `type BetaCitationContentBlockLocationParamResp`
 
                   - `Type ContentBlockLocation`
 
@@ -10701,7 +11045,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationWebSearchResultLocationParamResp`
 
                   - `Type WebSearchResultLocation`
 
@@ -10717,7 +11061,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minLength: 1
 
-                - `type BetaCitationSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationSearchResultLocationParamResp`
 
                   - `Type SearchResultLocation`
 
@@ -10751,13 +11095,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Title string`
 
-            - `type BetaImageBlockParamResp struct{…}`
+            - `type BetaImageBlockParamResp`
 
               - `Type Image`
 
               - `Source BetaImageBlockParamSourceUnionResp`
 
-                - `type BetaBase64ImageSource struct{…}`
+                - `type BetaBase64ImageSource`
 
                   - `Type Base64`
 
@@ -10775,13 +11119,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-                - `type BetaURLImageSource struct{…}`
+                - `type BetaURLImageSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileImageSource struct{…}`
+                - `type BetaFileImageSource`
 
                   - `Type File`
 
@@ -10803,13 +11147,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-            - `type BetaRequestDocumentBlock struct{…}`
+            - `type BetaRequestDocumentBlock`
 
               - `Type Document`
 
               - `Source BetaRequestDocumentBlockSourceUnion`
 
-                - `type BetaBase64PDFSource struct{…}`
+                - `type BetaBase64PDFSource`
 
                   - `Type Base64`
 
@@ -10819,7 +11163,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `MediaType ApplicationPDF`
 
-                - `type BetaPlainTextSource struct{…}`
+                - `type BetaPlainTextSource`
 
                   - `Type Text`
 
@@ -10827,7 +11171,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `MediaType TextPlain`
 
-                - `type BetaContentBlockSource struct{…}`
+                - `type BetaContentBlockSource`
 
                   - `Type Content`
 
@@ -10837,17 +11181,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `[]BetaContentBlockSourceContentUnion`
 
-                      - `type BetaTextBlockParamResp struct{…}`
+                      - `type BetaTextBlockParamResp`
 
-                      - `type BetaImageBlockParamResp struct{…}`
+                      - `type BetaImageBlockParamResp`
 
-                - `type BetaURLPDFSource struct{…}`
+                - `type BetaURLPDFSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileDocumentSource struct{…}`
+                - `type BetaFileDocumentSource`
 
                   - `Type File`
 
@@ -10869,7 +11213,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 maxLength: 500, minLength: 1
 
-            - `type BetaSearchResultBlockParamResp struct{…}`
+            - `type BetaSearchResultBlockParamResp`
 
               - `Type SearchResult`
 
@@ -10897,7 +11241,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Citations BetaCitationsConfigParamResp Optional`
 
-            - `type BetaThinkingBlockParamResp struct{…}`
+            - `type BetaThinkingBlockParamResp`
 
               - `Type Thinking`
 
@@ -10911,7 +11255,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The `thinking` text of this block as returned by the API.
 
-            - `type BetaRedactedThinkingBlockParamResp struct{…}`
+            - `type BetaRedactedThinkingBlockParamResp`
 
               - `Type RedactedThinking`
 
@@ -10919,7 +11263,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type BetaToolUseBlockParamResp struct{…}`
+            - `type BetaToolUseBlockParamResp`
 
               - `Type ToolUse`
 
@@ -10939,13 +11283,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `Type Direct`
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -10955,7 +11299,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
                   - `Type CodeExecution20260120`
 
@@ -10969,7 +11313,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaToolResultBlockParamResp struct{…}`
+            - `type BetaToolResultBlockParamResp`
 
               - `Type ToolResult`
 
@@ -10985,15 +11329,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `[]BetaToolResultBlockParamContentUnionResp`
 
-                  - `type BetaTextBlockParamResp struct{…}`
+                  - `type BetaTextBlockParamResp`
 
-                  - `type BetaImageBlockParamResp struct{…}`
+                  - `type BetaImageBlockParamResp`
 
-                  - `type BetaSearchResultBlockParamResp struct{…}`
+                  - `type BetaSearchResultBlockParamResp`
 
-                  - `type BetaRequestDocumentBlock struct{…}`
+                  - `type BetaRequestDocumentBlock`
 
-                  - `type BetaToolReferenceBlockParamResp struct{…}`
+                  - `type BetaToolReferenceBlockParamResp`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -11007,7 +11351,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type BetaBrowserStateBlockParamResp struct{…}`
+                  - `type BetaBrowserStateBlockParamResp`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -11057,7 +11401,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       maxItems: 200, minItems: 1
 
-                      - `type BetaBrowserStateChangeTabOpened struct{…}`
+                      - `type BetaBrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -11075,7 +11419,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                      - `type BetaBrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -11093,7 +11437,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                      - `type BetaBrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -11126,7 +11470,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minimum: 0
 
-                      - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                      - `type BetaBrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -11158,7 +11502,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaServerToolUseBlockParamResp struct{…}`
+            - `type BetaServerToolUseBlockParamResp`
 
               - `Type ServerToolUse`
 
@@ -11192,17 +11536,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+            - `type BetaWebSearchToolResultBlockParamResp`
 
               - `Type WebSearchToolResult`
 
@@ -11220,7 +11564,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `PageAge string Optional`
 
-                - `type BetaWebSearchToolRequestError struct{…}`
+                - `type BetaWebSearchToolRequestError`
 
                   - `Type WebSearchToolResultError`
 
@@ -11248,23 +11592,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+            - `type BetaWebFetchToolResultBlockParamResp`
 
               - `Type WebFetchToolResult`
 
               - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-                - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+                - `type BetaWebFetchToolResultErrorBlockParamResp`
 
                   - `Type WebFetchToolResultError`
 
@@ -11290,7 +11634,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-                - `type BetaWebFetchBlockParamResp struct{…}`
+                - `type BetaWebFetchBlockParamResp`
 
                   - `Type WebFetchResult`
 
@@ -11314,23 +11658,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+            - `type BetaAdvisorToolResultBlockParamResp`
 
               - `Type AdvisorToolResult`
 
               - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-                - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+                - `type BetaAdvisorToolResultErrorParamResp`
 
                   - `Type AdvisorToolResultError`
 
@@ -11350,7 +11694,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-                - `type BetaAdvisorResultBlockParamResp struct{…}`
+                - `type BetaAdvisorResultBlockParamResp`
 
                   - `Type AdvisorResult`
 
@@ -11358,7 +11702,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `StopReason string Optional`
 
-                - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+                - `type BetaAdvisorRedactedResultBlockParamResp`
 
                   - `Type AdvisorRedactedResult`
 
@@ -11376,13 +11720,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaCodeExecutionToolResultBlockParamResp`
 
               - `Type CodeExecutionToolResult`
 
               - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaCodeExecutionToolResultErrorParamResp`
 
                   - `Type CodeExecutionToolResultError`
 
@@ -11396,7 +11740,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-                - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaCodeExecutionResultBlockParamResp`
 
                   - `Type CodeExecutionResult`
 
@@ -11412,7 +11756,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Stdout string`
 
-                - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -11438,13 +11782,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
               - `Type BashCodeExecutionToolResult`
 
               - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
                   - `Type BashCodeExecutionToolResultError`
 
@@ -11460,7 +11804,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-                - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaBashCodeExecutionResultBlockParamResp`
 
                   - `Type BashCodeExecutionResult`
 
@@ -11484,13 +11828,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionToolResult`
 
               - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
                   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -11508,7 +11852,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionViewResult`
 
@@ -11528,13 +11872,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `TotalLines int64 Optional`
 
-                - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionCreateResult`
 
                   - `IsFileUpdate bool`
 
-                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -11556,13 +11900,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+            - `type BetaToolSearchToolResultBlockParamResp`
 
               - `Type ToolSearchToolResult`
 
               - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-                - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+                - `type BetaToolSearchToolResultErrorParamResp`
 
                   - `Type ToolSearchToolResultError`
 
@@ -11578,7 +11922,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+                - `type BetaToolSearchToolSearchResultBlockParamResp`
 
                   - `Type ToolSearchToolSearchResult`
 
@@ -11602,7 +11946,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaMCPToolUseBlockParamResp struct{…}`
+            - `type BetaMCPToolUseBlockParamResp`
 
               - `Type MCPToolUse`
 
@@ -11622,7 +11966,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+            - `type BetaRequestMCPToolResultBlockParamResp`
 
               - `Type MCPToolResult`
 
@@ -11654,7 +11998,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `IsError bool Optional`
 
-            - `type BetaContainerUploadBlockParamResp struct{…}`
+            - `type BetaContainerUploadBlockParamResp`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -11667,7 +12011,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCompactionBlockParamResp struct{…}`
+            - `type BetaCompactionBlockParamResp`
 
               A compaction block containing summary of previous context.
 
@@ -11691,7 +12035,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `type BetaRequestToolAdditionBlock struct{…}`
+              - `Signature string Optional`
+
+                The block's signature as returned, to be sent back verbatim
+
+            - `type BetaRequestToolAdditionBlock`
 
               Mid-conversation directive to surface a declared tool.
 
@@ -11703,7 +12051,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-                - `type BetaToolChangeToolReference struct{…}`
+                - `type BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -11716,7 +12064,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `type BetaToolChangeMCPToolReference struct{…}`
+                - `type BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -11727,7 +12075,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `ServerName string`
 
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
+                - `type BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -11739,7 +12087,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestToolRemovalBlock struct{…}`
+            - `type BetaRequestToolRemovalBlock`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -11751,19 +12099,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-                - `type BetaToolChangeToolReference struct{…}`
+                - `type BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
                   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `type BetaToolChangeMCPToolReference struct{…}`
+                - `type BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
+                - `type BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -11771,7 +12119,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaFallbackBlockParamResp struct{…}`
+            - `type BetaFallbackBlockParamResp`
 
               A `fallback` block echoed back from a prior response.
 
@@ -11931,11 +12279,30 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+      - `Compaction BetaCompactionConfig Optional`
+
+        Compact the whole conversation and return a signed `compaction` block,
+        alone, that a later request sends back first in `messages`, in place of
+        the messages it summarizes. There is no trigger and no pause flag: sending
+        the parameter compacts, and nothing is sampled after the block.
+
+        The summarization prompt is the server's own unless `instructions` are
+        given, which then replace it for this request; a value that is empty or
+        only whitespace counts as absent.
+
+        - `Type Summarize`
+
+        - `Instructions string Optional`
+
+          Replaces the server's default summarization prompt for this request. An empty or whitespace-only value counts as absent.
+
+          maxLength: 16384
+
       - `Container BetaMessageBatchNewParamsRequestParamsContainerUnion Optional`
 
         Container identifier for reuse across requests.
 
-        - `type BetaContainerParamsResp struct{…}`
+        - `type BetaContainerParamsResp`
 
           Container parameters with skills to be loaded.
 
@@ -11983,7 +12350,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           minItems: 0
 
-          - `type BetaClearToolUses20250919Edit struct{…}`
+          - `type BetaClearToolUses20250919Edit`
 
             - `Type ClearToolUses20250919`
 
@@ -12023,7 +12390,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Condition that triggers the context management strategy
 
-              - `type BetaInputTokensTrigger struct{…}`
+              - `type BetaInputTokensTrigger`
 
                 - `Type InputTokens`
 
@@ -12031,7 +12398,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-              - `type BetaToolUsesTrigger struct{…}`
+              - `type BetaToolUsesTrigger`
 
                 - `Type ToolUses`
 
@@ -12039,7 +12406,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-          - `type BetaClearThinking20251015Edit struct{…}`
+          - `type BetaClearThinking20251015Edit`
 
             - `Type ClearThinking20251015`
 
@@ -12047,7 +12414,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-              - `type BetaThinkingTurns struct{…}`
+              - `type BetaThinkingTurns`
 
                 - `Type ThinkingTurns`
 
@@ -12055,13 +12422,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-              - `type BetaAllThinkingTurns struct{…}`
+              - `type BetaAllThinkingTurns`
 
                 - `Type All`
 
               - `All`
 
-          - `type BetaCompact20260112Edit struct{…}`
+          - `type BetaCompact20260112Edit`
 
             Automatically compact older context when reaching the configured trigger threshold.
 
@@ -12115,7 +12482,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `string`
 
-        - `type BetaFallbackCreditTokenParamResp struct{…}`
+        - `type BetaFallbackCreditTokenParamResp`
 
           Object form of `fallback_credit_token`: the token plus a redemption
           mode.
@@ -12209,7 +12576,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `Thinking BetaFallbackParamThinkingUnionResp Optional`
 
-            - `type BetaThinkingConfigEnabled struct{…}`
+            - `type BetaThinkingConfigEnabled`
 
               - `Type Enabled`
 
@@ -12251,11 +12618,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `const BetaThinkingConfigEnabledDisplayUpdates BetaThinkingConfigEnabledDisplay = "updates"`
 
-            - `type BetaThinkingConfigDisabled struct{…}`
+            - `type BetaThinkingConfigDisabled`
 
               - `Type Disabled`
 
-            - `type BetaThinkingConfigAdaptive struct{…}`
+            - `type BetaThinkingConfigAdaptive`
 
               - `Type Adaptive`
 
@@ -12377,17 +12744,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
-        - `type BetaThinkingConfigEnabled struct{…}`
+        - `type BetaThinkingConfigEnabled`
 
-        - `type BetaThinkingConfigDisabled struct{…}`
+        - `type BetaThinkingConfigDisabled`
 
-        - `type BetaThinkingConfigAdaptive struct{…}`
+        - `type BetaThinkingConfigAdaptive`
 
       - `ToolChoice BetaToolChoiceUnion Optional`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `type BetaToolChoiceAuto struct{…}`
+        - `type BetaToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -12399,7 +12766,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `type BetaToolChoiceAny struct{…}`
+        - `type BetaToolChoiceAny`
 
           The model will use any available tools.
 
@@ -12411,7 +12778,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceTool struct{…}`
+        - `type BetaToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -12427,7 +12794,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceNone struct{…}`
+        - `type BetaToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -12497,7 +12864,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-        - `type BetaTool struct{…}`
+        - `type BetaTool`
 
           - `Type BetaToolType Optional`
 
@@ -12555,7 +12922,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolBash20241022 struct{…}`
+        - `type BetaToolBash20241022`
 
           - `Type Bash20241022`
 
@@ -12589,7 +12956,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolBash20250124 struct{…}`
+        - `type BetaToolBash20250124`
 
           - `Type Bash20250124`
 
@@ -12623,7 +12990,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20250522 struct{…}`
+        - `type BetaCodeExecutionTool20250522`
 
           - `Type CodeExecution20250522`
 
@@ -12655,7 +13022,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20250825 struct{…}`
+        - `type BetaCodeExecutionTool20250825`
 
           - `Type CodeExecution20250825`
 
@@ -12687,7 +13054,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20260120 struct{…}`
+        - `type BetaCodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -12721,7 +13088,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20260521 struct{…}`
+        - `type BetaCodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -12755,7 +13122,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaBrowserToolset20260801 struct{…}`
+        - `type BetaBrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -13149,7 +13516,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type BetaToolComputerUse20241022 struct{…}`
+        - `type BetaToolComputerUse20241022`
 
           - `Type Computer20241022`
 
@@ -13201,7 +13568,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaMemoryTool20250818 struct{…}`
+        - `type BetaMemoryTool20250818`
 
           - `Type Memory20250818`
 
@@ -13235,7 +13602,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolComputerUse20250124 struct{…}`
+        - `type BetaToolComputerUse20250124`
 
           - `Type Computer20250124`
 
@@ -13287,7 +13654,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20241022 struct{…}`
+        - `type BetaToolTextEditor20241022`
 
           - `Type TextEditor20241022`
 
@@ -13321,7 +13688,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolComputerUse20251124 struct{…}`
+        - `type BetaToolComputerUse20251124`
 
           - `Type Computer20251124`
 
@@ -13377,7 +13744,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaComputerToolset20260801 struct{…}`
+        - `type BetaComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -13607,7 +13974,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type BetaToolTextEditor20250124 struct{…}`
+        - `type BetaToolTextEditor20250124`
 
           - `Type TextEditor20250124`
 
@@ -13641,7 +14008,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20250429 struct{…}`
+        - `type BetaToolTextEditor20250429`
 
           - `Type TextEditor20250429`
 
@@ -13675,7 +14042,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20250728 struct{…}`
+        - `type BetaToolTextEditor20250728`
 
           - `Type TextEditor20250728`
 
@@ -13715,7 +14082,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebSearchTool20250305 struct{…}`
+        - `type BetaWebSearchTool20250305`
 
           - `Type WebSearch20250305`
 
@@ -13791,7 +14158,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               maxLength: 255, minLength: 1
 
-        - `type BetaWebFetchTool20250910 struct{…}`
+        - `type BetaWebFetchTool20250910`
 
           - `Type WebFetch20250910`
 
@@ -13847,7 +14214,98 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebSearchTool20260209 struct{…}`
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `Type All`
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `Type None`
+
+              - `type BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `Type Only`
+
+                - `Tools []BetaWebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+              - `type BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `Type Except`
+
+                - `Tools []BetaWebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+            - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `type BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `type BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `type BetaWebSearchTool20260209`
 
           - `Type WebSearch20260209`
 
@@ -13897,7 +14355,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type BetaWebFetchTool20260209 struct{…}`
+        - `type BetaWebFetchTool20260209`
 
           - `Type WebFetch20260209`
 
@@ -13953,7 +14411,16 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebFetchTool20260309 struct{…}`
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `type BetaWebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -14011,11 +14478,20 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type BetaWebSearchTool20260318 struct{…}`
+        - `type BetaWebSearchTool20260318`
 
           - `Type WebSearch20260318`
 
@@ -14073,7 +14549,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type BetaWebFetchTool20260318 struct{…}`
+        - `type BetaWebFetchTool20260318`
 
           - `Type WebFetch20260318`
 
@@ -14137,11 +14613,20 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type BetaAdvisorTool20260301 struct{…}`
+        - `type BetaAdvisorTool20260301`
 
           - `Type Advisor20260301`
 
@@ -14195,7 +14680,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolSearchToolBm25_20251119 struct{…}`
+        - `type BetaToolSearchToolBm25_20251119`
 
           - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -14231,7 +14716,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolSearchToolRegex20251119 struct{…}`
+        - `type BetaToolSearchToolRegex20251119`
 
           - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -14267,7 +14752,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaMCPToolset struct{…}`
+        - `type BetaMCPToolset`
 
           Configuration for a group of tools from an MCP server.
 
@@ -14444,6 +14929,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -14456,7 +14943,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -14744,6 +15231,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -14752,7 +15241,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -15040,6 +15529,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -15048,7 +15539,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -15329,6 +15820,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -15337,7 +15830,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -15615,6 +16108,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -15623,7 +16118,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type BetaDeletedMessageBatch struct{…}`
+- `type BetaDeletedMessageBatch`
 
   - `Type MessageBatchDeleted`
 
@@ -15793,6 +16288,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -15801,7 +16298,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type BetaMessageBatchIndividualResponse struct{…}`
+- `type BetaMessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -15817,7 +16314,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `type BetaMessageBatchSucceededResult struct{…}`
+    - `type BetaMessageBatchSucceededResult`
 
       - `Type Succeeded`
 
@@ -15906,7 +16403,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `type BetaTextBlock struct{…}`
+          - `type BetaTextBlock`
 
             - `Type Text`
 
@@ -15918,7 +16415,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `type BetaCitationCharLocation struct{…}`
+              - `type BetaCitationCharLocation`
 
                 - `Type CharLocation`
 
@@ -15940,7 +16437,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 0
 
-              - `type BetaCitationPageLocation struct{…}`
+              - `type BetaCitationPageLocation`
 
                 - `Type PageLocation`
 
@@ -15962,7 +16459,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-              - `type BetaCitationContentBlockLocation struct{…}`
+              - `type BetaCitationContentBlockLocation`
 
                 - `Type ContentBlockLocation`
 
@@ -15994,7 +16491,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 0
 
-              - `type BetaCitationsWebSearchResultLocation struct{…}`
+              - `type BetaCitationsWebSearchResultLocation`
 
                 - `Type WebSearchResultLocation`
 
@@ -16010,7 +16507,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `URL string`
 
-              - `type BetaCitationSearchResultLocation struct{…}`
+              - `type BetaCitationSearchResultLocation`
 
                 - `Type SearchResultLocation`
 
@@ -16050,7 +16547,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               minLength: 0
 
-          - `type BetaThinkingBlock struct{…}`
+          - `type BetaThinkingBlock`
 
             - `Type Thinking`
 
@@ -16068,7 +16565,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               The text of Claude's thinking process for this block.
 
-          - `type BetaRedactedThinkingBlock struct{…}`
+          - `type BetaRedactedThinkingBlock`
 
             - `Type RedactedThinking`
 
@@ -16082,7 +16579,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type BetaToolUseBlock struct{…}`
+          - `type BetaToolUseBlock`
 
             - `Type ToolUse`
 
@@ -16100,13 +16597,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Caller BetaToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `Type Direct`
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -16116,7 +16613,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
                 - `Type CodeExecution20260120`
 
@@ -16130,7 +16627,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaServerToolUseBlock struct{…}`
+          - `type BetaServerToolUseBlock`
 
             - `Type ServerToolUse`
 
@@ -16162,17 +16659,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebSearchToolResultBlock struct{…}`
+          - `type BetaWebSearchToolResultBlock`
 
             - `Type WebSearchToolResult`
 
@@ -16180,7 +16677,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaWebSearchToolResultBlockContentUnion`
 
-              - `type BetaWebSearchToolResultError struct{…}`
+              - `type BetaWebSearchToolResultError`
 
                 - `Type WebSearchToolResultError`
 
@@ -16220,17 +16717,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebFetchToolResultBlock struct{…}`
+          - `type BetaWebFetchToolResultBlock`
 
             - `Type WebFetchToolResult`
 
@@ -16238,7 +16735,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaWebFetchToolResultBlockContentUnion`
 
-              - `type BetaWebFetchToolResultErrorBlock struct{…}`
+              - `type BetaWebFetchToolResultErrorBlock`
 
                 - `Type WebFetchToolResultError`
 
@@ -16266,7 +16763,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-              - `type BetaWebFetchBlock struct{…}`
+              - `type BetaWebFetchBlock`
 
                 - `Type WebFetchResult`
 
@@ -16288,7 +16785,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Source BetaDocumentBlockSourceUnion`
 
-                    - `type BetaBase64PDFSource struct{…}`
+                    - `type BetaBase64PDFSource`
 
                       - `Type Base64`
 
@@ -16298,7 +16795,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `MediaType ApplicationPDF`
 
-                    - `type BetaPlainTextSource struct{…}`
+                    - `type BetaPlainTextSource`
 
                       - `Type Text`
 
@@ -16324,17 +16821,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaAdvisorToolResultBlock struct{…}`
+          - `type BetaAdvisorToolResultBlock`
 
             - `Type AdvisorToolResult`
 
@@ -16342,7 +16839,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaAdvisorToolResultBlockContentUnion`
 
-              - `type BetaAdvisorToolResultError struct{…}`
+              - `type BetaAdvisorToolResultError`
 
                 - `Type AdvisorToolResultError`
 
@@ -16364,7 +16861,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-              - `type BetaAdvisorResultBlock struct{…}`
+              - `type BetaAdvisorResultBlock`
 
                 - `Type AdvisorResult`
 
@@ -16376,7 +16873,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `Text string`
 
-              - `type BetaAdvisorRedactedResultBlock struct{…}`
+              - `type BetaAdvisorRedactedResultBlock`
 
                 - `Type AdvisorRedactedResult`
 
@@ -16394,7 +16891,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaCodeExecutionToolResultBlock struct{…}`
+          - `type BetaCodeExecutionToolResultBlock`
 
             - `Type CodeExecutionToolResult`
 
@@ -16402,7 +16899,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaCodeExecutionToolResultError struct{…}`
+              - `type BetaCodeExecutionToolResultError`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -16418,7 +16915,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-              - `type BetaCodeExecutionResultBlock struct{…}`
+              - `type BetaCodeExecutionResultBlock`
 
                 - `Type CodeExecutionResult`
 
@@ -16438,7 +16935,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `Stdout string`
 
-              - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+              - `type BetaEncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -16464,7 +16961,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+          - `type BetaBashCodeExecutionToolResultBlock`
 
             - `Type BashCodeExecutionToolResult`
 
@@ -16472,7 +16969,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaBashCodeExecutionToolResultError struct{…}`
+              - `type BetaBashCodeExecutionToolResultError`
 
                 - `Type BashCodeExecutionToolResultError`
 
@@ -16490,7 +16987,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-              - `type BetaBashCodeExecutionResultBlock struct{…}`
+              - `type BetaBashCodeExecutionResultBlock`
 
                 - `Type BashCodeExecutionResult`
 
@@ -16514,7 +17011,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionToolResultBlock`
 
             - `Type TextEditorCodeExecutionToolResult`
 
@@ -16522,7 +17019,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+              - `type BetaTextEditorCodeExecutionToolResultError`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
@@ -16542,7 +17039,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `ErrorMessage string`
 
-              - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionViewResultBlock`
 
                 - `Type TextEditorCodeExecutionViewResult`
 
@@ -16564,7 +17061,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `TotalLines int64`
 
-              - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
                 - `Type TextEditorCodeExecutionCreateResult`
 
@@ -16572,7 +17069,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `IsFileUpdate bool`
 
-              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -16592,7 +17089,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaToolSearchToolResultBlock struct{…}`
+          - `type BetaToolSearchToolResultBlock`
 
             - `Type ToolSearchToolResult`
 
@@ -16600,7 +17097,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaToolSearchToolResultBlockContentUnion`
 
-              - `type BetaToolSearchToolResultError struct{…}`
+              - `type BetaToolSearchToolResultError`
 
                 - `Type ToolSearchToolResultError`
 
@@ -16618,7 +17115,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `ErrorMessage string`
 
-              - `type BetaToolSearchToolSearchResultBlock struct{…}`
+              - `type BetaToolSearchToolSearchResultBlock`
 
                 - `Type ToolSearchToolSearchResult`
 
@@ -16638,7 +17135,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaMCPToolUseBlock struct{…}`
+          - `type BetaMCPToolUseBlock`
 
             - `Type MCPToolUse`
 
@@ -16658,7 +17155,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               The name of the MCP server
 
-          - `type BetaMCPToolResultBlock struct{…}`
+          - `type BetaMCPToolResultBlock`
 
             - `Type MCPToolResult`
 
@@ -16692,7 +17189,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaContainerUploadBlock struct{…}`
+          - `type BetaContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -16702,7 +17199,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `FileID string`
 
-          - `type BetaCompactionBlock struct{…}`
+          - `type BetaCompactionBlock`
 
             A compaction block returned when autocompact is triggered.
 
@@ -16722,7 +17219,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-          - `type BetaFallbackBlock struct{…}`
+            - `Signature string Optional`
+
+              Signature over the summary, to be sent back with the block verbatim
+
+          - `type BetaFallbackBlock`
 
             Marks the point in `content` where one model's output gives way to the next.
 
@@ -16872,7 +17373,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             List of context management edits that were applied.
 
-            - `type BetaClearToolUses20250919EditResponse struct{…}`
+            - `type BetaClearToolUses20250919EditResponse`
 
               - `Type ClearToolUses20250919`
 
@@ -16892,7 +17393,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 0
 
-            - `type BetaClearThinking20251015EditResponse struct{…}`
+            - `type BetaClearThinking20251015EditResponse`
 
               - `Type ClearThinking20251015`
 
@@ -16921,7 +17422,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-            - `type BetaCacheMissModelChanged struct{…}`
+            - `type BetaCacheMissModelChanged`
 
               - `Type ModelChanged`
 
@@ -16931,7 +17432,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissSystemChanged struct{…}`
+            - `type BetaCacheMissSystemChanged`
 
               - `Type SystemChanged`
 
@@ -16941,7 +17442,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissToolsChanged struct{…}`
+            - `type BetaCacheMissToolsChanged`
 
               - `Type ToolsChanged`
 
@@ -16951,7 +17452,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissMessagesChanged struct{…}`
+            - `type BetaCacheMissMessagesChanged`
 
               - `Type MessagesChanged`
 
@@ -16961,13 +17462,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+            - `type BetaCacheMissPreviousMessageNotFound`
 
               - `Type PreviousMessageNotFound`
 
                 default: previous_message_not_found
 
-            - `type BetaCacheMissUnavailable struct{…}`
+            - `type BetaCacheMissUnavailable`
 
               - `Type Unavailable`
 
@@ -17165,7 +17666,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               resulting shift is zero because there was nothing to move. `not_applied`:
               no reprice was applied; the arm's `reason` says why.
 
-              - `type BetaFallbackCreditRedeemed struct{…}`
+              - `type BetaFallbackCreditRedeemed`
 
                 The reprice was applied: the retry is billed as if the conversation
                 had been on the retry model all along.
@@ -17174,7 +17675,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   default: redeemed
 
-              - `type BetaFallbackCreditNotApplied struct{…}`
+              - `type BetaFallbackCreditNotApplied`
 
                 No reprice was applied; `reason` says why.
 
@@ -17246,7 +17747,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-            - `type BetaMessageIterationUsage struct{…}`
+            - `type BetaMessageIterationUsage`
 
               Token usage for a sampling iteration.
 
@@ -17290,7 +17791,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 0
 
-            - `type BetaCompactionIterationUsage struct{…}`
+            - `type BetaCompactionIterationUsage`
 
               Token usage for a compaction iteration.
 
@@ -17328,7 +17829,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 0
 
-            - `type BetaAdvisorMessageIterationUsage struct{…}`
+            - `type BetaAdvisorMessageIterationUsage`
 
               Token usage for an advisor sub-inference iteration.
 
@@ -17372,7 +17873,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 0
 
-            - `type BetaFallbackMessageIterationUsage struct{…}`
+            - `type BetaFallbackMessageIterationUsage`
 
               Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -17485,61 +17986,103 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-        - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+        - `InputTransformations []BetaInputTransformationUnion Optional`
 
-          Changes the API made to the request's input before showing it to the model:
-          one entry per change, in request order. Today the only entry type is
-          `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-          block from the request's `messages` that was removed from the prompt instead
-          of being shown to the model because it failed a binding check. More entry
-          types may be added over time; ignore types you do not recognize.
+          Changes the API made to the request's input before showing it to the model,
+          and blocks that failed a binding check but were left unchanged: one entry per
+          block, in request order. Two entry types today. `thinking_dropped` — a
+          `thinking`, `redacted_thinking` or `connector_text` block from the request's
+          `messages` that was removed from the prompt instead of being shown to the
+          model because it failed a binding check. `thinking_mismatch_allowed` — a
+          `thinking` or `redacted_thinking` block that failed the conversation check
+          (the conversation before it differs from the one it was created in, or it
+          carries no record of one on a model that requires it) and was shown to the
+          model all the same, because that check is not enforced for this request.
+          More entry types may be added over time; ignore types you do not recognize.
 
           Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
           every such response from a model that supports extended thinking, as `[]`
-          when nothing was changed; without the beta, blocks are removed all the same
-          but nothing is reported. Removed blocks contribute nothing to
-          `usage.input_tokens`. When streaming, the array is final in `message_start`;
-          the final `message_delta` event carries it only when a server-side model
-          fallback happened mid-stream, in which case it holds the serving model's
-          entries and replaces the one in `message_start`.
+          when there is no entry to report; without the beta, blocks are removed or
+          left in place all the same but nothing is reported. Removed blocks contribute
+          nothing to `usage.input_tokens`; blocks left in place count as sent. When
+          streaming, the array is final in `message_start`; the final `message_delta`
+          event carries it only when a server-side model fallback happened mid-stream,
+          in which case it holds the serving model's entries and replaces the one in
+          `message_start`.
 
-          - `Type ThinkingDropped`
+          - `type BetaThinkingDroppedInputTransformation`
 
-            Always `thinking_dropped` for this entry type.
+            - `Type ThinkingDropped`
 
-            default: thinking_dropped
+              Always `thinking_dropped` for this entry type.
 
-          - `Path string`
+              default: thinking_dropped
 
-            Where the removed block was in your request, as `messages.{i}.content.{j}`:
-            `i` indexes the `messages` array you sent and `j` that message's `content`
-            array — the same form error messages use.
+            - `Path string`
 
-          - `Reason BetaThinkingDroppedInputTransformationReason`
+              Where the removed block was in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
 
-            Which binding check removed the block: `model_binding_mismatch` — it was
-            created by a model whose reasoning the requested model may not read;
-            `prefix_binding_mismatch` — the conversation before it differs from the
-            conversation it was created in (the rest of that turn's consecutive thinking
-            blocks are removed with it, each with this reason);
-            `organization_binding_mismatch` — it was created under a different
-            organization (an Anthropic organization, AWS account or Google Cloud project)
-            and this organization is not one of its additional organizations;
-            `end_user_binding_mismatch` — it was created for a different end user, or
-            was removed by the consumer-organization binding. A block that would fail
-            several checks reports one reason, in this order of precedence:
-            `organization_binding_mismatch`, `end_user_binding_mismatch`,
-            `model_binding_mismatch`, `prefix_binding_mismatch`.
+            - `Reason BetaThinkingDroppedInputTransformationReason`
 
-            - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+              Which binding check removed the block: `model_binding_mismatch` — it was
+              created by a model whose reasoning the requested model may not read;
+              `prefix_binding_mismatch` — the conversation before it differs from the
+              conversation it was created in (the rest of that turn's consecutive thinking
+              blocks are removed with it, each with this reason);
+              `organization_binding_mismatch` — it was created under a different
+              organization (an Anthropic organization, AWS account or Google Cloud project)
+              and this organization is not one of its additional organizations;
+              `end_user_binding_mismatch` — it was created for a different end user, or
+              was removed by the consumer-organization binding. A block that would fail
+              several checks reports one reason, in this order of precedence:
+              `organization_binding_mismatch`, `end_user_binding_mismatch`,
+              `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-            - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
 
-    - `type BetaMessageBatchErroredResult struct{…}`
+              - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+          - `type BetaThinkingMismatchAllowedInputTransformation`
+
+            - `Type ThinkingMismatchAllowed`
+
+              Always `thinking_mismatch_allowed` for this entry type.
+
+              default: thinking_mismatch_allowed
+
+            - `Path string`
+
+              Where the block is in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
+
+            - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+              Which binding check the block failed; the block was shown to the model all
+              the same. Always `prefix_binding_mismatch` today — the conversation before
+              the block differs from the conversation it was created in, or the block
+              carries no record of one on a model that requires it. Were the check
+              enforced for this request, the block would have been removed or the request
+              rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+              takes the rest of that turn's consecutive thinking blocks, whereas here each
+              block is checked on its own, so `thinking_mismatch_allowed` entries are a
+              lower bound on what enforcement would remove.
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaMessageBatchErroredResult`
 
       - `Type Errored`
 
@@ -17553,7 +18096,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `Error BetaErrorUnion`
 
-          - `type BetaInvalidRequestError struct{…}`
+          - `type BetaInvalidRequestError`
 
             - `Type InvalidRequestError`
 
@@ -17563,7 +18106,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Invalid request
 
-          - `type BetaAuthenticationError struct{…}`
+          - `type BetaAuthenticationError`
 
             - `Type AuthenticationError`
 
@@ -17573,7 +18116,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Authentication error
 
-          - `type BetaBillingError struct{…}`
+          - `type BetaBillingError`
 
             - `Type BillingError`
 
@@ -17583,7 +18126,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Billing error
 
-          - `type BetaPermissionError struct{…}`
+          - `type BetaPermissionError`
 
             - `Type PermissionError`
 
@@ -17593,7 +18136,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Permission denied
 
-          - `type BetaNotFoundError struct{…}`
+          - `type BetaNotFoundError`
 
             - `Type NotFoundError`
 
@@ -17603,7 +18146,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Not found
 
-          - `type BetaRateLimitError struct{…}`
+          - `type BetaRateLimitError`
 
             - `Type RateLimitError`
 
@@ -17613,7 +18156,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Rate limited
 
-          - `type BetaGatewayTimeoutError struct{…}`
+          - `type BetaGatewayTimeoutError`
 
             - `Type TimeoutError`
 
@@ -17623,7 +18166,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Request timeout
 
-          - `type BetaAPIError struct{…}`
+          - `type BetaAPIError`
 
             - `Type APIError`
 
@@ -17633,7 +18176,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Internal server error
 
-          - `type BetaOverloadedError struct{…}`
+          - `type BetaOverloadedError`
 
             - `Type OverloadedError`
 
@@ -17645,13 +18188,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `RequestID string`
 
-    - `type BetaMessageBatchCanceledResult struct{…}`
+    - `type BetaMessageBatchCanceledResult`
 
       - `Type Canceled`
 
         default: canceled
 
-    - `type BetaMessageBatchExpiredResult struct{…}`
+    - `type BetaMessageBatchExpiredResult`
 
       - `Type Expired`
 
@@ -17707,7 +18250,7 @@ Create Agent
 
     Body param: Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-    - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
+    - `type BetaManagedAgentsModelConfigParamsResp`
 
       An object that defines additional configuration control over model use
 
@@ -17797,31 +18340,31 @@ Create Agent
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMax BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "max"`
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -17881,7 +18424,7 @@ Create Agent
 
     Body param: Skills available to the agent.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp struct{…}`
+    - `type BetaManagedAgentsAnthropicSkillParamsResp`
 
       An Anthropic-managed skill.
 
@@ -17899,7 +18442,7 @@ Create Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
+    - `type BetaManagedAgentsCustomSkillParamsResp`
 
       A user-created custom skill.
 
@@ -17927,7 +18470,7 @@ Create Agent
 
     Body param: Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
@@ -17937,7 +18480,7 @@ Create Agent
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsBashToolConfigParamsResp`
 
           Configuration override for the bash tool.
 
@@ -17955,25 +18498,25 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsEditToolConfigParamsResp`
 
           Configuration override for the edit tool.
 
@@ -17991,19 +18534,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsReadToolConfigParamsResp`
 
           Configuration override for the read tool.
 
@@ -18021,19 +18564,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWriteToolConfigParamsResp`
 
           Configuration override for the write tool.
 
@@ -18051,19 +18594,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsGlobToolConfigParamsResp`
 
           Configuration override for the glob tool.
 
@@ -18081,19 +18624,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsGrepToolConfigParamsResp`
 
           Configuration override for the grep tool.
 
@@ -18111,19 +18654,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
 
           Configuration override for the web_fetch tool.
 
@@ -18155,19 +18698,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
 
           Configuration override for the web_search tool.
 
@@ -18193,15 +18736,15 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -18247,19 +18790,19 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp struct{…}`
+    - `type BetaManagedAgentsMCPToolsetParamsResp`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -18289,15 +18832,15 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -18313,19 +18856,19 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp struct{…}`
+    - `type BetaManagedAgentsCustomToolParamsResp`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -18451,6 +18994,8 @@ Create Agent
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18459,7 +19004,7 @@ Create Agent
 
 #### Returns
 
-- `type BetaManagedAgentsAgent struct{…}`
+- `type BetaManagedAgentsAgent`
 
   A Managed Agents `agent`.
 
@@ -18569,31 +19114,31 @@ Create Agent
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-      - `type BetaManagedAgentsEffortLow struct{…}`
+      - `type BetaManagedAgentsEffortLow`
 
         Low effort. Favors latency over reasoning depth.
 
         - `Type BetaManagedAgentsEffortLowType`
 
-      - `type BetaManagedAgentsEffortMedium struct{…}`
+      - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
 
-      - `type BetaManagedAgentsEffortHigh struct{…}`
+      - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
         - `Type BetaManagedAgentsEffortHighType`
 
-      - `type BetaManagedAgentsEffortXhigh struct{…}`
+      - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
 
-      - `type BetaManagedAgentsEffortMax struct{…}`
+      - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
@@ -18621,7 +19166,7 @@ Create Agent
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `type BetaManagedAgentsAgentReference struct{…}`
+      - `type BetaManagedAgentsAgentReference`
 
         A resolved agent reference with a concrete version.
 
@@ -18633,7 +19178,7 @@ Create Agent
 
           format: int32
 
-      - `type BetaManagedAgentsAdvisor struct{…}`
+      - `type BetaManagedAgentsAdvisor`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -18647,7 +19192,7 @@ Create Agent
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
 
-    - `type BetaManagedAgentsAnthropicSkill struct{…}`
+    - `type BetaManagedAgentsAnthropicSkill`
 
       A resolved Anthropic-managed skill.
 
@@ -18657,7 +19202,7 @@ Create Agent
 
       - `Version string`
 
-    - `type BetaManagedAgentsCustomSkill struct{…}`
+    - `type BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
 
@@ -18671,13 +19216,13 @@ Create Agent
 
   - `Tools []BetaManagedAgentsAgentToolUnion`
 
-    - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-        - `type BetaManagedAgentsBashToolConfig struct{…}`
+        - `type BetaManagedAgentsBashToolConfig`
 
           Configuration for the bash tool.
 
@@ -18691,25 +19236,25 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfig struct{…}`
+        - `type BetaManagedAgentsEditToolConfig`
 
           Configuration for the edit tool.
 
@@ -18723,19 +19268,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfig struct{…}`
+        - `type BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
 
@@ -18749,19 +19294,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfig struct{…}`
+        - `type BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
 
@@ -18775,19 +19320,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfig struct{…}`
+        - `type BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
 
@@ -18801,19 +19346,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfig struct{…}`
+        - `type BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
 
@@ -18827,19 +19372,19 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
 
@@ -18853,15 +19398,15 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -18873,7 +19418,7 @@ Create Agent
 
             format: int32
 
-        - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfig`
 
           Configuration for the web_search tool.
 
@@ -18887,15 +19432,15 @@ Create Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -18943,19 +19488,19 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolset struct{…}`
+    - `type BetaManagedAgentsMCPToolset`
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -18969,15 +19514,15 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -18991,21 +19536,21 @@ Create Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `MCPServerName string`
 
-    - `type BetaManagedAgentsCustomTool struct{…}`
+    - `type BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
 
@@ -19280,6 +19825,8 @@ List Agents
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19288,7 +19835,7 @@ List Agents
 
 #### Returns
 
-- `type BetaManagedAgentsAgent struct{…}`
+- `type BetaManagedAgentsAgent`
 
   A Managed Agents `agent`.
 
@@ -19398,31 +19945,31 @@ List Agents
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-      - `type BetaManagedAgentsEffortLow struct{…}`
+      - `type BetaManagedAgentsEffortLow`
 
         Low effort. Favors latency over reasoning depth.
 
         - `Type BetaManagedAgentsEffortLowType`
 
-      - `type BetaManagedAgentsEffortMedium struct{…}`
+      - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
 
-      - `type BetaManagedAgentsEffortHigh struct{…}`
+      - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
         - `Type BetaManagedAgentsEffortHighType`
 
-      - `type BetaManagedAgentsEffortXhigh struct{…}`
+      - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
 
-      - `type BetaManagedAgentsEffortMax struct{…}`
+      - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
@@ -19450,7 +19997,7 @@ List Agents
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `type BetaManagedAgentsAgentReference struct{…}`
+      - `type BetaManagedAgentsAgentReference`
 
         A resolved agent reference with a concrete version.
 
@@ -19462,7 +20009,7 @@ List Agents
 
           format: int32
 
-      - `type BetaManagedAgentsAdvisor struct{…}`
+      - `type BetaManagedAgentsAdvisor`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -19476,7 +20023,7 @@ List Agents
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
 
-    - `type BetaManagedAgentsAnthropicSkill struct{…}`
+    - `type BetaManagedAgentsAnthropicSkill`
 
       A resolved Anthropic-managed skill.
 
@@ -19486,7 +20033,7 @@ List Agents
 
       - `Version string`
 
-    - `type BetaManagedAgentsCustomSkill struct{…}`
+    - `type BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
 
@@ -19500,13 +20047,13 @@ List Agents
 
   - `Tools []BetaManagedAgentsAgentToolUnion`
 
-    - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-        - `type BetaManagedAgentsBashToolConfig struct{…}`
+        - `type BetaManagedAgentsBashToolConfig`
 
           Configuration for the bash tool.
 
@@ -19520,25 +20067,25 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfig struct{…}`
+        - `type BetaManagedAgentsEditToolConfig`
 
           Configuration for the edit tool.
 
@@ -19552,19 +20099,19 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfig struct{…}`
+        - `type BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
 
@@ -19578,19 +20125,19 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfig struct{…}`
+        - `type BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
 
@@ -19604,19 +20151,19 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfig struct{…}`
+        - `type BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
 
@@ -19630,19 +20177,19 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfig struct{…}`
+        - `type BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
 
@@ -19656,19 +20203,19 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
 
@@ -19682,15 +20229,15 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -19702,7 +20249,7 @@ List Agents
 
             format: int32
 
-        - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfig`
 
           Configuration for the web_search tool.
 
@@ -19716,15 +20263,15 @@ List Agents
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -19772,19 +20319,19 @@ List Agents
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolset struct{…}`
+    - `type BetaManagedAgentsMCPToolset`
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -19798,15 +20345,15 @@ List Agents
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -19820,21 +20367,21 @@ List Agents
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `MCPServerName string`
 
-    - `type BetaManagedAgentsCustomTool struct{…}`
+    - `type BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
 
@@ -20091,6 +20638,8 @@ Get Agent
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -20099,7 +20648,7 @@ Get Agent
 
 #### Returns
 
-- `type BetaManagedAgentsAgent struct{…}`
+- `type BetaManagedAgentsAgent`
 
   A Managed Agents `agent`.
 
@@ -20209,31 +20758,31 @@ Get Agent
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-      - `type BetaManagedAgentsEffortLow struct{…}`
+      - `type BetaManagedAgentsEffortLow`
 
         Low effort. Favors latency over reasoning depth.
 
         - `Type BetaManagedAgentsEffortLowType`
 
-      - `type BetaManagedAgentsEffortMedium struct{…}`
+      - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
 
-      - `type BetaManagedAgentsEffortHigh struct{…}`
+      - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
         - `Type BetaManagedAgentsEffortHighType`
 
-      - `type BetaManagedAgentsEffortXhigh struct{…}`
+      - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
 
-      - `type BetaManagedAgentsEffortMax struct{…}`
+      - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
@@ -20261,7 +20810,7 @@ Get Agent
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `type BetaManagedAgentsAgentReference struct{…}`
+      - `type BetaManagedAgentsAgentReference`
 
         A resolved agent reference with a concrete version.
 
@@ -20273,7 +20822,7 @@ Get Agent
 
           format: int32
 
-      - `type BetaManagedAgentsAdvisor struct{…}`
+      - `type BetaManagedAgentsAdvisor`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -20287,7 +20836,7 @@ Get Agent
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
 
-    - `type BetaManagedAgentsAnthropicSkill struct{…}`
+    - `type BetaManagedAgentsAnthropicSkill`
 
       A resolved Anthropic-managed skill.
 
@@ -20297,7 +20846,7 @@ Get Agent
 
       - `Version string`
 
-    - `type BetaManagedAgentsCustomSkill struct{…}`
+    - `type BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
 
@@ -20311,13 +20860,13 @@ Get Agent
 
   - `Tools []BetaManagedAgentsAgentToolUnion`
 
-    - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-        - `type BetaManagedAgentsBashToolConfig struct{…}`
+        - `type BetaManagedAgentsBashToolConfig`
 
           Configuration for the bash tool.
 
@@ -20331,25 +20880,25 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfig struct{…}`
+        - `type BetaManagedAgentsEditToolConfig`
 
           Configuration for the edit tool.
 
@@ -20363,19 +20912,19 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfig struct{…}`
+        - `type BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
 
@@ -20389,19 +20938,19 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfig struct{…}`
+        - `type BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
 
@@ -20415,19 +20964,19 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfig struct{…}`
+        - `type BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
 
@@ -20441,19 +20990,19 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfig struct{…}`
+        - `type BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
 
@@ -20467,19 +21016,19 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
 
@@ -20493,15 +21042,15 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -20513,7 +21062,7 @@ Get Agent
 
             format: int32
 
-        - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfig`
 
           Configuration for the web_search tool.
 
@@ -20527,15 +21076,15 @@ Get Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -20583,19 +21132,19 @@ Get Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolset struct{…}`
+    - `type BetaManagedAgentsMCPToolset`
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -20609,15 +21158,15 @@ Get Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -20631,21 +21180,21 @@ Get Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `MCPServerName string`
 
-    - `type BetaManagedAgentsCustomTool struct{…}`
+    - `type BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
 
@@ -20829,7 +21378,7 @@ Update Agent
 
     Body param: Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-    - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
+    - `type BetaManagedAgentsModelConfigParamsResp`
 
       An object that defines additional configuration control over model use
 
@@ -20919,31 +21468,31 @@ Update Agent
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMax BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "max"`
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -20975,7 +21524,7 @@ Update Agent
 
     Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp struct{…}`
+    - `type BetaManagedAgentsAnthropicSkillParamsResp`
 
       An Anthropic-managed skill.
 
@@ -20993,7 +21542,7 @@ Update Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
+    - `type BetaManagedAgentsCustomSkillParamsResp`
 
       A user-created custom skill.
 
@@ -21021,7 +21570,7 @@ Update Agent
 
     Body param: Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
@@ -21031,7 +21580,7 @@ Update Agent
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsBashToolConfigParamsResp`
 
           Configuration override for the bash tool.
 
@@ -21049,25 +21598,25 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsEditToolConfigParamsResp`
 
           Configuration override for the edit tool.
 
@@ -21085,19 +21634,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsReadToolConfigParamsResp`
 
           Configuration override for the read tool.
 
@@ -21115,19 +21664,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWriteToolConfigParamsResp`
 
           Configuration override for the write tool.
 
@@ -21145,19 +21694,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsGlobToolConfigParamsResp`
 
           Configuration override for the glob tool.
 
@@ -21175,19 +21724,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsGrepToolConfigParamsResp`
 
           Configuration override for the grep tool.
 
@@ -21205,19 +21754,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
 
           Configuration override for the web_fetch tool.
 
@@ -21249,19 +21798,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
 
           Configuration override for the web_search tool.
 
@@ -21287,15 +21836,15 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -21341,19 +21890,19 @@ Update Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp struct{…}`
+    - `type BetaManagedAgentsMCPToolsetParamsResp`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -21383,15 +21932,15 @@ Update Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -21407,19 +21956,19 @@ Update Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp struct{…}`
+    - `type BetaManagedAgentsCustomToolParamsResp`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -21551,6 +22100,8 @@ Update Agent
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -21559,7 +22110,7 @@ Update Agent
 
 #### Returns
 
-- `type BetaManagedAgentsAgent struct{…}`
+- `type BetaManagedAgentsAgent`
 
   A Managed Agents `agent`.
 
@@ -21669,31 +22220,31 @@ Update Agent
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-      - `type BetaManagedAgentsEffortLow struct{…}`
+      - `type BetaManagedAgentsEffortLow`
 
         Low effort. Favors latency over reasoning depth.
 
         - `Type BetaManagedAgentsEffortLowType`
 
-      - `type BetaManagedAgentsEffortMedium struct{…}`
+      - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
 
-      - `type BetaManagedAgentsEffortHigh struct{…}`
+      - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
         - `Type BetaManagedAgentsEffortHighType`
 
-      - `type BetaManagedAgentsEffortXhigh struct{…}`
+      - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
 
-      - `type BetaManagedAgentsEffortMax struct{…}`
+      - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
@@ -21721,7 +22272,7 @@ Update Agent
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `type BetaManagedAgentsAgentReference struct{…}`
+      - `type BetaManagedAgentsAgentReference`
 
         A resolved agent reference with a concrete version.
 
@@ -21733,7 +22284,7 @@ Update Agent
 
           format: int32
 
-      - `type BetaManagedAgentsAdvisor struct{…}`
+      - `type BetaManagedAgentsAdvisor`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -21747,7 +22298,7 @@ Update Agent
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
 
-    - `type BetaManagedAgentsAnthropicSkill struct{…}`
+    - `type BetaManagedAgentsAnthropicSkill`
 
       A resolved Anthropic-managed skill.
 
@@ -21757,7 +22308,7 @@ Update Agent
 
       - `Version string`
 
-    - `type BetaManagedAgentsCustomSkill struct{…}`
+    - `type BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
 
@@ -21771,13 +22322,13 @@ Update Agent
 
   - `Tools []BetaManagedAgentsAgentToolUnion`
 
-    - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-        - `type BetaManagedAgentsBashToolConfig struct{…}`
+        - `type BetaManagedAgentsBashToolConfig`
 
           Configuration for the bash tool.
 
@@ -21791,25 +22342,25 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfig struct{…}`
+        - `type BetaManagedAgentsEditToolConfig`
 
           Configuration for the edit tool.
 
@@ -21823,19 +22374,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfig struct{…}`
+        - `type BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
 
@@ -21849,19 +22400,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfig struct{…}`
+        - `type BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
 
@@ -21875,19 +22426,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfig struct{…}`
+        - `type BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
 
@@ -21901,19 +22452,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfig struct{…}`
+        - `type BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
 
@@ -21927,19 +22478,19 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
 
@@ -21953,15 +22504,15 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -21973,7 +22524,7 @@ Update Agent
 
             format: int32
 
-        - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfig`
 
           Configuration for the web_search tool.
 
@@ -21987,15 +22538,15 @@ Update Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -22043,19 +22594,19 @@ Update Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolset struct{…}`
+    - `type BetaManagedAgentsMCPToolset`
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -22069,15 +22620,15 @@ Update Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -22091,21 +22642,21 @@ Update Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `MCPServerName string`
 
-    - `type BetaManagedAgentsCustomTool struct{…}`
+    - `type BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
 
@@ -22357,6 +22908,8 @@ Archive Agent
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -22365,7 +22918,7 @@ Archive Agent
 
 #### Returns
 
-- `type BetaManagedAgentsAgent struct{…}`
+- `type BetaManagedAgentsAgent`
 
   A Managed Agents `agent`.
 
@@ -22475,31 +23028,31 @@ Archive Agent
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-      - `type BetaManagedAgentsEffortLow struct{…}`
+      - `type BetaManagedAgentsEffortLow`
 
         Low effort. Favors latency over reasoning depth.
 
         - `Type BetaManagedAgentsEffortLowType`
 
-      - `type BetaManagedAgentsEffortMedium struct{…}`
+      - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
 
-      - `type BetaManagedAgentsEffortHigh struct{…}`
+      - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
         - `Type BetaManagedAgentsEffortHighType`
 
-      - `type BetaManagedAgentsEffortXhigh struct{…}`
+      - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
 
-      - `type BetaManagedAgentsEffortMax struct{…}`
+      - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
@@ -22527,7 +23080,7 @@ Archive Agent
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `type BetaManagedAgentsAgentReference struct{…}`
+      - `type BetaManagedAgentsAgentReference`
 
         A resolved agent reference with a concrete version.
 
@@ -22539,7 +23092,7 @@ Archive Agent
 
           format: int32
 
-      - `type BetaManagedAgentsAdvisor struct{…}`
+      - `type BetaManagedAgentsAdvisor`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -22553,7 +23106,7 @@ Archive Agent
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
 
-    - `type BetaManagedAgentsAnthropicSkill struct{…}`
+    - `type BetaManagedAgentsAnthropicSkill`
 
       A resolved Anthropic-managed skill.
 
@@ -22563,7 +23116,7 @@ Archive Agent
 
       - `Version string`
 
-    - `type BetaManagedAgentsCustomSkill struct{…}`
+    - `type BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
 
@@ -22577,13 +23130,13 @@ Archive Agent
 
   - `Tools []BetaManagedAgentsAgentToolUnion`
 
-    - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-        - `type BetaManagedAgentsBashToolConfig struct{…}`
+        - `type BetaManagedAgentsBashToolConfig`
 
           Configuration for the bash tool.
 
@@ -22597,25 +23150,25 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfig struct{…}`
+        - `type BetaManagedAgentsEditToolConfig`
 
           Configuration for the edit tool.
 
@@ -22629,19 +23182,19 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfig struct{…}`
+        - `type BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
 
@@ -22655,19 +23208,19 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfig struct{…}`
+        - `type BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
 
@@ -22681,19 +23234,19 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfig struct{…}`
+        - `type BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
 
@@ -22707,19 +23260,19 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfig struct{…}`
+        - `type BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
 
@@ -22733,19 +23286,19 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
 
@@ -22759,15 +23312,15 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -22779,7 +23332,7 @@ Archive Agent
 
             format: int32
 
-        - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfig`
 
           Configuration for the web_search tool.
 
@@ -22793,15 +23346,15 @@ Archive Agent
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -22849,19 +23402,19 @@ Archive Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolset struct{…}`
+    - `type BetaManagedAgentsMCPToolset`
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -22875,15 +23428,15 @@ Archive Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -22897,21 +23450,21 @@ Archive Agent
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `MCPServerName string`
 
-    - `type BetaManagedAgentsCustomTool struct{…}`
+    - `type BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
 
@@ -23173,6 +23726,8 @@ List Agent Versions
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -23181,7 +23736,7 @@ List Agent Versions
 
 #### Returns
 
-- `type BetaManagedAgentsAgent struct{…}`
+- `type BetaManagedAgentsAgent`
 
   A Managed Agents `agent`.
 
@@ -23291,31 +23846,31 @@ List Agent Versions
 
       How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-      - `type BetaManagedAgentsEffortLow struct{…}`
+      - `type BetaManagedAgentsEffortLow`
 
         Low effort. Favors latency over reasoning depth.
 
         - `Type BetaManagedAgentsEffortLowType`
 
-      - `type BetaManagedAgentsEffortMedium struct{…}`
+      - `type BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
         - `Type BetaManagedAgentsEffortMediumType`
 
-      - `type BetaManagedAgentsEffortHigh struct{…}`
+      - `type BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
         - `Type BetaManagedAgentsEffortHighType`
 
-      - `type BetaManagedAgentsEffortXhigh struct{…}`
+      - `type BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
         - `Type BetaManagedAgentsEffortXhighType`
 
-      - `type BetaManagedAgentsEffortMax struct{…}`
+      - `type BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
@@ -23343,7 +23898,7 @@ List Agent Versions
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `type BetaManagedAgentsAgentReference struct{…}`
+      - `type BetaManagedAgentsAgentReference`
 
         A resolved agent reference with a concrete version.
 
@@ -23355,7 +23910,7 @@ List Agent Versions
 
           format: int32
 
-      - `type BetaManagedAgentsAdvisor struct{…}`
+      - `type BetaManagedAgentsAdvisor`
 
         Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -23369,7 +23924,7 @@ List Agent Versions
 
   - `Skills []BetaManagedAgentsAgentSkillUnion`
 
-    - `type BetaManagedAgentsAnthropicSkill struct{…}`
+    - `type BetaManagedAgentsAnthropicSkill`
 
       A resolved Anthropic-managed skill.
 
@@ -23379,7 +23934,7 @@ List Agent Versions
 
       - `Version string`
 
-    - `type BetaManagedAgentsCustomSkill struct{…}`
+    - `type BetaManagedAgentsCustomSkill`
 
       A resolved user-created custom skill.
 
@@ -23393,13 +23948,13 @@ List Agent Versions
 
   - `Tools []BetaManagedAgentsAgentToolUnion`
 
-    - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+    - `type BetaManagedAgentsAgentToolset20260401`
 
       - `Type BetaManagedAgentsAgentToolset20260401Type`
 
       - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-        - `type BetaManagedAgentsBashToolConfig struct{…}`
+        - `type BetaManagedAgentsBashToolConfig`
 
           Configuration for the bash tool.
 
@@ -23413,25 +23968,25 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
               - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
               - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfig struct{…}`
+        - `type BetaManagedAgentsEditToolConfig`
 
           Configuration for the edit tool.
 
@@ -23445,19 +24000,19 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfig struct{…}`
+        - `type BetaManagedAgentsReadToolConfig`
 
           Configuration for the read tool.
 
@@ -23471,19 +24026,19 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfig struct{…}`
+        - `type BetaManagedAgentsWriteToolConfig`
 
           Configuration for the write tool.
 
@@ -23497,19 +24052,19 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfig struct{…}`
+        - `type BetaManagedAgentsGlobToolConfig`
 
           Configuration for the glob tool.
 
@@ -23523,19 +24078,19 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfig struct{…}`
+        - `type BetaManagedAgentsGrepToolConfig`
 
           Configuration for the grep tool.
 
@@ -23549,19 +24104,19 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebFetchToolConfig`
 
           Configuration for the web_fetch tool.
 
@@ -23575,15 +24130,15 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -23595,7 +24150,7 @@ List Agent Versions
 
             format: int32
 
-        - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+        - `type BetaManagedAgentsWebSearchToolConfig`
 
           Configuration for the web_search tool.
 
@@ -23609,15 +24164,15 @@ List Agent Versions
 
             Permission policy for tool execution.
 
-            - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAllowPolicy`
 
               Tool calls are automatically approved without user confirmation.
 
-            - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+            - `type BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-            - `type BetaManagedAgentsAutoPolicy struct{…}`
+            - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -23665,19 +24220,19 @@ List Agent Versions
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolset struct{…}`
+    - `type BetaManagedAgentsMCPToolset`
 
       - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -23691,15 +24246,15 @@ List Agent Versions
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -23713,21 +24268,21 @@ List Agent Versions
 
           Permission policy for tool execution.
 
-          - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAllowPolicy`
 
             Tool calls are automatically approved without user confirmation.
 
-          - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+          - `type BetaManagedAgentsAlwaysAskPolicy`
 
             Tool calls require user confirmation before execution.
 
-          - `type BetaManagedAgentsAutoPolicy struct{…}`
+          - `type BetaManagedAgentsAutoPolicy`
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
       - `MCPServerName string`
 
-    - `type BetaManagedAgentsCustomTool struct{…}`
+    - `type BetaManagedAgentsCustomTool`
 
       A custom tool as returned in API responses.
 
@@ -23894,7 +24449,7 @@ Create a new environment with the specified configuration.
 
     Body param: Environment configuration
 
-    - `type BetaCloudConfigParamsResp struct{…}`
+    - `type BetaCloudConfigParamsResp`
 
       Request params for `cloud` environment configuration.
 
@@ -23909,7 +24464,7 @@ Create a new environment with the specified configuration.
 
         Network configuration policy. Omit on update to preserve the existing value.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -23917,7 +24472,7 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetworkParamsResp struct{…}`
+        - `type BetaLimitedNetworkParamsResp`
 
           Limited network request params.
 
@@ -23978,7 +24533,7 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfigParamsResp struct{…}`
+    - `type BetaSelfHostedConfigParamsResp`
 
       Request params for `self_hosted` environment configuration.
 
@@ -24102,6 +24657,8 @@ Create a new environment with the specified configuration.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -24110,7 +24667,7 @@ Create a new environment with the specified configuration.
 
 #### Returns
 
-- `type BetaEnvironment struct{…}`
+- `type BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -24132,7 +24689,7 @@ Create a new environment with the specified configuration.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `type BetaCloudConfig struct{…}`
+    - `type BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -24144,7 +24701,7 @@ Create a new environment with the specified configuration.
 
         Network configuration policy.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -24152,7 +24709,7 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetwork struct{…}`
+        - `type BetaLimitedNetwork`
 
           Limited network access.
 
@@ -24206,7 +24763,7 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfig struct{…}`
+    - `type BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -24442,6 +24999,8 @@ List environments with pagination support.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -24450,7 +25009,7 @@ List environments with pagination support.
 
 #### Returns
 
-- `type BetaEnvironment struct{…}`
+- `type BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -24472,7 +25031,7 @@ List environments with pagination support.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `type BetaCloudConfig struct{…}`
+    - `type BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -24484,7 +25043,7 @@ List environments with pagination support.
 
         Network configuration policy.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -24492,7 +25051,7 @@ List environments with pagination support.
 
             Network policy type
 
-        - `type BetaLimitedNetwork struct{…}`
+        - `type BetaLimitedNetwork`
 
           Limited network access.
 
@@ -24546,7 +25105,7 @@ List environments with pagination support.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfig struct{…}`
+    - `type BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -24773,6 +25332,8 @@ Retrieve a specific environment by ID.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -24781,7 +25342,7 @@ Retrieve a specific environment by ID.
 
 #### Returns
 
-- `type BetaEnvironment struct{…}`
+- `type BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -24803,7 +25364,7 @@ Retrieve a specific environment by ID.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `type BetaCloudConfig struct{…}`
+    - `type BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -24815,7 +25376,7 @@ Retrieve a specific environment by ID.
 
         Network configuration policy.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -24823,7 +25384,7 @@ Retrieve a specific environment by ID.
 
             Network policy type
 
-        - `type BetaLimitedNetwork struct{…}`
+        - `type BetaLimitedNetwork`
 
           Limited network access.
 
@@ -24877,7 +25438,7 @@ Retrieve a specific environment by ID.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfig struct{…}`
+    - `type BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -25009,7 +25570,7 @@ Update an existing environment's configuration.
 
     Body param: Updated environment configuration
 
-    - `type BetaCloudConfigParamsResp struct{…}`
+    - `type BetaCloudConfigParamsResp`
 
       Request params for `cloud` environment configuration.
 
@@ -25024,7 +25585,7 @@ Update an existing environment's configuration.
 
         Network configuration policy. Omit on update to preserve the existing value.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -25032,7 +25593,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetworkParamsResp struct{…}`
+        - `type BetaLimitedNetworkParamsResp`
 
           Limited network request params.
 
@@ -25093,7 +25654,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfigParamsResp struct{…}`
+    - `type BetaSelfHostedConfigParamsResp`
 
       Request params for `self_hosted` environment configuration.
 
@@ -25223,6 +25784,8 @@ Update an existing environment's configuration.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -25231,7 +25794,7 @@ Update an existing environment's configuration.
 
 #### Returns
 
-- `type BetaEnvironment struct{…}`
+- `type BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -25253,7 +25816,7 @@ Update an existing environment's configuration.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `type BetaCloudConfig struct{…}`
+    - `type BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -25265,7 +25828,7 @@ Update an existing environment's configuration.
 
         Network configuration policy.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -25273,7 +25836,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetwork struct{…}`
+        - `type BetaLimitedNetwork`
 
           Limited network access.
 
@@ -25327,7 +25890,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfig struct{…}`
+    - `type BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -25553,6 +26116,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -25561,7 +26126,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 #### Returns
 
-- `type BetaEnvironmentDeleteResponse struct{…}`
+- `type BetaEnvironmentDeleteResponse`
 
   Response after deleting an environment.
 
@@ -25725,6 +26290,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -25733,7 +26300,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 #### Returns
 
-- `type BetaEnvironment struct{…}`
+- `type BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -25755,7 +26322,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `type BetaCloudConfig struct{…}`
+    - `type BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -25767,7 +26334,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
         Network configuration policy.
 
-        - `type BetaUnrestrictedNetwork struct{…}`
+        - `type BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -25775,7 +26342,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
             Network policy type
 
-        - `type BetaLimitedNetwork struct{…}`
+        - `type BetaLimitedNetwork`
 
           Limited network access.
 
@@ -25829,7 +26396,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
           Python packages to install
 
-    - `type BetaSelfHostedConfig struct{…}`
+    - `type BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 
@@ -26063,6 +26630,8 @@ Retrieve detailed information about a specific work item.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26071,7 +26640,7 @@ Retrieve detailed information about a specific work item.
 
 #### Returns
 
-- `type BetaSelfHostedWork struct{…}`
+- `type BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -26333,13 +26902,15 @@ Long poll for work items in the queue.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `AnthropicWorkerID param.Field[string] Optional`
 
     Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
 #### Returns
 
-- `type BetaSelfHostedWork struct{…}`
+- `type BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -26591,9 +27162,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaSelfHostedWork struct{…}`
+- `type BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -26855,9 +27428,11 @@ Record a heartbeat for a work item to maintain the lease.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaSelfHostedWorkHeartbeatResponse struct{…}`
+- `type BetaSelfHostedWorkHeartbeatResponse`
 
   Response after recording a heartbeat for a work item.
 
@@ -27058,6 +27633,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27066,7 +27643,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 #### Returns
 
-- `type BetaSelfHostedWork struct{…}`
+- `type BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -27327,9 +27904,11 @@ List work items in an environment.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaSelfHostedWork struct{…}`
+- `type BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -27590,6 +28169,8 @@ Update work item metadata with merge semantics.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27598,7 +28179,7 @@ Update work item metadata with merge semantics.
 
 #### Returns
 
-- `type BetaSelfHostedWork struct{…}`
+- `type BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -27851,6 +28432,8 @@ Get statistics about the work queue for an environment.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27859,7 +28442,7 @@ Get statistics about the work queue for an environment.
 
 #### Returns
 
-- `type BetaSelfHostedWorkQueueStats struct{…}`
+- `type BetaSelfHostedWorkQueueStats`
 
   Statistics about the work queue for an environment.
 
@@ -27950,7 +28533,7 @@ Create Session
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentParamsResp`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -27968,7 +28551,7 @@ Create Session
 
         format: int32
 
-    - `type BetaManagedAgentsAgentWithOverridesParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentWithOverridesParamsResp`
 
       Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
@@ -28002,7 +28585,7 @@ Create Session
 
         Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
-        - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
+        - `type BetaManagedAgentsModelConfigParamsResp`
 
           An object that defines additional configuration control over model use
 
@@ -28092,31 +28675,31 @@ Create Session
 
               - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMax BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "max"`
 
-            - `type BetaManagedAgentsEffortLow struct{…}`
+            - `type BetaManagedAgentsEffortLow`
 
               Low effort. Favors latency over reasoning depth.
 
               - `Type BetaManagedAgentsEffortLowType`
 
-            - `type BetaManagedAgentsEffortMedium struct{…}`
+            - `type BetaManagedAgentsEffortMedium`
 
               Medium effort. Balances latency and reasoning depth.
 
               - `Type BetaManagedAgentsEffortMediumType`
 
-            - `type BetaManagedAgentsEffortHigh struct{…}`
+            - `type BetaManagedAgentsEffortHigh`
 
               High effort. Favors reasoning depth.
 
               - `Type BetaManagedAgentsEffortHighType`
 
-            - `type BetaManagedAgentsEffortXhigh struct{…}`
+            - `type BetaManagedAgentsEffortXhigh`
 
               Extra-high effort. Not all models accept this level.
 
               - `Type BetaManagedAgentsEffortXhighType`
 
-            - `type BetaManagedAgentsEffortMax struct{…}`
+            - `type BetaManagedAgentsEffortMax`
 
               Maximum effort. Favors reasoning depth over latency.
 
@@ -28138,7 +28721,7 @@ Create Session
 
         Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
 
-        - `type BetaManagedAgentsAnthropicSkillParamsResp struct{…}`
+        - `type BetaManagedAgentsAnthropicSkillParamsResp`
 
           An Anthropic-managed skill.
 
@@ -28156,7 +28739,7 @@ Create Session
 
             minLength: 1, maxLength: 64
 
-        - `type BetaManagedAgentsCustomSkillParamsResp struct{…}`
+        - `type BetaManagedAgentsCustomSkillParamsResp`
 
           A user-created custom skill.
 
@@ -28184,7 +28767,7 @@ Create Session
 
         Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
 
-        - `type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
 
           Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
@@ -28194,7 +28777,7 @@ Create Session
 
             Per-tool configuration overrides.
 
-            - `type BetaManagedAgentsBashToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsBashToolConfigParamsResp`
 
               Configuration override for the bash tool.
 
@@ -28212,25 +28795,25 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
                   - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Type Auto`
 
-            - `type BetaManagedAgentsEditToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsEditToolConfigParamsResp`
 
               Configuration override for the edit tool.
 
@@ -28248,19 +28831,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsReadToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsReadToolConfigParamsResp`
 
               Configuration override for the read tool.
 
@@ -28278,19 +28861,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWriteToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsWriteToolConfigParamsResp`
 
               Configuration override for the write tool.
 
@@ -28308,19 +28891,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGlobToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsGlobToolConfigParamsResp`
 
               Configuration override for the glob tool.
 
@@ -28338,19 +28921,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGrepToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsGrepToolConfigParamsResp`
 
               Configuration override for the grep tool.
 
@@ -28368,19 +28951,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWebFetchToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
 
               Configuration override for the web_fetch tool.
 
@@ -28412,19 +28995,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWebSearchToolConfigParamsResp struct{…}`
+            - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
 
               Configuration override for the web_search tool.
 
@@ -28450,15 +29033,15 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -28504,19 +29087,19 @@ Create Session
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsMCPToolsetParamsResp struct{…}`
+        - `type BetaManagedAgentsMCPToolsetParamsResp`
 
           Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -28546,15 +29129,15 @@ Create Session
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -28570,19 +29153,19 @@ Create Session
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsCustomToolParamsResp struct{…}`
+        - `type BetaManagedAgentsCustomToolParamsResp`
 
           A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -28630,7 +29213,7 @@ Create Session
 
     Body param: Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
 
-    - `type BetaManagedAgentsUserMessageEventParams struct{…}`
+    - `type BetaManagedAgentsUserMessageEventParams`
 
       Parameters for sending a user message to the session.
 
@@ -28640,7 +29223,7 @@ Create Session
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -28652,7 +29235,7 @@ Create Session
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -28662,7 +29245,7 @@ Create Session
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -28680,7 +29263,7 @@ Create Session
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -28692,7 +29275,7 @@ Create Session
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -28704,7 +29287,7 @@ Create Session
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -28714,7 +29297,7 @@ Create Session
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -28732,7 +29315,7 @@ Create Session
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -28748,7 +29331,7 @@ Create Session
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -28760,7 +29343,7 @@ Create Session
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -28780,13 +29363,13 @@ Create Session
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsUserDefineOutcomeEventParams struct{…}`
+    - `type BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -28800,7 +29383,7 @@ Create Session
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubricParams struct{…}`
+        - `type BetaManagedAgentsFileRubricParams`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -28810,7 +29393,7 @@ Create Session
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubricParams struct{…}`
+        - `type BetaManagedAgentsTextRubricParams`
 
           Rubric content provided inline as text.
 
@@ -28836,7 +29419,7 @@ Create Session
 
     Body param: Resources (e.g. repositories, files) to mount into the session's container.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
 
       Mount a GitHub repository into the session's container.
 
@@ -28858,7 +29441,7 @@ Create Session
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -28868,7 +29451,7 @@ Create Session
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -28884,7 +29467,7 @@ Create Session
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsFileResourceParamsResp`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -28902,7 +29485,7 @@ Create Session
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -29034,6 +29617,8 @@ Create Session
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29042,7 +29627,7 @@ Create Session
 
 #### Returns
 
-- `type BetaManagedAgentsSession struct{…}`
+- `type BetaManagedAgentsSession`
 
   A Managed Agents `session`.
 
@@ -29146,31 +29731,31 @@ Create Session
 
         How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -29198,7 +29783,7 @@ Create Session
 
         Full `agent` definitions the coordinator may spawn as session threads.
 
-        - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+        - `type BetaManagedAgentsSessionThreadAgent`
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -29224,7 +29809,7 @@ Create Session
 
           - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-            - `type BetaManagedAgentsAnthropicSkill struct{…}`
+            - `type BetaManagedAgentsAnthropicSkill`
 
               A resolved Anthropic-managed skill.
 
@@ -29234,7 +29819,7 @@ Create Session
 
               - `Version string`
 
-            - `type BetaManagedAgentsCustomSkill struct{…}`
+            - `type BetaManagedAgentsCustomSkill`
 
               A resolved user-created custom skill.
 
@@ -29248,13 +29833,13 @@ Create Session
 
           - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-            - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+            - `type BetaManagedAgentsAgentToolset20260401`
 
               - `Type BetaManagedAgentsAgentToolset20260401Type`
 
               - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                - `type BetaManagedAgentsBashToolConfig struct{…}`
+                - `type BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
@@ -29268,25 +29853,25 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
                       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
                       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                       - `Type Auto`
 
-                - `type BetaManagedAgentsEditToolConfig struct{…}`
+                - `type BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
@@ -29300,19 +29885,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsReadToolConfig struct{…}`
+                - `type BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
@@ -29326,19 +29911,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                - `type BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
@@ -29352,19 +29937,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                - `type BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
@@ -29378,19 +29963,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                - `type BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
@@ -29404,19 +29989,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
@@ -29430,15 +30015,15 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -29450,7 +30035,7 @@ Create Session
 
                     format: int32
 
-                - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebSearchToolConfig`
 
                   Configuration for the web_search tool.
 
@@ -29464,15 +30049,15 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -29520,19 +30105,19 @@ Create Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsMCPToolset struct{…}`
+            - `type BetaManagedAgentsMCPToolset`
 
               - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -29546,15 +30131,15 @@ Create Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -29568,21 +30153,21 @@ Create Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `MCPServerName string`
 
-            - `type BetaManagedAgentsCustomTool struct{…}`
+            - `type BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
 
@@ -29606,7 +30191,7 @@ Create Session
 
             format: int32
 
-        - `type BetaManagedAgentsAdvisor struct{…}`
+        - `type BetaManagedAgentsAdvisor`
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -29620,11 +30205,11 @@ Create Session
 
     - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-      - `type BetaManagedAgentsAnthropicSkill struct{…}`
+      - `type BetaManagedAgentsAnthropicSkill`
 
         A resolved Anthropic-managed skill.
 
-      - `type BetaManagedAgentsCustomSkill struct{…}`
+      - `type BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
 
@@ -29632,11 +30217,11 @@ Create Session
 
     - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-      - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+      - `type BetaManagedAgentsAgentToolset20260401`
 
-      - `type BetaManagedAgentsMCPToolset struct{…}`
+      - `type BetaManagedAgentsMCPToolset`
 
-      - `type BetaManagedAgentsCustomTool struct{…}`
+      - `type BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
 
@@ -29714,7 +30299,7 @@ Create Session
 
   - `Resources []BetaManagedAgentsSessionResourceUnion`
 
-    - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResource`
 
       - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -29738,7 +30323,7 @@ Create Session
 
       - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -29748,7 +30333,7 @@ Create Session
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -29758,7 +30343,7 @@ Create Session
 
             minLength: 7, maxLength: 64
 
-    - `type BetaManagedAgentsFileResource struct{…}`
+    - `type BetaManagedAgentsFileResource`
 
       - `Type BetaManagedAgentsFileResourceType`
 
@@ -29780,7 +30365,7 @@ Create Session
 
         format: date-time
 
-    - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResource`
 
       A memory store attached to an agent session.
 
@@ -30334,6 +30919,8 @@ List Sessions
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -30342,7 +30929,7 @@ List Sessions
 
 #### Returns
 
-- `type BetaManagedAgentsSession struct{…}`
+- `type BetaManagedAgentsSession`
 
   A Managed Agents `session`.
 
@@ -30446,31 +31033,31 @@ List Sessions
 
         How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -30498,7 +31085,7 @@ List Sessions
 
         Full `agent` definitions the coordinator may spawn as session threads.
 
-        - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+        - `type BetaManagedAgentsSessionThreadAgent`
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -30524,7 +31111,7 @@ List Sessions
 
           - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-            - `type BetaManagedAgentsAnthropicSkill struct{…}`
+            - `type BetaManagedAgentsAnthropicSkill`
 
               A resolved Anthropic-managed skill.
 
@@ -30534,7 +31121,7 @@ List Sessions
 
               - `Version string`
 
-            - `type BetaManagedAgentsCustomSkill struct{…}`
+            - `type BetaManagedAgentsCustomSkill`
 
               A resolved user-created custom skill.
 
@@ -30548,13 +31135,13 @@ List Sessions
 
           - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-            - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+            - `type BetaManagedAgentsAgentToolset20260401`
 
               - `Type BetaManagedAgentsAgentToolset20260401Type`
 
               - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                - `type BetaManagedAgentsBashToolConfig struct{…}`
+                - `type BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
@@ -30568,25 +31155,25 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
                       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
                       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                       - `Type Auto`
 
-                - `type BetaManagedAgentsEditToolConfig struct{…}`
+                - `type BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
@@ -30600,19 +31187,19 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsReadToolConfig struct{…}`
+                - `type BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
@@ -30626,19 +31213,19 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                - `type BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
@@ -30652,19 +31239,19 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                - `type BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
@@ -30678,19 +31265,19 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                - `type BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
@@ -30704,19 +31291,19 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
@@ -30730,15 +31317,15 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -30750,7 +31337,7 @@ List Sessions
 
                     format: int32
 
-                - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebSearchToolConfig`
 
                   Configuration for the web_search tool.
 
@@ -30764,15 +31351,15 @@ List Sessions
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -30820,19 +31407,19 @@ List Sessions
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsMCPToolset struct{…}`
+            - `type BetaManagedAgentsMCPToolset`
 
               - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -30846,15 +31433,15 @@ List Sessions
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -30868,21 +31455,21 @@ List Sessions
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `MCPServerName string`
 
-            - `type BetaManagedAgentsCustomTool struct{…}`
+            - `type BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
 
@@ -30906,7 +31493,7 @@ List Sessions
 
             format: int32
 
-        - `type BetaManagedAgentsAdvisor struct{…}`
+        - `type BetaManagedAgentsAdvisor`
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -30920,11 +31507,11 @@ List Sessions
 
     - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-      - `type BetaManagedAgentsAnthropicSkill struct{…}`
+      - `type BetaManagedAgentsAnthropicSkill`
 
         A resolved Anthropic-managed skill.
 
-      - `type BetaManagedAgentsCustomSkill struct{…}`
+      - `type BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
 
@@ -30932,11 +31519,11 @@ List Sessions
 
     - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-      - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+      - `type BetaManagedAgentsAgentToolset20260401`
 
-      - `type BetaManagedAgentsMCPToolset struct{…}`
+      - `type BetaManagedAgentsMCPToolset`
 
-      - `type BetaManagedAgentsCustomTool struct{…}`
+      - `type BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
 
@@ -31014,7 +31601,7 @@ List Sessions
 
   - `Resources []BetaManagedAgentsSessionResourceUnion`
 
-    - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResource`
 
       - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -31038,7 +31625,7 @@ List Sessions
 
       - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -31048,7 +31635,7 @@ List Sessions
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -31058,7 +31645,7 @@ List Sessions
 
             minLength: 7, maxLength: 64
 
-    - `type BetaManagedAgentsFileResource struct{…}`
+    - `type BetaManagedAgentsFileResource`
 
       - `Type BetaManagedAgentsFileResourceType`
 
@@ -31080,7 +31667,7 @@ List Sessions
 
         format: date-time
 
-    - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResource`
 
       A memory store attached to an agent session.
 
@@ -31561,6 +32148,8 @@ Get Session
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31569,7 +32158,7 @@ Get Session
 
 #### Returns
 
-- `type BetaManagedAgentsSession struct{…}`
+- `type BetaManagedAgentsSession`
 
   A Managed Agents `session`.
 
@@ -31673,31 +32262,31 @@ Get Session
 
         How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -31725,7 +32314,7 @@ Get Session
 
         Full `agent` definitions the coordinator may spawn as session threads.
 
-        - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+        - `type BetaManagedAgentsSessionThreadAgent`
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -31751,7 +32340,7 @@ Get Session
 
           - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-            - `type BetaManagedAgentsAnthropicSkill struct{…}`
+            - `type BetaManagedAgentsAnthropicSkill`
 
               A resolved Anthropic-managed skill.
 
@@ -31761,7 +32350,7 @@ Get Session
 
               - `Version string`
 
-            - `type BetaManagedAgentsCustomSkill struct{…}`
+            - `type BetaManagedAgentsCustomSkill`
 
               A resolved user-created custom skill.
 
@@ -31775,13 +32364,13 @@ Get Session
 
           - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-            - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+            - `type BetaManagedAgentsAgentToolset20260401`
 
               - `Type BetaManagedAgentsAgentToolset20260401Type`
 
               - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                - `type BetaManagedAgentsBashToolConfig struct{…}`
+                - `type BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
@@ -31795,25 +32384,25 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
                       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
                       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                       - `Type Auto`
 
-                - `type BetaManagedAgentsEditToolConfig struct{…}`
+                - `type BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
@@ -31827,19 +32416,19 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsReadToolConfig struct{…}`
+                - `type BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
@@ -31853,19 +32442,19 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                - `type BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
@@ -31879,19 +32468,19 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                - `type BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
@@ -31905,19 +32494,19 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                - `type BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
@@ -31931,19 +32520,19 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
@@ -31957,15 +32546,15 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -31977,7 +32566,7 @@ Get Session
 
                     format: int32
 
-                - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebSearchToolConfig`
 
                   Configuration for the web_search tool.
 
@@ -31991,15 +32580,15 @@ Get Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -32047,19 +32636,19 @@ Get Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsMCPToolset struct{…}`
+            - `type BetaManagedAgentsMCPToolset`
 
               - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -32073,15 +32662,15 @@ Get Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -32095,21 +32684,21 @@ Get Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `MCPServerName string`
 
-            - `type BetaManagedAgentsCustomTool struct{…}`
+            - `type BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
 
@@ -32133,7 +32722,7 @@ Get Session
 
             format: int32
 
-        - `type BetaManagedAgentsAdvisor struct{…}`
+        - `type BetaManagedAgentsAdvisor`
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -32147,11 +32736,11 @@ Get Session
 
     - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-      - `type BetaManagedAgentsAnthropicSkill struct{…}`
+      - `type BetaManagedAgentsAnthropicSkill`
 
         A resolved Anthropic-managed skill.
 
-      - `type BetaManagedAgentsCustomSkill struct{…}`
+      - `type BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
 
@@ -32159,11 +32748,11 @@ Get Session
 
     - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-      - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+      - `type BetaManagedAgentsAgentToolset20260401`
 
-      - `type BetaManagedAgentsMCPToolset struct{…}`
+      - `type BetaManagedAgentsMCPToolset`
 
-      - `type BetaManagedAgentsCustomTool struct{…}`
+      - `type BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
 
@@ -32241,7 +32830,7 @@ Get Session
 
   - `Resources []BetaManagedAgentsSessionResourceUnion`
 
-    - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResource`
 
       - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -32265,7 +32854,7 @@ Get Session
 
       - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -32275,7 +32864,7 @@ Get Session
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -32285,7 +32874,7 @@ Get Session
 
             minLength: 7, maxLength: 64
 
-    - `type BetaManagedAgentsFileResource struct{…}`
+    - `type BetaManagedAgentsFileResource`
 
       - `Type BetaManagedAgentsFileResourceType`
 
@@ -32307,7 +32896,7 @@ Get Session
 
         format: date-time
 
-    - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResource`
 
       A memory store attached to an agent session.
 
@@ -32808,6 +33397,8 @@ Update Session
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32816,7 +33407,7 @@ Update Session
 
 #### Returns
 
-- `type BetaManagedAgentsSession struct{…}`
+- `type BetaManagedAgentsSession`
 
   A Managed Agents `session`.
 
@@ -32920,31 +33511,31 @@ Update Session
 
         How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -32972,7 +33563,7 @@ Update Session
 
         Full `agent` definitions the coordinator may spawn as session threads.
 
-        - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+        - `type BetaManagedAgentsSessionThreadAgent`
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -32998,7 +33589,7 @@ Update Session
 
           - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-            - `type BetaManagedAgentsAnthropicSkill struct{…}`
+            - `type BetaManagedAgentsAnthropicSkill`
 
               A resolved Anthropic-managed skill.
 
@@ -33008,7 +33599,7 @@ Update Session
 
               - `Version string`
 
-            - `type BetaManagedAgentsCustomSkill struct{…}`
+            - `type BetaManagedAgentsCustomSkill`
 
               A resolved user-created custom skill.
 
@@ -33022,13 +33613,13 @@ Update Session
 
           - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-            - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+            - `type BetaManagedAgentsAgentToolset20260401`
 
               - `Type BetaManagedAgentsAgentToolset20260401Type`
 
               - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                - `type BetaManagedAgentsBashToolConfig struct{…}`
+                - `type BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
@@ -33042,25 +33633,25 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
                       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
                       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                       - `Type Auto`
 
-                - `type BetaManagedAgentsEditToolConfig struct{…}`
+                - `type BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
@@ -33074,19 +33665,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsReadToolConfig struct{…}`
+                - `type BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
@@ -33100,19 +33691,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                - `type BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
@@ -33126,19 +33717,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                - `type BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
@@ -33152,19 +33743,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                - `type BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
@@ -33178,19 +33769,19 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
@@ -33204,15 +33795,15 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -33224,7 +33815,7 @@ Update Session
 
                     format: int32
 
-                - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebSearchToolConfig`
 
                   Configuration for the web_search tool.
 
@@ -33238,15 +33829,15 @@ Update Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -33294,19 +33885,19 @@ Update Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsMCPToolset struct{…}`
+            - `type BetaManagedAgentsMCPToolset`
 
               - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -33320,15 +33911,15 @@ Update Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -33342,21 +33933,21 @@ Update Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `MCPServerName string`
 
-            - `type BetaManagedAgentsCustomTool struct{…}`
+            - `type BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
 
@@ -33380,7 +33971,7 @@ Update Session
 
             format: int32
 
-        - `type BetaManagedAgentsAdvisor struct{…}`
+        - `type BetaManagedAgentsAdvisor`
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -33394,11 +33985,11 @@ Update Session
 
     - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-      - `type BetaManagedAgentsAnthropicSkill struct{…}`
+      - `type BetaManagedAgentsAnthropicSkill`
 
         A resolved Anthropic-managed skill.
 
-      - `type BetaManagedAgentsCustomSkill struct{…}`
+      - `type BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
 
@@ -33406,11 +33997,11 @@ Update Session
 
     - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-      - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+      - `type BetaManagedAgentsAgentToolset20260401`
 
-      - `type BetaManagedAgentsMCPToolset struct{…}`
+      - `type BetaManagedAgentsMCPToolset`
 
-      - `type BetaManagedAgentsCustomTool struct{…}`
+      - `type BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
 
@@ -33488,7 +34079,7 @@ Update Session
 
   - `Resources []BetaManagedAgentsSessionResourceUnion`
 
-    - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResource`
 
       - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -33512,7 +34103,7 @@ Update Session
 
       - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -33522,7 +34113,7 @@ Update Session
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -33532,7 +34123,7 @@ Update Session
 
             minLength: 7, maxLength: 64
 
-    - `type BetaManagedAgentsFileResource struct{…}`
+    - `type BetaManagedAgentsFileResource`
 
       - `Type BetaManagedAgentsFileResourceType`
 
@@ -33554,7 +34145,7 @@ Update Session
 
         format: date-time
 
-    - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResource`
 
       A memory store attached to an agent session.
 
@@ -34033,6 +34624,8 @@ Delete Session
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -34041,7 +34634,7 @@ Delete Session
 
 #### Returns
 
-- `type BetaManagedAgentsDeletedSession struct{…}`
+- `type BetaManagedAgentsDeletedSession`
 
   Confirmation that a `session` has been permanently deleted.
 
@@ -34199,6 +34792,8 @@ Archive Session
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -34207,7 +34802,7 @@ Archive Session
 
 #### Returns
 
-- `type BetaManagedAgentsSession struct{…}`
+- `type BetaManagedAgentsSession`
 
   A Managed Agents `session`.
 
@@ -34311,31 +34906,31 @@ Archive Session
 
         How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-        - `type BetaManagedAgentsEffortLow struct{…}`
+        - `type BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `Type BetaManagedAgentsEffortLowType`
 
-        - `type BetaManagedAgentsEffortMedium struct{…}`
+        - `type BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `Type BetaManagedAgentsEffortMediumType`
 
-        - `type BetaManagedAgentsEffortHigh struct{…}`
+        - `type BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `Type BetaManagedAgentsEffortHighType`
 
-        - `type BetaManagedAgentsEffortXhigh struct{…}`
+        - `type BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `Type BetaManagedAgentsEffortXhighType`
 
-        - `type BetaManagedAgentsEffortMax struct{…}`
+        - `type BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -34363,7 +34958,7 @@ Archive Session
 
         Full `agent` definitions the coordinator may spawn as session threads.
 
-        - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+        - `type BetaManagedAgentsSessionThreadAgent`
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -34389,7 +34984,7 @@ Archive Session
 
           - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-            - `type BetaManagedAgentsAnthropicSkill struct{…}`
+            - `type BetaManagedAgentsAnthropicSkill`
 
               A resolved Anthropic-managed skill.
 
@@ -34399,7 +34994,7 @@ Archive Session
 
               - `Version string`
 
-            - `type BetaManagedAgentsCustomSkill struct{…}`
+            - `type BetaManagedAgentsCustomSkill`
 
               A resolved user-created custom skill.
 
@@ -34413,13 +35008,13 @@ Archive Session
 
           - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-            - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+            - `type BetaManagedAgentsAgentToolset20260401`
 
               - `Type BetaManagedAgentsAgentToolset20260401Type`
 
               - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                - `type BetaManagedAgentsBashToolConfig struct{…}`
+                - `type BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
@@ -34433,25 +35028,25 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
                       - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
                       - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                       - `Type Auto`
 
-                - `type BetaManagedAgentsEditToolConfig struct{…}`
+                - `type BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
@@ -34465,19 +35060,19 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsReadToolConfig struct{…}`
+                - `type BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
@@ -34491,19 +35086,19 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                - `type BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
@@ -34517,19 +35112,19 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                - `type BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
@@ -34543,19 +35138,19 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                - `type BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
@@ -34569,19 +35164,19 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
@@ -34595,15 +35190,15 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -34615,7 +35210,7 @@ Archive Session
 
                     format: int32
 
-                - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                - `type BetaManagedAgentsWebSearchToolConfig`
 
                   Configuration for the web_search tool.
 
@@ -34629,15 +35224,15 @@ Archive Session
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -34685,19 +35280,19 @@ Archive Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsMCPToolset struct{…}`
+            - `type BetaManagedAgentsMCPToolset`
 
               - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -34711,15 +35306,15 @@ Archive Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -34733,21 +35328,21 @@ Archive Session
 
                   Permission policy for tool execution.
 
-                  - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                  - `type BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `type BetaManagedAgentsAutoPolicy struct{…}`
+                  - `type BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `MCPServerName string`
 
-            - `type BetaManagedAgentsCustomTool struct{…}`
+            - `type BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
 
@@ -34771,7 +35366,7 @@ Archive Session
 
             format: int32
 
-        - `type BetaManagedAgentsAdvisor struct{…}`
+        - `type BetaManagedAgentsAdvisor`
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -34785,11 +35380,11 @@ Archive Session
 
     - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-      - `type BetaManagedAgentsAnthropicSkill struct{…}`
+      - `type BetaManagedAgentsAnthropicSkill`
 
         A resolved Anthropic-managed skill.
 
-      - `type BetaManagedAgentsCustomSkill struct{…}`
+      - `type BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
 
@@ -34797,11 +35392,11 @@ Archive Session
 
     - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-      - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+      - `type BetaManagedAgentsAgentToolset20260401`
 
-      - `type BetaManagedAgentsMCPToolset struct{…}`
+      - `type BetaManagedAgentsMCPToolset`
 
-      - `type BetaManagedAgentsCustomTool struct{…}`
+      - `type BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
 
@@ -34879,7 +35474,7 @@ Archive Session
 
   - `Resources []BetaManagedAgentsSessionResourceUnion`
 
-    - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResource`
 
       - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -34903,7 +35498,7 @@ Archive Session
 
       - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -34913,7 +35508,7 @@ Archive Session
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -34923,7 +35518,7 @@ Archive Session
 
             minLength: 7, maxLength: 64
 
-    - `type BetaManagedAgentsFileResource struct{…}`
+    - `type BetaManagedAgentsFileResource`
 
       - `Type BetaManagedAgentsFileResourceType`
 
@@ -34945,7 +35540,7 @@ Archive Session
 
         format: date-time
 
-    - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResource`
 
       A memory store attached to an agent session.
 
@@ -35472,6 +36067,8 @@ List Events
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -35484,7 +36081,7 @@ List Events
 
   Union type for all event types in a session.
 
-  - `type BetaManagedAgentsUserMessageEvent struct{…}`
+  - `type BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -35498,7 +36095,7 @@ List Events
 
       Array of content blocks comprising the user message.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -35510,7 +36107,7 @@ List Events
 
           minLength: 1
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -35520,7 +36117,7 @@ List Events
 
           Union type for image source variants.
 
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+          - `type BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -35538,7 +36135,7 @@ List Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsURLImageSource struct{…}`
+          - `type BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -35550,7 +36147,7 @@ List Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileImageSource struct{…}`
+          - `type BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -35562,7 +36159,7 @@ List Events
 
               minLength: 1
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -35572,7 +36169,7 @@ List Events
 
           Union type for document source variants.
 
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+          - `type BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -35590,7 +36187,7 @@ List Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+          - `type BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -35606,7 +36203,7 @@ List Events
 
               MIME type of the text content. Must be "text/plain".
 
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+          - `type BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -35618,7 +36215,7 @@ List Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+          - `type BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -35638,7 +36235,7 @@ List Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -35650,7 +36247,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserInterruptEvent struct{…}`
+  - `type BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -35670,7 +36267,7 @@ List Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
+  - `type BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -35708,7 +36305,7 @@ List Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -35726,19 +36323,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -35790,7 +36387,7 @@ List Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -35818,7 +36415,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMessageEvent struct{…}`
+  - `type BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -35832,11 +36429,11 @@ List Events
 
       Array of text blocks comprising the agent response.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -35846,7 +36443,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentThinkingEvent struct{…}`
+  - `type BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -35862,7 +36459,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentMCPToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -35904,19 +36501,19 @@ List Events
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `Type AlwaysAllow`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `Type AlwaysAsk`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAuto struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -35926,13 +36523,13 @@ List Events
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `Type Allow`
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -35944,7 +36541,7 @@ List Events
 
               maxLength: 64
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -35960,7 +36557,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -35984,19 +36581,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -36004,7 +36601,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -36046,7 +36643,7 @@ List Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -36070,19 +36667,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -36090,7 +36687,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -36104,19 +36701,19 @@ List Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -36134,7 +36731,7 @@ List Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -36148,19 +36745,19 @@ List Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -36178,7 +36775,7 @@ List Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -36194,7 +36791,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionErrorEvent struct{…}`
+  - `type BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -36206,7 +36803,7 @@ List Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError struct{…}`
+      - `type BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -36220,25 +36817,25 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `Type BetaManagedAgentsRetryStatusRetryingType`
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `Type BetaManagedAgentsRetryStatusExhaustedType`
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type BetaManagedAgentsRetryStatusTerminalType`
 
-      - `type BetaManagedAgentsModelOverloadedError struct{…}`
+      - `type BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -36252,19 +36849,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError struct{…}`
+      - `type BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -36278,19 +36875,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError struct{…}`
+      - `type BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -36304,19 +36901,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError struct{…}`
+      - `type BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -36334,19 +36931,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError struct{…}`
+      - `type BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -36364,19 +36961,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError struct{…}`
+      - `type BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -36390,19 +36987,19 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+      - `type BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -36420,15 +37017,15 @@ List Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -36442,7 +37039,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -36458,7 +37055,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -36474,7 +37071,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -36492,13 +37089,13 @@ List Events
 
     - `StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `Type BetaManagedAgentsSessionEndTurnType`
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -36508,19 +37105,19 @@ List Events
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `Type BetaManagedAgentsSessionRetriesExhaustedType`
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `Type BetaManagedAgentsSessionBudgetReachedType`
 
-  - `type BetaManagedAgentsSessionStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -36536,7 +37133,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -36560,7 +37157,7 @@ List Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -36586,7 +37183,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -36660,7 +37257,7 @@ List Events
 
         - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
 
-  - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -36676,7 +37273,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanModelRequestEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -36704,7 +37301,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -36730,7 +37327,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+  - `type BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -36764,7 +37361,7 @@ List Events
 
       Rubric for grading the quality of an outcome.
 
-      - `type BetaManagedAgentsFileRubric struct{…}`
+      - `type BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -36774,7 +37371,7 @@ List Events
 
           ID of the rubric file.
 
-      - `type BetaManagedAgentsTextRubric struct{…}`
+      - `type BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -36784,7 +37381,7 @@ List Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
+  - `type BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -36800,7 +37397,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -36824,7 +37421,7 @@ List Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -36850,23 +37447,23 @@ List Events
 
     - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -36890,7 +37487,7 @@ List Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `type BetaManagedAgentsUserToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -36908,19 +37505,19 @@ List Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -36938,7 +37535,7 @@ List Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -36962,7 +37559,7 @@ List Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `type BetaManagedAgentsSessionUpdatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -37074,31 +37671,31 @@ List Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `type BetaManagedAgentsEffortLow struct{…}`
+          - `type BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `Type BetaManagedAgentsEffortLowType`
 
-          - `type BetaManagedAgentsEffortMedium struct{…}`
+          - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type BetaManagedAgentsEffortMediumType`
 
-          - `type BetaManagedAgentsEffortHigh struct{…}`
+          - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `Type BetaManagedAgentsEffortHighType`
 
-          - `type BetaManagedAgentsEffortXhigh struct{…}`
+          - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type BetaManagedAgentsEffortXhighType`
 
-          - `type BetaManagedAgentsEffortMax struct{…}`
+          - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -37126,7 +37723,7 @@ List Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+          - `type BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -37152,7 +37749,7 @@ List Events
 
             - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-              - `type BetaManagedAgentsAnthropicSkill struct{…}`
+              - `type BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -37162,7 +37759,7 @@ List Events
 
                 - `Version string`
 
-              - `type BetaManagedAgentsCustomSkill struct{…}`
+              - `type BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -37176,13 +37773,13 @@ List Events
 
             - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-              - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+              - `type BetaManagedAgentsAgentToolset20260401`
 
                 - `Type BetaManagedAgentsAgentToolset20260401Type`
 
                 - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                  - `type BetaManagedAgentsBashToolConfig struct{…}`
+                  - `type BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -37196,25 +37793,25 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `Type Auto`
 
-                  - `type BetaManagedAgentsEditToolConfig struct{…}`
+                  - `type BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -37228,19 +37825,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsReadToolConfig struct{…}`
+                  - `type BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -37254,19 +37851,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                  - `type BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -37280,19 +37877,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                  - `type BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -37306,19 +37903,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                  - `type BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -37332,19 +37929,19 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -37358,15 +37955,15 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -37378,7 +37975,7 @@ List Events
 
                       format: int32
 
-                  - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -37392,15 +37989,15 @@ List Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -37448,19 +38045,19 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `type BetaManagedAgentsMCPToolset struct{…}`
+              - `type BetaManagedAgentsMCPToolset`
 
                 - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -37474,15 +38071,15 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -37496,21 +38093,21 @@ List Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `MCPServerName string`
 
-              - `type BetaManagedAgentsCustomTool struct{…}`
+              - `type BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -37534,7 +38131,7 @@ List Events
 
               format: int32
 
-          - `type BetaManagedAgentsAdvisor struct{…}`
+          - `type BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -37548,11 +38145,11 @@ List Events
 
       - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-        - `type BetaManagedAgentsAnthropicSkill struct{…}`
+        - `type BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `type BetaManagedAgentsCustomSkill struct{…}`
+        - `type BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -37560,11 +38157,11 @@ List Events
 
       - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-        - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401`
 
-        - `type BetaManagedAgentsMCPToolset struct{…}`
+        - `type BetaManagedAgentsMCPToolset`
 
-        - `type BetaManagedAgentsCustomTool struct{…}`
+        - `type BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -37598,7 +38195,7 @@ List Events
 
       The session's new title. Present only when the update changed it.
 
-  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+  - `type BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -37626,7 +38223,7 @@ List Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionUsageEvent struct{…}`
+  - `type BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -37789,7 +38386,7 @@ Send Events
 
     Body param: Events to send to the `session`.
 
-    - `type BetaManagedAgentsUserMessageEventParams struct{…}`
+    - `type BetaManagedAgentsUserMessageEventParams`
 
       Parameters for sending a user message to the session.
 
@@ -37799,7 +38396,7 @@ Send Events
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -37811,7 +38408,7 @@ Send Events
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -37821,7 +38418,7 @@ Send Events
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -37839,7 +38436,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -37851,7 +38448,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -37863,7 +38460,7 @@ Send Events
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -37873,7 +38470,7 @@ Send Events
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -37891,7 +38488,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -37907,7 +38504,7 @@ Send Events
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -37919,7 +38516,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -37939,13 +38536,13 @@ Send Events
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsUserInterruptEventParamsResp struct{…}`
+    - `type BetaManagedAgentsUserInterruptEventParamsResp`
 
       Parameters for sending an interrupt to pause the agent.
 
@@ -37955,7 +38552,7 @@ Send Events
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `type BetaManagedAgentsUserToolConfirmationEventParamsResp struct{…}`
+    - `type BetaManagedAgentsUserToolConfirmationEventParamsResp`
 
       Parameters for confirming or denying a tool execution request.
 
@@ -37981,7 +38578,7 @@ Send Events
 
         maxLength: 10000
 
-    - `type BetaManagedAgentsUserCustomToolResultEventParamsResp struct{…}`
+    - `type BetaManagedAgentsUserCustomToolResultEventParamsResp`
 
       Parameters for providing the result of a custom tool execution.
 
@@ -37997,19 +38594,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `type BetaManagedAgentsSearchResultBlock struct{…}`
+        - `type BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -38051,7 +38648,7 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-    - `type BetaManagedAgentsUserDefineOutcomeEventParams struct{…}`
+    - `type BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -38065,7 +38662,7 @@ Send Events
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubricParams struct{…}`
+        - `type BetaManagedAgentsFileRubricParams`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -38075,7 +38672,7 @@ Send Events
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubricParams struct{…}`
+        - `type BetaManagedAgentsTextRubricParams`
 
           Rubric content provided inline as text.
 
@@ -38093,7 +38690,7 @@ Send Events
 
         format: int32
 
-    - `type BetaManagedAgentsUserToolResultEventParamsResp struct{…}`
+    - `type BetaManagedAgentsUserToolResultEventParamsResp`
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -38109,19 +38706,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `type BetaManagedAgentsSearchResultBlock struct{…}`
+        - `type BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -38129,7 +38726,7 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
+    - `type BetaManagedAgentsSystemMessageEventParamsResp`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -38245,6 +38842,8 @@ Send Events
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -38253,7 +38852,7 @@ Send Events
 
 #### Returns
 
-- `type BetaManagedAgentsSendSessionEvents struct{…}`
+- `type BetaManagedAgentsSendSessionEvents`
 
   Events that were successfully sent to the session.
 
@@ -38261,7 +38860,7 @@ Send Events
 
     Sent events
 
-    - `type BetaManagedAgentsUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsUserMessageEvent`
 
       A user message event in the session conversation.
 
@@ -38275,7 +38874,7 @@ Send Events
 
         Array of content blocks comprising the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -38287,7 +38886,7 @@ Send Events
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -38297,7 +38896,7 @@ Send Events
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -38315,7 +38914,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -38327,7 +38926,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -38339,7 +38938,7 @@ Send Events
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -38349,7 +38948,7 @@ Send Events
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -38367,7 +38966,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -38383,7 +38982,7 @@ Send Events
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -38395,7 +38994,7 @@ Send Events
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -38415,7 +39014,7 @@ Send Events
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -38427,7 +39026,7 @@ Send Events
 
         format: date-time
 
-    - `type BetaManagedAgentsUserInterruptEvent struct{…}`
+    - `type BetaManagedAgentsUserInterruptEvent`
 
       An interrupt event that pauses agent execution and returns control to the user.
 
@@ -38447,7 +39046,7 @@ Send Events
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
+    - `type BetaManagedAgentsUserToolConfirmationEvent`
 
       A tool confirmation event that approves or denies a pending tool execution.
 
@@ -38485,7 +39084,7 @@ Send Events
 
         Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-    - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
+    - `type BetaManagedAgentsUserCustomToolResultEvent`
 
       Event sent by the client providing the result of a custom tool execution.
 
@@ -38503,19 +39102,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `type BetaManagedAgentsSearchResultBlock struct{…}`
+        - `type BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -38567,7 +39166,7 @@ Send Events
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsUserDefineOutcomeEvent`
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -38601,7 +39200,7 @@ Send Events
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -38611,7 +39210,7 @@ Send Events
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -38621,7 +39220,7 @@ Send Events
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-    - `type BetaManagedAgentsUserToolResultEvent struct{…}`
+    - `type BetaManagedAgentsUserToolResultEvent`
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -38639,19 +39238,19 @@ Send Events
 
         The result content returned by the tool.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `type BetaManagedAgentsSearchResultBlock struct{…}`
+        - `type BetaManagedAgentsSearchResultBlock`
 
           A block containing a web search result.
 
@@ -38669,7 +39268,7 @@ Send Events
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-    - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsSystemMessageEvent`
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -38878,6 +39477,8 @@ Stream Events
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -38890,7 +39491,7 @@ Stream Events
 
   Server-sent event in the session stream.
 
-  - `type BetaManagedAgentsUserMessageEvent struct{…}`
+  - `type BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -38904,7 +39505,7 @@ Stream Events
 
       Array of content blocks comprising the user message.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -38916,7 +39517,7 @@ Stream Events
 
           minLength: 1
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -38926,7 +39527,7 @@ Stream Events
 
           Union type for image source variants.
 
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+          - `type BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -38944,7 +39545,7 @@ Stream Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsURLImageSource struct{…}`
+          - `type BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -38956,7 +39557,7 @@ Stream Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileImageSource struct{…}`
+          - `type BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -38968,7 +39569,7 @@ Stream Events
 
               minLength: 1
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -38978,7 +39579,7 @@ Stream Events
 
           Union type for document source variants.
 
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+          - `type BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -38996,7 +39597,7 @@ Stream Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+          - `type BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -39012,7 +39613,7 @@ Stream Events
 
               MIME type of the text content. Must be "text/plain".
 
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+          - `type BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -39024,7 +39625,7 @@ Stream Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+          - `type BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -39044,7 +39645,7 @@ Stream Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -39056,7 +39657,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserInterruptEvent struct{…}`
+  - `type BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -39076,7 +39677,7 @@ Stream Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
+  - `type BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -39114,7 +39715,7 @@ Stream Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -39132,19 +39733,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -39196,7 +39797,7 @@ Stream Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -39224,7 +39825,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMessageEvent struct{…}`
+  - `type BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -39238,11 +39839,11 @@ Stream Events
 
       Array of text blocks comprising the agent response.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -39252,7 +39853,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentThinkingEvent struct{…}`
+  - `type BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -39268,7 +39869,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentMCPToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -39310,19 +39911,19 @@ Stream Events
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `Type AlwaysAllow`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `Type AlwaysAsk`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAuto struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -39332,13 +39933,13 @@ Stream Events
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `Type Allow`
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -39350,7 +39951,7 @@ Stream Events
 
               maxLength: 64
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -39366,7 +39967,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -39390,19 +39991,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -39410,7 +40011,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -39452,7 +40053,7 @@ Stream Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -39476,19 +40077,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -39496,7 +40097,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -39510,19 +40111,19 @@ Stream Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -39540,7 +40141,7 @@ Stream Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -39554,19 +40155,19 @@ Stream Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -39584,7 +40185,7 @@ Stream Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -39600,7 +40201,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionErrorEvent struct{…}`
+  - `type BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -39612,7 +40213,7 @@ Stream Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError struct{…}`
+      - `type BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -39626,25 +40227,25 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `Type BetaManagedAgentsRetryStatusRetryingType`
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `Type BetaManagedAgentsRetryStatusExhaustedType`
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type BetaManagedAgentsRetryStatusTerminalType`
 
-      - `type BetaManagedAgentsModelOverloadedError struct{…}`
+      - `type BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -39658,19 +40259,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError struct{…}`
+      - `type BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -39684,19 +40285,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError struct{…}`
+      - `type BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -39710,19 +40311,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError struct{…}`
+      - `type BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -39740,19 +40341,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError struct{…}`
+      - `type BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -39770,19 +40371,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError struct{…}`
+      - `type BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -39796,19 +40397,19 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+      - `type BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -39826,15 +40427,15 @@ Stream Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -39848,7 +40449,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -39864,7 +40465,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -39880,7 +40481,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -39898,13 +40499,13 @@ Stream Events
 
     - `StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `Type BetaManagedAgentsSessionEndTurnType`
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -39914,19 +40515,19 @@ Stream Events
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `Type BetaManagedAgentsSessionRetriesExhaustedType`
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `Type BetaManagedAgentsSessionBudgetReachedType`
 
-  - `type BetaManagedAgentsSessionStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -39942,7 +40543,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -39966,7 +40567,7 @@ Stream Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -39992,7 +40593,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -40066,7 +40667,7 @@ Stream Events
 
         - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
 
-  - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -40082,7 +40683,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanModelRequestEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -40110,7 +40711,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -40136,7 +40737,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+  - `type BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -40170,7 +40771,7 @@ Stream Events
 
       Rubric for grading the quality of an outcome.
 
-      - `type BetaManagedAgentsFileRubric struct{…}`
+      - `type BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -40180,7 +40781,7 @@ Stream Events
 
           ID of the rubric file.
 
-      - `type BetaManagedAgentsTextRubric struct{…}`
+      - `type BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -40190,7 +40791,7 @@ Stream Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
+  - `type BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -40206,7 +40807,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40230,7 +40831,7 @@ Stream Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40256,23 +40857,23 @@ Stream Events
 
     - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40296,7 +40897,7 @@ Stream Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `type BetaManagedAgentsUserToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -40314,19 +40915,19 @@ Stream Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -40344,7 +40945,7 @@ Stream Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40368,7 +40969,7 @@ Stream Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `type BetaManagedAgentsSessionUpdatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -40480,31 +41081,31 @@ Stream Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `type BetaManagedAgentsEffortLow struct{…}`
+          - `type BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `Type BetaManagedAgentsEffortLowType`
 
-          - `type BetaManagedAgentsEffortMedium struct{…}`
+          - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type BetaManagedAgentsEffortMediumType`
 
-          - `type BetaManagedAgentsEffortHigh struct{…}`
+          - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `Type BetaManagedAgentsEffortHighType`
 
-          - `type BetaManagedAgentsEffortXhigh struct{…}`
+          - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type BetaManagedAgentsEffortXhighType`
 
-          - `type BetaManagedAgentsEffortMax struct{…}`
+          - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -40532,7 +41133,7 @@ Stream Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+          - `type BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -40558,7 +41159,7 @@ Stream Events
 
             - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-              - `type BetaManagedAgentsAnthropicSkill struct{…}`
+              - `type BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -40568,7 +41169,7 @@ Stream Events
 
                 - `Version string`
 
-              - `type BetaManagedAgentsCustomSkill struct{…}`
+              - `type BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -40582,13 +41183,13 @@ Stream Events
 
             - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-              - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+              - `type BetaManagedAgentsAgentToolset20260401`
 
                 - `Type BetaManagedAgentsAgentToolset20260401Type`
 
                 - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                  - `type BetaManagedAgentsBashToolConfig struct{…}`
+                  - `type BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -40602,25 +41203,25 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `Type Auto`
 
-                  - `type BetaManagedAgentsEditToolConfig struct{…}`
+                  - `type BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -40634,19 +41235,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsReadToolConfig struct{…}`
+                  - `type BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -40660,19 +41261,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                  - `type BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -40686,19 +41287,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                  - `type BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -40712,19 +41313,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                  - `type BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -40738,19 +41339,19 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -40764,15 +41365,15 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -40784,7 +41385,7 @@ Stream Events
 
                       format: int32
 
-                  - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -40798,15 +41399,15 @@ Stream Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -40854,19 +41455,19 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `type BetaManagedAgentsMCPToolset struct{…}`
+              - `type BetaManagedAgentsMCPToolset`
 
                 - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -40880,15 +41481,15 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -40902,21 +41503,21 @@ Stream Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `MCPServerName string`
 
-              - `type BetaManagedAgentsCustomTool struct{…}`
+              - `type BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -40940,7 +41541,7 @@ Stream Events
 
               format: int32
 
-          - `type BetaManagedAgentsAdvisor struct{…}`
+          - `type BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -40954,11 +41555,11 @@ Stream Events
 
       - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-        - `type BetaManagedAgentsAnthropicSkill struct{…}`
+        - `type BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `type BetaManagedAgentsCustomSkill struct{…}`
+        - `type BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -40966,11 +41567,11 @@ Stream Events
 
       - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-        - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401`
 
-        - `type BetaManagedAgentsMCPToolset struct{…}`
+        - `type BetaManagedAgentsMCPToolset`
 
-        - `type BetaManagedAgentsCustomTool struct{…}`
+        - `type BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -41004,7 +41605,7 @@ Stream Events
 
       The session's new title. Present only when the update changed it.
 
-  - `type BetaManagedAgentsStartEvent struct{…}`
+  - `type BetaManagedAgentsStartEvent`
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -41014,7 +41615,7 @@ Stream Events
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-      - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+      - `type BetaManagedAgentsAgentMessagePreview`
 
         - `Type BetaManagedAgentsAgentMessagePreviewType`
 
@@ -41022,7 +41623,7 @@ Stream Events
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-      - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+      - `type BetaManagedAgentsAgentThinkingPreview`
 
         - `Type BetaManagedAgentsAgentThinkingPreviewType`
 
@@ -41030,7 +41631,7 @@ Stream Events
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-  - `type BetaManagedAgentsDeltaEvent struct{…}`
+  - `type BetaManagedAgentsDeltaEvent`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -41056,7 +41657,7 @@ Stream Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+  - `type BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -41084,7 +41685,7 @@ Stream Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionUsageEvent struct{…}`
+  - `type BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -41334,6 +41935,8 @@ Add Session Resource
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41342,7 +41945,7 @@ Add Session Resource
 
 #### Returns
 
-- `type BetaManagedAgentsFileResource struct{…}`
+- `type BetaManagedAgentsFileResource`
 
   - `Type BetaManagedAgentsFileResourceType`
 
@@ -41533,6 +42136,8 @@ List Session Resources
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41543,7 +42148,7 @@ List Session Resources
 
 - `type BetaManagedAgentsSessionResourceUnion interface{…}`
 
-  - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+  - `type BetaManagedAgentsGitHubRepositoryResource`
 
     - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -41567,7 +42172,7 @@ List Session Resources
 
     - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-      - `type BetaManagedAgentsBranchCheckout struct{…}`
+      - `type BetaManagedAgentsBranchCheckout`
 
         - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -41577,7 +42182,7 @@ List Session Resources
 
           minLength: 1, maxLength: 255
 
-      - `type BetaManagedAgentsCommitCheckout struct{…}`
+      - `type BetaManagedAgentsCommitCheckout`
 
         - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -41587,7 +42192,7 @@ List Session Resources
 
           minLength: 7, maxLength: 64
 
-  - `type BetaManagedAgentsFileResource struct{…}`
+  - `type BetaManagedAgentsFileResource`
 
     - `Type BetaManagedAgentsFileResourceType`
 
@@ -41609,7 +42214,7 @@ List Session Resources
 
       format: date-time
 
-  - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+  - `type BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 
@@ -41820,6 +42425,8 @@ Get Session Resource
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41832,7 +42439,7 @@ Get Session Resource
 
   The requested session resource.
 
-  - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+  - `type BetaManagedAgentsGitHubRepositoryResource`
 
     - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -41856,7 +42463,7 @@ Get Session Resource
 
     - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-      - `type BetaManagedAgentsBranchCheckout struct{…}`
+      - `type BetaManagedAgentsBranchCheckout`
 
         - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -41866,7 +42473,7 @@ Get Session Resource
 
           minLength: 1, maxLength: 255
 
-      - `type BetaManagedAgentsCommitCheckout struct{…}`
+      - `type BetaManagedAgentsCommitCheckout`
 
         - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -41876,7 +42483,7 @@ Get Session Resource
 
           minLength: 7, maxLength: 64
 
-  - `type BetaManagedAgentsFileResource struct{…}`
+  - `type BetaManagedAgentsFileResource`
 
     - `Type BetaManagedAgentsFileResourceType`
 
@@ -41898,7 +42505,7 @@ Get Session Resource
 
       format: date-time
 
-  - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+  - `type BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 
@@ -42104,6 +42711,8 @@ Update Session Resource
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -42116,7 +42725,7 @@ Update Session Resource
 
   The updated session resource.
 
-  - `type BetaManagedAgentsGitHubRepositoryResource struct{…}`
+  - `type BetaManagedAgentsGitHubRepositoryResource`
 
     - `Type BetaManagedAgentsGitHubRepositoryResourceType`
 
@@ -42140,7 +42749,7 @@ Update Session Resource
 
     - `Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnion Optional`
 
-      - `type BetaManagedAgentsBranchCheckout struct{…}`
+      - `type BetaManagedAgentsBranchCheckout`
 
         - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -42150,7 +42759,7 @@ Update Session Resource
 
           minLength: 1, maxLength: 255
 
-      - `type BetaManagedAgentsCommitCheckout struct{…}`
+      - `type BetaManagedAgentsCommitCheckout`
 
         - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -42160,7 +42769,7 @@ Update Session Resource
 
           minLength: 7, maxLength: 64
 
-  - `type BetaManagedAgentsFileResource struct{…}`
+  - `type BetaManagedAgentsFileResource`
 
     - `Type BetaManagedAgentsFileResourceType`
 
@@ -42182,7 +42791,7 @@ Update Session Resource
 
       format: date-time
 
-  - `type BetaManagedAgentsMemoryStoreResource struct{…}`
+  - `type BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 
@@ -42383,6 +42992,8 @@ Delete Session Resource
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -42391,7 +43002,7 @@ Delete Session Resource
 
 #### Returns
 
-- `type BetaManagedAgentsDeleteSessionResource struct{…}`
+- `type BetaManagedAgentsDeleteSessionResource`
 
   Confirmation of resource deletion.
 
@@ -42563,6 +43174,8 @@ List Session Threads
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -42571,7 +43184,7 @@ List Session Threads
 
 #### Returns
 
-- `type BetaManagedAgentsSessionThread struct{…}`
+- `type BetaManagedAgentsSessionThread`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
 
@@ -42585,7 +43198,7 @@ List Session Threads
 
     The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
 
-    - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+    - `type BetaManagedAgentsSessionThreadAgent`
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -42681,31 +43294,31 @@ List Session Threads
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `type BetaManagedAgentsEffortLow struct{…}`
+          - `type BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `Type BetaManagedAgentsEffortLowType`
 
-          - `type BetaManagedAgentsEffortMedium struct{…}`
+          - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type BetaManagedAgentsEffortMediumType`
 
-          - `type BetaManagedAgentsEffortHigh struct{…}`
+          - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `Type BetaManagedAgentsEffortHighType`
 
-          - `type BetaManagedAgentsEffortXhigh struct{…}`
+          - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type BetaManagedAgentsEffortXhighType`
 
-          - `type BetaManagedAgentsEffortMax struct{…}`
+          - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -42727,7 +43340,7 @@ List Session Threads
 
       - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-        - `type BetaManagedAgentsAnthropicSkill struct{…}`
+        - `type BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
@@ -42737,7 +43350,7 @@ List Session Threads
 
           - `Version string`
 
-        - `type BetaManagedAgentsCustomSkill struct{…}`
+        - `type BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -42751,13 +43364,13 @@ List Session Threads
 
       - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-        - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401`
 
           - `Type BetaManagedAgentsAgentToolset20260401Type`
 
           - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-            - `type BetaManagedAgentsBashToolConfig struct{…}`
+            - `type BetaManagedAgentsBashToolConfig`
 
               Configuration for the bash tool.
 
@@ -42771,25 +43384,25 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
                   - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Type Auto`
 
-            - `type BetaManagedAgentsEditToolConfig struct{…}`
+            - `type BetaManagedAgentsEditToolConfig`
 
               Configuration for the edit tool.
 
@@ -42803,19 +43416,19 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsReadToolConfig struct{…}`
+            - `type BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
 
@@ -42829,19 +43442,19 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWriteToolConfig struct{…}`
+            - `type BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
 
@@ -42855,19 +43468,19 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGlobToolConfig struct{…}`
+            - `type BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
 
@@ -42881,19 +43494,19 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGrepToolConfig struct{…}`
+            - `type BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
 
@@ -42907,19 +43520,19 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+            - `type BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
 
@@ -42933,15 +43546,15 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -42953,7 +43566,7 @@ List Session Threads
 
                 format: int32
 
-            - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+            - `type BetaManagedAgentsWebSearchToolConfig`
 
               Configuration for the web_search tool.
 
@@ -42967,15 +43580,15 @@ List Session Threads
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -43023,19 +43636,19 @@ List Session Threads
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsMCPToolset struct{…}`
+        - `type BetaManagedAgentsMCPToolset`
 
           - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -43049,15 +43662,15 @@ List Session Threads
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -43071,21 +43684,21 @@ List Session Threads
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `MCPServerName string`
 
-        - `type BetaManagedAgentsCustomTool struct{…}`
+        - `type BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -43109,7 +43722,7 @@ List Session Threads
 
         format: int32
 
-    - `type BetaManagedAgentsAdvisor struct{…}`
+    - `type BetaManagedAgentsAdvisor`
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -43490,6 +44103,8 @@ Get Session Thread
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -43498,7 +44113,7 @@ Get Session Thread
 
 #### Returns
 
-- `type BetaManagedAgentsSessionThread struct{…}`
+- `type BetaManagedAgentsSessionThread`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
 
@@ -43512,7 +44127,7 @@ Get Session Thread
 
     The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
 
-    - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+    - `type BetaManagedAgentsSessionThreadAgent`
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -43608,31 +44223,31 @@ Get Session Thread
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `type BetaManagedAgentsEffortLow struct{…}`
+          - `type BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `Type BetaManagedAgentsEffortLowType`
 
-          - `type BetaManagedAgentsEffortMedium struct{…}`
+          - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type BetaManagedAgentsEffortMediumType`
 
-          - `type BetaManagedAgentsEffortHigh struct{…}`
+          - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `Type BetaManagedAgentsEffortHighType`
 
-          - `type BetaManagedAgentsEffortXhigh struct{…}`
+          - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type BetaManagedAgentsEffortXhighType`
 
-          - `type BetaManagedAgentsEffortMax struct{…}`
+          - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -43654,7 +44269,7 @@ Get Session Thread
 
       - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-        - `type BetaManagedAgentsAnthropicSkill struct{…}`
+        - `type BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
@@ -43664,7 +44279,7 @@ Get Session Thread
 
           - `Version string`
 
-        - `type BetaManagedAgentsCustomSkill struct{…}`
+        - `type BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -43678,13 +44293,13 @@ Get Session Thread
 
       - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-        - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401`
 
           - `Type BetaManagedAgentsAgentToolset20260401Type`
 
           - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-            - `type BetaManagedAgentsBashToolConfig struct{…}`
+            - `type BetaManagedAgentsBashToolConfig`
 
               Configuration for the bash tool.
 
@@ -43698,25 +44313,25 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
                   - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Type Auto`
 
-            - `type BetaManagedAgentsEditToolConfig struct{…}`
+            - `type BetaManagedAgentsEditToolConfig`
 
               Configuration for the edit tool.
 
@@ -43730,19 +44345,19 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsReadToolConfig struct{…}`
+            - `type BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
 
@@ -43756,19 +44371,19 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWriteToolConfig struct{…}`
+            - `type BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
 
@@ -43782,19 +44397,19 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGlobToolConfig struct{…}`
+            - `type BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
 
@@ -43808,19 +44423,19 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGrepToolConfig struct{…}`
+            - `type BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
 
@@ -43834,19 +44449,19 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+            - `type BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
 
@@ -43860,15 +44475,15 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -43880,7 +44495,7 @@ Get Session Thread
 
                 format: int32
 
-            - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+            - `type BetaManagedAgentsWebSearchToolConfig`
 
               Configuration for the web_search tool.
 
@@ -43894,15 +44509,15 @@ Get Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -43950,19 +44565,19 @@ Get Session Thread
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsMCPToolset struct{…}`
+        - `type BetaManagedAgentsMCPToolset`
 
           - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -43976,15 +44591,15 @@ Get Session Thread
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -43998,21 +44613,21 @@ Get Session Thread
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `MCPServerName string`
 
-        - `type BetaManagedAgentsCustomTool struct{…}`
+        - `type BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -44036,7 +44651,7 @@ Get Session Thread
 
         format: int32
 
-    - `type BetaManagedAgentsAdvisor struct{…}`
+    - `type BetaManagedAgentsAdvisor`
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -44414,6 +45029,8 @@ Archive Session Thread
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -44422,7 +45039,7 @@ Archive Session Thread
 
 #### Returns
 
-- `type BetaManagedAgentsSessionThread struct{…}`
+- `type BetaManagedAgentsSessionThread`
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
 
@@ -44436,7 +45053,7 @@ Archive Session Thread
 
     The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
 
-    - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+    - `type BetaManagedAgentsSessionThreadAgent`
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -44532,31 +45149,31 @@ Archive Session Thread
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `type BetaManagedAgentsEffortLow struct{…}`
+          - `type BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `Type BetaManagedAgentsEffortLowType`
 
-          - `type BetaManagedAgentsEffortMedium struct{…}`
+          - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type BetaManagedAgentsEffortMediumType`
 
-          - `type BetaManagedAgentsEffortHigh struct{…}`
+          - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `Type BetaManagedAgentsEffortHighType`
 
-          - `type BetaManagedAgentsEffortXhigh struct{…}`
+          - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type BetaManagedAgentsEffortXhighType`
 
-          - `type BetaManagedAgentsEffortMax struct{…}`
+          - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -44578,7 +45195,7 @@ Archive Session Thread
 
       - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-        - `type BetaManagedAgentsAnthropicSkill struct{…}`
+        - `type BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
@@ -44588,7 +45205,7 @@ Archive Session Thread
 
           - `Version string`
 
-        - `type BetaManagedAgentsCustomSkill struct{…}`
+        - `type BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -44602,13 +45219,13 @@ Archive Session Thread
 
       - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-        - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401`
 
           - `Type BetaManagedAgentsAgentToolset20260401Type`
 
           - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-            - `type BetaManagedAgentsBashToolConfig struct{…}`
+            - `type BetaManagedAgentsBashToolConfig`
 
               Configuration for the bash tool.
 
@@ -44622,25 +45239,25 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
                   - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
                   - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `Type Auto`
 
-            - `type BetaManagedAgentsEditToolConfig struct{…}`
+            - `type BetaManagedAgentsEditToolConfig`
 
               Configuration for the edit tool.
 
@@ -44654,19 +45271,19 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsReadToolConfig struct{…}`
+            - `type BetaManagedAgentsReadToolConfig`
 
               Configuration for the read tool.
 
@@ -44680,19 +45297,19 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWriteToolConfig struct{…}`
+            - `type BetaManagedAgentsWriteToolConfig`
 
               Configuration for the write tool.
 
@@ -44706,19 +45323,19 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGlobToolConfig struct{…}`
+            - `type BetaManagedAgentsGlobToolConfig`
 
               Configuration for the glob tool.
 
@@ -44732,19 +45349,19 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGrepToolConfig struct{…}`
+            - `type BetaManagedAgentsGrepToolConfig`
 
               Configuration for the grep tool.
 
@@ -44758,19 +45375,19 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+            - `type BetaManagedAgentsWebFetchToolConfig`
 
               Configuration for the web_fetch tool.
 
@@ -44784,15 +45401,15 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -44804,7 +45421,7 @@ Archive Session Thread
 
                 format: int32
 
-            - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+            - `type BetaManagedAgentsWebSearchToolConfig`
 
               Configuration for the web_search tool.
 
@@ -44818,15 +45435,15 @@ Archive Session Thread
 
                 Permission policy for tool execution.
 
-                - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `type BetaManagedAgentsAutoPolicy struct{…}`
+                - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -44874,19 +45491,19 @@ Archive Session Thread
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsMCPToolset struct{…}`
+        - `type BetaManagedAgentsMCPToolset`
 
           - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -44900,15 +45517,15 @@ Archive Session Thread
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -44922,21 +45539,21 @@ Archive Session Thread
 
               Permission policy for tool execution.
 
-              - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+              - `type BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `type BetaManagedAgentsAutoPolicy struct{…}`
+              - `type BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
           - `MCPServerName string`
 
-        - `type BetaManagedAgentsCustomTool struct{…}`
+        - `type BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -44960,7 +45577,7 @@ Archive Session Thread
 
         format: int32
 
-    - `type BetaManagedAgentsAdvisor struct{…}`
+    - `type BetaManagedAgentsAdvisor`
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -45350,6 +45967,8 @@ List Session Thread Events
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -45362,7 +45981,7 @@ List Session Thread Events
 
   Union type for all event types in a session.
 
-  - `type BetaManagedAgentsUserMessageEvent struct{…}`
+  - `type BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -45376,7 +45995,7 @@ List Session Thread Events
 
       Array of content blocks comprising the user message.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -45388,7 +46007,7 @@ List Session Thread Events
 
           minLength: 1
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -45398,7 +46017,7 @@ List Session Thread Events
 
           Union type for image source variants.
 
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+          - `type BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -45416,7 +46035,7 @@ List Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsURLImageSource struct{…}`
+          - `type BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -45428,7 +46047,7 @@ List Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileImageSource struct{…}`
+          - `type BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -45440,7 +46059,7 @@ List Session Thread Events
 
               minLength: 1
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -45450,7 +46069,7 @@ List Session Thread Events
 
           Union type for document source variants.
 
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+          - `type BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -45468,7 +46087,7 @@ List Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+          - `type BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -45484,7 +46103,7 @@ List Session Thread Events
 
               MIME type of the text content. Must be "text/plain".
 
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+          - `type BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -45496,7 +46115,7 @@ List Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+          - `type BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -45516,7 +46135,7 @@ List Session Thread Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -45528,7 +46147,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserInterruptEvent struct{…}`
+  - `type BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -45548,7 +46167,7 @@ List Session Thread Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
+  - `type BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -45586,7 +46205,7 @@ List Session Thread Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -45604,19 +46223,19 @@ List Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -45668,7 +46287,7 @@ List Session Thread Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -45696,7 +46315,7 @@ List Session Thread Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMessageEvent struct{…}`
+  - `type BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -45710,11 +46329,11 @@ List Session Thread Events
 
       Array of text blocks comprising the agent response.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -45724,7 +46343,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentThinkingEvent struct{…}`
+  - `type BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -45740,7 +46359,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentMCPToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -45782,19 +46401,19 @@ List Session Thread Events
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `Type AlwaysAllow`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `Type AlwaysAsk`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAuto struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -45804,13 +46423,13 @@ List Session Thread Events
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `Type Allow`
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -45822,7 +46441,7 @@ List Session Thread Events
 
               maxLength: 64
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -45838,7 +46457,7 @@ List Session Thread Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -45862,19 +46481,19 @@ List Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -45882,7 +46501,7 @@ List Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -45924,7 +46543,7 @@ List Session Thread Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -45948,19 +46567,19 @@ List Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -45968,7 +46587,7 @@ List Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -45982,19 +46601,19 @@ List Session Thread Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -46012,7 +46631,7 @@ List Session Thread Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -46026,19 +46645,19 @@ List Session Thread Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -46056,7 +46675,7 @@ List Session Thread Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -46072,7 +46691,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionErrorEvent struct{…}`
+  - `type BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -46084,7 +46703,7 @@ List Session Thread Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError struct{…}`
+      - `type BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -46098,25 +46717,25 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `Type BetaManagedAgentsRetryStatusRetryingType`
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `Type BetaManagedAgentsRetryStatusExhaustedType`
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type BetaManagedAgentsRetryStatusTerminalType`
 
-      - `type BetaManagedAgentsModelOverloadedError struct{…}`
+      - `type BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -46130,19 +46749,19 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError struct{…}`
+      - `type BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -46156,19 +46775,19 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError struct{…}`
+      - `type BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -46182,19 +46801,19 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError struct{…}`
+      - `type BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -46212,19 +46831,19 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError struct{…}`
+      - `type BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -46242,19 +46861,19 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError struct{…}`
+      - `type BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -46268,19 +46887,19 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+      - `type BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -46298,15 +46917,15 @@ List Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46320,7 +46939,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -46336,7 +46955,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -46352,7 +46971,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -46370,13 +46989,13 @@ List Session Thread Events
 
     - `StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `Type BetaManagedAgentsSessionEndTurnType`
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -46386,19 +47005,19 @@ List Session Thread Events
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `Type BetaManagedAgentsSessionRetriesExhaustedType`
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `Type BetaManagedAgentsSessionBudgetReachedType`
 
-  - `type BetaManagedAgentsSessionStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -46414,7 +47033,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -46438,7 +47057,7 @@ List Session Thread Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -46464,7 +47083,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -46538,7 +47157,7 @@ List Session Thread Events
 
         - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
 
-  - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -46554,7 +47173,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanModelRequestEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -46582,7 +47201,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -46608,7 +47227,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+  - `type BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -46642,7 +47261,7 @@ List Session Thread Events
 
       Rubric for grading the quality of an outcome.
 
-      - `type BetaManagedAgentsFileRubric struct{…}`
+      - `type BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -46652,7 +47271,7 @@ List Session Thread Events
 
           ID of the rubric file.
 
-      - `type BetaManagedAgentsTextRubric struct{…}`
+      - `type BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -46662,7 +47281,7 @@ List Session Thread Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
+  - `type BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -46678,7 +47297,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -46702,7 +47321,7 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -46728,23 +47347,23 @@ List Session Thread Events
 
     - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -46768,7 +47387,7 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `type BetaManagedAgentsUserToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -46786,19 +47405,19 @@ List Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -46816,7 +47435,7 @@ List Session Thread Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -46840,7 +47459,7 @@ List Session Thread Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `type BetaManagedAgentsSessionUpdatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -46952,31 +47571,31 @@ List Session Thread Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `type BetaManagedAgentsEffortLow struct{…}`
+          - `type BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `Type BetaManagedAgentsEffortLowType`
 
-          - `type BetaManagedAgentsEffortMedium struct{…}`
+          - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type BetaManagedAgentsEffortMediumType`
 
-          - `type BetaManagedAgentsEffortHigh struct{…}`
+          - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `Type BetaManagedAgentsEffortHighType`
 
-          - `type BetaManagedAgentsEffortXhigh struct{…}`
+          - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type BetaManagedAgentsEffortXhighType`
 
-          - `type BetaManagedAgentsEffortMax struct{…}`
+          - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -47004,7 +47623,7 @@ List Session Thread Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+          - `type BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -47030,7 +47649,7 @@ List Session Thread Events
 
             - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-              - `type BetaManagedAgentsAnthropicSkill struct{…}`
+              - `type BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -47040,7 +47659,7 @@ List Session Thread Events
 
                 - `Version string`
 
-              - `type BetaManagedAgentsCustomSkill struct{…}`
+              - `type BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -47054,13 +47673,13 @@ List Session Thread Events
 
             - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-              - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+              - `type BetaManagedAgentsAgentToolset20260401`
 
                 - `Type BetaManagedAgentsAgentToolset20260401Type`
 
                 - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                  - `type BetaManagedAgentsBashToolConfig struct{…}`
+                  - `type BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -47074,25 +47693,25 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `Type Auto`
 
-                  - `type BetaManagedAgentsEditToolConfig struct{…}`
+                  - `type BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -47106,19 +47725,19 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsReadToolConfig struct{…}`
+                  - `type BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -47132,19 +47751,19 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                  - `type BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -47158,19 +47777,19 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                  - `type BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -47184,19 +47803,19 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                  - `type BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -47210,19 +47829,19 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -47236,15 +47855,15 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -47256,7 +47875,7 @@ List Session Thread Events
 
                       format: int32
 
-                  - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -47270,15 +47889,15 @@ List Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -47326,19 +47945,19 @@ List Session Thread Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `type BetaManagedAgentsMCPToolset struct{…}`
+              - `type BetaManagedAgentsMCPToolset`
 
                 - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -47352,15 +47971,15 @@ List Session Thread Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -47374,21 +47993,21 @@ List Session Thread Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `MCPServerName string`
 
-              - `type BetaManagedAgentsCustomTool struct{…}`
+              - `type BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -47412,7 +48031,7 @@ List Session Thread Events
 
               format: int32
 
-          - `type BetaManagedAgentsAdvisor struct{…}`
+          - `type BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -47426,11 +48045,11 @@ List Session Thread Events
 
       - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-        - `type BetaManagedAgentsAnthropicSkill struct{…}`
+        - `type BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `type BetaManagedAgentsCustomSkill struct{…}`
+        - `type BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -47438,11 +48057,11 @@ List Session Thread Events
 
       - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-        - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401`
 
-        - `type BetaManagedAgentsMCPToolset struct{…}`
+        - `type BetaManagedAgentsMCPToolset`
 
-        - `type BetaManagedAgentsCustomTool struct{…}`
+        - `type BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -47476,7 +48095,7 @@ List Session Thread Events
 
       The session's new title. Present only when the update changed it.
 
-  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+  - `type BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -47504,7 +48123,7 @@ List Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionUsageEvent struct{…}`
+  - `type BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -47764,6 +48383,8 @@ Stream Session Thread Events
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -47776,7 +48397,7 @@ Stream Session Thread Events
 
   Server-sent event in a single thread's stream.
 
-  - `type BetaManagedAgentsUserMessageEvent struct{…}`
+  - `type BetaManagedAgentsUserMessageEvent`
 
     A user message event in the session conversation.
 
@@ -47790,7 +48411,7 @@ Stream Session Thread Events
 
       Array of content blocks comprising the user message.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
@@ -47802,7 +48423,7 @@ Stream Session Thread Events
 
           minLength: 1
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
@@ -47812,7 +48433,7 @@ Stream Session Thread Events
 
           Union type for image source variants.
 
-          - `type BetaManagedAgentsBase64ImageSource struct{…}`
+          - `type BetaManagedAgentsBase64ImageSource`
 
             Base64-encoded image data.
 
@@ -47830,7 +48451,7 @@ Stream Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsURLImageSource struct{…}`
+          - `type BetaManagedAgentsURLImageSource`
 
             Image referenced by URL.
 
@@ -47842,7 +48463,7 @@ Stream Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileImageSource struct{…}`
+          - `type BetaManagedAgentsFileImageSource`
 
             Image referenced by file ID.
 
@@ -47854,7 +48475,7 @@ Stream Session Thread Events
 
               minLength: 1
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -47864,7 +48485,7 @@ Stream Session Thread Events
 
           Union type for document source variants.
 
-          - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+          - `type BetaManagedAgentsBase64DocumentSource`
 
             Base64-encoded document data.
 
@@ -47882,7 +48503,7 @@ Stream Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+          - `type BetaManagedAgentsPlainTextDocumentSource`
 
             Plain text document content.
 
@@ -47898,7 +48519,7 @@ Stream Session Thread Events
 
               MIME type of the text content. Must be "text/plain".
 
-          - `type BetaManagedAgentsURLDocumentSource struct{…}`
+          - `type BetaManagedAgentsURLDocumentSource`
 
             Document referenced by URL.
 
@@ -47910,7 +48531,7 @@ Stream Session Thread Events
 
               minLength: 1
 
-          - `type BetaManagedAgentsFileDocumentSource struct{…}`
+          - `type BetaManagedAgentsFileDocumentSource`
 
             Document referenced by file ID.
 
@@ -47930,7 +48551,7 @@ Stream Session Thread Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -47942,7 +48563,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserInterruptEvent struct{…}`
+  - `type BetaManagedAgentsUserInterruptEvent`
 
     An interrupt event that pauses agent execution and returns control to the user.
 
@@ -47962,7 +48583,7 @@ Stream Session Thread Events
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `type BetaManagedAgentsUserToolConfirmationEvent struct{…}`
+  - `type BetaManagedAgentsUserToolConfirmationEvent`
 
     A tool confirmation event that approves or denies a pending tool execution.
 
@@ -48000,7 +48621,7 @@ Stream Session Thread Events
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsUserCustomToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserCustomToolResultEvent`
 
     Event sent by the client providing the result of a custom tool execution.
 
@@ -48018,19 +48639,19 @@ Stream Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -48082,7 +48703,7 @@ Stream Session Thread Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsAgentCustomToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentCustomToolUseEvent`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -48110,7 +48731,7 @@ Stream Session Thread Events
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMessageEvent struct{…}`
+  - `type BetaManagedAgentsAgentMessageEvent`
 
     An agent response event in the session conversation.
 
@@ -48124,11 +48745,11 @@ Stream Session Thread Events
 
       Array of text blocks comprising the agent response.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -48138,7 +48759,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentThinkingEvent struct{…}`
+  - `type BetaManagedAgentsAgentThinkingEvent`
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -48154,7 +48775,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsAgentMCPToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolUseEvent`
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -48196,19 +48817,19 @@ Stream Session Thread Events
 
       Names the resolved permission_policy that produced evaluated_permission, and under auto carries the judgement. Open union: clients must tolerate unknown variants.
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAllow`
 
         The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
 
         - `Type AlwaysAllow`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAlwaysAsk`
 
         The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
 
         - `Type AlwaysAsk`
 
-      - `type BetaManagedAgentsAgentToolEvaluationAuto struct{…}`
+      - `type BetaManagedAgentsAgentToolEvaluationAuto`
 
         The resolved permission_policy was auto: the server judged this invocation individually.
 
@@ -48218,13 +48839,13 @@ Stream Session Thread Events
 
           The server's per-invocation judgement under the auto permission policy. Its type always equals the event's top-level evaluated_permission. Open union: clients must tolerate unknown variants.
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAllow`
 
             The server judged the invocation safe to execute without client approval.
 
             - `Type Allow`
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionAsk`
 
             The server reached no judgement; the invocation is held for client approval.
 
@@ -48236,7 +48857,7 @@ Stream Session Thread Events
 
               maxLength: 64
 
-          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny struct{…}`
+          - `type BetaManagedAgentsAgentAutoEvaluatedPermissionDeny`
 
             The server judged the invocation high-risk; it does not execute and a synthetic error tool result is appended.
 
@@ -48252,7 +48873,7 @@ Stream Session Thread Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentMCPToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentMCPToolResultEvent`
 
     Event representing the result of an MCP tool execution.
 
@@ -48276,19 +48897,19 @@ Stream Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -48296,7 +48917,7 @@ Stream Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentToolUseEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolUseEvent`
 
     Event emitted when the agent invokes a built-in agent tool.
 
@@ -48338,7 +48959,7 @@ Stream Session Thread Events
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
-  - `type BetaManagedAgentsAgentToolResultEvent struct{…}`
+  - `type BetaManagedAgentsAgentToolResultEvent`
 
     Event representing the result of an agent tool execution.
 
@@ -48362,19 +48983,19 @@ Stream Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -48382,7 +49003,7 @@ Stream Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageReceivedEvent`
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -48396,19 +49017,19 @@ Stream Session Thread Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -48426,7 +49047,7 @@ Stream Session Thread Events
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadMessageSentEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadMessageSentEvent`
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -48440,19 +49061,19 @@ Stream Session Thread Events
 
       Message content blocks.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+      - `type BetaManagedAgentsRedactedBlockParam`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -48470,7 +49091,7 @@ Stream Session Thread Events
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-  - `type BetaManagedAgentsAgentThreadContextCompactedEvent struct{…}`
+  - `type BetaManagedAgentsAgentThreadContextCompactedEvent`
 
     Indicates that context compaction (summarization) occurred during the session.
 
@@ -48486,7 +49107,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionErrorEvent struct{…}`
+  - `type BetaManagedAgentsSessionErrorEvent`
 
     An error event indicating a problem occurred during session execution.
 
@@ -48498,7 +49119,7 @@ Stream Session Thread Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError struct{…}`
+      - `type BetaManagedAgentsUnknownError`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -48512,25 +49133,25 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
             - `Type BetaManagedAgentsRetryStatusRetryingType`
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
             - `Type BetaManagedAgentsRetryStatusExhaustedType`
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
             - `Type BetaManagedAgentsRetryStatusTerminalType`
 
-      - `type BetaManagedAgentsModelOverloadedError struct{…}`
+      - `type BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -48544,19 +49165,19 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError struct{…}`
+      - `type BetaManagedAgentsModelRateLimitedError`
 
         The model request was rate-limited.
 
@@ -48570,19 +49191,19 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError struct{…}`
+      - `type BetaManagedAgentsModelRequestFailedError`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -48596,19 +49217,19 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError struct{…}`
+      - `type BetaManagedAgentsMCPConnectionFailedError`
 
         Failed to connect to an MCP server.
 
@@ -48626,19 +49247,19 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError struct{…}`
+      - `type BetaManagedAgentsMCPAuthenticationFailedError`
 
         Authentication to an MCP server failed.
 
@@ -48656,19 +49277,19 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError struct{…}`
+      - `type BetaManagedAgentsBillingError`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -48682,19 +49303,19 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError struct{…}`
+      - `type BetaManagedAgentsCredentialHostUnreachableError`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -48712,15 +49333,15 @@ Stream Session Thread Events
 
           What the client should do next in response to this error.
 
-          - `type BetaManagedAgentsRetryStatusRetrying struct{…}`
+          - `type BetaManagedAgentsRetryStatusRetrying`
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-          - `type BetaManagedAgentsRetryStatusExhausted struct{…}`
+          - `type BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-          - `type BetaManagedAgentsRetryStatusTerminal struct{…}`
+          - `type BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
@@ -48734,7 +49355,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRescheduledEvent`
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -48750,7 +49371,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusRunningEvent`
 
     Indicates the session is actively running and the agent is working.
 
@@ -48766,7 +49387,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusIdleEvent`
 
     Indicates the agent has paused and is awaiting user input.
 
@@ -48784,13 +49405,13 @@ Stream Session Thread Events
 
     - `StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
         - `Type BetaManagedAgentsSessionEndTurnType`
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -48800,19 +49421,19 @@ Stream Session Thread Events
 
           The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `Type BetaManagedAgentsSessionRetriesExhaustedType`
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `Type BetaManagedAgentsSessionBudgetReachedType`
 
-  - `type BetaManagedAgentsSessionStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionStatusTerminatedEvent`
 
     Indicates the session has terminated, either due to an error or completion.
 
@@ -48828,7 +49449,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadCreatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
     Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -48852,7 +49473,7 @@ Stream Session Thread Events
 
       Public `sthr_` ID of the newly created thread.
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationStartEvent`
 
     Emitted when an outcome evaluation cycle begins.
 
@@ -48878,7 +49499,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationEndEvent`
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -48952,7 +49573,7 @@ Stream Session Thread Events
 
         - `const BetaManagedAgentsSpanModelUsageSpeedFast BetaManagedAgentsSpanModelUsageSpeed = "fast"`
 
-  - `type BetaManagedAgentsSpanModelRequestStartEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestStartEvent`
 
     Emitted when a model request is initiated by the agent.
 
@@ -48968,7 +49589,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanModelRequestEndEvent struct{…}`
+  - `type BetaManagedAgentsSpanModelRequestEndEvent`
 
     Emitted when a model request completes.
 
@@ -48996,7 +49617,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent struct{…}`
+  - `type BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent`
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -49022,7 +49643,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsUserDefineOutcomeEvent struct{…}`
+  - `type BetaManagedAgentsUserDefineOutcomeEvent`
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -49056,7 +49677,7 @@ Stream Session Thread Events
 
       Rubric for grading the quality of an outcome.
 
-      - `type BetaManagedAgentsFileRubric struct{…}`
+      - `type BetaManagedAgentsFileRubric`
 
         Rubric referenced by a file uploaded via the Files API.
 
@@ -49066,7 +49687,7 @@ Stream Session Thread Events
 
           ID of the rubric file.
 
-      - `type BetaManagedAgentsTextRubric struct{…}`
+      - `type BetaManagedAgentsTextRubric`
 
         Rubric content provided inline as text.
 
@@ -49076,7 +49697,7 @@ Stream Session Thread Events
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `type BetaManagedAgentsSessionDeletedEvent struct{…}`
+  - `type BetaManagedAgentsSessionDeletedEvent`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -49092,7 +49713,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionThreadStatusRunningEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRunningEvent`
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -49116,7 +49737,7 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that started running.
 
-  - `type BetaManagedAgentsSessionThreadStatusIdleEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusIdleEvent`
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -49142,23 +49763,23 @@ Stream Session Thread Events
 
     - `StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion`
 
-      - `type BetaManagedAgentsSessionEndTurn struct{…}`
+      - `type BetaManagedAgentsSessionEndTurn`
 
         The agent completed its turn naturally and is ready for the next user message.
 
-      - `type BetaManagedAgentsSessionRequiresAction struct{…}`
+      - `type BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-      - `type BetaManagedAgentsSessionRetriesExhausted struct{…}`
+      - `type BetaManagedAgentsSessionRetriesExhausted`
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-      - `type BetaManagedAgentsSessionBudgetReached struct{…}`
+      - `type BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -49182,7 +49803,7 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that terminated.
 
-  - `type BetaManagedAgentsUserToolResultEvent struct{…}`
+  - `type BetaManagedAgentsUserToolResultEvent`
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -49200,19 +49821,19 @@ Stream Session Thread Events
 
       The result content returned by the tool.
 
-      - `type BetaManagedAgentsTextBlock struct{…}`
+      - `type BetaManagedAgentsTextBlock`
 
         Regular text content.
 
-      - `type BetaManagedAgentsImageBlock struct{…}`
+      - `type BetaManagedAgentsImageBlock`
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-      - `type BetaManagedAgentsDocumentBlock struct{…}`
+      - `type BetaManagedAgentsDocumentBlock`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsSearchResultBlock struct{…}`
+      - `type BetaManagedAgentsSearchResultBlock`
 
         A block containing a web search result.
 
@@ -49230,7 +49851,7 @@ Stream Session Thread Events
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
-  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent struct{…}`
+  - `type BetaManagedAgentsSessionThreadStatusRescheduledEvent`
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -49254,7 +49875,7 @@ Stream Session Thread Events
 
       Public sthr_ ID of the thread that is retrying.
 
-  - `type BetaManagedAgentsSessionUpdatedEvent struct{…}`
+  - `type BetaManagedAgentsSessionUpdatedEvent`
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -49366,31 +49987,31 @@ Stream Session Thread Events
 
           How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-          - `type BetaManagedAgentsEffortLow struct{…}`
+          - `type BetaManagedAgentsEffortLow`
 
             Low effort. Favors latency over reasoning depth.
 
             - `Type BetaManagedAgentsEffortLowType`
 
-          - `type BetaManagedAgentsEffortMedium struct{…}`
+          - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
             - `Type BetaManagedAgentsEffortMediumType`
 
-          - `type BetaManagedAgentsEffortHigh struct{…}`
+          - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
             - `Type BetaManagedAgentsEffortHighType`
 
-          - `type BetaManagedAgentsEffortXhigh struct{…}`
+          - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
             - `Type BetaManagedAgentsEffortXhighType`
 
-          - `type BetaManagedAgentsEffortMax struct{…}`
+          - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
@@ -49418,7 +50039,7 @@ Stream Session Thread Events
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `type BetaManagedAgentsSessionThreadAgent struct{…}`
+          - `type BetaManagedAgentsSessionThreadAgent`
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -49444,7 +50065,7 @@ Stream Session Thread Events
 
             - `Skills []BetaManagedAgentsSessionThreadAgentSkillUnion`
 
-              - `type BetaManagedAgentsAnthropicSkill struct{…}`
+              - `type BetaManagedAgentsAnthropicSkill`
 
                 A resolved Anthropic-managed skill.
 
@@ -49454,7 +50075,7 @@ Stream Session Thread Events
 
                 - `Version string`
 
-              - `type BetaManagedAgentsCustomSkill struct{…}`
+              - `type BetaManagedAgentsCustomSkill`
 
                 A resolved user-created custom skill.
 
@@ -49468,13 +50089,13 @@ Stream Session Thread Events
 
             - `Tools []BetaManagedAgentsSessionThreadAgentToolUnion`
 
-              - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+              - `type BetaManagedAgentsAgentToolset20260401`
 
                 - `Type BetaManagedAgentsAgentToolset20260401Type`
 
                 - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
-                  - `type BetaManagedAgentsBashToolConfig struct{…}`
+                  - `type BetaManagedAgentsBashToolConfig`
 
                     Configuration for the bash tool.
 
@@ -49488,25 +50109,25 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
                         - `Type BetaManagedAgentsAlwaysAllowPolicyType`
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
                         - `Type BetaManagedAgentsAlwaysAskPolicyType`
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                         - `Type Auto`
 
-                  - `type BetaManagedAgentsEditToolConfig struct{…}`
+                  - `type BetaManagedAgentsEditToolConfig`
 
                     Configuration for the edit tool.
 
@@ -49520,19 +50141,19 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsReadToolConfig struct{…}`
+                  - `type BetaManagedAgentsReadToolConfig`
 
                     Configuration for the read tool.
 
@@ -49546,19 +50167,19 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWriteToolConfig struct{…}`
+                  - `type BetaManagedAgentsWriteToolConfig`
 
                     Configuration for the write tool.
 
@@ -49572,19 +50193,19 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGlobToolConfig struct{…}`
+                  - `type BetaManagedAgentsGlobToolConfig`
 
                     Configuration for the glob tool.
 
@@ -49598,19 +50219,19 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsGrepToolConfig struct{…}`
+                  - `type BetaManagedAgentsGrepToolConfig`
 
                     Configuration for the grep tool.
 
@@ -49624,19 +50245,19 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                  - `type BetaManagedAgentsWebFetchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebFetchToolConfig`
 
                     Configuration for the web_fetch tool.
 
@@ -49650,15 +50271,15 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -49670,7 +50291,7 @@ Stream Session Thread Events
 
                       format: int32
 
-                  - `type BetaManagedAgentsWebSearchToolConfig struct{…}`
+                  - `type BetaManagedAgentsWebSearchToolConfig`
 
                     Configuration for the web_search tool.
 
@@ -49684,15 +50305,15 @@ Stream Session Thread Events
 
                       Permission policy for tool execution.
 
-                      - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                         Tool calls are automatically approved without user confirmation.
 
-                      - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                      - `type BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                      - `type BetaManagedAgentsAutoPolicy struct{…}`
+                      - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -49740,19 +50361,19 @@ Stream Session Thread Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `type BetaManagedAgentsMCPToolset struct{…}`
+              - `type BetaManagedAgentsMCPToolset`
 
                 - `Type BetaManagedAgentsMCPToolsetType`
 
@@ -49766,15 +50387,15 @@ Stream Session Thread Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -49788,21 +50409,21 @@ Stream Session Thread Events
 
                     Permission policy for tool execution.
 
-                    - `type BetaManagedAgentsAlwaysAllowPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `type BetaManagedAgentsAlwaysAskPolicy struct{…}`
+                    - `type BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `type BetaManagedAgentsAutoPolicy struct{…}`
+                    - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                 - `MCPServerName string`
 
-              - `type BetaManagedAgentsCustomTool struct{…}`
+              - `type BetaManagedAgentsCustomTool`
 
                 A custom tool as returned in API responses.
 
@@ -49826,7 +50447,7 @@ Stream Session Thread Events
 
               format: int32
 
-          - `type BetaManagedAgentsAdvisor struct{…}`
+          - `type BetaManagedAgentsAdvisor`
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -49840,11 +50461,11 @@ Stream Session Thread Events
 
       - `Skills []BetaManagedAgentsSessionAgentSkillUnion`
 
-        - `type BetaManagedAgentsAnthropicSkill struct{…}`
+        - `type BetaManagedAgentsAnthropicSkill`
 
           A resolved Anthropic-managed skill.
 
-        - `type BetaManagedAgentsCustomSkill struct{…}`
+        - `type BetaManagedAgentsCustomSkill`
 
           A resolved user-created custom skill.
 
@@ -49852,11 +50473,11 @@ Stream Session Thread Events
 
       - `Tools []BetaManagedAgentsSessionAgentToolUnion`
 
-        - `type BetaManagedAgentsAgentToolset20260401 struct{…}`
+        - `type BetaManagedAgentsAgentToolset20260401`
 
-        - `type BetaManagedAgentsMCPToolset struct{…}`
+        - `type BetaManagedAgentsMCPToolset`
 
-        - `type BetaManagedAgentsCustomTool struct{…}`
+        - `type BetaManagedAgentsCustomTool`
 
           A custom tool as returned in API responses.
 
@@ -49890,7 +50511,7 @@ Stream Session Thread Events
 
       The session's new title. Present only when the update changed it.
 
-  - `type BetaManagedAgentsStartEvent struct{…}`
+  - `type BetaManagedAgentsStartEvent`
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -49900,7 +50521,7 @@ Stream Session Thread Events
 
       The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
 
-      - `type BetaManagedAgentsAgentMessagePreview struct{…}`
+      - `type BetaManagedAgentsAgentMessagePreview`
 
         - `Type BetaManagedAgentsAgentMessagePreviewType`
 
@@ -49908,7 +50529,7 @@ Stream Session Thread Events
 
           The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
 
-      - `type BetaManagedAgentsAgentThinkingPreview struct{…}`
+      - `type BetaManagedAgentsAgentThinkingPreview`
 
         - `Type BetaManagedAgentsAgentThinkingPreviewType`
 
@@ -49916,7 +50537,7 @@ Stream Session Thread Events
 
           The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
 
-  - `type BetaManagedAgentsDeltaEvent struct{…}`
+  - `type BetaManagedAgentsDeltaEvent`
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
@@ -49942,7 +50563,7 @@ Stream Session Thread Events
 
       The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
 
-  - `type BetaManagedAgentsSystemMessageEvent struct{…}`
+  - `type BetaManagedAgentsSystemMessageEvent`
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
@@ -49970,7 +50591,7 @@ Stream Session Thread Events
 
       format: date-time
 
-  - `type BetaManagedAgentsSessionUsageEvent struct{…}`
+  - `type BetaManagedAgentsSessionUsageEvent`
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
@@ -50124,7 +50745,7 @@ Create Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentParamsResp`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -50152,7 +50773,7 @@ Create Deployment
 
     Body param: Events to send to each session immediately after creation. At least 1, maximum 50.
 
-    - `type BetaManagedAgentsUserMessageEventParams struct{…}`
+    - `type BetaManagedAgentsUserMessageEventParams`
 
       Parameters for sending a user message to the session.
 
@@ -50162,7 +50783,7 @@ Create Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -50174,7 +50795,7 @@ Create Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -50184,7 +50805,7 @@ Create Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -50202,7 +50823,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -50214,7 +50835,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -50226,7 +50847,7 @@ Create Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -50236,7 +50857,7 @@ Create Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -50254,7 +50875,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -50270,7 +50891,7 @@ Create Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -50282,7 +50903,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -50302,13 +50923,13 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsUserDefineOutcomeEventParams struct{…}`
+    - `type BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -50322,7 +50943,7 @@ Create Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubricParams struct{…}`
+        - `type BetaManagedAgentsFileRubricParams`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -50332,7 +50953,7 @@ Create Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubricParams struct{…}`
+        - `type BetaManagedAgentsTextRubricParams`
 
           Rubric content provided inline as text.
 
@@ -50350,7 +50971,7 @@ Create Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
+    - `type BetaManagedAgentsSystemMessageEventParamsResp`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -50392,7 +51013,7 @@ Create Deployment
 
     Body param: Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
 
       Mount a GitHub repository into the session's container.
 
@@ -50414,7 +51035,7 @@ Create Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -50424,7 +51045,7 @@ Create Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -50440,7 +51061,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsFileResourceParamsResp`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -50458,7 +51079,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -50588,6 +51209,8 @@ Create Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -50596,7 +51219,7 @@ Create Deployment
 
 #### Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -50642,7 +51265,7 @@ Create Deployment
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -50652,7 +51275,7 @@ Create Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -50664,7 +51287,7 @@ Create Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -50674,7 +51297,7 @@ Create Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -50692,7 +51315,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -50704,7 +51327,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -50716,7 +51339,7 @@ Create Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -50726,7 +51349,7 @@ Create Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -50744,7 +51367,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -50760,7 +51383,7 @@ Create Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -50772,7 +51395,7 @@ Create Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -50792,13 +51415,13 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -50812,7 +51435,7 @@ Create Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -50822,7 +51445,7 @@ Create Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -50838,7 +51461,7 @@ Create Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -50868,13 +51491,13 @@ Create Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -50884,85 +51507,85 @@ Create Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -50972,7 +51595,7 @@ Create Deployment
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -50986,7 +51609,7 @@ Create Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -50996,7 +51619,7 @@ Create Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -51010,7 +51633,7 @@ Create Deployment
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -51024,7 +51647,7 @@ Create Deployment
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 
@@ -51363,6 +51986,8 @@ List Deployments
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -51371,7 +51996,7 @@ List Deployments
 
 #### Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -51417,7 +52042,7 @@ List Deployments
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -51427,7 +52052,7 @@ List Deployments
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -51439,7 +52064,7 @@ List Deployments
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -51449,7 +52074,7 @@ List Deployments
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -51467,7 +52092,7 @@ List Deployments
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -51479,7 +52104,7 @@ List Deployments
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -51491,7 +52116,7 @@ List Deployments
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -51501,7 +52126,7 @@ List Deployments
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -51519,7 +52144,7 @@ List Deployments
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -51535,7 +52160,7 @@ List Deployments
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -51547,7 +52172,7 @@ List Deployments
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -51567,13 +52192,13 @@ List Deployments
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -51587,7 +52212,7 @@ List Deployments
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -51597,7 +52222,7 @@ List Deployments
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -51613,7 +52238,7 @@ List Deployments
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -51643,13 +52268,13 @@ List Deployments
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -51659,85 +52284,85 @@ List Deployments
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -51747,7 +52372,7 @@ List Deployments
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -51761,7 +52386,7 @@ List Deployments
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -51771,7 +52396,7 @@ List Deployments
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -51785,7 +52410,7 @@ List Deployments
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -51799,7 +52424,7 @@ List Deployments
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 
@@ -52094,6 +52719,8 @@ Get Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -52102,7 +52729,7 @@ Get Deployment
 
 #### Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -52148,7 +52775,7 @@ Get Deployment
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -52158,7 +52785,7 @@ Get Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -52170,7 +52797,7 @@ Get Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -52180,7 +52807,7 @@ Get Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -52198,7 +52825,7 @@ Get Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -52210,7 +52837,7 @@ Get Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -52222,7 +52849,7 @@ Get Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -52232,7 +52859,7 @@ Get Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -52250,7 +52877,7 @@ Get Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -52266,7 +52893,7 @@ Get Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -52278,7 +52905,7 @@ Get Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -52298,13 +52925,13 @@ Get Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -52318,7 +52945,7 @@ Get Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -52328,7 +52955,7 @@ Get Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -52344,7 +52971,7 @@ Get Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -52374,13 +53001,13 @@ Get Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -52390,85 +53017,85 @@ Get Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -52478,7 +53105,7 @@ Get Deployment
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -52492,7 +53119,7 @@ Get Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -52502,7 +53129,7 @@ Get Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -52516,7 +53143,7 @@ Get Deployment
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -52530,7 +53157,7 @@ Get Deployment
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 
@@ -52732,7 +53359,7 @@ Update Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp struct{…}`
+    - `type BetaManagedAgentsAgentParamsResp`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -52770,7 +53397,7 @@ Update Deployment
 
     Body param: Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
-    - `type BetaManagedAgentsUserMessageEventParams struct{…}`
+    - `type BetaManagedAgentsUserMessageEventParams`
 
       Parameters for sending a user message to the session.
 
@@ -52780,7 +53407,7 @@ Update Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -52792,7 +53419,7 @@ Update Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -52802,7 +53429,7 @@ Update Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -52820,7 +53447,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -52832,7 +53459,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -52844,7 +53471,7 @@ Update Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -52854,7 +53481,7 @@ Update Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -52872,7 +53499,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -52888,7 +53515,7 @@ Update Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -52900,7 +53527,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -52920,13 +53547,13 @@ Update Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsUserDefineOutcomeEventParams struct{…}`
+    - `type BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -52940,7 +53567,7 @@ Update Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubricParams struct{…}`
+        - `type BetaManagedAgentsFileRubricParams`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -52950,7 +53577,7 @@ Update Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubricParams struct{…}`
+        - `type BetaManagedAgentsTextRubricParams`
 
           Rubric content provided inline as text.
 
@@ -52968,7 +53595,7 @@ Update Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp struct{…}`
+    - `type BetaManagedAgentsSystemMessageEventParamsResp`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
@@ -53000,7 +53627,7 @@ Update Deployment
 
     Body param: Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
 
       Mount a GitHub repository into the session's container.
 
@@ -53022,7 +53649,7 @@ Update Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -53032,7 +53659,7 @@ Update Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -53048,7 +53675,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp struct{…}`
+    - `type BetaManagedAgentsFileResourceParamsResp`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -53066,7 +53693,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -53196,6 +53823,8 @@ Update Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53204,7 +53833,7 @@ Update Deployment
 
 #### Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -53250,7 +53879,7 @@ Update Deployment
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -53260,7 +53889,7 @@ Update Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -53272,7 +53901,7 @@ Update Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -53282,7 +53911,7 @@ Update Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -53300,7 +53929,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -53312,7 +53941,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -53324,7 +53953,7 @@ Update Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -53334,7 +53963,7 @@ Update Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -53352,7 +53981,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -53368,7 +53997,7 @@ Update Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -53380,7 +54009,7 @@ Update Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -53400,13 +54029,13 @@ Update Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -53420,7 +54049,7 @@ Update Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -53430,7 +54059,7 @@ Update Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -53446,7 +54075,7 @@ Update Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -53476,13 +54105,13 @@ Update Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -53492,85 +54121,85 @@ Update Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -53580,7 +54209,7 @@ Update Deployment
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -53594,7 +54223,7 @@ Update Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -53604,7 +54233,7 @@ Update Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -53618,7 +54247,7 @@ Update Deployment
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -53632,7 +54261,7 @@ Update Deployment
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 
@@ -53926,6 +54555,8 @@ Archive Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53934,7 +54565,7 @@ Archive Deployment
 
 #### Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -53980,7 +54611,7 @@ Archive Deployment
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -53990,7 +54621,7 @@ Archive Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -54002,7 +54633,7 @@ Archive Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -54012,7 +54643,7 @@ Archive Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -54030,7 +54661,7 @@ Archive Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -54042,7 +54673,7 @@ Archive Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -54054,7 +54685,7 @@ Archive Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -54064,7 +54695,7 @@ Archive Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -54082,7 +54713,7 @@ Archive Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -54098,7 +54729,7 @@ Archive Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -54110,7 +54741,7 @@ Archive Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -54130,13 +54761,13 @@ Archive Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -54150,7 +54781,7 @@ Archive Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -54160,7 +54791,7 @@ Archive Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -54176,7 +54807,7 @@ Archive Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -54206,13 +54837,13 @@ Archive Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -54222,85 +54853,85 @@ Archive Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -54310,7 +54941,7 @@ Archive Deployment
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -54324,7 +54955,7 @@ Archive Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -54334,7 +54965,7 @@ Archive Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -54348,7 +54979,7 @@ Archive Deployment
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -54362,7 +54993,7 @@ Archive Deployment
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 
@@ -54656,6 +55287,8 @@ Run Deployment Now
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -54664,7 +55297,7 @@ Run Deployment Now
 
 #### Returns
 
-- `type BetaManagedAgentsDeploymentRun struct{…}`
+- `type BetaManagedAgentsDeploymentRun`
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
@@ -54700,7 +55333,7 @@ Run Deployment Now
 
     Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-    - `type BetaManagedAgentsEnvironmentArchivedRunError struct{…}`
+    - `type BetaManagedAgentsEnvironmentArchivedRunError`
 
       The deployment's environment was archived.
 
@@ -54710,7 +55343,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsAgentArchivedRunError struct{…}`
+    - `type BetaManagedAgentsAgentArchivedRunError`
 
       The deployment's agent was archived.
 
@@ -54720,7 +55353,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsEnvironmentNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsEnvironmentNotFoundRunError`
 
       The deployment's environment no longer exists.
 
@@ -54730,7 +55363,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsVaultNotFoundRunError`
 
       A vault referenced by the deployment no longer exists.
 
@@ -54740,7 +55373,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultArchivedRunError struct{…}`
+    - `type BetaManagedAgentsVaultArchivedRunError`
 
       A vault referenced by the deployment is archived.
 
@@ -54750,7 +55383,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsFileNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsFileNotFoundRunError`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -54760,7 +55393,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMemoryStoreArchivedRunError struct{…}`
+    - `type BetaManagedAgentsMemoryStoreArchivedRunError`
 
       A memory store referenced by the deployment is archived.
 
@@ -54770,7 +55403,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSkillNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsSkillNotFoundRunError`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -54780,7 +55413,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionResourceNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsSessionResourceNotFoundRunError`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -54790,7 +55423,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsWorkspaceArchivedRunError struct{…}`
+    - `type BetaManagedAgentsWorkspaceArchivedRunError`
 
       The deployment's workspace was archived.
 
@@ -54800,7 +55433,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsOrganizationDisabledRunError struct{…}`
+    - `type BetaManagedAgentsOrganizationDisabledRunError`
 
       The deployment's organization is disabled.
 
@@ -54810,7 +55443,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionRateLimitedRunError struct{…}`
+    - `type BetaManagedAgentsSessionRateLimitedRunError`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -54820,7 +55453,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionCreationRejectedRunError struct{…}`
+    - `type BetaManagedAgentsSessionCreationRejectedRunError`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -54830,7 +55463,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsUnknownRunError struct{…}`
+    - `type BetaManagedAgentsUnknownRunError`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -54840,7 +55473,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError struct{…}`
+    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -54850,7 +55483,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMCPEgressBlockedRunError struct{…}`
+    - `type BetaManagedAgentsMCPEgressBlockedRunError`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -54868,7 +55501,7 @@ Run Deployment Now
 
     Describes what triggered a deployment run, with trigger-specific metadata.
 
-    - `type BetaManagedAgentsScheduleTriggerContext struct{…}`
+    - `type BetaManagedAgentsScheduleTriggerContext`
 
       The run was fired by the deployment's cron schedule.
 
@@ -54880,7 +55513,7 @@ Run Deployment Now
 
         format: date-time
 
-    - `type BetaManagedAgentsManualTriggerContext struct{…}`
+    - `type BetaManagedAgentsManualTriggerContext`
 
       The run was started manually by creating a session directly against the deployment.
 
@@ -55052,6 +55685,8 @@ Pause Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -55060,7 +55695,7 @@ Pause Deployment
 
 #### Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -55106,7 +55741,7 @@ Pause Deployment
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -55116,7 +55751,7 @@ Pause Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -55128,7 +55763,7 @@ Pause Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -55138,7 +55773,7 @@ Pause Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -55156,7 +55791,7 @@ Pause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -55168,7 +55803,7 @@ Pause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -55180,7 +55815,7 @@ Pause Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -55190,7 +55825,7 @@ Pause Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -55208,7 +55843,7 @@ Pause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -55224,7 +55859,7 @@ Pause Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -55236,7 +55871,7 @@ Pause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -55256,13 +55891,13 @@ Pause Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -55276,7 +55911,7 @@ Pause Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -55286,7 +55921,7 @@ Pause Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -55302,7 +55937,7 @@ Pause Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -55332,13 +55967,13 @@ Pause Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -55348,85 +55983,85 @@ Pause Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -55436,7 +56071,7 @@ Pause Deployment
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -55450,7 +56085,7 @@ Pause Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -55460,7 +56095,7 @@ Pause Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -55474,7 +56109,7 @@ Pause Deployment
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -55488,7 +56123,7 @@ Pause Deployment
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 
@@ -55782,6 +56417,8 @@ Unpause Deployment
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -55790,7 +56427,7 @@ Unpause Deployment
 
 #### Returns
 
-- `type BetaManagedAgentsDeployment struct{…}`
+- `type BetaManagedAgentsDeployment`
 
   A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
 
@@ -55836,7 +56473,7 @@ Unpause Deployment
 
     Events sent to each session immediately after creation.
 
-    - `type BetaManagedAgentsDeploymentUserMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserMessageEvent`
 
       A user message sent to the session.
 
@@ -55846,7 +56483,7 @@ Unpause Deployment
 
         Array of content blocks for the user message.
 
-        - `type BetaManagedAgentsTextBlock struct{…}`
+        - `type BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -55858,7 +56495,7 @@ Unpause Deployment
 
             minLength: 1
 
-        - `type BetaManagedAgentsImageBlock struct{…}`
+        - `type BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -55868,7 +56505,7 @@ Unpause Deployment
 
             Union type for image source variants.
 
-            - `type BetaManagedAgentsBase64ImageSource struct{…}`
+            - `type BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -55886,7 +56523,7 @@ Unpause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsURLImageSource struct{…}`
+            - `type BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -55898,7 +56535,7 @@ Unpause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileImageSource struct{…}`
+            - `type BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -55910,7 +56547,7 @@ Unpause Deployment
 
                 minLength: 1
 
-        - `type BetaManagedAgentsDocumentBlock struct{…}`
+        - `type BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -55920,7 +56557,7 @@ Unpause Deployment
 
             Union type for document source variants.
 
-            - `type BetaManagedAgentsBase64DocumentSource struct{…}`
+            - `type BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -55938,7 +56575,7 @@ Unpause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsPlainTextDocumentSource struct{…}`
+            - `type BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -55954,7 +56591,7 @@ Unpause Deployment
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `type BetaManagedAgentsURLDocumentSource struct{…}`
+            - `type BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -55966,7 +56603,7 @@ Unpause Deployment
 
                 minLength: 1
 
-            - `type BetaManagedAgentsFileDocumentSource struct{…}`
+            - `type BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -55986,13 +56623,13 @@ Unpause Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam struct{…}`
+        - `type BetaManagedAgentsRedactedBlockParam`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
 
       An outcome the agent should work toward. The agent begins work on receipt.
 
@@ -56006,7 +56643,7 @@ Unpause Deployment
 
         Rubric for grading the quality of an outcome.
 
-        - `type BetaManagedAgentsFileRubric struct{…}`
+        - `type BetaManagedAgentsFileRubric`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -56016,7 +56653,7 @@ Unpause Deployment
 
             ID of the rubric file.
 
-        - `type BetaManagedAgentsTextRubric struct{…}`
+        - `type BetaManagedAgentsTextRubric`
 
           Rubric content provided inline as text.
 
@@ -56032,7 +56669,7 @@ Unpause Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsDeploymentSystemMessageEvent struct{…}`
+    - `type BetaManagedAgentsDeploymentSystemMessageEvent`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
 
@@ -56062,13 +56699,13 @@ Unpause Deployment
 
     Why a deployment is paused. Non-null exactly when `status` is `paused`.
 
-    - `type BetaManagedAgentsManualDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsManualDeploymentPausedReason`
 
       The caller invoked the pause endpoint on the deployment.
 
       - `Type BetaManagedAgentsManualDeploymentPausedReasonType`
 
-    - `type BetaManagedAgentsErrorDeploymentPausedReason struct{…}`
+    - `type BetaManagedAgentsErrorDeploymentPausedReason`
 
       A scheduled fire recorded a failed run whose error auto-pauses the deployment.
 
@@ -56078,85 +56715,85 @@ Unpause Deployment
 
         The error that triggered an auto-pause. Matches the failed run's `error.type`.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
           The deployment's environment was archived.
 
           - `Type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
           The deployment's agent was archived.
 
           - `Type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
           The deployment's environment no longer exists.
 
           - `Type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 
           The deployment's workspace was archived.
 
           - `Type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
           The deployment's organization is disabled.
 
           - `Type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
           A memory store referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
           A vault referenced by the deployment is archived.
 
           - `Type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type BetaManagedAgentsUnknownDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorType`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError struct{…}`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -56166,7 +56803,7 @@ Unpause Deployment
 
     Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceConfig struct{…}`
+    - `type BetaManagedAgentsGitHubRepositoryResourceConfig`
 
       A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
 
@@ -56180,7 +56817,7 @@ Unpause Deployment
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `type BetaManagedAgentsBranchCheckout struct{…}`
+        - `type BetaManagedAgentsBranchCheckout`
 
           - `Type BetaManagedAgentsBranchCheckoutType`
 
@@ -56190,7 +56827,7 @@ Unpause Deployment
 
             minLength: 1, maxLength: 255
 
-        - `type BetaManagedAgentsCommitCheckout struct{…}`
+        - `type BetaManagedAgentsCommitCheckout`
 
           - `Type BetaManagedAgentsCommitCheckoutType`
 
@@ -56204,7 +56841,7 @@ Unpause Deployment
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-    - `type BetaManagedAgentsFileResourceConfig struct{…}`
+    - `type BetaManagedAgentsFileResourceConfig`
 
       A file mounted into each session's container.
 
@@ -56218,7 +56855,7 @@ Unpause Deployment
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-    - `type BetaManagedAgentsMemoryStoreResourceConfig struct{…}`
+    - `type BetaManagedAgentsMemoryStoreResourceConfig`
 
       A memory store attached to each session created from this deployment.
 
@@ -56558,6 +57195,8 @@ List Deployment Runs
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -56566,7 +57205,7 @@ List Deployment Runs
 
 #### Returns
 
-- `type BetaManagedAgentsDeploymentRun struct{…}`
+- `type BetaManagedAgentsDeploymentRun`
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
@@ -56602,7 +57241,7 @@ List Deployment Runs
 
     Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-    - `type BetaManagedAgentsEnvironmentArchivedRunError struct{…}`
+    - `type BetaManagedAgentsEnvironmentArchivedRunError`
 
       The deployment's environment was archived.
 
@@ -56612,7 +57251,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsAgentArchivedRunError struct{…}`
+    - `type BetaManagedAgentsAgentArchivedRunError`
 
       The deployment's agent was archived.
 
@@ -56622,7 +57261,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsEnvironmentNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsEnvironmentNotFoundRunError`
 
       The deployment's environment no longer exists.
 
@@ -56632,7 +57271,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsVaultNotFoundRunError`
 
       A vault referenced by the deployment no longer exists.
 
@@ -56642,7 +57281,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultArchivedRunError struct{…}`
+    - `type BetaManagedAgentsVaultArchivedRunError`
 
       A vault referenced by the deployment is archived.
 
@@ -56652,7 +57291,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsFileNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsFileNotFoundRunError`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -56662,7 +57301,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMemoryStoreArchivedRunError struct{…}`
+    - `type BetaManagedAgentsMemoryStoreArchivedRunError`
 
       A memory store referenced by the deployment is archived.
 
@@ -56672,7 +57311,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSkillNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsSkillNotFoundRunError`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -56682,7 +57321,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionResourceNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsSessionResourceNotFoundRunError`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -56692,7 +57331,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsWorkspaceArchivedRunError struct{…}`
+    - `type BetaManagedAgentsWorkspaceArchivedRunError`
 
       The deployment's workspace was archived.
 
@@ -56702,7 +57341,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsOrganizationDisabledRunError struct{…}`
+    - `type BetaManagedAgentsOrganizationDisabledRunError`
 
       The deployment's organization is disabled.
 
@@ -56712,7 +57351,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionRateLimitedRunError struct{…}`
+    - `type BetaManagedAgentsSessionRateLimitedRunError`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -56722,7 +57361,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionCreationRejectedRunError struct{…}`
+    - `type BetaManagedAgentsSessionCreationRejectedRunError`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -56732,7 +57371,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsUnknownRunError struct{…}`
+    - `type BetaManagedAgentsUnknownRunError`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -56742,7 +57381,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError struct{…}`
+    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -56752,7 +57391,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMCPEgressBlockedRunError struct{…}`
+    - `type BetaManagedAgentsMCPEgressBlockedRunError`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -56770,7 +57409,7 @@ List Deployment Runs
 
     Describes what triggered a deployment run, with trigger-specific metadata.
 
-    - `type BetaManagedAgentsScheduleTriggerContext struct{…}`
+    - `type BetaManagedAgentsScheduleTriggerContext`
 
       The run was fired by the deployment's cron schedule.
 
@@ -56782,7 +57421,7 @@ List Deployment Runs
 
         format: date-time
 
-    - `type BetaManagedAgentsManualTriggerContext struct{…}`
+    - `type BetaManagedAgentsManualTriggerContext`
 
       The run was started manually by creating a session directly against the deployment.
 
@@ -56955,6 +57594,8 @@ Get Deployment Run
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -56963,7 +57604,7 @@ Get Deployment Run
 
 #### Returns
 
-- `type BetaManagedAgentsDeploymentRun struct{…}`
+- `type BetaManagedAgentsDeploymentRun`
 
   A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
 
@@ -56999,7 +57640,7 @@ Get Deployment Run
 
     Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
 
-    - `type BetaManagedAgentsEnvironmentArchivedRunError struct{…}`
+    - `type BetaManagedAgentsEnvironmentArchivedRunError`
 
       The deployment's environment was archived.
 
@@ -57009,7 +57650,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsAgentArchivedRunError struct{…}`
+    - `type BetaManagedAgentsAgentArchivedRunError`
 
       The deployment's agent was archived.
 
@@ -57019,7 +57660,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsEnvironmentNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsEnvironmentNotFoundRunError`
 
       The deployment's environment no longer exists.
 
@@ -57029,7 +57670,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsVaultNotFoundRunError`
 
       A vault referenced by the deployment no longer exists.
 
@@ -57039,7 +57680,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultArchivedRunError struct{…}`
+    - `type BetaManagedAgentsVaultArchivedRunError`
 
       A vault referenced by the deployment is archived.
 
@@ -57049,7 +57690,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsFileNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsFileNotFoundRunError`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -57059,7 +57700,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMemoryStoreArchivedRunError struct{…}`
+    - `type BetaManagedAgentsMemoryStoreArchivedRunError`
 
       A memory store referenced by the deployment is archived.
 
@@ -57069,7 +57710,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSkillNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsSkillNotFoundRunError`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -57079,7 +57720,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionResourceNotFoundRunError struct{…}`
+    - `type BetaManagedAgentsSessionResourceNotFoundRunError`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -57089,7 +57730,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsWorkspaceArchivedRunError struct{…}`
+    - `type BetaManagedAgentsWorkspaceArchivedRunError`
 
       The deployment's workspace was archived.
 
@@ -57099,7 +57740,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsOrganizationDisabledRunError struct{…}`
+    - `type BetaManagedAgentsOrganizationDisabledRunError`
 
       The deployment's organization is disabled.
 
@@ -57109,7 +57750,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionRateLimitedRunError struct{…}`
+    - `type BetaManagedAgentsSessionRateLimitedRunError`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -57119,7 +57760,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionCreationRejectedRunError struct{…}`
+    - `type BetaManagedAgentsSessionCreationRejectedRunError`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -57129,7 +57770,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsUnknownRunError struct{…}`
+    - `type BetaManagedAgentsUnknownRunError`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -57139,7 +57780,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError struct{…}`
+    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -57149,7 +57790,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMCPEgressBlockedRunError struct{…}`
+    - `type BetaManagedAgentsMCPEgressBlockedRunError`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -57167,7 +57808,7 @@ Get Deployment Run
 
     Describes what triggered a deployment run, with trigger-specific metadata.
 
-    - `type BetaManagedAgentsScheduleTriggerContext struct{…}`
+    - `type BetaManagedAgentsScheduleTriggerContext`
 
       The run was fired by the deployment's cron schedule.
 
@@ -57179,7 +57820,7 @@ Get Deployment Run
 
         format: date-time
 
-    - `type BetaManagedAgentsManualTriggerContext struct{…}`
+    - `type BetaManagedAgentsManualTriggerContext`
 
       The run was started manually by creating a session directly against the deployment.
 
@@ -57361,6 +58002,8 @@ Create Vault
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -57369,7 +58012,7 @@ Create Vault
 
 #### Returns
 
-- `type BetaManagedAgentsVault struct{…}`
+- `type BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -57572,6 +58215,8 @@ List Vaults
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -57580,7 +58225,7 @@ List Vaults
 
 #### Returns
 
-- `type BetaManagedAgentsVault struct{…}`
+- `type BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -57774,6 +58419,8 @@ Get Vault
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -57782,7 +58429,7 @@ Get Vault
 
 #### Returns
 
-- `type BetaManagedAgentsVault struct{…}`
+- `type BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -57985,6 +58632,8 @@ Update Vault
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -57993,7 +58642,7 @@ Update Vault
 
 #### Returns
 
-- `type BetaManagedAgentsVault struct{…}`
+- `type BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -58186,6 +58835,8 @@ Delete Vault
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -58194,7 +58845,7 @@ Delete Vault
 
 #### Returns
 
-- `type BetaManagedAgentsDeletedVault struct{…}`
+- `type BetaManagedAgentsDeletedVault`
 
   Confirmation of a deleted vault.
 
@@ -58354,6 +59005,8 @@ Archive Vault
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -58362,7 +59015,7 @@ Archive Vault
 
 #### Returns
 
-- `type BetaManagedAgentsVault struct{…}`
+- `type BetaManagedAgentsVault`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -58463,7 +59116,7 @@ Create Credential
 
     Body param: Authentication details for creating a credential.
 
-    - `type BetaManagedAgentsMCPOAuthCreateParamsResp struct{…}`
+    - `type BetaManagedAgentsMCPOAuthCreateParamsResp`
 
       Parameters for creating an MCP OAuth credential.
 
@@ -58511,13 +59164,13 @@ Create Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneParamResp`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneParamType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicParamResp struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicParamResp`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -58529,7 +59182,7 @@ Create Credential
 
               minLength: 1, maxLength: 512
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostParamResp struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthPostParamResp`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -58553,7 +59206,7 @@ Create Credential
 
           minLength: 1, maxLength: 8192
 
-    - `type BetaManagedAgentsStaticBearerCreateParamsResp struct{…}`
+    - `type BetaManagedAgentsStaticBearerCreateParamsResp`
 
       Parameters for creating a static bearer token credential.
 
@@ -58571,7 +59224,7 @@ Create Credential
 
         minLength: 1, maxLength: 2047
 
-    - `type BetaManagedAgentsEnvironmentVariableCreateParamsResp struct{…}`
+    - `type BetaManagedAgentsEnvironmentVariableCreateParamsResp`
 
       Parameters for creating an environment variable credential.
 
@@ -58581,13 +59234,13 @@ Create Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -58729,6 +59382,8 @@ Create Credential
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -58737,7 +59392,7 @@ Create Credential
 
 #### Returns
 
-- `type BetaManagedAgentsCredential struct{…}`
+- `type BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -58757,7 +59412,7 @@ Create Credential
 
     Authentication details for a credential.
 
-    - `type BetaManagedAgentsMCPOAuthAuthResponse struct{…}`
+    - `type BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -58787,19 +59442,19 @@ Create Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type BetaManagedAgentsTokenEndpointAuthBasicResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -58813,7 +59468,7 @@ Create Credential
 
           OAuth scope for the refresh request.
 
-    - `type BetaManagedAgentsStaticBearerAuthResponse struct{…}`
+    - `type BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -58823,7 +59478,7 @@ Create Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}`
+    - `type BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -58845,13 +59500,13 @@ Create Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -59073,6 +59728,8 @@ List Credentials
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -59081,7 +59738,7 @@ List Credentials
 
 #### Returns
 
-- `type BetaManagedAgentsCredential struct{…}`
+- `type BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -59101,7 +59758,7 @@ List Credentials
 
     Authentication details for a credential.
 
-    - `type BetaManagedAgentsMCPOAuthAuthResponse struct{…}`
+    - `type BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -59131,19 +59788,19 @@ List Credentials
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type BetaManagedAgentsTokenEndpointAuthBasicResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -59157,7 +59814,7 @@ List Credentials
 
           OAuth scope for the refresh request.
 
-    - `type BetaManagedAgentsStaticBearerAuthResponse struct{…}`
+    - `type BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -59167,7 +59824,7 @@ List Credentials
 
         URL of the MCP server this credential authenticates against.
 
-    - `type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}`
+    - `type BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -59189,13 +59846,13 @@ List Credentials
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -59404,6 +60061,8 @@ Get Credential
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -59412,7 +60071,7 @@ Get Credential
 
 #### Returns
 
-- `type BetaManagedAgentsCredential struct{…}`
+- `type BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -59432,7 +60091,7 @@ Get Credential
 
     Authentication details for a credential.
 
-    - `type BetaManagedAgentsMCPOAuthAuthResponse struct{…}`
+    - `type BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -59462,19 +60121,19 @@ Get Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type BetaManagedAgentsTokenEndpointAuthBasicResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -59488,7 +60147,7 @@ Get Credential
 
           OAuth scope for the refresh request.
 
-    - `type BetaManagedAgentsStaticBearerAuthResponse struct{…}`
+    - `type BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -59498,7 +60157,7 @@ Get Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}`
+    - `type BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -59520,13 +60179,13 @@ Get Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -59638,7 +60297,7 @@ Update Credential
 
     Body param: Updated authentication details for a credential.
 
-    - `type BetaManagedAgentsMCPOAuthUpdateParamsResp struct{…}`
+    - `type BetaManagedAgentsMCPOAuthUpdateParamsResp`
 
       Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -59674,7 +60333,7 @@ Update Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp`
 
             Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -59686,7 +60345,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp`
 
             Updated POST body authentication parameters for the token endpoint.
 
@@ -59698,7 +60357,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-    - `type BetaManagedAgentsStaticBearerUpdateParamsResp struct{…}`
+    - `type BetaManagedAgentsStaticBearerUpdateParamsResp`
 
       Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -59710,7 +60369,7 @@ Update Credential
 
         minLength: 1, maxLength: 8192
 
-    - `type BetaManagedAgentsEnvironmentVariableUpdateParamsResp struct{…}`
+    - `type BetaManagedAgentsEnvironmentVariableUpdateParamsResp`
 
       Parameters for updating an environment variable credential. `secret_name` is immutable.
 
@@ -59732,13 +60391,13 @@ Update Credential
 
         Updated networking scope. Full replacement.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp struct{…}`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp struct{…}`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -59862,6 +60521,8 @@ Update Credential
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -59870,7 +60531,7 @@ Update Credential
 
 #### Returns
 
-- `type BetaManagedAgentsCredential struct{…}`
+- `type BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -59890,7 +60551,7 @@ Update Credential
 
     Authentication details for a credential.
 
-    - `type BetaManagedAgentsMCPOAuthAuthResponse struct{…}`
+    - `type BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -59920,19 +60581,19 @@ Update Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type BetaManagedAgentsTokenEndpointAuthBasicResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -59946,7 +60607,7 @@ Update Credential
 
           OAuth scope for the refresh request.
 
-    - `type BetaManagedAgentsStaticBearerAuthResponse struct{…}`
+    - `type BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -59956,7 +60617,7 @@ Update Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}`
+    - `type BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -59978,13 +60639,13 @@ Update Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -60190,6 +60851,8 @@ Delete Credential
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -60198,7 +60861,7 @@ Delete Credential
 
 #### Returns
 
-- `type BetaManagedAgentsDeletedCredential struct{…}`
+- `type BetaManagedAgentsDeletedCredential`
 
   Confirmation of a deleted credential.
 
@@ -60364,6 +61027,8 @@ Archive Credential
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -60372,7 +61037,7 @@ Archive Credential
 
 #### Returns
 
-- `type BetaManagedAgentsCredential struct{…}`
+- `type BetaManagedAgentsCredential`
 
   A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -60392,7 +61057,7 @@ Archive Credential
 
     Authentication details for a credential.
 
-    - `type BetaManagedAgentsMCPOAuthAuthResponse struct{…}`
+    - `type BetaManagedAgentsMCPOAuthAuthResponse`
 
       OAuth credential details for an MCP server.
 
@@ -60422,19 +61087,19 @@ Archive Credential
 
         - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicResponse`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
             - `Type BetaManagedAgentsTokenEndpointAuthBasicResponseType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostResponse struct{…}`
+          - `type BetaManagedAgentsTokenEndpointAuthPostResponse`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -60448,7 +61113,7 @@ Archive Credential
 
           OAuth scope for the refresh request.
 
-    - `type BetaManagedAgentsStaticBearerAuthResponse struct{…}`
+    - `type BetaManagedAgentsStaticBearerAuthResponse`
 
       Static bearer token credential details for an MCP server.
 
@@ -60458,7 +61123,7 @@ Archive Credential
 
         URL of the MCP server this credential authenticates against.
 
-    - `type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}`
+    - `type BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Environment variable credential details. The secret value is never returned.
 
@@ -60480,13 +61145,13 @@ Archive Credential
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
           The secret is substituted on any host the session's Environment network policy permits egress to.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingResponse`
 
           The secret is substituted only on requests to the listed hosts.
 
@@ -60692,6 +61357,8 @@ Validate Credential
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -60700,7 +61367,7 @@ Validate Credential
 
 #### Returns
 
-- `type BetaManagedAgentsCredentialValidation struct{…}`
+- `type BetaManagedAgentsCredentialValidation`
 
   Result of live-probing a credential against its configured MCP server.
 
@@ -60974,6 +61641,8 @@ Create a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -60982,7 +61651,7 @@ Create a memory store
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryStore struct{…}`
+- `type BetaManagedAgentsMemoryStore`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -61202,6 +61871,8 @@ List memory stores
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -61210,7 +61881,7 @@ List memory stores
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryStore struct{…}`
+- `type BetaManagedAgentsMemoryStore`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -61409,6 +62080,8 @@ Retrieve a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -61417,7 +62090,7 @@ Retrieve a memory store
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryStore struct{…}`
+- `type BetaManagedAgentsMemoryStore`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -61631,6 +62304,8 @@ Update a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -61639,7 +62314,7 @@ Update a memory store
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryStore struct{…}`
+- `type BetaManagedAgentsMemoryStore`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -61837,6 +62512,8 @@ Delete a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -61845,7 +62522,7 @@ Delete a memory store
 
 #### Returns
 
-- `type BetaManagedAgentsDeletedMemoryStore struct{…}`
+- `type BetaManagedAgentsDeletedMemoryStore`
 
   Confirmation that a `memory_store` was deleted.
 
@@ -62005,6 +62682,8 @@ Archive a memory store
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62013,7 +62692,7 @@ Archive a memory store
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryStore struct{…}`
+- `type BetaManagedAgentsMemoryStore`
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -62227,6 +62906,8 @@ Create a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62235,7 +62916,7 @@ Create a memory
 
 #### Returns
 
-- `type BetaManagedAgentsMemory struct{…}`
+- `type BetaManagedAgentsMemory`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -62468,6 +63149,8 @@ List memories
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62480,7 +63163,7 @@ List memories
 
   One item in a [List memories](../beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-  - `type BetaManagedAgentsMemory struct{…}`
+  - `type BetaManagedAgentsMemory`
 
     A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -62528,7 +63211,7 @@ List memories
 
       The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-  - `type BetaManagedAgentsMemoryPrefix struct{…}`
+  - `type BetaManagedAgentsMemoryPrefix`
 
     A rolled-up directory marker returned by [List memories](../beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -62709,6 +63392,8 @@ Retrieve a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62717,7 +63402,7 @@ Retrieve a memory
 
 #### Returns
 
-- `type BetaManagedAgentsMemory struct{…}`
+- `type BetaManagedAgentsMemory`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -62947,6 +63632,8 @@ Update a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62955,7 +63642,7 @@ Update a memory
 
 #### Returns
 
-- `type BetaManagedAgentsMemory struct{…}`
+- `type BetaManagedAgentsMemory`
 
   A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -63171,6 +63858,8 @@ Delete a memory
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63179,7 +63868,7 @@ Delete a memory
 
 #### Returns
 
-- `type BetaManagedAgentsDeletedMemory struct{…}`
+- `type BetaManagedAgentsDeletedMemory`
 
   Tombstone returned by [Delete a memory](../beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](../beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
 
@@ -63389,6 +64078,8 @@ List memory versions
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63397,7 +64088,7 @@ List memory versions
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryVersion struct{…}`
+- `type BetaManagedAgentsMemoryVersion`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -63449,7 +64140,7 @@ List memory versions
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../beta/sessions/retrieve.md).
 
-    - `type BetaManagedAgentsSessionActor struct{…}`
+    - `type BetaManagedAgentsSessionActor`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -63461,7 +64152,7 @@ List memory versions
 
         minLength: 1
 
-    - `type BetaManagedAgentsAPIActor struct{…}`
+    - `type BetaManagedAgentsAPIActor`
 
       Attribution for a write made directly via the public API (outside of any session).
 
@@ -63473,7 +64164,7 @@ List memory versions
 
         minLength: 1
 
-    - `type BetaManagedAgentsUserActor struct{…}`
+    - `type BetaManagedAgentsUserActor`
 
       Attribution for a write made by a human user through the Anthropic Console.
 
@@ -63485,7 +64176,7 @@ List memory versions
 
         minLength: 1
 
-    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+    - `type BetaManagedAgentsServiceAccountActor`
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -63691,6 +64382,8 @@ Retrieve a memory version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63699,7 +64392,7 @@ Retrieve a memory version
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryVersion struct{…}`
+- `type BetaManagedAgentsMemoryVersion`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -63751,7 +64444,7 @@ Retrieve a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../beta/sessions/retrieve.md).
 
-    - `type BetaManagedAgentsSessionActor struct{…}`
+    - `type BetaManagedAgentsSessionActor`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -63763,7 +64456,7 @@ Retrieve a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsAPIActor struct{…}`
+    - `type BetaManagedAgentsAPIActor`
 
       Attribution for a write made directly via the public API (outside of any session).
 
@@ -63775,7 +64468,7 @@ Retrieve a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsUserActor struct{…}`
+    - `type BetaManagedAgentsUserActor`
 
       Attribution for a write made by a human user through the Anthropic Console.
 
@@ -63787,7 +64480,7 @@ Retrieve a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+    - `type BetaManagedAgentsServiceAccountActor`
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -63986,6 +64679,8 @@ Redact a memory version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63994,7 +64689,7 @@ Redact a memory version
 
 #### Returns
 
-- `type BetaManagedAgentsMemoryVersion struct{…}`
+- `type BetaManagedAgentsMemoryVersion`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -64046,7 +64741,7 @@ Redact a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../beta/sessions/retrieve.md).
 
-    - `type BetaManagedAgentsSessionActor struct{…}`
+    - `type BetaManagedAgentsSessionActor`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -64058,7 +64753,7 @@ Redact a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsAPIActor struct{…}`
+    - `type BetaManagedAgentsAPIActor`
 
       Attribution for a write made directly via the public API (outside of any session).
 
@@ -64070,7 +64765,7 @@ Redact a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsUserActor struct{…}`
+    - `type BetaManagedAgentsUserActor`
 
       Attribution for a write made by a human user through the Anthropic Console.
 
@@ -64082,7 +64777,7 @@ Redact a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+    - `type BetaManagedAgentsServiceAccountActor`
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -64289,6 +64984,8 @@ Upload File
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -64297,7 +64994,7 @@ Upload File
 
 #### Returns
 
-- `type BetaFileMetadata struct{…}`
+- `type BetaFileMetadata`
 
   - `Type File`
 
@@ -64537,6 +65234,8 @@ List Files
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -64545,7 +65244,7 @@ List Files
 
 #### Returns
 
-- `type BetaFileMetadata struct{…}`
+- `type BetaFileMetadata`
 
   - `Type File`
 
@@ -64770,6 +65469,8 @@ Download File
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -64923,6 +65624,8 @@ Get File Metadata
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -64931,7 +65634,7 @@ Get File Metadata
 
 #### Returns
 
-- `type BetaFileMetadata struct{…}`
+- `type BetaFileMetadata`
 
   - `Type File`
 
@@ -65155,6 +65858,8 @@ Delete File
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65163,7 +65868,7 @@ Delete File
 
 #### Returns
 
-- `type BetaDeletedFile struct{…}`
+- `type BetaDeletedFile`
 
   - `Type BetaDeletedFileType Optional`
 
@@ -65339,6 +66044,8 @@ Create Skill
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65347,7 +66054,7 @@ Create Skill
 
 #### Returns
 
-- `type BetaSkill struct{…}`
+- `type BetaSkill`
 
   - `Type Skill`
 
@@ -65593,6 +66300,8 @@ List Skills
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65601,7 +66310,7 @@ List Skills
 
 #### Returns
 
-- `type BetaSkill struct{…}`
+- `type BetaSkill`
 
   - `Type Skill`
 
@@ -65831,6 +66540,8 @@ Get Skill
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65839,7 +66550,7 @@ Get Skill
 
 #### Returns
 
-- `type BetaSkill struct{…}`
+- `type BetaSkill`
 
   - `Type Skill`
 
@@ -66068,6 +66779,8 @@ Delete Skill
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -66076,7 +66789,7 @@ Delete Skill
 
 #### Returns
 
-- `type BetaDeletedSkill struct{…}`
+- `type BetaDeletedSkill`
 
   - `Type SkillDeleted`
 
@@ -66254,6 +66967,8 @@ Create Skill Version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -66262,7 +66977,7 @@ Create Skill Version
 
 #### Returns
 
-- `type BetaSkillVersion struct{…}`
+- `type BetaSkillVersion`
 
   - `Type SkillVersion`
 
@@ -66476,6 +67191,8 @@ List Skill Versions
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -66484,7 +67201,7 @@ List Skill Versions
 
 #### Returns
 
-- `type BetaSkillVersion struct{…}`
+- `type BetaSkillVersion`
 
   - `Type SkillVersion`
 
@@ -66693,6 +67410,8 @@ Download a skill version's content as a zip archive.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -66856,6 +67575,8 @@ Get Skill Version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -66864,7 +67585,7 @@ Get Skill Version
 
 #### Returns
 
-- `type BetaSkillVersion struct{…}`
+- `type BetaSkillVersion`
 
   - `Type SkillVersion`
 
@@ -67070,6 +67791,8 @@ Delete Skill Version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67078,7 +67801,7 @@ Delete Skill Version
 
 #### Returns
 
-- `type BetaDeletedSkillVersion struct{…}`
+- `type BetaDeletedSkillVersion`
 
   - `Type SkillVersionDeleted`
 
@@ -67279,6 +68002,8 @@ Create User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67287,7 +68012,7 @@ Create User Profile
 
 #### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -67588,6 +68313,8 @@ List User Profiles
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67596,7 +68323,7 @@ List User Profiles
 
 #### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -67878,6 +68605,8 @@ Get User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67886,7 +68615,7 @@ Get User Profile
 
 #### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -68201,6 +68930,8 @@ Update User Profile
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68209,7 +68940,7 @@ Update User Profile
 
 #### Returns
 
-- `type BetaUserProfile struct{…}`
+- `type BetaUserProfile`
 
   - `Type BetaUserProfileType`
 
@@ -68490,6 +69221,8 @@ Create Enrollment URL
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68498,7 +69231,7 @@ Create Enrollment URL
 
 #### Returns
 
-- `type BetaUserProfileEnrollmentURL struct{…}`
+- `type BetaUserProfileEnrollmentURL`
 
   - `Type BetaUserProfileEnrollmentURLType`
 
@@ -68571,7 +69304,7 @@ Create a Dream
 
     Body param
 
-    - `type BetaDreamMemoryStoreInput struct{…}`
+    - `type BetaDreamMemoryStoreInput`
 
       An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
@@ -68581,7 +69314,7 @@ Create a Dream
 
         minLength: 1
 
-    - `type BetaDreamSessionsInput struct{…}`
+    - `type BetaDreamSessionsInput`
 
       Input session transcripts the dream reads.
 
@@ -68595,7 +69328,7 @@ Create a Dream
 
     - `string`
 
-    - `type BetaDreamModelConfigParamResp struct{…}`
+    - `type BetaDreamModelConfigParamResp`
 
       Model identifier and configuration applied to every pipeline stage.
 
@@ -68721,6 +69454,8 @@ Create a Dream
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68729,7 +69464,7 @@ Create a Dream
 
 #### Returns
 
-- `type BetaDream struct{…}`
+- `type BetaDream`
 
   An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
@@ -68765,7 +69500,7 @@ Create a Dream
 
   - `Inputs []BetaDreamInputUnion`
 
-    - `type BetaDreamMemoryStoreInput struct{…}`
+    - `type BetaDreamMemoryStoreInput`
 
       An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
@@ -68775,7 +69510,7 @@ Create a Dream
 
         minLength: 1
 
-    - `type BetaDreamSessionsInput struct{…}`
+    - `type BetaDreamSessionsInput`
 
       Input session transcripts the dream reads.
 
@@ -68805,13 +69540,13 @@ Create a Dream
 
   - `OutputBehavior BetaOutputBehaviorUnion`
 
-    - `type BetaOutputBehaviorCreateNew struct{…}`
+    - `type BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
       - `Type BetaOutputBehaviorCreateNewType`
 
-    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+    - `type BetaOutputBehaviorUpdateExisting`
 
       The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
 
@@ -69100,6 +69835,8 @@ List Dreams
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69108,7 +69845,7 @@ List Dreams
 
 #### Returns
 
-- `type BetaDream struct{…}`
+- `type BetaDream`
 
   An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
@@ -69144,7 +69881,7 @@ List Dreams
 
   - `Inputs []BetaDreamInputUnion`
 
-    - `type BetaDreamMemoryStoreInput struct{…}`
+    - `type BetaDreamMemoryStoreInput`
 
       An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
@@ -69154,7 +69891,7 @@ List Dreams
 
         minLength: 1
 
-    - `type BetaDreamSessionsInput struct{…}`
+    - `type BetaDreamSessionsInput`
 
       Input session transcripts the dream reads.
 
@@ -69184,13 +69921,13 @@ List Dreams
 
   - `OutputBehavior BetaOutputBehaviorUnion`
 
-    - `type BetaOutputBehaviorCreateNew struct{…}`
+    - `type BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
       - `Type BetaOutputBehaviorCreateNewType`
 
-    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+    - `type BetaOutputBehaviorUpdateExisting`
 
       The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
 
@@ -69436,6 +70173,8 @@ Get a Dream
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69444,7 +70183,7 @@ Get a Dream
 
 #### Returns
 
-- `type BetaDream struct{…}`
+- `type BetaDream`
 
   An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
@@ -69480,7 +70219,7 @@ Get a Dream
 
   - `Inputs []BetaDreamInputUnion`
 
-    - `type BetaDreamMemoryStoreInput struct{…}`
+    - `type BetaDreamMemoryStoreInput`
 
       An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
@@ -69490,7 +70229,7 @@ Get a Dream
 
         minLength: 1
 
-    - `type BetaDreamSessionsInput struct{…}`
+    - `type BetaDreamSessionsInput`
 
       Input session transcripts the dream reads.
 
@@ -69520,13 +70259,13 @@ Get a Dream
 
   - `OutputBehavior BetaOutputBehaviorUnion`
 
-    - `type BetaOutputBehaviorCreateNew struct{…}`
+    - `type BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
       - `Type BetaOutputBehaviorCreateNewType`
 
-    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+    - `type BetaOutputBehaviorUpdateExisting`
 
       The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
 
@@ -69771,6 +70510,8 @@ Cancel a Dream
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69779,7 +70520,7 @@ Cancel a Dream
 
 #### Returns
 
-- `type BetaDream struct{…}`
+- `type BetaDream`
 
   An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
@@ -69815,7 +70556,7 @@ Cancel a Dream
 
   - `Inputs []BetaDreamInputUnion`
 
-    - `type BetaDreamMemoryStoreInput struct{…}`
+    - `type BetaDreamMemoryStoreInput`
 
       An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
@@ -69825,7 +70566,7 @@ Cancel a Dream
 
         minLength: 1
 
-    - `type BetaDreamSessionsInput struct{…}`
+    - `type BetaDreamSessionsInput`
 
       Input session transcripts the dream reads.
 
@@ -69855,13 +70596,13 @@ Cancel a Dream
 
   - `OutputBehavior BetaOutputBehaviorUnion`
 
-    - `type BetaOutputBehaviorCreateNew struct{…}`
+    - `type BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
       - `Type BetaOutputBehaviorCreateNewType`
 
-    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+    - `type BetaOutputBehaviorUpdateExisting`
 
       The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
 
@@ -70106,6 +70847,8 @@ Archive a Dream
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70114,7 +70857,7 @@ Archive a Dream
 
 #### Returns
 
-- `type BetaDream struct{…}`
+- `type BetaDream`
 
   An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
@@ -70150,7 +70893,7 @@ Archive a Dream
 
   - `Inputs []BetaDreamInputUnion`
 
-    - `type BetaDreamMemoryStoreInput struct{…}`
+    - `type BetaDreamMemoryStoreInput`
 
       An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
@@ -70160,7 +70903,7 @@ Archive a Dream
 
         minLength: 1
 
-    - `type BetaDreamSessionsInput struct{…}`
+    - `type BetaDreamSessionsInput`
 
       Input session transcripts the dream reads.
 
@@ -70190,13 +70933,13 @@ Archive a Dream
 
   - `OutputBehavior BetaOutputBehaviorUnion`
 
-    - `type BetaOutputBehaviorCreateNew struct{…}`
+    - `type BetaOutputBehaviorCreateNew`
 
       The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
       - `Type BetaOutputBehaviorCreateNewType`
 
-    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+    - `type BetaOutputBehaviorUpdateExisting`
 
       The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
 
@@ -70449,6 +71192,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70457,7 +71202,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 #### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -70639,6 +71384,8 @@ Fetches a tunnel by ID.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70647,7 +71394,7 @@ Fetches a tunnel by ID.
 
 #### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -70845,6 +71592,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70853,7 +71602,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 #### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -71040,6 +71789,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71048,7 +71799,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 #### Returns
 
-- `type BetaTunnel struct{…}`
+- `type BetaTunnel`
 
   An MCP tunnel.
 
@@ -71234,6 +71985,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71242,7 +71995,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 #### Returns
 
-- `type BetaTunnelToken struct{…}`
+- `type BetaTunnelToken`
 
   A tunnel's connector token.
 
@@ -71415,6 +72168,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71423,7 +72178,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 #### Returns
 
-- `type BetaTunnelToken struct{…}`
+- `type BetaTunnelToken`
 
   A tunnel's connector token.
 
@@ -71598,6 +72353,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71606,7 +72363,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -71805,6 +72562,8 @@ Fetches a tunnel certificate by ID.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71813,7 +72572,7 @@ Fetches a tunnel certificate by ID.
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -72022,6 +72781,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72030,7 +72791,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -72232,6 +72993,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72240,7 +73003,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 #### Returns
 
-- `type BetaTunnelCertificate struct{…}`
+- `type BetaTunnelCertificate`
 
   A CA certificate attached to a tunnel.
 
@@ -72333,7 +73096,7 @@ Retrieve information about the organization associated with the authenticated AP
 
 #### Returns
 
-- `type BetaOrganization struct{…}`
+- `type BetaOrganization`
 
   - `Type Organization`
 
@@ -72440,7 +73203,7 @@ List API Keys
 
 #### Returns
 
-- `type BetaAPIKey struct{…}`
+- `type BetaAPIKey`
 
   - `Type APIKey`
 
@@ -72496,7 +73259,7 @@ List API Keys
 
     The principal the API key acts as (a User or a Service Account), or `null` if the API key is not bound to a principal.
 
-    - `type BetaAPIKeyUserActor struct{…}`
+    - `type BetaAPIKeyUserActor`
 
       - `Type UserActor`
 
@@ -72508,7 +73271,7 @@ List API Keys
 
         ID of the User the API key acts as.
 
-    - `type BetaAPIKeyServiceAccountActor struct{…}`
+    - `type BetaAPIKeyServiceAccountActor`
 
       - `Type ServiceAccountActor`
 
@@ -72524,7 +73287,7 @@ List API Keys
 
     Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id": "wrkspc_..."}`, with the Workspace's real ID even when it is the organization's default Workspace), or the organization (`{"type": "organization"}`) for a principal-bound API key that has no Workspace.
 
-    - `type BetaAPIKeyOrganizationScope struct{…}`
+    - `type BetaAPIKeyOrganizationScope`
 
       - `Type Organization`
 
@@ -72532,7 +73295,7 @@ List API Keys
 
         default: organization
 
-    - `type BetaAPIKeyWorkspaceScope struct{…}`
+    - `type BetaAPIKeyWorkspaceScope`
 
       - `Type Workspace`
 
@@ -72637,7 +73400,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
 #### Returns
 
-- `type BetaAPIKey struct{…}`
+- `type BetaAPIKey`
 
   - `Type APIKey`
 
@@ -72693,7 +73456,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
     The principal the API key acts as (a User or a Service Account), or `null` if the API key is not bound to a principal.
 
-    - `type BetaAPIKeyUserActor struct{…}`
+    - `type BetaAPIKeyUserActor`
 
       - `Type UserActor`
 
@@ -72705,7 +73468,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
         ID of the User the API key acts as.
 
-    - `type BetaAPIKeyServiceAccountActor struct{…}`
+    - `type BetaAPIKeyServiceAccountActor`
 
       - `Type ServiceAccountActor`
 
@@ -72721,7 +73484,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
     Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id": "wrkspc_..."}`, with the Workspace's real ID even when it is the organization's default Workspace), or the organization (`{"type": "organization"}`) for a principal-bound API key that has no Workspace.
 
-    - `type BetaAPIKeyOrganizationScope struct{…}`
+    - `type BetaAPIKeyOrganizationScope`
 
       - `Type Organization`
 
@@ -72729,7 +73492,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
         default: organization
 
-    - `type BetaAPIKeyWorkspaceScope struct{…}`
+    - `type BetaAPIKeyWorkspaceScope`
 
       - `Type Workspace`
 
@@ -72845,7 +73608,7 @@ Update API Key
 
 #### Returns
 
-- `type BetaAPIKey struct{…}`
+- `type BetaAPIKey`
 
   - `Type APIKey`
 
@@ -72901,7 +73664,7 @@ Update API Key
 
     The principal the API key acts as (a User or a Service Account), or `null` if the API key is not bound to a principal.
 
-    - `type BetaAPIKeyUserActor struct{…}`
+    - `type BetaAPIKeyUserActor`
 
       - `Type UserActor`
 
@@ -72913,7 +73676,7 @@ Update API Key
 
         ID of the User the API key acts as.
 
-    - `type BetaAPIKeyServiceAccountActor struct{…}`
+    - `type BetaAPIKeyServiceAccountActor`
 
       - `Type ServiceAccountActor`
 
@@ -72929,7 +73692,7 @@ Update API Key
 
     Where the API key belongs: its Workspace (`{"type": "workspace", "workspace_id": "wrkspc_..."}`, with the Workspace's real ID even when it is the organization's default Workspace), or the organization (`{"type": "organization"}`) for a principal-bound API key that has no Workspace.
 
-    - `type BetaAPIKeyOrganizationScope struct{…}`
+    - `type BetaAPIKeyOrganizationScope`
 
       - `Type Organization`
 
@@ -72937,7 +73700,7 @@ Update API Key
 
         default: organization
 
-    - `type BetaAPIKeyWorkspaceScope struct{…}`
+    - `type BetaAPIKeyWorkspaceScope`
 
       - `Type Workspace`
 
@@ -73041,7 +73804,7 @@ Create an external key config owned by the caller's organization.
 
     KMS provider identity and auth coordinates.
 
-    - `type BetaAWSExternalKeyConfig struct{…}`
+    - `type BetaAWSExternalKeyConfig`
 
       - `Type AWS`
 
@@ -73061,7 +73824,7 @@ Create an external key config owned by the caller's organization.
 
         IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-    - `type BetaGCPExternalKeyConfig struct{…}`
+    - `type BetaGCPExternalKeyConfig`
 
       - `Type GCP`
 
@@ -73069,7 +73832,7 @@ Create an external key config owned by the caller's organization.
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfigParamResp struct{…}`
+    - `type BetaAzureExternalKeyConfigParamResp`
 
       Azure Key Vault provider configuration.
 
@@ -73105,7 +73868,7 @@ Create an external key config owned by the caller's organization.
 
 #### Returns
 
-- `type BetaExternalKey struct{…}`
+- `type BetaExternalKey`
 
   CMEK external key config belonging to the caller's organization.
 
@@ -73125,13 +73888,13 @@ Create an external key config owned by the caller's organization.
 
     Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
 
-    - `type BetaExternalKeyAttachedAttachment struct{…}`
+    - `type BetaExternalKeyAttachedAttachment`
 
       - `Type Attached`
 
         default: attached
 
-    - `type BetaExternalKeyUnattachedAttachment struct{…}`
+    - `type BetaExternalKeyUnattachedAttachment`
 
       - `Type Unattached`
 
@@ -73153,7 +73916,7 @@ Create an external key config owned by the caller's organization.
 
     KMS provider identity and auth coordinates.
 
-    - `type BetaAWSExternalKeyConfig struct{…}`
+    - `type BetaAWSExternalKeyConfig`
 
       - `Type AWS`
 
@@ -73173,7 +73936,7 @@ Create an external key config owned by the caller's organization.
 
         IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-    - `type BetaGCPExternalKeyConfig struct{…}`
+    - `type BetaGCPExternalKeyConfig`
 
       - `Type GCP`
 
@@ -73181,7 +73944,7 @@ Create an external key config owned by the caller's organization.
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfig struct{…}`
+    - `type BetaAzureExternalKeyConfig`
 
       - `Type Azure`
 
@@ -73285,7 +74048,7 @@ Results are ordered by creation time (newest first). Use the
 
 #### Returns
 
-- `type BetaExternalKey struct{…}`
+- `type BetaExternalKey`
 
   CMEK external key config belonging to the caller's organization.
 
@@ -73305,13 +74068,13 @@ Results are ordered by creation time (newest first). Use the
 
     Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
 
-    - `type BetaExternalKeyAttachedAttachment struct{…}`
+    - `type BetaExternalKeyAttachedAttachment`
 
       - `Type Attached`
 
         default: attached
 
-    - `type BetaExternalKeyUnattachedAttachment struct{…}`
+    - `type BetaExternalKeyUnattachedAttachment`
 
       - `Type Unattached`
 
@@ -73333,7 +74096,7 @@ Results are ordered by creation time (newest first). Use the
 
     KMS provider identity and auth coordinates.
 
-    - `type BetaAWSExternalKeyConfig struct{…}`
+    - `type BetaAWSExternalKeyConfig`
 
       - `Type AWS`
 
@@ -73353,7 +74116,7 @@ Results are ordered by creation time (newest first). Use the
 
         IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-    - `type BetaGCPExternalKeyConfig struct{…}`
+    - `type BetaGCPExternalKeyConfig`
 
       - `Type GCP`
 
@@ -73361,7 +74124,7 @@ Results are ordered by creation time (newest first). Use the
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfig struct{…}`
+    - `type BetaAzureExternalKeyConfig`
 
       - `Type Azure`
 
@@ -73455,7 +74218,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
 #### Returns
 
-- `type BetaExternalKey struct{…}`
+- `type BetaExternalKey`
 
   CMEK external key config belonging to the caller's organization.
 
@@ -73475,13 +74238,13 @@ Retrieve a single external key config in the caller's organization by ID.
 
     Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
 
-    - `type BetaExternalKeyAttachedAttachment struct{…}`
+    - `type BetaExternalKeyAttachedAttachment`
 
       - `Type Attached`
 
         default: attached
 
-    - `type BetaExternalKeyUnattachedAttachment struct{…}`
+    - `type BetaExternalKeyUnattachedAttachment`
 
       - `Type Unattached`
 
@@ -73503,7 +74266,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
     KMS provider identity and auth coordinates.
 
-    - `type BetaAWSExternalKeyConfig struct{…}`
+    - `type BetaAWSExternalKeyConfig`
 
       - `Type AWS`
 
@@ -73523,7 +74286,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
         IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-    - `type BetaGCPExternalKeyConfig struct{…}`
+    - `type BetaGCPExternalKeyConfig`
 
       - `Type GCP`
 
@@ -73531,7 +74294,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfig struct{…}`
+    - `type BetaAzureExternalKeyConfig`
 
       - `Type Azure`
 
@@ -73640,7 +74403,7 @@ encrypted data requires the original key identity to decrypt.
 
     KMS provider identity and auth coordinates.
 
-    - `type BetaAWSExternalKeyConfig struct{…}`
+    - `type BetaAWSExternalKeyConfig`
 
       - `Type AWS`
 
@@ -73660,7 +74423,7 @@ encrypted data requires the original key identity to decrypt.
 
         IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-    - `type BetaGCPExternalKeyConfig struct{…}`
+    - `type BetaGCPExternalKeyConfig`
 
       - `Type GCP`
 
@@ -73668,7 +74431,7 @@ encrypted data requires the original key identity to decrypt.
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfigParamResp struct{…}`
+    - `type BetaAzureExternalKeyConfigParamResp`
 
       Azure Key Vault provider configuration.
 
@@ -73692,7 +74455,7 @@ encrypted data requires the original key identity to decrypt.
 
 #### Returns
 
-- `type BetaExternalKey struct{…}`
+- `type BetaExternalKey`
 
   CMEK external key config belonging to the caller's organization.
 
@@ -73712,13 +74475,13 @@ encrypted data requires the original key identity to decrypt.
 
     Whether any workspace uses this config to encrypt its data — counting live and archived workspaces (an archived workspace's data remains encrypted under the config), excluding deleted ones. Only an attached config is used by the encryption path; an `unattached` config is inert and can be deleted.
 
-    - `type BetaExternalKeyAttachedAttachment struct{…}`
+    - `type BetaExternalKeyAttachedAttachment`
 
       - `Type Attached`
 
         default: attached
 
-    - `type BetaExternalKeyUnattachedAttachment struct{…}`
+    - `type BetaExternalKeyUnattachedAttachment`
 
       - `Type Unattached`
 
@@ -73740,7 +74503,7 @@ encrypted data requires the original key identity to decrypt.
 
     KMS provider identity and auth coordinates.
 
-    - `type BetaAWSExternalKeyConfig struct{…}`
+    - `type BetaAWSExternalKeyConfig`
 
       - `Type AWS`
 
@@ -73760,7 +74523,7 @@ encrypted data requires the original key identity to decrypt.
 
         IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
 
-    - `type BetaGCPExternalKeyConfig struct{…}`
+    - `type BetaGCPExternalKeyConfig`
 
       - `Type GCP`
 
@@ -73768,7 +74531,7 @@ encrypted data requires the original key identity to decrypt.
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfig struct{…}`
+    - `type BetaAzureExternalKeyConfig`
 
       - `Type Azure`
 
@@ -73863,7 +74626,7 @@ The request is rejected if any workspace still references this config.
 
 #### Returns
 
-- `type BetaOrganizationExternalKeyDeleteResponse struct{…}`
+- `type BetaOrganizationExternalKeyDeleteResponse`
 
   - `Type ExternalKeyDeleted`
 
@@ -73930,7 +74693,7 @@ message if it failed or timed out.
 
 #### Returns
 
-- `type BetaOrganizationExternalKeyValidateResponse struct{…}`
+- `type BetaOrganizationExternalKeyValidateResponse`
 
   Result of a validation roundtrip against the customer's KMS.
 
@@ -74034,7 +74797,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
     Body param: How signing keys are obtained. Defaults to OIDC discovery.
 
-    - `type BetaJWKSDiscovery struct{…}`
+    - `type BetaJWKSDiscovery`
 
       JWKS via the issuer's OIDC discovery document.
 
@@ -74050,7 +74813,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
         Set when the discovery URL differs from `issuer_url`.
 
-    - `type BetaJWKSExplicitURL struct{…}`
+    - `type BetaJWKSExplicitURL`
 
       JWKS fetched from a fixed endpoint.
 
@@ -74068,7 +74831,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
         maxLength: 8192
 
-    - `type BetaJWKSInline struct{…}`
+    - `type BetaJWKSInline`
 
       JWKS supplied directly; no network fetch.
 
@@ -74184,9 +74947,11 @@ matched as the JWT's `iss` claim and is not fetched.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationIssuer struct{…}`
+- `type BetaFederationIssuer`
 
   Registered external OIDC identity provider.
 
@@ -74233,7 +74998,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
     How signing keys are obtained for signature verification.
 
-    - `type BetaJWKSDiscovery struct{…}`
+    - `type BetaJWKSDiscovery`
 
       JWKS via the issuer's OIDC discovery document.
 
@@ -74249,7 +75014,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
         Set when the discovery URL differs from `issuer_url`.
 
-    - `type BetaJWKSExplicitURL struct{…}`
+    - `type BetaJWKSExplicitURL`
 
       JWKS fetched from a fixed endpoint.
 
@@ -74267,7 +75032,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
         maxLength: 8192
 
-    - `type BetaJWKSInline struct{…}`
+    - `type BetaJWKSInline`
 
       JWKS supplied directly; no network fetch.
 
@@ -74513,9 +75278,11 @@ Archived issuers are excluded unless `include_archived=true`.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationIssuer struct{…}`
+- `type BetaFederationIssuer`
 
   Registered external OIDC identity provider.
 
@@ -74562,7 +75329,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
     How signing keys are obtained for signature verification.
 
-    - `type BetaJWKSDiscovery struct{…}`
+    - `type BetaJWKSDiscovery`
 
       JWKS via the issuer's OIDC discovery document.
 
@@ -74578,7 +75345,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
         Set when the discovery URL differs from `issuer_url`.
 
-    - `type BetaJWKSExplicitURL struct{…}`
+    - `type BetaJWKSExplicitURL`
 
       JWKS fetched from a fixed endpoint.
 
@@ -74596,7 +75363,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
         maxLength: 8192
 
-    - `type BetaJWKSInline struct{…}`
+    - `type BetaJWKSInline`
 
       JWKS supplied directly; no network fetch.
 
@@ -74832,9 +75599,11 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationIssuer struct{…}`
+- `type BetaFederationIssuer`
 
   Registered external OIDC identity provider.
 
@@ -74881,7 +75650,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
     How signing keys are obtained for signature verification.
 
-    - `type BetaJWKSDiscovery struct{…}`
+    - `type BetaJWKSDiscovery`
 
       JWKS via the issuer's OIDC discovery document.
 
@@ -74897,7 +75666,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
         Set when the discovery URL differs from `issuer_url`.
 
-    - `type BetaJWKSExplicitURL struct{…}`
+    - `type BetaJWKSExplicitURL`
 
       JWKS fetched from a fixed endpoint.
 
@@ -74915,7 +75684,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
         maxLength: 8192
 
-    - `type BetaJWKSInline struct{…}`
+    - `type BetaJWKSInline`
 
       JWKS supplied directly; no network fetch.
 
@@ -75073,7 +75842,7 @@ session.
 
     Body param: Replaces the entire JWKS configuration.
 
-    - `type BetaJWKSDiscovery struct{…}`
+    - `type BetaJWKSDiscovery`
 
       JWKS via the issuer's OIDC discovery document.
 
@@ -75089,7 +75858,7 @@ session.
 
         Set when the discovery URL differs from `issuer_url`.
 
-    - `type BetaJWKSExplicitURL struct{…}`
+    - `type BetaJWKSExplicitURL`
 
       JWKS fetched from a fixed endpoint.
 
@@ -75107,7 +75876,7 @@ session.
 
         maxLength: 8192
 
-    - `type BetaJWKSInline struct{…}`
+    - `type BetaJWKSInline`
 
       JWKS supplied directly; no network fetch.
 
@@ -75233,9 +76002,11 @@ session.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationIssuer struct{…}`
+- `type BetaFederationIssuer`
 
   Registered external OIDC identity provider.
 
@@ -75282,7 +76053,7 @@ session.
 
     How signing keys are obtained for signature verification.
 
-    - `type BetaJWKSDiscovery struct{…}`
+    - `type BetaJWKSDiscovery`
 
       JWKS via the issuer's OIDC discovery document.
 
@@ -75298,7 +76069,7 @@ session.
 
         Set when the discovery URL differs from `issuer_url`.
 
-    - `type BetaJWKSExplicitURL struct{…}`
+    - `type BetaJWKSExplicitURL`
 
       JWKS fetched from a fixed endpoint.
 
@@ -75316,7 +76087,7 @@ session.
 
         maxLength: 8192
 
-    - `type BetaJWKSInline struct{…}`
+    - `type BetaJWKSInline`
 
       JWKS supplied directly; no network fetch.
 
@@ -75556,9 +76327,11 @@ issuer cannot be changed), or recreate them against another issuer.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationIssuer struct{…}`
+- `type BetaFederationIssuer`
 
   Registered external OIDC identity provider.
 
@@ -75605,7 +76378,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
     How signing keys are obtained for signature verification.
 
-    - `type BetaJWKSDiscovery struct{…}`
+    - `type BetaJWKSDiscovery`
 
       JWKS via the issuer's OIDC discovery document.
 
@@ -75621,7 +76394,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
         Set when the discovery URL differs from `issuer_url`.
 
-    - `type BetaJWKSExplicitURL struct{…}`
+    - `type BetaJWKSExplicitURL`
 
       JWKS fetched from a fixed endpoint.
 
@@ -75639,7 +76412,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
         maxLength: 8192
 
-    - `type BetaJWKSInline struct{…}`
+    - `type BetaJWKSInline`
 
       JWKS supplied directly; no network fetch.
 
@@ -75934,9 +76707,11 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationRule struct{…}`
+- `type BetaFederationRule`
 
   Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -76275,9 +77050,11 @@ unless `include_archived=true`.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationRule struct{…}`
+- `type BetaFederationRule`
 
   Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -76596,9 +77373,11 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationRule struct{…}`
+- `type BetaFederationRule`
 
   Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -76980,9 +77759,11 @@ Console session.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationRule struct{…}`
+- `type BetaFederationRule`
 
   Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -77308,9 +78089,11 @@ other scopes require a Console session.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationRule struct{…}`
+- `type BetaFederationRule`
 
   Authorization rule binding an external OIDC identity to Anthropic.
 
@@ -77643,9 +78426,11 @@ other scopes require a Console session.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationRuleWorkspace struct{…}`
+- `type BetaFederationRuleWorkspace`
 
   - `Type FederationRuleWorkspace`
 
@@ -77849,9 +78634,11 @@ rules with `applies_to_all_workspaces` or a legacy single
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaFederationRuleWorkspace struct{…}`
+- `type BetaFederationRuleWorkspace`
 
   - `Type FederationRuleWorkspace`
 
@@ -78051,9 +78838,11 @@ Console session.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaOrganizationFederationRuleWorkspaceRemoveResponse struct{…}`
+- `type BetaOrganizationFederationRuleWorkspaceRemoveResponse`
 
   - `Type FederationRuleWorkspaceDeleted`
 
@@ -78154,7 +78943,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
 #### Returns
 
-- `type BetaOrganizationInvite struct{…}`
+- `type BetaOrganizationInvite`
 
   - `Type Invite`
 
@@ -78326,7 +79115,7 @@ List the organization's invites.
 
 #### Returns
 
-- `type BetaOrganizationInvite struct{…}`
+- `type BetaOrganizationInvite`
 
   - `Type Invite`
 
@@ -78466,7 +79255,7 @@ Retrieve an invite by ID.
 
 #### Returns
 
-- `type BetaOrganizationInvite struct{…}`
+- `type BetaOrganizationInvite`
 
   - `Type Invite`
 
@@ -78599,7 +79388,7 @@ Delete a pending invite.
 
 #### Returns
 
-- `type BetaOrganizationInviteDeleteResponse struct{…}`
+- `type BetaOrganizationInviteDeleteResponse`
 
   - `Type InviteDeleted`
 
@@ -78789,9 +79578,11 @@ accounts.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccount struct{…}`
+- `type BetaServiceAccount`
 
   Named non-human identity within the caller's organization.
 
@@ -79027,9 +79818,11 @@ archived service accounts.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccount struct{…}`
+- `type BetaServiceAccount`
 
   Named non-human identity within the caller's organization.
 
@@ -79254,9 +80047,11 @@ Retrieve a service account by its ID (`svac_...`).
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccount struct{…}`
+- `type BetaServiceAccount`
 
   Named non-human identity within the caller's organization.
 
@@ -79499,9 +80294,11 @@ interactive credential (a user OAuth token or a Console session).
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccount struct{…}`
+- `type BetaServiceAccount`
 
   Named non-human identity within the caller's organization.
 
@@ -79730,9 +80527,11 @@ those rules first or change their target to another service account.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccount struct{…}`
+- `type BetaServiceAccount`
 
   Named non-human identity within the caller's organization.
 
@@ -79973,9 +80772,11 @@ rejected.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccountWorkspaceMember struct{…}`
+- `type BetaServiceAccountWorkspaceMember`
 
   - `Type ServiceAccountWorkspaceMember`
 
@@ -80196,9 +80997,11 @@ page to recover.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccountWorkspaceMember struct{…}`
+- `type BetaServiceAccountWorkspaceMember`
 
   - `Type ServiceAccountWorkspaceMember`
 
@@ -80409,9 +81212,11 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaOrganizationServiceAccountWorkspaceRemoveResponse struct{…}`
+- `type BetaOrganizationServiceAccountWorkspaceRemoveResponse`
 
   - `Type ServiceAccountWorkspaceMemberDeleted`
 
@@ -80510,7 +81315,7 @@ List the organization's members.
 
 #### Returns
 
-- `type BetaOrganizationUser struct{…}`
+- `type BetaOrganizationUser`
 
   - `Type User`
 
@@ -80621,7 +81426,7 @@ Retrieve a member of the organization by user ID.
 
 #### Returns
 
-- `type BetaOrganizationUser struct{…}`
+- `type BetaOrganizationUser`
 
   - `Type User`
 
@@ -80743,7 +81548,7 @@ Update a member's organization role.
 
 #### Returns
 
-- `type BetaOrganizationUser struct{…}`
+- `type BetaOrganizationUser`
 
   - `Type User`
 
@@ -80853,7 +81658,7 @@ Remove a member from the organization.
 
 #### Returns
 
-- `type BetaOrganizationUserRemoveResponse struct{…}`
+- `type BetaOrganizationUserRemoveResponse`
 
   - `Type UserDeleted`
 
@@ -80937,7 +81742,7 @@ List Workspaces
 
 #### Returns
 
-- `type BetaWorkspace struct{…}`
+- `type BetaWorkspace`
 
   - `Type Workspace`
 
@@ -81231,9 +82036,11 @@ Create Workspace
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaWorkspace struct{…}`
+- `type BetaWorkspace`
 
   - `Type Workspace`
 
@@ -81394,7 +82201,7 @@ Get Workspace
 
 #### Returns
 
-- `type BetaWorkspace struct{…}`
+- `type BetaWorkspace`
 
   - `Type Workspace`
 
@@ -81587,7 +82394,7 @@ Update Workspace
 
 #### Returns
 
-- `type BetaWorkspace struct{…}`
+- `type BetaWorkspace`
 
   - `Type Workspace`
 
@@ -81748,7 +82555,7 @@ Archive Workspace
 
 #### Returns
 
-- `type BetaWorkspace struct{…}`
+- `type BetaWorkspace`
 
   - `Type Workspace`
 
@@ -81947,7 +82754,7 @@ the remaining entries.
 
 #### Returns
 
-- `type BetaWorkspaceRateLimit struct{…}`
+- `type BetaWorkspaceRateLimit`
 
   - `Type WorkspaceRateLimit`
 
@@ -82090,7 +82897,7 @@ List Workspace Members
 
 #### Returns
 
-- `type BetaWorkspaceMember struct{…}`
+- `type BetaWorkspaceMember`
 
   - `Type WorkspaceMember`
 
@@ -82195,7 +83002,7 @@ Create Workspace Member
 
 #### Returns
 
-- `type BetaWorkspaceMember struct{…}`
+- `type BetaWorkspaceMember`
 
   - `Type WorkspaceMember`
 
@@ -82292,7 +83099,7 @@ Get Workspace Member
 
 #### Returns
 
-- `type BetaWorkspaceMember struct{…}`
+- `type BetaWorkspaceMember`
 
   - `Type WorkspaceMember`
 
@@ -82392,7 +83199,7 @@ Update Workspace Member
 
 #### Returns
 
-- `type BetaWorkspaceMember struct{…}`
+- `type BetaWorkspaceMember`
 
   - `Type WorkspaceMember`
 
@@ -82489,7 +83296,7 @@ Delete Workspace Member
 
 #### Returns
 
-- `type BetaOrganizationWorkspaceMemberRemoveResponse struct{…}`
+- `type BetaOrganizationWorkspaceMemberRemoveResponse`
 
   - `Type WorkspaceMemberDeleted`
 
@@ -82683,9 +83490,11 @@ omitted from the results.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccountWorkspaceMember struct{…}`
+- `type BetaServiceAccountWorkspaceMember`
 
   - `Type ServiceAccountWorkspaceMember`
 
@@ -82901,9 +83710,11 @@ accounts cannot be added and are rejected.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccountWorkspaceMember struct{…}`
+- `type BetaServiceAccountWorkspaceMember`
 
   - `Type ServiceAccountWorkspaceMember`
 
@@ -83111,9 +83922,11 @@ account returns 404.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccountWorkspaceMember struct{…}`
+- `type BetaServiceAccountWorkspaceMember`
 
   - `Type ServiceAccountWorkspaceMember`
 
@@ -83324,9 +84137,11 @@ rejected.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaServiceAccountWorkspaceMember struct{…}`
+- `type BetaServiceAccountWorkspaceMember`
 
   - `Type ServiceAccountWorkspaceMember`
 
@@ -83533,9 +84348,11 @@ membership. Archived workspaces return 400.
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
 #### Returns
 
-- `type BetaOrganizationWorkspaceServiceAccountRemoveResponse struct{…}`
+- `type BetaOrganizationWorkspaceServiceAccountRemoveResponse`
 
   - `Type ServiceAccountWorkspaceMemberDeleted`
 
@@ -83646,7 +84463,7 @@ the remaining entries.
 
 #### Returns
 
-- `type BetaOrganizationRateLimit struct{…}`
+- `type BetaOrganizationRateLimit`
 
   - `Type RateLimit`
 
@@ -83756,7 +84573,7 @@ organization reads the state inherited from the parent's configuration.
 
 #### Returns
 
-- `type BetaComplianceSettings struct{…}`
+- `type BetaComplianceSettings`
 
   - `Type ComplianceSettings`
 
@@ -83766,13 +84583,13 @@ organization reads the state inherited from the parent's configuration.
 
     Whether the Compliance API is enabled for this organization.
 
-    - `type BetaComplianceSettingsStateEnabled struct{…}`
+    - `type BetaComplianceSettingsStateEnabled`
 
       - `Type Enabled`
 
         default: enabled
 
-    - `type BetaComplianceSettingsStateDisabled struct{…}`
+    - `type BetaComplianceSettingsStateDisabled`
 
       - `Type Disabled`
 
@@ -83845,7 +84662,7 @@ compliance settings.
 
 #### Returns
 
-- `type BetaComplianceSettings struct{…}`
+- `type BetaComplianceSettings`
 
   - `Type ComplianceSettings`
 
@@ -83855,13 +84672,13 @@ compliance settings.
 
     Whether the Compliance API is enabled for this organization.
 
-    - `type BetaComplianceSettingsStateEnabled struct{…}`
+    - `type BetaComplianceSettingsStateEnabled`
 
       - `Type Enabled`
 
         default: enabled
 
-    - `type BetaComplianceSettingsStateDisabled struct{…}`
+    - `type BetaComplianceSettingsStateDisabled`
 
       - `Type Disabled`
 

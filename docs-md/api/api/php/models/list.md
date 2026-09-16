@@ -41,7 +41,7 @@ The Models API response can be used to determine which models are available for 
 
 ## Returns
 
-- `ModelInfo`
+- `class ModelInfo`
 
   - `"model" type`
 

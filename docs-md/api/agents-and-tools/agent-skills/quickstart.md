@@ -492,7 +492,7 @@ for _, block := range response.Content {
 if fileID != "" {
 	// Download the file and save it
 	outputPath := filepath.Join(os.TempDir(), "renewable_energy.pptx")
-	fileContent, err := client.Files.Download(ctx, fileID)
+	fileContent, err := client.Files.Download(ctx, fileID, anthropic.FileDownloadParams{})
 	if err != nil {
 		panic(err)
 	}

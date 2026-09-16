@@ -35,7 +35,7 @@ Create Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -127,11 +127,13 @@ Create Skill Version
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaSkillVersion: …`
+- `class BetaSkillVersion`
 
   - `type: Literal["skill_version"]`
 
@@ -236,7 +238,7 @@ List Skill Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -328,11 +330,13 @@ List Skill Versions
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaSkillVersion: …`
+- `class BetaSkillVersion`
 
   - `type: Literal["skill_version"]`
 
@@ -436,7 +440,7 @@ Download a skill version's content as a zip archive.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -527,6 +531,8 @@ Download a skill version's content as a zip archive.
     - `"thinking-binding-controls-2026-08-01"`
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
 
@@ -582,7 +588,7 @@ Get Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -674,11 +680,13 @@ Get Skill Version
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaSkillVersion: …`
+- `class BetaSkillVersion`
 
   - `type: Literal["skill_version"]`
 
@@ -777,7 +785,7 @@ Delete Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -869,11 +877,13 @@ Delete Skill Version
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaDeletedSkillVersion: …`
+- `class BetaDeletedSkillVersion`
 
   - `type: Literal["skill_version_deleted"]`
 
@@ -919,7 +929,7 @@ print(beta_deleted_skill_version.id)
 
 ### Beta Deleted Skill Version
 
-- `class BetaDeletedSkillVersion: …`
+- `class BetaDeletedSkillVersion`
 
   - `type: Literal["skill_version_deleted"]`
 
@@ -936,7 +946,7 @@ print(beta_deleted_skill_version.id)
 
 ### Beta Skill Version
 
-- `class BetaSkillVersion: …`
+- `class BetaSkillVersion`
 
   - `type: Literal["skill_version"]`
 

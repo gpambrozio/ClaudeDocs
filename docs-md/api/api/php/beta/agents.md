@@ -61,7 +61,7 @@ Create Agent
 
 ### Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 
@@ -270,7 +270,7 @@ List Agents
 
 ### Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 
@@ -442,7 +442,7 @@ Get Agent
 
 ### Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 
@@ -642,7 +642,7 @@ Update Agent
 
 ### Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 
@@ -840,7 +840,7 @@ Archive Agent
 
 ### Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 
@@ -983,7 +983,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Advisor
 
-- `BetaManagedAgentsAdvisor`
+- `class BetaManagedAgentsAdvisor`
 
   - `Type type`
 
@@ -993,7 +993,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 
@@ -1039,7 +1039,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Reference
 
-- `BetaManagedAgentsAgentReference`
+- `class BetaManagedAgentsAgentReference`
 
   - `Type type`
 
@@ -1049,9 +1049,9 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Tool Config
 
-- `BetaManagedAgentsAgentToolConfig`
+- `class BetaManagedAgentsAgentToolConfig`
 
-  - `BetaManagedAgentsBashToolConfig`
+  - `class BetaManagedAgentsBashToolConfig`
 
     - `"bash" type`
 
@@ -1063,7 +1063,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsEditToolConfig`
+  - `class BetaManagedAgentsEditToolConfig`
 
     - `"edit" type`
 
@@ -1075,7 +1075,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsReadToolConfig`
+  - `class BetaManagedAgentsReadToolConfig`
 
     - `"read" type`
 
@@ -1087,7 +1087,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsWriteToolConfig`
+  - `class BetaManagedAgentsWriteToolConfig`
 
     - `"write" type`
 
@@ -1099,7 +1099,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsGlobToolConfig`
+  - `class BetaManagedAgentsGlobToolConfig`
 
     - `"glob" type`
 
@@ -1111,7 +1111,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsGrepToolConfig`
+  - `class BetaManagedAgentsGrepToolConfig`
 
     - `"grep" type`
 
@@ -1123,7 +1123,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsWebFetchToolConfig`
+  - `class BetaManagedAgentsWebFetchToolConfig`
 
     - `"web_fetch" type`
 
@@ -1141,7 +1141,7 @@ var_dump($betaManagedAgentsAgent);
 
     - `?int maxContentTokens`
 
-  - `BetaManagedAgentsWebSearchToolConfig`
+  - `class BetaManagedAgentsWebSearchToolConfig`
 
     - `"web_search" type`
 
@@ -1163,9 +1163,9 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Tool Config Params
 
-- `BetaManagedAgentsAgentToolConfigParams`
+- `class BetaManagedAgentsAgentToolConfigParams`
 
-  - `BetaManagedAgentsBashToolConfigParams`
+  - `class BetaManagedAgentsBashToolConfigParams`
 
     - `?Type type`
 
@@ -1181,7 +1181,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsEditToolConfigParams`
+  - `class BetaManagedAgentsEditToolConfigParams`
 
     - `?Type type`
 
@@ -1197,7 +1197,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsReadToolConfigParams`
+  - `class BetaManagedAgentsReadToolConfigParams`
 
     - `?Type type`
 
@@ -1213,7 +1213,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsWriteToolConfigParams`
+  - `class BetaManagedAgentsWriteToolConfigParams`
 
     - `?Type type`
 
@@ -1229,7 +1229,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsGlobToolConfigParams`
+  - `class BetaManagedAgentsGlobToolConfigParams`
 
     - `?Type type`
 
@@ -1245,7 +1245,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsGrepToolConfigParams`
+  - `class BetaManagedAgentsGrepToolConfigParams`
 
     - `?Type type`
 
@@ -1261,7 +1261,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsWebFetchToolConfigParams`
+  - `class BetaManagedAgentsWebFetchToolConfigParams`
 
     - `?Type type`
 
@@ -1289,7 +1289,7 @@ var_dump($betaManagedAgentsAgent);
 
       Permission policy for tool execution.
 
-  - `BetaManagedAgentsWebSearchToolConfigParams`
+  - `class BetaManagedAgentsWebSearchToolConfigParams`
 
     - `?Type type`
 
@@ -1319,7 +1319,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset Default Config
 
-- `BetaManagedAgentsAgentToolsetDefaultConfig`
+- `class BetaManagedAgentsAgentToolsetDefaultConfig`
 
   - `bool enabled`
 
@@ -1329,7 +1329,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset Default Config Params
 
-- `BetaManagedAgentsAgentToolsetDefaultConfigParams`
+- `class BetaManagedAgentsAgentToolsetDefaultConfigParams`
 
   - `?bool enabled`
 
@@ -1341,7 +1341,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401
 
-- `BetaManagedAgentsAgentToolset20260401`
+- `class BetaManagedAgentsAgentToolset20260401`
 
   - `Type type`
 
@@ -1353,7 +1353,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401 Bash Input
 
-- `BetaManagedAgentsAgentToolset20260401BashInput`
+- `class BetaManagedAgentsAgentToolset20260401BashInput`
 
   - `?string command`
 
@@ -1372,7 +1372,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401 Edit Input
 
-- `BetaManagedAgentsAgentToolset20260401EditInput`
+- `class BetaManagedAgentsAgentToolset20260401EditInput`
 
   - `string filePath`
 
@@ -1393,7 +1393,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401 Glob Input
 
-- `BetaManagedAgentsAgentToolset20260401GlobInput`
+- `class BetaManagedAgentsAgentToolset20260401GlobInput`
 
   - `string pattern`
 
@@ -1408,7 +1408,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401 Grep Input
 
-- `BetaManagedAgentsAgentToolset20260401GrepInput`
+- `class BetaManagedAgentsAgentToolset20260401GrepInput`
 
   - `string pattern`
 
@@ -1421,7 +1421,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401 Params
 
-- `BetaManagedAgentsAgentToolset20260401Params`
+- `class BetaManagedAgentsAgentToolset20260401Params`
 
   - `Type type`
 
@@ -1435,7 +1435,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401 Read Input
 
-- `BetaManagedAgentsAgentToolset20260401ReadInput`
+- `class BetaManagedAgentsAgentToolset20260401ReadInput`
 
   - `string filePath`
 
@@ -1449,7 +1449,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Toolset20260401 Write Input
 
-- `BetaManagedAgentsAgentToolset20260401WriteInput`
+- `class BetaManagedAgentsAgentToolset20260401WriteInput`
 
   - `string content`
 
@@ -1461,19 +1461,19 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Always Allow Policy
 
-- `BetaManagedAgentsAlwaysAllowPolicy`
+- `class BetaManagedAgentsAlwaysAllowPolicy`
 
   - `Type type`
 
 ### Beta Managed Agents Always Ask Policy
 
-- `BetaManagedAgentsAlwaysAskPolicy`
+- `class BetaManagedAgentsAlwaysAskPolicy`
 
   - `Type type`
 
 ### Beta Managed Agents Anthropic Skill
 
-- `BetaManagedAgentsAnthropicSkill`
+- `class BetaManagedAgentsAnthropicSkill`
 
   - `Type type`
 
@@ -1483,7 +1483,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Anthropic Skill Params
 
-- `BetaManagedAgentsAnthropicSkillParams`
+- `class BetaManagedAgentsAnthropicSkillParams`
 
   - `Type type`
 
@@ -1497,13 +1497,13 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Auto Policy
 
-- `BetaManagedAgentsAutoPolicy`
+- `class BetaManagedAgentsAutoPolicy`
 
   - `"auto" type`
 
 ### Beta Managed Agents Bash Tool Config
 
-- `BetaManagedAgentsBashToolConfig`
+- `class BetaManagedAgentsBashToolConfig`
 
   - `"bash" type`
 
@@ -1517,7 +1517,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Bash Tool Config Params
 
-- `BetaManagedAgentsBashToolConfigParams`
+- `class BetaManagedAgentsBashToolConfigParams`
 
   - `?Type type`
 
@@ -1535,7 +1535,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Custom Skill
 
-- `BetaManagedAgentsCustomSkill`
+- `class BetaManagedAgentsCustomSkill`
 
   - `Type type`
 
@@ -1545,7 +1545,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Custom Skill Params
 
-- `BetaManagedAgentsCustomSkillParams`
+- `class BetaManagedAgentsCustomSkillParams`
 
   - `Type type`
 
@@ -1559,7 +1559,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Custom Tool
 
-- `BetaManagedAgentsCustomTool`
+- `class BetaManagedAgentsCustomTool`
 
   - `Type type`
 
@@ -1573,7 +1573,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Custom Tool Input Schema
 
-- `BetaManagedAgentsCustomToolInputSchema`
+- `class BetaManagedAgentsCustomToolInputSchema`
 
   - `"object" type`
 
@@ -1583,7 +1583,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Custom Tool Params
 
-- `BetaManagedAgentsCustomToolParams`
+- `class BetaManagedAgentsCustomToolParams`
 
   - `Type type`
 
@@ -1601,7 +1601,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Edit Tool Config
 
-- `BetaManagedAgentsEditToolConfig`
+- `class BetaManagedAgentsEditToolConfig`
 
   - `"edit" type`
 
@@ -1615,7 +1615,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Edit Tool Config Params
 
-- `BetaManagedAgentsEditToolConfigParams`
+- `class BetaManagedAgentsEditToolConfigParams`
 
   - `?Type type`
 
@@ -1633,37 +1633,37 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Effort High
 
-- `BetaManagedAgentsEffortHigh`
+- `class BetaManagedAgentsEffortHigh`
 
   - `Type type`
 
 ### Beta Managed Agents Effort Low
 
-- `BetaManagedAgentsEffortLow`
+- `class BetaManagedAgentsEffortLow`
 
   - `Type type`
 
 ### Beta Managed Agents Effort Max
 
-- `BetaManagedAgentsEffortMax`
+- `class BetaManagedAgentsEffortMax`
 
   - `Type type`
 
 ### Beta Managed Agents Effort Medium
 
-- `BetaManagedAgentsEffortMedium`
+- `class BetaManagedAgentsEffortMedium`
 
   - `Type type`
 
 ### Beta Managed Agents Effort Xhigh
 
-- `BetaManagedAgentsEffortXhigh`
+- `class BetaManagedAgentsEffortXhigh`
 
   - `Type type`
 
 ### Beta Managed Agents Glob Tool Config
 
-- `BetaManagedAgentsGlobToolConfig`
+- `class BetaManagedAgentsGlobToolConfig`
 
   - `"glob" type`
 
@@ -1677,7 +1677,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Glob Tool Config Params
 
-- `BetaManagedAgentsGlobToolConfigParams`
+- `class BetaManagedAgentsGlobToolConfigParams`
 
   - `?Type type`
 
@@ -1695,7 +1695,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Grep Tool Config
 
-- `BetaManagedAgentsGrepToolConfig`
+- `class BetaManagedAgentsGrepToolConfig`
 
   - `"grep" type`
 
@@ -1709,7 +1709,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Grep Tool Config Params
 
-- `BetaManagedAgentsGrepToolConfigParams`
+- `class BetaManagedAgentsGrepToolConfigParams`
 
   - `?Type type`
 
@@ -1727,7 +1727,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents MCP Server URL Definition
 
-- `BetaManagedAgentsMCPServerURLDefinition`
+- `class BetaManagedAgentsMCPServerURLDefinition`
 
   - `Type type`
 
@@ -1737,7 +1737,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents MCP Tool Config
 
-- `BetaManagedAgentsMCPToolConfig`
+- `class BetaManagedAgentsMCPToolConfig`
 
   - `bool enabled`
 
@@ -1749,7 +1749,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents MCP Tool Config Params
 
-- `BetaManagedAgentsMCPToolConfigParams`
+- `class BetaManagedAgentsMCPToolConfigParams`
 
   - `string name`
 
@@ -1765,7 +1765,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents MCP Toolset
 
-- `BetaManagedAgentsMCPToolset`
+- `class BetaManagedAgentsMCPToolset`
 
   - `Type type`
 
@@ -1779,7 +1779,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents MCP Toolset Default Config
 
-- `BetaManagedAgentsMCPToolsetDefaultConfig`
+- `class BetaManagedAgentsMCPToolsetDefaultConfig`
 
   - `bool enabled`
 
@@ -1789,7 +1789,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents MCP Toolset Default Config Params
 
-- `BetaManagedAgentsMCPToolsetDefaultConfigParams`
+- `class BetaManagedAgentsMCPToolsetDefaultConfigParams`
 
   - `?bool enabled`
 
@@ -1801,7 +1801,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents MCP Toolset Params
 
-- `BetaManagedAgentsMCPToolsetParams`
+- `class BetaManagedAgentsMCPToolsetParams`
 
   - `Type type`
 
@@ -1819,7 +1819,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Model
 
-- `BetaManagedAgentsModel`
+- `enum BetaManagedAgentsModel`
 
   - `"claude-fable-5-1"`
 
@@ -1879,7 +1879,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Model Config
 
-- `BetaManagedAgentsModelConfig`
+- `class BetaManagedAgentsModelConfig`
 
   - `BetaManagedAgentsModel id`
 
@@ -1901,7 +1901,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Model Config Params
 
-- `BetaManagedAgentsModelConfigParams`
+- `class BetaManagedAgentsModelConfigParams`
 
   - `BetaManagedAgentsModel id`
 
@@ -1923,7 +1923,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Multiagent Coordinator
 
-- `BetaManagedAgentsMultiagentCoordinator`
+- `class BetaManagedAgentsMultiagentCoordinator`
 
   - `Type type`
 
@@ -1933,7 +1933,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Multiagent Coordinator Params
 
-- `BetaManagedAgentsMultiagentCoordinatorParams`
+- `class BetaManagedAgentsMultiagentCoordinatorParams`
 
   - `Type type`
 
@@ -1943,13 +1943,13 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Multiagent Self Params
 
-- `BetaManagedAgentsMultiagentSelfParams`
+- `class BetaManagedAgentsMultiagentSelfParams`
 
   - `Type type`
 
 ### Beta Managed Agents Read Tool Config
 
-- `BetaManagedAgentsReadToolConfig`
+- `class BetaManagedAgentsReadToolConfig`
 
   - `"read" type`
 
@@ -1963,7 +1963,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Read Tool Config Params
 
-- `BetaManagedAgentsReadToolConfigParams`
+- `class BetaManagedAgentsReadToolConfigParams`
 
   - `?Type type`
 
@@ -1981,7 +1981,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Session Thread Agent
 
-- `BetaManagedAgentsSessionThreadAgent`
+- `class BetaManagedAgentsSessionThreadAgent`
 
   - `Type type`
 
@@ -2007,9 +2007,9 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Skill Params
 
-- `BetaManagedAgentsSkillParams`
+- `class BetaManagedAgentsSkillParams`
 
-  - `BetaManagedAgentsAnthropicSkillParams`
+  - `class BetaManagedAgentsAnthropicSkillParams`
 
     - `Type type`
 
@@ -2021,7 +2021,7 @@ var_dump($betaManagedAgentsAgent);
 
       Version to pin. Defaults to latest if omitted.
 
-  - `BetaManagedAgentsCustomSkillParams`
+  - `class BetaManagedAgentsCustomSkillParams`
 
     - `Type type`
 
@@ -2035,7 +2035,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents URL MCP Server Params
 
-- `BetaManagedAgentsURLMCPServerParams`
+- `class BetaManagedAgentsURLMCPServerParams`
 
   - `Type type`
 
@@ -2049,7 +2049,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents User Location
 
-- `BetaManagedAgentsUserLocation`
+- `class BetaManagedAgentsUserLocation`
 
   - `"approximate" type`
 
@@ -2073,7 +2073,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Web Fetch Tool Config
 
-- `BetaManagedAgentsWebFetchToolConfig`
+- `class BetaManagedAgentsWebFetchToolConfig`
 
   - `"web_fetch" type`
 
@@ -2093,7 +2093,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Web Fetch Tool Config Params
 
-- `BetaManagedAgentsWebFetchToolConfigParams`
+- `class BetaManagedAgentsWebFetchToolConfigParams`
 
   - `?Type type`
 
@@ -2123,7 +2123,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Web Search Tool Config
 
-- `BetaManagedAgentsWebSearchToolConfig`
+- `class BetaManagedAgentsWebSearchToolConfig`
 
   - `"web_search" type`
 
@@ -2145,7 +2145,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Web Search Tool Config Params
 
-- `BetaManagedAgentsWebSearchToolConfigParams`
+- `class BetaManagedAgentsWebSearchToolConfigParams`
 
   - `?Type type`
 
@@ -2175,7 +2175,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Write Tool Config
 
-- `BetaManagedAgentsWriteToolConfig`
+- `class BetaManagedAgentsWriteToolConfig`
 
   - `"write" type`
 
@@ -2189,7 +2189,7 @@ var_dump($betaManagedAgentsAgent);
 
 ### Beta Managed Agents Write Tool Config Params
 
-- `BetaManagedAgentsWriteToolConfigParams`
+- `class BetaManagedAgentsWriteToolConfigParams`
 
   - `?Type type`
 
@@ -2235,7 +2235,7 @@ List Agent Versions
 
 #### Returns
 
-- `BetaManagedAgentsAgent`
+- `class BetaManagedAgentsAgent`
 
   - `Type type`
 

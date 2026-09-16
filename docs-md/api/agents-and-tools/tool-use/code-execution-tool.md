@@ -677,12 +677,12 @@ foreach (var fileId in fileIds)
 	fileIDs := extractFileIDs(response)
 
 	for _, fileID := range fileIDs {
-		fileMetadata, err := client.Files.GetMetadata(ctx, fileID)
+		fileMetadata, err := client.Files.GetMetadata(ctx, fileID, anthropic.FileGetMetadataParams{})
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		fileContent, err := client.Files.Download(ctx, fileID)
+		fileContent, err := client.Files.Download(ctx, fileID, anthropic.FileDownloadParams{})
 		if err != nil {
 			log.Fatal(err)
 		}

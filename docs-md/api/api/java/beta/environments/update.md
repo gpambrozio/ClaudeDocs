@@ -113,13 +113,15 @@ Update an existing environment's configuration.
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `Optional<Config> config`
 
     Updated environment configuration
 
-    - `class BetaCloudConfigParams:`
+    - `class BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -134,7 +136,7 @@ Update an existing environment's configuration.
 
         Network configuration policy. Omit on update to preserve the existing value.
 
-        - `class BetaUnrestrictedNetwork:`
+        - `class BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -142,7 +144,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `class BetaLimitedNetworkParams:`
+        - `class BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -201,7 +203,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `class BetaSelfHostedConfigParams:`
+    - `class BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
@@ -235,7 +237,7 @@ Update an existing environment's configuration.
 
 ## Returns
 
-- `class BetaEnvironment:`
+- `class BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -255,7 +257,7 @@ Update an existing environment's configuration.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `class BetaCloudConfig:`
+    - `class BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -267,7 +269,7 @@ Update an existing environment's configuration.
 
         Network configuration policy.
 
-        - `class BetaUnrestrictedNetwork:`
+        - `class BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -275,7 +277,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `class BetaLimitedNetwork:`
+        - `class BetaLimitedNetwork`
 
           Limited network access.
 
@@ -327,7 +329,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `class BetaSelfHostedConfig:`
+    - `class BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 

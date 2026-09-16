@@ -772,7 +772,7 @@ Console.WriteLine(file);
 ```
 
 ```go Go
-metadata, err := client.Files.GetMetadata(context.TODO(), fileID)
+metadata, err := client.Files.GetMetadata(context.TODO(), fileID, anthropic.FileGetMetadataParams{})
 if err != nil {
 	log.Fatal(err)
 }
@@ -824,7 +824,7 @@ await client.Files.Delete(fileId);
 ```
 
 ```go Go
-_, err = client.Files.Delete(context.TODO(), fileID)
+_, err = client.Files.Delete(context.TODO(), fileID, anthropic.FileDeleteParams{})
 if err != nil {
 	log.Fatal(err)
 }
@@ -881,7 +881,7 @@ await source.CopyToAsync(destination);
 
 ```go Go
 func downloadFile(client anthropic.Client, fileID string) error {
-	resp, err := client.Files.Download(context.TODO(), fileID)
+	resp, err := client.Files.Download(context.TODO(), fileID, anthropic.FileDownloadParams{})
 	if err != nil {
 		return err
 	}

@@ -2559,6 +2559,97 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `type: :all`
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `type: :none`
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `type: :only`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `type: :except`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+      - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
   - `class WebSearchTool20260209`
 
     - `type: :web_search_20260209`
@@ -2665,6 +2756,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
   - `class WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
@@ -2722,6 +2822,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     - `strict: bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
 
     - `use_cache: bool`
 
@@ -2848,6 +2957,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     - `strict: bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
 
     - `use_cache: bool`
 
@@ -3918,7 +4036,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `:batch`
 
-- `RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
+- `type RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
 
   - `class RawMessageStartEvent`
 
@@ -6628,6 +6746,97 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `type: :all`
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `type: :none`
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `type: :only`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `type: :except`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+      - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
   - `class WebSearchTool20260209`
 
     - `type: :web_search_20260209`
@@ -6734,6 +6943,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
   - `class WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
@@ -6791,6 +7009,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
     - `strict: bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
 
     - `use_cache: bool`
 
@@ -6917,6 +7144,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
     - `strict: bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
 
     - `use_cache: bool`
 
@@ -7246,7 +7482,7 @@ puts(message_tokens_count)
 
 ### Bash Code Execution Tool Result Error Code
 
-- `BashCodeExecutionToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
+- `type BashCodeExecutionToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
   - `:invalid_tool_input`
 
@@ -7804,7 +8040,7 @@ puts(message_tokens_count)
 
 ### Browser State Change
 
-- `BrowserStateChange = BrowserStateChangeTabOpened | BrowserStateChangeDownloadStarted | BrowserStateChangeDownloadCompleted | BrowserStateChangeDownloadFailed`
+- `type BrowserStateChange = BrowserStateChangeTabOpened | BrowserStateChangeDownloadStarted | BrowserStateChangeDownloadCompleted | BrowserStateChangeDownloadFailed`
 
   - `class BrowserStateChangeTabOpened`
 
@@ -9656,7 +9892,7 @@ puts(message_tokens_count)
 
 ### Code Execution Tool Result Block Content
 
-- `CodeExecutionToolResultBlockContent = CodeExecutionToolResultError | CodeExecutionResultBlock | EncryptedCodeExecutionResultBlock`
+- `type CodeExecutionToolResultBlockContent = CodeExecutionToolResultError | CodeExecutionResultBlock | EncryptedCodeExecutionResultBlock`
 
   - `class CodeExecutionToolResultError`
 
@@ -9789,7 +10025,7 @@ puts(message_tokens_count)
 
 ### Code Execution Tool Result Block Param Content
 
-- `CodeExecutionToolResultBlockParamContent = CodeExecutionToolResultErrorParam | CodeExecutionResultBlockParam | EncryptedCodeExecutionResultBlockParam`
+- `type CodeExecutionToolResultBlockParamContent = CodeExecutionToolResultErrorParam | CodeExecutionResultBlockParam | EncryptedCodeExecutionResultBlockParam`
 
   - `class CodeExecutionToolResultErrorParam`
 
@@ -9857,7 +10093,7 @@ puts(message_tokens_count)
 
 ### Code Execution Tool Result Error Code
 
-- `CodeExecutionToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
+- `type CodeExecutionToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
 
   - `:invalid_tool_input`
 
@@ -10731,7 +10967,7 @@ puts(message_tokens_count)
 
 ### Content Block
 
-- `ContentBlock = TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
+- `type ContentBlock = TextBlock | ThinkingBlock | RedactedThinkingBlock | 9 more`
 
   - `class TextBlock`
 
@@ -11339,7 +11575,7 @@ puts(message_tokens_count)
 
 ### Content Block Param
 
-- `ContentBlockParam = TextBlockParam | ImageBlockParam | DocumentBlockParam | 13 more`
+- `type ContentBlockParam = TextBlockParam | ImageBlockParam | DocumentBlockParam | 13 more`
 
   - `class TextBlockParam`
 
@@ -12521,7 +12757,7 @@ puts(message_tokens_count)
 
 ### Content Block Source Content
 
-- `ContentBlockSourceContent = TextBlockParam | ImageBlockParam`
+- `type ContentBlockSourceContent = TextBlockParam | ImageBlockParam`
 
   - `class TextBlockParam`
 
@@ -14202,7 +14438,7 @@ puts(message_tokens_count)
 
 ### Message Count Tokens Tool
 
-- `MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
+- `type MessageCountTokensTool = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
 
   - `class Tool`
 
@@ -15345,6 +15581,97 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `type: :all`
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `type: :none`
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `type: :only`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `type: :except`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+      - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
   - `class WebSearchTool20260209`
 
     - `type: :web_search_20260209`
@@ -15451,6 +15778,15 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
   - `class WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
@@ -15508,6 +15844,15 @@ puts(message_tokens_count)
     - `strict: bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
 
     - `use_cache: bool`
 
@@ -15635,6 +15980,15 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `use_cache: bool`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
@@ -15713,7 +16067,7 @@ puts(message_tokens_count)
 
 ### Message Create Params Container
 
-- `MessageCreateParamsContainer = ContainerParams | String`
+- `type MessageCreateParamsContainer = ContainerParams | String`
 
   Container identifier for reuse across requests.
 
@@ -16820,7 +17174,7 @@ puts(message_tokens_count)
 
 ### Model
 
-- `Model = :"claude-fable-5-1" | :"claude-mythos-5-1" | :"claude-sonnet-5" | 14 more | String`
+- `type Model = :"claude-fable-5-1" | :"claude-mythos-5-1" | :"claude-sonnet-5" | 14 more | String`
 
   The model that will complete your prompt.
 
@@ -16959,7 +17313,7 @@ puts(message_tokens_count)
 
 ### Raw Content Block Delta
 
-- `RawContentBlockDelta = TextDelta | InputJSONDelta | CitationsDelta | 2 more`
+- `type RawContentBlockDelta = TextDelta | InputJSONDelta | CitationsDelta | 2 more`
 
   - `class TextDelta`
 
@@ -19032,7 +19386,7 @@ puts(message_tokens_count)
 
 ### Raw Message Stream Event
 
-- `RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
+- `type RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
 
   - `class RawMessageStartEvent`
 
@@ -20584,7 +20938,7 @@ puts(message_tokens_count)
 
 ### Stop Reason
 
-- `StopReason = :end_turn | :max_tokens | :stop_sequence | 4 more`
+- `type StopReason = :end_turn | :max_tokens | :stop_sequence | 4 more`
 
   - `:end_turn`
 
@@ -20889,7 +21243,7 @@ puts(message_tokens_count)
 
 ### Text Citation
 
-- `TextCitation = CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
+- `type TextCitation = CitationCharLocation | CitationPageLocation | CitationContentBlockLocation | 2 more`
 
   - `class CitationCharLocation`
 
@@ -21011,7 +21365,7 @@ puts(message_tokens_count)
 
 ### Text Citation Param
 
-- `TextCitationParam = CitationCharLocationParam | CitationPageLocationParam | CitationContentBlockLocationParam | 2 more`
+- `type TextCitationParam = CitationCharLocationParam | CitationPageLocationParam | CitationContentBlockLocationParam | 2 more`
 
   - `class CitationCharLocationParam`
 
@@ -21372,7 +21726,7 @@ puts(message_tokens_count)
 
 ### Text Editor Code Execution Tool Result Error Code
 
-- `TextEditorCodeExecutionToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
+- `type TextEditorCodeExecutionToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | 2 more`
 
   - `:invalid_tool_input`
 
@@ -21528,7 +21882,7 @@ puts(message_tokens_count)
 
 ### Thinking Config Param
 
-- `ThinkingConfigParam = ThinkingConfigEnabled | ThinkingConfigDisabled | ThinkingConfigAdaptive`
+- `type ThinkingConfigParam = ThinkingConfigEnabled | ThinkingConfigDisabled | ThinkingConfigAdaptive`
 
   Configuration for enabling Claude's extended thinking.
 
@@ -21716,7 +22070,7 @@ puts(message_tokens_count)
 
 ### Tool Choice
 
-- `ToolChoice = ToolChoiceAuto | ToolChoiceAny | ToolChoiceTool | ToolChoiceNone`
+- `type ToolChoice = ToolChoiceAuto | ToolChoiceAny | ToolChoiceTool | ToolChoiceNone`
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
@@ -22580,7 +22934,7 @@ puts(message_tokens_count)
 
 ### Tool Search Tool Result Error Code
 
-- `ToolSearchToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
+- `type ToolSearchToolResultErrorCode = :invalid_tool_input | :unavailable | :too_many_requests | :execution_time_exceeded`
 
   - `:invalid_tool_input`
 
@@ -22824,7 +23178,7 @@ puts(message_tokens_count)
 
 ### Tool Union
 
-- `ToolUnion = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
+- `type ToolUnion = Tool | ToolBash20250124 | CodeExecutionTool20250522 | 18 more`
 
   - `class Tool`
 
@@ -23967,6 +24321,97 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `type: :all`
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `type: :none`
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `type: :only`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `type: :except`
+
+          - `tools: Array[WebFetchURLSourceToolReference]`
+
+            - `type: :tool_reference`
+
+            - `name: String`
+
+      - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
   - `class WebSearchTool20260209`
 
     - `type: :web_search_20260209`
@@ -24073,6 +24518,15 @@ puts(message_tokens_count)
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
   - `class WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
@@ -24130,6 +24584,15 @@ puts(message_tokens_count)
     - `strict: bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
 
     - `use_cache: bool`
 
@@ -24256,6 +24719,15 @@ puts(message_tokens_count)
     - `strict: bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+    - `url_sources: WebFetchURLSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
 
     - `use_cache: bool`
 
@@ -24996,6 +25468,97 @@ puts(message_tokens_count)
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `url_sources: WebFetchURLSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: :all`
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: :none`
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: :only`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: :except`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+    - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
 ### Web Fetch Tool 20260209
 
 - `class WebFetchTool20260209`
@@ -25072,6 +25635,97 @@ puts(message_tokens_count)
   - `strict: bool`
 
     When true, guarantees schema validation on tool names and inputs
+
+  - `url_sources: WebFetchURLSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: :all`
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: :none`
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: :only`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: :except`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+    - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
 
 ### Web Fetch Tool 20260309
 
@@ -25151,6 +25805,97 @@ puts(message_tokens_count)
   - `strict: bool`
 
     When true, guarantees schema validation on tool names and inputs
+
+  - `url_sources: WebFetchURLSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: :all`
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: :none`
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: :only`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: :except`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+    - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
 
   - `use_cache: bool`
 
@@ -25240,6 +25985,97 @@ puts(message_tokens_count)
   - `strict: bool`
 
     When true, guarantees schema validation on tool names and inputs
+
+  - `url_sources: WebFetchURLSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `type: :all`
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `type: :none`
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `type: :only`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `type: :except`
+
+        - `tools: Array[WebFetchURLSourceToolReference]`
+
+          - `type: :tool_reference`
+
+          - `name: String`
+
+    - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `class WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `class WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `class WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `class WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
 
   - `use_cache: bool`
 
@@ -25758,7 +26594,7 @@ puts(message_tokens_count)
 
 ### Web Fetch Tool Result Error Code
 
-- `WebFetchToolResultErrorCode = :invalid_tool_input | :url_too_long | :url_not_allowed | 7 more`
+- `type WebFetchToolResultErrorCode = :invalid_tool_input | :url_too_long | :url_not_allowed | 7 more`
 
   - `:invalid_tool_input`
 
@@ -25779,6 +26615,158 @@ puts(message_tokens_count)
   - `:unavailable`
 
   - `:content_too_large`
+
+### Web Fetch URL Source All
+
+- `class WebFetchURLSourceAll`
+
+  The `url_sources` variant under which a source contributes in
+  full: every result of the tool filter's source, or all user input.
+
+  - `type: :all`
+
+### Web Fetch URL Source Except
+
+- `class WebFetchURLSourceExcept`
+
+  The tool filter variant under which every result but the named
+  tools' contributes.
+
+  - `type: :except`
+
+  - `tools: Array[WebFetchURLSourceToolReference]`
+
+    - `type: :tool_reference`
+
+    - `name: String`
+
+### Web Fetch URL Source None
+
+- `class WebFetchURLSourceNone`
+
+  The `url_sources` variant under which a source contributes nothing:
+  no result of the tool filter's source, or no user input.
+
+  - `type: :none`
+
+### Web Fetch URL Source Only
+
+- `class WebFetchURLSourceOnly`
+
+  The tool filter variant under which only the named tools' results
+  contribute.
+
+  - `type: :only`
+
+  - `tools: Array[WebFetchURLSourceToolReference]`
+
+    - `type: :tool_reference`
+
+    - `name: String`
+
+### Web Fetch URL Source Tool Reference
+
+- `class WebFetchURLSourceToolReference`
+
+  One entry of a tool filter's `tools`: it must name a tool declared
+  in this request's `tools[]`.
+
+  - `type: :tool_reference`
+
+  - `name: String`
+
+### Web Fetch URL Sources
+
+- `class WebFetchURLSources`
+
+  Which sources contribute to the set of URLs web fetch may fetch.
+
+  Each key is a tagged variant: `user_input` is `all` or `none`; the
+  two tool filters are `all`, `none`, `only` (only the named tools'
+  results) or `except` (every result but the named tools'). A named tool
+  must be declared in this request's `tools[]`.
+
+  - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+    Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+    - `class WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+      - `type: :all`
+
+    - `class WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+      - `type: :none`
+
+    - `class WebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+      - `type: :only`
+
+      - `tools: Array[WebFetchURLSourceToolReference]`
+
+        - `type: :tool_reference`
+
+        - `name: String`
+
+    - `class WebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+      - `type: :except`
+
+      - `tools: Array[WebFetchURLSourceToolReference]`
+
+        - `type: :tool_reference`
+
+        - `name: String`
+
+  - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+    Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+    - `class WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `class WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+    - `class WebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+    - `class WebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+  - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+    Whether URLs in user messages are fetchable: "all" or "none".
+
+    - `class WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `class WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
 
 ### Web Search Result Block
 
@@ -26191,7 +27179,7 @@ puts(message_tokens_count)
 
 ### Web Search Tool Result Block Content
 
-- `WebSearchToolResultBlockContent = WebSearchToolResultError | Array[WebSearchResultBlock]`
+- `type WebSearchToolResultBlockContent = WebSearchToolResultError | Array[WebSearchResultBlock]`
 
   - `class WebSearchToolResultError`
 
@@ -26314,7 +27302,7 @@ puts(message_tokens_count)
 
 ### Web Search Tool Result Block Param Content
 
-- `WebSearchToolResultBlockParamContent = Array[WebSearchResultBlockParam] | WebSearchToolRequestError`
+- `type WebSearchToolResultBlockParamContent = Array[WebSearchResultBlockParam] | WebSearchToolRequestError`
 
   - `WebSearchToolResultBlockItem = Array[WebSearchResultBlockParam]`
 
@@ -26368,7 +27356,7 @@ puts(message_tokens_count)
 
 ### Web Search Tool Result Error Code
 
-- `WebSearchToolResultErrorCode = :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
+- `type WebSearchToolResultErrorCode = :invalid_tool_input | :unavailable | :max_uses_exceeded | 3 more`
 
   - `:invalid_tool_input`
 
@@ -28956,6 +29944,97 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           When true, guarantees schema validation on tool names and inputs
 
+        - `url_sources: WebFetchURLSources`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
+
+          - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+            Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+            - `class WebFetchURLSourceAll`
+
+              The `url_sources` variant under which a source contributes in
+              full: every result of the tool filter's source, or all user input.
+
+              - `type: :all`
+
+            - `class WebFetchURLSourceNone`
+
+              The `url_sources` variant under which a source contributes nothing:
+              no result of the tool filter's source, or no user input.
+
+              - `type: :none`
+
+            - `class WebFetchURLSourceOnly`
+
+              The tool filter variant under which only the named tools' results
+              contribute.
+
+              - `type: :only`
+
+              - `tools: Array[WebFetchURLSourceToolReference]`
+
+                - `type: :tool_reference`
+
+                - `name: String`
+
+            - `class WebFetchURLSourceExcept`
+
+              The tool filter variant under which every result but the named
+              tools' contributes.
+
+              - `type: :except`
+
+              - `tools: Array[WebFetchURLSourceToolReference]`
+
+                - `type: :tool_reference`
+
+                - `name: String`
+
+          - `server_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+            Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+            - `class WebFetchURLSourceAll`
+
+              The `url_sources` variant under which a source contributes in
+              full: every result of the tool filter's source, or all user input.
+
+            - `class WebFetchURLSourceNone`
+
+              The `url_sources` variant under which a source contributes nothing:
+              no result of the tool filter's source, or no user input.
+
+            - `class WebFetchURLSourceOnly`
+
+              The tool filter variant under which only the named tools' results
+              contribute.
+
+            - `class WebFetchURLSourceExcept`
+
+              The tool filter variant under which every result but the named
+              tools' contributes.
+
+          - `user_input: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+            Whether URLs in user messages are fetchable: "all" or "none".
+
+            - `class WebFetchURLSourceAll`
+
+              The `url_sources` variant under which a source contributes in
+              full: every result of the tool filter's source, or all user input.
+
+            - `class WebFetchURLSourceNone`
+
+              The `url_sources` variant under which a source contributes nothing:
+              no result of the tool filter's source, or no user input.
+
       - `class WebSearchTool20260209`
 
         - `type: :web_search_20260209`
@@ -29062,6 +30141,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           When true, guarantees schema validation on tool names and inputs
 
+        - `url_sources: WebFetchURLSources`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
+
       - `class WebFetchTool20260309`
 
         Web fetch tool with use_cache parameter for bypassing cached content.
@@ -29119,6 +30207,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
         - `strict: bool`
 
           When true, guarantees schema validation on tool names and inputs
+
+        - `url_sources: WebFetchURLSources`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
 
         - `use_cache: bool`
 
@@ -29245,6 +30342,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
         - `strict: bool`
 
           When true, guarantees schema validation on tool names and inputs
+
+        - `url_sources: WebFetchURLSources`
+
+          Which sources contribute to the set of URLs web fetch may fetch.
+
+          Each key is a tagged variant: `user_input` is `all` or `none`; the
+          two tool filters are `all`, `none`, `only` (only the named tools'
+          results) or `except` (every result but the named tools'). A named tool
+          must be declared in this request's `tools[]`.
 
         - `use_cache: bool`
 

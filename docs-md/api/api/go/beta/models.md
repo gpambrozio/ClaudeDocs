@@ -135,6 +135,8 @@ The Models API response can be used to determine which models are available for 
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -143,7 +145,7 @@ The Models API response can be used to determine which models are available for 
 
 ### Returns
 
-- `type BetaModelInfo struct{…}`
+- `type BetaModelInfo`
 
   - `Type Model`
 
@@ -180,6 +182,20 @@ The Models API response can be used to determine which models are available for 
     - `CodeExecution BetaCapabilitySupport`
 
       Whether the model supports code execution tools.
+
+    - `Compaction BetaCompactionCapability`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `Summarize BetaCapabilitySupport`
+
+        Whether the summarize compaction type is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
 
     - `ContextManagement BetaContextManagementCapability`
 
@@ -322,6 +338,12 @@ func main() {
           "supported": true
         },
         "code_execution": {
+          "supported": true
+        },
+        "compaction": {
+          "summarize": {
+            "supported": true
+          },
           "supported": true
         },
         "context_management": {
@@ -504,6 +526,8 @@ The Models API response can be used to determine information about a specific mo
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -512,7 +536,7 @@ The Models API response can be used to determine information about a specific mo
 
 ### Returns
 
-- `type BetaModelInfo struct{…}`
+- `type BetaModelInfo`
 
   - `Type Model`
 
@@ -549,6 +573,20 @@ The Models API response can be used to determine information about a specific mo
     - `CodeExecution BetaCapabilitySupport`
 
       Whether the model supports code execution tools.
+
+    - `Compaction BetaCompactionCapability`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `Summarize BetaCapabilitySupport`
+
+        Whether the summarize compaction type is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
 
     - `ContextManagement BetaContextManagementCapability`
 
@@ -695,6 +733,12 @@ func main() {
     "code_execution": {
       "supported": true
     },
+    "compaction": {
+      "summarize": {
+        "supported": true
+      },
+      "supported": true
+    },
     "context_management": {
       "clear_thinking_20251015": {
         "supported": true
@@ -758,7 +802,7 @@ func main() {
 
 ### Beta Capability Support
 
-- `type BetaCapabilitySupport struct{…}`
+- `type BetaCapabilitySupport`
 
   Indicates whether a capability is supported.
 
@@ -766,9 +810,29 @@ func main() {
 
     Whether this capability is supported by the model.
 
+### Beta Compaction Capability
+
+- `type BetaCompactionCapability`
+
+  Compaction capability details: whether the model accepts the top-level
+  `compaction` request parameter, with one entry per supported
+  `compaction.type` value.
+
+  - `Summarize BetaCapabilitySupport`
+
+    Whether the summarize compaction type is supported.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
+
+  - `Supported bool`
+
+    Whether this capability is supported by the model.
+
 ### Beta Context Management Capability
 
-- `type BetaContextManagementCapability struct{…}`
+- `type BetaContextManagementCapability`
 
   Context management capability details.
 
@@ -794,7 +858,7 @@ func main() {
 
 ### Beta Effort Capability
 
-- `type BetaEffortCapability struct{…}`
+- `type BetaEffortCapability`
 
   Effort (reasoning_effort) capability details.
 
@@ -828,7 +892,7 @@ func main() {
 
 ### Beta Model Capabilities
 
-- `type BetaModelCapabilities struct{…}`
+- `type BetaModelCapabilities`
 
   Model capability information.
 
@@ -847,6 +911,20 @@ func main() {
   - `CodeExecution BetaCapabilitySupport`
 
     Whether the model supports code execution tools.
+
+  - `Compaction BetaCompactionCapability`
+
+    Compaction capability details: whether the model accepts the top-level
+    `compaction` request parameter, with one entry per supported
+    `compaction.type` value.
+
+    - `Summarize BetaCapabilitySupport`
+
+      Whether the summarize compaction type is supported.
+
+    - `Supported bool`
+
+      Whether this capability is supported by the model.
 
   - `ContextManagement BetaContextManagementCapability`
 
@@ -930,7 +1008,7 @@ func main() {
 
 ### Beta Model Info
 
-- `type BetaModelInfo struct{…}`
+- `type BetaModelInfo`
 
   - `Type Model`
 
@@ -967,6 +1045,20 @@ func main() {
     - `CodeExecution BetaCapabilitySupport`
 
       Whether the model supports code execution tools.
+
+    - `Compaction BetaCompactionCapability`
+
+      Compaction capability details: whether the model accepts the top-level
+      `compaction` request parameter, with one entry per supported
+      `compaction.type` value.
+
+      - `Summarize BetaCapabilitySupport`
+
+        Whether the summarize compaction type is supported.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
 
     - `ContextManagement BetaContextManagementCapability`
 
@@ -1068,7 +1160,7 @@ func main() {
 
 ### Beta Thinking Capability
 
-- `type BetaThinkingCapability struct{…}`
+- `type BetaThinkingCapability`
 
   Thinking capability details.
 
@@ -1094,7 +1186,7 @@ func main() {
 
 ### Beta Thinking Types
 
-- `type BetaThinkingTypes struct{…}`
+- `type BetaThinkingTypes`
 
   Supported thinking type configurations.
 

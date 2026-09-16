@@ -90,7 +90,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `[]ContentBlockParamUnionResp`
 
-        - `type TextBlockParamResp struct{…}`
+        - `type TextBlockParamResp`
 
           - `Type Text`
 
@@ -121,7 +121,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Citations []TextCitationParamUnionResp Optional`
 
-            - `type CitationCharLocationParamResp struct{…}`
+            - `type CitationCharLocationParamResp`
 
               - `Type CharLocation`
 
@@ -141,7 +141,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 0
 
-            - `type CitationPageLocationParamResp struct{…}`
+            - `type CitationPageLocationParamResp`
 
               - `Type PageLocation`
 
@@ -161,7 +161,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 1
 
-            - `type CitationContentBlockLocationParamResp struct{…}`
+            - `type CitationContentBlockLocationParamResp`
 
               - `Type ContentBlockLocation`
 
@@ -191,7 +191,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 0
 
-            - `type CitationWebSearchResultLocationParamResp struct{…}`
+            - `type CitationWebSearchResultLocationParamResp`
 
               - `Type WebSearchResultLocation`
 
@@ -207,7 +207,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minLength: 1
 
-            - `type CitationSearchResultLocationParamResp struct{…}`
+            - `type CitationSearchResultLocationParamResp`
 
               - `Type SearchResultLocation`
 
@@ -241,13 +241,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Title string`
 
-        - `type ImageBlockParamResp struct{…}`
+        - `type ImageBlockParamResp`
 
           - `Type Image`
 
           - `Source ImageBlockParamSourceUnionResp`
 
-            - `type Base64ImageSource struct{…}`
+            - `type Base64ImageSource`
 
               - `Type Base64`
 
@@ -265,13 +265,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-            - `type URLImageSource struct{…}`
+            - `type URLImageSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type FileImageSource struct{…}`
+            - `type FileImageSource`
 
               - `Type File`
 
@@ -293,13 +293,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-        - `type DocumentBlockParamResp struct{…}`
+        - `type DocumentBlockParamResp`
 
           - `Type Document`
 
           - `Source DocumentBlockParamSourceUnionResp`
 
-            - `type Base64PDFSource struct{…}`
+            - `type Base64PDFSource`
 
               - `Type Base64`
 
@@ -309,7 +309,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `MediaType ApplicationPDF`
 
-            - `type PlainTextSource struct{…}`
+            - `type PlainTextSource`
 
               - `Type Text`
 
@@ -317,7 +317,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `MediaType TextPlain`
 
-            - `type ContentBlockSource struct{…}`
+            - `type ContentBlockSource`
 
               - `Type Content`
 
@@ -327,17 +327,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `[]ContentBlockSourceContentItemUnion`
 
-                  - `type TextBlockParamResp struct{…}`
+                  - `type TextBlockParamResp`
 
-                  - `type ImageBlockParamResp struct{…}`
+                  - `type ImageBlockParamResp`
 
-            - `type URLPDFSource struct{…}`
+            - `type URLPDFSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type FileDocumentSource struct{…}`
+            - `type FileDocumentSource`
 
               - `Type File`
 
@@ -359,7 +359,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             maxLength: 500, minLength: 1
 
-        - `type SearchResultBlockParamResp struct{…}`
+        - `type SearchResultBlockParamResp`
 
           - `Type SearchResult`
 
@@ -387,7 +387,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Citations CitationsConfigParamResp Optional`
 
-        - `type ThinkingBlockParamResp struct{…}`
+        - `type ThinkingBlockParamResp`
 
           - `Type Thinking`
 
@@ -401,7 +401,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The `thinking` text of this block as returned by the API.
 
-        - `type RedactedThinkingBlockParamResp struct{…}`
+        - `type RedactedThinkingBlockParamResp`
 
           - `Type RedactedThinking`
 
@@ -409,7 +409,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type ToolUseBlockParamResp struct{…}`
+        - `type ToolUseBlockParamResp`
 
           - `Type ToolUse`
 
@@ -429,13 +429,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -445,7 +445,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -459,7 +459,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type ToolResultBlockParamResp struct{…}`
+        - `type ToolResultBlockParamResp`
 
           - `Type ToolResult`
 
@@ -475,15 +475,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `[]ToolResultBlockParamContentUnionResp`
 
-              - `type TextBlockParamResp struct{…}`
+              - `type TextBlockParamResp`
 
-              - `type ImageBlockParamResp struct{…}`
+              - `type ImageBlockParamResp`
 
-              - `type SearchResultBlockParamResp struct{…}`
+              - `type SearchResultBlockParamResp`
 
-              - `type DocumentBlockParamResp struct{…}`
+              - `type DocumentBlockParamResp`
 
-              - `type ToolReferenceBlockParamResp struct{…}`
+              - `type ToolReferenceBlockParamResp`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -497,7 +497,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BrowserStateBlockParamResp struct{…}`
+              - `type BrowserStateBlockParamResp`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -547,7 +547,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   maxItems: 200, minItems: 1
 
-                  - `type BrowserStateChangeTabOpened struct{…}`
+                  - `type BrowserStateChangeTabOpened`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -565,7 +565,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BrowserStateChangeDownloadStarted struct{…}`
+                  - `type BrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
 
@@ -583,7 +583,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BrowserStateChangeDownloadCompleted struct{…}`
+                  - `type BrowserStateChangeDownloadCompleted`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -616,7 +616,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       minimum: 0
 
-                  - `type BrowserStateChangeDownloadFailed struct{…}`
+                  - `type BrowserStateChangeDownloadFailed`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -648,7 +648,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type ServerToolUseBlockParamResp struct{…}`
+        - `type ServerToolUseBlockParamResp`
 
           - `Type ServerToolUse`
 
@@ -680,17 +680,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
-        - `type WebSearchToolResultBlockParamResp struct{…}`
+        - `type WebSearchToolResultBlockParamResp`
 
           - `Type WebSearchToolResult`
 
@@ -708,7 +708,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `PageAge string Optional`
 
-            - `type WebSearchToolRequestError struct{…}`
+            - `type WebSearchToolRequestError`
 
               - `Type WebSearchToolResultError`
 
@@ -736,23 +736,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
-        - `type WebFetchToolResultBlockParamResp struct{…}`
+        - `type WebFetchToolResultBlockParamResp`
 
           - `Type WebFetchToolResult`
 
           - `Content WebFetchToolResultBlockParamContentUnionResp`
 
-            - `type WebFetchToolResultErrorBlockParamResp struct{…}`
+            - `type WebFetchToolResultErrorBlockParamResp`
 
               - `Type WebFetchToolResultError`
 
@@ -778,7 +778,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type WebFetchBlockParamResp struct{…}`
+            - `type WebFetchBlockParamResp`
 
               - `Type WebFetchResult`
 
@@ -802,23 +802,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
-        - `type CodeExecutionToolResultBlockParamResp struct{…}`
+        - `type CodeExecutionToolResultBlockParamResp`
 
           - `Type CodeExecutionToolResult`
 
           - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type CodeExecutionToolResultErrorParamResp struct{…}`
+            - `type CodeExecutionToolResultErrorParamResp`
 
               - `Type CodeExecutionToolResultError`
 
@@ -832,7 +832,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type CodeExecutionResultBlockParamResp struct{…}`
+            - `type CodeExecutionResultBlockParamResp`
 
               - `Type CodeExecutionResult`
 
@@ -848,7 +848,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Stdout string`
 
-            - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+            - `type EncryptedCodeExecutionResultBlockParamResp`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -874,13 +874,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BashCodeExecutionToolResultBlockParamResp`
 
           - `Type BashCodeExecutionToolResult`
 
           - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BashCodeExecutionToolResultErrorParamResp`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -896,7 +896,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-            - `type BashCodeExecutionResultBlockParamResp struct{…}`
+            - `type BashCodeExecutionResultBlockParamResp`
 
               - `Type BashCodeExecutionResult`
 
@@ -920,13 +920,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type TextEditorCodeExecutionToolResultBlockParamResp`
 
           - `Type TextEditorCodeExecutionToolResult`
 
           - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type TextEditorCodeExecutionToolResultErrorParamResp`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -944,7 +944,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+            - `type TextEditorCodeExecutionViewResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -964,13 +964,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `TotalLines int64 Optional`
 
-            - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+            - `type TextEditorCodeExecutionCreateResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+            - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -992,13 +992,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type ToolSearchToolResultBlockParamResp struct{…}`
+        - `type ToolSearchToolResultBlockParamResp`
 
           - `Type ToolSearchToolResult`
 
           - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
-            - `type ToolSearchToolResultErrorParamResp struct{…}`
+            - `type ToolSearchToolResultErrorParamResp`
 
               - `Type ToolSearchToolResultError`
 
@@ -1014,7 +1014,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
+            - `type ToolSearchToolSearchResultBlockParamResp`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -1038,7 +1038,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type ContainerUploadBlockParamResp struct{…}`
+        - `type ContainerUploadBlockParamResp`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -1199,7 +1199,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type Tool struct{…}`
+    - `type Tool`
 
       - `Type ToolType Optional`
 
@@ -1257,7 +1257,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolBash20250124 struct{…}`
+    - `type ToolBash20250124`
 
       - `Type Bash20250124`
 
@@ -1291,7 +1291,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20250522 struct{…}`
+    - `type CodeExecutionTool20250522`
 
       - `Type CodeExecution20250522`
 
@@ -1323,7 +1323,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20250825 struct{…}`
+    - `type CodeExecutionTool20250825`
 
       - `Type CodeExecution20250825`
 
@@ -1355,7 +1355,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20260120 struct{…}`
+    - `type CodeExecutionTool20260120`
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -1389,7 +1389,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20260521 struct{…}`
+    - `type CodeExecutionTool20260521`
 
       Code execution tool with REPL state persistence.
 
@@ -1423,7 +1423,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BrowserToolset20260801 struct{…}`
+    - `type BrowserToolset20260801`
 
       The browser toolset: a single `tools[]` entry (carrying no
       `name`) that declares the browser tool family. The model is served
@@ -1817,7 +1817,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type MemoryTool20250818 struct{…}`
+    - `type MemoryTool20250818`
 
       - `Type Memory20250818`
 
@@ -1851,7 +1851,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ComputerToolset20260801 struct{…}`
+    - `type ComputerToolset20260801`
 
       The computer toolset: a single `tools[]` entry (carrying no
       `name`) that declares the computer tool family. The model is
@@ -2081,7 +2081,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type ToolTextEditor20250124 struct{…}`
+    - `type ToolTextEditor20250124`
 
       - `Type TextEditor20250124`
 
@@ -2115,7 +2115,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolTextEditor20250429 struct{…}`
+    - `type ToolTextEditor20250429`
 
       - `Type TextEditor20250429`
 
@@ -2149,7 +2149,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolTextEditor20250728 struct{…}`
+    - `type ToolTextEditor20250728`
 
       - `Type TextEditor20250728`
 
@@ -2189,7 +2189,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type WebSearchTool20250305 struct{…}`
+    - `type WebSearchTool20250305`
 
       - `Type WebSearch20250305`
 
@@ -2265,7 +2265,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           maxLength: 255, minLength: 1
 
-    - `type WebFetchTool20250910 struct{…}`
+    - `type WebFetchTool20250910`
 
       - `Type WebFetch20250910`
 
@@ -2321,7 +2321,98 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type WebSearchTool20260209 struct{…}`
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+        - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+          Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+          - `type WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+            - `Type All`
+
+          - `type WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+            - `Type None`
+
+          - `type WebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+            - `Type Only`
+
+            - `Tools []WebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+          - `type WebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+            - `Type Except`
+
+            - `Tools []WebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+        - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+          Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+          - `type WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+          - `type WebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+          - `type WebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+        - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+          Whether URLs in user messages are fetchable: "all" or "none".
+
+          - `type WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+    - `type WebSearchTool20260209`
 
       - `Type WebSearch20260209`
 
@@ -2371,7 +2462,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type WebFetchTool20260209 struct{…}`
+    - `type WebFetchTool20260209`
 
       - `Type WebFetch20260209`
 
@@ -2427,7 +2518,16 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type WebFetchTool20260309 struct{…}`
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+    - `type WebFetchTool20260309`
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -2485,11 +2585,20 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type WebSearchTool20260318 struct{…}`
+    - `type WebSearchTool20260318`
 
       - `Type WebSearch20260318`
 
@@ -2547,7 +2656,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type WebFetchTool20260318 struct{…}`
+    - `type WebFetchTool20260318`
 
       - `Type WebFetch20260318`
 
@@ -2611,11 +2720,20 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type ToolSearchToolBm25_20251119 struct{…}`
+    - `type ToolSearchToolBm25_20251119`
 
       - `Type ToolSearchToolBm25_20251119Type`
 
@@ -2651,7 +2769,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolSearchToolRegex20251119 struct{…}`
+    - `type ToolSearchToolRegex20251119`
 
       - `Type ToolSearchToolRegex20251119Type`
 
@@ -2735,7 +2853,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 ### Returns
 
-- `type Message struct{…}`
+- `type Message`
 
   - `Type Message`
 
@@ -2818,7 +2936,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `type TextBlock struct{…}`
+    - `type TextBlock`
 
       - `Type Text`
 
@@ -2830,7 +2948,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type CitationCharLocation struct{…}`
+        - `type CitationCharLocation`
 
           - `Type CharLocation`
 
@@ -2852,7 +2970,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 0
 
-        - `type CitationPageLocation struct{…}`
+        - `type CitationPageLocation`
 
           - `Type PageLocation`
 
@@ -2874,7 +2992,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 1
 
-        - `type CitationContentBlockLocation struct{…}`
+        - `type CitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -2906,7 +3024,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minimum: 0
 
-        - `type CitationsWebSearchResultLocation struct{…}`
+        - `type CitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -2922,7 +3040,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `URL string`
 
-        - `type CitationsSearchResultLocation struct{…}`
+        - `type CitationsSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -2962,7 +3080,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         minLength: 0
 
-    - `type ThinkingBlock struct{…}`
+    - `type ThinkingBlock`
 
       - `Type Thinking`
 
@@ -2980,7 +3098,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The text of Claude's thinking process for this block.
 
-    - `type RedactedThinkingBlock struct{…}`
+    - `type RedactedThinkingBlock`
 
       - `Type RedactedThinking`
 
@@ -2994,7 +3112,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type ToolUseBlock struct{…}`
+    - `type ToolUseBlock`
 
       - `Type ToolUse`
 
@@ -3008,13 +3126,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
           - `Type Direct`
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -3024,7 +3142,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
           - `Type CodeExecution20260120`
 
@@ -3044,7 +3162,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type ServerToolUseBlock struct{…}`
+    - `type ServerToolUseBlock`
 
       - `Type ServerToolUse`
 
@@ -3058,15 +3176,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Input map[string, any]`
 
@@ -3086,7 +3204,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-    - `type WebSearchToolResultBlock struct{…}`
+    - `type WebSearchToolResultBlock`
 
       - `Type WebSearchToolResult`
 
@@ -3096,19 +3214,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Content WebSearchToolResultBlockContentUnion`
 
-        - `type WebSearchToolResultError struct{…}`
+        - `type WebSearchToolResultError`
 
           - `Type WebSearchToolResultError`
 
@@ -3146,7 +3264,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type WebFetchToolResultBlock struct{…}`
+    - `type WebFetchToolResultBlock`
 
       - `Type WebFetchToolResult`
 
@@ -3156,19 +3274,19 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Content WebFetchToolResultBlockContentUnion`
 
-        - `type WebFetchToolResultErrorBlock struct{…}`
+        - `type WebFetchToolResultErrorBlock`
 
           - `Type WebFetchToolResultError`
 
@@ -3196,7 +3314,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-        - `type WebFetchBlock struct{…}`
+        - `type WebFetchBlock`
 
           - `Type WebFetchResult`
 
@@ -3218,7 +3336,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `Source DocumentBlockSourceUnion`
 
-              - `type Base64PDFSource struct{…}`
+              - `type Base64PDFSource`
 
                 - `Type Base64`
 
@@ -3228,7 +3346,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `MediaType ApplicationPDF`
 
-              - `type PlainTextSource struct{…}`
+              - `type PlainTextSource`
 
                 - `Type Text`
 
@@ -3252,7 +3370,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type CodeExecutionToolResultBlock struct{…}`
+    - `type CodeExecutionToolResultBlock`
 
       - `Type CodeExecutionToolResult`
 
@@ -3260,7 +3378,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content CodeExecutionToolResultBlockContentUnion`
 
-        - `type CodeExecutionToolResultError struct{…}`
+        - `type CodeExecutionToolResultError`
 
           - `Type CodeExecutionToolResultError`
 
@@ -3276,7 +3394,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-        - `type CodeExecutionResultBlock struct{…}`
+        - `type CodeExecutionResultBlock`
 
           - `Type CodeExecutionResult`
 
@@ -3296,7 +3414,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Stdout string`
 
-        - `type EncryptedCodeExecutionResultBlock struct{…}`
+        - `type EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -3322,7 +3440,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BashCodeExecutionToolResultBlock struct{…}`
+    - `type BashCodeExecutionToolResultBlock`
 
       - `Type BashCodeExecutionToolResult`
 
@@ -3330,7 +3448,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BashCodeExecutionToolResultError struct{…}`
+        - `type BashCodeExecutionToolResultError`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -3348,7 +3466,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-        - `type BashCodeExecutionResultBlock struct{…}`
+        - `type BashCodeExecutionResultBlock`
 
           - `Type BashCodeExecutionResult`
 
@@ -3372,7 +3490,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+    - `type TextEditorCodeExecutionToolResultBlock`
 
       - `Type TextEditorCodeExecutionToolResult`
 
@@ -3380,7 +3498,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type TextEditorCodeExecutionToolResultError struct{…}`
+        - `type TextEditorCodeExecutionToolResultError`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -3400,7 +3518,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `ErrorMessage string`
 
-        - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+        - `type TextEditorCodeExecutionViewResultBlock`
 
           - `Type TextEditorCodeExecutionViewResult`
 
@@ -3422,7 +3540,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `TotalLines int64`
 
-        - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+        - `type TextEditorCodeExecutionCreateResultBlock`
 
           - `Type TextEditorCodeExecutionCreateResult`
 
@@ -3430,7 +3548,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `IsFileUpdate bool`
 
-        - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+        - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -3450,7 +3568,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ToolSearchToolResultBlock struct{…}`
+    - `type ToolSearchToolResultBlock`
 
       - `Type ToolSearchToolResult`
 
@@ -3458,7 +3576,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content ToolSearchToolResultBlockContentUnion`
 
-        - `type ToolSearchToolResultError struct{…}`
+        - `type ToolSearchToolResultError`
 
           - `Type ToolSearchToolResultError`
 
@@ -3476,7 +3594,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `ErrorMessage string`
 
-        - `type ToolSearchToolSearchResultBlock struct{…}`
+        - `type ToolSearchToolSearchResultBlock`
 
           - `Type ToolSearchToolSearchResult`
 
@@ -3496,7 +3614,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ContainerUploadBlock struct{…}`
+    - `type ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -3776,7 +3894,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 - `type MessageStreamEventUnion interface{…}`
 
-  - `type MessageStartEvent struct{…}`
+  - `type MessageStartEvent`
 
     - `Type MessageStart`
 
@@ -3784,7 +3902,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `Message Message`
 
-  - `type MessageDeltaEvent struct{…}`
+  - `type MessageDeltaEvent`
 
     - `Type MessageDelta`
 
@@ -3851,13 +3969,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         The number of server tool requests.
 
-  - `type MessageStopEvent struct{…}`
+  - `type MessageStopEvent`
 
     - `Type MessageStop`
 
       default: message_stop
 
-  - `type ContentBlockStartEvent struct{…}`
+  - `type ContentBlockStartEvent`
 
     - `Type ContentBlockStart`
 
@@ -3865,35 +3983,35 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `ContentBlock ContentBlockStartEventContentBlockUnion`
 
-      - `type TextBlock struct{…}`
+      - `type TextBlock`
 
-      - `type ThinkingBlock struct{…}`
+      - `type ThinkingBlock`
 
-      - `type RedactedThinkingBlock struct{…}`
+      - `type RedactedThinkingBlock`
 
-      - `type ToolUseBlock struct{…}`
+      - `type ToolUseBlock`
 
-      - `type ServerToolUseBlock struct{…}`
+      - `type ServerToolUseBlock`
 
-      - `type WebSearchToolResultBlock struct{…}`
+      - `type WebSearchToolResultBlock`
 
-      - `type WebFetchToolResultBlock struct{…}`
+      - `type WebFetchToolResultBlock`
 
-      - `type CodeExecutionToolResultBlock struct{…}`
+      - `type CodeExecutionToolResultBlock`
 
-      - `type BashCodeExecutionToolResultBlock struct{…}`
+      - `type BashCodeExecutionToolResultBlock`
 
-      - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type TextEditorCodeExecutionToolResultBlock`
 
-      - `type ToolSearchToolResultBlock struct{…}`
+      - `type ToolSearchToolResultBlock`
 
-      - `type ContainerUploadBlock struct{…}`
+      - `type ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
     - `Index int64`
 
-  - `type ContentBlockDeltaEvent struct{…}`
+  - `type ContentBlockDeltaEvent`
 
     - `Type ContentBlockDelta`
 
@@ -3901,7 +4019,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `Delta RawContentBlockDeltaUnion`
 
-      - `type TextDelta struct{…}`
+      - `type TextDelta`
 
         - `Type TextDelta`
 
@@ -3909,7 +4027,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `Text string`
 
-      - `type InputJSONDelta struct{…}`
+      - `type InputJSONDelta`
 
         - `Type InputJSONDelta`
 
@@ -3917,7 +4035,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `PartialJSON string`
 
-      - `type CitationsDelta struct{…}`
+      - `type CitationsDelta`
 
         - `Type CitationsDelta`
 
@@ -3925,17 +4043,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `Citation CitationsDeltaCitationUnion`
 
-          - `type CitationCharLocation struct{…}`
+          - `type CitationCharLocation`
 
-          - `type CitationPageLocation struct{…}`
+          - `type CitationPageLocation`
 
-          - `type CitationContentBlockLocation struct{…}`
+          - `type CitationContentBlockLocation`
 
-          - `type CitationsWebSearchResultLocation struct{…}`
+          - `type CitationsWebSearchResultLocation`
 
-          - `type CitationsSearchResultLocation struct{…}`
+          - `type CitationsSearchResultLocation`
 
-      - `type ThinkingDelta struct{…}`
+      - `type ThinkingDelta`
 
         - `Type ThinkingDelta`
 
@@ -3945,7 +4063,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `type SignatureDelta struct{…}`
+      - `type SignatureDelta`
 
         - `Type SignatureDelta`
 
@@ -3957,7 +4075,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `Index int64`
 
-  - `type ContentBlockStopEvent struct{…}`
+  - `type ContentBlockStopEvent`
 
     - `Type ContentBlockStop`
 
@@ -4137,7 +4255,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `[]ContentBlockParamUnionResp`
 
-        - `type TextBlockParamResp struct{…}`
+        - `type TextBlockParamResp`
 
           - `Type Text`
 
@@ -4168,7 +4286,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Citations []TextCitationParamUnionResp Optional`
 
-            - `type CitationCharLocationParamResp struct{…}`
+            - `type CitationCharLocationParamResp`
 
               - `Type CharLocation`
 
@@ -4188,7 +4306,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-            - `type CitationPageLocationParamResp struct{…}`
+            - `type CitationPageLocationParamResp`
 
               - `Type PageLocation`
 
@@ -4208,7 +4326,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 1
 
-            - `type CitationContentBlockLocationParamResp struct{…}`
+            - `type CitationContentBlockLocationParamResp`
 
               - `Type ContentBlockLocation`
 
@@ -4238,7 +4356,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-            - `type CitationWebSearchResultLocationParamResp struct{…}`
+            - `type CitationWebSearchResultLocationParamResp`
 
               - `Type WebSearchResultLocation`
 
@@ -4254,7 +4372,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minLength: 1
 
-            - `type CitationSearchResultLocationParamResp struct{…}`
+            - `type CitationSearchResultLocationParamResp`
 
               - `Type SearchResultLocation`
 
@@ -4288,13 +4406,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Title string`
 
-        - `type ImageBlockParamResp struct{…}`
+        - `type ImageBlockParamResp`
 
           - `Type Image`
 
           - `Source ImageBlockParamSourceUnionResp`
 
-            - `type Base64ImageSource struct{…}`
+            - `type Base64ImageSource`
 
               - `Type Base64`
 
@@ -4312,13 +4430,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-            - `type URLImageSource struct{…}`
+            - `type URLImageSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type FileImageSource struct{…}`
+            - `type FileImageSource`
 
               - `Type File`
 
@@ -4340,13 +4458,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-        - `type DocumentBlockParamResp struct{…}`
+        - `type DocumentBlockParamResp`
 
           - `Type Document`
 
           - `Source DocumentBlockParamSourceUnionResp`
 
-            - `type Base64PDFSource struct{…}`
+            - `type Base64PDFSource`
 
               - `Type Base64`
 
@@ -4356,7 +4474,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `MediaType ApplicationPDF`
 
-            - `type PlainTextSource struct{…}`
+            - `type PlainTextSource`
 
               - `Type Text`
 
@@ -4364,7 +4482,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `MediaType TextPlain`
 
-            - `type ContentBlockSource struct{…}`
+            - `type ContentBlockSource`
 
               - `Type Content`
 
@@ -4374,17 +4492,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `[]ContentBlockSourceContentItemUnion`
 
-                  - `type TextBlockParamResp struct{…}`
+                  - `type TextBlockParamResp`
 
-                  - `type ImageBlockParamResp struct{…}`
+                  - `type ImageBlockParamResp`
 
-            - `type URLPDFSource struct{…}`
+            - `type URLPDFSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type FileDocumentSource struct{…}`
+            - `type FileDocumentSource`
 
               - `Type File`
 
@@ -4406,7 +4524,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             maxLength: 500, minLength: 1
 
-        - `type SearchResultBlockParamResp struct{…}`
+        - `type SearchResultBlockParamResp`
 
           - `Type SearchResult`
 
@@ -4434,7 +4552,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Citations CitationsConfigParamResp Optional`
 
-        - `type ThinkingBlockParamResp struct{…}`
+        - `type ThinkingBlockParamResp`
 
           - `Type Thinking`
 
@@ -4448,7 +4566,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The `thinking` text of this block as returned by the API.
 
-        - `type RedactedThinkingBlockParamResp struct{…}`
+        - `type RedactedThinkingBlockParamResp`
 
           - `Type RedactedThinking`
 
@@ -4456,7 +4574,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type ToolUseBlockParamResp struct{…}`
+        - `type ToolUseBlockParamResp`
 
           - `Type ToolUse`
 
@@ -4476,13 +4594,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -4492,7 +4610,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -4506,7 +4624,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type ToolResultBlockParamResp struct{…}`
+        - `type ToolResultBlockParamResp`
 
           - `Type ToolResult`
 
@@ -4522,15 +4640,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `[]ToolResultBlockParamContentUnionResp`
 
-              - `type TextBlockParamResp struct{…}`
+              - `type TextBlockParamResp`
 
-              - `type ImageBlockParamResp struct{…}`
+              - `type ImageBlockParamResp`
 
-              - `type SearchResultBlockParamResp struct{…}`
+              - `type SearchResultBlockParamResp`
 
-              - `type DocumentBlockParamResp struct{…}`
+              - `type DocumentBlockParamResp`
 
-              - `type ToolReferenceBlockParamResp struct{…}`
+              - `type ToolReferenceBlockParamResp`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -4544,7 +4662,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BrowserStateBlockParamResp struct{…}`
+              - `type BrowserStateBlockParamResp`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -4594,7 +4712,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   maxItems: 200, minItems: 1
 
-                  - `type BrowserStateChangeTabOpened struct{…}`
+                  - `type BrowserStateChangeTabOpened`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -4612,7 +4730,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BrowserStateChangeDownloadStarted struct{…}`
+                  - `type BrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
 
@@ -4630,7 +4748,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BrowserStateChangeDownloadCompleted struct{…}`
+                  - `type BrowserStateChangeDownloadCompleted`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -4663,7 +4781,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       minimum: 0
 
-                  - `type BrowserStateChangeDownloadFailed struct{…}`
+                  - `type BrowserStateChangeDownloadFailed`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -4695,7 +4813,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type ServerToolUseBlockParamResp struct{…}`
+        - `type ServerToolUseBlockParamResp`
 
           - `Type ServerToolUse`
 
@@ -4727,17 +4845,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
-        - `type WebSearchToolResultBlockParamResp struct{…}`
+        - `type WebSearchToolResultBlockParamResp`
 
           - `Type WebSearchToolResult`
 
@@ -4755,7 +4873,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `PageAge string Optional`
 
-            - `type WebSearchToolRequestError struct{…}`
+            - `type WebSearchToolRequestError`
 
               - `Type WebSearchToolResultError`
 
@@ -4783,23 +4901,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
-        - `type WebFetchToolResultBlockParamResp struct{…}`
+        - `type WebFetchToolResultBlockParamResp`
 
           - `Type WebFetchToolResult`
 
           - `Content WebFetchToolResultBlockParamContentUnionResp`
 
-            - `type WebFetchToolResultErrorBlockParamResp struct{…}`
+            - `type WebFetchToolResultErrorBlockParamResp`
 
               - `Type WebFetchToolResultError`
 
@@ -4825,7 +4943,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type WebFetchBlockParamResp struct{…}`
+            - `type WebFetchBlockParamResp`
 
               - `Type WebFetchResult`
 
@@ -4849,23 +4967,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
-        - `type CodeExecutionToolResultBlockParamResp struct{…}`
+        - `type CodeExecutionToolResultBlockParamResp`
 
           - `Type CodeExecutionToolResult`
 
           - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type CodeExecutionToolResultErrorParamResp struct{…}`
+            - `type CodeExecutionToolResultErrorParamResp`
 
               - `Type CodeExecutionToolResultError`
 
@@ -4879,7 +4997,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type CodeExecutionResultBlockParamResp struct{…}`
+            - `type CodeExecutionResultBlockParamResp`
 
               - `Type CodeExecutionResult`
 
@@ -4895,7 +5013,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Stdout string`
 
-            - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+            - `type EncryptedCodeExecutionResultBlockParamResp`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -4921,13 +5039,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BashCodeExecutionToolResultBlockParamResp`
 
           - `Type BashCodeExecutionToolResult`
 
           - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BashCodeExecutionToolResultErrorParamResp`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -4943,7 +5061,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-            - `type BashCodeExecutionResultBlockParamResp struct{…}`
+            - `type BashCodeExecutionResultBlockParamResp`
 
               - `Type BashCodeExecutionResult`
 
@@ -4967,13 +5085,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type TextEditorCodeExecutionToolResultBlockParamResp`
 
           - `Type TextEditorCodeExecutionToolResult`
 
           - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type TextEditorCodeExecutionToolResultErrorParamResp`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -4991,7 +5109,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `ErrorMessage string Optional`
 
-            - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+            - `type TextEditorCodeExecutionViewResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -5011,13 +5129,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `TotalLines int64 Optional`
 
-            - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+            - `type TextEditorCodeExecutionCreateResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+            - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -5039,13 +5157,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type ToolSearchToolResultBlockParamResp struct{…}`
+        - `type ToolSearchToolResultBlockParamResp`
 
           - `Type ToolSearchToolResult`
 
           - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
-            - `type ToolSearchToolResultErrorParamResp struct{…}`
+            - `type ToolSearchToolResultErrorParamResp`
 
               - `Type ToolSearchToolResultError`
 
@@ -5061,7 +5179,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `ErrorMessage string Optional`
 
-            - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
+            - `type ToolSearchToolSearchResultBlockParamResp`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -5085,7 +5203,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Create a cache control breakpoint at this content block.
 
-        - `type ContainerUploadBlockParamResp struct{…}`
+        - `type ContainerUploadBlockParamResp`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -5218,7 +5336,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type Tool struct{…}`
+    - `type Tool`
 
       - `Type ToolType Optional`
 
@@ -5276,7 +5394,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolBash20250124 struct{…}`
+    - `type ToolBash20250124`
 
       - `Type Bash20250124`
 
@@ -5310,7 +5428,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20250522 struct{…}`
+    - `type CodeExecutionTool20250522`
 
       - `Type CodeExecution20250522`
 
@@ -5342,7 +5460,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20250825 struct{…}`
+    - `type CodeExecutionTool20250825`
 
       - `Type CodeExecution20250825`
 
@@ -5374,7 +5492,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20260120 struct{…}`
+    - `type CodeExecutionTool20260120`
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -5408,7 +5526,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type CodeExecutionTool20260521 struct{…}`
+    - `type CodeExecutionTool20260521`
 
       Code execution tool with REPL state persistence.
 
@@ -5442,7 +5560,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BrowserToolset20260801 struct{…}`
+    - `type BrowserToolset20260801`
 
       The browser toolset: a single `tools[]` entry (carrying no
       `name`) that declares the browser tool family. The model is served
@@ -5836,7 +5954,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type MemoryTool20250818 struct{…}`
+    - `type MemoryTool20250818`
 
       - `Type Memory20250818`
 
@@ -5870,7 +5988,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ComputerToolset20260801 struct{…}`
+    - `type ComputerToolset20260801`
 
       The computer toolset: a single `tools[]` entry (carrying no
       `name`) that declares the computer tool family. The model is
@@ -6100,7 +6218,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type ToolTextEditor20250124 struct{…}`
+    - `type ToolTextEditor20250124`
 
       - `Type TextEditor20250124`
 
@@ -6134,7 +6252,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolTextEditor20250429 struct{…}`
+    - `type ToolTextEditor20250429`
 
       - `Type TextEditor20250429`
 
@@ -6168,7 +6286,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolTextEditor20250728 struct{…}`
+    - `type ToolTextEditor20250728`
 
       - `Type TextEditor20250728`
 
@@ -6208,7 +6326,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type WebSearchTool20250305 struct{…}`
+    - `type WebSearchTool20250305`
 
       - `Type WebSearch20250305`
 
@@ -6284,7 +6402,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           maxLength: 255, minLength: 1
 
-    - `type WebFetchTool20250910 struct{…}`
+    - `type WebFetchTool20250910`
 
       - `Type WebFetch20250910`
 
@@ -6340,7 +6458,98 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type WebSearchTool20260209 struct{…}`
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+        - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+          Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+          - `type WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+            - `Type All`
+
+          - `type WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+            - `Type None`
+
+          - `type WebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+            - `Type Only`
+
+            - `Tools []WebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+          - `type WebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+            - `Type Except`
+
+            - `Tools []WebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+        - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+          Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+          - `type WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+          - `type WebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+          - `type WebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+        - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+          Whether URLs in user messages are fetchable: "all" or "none".
+
+          - `type WebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type WebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+    - `type WebSearchTool20260209`
 
       - `Type WebSearch20260209`
 
@@ -6390,7 +6599,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type WebFetchTool20260209 struct{…}`
+    - `type WebFetchTool20260209`
 
       - `Type WebFetch20260209`
 
@@ -6446,7 +6655,16 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type WebFetchTool20260309 struct{…}`
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+    - `type WebFetchTool20260309`
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -6504,11 +6722,20 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type WebSearchTool20260318 struct{…}`
+    - `type WebSearchTool20260318`
 
       - `Type WebSearch20260318`
 
@@ -6566,7 +6793,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type WebFetchTool20260318 struct{…}`
+    - `type WebFetchTool20260318`
 
       - `Type WebFetch20260318`
 
@@ -6630,11 +6857,20 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources WebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type ToolSearchToolBm25_20251119 struct{…}`
+    - `type ToolSearchToolBm25_20251119`
 
       - `Type ToolSearchToolBm25_20251119Type`
 
@@ -6670,7 +6906,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type ToolSearchToolRegex20251119 struct{…}`
+    - `type ToolSearchToolRegex20251119`
 
       - `Type ToolSearchToolRegex20251119Type`
 
@@ -6718,7 +6954,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
 ### Returns
 
-- `type MessageTokensCount struct{…}`
+- `type MessageTokensCount`
 
   - `InputTokens int64`
 
@@ -6771,7 +7007,7 @@ func main() {
 
 ### Base64 Image Source
 
-- `type Base64ImageSource struct{…}`
+- `type Base64ImageSource`
 
   - `Type Base64`
 
@@ -6791,7 +7027,7 @@ func main() {
 
 ### Base64 PDF Source
 
-- `type Base64PDFSource struct{…}`
+- `type Base64PDFSource`
 
   - `Type Base64`
 
@@ -6803,7 +7039,7 @@ func main() {
 
 ### Bash Code Execution Output Block
 
-- `type BashCodeExecutionOutputBlock struct{…}`
+- `type BashCodeExecutionOutputBlock`
 
   - `Type BashCodeExecutionOutput`
 
@@ -6813,7 +7049,7 @@ func main() {
 
 ### Bash Code Execution Output Block Param
 
-- `type BashCodeExecutionOutputBlockParamResp struct{…}`
+- `type BashCodeExecutionOutputBlockParamResp`
 
   - `Type BashCodeExecutionOutput`
 
@@ -6821,7 +7057,7 @@ func main() {
 
 ### Bash Code Execution Result Block
 
-- `type BashCodeExecutionResultBlock struct{…}`
+- `type BashCodeExecutionResultBlock`
 
   - `Type BashCodeExecutionResult`
 
@@ -6843,7 +7079,7 @@ func main() {
 
 ### Bash Code Execution Result Block Param
 
-- `type BashCodeExecutionResultBlockParamResp struct{…}`
+- `type BashCodeExecutionResultBlockParamResp`
 
   - `Type BashCodeExecutionResult`
 
@@ -6861,7 +7097,7 @@ func main() {
 
 ### Bash Code Execution Tool Result Block
 
-- `type BashCodeExecutionToolResultBlock struct{…}`
+- `type BashCodeExecutionToolResultBlock`
 
   - `Type BashCodeExecutionToolResult`
 
@@ -6869,7 +7105,7 @@ func main() {
 
   - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-    - `type BashCodeExecutionToolResultError struct{…}`
+    - `type BashCodeExecutionToolResultError`
 
       - `Type BashCodeExecutionToolResultError`
 
@@ -6887,7 +7123,7 @@ func main() {
 
         - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-    - `type BashCodeExecutionResultBlock struct{…}`
+    - `type BashCodeExecutionResultBlock`
 
       - `Type BashCodeExecutionResult`
 
@@ -6913,13 +7149,13 @@ func main() {
 
 ### Bash Code Execution Tool Result Block Param
 
-- `type BashCodeExecutionToolResultBlockParamResp struct{…}`
+- `type BashCodeExecutionToolResultBlockParamResp`
 
   - `Type BashCodeExecutionToolResult`
 
   - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
-    - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+    - `type BashCodeExecutionToolResultErrorParamResp`
 
       - `Type BashCodeExecutionToolResultError`
 
@@ -6935,7 +7171,7 @@ func main() {
 
         - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-    - `type BashCodeExecutionResultBlockParamResp struct{…}`
+    - `type BashCodeExecutionResultBlockParamResp`
 
       - `Type BashCodeExecutionResult`
 
@@ -6978,7 +7214,7 @@ func main() {
 
 ### Bash Code Execution Tool Result Error
 
-- `type BashCodeExecutionToolResultError struct{…}`
+- `type BashCodeExecutionToolResultError`
 
   - `Type BashCodeExecutionToolResultError`
 
@@ -7012,7 +7248,7 @@ func main() {
 
 ### Bash Code Execution Tool Result Error Param
 
-- `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+- `type BashCodeExecutionToolResultErrorParamResp`
 
   - `Type BashCodeExecutionToolResultError`
 
@@ -7030,7 +7266,7 @@ func main() {
 
 ### Browser Close Tab Config
 
-- `type BrowserCloseTabConfig struct{…}`
+- `type BrowserCloseTabConfig`
 
   `close_tab`'s config overrides.
 
@@ -7044,7 +7280,7 @@ func main() {
 
 ### Browser Double Click Config
 
-- `type BrowserDoubleClickConfig struct{…}`
+- `type BrowserDoubleClickConfig`
 
   `double_click`'s config overrides.
 
@@ -7058,7 +7294,7 @@ func main() {
 
 ### Browser File Upload Config
 
-- `type BrowserFileUploadConfig struct{…}`
+- `type BrowserFileUploadConfig`
 
   `file_upload`'s config overrides.
 
@@ -7072,7 +7308,7 @@ func main() {
 
 ### Browser Find Config
 
-- `type BrowserFindConfig struct{…}`
+- `type BrowserFindConfig`
 
   `find`'s config overrides.
 
@@ -7086,7 +7322,7 @@ func main() {
 
 ### Browser Form Input Config
 
-- `type BrowserFormInputConfig struct{…}`
+- `type BrowserFormInputConfig`
 
   `form_input`'s config overrides.
 
@@ -7100,7 +7336,7 @@ func main() {
 
 ### Browser Get Page Text Config
 
-- `type BrowserGetPageTextConfig struct{…}`
+- `type BrowserGetPageTextConfig`
 
   `get_page_text`'s config overrides.
 
@@ -7114,7 +7350,7 @@ func main() {
 
 ### Browser Hold Key Config
 
-- `type BrowserHoldKeyConfig struct{…}`
+- `type BrowserHoldKeyConfig`
 
   `hold_key`'s config overrides.
 
@@ -7128,7 +7364,7 @@ func main() {
 
 ### Browser Hover Config
 
-- `type BrowserHoverConfig struct{…}`
+- `type BrowserHoverConfig`
 
   `hover`'s config overrides.
 
@@ -7142,7 +7378,7 @@ func main() {
 
 ### Browser Javascript Exec Config
 
-- `type BrowserJavascriptExecConfig struct{…}`
+- `type BrowserJavascriptExecConfig`
 
   `javascript_exec`'s config overrides.
 
@@ -7156,7 +7392,7 @@ func main() {
 
 ### Browser Key Config
 
-- `type BrowserKeyConfig struct{…}`
+- `type BrowserKeyConfig`
 
   `key`'s config overrides.
 
@@ -7170,7 +7406,7 @@ func main() {
 
 ### Browser Left Click Config
 
-- `type BrowserLeftClickConfig struct{…}`
+- `type BrowserLeftClickConfig`
 
   `left_click`'s config overrides.
 
@@ -7184,7 +7420,7 @@ func main() {
 
 ### Browser Left Click Drag Config
 
-- `type BrowserLeftClickDragConfig struct{…}`
+- `type BrowserLeftClickDragConfig`
 
   `left_click_drag`'s config overrides.
 
@@ -7198,7 +7434,7 @@ func main() {
 
 ### Browser Left Mouse Down Config
 
-- `type BrowserLeftMouseDownConfig struct{…}`
+- `type BrowserLeftMouseDownConfig`
 
   `left_mouse_down`'s config overrides.
 
@@ -7212,7 +7448,7 @@ func main() {
 
 ### Browser Left Mouse Up Config
 
-- `type BrowserLeftMouseUpConfig struct{…}`
+- `type BrowserLeftMouseUpConfig`
 
   `left_mouse_up`'s config overrides.
 
@@ -7226,7 +7462,7 @@ func main() {
 
 ### Browser List Tabs Config
 
-- `type BrowserListTabsConfig struct{…}`
+- `type BrowserListTabsConfig`
 
   `list_tabs`'s config overrides.
 
@@ -7240,7 +7476,7 @@ func main() {
 
 ### Browser Middle Click Config
 
-- `type BrowserMiddleClickConfig struct{…}`
+- `type BrowserMiddleClickConfig`
 
   `middle_click`'s config overrides.
 
@@ -7254,7 +7490,7 @@ func main() {
 
 ### Browser Mouse Move Config
 
-- `type BrowserMouseMoveConfig struct{…}`
+- `type BrowserMouseMoveConfig`
 
   `mouse_move`'s config overrides.
 
@@ -7268,7 +7504,7 @@ func main() {
 
 ### Browser Navigate Config
 
-- `type BrowserNavigateConfig struct{…}`
+- `type BrowserNavigateConfig`
 
   `navigate`'s config overrides.
 
@@ -7282,7 +7518,7 @@ func main() {
 
 ### Browser New Tab Config
 
-- `type BrowserNewTabConfig struct{…}`
+- `type BrowserNewTabConfig`
 
   `new_tab`'s config overrides.
 
@@ -7296,7 +7532,7 @@ func main() {
 
 ### Browser Read Console Config
 
-- `type BrowserReadConsoleConfig struct{…}`
+- `type BrowserReadConsoleConfig`
 
   `read_console`'s config overrides.
 
@@ -7310,7 +7546,7 @@ func main() {
 
 ### Browser Read Network Config
 
-- `type BrowserReadNetworkConfig struct{…}`
+- `type BrowserReadNetworkConfig`
 
   `read_network`'s config overrides.
 
@@ -7324,7 +7560,7 @@ func main() {
 
 ### Browser Read Page Config
 
-- `type BrowserReadPageConfig struct{…}`
+- `type BrowserReadPageConfig`
 
   `read_page`'s config overrides.
 
@@ -7338,7 +7574,7 @@ func main() {
 
 ### Browser Right Click Config
 
-- `type BrowserRightClickConfig struct{…}`
+- `type BrowserRightClickConfig`
 
   `right_click`'s config overrides.
 
@@ -7352,7 +7588,7 @@ func main() {
 
 ### Browser Screenshot Config
 
-- `type BrowserScreenshotConfig struct{…}`
+- `type BrowserScreenshotConfig`
 
   `screenshot`'s config overrides.
 
@@ -7366,7 +7602,7 @@ func main() {
 
 ### Browser Scroll Config
 
-- `type BrowserScrollConfig struct{…}`
+- `type BrowserScrollConfig`
 
   `scroll`'s config overrides.
 
@@ -7380,7 +7616,7 @@ func main() {
 
 ### Browser Scroll To Config
 
-- `type BrowserScrollToConfig struct{…}`
+- `type BrowserScrollToConfig`
 
   `scroll_to`'s config overrides.
 
@@ -7394,7 +7630,7 @@ func main() {
 
 ### Browser State Block Param
 
-- `type BrowserStateBlockParamResp struct{…}`
+- `type BrowserStateBlockParamResp`
 
   The caller's browser state after a browser toolset member call —
   the full inventory of open tabs, which tab is active, and any side
@@ -7461,7 +7697,7 @@ func main() {
 
     maxItems: 200, minItems: 1
 
-    - `type BrowserStateChangeTabOpened struct{…}`
+    - `type BrowserStateChangeTabOpened`
 
       A tab this call's execution opened that remains open at its end —
       the creation delta of the `tabs` inventory, not an event log.
@@ -7479,7 +7715,7 @@ func main() {
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `type BrowserStateChangeDownloadStarted struct{…}`
+    - `type BrowserStateChangeDownloadStarted`
 
       A file download that started during this call.
 
@@ -7497,7 +7733,7 @@ func main() {
 
         maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `type BrowserStateChangeDownloadCompleted struct{…}`
+    - `type BrowserStateChangeDownloadCompleted`
 
       A file download that finished during this call, reported with the
       same `download_id` as its `download_started` — or without a prior
@@ -7530,7 +7766,7 @@ func main() {
 
         minimum: 0
 
-    - `type BrowserStateChangeDownloadFailed struct{…}`
+    - `type BrowserStateChangeDownloadFailed`
 
       A file download that failed — or was cancelled — during this call.
 
@@ -7558,7 +7794,7 @@ func main() {
 
 - `type BrowserStateChangeUnion interface{…}`
 
-  - `type BrowserStateChangeTabOpened struct{…}`
+  - `type BrowserStateChangeTabOpened`
 
     A tab this call's execution opened that remains open at its end —
     the creation delta of the `tabs` inventory, not an event log.
@@ -7576,7 +7812,7 @@ func main() {
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-  - `type BrowserStateChangeDownloadStarted struct{…}`
+  - `type BrowserStateChangeDownloadStarted`
 
     A file download that started during this call.
 
@@ -7594,7 +7830,7 @@ func main() {
 
       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-  - `type BrowserStateChangeDownloadCompleted struct{…}`
+  - `type BrowserStateChangeDownloadCompleted`
 
     A file download that finished during this call, reported with the
     same `download_id` as its `download_started` — or without a prior
@@ -7627,7 +7863,7 @@ func main() {
 
       minimum: 0
 
-  - `type BrowserStateChangeDownloadFailed struct{…}`
+  - `type BrowserStateChangeDownloadFailed`
 
     A file download that failed — or was cancelled — during this call.
 
@@ -7653,7 +7889,7 @@ func main() {
 
 ### Browser State Change Download Completed
 
-- `type BrowserStateChangeDownloadCompleted struct{…}`
+- `type BrowserStateChangeDownloadCompleted`
 
   A file download that finished during this call, reported with the
   same `download_id` as its `download_started` — or without a prior
@@ -7688,7 +7924,7 @@ func main() {
 
 ### Browser State Change Download Failed
 
-- `type BrowserStateChangeDownloadFailed struct{…}`
+- `type BrowserStateChangeDownloadFailed`
 
   A file download that failed — or was cancelled — during this call.
 
@@ -7714,7 +7950,7 @@ func main() {
 
 ### Browser State Change Download Started
 
-- `type BrowserStateChangeDownloadStarted struct{…}`
+- `type BrowserStateChangeDownloadStarted`
 
   A file download that started during this call.
 
@@ -7734,7 +7970,7 @@ func main() {
 
 ### Browser State Change Tab Opened
 
-- `type BrowserStateChangeTabOpened struct{…}`
+- `type BrowserStateChangeTabOpened`
 
   A tab this call's execution opened that remains open at its end —
   the creation delta of the `tabs` inventory, not an event log.
@@ -7754,7 +7990,7 @@ func main() {
 
 ### Browser State Tab Entry
 
-- `type BrowserStateTabEntry struct{…}`
+- `type BrowserStateTabEntry`
 
   One open browser tab reported in a `browser_state` block's `tabs`
   inventory.
@@ -7789,7 +8025,7 @@ func main() {
 
 ### Browser Switch Tab Config
 
-- `type BrowserSwitchTabConfig struct{…}`
+- `type BrowserSwitchTabConfig`
 
   `switch_tab`'s config overrides.
 
@@ -7803,7 +8039,7 @@ func main() {
 
 ### Browser Toolset 20260801
 
-- `type BrowserToolset20260801 struct{…}`
+- `type BrowserToolset20260801`
 
   The browser toolset: a single `tools[]` entry (carrying no
   `name`) that declares the browser tool family. The model is served
@@ -8216,7 +8452,7 @@ func main() {
 
 ### Browser Toolset Configs
 
-- `type BrowserToolsetConfigs struct{…}`
+- `type BrowserToolsetConfigs`
 
   Per-member configuration for `browser_toolset_20260801`: one
   optional field per member tool, keyed by the member name — the same
@@ -8599,7 +8835,7 @@ func main() {
 
 ### Browser Triple Click Config
 
-- `type BrowserTripleClickConfig struct{…}`
+- `type BrowserTripleClickConfig`
 
   `triple_click`'s config overrides.
 
@@ -8613,7 +8849,7 @@ func main() {
 
 ### Browser Type Config
 
-- `type BrowserTypeConfig struct{…}`
+- `type BrowserTypeConfig`
 
   `type`'s config overrides.
 
@@ -8627,7 +8863,7 @@ func main() {
 
 ### Browser Wait Config
 
-- `type BrowserWaitConfig struct{…}`
+- `type BrowserWaitConfig`
 
   `wait`'s config overrides.
 
@@ -8641,7 +8877,7 @@ func main() {
 
 ### Browser Zoom Config
 
-- `type BrowserZoomConfig struct{…}`
+- `type BrowserZoomConfig`
 
   `zoom`'s config overrides.
 
@@ -8655,7 +8891,7 @@ func main() {
 
 ### Cache Control Ephemeral
 
-- `type CacheControlEphemeral struct{…}`
+- `type CacheControlEphemeral`
 
   - `Type Ephemeral`
 
@@ -8676,7 +8912,7 @@ func main() {
 
 ### Cache Creation
 
-- `type CacheCreation struct{…}`
+- `type CacheCreation`
 
   - `Ephemeral1hInputTokens int64`
 
@@ -8692,7 +8928,7 @@ func main() {
 
 ### Citation Char Location
 
-- `type CitationCharLocation struct{…}`
+- `type CitationCharLocation`
 
   - `Type CharLocation`
 
@@ -8716,7 +8952,7 @@ func main() {
 
 ### Citation Char Location Param
 
-- `type CitationCharLocationParamResp struct{…}`
+- `type CitationCharLocationParamResp`
 
   - `Type CharLocation`
 
@@ -8738,7 +8974,7 @@ func main() {
 
 ### Citation Content Block Location
 
-- `type CitationContentBlockLocation struct{…}`
+- `type CitationContentBlockLocation`
 
   - `Type ContentBlockLocation`
 
@@ -8772,7 +9008,7 @@ func main() {
 
 ### Citation Content Block Location Param
 
-- `type CitationContentBlockLocationParamResp struct{…}`
+- `type CitationContentBlockLocationParamResp`
 
   - `Type ContentBlockLocation`
 
@@ -8804,7 +9040,7 @@ func main() {
 
 ### Citation Page Location
 
-- `type CitationPageLocation struct{…}`
+- `type CitationPageLocation`
 
   - `Type PageLocation`
 
@@ -8828,7 +9064,7 @@ func main() {
 
 ### Citation Page Location Param
 
-- `type CitationPageLocationParamResp struct{…}`
+- `type CitationPageLocationParamResp`
 
   - `Type PageLocation`
 
@@ -8850,7 +9086,7 @@ func main() {
 
 ### Citation Search Result Location Param
 
-- `type CitationSearchResultLocationParamResp struct{…}`
+- `type CitationSearchResultLocationParamResp`
 
   - `Type SearchResultLocation`
 
@@ -8886,7 +9122,7 @@ func main() {
 
 ### Citation Web Search Result Location Param
 
-- `type CitationWebSearchResultLocationParamResp struct{…}`
+- `type CitationWebSearchResultLocationParamResp`
 
   - `Type WebSearchResultLocation`
 
@@ -8904,7 +9140,7 @@ func main() {
 
 ### Citations Config
 
-- `type CitationsConfig struct{…}`
+- `type CitationsConfig`
 
   - `Enabled bool`
 
@@ -8912,13 +9148,13 @@ func main() {
 
 ### Citations Config Param
 
-- `type CitationsConfigParamResp struct{…}`
+- `type CitationsConfigParamResp`
 
   - `Enabled bool Optional`
 
 ### Citations Delta
 
-- `type CitationsDelta struct{…}`
+- `type CitationsDelta`
 
   - `Type CitationsDelta`
 
@@ -8926,7 +9162,7 @@ func main() {
 
   - `Citation CitationsDeltaCitationUnion`
 
-    - `type CitationCharLocation struct{…}`
+    - `type CitationCharLocation`
 
       - `Type CharLocation`
 
@@ -8948,7 +9184,7 @@ func main() {
 
         minimum: 0
 
-    - `type CitationPageLocation struct{…}`
+    - `type CitationPageLocation`
 
       - `Type PageLocation`
 
@@ -8970,7 +9206,7 @@ func main() {
 
         minimum: 1
 
-    - `type CitationContentBlockLocation struct{…}`
+    - `type CitationContentBlockLocation`
 
       - `Type ContentBlockLocation`
 
@@ -9002,7 +9238,7 @@ func main() {
 
         minimum: 0
 
-    - `type CitationsWebSearchResultLocation struct{…}`
+    - `type CitationsWebSearchResultLocation`
 
       - `Type WebSearchResultLocation`
 
@@ -9018,7 +9254,7 @@ func main() {
 
       - `URL string`
 
-    - `type CitationsSearchResultLocation struct{…}`
+    - `type CitationsSearchResultLocation`
 
       - `Type SearchResultLocation`
 
@@ -9056,7 +9292,7 @@ func main() {
 
 ### Citations Search Result Location
 
-- `type CitationsSearchResultLocation struct{…}`
+- `type CitationsSearchResultLocation`
 
   - `Type SearchResultLocation`
 
@@ -9094,7 +9330,7 @@ func main() {
 
 ### Citations Web Search Result Location
 
-- `type CitationsWebSearchResultLocation struct{…}`
+- `type CitationsWebSearchResultLocation`
 
   - `Type WebSearchResultLocation`
 
@@ -9112,7 +9348,7 @@ func main() {
 
 ### Code Execution Output Block
 
-- `type CodeExecutionOutputBlock struct{…}`
+- `type CodeExecutionOutputBlock`
 
   - `Type CodeExecutionOutput`
 
@@ -9122,7 +9358,7 @@ func main() {
 
 ### Code Execution Output Block Param
 
-- `type CodeExecutionOutputBlockParamResp struct{…}`
+- `type CodeExecutionOutputBlockParamResp`
 
   - `Type CodeExecutionOutput`
 
@@ -9130,7 +9366,7 @@ func main() {
 
 ### Code Execution Result Block
 
-- `type CodeExecutionResultBlock struct{…}`
+- `type CodeExecutionResultBlock`
 
   - `Type CodeExecutionResult`
 
@@ -9152,7 +9388,7 @@ func main() {
 
 ### Code Execution Result Block Param
 
-- `type CodeExecutionResultBlockParamResp struct{…}`
+- `type CodeExecutionResultBlockParamResp`
 
   - `Type CodeExecutionResult`
 
@@ -9170,7 +9406,7 @@ func main() {
 
 ### Code Execution Tool 20250522
 
-- `type CodeExecutionTool20250522 struct{…}`
+- `type CodeExecutionTool20250522`
 
   - `Type CodeExecution20250522`
 
@@ -9221,7 +9457,7 @@ func main() {
 
 ### Code Execution Tool 20250825
 
-- `type CodeExecutionTool20250825 struct{…}`
+- `type CodeExecutionTool20250825`
 
   - `Type CodeExecution20250825`
 
@@ -9272,7 +9508,7 @@ func main() {
 
 ### Code Execution Tool 20260120
 
-- `type CodeExecutionTool20260120 struct{…}`
+- `type CodeExecutionTool20260120`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -9325,7 +9561,7 @@ func main() {
 
 ### Code Execution Tool 20260521
 
-- `type CodeExecutionTool20260521 struct{…}`
+- `type CodeExecutionTool20260521`
 
   Code execution tool with REPL state persistence.
 
@@ -9378,7 +9614,7 @@ func main() {
 
 ### Code Execution Tool Result Block
 
-- `type CodeExecutionToolResultBlock struct{…}`
+- `type CodeExecutionToolResultBlock`
 
   - `Type CodeExecutionToolResult`
 
@@ -9386,7 +9622,7 @@ func main() {
 
   - `Content CodeExecutionToolResultBlockContentUnion`
 
-    - `type CodeExecutionToolResultError struct{…}`
+    - `type CodeExecutionToolResultError`
 
       - `Type CodeExecutionToolResultError`
 
@@ -9402,7 +9638,7 @@ func main() {
 
         - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-    - `type CodeExecutionResultBlock struct{…}`
+    - `type CodeExecutionResultBlock`
 
       - `Type CodeExecutionResult`
 
@@ -9422,7 +9658,7 @@ func main() {
 
       - `Stdout string`
 
-    - `type EncryptedCodeExecutionResultBlock struct{…}`
+    - `type EncryptedCodeExecutionResultBlock`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -9452,7 +9688,7 @@ func main() {
 
 - `type CodeExecutionToolResultBlockContentUnion interface{…}`
 
-  - `type CodeExecutionToolResultError struct{…}`
+  - `type CodeExecutionToolResultError`
 
     - `Type CodeExecutionToolResultError`
 
@@ -9468,7 +9704,7 @@ func main() {
 
       - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-  - `type CodeExecutionResultBlock struct{…}`
+  - `type CodeExecutionResultBlock`
 
     - `Type CodeExecutionResult`
 
@@ -9488,7 +9724,7 @@ func main() {
 
     - `Stdout string`
 
-  - `type EncryptedCodeExecutionResultBlock struct{…}`
+  - `type EncryptedCodeExecutionResultBlock`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -9512,13 +9748,13 @@ func main() {
 
 ### Code Execution Tool Result Block Param
 
-- `type CodeExecutionToolResultBlockParamResp struct{…}`
+- `type CodeExecutionToolResultBlockParamResp`
 
   - `Type CodeExecutionToolResult`
 
   - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
-    - `type CodeExecutionToolResultErrorParamResp struct{…}`
+    - `type CodeExecutionToolResultErrorParamResp`
 
       - `Type CodeExecutionToolResultError`
 
@@ -9532,7 +9768,7 @@ func main() {
 
         - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-    - `type CodeExecutionResultBlockParamResp struct{…}`
+    - `type CodeExecutionResultBlockParamResp`
 
       - `Type CodeExecutionResult`
 
@@ -9548,7 +9784,7 @@ func main() {
 
       - `Stdout string`
 
-    - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+    - `type EncryptedCodeExecutionResultBlockParamResp`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -9595,7 +9831,7 @@ func main() {
 
 - `type CodeExecutionToolResultBlockParamContentUnionResp interface{…}`
 
-  - `type CodeExecutionToolResultErrorParamResp struct{…}`
+  - `type CodeExecutionToolResultErrorParamResp`
 
     - `Type CodeExecutionToolResultError`
 
@@ -9609,7 +9845,7 @@ func main() {
 
       - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-  - `type CodeExecutionResultBlockParamResp struct{…}`
+  - `type CodeExecutionResultBlockParamResp`
 
     - `Type CodeExecutionResult`
 
@@ -9625,7 +9861,7 @@ func main() {
 
     - `Stdout string`
 
-  - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+  - `type EncryptedCodeExecutionResultBlockParamResp`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -9645,7 +9881,7 @@ func main() {
 
 ### Code Execution Tool Result Error
 
-- `type CodeExecutionToolResultError struct{…}`
+- `type CodeExecutionToolResultError`
 
   - `Type CodeExecutionToolResultError`
 
@@ -9675,7 +9911,7 @@ func main() {
 
 ### Code Execution Tool Result Error Param
 
-- `type CodeExecutionToolResultErrorParamResp struct{…}`
+- `type CodeExecutionToolResultErrorParamResp`
 
   - `Type CodeExecutionToolResultError`
 
@@ -9691,7 +9927,7 @@ func main() {
 
 ### Computer Cursor Position Config
 
-- `type ComputerCursorPositionConfig struct{…}`
+- `type ComputerCursorPositionConfig`
 
   `cursor_position`'s config overrides.
 
@@ -9705,7 +9941,7 @@ func main() {
 
 ### Computer Double Click Config
 
-- `type ComputerDoubleClickConfig struct{…}`
+- `type ComputerDoubleClickConfig`
 
   `double_click`'s config overrides.
 
@@ -9719,7 +9955,7 @@ func main() {
 
 ### Computer Hold Key Config
 
-- `type ComputerHoldKeyConfig struct{…}`
+- `type ComputerHoldKeyConfig`
 
   `hold_key`'s config overrides.
 
@@ -9733,7 +9969,7 @@ func main() {
 
 ### Computer Key Config
 
-- `type ComputerKeyConfig struct{…}`
+- `type ComputerKeyConfig`
 
   `key`'s config overrides.
 
@@ -9747,7 +9983,7 @@ func main() {
 
 ### Computer Left Click Config
 
-- `type ComputerLeftClickConfig struct{…}`
+- `type ComputerLeftClickConfig`
 
   `left_click`'s config overrides.
 
@@ -9761,7 +9997,7 @@ func main() {
 
 ### Computer Left Click Drag Config
 
-- `type ComputerLeftClickDragConfig struct{…}`
+- `type ComputerLeftClickDragConfig`
 
   `left_click_drag`'s config overrides.
 
@@ -9775,7 +10011,7 @@ func main() {
 
 ### Computer Left Mouse Down Config
 
-- `type ComputerLeftMouseDownConfig struct{…}`
+- `type ComputerLeftMouseDownConfig`
 
   `left_mouse_down`'s config overrides.
 
@@ -9789,7 +10025,7 @@ func main() {
 
 ### Computer Left Mouse Up Config
 
-- `type ComputerLeftMouseUpConfig struct{…}`
+- `type ComputerLeftMouseUpConfig`
 
   `left_mouse_up`'s config overrides.
 
@@ -9803,7 +10039,7 @@ func main() {
 
 ### Computer Middle Click Config
 
-- `type ComputerMiddleClickConfig struct{…}`
+- `type ComputerMiddleClickConfig`
 
   `middle_click`'s config overrides.
 
@@ -9817,7 +10053,7 @@ func main() {
 
 ### Computer Mouse Move Config
 
-- `type ComputerMouseMoveConfig struct{…}`
+- `type ComputerMouseMoveConfig`
 
   `mouse_move`'s config overrides.
 
@@ -9831,7 +10067,7 @@ func main() {
 
 ### Computer Right Click Config
 
-- `type ComputerRightClickConfig struct{…}`
+- `type ComputerRightClickConfig`
 
   `right_click`'s config overrides.
 
@@ -9845,7 +10081,7 @@ func main() {
 
 ### Computer Screenshot Config
 
-- `type ComputerScreenshotConfig struct{…}`
+- `type ComputerScreenshotConfig`
 
   `screenshot`'s config overrides.
 
@@ -9859,7 +10095,7 @@ func main() {
 
 ### Computer Scroll Config
 
-- `type ComputerScrollConfig struct{…}`
+- `type ComputerScrollConfig`
 
   `scroll`'s config overrides.
 
@@ -9873,7 +10109,7 @@ func main() {
 
 ### Computer Toolset 20260801
 
-- `type ComputerToolset20260801 struct{…}`
+- `type ComputerToolset20260801`
 
   The computer toolset: a single `tools[]` entry (carrying no
   `name`) that declares the computer tool family. The model is
@@ -10122,7 +10358,7 @@ func main() {
 
 ### Computer Toolset Configs
 
-- `type ComputerToolsetConfigs struct{…}`
+- `type ComputerToolsetConfigs`
 
   Per-member configuration for `computer_toolset_20260801`: one
   optional field per member tool, keyed by the member name — the same
@@ -10337,7 +10573,7 @@ func main() {
 
 ### Computer Triple Click Config
 
-- `type ComputerTripleClickConfig struct{…}`
+- `type ComputerTripleClickConfig`
 
   `triple_click`'s config overrides.
 
@@ -10351,7 +10587,7 @@ func main() {
 
 ### Computer Type Config
 
-- `type ComputerTypeConfig struct{…}`
+- `type ComputerTypeConfig`
 
   `type`'s config overrides.
 
@@ -10365,7 +10601,7 @@ func main() {
 
 ### Computer Wait Config
 
-- `type ComputerWaitConfig struct{…}`
+- `type ComputerWaitConfig`
 
   `wait`'s config overrides.
 
@@ -10379,7 +10615,7 @@ func main() {
 
 ### Computer Zoom Config
 
-- `type ComputerZoomConfig struct{…}`
+- `type ComputerZoomConfig`
 
   `zoom`'s config overrides.
 
@@ -10393,7 +10629,7 @@ func main() {
 
 ### Container
 
-- `type Container struct{…}`
+- `type Container`
 
   Information about the container used in the request (for the code execution tool)
 
@@ -10433,7 +10669,7 @@ func main() {
 
 ### Container Params
 
-- `type ContainerParamsResp struct{…}`
+- `type ContainerParamsResp`
 
   Container parameters with skills to be loaded.
 
@@ -10469,7 +10705,7 @@ func main() {
 
 ### Container Skill
 
-- `type ContainerSkill struct{…}`
+- `type ContainerSkill`
 
   A skill that was loaded in a container (response model).
 
@@ -10495,7 +10731,7 @@ func main() {
 
 ### Container Upload Block
 
-- `type ContainerUploadBlock struct{…}`
+- `type ContainerUploadBlock`
 
   Response model for a file uploaded to the container.
 
@@ -10507,7 +10743,7 @@ func main() {
 
 ### Container Upload Block Param
 
-- `type ContainerUploadBlockParamResp struct{…}`
+- `type ContainerUploadBlockParamResp`
 
   A content block that represents a file to be uploaded to the container
   Files uploaded via this block will be available in the container's input directory.
@@ -10541,7 +10777,7 @@ func main() {
 
 - `type ContentBlockUnion interface{…}`
 
-  - `type TextBlock struct{…}`
+  - `type TextBlock`
 
     - `Type Text`
 
@@ -10553,7 +10789,7 @@ func main() {
 
       The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-      - `type CitationCharLocation struct{…}`
+      - `type CitationCharLocation`
 
         - `Type CharLocation`
 
@@ -10575,7 +10811,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationPageLocation struct{…}`
+      - `type CitationPageLocation`
 
         - `Type PageLocation`
 
@@ -10597,7 +10833,7 @@ func main() {
 
           minimum: 1
 
-      - `type CitationContentBlockLocation struct{…}`
+      - `type CitationContentBlockLocation`
 
         - `Type ContentBlockLocation`
 
@@ -10629,7 +10865,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationsWebSearchResultLocation struct{…}`
+      - `type CitationsWebSearchResultLocation`
 
         - `Type WebSearchResultLocation`
 
@@ -10645,7 +10881,7 @@ func main() {
 
         - `URL string`
 
-      - `type CitationsSearchResultLocation struct{…}`
+      - `type CitationsSearchResultLocation`
 
         - `Type SearchResultLocation`
 
@@ -10685,7 +10921,7 @@ func main() {
 
       minLength: 0
 
-  - `type ThinkingBlock struct{…}`
+  - `type ThinkingBlock`
 
     - `Type Thinking`
 
@@ -10703,7 +10939,7 @@ func main() {
 
       The text of Claude's thinking process for this block.
 
-  - `type RedactedThinkingBlock struct{…}`
+  - `type RedactedThinkingBlock`
 
     - `Type RedactedThinking`
 
@@ -10717,7 +10953,7 @@ func main() {
 
       See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-  - `type ToolUseBlock struct{…}`
+  - `type ToolUseBlock`
 
     - `Type ToolUse`
 
@@ -10731,13 +10967,13 @@ func main() {
 
       default: {"type":"direct"}
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
         - `Type Direct`
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
@@ -10747,7 +10983,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
         - `Type CodeExecution20260120`
 
@@ -10767,7 +11003,7 @@ func main() {
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type ServerToolUseBlock struct{…}`
+  - `type ServerToolUseBlock`
 
     - `Type ServerToolUse`
 
@@ -10781,15 +11017,15 @@ func main() {
 
       default: {"type":"direct"}
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
     - `Input map[string, any]`
 
@@ -10809,7 +11045,7 @@ func main() {
 
       - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-  - `type WebSearchToolResultBlock struct{…}`
+  - `type WebSearchToolResultBlock`
 
     - `Type WebSearchToolResult`
 
@@ -10819,19 +11055,19 @@ func main() {
 
       default: {"type":"direct"}
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
     - `Content WebSearchToolResultBlockContentUnion`
 
-      - `type WebSearchToolResultError struct{…}`
+      - `type WebSearchToolResultError`
 
         - `Type WebSearchToolResultError`
 
@@ -10869,7 +11105,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type WebFetchToolResultBlock struct{…}`
+  - `type WebFetchToolResultBlock`
 
     - `Type WebFetchToolResult`
 
@@ -10879,19 +11115,19 @@ func main() {
 
       default: {"type":"direct"}
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
     - `Content WebFetchToolResultBlockContentUnion`
 
-      - `type WebFetchToolResultErrorBlock struct{…}`
+      - `type WebFetchToolResultErrorBlock`
 
         - `Type WebFetchToolResultError`
 
@@ -10919,7 +11155,7 @@ func main() {
 
           - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-      - `type WebFetchBlock struct{…}`
+      - `type WebFetchBlock`
 
         - `Type WebFetchResult`
 
@@ -10941,7 +11177,7 @@ func main() {
 
           - `Source DocumentBlockSourceUnion`
 
-            - `type Base64PDFSource struct{…}`
+            - `type Base64PDFSource`
 
               - `Type Base64`
 
@@ -10951,7 +11187,7 @@ func main() {
 
               - `MediaType ApplicationPDF`
 
-            - `type PlainTextSource struct{…}`
+            - `type PlainTextSource`
 
               - `Type Text`
 
@@ -10975,7 +11211,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type CodeExecutionToolResultBlock struct{…}`
+  - `type CodeExecutionToolResultBlock`
 
     - `Type CodeExecutionToolResult`
 
@@ -10983,7 +11219,7 @@ func main() {
 
     - `Content CodeExecutionToolResultBlockContentUnion`
 
-      - `type CodeExecutionToolResultError struct{…}`
+      - `type CodeExecutionToolResultError`
 
         - `Type CodeExecutionToolResultError`
 
@@ -10999,7 +11235,7 @@ func main() {
 
           - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-      - `type CodeExecutionResultBlock struct{…}`
+      - `type CodeExecutionResultBlock`
 
         - `Type CodeExecutionResult`
 
@@ -11019,7 +11255,7 @@ func main() {
 
         - `Stdout string`
 
-      - `type EncryptedCodeExecutionResultBlock struct{…}`
+      - `type EncryptedCodeExecutionResultBlock`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -11045,7 +11281,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type BashCodeExecutionToolResultBlock struct{…}`
+  - `type BashCodeExecutionToolResultBlock`
 
     - `Type BashCodeExecutionToolResult`
 
@@ -11053,7 +11289,7 @@ func main() {
 
     - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-      - `type BashCodeExecutionToolResultError struct{…}`
+      - `type BashCodeExecutionToolResultError`
 
         - `Type BashCodeExecutionToolResultError`
 
@@ -11071,7 +11307,7 @@ func main() {
 
           - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-      - `type BashCodeExecutionResultBlock struct{…}`
+      - `type BashCodeExecutionResultBlock`
 
         - `Type BashCodeExecutionResult`
 
@@ -11095,7 +11331,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+  - `type TextEditorCodeExecutionToolResultBlock`
 
     - `Type TextEditorCodeExecutionToolResult`
 
@@ -11103,7 +11339,7 @@ func main() {
 
     - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-      - `type TextEditorCodeExecutionToolResultError struct{…}`
+      - `type TextEditorCodeExecutionToolResultError`
 
         - `Type TextEditorCodeExecutionToolResultError`
 
@@ -11123,7 +11359,7 @@ func main() {
 
         - `ErrorMessage string`
 
-      - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+      - `type TextEditorCodeExecutionViewResultBlock`
 
         - `Type TextEditorCodeExecutionViewResult`
 
@@ -11145,7 +11381,7 @@ func main() {
 
         - `TotalLines int64`
 
-      - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+      - `type TextEditorCodeExecutionCreateResultBlock`
 
         - `Type TextEditorCodeExecutionCreateResult`
 
@@ -11153,7 +11389,7 @@ func main() {
 
         - `IsFileUpdate bool`
 
-      - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+      - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
         - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -11173,7 +11409,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type ToolSearchToolResultBlock struct{…}`
+  - `type ToolSearchToolResultBlock`
 
     - `Type ToolSearchToolResult`
 
@@ -11181,7 +11417,7 @@ func main() {
 
     - `Content ToolSearchToolResultBlockContentUnion`
 
-      - `type ToolSearchToolResultError struct{…}`
+      - `type ToolSearchToolResultError`
 
         - `Type ToolSearchToolResultError`
 
@@ -11199,7 +11435,7 @@ func main() {
 
         - `ErrorMessage string`
 
-      - `type ToolSearchToolSearchResultBlock struct{…}`
+      - `type ToolSearchToolSearchResultBlock`
 
         - `Type ToolSearchToolSearchResult`
 
@@ -11219,7 +11455,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type ContainerUploadBlock struct{…}`
+  - `type ContainerUploadBlock`
 
     Response model for a file uploaded to the container.
 
@@ -11233,7 +11469,7 @@ func main() {
 
 - `type ContentBlockParamUnionResp interface{…}`
 
-  - `type TextBlockParamResp struct{…}`
+  - `type TextBlockParamResp`
 
     - `Type Text`
 
@@ -11264,7 +11500,7 @@ func main() {
 
     - `Citations []TextCitationParamUnionResp Optional`
 
-      - `type CitationCharLocationParamResp struct{…}`
+      - `type CitationCharLocationParamResp`
 
         - `Type CharLocation`
 
@@ -11284,7 +11520,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationPageLocationParamResp struct{…}`
+      - `type CitationPageLocationParamResp`
 
         - `Type PageLocation`
 
@@ -11304,7 +11540,7 @@ func main() {
 
           minimum: 1
 
-      - `type CitationContentBlockLocationParamResp struct{…}`
+      - `type CitationContentBlockLocationParamResp`
 
         - `Type ContentBlockLocation`
 
@@ -11334,7 +11570,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationWebSearchResultLocationParamResp struct{…}`
+      - `type CitationWebSearchResultLocationParamResp`
 
         - `Type WebSearchResultLocation`
 
@@ -11350,7 +11586,7 @@ func main() {
 
           minLength: 1
 
-      - `type CitationSearchResultLocationParamResp struct{…}`
+      - `type CitationSearchResultLocationParamResp`
 
         - `Type SearchResultLocation`
 
@@ -11384,13 +11620,13 @@ func main() {
 
         - `Title string`
 
-  - `type ImageBlockParamResp struct{…}`
+  - `type ImageBlockParamResp`
 
     - `Type Image`
 
     - `Source ImageBlockParamSourceUnionResp`
 
-      - `type Base64ImageSource struct{…}`
+      - `type Base64ImageSource`
 
         - `Type Base64`
 
@@ -11408,13 +11644,13 @@ func main() {
 
           - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-      - `type URLImageSource struct{…}`
+      - `type URLImageSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type FileImageSource struct{…}`
+      - `type FileImageSource`
 
         - `Type File`
 
@@ -11436,13 +11672,13 @@ func main() {
 
         - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-  - `type DocumentBlockParamResp struct{…}`
+  - `type DocumentBlockParamResp`
 
     - `Type Document`
 
     - `Source DocumentBlockParamSourceUnionResp`
 
-      - `type Base64PDFSource struct{…}`
+      - `type Base64PDFSource`
 
         - `Type Base64`
 
@@ -11452,7 +11688,7 @@ func main() {
 
         - `MediaType ApplicationPDF`
 
-      - `type PlainTextSource struct{…}`
+      - `type PlainTextSource`
 
         - `Type Text`
 
@@ -11460,7 +11696,7 @@ func main() {
 
         - `MediaType TextPlain`
 
-      - `type ContentBlockSource struct{…}`
+      - `type ContentBlockSource`
 
         - `Type Content`
 
@@ -11470,17 +11706,17 @@ func main() {
 
           - `[]ContentBlockSourceContentItemUnion`
 
-            - `type TextBlockParamResp struct{…}`
+            - `type TextBlockParamResp`
 
-            - `type ImageBlockParamResp struct{…}`
+            - `type ImageBlockParamResp`
 
-      - `type URLPDFSource struct{…}`
+      - `type URLPDFSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type FileDocumentSource struct{…}`
+      - `type FileDocumentSource`
 
         - `Type File`
 
@@ -11502,7 +11738,7 @@ func main() {
 
       maxLength: 500, minLength: 1
 
-  - `type SearchResultBlockParamResp struct{…}`
+  - `type SearchResultBlockParamResp`
 
     - `Type SearchResult`
 
@@ -11530,7 +11766,7 @@ func main() {
 
     - `Citations CitationsConfigParamResp Optional`
 
-  - `type ThinkingBlockParamResp struct{…}`
+  - `type ThinkingBlockParamResp`
 
     - `Type Thinking`
 
@@ -11544,7 +11780,7 @@ func main() {
 
       The `thinking` text of this block as returned by the API.
 
-  - `type RedactedThinkingBlockParamResp struct{…}`
+  - `type RedactedThinkingBlockParamResp`
 
     - `Type RedactedThinking`
 
@@ -11552,7 +11788,7 @@ func main() {
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-  - `type ToolUseBlockParamResp struct{…}`
+  - `type ToolUseBlockParamResp`
 
     - `Type ToolUse`
 
@@ -11572,13 +11808,13 @@ func main() {
 
     - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
         - `Type Direct`
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
@@ -11588,7 +11824,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
         - `Type CodeExecution20260120`
 
@@ -11602,7 +11838,7 @@ func main() {
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type ToolResultBlockParamResp struct{…}`
+  - `type ToolResultBlockParamResp`
 
     - `Type ToolResult`
 
@@ -11618,15 +11854,15 @@ func main() {
 
       - `[]ToolResultBlockParamContentUnionResp`
 
-        - `type TextBlockParamResp struct{…}`
+        - `type TextBlockParamResp`
 
-        - `type ImageBlockParamResp struct{…}`
+        - `type ImageBlockParamResp`
 
-        - `type SearchResultBlockParamResp struct{…}`
+        - `type SearchResultBlockParamResp`
 
-        - `type DocumentBlockParamResp struct{…}`
+        - `type DocumentBlockParamResp`
 
-        - `type ToolReferenceBlockParamResp struct{…}`
+        - `type ToolReferenceBlockParamResp`
 
           Tool reference block that can be included in tool_result content.
 
@@ -11640,7 +11876,7 @@ func main() {
 
             Create a cache control breakpoint at this content block.
 
-        - `type BrowserStateBlockParamResp struct{…}`
+        - `type BrowserStateBlockParamResp`
 
           The caller's browser state after a browser toolset member call —
           the full inventory of open tabs, which tab is active, and any side
@@ -11690,7 +11926,7 @@ func main() {
 
             maxItems: 200, minItems: 1
 
-            - `type BrowserStateChangeTabOpened struct{…}`
+            - `type BrowserStateChangeTabOpened`
 
               A tab this call's execution opened that remains open at its end —
               the creation delta of the `tabs` inventory, not an event log.
@@ -11708,7 +11944,7 @@ func main() {
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `type BrowserStateChangeDownloadStarted struct{…}`
+            - `type BrowserStateChangeDownloadStarted`
 
               A file download that started during this call.
 
@@ -11726,7 +11962,7 @@ func main() {
 
                 maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `type BrowserStateChangeDownloadCompleted struct{…}`
+            - `type BrowserStateChangeDownloadCompleted`
 
               A file download that finished during this call, reported with the
               same `download_id` as its `download_started` — or without a prior
@@ -11759,7 +11995,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BrowserStateChangeDownloadFailed struct{…}`
+            - `type BrowserStateChangeDownloadFailed`
 
               A file download that failed — or was cancelled — during this call.
 
@@ -11791,7 +12027,7 @@ func main() {
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type ServerToolUseBlockParamResp struct{…}`
+  - `type ServerToolUseBlockParamResp`
 
     - `Type ServerToolUse`
 
@@ -11823,17 +12059,17 @@ func main() {
 
     - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
-  - `type WebSearchToolResultBlockParamResp struct{…}`
+  - `type WebSearchToolResultBlockParamResp`
 
     - `Type WebSearchToolResult`
 
@@ -11851,7 +12087,7 @@ func main() {
 
         - `PageAge string Optional`
 
-      - `type WebSearchToolRequestError struct{…}`
+      - `type WebSearchToolRequestError`
 
         - `Type WebSearchToolResultError`
 
@@ -11879,23 +12115,23 @@ func main() {
 
     - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
-  - `type WebFetchToolResultBlockParamResp struct{…}`
+  - `type WebFetchToolResultBlockParamResp`
 
     - `Type WebFetchToolResult`
 
     - `Content WebFetchToolResultBlockParamContentUnionResp`
 
-      - `type WebFetchToolResultErrorBlockParamResp struct{…}`
+      - `type WebFetchToolResultErrorBlockParamResp`
 
         - `Type WebFetchToolResultError`
 
@@ -11921,7 +12157,7 @@ func main() {
 
           - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-      - `type WebFetchBlockParamResp struct{…}`
+      - `type WebFetchBlockParamResp`
 
         - `Type WebFetchResult`
 
@@ -11945,23 +12181,23 @@ func main() {
 
     - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-      - `type DirectCaller struct{…}`
+      - `type DirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type ServerToolCaller struct{…}`
+      - `type ServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type ServerToolCaller20260120 struct{…}`
+      - `type ServerToolCaller20260120`
 
-  - `type CodeExecutionToolResultBlockParamResp struct{…}`
+  - `type CodeExecutionToolResultBlockParamResp`
 
     - `Type CodeExecutionToolResult`
 
     - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
-      - `type CodeExecutionToolResultErrorParamResp struct{…}`
+      - `type CodeExecutionToolResultErrorParamResp`
 
         - `Type CodeExecutionToolResultError`
 
@@ -11975,7 +12211,7 @@ func main() {
 
           - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-      - `type CodeExecutionResultBlockParamResp struct{…}`
+      - `type CodeExecutionResultBlockParamResp`
 
         - `Type CodeExecutionResult`
 
@@ -11991,7 +12227,7 @@ func main() {
 
         - `Stdout string`
 
-      - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+      - `type EncryptedCodeExecutionResultBlockParamResp`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12017,13 +12253,13 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
+  - `type BashCodeExecutionToolResultBlockParamResp`
 
     - `Type BashCodeExecutionToolResult`
 
     - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
-      - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+      - `type BashCodeExecutionToolResultErrorParamResp`
 
         - `Type BashCodeExecutionToolResultError`
 
@@ -12039,7 +12275,7 @@ func main() {
 
           - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-      - `type BashCodeExecutionResultBlockParamResp struct{…}`
+      - `type BashCodeExecutionResultBlockParamResp`
 
         - `Type BashCodeExecutionResult`
 
@@ -12063,13 +12299,13 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+  - `type TextEditorCodeExecutionToolResultBlockParamResp`
 
     - `Type TextEditorCodeExecutionToolResult`
 
     - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-      - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+      - `type TextEditorCodeExecutionToolResultErrorParamResp`
 
         - `Type TextEditorCodeExecutionToolResultError`
 
@@ -12087,7 +12323,7 @@ func main() {
 
         - `ErrorMessage string Optional`
 
-      - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+      - `type TextEditorCodeExecutionViewResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionViewResult`
 
@@ -12107,13 +12343,13 @@ func main() {
 
         - `TotalLines int64 Optional`
 
-      - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+      - `type TextEditorCodeExecutionCreateResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionCreateResult`
 
         - `IsFileUpdate bool`
 
-      - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+      - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -12135,13 +12371,13 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type ToolSearchToolResultBlockParamResp struct{…}`
+  - `type ToolSearchToolResultBlockParamResp`
 
     - `Type ToolSearchToolResult`
 
     - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
-      - `type ToolSearchToolResultErrorParamResp struct{…}`
+      - `type ToolSearchToolResultErrorParamResp`
 
         - `Type ToolSearchToolResultError`
 
@@ -12157,7 +12393,7 @@ func main() {
 
         - `ErrorMessage string Optional`
 
-      - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
+      - `type ToolSearchToolSearchResultBlockParamResp`
 
         - `Type ToolSearchToolSearchResult`
 
@@ -12181,7 +12417,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type ContainerUploadBlockParamResp struct{…}`
+  - `type ContainerUploadBlockParamResp`
 
     A content block that represents a file to be uploaded to the container
     Files uploaded via this block will be available in the container's input directory.
@@ -12196,7 +12432,7 @@ func main() {
 
 ### Content Block Source
 
-- `type ContentBlockSource struct{…}`
+- `type ContentBlockSource`
 
   - `Type Content`
 
@@ -12206,7 +12442,7 @@ func main() {
 
     - `[]ContentBlockSourceContentItemUnion`
 
-      - `type TextBlockParamResp struct{…}`
+      - `type TextBlockParamResp`
 
         - `Type Text`
 
@@ -12237,7 +12473,7 @@ func main() {
 
         - `Citations []TextCitationParamUnionResp Optional`
 
-          - `type CitationCharLocationParamResp struct{…}`
+          - `type CitationCharLocationParamResp`
 
             - `Type CharLocation`
 
@@ -12257,7 +12493,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationPageLocationParamResp struct{…}`
+          - `type CitationPageLocationParamResp`
 
             - `Type PageLocation`
 
@@ -12277,7 +12513,7 @@ func main() {
 
               minimum: 1
 
-          - `type CitationContentBlockLocationParamResp struct{…}`
+          - `type CitationContentBlockLocationParamResp`
 
             - `Type ContentBlockLocation`
 
@@ -12307,7 +12543,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationWebSearchResultLocationParamResp struct{…}`
+          - `type CitationWebSearchResultLocationParamResp`
 
             - `Type WebSearchResultLocation`
 
@@ -12323,7 +12559,7 @@ func main() {
 
               minLength: 1
 
-          - `type CitationSearchResultLocationParamResp struct{…}`
+          - `type CitationSearchResultLocationParamResp`
 
             - `Type SearchResultLocation`
 
@@ -12357,13 +12593,13 @@ func main() {
 
             - `Title string`
 
-      - `type ImageBlockParamResp struct{…}`
+      - `type ImageBlockParamResp`
 
         - `Type Image`
 
         - `Source ImageBlockParamSourceUnionResp`
 
-          - `type Base64ImageSource struct{…}`
+          - `type Base64ImageSource`
 
             - `Type Base64`
 
@@ -12381,13 +12617,13 @@ func main() {
 
               - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-          - `type URLImageSource struct{…}`
+          - `type URLImageSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type FileImageSource struct{…}`
+          - `type FileImageSource`
 
             - `Type File`
 
@@ -12413,7 +12649,7 @@ func main() {
 
 - `type ContentBlockSourceContentItemUnion interface{…}`
 
-  - `type TextBlockParamResp struct{…}`
+  - `type TextBlockParamResp`
 
     - `Type Text`
 
@@ -12444,7 +12680,7 @@ func main() {
 
     - `Citations []TextCitationParamUnionResp Optional`
 
-      - `type CitationCharLocationParamResp struct{…}`
+      - `type CitationCharLocationParamResp`
 
         - `Type CharLocation`
 
@@ -12464,7 +12700,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationPageLocationParamResp struct{…}`
+      - `type CitationPageLocationParamResp`
 
         - `Type PageLocation`
 
@@ -12484,7 +12720,7 @@ func main() {
 
           minimum: 1
 
-      - `type CitationContentBlockLocationParamResp struct{…}`
+      - `type CitationContentBlockLocationParamResp`
 
         - `Type ContentBlockLocation`
 
@@ -12514,7 +12750,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationWebSearchResultLocationParamResp struct{…}`
+      - `type CitationWebSearchResultLocationParamResp`
 
         - `Type WebSearchResultLocation`
 
@@ -12530,7 +12766,7 @@ func main() {
 
           minLength: 1
 
-      - `type CitationSearchResultLocationParamResp struct{…}`
+      - `type CitationSearchResultLocationParamResp`
 
         - `Type SearchResultLocation`
 
@@ -12564,13 +12800,13 @@ func main() {
 
         - `Title string`
 
-  - `type ImageBlockParamResp struct{…}`
+  - `type ImageBlockParamResp`
 
     - `Type Image`
 
     - `Source ImageBlockParamSourceUnionResp`
 
-      - `type Base64ImageSource struct{…}`
+      - `type Base64ImageSource`
 
         - `Type Base64`
 
@@ -12588,13 +12824,13 @@ func main() {
 
           - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-      - `type URLImageSource struct{…}`
+      - `type URLImageSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type FileImageSource struct{…}`
+      - `type FileImageSource`
 
         - `Type File`
 
@@ -12618,7 +12854,7 @@ func main() {
 
 ### Direct Caller
 
-- `type DirectCaller struct{…}`
+- `type DirectCaller`
 
   Tool invocation directly from the model.
 
@@ -12626,7 +12862,7 @@ func main() {
 
 ### Document Block
 
-- `type DocumentBlock struct{…}`
+- `type DocumentBlock`
 
   - `Type Document`
 
@@ -12642,7 +12878,7 @@ func main() {
 
   - `Source DocumentBlockSourceUnion`
 
-    - `type Base64PDFSource struct{…}`
+    - `type Base64PDFSource`
 
       - `Type Base64`
 
@@ -12652,7 +12888,7 @@ func main() {
 
       - `MediaType ApplicationPDF`
 
-    - `type PlainTextSource struct{…}`
+    - `type PlainTextSource`
 
       - `Type Text`
 
@@ -12666,13 +12902,13 @@ func main() {
 
 ### Document Block Param
 
-- `type DocumentBlockParamResp struct{…}`
+- `type DocumentBlockParamResp`
 
   - `Type Document`
 
   - `Source DocumentBlockParamSourceUnionResp`
 
-    - `type Base64PDFSource struct{…}`
+    - `type Base64PDFSource`
 
       - `Type Base64`
 
@@ -12682,7 +12918,7 @@ func main() {
 
       - `MediaType ApplicationPDF`
 
-    - `type PlainTextSource struct{…}`
+    - `type PlainTextSource`
 
       - `Type Text`
 
@@ -12690,7 +12926,7 @@ func main() {
 
       - `MediaType TextPlain`
 
-    - `type ContentBlockSource struct{…}`
+    - `type ContentBlockSource`
 
       - `Type Content`
 
@@ -12700,7 +12936,7 @@ func main() {
 
         - `[]ContentBlockSourceContentItemUnion`
 
-          - `type TextBlockParamResp struct{…}`
+          - `type TextBlockParamResp`
 
             - `Type Text`
 
@@ -12731,7 +12967,7 @@ func main() {
 
             - `Citations []TextCitationParamUnionResp Optional`
 
-              - `type CitationCharLocationParamResp struct{…}`
+              - `type CitationCharLocationParamResp`
 
                 - `Type CharLocation`
 
@@ -12751,7 +12987,7 @@ func main() {
 
                   minimum: 0
 
-              - `type CitationPageLocationParamResp struct{…}`
+              - `type CitationPageLocationParamResp`
 
                 - `Type PageLocation`
 
@@ -12771,7 +13007,7 @@ func main() {
 
                   minimum: 1
 
-              - `type CitationContentBlockLocationParamResp struct{…}`
+              - `type CitationContentBlockLocationParamResp`
 
                 - `Type ContentBlockLocation`
 
@@ -12801,7 +13037,7 @@ func main() {
 
                   minimum: 0
 
-              - `type CitationWebSearchResultLocationParamResp struct{…}`
+              - `type CitationWebSearchResultLocationParamResp`
 
                 - `Type WebSearchResultLocation`
 
@@ -12817,7 +13053,7 @@ func main() {
 
                   minLength: 1
 
-              - `type CitationSearchResultLocationParamResp struct{…}`
+              - `type CitationSearchResultLocationParamResp`
 
                 - `Type SearchResultLocation`
 
@@ -12851,13 +13087,13 @@ func main() {
 
                 - `Title string`
 
-          - `type ImageBlockParamResp struct{…}`
+          - `type ImageBlockParamResp`
 
             - `Type Image`
 
             - `Source ImageBlockParamSourceUnionResp`
 
-              - `type Base64ImageSource struct{…}`
+              - `type Base64ImageSource`
 
                 - `Type Base64`
 
@@ -12875,13 +13111,13 @@ func main() {
 
                   - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-              - `type URLImageSource struct{…}`
+              - `type URLImageSource`
 
                 - `Type URL`
 
                 - `URL string`
 
-              - `type FileImageSource struct{…}`
+              - `type FileImageSource`
 
                 - `Type File`
 
@@ -12903,13 +13139,13 @@ func main() {
 
                 - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-    - `type URLPDFSource struct{…}`
+    - `type URLPDFSource`
 
       - `Type URL`
 
       - `URL string`
 
-    - `type FileDocumentSource struct{…}`
+    - `type FileDocumentSource`
 
       - `Type File`
 
@@ -12933,7 +13169,7 @@ func main() {
 
 ### Encrypted Code Execution Result Block
 
-- `type EncryptedCodeExecutionResultBlock struct{…}`
+- `type EncryptedCodeExecutionResultBlock`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12957,7 +13193,7 @@ func main() {
 
 ### Encrypted Code Execution Result Block Param
 
-- `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+- `type EncryptedCodeExecutionResultBlockParamResp`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12977,7 +13213,7 @@ func main() {
 
 ### File Document Source
 
-- `type FileDocumentSource struct{…}`
+- `type FileDocumentSource`
 
   - `Type File`
 
@@ -12985,7 +13221,7 @@ func main() {
 
 ### File Image Source
 
-- `type FileImageSource struct{…}`
+- `type FileImageSource`
 
   - `Type File`
 
@@ -12993,13 +13229,13 @@ func main() {
 
 ### Image Block Param
 
-- `type ImageBlockParamResp struct{…}`
+- `type ImageBlockParamResp`
 
   - `Type Image`
 
   - `Source ImageBlockParamSourceUnionResp`
 
-    - `type Base64ImageSource struct{…}`
+    - `type Base64ImageSource`
 
       - `Type Base64`
 
@@ -13017,13 +13253,13 @@ func main() {
 
         - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-    - `type URLImageSource struct{…}`
+    - `type URLImageSource`
 
       - `Type URL`
 
       - `URL string`
 
-    - `type FileImageSource struct{…}`
+    - `type FileImageSource`
 
       - `Type File`
 
@@ -13064,7 +13300,7 @@ func main() {
 
 ### Image Transformations Param
 
-- `type ImageTransformationsParamResp struct{…}`
+- `type ImageTransformationsParamResp`
 
   Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
@@ -13078,7 +13314,7 @@ func main() {
 
 ### Input JSON Delta
 
-- `type InputJSONDelta struct{…}`
+- `type InputJSONDelta`
 
   - `Type InputJSONDelta`
 
@@ -13088,7 +13324,7 @@ func main() {
 
 ### JSON Output Format
 
-- `type JSONOutputFormat struct{…}`
+- `type JSONOutputFormat`
 
   - `Type JSONSchema`
 
@@ -13098,7 +13334,7 @@ func main() {
 
 ### Memory Tool 20250818
 
-- `type MemoryTool20250818 struct{…}`
+- `type MemoryTool20250818`
 
   - `Type Memory20250818`
 
@@ -13151,7 +13387,7 @@ func main() {
 
 ### Message
 
-- `type Message struct{…}`
+- `type Message`
 
   - `Type Message`
 
@@ -13234,7 +13470,7 @@ func main() {
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `type TextBlock struct{…}`
+    - `type TextBlock`
 
       - `Type Text`
 
@@ -13246,7 +13482,7 @@ func main() {
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type CitationCharLocation struct{…}`
+        - `type CitationCharLocation`
 
           - `Type CharLocation`
 
@@ -13268,7 +13504,7 @@ func main() {
 
             minimum: 0
 
-        - `type CitationPageLocation struct{…}`
+        - `type CitationPageLocation`
 
           - `Type PageLocation`
 
@@ -13290,7 +13526,7 @@ func main() {
 
             minimum: 1
 
-        - `type CitationContentBlockLocation struct{…}`
+        - `type CitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -13322,7 +13558,7 @@ func main() {
 
             minimum: 0
 
-        - `type CitationsWebSearchResultLocation struct{…}`
+        - `type CitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -13338,7 +13574,7 @@ func main() {
 
           - `URL string`
 
-        - `type CitationsSearchResultLocation struct{…}`
+        - `type CitationsSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -13378,7 +13614,7 @@ func main() {
 
         minLength: 0
 
-    - `type ThinkingBlock struct{…}`
+    - `type ThinkingBlock`
 
       - `Type Thinking`
 
@@ -13396,7 +13632,7 @@ func main() {
 
         The text of Claude's thinking process for this block.
 
-    - `type RedactedThinkingBlock struct{…}`
+    - `type RedactedThinkingBlock`
 
       - `Type RedactedThinking`
 
@@ -13410,7 +13646,7 @@ func main() {
 
         See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type ToolUseBlock struct{…}`
+    - `type ToolUseBlock`
 
       - `Type ToolUse`
 
@@ -13424,13 +13660,13 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
           - `Type Direct`
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -13440,7 +13676,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
           - `Type CodeExecution20260120`
 
@@ -13460,7 +13696,7 @@ func main() {
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type ServerToolUseBlock struct{…}`
+    - `type ServerToolUseBlock`
 
       - `Type ServerToolUse`
 
@@ -13474,15 +13710,15 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Input map[string, any]`
 
@@ -13502,7 +13738,7 @@ func main() {
 
         - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-    - `type WebSearchToolResultBlock struct{…}`
+    - `type WebSearchToolResultBlock`
 
       - `Type WebSearchToolResult`
 
@@ -13512,19 +13748,19 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Content WebSearchToolResultBlockContentUnion`
 
-        - `type WebSearchToolResultError struct{…}`
+        - `type WebSearchToolResultError`
 
           - `Type WebSearchToolResultError`
 
@@ -13562,7 +13798,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type WebFetchToolResultBlock struct{…}`
+    - `type WebFetchToolResultBlock`
 
       - `Type WebFetchToolResult`
 
@@ -13572,19 +13808,19 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Content WebFetchToolResultBlockContentUnion`
 
-        - `type WebFetchToolResultErrorBlock struct{…}`
+        - `type WebFetchToolResultErrorBlock`
 
           - `Type WebFetchToolResultError`
 
@@ -13612,7 +13848,7 @@ func main() {
 
             - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-        - `type WebFetchBlock struct{…}`
+        - `type WebFetchBlock`
 
           - `Type WebFetchResult`
 
@@ -13634,7 +13870,7 @@ func main() {
 
             - `Source DocumentBlockSourceUnion`
 
-              - `type Base64PDFSource struct{…}`
+              - `type Base64PDFSource`
 
                 - `Type Base64`
 
@@ -13644,7 +13880,7 @@ func main() {
 
                 - `MediaType ApplicationPDF`
 
-              - `type PlainTextSource struct{…}`
+              - `type PlainTextSource`
 
                 - `Type Text`
 
@@ -13668,7 +13904,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type CodeExecutionToolResultBlock struct{…}`
+    - `type CodeExecutionToolResultBlock`
 
       - `Type CodeExecutionToolResult`
 
@@ -13676,7 +13912,7 @@ func main() {
 
       - `Content CodeExecutionToolResultBlockContentUnion`
 
-        - `type CodeExecutionToolResultError struct{…}`
+        - `type CodeExecutionToolResultError`
 
           - `Type CodeExecutionToolResultError`
 
@@ -13692,7 +13928,7 @@ func main() {
 
             - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-        - `type CodeExecutionResultBlock struct{…}`
+        - `type CodeExecutionResultBlock`
 
           - `Type CodeExecutionResult`
 
@@ -13712,7 +13948,7 @@ func main() {
 
           - `Stdout string`
 
-        - `type EncryptedCodeExecutionResultBlock struct{…}`
+        - `type EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -13738,7 +13974,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BashCodeExecutionToolResultBlock struct{…}`
+    - `type BashCodeExecutionToolResultBlock`
 
       - `Type BashCodeExecutionToolResult`
 
@@ -13746,7 +13982,7 @@ func main() {
 
       - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BashCodeExecutionToolResultError struct{…}`
+        - `type BashCodeExecutionToolResultError`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -13764,7 +14000,7 @@ func main() {
 
             - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-        - `type BashCodeExecutionResultBlock struct{…}`
+        - `type BashCodeExecutionResultBlock`
 
           - `Type BashCodeExecutionResult`
 
@@ -13788,7 +14024,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+    - `type TextEditorCodeExecutionToolResultBlock`
 
       - `Type TextEditorCodeExecutionToolResult`
 
@@ -13796,7 +14032,7 @@ func main() {
 
       - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type TextEditorCodeExecutionToolResultError struct{…}`
+        - `type TextEditorCodeExecutionToolResultError`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -13816,7 +14052,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+        - `type TextEditorCodeExecutionViewResultBlock`
 
           - `Type TextEditorCodeExecutionViewResult`
 
@@ -13838,7 +14074,7 @@ func main() {
 
           - `TotalLines int64`
 
-        - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+        - `type TextEditorCodeExecutionCreateResultBlock`
 
           - `Type TextEditorCodeExecutionCreateResult`
 
@@ -13846,7 +14082,7 @@ func main() {
 
           - `IsFileUpdate bool`
 
-        - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+        - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -13866,7 +14102,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ToolSearchToolResultBlock struct{…}`
+    - `type ToolSearchToolResultBlock`
 
       - `Type ToolSearchToolResult`
 
@@ -13874,7 +14110,7 @@ func main() {
 
       - `Content ToolSearchToolResultBlockContentUnion`
 
-        - `type ToolSearchToolResultError struct{…}`
+        - `type ToolSearchToolResultError`
 
           - `Type ToolSearchToolResultError`
 
@@ -13892,7 +14128,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type ToolSearchToolSearchResultBlock struct{…}`
+        - `type ToolSearchToolSearchResultBlock`
 
           - `Type ToolSearchToolSearchResult`
 
@@ -13912,7 +14148,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ContainerUploadBlock struct{…}`
+    - `type ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -14194,7 +14430,7 @@ func main() {
 
 - `type MessageCountTokensToolUnion interface{…}`
 
-  - `type Tool struct{…}`
+  - `type Tool`
 
     - `Type ToolType Optional`
 
@@ -14269,7 +14505,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolBash20250124 struct{…}`
+  - `type ToolBash20250124`
 
     - `Type Bash20250124`
 
@@ -14303,7 +14539,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20250522 struct{…}`
+  - `type CodeExecutionTool20250522`
 
     - `Type CodeExecution20250522`
 
@@ -14335,7 +14571,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20250825 struct{…}`
+  - `type CodeExecutionTool20250825`
 
     - `Type CodeExecution20250825`
 
@@ -14367,7 +14603,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20260120 struct{…}`
+  - `type CodeExecutionTool20260120`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -14401,7 +14637,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20260521 struct{…}`
+  - `type CodeExecutionTool20260521`
 
     Code execution tool with REPL state persistence.
 
@@ -14435,7 +14671,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BrowserToolset20260801 struct{…}`
+  - `type BrowserToolset20260801`
 
     The browser toolset: a single `tools[]` entry (carrying no
     `name`) that declares the browser tool family. The model is served
@@ -14829,7 +15065,7 @@ func main() {
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type MemoryTool20250818 struct{…}`
+  - `type MemoryTool20250818`
 
     - `Type Memory20250818`
 
@@ -14863,7 +15099,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ComputerToolset20260801 struct{…}`
+  - `type ComputerToolset20260801`
 
     The computer toolset: a single `tools[]` entry (carrying no
     `name`) that declares the computer tool family. The model is
@@ -15093,7 +15329,7 @@ func main() {
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type ToolTextEditor20250124 struct{…}`
+  - `type ToolTextEditor20250124`
 
     - `Type TextEditor20250124`
 
@@ -15127,7 +15363,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolTextEditor20250429 struct{…}`
+  - `type ToolTextEditor20250429`
 
     - `Type TextEditor20250429`
 
@@ -15161,7 +15397,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolTextEditor20250728 struct{…}`
+  - `type ToolTextEditor20250728`
 
     - `Type TextEditor20250728`
 
@@ -15201,7 +15437,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type WebSearchTool20250305 struct{…}`
+  - `type WebSearchTool20250305`
 
     - `Type WebSearch20250305`
 
@@ -15277,7 +15513,7 @@ func main() {
 
         maxLength: 255, minLength: 1
 
-  - `type WebFetchTool20250910 struct{…}`
+  - `type WebFetchTool20250910`
 
     - `Type WebFetch20250910`
 
@@ -15335,7 +15571,98 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type WebSearchTool20260209 struct{…}`
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `type WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `Type All`
+
+        - `type WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `Type None`
+
+        - `type WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `Type Only`
+
+          - `Tools []WebFetchURLSourceToolReference`
+
+            - `Type ToolReference`
+
+            - `Name string`
+
+        - `type WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `Type Except`
+
+          - `Tools []WebFetchURLSourceToolReference`
+
+            - `Type ToolReference`
+
+            - `Name string`
+
+      - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `type WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `type WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `type WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `type WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `type WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `type WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+  - `type WebSearchTool20260209`
 
     - `Type WebSearch20260209`
 
@@ -15385,7 +15712,7 @@ func main() {
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `type WebFetchTool20260209 struct{…}`
+  - `type WebFetchTool20260209`
 
     - `Type WebFetch20260209`
 
@@ -15441,7 +15768,16 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type WebFetchTool20260309 struct{…}`
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `type WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -15499,11 +15835,20 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `UseCache bool Optional`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `type WebSearchTool20260318 struct{…}`
+  - `type WebSearchTool20260318`
 
     - `Type WebSearch20260318`
 
@@ -15561,7 +15906,7 @@ func main() {
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `type WebFetchTool20260318 struct{…}`
+  - `type WebFetchTool20260318`
 
     - `Type WebFetch20260318`
 
@@ -15625,11 +15970,20 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `UseCache bool Optional`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `type ToolSearchToolBm25_20251119 struct{…}`
+  - `type ToolSearchToolBm25_20251119`
 
     - `Type ToolSearchToolBm25_20251119Type`
 
@@ -15665,7 +16019,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolSearchToolRegex20251119 struct{…}`
+  - `type ToolSearchToolRegex20251119`
 
     - `Type ToolSearchToolRegex20251119Type`
 
@@ -15707,7 +16061,7 @@ func main() {
 
   Container identifier for reuse across requests.
 
-  - `type ContainerParamsResp struct{…}`
+  - `type ContainerParamsResp`
 
     Container parameters with skills to be loaded.
 
@@ -15745,7 +16099,7 @@ func main() {
 
 ### Message Delta Usage
 
-- `type MessageDeltaUsage struct{…}`
+- `type MessageDeltaUsage`
 
   - `CacheCreationInputTokens int64`
 
@@ -15809,13 +16163,13 @@ func main() {
 
 ### Message Param
 
-- `type MessageParamResp struct{…}`
+- `type MessageParamResp`
 
   - `Content []ContentBlockParamUnionResp`
 
     - `[]ContentBlockParamUnionResp`
 
-      - `type TextBlockParamResp struct{…}`
+      - `type TextBlockParamResp`
 
         - `Type Text`
 
@@ -15846,7 +16200,7 @@ func main() {
 
         - `Citations []TextCitationParamUnionResp Optional`
 
-          - `type CitationCharLocationParamResp struct{…}`
+          - `type CitationCharLocationParamResp`
 
             - `Type CharLocation`
 
@@ -15866,7 +16220,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationPageLocationParamResp struct{…}`
+          - `type CitationPageLocationParamResp`
 
             - `Type PageLocation`
 
@@ -15886,7 +16240,7 @@ func main() {
 
               minimum: 1
 
-          - `type CitationContentBlockLocationParamResp struct{…}`
+          - `type CitationContentBlockLocationParamResp`
 
             - `Type ContentBlockLocation`
 
@@ -15916,7 +16270,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationWebSearchResultLocationParamResp struct{…}`
+          - `type CitationWebSearchResultLocationParamResp`
 
             - `Type WebSearchResultLocation`
 
@@ -15932,7 +16286,7 @@ func main() {
 
               minLength: 1
 
-          - `type CitationSearchResultLocationParamResp struct{…}`
+          - `type CitationSearchResultLocationParamResp`
 
             - `Type SearchResultLocation`
 
@@ -15966,13 +16320,13 @@ func main() {
 
             - `Title string`
 
-      - `type ImageBlockParamResp struct{…}`
+      - `type ImageBlockParamResp`
 
         - `Type Image`
 
         - `Source ImageBlockParamSourceUnionResp`
 
-          - `type Base64ImageSource struct{…}`
+          - `type Base64ImageSource`
 
             - `Type Base64`
 
@@ -15990,13 +16344,13 @@ func main() {
 
               - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-          - `type URLImageSource struct{…}`
+          - `type URLImageSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type FileImageSource struct{…}`
+          - `type FileImageSource`
 
             - `Type File`
 
@@ -16018,13 +16372,13 @@ func main() {
 
             - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-      - `type DocumentBlockParamResp struct{…}`
+      - `type DocumentBlockParamResp`
 
         - `Type Document`
 
         - `Source DocumentBlockParamSourceUnionResp`
 
-          - `type Base64PDFSource struct{…}`
+          - `type Base64PDFSource`
 
             - `Type Base64`
 
@@ -16034,7 +16388,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type PlainTextSource struct{…}`
+          - `type PlainTextSource`
 
             - `Type Text`
 
@@ -16042,7 +16396,7 @@ func main() {
 
             - `MediaType TextPlain`
 
-          - `type ContentBlockSource struct{…}`
+          - `type ContentBlockSource`
 
             - `Type Content`
 
@@ -16052,17 +16406,17 @@ func main() {
 
               - `[]ContentBlockSourceContentItemUnion`
 
-                - `type TextBlockParamResp struct{…}`
+                - `type TextBlockParamResp`
 
-                - `type ImageBlockParamResp struct{…}`
+                - `type ImageBlockParamResp`
 
-          - `type URLPDFSource struct{…}`
+          - `type URLPDFSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type FileDocumentSource struct{…}`
+          - `type FileDocumentSource`
 
             - `Type File`
 
@@ -16084,7 +16438,7 @@ func main() {
 
           maxLength: 500, minLength: 1
 
-      - `type SearchResultBlockParamResp struct{…}`
+      - `type SearchResultBlockParamResp`
 
         - `Type SearchResult`
 
@@ -16112,7 +16466,7 @@ func main() {
 
         - `Citations CitationsConfigParamResp Optional`
 
-      - `type ThinkingBlockParamResp struct{…}`
+      - `type ThinkingBlockParamResp`
 
         - `Type Thinking`
 
@@ -16126,7 +16480,7 @@ func main() {
 
           The `thinking` text of this block as returned by the API.
 
-      - `type RedactedThinkingBlockParamResp struct{…}`
+      - `type RedactedThinkingBlockParamResp`
 
         - `Type RedactedThinking`
 
@@ -16134,7 +16488,7 @@ func main() {
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-      - `type ToolUseBlockParamResp struct{…}`
+      - `type ToolUseBlockParamResp`
 
         - `Type ToolUse`
 
@@ -16154,13 +16508,13 @@ func main() {
 
         - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
             - `Type Direct`
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -16170,7 +16524,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
             - `Type CodeExecution20260120`
 
@@ -16184,7 +16538,7 @@ func main() {
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type ToolResultBlockParamResp struct{…}`
+      - `type ToolResultBlockParamResp`
 
         - `Type ToolResult`
 
@@ -16200,15 +16554,15 @@ func main() {
 
           - `[]ToolResultBlockParamContentUnionResp`
 
-            - `type TextBlockParamResp struct{…}`
+            - `type TextBlockParamResp`
 
-            - `type ImageBlockParamResp struct{…}`
+            - `type ImageBlockParamResp`
 
-            - `type SearchResultBlockParamResp struct{…}`
+            - `type SearchResultBlockParamResp`
 
-            - `type DocumentBlockParamResp struct{…}`
+            - `type DocumentBlockParamResp`
 
-            - `type ToolReferenceBlockParamResp struct{…}`
+            - `type ToolReferenceBlockParamResp`
 
               Tool reference block that can be included in tool_result content.
 
@@ -16222,7 +16576,7 @@ func main() {
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BrowserStateBlockParamResp struct{…}`
+            - `type BrowserStateBlockParamResp`
 
               The caller's browser state after a browser toolset member call —
               the full inventory of open tabs, which tab is active, and any side
@@ -16272,7 +16626,7 @@ func main() {
 
                 maxItems: 200, minItems: 1
 
-                - `type BrowserStateChangeTabOpened struct{…}`
+                - `type BrowserStateChangeTabOpened`
 
                   A tab this call's execution opened that remains open at its end —
                   the creation delta of the `tabs` inventory, not an event log.
@@ -16290,7 +16644,7 @@ func main() {
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `type BrowserStateChangeDownloadStarted struct{…}`
+                - `type BrowserStateChangeDownloadStarted`
 
                   A file download that started during this call.
 
@@ -16308,7 +16662,7 @@ func main() {
 
                     maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `type BrowserStateChangeDownloadCompleted struct{…}`
+                - `type BrowserStateChangeDownloadCompleted`
 
                   A file download that finished during this call, reported with the
                   same `download_id` as its `download_started` — or without a prior
@@ -16341,7 +16695,7 @@ func main() {
 
                     minimum: 0
 
-                - `type BrowserStateChangeDownloadFailed struct{…}`
+                - `type BrowserStateChangeDownloadFailed`
 
                   A file download that failed — or was cancelled — during this call.
 
@@ -16373,7 +16727,7 @@ func main() {
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type ServerToolUseBlockParamResp struct{…}`
+      - `type ServerToolUseBlockParamResp`
 
         - `Type ServerToolUse`
 
@@ -16405,17 +16759,17 @@ func main() {
 
         - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
-      - `type WebSearchToolResultBlockParamResp struct{…}`
+      - `type WebSearchToolResultBlockParamResp`
 
         - `Type WebSearchToolResult`
 
@@ -16433,7 +16787,7 @@ func main() {
 
             - `PageAge string Optional`
 
-          - `type WebSearchToolRequestError struct{…}`
+          - `type WebSearchToolRequestError`
 
             - `Type WebSearchToolResultError`
 
@@ -16461,23 +16815,23 @@ func main() {
 
         - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
-      - `type WebFetchToolResultBlockParamResp struct{…}`
+      - `type WebFetchToolResultBlockParamResp`
 
         - `Type WebFetchToolResult`
 
         - `Content WebFetchToolResultBlockParamContentUnionResp`
 
-          - `type WebFetchToolResultErrorBlockParamResp struct{…}`
+          - `type WebFetchToolResultErrorBlockParamResp`
 
             - `Type WebFetchToolResultError`
 
@@ -16503,7 +16857,7 @@ func main() {
 
               - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-          - `type WebFetchBlockParamResp struct{…}`
+          - `type WebFetchBlockParamResp`
 
             - `Type WebFetchResult`
 
@@ -16527,23 +16881,23 @@ func main() {
 
         - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
-      - `type CodeExecutionToolResultBlockParamResp struct{…}`
+      - `type CodeExecutionToolResultBlockParamResp`
 
         - `Type CodeExecutionToolResult`
 
         - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
-          - `type CodeExecutionToolResultErrorParamResp struct{…}`
+          - `type CodeExecutionToolResultErrorParamResp`
 
             - `Type CodeExecutionToolResultError`
 
@@ -16557,7 +16911,7 @@ func main() {
 
               - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-          - `type CodeExecutionResultBlockParamResp struct{…}`
+          - `type CodeExecutionResultBlockParamResp`
 
             - `Type CodeExecutionResult`
 
@@ -16573,7 +16927,7 @@ func main() {
 
             - `Stdout string`
 
-          - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+          - `type EncryptedCodeExecutionResultBlockParamResp`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -16599,13 +16953,13 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
+      - `type BashCodeExecutionToolResultBlockParamResp`
 
         - `Type BashCodeExecutionToolResult`
 
         - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
-          - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+          - `type BashCodeExecutionToolResultErrorParamResp`
 
             - `Type BashCodeExecutionToolResultError`
 
@@ -16621,7 +16975,7 @@ func main() {
 
               - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-          - `type BashCodeExecutionResultBlockParamResp struct{…}`
+          - `type BashCodeExecutionResultBlockParamResp`
 
             - `Type BashCodeExecutionResult`
 
@@ -16645,13 +16999,13 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+      - `type TextEditorCodeExecutionToolResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionToolResult`
 
         - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-          - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+          - `type TextEditorCodeExecutionToolResultErrorParamResp`
 
             - `Type TextEditorCodeExecutionToolResultError`
 
@@ -16669,7 +17023,7 @@ func main() {
 
             - `ErrorMessage string Optional`
 
-          - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+          - `type TextEditorCodeExecutionViewResultBlockParamResp`
 
             - `Type TextEditorCodeExecutionViewResult`
 
@@ -16689,13 +17043,13 @@ func main() {
 
             - `TotalLines int64 Optional`
 
-          - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+          - `type TextEditorCodeExecutionCreateResultBlockParamResp`
 
             - `Type TextEditorCodeExecutionCreateResult`
 
             - `IsFileUpdate bool`
 
-          - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+          - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
             - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -16717,13 +17071,13 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type ToolSearchToolResultBlockParamResp struct{…}`
+      - `type ToolSearchToolResultBlockParamResp`
 
         - `Type ToolSearchToolResult`
 
         - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
-          - `type ToolSearchToolResultErrorParamResp struct{…}`
+          - `type ToolSearchToolResultErrorParamResp`
 
             - `Type ToolSearchToolResultError`
 
@@ -16739,7 +17093,7 @@ func main() {
 
             - `ErrorMessage string Optional`
 
-          - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
+          - `type ToolSearchToolSearchResultBlockParamResp`
 
             - `Type ToolSearchToolSearchResult`
 
@@ -16763,7 +17117,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type ContainerUploadBlockParamResp struct{…}`
+      - `type ContainerUploadBlockParamResp`
 
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
@@ -16786,7 +17140,7 @@ func main() {
 
 ### Message Tokens Count
 
-- `type MessageTokensCount struct{…}`
+- `type MessageTokensCount`
 
   - `InputTokens int64`
 
@@ -16794,7 +17148,7 @@ func main() {
 
 ### Metadata
 
-- `type Metadata struct{…}`
+- `type Metadata`
 
   - `UserID string Optional`
 
@@ -16890,7 +17244,7 @@ func main() {
 
 ### Output Config
 
-- `type OutputConfig struct{…}`
+- `type OutputConfig`
 
   - `Effort OutputConfigEffort Optional`
 
@@ -16918,7 +17272,7 @@ func main() {
 
 ### Output Tokens Details
 
-- `type OutputTokensDetails struct{…}`
+- `type OutputTokensDetails`
 
   - `ThinkingTokens int64`
 
@@ -16935,7 +17289,7 @@ func main() {
 
 ### Plain Text Source
 
-- `type PlainTextSource struct{…}`
+- `type PlainTextSource`
 
   - `Type Text`
 
@@ -16947,7 +17301,7 @@ func main() {
 
 - `type RawContentBlockDeltaUnion interface{…}`
 
-  - `type TextDelta struct{…}`
+  - `type TextDelta`
 
     - `Type TextDelta`
 
@@ -16955,7 +17309,7 @@ func main() {
 
     - `Text string`
 
-  - `type InputJSONDelta struct{…}`
+  - `type InputJSONDelta`
 
     - `Type InputJSONDelta`
 
@@ -16963,7 +17317,7 @@ func main() {
 
     - `PartialJSON string`
 
-  - `type CitationsDelta struct{…}`
+  - `type CitationsDelta`
 
     - `Type CitationsDelta`
 
@@ -16971,7 +17325,7 @@ func main() {
 
     - `Citation CitationsDeltaCitationUnion`
 
-      - `type CitationCharLocation struct{…}`
+      - `type CitationCharLocation`
 
         - `Type CharLocation`
 
@@ -16993,7 +17347,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationPageLocation struct{…}`
+      - `type CitationPageLocation`
 
         - `Type PageLocation`
 
@@ -17015,7 +17369,7 @@ func main() {
 
           minimum: 1
 
-      - `type CitationContentBlockLocation struct{…}`
+      - `type CitationContentBlockLocation`
 
         - `Type ContentBlockLocation`
 
@@ -17047,7 +17401,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationsWebSearchResultLocation struct{…}`
+      - `type CitationsWebSearchResultLocation`
 
         - `Type WebSearchResultLocation`
 
@@ -17063,7 +17417,7 @@ func main() {
 
         - `URL string`
 
-      - `type CitationsSearchResultLocation struct{…}`
+      - `type CitationsSearchResultLocation`
 
         - `Type SearchResultLocation`
 
@@ -17099,7 +17453,7 @@ func main() {
 
         - `Title string`
 
-  - `type ThinkingDelta struct{…}`
+  - `type ThinkingDelta`
 
     - `Type ThinkingDelta`
 
@@ -17109,7 +17463,7 @@ func main() {
 
       The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-  - `type SignatureDelta struct{…}`
+  - `type SignatureDelta`
 
     - `Type SignatureDelta`
 
@@ -17121,7 +17475,7 @@ func main() {
 
 ### Raw Content Block Delta Event
 
-- `type ContentBlockDeltaEvent struct{…}`
+- `type ContentBlockDeltaEvent`
 
   - `Type ContentBlockDelta`
 
@@ -17129,7 +17483,7 @@ func main() {
 
   - `Delta RawContentBlockDeltaUnion`
 
-    - `type TextDelta struct{…}`
+    - `type TextDelta`
 
       - `Type TextDelta`
 
@@ -17137,7 +17491,7 @@ func main() {
 
       - `Text string`
 
-    - `type InputJSONDelta struct{…}`
+    - `type InputJSONDelta`
 
       - `Type InputJSONDelta`
 
@@ -17145,7 +17499,7 @@ func main() {
 
       - `PartialJSON string`
 
-    - `type CitationsDelta struct{…}`
+    - `type CitationsDelta`
 
       - `Type CitationsDelta`
 
@@ -17153,7 +17507,7 @@ func main() {
 
       - `Citation CitationsDeltaCitationUnion`
 
-        - `type CitationCharLocation struct{…}`
+        - `type CitationCharLocation`
 
           - `Type CharLocation`
 
@@ -17175,7 +17529,7 @@ func main() {
 
             minimum: 0
 
-        - `type CitationPageLocation struct{…}`
+        - `type CitationPageLocation`
 
           - `Type PageLocation`
 
@@ -17197,7 +17551,7 @@ func main() {
 
             minimum: 1
 
-        - `type CitationContentBlockLocation struct{…}`
+        - `type CitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -17229,7 +17583,7 @@ func main() {
 
             minimum: 0
 
-        - `type CitationsWebSearchResultLocation struct{…}`
+        - `type CitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -17245,7 +17599,7 @@ func main() {
 
           - `URL string`
 
-        - `type CitationsSearchResultLocation struct{…}`
+        - `type CitationsSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -17281,7 +17635,7 @@ func main() {
 
           - `Title string`
 
-    - `type ThinkingDelta struct{…}`
+    - `type ThinkingDelta`
 
       - `Type ThinkingDelta`
 
@@ -17291,7 +17645,7 @@ func main() {
 
         The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-    - `type SignatureDelta struct{…}`
+    - `type SignatureDelta`
 
       - `Type SignatureDelta`
 
@@ -17305,7 +17659,7 @@ func main() {
 
 ### Raw Content Block Start Event
 
-- `type ContentBlockStartEvent struct{…}`
+- `type ContentBlockStartEvent`
 
   - `Type ContentBlockStart`
 
@@ -17313,7 +17667,7 @@ func main() {
 
   - `ContentBlock ContentBlockStartEventContentBlockUnion`
 
-    - `type TextBlock struct{…}`
+    - `type TextBlock`
 
       - `Type Text`
 
@@ -17325,7 +17679,7 @@ func main() {
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type CitationCharLocation struct{…}`
+        - `type CitationCharLocation`
 
           - `Type CharLocation`
 
@@ -17347,7 +17701,7 @@ func main() {
 
             minimum: 0
 
-        - `type CitationPageLocation struct{…}`
+        - `type CitationPageLocation`
 
           - `Type PageLocation`
 
@@ -17369,7 +17723,7 @@ func main() {
 
             minimum: 1
 
-        - `type CitationContentBlockLocation struct{…}`
+        - `type CitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -17401,7 +17755,7 @@ func main() {
 
             minimum: 0
 
-        - `type CitationsWebSearchResultLocation struct{…}`
+        - `type CitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -17417,7 +17771,7 @@ func main() {
 
           - `URL string`
 
-        - `type CitationsSearchResultLocation struct{…}`
+        - `type CitationsSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -17457,7 +17811,7 @@ func main() {
 
         minLength: 0
 
-    - `type ThinkingBlock struct{…}`
+    - `type ThinkingBlock`
 
       - `Type Thinking`
 
@@ -17475,7 +17829,7 @@ func main() {
 
         The text of Claude's thinking process for this block.
 
-    - `type RedactedThinkingBlock struct{…}`
+    - `type RedactedThinkingBlock`
 
       - `Type RedactedThinking`
 
@@ -17489,7 +17843,7 @@ func main() {
 
         See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type ToolUseBlock struct{…}`
+    - `type ToolUseBlock`
 
       - `Type ToolUse`
 
@@ -17503,13 +17857,13 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
           - `Type Direct`
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -17519,7 +17873,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
           - `Type CodeExecution20260120`
 
@@ -17539,7 +17893,7 @@ func main() {
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type ServerToolUseBlock struct{…}`
+    - `type ServerToolUseBlock`
 
       - `Type ServerToolUse`
 
@@ -17553,15 +17907,15 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Input map[string, any]`
 
@@ -17581,7 +17935,7 @@ func main() {
 
         - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-    - `type WebSearchToolResultBlock struct{…}`
+    - `type WebSearchToolResultBlock`
 
       - `Type WebSearchToolResult`
 
@@ -17591,19 +17945,19 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Content WebSearchToolResultBlockContentUnion`
 
-        - `type WebSearchToolResultError struct{…}`
+        - `type WebSearchToolResultError`
 
           - `Type WebSearchToolResultError`
 
@@ -17641,7 +17995,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type WebFetchToolResultBlock struct{…}`
+    - `type WebFetchToolResultBlock`
 
       - `Type WebFetchToolResult`
 
@@ -17651,19 +18005,19 @@ func main() {
 
         default: {"type":"direct"}
 
-        - `type DirectCaller struct{…}`
+        - `type DirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type ServerToolCaller struct{…}`
+        - `type ServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type ServerToolCaller20260120 struct{…}`
+        - `type ServerToolCaller20260120`
 
       - `Content WebFetchToolResultBlockContentUnion`
 
-        - `type WebFetchToolResultErrorBlock struct{…}`
+        - `type WebFetchToolResultErrorBlock`
 
           - `Type WebFetchToolResultError`
 
@@ -17691,7 +18045,7 @@ func main() {
 
             - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-        - `type WebFetchBlock struct{…}`
+        - `type WebFetchBlock`
 
           - `Type WebFetchResult`
 
@@ -17713,7 +18067,7 @@ func main() {
 
             - `Source DocumentBlockSourceUnion`
 
-              - `type Base64PDFSource struct{…}`
+              - `type Base64PDFSource`
 
                 - `Type Base64`
 
@@ -17723,7 +18077,7 @@ func main() {
 
                 - `MediaType ApplicationPDF`
 
-              - `type PlainTextSource struct{…}`
+              - `type PlainTextSource`
 
                 - `Type Text`
 
@@ -17747,7 +18101,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type CodeExecutionToolResultBlock struct{…}`
+    - `type CodeExecutionToolResultBlock`
 
       - `Type CodeExecutionToolResult`
 
@@ -17755,7 +18109,7 @@ func main() {
 
       - `Content CodeExecutionToolResultBlockContentUnion`
 
-        - `type CodeExecutionToolResultError struct{…}`
+        - `type CodeExecutionToolResultError`
 
           - `Type CodeExecutionToolResultError`
 
@@ -17771,7 +18125,7 @@ func main() {
 
             - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-        - `type CodeExecutionResultBlock struct{…}`
+        - `type CodeExecutionResultBlock`
 
           - `Type CodeExecutionResult`
 
@@ -17791,7 +18145,7 @@ func main() {
 
           - `Stdout string`
 
-        - `type EncryptedCodeExecutionResultBlock struct{…}`
+        - `type EncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -17817,7 +18171,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BashCodeExecutionToolResultBlock struct{…}`
+    - `type BashCodeExecutionToolResultBlock`
 
       - `Type BashCodeExecutionToolResult`
 
@@ -17825,7 +18179,7 @@ func main() {
 
       - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BashCodeExecutionToolResultError struct{…}`
+        - `type BashCodeExecutionToolResultError`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -17843,7 +18197,7 @@ func main() {
 
             - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-        - `type BashCodeExecutionResultBlock struct{…}`
+        - `type BashCodeExecutionResultBlock`
 
           - `Type BashCodeExecutionResult`
 
@@ -17867,7 +18221,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+    - `type TextEditorCodeExecutionToolResultBlock`
 
       - `Type TextEditorCodeExecutionToolResult`
 
@@ -17875,7 +18229,7 @@ func main() {
 
       - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type TextEditorCodeExecutionToolResultError struct{…}`
+        - `type TextEditorCodeExecutionToolResultError`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -17895,7 +18249,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+        - `type TextEditorCodeExecutionViewResultBlock`
 
           - `Type TextEditorCodeExecutionViewResult`
 
@@ -17917,7 +18271,7 @@ func main() {
 
           - `TotalLines int64`
 
-        - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+        - `type TextEditorCodeExecutionCreateResultBlock`
 
           - `Type TextEditorCodeExecutionCreateResult`
 
@@ -17925,7 +18279,7 @@ func main() {
 
           - `IsFileUpdate bool`
 
-        - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+        - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
           - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -17945,7 +18299,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ToolSearchToolResultBlock struct{…}`
+    - `type ToolSearchToolResultBlock`
 
       - `Type ToolSearchToolResult`
 
@@ -17953,7 +18307,7 @@ func main() {
 
       - `Content ToolSearchToolResultBlockContentUnion`
 
-        - `type ToolSearchToolResultError struct{…}`
+        - `type ToolSearchToolResultError`
 
           - `Type ToolSearchToolResultError`
 
@@ -17971,7 +18325,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type ToolSearchToolSearchResultBlock struct{…}`
+        - `type ToolSearchToolSearchResultBlock`
 
           - `Type ToolSearchToolSearchResult`
 
@@ -17991,7 +18345,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ContainerUploadBlock struct{…}`
+    - `type ContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -18005,7 +18359,7 @@ func main() {
 
 ### Raw Content Block Stop Event
 
-- `type ContentBlockStopEvent struct{…}`
+- `type ContentBlockStopEvent`
 
   - `Type ContentBlockStop`
 
@@ -18015,7 +18369,7 @@ func main() {
 
 ### Raw Message Delta Event
 
-- `type MessageDeltaEvent struct{…}`
+- `type MessageDeltaEvent`
 
   - `Type MessageDelta`
 
@@ -18191,7 +18545,7 @@ func main() {
 
 ### Raw Message Start Event
 
-- `type MessageStartEvent struct{…}`
+- `type MessageStartEvent`
 
   - `Type MessageStart`
 
@@ -18280,7 +18634,7 @@ func main() {
       [{"type": "text", "text": "B)"}]
       ```
 
-      - `type TextBlock struct{…}`
+      - `type TextBlock`
 
         - `Type Text`
 
@@ -18292,7 +18646,7 @@ func main() {
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `type CitationCharLocation struct{…}`
+          - `type CitationCharLocation`
 
             - `Type CharLocation`
 
@@ -18314,7 +18668,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationPageLocation struct{…}`
+          - `type CitationPageLocation`
 
             - `Type PageLocation`
 
@@ -18336,7 +18690,7 @@ func main() {
 
               minimum: 1
 
-          - `type CitationContentBlockLocation struct{…}`
+          - `type CitationContentBlockLocation`
 
             - `Type ContentBlockLocation`
 
@@ -18368,7 +18722,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationsWebSearchResultLocation struct{…}`
+          - `type CitationsWebSearchResultLocation`
 
             - `Type WebSearchResultLocation`
 
@@ -18384,7 +18738,7 @@ func main() {
 
             - `URL string`
 
-          - `type CitationsSearchResultLocation struct{…}`
+          - `type CitationsSearchResultLocation`
 
             - `Type SearchResultLocation`
 
@@ -18424,7 +18778,7 @@ func main() {
 
           minLength: 0
 
-      - `type ThinkingBlock struct{…}`
+      - `type ThinkingBlock`
 
         - `Type Thinking`
 
@@ -18442,7 +18796,7 @@ func main() {
 
           The text of Claude's thinking process for this block.
 
-      - `type RedactedThinkingBlock struct{…}`
+      - `type RedactedThinkingBlock`
 
         - `Type RedactedThinking`
 
@@ -18456,7 +18810,7 @@ func main() {
 
           See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type ToolUseBlock struct{…}`
+      - `type ToolUseBlock`
 
         - `Type ToolUse`
 
@@ -18470,13 +18824,13 @@ func main() {
 
           default: {"type":"direct"}
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
             - `Type Direct`
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -18486,7 +18840,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
             - `Type CodeExecution20260120`
 
@@ -18506,7 +18860,7 @@ func main() {
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type ServerToolUseBlock struct{…}`
+      - `type ServerToolUseBlock`
 
         - `Type ServerToolUse`
 
@@ -18520,15 +18874,15 @@ func main() {
 
           default: {"type":"direct"}
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
         - `Input map[string, any]`
 
@@ -18548,7 +18902,7 @@ func main() {
 
           - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-      - `type WebSearchToolResultBlock struct{…}`
+      - `type WebSearchToolResultBlock`
 
         - `Type WebSearchToolResult`
 
@@ -18558,19 +18912,19 @@ func main() {
 
           default: {"type":"direct"}
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
         - `Content WebSearchToolResultBlockContentUnion`
 
-          - `type WebSearchToolResultError struct{…}`
+          - `type WebSearchToolResultError`
 
             - `Type WebSearchToolResultError`
 
@@ -18608,7 +18962,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type WebFetchToolResultBlock struct{…}`
+      - `type WebFetchToolResultBlock`
 
         - `Type WebFetchToolResult`
 
@@ -18618,19 +18972,19 @@ func main() {
 
           default: {"type":"direct"}
 
-          - `type DirectCaller struct{…}`
+          - `type DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type ServerToolCaller struct{…}`
+          - `type ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type ServerToolCaller20260120 struct{…}`
+          - `type ServerToolCaller20260120`
 
         - `Content WebFetchToolResultBlockContentUnion`
 
-          - `type WebFetchToolResultErrorBlock struct{…}`
+          - `type WebFetchToolResultErrorBlock`
 
             - `Type WebFetchToolResultError`
 
@@ -18658,7 +19012,7 @@ func main() {
 
               - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-          - `type WebFetchBlock struct{…}`
+          - `type WebFetchBlock`
 
             - `Type WebFetchResult`
 
@@ -18680,7 +19034,7 @@ func main() {
 
               - `Source DocumentBlockSourceUnion`
 
-                - `type Base64PDFSource struct{…}`
+                - `type Base64PDFSource`
 
                   - `Type Base64`
 
@@ -18690,7 +19044,7 @@ func main() {
 
                   - `MediaType ApplicationPDF`
 
-                - `type PlainTextSource struct{…}`
+                - `type PlainTextSource`
 
                   - `Type Text`
 
@@ -18714,7 +19068,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type CodeExecutionToolResultBlock struct{…}`
+      - `type CodeExecutionToolResultBlock`
 
         - `Type CodeExecutionToolResult`
 
@@ -18722,7 +19076,7 @@ func main() {
 
         - `Content CodeExecutionToolResultBlockContentUnion`
 
-          - `type CodeExecutionToolResultError struct{…}`
+          - `type CodeExecutionToolResultError`
 
             - `Type CodeExecutionToolResultError`
 
@@ -18738,7 +19092,7 @@ func main() {
 
               - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-          - `type CodeExecutionResultBlock struct{…}`
+          - `type CodeExecutionResultBlock`
 
             - `Type CodeExecutionResult`
 
@@ -18758,7 +19112,7 @@ func main() {
 
             - `Stdout string`
 
-          - `type EncryptedCodeExecutionResultBlock struct{…}`
+          - `type EncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -18784,7 +19138,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BashCodeExecutionToolResultBlock struct{…}`
+      - `type BashCodeExecutionToolResultBlock`
 
         - `Type BashCodeExecutionToolResult`
 
@@ -18792,7 +19146,7 @@ func main() {
 
         - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-          - `type BashCodeExecutionToolResultError struct{…}`
+          - `type BashCodeExecutionToolResultError`
 
             - `Type BashCodeExecutionToolResultError`
 
@@ -18810,7 +19164,7 @@ func main() {
 
               - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-          - `type BashCodeExecutionResultBlock struct{…}`
+          - `type BashCodeExecutionResultBlock`
 
             - `Type BashCodeExecutionResult`
 
@@ -18834,7 +19188,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type TextEditorCodeExecutionToolResultBlock`
 
         - `Type TextEditorCodeExecutionToolResult`
 
@@ -18842,7 +19196,7 @@ func main() {
 
         - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-          - `type TextEditorCodeExecutionToolResultError struct{…}`
+          - `type TextEditorCodeExecutionToolResultError`
 
             - `Type TextEditorCodeExecutionToolResultError`
 
@@ -18862,7 +19216,7 @@ func main() {
 
             - `ErrorMessage string`
 
-          - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+          - `type TextEditorCodeExecutionViewResultBlock`
 
             - `Type TextEditorCodeExecutionViewResult`
 
@@ -18884,7 +19238,7 @@ func main() {
 
             - `TotalLines int64`
 
-          - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+          - `type TextEditorCodeExecutionCreateResultBlock`
 
             - `Type TextEditorCodeExecutionCreateResult`
 
@@ -18892,7 +19246,7 @@ func main() {
 
             - `IsFileUpdate bool`
 
-          - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+          - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
             - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -18912,7 +19266,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type ToolSearchToolResultBlock struct{…}`
+      - `type ToolSearchToolResultBlock`
 
         - `Type ToolSearchToolResult`
 
@@ -18920,7 +19274,7 @@ func main() {
 
         - `Content ToolSearchToolResultBlockContentUnion`
 
-          - `type ToolSearchToolResultError struct{…}`
+          - `type ToolSearchToolResultError`
 
             - `Type ToolSearchToolResultError`
 
@@ -18938,7 +19292,7 @@ func main() {
 
             - `ErrorMessage string`
 
-          - `type ToolSearchToolSearchResultBlock struct{…}`
+          - `type ToolSearchToolSearchResultBlock`
 
             - `Type ToolSearchToolSearchResult`
 
@@ -18958,7 +19312,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type ContainerUploadBlock struct{…}`
+      - `type ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
@@ -19238,7 +19592,7 @@ func main() {
 
 ### Raw Message Stop Event
 
-- `type MessageStopEvent struct{…}`
+- `type MessageStopEvent`
 
   - `Type MessageStop`
 
@@ -19248,7 +19602,7 @@ func main() {
 
 - `type MessageStreamEventUnion interface{…}`
 
-  - `type MessageStartEvent struct{…}`
+  - `type MessageStartEvent`
 
     - `Type MessageStart`
 
@@ -19337,7 +19691,7 @@ func main() {
         [{"type": "text", "text": "B)"}]
         ```
 
-        - `type TextBlock struct{…}`
+        - `type TextBlock`
 
           - `Type Text`
 
@@ -19349,7 +19703,7 @@ func main() {
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `type CitationCharLocation struct{…}`
+            - `type CitationCharLocation`
 
               - `Type CharLocation`
 
@@ -19371,7 +19725,7 @@ func main() {
 
                 minimum: 0
 
-            - `type CitationPageLocation struct{…}`
+            - `type CitationPageLocation`
 
               - `Type PageLocation`
 
@@ -19393,7 +19747,7 @@ func main() {
 
                 minimum: 1
 
-            - `type CitationContentBlockLocation struct{…}`
+            - `type CitationContentBlockLocation`
 
               - `Type ContentBlockLocation`
 
@@ -19425,7 +19779,7 @@ func main() {
 
                 minimum: 0
 
-            - `type CitationsWebSearchResultLocation struct{…}`
+            - `type CitationsWebSearchResultLocation`
 
               - `Type WebSearchResultLocation`
 
@@ -19441,7 +19795,7 @@ func main() {
 
               - `URL string`
 
-            - `type CitationsSearchResultLocation struct{…}`
+            - `type CitationsSearchResultLocation`
 
               - `Type SearchResultLocation`
 
@@ -19481,7 +19835,7 @@ func main() {
 
             minLength: 0
 
-        - `type ThinkingBlock struct{…}`
+        - `type ThinkingBlock`
 
           - `Type Thinking`
 
@@ -19499,7 +19853,7 @@ func main() {
 
             The text of Claude's thinking process for this block.
 
-        - `type RedactedThinkingBlock struct{…}`
+        - `type RedactedThinkingBlock`
 
           - `Type RedactedThinking`
 
@@ -19513,7 +19867,7 @@ func main() {
 
             See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type ToolUseBlock struct{…}`
+        - `type ToolUseBlock`
 
           - `Type ToolUse`
 
@@ -19527,13 +19881,13 @@ func main() {
 
             default: {"type":"direct"}
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -19543,7 +19897,7 @@ func main() {
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -19563,7 +19917,7 @@ func main() {
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type ServerToolUseBlock struct{…}`
+        - `type ServerToolUseBlock`
 
           - `Type ServerToolUse`
 
@@ -19577,15 +19931,15 @@ func main() {
 
             default: {"type":"direct"}
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
           - `Input map[string, any]`
 
@@ -19605,7 +19959,7 @@ func main() {
 
             - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-        - `type WebSearchToolResultBlock struct{…}`
+        - `type WebSearchToolResultBlock`
 
           - `Type WebSearchToolResult`
 
@@ -19615,19 +19969,19 @@ func main() {
 
             default: {"type":"direct"}
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
           - `Content WebSearchToolResultBlockContentUnion`
 
-            - `type WebSearchToolResultError struct{…}`
+            - `type WebSearchToolResultError`
 
               - `Type WebSearchToolResultError`
 
@@ -19665,7 +20019,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type WebFetchToolResultBlock struct{…}`
+        - `type WebFetchToolResultBlock`
 
           - `Type WebFetchToolResult`
 
@@ -19675,19 +20029,19 @@ func main() {
 
             default: {"type":"direct"}
 
-            - `type DirectCaller struct{…}`
+            - `type DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type ServerToolCaller struct{…}`
+            - `type ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type ServerToolCaller20260120 struct{…}`
+            - `type ServerToolCaller20260120`
 
           - `Content WebFetchToolResultBlockContentUnion`
 
-            - `type WebFetchToolResultErrorBlock struct{…}`
+            - `type WebFetchToolResultErrorBlock`
 
               - `Type WebFetchToolResultError`
 
@@ -19715,7 +20069,7 @@ func main() {
 
                 - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type WebFetchBlock struct{…}`
+            - `type WebFetchBlock`
 
               - `Type WebFetchResult`
 
@@ -19737,7 +20091,7 @@ func main() {
 
                 - `Source DocumentBlockSourceUnion`
 
-                  - `type Base64PDFSource struct{…}`
+                  - `type Base64PDFSource`
 
                     - `Type Base64`
 
@@ -19747,7 +20101,7 @@ func main() {
 
                     - `MediaType ApplicationPDF`
 
-                  - `type PlainTextSource struct{…}`
+                  - `type PlainTextSource`
 
                     - `Type Text`
 
@@ -19771,7 +20125,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type CodeExecutionToolResultBlock struct{…}`
+        - `type CodeExecutionToolResultBlock`
 
           - `Type CodeExecutionToolResult`
 
@@ -19779,7 +20133,7 @@ func main() {
 
           - `Content CodeExecutionToolResultBlockContentUnion`
 
-            - `type CodeExecutionToolResultError struct{…}`
+            - `type CodeExecutionToolResultError`
 
               - `Type CodeExecutionToolResultError`
 
@@ -19795,7 +20149,7 @@ func main() {
 
                 - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type CodeExecutionResultBlock struct{…}`
+            - `type CodeExecutionResultBlock`
 
               - `Type CodeExecutionResult`
 
@@ -19815,7 +20169,7 @@ func main() {
 
               - `Stdout string`
 
-            - `type EncryptedCodeExecutionResultBlock struct{…}`
+            - `type EncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -19841,7 +20195,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BashCodeExecutionToolResultBlock struct{…}`
+        - `type BashCodeExecutionToolResultBlock`
 
           - `Type BashCodeExecutionToolResult`
 
@@ -19849,7 +20203,7 @@ func main() {
 
           - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-            - `type BashCodeExecutionToolResultError struct{…}`
+            - `type BashCodeExecutionToolResultError`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -19867,7 +20221,7 @@ func main() {
 
                 - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-            - `type BashCodeExecutionResultBlock struct{…}`
+            - `type BashCodeExecutionResultBlock`
 
               - `Type BashCodeExecutionResult`
 
@@ -19891,7 +20245,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+        - `type TextEditorCodeExecutionToolResultBlock`
 
           - `Type TextEditorCodeExecutionToolResult`
 
@@ -19899,7 +20253,7 @@ func main() {
 
           - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-            - `type TextEditorCodeExecutionToolResultError struct{…}`
+            - `type TextEditorCodeExecutionToolResultError`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -19919,7 +20273,7 @@ func main() {
 
               - `ErrorMessage string`
 
-            - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+            - `type TextEditorCodeExecutionViewResultBlock`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -19941,7 +20295,7 @@ func main() {
 
               - `TotalLines int64`
 
-            - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+            - `type TextEditorCodeExecutionCreateResultBlock`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
@@ -19949,7 +20303,7 @@ func main() {
 
               - `IsFileUpdate bool`
 
-            - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+            - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -19969,7 +20323,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type ToolSearchToolResultBlock struct{…}`
+        - `type ToolSearchToolResultBlock`
 
           - `Type ToolSearchToolResult`
 
@@ -19977,7 +20331,7 @@ func main() {
 
           - `Content ToolSearchToolResultBlockContentUnion`
 
-            - `type ToolSearchToolResultError struct{…}`
+            - `type ToolSearchToolResultError`
 
               - `Type ToolSearchToolResultError`
 
@@ -19995,7 +20349,7 @@ func main() {
 
               - `ErrorMessage string`
 
-            - `type ToolSearchToolSearchResultBlock struct{…}`
+            - `type ToolSearchToolSearchResultBlock`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -20015,7 +20369,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type ContainerUploadBlock struct{…}`
+        - `type ContainerUploadBlock`
 
           Response model for a file uploaded to the container.
 
@@ -20293,7 +20647,7 @@ func main() {
 
           - `const UsageServiceTierBatch UsageServiceTier = "batch"`
 
-  - `type MessageDeltaEvent struct{…}`
+  - `type MessageDeltaEvent`
 
     - `Type MessageDelta`
 
@@ -20360,13 +20714,13 @@ func main() {
 
         The number of server tool requests.
 
-  - `type MessageStopEvent struct{…}`
+  - `type MessageStopEvent`
 
     - `Type MessageStop`
 
       default: message_stop
 
-  - `type ContentBlockStartEvent struct{…}`
+  - `type ContentBlockStartEvent`
 
     - `Type ContentBlockStart`
 
@@ -20374,35 +20728,35 @@ func main() {
 
     - `ContentBlock ContentBlockStartEventContentBlockUnion`
 
-      - `type TextBlock struct{…}`
+      - `type TextBlock`
 
-      - `type ThinkingBlock struct{…}`
+      - `type ThinkingBlock`
 
-      - `type RedactedThinkingBlock struct{…}`
+      - `type RedactedThinkingBlock`
 
-      - `type ToolUseBlock struct{…}`
+      - `type ToolUseBlock`
 
-      - `type ServerToolUseBlock struct{…}`
+      - `type ServerToolUseBlock`
 
-      - `type WebSearchToolResultBlock struct{…}`
+      - `type WebSearchToolResultBlock`
 
-      - `type WebFetchToolResultBlock struct{…}`
+      - `type WebFetchToolResultBlock`
 
-      - `type CodeExecutionToolResultBlock struct{…}`
+      - `type CodeExecutionToolResultBlock`
 
-      - `type BashCodeExecutionToolResultBlock struct{…}`
+      - `type BashCodeExecutionToolResultBlock`
 
-      - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type TextEditorCodeExecutionToolResultBlock`
 
-      - `type ToolSearchToolResultBlock struct{…}`
+      - `type ToolSearchToolResultBlock`
 
-      - `type ContainerUploadBlock struct{…}`
+      - `type ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
     - `Index int64`
 
-  - `type ContentBlockDeltaEvent struct{…}`
+  - `type ContentBlockDeltaEvent`
 
     - `Type ContentBlockDelta`
 
@@ -20410,7 +20764,7 @@ func main() {
 
     - `Delta RawContentBlockDeltaUnion`
 
-      - `type TextDelta struct{…}`
+      - `type TextDelta`
 
         - `Type TextDelta`
 
@@ -20418,7 +20772,7 @@ func main() {
 
         - `Text string`
 
-      - `type InputJSONDelta struct{…}`
+      - `type InputJSONDelta`
 
         - `Type InputJSONDelta`
 
@@ -20426,7 +20780,7 @@ func main() {
 
         - `PartialJSON string`
 
-      - `type CitationsDelta struct{…}`
+      - `type CitationsDelta`
 
         - `Type CitationsDelta`
 
@@ -20434,17 +20788,17 @@ func main() {
 
         - `Citation CitationsDeltaCitationUnion`
 
-          - `type CitationCharLocation struct{…}`
+          - `type CitationCharLocation`
 
-          - `type CitationPageLocation struct{…}`
+          - `type CitationPageLocation`
 
-          - `type CitationContentBlockLocation struct{…}`
+          - `type CitationContentBlockLocation`
 
-          - `type CitationsWebSearchResultLocation struct{…}`
+          - `type CitationsWebSearchResultLocation`
 
-          - `type CitationsSearchResultLocation struct{…}`
+          - `type CitationsSearchResultLocation`
 
-      - `type ThinkingDelta struct{…}`
+      - `type ThinkingDelta`
 
         - `Type ThinkingDelta`
 
@@ -20454,7 +20808,7 @@ func main() {
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `type SignatureDelta struct{…}`
+      - `type SignatureDelta`
 
         - `Type SignatureDelta`
 
@@ -20466,7 +20820,7 @@ func main() {
 
     - `Index int64`
 
-  - `type ContentBlockStopEvent struct{…}`
+  - `type ContentBlockStopEvent`
 
     - `Type ContentBlockStop`
 
@@ -20476,7 +20830,7 @@ func main() {
 
 ### Redacted Thinking Block
 
-- `type RedactedThinkingBlock struct{…}`
+- `type RedactedThinkingBlock`
 
   - `Type RedactedThinking`
 
@@ -20492,7 +20846,7 @@ func main() {
 
 ### Redacted Thinking Block Param
 
-- `type RedactedThinkingBlockParamResp struct{…}`
+- `type RedactedThinkingBlockParamResp`
 
   - `Type RedactedThinking`
 
@@ -20502,7 +20856,7 @@ func main() {
 
 ### Refusal Stop Details
 
-- `type RefusalStopDetails struct{…}`
+- `type RefusalStopDetails`
 
   Structured information about a refusal.
 
@@ -20542,7 +20896,7 @@ func main() {
 
 ### Search Result Block Param
 
-- `type SearchResultBlockParamResp struct{…}`
+- `type SearchResultBlockParamResp`
 
   - `Type SearchResult`
 
@@ -20577,7 +20931,7 @@ func main() {
 
     - `Citations []TextCitationParamUnionResp Optional`
 
-      - `type CitationCharLocationParamResp struct{…}`
+      - `type CitationCharLocationParamResp`
 
         - `Type CharLocation`
 
@@ -20597,7 +20951,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationPageLocationParamResp struct{…}`
+      - `type CitationPageLocationParamResp`
 
         - `Type PageLocation`
 
@@ -20617,7 +20971,7 @@ func main() {
 
           minimum: 1
 
-      - `type CitationContentBlockLocationParamResp struct{…}`
+      - `type CitationContentBlockLocationParamResp`
 
         - `Type ContentBlockLocation`
 
@@ -20647,7 +21001,7 @@ func main() {
 
           minimum: 0
 
-      - `type CitationWebSearchResultLocationParamResp struct{…}`
+      - `type CitationWebSearchResultLocationParamResp`
 
         - `Type WebSearchResultLocation`
 
@@ -20663,7 +21017,7 @@ func main() {
 
           minLength: 1
 
-      - `type CitationSearchResultLocationParamResp struct{…}`
+      - `type CitationSearchResultLocationParamResp`
 
         - `Type SearchResultLocation`
 
@@ -20711,7 +21065,7 @@ func main() {
 
 ### Server Tool Caller
 
-- `type ServerToolCaller struct{…}`
+- `type ServerToolCaller`
 
   Tool invocation generated by a server-side tool.
 
@@ -20723,7 +21077,7 @@ func main() {
 
 ### Server Tool Caller 20260120
 
-- `type ServerToolCaller20260120 struct{…}`
+- `type ServerToolCaller20260120`
 
   - `Type CodeExecution20260120`
 
@@ -20733,7 +21087,7 @@ func main() {
 
 ### Server Tool Usage
 
-- `type ServerToolUsage struct{…}`
+- `type ServerToolUsage`
 
   - `WebFetchRequests int64`
 
@@ -20749,7 +21103,7 @@ func main() {
 
 ### Server Tool Use Block
 
-- `type ServerToolUseBlock struct{…}`
+- `type ServerToolUseBlock`
 
   - `Type ServerToolUse`
 
@@ -20763,13 +21117,13 @@ func main() {
 
     default: {"type":"direct"}
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -20779,7 +21133,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -20807,7 +21161,7 @@ func main() {
 
 ### Server Tool Use Block Param
 
-- `type ServerToolUseBlockParamResp struct{…}`
+- `type ServerToolUseBlockParamResp`
 
   - `Type ServerToolUse`
 
@@ -20856,13 +21210,13 @@ func main() {
 
   - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -20872,7 +21226,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -20882,7 +21236,7 @@ func main() {
 
 ### Signature Delta
 
-- `type SignatureDelta struct{…}`
+- `type SignatureDelta`
 
   - `Type SignatureDelta`
 
@@ -20894,7 +21248,7 @@ func main() {
 
 ### Skill Params
 
-- `type SkillParamsResp struct{…}`
+- `type SkillParamsResp`
 
   Specification for a skill to be loaded in a container (request model).
 
@@ -20938,7 +21292,7 @@ func main() {
 
 ### Text Block
 
-- `type TextBlock struct{…}`
+- `type TextBlock`
 
   - `Type Text`
 
@@ -20950,7 +21304,7 @@ func main() {
 
     The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-    - `type CitationCharLocation struct{…}`
+    - `type CitationCharLocation`
 
       - `Type CharLocation`
 
@@ -20972,7 +21326,7 @@ func main() {
 
         minimum: 0
 
-    - `type CitationPageLocation struct{…}`
+    - `type CitationPageLocation`
 
       - `Type PageLocation`
 
@@ -20994,7 +21348,7 @@ func main() {
 
         minimum: 1
 
-    - `type CitationContentBlockLocation struct{…}`
+    - `type CitationContentBlockLocation`
 
       - `Type ContentBlockLocation`
 
@@ -21026,7 +21380,7 @@ func main() {
 
         minimum: 0
 
-    - `type CitationsWebSearchResultLocation struct{…}`
+    - `type CitationsWebSearchResultLocation`
 
       - `Type WebSearchResultLocation`
 
@@ -21042,7 +21396,7 @@ func main() {
 
       - `URL string`
 
-    - `type CitationsSearchResultLocation struct{…}`
+    - `type CitationsSearchResultLocation`
 
       - `Type SearchResultLocation`
 
@@ -21084,7 +21438,7 @@ func main() {
 
 ### Text Block Param
 
-- `type TextBlockParamResp struct{…}`
+- `type TextBlockParamResp`
 
   - `Type Text`
 
@@ -21115,7 +21469,7 @@ func main() {
 
   - `Citations []TextCitationParamUnionResp Optional`
 
-    - `type CitationCharLocationParamResp struct{…}`
+    - `type CitationCharLocationParamResp`
 
       - `Type CharLocation`
 
@@ -21135,7 +21489,7 @@ func main() {
 
         minimum: 0
 
-    - `type CitationPageLocationParamResp struct{…}`
+    - `type CitationPageLocationParamResp`
 
       - `Type PageLocation`
 
@@ -21155,7 +21509,7 @@ func main() {
 
         minimum: 1
 
-    - `type CitationContentBlockLocationParamResp struct{…}`
+    - `type CitationContentBlockLocationParamResp`
 
       - `Type ContentBlockLocation`
 
@@ -21185,7 +21539,7 @@ func main() {
 
         minimum: 0
 
-    - `type CitationWebSearchResultLocationParamResp struct{…}`
+    - `type CitationWebSearchResultLocationParamResp`
 
       - `Type WebSearchResultLocation`
 
@@ -21201,7 +21555,7 @@ func main() {
 
         minLength: 1
 
-    - `type CitationSearchResultLocationParamResp struct{…}`
+    - `type CitationSearchResultLocationParamResp`
 
       - `Type SearchResultLocation`
 
@@ -21239,7 +21593,7 @@ func main() {
 
 - `type TextCitationUnion interface{…}`
 
-  - `type CitationCharLocation struct{…}`
+  - `type CitationCharLocation`
 
     - `Type CharLocation`
 
@@ -21261,7 +21615,7 @@ func main() {
 
       minimum: 0
 
-  - `type CitationPageLocation struct{…}`
+  - `type CitationPageLocation`
 
     - `Type PageLocation`
 
@@ -21283,7 +21637,7 @@ func main() {
 
       minimum: 1
 
-  - `type CitationContentBlockLocation struct{…}`
+  - `type CitationContentBlockLocation`
 
     - `Type ContentBlockLocation`
 
@@ -21315,7 +21669,7 @@ func main() {
 
       minimum: 0
 
-  - `type CitationsWebSearchResultLocation struct{…}`
+  - `type CitationsWebSearchResultLocation`
 
     - `Type WebSearchResultLocation`
 
@@ -21331,7 +21685,7 @@ func main() {
 
     - `URL string`
 
-  - `type CitationsSearchResultLocation struct{…}`
+  - `type CitationsSearchResultLocation`
 
     - `Type SearchResultLocation`
 
@@ -21371,7 +21725,7 @@ func main() {
 
 - `type TextCitationParamUnionResp interface{…}`
 
-  - `type CitationCharLocationParamResp struct{…}`
+  - `type CitationCharLocationParamResp`
 
     - `Type CharLocation`
 
@@ -21391,7 +21745,7 @@ func main() {
 
       minimum: 0
 
-  - `type CitationPageLocationParamResp struct{…}`
+  - `type CitationPageLocationParamResp`
 
     - `Type PageLocation`
 
@@ -21411,7 +21765,7 @@ func main() {
 
       minimum: 1
 
-  - `type CitationContentBlockLocationParamResp struct{…}`
+  - `type CitationContentBlockLocationParamResp`
 
     - `Type ContentBlockLocation`
 
@@ -21441,7 +21795,7 @@ func main() {
 
       minimum: 0
 
-  - `type CitationWebSearchResultLocationParamResp struct{…}`
+  - `type CitationWebSearchResultLocationParamResp`
 
     - `Type WebSearchResultLocation`
 
@@ -21457,7 +21811,7 @@ func main() {
 
       minLength: 1
 
-  - `type CitationSearchResultLocationParamResp struct{…}`
+  - `type CitationSearchResultLocationParamResp`
 
     - `Type SearchResultLocation`
 
@@ -21493,7 +21847,7 @@ func main() {
 
 ### Text Delta
 
-- `type TextDelta struct{…}`
+- `type TextDelta`
 
   - `Type TextDelta`
 
@@ -21503,7 +21857,7 @@ func main() {
 
 ### Text Editor Code Execution Create Result Block
 
-- `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+- `type TextEditorCodeExecutionCreateResultBlock`
 
   - `Type TextEditorCodeExecutionCreateResult`
 
@@ -21513,7 +21867,7 @@ func main() {
 
 ### Text Editor Code Execution Create Result Block Param
 
-- `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+- `type TextEditorCodeExecutionCreateResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionCreateResult`
 
@@ -21521,7 +21875,7 @@ func main() {
 
 ### Text Editor Code Execution Str Replace Result Block
 
-- `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+- `type TextEditorCodeExecutionStrReplaceResultBlock`
 
   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -21539,7 +21893,7 @@ func main() {
 
 ### Text Editor Code Execution Str Replace Result Block Param
 
-- `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+- `type TextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -21555,7 +21909,7 @@ func main() {
 
 ### Text Editor Code Execution Tool Result Block
 
-- `type TextEditorCodeExecutionToolResultBlock struct{…}`
+- `type TextEditorCodeExecutionToolResultBlock`
 
   - `Type TextEditorCodeExecutionToolResult`
 
@@ -21563,7 +21917,7 @@ func main() {
 
   - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-    - `type TextEditorCodeExecutionToolResultError struct{…}`
+    - `type TextEditorCodeExecutionToolResultError`
 
       - `Type TextEditorCodeExecutionToolResultError`
 
@@ -21583,7 +21937,7 @@ func main() {
 
       - `ErrorMessage string`
 
-    - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+    - `type TextEditorCodeExecutionViewResultBlock`
 
       - `Type TextEditorCodeExecutionViewResult`
 
@@ -21605,7 +21959,7 @@ func main() {
 
       - `TotalLines int64`
 
-    - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+    - `type TextEditorCodeExecutionCreateResultBlock`
 
       - `Type TextEditorCodeExecutionCreateResult`
 
@@ -21613,7 +21967,7 @@ func main() {
 
       - `IsFileUpdate bool`
 
-    - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+    - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
       - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -21635,13 +21989,13 @@ func main() {
 
 ### Text Editor Code Execution Tool Result Block Param
 
-- `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+- `type TextEditorCodeExecutionToolResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionToolResult`
 
   - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-    - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+    - `type TextEditorCodeExecutionToolResultErrorParamResp`
 
       - `Type TextEditorCodeExecutionToolResultError`
 
@@ -21659,7 +22013,7 @@ func main() {
 
       - `ErrorMessage string Optional`
 
-    - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+    - `type TextEditorCodeExecutionViewResultBlockParamResp`
 
       - `Type TextEditorCodeExecutionViewResult`
 
@@ -21679,13 +22033,13 @@ func main() {
 
       - `TotalLines int64 Optional`
 
-    - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+    - `type TextEditorCodeExecutionCreateResultBlockParamResp`
 
       - `Type TextEditorCodeExecutionCreateResult`
 
       - `IsFileUpdate bool`
 
-    - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+    - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
       - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -21726,7 +22080,7 @@ func main() {
 
 ### Text Editor Code Execution Tool Result Error
 
-- `type TextEditorCodeExecutionToolResultError struct{…}`
+- `type TextEditorCodeExecutionToolResultError`
 
   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -21762,7 +22116,7 @@ func main() {
 
 ### Text Editor Code Execution Tool Result Error Param
 
-- `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+- `type TextEditorCodeExecutionToolResultErrorParamResp`
 
   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -21782,7 +22136,7 @@ func main() {
 
 ### Text Editor Code Execution View Result Block
 
-- `type TextEditorCodeExecutionViewResultBlock struct{…}`
+- `type TextEditorCodeExecutionViewResultBlock`
 
   - `Type TextEditorCodeExecutionViewResult`
 
@@ -21806,7 +22160,7 @@ func main() {
 
 ### Text Editor Code Execution View Result Block Param
 
-- `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+- `type TextEditorCodeExecutionViewResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionViewResult`
 
@@ -21828,7 +22182,7 @@ func main() {
 
 ### Thinking Block
 
-- `type ThinkingBlock struct{…}`
+- `type ThinkingBlock`
 
   - `Type Thinking`
 
@@ -21848,7 +22202,7 @@ func main() {
 
 ### Thinking Block Param
 
-- `type ThinkingBlockParamResp struct{…}`
+- `type ThinkingBlockParamResp`
 
   - `Type Thinking`
 
@@ -21864,7 +22218,7 @@ func main() {
 
 ### Thinking Config Adaptive
 
-- `type ThinkingConfigAdaptive struct{…}`
+- `type ThinkingConfigAdaptive`
 
   - `Type Adaptive`
 
@@ -21878,13 +22232,13 @@ func main() {
 
 ### Thinking Config Disabled
 
-- `type ThinkingConfigDisabled struct{…}`
+- `type ThinkingConfigDisabled`
 
   - `Type Disabled`
 
 ### Thinking Config Enabled
 
-- `type ThinkingConfigEnabled struct{…}`
+- `type ThinkingConfigEnabled`
 
   - `Type Enabled`
 
@@ -21916,7 +22270,7 @@ func main() {
 
   See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
-  - `type ThinkingConfigEnabled struct{…}`
+  - `type ThinkingConfigEnabled`
 
     - `Type Enabled`
 
@@ -21938,11 +22292,11 @@ func main() {
 
       - `const ThinkingConfigEnabledDisplayOmitted ThinkingConfigEnabledDisplay = "omitted"`
 
-  - `type ThinkingConfigDisabled struct{…}`
+  - `type ThinkingConfigDisabled`
 
     - `Type Disabled`
 
-  - `type ThinkingConfigAdaptive struct{…}`
+  - `type ThinkingConfigAdaptive`
 
     - `Type Adaptive`
 
@@ -21956,7 +22310,7 @@ func main() {
 
 ### Thinking Delta
 
-- `type ThinkingDelta struct{…}`
+- `type ThinkingDelta`
 
   - `Type ThinkingDelta`
 
@@ -21968,7 +22322,7 @@ func main() {
 
 ### Tool
 
-- `type Tool struct{…}`
+- `type Tool`
 
   - `Type ToolType Optional`
 
@@ -22045,7 +22399,7 @@ func main() {
 
 ### Tool Bash 20250124
 
-- `type ToolBash20250124 struct{…}`
+- `type ToolBash20250124`
 
   - `Type Bash20250124`
 
@@ -22102,7 +22456,7 @@ func main() {
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `type ToolChoiceAuto struct{…}`
+  - `type ToolChoiceAuto`
 
     The model will automatically decide whether to use tools.
 
@@ -22114,7 +22468,7 @@ func main() {
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `type ToolChoiceAny struct{…}`
+  - `type ToolChoiceAny`
 
     The model will use any available tools.
 
@@ -22126,7 +22480,7 @@ func main() {
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `type ToolChoiceTool struct{…}`
+  - `type ToolChoiceTool`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -22142,7 +22496,7 @@ func main() {
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `type ToolChoiceNone struct{…}`
+  - `type ToolChoiceNone`
 
     The model will not be allowed to use tools.
 
@@ -22150,7 +22504,7 @@ func main() {
 
 ### Tool Choice Any
 
-- `type ToolChoiceAny struct{…}`
+- `type ToolChoiceAny`
 
   The model will use any available tools.
 
@@ -22164,7 +22518,7 @@ func main() {
 
 ### Tool Choice Auto
 
-- `type ToolChoiceAuto struct{…}`
+- `type ToolChoiceAuto`
 
   The model will automatically decide whether to use tools.
 
@@ -22178,7 +22532,7 @@ func main() {
 
 ### Tool Choice None
 
-- `type ToolChoiceNone struct{…}`
+- `type ToolChoiceNone`
 
   The model will not be allowed to use tools.
 
@@ -22186,7 +22540,7 @@ func main() {
 
 ### Tool Choice Tool
 
-- `type ToolChoiceTool struct{…}`
+- `type ToolChoiceTool`
 
   The model will use the specified tool with `tool_choice.name`.
 
@@ -22204,7 +22558,7 @@ func main() {
 
 ### Tool Reference Block
 
-- `type ToolReferenceBlock struct{…}`
+- `type ToolReferenceBlock`
 
   - `Type ToolReference`
 
@@ -22216,7 +22570,7 @@ func main() {
 
 ### Tool Reference Block Param
 
-- `type ToolReferenceBlockParamResp struct{…}`
+- `type ToolReferenceBlockParamResp`
 
   Tool reference block that can be included in tool_result content.
 
@@ -22249,7 +22603,7 @@ func main() {
 
 ### Tool Result Block Param
 
-- `type ToolResultBlockParamResp struct{…}`
+- `type ToolResultBlockParamResp`
 
   - `Type ToolResult`
 
@@ -22282,7 +22636,7 @@ func main() {
 
     - `[]ToolResultBlockParamContentUnionResp`
 
-      - `type TextBlockParamResp struct{…}`
+      - `type TextBlockParamResp`
 
         - `Type Text`
 
@@ -22296,7 +22650,7 @@ func main() {
 
         - `Citations []TextCitationParamUnionResp Optional`
 
-          - `type CitationCharLocationParamResp struct{…}`
+          - `type CitationCharLocationParamResp`
 
             - `Type CharLocation`
 
@@ -22316,7 +22670,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationPageLocationParamResp struct{…}`
+          - `type CitationPageLocationParamResp`
 
             - `Type PageLocation`
 
@@ -22336,7 +22690,7 @@ func main() {
 
               minimum: 1
 
-          - `type CitationContentBlockLocationParamResp struct{…}`
+          - `type CitationContentBlockLocationParamResp`
 
             - `Type ContentBlockLocation`
 
@@ -22366,7 +22720,7 @@ func main() {
 
               minimum: 0
 
-          - `type CitationWebSearchResultLocationParamResp struct{…}`
+          - `type CitationWebSearchResultLocationParamResp`
 
             - `Type WebSearchResultLocation`
 
@@ -22382,7 +22736,7 @@ func main() {
 
               minLength: 1
 
-          - `type CitationSearchResultLocationParamResp struct{…}`
+          - `type CitationSearchResultLocationParamResp`
 
             - `Type SearchResultLocation`
 
@@ -22416,13 +22770,13 @@ func main() {
 
             - `Title string`
 
-      - `type ImageBlockParamResp struct{…}`
+      - `type ImageBlockParamResp`
 
         - `Type Image`
 
         - `Source ImageBlockParamSourceUnionResp`
 
-          - `type Base64ImageSource struct{…}`
+          - `type Base64ImageSource`
 
             - `Type Base64`
 
@@ -22440,13 +22794,13 @@ func main() {
 
               - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-          - `type URLImageSource struct{…}`
+          - `type URLImageSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type FileImageSource struct{…}`
+          - `type FileImageSource`
 
             - `Type File`
 
@@ -22468,7 +22822,7 @@ func main() {
 
             - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-      - `type SearchResultBlockParamResp struct{…}`
+      - `type SearchResultBlockParamResp`
 
         - `Type SearchResult`
 
@@ -22498,13 +22852,13 @@ func main() {
 
           - `Enabled bool Optional`
 
-      - `type DocumentBlockParamResp struct{…}`
+      - `type DocumentBlockParamResp`
 
         - `Type Document`
 
         - `Source DocumentBlockParamSourceUnionResp`
 
-          - `type Base64PDFSource struct{…}`
+          - `type Base64PDFSource`
 
             - `Type Base64`
 
@@ -22514,7 +22868,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type PlainTextSource struct{…}`
+          - `type PlainTextSource`
 
             - `Type Text`
 
@@ -22522,7 +22876,7 @@ func main() {
 
             - `MediaType TextPlain`
 
-          - `type ContentBlockSource struct{…}`
+          - `type ContentBlockSource`
 
             - `Type Content`
 
@@ -22532,17 +22886,17 @@ func main() {
 
               - `[]ContentBlockSourceContentItemUnion`
 
-                - `type TextBlockParamResp struct{…}`
+                - `type TextBlockParamResp`
 
-                - `type ImageBlockParamResp struct{…}`
+                - `type ImageBlockParamResp`
 
-          - `type URLPDFSource struct{…}`
+          - `type URLPDFSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type FileDocumentSource struct{…}`
+          - `type FileDocumentSource`
 
             - `Type File`
 
@@ -22562,7 +22916,7 @@ func main() {
 
           maxLength: 500, minLength: 1
 
-      - `type ToolReferenceBlockParamResp struct{…}`
+      - `type ToolReferenceBlockParamResp`
 
         Tool reference block that can be included in tool_result content.
 
@@ -22576,7 +22930,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BrowserStateBlockParamResp struct{…}`
+      - `type BrowserStateBlockParamResp`
 
         The caller's browser state after a browser toolset member call —
         the full inventory of open tabs, which tab is active, and any side
@@ -22626,7 +22980,7 @@ func main() {
 
           maxItems: 200, minItems: 1
 
-          - `type BrowserStateChangeTabOpened struct{…}`
+          - `type BrowserStateChangeTabOpened`
 
             A tab this call's execution opened that remains open at its end —
             the creation delta of the `tabs` inventory, not an event log.
@@ -22644,7 +22998,7 @@ func main() {
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-          - `type BrowserStateChangeDownloadStarted struct{…}`
+          - `type BrowserStateChangeDownloadStarted`
 
             A file download that started during this call.
 
@@ -22662,7 +23016,7 @@ func main() {
 
               maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-          - `type BrowserStateChangeDownloadCompleted struct{…}`
+          - `type BrowserStateChangeDownloadCompleted`
 
             A file download that finished during this call, reported with the
             same `download_id` as its `download_started` — or without a prior
@@ -22695,7 +23049,7 @@ func main() {
 
               minimum: 0
 
-          - `type BrowserStateChangeDownloadFailed struct{…}`
+          - `type BrowserStateChangeDownloadFailed`
 
             A file download that failed — or was cancelled — during this call.
 
@@ -22729,7 +23083,7 @@ func main() {
 
 ### Tool Search Tool Bm25 20251119
 
-- `type ToolSearchToolBm25_20251119 struct{…}`
+- `type ToolSearchToolBm25_20251119`
 
   - `Type ToolSearchToolBm25_20251119Type`
 
@@ -22784,7 +23138,7 @@ func main() {
 
 ### Tool Search Tool Regex 20251119
 
-- `type ToolSearchToolRegex20251119 struct{…}`
+- `type ToolSearchToolRegex20251119`
 
   - `Type ToolSearchToolRegex20251119Type`
 
@@ -22839,7 +23193,7 @@ func main() {
 
 ### Tool Search Tool Result Block
 
-- `type ToolSearchToolResultBlock struct{…}`
+- `type ToolSearchToolResultBlock`
 
   - `Type ToolSearchToolResult`
 
@@ -22847,7 +23201,7 @@ func main() {
 
   - `Content ToolSearchToolResultBlockContentUnion`
 
-    - `type ToolSearchToolResultError struct{…}`
+    - `type ToolSearchToolResultError`
 
       - `Type ToolSearchToolResultError`
 
@@ -22865,7 +23219,7 @@ func main() {
 
       - `ErrorMessage string`
 
-    - `type ToolSearchToolSearchResultBlock struct{…}`
+    - `type ToolSearchToolSearchResultBlock`
 
       - `Type ToolSearchToolSearchResult`
 
@@ -22887,13 +23241,13 @@ func main() {
 
 ### Tool Search Tool Result Block Param
 
-- `type ToolSearchToolResultBlockParamResp struct{…}`
+- `type ToolSearchToolResultBlockParamResp`
 
   - `Type ToolSearchToolResult`
 
   - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
-    - `type ToolSearchToolResultErrorParamResp struct{…}`
+    - `type ToolSearchToolResultErrorParamResp`
 
       - `Type ToolSearchToolResultError`
 
@@ -22909,7 +23263,7 @@ func main() {
 
       - `ErrorMessage string Optional`
 
-    - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
+    - `type ToolSearchToolSearchResultBlockParamResp`
 
       - `Type ToolSearchToolSearchResult`
 
@@ -22952,7 +23306,7 @@ func main() {
 
 ### Tool Search Tool Result Error
 
-- `type ToolSearchToolResultError struct{…}`
+- `type ToolSearchToolResultError`
 
   - `Type ToolSearchToolResultError`
 
@@ -22984,7 +23338,7 @@ func main() {
 
 ### Tool Search Tool Result Error Param
 
-- `type ToolSearchToolResultErrorParamResp struct{…}`
+- `type ToolSearchToolResultErrorParamResp`
 
   - `Type ToolSearchToolResultError`
 
@@ -23002,7 +23356,7 @@ func main() {
 
 ### Tool Search Tool Search Result Block
 
-- `type ToolSearchToolSearchResultBlock struct{…}`
+- `type ToolSearchToolSearchResultBlock`
 
   - `Type ToolSearchToolSearchResult`
 
@@ -23020,7 +23374,7 @@ func main() {
 
 ### Tool Search Tool Search Result Block Param
 
-- `type ToolSearchToolSearchResultBlockParamResp struct{…}`
+- `type ToolSearchToolSearchResultBlockParamResp`
 
   - `Type ToolSearchToolSearchResult`
 
@@ -23055,7 +23409,7 @@ func main() {
 
 ### Tool Text Editor 20250124
 
-- `type ToolTextEditor20250124 struct{…}`
+- `type ToolTextEditor20250124`
 
   - `Type TextEditor20250124`
 
@@ -23108,7 +23462,7 @@ func main() {
 
 ### Tool Text Editor 20250429
 
-- `type ToolTextEditor20250429 struct{…}`
+- `type ToolTextEditor20250429`
 
   - `Type TextEditor20250429`
 
@@ -23161,7 +23515,7 @@ func main() {
 
 ### Tool Text Editor 20250728
 
-- `type ToolTextEditor20250728 struct{…}`
+- `type ToolTextEditor20250728`
 
   - `Type TextEditor20250728`
 
@@ -23222,7 +23576,7 @@ func main() {
 
 - `type ToolUnion interface{…}`
 
-  - `type Tool struct{…}`
+  - `type Tool`
 
     - `Type ToolType Optional`
 
@@ -23297,7 +23651,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolBash20250124 struct{…}`
+  - `type ToolBash20250124`
 
     - `Type Bash20250124`
 
@@ -23331,7 +23685,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20250522 struct{…}`
+  - `type CodeExecutionTool20250522`
 
     - `Type CodeExecution20250522`
 
@@ -23363,7 +23717,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20250825 struct{…}`
+  - `type CodeExecutionTool20250825`
 
     - `Type CodeExecution20250825`
 
@@ -23395,7 +23749,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20260120 struct{…}`
+  - `type CodeExecutionTool20260120`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -23429,7 +23783,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type CodeExecutionTool20260521 struct{…}`
+  - `type CodeExecutionTool20260521`
 
     Code execution tool with REPL state persistence.
 
@@ -23463,7 +23817,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BrowserToolset20260801 struct{…}`
+  - `type BrowserToolset20260801`
 
     The browser toolset: a single `tools[]` entry (carrying no
     `name`) that declares the browser tool family. The model is served
@@ -23857,7 +24211,7 @@ func main() {
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type MemoryTool20250818 struct{…}`
+  - `type MemoryTool20250818`
 
     - `Type Memory20250818`
 
@@ -23891,7 +24245,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ComputerToolset20260801 struct{…}`
+  - `type ComputerToolset20260801`
 
     The computer toolset: a single `tools[]` entry (carrying no
     `name`) that declares the computer tool family. The model is
@@ -24121,7 +24475,7 @@ func main() {
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type ToolTextEditor20250124 struct{…}`
+  - `type ToolTextEditor20250124`
 
     - `Type TextEditor20250124`
 
@@ -24155,7 +24509,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolTextEditor20250429 struct{…}`
+  - `type ToolTextEditor20250429`
 
     - `Type TextEditor20250429`
 
@@ -24189,7 +24543,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolTextEditor20250728 struct{…}`
+  - `type ToolTextEditor20250728`
 
     - `Type TextEditor20250728`
 
@@ -24229,7 +24583,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type WebSearchTool20250305 struct{…}`
+  - `type WebSearchTool20250305`
 
     - `Type WebSearch20250305`
 
@@ -24305,7 +24659,7 @@ func main() {
 
         maxLength: 255, minLength: 1
 
-  - `type WebFetchTool20250910 struct{…}`
+  - `type WebFetchTool20250910`
 
     - `Type WebFetch20250910`
 
@@ -24363,7 +24717,98 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type WebSearchTool20260209 struct{…}`
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `type WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `Type All`
+
+        - `type WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `Type None`
+
+        - `type WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `Type Only`
+
+          - `Tools []WebFetchURLSourceToolReference`
+
+            - `Type ToolReference`
+
+            - `Name string`
+
+        - `type WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `Type Except`
+
+          - `Tools []WebFetchURLSourceToolReference`
+
+            - `Type ToolReference`
+
+            - `Name string`
+
+      - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `type WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `type WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `type WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `type WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `type WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `type WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+  - `type WebSearchTool20260209`
 
     - `Type WebSearch20260209`
 
@@ -24413,7 +24858,7 @@ func main() {
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `type WebFetchTool20260209 struct{…}`
+  - `type WebFetchTool20260209`
 
     - `Type WebFetch20260209`
 
@@ -24469,7 +24914,16 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type WebFetchTool20260309 struct{…}`
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `type WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -24527,11 +24981,20 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `UseCache bool Optional`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `type WebSearchTool20260318 struct{…}`
+  - `type WebSearchTool20260318`
 
     - `Type WebSearch20260318`
 
@@ -24589,7 +25052,7 @@ func main() {
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `type WebFetchTool20260318 struct{…}`
+  - `type WebFetchTool20260318`
 
     - `Type WebFetch20260318`
 
@@ -24653,11 +25116,20 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `URLSources WebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `UseCache bool Optional`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `type ToolSearchToolBm25_20251119 struct{…}`
+  - `type ToolSearchToolBm25_20251119`
 
     - `Type ToolSearchToolBm25_20251119Type`
 
@@ -24693,7 +25165,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type ToolSearchToolRegex20251119 struct{…}`
+  - `type ToolSearchToolRegex20251119`
 
     - `Type ToolSearchToolRegex20251119Type`
 
@@ -24731,7 +25203,7 @@ func main() {
 
 ### Tool Use Block
 
-- `type ToolUseBlock struct{…}`
+- `type ToolUseBlock`
 
   - `Type ToolUse`
 
@@ -24745,13 +25217,13 @@ func main() {
 
     default: {"type":"direct"}
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -24761,7 +25233,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -24783,7 +25255,7 @@ func main() {
 
 ### Tool Use Block Param
 
-- `type ToolUseBlockParamResp struct{…}`
+- `type ToolUseBlockParamResp`
 
   - `Type ToolUse`
 
@@ -24820,13 +25292,13 @@ func main() {
 
   - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -24836,7 +25308,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -24852,7 +25324,7 @@ func main() {
 
 ### URL Image Source
 
-- `type URLImageSource struct{…}`
+- `type URLImageSource`
 
   - `Type URL`
 
@@ -24860,7 +25332,7 @@ func main() {
 
 ### URL PDF Source
 
-- `type URLPDFSource struct{…}`
+- `type URLPDFSource`
 
   - `Type URL`
 
@@ -24868,7 +25340,7 @@ func main() {
 
 ### Usage
 
-- `type Usage struct{…}`
+- `type Usage`
 
   - `CacheCreation CacheCreation`
 
@@ -24964,7 +25436,7 @@ func main() {
 
 ### User Location
 
-- `type UserLocation struct{…}`
+- `type UserLocation`
 
   - `Type Approximate`
 
@@ -24994,7 +25466,7 @@ func main() {
 
 ### Web Fetch Block
 
-- `type WebFetchBlock struct{…}`
+- `type WebFetchBlock`
 
   - `Type WebFetchResult`
 
@@ -25016,7 +25488,7 @@ func main() {
 
     - `Source DocumentBlockSourceUnion`
 
-      - `type Base64PDFSource struct{…}`
+      - `type Base64PDFSource`
 
         - `Type Base64`
 
@@ -25026,7 +25498,7 @@ func main() {
 
         - `MediaType ApplicationPDF`
 
-      - `type PlainTextSource struct{…}`
+      - `type PlainTextSource`
 
         - `Type Text`
 
@@ -25048,7 +25520,7 @@ func main() {
 
 ### Web Fetch Block Param
 
-- `type WebFetchBlockParamResp struct{…}`
+- `type WebFetchBlockParamResp`
 
   - `Type WebFetchResult`
 
@@ -25058,7 +25530,7 @@ func main() {
 
     - `Source DocumentBlockParamSourceUnionResp`
 
-      - `type Base64PDFSource struct{…}`
+      - `type Base64PDFSource`
 
         - `Type Base64`
 
@@ -25068,7 +25540,7 @@ func main() {
 
         - `MediaType ApplicationPDF`
 
-      - `type PlainTextSource struct{…}`
+      - `type PlainTextSource`
 
         - `Type Text`
 
@@ -25076,7 +25548,7 @@ func main() {
 
         - `MediaType TextPlain`
 
-      - `type ContentBlockSource struct{…}`
+      - `type ContentBlockSource`
 
         - `Type Content`
 
@@ -25086,7 +25558,7 @@ func main() {
 
           - `[]ContentBlockSourceContentItemUnion`
 
-            - `type TextBlockParamResp struct{…}`
+            - `type TextBlockParamResp`
 
               - `Type Text`
 
@@ -25117,7 +25589,7 @@ func main() {
 
               - `Citations []TextCitationParamUnionResp Optional`
 
-                - `type CitationCharLocationParamResp struct{…}`
+                - `type CitationCharLocationParamResp`
 
                   - `Type CharLocation`
 
@@ -25137,7 +25609,7 @@ func main() {
 
                     minimum: 0
 
-                - `type CitationPageLocationParamResp struct{…}`
+                - `type CitationPageLocationParamResp`
 
                   - `Type PageLocation`
 
@@ -25157,7 +25629,7 @@ func main() {
 
                     minimum: 1
 
-                - `type CitationContentBlockLocationParamResp struct{…}`
+                - `type CitationContentBlockLocationParamResp`
 
                   - `Type ContentBlockLocation`
 
@@ -25187,7 +25659,7 @@ func main() {
 
                     minimum: 0
 
-                - `type CitationWebSearchResultLocationParamResp struct{…}`
+                - `type CitationWebSearchResultLocationParamResp`
 
                   - `Type WebSearchResultLocation`
 
@@ -25203,7 +25675,7 @@ func main() {
 
                     minLength: 1
 
-                - `type CitationSearchResultLocationParamResp struct{…}`
+                - `type CitationSearchResultLocationParamResp`
 
                   - `Type SearchResultLocation`
 
@@ -25237,13 +25709,13 @@ func main() {
 
                   - `Title string`
 
-            - `type ImageBlockParamResp struct{…}`
+            - `type ImageBlockParamResp`
 
               - `Type Image`
 
               - `Source ImageBlockParamSourceUnionResp`
 
-                - `type Base64ImageSource struct{…}`
+                - `type Base64ImageSource`
 
                   - `Type Base64`
 
@@ -25261,13 +25733,13 @@ func main() {
 
                     - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-                - `type URLImageSource struct{…}`
+                - `type URLImageSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type FileImageSource struct{…}`
+                - `type FileImageSource`
 
                   - `Type File`
 
@@ -25289,13 +25761,13 @@ func main() {
 
                   - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-      - `type URLPDFSource struct{…}`
+      - `type URLPDFSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type FileDocumentSource struct{…}`
+      - `type FileDocumentSource`
 
         - `Type File`
 
@@ -25327,7 +25799,7 @@ func main() {
 
 ### Web Fetch Tool 20250910
 
-- `type WebFetchTool20250910 struct{…}`
+- `type WebFetchTool20250910`
 
   - `Type WebFetch20250910`
 
@@ -25402,9 +25874,100 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources WebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
 ### Web Fetch Tool 20260209
 
-- `type WebFetchTool20260209 struct{…}`
+- `type WebFetchTool20260209`
 
   - `Type WebFetch20260209`
 
@@ -25479,9 +26042,100 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources WebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
 ### Web Fetch Tool 20260309
 
-- `type WebFetchTool20260309 struct{…}`
+- `type WebFetchTool20260309`
 
   Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -25558,13 +26212,104 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources WebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
   - `UseCache bool Optional`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Web Fetch Tool 20260318
 
-- `type WebFetchTool20260318 struct{…}`
+- `type WebFetchTool20260318`
 
   - `Type WebFetch20260318`
 
@@ -25647,13 +26392,104 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources WebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []WebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type WebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type WebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type WebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type WebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
   - `UseCache bool Optional`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Web Fetch Tool Result Block
 
-- `type WebFetchToolResultBlock struct{…}`
+- `type WebFetchToolResultBlock`
 
   - `Type WebFetchToolResult`
 
@@ -25663,13 +26499,13 @@ func main() {
 
     default: {"type":"direct"}
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -25679,7 +26515,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -25689,7 +26525,7 @@ func main() {
 
   - `Content WebFetchToolResultBlockContentUnion`
 
-    - `type WebFetchToolResultErrorBlock struct{…}`
+    - `type WebFetchToolResultErrorBlock`
 
       - `Type WebFetchToolResultError`
 
@@ -25717,7 +26553,7 @@ func main() {
 
         - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-    - `type WebFetchBlock struct{…}`
+    - `type WebFetchBlock`
 
       - `Type WebFetchResult`
 
@@ -25739,7 +26575,7 @@ func main() {
 
         - `Source DocumentBlockSourceUnion`
 
-          - `type Base64PDFSource struct{…}`
+          - `type Base64PDFSource`
 
             - `Type Base64`
 
@@ -25749,7 +26585,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type PlainTextSource struct{…}`
+          - `type PlainTextSource`
 
             - `Type Text`
 
@@ -25775,13 +26611,13 @@ func main() {
 
 ### Web Fetch Tool Result Block Param
 
-- `type WebFetchToolResultBlockParamResp struct{…}`
+- `type WebFetchToolResultBlockParamResp`
 
   - `Type WebFetchToolResult`
 
   - `Content WebFetchToolResultBlockParamContentUnionResp`
 
-    - `type WebFetchToolResultErrorBlockParamResp struct{…}`
+    - `type WebFetchToolResultErrorBlockParamResp`
 
       - `Type WebFetchToolResultError`
 
@@ -25807,7 +26643,7 @@ func main() {
 
         - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-    - `type WebFetchBlockParamResp struct{…}`
+    - `type WebFetchBlockParamResp`
 
       - `Type WebFetchResult`
 
@@ -25817,7 +26653,7 @@ func main() {
 
         - `Source DocumentBlockParamSourceUnionResp`
 
-          - `type Base64PDFSource struct{…}`
+          - `type Base64PDFSource`
 
             - `Type Base64`
 
@@ -25827,7 +26663,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type PlainTextSource struct{…}`
+          - `type PlainTextSource`
 
             - `Type Text`
 
@@ -25835,7 +26671,7 @@ func main() {
 
             - `MediaType TextPlain`
 
-          - `type ContentBlockSource struct{…}`
+          - `type ContentBlockSource`
 
             - `Type Content`
 
@@ -25845,7 +26681,7 @@ func main() {
 
               - `[]ContentBlockSourceContentItemUnion`
 
-                - `type TextBlockParamResp struct{…}`
+                - `type TextBlockParamResp`
 
                   - `Type Text`
 
@@ -25876,7 +26712,7 @@ func main() {
 
                   - `Citations []TextCitationParamUnionResp Optional`
 
-                    - `type CitationCharLocationParamResp struct{…}`
+                    - `type CitationCharLocationParamResp`
 
                       - `Type CharLocation`
 
@@ -25896,7 +26732,7 @@ func main() {
 
                         minimum: 0
 
-                    - `type CitationPageLocationParamResp struct{…}`
+                    - `type CitationPageLocationParamResp`
 
                       - `Type PageLocation`
 
@@ -25916,7 +26752,7 @@ func main() {
 
                         minimum: 1
 
-                    - `type CitationContentBlockLocationParamResp struct{…}`
+                    - `type CitationContentBlockLocationParamResp`
 
                       - `Type ContentBlockLocation`
 
@@ -25946,7 +26782,7 @@ func main() {
 
                         minimum: 0
 
-                    - `type CitationWebSearchResultLocationParamResp struct{…}`
+                    - `type CitationWebSearchResultLocationParamResp`
 
                       - `Type WebSearchResultLocation`
 
@@ -25962,7 +26798,7 @@ func main() {
 
                         minLength: 1
 
-                    - `type CitationSearchResultLocationParamResp struct{…}`
+                    - `type CitationSearchResultLocationParamResp`
 
                       - `Type SearchResultLocation`
 
@@ -25996,13 +26832,13 @@ func main() {
 
                       - `Title string`
 
-                - `type ImageBlockParamResp struct{…}`
+                - `type ImageBlockParamResp`
 
                   - `Type Image`
 
                   - `Source ImageBlockParamSourceUnionResp`
 
-                    - `type Base64ImageSource struct{…}`
+                    - `type Base64ImageSource`
 
                       - `Type Base64`
 
@@ -26020,13 +26856,13 @@ func main() {
 
                         - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-                    - `type URLImageSource struct{…}`
+                    - `type URLImageSource`
 
                       - `Type URL`
 
                       - `URL string`
 
-                    - `type FileImageSource struct{…}`
+                    - `type FileImageSource`
 
                       - `Type File`
 
@@ -26048,13 +26884,13 @@ func main() {
 
                       - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-          - `type URLPDFSource struct{…}`
+          - `type URLPDFSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type FileDocumentSource struct{…}`
+          - `type FileDocumentSource`
 
             - `Type File`
 
@@ -26094,13 +26930,13 @@ func main() {
 
   - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -26110,7 +26946,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -26120,7 +26956,7 @@ func main() {
 
 ### Web Fetch Tool Result Error Block
 
-- `type WebFetchToolResultErrorBlock struct{…}`
+- `type WebFetchToolResultErrorBlock`
 
   - `Type WebFetchToolResultError`
 
@@ -26150,7 +26986,7 @@ func main() {
 
 ### Web Fetch Tool Result Error Block Param
 
-- `type WebFetchToolResultErrorBlockParamResp struct{…}`
+- `type WebFetchToolResultErrorBlockParamResp`
 
   - `Type WebFetchToolResultError`
 
@@ -26200,9 +27036,161 @@ func main() {
 
   - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
+### Web Fetch URL Source All
+
+- `type WebFetchURLSourceAll`
+
+  The `url_sources` variant under which a source contributes in
+  full: every result of the tool filter's source, or all user input.
+
+  - `Type All`
+
+### Web Fetch URL Source Except
+
+- `type WebFetchURLSourceExcept`
+
+  The tool filter variant under which every result but the named
+  tools' contributes.
+
+  - `Type Except`
+
+  - `Tools []WebFetchURLSourceToolReference`
+
+    - `Type ToolReference`
+
+    - `Name string`
+
+### Web Fetch URL Source None
+
+- `type WebFetchURLSourceNone`
+
+  The `url_sources` variant under which a source contributes nothing:
+  no result of the tool filter's source, or no user input.
+
+  - `Type None`
+
+### Web Fetch URL Source Only
+
+- `type WebFetchURLSourceOnly`
+
+  The tool filter variant under which only the named tools' results
+  contribute.
+
+  - `Type Only`
+
+  - `Tools []WebFetchURLSourceToolReference`
+
+    - `Type ToolReference`
+
+    - `Name string`
+
+### Web Fetch URL Source Tool Reference
+
+- `type WebFetchURLSourceToolReference`
+
+  One entry of a tool filter's `tools`: it must name a tool declared
+  in this request's `tools[]`.
+
+  - `Type ToolReference`
+
+  - `Name string`
+
+### Web Fetch URL Sources
+
+- `type WebFetchURLSources`
+
+  Which sources contribute to the set of URLs web fetch may fetch.
+
+  Each key is a tagged variant: `user_input` is `all` or `none`; the
+  two tool filters are `all`, `none`, `only` (only the named tools'
+  results) or `except` (every result but the named tools'). A named tool
+  must be declared in this request's `tools[]`.
+
+  - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+    Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+    - `type WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+      - `Type All`
+
+    - `type WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+      - `Type None`
+
+    - `type WebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+      - `Type Only`
+
+      - `Tools []WebFetchURLSourceToolReference`
+
+        - `Type ToolReference`
+
+        - `Name string`
+
+    - `type WebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+      - `Type Except`
+
+      - `Tools []WebFetchURLSourceToolReference`
+
+        - `Type ToolReference`
+
+        - `Name string`
+
+  - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+    Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+    - `type WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `type WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+    - `type WebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+    - `type WebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+  - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+    Whether URLs in user messages are fetchable: "all" or "none".
+
+    - `type WebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `type WebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
 ### Web Search Result Block
 
-- `type WebSearchResultBlock struct{…}`
+- `type WebSearchResultBlock`
 
   - `Type WebSearchResult`
 
@@ -26218,7 +27206,7 @@ func main() {
 
 ### Web Search Result Block Param
 
-- `type WebSearchResultBlockParamResp struct{…}`
+- `type WebSearchResultBlockParamResp`
 
   - `Type WebSearchResult`
 
@@ -26232,7 +27220,7 @@ func main() {
 
 ### Web Search Tool 20250305
 
-- `type WebSearchTool20250305 struct{…}`
+- `type WebSearchTool20250305`
 
   - `Type WebSearch20250305`
 
@@ -26327,7 +27315,7 @@ func main() {
 
 ### Web Search Tool 20260209
 
-- `type WebSearchTool20260209 struct{…}`
+- `type WebSearchTool20260209`
 
   - `Type WebSearch20260209`
 
@@ -26422,7 +27410,7 @@ func main() {
 
 ### Web Search Tool 20260318
 
-- `type WebSearchTool20260318 struct{…}`
+- `type WebSearchTool20260318`
 
   - `Type WebSearch20260318`
 
@@ -26525,7 +27513,7 @@ func main() {
 
 ### Web Search Tool Request Error
 
-- `type WebSearchToolRequestError struct{…}`
+- `type WebSearchToolRequestError`
 
   - `Type WebSearchToolResultError`
 
@@ -26545,7 +27533,7 @@ func main() {
 
 ### Web Search Tool Result Block
 
-- `type WebSearchToolResultBlock struct{…}`
+- `type WebSearchToolResultBlock`
 
   - `Type WebSearchToolResult`
 
@@ -26555,13 +27543,13 @@ func main() {
 
     default: {"type":"direct"}
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -26571,7 +27559,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -26581,7 +27569,7 @@ func main() {
 
   - `Content WebSearchToolResultBlockContentUnion`
 
-    - `type WebSearchToolResultError struct{…}`
+    - `type WebSearchToolResultError`
 
       - `Type WebSearchToolResultError`
 
@@ -26623,7 +27611,7 @@ func main() {
 
 - `type WebSearchToolResultBlockContentUnion interface{…}`
 
-  - `type WebSearchToolResultError struct{…}`
+  - `type WebSearchToolResultError`
 
     - `Type WebSearchToolResultError`
 
@@ -26659,7 +27647,7 @@ func main() {
 
 ### Web Search Tool Result Block Param
 
-- `type WebSearchToolResultBlockParamResp struct{…}`
+- `type WebSearchToolResultBlockParamResp`
 
   - `Type WebSearchToolResult`
 
@@ -26677,7 +27665,7 @@ func main() {
 
       - `PageAge string Optional`
 
-    - `type WebSearchToolRequestError struct{…}`
+    - `type WebSearchToolRequestError`
 
       - `Type WebSearchToolResultError`
 
@@ -26722,13 +27710,13 @@ func main() {
 
   - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
 
-    - `type DirectCaller struct{…}`
+    - `type DirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type ServerToolCaller struct{…}`
+    - `type ServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -26738,7 +27726,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type ServerToolCaller20260120 struct{…}`
+    - `type ServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -26762,7 +27750,7 @@ func main() {
 
     - `PageAge string Optional`
 
-  - `type WebSearchToolRequestError struct{…}`
+  - `type WebSearchToolRequestError`
 
     - `Type WebSearchToolResultError`
 
@@ -26782,7 +27770,7 @@ func main() {
 
 ### Web Search Tool Result Error
 
-- `type WebSearchToolResultError struct{…}`
+- `type WebSearchToolResultError`
 
   - `Type WebSearchToolResultError`
 
@@ -26923,7 +27911,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `[]ContentBlockParamUnionResp`
 
-            - `type TextBlockParamResp struct{…}`
+            - `type TextBlockParamResp`
 
               - `Type Text`
 
@@ -26954,7 +27942,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Citations []TextCitationParamUnionResp Optional`
 
-                - `type CitationCharLocationParamResp struct{…}`
+                - `type CitationCharLocationParamResp`
 
                   - `Type CharLocation`
 
@@ -26974,7 +27962,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                - `type CitationPageLocationParamResp struct{…}`
+                - `type CitationPageLocationParamResp`
 
                   - `Type PageLocation`
 
@@ -26994,7 +27982,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 1
 
-                - `type CitationContentBlockLocationParamResp struct{…}`
+                - `type CitationContentBlockLocationParamResp`
 
                   - `Type ContentBlockLocation`
 
@@ -27024,7 +28012,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                - `type CitationWebSearchResultLocationParamResp struct{…}`
+                - `type CitationWebSearchResultLocationParamResp`
 
                   - `Type WebSearchResultLocation`
 
@@ -27040,7 +28028,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minLength: 1
 
-                - `type CitationSearchResultLocationParamResp struct{…}`
+                - `type CitationSearchResultLocationParamResp`
 
                   - `Type SearchResultLocation`
 
@@ -27074,13 +28062,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Title string`
 
-            - `type ImageBlockParamResp struct{…}`
+            - `type ImageBlockParamResp`
 
               - `Type Image`
 
               - `Source ImageBlockParamSourceUnionResp`
 
-                - `type Base64ImageSource struct{…}`
+                - `type Base64ImageSource`
 
                   - `Type Base64`
 
@@ -27098,13 +28086,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const Base64ImageSourceMediaTypeImageWebP Base64ImageSourceMediaType = "image/webp"`
 
-                - `type URLImageSource struct{…}`
+                - `type URLImageSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type FileImageSource struct{…}`
+                - `type FileImageSource`
 
                   - `Type File`
 
@@ -27126,13 +28114,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
-            - `type DocumentBlockParamResp struct{…}`
+            - `type DocumentBlockParamResp`
 
               - `Type Document`
 
               - `Source DocumentBlockParamSourceUnionResp`
 
-                - `type Base64PDFSource struct{…}`
+                - `type Base64PDFSource`
 
                   - `Type Base64`
 
@@ -27142,7 +28130,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `MediaType ApplicationPDF`
 
-                - `type PlainTextSource struct{…}`
+                - `type PlainTextSource`
 
                   - `Type Text`
 
@@ -27150,7 +28138,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `MediaType TextPlain`
 
-                - `type ContentBlockSource struct{…}`
+                - `type ContentBlockSource`
 
                   - `Type Content`
 
@@ -27160,17 +28148,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `[]ContentBlockSourceContentItemUnion`
 
-                      - `type TextBlockParamResp struct{…}`
+                      - `type TextBlockParamResp`
 
-                      - `type ImageBlockParamResp struct{…}`
+                      - `type ImageBlockParamResp`
 
-                - `type URLPDFSource struct{…}`
+                - `type URLPDFSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type FileDocumentSource struct{…}`
+                - `type FileDocumentSource`
 
                   - `Type File`
 
@@ -27192,7 +28180,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 maxLength: 500, minLength: 1
 
-            - `type SearchResultBlockParamResp struct{…}`
+            - `type SearchResultBlockParamResp`
 
               - `Type SearchResult`
 
@@ -27220,7 +28208,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Citations CitationsConfigParamResp Optional`
 
-            - `type ThinkingBlockParamResp struct{…}`
+            - `type ThinkingBlockParamResp`
 
               - `Type Thinking`
 
@@ -27234,7 +28222,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The `thinking` text of this block as returned by the API.
 
-            - `type RedactedThinkingBlockParamResp struct{…}`
+            - `type RedactedThinkingBlockParamResp`
 
               - `Type RedactedThinking`
 
@@ -27242,7 +28230,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type ToolUseBlockParamResp struct{…}`
+            - `type ToolUseBlockParamResp`
 
               - `Type ToolUse`
 
@@ -27262,13 +28250,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller ToolUseBlockParamCallerUnionResp Optional`
 
-                - `type DirectCaller struct{…}`
+                - `type DirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `Type Direct`
 
-                - `type ServerToolCaller struct{…}`
+                - `type ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -27278,7 +28266,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `type ServerToolCaller20260120 struct{…}`
+                - `type ServerToolCaller20260120`
 
                   - `Type CodeExecution20260120`
 
@@ -27292,7 +28280,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type ToolResultBlockParamResp struct{…}`
+            - `type ToolResultBlockParamResp`
 
               - `Type ToolResult`
 
@@ -27308,15 +28296,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `[]ToolResultBlockParamContentUnionResp`
 
-                  - `type TextBlockParamResp struct{…}`
+                  - `type TextBlockParamResp`
 
-                  - `type ImageBlockParamResp struct{…}`
+                  - `type ImageBlockParamResp`
 
-                  - `type SearchResultBlockParamResp struct{…}`
+                  - `type SearchResultBlockParamResp`
 
-                  - `type DocumentBlockParamResp struct{…}`
+                  - `type DocumentBlockParamResp`
 
-                  - `type ToolReferenceBlockParamResp struct{…}`
+                  - `type ToolReferenceBlockParamResp`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -27330,7 +28318,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type BrowserStateBlockParamResp struct{…}`
+                  - `type BrowserStateBlockParamResp`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -27380,7 +28368,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       maxItems: 200, minItems: 1
 
-                      - `type BrowserStateChangeTabOpened struct{…}`
+                      - `type BrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -27398,7 +28386,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BrowserStateChangeDownloadStarted struct{…}`
+                      - `type BrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -27416,7 +28404,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BrowserStateChangeDownloadCompleted struct{…}`
+                      - `type BrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -27449,7 +28437,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minimum: 0
 
-                      - `type BrowserStateChangeDownloadFailed struct{…}`
+                      - `type BrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -27481,7 +28469,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type ServerToolUseBlockParamResp struct{…}`
+            - `type ServerToolUseBlockParamResp`
 
               - `Type ServerToolUse`
 
@@ -27513,17 +28501,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller ServerToolUseBlockParamCallerUnionResp Optional`
 
-                - `type DirectCaller struct{…}`
+                - `type DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type ServerToolCaller struct{…}`
+                - `type ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type ServerToolCaller20260120 struct{…}`
+                - `type ServerToolCaller20260120`
 
-            - `type WebSearchToolResultBlockParamResp struct{…}`
+            - `type WebSearchToolResultBlockParamResp`
 
               - `Type WebSearchToolResult`
 
@@ -27541,7 +28529,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `PageAge string Optional`
 
-                - `type WebSearchToolRequestError struct{…}`
+                - `type WebSearchToolRequestError`
 
                   - `Type WebSearchToolResultError`
 
@@ -27569,23 +28557,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller WebSearchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type DirectCaller struct{…}`
+                - `type DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type ServerToolCaller struct{…}`
+                - `type ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type ServerToolCaller20260120 struct{…}`
+                - `type ServerToolCaller20260120`
 
-            - `type WebFetchToolResultBlockParamResp struct{…}`
+            - `type WebFetchToolResultBlockParamResp`
 
               - `Type WebFetchToolResult`
 
               - `Content WebFetchToolResultBlockParamContentUnionResp`
 
-                - `type WebFetchToolResultErrorBlockParamResp struct{…}`
+                - `type WebFetchToolResultErrorBlockParamResp`
 
                   - `Type WebFetchToolResultError`
 
@@ -27611,7 +28599,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-                - `type WebFetchBlockParamResp struct{…}`
+                - `type WebFetchBlockParamResp`
 
                   - `Type WebFetchResult`
 
@@ -27635,23 +28623,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Caller WebFetchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type DirectCaller struct{…}`
+                - `type DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type ServerToolCaller struct{…}`
+                - `type ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type ServerToolCaller20260120 struct{…}`
+                - `type ServerToolCaller20260120`
 
-            - `type CodeExecutionToolResultBlockParamResp struct{…}`
+            - `type CodeExecutionToolResultBlockParamResp`
 
               - `Type CodeExecutionToolResult`
 
               - `Content CodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type CodeExecutionToolResultErrorParamResp struct{…}`
+                - `type CodeExecutionToolResultErrorParamResp`
 
                   - `Type CodeExecutionToolResultError`
 
@@ -27665,7 +28653,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-                - `type CodeExecutionResultBlockParamResp struct{…}`
+                - `type CodeExecutionResultBlockParamResp`
 
                   - `Type CodeExecutionResult`
 
@@ -27681,7 +28669,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Stdout string`
 
-                - `type EncryptedCodeExecutionResultBlockParamResp struct{…}`
+                - `type EncryptedCodeExecutionResultBlockParamResp`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -27707,13 +28695,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BashCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BashCodeExecutionToolResultBlockParamResp`
 
               - `Type BashCodeExecutionToolResult`
 
               - `Content BashCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BashCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BashCodeExecutionToolResultErrorParamResp`
 
                   - `Type BashCodeExecutionToolResultError`
 
@@ -27729,7 +28717,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-                - `type BashCodeExecutionResultBlockParamResp struct{…}`
+                - `type BashCodeExecutionResultBlockParamResp`
 
                   - `Type BashCodeExecutionResult`
 
@@ -27753,13 +28741,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type TextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type TextEditorCodeExecutionToolResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionToolResult`
 
               - `Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type TextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type TextEditorCodeExecutionToolResultErrorParamResp`
 
                   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -27777,7 +28765,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `ErrorMessage string Optional`
 
-                - `type TextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+                - `type TextEditorCodeExecutionViewResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionViewResult`
 
@@ -27797,13 +28785,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `TotalLines int64 Optional`
 
-                - `type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+                - `type TextEditorCodeExecutionCreateResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionCreateResult`
 
                   - `IsFileUpdate bool`
 
-                - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+                - `type TextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -27825,13 +28813,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type ToolSearchToolResultBlockParamResp struct{…}`
+            - `type ToolSearchToolResultBlockParamResp`
 
               - `Type ToolSearchToolResult`
 
               - `Content ToolSearchToolResultBlockParamContentUnionResp`
 
-                - `type ToolSearchToolResultErrorParamResp struct{…}`
+                - `type ToolSearchToolResultErrorParamResp`
 
                   - `Type ToolSearchToolResultError`
 
@@ -27847,7 +28835,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `ErrorMessage string Optional`
 
-                - `type ToolSearchToolSearchResultBlockParamResp struct{…}`
+                - `type ToolSearchToolSearchResultBlockParamResp`
 
                   - `Type ToolSearchToolSearchResult`
 
@@ -27871,7 +28859,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Create a cache control breakpoint at this content block.
 
-            - `type ContainerUploadBlockParamResp struct{…}`
+            - `type ContainerUploadBlockParamResp`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -27982,7 +28970,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Container identifier for reuse across requests.
 
-        - `type ContainerParamsResp struct{…}`
+        - `type ContainerParamsResp`
 
           Container parameters with skills to be loaded.
 
@@ -28114,7 +29102,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
-        - `type ThinkingConfigEnabled struct{…}`
+        - `type ThinkingConfigEnabled`
 
           - `Type Enabled`
 
@@ -28136,11 +29124,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `const ThinkingConfigEnabledDisplayOmitted ThinkingConfigEnabledDisplay = "omitted"`
 
-        - `type ThinkingConfigDisabled struct{…}`
+        - `type ThinkingConfigDisabled`
 
           - `Type Disabled`
 
-        - `type ThinkingConfigAdaptive struct{…}`
+        - `type ThinkingConfigAdaptive`
 
           - `Type Adaptive`
 
@@ -28156,7 +29144,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `type ToolChoiceAuto struct{…}`
+        - `type ToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -28168,7 +29156,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `type ToolChoiceAny struct{…}`
+        - `type ToolChoiceAny`
 
           The model will use any available tools.
 
@@ -28180,7 +29168,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type ToolChoiceTool struct{…}`
+        - `type ToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -28196,7 +29184,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type ToolChoiceNone struct{…}`
+        - `type ToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -28266,7 +29254,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-        - `type Tool struct{…}`
+        - `type Tool`
 
           - `Type ToolType Optional`
 
@@ -28324,7 +29312,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type ToolBash20250124 struct{…}`
+        - `type ToolBash20250124`
 
           - `Type Bash20250124`
 
@@ -28358,7 +29346,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type CodeExecutionTool20250522 struct{…}`
+        - `type CodeExecutionTool20250522`
 
           - `Type CodeExecution20250522`
 
@@ -28390,7 +29378,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type CodeExecutionTool20250825 struct{…}`
+        - `type CodeExecutionTool20250825`
 
           - `Type CodeExecution20250825`
 
@@ -28422,7 +29410,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type CodeExecutionTool20260120 struct{…}`
+        - `type CodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -28456,7 +29444,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type CodeExecutionTool20260521 struct{…}`
+        - `type CodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -28490,7 +29478,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BrowserToolset20260801 struct{…}`
+        - `type BrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -28884,7 +29872,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type MemoryTool20250818 struct{…}`
+        - `type MemoryTool20250818`
 
           - `Type Memory20250818`
 
@@ -28918,7 +29906,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type ComputerToolset20260801 struct{…}`
+        - `type ComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -29148,7 +30136,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type ToolTextEditor20250124 struct{…}`
+        - `type ToolTextEditor20250124`
 
           - `Type TextEditor20250124`
 
@@ -29182,7 +30170,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type ToolTextEditor20250429 struct{…}`
+        - `type ToolTextEditor20250429`
 
           - `Type TextEditor20250429`
 
@@ -29216,7 +30204,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type ToolTextEditor20250728 struct{…}`
+        - `type ToolTextEditor20250728`
 
           - `Type TextEditor20250728`
 
@@ -29256,7 +30244,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type WebSearchTool20250305 struct{…}`
+        - `type WebSearchTool20250305`
 
           - `Type WebSearch20250305`
 
@@ -29332,7 +30320,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               maxLength: 255, minLength: 1
 
-        - `type WebFetchTool20250910 struct{…}`
+        - `type WebFetchTool20250910`
 
           - `Type WebFetch20250910`
 
@@ -29388,7 +30376,98 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type WebSearchTool20260209 struct{…}`
+          - `URLSources WebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `ClientToolResults WebFetchURLSourcesClientToolResultsUnion Optional`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `type WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `Type All`
+
+              - `type WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `Type None`
+
+              - `type WebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `Type Only`
+
+                - `Tools []WebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+              - `type WebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `Type Except`
+
+                - `Tools []WebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+            - `ServerToolResults WebFetchURLSourcesServerToolResultsUnion Optional`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `type WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `type WebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `type WebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `UserInput WebFetchURLSourcesUserInputUnion Optional`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `type WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `type WebSearchTool20260209`
 
           - `Type WebSearch20260209`
 
@@ -29438,7 +30517,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type WebFetchTool20260209 struct{…}`
+        - `type WebFetchTool20260209`
 
           - `Type WebFetch20260209`
 
@@ -29494,7 +30573,16 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type WebFetchTool20260309 struct{…}`
+          - `URLSources WebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `type WebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -29552,11 +30640,20 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources WebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type WebSearchTool20260318 struct{…}`
+        - `type WebSearchTool20260318`
 
           - `Type WebSearch20260318`
 
@@ -29614,7 +30711,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type WebFetchTool20260318 struct{…}`
+        - `type WebFetchTool20260318`
 
           - `Type WebFetch20260318`
 
@@ -29678,11 +30775,20 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources WebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type ToolSearchToolBm25_20251119 struct{…}`
+        - `type ToolSearchToolBm25_20251119`
 
           - `Type ToolSearchToolBm25_20251119Type`
 
@@ -29718,7 +30824,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type ToolSearchToolRegex20251119 struct{…}`
+        - `type ToolSearchToolRegex20251119`
 
           - `Type ToolSearchToolRegex20251119Type`
 
@@ -29802,7 +30908,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type MessageBatch struct{…}`
+- `type MessageBatch`
 
   - `Type MessageBatch`
 
@@ -30000,7 +31106,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type MessageBatch struct{…}`
+- `type MessageBatch`
 
   - `Type MessageBatch`
 
@@ -30198,7 +31304,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type MessageBatch struct{…}`
+- `type MessageBatch`
 
   - `Type MessageBatch`
 
@@ -30389,7 +31495,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type MessageBatch struct{…}`
+- `type MessageBatch`
 
   - `Type MessageBatch`
 
@@ -30577,7 +31683,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type DeletedMessageBatch struct{…}`
+- `type DeletedMessageBatch`
 
   - `Type MessageBatchDeleted`
 
@@ -30657,7 +31763,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `type MessageBatchIndividualResponse struct{…}`
+- `type MessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -30673,7 +31779,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `type MessageBatchSucceededResult struct{…}`
+    - `type MessageBatchSucceededResult`
 
       - `Type Succeeded`
 
@@ -30762,7 +31868,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `type TextBlock struct{…}`
+          - `type TextBlock`
 
             - `Type Text`
 
@@ -30774,7 +31880,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `type CitationCharLocation struct{…}`
+              - `type CitationCharLocation`
 
                 - `Type CharLocation`
 
@@ -30796,7 +31902,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 0
 
-              - `type CitationPageLocation struct{…}`
+              - `type CitationPageLocation`
 
                 - `Type PageLocation`
 
@@ -30818,7 +31924,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-              - `type CitationContentBlockLocation struct{…}`
+              - `type CitationContentBlockLocation`
 
                 - `Type ContentBlockLocation`
 
@@ -30850,7 +31956,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 0
 
-              - `type CitationsWebSearchResultLocation struct{…}`
+              - `type CitationsWebSearchResultLocation`
 
                 - `Type WebSearchResultLocation`
 
@@ -30866,7 +31972,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `URL string`
 
-              - `type CitationsSearchResultLocation struct{…}`
+              - `type CitationsSearchResultLocation`
 
                 - `Type SearchResultLocation`
 
@@ -30906,7 +32012,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               minLength: 0
 
-          - `type ThinkingBlock struct{…}`
+          - `type ThinkingBlock`
 
             - `Type Thinking`
 
@@ -30924,7 +32030,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               The text of Claude's thinking process for this block.
 
-          - `type RedactedThinkingBlock struct{…}`
+          - `type RedactedThinkingBlock`
 
             - `Type RedactedThinking`
 
@@ -30938,7 +32044,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type ToolUseBlock struct{…}`
+          - `type ToolUseBlock`
 
             - `Type ToolUse`
 
@@ -30952,13 +32058,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: {"type":"direct"}
 
-              - `type DirectCaller struct{…}`
+              - `type DirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `Type Direct`
 
-              - `type ServerToolCaller struct{…}`
+              - `type ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -30968,7 +32074,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type ServerToolCaller20260120 struct{…}`
+              - `type ServerToolCaller20260120`
 
                 - `Type CodeExecution20260120`
 
@@ -30988,7 +32094,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type ServerToolUseBlock struct{…}`
+          - `type ServerToolUseBlock`
 
             - `Type ServerToolUse`
 
@@ -31002,15 +32108,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: {"type":"direct"}
 
-              - `type DirectCaller struct{…}`
+              - `type DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type ServerToolCaller struct{…}`
+              - `type ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type ServerToolCaller20260120 struct{…}`
+              - `type ServerToolCaller20260120`
 
             - `Input map[string, any]`
 
@@ -31030,7 +32136,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `const ServerToolUseBlockNameToolSearchToolBm25 ServerToolUseBlockName = "tool_search_tool_bm25"`
 
-          - `type WebSearchToolResultBlock struct{…}`
+          - `type WebSearchToolResultBlock`
 
             - `Type WebSearchToolResult`
 
@@ -31040,19 +32146,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: {"type":"direct"}
 
-              - `type DirectCaller struct{…}`
+              - `type DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type ServerToolCaller struct{…}`
+              - `type ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type ServerToolCaller20260120 struct{…}`
+              - `type ServerToolCaller20260120`
 
             - `Content WebSearchToolResultBlockContentUnion`
 
-              - `type WebSearchToolResultError struct{…}`
+              - `type WebSearchToolResultError`
 
                 - `Type WebSearchToolResultError`
 
@@ -31090,7 +32196,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type WebFetchToolResultBlock struct{…}`
+          - `type WebFetchToolResultBlock`
 
             - `Type WebFetchToolResult`
 
@@ -31100,19 +32206,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: {"type":"direct"}
 
-              - `type DirectCaller struct{…}`
+              - `type DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type ServerToolCaller struct{…}`
+              - `type ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type ServerToolCaller20260120 struct{…}`
+              - `type ServerToolCaller20260120`
 
             - `Content WebFetchToolResultBlockContentUnion`
 
-              - `type WebFetchToolResultErrorBlock struct{…}`
+              - `type WebFetchToolResultErrorBlock`
 
                 - `Type WebFetchToolResultError`
 
@@ -31140,7 +32246,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const WebFetchToolResultErrorCodeContentTooLarge WebFetchToolResultErrorCode = "content_too_large"`
 
-              - `type WebFetchBlock struct{…}`
+              - `type WebFetchBlock`
 
                 - `Type WebFetchResult`
 
@@ -31162,7 +32268,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Source DocumentBlockSourceUnion`
 
-                    - `type Base64PDFSource struct{…}`
+                    - `type Base64PDFSource`
 
                       - `Type Base64`
 
@@ -31172,7 +32278,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `MediaType ApplicationPDF`
 
-                    - `type PlainTextSource struct{…}`
+                    - `type PlainTextSource`
 
                       - `Type Text`
 
@@ -31196,7 +32302,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type CodeExecutionToolResultBlock struct{…}`
+          - `type CodeExecutionToolResultBlock`
 
             - `Type CodeExecutionToolResult`
 
@@ -31204,7 +32310,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content CodeExecutionToolResultBlockContentUnion`
 
-              - `type CodeExecutionToolResultError struct{…}`
+              - `type CodeExecutionToolResultError`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -31220,7 +32326,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-              - `type CodeExecutionResultBlock struct{…}`
+              - `type CodeExecutionResultBlock`
 
                 - `Type CodeExecutionResult`
 
@@ -31240,7 +32346,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `Stdout string`
 
-              - `type EncryptedCodeExecutionResultBlock struct{…}`
+              - `type EncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -31266,7 +32372,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BashCodeExecutionToolResultBlock struct{…}`
+          - `type BashCodeExecutionToolResultBlock`
 
             - `Type BashCodeExecutionToolResult`
 
@@ -31274,7 +32380,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BashCodeExecutionToolResultError struct{…}`
+              - `type BashCodeExecutionToolResultError`
 
                 - `Type BashCodeExecutionToolResultError`
 
@@ -31292,7 +32398,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
-              - `type BashCodeExecutionResultBlock struct{…}`
+              - `type BashCodeExecutionResultBlock`
 
                 - `Type BashCodeExecutionResult`
 
@@ -31316,7 +32422,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type TextEditorCodeExecutionToolResultBlock struct{…}`
+          - `type TextEditorCodeExecutionToolResultBlock`
 
             - `Type TextEditorCodeExecutionToolResult`
 
@@ -31324,7 +32430,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type TextEditorCodeExecutionToolResultError struct{…}`
+              - `type TextEditorCodeExecutionToolResultError`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
@@ -31344,7 +32450,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `ErrorMessage string`
 
-              - `type TextEditorCodeExecutionViewResultBlock struct{…}`
+              - `type TextEditorCodeExecutionViewResultBlock`
 
                 - `Type TextEditorCodeExecutionViewResult`
 
@@ -31366,7 +32472,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `TotalLines int64`
 
-              - `type TextEditorCodeExecutionCreateResultBlock struct{…}`
+              - `type TextEditorCodeExecutionCreateResultBlock`
 
                 - `Type TextEditorCodeExecutionCreateResult`
 
@@ -31374,7 +32480,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `IsFileUpdate bool`
 
-              - `type TextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+              - `type TextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -31394,7 +32500,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type ToolSearchToolResultBlock struct{…}`
+          - `type ToolSearchToolResultBlock`
 
             - `Type ToolSearchToolResult`
 
@@ -31402,7 +32508,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content ToolSearchToolResultBlockContentUnion`
 
-              - `type ToolSearchToolResultError struct{…}`
+              - `type ToolSearchToolResultError`
 
                 - `Type ToolSearchToolResultError`
 
@@ -31420,7 +32526,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `ErrorMessage string`
 
-              - `type ToolSearchToolSearchResultBlock struct{…}`
+              - `type ToolSearchToolSearchResultBlock`
 
                 - `Type ToolSearchToolSearchResult`
 
@@ -31440,7 +32546,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type ContainerUploadBlock struct{…}`
+          - `type ContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -31718,7 +32824,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `const UsageServiceTierBatch UsageServiceTier = "batch"`
 
-    - `type MessageBatchErroredResult struct{…}`
+    - `type MessageBatchErroredResult`
 
       - `Type Errored`
 
@@ -31732,7 +32838,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `Error ErrorObjectUnion`
 
-          - `type InvalidRequestError struct{…}`
+          - `type InvalidRequestError`
 
             - `Type InvalidRequestError`
 
@@ -31742,7 +32848,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Invalid request
 
-          - `type AuthenticationError struct{…}`
+          - `type AuthenticationError`
 
             - `Type AuthenticationError`
 
@@ -31752,7 +32858,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Authentication error
 
-          - `type BillingError struct{…}`
+          - `type BillingError`
 
             - `Type BillingError`
 
@@ -31762,7 +32868,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Billing error
 
-          - `type PermissionError struct{…}`
+          - `type PermissionError`
 
             - `Type PermissionError`
 
@@ -31772,7 +32878,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Permission denied
 
-          - `type NotFoundError struct{…}`
+          - `type NotFoundError`
 
             - `Type NotFoundError`
 
@@ -31782,7 +32888,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Not found
 
-          - `type RateLimitError struct{…}`
+          - `type RateLimitError`
 
             - `Type RateLimitError`
 
@@ -31792,7 +32898,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Rate limited
 
-          - `type GatewayTimeoutError struct{…}`
+          - `type GatewayTimeoutError`
 
             - `Type TimeoutError`
 
@@ -31802,7 +32908,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Request timeout
 
-          - `type APIErrorObject struct{…}`
+          - `type APIErrorObject`
 
             - `Type APIError`
 
@@ -31812,7 +32918,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Internal server error
 
-          - `type OverloadedError struct{…}`
+          - `type OverloadedError`
 
             - `Type OverloadedError`
 
@@ -31824,13 +32930,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `RequestID string`
 
-    - `type MessageBatchCanceledResult struct{…}`
+    - `type MessageBatchCanceledResult`
 
       - `Type Canceled`
 
         default: canceled
 
-    - `type MessageBatchExpiredResult struct{…}`
+    - `type MessageBatchExpiredResult`
 
       - `Type Expired`
 

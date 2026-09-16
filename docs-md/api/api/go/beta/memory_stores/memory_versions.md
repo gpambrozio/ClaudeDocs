@@ -165,6 +165,8 @@ List memory versions
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -173,7 +175,7 @@ List memory versions
 
 ### Returns
 
-- `type BetaManagedAgentsMemoryVersion struct{…}`
+- `type BetaManagedAgentsMemoryVersion`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -225,7 +227,7 @@ List memory versions
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../../beta/sessions/retrieve.md).
 
-    - `type BetaManagedAgentsSessionActor struct{…}`
+    - `type BetaManagedAgentsSessionActor`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -237,7 +239,7 @@ List memory versions
 
         minLength: 1
 
-    - `type BetaManagedAgentsAPIActor struct{…}`
+    - `type BetaManagedAgentsAPIActor`
 
       Attribution for a write made directly via the public API (outside of any session).
 
@@ -249,7 +251,7 @@ List memory versions
 
         minLength: 1
 
-    - `type BetaManagedAgentsUserActor struct{…}`
+    - `type BetaManagedAgentsUserActor`
 
       Attribution for a write made by a human user through the Anthropic Console.
 
@@ -261,7 +263,7 @@ List memory versions
 
         minLength: 1
 
-    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+    - `type BetaManagedAgentsServiceAccountActor`
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -467,6 +469,8 @@ Retrieve a memory version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -475,7 +479,7 @@ Retrieve a memory version
 
 ### Returns
 
-- `type BetaManagedAgentsMemoryVersion struct{…}`
+- `type BetaManagedAgentsMemoryVersion`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -527,7 +531,7 @@ Retrieve a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../../beta/sessions/retrieve.md).
 
-    - `type BetaManagedAgentsSessionActor struct{…}`
+    - `type BetaManagedAgentsSessionActor`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -539,7 +543,7 @@ Retrieve a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsAPIActor struct{…}`
+    - `type BetaManagedAgentsAPIActor`
 
       Attribution for a write made directly via the public API (outside of any session).
 
@@ -551,7 +555,7 @@ Retrieve a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsUserActor struct{…}`
+    - `type BetaManagedAgentsUserActor`
 
       Attribution for a write made by a human user through the Anthropic Console.
 
@@ -563,7 +567,7 @@ Retrieve a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+    - `type BetaManagedAgentsServiceAccountActor`
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -762,6 +766,8 @@ Redact a memory version
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -770,7 +776,7 @@ Redact a memory version
 
 ### Returns
 
-- `type BetaManagedAgentsMemoryVersion struct{…}`
+- `type BetaManagedAgentsMemoryVersion`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -822,7 +828,7 @@ Redact a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../../beta/sessions/retrieve.md).
 
-    - `type BetaManagedAgentsSessionActor struct{…}`
+    - `type BetaManagedAgentsSessionActor`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -834,7 +840,7 @@ Redact a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsAPIActor struct{…}`
+    - `type BetaManagedAgentsAPIActor`
 
       Attribution for a write made directly via the public API (outside of any session).
 
@@ -846,7 +852,7 @@ Redact a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsUserActor struct{…}`
+    - `type BetaManagedAgentsUserActor`
 
       Attribution for a write made by a human user through the Anthropic Console.
 
@@ -858,7 +864,7 @@ Redact a memory version
 
         minLength: 1
 
-    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+    - `type BetaManagedAgentsServiceAccountActor`
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -949,7 +955,7 @@ func main() {
 
   Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../../beta/sessions/retrieve.md).
 
-  - `type BetaManagedAgentsSessionActor struct{…}`
+  - `type BetaManagedAgentsSessionActor`
 
     Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -961,7 +967,7 @@ func main() {
 
       minLength: 1
 
-  - `type BetaManagedAgentsAPIActor struct{…}`
+  - `type BetaManagedAgentsAPIActor`
 
     Attribution for a write made directly via the public API (outside of any session).
 
@@ -973,7 +979,7 @@ func main() {
 
       minLength: 1
 
-  - `type BetaManagedAgentsUserActor struct{…}`
+  - `type BetaManagedAgentsUserActor`
 
     Attribution for a write made by a human user through the Anthropic Console.
 
@@ -985,7 +991,7 @@ func main() {
 
       minLength: 1
 
-  - `type BetaManagedAgentsServiceAccountActor struct{…}`
+  - `type BetaManagedAgentsServiceAccountActor`
 
     Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -999,7 +1005,7 @@ func main() {
 
 ### Beta Managed Agents API Actor
 
-- `type BetaManagedAgentsAPIActor struct{…}`
+- `type BetaManagedAgentsAPIActor`
 
   Attribution for a write made directly via the public API (outside of any session).
 
@@ -1013,7 +1019,7 @@ func main() {
 
 ### Beta Managed Agents Memory Version
 
-- `type BetaManagedAgentsMemoryVersion struct{…}`
+- `type BetaManagedAgentsMemoryVersion`
 
   A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -1065,7 +1071,7 @@ func main() {
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](../../../beta/sessions/retrieve.md).
 
-    - `type BetaManagedAgentsSessionActor struct{…}`
+    - `type BetaManagedAgentsSessionActor`
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -1077,7 +1083,7 @@ func main() {
 
         minLength: 1
 
-    - `type BetaManagedAgentsAPIActor struct{…}`
+    - `type BetaManagedAgentsAPIActor`
 
       Attribution for a write made directly via the public API (outside of any session).
 
@@ -1089,7 +1095,7 @@ func main() {
 
         minLength: 1
 
-    - `type BetaManagedAgentsUserActor struct{…}`
+    - `type BetaManagedAgentsUserActor`
 
       Attribution for a write made by a human user through the Anthropic Console.
 
@@ -1101,7 +1107,7 @@ func main() {
 
         minLength: 1
 
-    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+    - `type BetaManagedAgentsServiceAccountActor`
 
       Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -1141,7 +1147,7 @@ func main() {
 
 ### Beta Managed Agents Service Account Actor
 
-- `type BetaManagedAgentsServiceAccountActor struct{…}`
+- `type BetaManagedAgentsServiceAccountActor`
 
   Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
 
@@ -1155,7 +1161,7 @@ func main() {
 
 ### Beta Managed Agents Session Actor
 
-- `type BetaManagedAgentsSessionActor struct{…}`
+- `type BetaManagedAgentsSessionActor`
 
   Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -1169,7 +1175,7 @@ func main() {
 
 ### Beta Managed Agents User Actor
 
-- `type BetaManagedAgentsUserActor struct{…}`
+- `type BetaManagedAgentsUserActor`
 
   Attribution for a write made by a human user through the Anthropic Console.
 

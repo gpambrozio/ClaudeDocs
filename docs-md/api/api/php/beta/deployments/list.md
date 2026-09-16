@@ -51,7 +51,7 @@ List Deployments
 
 ## Returns
 
-- `BetaManagedAgentsDeployment`
+- `class BetaManagedAgentsDeployment`
 
   - `Type type`
 

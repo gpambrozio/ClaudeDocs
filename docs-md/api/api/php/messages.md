@@ -248,7 +248,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 ### Returns
 
-- `Message`
+- `class Message`
 
   - `"message" type`
 
@@ -345,15 +345,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-- `RawMessageStreamEvent`
+- `class RawMessageStreamEvent`
 
-  - `RawMessageStartEvent`
+  - `class RawMessageStartEvent`
 
     - `"message_start" type`
 
     - `Message message`
 
-  - `RawMessageDeltaEvent`
+  - `class RawMessageDeltaEvent`
 
     - `"message_delta" type`
 
@@ -371,11 +371,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-  - `RawMessageStopEvent`
+  - `class RawMessageStopEvent`
 
     - `"message_stop" type`
 
-  - `RawContentBlockStartEvent`
+  - `class RawContentBlockStartEvent`
 
     - `"content_block_start" type`
 
@@ -383,7 +383,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `int index`
 
-  - `RawContentBlockDeltaEvent`
+  - `class RawContentBlockDeltaEvent`
 
     - `"content_block_delta" type`
 
@@ -391,7 +391,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `int index`
 
-  - `RawContentBlockStopEvent`
+  - `class RawContentBlockStopEvent`
 
     - `"content_block_stop" type`
 
@@ -706,7 +706,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
 ### Returns
 
-- `MessageTokensCount`
+- `class MessageTokensCount`
 
   - `int inputTokens`
 
@@ -785,7 +785,7 @@ var_dump($messageTokensCount);
 
 ### Base64 Image Source
 
-- `Base64ImageSource`
+- `class Base64ImageSource`
 
   - `"base64" type`
 
@@ -795,7 +795,7 @@ var_dump($messageTokensCount);
 
 ### Base64 PDF Source
 
-- `Base64PDFSource`
+- `class Base64PDFSource`
 
   - `"base64" type`
 
@@ -805,7 +805,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Output Block
 
-- `BashCodeExecutionOutputBlock`
+- `class BashCodeExecutionOutputBlock`
 
   - `"bash_code_execution_output" type`
 
@@ -813,7 +813,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Output Block Param
 
-- `BashCodeExecutionOutputBlockParam`
+- `class BashCodeExecutionOutputBlockParam`
 
   - `"bash_code_execution_output" type`
 
@@ -821,7 +821,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Result Block
 
-- `BashCodeExecutionResultBlock`
+- `class BashCodeExecutionResultBlock`
 
   - `"bash_code_execution_result" type`
 
@@ -835,7 +835,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Result Block Param
 
-- `BashCodeExecutionResultBlockParam`
+- `class BashCodeExecutionResultBlockParam`
 
   - `"bash_code_execution_result" type`
 
@@ -849,7 +849,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Tool Result Block
 
-- `BashCodeExecutionToolResultBlock`
+- `class BashCodeExecutionToolResultBlock`
 
   - `"bash_code_execution_tool_result" type`
 
@@ -859,7 +859,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Tool Result Block Param
 
-- `BashCodeExecutionToolResultBlockParam`
+- `class BashCodeExecutionToolResultBlockParam`
 
   - `"bash_code_execution_tool_result" type`
 
@@ -873,7 +873,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Tool Result Error
 
-- `BashCodeExecutionToolResultError`
+- `class BashCodeExecutionToolResultError`
 
   - `"bash_code_execution_tool_result_error" type`
 
@@ -881,7 +881,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Tool Result Error Code
 
-- `BashCodeExecutionToolResultErrorCode`
+- `enum BashCodeExecutionToolResultErrorCode`
 
   - `"invalid_tool_input"`
 
@@ -895,7 +895,7 @@ var_dump($messageTokensCount);
 
 ### Bash Code Execution Tool Result Error Param
 
-- `BashCodeExecutionToolResultErrorParam`
+- `class BashCodeExecutionToolResultErrorParam`
 
   - `"bash_code_execution_tool_result_error" type`
 
@@ -903,7 +903,7 @@ var_dump($messageTokensCount);
 
 ### Browser Close Tab Config
 
-- `BrowserCloseTabConfig`
+- `class BrowserCloseTabConfig`
 
   - `?bool deferLoading`
 
@@ -915,7 +915,7 @@ var_dump($messageTokensCount);
 
 ### Browser Double Click Config
 
-- `BrowserDoubleClickConfig`
+- `class BrowserDoubleClickConfig`
 
   - `?bool deferLoading`
 
@@ -927,7 +927,7 @@ var_dump($messageTokensCount);
 
 ### Browser File Upload Config
 
-- `BrowserFileUploadConfig`
+- `class BrowserFileUploadConfig`
 
   - `?bool deferLoading`
 
@@ -939,7 +939,7 @@ var_dump($messageTokensCount);
 
 ### Browser Find Config
 
-- `BrowserFindConfig`
+- `class BrowserFindConfig`
 
   - `?bool deferLoading`
 
@@ -951,7 +951,7 @@ var_dump($messageTokensCount);
 
 ### Browser Form Input Config
 
-- `BrowserFormInputConfig`
+- `class BrowserFormInputConfig`
 
   - `?bool deferLoading`
 
@@ -963,7 +963,7 @@ var_dump($messageTokensCount);
 
 ### Browser Get Page Text Config
 
-- `BrowserGetPageTextConfig`
+- `class BrowserGetPageTextConfig`
 
   - `?bool deferLoading`
 
@@ -975,7 +975,7 @@ var_dump($messageTokensCount);
 
 ### Browser Hold Key Config
 
-- `BrowserHoldKeyConfig`
+- `class BrowserHoldKeyConfig`
 
   - `?bool deferLoading`
 
@@ -987,7 +987,7 @@ var_dump($messageTokensCount);
 
 ### Browser Hover Config
 
-- `BrowserHoverConfig`
+- `class BrowserHoverConfig`
 
   - `?bool deferLoading`
 
@@ -999,7 +999,7 @@ var_dump($messageTokensCount);
 
 ### Browser Javascript Exec Config
 
-- `BrowserJavascriptExecConfig`
+- `class BrowserJavascriptExecConfig`
 
   - `?bool deferLoading`
 
@@ -1011,7 +1011,7 @@ var_dump($messageTokensCount);
 
 ### Browser Key Config
 
-- `BrowserKeyConfig`
+- `class BrowserKeyConfig`
 
   - `?bool deferLoading`
 
@@ -1023,7 +1023,7 @@ var_dump($messageTokensCount);
 
 ### Browser Left Click Config
 
-- `BrowserLeftClickConfig`
+- `class BrowserLeftClickConfig`
 
   - `?bool deferLoading`
 
@@ -1035,7 +1035,7 @@ var_dump($messageTokensCount);
 
 ### Browser Left Click Drag Config
 
-- `BrowserLeftClickDragConfig`
+- `class BrowserLeftClickDragConfig`
 
   - `?bool deferLoading`
 
@@ -1047,7 +1047,7 @@ var_dump($messageTokensCount);
 
 ### Browser Left Mouse Down Config
 
-- `BrowserLeftMouseDownConfig`
+- `class BrowserLeftMouseDownConfig`
 
   - `?bool deferLoading`
 
@@ -1059,7 +1059,7 @@ var_dump($messageTokensCount);
 
 ### Browser Left Mouse Up Config
 
-- `BrowserLeftMouseUpConfig`
+- `class BrowserLeftMouseUpConfig`
 
   - `?bool deferLoading`
 
@@ -1071,7 +1071,7 @@ var_dump($messageTokensCount);
 
 ### Browser List Tabs Config
 
-- `BrowserListTabsConfig`
+- `class BrowserListTabsConfig`
 
   - `?bool deferLoading`
 
@@ -1083,7 +1083,7 @@ var_dump($messageTokensCount);
 
 ### Browser Middle Click Config
 
-- `BrowserMiddleClickConfig`
+- `class BrowserMiddleClickConfig`
 
   - `?bool deferLoading`
 
@@ -1095,7 +1095,7 @@ var_dump($messageTokensCount);
 
 ### Browser Mouse Move Config
 
-- `BrowserMouseMoveConfig`
+- `class BrowserMouseMoveConfig`
 
   - `?bool deferLoading`
 
@@ -1107,7 +1107,7 @@ var_dump($messageTokensCount);
 
 ### Browser Navigate Config
 
-- `BrowserNavigateConfig`
+- `class BrowserNavigateConfig`
 
   - `?bool deferLoading`
 
@@ -1119,7 +1119,7 @@ var_dump($messageTokensCount);
 
 ### Browser New Tab Config
 
-- `BrowserNewTabConfig`
+- `class BrowserNewTabConfig`
 
   - `?bool deferLoading`
 
@@ -1131,7 +1131,7 @@ var_dump($messageTokensCount);
 
 ### Browser Read Console Config
 
-- `BrowserReadConsoleConfig`
+- `class BrowserReadConsoleConfig`
 
   - `?bool deferLoading`
 
@@ -1143,7 +1143,7 @@ var_dump($messageTokensCount);
 
 ### Browser Read Network Config
 
-- `BrowserReadNetworkConfig`
+- `class BrowserReadNetworkConfig`
 
   - `?bool deferLoading`
 
@@ -1155,7 +1155,7 @@ var_dump($messageTokensCount);
 
 ### Browser Read Page Config
 
-- `BrowserReadPageConfig`
+- `class BrowserReadPageConfig`
 
   - `?bool deferLoading`
 
@@ -1167,7 +1167,7 @@ var_dump($messageTokensCount);
 
 ### Browser Right Click Config
 
-- `BrowserRightClickConfig`
+- `class BrowserRightClickConfig`
 
   - `?bool deferLoading`
 
@@ -1179,7 +1179,7 @@ var_dump($messageTokensCount);
 
 ### Browser Screenshot Config
 
-- `BrowserScreenshotConfig`
+- `class BrowserScreenshotConfig`
 
   - `?bool deferLoading`
 
@@ -1191,7 +1191,7 @@ var_dump($messageTokensCount);
 
 ### Browser Scroll Config
 
-- `BrowserScrollConfig`
+- `class BrowserScrollConfig`
 
   - `?bool deferLoading`
 
@@ -1203,7 +1203,7 @@ var_dump($messageTokensCount);
 
 ### Browser Scroll To Config
 
-- `BrowserScrollToConfig`
+- `class BrowserScrollToConfig`
 
   - `?bool deferLoading`
 
@@ -1215,7 +1215,7 @@ var_dump($messageTokensCount);
 
 ### Browser State Block Param
 
-- `BrowserStateBlockParam`
+- `class BrowserStateBlockParam`
 
   - `"browser_state" type`
 
@@ -1233,9 +1233,9 @@ var_dump($messageTokensCount);
 
 ### Browser State Change
 
-- `BrowserStateChange`
+- `class BrowserStateChange`
 
-  - `BrowserStateChangeTabOpened`
+  - `class BrowserStateChangeTabOpened`
 
     - `"tab_opened" type`
 
@@ -1243,7 +1243,7 @@ var_dump($messageTokensCount);
 
       The `tab_id` of the opened tab, present in `tabs`.
 
-  - `BrowserStateChangeDownloadStarted`
+  - `class BrowserStateChangeDownloadStarted`
 
     - `"download_started" type`
 
@@ -1255,7 +1255,7 @@ var_dump($messageTokensCount);
 
       The final post-redirect URL the download was served from.
 
-  - `BrowserStateChangeDownloadCompleted`
+  - `class BrowserStateChangeDownloadCompleted`
 
     - `"download_completed" type`
 
@@ -1275,7 +1275,7 @@ var_dump($messageTokensCount);
 
       The completed download's size.
 
-  - `BrowserStateChangeDownloadFailed`
+  - `class BrowserStateChangeDownloadFailed`
 
     - `"download_failed" type`
 
@@ -1293,7 +1293,7 @@ var_dump($messageTokensCount);
 
 ### Browser State Change Download Completed
 
-- `BrowserStateChangeDownloadCompleted`
+- `class BrowserStateChangeDownloadCompleted`
 
   - `"download_completed" type`
 
@@ -1315,7 +1315,7 @@ var_dump($messageTokensCount);
 
 ### Browser State Change Download Failed
 
-- `BrowserStateChangeDownloadFailed`
+- `class BrowserStateChangeDownloadFailed`
 
   - `"download_failed" type`
 
@@ -1333,7 +1333,7 @@ var_dump($messageTokensCount);
 
 ### Browser State Change Download Started
 
-- `BrowserStateChangeDownloadStarted`
+- `class BrowserStateChangeDownloadStarted`
 
   - `"download_started" type`
 
@@ -1347,7 +1347,7 @@ var_dump($messageTokensCount);
 
 ### Browser State Change Tab Opened
 
-- `BrowserStateChangeTabOpened`
+- `class BrowserStateChangeTabOpened`
 
   - `"tab_opened" type`
 
@@ -1357,7 +1357,7 @@ var_dump($messageTokensCount);
 
 ### Browser State Tab Entry
 
-- `BrowserStateTabEntry`
+- `class BrowserStateTabEntry`
 
   - `string tabID`
 
@@ -1377,7 +1377,7 @@ var_dump($messageTokensCount);
 
 ### Browser Switch Tab Config
 
-- `BrowserSwitchTabConfig`
+- `class BrowserSwitchTabConfig`
 
   - `?bool deferLoading`
 
@@ -1389,7 +1389,7 @@ var_dump($messageTokensCount);
 
 ### Browser Toolset 20260801
 
-- `BrowserToolset20260801`
+- `class BrowserToolset20260801`
 
   - `"browser_toolset_20260801" type`
 
@@ -1408,7 +1408,7 @@ var_dump($messageTokensCount);
 
 ### Browser Toolset Configs
 
-- `BrowserToolsetConfigs`
+- `class BrowserToolsetConfigs`
 
   - `?BrowserTypeConfig type`
 
@@ -1536,7 +1536,7 @@ var_dump($messageTokensCount);
 
 ### Browser Triple Click Config
 
-- `BrowserTripleClickConfig`
+- `class BrowserTripleClickConfig`
 
   - `?bool deferLoading`
 
@@ -1548,7 +1548,7 @@ var_dump($messageTokensCount);
 
 ### Browser Type Config
 
-- `BrowserTypeConfig`
+- `class BrowserTypeConfig`
 
   - `?bool deferLoading`
 
@@ -1560,7 +1560,7 @@ var_dump($messageTokensCount);
 
 ### Browser Wait Config
 
-- `BrowserWaitConfig`
+- `class BrowserWaitConfig`
 
   - `?bool deferLoading`
 
@@ -1572,7 +1572,7 @@ var_dump($messageTokensCount);
 
 ### Browser Zoom Config
 
-- `BrowserZoomConfig`
+- `class BrowserZoomConfig`
 
   - `?bool deferLoading`
 
@@ -1584,7 +1584,7 @@ var_dump($messageTokensCount);
 
 ### Cache Control Ephemeral
 
-- `CacheControlEphemeral`
+- `class CacheControlEphemeral`
 
   - `"ephemeral" type`
 
@@ -1601,7 +1601,7 @@ var_dump($messageTokensCount);
 
 ### Cache Creation
 
-- `CacheCreation`
+- `class CacheCreation`
 
   - `int ephemeral1hInputTokens`
 
@@ -1613,7 +1613,7 @@ var_dump($messageTokensCount);
 
 ### Citation Char Location
 
-- `CitationCharLocation`
+- `class CitationCharLocation`
 
   - `"char_location" type`
 
@@ -1631,7 +1631,7 @@ var_dump($messageTokensCount);
 
 ### Citation Char Location Param
 
-- `CitationCharLocationParam`
+- `class CitationCharLocationParam`
 
   - `"char_location" type`
 
@@ -1647,7 +1647,7 @@ var_dump($messageTokensCount);
 
 ### Citation Content Block Location
 
-- `CitationContentBlockLocation`
+- `class CitationContentBlockLocation`
 
   - `"content_block_location" type`
 
@@ -1675,7 +1675,7 @@ var_dump($messageTokensCount);
 
 ### Citation Content Block Location Param
 
-- `CitationContentBlockLocationParam`
+- `class CitationContentBlockLocationParam`
 
   - `"content_block_location" type`
 
@@ -1701,7 +1701,7 @@ var_dump($messageTokensCount);
 
 ### Citation Page Location
 
-- `CitationPageLocation`
+- `class CitationPageLocation`
 
   - `"page_location" type`
 
@@ -1719,7 +1719,7 @@ var_dump($messageTokensCount);
 
 ### Citation Page Location Param
 
-- `CitationPageLocationParam`
+- `class CitationPageLocationParam`
 
   - `"page_location" type`
 
@@ -1735,7 +1735,7 @@ var_dump($messageTokensCount);
 
 ### Citation Search Result Location Param
 
-- `CitationSearchResultLocationParam`
+- `class CitationSearchResultLocationParam`
 
   - `"search_result_location" type`
 
@@ -1767,7 +1767,7 @@ var_dump($messageTokensCount);
 
 ### Citation Web Search Result Location Param
 
-- `CitationWebSearchResultLocationParam`
+- `class CitationWebSearchResultLocationParam`
 
   - `"web_search_result_location" type`
 
@@ -1781,19 +1781,19 @@ var_dump($messageTokensCount);
 
 ### Citations Config
 
-- `CitationsConfig`
+- `class CitationsConfig`
 
   - `bool enabled`
 
 ### Citations Config Param
 
-- `CitationsConfigParam`
+- `class CitationsConfigParam`
 
   - `?bool enabled`
 
 ### Citations Delta
 
-- `CitationsDelta`
+- `class CitationsDelta`
 
   - `"citations_delta" type`
 
@@ -1801,7 +1801,7 @@ var_dump($messageTokensCount);
 
 ### Citations Search Result Location
 
-- `CitationsSearchResultLocation`
+- `class CitationsSearchResultLocation`
 
   - `"search_result_location" type`
 
@@ -1833,7 +1833,7 @@ var_dump($messageTokensCount);
 
 ### Citations Web Search Result Location
 
-- `CitationsWebSearchResultLocation`
+- `class CitationsWebSearchResultLocation`
 
   - `"web_search_result_location" type`
 
@@ -1847,7 +1847,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Output Block
 
-- `CodeExecutionOutputBlock`
+- `class CodeExecutionOutputBlock`
 
   - `"code_execution_output" type`
 
@@ -1855,7 +1855,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Output Block Param
 
-- `CodeExecutionOutputBlockParam`
+- `class CodeExecutionOutputBlockParam`
 
   - `"code_execution_output" type`
 
@@ -1863,7 +1863,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Result Block
 
-- `CodeExecutionResultBlock`
+- `class CodeExecutionResultBlock`
 
   - `"code_execution_result" type`
 
@@ -1877,7 +1877,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Result Block Param
 
-- `CodeExecutionResultBlockParam`
+- `class CodeExecutionResultBlockParam`
 
   - `"code_execution_result" type`
 
@@ -1891,7 +1891,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool 20250522
 
-- `CodeExecutionTool20250522`
+- `class CodeExecutionTool20250522`
 
   - `"code_execution_20250522" type`
 
@@ -1917,7 +1917,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool 20250825
 
-- `CodeExecutionTool20250825`
+- `class CodeExecutionTool20250825`
 
   - `"code_execution_20250825" type`
 
@@ -1943,7 +1943,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool 20260120
 
-- `CodeExecutionTool20260120`
+- `class CodeExecutionTool20260120`
 
   - `"code_execution_20260120" type`
 
@@ -1969,7 +1969,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool 20260521
 
-- `CodeExecutionTool20260521`
+- `class CodeExecutionTool20260521`
 
   - `"code_execution_20260521" type`
 
@@ -1995,7 +1995,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool Result Block
 
-- `CodeExecutionToolResultBlock`
+- `class CodeExecutionToolResultBlock`
 
   - `"code_execution_tool_result" type`
 
@@ -2005,15 +2005,15 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool Result Block Content
 
-- `CodeExecutionToolResultBlockContent`
+- `class CodeExecutionToolResultBlockContent`
 
-  - `CodeExecutionToolResultError`
+  - `class CodeExecutionToolResultError`
 
     - `"code_execution_tool_result_error" type`
 
     - `CodeExecutionToolResultErrorCode errorCode`
 
-  - `CodeExecutionResultBlock`
+  - `class CodeExecutionResultBlock`
 
     - `"code_execution_result" type`
 
@@ -2025,7 +2025,7 @@ var_dump($messageTokensCount);
 
     - `string stdout`
 
-  - `EncryptedCodeExecutionResultBlock`
+  - `class EncryptedCodeExecutionResultBlock`
 
     - `"encrypted_code_execution_result" type`
 
@@ -2039,7 +2039,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool Result Block Param
 
-- `CodeExecutionToolResultBlockParam`
+- `class CodeExecutionToolResultBlockParam`
 
   - `"code_execution_tool_result" type`
 
@@ -2053,15 +2053,15 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool Result Block Param Content
 
-- `CodeExecutionToolResultBlockParamContent`
+- `class CodeExecutionToolResultBlockParamContent`
 
-  - `CodeExecutionToolResultErrorParam`
+  - `class CodeExecutionToolResultErrorParam`
 
     - `"code_execution_tool_result_error" type`
 
     - `CodeExecutionToolResultErrorCode errorCode`
 
-  - `CodeExecutionResultBlockParam`
+  - `class CodeExecutionResultBlockParam`
 
     - `"code_execution_result" type`
 
@@ -2073,7 +2073,7 @@ var_dump($messageTokensCount);
 
     - `string stdout`
 
-  - `EncryptedCodeExecutionResultBlockParam`
+  - `class EncryptedCodeExecutionResultBlockParam`
 
     - `"encrypted_code_execution_result" type`
 
@@ -2087,7 +2087,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool Result Error
 
-- `CodeExecutionToolResultError`
+- `class CodeExecutionToolResultError`
 
   - `"code_execution_tool_result_error" type`
 
@@ -2095,7 +2095,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool Result Error Code
 
-- `CodeExecutionToolResultErrorCode`
+- `enum CodeExecutionToolResultErrorCode`
 
   - `"invalid_tool_input"`
 
@@ -2107,7 +2107,7 @@ var_dump($messageTokensCount);
 
 ### Code Execution Tool Result Error Param
 
-- `CodeExecutionToolResultErrorParam`
+- `class CodeExecutionToolResultErrorParam`
 
   - `"code_execution_tool_result_error" type`
 
@@ -2115,7 +2115,7 @@ var_dump($messageTokensCount);
 
 ### Computer Cursor Position Config
 
-- `ComputerCursorPositionConfig`
+- `class ComputerCursorPositionConfig`
 
   - `?bool deferLoading`
 
@@ -2127,7 +2127,7 @@ var_dump($messageTokensCount);
 
 ### Computer Double Click Config
 
-- `ComputerDoubleClickConfig`
+- `class ComputerDoubleClickConfig`
 
   - `?bool deferLoading`
 
@@ -2139,7 +2139,7 @@ var_dump($messageTokensCount);
 
 ### Computer Hold Key Config
 
-- `ComputerHoldKeyConfig`
+- `class ComputerHoldKeyConfig`
 
   - `?bool deferLoading`
 
@@ -2151,7 +2151,7 @@ var_dump($messageTokensCount);
 
 ### Computer Key Config
 
-- `ComputerKeyConfig`
+- `class ComputerKeyConfig`
 
   - `?bool deferLoading`
 
@@ -2163,7 +2163,7 @@ var_dump($messageTokensCount);
 
 ### Computer Left Click Config
 
-- `ComputerLeftClickConfig`
+- `class ComputerLeftClickConfig`
 
   - `?bool deferLoading`
 
@@ -2175,7 +2175,7 @@ var_dump($messageTokensCount);
 
 ### Computer Left Click Drag Config
 
-- `ComputerLeftClickDragConfig`
+- `class ComputerLeftClickDragConfig`
 
   - `?bool deferLoading`
 
@@ -2187,7 +2187,7 @@ var_dump($messageTokensCount);
 
 ### Computer Left Mouse Down Config
 
-- `ComputerLeftMouseDownConfig`
+- `class ComputerLeftMouseDownConfig`
 
   - `?bool deferLoading`
 
@@ -2199,7 +2199,7 @@ var_dump($messageTokensCount);
 
 ### Computer Left Mouse Up Config
 
-- `ComputerLeftMouseUpConfig`
+- `class ComputerLeftMouseUpConfig`
 
   - `?bool deferLoading`
 
@@ -2211,7 +2211,7 @@ var_dump($messageTokensCount);
 
 ### Computer Middle Click Config
 
-- `ComputerMiddleClickConfig`
+- `class ComputerMiddleClickConfig`
 
   - `?bool deferLoading`
 
@@ -2223,7 +2223,7 @@ var_dump($messageTokensCount);
 
 ### Computer Mouse Move Config
 
-- `ComputerMouseMoveConfig`
+- `class ComputerMouseMoveConfig`
 
   - `?bool deferLoading`
 
@@ -2235,7 +2235,7 @@ var_dump($messageTokensCount);
 
 ### Computer Right Click Config
 
-- `ComputerRightClickConfig`
+- `class ComputerRightClickConfig`
 
   - `?bool deferLoading`
 
@@ -2247,7 +2247,7 @@ var_dump($messageTokensCount);
 
 ### Computer Screenshot Config
 
-- `ComputerScreenshotConfig`
+- `class ComputerScreenshotConfig`
 
   - `?bool deferLoading`
 
@@ -2259,7 +2259,7 @@ var_dump($messageTokensCount);
 
 ### Computer Scroll Config
 
-- `ComputerScrollConfig`
+- `class ComputerScrollConfig`
 
   - `?bool deferLoading`
 
@@ -2271,7 +2271,7 @@ var_dump($messageTokensCount);
 
 ### Computer Toolset 20260801
 
-- `ComputerToolset20260801`
+- `class ComputerToolset20260801`
 
   - `"computer_toolset_20260801" type`
 
@@ -2290,7 +2290,7 @@ var_dump($messageTokensCount);
 
 ### Computer Toolset Configs
 
-- `ComputerToolsetConfigs`
+- `class ComputerToolsetConfigs`
 
   - `?ComputerTypeConfig type`
 
@@ -2362,7 +2362,7 @@ var_dump($messageTokensCount);
 
 ### Computer Triple Click Config
 
-- `ComputerTripleClickConfig`
+- `class ComputerTripleClickConfig`
 
   - `?bool deferLoading`
 
@@ -2374,7 +2374,7 @@ var_dump($messageTokensCount);
 
 ### Computer Type Config
 
-- `ComputerTypeConfig`
+- `class ComputerTypeConfig`
 
   - `?bool deferLoading`
 
@@ -2386,7 +2386,7 @@ var_dump($messageTokensCount);
 
 ### Computer Wait Config
 
-- `ComputerWaitConfig`
+- `class ComputerWaitConfig`
 
   - `?bool deferLoading`
 
@@ -2398,7 +2398,7 @@ var_dump($messageTokensCount);
 
 ### Computer Zoom Config
 
-- `ComputerZoomConfig`
+- `class ComputerZoomConfig`
 
   - `?bool deferLoading`
 
@@ -2410,7 +2410,7 @@ var_dump($messageTokensCount);
 
 ### Container
 
-- `Container`
+- `class Container`
 
   - `string id`
 
@@ -2426,7 +2426,7 @@ var_dump($messageTokensCount);
 
 ### Container Params
 
-- `ContainerParams`
+- `class ContainerParams`
 
   - `?string id`
 
@@ -2438,7 +2438,7 @@ var_dump($messageTokensCount);
 
 ### Container Skill
 
-- `ContainerSkill`
+- `class ContainerSkill`
 
   - `Type type`
 
@@ -2454,7 +2454,7 @@ var_dump($messageTokensCount);
 
 ### Container Upload Block
 
-- `ContainerUploadBlock`
+- `class ContainerUploadBlock`
 
   - `"container_upload" type`
 
@@ -2462,7 +2462,7 @@ var_dump($messageTokensCount);
 
 ### Container Upload Block Param
 
-- `ContainerUploadBlockParam`
+- `class ContainerUploadBlockParam`
 
   - `"container_upload" type`
 
@@ -2474,9 +2474,9 @@ var_dump($messageTokensCount);
 
 ### Content Block
 
-- `ContentBlock`
+- `class ContentBlock`
 
-  - `TextBlock`
+  - `class TextBlock`
 
     - `"text" type`
 
@@ -2488,7 +2488,7 @@ var_dump($messageTokensCount);
 
     - `string text`
 
-  - `ThinkingBlock`
+  - `class ThinkingBlock`
 
     - `"thinking" type`
 
@@ -2504,7 +2504,7 @@ var_dump($messageTokensCount);
 
       The text of Claude's thinking process for this block.
 
-  - `RedactedThinkingBlock`
+  - `class RedactedThinkingBlock`
 
     - `"redacted_thinking" type`
 
@@ -2516,7 +2516,7 @@ var_dump($messageTokensCount);
 
       See [extended thinking](../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-  - `ToolUseBlock`
+  - `class ToolUseBlock`
 
     - `"tool_use" type`
 
@@ -2532,7 +2532,7 @@ var_dump($messageTokensCount);
 
       For a toolset member tool_use, the toolset family.
 
-  - `ServerToolUseBlock`
+  - `class ServerToolUseBlock`
 
     - `"server_tool_use" type`
 
@@ -2544,7 +2544,7 @@ var_dump($messageTokensCount);
 
     - `Name name`
 
-  - `WebSearchToolResultBlock`
+  - `class WebSearchToolResultBlock`
 
     - `"web_search_tool_result" type`
 
@@ -2554,7 +2554,7 @@ var_dump($messageTokensCount);
 
     - `string toolUseID`
 
-  - `WebFetchToolResultBlock`
+  - `class WebFetchToolResultBlock`
 
     - `"web_fetch_tool_result" type`
 
@@ -2564,7 +2564,7 @@ var_dump($messageTokensCount);
 
     - `string toolUseID`
 
-  - `CodeExecutionToolResultBlock`
+  - `class CodeExecutionToolResultBlock`
 
     - `"code_execution_tool_result" type`
 
@@ -2572,7 +2572,7 @@ var_dump($messageTokensCount);
 
     - `string toolUseID`
 
-  - `BashCodeExecutionToolResultBlock`
+  - `class BashCodeExecutionToolResultBlock`
 
     - `"bash_code_execution_tool_result" type`
 
@@ -2580,7 +2580,7 @@ var_dump($messageTokensCount);
 
     - `string toolUseID`
 
-  - `TextEditorCodeExecutionToolResultBlock`
+  - `class TextEditorCodeExecutionToolResultBlock`
 
     - `"text_editor_code_execution_tool_result" type`
 
@@ -2588,7 +2588,7 @@ var_dump($messageTokensCount);
 
     - `string toolUseID`
 
-  - `ToolSearchToolResultBlock`
+  - `class ToolSearchToolResultBlock`
 
     - `"tool_search_tool_result" type`
 
@@ -2596,7 +2596,7 @@ var_dump($messageTokensCount);
 
     - `string toolUseID`
 
-  - `ContainerUploadBlock`
+  - `class ContainerUploadBlock`
 
     - `"container_upload" type`
 
@@ -2604,9 +2604,9 @@ var_dump($messageTokensCount);
 
 ### Content Block Param
 
-- `ContentBlockParam`
+- `class ContentBlockParam`
 
-  - `TextBlockParam`
+  - `class TextBlockParam`
 
     - `"text" type`
 
@@ -2618,7 +2618,7 @@ var_dump($messageTokensCount);
 
     - `?list<TextCitationParam> citations`
 
-  - `ImageBlockParam`
+  - `class ImageBlockParam`
 
     - `"image" type`
 
@@ -2632,7 +2632,7 @@ var_dump($messageTokensCount);
 
       Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
-  - `DocumentBlockParam`
+  - `class DocumentBlockParam`
 
     - `"document" type`
 
@@ -2648,7 +2648,7 @@ var_dump($messageTokensCount);
 
     - `?string title`
 
-  - `SearchResultBlockParam`
+  - `class SearchResultBlockParam`
 
     - `"search_result" type`
 
@@ -2664,7 +2664,7 @@ var_dump($messageTokensCount);
 
     - `?CitationsConfigParam citations`
 
-  - `ThinkingBlockParam`
+  - `class ThinkingBlockParam`
 
     - `"thinking" type`
 
@@ -2678,7 +2678,7 @@ var_dump($messageTokensCount);
 
       The `thinking` text of this block as returned by the API.
 
-  - `RedactedThinkingBlockParam`
+  - `class RedactedThinkingBlockParam`
 
     - `"redacted_thinking" type`
 
@@ -2686,7 +2686,7 @@ var_dump($messageTokensCount);
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-  - `ToolUseBlockParam`
+  - `class ToolUseBlockParam`
 
     - `"tool_use" type`
 
@@ -2706,7 +2706,7 @@ var_dump($messageTokensCount);
 
       For a toolset member tool_use, the toolset family this member belongs to.
 
-  - `ToolResultBlockParam`
+  - `class ToolResultBlockParam`
 
     - `"tool_result" type`
 
@@ -2724,7 +2724,7 @@ var_dump($messageTokensCount);
 
       For a toolset member tool_result, the toolset family of the paired tool_use.
 
-  - `ServerToolUseBlockParam`
+  - `class ServerToolUseBlockParam`
 
     - `"server_tool_use" type`
 
@@ -2740,7 +2740,7 @@ var_dump($messageTokensCount);
 
     - `?Caller caller`
 
-  - `WebSearchToolResultBlockParam`
+  - `class WebSearchToolResultBlockParam`
 
     - `"web_search_tool_result" type`
 
@@ -2754,7 +2754,7 @@ var_dump($messageTokensCount);
 
     - `?Caller caller`
 
-  - `WebFetchToolResultBlockParam`
+  - `class WebFetchToolResultBlockParam`
 
     - `"web_fetch_tool_result" type`
 
@@ -2768,7 +2768,7 @@ var_dump($messageTokensCount);
 
     - `?Caller caller`
 
-  - `CodeExecutionToolResultBlockParam`
+  - `class CodeExecutionToolResultBlockParam`
 
     - `"code_execution_tool_result" type`
 
@@ -2780,7 +2780,7 @@ var_dump($messageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-  - `BashCodeExecutionToolResultBlockParam`
+  - `class BashCodeExecutionToolResultBlockParam`
 
     - `"bash_code_execution_tool_result" type`
 
@@ -2792,7 +2792,7 @@ var_dump($messageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-  - `TextEditorCodeExecutionToolResultBlockParam`
+  - `class TextEditorCodeExecutionToolResultBlockParam`
 
     - `"text_editor_code_execution_tool_result" type`
 
@@ -2804,7 +2804,7 @@ var_dump($messageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-  - `ToolSearchToolResultBlockParam`
+  - `class ToolSearchToolResultBlockParam`
 
     - `"tool_search_tool_result" type`
 
@@ -2816,7 +2816,7 @@ var_dump($messageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
-  - `ContainerUploadBlockParam`
+  - `class ContainerUploadBlockParam`
 
     - `"container_upload" type`
 
@@ -2828,7 +2828,7 @@ var_dump($messageTokensCount);
 
 ### Content Block Source
 
-- `ContentBlockSource`
+- `class ContentBlockSource`
 
   - `"content" type`
 
@@ -2836,9 +2836,9 @@ var_dump($messageTokensCount);
 
 ### Content Block Source Content
 
-- `ContentBlockSourceContent`
+- `class ContentBlockSourceContent`
 
-  - `TextBlockParam`
+  - `class TextBlockParam`
 
     - `"text" type`
 
@@ -2850,7 +2850,7 @@ var_dump($messageTokensCount);
 
     - `?list<TextCitationParam> citations`
 
-  - `ImageBlockParam`
+  - `class ImageBlockParam`
 
     - `"image" type`
 
@@ -2866,13 +2866,13 @@ var_dump($messageTokensCount);
 
 ### Direct Caller
 
-- `DirectCaller`
+- `class DirectCaller`
 
   - `"direct" type`
 
 ### Document Block
 
-- `DocumentBlock`
+- `class DocumentBlock`
 
   - `"document" type`
 
@@ -2888,7 +2888,7 @@ var_dump($messageTokensCount);
 
 ### Document Block Param
 
-- `DocumentBlockParam`
+- `class DocumentBlockParam`
 
   - `"document" type`
 
@@ -2906,7 +2906,7 @@ var_dump($messageTokensCount);
 
 ### Encrypted Code Execution Result Block
 
-- `EncryptedCodeExecutionResultBlock`
+- `class EncryptedCodeExecutionResultBlock`
 
   - `"encrypted_code_execution_result" type`
 
@@ -2920,7 +2920,7 @@ var_dump($messageTokensCount);
 
 ### Encrypted Code Execution Result Block Param
 
-- `EncryptedCodeExecutionResultBlockParam`
+- `class EncryptedCodeExecutionResultBlockParam`
 
   - `"encrypted_code_execution_result" type`
 
@@ -2934,7 +2934,7 @@ var_dump($messageTokensCount);
 
 ### File Document Source
 
-- `FileDocumentSource`
+- `class FileDocumentSource`
 
   - `"file" type`
 
@@ -2942,7 +2942,7 @@ var_dump($messageTokensCount);
 
 ### File Image Source
 
-- `FileImageSource`
+- `class FileImageSource`
 
   - `"file" type`
 
@@ -2950,7 +2950,7 @@ var_dump($messageTokensCount);
 
 ### Image Block Param
 
-- `ImageBlockParam`
+- `class ImageBlockParam`
 
   - `"image" type`
 
@@ -2966,7 +2966,7 @@ var_dump($messageTokensCount);
 
 ### Image Transformations Param
 
-- `ImageTransformationsParam`
+- `class ImageTransformationsParam`
 
   - `?OversizedImage oversizedImage`
 
@@ -2974,7 +2974,7 @@ var_dump($messageTokensCount);
 
 ### Input JSON Delta
 
-- `InputJSONDelta`
+- `class InputJSONDelta`
 
   - `"input_json_delta" type`
 
@@ -2982,7 +2982,7 @@ var_dump($messageTokensCount);
 
 ### JSON Output Format
 
-- `JSONOutputFormat`
+- `class JSONOutputFormat`
 
   - `"json_schema" type`
 
@@ -2992,7 +2992,7 @@ var_dump($messageTokensCount);
 
 ### Memory Tool 20250818
 
-- `MemoryTool20250818`
+- `class MemoryTool20250818`
 
   - `"memory_20250818" type`
 
@@ -3020,7 +3020,7 @@ var_dump($messageTokensCount);
 
 ### Message
 
-- `Message`
+- `class Message`
 
   - `"message" type`
 
@@ -3119,9 +3119,9 @@ var_dump($messageTokensCount);
 
 ### Message Count Tokens Tool
 
-- `MessageCountTokensTool`
+- `class MessageCountTokensTool`
 
-  - `Tool`
+  - `class Tool`
 
     - `?Type type`
 
@@ -3163,7 +3163,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolBash20250124`
+  - `class ToolBash20250124`
 
     - `"bash_20250124" type`
 
@@ -3189,7 +3189,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522`
+  - `class CodeExecutionTool20250522`
 
     - `"code_execution_20250522" type`
 
@@ -3213,7 +3213,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825`
+  - `class CodeExecutionTool20250825`
 
     - `"code_execution_20250825" type`
 
@@ -3237,7 +3237,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120`
+  - `class CodeExecutionTool20260120`
 
     - `"code_execution_20260120" type`
 
@@ -3261,7 +3261,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260521`
+  - `class CodeExecutionTool20260521`
 
     - `"code_execution_20260521" type`
 
@@ -3285,7 +3285,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `BrowserToolset20260801`
+  - `class BrowserToolset20260801`
 
     - `"browser_toolset_20260801" type`
 
@@ -3302,7 +3302,7 @@ var_dump($messageTokensCount);
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
 
-  - `MemoryTool20250818`
+  - `class MemoryTool20250818`
 
     - `"memory_20250818" type`
 
@@ -3328,7 +3328,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ComputerToolset20260801`
+  - `class ComputerToolset20260801`
 
     - `"computer_toolset_20260801" type`
 
@@ -3345,7 +3345,7 @@ var_dump($messageTokensCount);
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
 
-  - `ToolTextEditor20250124`
+  - `class ToolTextEditor20250124`
 
     - `"text_editor_20250124" type`
 
@@ -3371,7 +3371,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429`
+  - `class ToolTextEditor20250429`
 
     - `"text_editor_20250429" type`
 
@@ -3397,7 +3397,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728`
+  - `class ToolTextEditor20250728`
 
     - `"text_editor_20250728" type`
 
@@ -3427,7 +3427,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305`
+  - `class WebSearchTool20250305`
 
     - `"web_search_20250305" type`
 
@@ -3467,7 +3467,7 @@ var_dump($messageTokensCount);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20250910`
+  - `class WebFetchTool20250910`
 
     - `"web_fetch_20250910" type`
 
@@ -3511,7 +3511,16 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209`
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `class WebSearchTool20260209`
 
     - `"web_search_20260209" type`
 
@@ -3551,7 +3560,7 @@ var_dump($messageTokensCount);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260209`
+  - `class WebFetchTool20260209`
 
     - `"web_fetch_20260209" type`
 
@@ -3595,7 +3604,16 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309`
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `class WebFetchTool20260309`
 
     - `"web_fetch_20260309" type`
 
@@ -3639,11 +3657,20 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `?bool useCache`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `WebSearchTool20260318`
+  - `class WebSearchTool20260318`
 
     - `"web_search_20260318" type`
 
@@ -3687,7 +3714,7 @@ var_dump($messageTokensCount);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260318`
+  - `class WebFetchTool20260318`
 
     - `"web_fetch_20260318" type`
 
@@ -3735,11 +3762,20 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `?bool useCache`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119`
+  - `class ToolSearchToolBm25_20251119`
 
     - `Type type`
 
@@ -3763,7 +3799,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119`
+  - `class ToolSearchToolRegex20251119`
 
     - `Type type`
 
@@ -3789,9 +3825,9 @@ var_dump($messageTokensCount);
 
 ### Message Create Params Container
 
-- `MessageCreateParamsContainer`
+- `class MessageCreateParamsContainer`
 
-  - `ContainerParams`
+  - `class ContainerParams`
 
     - `?string id`
 
@@ -3805,7 +3841,7 @@ var_dump($messageTokensCount);
 
 ### Message Delta Usage
 
-- `MessageDeltaUsage`
+- `class MessageDeltaUsage`
 
   - `?int cacheCreationInputTokens`
 
@@ -3838,7 +3874,7 @@ var_dump($messageTokensCount);
 
 ### Message Param
 
-- `MessageParam`
+- `class MessageParam`
 
   - `Content content`
 
@@ -3846,7 +3882,7 @@ var_dump($messageTokensCount);
 
 ### Message Tokens Count
 
-- `MessageTokensCount`
+- `class MessageTokensCount`
 
   - `int inputTokens`
 
@@ -3854,7 +3890,7 @@ var_dump($messageTokensCount);
 
 ### Metadata
 
-- `Metadata`
+- `class Metadata`
 
   - `?string userID`
 
@@ -3864,7 +3900,7 @@ var_dump($messageTokensCount);
 
 ### Model
 
-- `Model`
+- `enum Model`
 
   - `"claude-fable-5-1"`
 
@@ -3936,7 +3972,7 @@ var_dump($messageTokensCount);
 
 ### Output Config
 
-- `OutputConfig`
+- `class OutputConfig`
 
   - `?Effort effort`
 
@@ -3948,7 +3984,7 @@ var_dump($messageTokensCount);
 
 ### Output Tokens Details
 
-- `OutputTokensDetails`
+- `class OutputTokensDetails`
 
   - `int thinkingTokens`
 
@@ -3963,7 +3999,7 @@ var_dump($messageTokensCount);
 
 ### Plain Text Source
 
-- `PlainTextSource`
+- `class PlainTextSource`
 
   - `"text" type`
 
@@ -3973,27 +4009,27 @@ var_dump($messageTokensCount);
 
 ### Raw Content Block Delta
 
-- `RawContentBlockDelta`
+- `class RawContentBlockDelta`
 
-  - `TextDelta`
+  - `class TextDelta`
 
     - `"text_delta" type`
 
     - `string text`
 
-  - `InputJSONDelta`
+  - `class InputJSONDelta`
 
     - `"input_json_delta" type`
 
     - `string partialJSON`
 
-  - `CitationsDelta`
+  - `class CitationsDelta`
 
     - `"citations_delta" type`
 
     - `Citation citation`
 
-  - `ThinkingDelta`
+  - `class ThinkingDelta`
 
     - `"thinking_delta" type`
 
@@ -4001,7 +4037,7 @@ var_dump($messageTokensCount);
 
       The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-  - `SignatureDelta`
+  - `class SignatureDelta`
 
     - `"signature_delta" type`
 
@@ -4011,7 +4047,7 @@ var_dump($messageTokensCount);
 
 ### Raw Content Block Delta Event
 
-- `RawContentBlockDeltaEvent`
+- `class RawContentBlockDeltaEvent`
 
   - `"content_block_delta" type`
 
@@ -4021,7 +4057,7 @@ var_dump($messageTokensCount);
 
 ### Raw Content Block Start Event
 
-- `RawContentBlockStartEvent`
+- `class RawContentBlockStartEvent`
 
   - `"content_block_start" type`
 
@@ -4031,7 +4067,7 @@ var_dump($messageTokensCount);
 
 ### Raw Content Block Stop Event
 
-- `RawContentBlockStopEvent`
+- `class RawContentBlockStopEvent`
 
   - `"content_block_stop" type`
 
@@ -4039,7 +4075,7 @@ var_dump($messageTokensCount);
 
 ### Raw Message Delta Event
 
-- `RawMessageDeltaEvent`
+- `class RawMessageDeltaEvent`
 
   - `"message_delta" type`
 
@@ -4059,7 +4095,7 @@ var_dump($messageTokensCount);
 
 ### Raw Message Start Event
 
-- `RawMessageStartEvent`
+- `class RawMessageStartEvent`
 
   - `"message_start" type`
 
@@ -4067,21 +4103,21 @@ var_dump($messageTokensCount);
 
 ### Raw Message Stop Event
 
-- `RawMessageStopEvent`
+- `class RawMessageStopEvent`
 
   - `"message_stop" type`
 
 ### Raw Message Stream Event
 
-- `RawMessageStreamEvent`
+- `class RawMessageStreamEvent`
 
-  - `RawMessageStartEvent`
+  - `class RawMessageStartEvent`
 
     - `"message_start" type`
 
     - `Message message`
 
-  - `RawMessageDeltaEvent`
+  - `class RawMessageDeltaEvent`
 
     - `"message_delta" type`
 
@@ -4099,11 +4135,11 @@ var_dump($messageTokensCount);
 
       Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-  - `RawMessageStopEvent`
+  - `class RawMessageStopEvent`
 
     - `"message_stop" type`
 
-  - `RawContentBlockStartEvent`
+  - `class RawContentBlockStartEvent`
 
     - `"content_block_start" type`
 
@@ -4111,7 +4147,7 @@ var_dump($messageTokensCount);
 
     - `int index`
 
-  - `RawContentBlockDeltaEvent`
+  - `class RawContentBlockDeltaEvent`
 
     - `"content_block_delta" type`
 
@@ -4119,7 +4155,7 @@ var_dump($messageTokensCount);
 
     - `int index`
 
-  - `RawContentBlockStopEvent`
+  - `class RawContentBlockStopEvent`
 
     - `"content_block_stop" type`
 
@@ -4127,7 +4163,7 @@ var_dump($messageTokensCount);
 
 ### Redacted Thinking Block
 
-- `RedactedThinkingBlock`
+- `class RedactedThinkingBlock`
 
   - `"redacted_thinking" type`
 
@@ -4141,7 +4177,7 @@ var_dump($messageTokensCount);
 
 ### Redacted Thinking Block Param
 
-- `RedactedThinkingBlockParam`
+- `class RedactedThinkingBlockParam`
 
   - `"redacted_thinking" type`
 
@@ -4151,7 +4187,7 @@ var_dump($messageTokensCount);
 
 ### Refusal Stop Details
 
-- `RefusalStopDetails`
+- `class RefusalStopDetails`
 
   - `"refusal" type`
 
@@ -4167,7 +4203,7 @@ var_dump($messageTokensCount);
 
 ### Search Result Block Param
 
-- `SearchResultBlockParam`
+- `class SearchResultBlockParam`
 
   - `"search_result" type`
 
@@ -4185,7 +4221,7 @@ var_dump($messageTokensCount);
 
 ### Server Tool Caller
 
-- `ServerToolCaller`
+- `class ServerToolCaller`
 
   - `"code_execution_20250825" type`
 
@@ -4193,7 +4229,7 @@ var_dump($messageTokensCount);
 
 ### Server Tool Caller 20260120
 
-- `ServerToolCaller20260120`
+- `class ServerToolCaller20260120`
 
   - `"code_execution_20260120" type`
 
@@ -4201,7 +4237,7 @@ var_dump($messageTokensCount);
 
 ### Server Tool Usage
 
-- `ServerToolUsage`
+- `class ServerToolUsage`
 
   - `int webFetchRequests`
 
@@ -4213,7 +4249,7 @@ var_dump($messageTokensCount);
 
 ### Server Tool Use Block
 
-- `ServerToolUseBlock`
+- `class ServerToolUseBlock`
 
   - `"server_tool_use" type`
 
@@ -4227,7 +4263,7 @@ var_dump($messageTokensCount);
 
 ### Server Tool Use Block Param
 
-- `ServerToolUseBlockParam`
+- `class ServerToolUseBlockParam`
 
   - `"server_tool_use" type`
 
@@ -4245,7 +4281,7 @@ var_dump($messageTokensCount);
 
 ### Signature Delta
 
-- `SignatureDelta`
+- `class SignatureDelta`
 
   - `"signature_delta" type`
 
@@ -4255,7 +4291,7 @@ var_dump($messageTokensCount);
 
 ### Skill Params
 
-- `SkillParams`
+- `class SkillParams`
 
   - `Type type`
 
@@ -4271,7 +4307,7 @@ var_dump($messageTokensCount);
 
 ### Stop Reason
 
-- `StopReason`
+- `enum StopReason`
 
   - `"end_turn"`
 
@@ -4289,7 +4325,7 @@ var_dump($messageTokensCount);
 
 ### Text Block
 
-- `TextBlock`
+- `class TextBlock`
 
   - `"text" type`
 
@@ -4303,7 +4339,7 @@ var_dump($messageTokensCount);
 
 ### Text Block Param
 
-- `TextBlockParam`
+- `class TextBlockParam`
 
   - `"text" type`
 
@@ -4317,9 +4353,9 @@ var_dump($messageTokensCount);
 
 ### Text Citation
 
-- `TextCitation`
+- `class TextCitation`
 
-  - `CitationCharLocation`
+  - `class CitationCharLocation`
 
     - `"char_location" type`
 
@@ -4335,7 +4371,7 @@ var_dump($messageTokensCount);
 
     - `int startCharIndex`
 
-  - `CitationPageLocation`
+  - `class CitationPageLocation`
 
     - `"page_location" type`
 
@@ -4351,7 +4387,7 @@ var_dump($messageTokensCount);
 
     - `int startPageNumber`
 
-  - `CitationContentBlockLocation`
+  - `class CitationContentBlockLocation`
 
     - `"content_block_location" type`
 
@@ -4377,7 +4413,7 @@ var_dump($messageTokensCount);
 
       0-based index of the first cited block in the source's `content` array.
 
-  - `CitationsWebSearchResultLocation`
+  - `class CitationsWebSearchResultLocation`
 
     - `"web_search_result_location" type`
 
@@ -4389,7 +4425,7 @@ var_dump($messageTokensCount);
 
     - `string url`
 
-  - `CitationsSearchResultLocation`
+  - `class CitationsSearchResultLocation`
 
     - `"search_result_location" type`
 
@@ -4421,9 +4457,9 @@ var_dump($messageTokensCount);
 
 ### Text Citation Param
 
-- `TextCitationParam`
+- `class TextCitationParam`
 
-  - `CitationCharLocationParam`
+  - `class CitationCharLocationParam`
 
     - `"char_location" type`
 
@@ -4437,7 +4473,7 @@ var_dump($messageTokensCount);
 
     - `int startCharIndex`
 
-  - `CitationPageLocationParam`
+  - `class CitationPageLocationParam`
 
     - `"page_location" type`
 
@@ -4451,7 +4487,7 @@ var_dump($messageTokensCount);
 
     - `int startPageNumber`
 
-  - `CitationContentBlockLocationParam`
+  - `class CitationContentBlockLocationParam`
 
     - `"content_block_location" type`
 
@@ -4475,7 +4511,7 @@ var_dump($messageTokensCount);
 
       0-based index of the first cited block in the source's `content` array.
 
-  - `CitationWebSearchResultLocationParam`
+  - `class CitationWebSearchResultLocationParam`
 
     - `"web_search_result_location" type`
 
@@ -4487,7 +4523,7 @@ var_dump($messageTokensCount);
 
     - `string url`
 
-  - `CitationSearchResultLocationParam`
+  - `class CitationSearchResultLocationParam`
 
     - `"search_result_location" type`
 
@@ -4519,7 +4555,7 @@ var_dump($messageTokensCount);
 
 ### Text Delta
 
-- `TextDelta`
+- `class TextDelta`
 
   - `"text_delta" type`
 
@@ -4527,7 +4563,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Create Result Block
 
-- `TextEditorCodeExecutionCreateResultBlock`
+- `class TextEditorCodeExecutionCreateResultBlock`
 
   - `"text_editor_code_execution_create_result" type`
 
@@ -4535,7 +4571,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Create Result Block Param
 
-- `TextEditorCodeExecutionCreateResultBlockParam`
+- `class TextEditorCodeExecutionCreateResultBlockParam`
 
   - `"text_editor_code_execution_create_result" type`
 
@@ -4543,7 +4579,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Str Replace Result Block
 
-- `TextEditorCodeExecutionStrReplaceResultBlock`
+- `class TextEditorCodeExecutionStrReplaceResultBlock`
 
   - `"text_editor_code_execution_str_replace_result" type`
 
@@ -4559,7 +4595,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Str Replace Result Block Param
 
-- `TextEditorCodeExecutionStrReplaceResultBlockParam`
+- `class TextEditorCodeExecutionStrReplaceResultBlockParam`
 
   - `"text_editor_code_execution_str_replace_result" type`
 
@@ -4575,7 +4611,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Tool Result Block
 
-- `TextEditorCodeExecutionToolResultBlock`
+- `class TextEditorCodeExecutionToolResultBlock`
 
   - `"text_editor_code_execution_tool_result" type`
 
@@ -4585,7 +4621,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Tool Result Block Param
 
-- `TextEditorCodeExecutionToolResultBlockParam`
+- `class TextEditorCodeExecutionToolResultBlockParam`
 
   - `"text_editor_code_execution_tool_result" type`
 
@@ -4599,7 +4635,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Tool Result Error
 
-- `TextEditorCodeExecutionToolResultError`
+- `class TextEditorCodeExecutionToolResultError`
 
   - `"text_editor_code_execution_tool_result_error" type`
 
@@ -4609,7 +4645,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Tool Result Error Code
 
-- `TextEditorCodeExecutionToolResultErrorCode`
+- `enum TextEditorCodeExecutionToolResultErrorCode`
 
   - `"invalid_tool_input"`
 
@@ -4623,7 +4659,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution Tool Result Error Param
 
-- `TextEditorCodeExecutionToolResultErrorParam`
+- `class TextEditorCodeExecutionToolResultErrorParam`
 
   - `"text_editor_code_execution_tool_result_error" type`
 
@@ -4633,7 +4669,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution View Result Block
 
-- `TextEditorCodeExecutionViewResultBlock`
+- `class TextEditorCodeExecutionViewResultBlock`
 
   - `"text_editor_code_execution_view_result" type`
 
@@ -4649,7 +4685,7 @@ var_dump($messageTokensCount);
 
 ### Text Editor Code Execution View Result Block Param
 
-- `TextEditorCodeExecutionViewResultBlockParam`
+- `class TextEditorCodeExecutionViewResultBlockParam`
 
   - `"text_editor_code_execution_view_result" type`
 
@@ -4665,7 +4701,7 @@ var_dump($messageTokensCount);
 
 ### Thinking Block
 
-- `ThinkingBlock`
+- `class ThinkingBlock`
 
   - `"thinking" type`
 
@@ -4683,7 +4719,7 @@ var_dump($messageTokensCount);
 
 ### Thinking Block Param
 
-- `ThinkingBlockParam`
+- `class ThinkingBlockParam`
 
   - `"thinking" type`
 
@@ -4699,7 +4735,7 @@ var_dump($messageTokensCount);
 
 ### Thinking Config Adaptive
 
-- `ThinkingConfigAdaptive`
+- `class ThinkingConfigAdaptive`
 
   - `"adaptive" type`
 
@@ -4709,13 +4745,13 @@ var_dump($messageTokensCount);
 
 ### Thinking Config Disabled
 
-- `ThinkingConfigDisabled`
+- `class ThinkingConfigDisabled`
 
   - `"disabled" type`
 
 ### Thinking Config Enabled
 
-- `ThinkingConfigEnabled`
+- `class ThinkingConfigEnabled`
 
   - `"enabled" type`
 
@@ -4733,9 +4769,9 @@ var_dump($messageTokensCount);
 
 ### Thinking Config Param
 
-- `ThinkingConfigParam`
+- `class ThinkingConfigParam`
 
-  - `ThinkingConfigEnabled`
+  - `class ThinkingConfigEnabled`
 
     - `"enabled" type`
 
@@ -4751,11 +4787,11 @@ var_dump($messageTokensCount);
 
       Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-  - `ThinkingConfigDisabled`
+  - `class ThinkingConfigDisabled`
 
     - `"disabled" type`
 
-  - `ThinkingConfigAdaptive`
+  - `class ThinkingConfigAdaptive`
 
     - `"adaptive" type`
 
@@ -4765,7 +4801,7 @@ var_dump($messageTokensCount);
 
 ### Thinking Delta
 
-- `ThinkingDelta`
+- `class ThinkingDelta`
 
   - `"thinking_delta" type`
 
@@ -4775,7 +4811,7 @@ var_dump($messageTokensCount);
 
 ### Tool
 
-- `Tool`
+- `class Tool`
 
   - `?Type type`
 
@@ -4819,7 +4855,7 @@ var_dump($messageTokensCount);
 
 ### Tool Bash 20250124
 
-- `ToolBash20250124`
+- `class ToolBash20250124`
 
   - `"bash_20250124" type`
 
@@ -4847,9 +4883,9 @@ var_dump($messageTokensCount);
 
 ### Tool Choice
 
-- `ToolChoice`
+- `class ToolChoice`
 
-  - `ToolChoiceAuto`
+  - `class ToolChoiceAuto`
 
     - `"auto" type`
 
@@ -4859,7 +4895,7 @@ var_dump($messageTokensCount);
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `ToolChoiceAny`
+  - `class ToolChoiceAny`
 
     - `"any" type`
 
@@ -4869,7 +4905,7 @@ var_dump($messageTokensCount);
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceTool`
+  - `class ToolChoiceTool`
 
     - `"tool" type`
 
@@ -4883,13 +4919,13 @@ var_dump($messageTokensCount);
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `ToolChoiceNone`
+  - `class ToolChoiceNone`
 
     - `"none" type`
 
 ### Tool Choice Any
 
-- `ToolChoiceAny`
+- `class ToolChoiceAny`
 
   - `"any" type`
 
@@ -4901,7 +4937,7 @@ var_dump($messageTokensCount);
 
 ### Tool Choice Auto
 
-- `ToolChoiceAuto`
+- `class ToolChoiceAuto`
 
   - `"auto" type`
 
@@ -4913,13 +4949,13 @@ var_dump($messageTokensCount);
 
 ### Tool Choice None
 
-- `ToolChoiceNone`
+- `class ToolChoiceNone`
 
   - `"none" type`
 
 ### Tool Choice Tool
 
-- `ToolChoiceTool`
+- `class ToolChoiceTool`
 
   - `"tool" type`
 
@@ -4935,7 +4971,7 @@ var_dump($messageTokensCount);
 
 ### Tool Reference Block
 
-- `ToolReferenceBlock`
+- `class ToolReferenceBlock`
 
   - `"tool_reference" type`
 
@@ -4943,7 +4979,7 @@ var_dump($messageTokensCount);
 
 ### Tool Reference Block Param
 
-- `ToolReferenceBlockParam`
+- `class ToolReferenceBlockParam`
 
   - `"tool_reference" type`
 
@@ -4955,7 +4991,7 @@ var_dump($messageTokensCount);
 
 ### Tool Result Block Param
 
-- `ToolResultBlockParam`
+- `class ToolResultBlockParam`
 
   - `"tool_result" type`
 
@@ -4975,7 +5011,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Bm25 20251119
 
-- `ToolSearchToolBm25_20251119`
+- `class ToolSearchToolBm25_20251119`
 
   - `Type type`
 
@@ -5001,7 +5037,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Regex 20251119
 
-- `ToolSearchToolRegex20251119`
+- `class ToolSearchToolRegex20251119`
 
   - `Type type`
 
@@ -5027,7 +5063,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Result Block
 
-- `ToolSearchToolResultBlock`
+- `class ToolSearchToolResultBlock`
 
   - `"tool_search_tool_result" type`
 
@@ -5037,7 +5073,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Result Block Param
 
-- `ToolSearchToolResultBlockParam`
+- `class ToolSearchToolResultBlockParam`
 
   - `"tool_search_tool_result" type`
 
@@ -5051,7 +5087,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Result Error
 
-- `ToolSearchToolResultError`
+- `class ToolSearchToolResultError`
 
   - `"tool_search_tool_result_error" type`
 
@@ -5061,7 +5097,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Result Error Code
 
-- `ToolSearchToolResultErrorCode`
+- `enum ToolSearchToolResultErrorCode`
 
   - `"invalid_tool_input"`
 
@@ -5073,7 +5109,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Result Error Param
 
-- `ToolSearchToolResultErrorParam`
+- `class ToolSearchToolResultErrorParam`
 
   - `"tool_search_tool_result_error" type`
 
@@ -5083,7 +5119,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Search Result Block
 
-- `ToolSearchToolSearchResultBlock`
+- `class ToolSearchToolSearchResultBlock`
 
   - `"tool_search_tool_search_result" type`
 
@@ -5091,7 +5127,7 @@ var_dump($messageTokensCount);
 
 ### Tool Search Tool Search Result Block Param
 
-- `ToolSearchToolSearchResultBlockParam`
+- `class ToolSearchToolSearchResultBlockParam`
 
   - `"tool_search_tool_search_result" type`
 
@@ -5099,7 +5135,7 @@ var_dump($messageTokensCount);
 
 ### Tool Text Editor 20250124
 
-- `ToolTextEditor20250124`
+- `class ToolTextEditor20250124`
 
   - `"text_editor_20250124" type`
 
@@ -5127,7 +5163,7 @@ var_dump($messageTokensCount);
 
 ### Tool Text Editor 20250429
 
-- `ToolTextEditor20250429`
+- `class ToolTextEditor20250429`
 
   - `"text_editor_20250429" type`
 
@@ -5155,7 +5191,7 @@ var_dump($messageTokensCount);
 
 ### Tool Text Editor 20250728
 
-- `ToolTextEditor20250728`
+- `class ToolTextEditor20250728`
 
   - `"text_editor_20250728" type`
 
@@ -5187,9 +5223,9 @@ var_dump($messageTokensCount);
 
 ### Tool Union
 
-- `ToolUnion`
+- `class ToolUnion`
 
-  - `Tool`
+  - `class Tool`
 
     - `?Type type`
 
@@ -5231,7 +5267,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolBash20250124`
+  - `class ToolBash20250124`
 
     - `"bash_20250124" type`
 
@@ -5257,7 +5293,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250522`
+  - `class CodeExecutionTool20250522`
 
     - `"code_execution_20250522" type`
 
@@ -5281,7 +5317,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20250825`
+  - `class CodeExecutionTool20250825`
 
     - `"code_execution_20250825" type`
 
@@ -5305,7 +5341,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260120`
+  - `class CodeExecutionTool20260120`
 
     - `"code_execution_20260120" type`
 
@@ -5329,7 +5365,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `CodeExecutionTool20260521`
+  - `class CodeExecutionTool20260521`
 
     - `"code_execution_20260521" type`
 
@@ -5353,7 +5389,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `BrowserToolset20260801`
+  - `class BrowserToolset20260801`
 
     - `"browser_toolset_20260801" type`
 
@@ -5370,7 +5406,7 @@ var_dump($messageTokensCount);
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
 
-  - `MemoryTool20250818`
+  - `class MemoryTool20250818`
 
     - `"memory_20250818" type`
 
@@ -5396,7 +5432,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ComputerToolset20260801`
+  - `class ComputerToolset20260801`
 
     - `"computer_toolset_20260801" type`
 
@@ -5413,7 +5449,7 @@ var_dump($messageTokensCount);
       absent. Unknown keys are rejected: the field set is this toolset
       version's complete member set.
 
-  - `ToolTextEditor20250124`
+  - `class ToolTextEditor20250124`
 
     - `"text_editor_20250124" type`
 
@@ -5439,7 +5475,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250429`
+  - `class ToolTextEditor20250429`
 
     - `"text_editor_20250429" type`
 
@@ -5465,7 +5501,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolTextEditor20250728`
+  - `class ToolTextEditor20250728`
 
     - `"text_editor_20250728" type`
 
@@ -5495,7 +5531,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20250305`
+  - `class WebSearchTool20250305`
 
     - `"web_search_20250305" type`
 
@@ -5535,7 +5571,7 @@ var_dump($messageTokensCount);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20250910`
+  - `class WebFetchTool20250910`
 
     - `"web_fetch_20250910" type`
 
@@ -5579,7 +5615,16 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebSearchTool20260209`
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `class WebSearchTool20260209`
 
     - `"web_search_20260209" type`
 
@@ -5619,7 +5664,7 @@ var_dump($messageTokensCount);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260209`
+  - `class WebFetchTool20260209`
 
     - `"web_fetch_20260209" type`
 
@@ -5663,7 +5708,16 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `WebFetchTool20260309`
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `class WebFetchTool20260309`
 
     - `"web_fetch_20260309" type`
 
@@ -5707,11 +5761,20 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `?bool useCache`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `WebSearchTool20260318`
+  - `class WebSearchTool20260318`
 
     - `"web_search_20260318" type`
 
@@ -5755,7 +5818,7 @@ var_dump($messageTokensCount);
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `WebFetchTool20260318`
+  - `class WebFetchTool20260318`
 
     - `"web_fetch_20260318" type`
 
@@ -5803,11 +5866,20 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `?WebFetchURLSources urlSources`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `?bool useCache`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `ToolSearchToolBm25_20251119`
+  - `class ToolSearchToolBm25_20251119`
 
     - `Type type`
 
@@ -5831,7 +5903,7 @@ var_dump($messageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `ToolSearchToolRegex20251119`
+  - `class ToolSearchToolRegex20251119`
 
     - `Type type`
 
@@ -5857,7 +5929,7 @@ var_dump($messageTokensCount);
 
 ### Tool Use Block
 
-- `ToolUseBlock`
+- `class ToolUseBlock`
 
   - `"tool_use" type`
 
@@ -5875,7 +5947,7 @@ var_dump($messageTokensCount);
 
 ### Tool Use Block Param
 
-- `ToolUseBlockParam`
+- `class ToolUseBlockParam`
 
   - `"tool_use" type`
 
@@ -5897,7 +5969,7 @@ var_dump($messageTokensCount);
 
 ### URL Image Source
 
-- `URLImageSource`
+- `class URLImageSource`
 
   - `"url" type`
 
@@ -5905,7 +5977,7 @@ var_dump($messageTokensCount);
 
 ### URL PDF Source
 
-- `URLPDFSource`
+- `class URLPDFSource`
 
   - `"url" type`
 
@@ -5913,7 +5985,7 @@ var_dump($messageTokensCount);
 
 ### Usage
 
-- `Usage`
+- `class Usage`
 
   - `?CacheCreation cacheCreation`
 
@@ -5958,7 +6030,7 @@ var_dump($messageTokensCount);
 
 ### User Location
 
-- `UserLocation`
+- `class UserLocation`
 
   - `"approximate" type`
 
@@ -5980,7 +6052,7 @@ var_dump($messageTokensCount);
 
 ### Web Fetch Block
 
-- `WebFetchBlock`
+- `class WebFetchBlock`
 
   - `"web_fetch_result" type`
 
@@ -5996,7 +6068,7 @@ var_dump($messageTokensCount);
 
 ### Web Fetch Block Param
 
-- `WebFetchBlockParam`
+- `class WebFetchBlockParam`
 
   - `"web_fetch_result" type`
 
@@ -6012,7 +6084,7 @@ var_dump($messageTokensCount);
 
 ### Web Fetch Tool 20250910
 
-- `WebFetchTool20250910`
+- `class WebFetchTool20250910`
 
   - `"web_fetch_20250910" type`
 
@@ -6056,9 +6128,18 @@ var_dump($messageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `?WebFetchURLSources urlSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
 ### Web Fetch Tool 20260209
 
-- `WebFetchTool20260209`
+- `class WebFetchTool20260209`
 
   - `"web_fetch_20260209" type`
 
@@ -6102,9 +6183,18 @@ var_dump($messageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `?WebFetchURLSources urlSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
 ### Web Fetch Tool 20260309
 
-- `WebFetchTool20260309`
+- `class WebFetchTool20260309`
 
   - `"web_fetch_20260309" type`
 
@@ -6148,13 +6238,22 @@ var_dump($messageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `?WebFetchURLSources urlSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
   - `?bool useCache`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Web Fetch Tool 20260318
 
-- `WebFetchTool20260318`
+- `class WebFetchTool20260318`
 
   - `"web_fetch_20260318" type`
 
@@ -6202,13 +6301,22 @@ var_dump($messageTokensCount);
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `?WebFetchURLSources urlSources`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
   - `?bool useCache`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Web Fetch Tool Result Block
 
-- `WebFetchToolResultBlock`
+- `class WebFetchToolResultBlock`
 
   - `"web_fetch_tool_result" type`
 
@@ -6220,7 +6328,7 @@ var_dump($messageTokensCount);
 
 ### Web Fetch Tool Result Block Param
 
-- `WebFetchToolResultBlockParam`
+- `class WebFetchToolResultBlockParam`
 
   - `"web_fetch_tool_result" type`
 
@@ -6236,7 +6344,7 @@ var_dump($messageTokensCount);
 
 ### Web Fetch Tool Result Error Block
 
-- `WebFetchToolResultErrorBlock`
+- `class WebFetchToolResultErrorBlock`
 
   - `"web_fetch_tool_result_error" type`
 
@@ -6244,7 +6352,7 @@ var_dump($messageTokensCount);
 
 ### Web Fetch Tool Result Error Block Param
 
-- `WebFetchToolResultErrorBlockParam`
+- `class WebFetchToolResultErrorBlockParam`
 
   - `"web_fetch_tool_result_error" type`
 
@@ -6252,7 +6360,7 @@ var_dump($messageTokensCount);
 
 ### Web Fetch Tool Result Error Code
 
-- `WebFetchToolResultErrorCode`
+- `enum WebFetchToolResultErrorCode`
 
   - `"invalid_tool_input"`
 
@@ -6274,9 +6382,61 @@ var_dump($messageTokensCount);
 
   - `"content_too_large"`
 
+### Web Fetch URL Source All
+
+- `class WebFetchURLSourceAll`
+
+  - `"all" type`
+
+### Web Fetch URL Source Except
+
+- `class WebFetchURLSourceExcept`
+
+  - `"except" type`
+
+  - `list<WebFetchURLSourceToolReference> tools`
+
+### Web Fetch URL Source None
+
+- `class WebFetchURLSourceNone`
+
+  - `"none" type`
+
+### Web Fetch URL Source Only
+
+- `class WebFetchURLSourceOnly`
+
+  - `"only" type`
+
+  - `list<WebFetchURLSourceToolReference> tools`
+
+### Web Fetch URL Source Tool Reference
+
+- `class WebFetchURLSourceToolReference`
+
+  - `"tool_reference" type`
+
+  - `string name`
+
+### Web Fetch URL Sources
+
+- `class WebFetchURLSources`
+
+  - `?ClientToolResults clientToolResults`
+
+    Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+  - `?ServerToolResults serverToolResults`
+
+    Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+  - `?UserInput userInput`
+
+    Whether URLs in user messages are fetchable: "all" or "none".
+
 ### Web Search Result Block
 
-- `WebSearchResultBlock`
+- `class WebSearchResultBlock`
 
   - `"web_search_result" type`
 
@@ -6290,7 +6450,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Result Block Param
 
-- `WebSearchResultBlockParam`
+- `class WebSearchResultBlockParam`
 
   - `"web_search_result" type`
 
@@ -6304,7 +6464,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool 20250305
 
-- `WebSearchTool20250305`
+- `class WebSearchTool20250305`
 
   - `"web_search_20250305" type`
 
@@ -6346,7 +6506,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool 20260209
 
-- `WebSearchTool20260209`
+- `class WebSearchTool20260209`
 
   - `"web_search_20260209" type`
 
@@ -6388,7 +6548,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool 20260318
 
-- `WebSearchTool20260318`
+- `class WebSearchTool20260318`
 
   - `"web_search_20260318" type`
 
@@ -6434,7 +6594,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool Request Error
 
-- `WebSearchToolRequestError`
+- `class WebSearchToolRequestError`
 
   - `"web_search_tool_result_error" type`
 
@@ -6442,7 +6602,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool Result Block
 
-- `WebSearchToolResultBlock`
+- `class WebSearchToolResultBlock`
 
   - `"web_search_tool_result" type`
 
@@ -6454,15 +6614,15 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool Result Block Content
 
-- `WebSearchToolResultBlockContent`
+- `class WebSearchToolResultBlockContent`
 
-  - `WebSearchToolResultError`
+  - `class WebSearchToolResultError`
 
     - `"web_search_tool_result_error" type`
 
     - `WebSearchToolResultErrorCode errorCode`
 
-  - `list<WebSearchResultBlock>`
+  - `class list<WebSearchResultBlock>`
 
     - `"web_search_result" type`
 
@@ -6476,7 +6636,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool Result Block Param
 
-- `WebSearchToolResultBlockParam`
+- `class WebSearchToolResultBlockParam`
 
   - `"web_search_tool_result" type`
 
@@ -6492,9 +6652,9 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool Result Block Param Content
 
-- `WebSearchToolResultBlockParamContent`
+- `class WebSearchToolResultBlockParamContent`
 
-  - `list<WebSearchResultBlockParam>`
+  - `class list<WebSearchResultBlockParam>`
 
     - `"web_search_result" type`
 
@@ -6506,7 +6666,7 @@ var_dump($messageTokensCount);
 
     - `?string pageAge`
 
-  - `WebSearchToolRequestError`
+  - `class WebSearchToolRequestError`
 
     - `"web_search_tool_result_error" type`
 
@@ -6514,7 +6674,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool Result Error
 
-- `WebSearchToolResultError`
+- `class WebSearchToolResultError`
 
   - `"web_search_tool_result_error" type`
 
@@ -6522,7 +6682,7 @@ var_dump($messageTokensCount);
 
 ### Web Search Tool Result Error Code
 
-- `WebSearchToolResultErrorCode`
+- `enum WebSearchToolResultErrorCode`
 
   - `"invalid_tool_input"`
 
@@ -6564,7 +6724,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `MessageBatch`
+- `class MessageBatch`
 
   - `"message_batch" type`
 
@@ -6742,7 +6902,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `MessageBatch`
+- `class MessageBatch`
 
   - `"message_batch" type`
 
@@ -6865,7 +7025,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `MessageBatch`
+- `class MessageBatch`
 
   - `"message_batch" type`
 
@@ -6988,7 +7148,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `MessageBatch`
+- `class MessageBatch`
 
   - `"message_batch" type`
 
@@ -7101,7 +7261,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `DeletedMessageBatch`
+- `class DeletedMessageBatch`
 
   - `"message_batch_deleted" type`
 
@@ -7160,7 +7320,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 #### Returns
 
-- `MessageBatchIndividualResponse`
+- `class MessageBatchIndividualResponse`
 
   - `string customID`
 

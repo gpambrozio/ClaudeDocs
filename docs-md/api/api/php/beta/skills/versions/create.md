@@ -35,7 +35,7 @@ Create Skill Version
 
 ## Returns
 
-- `SkillVersion`
+- `class SkillVersion`
 
   - `"skill_version" type`
 

@@ -125,6 +125,8 @@ Upload File
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -133,7 +135,7 @@ Upload File
 
 ### Returns
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonElement Type = "file"`
 
@@ -351,6 +353,8 @@ List Files
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -359,7 +363,7 @@ List Files
 
 ### Returns
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonElement Type = "file"`
 
@@ -565,6 +569,8 @@ Download File
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -691,6 +697,8 @@ Get File Metadata
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -699,7 +707,7 @@ Get File Metadata
 
 ### Returns
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonElement Type = "file"`
 
@@ -898,6 +906,8 @@ Delete File
 
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `Compact2026_09_04("compact-2026-09-04")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -906,7 +916,7 @@ Delete File
 
 ### Returns
 
-- `class BetaDeletedFile:`
+- `class BetaDeletedFile`
 
   - `Type Type`
 
@@ -941,7 +951,7 @@ Console.WriteLine(betaDeletedFile);
 
 ### Beta Deleted File
 
-- `class BetaDeletedFile:`
+- `class BetaDeletedFile`
 
   - `Type Type`
 
@@ -955,7 +965,7 @@ Console.WriteLine(betaDeletedFile);
 
 ### Beta File Metadata
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonElement Type = "file"`
 
@@ -1017,7 +1027,7 @@ Console.WriteLine(betaDeletedFile);
 
 ### Beta File Scope
 
-- `class BetaFileScope:`
+- `class BetaFileScope`
 
   - `JsonElement Type = "session"`
 

@@ -115,6 +115,8 @@ Add Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
@@ -123,7 +125,7 @@ Add Session Resource
 
 ### Returns
 
-- `class BetaManagedAgentsFileResource:`
+- `class BetaManagedAgentsFileResource`
 
   - `Type type`
 
@@ -305,13 +307,15 @@ List Session Resources
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
 - `class BetaManagedAgentsSessionResource: union`
 
-  - `class BetaManagedAgentsGitHubRepositoryResource:`
+  - `class BetaManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -335,7 +339,7 @@ List Session Resources
 
     - `Optional<Checkout> checkout`
 
-      - `class BetaManagedAgentsBranchCheckout:`
+      - `class BetaManagedAgentsBranchCheckout`
 
         - `Type type`
 
@@ -345,7 +349,7 @@ List Session Resources
 
           minLength: 1, maxLength: 255
 
-      - `class BetaManagedAgentsCommitCheckout:`
+      - `class BetaManagedAgentsCommitCheckout`
 
         - `Type type`
 
@@ -355,7 +359,7 @@ List Session Resources
 
           minLength: 7, maxLength: 64
 
-  - `class BetaManagedAgentsFileResource:`
+  - `class BetaManagedAgentsFileResource`
 
     - `Type type`
 
@@ -377,7 +381,7 @@ List Session Resources
 
       format: date-time
 
-  - `class BetaManagedAgentsMemoryStoreResource:`
+  - `class BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 
@@ -574,6 +578,8 @@ Get Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
@@ -582,7 +588,7 @@ Get Session Resource
 
   The requested session resource.
 
-  - `class BetaManagedAgentsGitHubRepositoryResource:`
+  - `class BetaManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -606,7 +612,7 @@ Get Session Resource
 
     - `Optional<Checkout> checkout`
 
-      - `class BetaManagedAgentsBranchCheckout:`
+      - `class BetaManagedAgentsBranchCheckout`
 
         - `Type type`
 
@@ -616,7 +622,7 @@ Get Session Resource
 
           minLength: 1, maxLength: 255
 
-      - `class BetaManagedAgentsCommitCheckout:`
+      - `class BetaManagedAgentsCommitCheckout`
 
         - `Type type`
 
@@ -626,7 +632,7 @@ Get Session Resource
 
           minLength: 7, maxLength: 64
 
-  - `class BetaManagedAgentsFileResource:`
+  - `class BetaManagedAgentsFileResource`
 
     - `Type type`
 
@@ -648,7 +654,7 @@ Get Session Resource
 
       format: date-time
 
-  - `class BetaManagedAgentsMemoryStoreResource:`
+  - `class BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 
@@ -836,6 +842,8 @@ Update Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `String authorizationToken`
@@ -850,7 +858,7 @@ Update Session Resource
 
   The updated session resource.
 
-  - `class BetaManagedAgentsGitHubRepositoryResource:`
+  - `class BetaManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -874,7 +882,7 @@ Update Session Resource
 
     - `Optional<Checkout> checkout`
 
-      - `class BetaManagedAgentsBranchCheckout:`
+      - `class BetaManagedAgentsBranchCheckout`
 
         - `Type type`
 
@@ -884,7 +892,7 @@ Update Session Resource
 
           minLength: 1, maxLength: 255
 
-      - `class BetaManagedAgentsCommitCheckout:`
+      - `class BetaManagedAgentsCommitCheckout`
 
         - `Type type`
 
@@ -894,7 +902,7 @@ Update Session Resource
 
           minLength: 7, maxLength: 64
 
-  - `class BetaManagedAgentsFileResource:`
+  - `class BetaManagedAgentsFileResource`
 
     - `Type type`
 
@@ -916,7 +924,7 @@ Update Session Resource
 
       format: date-time
 
-  - `class BetaManagedAgentsMemoryStoreResource:`
+  - `class BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 
@@ -1105,11 +1113,13 @@ Delete Session Resource
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class BetaManagedAgentsDeleteSessionResource:`
+- `class BetaManagedAgentsDeleteSessionResource`
 
   Confirmation of resource deletion.
 
@@ -1155,7 +1165,7 @@ public final class Main {
 
 ### Beta Managed Agents Delete Session Resource
 
-- `class BetaManagedAgentsDeleteSessionResource:`
+- `class BetaManagedAgentsDeleteSessionResource`
 
   Confirmation of resource deletion.
 
@@ -1165,7 +1175,7 @@ public final class Main {
 
 ### Beta Managed Agents File Resource
 
-- `class BetaManagedAgentsFileResource:`
+- `class BetaManagedAgentsFileResource`
 
   - `Type type`
 
@@ -1189,7 +1199,7 @@ public final class Main {
 
 ### Beta Managed Agents GitHub Repository Resource
 
-- `class BetaManagedAgentsGitHubRepositoryResource:`
+- `class BetaManagedAgentsGitHubRepositoryResource`
 
   - `Type type`
 
@@ -1213,7 +1223,7 @@ public final class Main {
 
   - `Optional<Checkout> checkout`
 
-    - `class BetaManagedAgentsBranchCheckout:`
+    - `class BetaManagedAgentsBranchCheckout`
 
       - `Type type`
 
@@ -1223,7 +1233,7 @@ public final class Main {
 
         minLength: 1, maxLength: 255
 
-    - `class BetaManagedAgentsCommitCheckout:`
+    - `class BetaManagedAgentsCommitCheckout`
 
       - `Type type`
 
@@ -1235,7 +1245,7 @@ public final class Main {
 
 ### Beta Managed Agents Memory Store Resource
 
-- `class BetaManagedAgentsMemoryStoreResource:`
+- `class BetaManagedAgentsMemoryStoreResource`
 
   A memory store attached to an agent session.
 
@@ -1275,7 +1285,7 @@ public final class Main {
 
 - `class BetaManagedAgentsSessionResource: union`
 
-  - `class BetaManagedAgentsGitHubRepositoryResource:`
+  - `class BetaManagedAgentsGitHubRepositoryResource`
 
     - `Type type`
 
@@ -1299,7 +1309,7 @@ public final class Main {
 
     - `Optional<Checkout> checkout`
 
-      - `class BetaManagedAgentsBranchCheckout:`
+      - `class BetaManagedAgentsBranchCheckout`
 
         - `Type type`
 
@@ -1309,7 +1319,7 @@ public final class Main {
 
           minLength: 1, maxLength: 255
 
-      - `class BetaManagedAgentsCommitCheckout:`
+      - `class BetaManagedAgentsCommitCheckout`
 
         - `Type type`
 
@@ -1319,7 +1329,7 @@ public final class Main {
 
           minLength: 7, maxLength: 64
 
-  - `class BetaManagedAgentsFileResource:`
+  - `class BetaManagedAgentsFileResource`
 
     - `Type type`
 
@@ -1341,7 +1351,7 @@ public final class Main {
 
       format: date-time
 
-  - `class BetaManagedAgentsMemoryStoreResource:`
+  - `class BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 

@@ -31,7 +31,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
 ## Returns
 
-- `MessageBatchIndividualResponse`
+- `class MessageBatchIndividualResponse`
 
   - `string customID`
 

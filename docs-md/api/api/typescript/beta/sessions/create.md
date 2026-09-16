@@ -23,7 +23,7 @@ Create Session
 
     - `string`
 
-    - `BetaManagedAgentsAgentParams`
+    - `interface BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -41,7 +41,7 @@ Create Session
 
         format: int32
 
-    - `BetaManagedAgentsAgentWithOverridesParams`
+    - `interface BetaManagedAgentsAgentWithOverridesParams`
 
       Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
@@ -75,7 +75,7 @@ Create Session
 
         Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
-        - `BetaManagedAgentsModel = "claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more | (string & {})`
+        - `type BetaManagedAgentsModel = "claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more | (string & {})`
 
           The model that will power your agent.
 
@@ -141,7 +141,7 @@ Create Session
 
           - `(string & {})`
 
-        - `BetaManagedAgentsModelConfigParams`
+        - `interface BetaManagedAgentsModelConfigParams`
 
           An object that defines additional configuration control over model use
 
@@ -167,31 +167,31 @@ Create Session
 
               - `"max"`
 
-            - `BetaManagedAgentsEffortLow`
+            - `interface BetaManagedAgentsEffortLow`
 
               Low effort. Favors latency over reasoning depth.
 
               - `type: "low"`
 
-            - `BetaManagedAgentsEffortMedium`
+            - `interface BetaManagedAgentsEffortMedium`
 
               Medium effort. Balances latency and reasoning depth.
 
               - `type: "medium"`
 
-            - `BetaManagedAgentsEffortHigh`
+            - `interface BetaManagedAgentsEffortHigh`
 
               High effort. Favors reasoning depth.
 
               - `type: "high"`
 
-            - `BetaManagedAgentsEffortXhigh`
+            - `interface BetaManagedAgentsEffortXhigh`
 
               Extra-high effort. Not all models accept this level.
 
               - `type: "xhigh"`
 
-            - `BetaManagedAgentsEffortMax`
+            - `interface BetaManagedAgentsEffortMax`
 
               Maximum effort. Favors reasoning depth over latency.
 
@@ -213,7 +213,7 @@ Create Session
 
         Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
 
-        - `BetaManagedAgentsAnthropicSkillParams`
+        - `interface BetaManagedAgentsAnthropicSkillParams`
 
           An Anthropic-managed skill.
 
@@ -231,7 +231,7 @@ Create Session
 
             minLength: 1, maxLength: 64
 
-        - `BetaManagedAgentsCustomSkillParams`
+        - `interface BetaManagedAgentsCustomSkillParams`
 
           A user-created custom skill.
 
@@ -259,7 +259,7 @@ Create Session
 
         Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
 
-        - `BetaManagedAgentsAgentToolset20260401Params`
+        - `interface BetaManagedAgentsAgentToolset20260401Params`
 
           Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
@@ -269,7 +269,7 @@ Create Session
 
             Per-tool configuration overrides.
 
-            - `BetaManagedAgentsBashToolConfigParams`
+            - `interface BetaManagedAgentsBashToolConfigParams`
 
               Configuration override for the bash tool.
 
@@ -287,25 +287,25 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
                   - `type: "always_allow"`
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
                   - `type: "always_ask"`
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                   - `type: "auto"`
 
-            - `BetaManagedAgentsEditToolConfigParams`
+            - `interface BetaManagedAgentsEditToolConfigParams`
 
               Configuration override for the edit tool.
 
@@ -323,19 +323,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `BetaManagedAgentsReadToolConfigParams`
+            - `interface BetaManagedAgentsReadToolConfigParams`
 
               Configuration override for the read tool.
 
@@ -353,19 +353,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `BetaManagedAgentsWriteToolConfigParams`
+            - `interface BetaManagedAgentsWriteToolConfigParams`
 
               Configuration override for the write tool.
 
@@ -383,19 +383,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `BetaManagedAgentsGlobToolConfigParams`
+            - `interface BetaManagedAgentsGlobToolConfigParams`
 
               Configuration override for the glob tool.
 
@@ -413,19 +413,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `BetaManagedAgentsGrepToolConfigParams`
+            - `interface BetaManagedAgentsGrepToolConfigParams`
 
               Configuration override for the grep tool.
 
@@ -443,19 +443,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `BetaManagedAgentsWebFetchToolConfigParams`
+            - `interface BetaManagedAgentsWebFetchToolConfigParams`
 
               Configuration override for the web_fetch tool.
 
@@ -487,19 +487,19 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `BetaManagedAgentsWebSearchToolConfigParams`
+            - `interface BetaManagedAgentsWebSearchToolConfigParams`
 
               Configuration override for the web_search tool.
 
@@ -525,15 +525,15 @@ Create Session
 
                 Permission policy for tool execution.
 
-                - `BetaManagedAgentsAlwaysAllowPolicy`
+                - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                   Tool calls are automatically approved without user confirmation.
 
-                - `BetaManagedAgentsAlwaysAskPolicy`
+                - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                - `BetaManagedAgentsAutoPolicy`
+                - `interface BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -579,19 +579,19 @@ Create Session
 
               Permission policy for tool execution.
 
-              - `BetaManagedAgentsAlwaysAllowPolicy`
+              - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `BetaManagedAgentsAlwaysAskPolicy`
+              - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `BetaManagedAgentsAutoPolicy`
+              - `interface BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `BetaManagedAgentsMCPToolsetParams`
+        - `interface BetaManagedAgentsMCPToolsetParams`
 
           Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -621,15 +621,15 @@ Create Session
 
               Permission policy for tool execution.
 
-              - `BetaManagedAgentsAlwaysAllowPolicy`
+              - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `BetaManagedAgentsAlwaysAskPolicy`
+              - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `BetaManagedAgentsAutoPolicy`
+              - `interface BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -645,19 +645,19 @@ Create Session
 
               Permission policy for tool execution.
 
-              - `BetaManagedAgentsAlwaysAllowPolicy`
+              - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                 Tool calls are automatically approved without user confirmation.
 
-              - `BetaManagedAgentsAlwaysAskPolicy`
+              - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                 Tool calls require user confirmation before execution.
 
-              - `BetaManagedAgentsAutoPolicy`
+              - `interface BetaManagedAgentsAutoPolicy`
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `BetaManagedAgentsCustomToolParams`
+        - `interface BetaManagedAgentsCustomToolParams`
 
           A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -719,7 +719,7 @@ Create Session
 
     Body param: Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
 
-    - `BetaManagedAgentsUserMessageEventParams`
+    - `interface BetaManagedAgentsUserMessageEventParams`
 
       Parameters for sending a user message to the session.
 
@@ -729,7 +729,7 @@ Create Session
 
         Array of content blocks for the user message.
 
-        - `BetaManagedAgentsTextBlock`
+        - `interface BetaManagedAgentsTextBlock`
 
           Regular text content.
 
@@ -741,7 +741,7 @@ Create Session
 
             minLength: 1
 
-        - `BetaManagedAgentsImageBlock`
+        - `interface BetaManagedAgentsImageBlock`
 
           Image content specified directly as base64 data or as a reference via a URL.
 
@@ -751,7 +751,7 @@ Create Session
 
             Union type for image source variants.
 
-            - `BetaManagedAgentsBase64ImageSource`
+            - `interface BetaManagedAgentsBase64ImageSource`
 
               Base64-encoded image data.
 
@@ -769,7 +769,7 @@ Create Session
 
                 minLength: 1
 
-            - `BetaManagedAgentsURLImageSource`
+            - `interface BetaManagedAgentsURLImageSource`
 
               Image referenced by URL.
 
@@ -781,7 +781,7 @@ Create Session
 
                 minLength: 1
 
-            - `BetaManagedAgentsFileImageSource`
+            - `interface BetaManagedAgentsFileImageSource`
 
               Image referenced by file ID.
 
@@ -793,7 +793,7 @@ Create Session
 
                 minLength: 1
 
-        - `BetaManagedAgentsDocumentBlock`
+        - `interface BetaManagedAgentsDocumentBlock`
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -803,7 +803,7 @@ Create Session
 
             Union type for document source variants.
 
-            - `BetaManagedAgentsBase64DocumentSource`
+            - `interface BetaManagedAgentsBase64DocumentSource`
 
               Base64-encoded document data.
 
@@ -821,7 +821,7 @@ Create Session
 
                 minLength: 1
 
-            - `BetaManagedAgentsPlainTextDocumentSource`
+            - `interface BetaManagedAgentsPlainTextDocumentSource`
 
               Plain text document content.
 
@@ -837,7 +837,7 @@ Create Session
 
                 MIME type of the text content. Must be "text/plain".
 
-            - `BetaManagedAgentsURLDocumentSource`
+            - `interface BetaManagedAgentsURLDocumentSource`
 
               Document referenced by URL.
 
@@ -849,7 +849,7 @@ Create Session
 
                 minLength: 1
 
-            - `BetaManagedAgentsFileDocumentSource`
+            - `interface BetaManagedAgentsFileDocumentSource`
 
               Document referenced by file ID.
 
@@ -869,13 +869,13 @@ Create Session
 
             The title of the document.
 
-        - `BetaManagedAgentsRedactedBlock`
+        - `interface BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `type: "redacted"`
 
-    - `BetaManagedAgentsUserDefineOutcomeEventParams`
+    - `interface BetaManagedAgentsUserDefineOutcomeEventParams`
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -889,7 +889,7 @@ Create Session
 
         Rubric for grading the quality of an outcome.
 
-        - `BetaManagedAgentsFileRubricParams`
+        - `interface BetaManagedAgentsFileRubricParams`
 
           Rubric referenced by a file uploaded via the Files API.
 
@@ -899,7 +899,7 @@ Create Session
 
             ID of the rubric file.
 
-        - `BetaManagedAgentsTextRubricParams`
+        - `interface BetaManagedAgentsTextRubricParams`
 
           Rubric content provided inline as text.
 
@@ -925,7 +925,7 @@ Create Session
 
     Body param: Resources (e.g. repositories, files) to mount into the session's container.
 
-    - `BetaManagedAgentsGitHubRepositoryResourceParams`
+    - `interface BetaManagedAgentsGitHubRepositoryResourceParams`
 
       Mount a GitHub repository into the session's container.
 
@@ -947,7 +947,7 @@ Create Session
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
-        - `BetaManagedAgentsBranchCheckout`
+        - `interface BetaManagedAgentsBranchCheckout`
 
           - `type: "branch"`
 
@@ -957,7 +957,7 @@ Create Session
 
             minLength: 1, maxLength: 255
 
-        - `BetaManagedAgentsCommitCheckout`
+        - `interface BetaManagedAgentsCommitCheckout`
 
           - `type: "commit"`
 
@@ -973,7 +973,7 @@ Create Session
 
         minLength: 1, maxLength: 4096
 
-    - `BetaManagedAgentsFileResourceParams`
+    - `interface BetaManagedAgentsFileResourceParams`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -991,7 +991,7 @@ Create Session
 
         minLength: 1, maxLength: 4096
 
-    - `BetaManagedAgentsMemoryStoreResourceParam`
+    - `interface BetaManagedAgentsMemoryStoreResourceParam`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -1031,7 +1031,7 @@ Create Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1123,6 +1123,8 @@ Create Session
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1131,7 +1133,7 @@ Create Session
 
 ## Returns
 
-- `BetaManagedAgentsSession`
+- `interface BetaManagedAgentsSession`
 
   A Managed Agents `session`.
 
@@ -1231,31 +1233,31 @@ Create Session
 
         How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
-        - `BetaManagedAgentsEffortLow`
+        - `interface BetaManagedAgentsEffortLow`
 
           Low effort. Favors latency over reasoning depth.
 
           - `type: "low"`
 
-        - `BetaManagedAgentsEffortMedium`
+        - `interface BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
           - `type: "medium"`
 
-        - `BetaManagedAgentsEffortHigh`
+        - `interface BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
           - `type: "high"`
 
-        - `BetaManagedAgentsEffortXhigh`
+        - `interface BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
           - `type: "xhigh"`
 
-        - `BetaManagedAgentsEffortMax`
+        - `interface BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
@@ -1283,7 +1285,7 @@ Create Session
 
         Full `agent` definitions the coordinator may spawn as session threads.
 
-        - `BetaManagedAgentsSessionThreadAgent`
+        - `interface BetaManagedAgentsSessionThreadAgent`
 
           Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -1309,7 +1311,7 @@ Create Session
 
           - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
 
-            - `BetaManagedAgentsAnthropicSkill`
+            - `interface BetaManagedAgentsAnthropicSkill`
 
               A resolved Anthropic-managed skill.
 
@@ -1319,7 +1321,7 @@ Create Session
 
               - `version: string`
 
-            - `BetaManagedAgentsCustomSkill`
+            - `interface BetaManagedAgentsCustomSkill`
 
               A resolved user-created custom skill.
 
@@ -1333,13 +1335,13 @@ Create Session
 
           - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
 
-            - `BetaManagedAgentsAgentToolset20260401`
+            - `interface BetaManagedAgentsAgentToolset20260401`
 
               - `type: "agent_toolset_20260401"`
 
               - `configs: Array<BetaManagedAgentsAgentToolConfig>`
 
-                - `BetaManagedAgentsBashToolConfig`
+                - `interface BetaManagedAgentsBashToolConfig`
 
                   Configuration for the bash tool.
 
@@ -1353,25 +1355,25 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
                       - `type: "always_allow"`
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
                       - `type: "always_ask"`
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
                       - `type: "auto"`
 
-                - `BetaManagedAgentsEditToolConfig`
+                - `interface BetaManagedAgentsEditToolConfig`
 
                   Configuration for the edit tool.
 
@@ -1385,19 +1387,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `BetaManagedAgentsReadToolConfig`
+                - `interface BetaManagedAgentsReadToolConfig`
 
                   Configuration for the read tool.
 
@@ -1411,19 +1413,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `BetaManagedAgentsWriteToolConfig`
+                - `interface BetaManagedAgentsWriteToolConfig`
 
                   Configuration for the write tool.
 
@@ -1437,19 +1439,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `BetaManagedAgentsGlobToolConfig`
+                - `interface BetaManagedAgentsGlobToolConfig`
 
                   Configuration for the glob tool.
 
@@ -1463,19 +1465,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `BetaManagedAgentsGrepToolConfig`
+                - `interface BetaManagedAgentsGrepToolConfig`
 
                   Configuration for the grep tool.
 
@@ -1489,19 +1491,19 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                - `BetaManagedAgentsWebFetchToolConfig`
+                - `interface BetaManagedAgentsWebFetchToolConfig`
 
                   Configuration for the web_fetch tool.
 
@@ -1515,15 +1517,15 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -1535,7 +1537,7 @@ Create Session
 
                     format: int32
 
-                - `BetaManagedAgentsWebSearchToolConfig`
+                - `interface BetaManagedAgentsWebSearchToolConfig`
 
                   Configuration for the web_search tool.
 
@@ -1549,15 +1551,15 @@ Create Session
 
                     Permission policy for tool execution.
 
-                    - `BetaManagedAgentsAlwaysAllowPolicy`
+                    - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                       Tool calls are automatically approved without user confirmation.
 
-                    - `BetaManagedAgentsAlwaysAskPolicy`
+                    - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                       Tool calls require user confirmation before execution.
 
-                    - `BetaManagedAgentsAutoPolicy`
+                    - `interface BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -1605,19 +1607,19 @@ Create Session
 
                   Permission policy for tool execution.
 
-                  - `BetaManagedAgentsAlwaysAllowPolicy`
+                  - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `BetaManagedAgentsAlwaysAskPolicy`
+                  - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `BetaManagedAgentsAutoPolicy`
+                  - `interface BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `BetaManagedAgentsMCPToolset`
+            - `interface BetaManagedAgentsMCPToolset`
 
               - `type: "mcp_toolset"`
 
@@ -1631,15 +1633,15 @@ Create Session
 
                   Permission policy for tool execution.
 
-                  - `BetaManagedAgentsAlwaysAllowPolicy`
+                  - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `BetaManagedAgentsAlwaysAskPolicy`
+                  - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `BetaManagedAgentsAutoPolicy`
+                  - `interface BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
@@ -1653,21 +1655,21 @@ Create Session
 
                   Permission policy for tool execution.
 
-                  - `BetaManagedAgentsAlwaysAllowPolicy`
+                  - `interface BetaManagedAgentsAlwaysAllowPolicy`
 
                     Tool calls are automatically approved without user confirmation.
 
-                  - `BetaManagedAgentsAlwaysAskPolicy`
+                  - `interface BetaManagedAgentsAlwaysAskPolicy`
 
                     Tool calls require user confirmation before execution.
 
-                  - `BetaManagedAgentsAutoPolicy`
+                  - `interface BetaManagedAgentsAutoPolicy`
 
                     The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
               - `mcp_server_name: string`
 
-            - `BetaManagedAgentsCustomTool`
+            - `interface BetaManagedAgentsCustomTool`
 
               A custom tool as returned in API responses.
 
@@ -1691,7 +1693,7 @@ Create Session
 
             format: int32
 
-        - `BetaManagedAgentsAdvisor`
+        - `interface BetaManagedAgentsAdvisor`
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
@@ -1705,11 +1707,11 @@ Create Session
 
     - `skills: Array<BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill>`
 
-      - `BetaManagedAgentsAnthropicSkill`
+      - `interface BetaManagedAgentsAnthropicSkill`
 
         A resolved Anthropic-managed skill.
 
-      - `BetaManagedAgentsCustomSkill`
+      - `interface BetaManagedAgentsCustomSkill`
 
         A resolved user-created custom skill.
 
@@ -1717,11 +1719,11 @@ Create Session
 
     - `tools: Array<BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool>`
 
-      - `BetaManagedAgentsAgentToolset20260401`
+      - `interface BetaManagedAgentsAgentToolset20260401`
 
-      - `BetaManagedAgentsMCPToolset`
+      - `interface BetaManagedAgentsMCPToolset`
 
-      - `BetaManagedAgentsCustomTool`
+      - `interface BetaManagedAgentsCustomTool`
 
         A custom tool as returned in API responses.
 
@@ -1799,7 +1801,7 @@ Create Session
 
   - `resources: Array<BetaManagedAgentsSessionResource>`
 
-    - `BetaManagedAgentsGitHubRepositoryResource`
+    - `interface BetaManagedAgentsGitHubRepositoryResource`
 
       - `type: "github_repository"`
 
@@ -1823,7 +1825,7 @@ Create Session
 
       - `checkout?: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout | null`
 
-        - `BetaManagedAgentsBranchCheckout`
+        - `interface BetaManagedAgentsBranchCheckout`
 
           - `type: "branch"`
 
@@ -1833,7 +1835,7 @@ Create Session
 
             minLength: 1, maxLength: 255
 
-        - `BetaManagedAgentsCommitCheckout`
+        - `interface BetaManagedAgentsCommitCheckout`
 
           - `type: "commit"`
 
@@ -1843,7 +1845,7 @@ Create Session
 
             minLength: 7, maxLength: 64
 
-    - `BetaManagedAgentsFileResource`
+    - `interface BetaManagedAgentsFileResource`
 
       - `type: "file"`
 
@@ -1865,7 +1867,7 @@ Create Session
 
         format: date-time
 
-    - `BetaManagedAgentsMemoryStoreResource`
+    - `interface BetaManagedAgentsMemoryStoreResource`
 
       A memory store attached to an agent session.
 

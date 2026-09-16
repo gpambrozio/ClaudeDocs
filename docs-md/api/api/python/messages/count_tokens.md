@@ -76,7 +76,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
     - `List[Union[TextBlockParam, ImageBlockParam, DocumentBlockParam, 14 more]]`
 
-      - `class TextBlockParam: …`
+      - `class TextBlockParam`
 
         - `type: Literal["text"]`
 
@@ -107,7 +107,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         - `citations: Optional[List[TextCitationParam]]`
 
-          - `class CitationCharLocationParam: …`
+          - `class CitationCharLocationParam`
 
             - `type: Literal["char_location"]`
 
@@ -127,7 +127,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               minimum: 0
 
-          - `class CitationPageLocationParam: …`
+          - `class CitationPageLocationParam`
 
             - `type: Literal["page_location"]`
 
@@ -147,7 +147,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               minimum: 1
 
-          - `class CitationContentBlockLocationParam: …`
+          - `class CitationContentBlockLocationParam`
 
             - `type: Literal["content_block_location"]`
 
@@ -177,7 +177,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               minimum: 0
 
-          - `class CitationWebSearchResultLocationParam: …`
+          - `class CitationWebSearchResultLocationParam`
 
             - `type: Literal["web_search_result_location"]`
 
@@ -193,7 +193,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               minLength: 1
 
-          - `class CitationSearchResultLocationParam: …`
+          - `class CitationSearchResultLocationParam`
 
             - `type: Literal["search_result_location"]`
 
@@ -227,13 +227,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `title: Optional[str]`
 
-      - `class ImageBlockParam: …`
+      - `class ImageBlockParam`
 
         - `type: Literal["image"]`
 
         - `source: Source`
 
-          - `class Base64ImageSource: …`
+          - `class Base64ImageSource`
 
             - `type: Literal["base64"]`
 
@@ -251,13 +251,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `"image/webp"`
 
-          - `class URLImageSource: …`
+          - `class URLImageSource`
 
             - `type: Literal["url"]`
 
             - `url: str`
 
-          - `class FileImageSource: …`
+          - `class FileImageSource`
 
             - `type: Literal["file"]`
 
@@ -279,13 +279,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `"error"`
 
-      - `class DocumentBlockParam: …`
+      - `class DocumentBlockParam`
 
         - `type: Literal["document"]`
 
         - `source: Source`
 
-          - `class Base64PDFSource: …`
+          - `class Base64PDFSource`
 
             - `type: Literal["base64"]`
 
@@ -295,7 +295,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `media_type: Literal["application/pdf"]`
 
-          - `class PlainTextSource: …`
+          - `class PlainTextSource`
 
             - `type: Literal["text"]`
 
@@ -303,7 +303,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `media_type: Literal["text/plain"]`
 
-          - `class ContentBlockSource: …`
+          - `class ContentBlockSource`
 
             - `type: Literal["content"]`
 
@@ -313,17 +313,17 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `List[ContentBlockSourceContent]`
 
-                - `class TextBlockParam: …`
+                - `class TextBlockParam`
 
-                - `class ImageBlockParam: …`
+                - `class ImageBlockParam`
 
-          - `class URLPDFSource: …`
+          - `class URLPDFSource`
 
             - `type: Literal["url"]`
 
             - `url: str`
 
-          - `class FileDocumentSource: …`
+          - `class FileDocumentSource`
 
             - `type: Literal["file"]`
 
@@ -345,7 +345,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           maxLength: 500, minLength: 1
 
-      - `class SearchResultBlockParam: …`
+      - `class SearchResultBlockParam`
 
         - `type: Literal["search_result"]`
 
@@ -373,7 +373,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         - `citations: Optional[CitationsConfigParam]`
 
-      - `class ThinkingBlockParam: …`
+      - `class ThinkingBlockParam`
 
         - `type: Literal["thinking"]`
 
@@ -387,7 +387,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           The `thinking` text of this block as returned by the API.
 
-      - `class RedactedThinkingBlockParam: …`
+      - `class RedactedThinkingBlockParam`
 
         - `type: Literal["redacted_thinking"]`
 
@@ -395,7 +395,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-      - `class ToolUseBlockParam: …`
+      - `class ToolUseBlockParam`
 
         - `type: Literal["tool_use"]`
 
@@ -415,13 +415,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         - `caller: Optional[Caller]`
 
-          - `class DirectCaller: …`
+          - `class DirectCaller`
 
             Tool invocation directly from the model.
 
             - `type: Literal["direct"]`
 
-          - `class ServerToolCaller: …`
+          - `class ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -431,7 +431,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `class ServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120`
 
             - `type: Literal["code_execution_20260120"]`
 
@@ -445,7 +445,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `class ToolResultBlockParam: …`
+      - `class ToolResultBlockParam`
 
         - `type: Literal["tool_result"]`
 
@@ -463,15 +463,15 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `List[Content]`
 
-            - `class TextBlockParam: …`
+            - `class TextBlockParam`
 
-            - `class ImageBlockParam: …`
+            - `class ImageBlockParam`
 
-            - `class SearchResultBlockParam: …`
+            - `class SearchResultBlockParam`
 
-            - `class DocumentBlockParam: …`
+            - `class DocumentBlockParam`
 
-            - `class ToolReferenceBlockParam: …`
+            - `class ToolReferenceBlockParam`
 
               Tool reference block that can be included in tool_result content.
 
@@ -485,7 +485,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 Create a cache control breakpoint at this content block.
 
-            - `class BrowserStateBlockParam: …`
+            - `class BrowserStateBlockParam`
 
               The caller's browser state after a browser toolset member call —
               the full inventory of open tabs, which tab is active, and any side
@@ -535,7 +535,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 maxItems: 200, minItems: 1
 
-                - `class BrowserStateChangeTabOpened: …`
+                - `class BrowserStateChangeTabOpened`
 
                   A tab this call's execution opened that remains open at its end —
                   the creation delta of the `tabs` inventory, not an event log.
@@ -553,7 +553,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `class BrowserStateChangeDownloadStarted: …`
+                - `class BrowserStateChangeDownloadStarted`
 
                   A file download that started during this call.
 
@@ -571,7 +571,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                     maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `class BrowserStateChangeDownloadCompleted: …`
+                - `class BrowserStateChangeDownloadCompleted`
 
                   A file download that finished during this call, reported with the
                   same `download_id` as its `download_started` — or without a prior
@@ -604,7 +604,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                     minimum: 0
 
-                - `class BrowserStateChangeDownloadFailed: …`
+                - `class BrowserStateChangeDownloadFailed`
 
                   A file download that failed — or was cancelled — during this call.
 
@@ -636,7 +636,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `class ServerToolUseBlockParam: …`
+      - `class ServerToolUseBlockParam`
 
         - `type: Literal["server_tool_use"]`
 
@@ -668,17 +668,17 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         - `caller: Optional[Caller]`
 
-          - `class DirectCaller: …`
+          - `class DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `class ServerToolCaller: …`
+          - `class ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `class ServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120`
 
-      - `class WebSearchToolResultBlockParam: …`
+      - `class WebSearchToolResultBlockParam`
 
         - `type: Literal["web_search_tool_result"]`
 
@@ -696,7 +696,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `page_age: Optional[str]`
 
-          - `class WebSearchToolRequestError: …`
+          - `class WebSearchToolRequestError`
 
             - `type: Literal["web_search_tool_result_error"]`
 
@@ -724,23 +724,23 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         - `caller: Optional[Caller]`
 
-          - `class DirectCaller: …`
+          - `class DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `class ServerToolCaller: …`
+          - `class ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `class ServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120`
 
-      - `class WebFetchToolResultBlockParam: …`
+      - `class WebFetchToolResultBlockParam`
 
         - `type: Literal["web_fetch_tool_result"]`
 
         - `content: Content`
 
-          - `class WebFetchToolResultErrorBlockParam: …`
+          - `class WebFetchToolResultErrorBlockParam`
 
             - `type: Literal["web_fetch_tool_result_error"]`
 
@@ -766,7 +766,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `"content_too_large"`
 
-          - `class WebFetchBlockParam: …`
+          - `class WebFetchBlockParam`
 
             - `type: Literal["web_fetch_result"]`
 
@@ -790,23 +790,23 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         - `caller: Optional[Caller]`
 
-          - `class DirectCaller: …`
+          - `class DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `class ServerToolCaller: …`
+          - `class ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `class ServerToolCaller20260120: …`
+          - `class ServerToolCaller20260120`
 
-      - `class CodeExecutionToolResultBlockParam: …`
+      - `class CodeExecutionToolResultBlockParam`
 
         - `type: Literal["code_execution_tool_result"]`
 
         - `content: CodeExecutionToolResultBlockParamContent`
 
-          - `class CodeExecutionToolResultErrorParam: …`
+          - `class CodeExecutionToolResultErrorParam`
 
             - `type: Literal["code_execution_tool_result_error"]`
 
@@ -820,7 +820,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `"execution_time_exceeded"`
 
-          - `class CodeExecutionResultBlockParam: …`
+          - `class CodeExecutionResultBlockParam`
 
             - `type: Literal["code_execution_result"]`
 
@@ -836,7 +836,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `stdout: str`
 
-          - `class EncryptedCodeExecutionResultBlockParam: …`
+          - `class EncryptedCodeExecutionResultBlockParam`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -862,13 +862,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           Create a cache control breakpoint at this content block.
 
-      - `class BashCodeExecutionToolResultBlockParam: …`
+      - `class BashCodeExecutionToolResultBlockParam`
 
         - `type: Literal["bash_code_execution_tool_result"]`
 
         - `content: Content`
 
-          - `class BashCodeExecutionToolResultErrorParam: …`
+          - `class BashCodeExecutionToolResultErrorParam`
 
             - `type: Literal["bash_code_execution_tool_result_error"]`
 
@@ -884,7 +884,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `"output_file_too_large"`
 
-          - `class BashCodeExecutionResultBlockParam: …`
+          - `class BashCodeExecutionResultBlockParam`
 
             - `type: Literal["bash_code_execution_result"]`
 
@@ -908,13 +908,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           Create a cache control breakpoint at this content block.
 
-      - `class TextEditorCodeExecutionToolResultBlockParam: …`
+      - `class TextEditorCodeExecutionToolResultBlockParam`
 
         - `type: Literal["text_editor_code_execution_tool_result"]`
 
         - `content: Content`
 
-          - `class TextEditorCodeExecutionToolResultErrorParam: …`
+          - `class TextEditorCodeExecutionToolResultErrorParam`
 
             - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
@@ -932,7 +932,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `error_message: Optional[str]`
 
-          - `class TextEditorCodeExecutionViewResultBlockParam: …`
+          - `class TextEditorCodeExecutionViewResultBlockParam`
 
             - `type: Literal["text_editor_code_execution_view_result"]`
 
@@ -952,13 +952,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `total_lines: Optional[int]`
 
-          - `class TextEditorCodeExecutionCreateResultBlockParam: …`
+          - `class TextEditorCodeExecutionCreateResultBlockParam`
 
             - `type: Literal["text_editor_code_execution_create_result"]`
 
             - `is_file_update: bool`
 
-          - `class TextEditorCodeExecutionStrReplaceResultBlockParam: …`
+          - `class TextEditorCodeExecutionStrReplaceResultBlockParam`
 
             - `type: Literal["text_editor_code_execution_str_replace_result"]`
 
@@ -980,13 +980,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           Create a cache control breakpoint at this content block.
 
-      - `class ToolSearchToolResultBlockParam: …`
+      - `class ToolSearchToolResultBlockParam`
 
         - `type: Literal["tool_search_tool_result"]`
 
         - `content: Content`
 
-          - `class ToolSearchToolResultErrorParam: …`
+          - `class ToolSearchToolResultErrorParam`
 
             - `type: Literal["tool_search_tool_result_error"]`
 
@@ -1002,7 +1002,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `error_message: Optional[str]`
 
-          - `class ToolSearchToolSearchResultBlockParam: …`
+          - `class ToolSearchToolSearchResultBlockParam`
 
             - `type: Literal["tool_search_tool_search_result"]`
 
@@ -1026,7 +1026,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           Create a cache control breakpoint at this content block.
 
-      - `class ContainerUploadBlockParam: …`
+      - `class ContainerUploadBlockParam`
 
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
@@ -1209,7 +1209,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   See [extended thinking](../../../build-with-claude/extended-thinking.md) for details.
 
-  - `class ThinkingConfigEnabled: …`
+  - `class ThinkingConfigEnabled`
 
     - `type: Literal["enabled"]`
 
@@ -1231,11 +1231,11 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       - `"omitted"`
 
-  - `class ThinkingConfigDisabled: …`
+  - `class ThinkingConfigDisabled`
 
     - `type: Literal["disabled"]`
 
-  - `class ThinkingConfigAdaptive: …`
+  - `class ThinkingConfigAdaptive`
 
     - `type: Literal["adaptive"]`
 
@@ -1251,7 +1251,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `class ToolChoiceAuto: …`
+  - `class ToolChoiceAuto`
 
     The model will automatically decide whether to use tools.
 
@@ -1263,7 +1263,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `class ToolChoiceAny: …`
+  - `class ToolChoiceAny`
 
     The model will use any available tools.
 
@@ -1275,7 +1275,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `class ToolChoiceTool: …`
+  - `class ToolChoiceTool`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -1291,7 +1291,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `class ToolChoiceNone: …`
+  - `class ToolChoiceNone`
 
     The model will not be allowed to use tools.
 
@@ -1361,7 +1361,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   See our [guide](../../../agents-and-tools/tool-use/overview.md) for more details.
 
-  - `class Tool: …`
+  - `class Tool`
 
     - `type: Optional[Literal["custom"]]`
 
@@ -1419,7 +1419,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class ToolBash20250124: …`
+  - `class ToolBash20250124`
 
     - `type: Literal["bash_20250124"]`
 
@@ -1453,7 +1453,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class CodeExecutionTool20250522: …`
+  - `class CodeExecutionTool20250522`
 
     - `type: Literal["code_execution_20250522"]`
 
@@ -1485,7 +1485,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class CodeExecutionTool20250825: …`
+  - `class CodeExecutionTool20250825`
 
     - `type: Literal["code_execution_20250825"]`
 
@@ -1517,7 +1517,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class CodeExecutionTool20260120: …`
+  - `class CodeExecutionTool20260120`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -1551,7 +1551,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class CodeExecutionTool20260521: …`
+  - `class CodeExecutionTool20260521`
 
     Code execution tool with REPL state persistence.
 
@@ -1585,7 +1585,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class BrowserToolset20260801: …`
+  - `class BrowserToolset20260801`
 
     The browser toolset: a single `tools[]` entry (carrying no
     `name`) that declares the browser tool family. The model is served
@@ -1979,7 +1979,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `class MemoryTool20250818: …`
+  - `class MemoryTool20250818`
 
     - `type: Literal["memory_20250818"]`
 
@@ -2013,7 +2013,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class ComputerToolset20260801: …`
+  - `class ComputerToolset20260801`
 
     The computer toolset: a single `tools[]` entry (carrying no
     `name`) that declares the computer tool family. The model is
@@ -2243,7 +2243,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `class ToolTextEditor20250124: …`
+  - `class ToolTextEditor20250124`
 
     - `type: Literal["text_editor_20250124"]`
 
@@ -2277,7 +2277,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class ToolTextEditor20250429: …`
+  - `class ToolTextEditor20250429`
 
     - `type: Literal["text_editor_20250429"]`
 
@@ -2311,7 +2311,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class ToolTextEditor20250728: …`
+  - `class ToolTextEditor20250728`
 
     - `type: Literal["text_editor_20250728"]`
 
@@ -2351,7 +2351,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class WebSearchTool20250305: …`
+  - `class WebSearchTool20250305`
 
     - `type: Literal["web_search_20250305"]`
 
@@ -2427,7 +2427,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         maxLength: 255, minLength: 1
 
-  - `class WebFetchTool20250910: …`
+  - `class WebFetchTool20250910`
 
     - `type: Literal["web_fetch_20250910"]`
 
@@ -2483,7 +2483,98 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class WebSearchTool20260209: …`
+    - `url_sources: Optional[WebFetchURLSources]`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `client_tool_results: Optional[ClientToolResults]`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `type: Literal["all"]`
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `type: Literal["none"]`
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `type: Literal["only"]`
+
+          - `tools: List[WebFetchURLSourceToolReference]`
+
+            - `type: Literal["tool_reference"]`
+
+            - `name: str`
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `type: Literal["except"]`
+
+          - `tools: List[WebFetchURLSourceToolReference]`
+
+            - `type: Literal["tool_reference"]`
+
+            - `name: str`
+
+      - `server_tool_results: Optional[ServerToolResults]`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `class WebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `class WebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `user_input: Optional[UserInput]`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `class WebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `class WebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+  - `class WebSearchTool20260209`
 
     - `type: Literal["web_search_20260209"]`
 
@@ -2533,7 +2624,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `class WebFetchTool20260209: …`
+  - `class WebFetchTool20260209`
 
     - `type: Literal["web_fetch_20260209"]`
 
@@ -2589,7 +2680,16 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class WebFetchTool20260309: …`
+    - `url_sources: Optional[WebFetchURLSources]`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `class WebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -2647,11 +2747,20 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: Optional[WebFetchURLSources]`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `use_cache: Optional[bool]`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `class WebSearchTool20260318: …`
+  - `class WebSearchTool20260318`
 
     - `type: Literal["web_search_20260318"]`
 
@@ -2709,7 +2818,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `class WebFetchTool20260318: …`
+  - `class WebFetchTool20260318`
 
     - `type: Literal["web_fetch_20260318"]`
 
@@ -2773,11 +2882,20 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `url_sources: Optional[WebFetchURLSources]`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `use_cache: Optional[bool]`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `class ToolSearchToolBm25_20251119: …`
+  - `class ToolSearchToolBm25_20251119`
 
     - `type: Literal["tool_search_tool_bm25_20251119", "tool_search_tool_bm25"]`
 
@@ -2813,7 +2931,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `class ToolSearchToolRegex20251119: …`
+  - `class ToolSearchToolRegex20251119`
 
     - `type: Literal["tool_search_tool_regex_20251119", "tool_search_tool_regex"]`
 
@@ -2857,7 +2975,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
 ## Returns
 
-- `class MessageTokensCount: …`
+- `class MessageTokensCount`
 
   - `input_tokens: int`
 

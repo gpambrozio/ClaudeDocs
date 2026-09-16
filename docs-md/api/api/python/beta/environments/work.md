@@ -29,7 +29,7 @@ Retrieve detailed information about a specific work item.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -121,11 +121,13 @@ Retrieve detailed information about a specific work item.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaSelfHostedWork: …`
+- `class BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -280,7 +282,7 @@ Long poll for work items in the queue.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -372,13 +374,15 @@ Long poll for work items in the queue.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `anthropic_worker_id: Optional[str]`
 
   Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
 ### Returns
 
-- `class BetaSelfHostedWork: …`
+- `class BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -522,7 +526,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -614,9 +618,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 ### Returns
 
-- `class BetaSelfHostedWork: …`
+- `class BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -769,7 +775,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -861,9 +867,11 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 ### Returns
 
-- `class BetaSelfHostedWorkHeartbeatResponse: …`
+- `class BetaSelfHostedWorkHeartbeatResponse`
 
   Response after recording a heartbeat for a work item.
 
@@ -957,7 +965,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1049,11 +1057,13 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaSelfHostedWork: …`
+- `class BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -1206,7 +1216,7 @@ List work items in an environment.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1298,9 +1308,11 @@ List work items in an environment.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 ### Returns
 
-- `class BetaSelfHostedWork: …`
+- `class BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -1454,7 +1466,7 @@ Update work item metadata with merge semantics.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1546,11 +1558,13 @@ Update work item metadata with merge semantics.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaSelfHostedWork: …`
+- `class BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -1692,7 +1706,7 @@ Get statistics about the work queue for an environment.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1784,11 +1798,13 @@ Get statistics about the work queue for an environment.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaSelfHostedWorkQueueStats: …`
+- `class BetaSelfHostedWorkQueueStats`
 
   Statistics about the work queue for an environment.
 
@@ -1851,7 +1867,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Beta Self Hosted Work
 
-- `class BetaSelfHostedWork: …`
+- `class BetaSelfHostedWork`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -1933,7 +1949,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Beta Self Hosted Work Heartbeat Response
 
-- `class BetaSelfHostedWorkHeartbeatResponse: …`
+- `class BetaSelfHostedWorkHeartbeatResponse`
 
   Response after recording a heartbeat for a work item.
 
@@ -1971,7 +1987,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Beta Self Hosted Work List Response
 
-- `class BetaSelfHostedWorkListResponse: …`
+- `class BetaSelfHostedWorkListResponse`
 
   Response when listing work items with cursor-based pagination.
 
@@ -2057,7 +2073,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Beta Self Hosted Work Queue Stats
 
-- `class BetaSelfHostedWorkQueueStats: …`
+- `class BetaSelfHostedWorkQueueStats`
 
   Statistics about the work queue for an environment.
 
@@ -2089,7 +2105,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Beta Self Hosted Work Stop Request
 
-- `class BetaSelfHostedWorkStopRequest: …`
+- `class BetaSelfHostedWorkStopRequest`
 
   Request to stop a work item.
 
@@ -2101,7 +2117,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Beta Self Hosted Work Update Request
 
-- `class BetaSelfHostedWorkUpdateRequest: …`
+- `class BetaSelfHostedWorkUpdateRequest`
 
   Request to update work item metadata.
 
@@ -2111,7 +2127,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Beta Session Work Data
 
-- `class BetaSessionWorkData: …`
+- `class BetaSessionWorkData`
 
   Work data for session work items.
 

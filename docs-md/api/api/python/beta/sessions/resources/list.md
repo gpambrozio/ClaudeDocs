@@ -33,7 +33,7 @@ List Session Resources
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -125,13 +125,15 @@ List Session Resources
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ## Returns
 
-- `BetaManagedAgentsSessionResource`
+- `type BetaManagedAgentsSessionResource = ...`
 
-  - `class BetaManagedAgentsGitHubRepositoryResource: …`
+  - `class BetaManagedAgentsGitHubRepositoryResource`
 
     - `type: Literal["github_repository"]`
 
@@ -155,7 +157,7 @@ List Session Resources
 
     - `checkout: Optional[Checkout]`
 
-      - `class BetaManagedAgentsBranchCheckout: …`
+      - `class BetaManagedAgentsBranchCheckout`
 
         - `type: Literal["branch"]`
 
@@ -165,7 +167,7 @@ List Session Resources
 
           minLength: 1, maxLength: 255
 
-      - `class BetaManagedAgentsCommitCheckout: …`
+      - `class BetaManagedAgentsCommitCheckout`
 
         - `type: Literal["commit"]`
 
@@ -175,7 +177,7 @@ List Session Resources
 
           minLength: 7, maxLength: 64
 
-  - `class BetaManagedAgentsFileResource: …`
+  - `class BetaManagedAgentsFileResource`
 
     - `type: Literal["file"]`
 
@@ -197,7 +199,7 @@ List Session Resources
 
       format: date-time
 
-  - `class BetaManagedAgentsMemoryStoreResource: …`
+  - `class BetaManagedAgentsMemoryStoreResource`
 
     A memory store attached to an agent session.
 

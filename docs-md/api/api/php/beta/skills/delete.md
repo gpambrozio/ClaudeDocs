@@ -29,7 +29,7 @@ Delete Skill
 
 ## Returns
 
-- `BetaDeletedSkill`
+- `class BetaDeletedSkill`
 
   - `"skill_deleted" type`
 

@@ -27,7 +27,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ## Returns
 
-- `class MessageBatch:`
+- `class MessageBatch`
 
   - `JsonValue type = "message_batch"`
 

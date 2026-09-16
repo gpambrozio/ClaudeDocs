@@ -110,7 +110,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
           - `Array<BetaContentBlockParam>`
 
-            - `BetaTextBlockParam`
+            - `interface BetaTextBlockParam`
 
               - `type: "text"`
 
@@ -141,7 +141,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `citations?: Array<BetaTextCitationParam> | null`
 
-                - `BetaCitationCharLocationParam`
+                - `interface BetaCitationCharLocationParam`
 
                   - `type: "char_location"`
 
@@ -161,7 +161,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     minimum: 0
 
-                - `BetaCitationPageLocationParam`
+                - `interface BetaCitationPageLocationParam`
 
                   - `type: "page_location"`
 
@@ -181,7 +181,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     minimum: 1
 
-                - `BetaCitationContentBlockLocationParam`
+                - `interface BetaCitationContentBlockLocationParam`
 
                   - `type: "content_block_location"`
 
@@ -211,7 +211,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     minimum: 0
 
-                - `BetaCitationWebSearchResultLocationParam`
+                - `interface BetaCitationWebSearchResultLocationParam`
 
                   - `type: "web_search_result_location"`
 
@@ -227,7 +227,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     minLength: 1
 
-                - `BetaCitationSearchResultLocationParam`
+                - `interface BetaCitationSearchResultLocationParam`
 
                   - `type: "search_result_location"`
 
@@ -261,13 +261,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `title: string | null`
 
-            - `BetaImageBlockParam`
+            - `interface BetaImageBlockParam`
 
               - `type: "image"`
 
               - `source: BetaBase64ImageSource | BetaURLImageSource | BetaFileImageSource`
 
-                - `BetaBase64ImageSource`
+                - `interface BetaBase64ImageSource`
 
                   - `type: "base64"`
 
@@ -285,13 +285,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `"image/webp"`
 
-                - `BetaURLImageSource`
+                - `interface BetaURLImageSource`
 
                   - `type: "url"`
 
                   - `url: string`
 
-                - `BetaFileImageSource`
+                - `interface BetaFileImageSource`
 
                   - `type: "file"`
 
@@ -313,13 +313,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `"error"`
 
-            - `BetaRequestDocumentBlock`
+            - `interface BetaRequestDocumentBlock`
 
               - `type: "document"`
 
               - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
 
-                - `BetaBase64PDFSource`
+                - `interface BetaBase64PDFSource`
 
                   - `type: "base64"`
 
@@ -329,7 +329,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `media_type: "application/pdf"`
 
-                - `BetaPlainTextSource`
+                - `interface BetaPlainTextSource`
 
                   - `type: "text"`
 
@@ -337,7 +337,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `media_type: "text/plain"`
 
-                - `BetaContentBlockSource`
+                - `interface BetaContentBlockSource`
 
                   - `type: "content"`
 
@@ -347,17 +347,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `Array<BetaContentBlockSourceContent>`
 
-                      - `BetaTextBlockParam`
+                      - `interface BetaTextBlockParam`
 
-                      - `BetaImageBlockParam`
+                      - `interface BetaImageBlockParam`
 
-                - `BetaURLPDFSource`
+                - `interface BetaURLPDFSource`
 
                   - `type: "url"`
 
                   - `url: string`
 
-                - `BetaFileDocumentSource`
+                - `interface BetaFileDocumentSource`
 
                   - `type: "file"`
 
@@ -379,7 +379,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 maxLength: 500, minLength: 1
 
-            - `BetaSearchResultBlockParam`
+            - `interface BetaSearchResultBlockParam`
 
               - `type: "search_result"`
 
@@ -407,7 +407,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `citations?: BetaCitationsConfigParam`
 
-            - `BetaThinkingBlockParam`
+            - `interface BetaThinkingBlockParam`
 
               - `type: "thinking"`
 
@@ -421,7 +421,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 The `thinking` text of this block as returned by the API.
 
-            - `BetaRedactedThinkingBlockParam`
+            - `interface BetaRedactedThinkingBlockParam`
 
               - `type: "redacted_thinking"`
 
@@ -429,7 +429,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `BetaToolUseBlockParam`
+            - `interface BetaToolUseBlockParam`
 
               - `type: "tool_use"`
 
@@ -449,13 +449,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-                - `BetaDirectCaller`
+                - `interface BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `type: "direct"`
 
-                - `BetaServerToolCaller`
+                - `interface BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -465,7 +465,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `BetaServerToolCaller20260120`
+                - `interface BetaServerToolCaller20260120`
 
                   - `type: "code_execution_20260120"`
 
@@ -479,7 +479,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `BetaToolResultBlockParam`
+            - `interface BetaToolResultBlockParam`
 
               - `type: "tool_result"`
 
@@ -497,15 +497,15 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
-                  - `BetaTextBlockParam`
+                  - `interface BetaTextBlockParam`
 
-                  - `BetaImageBlockParam`
+                  - `interface BetaImageBlockParam`
 
-                  - `BetaSearchResultBlockParam`
+                  - `interface BetaSearchResultBlockParam`
 
-                  - `BetaRequestDocumentBlock`
+                  - `interface BetaRequestDocumentBlock`
 
-                  - `BetaToolReferenceBlockParam`
+                  - `interface BetaToolReferenceBlockParam`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -519,7 +519,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                       Create a cache control breakpoint at this content block.
 
-                  - `BetaBrowserStateBlockParam`
+                  - `interface BetaBrowserStateBlockParam`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -569,7 +569,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                       maxItems: 200, minItems: 1
 
-                      - `BetaBrowserStateChangeTabOpened`
+                      - `interface BetaBrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -587,7 +587,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `BetaBrowserStateChangeDownloadStarted`
+                      - `interface BetaBrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -605,7 +605,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `BetaBrowserStateChangeDownloadCompleted`
+                      - `interface BetaBrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -638,7 +638,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           minimum: 0
 
-                      - `BetaBrowserStateChangeDownloadFailed`
+                      - `interface BetaBrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -670,7 +670,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `BetaServerToolUseBlockParam`
+            - `interface BetaServerToolUseBlockParam`
 
               - `type: "server_tool_use"`
 
@@ -704,17 +704,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-                - `BetaDirectCaller`
+                - `interface BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `BetaServerToolCaller`
+                - `interface BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `BetaServerToolCaller20260120`
+                - `interface BetaServerToolCaller20260120`
 
-            - `BetaWebSearchToolResultBlockParam`
+            - `interface BetaWebSearchToolResultBlockParam`
 
               - `type: "web_search_tool_result"`
 
@@ -732,7 +732,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `page_age?: string | null`
 
-                - `BetaWebSearchToolRequestError`
+                - `interface BetaWebSearchToolRequestError`
 
                   - `type: "web_search_tool_result_error"`
 
@@ -760,23 +760,23 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-                - `BetaDirectCaller`
+                - `interface BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `BetaServerToolCaller`
+                - `interface BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `BetaServerToolCaller20260120`
+                - `interface BetaServerToolCaller20260120`
 
-            - `BetaWebFetchToolResultBlockParam`
+            - `interface BetaWebFetchToolResultBlockParam`
 
               - `type: "web_fetch_tool_result"`
 
               - `content: BetaWebFetchToolResultErrorBlockParam | BetaWebFetchBlockParam`
 
-                - `BetaWebFetchToolResultErrorBlockParam`
+                - `interface BetaWebFetchToolResultErrorBlockParam`
 
                   - `type: "web_fetch_tool_result_error"`
 
@@ -802,7 +802,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `"content_too_large"`
 
-                - `BetaWebFetchBlockParam`
+                - `interface BetaWebFetchBlockParam`
 
                   - `type: "web_fetch_result"`
 
@@ -826,23 +826,23 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `caller?: BetaDirectCaller | BetaServerToolCaller | BetaServerToolCaller20260120`
 
-                - `BetaDirectCaller`
+                - `interface BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `BetaServerToolCaller`
+                - `interface BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `BetaServerToolCaller20260120`
+                - `interface BetaServerToolCaller20260120`
 
-            - `BetaAdvisorToolResultBlockParam`
+            - `interface BetaAdvisorToolResultBlockParam`
 
               - `type: "advisor_tool_result"`
 
               - `content: BetaAdvisorToolResultErrorParam | BetaAdvisorResultBlockParam | BetaAdvisorRedactedResultBlockParam`
 
-                - `BetaAdvisorToolResultErrorParam`
+                - `interface BetaAdvisorToolResultErrorParam`
 
                   - `type: "advisor_tool_result_error"`
 
@@ -862,7 +862,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `"model_not_found"`
 
-                - `BetaAdvisorResultBlockParam`
+                - `interface BetaAdvisorResultBlockParam`
 
                   - `type: "advisor_result"`
 
@@ -870,7 +870,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `stop_reason?: string | null`
 
-                - `BetaAdvisorRedactedResultBlockParam`
+                - `interface BetaAdvisorRedactedResultBlockParam`
 
                   - `type: "advisor_redacted_result"`
 
@@ -888,13 +888,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaCodeExecutionToolResultBlockParam`
+            - `interface BetaCodeExecutionToolResultBlockParam`
 
               - `type: "code_execution_tool_result"`
 
               - `content: BetaCodeExecutionToolResultBlockParamContent`
 
-                - `BetaCodeExecutionToolResultErrorParam`
+                - `interface BetaCodeExecutionToolResultErrorParam`
 
                   - `type: "code_execution_tool_result_error"`
 
@@ -908,7 +908,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `"execution_time_exceeded"`
 
-                - `BetaCodeExecutionResultBlockParam`
+                - `interface BetaCodeExecutionResultBlockParam`
 
                   - `type: "code_execution_result"`
 
@@ -924,7 +924,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `stdout: string`
 
-                - `BetaEncryptedCodeExecutionResultBlockParam`
+                - `interface BetaEncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -950,13 +950,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaBashCodeExecutionToolResultBlockParam`
+            - `interface BetaBashCodeExecutionToolResultBlockParam`
 
               - `type: "bash_code_execution_tool_result"`
 
               - `content: BetaBashCodeExecutionToolResultErrorParam | BetaBashCodeExecutionResultBlockParam`
 
-                - `BetaBashCodeExecutionToolResultErrorParam`
+                - `interface BetaBashCodeExecutionToolResultErrorParam`
 
                   - `type: "bash_code_execution_tool_result_error"`
 
@@ -972,7 +972,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     - `"output_file_too_large"`
 
-                - `BetaBashCodeExecutionResultBlockParam`
+                - `interface BetaBashCodeExecutionResultBlockParam`
 
                   - `type: "bash_code_execution_result"`
 
@@ -996,13 +996,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaTextEditorCodeExecutionToolResultBlockParam`
+            - `interface BetaTextEditorCodeExecutionToolResultBlockParam`
 
               - `type: "text_editor_code_execution_tool_result"`
 
               - `content: BetaTextEditorCodeExecutionToolResultErrorParam | BetaTextEditorCodeExecutionViewResultBlockParam | BetaTextEditorCodeExecutionCreateResultBlockParam | BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
-                - `BetaTextEditorCodeExecutionToolResultErrorParam`
+                - `interface BetaTextEditorCodeExecutionToolResultErrorParam`
 
                   - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -1020,7 +1020,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `error_message?: string | null`
 
-                - `BetaTextEditorCodeExecutionViewResultBlockParam`
+                - `interface BetaTextEditorCodeExecutionViewResultBlockParam`
 
                   - `type: "text_editor_code_execution_view_result"`
 
@@ -1040,13 +1040,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `total_lines?: number | null`
 
-                - `BetaTextEditorCodeExecutionCreateResultBlockParam`
+                - `interface BetaTextEditorCodeExecutionCreateResultBlockParam`
 
                   - `type: "text_editor_code_execution_create_result"`
 
                   - `is_file_update: boolean`
 
-                - `BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
+                - `interface BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
                   - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -1068,13 +1068,13 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaToolSearchToolResultBlockParam`
+            - `interface BetaToolSearchToolResultBlockParam`
 
               - `type: "tool_search_tool_result"`
 
               - `content: BetaToolSearchToolResultErrorParam | BetaToolSearchToolSearchResultBlockParam`
 
-                - `BetaToolSearchToolResultErrorParam`
+                - `interface BetaToolSearchToolResultErrorParam`
 
                   - `type: "tool_search_tool_result_error"`
 
@@ -1090,7 +1090,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `error_message?: string | null`
 
-                - `BetaToolSearchToolSearchResultBlockParam`
+                - `interface BetaToolSearchToolSearchResultBlockParam`
 
                   - `type: "tool_search_tool_search_result"`
 
@@ -1114,7 +1114,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaMCPToolUseBlockParam`
+            - `interface BetaMCPToolUseBlockParam`
 
               - `type: "mcp_tool_use"`
 
@@ -1134,7 +1134,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaRequestMCPToolResultBlockParam`
+            - `interface BetaRequestMCPToolResultBlockParam`
 
               - `type: "mcp_tool_result"`
 
@@ -1166,7 +1166,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `is_error?: boolean`
 
-            - `BetaContainerUploadBlockParam`
+            - `interface BetaContainerUploadBlockParam`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -1179,7 +1179,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaCompactionBlockParam`
+            - `interface BetaCompactionBlockParam`
 
               A compaction block containing summary of previous context.
 
@@ -1203,7 +1203,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `BetaRequestToolAdditionBlock`
+              - `signature?: string | null`
+
+                The block's signature as returned, to be sent back verbatim
+
+            - `interface BetaRequestToolAdditionBlock`
 
               Mid-conversation directive to surface a declared tool.
 
@@ -1215,7 +1219,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-                - `BetaToolChangeToolReference`
+                - `interface BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -1228,7 +1232,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `BetaToolChangeMCPToolReference`
+                - `interface BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -1239,7 +1243,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   - `server_name: string`
 
-                - `BetaToolChangeMCPToolsetReference`
+                - `interface BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -1251,7 +1255,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaRequestToolRemovalBlock`
+            - `interface BetaRequestToolRemovalBlock`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -1263,19 +1267,19 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
 
-                - `BetaToolChangeToolReference`
+                - `interface BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
                   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `BetaToolChangeMCPToolReference`
+                - `interface BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `BetaToolChangeMCPToolsetReference`
+                - `interface BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -1283,7 +1287,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Create a cache control breakpoint at this content block.
 
-            - `BetaFallbackBlockParam`
+            - `interface BetaFallbackBlockParam`
 
               A `fallback` block echoed back from a prior response.
 
@@ -1439,11 +1443,30 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+      - `compaction?: BetaCompactionConfig | null`
+
+        Compact the whole conversation and return a signed `compaction` block,
+        alone, that a later request sends back first in `messages`, in place of
+        the messages it summarizes. There is no trigger and no pause flag: sending
+        the parameter compacts, and nothing is sampled after the block.
+
+        The summarization prompt is the server's own unless `instructions` are
+        given, which then replace it for this request; a value that is empty or
+        only whitespace counts as absent.
+
+        - `type: "summarize"`
+
+        - `instructions?: string | null`
+
+          Replaces the server's default summarization prompt for this request. An empty or whitespace-only value counts as absent.
+
+          maxLength: 16384
+
       - `container?: BetaContainerParams | string | null`
 
         Container identifier for reuse across requests.
 
-        - `BetaContainerParams`
+        - `interface BetaContainerParams`
 
           Container parameters with skills to be loaded.
 
@@ -1491,7 +1514,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
           minItems: 0
 
-          - `BetaClearToolUses20250919Edit`
+          - `interface BetaClearToolUses20250919Edit`
 
             - `type: "clear_tool_uses_20250919"`
 
@@ -1531,7 +1554,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               Condition that triggers the context management strategy
 
-              - `BetaInputTokensTrigger`
+              - `interface BetaInputTokensTrigger`
 
                 - `type: "input_tokens"`
 
@@ -1539,7 +1562,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   minimum: 1
 
-              - `BetaToolUsesTrigger`
+              - `interface BetaToolUsesTrigger`
 
                 - `type: "tool_uses"`
 
@@ -1547,7 +1570,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   minimum: 1
 
-          - `BetaClearThinking20251015Edit`
+          - `interface BetaClearThinking20251015Edit`
 
             - `type: "clear_thinking_20251015"`
 
@@ -1555,7 +1578,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-              - `BetaThinkingTurns`
+              - `interface BetaThinkingTurns`
 
                 - `type: "thinking_turns"`
 
@@ -1563,7 +1586,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                   minimum: 1
 
-              - `BetaAllThinkingTurns`
+              - `interface BetaAllThinkingTurns`
 
                 - `type: "all"`
 
@@ -1571,7 +1594,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `"all"`
 
-          - `BetaCompact20260112Edit`
+          - `interface BetaCompact20260112Edit`
 
             Automatically compact older context when reaching the configured trigger threshold.
 
@@ -1625,7 +1648,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         - `string`
 
-        - `BetaFallbackCreditTokenParam`
+        - `interface BetaFallbackCreditTokenParam`
 
           Object form of `fallback_credit_token`: the token plus a redemption
           mode.
@@ -1719,7 +1742,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
           - `thinking?: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive | null`
 
-            - `BetaThinkingConfigEnabled`
+            - `interface BetaThinkingConfigEnabled`
 
               - `type: "enabled"`
 
@@ -1761,11 +1784,11 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 - `"updates"`
 
-            - `BetaThinkingConfigDisabled`
+            - `interface BetaThinkingConfigDisabled`
 
               - `type: "disabled"`
 
-            - `BetaThinkingConfigAdaptive`
+            - `interface BetaThinkingConfigAdaptive`
 
               - `type: "adaptive"`
 
@@ -1891,17 +1914,17 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         See [extended thinking](../../../../../build-with-claude/extended-thinking.md) for details.
 
-        - `BetaThinkingConfigEnabled`
+        - `interface BetaThinkingConfigEnabled`
 
-        - `BetaThinkingConfigDisabled`
+        - `interface BetaThinkingConfigDisabled`
 
-        - `BetaThinkingConfigAdaptive`
+        - `interface BetaThinkingConfigAdaptive`
 
       - `tool_choice?: BetaToolChoice`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `BetaToolChoiceAuto`
+        - `interface BetaToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -1913,7 +1936,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `BetaToolChoiceAny`
+        - `interface BetaToolChoiceAny`
 
           The model will use any available tools.
 
@@ -1925,7 +1948,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `BetaToolChoiceTool`
+        - `interface BetaToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -1941,7 +1964,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `BetaToolChoiceNone`
+        - `interface BetaToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -2011,7 +2034,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
         See our [guide](../../../../../agents-and-tools/tool-use/overview.md) for more details.
 
-        - `BetaTool`
+        - `interface BetaTool`
 
           - `type?: "custom" | null`
 
@@ -2069,7 +2092,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolBash20241022`
+        - `interface BetaToolBash20241022`
 
           - `type: "bash_20241022"`
 
@@ -2103,7 +2126,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolBash20250124`
+        - `interface BetaToolBash20250124`
 
           - `type: "bash_20250124"`
 
@@ -2137,7 +2160,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaCodeExecutionTool20250522`
+        - `interface BetaCodeExecutionTool20250522`
 
           - `type: "code_execution_20250522"`
 
@@ -2169,7 +2192,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaCodeExecutionTool20250825`
+        - `interface BetaCodeExecutionTool20250825`
 
           - `type: "code_execution_20250825"`
 
@@ -2201,7 +2224,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaCodeExecutionTool20260120`
+        - `interface BetaCodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -2235,7 +2258,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaCodeExecutionTool20260521`
+        - `interface BetaCodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -2269,7 +2292,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaBrowserToolset20260801`
+        - `interface BetaBrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -2663,7 +2686,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `BetaToolComputerUse20241022`
+        - `interface BetaToolComputerUse20241022`
 
           - `type: "computer_20241022"`
 
@@ -2715,7 +2738,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaMemoryTool20250818`
+        - `interface BetaMemoryTool20250818`
 
           - `type: "memory_20250818"`
 
@@ -2749,7 +2772,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolComputerUse20250124`
+        - `interface BetaToolComputerUse20250124`
 
           - `type: "computer_20250124"`
 
@@ -2801,7 +2824,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolTextEditor20241022`
+        - `interface BetaToolTextEditor20241022`
 
           - `type: "text_editor_20241022"`
 
@@ -2835,7 +2858,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolComputerUse20251124`
+        - `interface BetaToolComputerUse20251124`
 
           - `type: "computer_20251124"`
 
@@ -2891,7 +2914,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaComputerToolset20260801`
+        - `interface BetaComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -3121,7 +3144,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `BetaToolTextEditor20250124`
+        - `interface BetaToolTextEditor20250124`
 
           - `type: "text_editor_20250124"`
 
@@ -3155,7 +3178,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolTextEditor20250429`
+        - `interface BetaToolTextEditor20250429`
 
           - `type: "text_editor_20250429"`
 
@@ -3189,7 +3212,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolTextEditor20250728`
+        - `interface BetaToolTextEditor20250728`
 
           - `type: "text_editor_20250728"`
 
@@ -3229,7 +3252,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaWebSearchTool20250305`
+        - `interface BetaWebSearchTool20250305`
 
           - `type: "web_search_20250305"`
 
@@ -3305,7 +3328,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               maxLength: 255, minLength: 1
 
-        - `BetaWebFetchTool20250910`
+        - `interface BetaWebFetchTool20250910`
 
           - `type: "web_fetch_20250910"`
 
@@ -3361,7 +3384,98 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaWebSearchTool20260209`
+          - `url_sources?: BetaWebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `client_tool_results?: BetaWebFetchURLSourceAll | BetaWebFetchURLSourceNone | BetaWebFetchURLSourceOnly | BetaWebFetchURLSourceExcept`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `interface BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `type: "all"`
+
+              - `interface BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `type: "none"`
+
+              - `interface BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `type: "only"`
+
+                - `tools: Array<BetaWebFetchURLSourceToolReference>`
+
+                  - `type: "tool_reference"`
+
+                  - `name: string`
+
+              - `interface BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `type: "except"`
+
+                - `tools: Array<BetaWebFetchURLSourceToolReference>`
+
+                  - `type: "tool_reference"`
+
+                  - `name: string`
+
+            - `server_tool_results?: BetaWebFetchURLSourceAll | BetaWebFetchURLSourceNone | BetaWebFetchURLSourceOnly | BetaWebFetchURLSourceExcept`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `interface BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `interface BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `interface BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `interface BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `user_input?: BetaWebFetchURLSourceAll | BetaWebFetchURLSourceNone`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `interface BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `interface BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `interface BetaWebSearchTool20260209`
 
           - `type: "web_search_20260209"`
 
@@ -3411,7 +3525,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `BetaWebFetchTool20260209`
+        - `interface BetaWebFetchTool20260209`
 
           - `type: "web_fetch_20260209"`
 
@@ -3467,7 +3581,16 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaWebFetchTool20260309`
+          - `url_sources?: BetaWebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `interface BetaWebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -3525,11 +3648,20 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `url_sources?: BetaWebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `use_cache?: boolean`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `BetaWebSearchTool20260318`
+        - `interface BetaWebSearchTool20260318`
 
           - `type: "web_search_20260318"`
 
@@ -3587,7 +3719,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `BetaWebFetchTool20260318`
+        - `interface BetaWebFetchTool20260318`
 
           - `type: "web_fetch_20260318"`
 
@@ -3651,11 +3783,20 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `url_sources?: BetaWebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `use_cache?: boolean`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `BetaAdvisorTool20260301`
+        - `interface BetaAdvisorTool20260301`
 
           - `type: "advisor_20260301"`
 
@@ -3709,7 +3850,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolSearchToolBm25_20251119`
+        - `interface BetaToolSearchToolBm25_20251119`
 
           - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -3745,7 +3886,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaToolSearchToolRegex20251119`
+        - `interface BetaToolSearchToolRegex20251119`
 
           - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -3781,7 +3922,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BetaMCPToolset`
+        - `interface BetaMCPToolset`
 
           Configuration for a group of tools from an MCP server.
 
@@ -3866,7 +4007,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 42 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3958,6 +4099,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
+      - `"compact-2026-09-04"`
+
   - `user_profile_id?: string`
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -3970,7 +4113,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
 ## Returns
 
-- `BetaMessageBatch`
+- `interface BetaMessageBatch`
 
   - `type: "message_batch"`
 

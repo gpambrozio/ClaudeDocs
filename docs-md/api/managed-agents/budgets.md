@@ -6,9 +6,11 @@ url: https://platform.claude.com/docs/en/managed-agents/budgets
 description: Cap a session's spend with a hard dollar budget enforced at public list rates.
 ---
 
-A session budget is an optional hard spend ceiling you set when you [create a session](sessions.md). The platform continuously prices everything the session consumes at public list rates (the session's **list cost**) and stops issuing new model requests once that cost reaches the budget. The request in flight when the cap is crossed still finishes, so the final list cost can land [a fraction past the budget](budgets.md#when-a-session-reaches-its-budget). A session at its budget pauses and goes [idle](session-operations.md#session-statuses) rather than terminating; changing or removing the budget resumes its work automatically. Deployments accept the same budget and apply it to each session they start; see [Budgets on deployments](budgets.md#budgets-on-deployments).
+## Compatibility
+- Status: Beta
+- [Beta header](../api/beta-headers.md): `managed-agents-2026-04-01`
 
-Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/beta-headers.md#endpoint-specific-headers).
+A session budget is an optional hard spend ceiling you set when you [create a session](sessions.md). The platform continuously prices everything the session consumes at public list rates (the session's **list cost**) and stops issuing new model requests once that cost reaches the budget. The request in flight when the cap is crossed still finishes, so the final list cost can land [a fraction past the budget](budgets.md#when-a-session-reaches-its-budget). A session at its budget pauses and goes [idle](session-operations.md#session-statuses) rather than terminating; changing or removing the budget resumes its work automatically. Deployments accept the same budget and apply it to each session they start; see [Budgets on deployments](budgets.md#budgets-on-deployments).
 
 ## Set a budget at session creation
 

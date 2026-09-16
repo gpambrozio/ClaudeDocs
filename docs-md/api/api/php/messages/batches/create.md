@@ -31,7 +31,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ## Returns
 
-- `MessageBatch`
+- `class MessageBatch`
 
   - `"message_batch" type`
 

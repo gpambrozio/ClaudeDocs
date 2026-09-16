@@ -29,7 +29,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ## Returns
 
-- `class DeletedMessageBatch:`
+- `class DeletedMessageBatch`
 
   - `JsonValue type = "message_batch_deleted"`
 

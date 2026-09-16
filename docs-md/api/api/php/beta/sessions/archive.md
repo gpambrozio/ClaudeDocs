@@ -25,7 +25,7 @@ Archive Session
 
 ## Returns
 
-- `BetaManagedAgentsSession`
+- `class BetaManagedAgentsSession`
 
   - `Type type`
 

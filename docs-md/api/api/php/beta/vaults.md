@@ -33,7 +33,7 @@ Create Vault
 
 ### Returns
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 
@@ -126,7 +126,7 @@ List Vaults
 
 ### Returns
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 
@@ -215,7 +215,7 @@ Get Vault
 
 ### Returns
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 
@@ -305,7 +305,7 @@ Update Vault
 
 ### Returns
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 
@@ -389,7 +389,7 @@ Delete Vault
 
 ### Returns
 
-- `BetaManagedAgentsDeletedVault`
+- `class BetaManagedAgentsDeletedVault`
 
   - `Type type`
 
@@ -444,7 +444,7 @@ Archive Vault
 
 ### Returns
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 
@@ -510,7 +510,7 @@ var_dump($betaManagedAgentsVault);
 
 ### Beta Managed Agents Deleted Vault
 
-- `BetaManagedAgentsDeletedVault`
+- `class BetaManagedAgentsDeletedVault`
 
   - `Type type`
 
@@ -520,7 +520,7 @@ var_dump($betaManagedAgentsVault);
 
 ### Beta Managed Agents Vault
 
-- `BetaManagedAgentsVault`
+- `class BetaManagedAgentsVault`
 
   - `Type type`
 
@@ -582,7 +582,7 @@ Create Credential
 
 #### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -696,7 +696,7 @@ List Credentials
 
 #### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -801,7 +801,7 @@ Get Credential
 
 #### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -911,7 +911,7 @@ Update Credential
 
 #### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -1023,7 +1023,7 @@ Delete Credential
 
 #### Returns
 
-- `ManagedAgentsDeletedCredential`
+- `class ManagedAgentsDeletedCredential`
 
   - `Type type`
 
@@ -1085,7 +1085,7 @@ Archive Credential
 
 #### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -1183,7 +1183,7 @@ Validate Credential
 
 #### Returns
 
-- `ManagedAgentsCredentialValidation`
+- `class ManagedAgentsCredentialValidation`
 
   - `Type type`
 

@@ -107,7 +107,7 @@ Create User Profile
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -199,11 +199,13 @@ Create User Profile
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaUserProfile: …`
+- `class BetaUserProfile`
 
   - `type: Literal["user_profile"]`
 
@@ -400,7 +402,7 @@ List User Profiles
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -492,11 +494,13 @@ List User Profiles
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaUserProfile: …`
+- `class BetaUserProfile`
 
   - `type: Literal["user_profile"]`
 
@@ -675,7 +679,7 @@ Get User Profile
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -767,11 +771,13 @@ Get User Profile
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaUserProfile: …`
+- `class BetaUserProfile`
 
   - `type: Literal["user_profile"]`
 
@@ -1030,7 +1036,7 @@ Update User Profile
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1122,11 +1128,13 @@ Update User Profile
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaUserProfile: …`
+- `class BetaUserProfile`
 
   - `type: Literal["user_profile"]`
 
@@ -1301,7 +1309,7 @@ Create Enrollment URL
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1393,11 +1401,13 @@ Create Enrollment URL
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ### Returns
 
-- `class BetaUserProfileEnrollmentURL: …`
+- `class BetaUserProfileEnrollmentURL`
 
   - `type: Literal["enrollment_url"]`
 
@@ -1444,7 +1454,7 @@ print(beta_user_profile_enrollment_url.expires_at)
 
 ### Beta User Profile
 
-- `class BetaUserProfile: …`
+- `class BetaUserProfile`
 
   - `type: Literal["user_profile"]`
 
@@ -1556,7 +1566,7 @@ print(beta_user_profile_enrollment_url.expires_at)
 
 ### Beta User Profile Enrollment URL
 
-- `class BetaUserProfileEnrollmentURL: …`
+- `class BetaUserProfileEnrollmentURL`
 
   - `type: Literal["enrollment_url"]`
 
@@ -1574,7 +1584,7 @@ print(beta_user_profile_enrollment_url.expires_at)
 
 ### Beta User Profile External User Details
 
-- `class BetaUserProfileExternalUserDetails: …`
+- `class BetaUserProfileExternalUserDetails`
 
   Details about the entity this profile represents, as the platform states them. Anthropic does not verify them. Every field is present, `null` until the platform supplies a value.
 
@@ -1624,7 +1634,7 @@ print(beta_user_profile_enrollment_url.expires_at)
 
 ### Beta User Profile External User Details Params
 
-- `class BetaUserProfileExternalUserDetailsParams: …`
+- `class BetaUserProfileExternalUserDetailsParams`
 
   - `account_status: Optional[Literal["active", "suspended", "blocked"]]`
 
@@ -1678,7 +1688,7 @@ print(beta_user_profile_enrollment_url.expires_at)
 
 ### Beta User Profile Trust Grant
 
-- `class BetaUserProfileTrustGrant: …`
+- `class BetaUserProfileTrustGrant`
 
   - `status: Literal["active", "pending", "rejected"]`
 

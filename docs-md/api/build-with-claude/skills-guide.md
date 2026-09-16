@@ -555,12 +555,12 @@ func main() {
 
 	// Step 3: Download the file using Files API
 	for _, fileID := range fileIDs {
-		fileMetadata, err := client.Files.GetMetadata(context.TODO(), fileID)
+		fileMetadata, err := client.Files.GetMetadata(context.TODO(), fileID, anthropic.FileGetMetadataParams{})
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		fileContent, err := client.Files.Download(context.TODO(), fileID)
+		fileContent, err := client.Files.Download(context.TODO(), fileID, anthropic.FileDownloadParams{})
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -834,7 +834,7 @@ client := anthropic.NewClient()
 fileID := "file_011CNha8iCJcU1wXNR6q4V8w"
 
 // Get file metadata
-fileInfo, err := client.Files.GetMetadata(context.TODO(), fileID)
+fileInfo, err := client.Files.GetMetadata(context.TODO(), fileID, anthropic.FileGetMetadataParams{})
 if err != nil {
 	log.Fatal(err)
 }
@@ -851,7 +851,7 @@ if files.Err() != nil {
 }
 
 // Delete a file
-_, err = client.Files.Delete(context.TODO(), fileID)
+_, err = client.Files.Delete(context.TODO(), fileID, anthropic.FileDeleteParams{})
 if err != nil {
 	log.Fatal(err)
 }
@@ -2627,6 +2627,7 @@ client := anthropic.NewClient()
 skill, err := client.Skills.Get(
 	context.TODO(),
 	"skill_01AbCdEfGhIjKlMnOpQrStUv",
+	anthropic.SkillGetParams{},
 )
 if err != nil {
 	log.Fatal(err)
@@ -2709,6 +2710,7 @@ client := anthropic.NewClient()
 _, err := client.Skills.Delete(
 	context.TODO(),
 	"skill_01AbCdEfGhIjKlMnOpQrStUv",
+	anthropic.SkillDeleteParams{},
 )
 if err != nil {
 	log.Fatal(err)

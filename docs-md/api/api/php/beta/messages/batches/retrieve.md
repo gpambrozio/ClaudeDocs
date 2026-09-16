@@ -29,7 +29,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
 ## Returns
 
-- `MessageBatch`
+- `class MessageBatch`
 
   - `"message_batch" type`
 

@@ -37,7 +37,7 @@ List environments with pagination support.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 42 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -129,11 +129,13 @@ List environments with pagination support.
 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
+    - `"compact-2026-09-04"`
+
 - `workspace_id: Optional[str]`
 
 ## Returns
 
-- `class BetaEnvironment: …`
+- `class BetaEnvironment`
 
   Unified Environment resource for both cloud and self-hosted environments.
 
@@ -155,7 +157,7 @@ List environments with pagination support.
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
-    - `class BetaCloudConfig: …`
+    - `class BetaCloudConfig`
 
       `cloud` environment configuration.
 
@@ -167,7 +169,7 @@ List environments with pagination support.
 
         Network configuration policy.
 
-        - `class BetaUnrestrictedNetwork: …`
+        - `class BetaUnrestrictedNetwork`
 
           Unrestricted network access.
 
@@ -175,7 +177,7 @@ List environments with pagination support.
 
             Network policy type
 
-        - `class BetaLimitedNetwork: …`
+        - `class BetaLimitedNetwork`
 
           Limited network access.
 
@@ -229,7 +231,7 @@ List environments with pagination support.
 
           Python packages to install
 
-    - `class BetaSelfHostedConfig: …`
+    - `class BetaSelfHostedConfig`
 
       Configuration for self-hosted environments.
 

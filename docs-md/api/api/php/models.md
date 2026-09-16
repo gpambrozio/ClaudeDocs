@@ -43,7 +43,7 @@ The Models API response can be used to determine which models are available for 
 
 ### Returns
 
-- `ModelInfo`
+- `class ModelInfo`
 
   - `"model" type`
 
@@ -200,7 +200,7 @@ The Models API response can be used to determine information about a specific mo
 
 ### Returns
 
-- `ModelInfo`
+- `class ModelInfo`
 
   - `"model" type`
 
@@ -328,7 +328,7 @@ var_dump($modelInfo);
 
 ### Capability Support
 
-- `CapabilitySupport`
+- `class CapabilitySupport`
 
   - `bool supported`
 
@@ -336,7 +336,7 @@ var_dump($modelInfo);
 
 ### Context Management Capability
 
-- `ContextManagementCapability`
+- `class ContextManagementCapability`
 
   - `?CapabilitySupport clearThinking20251015`
 
@@ -356,7 +356,7 @@ var_dump($modelInfo);
 
 ### Effort Capability
 
-- `EffortCapability`
+- `class EffortCapability`
 
   - `CapabilitySupport high`
 
@@ -384,7 +384,7 @@ var_dump($modelInfo);
 
 ### Model Capabilities
 
-- `ModelCapabilities`
+- `class ModelCapabilities`
 
   - `CapabilitySupport batch`
 
@@ -424,7 +424,7 @@ var_dump($modelInfo);
 
 ### Model Info
 
-- `ModelInfo`
+- `class ModelInfo`
 
   - `"model" type`
 
@@ -458,7 +458,7 @@ var_dump($modelInfo);
 
 ### Thinking Capability
 
-- `ThinkingCapability`
+- `class ThinkingCapability`
 
   - `bool supported`
 
@@ -470,7 +470,7 @@ var_dump($modelInfo);
 
 ### Thinking Types
 
-- `ThinkingTypes`
+- `class ThinkingTypes`
 
   - `CapabilitySupport adaptive`
 

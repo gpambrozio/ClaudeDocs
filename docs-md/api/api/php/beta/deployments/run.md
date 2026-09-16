@@ -25,7 +25,7 @@ Run Deployment Now
 
 ## Returns
 
-- `BetaManagedAgentsDeploymentRun`
+- `class BetaManagedAgentsDeploymentRun`
 
   - `Type type`
 

@@ -110,7 +110,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           - `[]BetaContentBlockParamUnionResp`
 
-            - `type BetaTextBlockParamResp struct{…}`
+            - `type BetaTextBlockParamResp`
 
               - `Type Text`
 
@@ -141,7 +141,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Citations []BetaTextCitationParamUnionResp Optional`
 
-                - `type BetaCitationCharLocationParamResp struct{…}`
+                - `type BetaCitationCharLocationParamResp`
 
                   - `Type CharLocation`
 
@@ -161,7 +161,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     minimum: 0
 
-                - `type BetaCitationPageLocationParamResp struct{…}`
+                - `type BetaCitationPageLocationParamResp`
 
                   - `Type PageLocation`
 
@@ -181,7 +181,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     minimum: 1
 
-                - `type BetaCitationContentBlockLocationParamResp struct{…}`
+                - `type BetaCitationContentBlockLocationParamResp`
 
                   - `Type ContentBlockLocation`
 
@@ -211,7 +211,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     minimum: 0
 
-                - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationWebSearchResultLocationParamResp`
 
                   - `Type WebSearchResultLocation`
 
@@ -227,7 +227,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     minLength: 1
 
-                - `type BetaCitationSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationSearchResultLocationParamResp`
 
                   - `Type SearchResultLocation`
 
@@ -261,13 +261,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `Title string`
 
-            - `type BetaImageBlockParamResp struct{…}`
+            - `type BetaImageBlockParamResp`
 
               - `Type Image`
 
               - `Source BetaImageBlockParamSourceUnionResp`
 
-                - `type BetaBase64ImageSource struct{…}`
+                - `type BetaBase64ImageSource`
 
                   - `Type Base64`
 
@@ -285,13 +285,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-                - `type BetaURLImageSource struct{…}`
+                - `type BetaURLImageSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileImageSource struct{…}`
+                - `type BetaFileImageSource`
 
                   - `Type File`
 
@@ -313,13 +313,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-            - `type BetaRequestDocumentBlock struct{…}`
+            - `type BetaRequestDocumentBlock`
 
               - `Type Document`
 
               - `Source BetaRequestDocumentBlockSourceUnion`
 
-                - `type BetaBase64PDFSource struct{…}`
+                - `type BetaBase64PDFSource`
 
                   - `Type Base64`
 
@@ -329,7 +329,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `MediaType ApplicationPDF`
 
-                - `type BetaPlainTextSource struct{…}`
+                - `type BetaPlainTextSource`
 
                   - `Type Text`
 
@@ -337,7 +337,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `MediaType TextPlain`
 
-                - `type BetaContentBlockSource struct{…}`
+                - `type BetaContentBlockSource`
 
                   - `Type Content`
 
@@ -347,17 +347,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `[]BetaContentBlockSourceContentUnion`
 
-                      - `type BetaTextBlockParamResp struct{…}`
+                      - `type BetaTextBlockParamResp`
 
-                      - `type BetaImageBlockParamResp struct{…}`
+                      - `type BetaImageBlockParamResp`
 
-                - `type BetaURLPDFSource struct{…}`
+                - `type BetaURLPDFSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileDocumentSource struct{…}`
+                - `type BetaFileDocumentSource`
 
                   - `Type File`
 
@@ -379,7 +379,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 maxLength: 500, minLength: 1
 
-            - `type BetaSearchResultBlockParamResp struct{…}`
+            - `type BetaSearchResultBlockParamResp`
 
               - `Type SearchResult`
 
@@ -407,7 +407,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Citations BetaCitationsConfigParamResp Optional`
 
-            - `type BetaThinkingBlockParamResp struct{…}`
+            - `type BetaThinkingBlockParamResp`
 
               - `Type Thinking`
 
@@ -421,7 +421,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 The `thinking` text of this block as returned by the API.
 
-            - `type BetaRedactedThinkingBlockParamResp struct{…}`
+            - `type BetaRedactedThinkingBlockParamResp`
 
               - `Type RedactedThinking`
 
@@ -429,7 +429,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type BetaToolUseBlockParamResp struct{…}`
+            - `type BetaToolUseBlockParamResp`
 
               - `Type ToolUse`
 
@@ -449,13 +449,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `Type Direct`
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -465,7 +465,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
                   - `Type CodeExecution20260120`
 
@@ -479,7 +479,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaToolResultBlockParamResp struct{…}`
+            - `type BetaToolResultBlockParamResp`
 
               - `Type ToolResult`
 
@@ -495,15 +495,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `[]BetaToolResultBlockParamContentUnionResp`
 
-                  - `type BetaTextBlockParamResp struct{…}`
+                  - `type BetaTextBlockParamResp`
 
-                  - `type BetaImageBlockParamResp struct{…}`
+                  - `type BetaImageBlockParamResp`
 
-                  - `type BetaSearchResultBlockParamResp struct{…}`
+                  - `type BetaSearchResultBlockParamResp`
 
-                  - `type BetaRequestDocumentBlock struct{…}`
+                  - `type BetaRequestDocumentBlock`
 
-                  - `type BetaToolReferenceBlockParamResp struct{…}`
+                  - `type BetaToolReferenceBlockParamResp`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -517,7 +517,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type BetaBrowserStateBlockParamResp struct{…}`
+                  - `type BetaBrowserStateBlockParamResp`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -567,7 +567,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       maxItems: 200, minItems: 1
 
-                      - `type BetaBrowserStateChangeTabOpened struct{…}`
+                      - `type BetaBrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -585,7 +585,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                      - `type BetaBrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -603,7 +603,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                      - `type BetaBrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -636,7 +636,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           minimum: 0
 
-                      - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                      - `type BetaBrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -668,7 +668,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaServerToolUseBlockParamResp struct{…}`
+            - `type BetaServerToolUseBlockParamResp`
 
               - `Type ServerToolUse`
 
@@ -702,17 +702,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+            - `type BetaWebSearchToolResultBlockParamResp`
 
               - `Type WebSearchToolResult`
 
@@ -730,7 +730,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `PageAge string Optional`
 
-                - `type BetaWebSearchToolRequestError struct{…}`
+                - `type BetaWebSearchToolRequestError`
 
                   - `Type WebSearchToolResultError`
 
@@ -758,23 +758,23 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+            - `type BetaWebFetchToolResultBlockParamResp`
 
               - `Type WebFetchToolResult`
 
               - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-                - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+                - `type BetaWebFetchToolResultErrorBlockParamResp`
 
                   - `Type WebFetchToolResultError`
 
@@ -800,7 +800,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-                - `type BetaWebFetchBlockParamResp struct{…}`
+                - `type BetaWebFetchBlockParamResp`
 
                   - `Type WebFetchResult`
 
@@ -824,23 +824,23 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+            - `type BetaAdvisorToolResultBlockParamResp`
 
               - `Type AdvisorToolResult`
 
               - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-                - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+                - `type BetaAdvisorToolResultErrorParamResp`
 
                   - `Type AdvisorToolResultError`
 
@@ -860,7 +860,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-                - `type BetaAdvisorResultBlockParamResp struct{…}`
+                - `type BetaAdvisorResultBlockParamResp`
 
                   - `Type AdvisorResult`
 
@@ -868,7 +868,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `StopReason string Optional`
 
-                - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+                - `type BetaAdvisorRedactedResultBlockParamResp`
 
                   - `Type AdvisorRedactedResult`
 
@@ -886,13 +886,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaCodeExecutionToolResultBlockParamResp`
 
               - `Type CodeExecutionToolResult`
 
               - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaCodeExecutionToolResultErrorParamResp`
 
                   - `Type CodeExecutionToolResultError`
 
@@ -906,7 +906,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-                - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaCodeExecutionResultBlockParamResp`
 
                   - `Type CodeExecutionResult`
 
@@ -922,7 +922,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `Stdout string`
 
-                - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -948,13 +948,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
               - `Type BashCodeExecutionToolResult`
 
               - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
                   - `Type BashCodeExecutionToolResultError`
 
@@ -970,7 +970,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-                - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaBashCodeExecutionResultBlockParamResp`
 
                   - `Type BashCodeExecutionResult`
 
@@ -994,13 +994,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionToolResult`
 
               - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
                   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -1018,7 +1018,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionViewResult`
 
@@ -1038,13 +1038,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `TotalLines int64 Optional`
 
-                - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionCreateResult`
 
                   - `IsFileUpdate bool`
 
-                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -1066,13 +1066,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+            - `type BetaToolSearchToolResultBlockParamResp`
 
               - `Type ToolSearchToolResult`
 
               - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-                - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+                - `type BetaToolSearchToolResultErrorParamResp`
 
                   - `Type ToolSearchToolResultError`
 
@@ -1088,7 +1088,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+                - `type BetaToolSearchToolSearchResultBlockParamResp`
 
                   - `Type ToolSearchToolSearchResult`
 
@@ -1112,7 +1112,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaMCPToolUseBlockParamResp struct{…}`
+            - `type BetaMCPToolUseBlockParamResp`
 
               - `Type MCPToolUse`
 
@@ -1132,7 +1132,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+            - `type BetaRequestMCPToolResultBlockParamResp`
 
               - `Type MCPToolResult`
 
@@ -1164,7 +1164,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `IsError bool Optional`
 
-            - `type BetaContainerUploadBlockParamResp struct{…}`
+            - `type BetaContainerUploadBlockParamResp`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -1177,7 +1177,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCompactionBlockParamResp struct{…}`
+            - `type BetaCompactionBlockParamResp`
 
               A compaction block containing summary of previous context.
 
@@ -1201,7 +1201,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `type BetaRequestToolAdditionBlock struct{…}`
+              - `Signature string Optional`
+
+                The block's signature as returned, to be sent back verbatim
+
+            - `type BetaRequestToolAdditionBlock`
 
               Mid-conversation directive to surface a declared tool.
 
@@ -1213,7 +1217,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-                - `type BetaToolChangeToolReference struct{…}`
+                - `type BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -1226,7 +1230,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `type BetaToolChangeMCPToolReference struct{…}`
+                - `type BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -1237,7 +1241,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `ServerName string`
 
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
+                - `type BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -1249,7 +1253,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestToolRemovalBlock struct{…}`
+            - `type BetaRequestToolRemovalBlock`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -1261,19 +1265,19 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-                - `type BetaToolChangeToolReference struct{…}`
+                - `type BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
                   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `type BetaToolChangeMCPToolReference struct{…}`
+                - `type BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
+                - `type BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -1281,7 +1285,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaFallbackBlockParamResp struct{…}`
+            - `type BetaFallbackBlockParamResp`
 
               A `fallback` block echoed back from a prior response.
 
@@ -1441,11 +1445,30 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+      - `Compaction BetaCompactionConfig Optional`
+
+        Compact the whole conversation and return a signed `compaction` block,
+        alone, that a later request sends back first in `messages`, in place of
+        the messages it summarizes. There is no trigger and no pause flag: sending
+        the parameter compacts, and nothing is sampled after the block.
+
+        The summarization prompt is the server's own unless `instructions` are
+        given, which then replace it for this request; a value that is empty or
+        only whitespace counts as absent.
+
+        - `Type Summarize`
+
+        - `Instructions string Optional`
+
+          Replaces the server's default summarization prompt for this request. An empty or whitespace-only value counts as absent.
+
+          maxLength: 16384
+
       - `Container BetaMessageBatchNewParamsRequestParamsContainerUnion Optional`
 
         Container identifier for reuse across requests.
 
-        - `type BetaContainerParamsResp struct{…}`
+        - `type BetaContainerParamsResp`
 
           Container parameters with skills to be loaded.
 
@@ -1493,7 +1516,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           minItems: 0
 
-          - `type BetaClearToolUses20250919Edit struct{…}`
+          - `type BetaClearToolUses20250919Edit`
 
             - `Type ClearToolUses20250919`
 
@@ -1533,7 +1556,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               Condition that triggers the context management strategy
 
-              - `type BetaInputTokensTrigger struct{…}`
+              - `type BetaInputTokensTrigger`
 
                 - `Type InputTokens`
 
@@ -1541,7 +1564,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 1
 
-              - `type BetaToolUsesTrigger struct{…}`
+              - `type BetaToolUsesTrigger`
 
                 - `Type ToolUses`
 
@@ -1549,7 +1572,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 1
 
-          - `type BetaClearThinking20251015Edit struct{…}`
+          - `type BetaClearThinking20251015Edit`
 
             - `Type ClearThinking20251015`
 
@@ -1557,7 +1580,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-              - `type BetaThinkingTurns struct{…}`
+              - `type BetaThinkingTurns`
 
                 - `Type ThinkingTurns`
 
@@ -1565,13 +1588,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 1
 
-              - `type BetaAllThinkingTurns struct{…}`
+              - `type BetaAllThinkingTurns`
 
                 - `Type All`
 
               - `All`
 
-          - `type BetaCompact20260112Edit struct{…}`
+          - `type BetaCompact20260112Edit`
 
             Automatically compact older context when reaching the configured trigger threshold.
 
@@ -1625,7 +1648,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `string`
 
-        - `type BetaFallbackCreditTokenParamResp struct{…}`
+        - `type BetaFallbackCreditTokenParamResp`
 
           Object form of `fallback_credit_token`: the token plus a redemption
           mode.
@@ -1719,7 +1742,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           - `Thinking BetaFallbackParamThinkingUnionResp Optional`
 
-            - `type BetaThinkingConfigEnabled struct{…}`
+            - `type BetaThinkingConfigEnabled`
 
               - `Type Enabled`
 
@@ -1761,11 +1784,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `const BetaThinkingConfigEnabledDisplayUpdates BetaThinkingConfigEnabledDisplay = "updates"`
 
-            - `type BetaThinkingConfigDisabled struct{…}`
+            - `type BetaThinkingConfigDisabled`
 
               - `Type Disabled`
 
-            - `type BetaThinkingConfigAdaptive struct{…}`
+            - `type BetaThinkingConfigAdaptive`
 
               - `Type Adaptive`
 
@@ -1887,17 +1910,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         See [extended thinking](../../../../build-with-claude/extended-thinking.md) for details.
 
-        - `type BetaThinkingConfigEnabled struct{…}`
+        - `type BetaThinkingConfigEnabled`
 
-        - `type BetaThinkingConfigDisabled struct{…}`
+        - `type BetaThinkingConfigDisabled`
 
-        - `type BetaThinkingConfigAdaptive struct{…}`
+        - `type BetaThinkingConfigAdaptive`
 
       - `ToolChoice BetaToolChoiceUnion Optional`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `type BetaToolChoiceAuto struct{…}`
+        - `type BetaToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -1909,7 +1932,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `type BetaToolChoiceAny struct{…}`
+        - `type BetaToolChoiceAny`
 
           The model will use any available tools.
 
@@ -1921,7 +1944,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceTool struct{…}`
+        - `type BetaToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -1937,7 +1960,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceNone struct{…}`
+        - `type BetaToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -2007,7 +2030,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         See our [guide](../../../../agents-and-tools/tool-use/overview.md) for more details.
 
-        - `type BetaTool struct{…}`
+        - `type BetaTool`
 
           - `Type BetaToolType Optional`
 
@@ -2065,7 +2088,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolBash20241022 struct{…}`
+        - `type BetaToolBash20241022`
 
           - `Type Bash20241022`
 
@@ -2099,7 +2122,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolBash20250124 struct{…}`
+        - `type BetaToolBash20250124`
 
           - `Type Bash20250124`
 
@@ -2133,7 +2156,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20250522 struct{…}`
+        - `type BetaCodeExecutionTool20250522`
 
           - `Type CodeExecution20250522`
 
@@ -2165,7 +2188,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20250825 struct{…}`
+        - `type BetaCodeExecutionTool20250825`
 
           - `Type CodeExecution20250825`
 
@@ -2197,7 +2220,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20260120 struct{…}`
+        - `type BetaCodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -2231,7 +2254,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20260521 struct{…}`
+        - `type BetaCodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -2265,7 +2288,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaBrowserToolset20260801 struct{…}`
+        - `type BetaBrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -2659,7 +2682,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type BetaToolComputerUse20241022 struct{…}`
+        - `type BetaToolComputerUse20241022`
 
           - `Type Computer20241022`
 
@@ -2711,7 +2734,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaMemoryTool20250818 struct{…}`
+        - `type BetaMemoryTool20250818`
 
           - `Type Memory20250818`
 
@@ -2745,7 +2768,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolComputerUse20250124 struct{…}`
+        - `type BetaToolComputerUse20250124`
 
           - `Type Computer20250124`
 
@@ -2797,7 +2820,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20241022 struct{…}`
+        - `type BetaToolTextEditor20241022`
 
           - `Type TextEditor20241022`
 
@@ -2831,7 +2854,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolComputerUse20251124 struct{…}`
+        - `type BetaToolComputerUse20251124`
 
           - `Type Computer20251124`
 
@@ -2887,7 +2910,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaComputerToolset20260801 struct{…}`
+        - `type BetaComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -3117,7 +3140,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type BetaToolTextEditor20250124 struct{…}`
+        - `type BetaToolTextEditor20250124`
 
           - `Type TextEditor20250124`
 
@@ -3151,7 +3174,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20250429 struct{…}`
+        - `type BetaToolTextEditor20250429`
 
           - `Type TextEditor20250429`
 
@@ -3185,7 +3208,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20250728 struct{…}`
+        - `type BetaToolTextEditor20250728`
 
           - `Type TextEditor20250728`
 
@@ -3225,7 +3248,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebSearchTool20250305 struct{…}`
+        - `type BetaWebSearchTool20250305`
 
           - `Type WebSearch20250305`
 
@@ -3301,7 +3324,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               maxLength: 255, minLength: 1
 
-        - `type BetaWebFetchTool20250910 struct{…}`
+        - `type BetaWebFetchTool20250910`
 
           - `Type WebFetch20250910`
 
@@ -3357,7 +3380,98 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebSearchTool20260209 struct{…}`
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `Type All`
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `Type None`
+
+              - `type BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `Type Only`
+
+                - `Tools []BetaWebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+              - `type BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `Type Except`
+
+                - `Tools []BetaWebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+            - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `type BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `type BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `type BetaWebSearchTool20260209`
 
           - `Type WebSearch20260209`
 
@@ -3407,7 +3521,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type BetaWebFetchTool20260209 struct{…}`
+        - `type BetaWebFetchTool20260209`
 
           - `Type WebFetch20260209`
 
@@ -3463,7 +3577,16 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebFetchTool20260309 struct{…}`
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `type BetaWebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -3521,11 +3644,20 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type BetaWebSearchTool20260318 struct{…}`
+        - `type BetaWebSearchTool20260318`
 
           - `Type WebSearch20260318`
 
@@ -3583,7 +3715,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type BetaWebFetchTool20260318 struct{…}`
+        - `type BetaWebFetchTool20260318`
 
           - `Type WebFetch20260318`
 
@@ -3647,11 +3779,20 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type BetaAdvisorTool20260301 struct{…}`
+        - `type BetaAdvisorTool20260301`
 
           - `Type Advisor20260301`
 
@@ -3705,7 +3846,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolSearchToolBm25_20251119 struct{…}`
+        - `type BetaToolSearchToolBm25_20251119`
 
           - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -3741,7 +3882,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolSearchToolRegex20251119 struct{…}`
+        - `type BetaToolSearchToolRegex20251119`
 
           - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -3777,7 +3918,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaMCPToolset struct{…}`
+        - `type BetaMCPToolset`
 
           Configuration for a group of tools from an MCP server.
 
@@ -3954,6 +4095,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -3966,7 +4109,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -4254,6 +4397,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4262,7 +4407,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -4550,6 +4695,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4558,7 +4705,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -4839,6 +4986,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4847,7 +4996,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -5125,6 +5274,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5133,7 +5284,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ### Returns
 
-- `type BetaDeletedMessageBatch struct{…}`
+- `type BetaDeletedMessageBatch`
 
   - `Type MessageBatchDeleted`
 
@@ -5303,6 +5454,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5311,7 +5464,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ### Returns
 
-- `type BetaMessageBatchIndividualResponse struct{…}`
+- `type BetaMessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -5327,7 +5480,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `type BetaMessageBatchSucceededResult struct{…}`
+    - `type BetaMessageBatchSucceededResult`
 
       - `Type Succeeded`
 
@@ -5416,7 +5569,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `type BetaTextBlock struct{…}`
+          - `type BetaTextBlock`
 
             - `Type Text`
 
@@ -5428,7 +5581,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `type BetaCitationCharLocation struct{…}`
+              - `type BetaCitationCharLocation`
 
                 - `Type CharLocation`
 
@@ -5450,7 +5603,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 0
 
-              - `type BetaCitationPageLocation struct{…}`
+              - `type BetaCitationPageLocation`
 
                 - `Type PageLocation`
 
@@ -5472,7 +5625,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 1
 
-              - `type BetaCitationContentBlockLocation struct{…}`
+              - `type BetaCitationContentBlockLocation`
 
                 - `Type ContentBlockLocation`
 
@@ -5504,7 +5657,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 0
 
-              - `type BetaCitationsWebSearchResultLocation struct{…}`
+              - `type BetaCitationsWebSearchResultLocation`
 
                 - `Type WebSearchResultLocation`
 
@@ -5520,7 +5673,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `URL string`
 
-              - `type BetaCitationSearchResultLocation struct{…}`
+              - `type BetaCitationSearchResultLocation`
 
                 - `Type SearchResultLocation`
 
@@ -5560,7 +5713,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minLength: 0
 
-          - `type BetaThinkingBlock struct{…}`
+          - `type BetaThinkingBlock`
 
             - `Type Thinking`
 
@@ -5578,7 +5731,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               The text of Claude's thinking process for this block.
 
-          - `type BetaRedactedThinkingBlock struct{…}`
+          - `type BetaRedactedThinkingBlock`
 
             - `Type RedactedThinking`
 
@@ -5592,7 +5745,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               See [extended thinking](../../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type BetaToolUseBlock struct{…}`
+          - `type BetaToolUseBlock`
 
             - `Type ToolUse`
 
@@ -5610,13 +5763,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Caller BetaToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `Type Direct`
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -5626,7 +5779,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
                 - `Type CodeExecution20260120`
 
@@ -5640,7 +5793,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaServerToolUseBlock struct{…}`
+          - `type BetaServerToolUseBlock`
 
             - `Type ServerToolUse`
 
@@ -5672,17 +5825,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebSearchToolResultBlock struct{…}`
+          - `type BetaWebSearchToolResultBlock`
 
             - `Type WebSearchToolResult`
 
@@ -5690,7 +5843,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BetaWebSearchToolResultBlockContentUnion`
 
-              - `type BetaWebSearchToolResultError struct{…}`
+              - `type BetaWebSearchToolResultError`
 
                 - `Type WebSearchToolResultError`
 
@@ -5730,17 +5883,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebFetchToolResultBlock struct{…}`
+          - `type BetaWebFetchToolResultBlock`
 
             - `Type WebFetchToolResult`
 
@@ -5748,7 +5901,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BetaWebFetchToolResultBlockContentUnion`
 
-              - `type BetaWebFetchToolResultErrorBlock struct{…}`
+              - `type BetaWebFetchToolResultErrorBlock`
 
                 - `Type WebFetchToolResultError`
 
@@ -5776,7 +5929,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-              - `type BetaWebFetchBlock struct{…}`
+              - `type BetaWebFetchBlock`
 
                 - `Type WebFetchResult`
 
@@ -5798,7 +5951,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `Source BetaDocumentBlockSourceUnion`
 
-                    - `type BetaBase64PDFSource struct{…}`
+                    - `type BetaBase64PDFSource`
 
                       - `Type Base64`
 
@@ -5808,7 +5961,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       - `MediaType ApplicationPDF`
 
-                    - `type BetaPlainTextSource struct{…}`
+                    - `type BetaPlainTextSource`
 
                       - `Type Text`
 
@@ -5834,17 +5987,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaAdvisorToolResultBlock struct{…}`
+          - `type BetaAdvisorToolResultBlock`
 
             - `Type AdvisorToolResult`
 
@@ -5852,7 +6005,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BetaAdvisorToolResultBlockContentUnion`
 
-              - `type BetaAdvisorToolResultError struct{…}`
+              - `type BetaAdvisorToolResultError`
 
                 - `Type AdvisorToolResultError`
 
@@ -5874,7 +6027,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-              - `type BetaAdvisorResultBlock struct{…}`
+              - `type BetaAdvisorResultBlock`
 
                 - `Type AdvisorResult`
 
@@ -5886,7 +6039,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `Text string`
 
-              - `type BetaAdvisorRedactedResultBlock struct{…}`
+              - `type BetaAdvisorRedactedResultBlock`
 
                 - `Type AdvisorRedactedResult`
 
@@ -5904,7 +6057,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaCodeExecutionToolResultBlock struct{…}`
+          - `type BetaCodeExecutionToolResultBlock`
 
             - `Type CodeExecutionToolResult`
 
@@ -5912,7 +6065,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaCodeExecutionToolResultError struct{…}`
+              - `type BetaCodeExecutionToolResultError`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -5928,7 +6081,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-              - `type BetaCodeExecutionResultBlock struct{…}`
+              - `type BetaCodeExecutionResultBlock`
 
                 - `Type CodeExecutionResult`
 
@@ -5948,7 +6101,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `Stdout string`
 
-              - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+              - `type BetaEncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -5974,7 +6127,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+          - `type BetaBashCodeExecutionToolResultBlock`
 
             - `Type BashCodeExecutionToolResult`
 
@@ -5982,7 +6135,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaBashCodeExecutionToolResultError struct{…}`
+              - `type BetaBashCodeExecutionToolResultError`
 
                 - `Type BashCodeExecutionToolResultError`
 
@@ -6000,7 +6153,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-              - `type BetaBashCodeExecutionResultBlock struct{…}`
+              - `type BetaBashCodeExecutionResultBlock`
 
                 - `Type BashCodeExecutionResult`
 
@@ -6024,7 +6177,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionToolResultBlock`
 
             - `Type TextEditorCodeExecutionToolResult`
 
@@ -6032,7 +6185,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+              - `type BetaTextEditorCodeExecutionToolResultError`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
@@ -6052,7 +6205,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `ErrorMessage string`
 
-              - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionViewResultBlock`
 
                 - `Type TextEditorCodeExecutionViewResult`
 
@@ -6074,7 +6227,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `TotalLines int64`
 
-              - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
                 - `Type TextEditorCodeExecutionCreateResult`
 
@@ -6082,7 +6235,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `IsFileUpdate bool`
 
-              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -6102,7 +6255,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaToolSearchToolResultBlock struct{…}`
+          - `type BetaToolSearchToolResultBlock`
 
             - `Type ToolSearchToolResult`
 
@@ -6110,7 +6263,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BetaToolSearchToolResultBlockContentUnion`
 
-              - `type BetaToolSearchToolResultError struct{…}`
+              - `type BetaToolSearchToolResultError`
 
                 - `Type ToolSearchToolResultError`
 
@@ -6128,7 +6281,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `ErrorMessage string`
 
-              - `type BetaToolSearchToolSearchResultBlock struct{…}`
+              - `type BetaToolSearchToolSearchResultBlock`
 
                 - `Type ToolSearchToolSearchResult`
 
@@ -6148,7 +6301,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaMCPToolUseBlock struct{…}`
+          - `type BetaMCPToolUseBlock`
 
             - `Type MCPToolUse`
 
@@ -6168,7 +6321,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               The name of the MCP server
 
-          - `type BetaMCPToolResultBlock struct{…}`
+          - `type BetaMCPToolResultBlock`
 
             - `Type MCPToolResult`
 
@@ -6202,7 +6355,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaContainerUploadBlock struct{…}`
+          - `type BetaContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -6212,7 +6365,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `FileID string`
 
-          - `type BetaCompactionBlock struct{…}`
+          - `type BetaCompactionBlock`
 
             A compaction block returned when autocompact is triggered.
 
@@ -6232,7 +6385,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-          - `type BetaFallbackBlock struct{…}`
+            - `Signature string Optional`
+
+              Signature over the summary, to be sent back with the block verbatim
+
+          - `type BetaFallbackBlock`
 
             Marks the point in `content` where one model's output gives way to the next.
 
@@ -6382,7 +6539,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             List of context management edits that were applied.
 
-            - `type BetaClearToolUses20250919EditResponse struct{…}`
+            - `type BetaClearToolUses20250919EditResponse`
 
               - `Type ClearToolUses20250919`
 
@@ -6402,7 +6559,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 minimum: 0
 
-            - `type BetaClearThinking20251015EditResponse struct{…}`
+            - `type BetaClearThinking20251015EditResponse`
 
               - `Type ClearThinking20251015`
 
@@ -6431,7 +6588,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-            - `type BetaCacheMissModelChanged struct{…}`
+            - `type BetaCacheMissModelChanged`
 
               - `Type ModelChanged`
 
@@ -6441,7 +6598,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissSystemChanged struct{…}`
+            - `type BetaCacheMissSystemChanged`
 
               - `Type SystemChanged`
 
@@ -6451,7 +6608,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissToolsChanged struct{…}`
+            - `type BetaCacheMissToolsChanged`
 
               - `Type ToolsChanged`
 
@@ -6461,7 +6618,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissMessagesChanged struct{…}`
+            - `type BetaCacheMissMessagesChanged`
 
               - `Type MessagesChanged`
 
@@ -6471,13 +6628,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+            - `type BetaCacheMissPreviousMessageNotFound`
 
               - `Type PreviousMessageNotFound`
 
                 default: previous_message_not_found
 
-            - `type BetaCacheMissUnavailable struct{…}`
+            - `type BetaCacheMissUnavailable`
 
               - `Type Unavailable`
 
@@ -6675,7 +6832,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               resulting shift is zero because there was nothing to move. `not_applied`:
               no reprice was applied; the arm's `reason` says why.
 
-              - `type BetaFallbackCreditRedeemed struct{…}`
+              - `type BetaFallbackCreditRedeemed`
 
                 The reprice was applied: the retry is billed as if the conversation
                 had been on the retry model all along.
@@ -6684,7 +6841,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   default: redeemed
 
-              - `type BetaFallbackCreditNotApplied struct{…}`
+              - `type BetaFallbackCreditNotApplied`
 
                 No reprice was applied; `reason` says why.
 
@@ -6756,7 +6913,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-            - `type BetaMessageIterationUsage struct{…}`
+            - `type BetaMessageIterationUsage`
 
               Token usage for a sampling iteration.
 
@@ -6800,7 +6957,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 minimum: 0
 
-            - `type BetaCompactionIterationUsage struct{…}`
+            - `type BetaCompactionIterationUsage`
 
               Token usage for a compaction iteration.
 
@@ -6838,7 +6995,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 minimum: 0
 
-            - `type BetaAdvisorMessageIterationUsage struct{…}`
+            - `type BetaAdvisorMessageIterationUsage`
 
               Token usage for an advisor sub-inference iteration.
 
@@ -6882,7 +7039,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 minimum: 0
 
-            - `type BetaFallbackMessageIterationUsage struct{…}`
+            - `type BetaFallbackMessageIterationUsage`
 
               Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -6995,61 +7152,103 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-        - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+        - `InputTransformations []BetaInputTransformationUnion Optional`
 
-          Changes the API made to the request's input before showing it to the model:
-          one entry per change, in request order. Today the only entry type is
-          `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-          block from the request's `messages` that was removed from the prompt instead
-          of being shown to the model because it failed a binding check. More entry
-          types may be added over time; ignore types you do not recognize.
+          Changes the API made to the request's input before showing it to the model,
+          and blocks that failed a binding check but were left unchanged: one entry per
+          block, in request order. Two entry types today. `thinking_dropped` — a
+          `thinking`, `redacted_thinking` or `connector_text` block from the request's
+          `messages` that was removed from the prompt instead of being shown to the
+          model because it failed a binding check. `thinking_mismatch_allowed` — a
+          `thinking` or `redacted_thinking` block that failed the conversation check
+          (the conversation before it differs from the one it was created in, or it
+          carries no record of one on a model that requires it) and was shown to the
+          model all the same, because that check is not enforced for this request.
+          More entry types may be added over time; ignore types you do not recognize.
 
           Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
           every such response from a model that supports extended thinking, as `[]`
-          when nothing was changed; without the beta, blocks are removed all the same
-          but nothing is reported. Removed blocks contribute nothing to
-          `usage.input_tokens`. When streaming, the array is final in `message_start`;
-          the final `message_delta` event carries it only when a server-side model
-          fallback happened mid-stream, in which case it holds the serving model's
-          entries and replaces the one in `message_start`.
+          when there is no entry to report; without the beta, blocks are removed or
+          left in place all the same but nothing is reported. Removed blocks contribute
+          nothing to `usage.input_tokens`; blocks left in place count as sent. When
+          streaming, the array is final in `message_start`; the final `message_delta`
+          event carries it only when a server-side model fallback happened mid-stream,
+          in which case it holds the serving model's entries and replaces the one in
+          `message_start`.
 
-          - `Type ThinkingDropped`
+          - `type BetaThinkingDroppedInputTransformation`
 
-            Always `thinking_dropped` for this entry type.
+            - `Type ThinkingDropped`
 
-            default: thinking_dropped
+              Always `thinking_dropped` for this entry type.
 
-          - `Path string`
+              default: thinking_dropped
 
-            Where the removed block was in your request, as `messages.{i}.content.{j}`:
-            `i` indexes the `messages` array you sent and `j` that message's `content`
-            array — the same form error messages use.
+            - `Path string`
 
-          - `Reason BetaThinkingDroppedInputTransformationReason`
+              Where the removed block was in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
 
-            Which binding check removed the block: `model_binding_mismatch` — it was
-            created by a model whose reasoning the requested model may not read;
-            `prefix_binding_mismatch` — the conversation before it differs from the
-            conversation it was created in (the rest of that turn's consecutive thinking
-            blocks are removed with it, each with this reason);
-            `organization_binding_mismatch` — it was created under a different
-            organization (an Anthropic organization, AWS account or Google Cloud project)
-            and this organization is not one of its additional organizations;
-            `end_user_binding_mismatch` — it was created for a different end user, or
-            was removed by the consumer-organization binding. A block that would fail
-            several checks reports one reason, in this order of precedence:
-            `organization_binding_mismatch`, `end_user_binding_mismatch`,
-            `model_binding_mismatch`, `prefix_binding_mismatch`.
+            - `Reason BetaThinkingDroppedInputTransformationReason`
 
-            - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+              Which binding check removed the block: `model_binding_mismatch` — it was
+              created by a model whose reasoning the requested model may not read;
+              `prefix_binding_mismatch` — the conversation before it differs from the
+              conversation it was created in (the rest of that turn's consecutive thinking
+              blocks are removed with it, each with this reason);
+              `organization_binding_mismatch` — it was created under a different
+              organization (an Anthropic organization, AWS account or Google Cloud project)
+              and this organization is not one of its additional organizations;
+              `end_user_binding_mismatch` — it was created for a different end user, or
+              was removed by the consumer-organization binding. A block that would fail
+              several checks reports one reason, in this order of precedence:
+              `organization_binding_mismatch`, `end_user_binding_mismatch`,
+              `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-            - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
 
-    - `type BetaMessageBatchErroredResult struct{…}`
+              - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+          - `type BetaThinkingMismatchAllowedInputTransformation`
+
+            - `Type ThinkingMismatchAllowed`
+
+              Always `thinking_mismatch_allowed` for this entry type.
+
+              default: thinking_mismatch_allowed
+
+            - `Path string`
+
+              Where the block is in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
+
+            - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+              Which binding check the block failed; the block was shown to the model all
+              the same. Always `prefix_binding_mismatch` today — the conversation before
+              the block differs from the conversation it was created in, or the block
+              carries no record of one on a model that requires it. Were the check
+              enforced for this request, the block would have been removed or the request
+              rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+              takes the rest of that turn's consecutive thinking blocks, whereas here each
+              block is checked on its own, so `thinking_mismatch_allowed` entries are a
+              lower bound on what enforcement would remove.
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaMessageBatchErroredResult`
 
       - `Type Errored`
 
@@ -7063,7 +7262,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `Error BetaErrorUnion`
 
-          - `type BetaInvalidRequestError struct{…}`
+          - `type BetaInvalidRequestError`
 
             - `Type InvalidRequestError`
 
@@ -7073,7 +7272,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Invalid request
 
-          - `type BetaAuthenticationError struct{…}`
+          - `type BetaAuthenticationError`
 
             - `Type AuthenticationError`
 
@@ -7083,7 +7282,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Authentication error
 
-          - `type BetaBillingError struct{…}`
+          - `type BetaBillingError`
 
             - `Type BillingError`
 
@@ -7093,7 +7292,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Billing error
 
-          - `type BetaPermissionError struct{…}`
+          - `type BetaPermissionError`
 
             - `Type PermissionError`
 
@@ -7103,7 +7302,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Permission denied
 
-          - `type BetaNotFoundError struct{…}`
+          - `type BetaNotFoundError`
 
             - `Type NotFoundError`
 
@@ -7113,7 +7312,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Not found
 
-          - `type BetaRateLimitError struct{…}`
+          - `type BetaRateLimitError`
 
             - `Type RateLimitError`
 
@@ -7123,7 +7322,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Rate limited
 
-          - `type BetaGatewayTimeoutError struct{…}`
+          - `type BetaGatewayTimeoutError`
 
             - `Type TimeoutError`
 
@@ -7133,7 +7332,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Request timeout
 
-          - `type BetaAPIError struct{…}`
+          - `type BetaAPIError`
 
             - `Type APIError`
 
@@ -7143,7 +7342,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Internal server error
 
-          - `type BetaOverloadedError struct{…}`
+          - `type BetaOverloadedError`
 
             - `Type OverloadedError`
 
@@ -7155,13 +7354,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `RequestID string`
 
-    - `type BetaMessageBatchCanceledResult struct{…}`
+    - `type BetaMessageBatchCanceledResult`
 
       - `Type Canceled`
 
         default: canceled
 
-    - `type BetaMessageBatchExpiredResult struct{…}`
+    - `type BetaMessageBatchExpiredResult`
 
       - `Type Expired`
 
@@ -7203,7 +7402,7 @@ func main() {
 
 ### Beta Deleted Message Batch
 
-- `type BetaDeletedMessageBatch struct{…}`
+- `type BetaDeletedMessageBatch`
 
   - `Type MessageBatchDeleted`
 
@@ -7219,7 +7418,7 @@ func main() {
 
 ### Beta Message Batch
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -7329,7 +7528,7 @@ func main() {
 
 ### Beta Message Batch Canceled Result
 
-- `type BetaMessageBatchCanceledResult struct{…}`
+- `type BetaMessageBatchCanceledResult`
 
   - `Type Canceled`
 
@@ -7337,7 +7536,7 @@ func main() {
 
 ### Beta Message Batch Errored Result
 
-- `type BetaMessageBatchErroredResult struct{…}`
+- `type BetaMessageBatchErroredResult`
 
   - `Type Errored`
 
@@ -7351,7 +7550,7 @@ func main() {
 
     - `Error BetaErrorUnion`
 
-      - `type BetaInvalidRequestError struct{…}`
+      - `type BetaInvalidRequestError`
 
         - `Type InvalidRequestError`
 
@@ -7361,7 +7560,7 @@ func main() {
 
           default: Invalid request
 
-      - `type BetaAuthenticationError struct{…}`
+      - `type BetaAuthenticationError`
 
         - `Type AuthenticationError`
 
@@ -7371,7 +7570,7 @@ func main() {
 
           default: Authentication error
 
-      - `type BetaBillingError struct{…}`
+      - `type BetaBillingError`
 
         - `Type BillingError`
 
@@ -7381,7 +7580,7 @@ func main() {
 
           default: Billing error
 
-      - `type BetaPermissionError struct{…}`
+      - `type BetaPermissionError`
 
         - `Type PermissionError`
 
@@ -7391,7 +7590,7 @@ func main() {
 
           default: Permission denied
 
-      - `type BetaNotFoundError struct{…}`
+      - `type BetaNotFoundError`
 
         - `Type NotFoundError`
 
@@ -7401,7 +7600,7 @@ func main() {
 
           default: Not found
 
-      - `type BetaRateLimitError struct{…}`
+      - `type BetaRateLimitError`
 
         - `Type RateLimitError`
 
@@ -7411,7 +7610,7 @@ func main() {
 
           default: Rate limited
 
-      - `type BetaGatewayTimeoutError struct{…}`
+      - `type BetaGatewayTimeoutError`
 
         - `Type TimeoutError`
 
@@ -7421,7 +7620,7 @@ func main() {
 
           default: Request timeout
 
-      - `type BetaAPIError struct{…}`
+      - `type BetaAPIError`
 
         - `Type APIError`
 
@@ -7431,7 +7630,7 @@ func main() {
 
           default: Internal server error
 
-      - `type BetaOverloadedError struct{…}`
+      - `type BetaOverloadedError`
 
         - `Type OverloadedError`
 
@@ -7445,7 +7644,7 @@ func main() {
 
 ### Beta Message Batch Expired Result
 
-- `type BetaMessageBatchExpiredResult struct{…}`
+- `type BetaMessageBatchExpiredResult`
 
   - `Type Expired`
 
@@ -7453,7 +7652,7 @@ func main() {
 
 ### Beta Message Batch Individual Response
 
-- `type BetaMessageBatchIndividualResponse struct{…}`
+- `type BetaMessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -7469,7 +7668,7 @@ func main() {
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `type BetaMessageBatchSucceededResult struct{…}`
+    - `type BetaMessageBatchSucceededResult`
 
       - `Type Succeeded`
 
@@ -7558,7 +7757,7 @@ func main() {
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `type BetaTextBlock struct{…}`
+          - `type BetaTextBlock`
 
             - `Type Text`
 
@@ -7570,7 +7769,7 @@ func main() {
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `type BetaCitationCharLocation struct{…}`
+              - `type BetaCitationCharLocation`
 
                 - `Type CharLocation`
 
@@ -7592,7 +7791,7 @@ func main() {
 
                   minimum: 0
 
-              - `type BetaCitationPageLocation struct{…}`
+              - `type BetaCitationPageLocation`
 
                 - `Type PageLocation`
 
@@ -7614,7 +7813,7 @@ func main() {
 
                   minimum: 1
 
-              - `type BetaCitationContentBlockLocation struct{…}`
+              - `type BetaCitationContentBlockLocation`
 
                 - `Type ContentBlockLocation`
 
@@ -7646,7 +7845,7 @@ func main() {
 
                   minimum: 0
 
-              - `type BetaCitationsWebSearchResultLocation struct{…}`
+              - `type BetaCitationsWebSearchResultLocation`
 
                 - `Type WebSearchResultLocation`
 
@@ -7662,7 +7861,7 @@ func main() {
 
                 - `URL string`
 
-              - `type BetaCitationSearchResultLocation struct{…}`
+              - `type BetaCitationSearchResultLocation`
 
                 - `Type SearchResultLocation`
 
@@ -7702,7 +7901,7 @@ func main() {
 
               minLength: 0
 
-          - `type BetaThinkingBlock struct{…}`
+          - `type BetaThinkingBlock`
 
             - `Type Thinking`
 
@@ -7720,7 +7919,7 @@ func main() {
 
               The text of Claude's thinking process for this block.
 
-          - `type BetaRedactedThinkingBlock struct{…}`
+          - `type BetaRedactedThinkingBlock`
 
             - `Type RedactedThinking`
 
@@ -7734,7 +7933,7 @@ func main() {
 
               See [extended thinking](../../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type BetaToolUseBlock struct{…}`
+          - `type BetaToolUseBlock`
 
             - `Type ToolUse`
 
@@ -7752,13 +7951,13 @@ func main() {
 
             - `Caller BetaToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `Type Direct`
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -7768,7 +7967,7 @@ func main() {
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
                 - `Type CodeExecution20260120`
 
@@ -7782,7 +7981,7 @@ func main() {
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaServerToolUseBlock struct{…}`
+          - `type BetaServerToolUseBlock`
 
             - `Type ServerToolUse`
 
@@ -7814,17 +8013,17 @@ func main() {
 
             - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebSearchToolResultBlock struct{…}`
+          - `type BetaWebSearchToolResultBlock`
 
             - `Type WebSearchToolResult`
 
@@ -7832,7 +8031,7 @@ func main() {
 
             - `Content BetaWebSearchToolResultBlockContentUnion`
 
-              - `type BetaWebSearchToolResultError struct{…}`
+              - `type BetaWebSearchToolResultError`
 
                 - `Type WebSearchToolResultError`
 
@@ -7872,17 +8071,17 @@ func main() {
 
             - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebFetchToolResultBlock struct{…}`
+          - `type BetaWebFetchToolResultBlock`
 
             - `Type WebFetchToolResult`
 
@@ -7890,7 +8089,7 @@ func main() {
 
             - `Content BetaWebFetchToolResultBlockContentUnion`
 
-              - `type BetaWebFetchToolResultErrorBlock struct{…}`
+              - `type BetaWebFetchToolResultErrorBlock`
 
                 - `Type WebFetchToolResultError`
 
@@ -7918,7 +8117,7 @@ func main() {
 
                   - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-              - `type BetaWebFetchBlock struct{…}`
+              - `type BetaWebFetchBlock`
 
                 - `Type WebFetchResult`
 
@@ -7940,7 +8139,7 @@ func main() {
 
                   - `Source BetaDocumentBlockSourceUnion`
 
-                    - `type BetaBase64PDFSource struct{…}`
+                    - `type BetaBase64PDFSource`
 
                       - `Type Base64`
 
@@ -7950,7 +8149,7 @@ func main() {
 
                       - `MediaType ApplicationPDF`
 
-                    - `type BetaPlainTextSource struct{…}`
+                    - `type BetaPlainTextSource`
 
                       - `Type Text`
 
@@ -7976,17 +8175,17 @@ func main() {
 
             - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaAdvisorToolResultBlock struct{…}`
+          - `type BetaAdvisorToolResultBlock`
 
             - `Type AdvisorToolResult`
 
@@ -7994,7 +8193,7 @@ func main() {
 
             - `Content BetaAdvisorToolResultBlockContentUnion`
 
-              - `type BetaAdvisorToolResultError struct{…}`
+              - `type BetaAdvisorToolResultError`
 
                 - `Type AdvisorToolResultError`
 
@@ -8016,7 +8215,7 @@ func main() {
 
                   - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-              - `type BetaAdvisorResultBlock struct{…}`
+              - `type BetaAdvisorResultBlock`
 
                 - `Type AdvisorResult`
 
@@ -8028,7 +8227,7 @@ func main() {
 
                 - `Text string`
 
-              - `type BetaAdvisorRedactedResultBlock struct{…}`
+              - `type BetaAdvisorRedactedResultBlock`
 
                 - `Type AdvisorRedactedResult`
 
@@ -8046,7 +8245,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaCodeExecutionToolResultBlock struct{…}`
+          - `type BetaCodeExecutionToolResultBlock`
 
             - `Type CodeExecutionToolResult`
 
@@ -8054,7 +8253,7 @@ func main() {
 
             - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaCodeExecutionToolResultError struct{…}`
+              - `type BetaCodeExecutionToolResultError`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -8070,7 +8269,7 @@ func main() {
 
                   - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-              - `type BetaCodeExecutionResultBlock struct{…}`
+              - `type BetaCodeExecutionResultBlock`
 
                 - `Type CodeExecutionResult`
 
@@ -8090,7 +8289,7 @@ func main() {
 
                 - `Stdout string`
 
-              - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+              - `type BetaEncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -8116,7 +8315,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+          - `type BetaBashCodeExecutionToolResultBlock`
 
             - `Type BashCodeExecutionToolResult`
 
@@ -8124,7 +8323,7 @@ func main() {
 
             - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaBashCodeExecutionToolResultError struct{…}`
+              - `type BetaBashCodeExecutionToolResultError`
 
                 - `Type BashCodeExecutionToolResultError`
 
@@ -8142,7 +8341,7 @@ func main() {
 
                   - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-              - `type BetaBashCodeExecutionResultBlock struct{…}`
+              - `type BetaBashCodeExecutionResultBlock`
 
                 - `Type BashCodeExecutionResult`
 
@@ -8166,7 +8365,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionToolResultBlock`
 
             - `Type TextEditorCodeExecutionToolResult`
 
@@ -8174,7 +8373,7 @@ func main() {
 
             - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+              - `type BetaTextEditorCodeExecutionToolResultError`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
@@ -8194,7 +8393,7 @@ func main() {
 
                 - `ErrorMessage string`
 
-              - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionViewResultBlock`
 
                 - `Type TextEditorCodeExecutionViewResult`
 
@@ -8216,7 +8415,7 @@ func main() {
 
                 - `TotalLines int64`
 
-              - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
                 - `Type TextEditorCodeExecutionCreateResult`
 
@@ -8224,7 +8423,7 @@ func main() {
 
                 - `IsFileUpdate bool`
 
-              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -8244,7 +8443,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaToolSearchToolResultBlock struct{…}`
+          - `type BetaToolSearchToolResultBlock`
 
             - `Type ToolSearchToolResult`
 
@@ -8252,7 +8451,7 @@ func main() {
 
             - `Content BetaToolSearchToolResultBlockContentUnion`
 
-              - `type BetaToolSearchToolResultError struct{…}`
+              - `type BetaToolSearchToolResultError`
 
                 - `Type ToolSearchToolResultError`
 
@@ -8270,7 +8469,7 @@ func main() {
 
                 - `ErrorMessage string`
 
-              - `type BetaToolSearchToolSearchResultBlock struct{…}`
+              - `type BetaToolSearchToolSearchResultBlock`
 
                 - `Type ToolSearchToolSearchResult`
 
@@ -8290,7 +8489,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaMCPToolUseBlock struct{…}`
+          - `type BetaMCPToolUseBlock`
 
             - `Type MCPToolUse`
 
@@ -8310,7 +8509,7 @@ func main() {
 
               The name of the MCP server
 
-          - `type BetaMCPToolResultBlock struct{…}`
+          - `type BetaMCPToolResultBlock`
 
             - `Type MCPToolResult`
 
@@ -8344,7 +8543,7 @@ func main() {
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaContainerUploadBlock struct{…}`
+          - `type BetaContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -8354,7 +8553,7 @@ func main() {
 
             - `FileID string`
 
-          - `type BetaCompactionBlock struct{…}`
+          - `type BetaCompactionBlock`
 
             A compaction block returned when autocompact is triggered.
 
@@ -8374,7 +8573,11 @@ func main() {
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-          - `type BetaFallbackBlock struct{…}`
+            - `Signature string Optional`
+
+              Signature over the summary, to be sent back with the block verbatim
+
+          - `type BetaFallbackBlock`
 
             Marks the point in `content` where one model's output gives way to the next.
 
@@ -8524,7 +8727,7 @@ func main() {
 
             List of context management edits that were applied.
 
-            - `type BetaClearToolUses20250919EditResponse struct{…}`
+            - `type BetaClearToolUses20250919EditResponse`
 
               - `Type ClearToolUses20250919`
 
@@ -8544,7 +8747,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaClearThinking20251015EditResponse struct{…}`
+            - `type BetaClearThinking20251015EditResponse`
 
               - `Type ClearThinking20251015`
 
@@ -8573,7 +8776,7 @@ func main() {
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-            - `type BetaCacheMissModelChanged struct{…}`
+            - `type BetaCacheMissModelChanged`
 
               - `Type ModelChanged`
 
@@ -8583,7 +8786,7 @@ func main() {
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissSystemChanged struct{…}`
+            - `type BetaCacheMissSystemChanged`
 
               - `Type SystemChanged`
 
@@ -8593,7 +8796,7 @@ func main() {
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissToolsChanged struct{…}`
+            - `type BetaCacheMissToolsChanged`
 
               - `Type ToolsChanged`
 
@@ -8603,7 +8806,7 @@ func main() {
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissMessagesChanged struct{…}`
+            - `type BetaCacheMissMessagesChanged`
 
               - `Type MessagesChanged`
 
@@ -8613,13 +8816,13 @@ func main() {
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+            - `type BetaCacheMissPreviousMessageNotFound`
 
               - `Type PreviousMessageNotFound`
 
                 default: previous_message_not_found
 
-            - `type BetaCacheMissUnavailable struct{…}`
+            - `type BetaCacheMissUnavailable`
 
               - `Type Unavailable`
 
@@ -8817,7 +9020,7 @@ func main() {
               resulting shift is zero because there was nothing to move. `not_applied`:
               no reprice was applied; the arm's `reason` says why.
 
-              - `type BetaFallbackCreditRedeemed struct{…}`
+              - `type BetaFallbackCreditRedeemed`
 
                 The reprice was applied: the retry is billed as if the conversation
                 had been on the retry model all along.
@@ -8826,7 +9029,7 @@ func main() {
 
                   default: redeemed
 
-              - `type BetaFallbackCreditNotApplied struct{…}`
+              - `type BetaFallbackCreditNotApplied`
 
                 No reprice was applied; `reason` says why.
 
@@ -8898,7 +9101,7 @@ func main() {
 
             A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-            - `type BetaMessageIterationUsage struct{…}`
+            - `type BetaMessageIterationUsage`
 
               Token usage for a sampling iteration.
 
@@ -8942,7 +9145,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaCompactionIterationUsage struct{…}`
+            - `type BetaCompactionIterationUsage`
 
               Token usage for a compaction iteration.
 
@@ -8980,7 +9183,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaAdvisorMessageIterationUsage struct{…}`
+            - `type BetaAdvisorMessageIterationUsage`
 
               Token usage for an advisor sub-inference iteration.
 
@@ -9024,7 +9227,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaFallbackMessageIterationUsage struct{…}`
+            - `type BetaFallbackMessageIterationUsage`
 
               Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -9137,61 +9340,103 @@ func main() {
 
             - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-        - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+        - `InputTransformations []BetaInputTransformationUnion Optional`
 
-          Changes the API made to the request's input before showing it to the model:
-          one entry per change, in request order. Today the only entry type is
-          `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-          block from the request's `messages` that was removed from the prompt instead
-          of being shown to the model because it failed a binding check. More entry
-          types may be added over time; ignore types you do not recognize.
+          Changes the API made to the request's input before showing it to the model,
+          and blocks that failed a binding check but were left unchanged: one entry per
+          block, in request order. Two entry types today. `thinking_dropped` — a
+          `thinking`, `redacted_thinking` or `connector_text` block from the request's
+          `messages` that was removed from the prompt instead of being shown to the
+          model because it failed a binding check. `thinking_mismatch_allowed` — a
+          `thinking` or `redacted_thinking` block that failed the conversation check
+          (the conversation before it differs from the one it was created in, or it
+          carries no record of one on a model that requires it) and was shown to the
+          model all the same, because that check is not enforced for this request.
+          More entry types may be added over time; ignore types you do not recognize.
 
           Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
           every such response from a model that supports extended thinking, as `[]`
-          when nothing was changed; without the beta, blocks are removed all the same
-          but nothing is reported. Removed blocks contribute nothing to
-          `usage.input_tokens`. When streaming, the array is final in `message_start`;
-          the final `message_delta` event carries it only when a server-side model
-          fallback happened mid-stream, in which case it holds the serving model's
-          entries and replaces the one in `message_start`.
+          when there is no entry to report; without the beta, blocks are removed or
+          left in place all the same but nothing is reported. Removed blocks contribute
+          nothing to `usage.input_tokens`; blocks left in place count as sent. When
+          streaming, the array is final in `message_start`; the final `message_delta`
+          event carries it only when a server-side model fallback happened mid-stream,
+          in which case it holds the serving model's entries and replaces the one in
+          `message_start`.
 
-          - `Type ThinkingDropped`
+          - `type BetaThinkingDroppedInputTransformation`
 
-            Always `thinking_dropped` for this entry type.
+            - `Type ThinkingDropped`
 
-            default: thinking_dropped
+              Always `thinking_dropped` for this entry type.
 
-          - `Path string`
+              default: thinking_dropped
 
-            Where the removed block was in your request, as `messages.{i}.content.{j}`:
-            `i` indexes the `messages` array you sent and `j` that message's `content`
-            array — the same form error messages use.
+            - `Path string`
 
-          - `Reason BetaThinkingDroppedInputTransformationReason`
+              Where the removed block was in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
 
-            Which binding check removed the block: `model_binding_mismatch` — it was
-            created by a model whose reasoning the requested model may not read;
-            `prefix_binding_mismatch` — the conversation before it differs from the
-            conversation it was created in (the rest of that turn's consecutive thinking
-            blocks are removed with it, each with this reason);
-            `organization_binding_mismatch` — it was created under a different
-            organization (an Anthropic organization, AWS account or Google Cloud project)
-            and this organization is not one of its additional organizations;
-            `end_user_binding_mismatch` — it was created for a different end user, or
-            was removed by the consumer-organization binding. A block that would fail
-            several checks reports one reason, in this order of precedence:
-            `organization_binding_mismatch`, `end_user_binding_mismatch`,
-            `model_binding_mismatch`, `prefix_binding_mismatch`.
+            - `Reason BetaThinkingDroppedInputTransformationReason`
 
-            - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+              Which binding check removed the block: `model_binding_mismatch` — it was
+              created by a model whose reasoning the requested model may not read;
+              `prefix_binding_mismatch` — the conversation before it differs from the
+              conversation it was created in (the rest of that turn's consecutive thinking
+              blocks are removed with it, each with this reason);
+              `organization_binding_mismatch` — it was created under a different
+              organization (an Anthropic organization, AWS account or Google Cloud project)
+              and this organization is not one of its additional organizations;
+              `end_user_binding_mismatch` — it was created for a different end user, or
+              was removed by the consumer-organization binding. A block that would fail
+              several checks reports one reason, in this order of precedence:
+              `organization_binding_mismatch`, `end_user_binding_mismatch`,
+              `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-            - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
 
-    - `type BetaMessageBatchErroredResult struct{…}`
+              - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+          - `type BetaThinkingMismatchAllowedInputTransformation`
+
+            - `Type ThinkingMismatchAllowed`
+
+              Always `thinking_mismatch_allowed` for this entry type.
+
+              default: thinking_mismatch_allowed
+
+            - `Path string`
+
+              Where the block is in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
+
+            - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+              Which binding check the block failed; the block was shown to the model all
+              the same. Always `prefix_binding_mismatch` today — the conversation before
+              the block differs from the conversation it was created in, or the block
+              carries no record of one on a model that requires it. Were the check
+              enforced for this request, the block would have been removed or the request
+              rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+              takes the rest of that turn's consecutive thinking blocks, whereas here each
+              block is checked on its own, so `thinking_mismatch_allowed` entries are a
+              lower bound on what enforcement would remove.
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaMessageBatchErroredResult`
 
       - `Type Errored`
 
@@ -9205,7 +9450,7 @@ func main() {
 
         - `Error BetaErrorUnion`
 
-          - `type BetaInvalidRequestError struct{…}`
+          - `type BetaInvalidRequestError`
 
             - `Type InvalidRequestError`
 
@@ -9215,7 +9460,7 @@ func main() {
 
               default: Invalid request
 
-          - `type BetaAuthenticationError struct{…}`
+          - `type BetaAuthenticationError`
 
             - `Type AuthenticationError`
 
@@ -9225,7 +9470,7 @@ func main() {
 
               default: Authentication error
 
-          - `type BetaBillingError struct{…}`
+          - `type BetaBillingError`
 
             - `Type BillingError`
 
@@ -9235,7 +9480,7 @@ func main() {
 
               default: Billing error
 
-          - `type BetaPermissionError struct{…}`
+          - `type BetaPermissionError`
 
             - `Type PermissionError`
 
@@ -9245,7 +9490,7 @@ func main() {
 
               default: Permission denied
 
-          - `type BetaNotFoundError struct{…}`
+          - `type BetaNotFoundError`
 
             - `Type NotFoundError`
 
@@ -9255,7 +9500,7 @@ func main() {
 
               default: Not found
 
-          - `type BetaRateLimitError struct{…}`
+          - `type BetaRateLimitError`
 
             - `Type RateLimitError`
 
@@ -9265,7 +9510,7 @@ func main() {
 
               default: Rate limited
 
-          - `type BetaGatewayTimeoutError struct{…}`
+          - `type BetaGatewayTimeoutError`
 
             - `Type TimeoutError`
 
@@ -9275,7 +9520,7 @@ func main() {
 
               default: Request timeout
 
-          - `type BetaAPIError struct{…}`
+          - `type BetaAPIError`
 
             - `Type APIError`
 
@@ -9285,7 +9530,7 @@ func main() {
 
               default: Internal server error
 
-          - `type BetaOverloadedError struct{…}`
+          - `type BetaOverloadedError`
 
             - `Type OverloadedError`
 
@@ -9297,13 +9542,13 @@ func main() {
 
         - `RequestID string`
 
-    - `type BetaMessageBatchCanceledResult struct{…}`
+    - `type BetaMessageBatchCanceledResult`
 
       - `Type Canceled`
 
         default: canceled
 
-    - `type BetaMessageBatchExpiredResult struct{…}`
+    - `type BetaMessageBatchExpiredResult`
 
       - `Type Expired`
 
@@ -9311,7 +9556,7 @@ func main() {
 
 ### Beta Message Batch Request Counts
 
-- `type BetaMessageBatchRequestCounts struct{…}`
+- `type BetaMessageBatchRequestCounts`
 
   - `Canceled int64`
 
@@ -9359,7 +9604,7 @@ func main() {
 
   Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-  - `type BetaMessageBatchSucceededResult struct{…}`
+  - `type BetaMessageBatchSucceededResult`
 
     - `Type Succeeded`
 
@@ -9448,7 +9693,7 @@ func main() {
         [{"type": "text", "text": "B)"}]
         ```
 
-        - `type BetaTextBlock struct{…}`
+        - `type BetaTextBlock`
 
           - `Type Text`
 
@@ -9460,7 +9705,7 @@ func main() {
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `type BetaCitationCharLocation struct{…}`
+            - `type BetaCitationCharLocation`
 
               - `Type CharLocation`
 
@@ -9482,7 +9727,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaCitationPageLocation struct{…}`
+            - `type BetaCitationPageLocation`
 
               - `Type PageLocation`
 
@@ -9504,7 +9749,7 @@ func main() {
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocation struct{…}`
+            - `type BetaCitationContentBlockLocation`
 
               - `Type ContentBlockLocation`
 
@@ -9536,7 +9781,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaCitationsWebSearchResultLocation struct{…}`
+            - `type BetaCitationsWebSearchResultLocation`
 
               - `Type WebSearchResultLocation`
 
@@ -9552,7 +9797,7 @@ func main() {
 
               - `URL string`
 
-            - `type BetaCitationSearchResultLocation struct{…}`
+            - `type BetaCitationSearchResultLocation`
 
               - `Type SearchResultLocation`
 
@@ -9592,7 +9837,7 @@ func main() {
 
             minLength: 0
 
-        - `type BetaThinkingBlock struct{…}`
+        - `type BetaThinkingBlock`
 
           - `Type Thinking`
 
@@ -9610,7 +9855,7 @@ func main() {
 
             The text of Claude's thinking process for this block.
 
-        - `type BetaRedactedThinkingBlock struct{…}`
+        - `type BetaRedactedThinkingBlock`
 
           - `Type RedactedThinking`
 
@@ -9624,7 +9869,7 @@ func main() {
 
             See [extended thinking](../../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type BetaToolUseBlock struct{…}`
+        - `type BetaToolUseBlock`
 
           - `Type ToolUse`
 
@@ -9642,13 +9887,13 @@ func main() {
 
           - `Caller BetaToolUseBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -9658,7 +9903,7 @@ func main() {
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -9672,7 +9917,7 @@ func main() {
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlock struct{…}`
+        - `type BetaServerToolUseBlock`
 
           - `Type ServerToolUse`
 
@@ -9704,17 +9949,17 @@ func main() {
 
           - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlock struct{…}`
+        - `type BetaWebSearchToolResultBlock`
 
           - `Type WebSearchToolResult`
 
@@ -9722,7 +9967,7 @@ func main() {
 
           - `Content BetaWebSearchToolResultBlockContentUnion`
 
-            - `type BetaWebSearchToolResultError struct{…}`
+            - `type BetaWebSearchToolResultError`
 
               - `Type WebSearchToolResultError`
 
@@ -9762,17 +10007,17 @@ func main() {
 
           - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlock struct{…}`
+        - `type BetaWebFetchToolResultBlock`
 
           - `Type WebFetchToolResult`
 
@@ -9780,7 +10025,7 @@ func main() {
 
           - `Content BetaWebFetchToolResultBlockContentUnion`
 
-            - `type BetaWebFetchToolResultErrorBlock struct{…}`
+            - `type BetaWebFetchToolResultErrorBlock`
 
               - `Type WebFetchToolResultError`
 
@@ -9808,7 +10053,7 @@ func main() {
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlock struct{…}`
+            - `type BetaWebFetchBlock`
 
               - `Type WebFetchResult`
 
@@ -9830,7 +10075,7 @@ func main() {
 
                 - `Source BetaDocumentBlockSourceUnion`
 
-                  - `type BetaBase64PDFSource struct{…}`
+                  - `type BetaBase64PDFSource`
 
                     - `Type Base64`
 
@@ -9840,7 +10085,7 @@ func main() {
 
                     - `MediaType ApplicationPDF`
 
-                  - `type BetaPlainTextSource struct{…}`
+                  - `type BetaPlainTextSource`
 
                     - `Type Text`
 
@@ -9866,17 +10111,17 @@ func main() {
 
           - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlock struct{…}`
+        - `type BetaAdvisorToolResultBlock`
 
           - `Type AdvisorToolResult`
 
@@ -9884,7 +10129,7 @@ func main() {
 
           - `Content BetaAdvisorToolResultBlockContentUnion`
 
-            - `type BetaAdvisorToolResultError struct{…}`
+            - `type BetaAdvisorToolResultError`
 
               - `Type AdvisorToolResultError`
 
@@ -9906,7 +10151,7 @@ func main() {
 
                 - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlock struct{…}`
+            - `type BetaAdvisorResultBlock`
 
               - `Type AdvisorResult`
 
@@ -9918,7 +10163,7 @@ func main() {
 
               - `Text string`
 
-            - `type BetaAdvisorRedactedResultBlock struct{…}`
+            - `type BetaAdvisorRedactedResultBlock`
 
               - `Type AdvisorRedactedResult`
 
@@ -9936,7 +10181,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaCodeExecutionToolResultBlock struct{…}`
+        - `type BetaCodeExecutionToolResultBlock`
 
           - `Type CodeExecutionToolResult`
 
@@ -9944,7 +10189,7 @@ func main() {
 
           - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-            - `type BetaCodeExecutionToolResultError struct{…}`
+            - `type BetaCodeExecutionToolResultError`
 
               - `Type CodeExecutionToolResultError`
 
@@ -9960,7 +10205,7 @@ func main() {
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlock struct{…}`
+            - `type BetaCodeExecutionResultBlock`
 
               - `Type CodeExecutionResult`
 
@@ -9980,7 +10225,7 @@ func main() {
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+            - `type BetaEncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -10006,7 +10251,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+        - `type BetaBashCodeExecutionToolResultBlock`
 
           - `Type BashCodeExecutionToolResult`
 
@@ -10014,7 +10259,7 @@ func main() {
 
           - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-            - `type BetaBashCodeExecutionToolResultError struct{…}`
+            - `type BetaBashCodeExecutionToolResultError`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -10032,7 +10277,7 @@ func main() {
 
                 - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlock struct{…}`
+            - `type BetaBashCodeExecutionResultBlock`
 
               - `Type BashCodeExecutionResult`
 
@@ -10056,7 +10301,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultBlock`
 
           - `Type TextEditorCodeExecutionToolResult`
 
@@ -10064,7 +10309,7 @@ func main() {
 
           - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-            - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultError`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -10084,7 +10329,7 @@ func main() {
 
               - `ErrorMessage string`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+            - `type BetaTextEditorCodeExecutionViewResultBlock`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -10106,7 +10351,7 @@ func main() {
 
               - `TotalLines int64`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+            - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
@@ -10114,7 +10359,7 @@ func main() {
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -10134,7 +10379,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaToolSearchToolResultBlock struct{…}`
+        - `type BetaToolSearchToolResultBlock`
 
           - `Type ToolSearchToolResult`
 
@@ -10142,7 +10387,7 @@ func main() {
 
           - `Content BetaToolSearchToolResultBlockContentUnion`
 
-            - `type BetaToolSearchToolResultError struct{…}`
+            - `type BetaToolSearchToolResultError`
 
               - `Type ToolSearchToolResultError`
 
@@ -10160,7 +10405,7 @@ func main() {
 
               - `ErrorMessage string`
 
-            - `type BetaToolSearchToolSearchResultBlock struct{…}`
+            - `type BetaToolSearchToolSearchResultBlock`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -10180,7 +10425,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaMCPToolUseBlock struct{…}`
+        - `type BetaMCPToolUseBlock`
 
           - `Type MCPToolUse`
 
@@ -10200,7 +10445,7 @@ func main() {
 
             The name of the MCP server
 
-        - `type BetaMCPToolResultBlock struct{…}`
+        - `type BetaMCPToolResultBlock`
 
           - `Type MCPToolResult`
 
@@ -10234,7 +10479,7 @@ func main() {
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaContainerUploadBlock struct{…}`
+        - `type BetaContainerUploadBlock`
 
           Response model for a file uploaded to the container.
 
@@ -10244,7 +10489,7 @@ func main() {
 
           - `FileID string`
 
-        - `type BetaCompactionBlock struct{…}`
+        - `type BetaCompactionBlock`
 
           A compaction block returned when autocompact is triggered.
 
@@ -10264,7 +10509,11 @@ func main() {
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaFallbackBlock struct{…}`
+          - `Signature string Optional`
+
+            Signature over the summary, to be sent back with the block verbatim
+
+        - `type BetaFallbackBlock`
 
           Marks the point in `content` where one model's output gives way to the next.
 
@@ -10414,7 +10663,7 @@ func main() {
 
           List of context management edits that were applied.
 
-          - `type BetaClearToolUses20250919EditResponse struct{…}`
+          - `type BetaClearToolUses20250919EditResponse`
 
             - `Type ClearToolUses20250919`
 
@@ -10434,7 +10683,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaClearThinking20251015EditResponse struct{…}`
+          - `type BetaClearThinking20251015EditResponse`
 
             - `Type ClearThinking20251015`
 
@@ -10463,7 +10712,7 @@ func main() {
 
           Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-          - `type BetaCacheMissModelChanged struct{…}`
+          - `type BetaCacheMissModelChanged`
 
             - `Type ModelChanged`
 
@@ -10473,7 +10722,7 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissSystemChanged struct{…}`
+          - `type BetaCacheMissSystemChanged`
 
             - `Type SystemChanged`
 
@@ -10483,7 +10732,7 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissToolsChanged struct{…}`
+          - `type BetaCacheMissToolsChanged`
 
             - `Type ToolsChanged`
 
@@ -10493,7 +10742,7 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissMessagesChanged struct{…}`
+          - `type BetaCacheMissMessagesChanged`
 
             - `Type MessagesChanged`
 
@@ -10503,13 +10752,13 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+          - `type BetaCacheMissPreviousMessageNotFound`
 
             - `Type PreviousMessageNotFound`
 
               default: previous_message_not_found
 
-          - `type BetaCacheMissUnavailable struct{…}`
+          - `type BetaCacheMissUnavailable`
 
             - `Type Unavailable`
 
@@ -10707,7 +10956,7 @@ func main() {
             resulting shift is zero because there was nothing to move. `not_applied`:
             no reprice was applied; the arm's `reason` says why.
 
-            - `type BetaFallbackCreditRedeemed struct{…}`
+            - `type BetaFallbackCreditRedeemed`
 
               The reprice was applied: the retry is billed as if the conversation
               had been on the retry model all along.
@@ -10716,7 +10965,7 @@ func main() {
 
                 default: redeemed
 
-            - `type BetaFallbackCreditNotApplied struct{…}`
+            - `type BetaFallbackCreditNotApplied`
 
               No reprice was applied; `reason` says why.
 
@@ -10788,7 +11037,7 @@ func main() {
 
           A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-          - `type BetaMessageIterationUsage struct{…}`
+          - `type BetaMessageIterationUsage`
 
             Token usage for a sampling iteration.
 
@@ -10832,7 +11081,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCompactionIterationUsage struct{…}`
+          - `type BetaCompactionIterationUsage`
 
             Token usage for a compaction iteration.
 
@@ -10870,7 +11119,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaAdvisorMessageIterationUsage struct{…}`
+          - `type BetaAdvisorMessageIterationUsage`
 
             Token usage for an advisor sub-inference iteration.
 
@@ -10914,7 +11163,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaFallbackMessageIterationUsage struct{…}`
+          - `type BetaFallbackMessageIterationUsage`
 
             Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -11027,61 +11276,103 @@ func main() {
 
           - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-      - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+      - `InputTransformations []BetaInputTransformationUnion Optional`
 
-        Changes the API made to the request's input before showing it to the model:
-        one entry per change, in request order. Today the only entry type is
-        `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-        block from the request's `messages` that was removed from the prompt instead
-        of being shown to the model because it failed a binding check. More entry
-        types may be added over time; ignore types you do not recognize.
+        Changes the API made to the request's input before showing it to the model,
+        and blocks that failed a binding check but were left unchanged: one entry per
+        block, in request order. Two entry types today. `thinking_dropped` — a
+        `thinking`, `redacted_thinking` or `connector_text` block from the request's
+        `messages` that was removed from the prompt instead of being shown to the
+        model because it failed a binding check. `thinking_mismatch_allowed` — a
+        `thinking` or `redacted_thinking` block that failed the conversation check
+        (the conversation before it differs from the one it was created in, or it
+        carries no record of one on a model that requires it) and was shown to the
+        model all the same, because that check is not enforced for this request.
+        More entry types may be added over time; ignore types you do not recognize.
 
         Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
         every such response from a model that supports extended thinking, as `[]`
-        when nothing was changed; without the beta, blocks are removed all the same
-        but nothing is reported. Removed blocks contribute nothing to
-        `usage.input_tokens`. When streaming, the array is final in `message_start`;
-        the final `message_delta` event carries it only when a server-side model
-        fallback happened mid-stream, in which case it holds the serving model's
-        entries and replaces the one in `message_start`.
+        when there is no entry to report; without the beta, blocks are removed or
+        left in place all the same but nothing is reported. Removed blocks contribute
+        nothing to `usage.input_tokens`; blocks left in place count as sent. When
+        streaming, the array is final in `message_start`; the final `message_delta`
+        event carries it only when a server-side model fallback happened mid-stream,
+        in which case it holds the serving model's entries and replaces the one in
+        `message_start`.
 
-        - `Type ThinkingDropped`
+        - `type BetaThinkingDroppedInputTransformation`
 
-          Always `thinking_dropped` for this entry type.
+          - `Type ThinkingDropped`
 
-          default: thinking_dropped
+            Always `thinking_dropped` for this entry type.
 
-        - `Path string`
+            default: thinking_dropped
 
-          Where the removed block was in your request, as `messages.{i}.content.{j}`:
-          `i` indexes the `messages` array you sent and `j` that message's `content`
-          array — the same form error messages use.
+          - `Path string`
 
-        - `Reason BetaThinkingDroppedInputTransformationReason`
+            Where the removed block was in your request, as `messages.{i}.content.{j}`:
+            `i` indexes the `messages` array you sent and `j` that message's `content`
+            array — the same form error messages use.
 
-          Which binding check removed the block: `model_binding_mismatch` — it was
-          created by a model whose reasoning the requested model may not read;
-          `prefix_binding_mismatch` — the conversation before it differs from the
-          conversation it was created in (the rest of that turn's consecutive thinking
-          blocks are removed with it, each with this reason);
-          `organization_binding_mismatch` — it was created under a different
-          organization (an Anthropic organization, AWS account or Google Cloud project)
-          and this organization is not one of its additional organizations;
-          `end_user_binding_mismatch` — it was created for a different end user, or
-          was removed by the consumer-organization binding. A block that would fail
-          several checks reports one reason, in this order of precedence:
-          `organization_binding_mismatch`, `end_user_binding_mismatch`,
-          `model_binding_mismatch`, `prefix_binding_mismatch`.
+          - `Reason BetaThinkingDroppedInputTransformationReason`
 
-          - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+            Which binding check removed the block: `model_binding_mismatch` — it was
+            created by a model whose reasoning the requested model may not read;
+            `prefix_binding_mismatch` — the conversation before it differs from the
+            conversation it was created in (the rest of that turn's consecutive thinking
+            blocks are removed with it, each with this reason);
+            `organization_binding_mismatch` — it was created under a different
+            organization (an Anthropic organization, AWS account or Google Cloud project)
+            and this organization is not one of its additional organizations;
+            `end_user_binding_mismatch` — it was created for a different end user, or
+            was removed by the consumer-organization binding. A block that would fail
+            several checks reports one reason, in this order of precedence:
+            `organization_binding_mismatch`, `end_user_binding_mismatch`,
+            `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-          - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+            - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-          - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+            - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-          - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+            - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
 
-  - `type BetaMessageBatchErroredResult struct{…}`
+            - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+        - `type BetaThinkingMismatchAllowedInputTransformation`
+
+          - `Type ThinkingMismatchAllowed`
+
+            Always `thinking_mismatch_allowed` for this entry type.
+
+            default: thinking_mismatch_allowed
+
+          - `Path string`
+
+            Where the block is in your request, as `messages.{i}.content.{j}`:
+            `i` indexes the `messages` array you sent and `j` that message's `content`
+            array — the same form error messages use.
+
+          - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+            Which binding check the block failed; the block was shown to the model all
+            the same. Always `prefix_binding_mismatch` today — the conversation before
+            the block differs from the conversation it was created in, or the block
+            carries no record of one on a model that requires it. Were the check
+            enforced for this request, the block would have been removed or the request
+            rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+            takes the rest of that turn's consecutive thinking blocks, whereas here each
+            block is checked on its own, so `thinking_mismatch_allowed` entries are a
+            lower bound on what enforcement would remove.
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
+
+  - `type BetaMessageBatchErroredResult`
 
     - `Type Errored`
 
@@ -11095,7 +11386,7 @@ func main() {
 
       - `Error BetaErrorUnion`
 
-        - `type BetaInvalidRequestError struct{…}`
+        - `type BetaInvalidRequestError`
 
           - `Type InvalidRequestError`
 
@@ -11105,7 +11396,7 @@ func main() {
 
             default: Invalid request
 
-        - `type BetaAuthenticationError struct{…}`
+        - `type BetaAuthenticationError`
 
           - `Type AuthenticationError`
 
@@ -11115,7 +11406,7 @@ func main() {
 
             default: Authentication error
 
-        - `type BetaBillingError struct{…}`
+        - `type BetaBillingError`
 
           - `Type BillingError`
 
@@ -11125,7 +11416,7 @@ func main() {
 
             default: Billing error
 
-        - `type BetaPermissionError struct{…}`
+        - `type BetaPermissionError`
 
           - `Type PermissionError`
 
@@ -11135,7 +11426,7 @@ func main() {
 
             default: Permission denied
 
-        - `type BetaNotFoundError struct{…}`
+        - `type BetaNotFoundError`
 
           - `Type NotFoundError`
 
@@ -11145,7 +11436,7 @@ func main() {
 
             default: Not found
 
-        - `type BetaRateLimitError struct{…}`
+        - `type BetaRateLimitError`
 
           - `Type RateLimitError`
 
@@ -11155,7 +11446,7 @@ func main() {
 
             default: Rate limited
 
-        - `type BetaGatewayTimeoutError struct{…}`
+        - `type BetaGatewayTimeoutError`
 
           - `Type TimeoutError`
 
@@ -11165,7 +11456,7 @@ func main() {
 
             default: Request timeout
 
-        - `type BetaAPIError struct{…}`
+        - `type BetaAPIError`
 
           - `Type APIError`
 
@@ -11175,7 +11466,7 @@ func main() {
 
             default: Internal server error
 
-        - `type BetaOverloadedError struct{…}`
+        - `type BetaOverloadedError`
 
           - `Type OverloadedError`
 
@@ -11187,13 +11478,13 @@ func main() {
 
       - `RequestID string`
 
-  - `type BetaMessageBatchCanceledResult struct{…}`
+  - `type BetaMessageBatchCanceledResult`
 
     - `Type Canceled`
 
       default: canceled
 
-  - `type BetaMessageBatchExpiredResult struct{…}`
+  - `type BetaMessageBatchExpiredResult`
 
     - `Type Expired`
 
@@ -11201,7 +11492,7 @@ func main() {
 
 ### Beta Message Batch Succeeded Result
 
-- `type BetaMessageBatchSucceededResult struct{…}`
+- `type BetaMessageBatchSucceededResult`
 
   - `Type Succeeded`
 
@@ -11290,7 +11581,7 @@ func main() {
       [{"type": "text", "text": "B)"}]
       ```
 
-      - `type BetaTextBlock struct{…}`
+      - `type BetaTextBlock`
 
         - `Type Text`
 
@@ -11302,7 +11593,7 @@ func main() {
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `type BetaCitationCharLocation struct{…}`
+          - `type BetaCitationCharLocation`
 
             - `Type CharLocation`
 
@@ -11324,7 +11615,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationPageLocation struct{…}`
+          - `type BetaCitationPageLocation`
 
             - `Type PageLocation`
 
@@ -11346,7 +11637,7 @@ func main() {
 
               minimum: 1
 
-          - `type BetaCitationContentBlockLocation struct{…}`
+          - `type BetaCitationContentBlockLocation`
 
             - `Type ContentBlockLocation`
 
@@ -11378,7 +11669,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationsWebSearchResultLocation struct{…}`
+          - `type BetaCitationsWebSearchResultLocation`
 
             - `Type WebSearchResultLocation`
 
@@ -11394,7 +11685,7 @@ func main() {
 
             - `URL string`
 
-          - `type BetaCitationSearchResultLocation struct{…}`
+          - `type BetaCitationSearchResultLocation`
 
             - `Type SearchResultLocation`
 
@@ -11434,7 +11725,7 @@ func main() {
 
           minLength: 0
 
-      - `type BetaThinkingBlock struct{…}`
+      - `type BetaThinkingBlock`
 
         - `Type Thinking`
 
@@ -11452,7 +11743,7 @@ func main() {
 
           The text of Claude's thinking process for this block.
 
-      - `type BetaRedactedThinkingBlock struct{…}`
+      - `type BetaRedactedThinkingBlock`
 
         - `Type RedactedThinking`
 
@@ -11466,7 +11757,7 @@ func main() {
 
           See [extended thinking](../../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type BetaToolUseBlock struct{…}`
+      - `type BetaToolUseBlock`
 
         - `Type ToolUse`
 
@@ -11484,13 +11775,13 @@ func main() {
 
         - `Caller BetaToolUseBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
             - `Type Direct`
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -11500,7 +11791,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
             - `Type CodeExecution20260120`
 
@@ -11514,7 +11805,7 @@ func main() {
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type BetaServerToolUseBlock struct{…}`
+      - `type BetaServerToolUseBlock`
 
         - `Type ServerToolUse`
 
@@ -11546,17 +11837,17 @@ func main() {
 
         - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaWebSearchToolResultBlock struct{…}`
+      - `type BetaWebSearchToolResultBlock`
 
         - `Type WebSearchToolResult`
 
@@ -11564,7 +11855,7 @@ func main() {
 
         - `Content BetaWebSearchToolResultBlockContentUnion`
 
-          - `type BetaWebSearchToolResultError struct{…}`
+          - `type BetaWebSearchToolResultError`
 
             - `Type WebSearchToolResultError`
 
@@ -11604,17 +11895,17 @@ func main() {
 
         - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaWebFetchToolResultBlock struct{…}`
+      - `type BetaWebFetchToolResultBlock`
 
         - `Type WebFetchToolResult`
 
@@ -11622,7 +11913,7 @@ func main() {
 
         - `Content BetaWebFetchToolResultBlockContentUnion`
 
-          - `type BetaWebFetchToolResultErrorBlock struct{…}`
+          - `type BetaWebFetchToolResultErrorBlock`
 
             - `Type WebFetchToolResultError`
 
@@ -11650,7 +11941,7 @@ func main() {
 
               - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-          - `type BetaWebFetchBlock struct{…}`
+          - `type BetaWebFetchBlock`
 
             - `Type WebFetchResult`
 
@@ -11672,7 +11963,7 @@ func main() {
 
               - `Source BetaDocumentBlockSourceUnion`
 
-                - `type BetaBase64PDFSource struct{…}`
+                - `type BetaBase64PDFSource`
 
                   - `Type Base64`
 
@@ -11682,7 +11973,7 @@ func main() {
 
                   - `MediaType ApplicationPDF`
 
-                - `type BetaPlainTextSource struct{…}`
+                - `type BetaPlainTextSource`
 
                   - `Type Text`
 
@@ -11708,17 +11999,17 @@ func main() {
 
         - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaAdvisorToolResultBlock struct{…}`
+      - `type BetaAdvisorToolResultBlock`
 
         - `Type AdvisorToolResult`
 
@@ -11726,7 +12017,7 @@ func main() {
 
         - `Content BetaAdvisorToolResultBlockContentUnion`
 
-          - `type BetaAdvisorToolResultError struct{…}`
+          - `type BetaAdvisorToolResultError`
 
             - `Type AdvisorToolResultError`
 
@@ -11748,7 +12039,7 @@ func main() {
 
               - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-          - `type BetaAdvisorResultBlock struct{…}`
+          - `type BetaAdvisorResultBlock`
 
             - `Type AdvisorResult`
 
@@ -11760,7 +12051,7 @@ func main() {
 
             - `Text string`
 
-          - `type BetaAdvisorRedactedResultBlock struct{…}`
+          - `type BetaAdvisorRedactedResultBlock`
 
             - `Type AdvisorRedactedResult`
 
@@ -11778,7 +12069,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaCodeExecutionToolResultBlock struct{…}`
+      - `type BetaCodeExecutionToolResultBlock`
 
         - `Type CodeExecutionToolResult`
 
@@ -11786,7 +12077,7 @@ func main() {
 
         - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-          - `type BetaCodeExecutionToolResultError struct{…}`
+          - `type BetaCodeExecutionToolResultError`
 
             - `Type CodeExecutionToolResultError`
 
@@ -11802,7 +12093,7 @@ func main() {
 
               - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-          - `type BetaCodeExecutionResultBlock struct{…}`
+          - `type BetaCodeExecutionResultBlock`
 
             - `Type CodeExecutionResult`
 
@@ -11822,7 +12113,7 @@ func main() {
 
             - `Stdout string`
 
-          - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+          - `type BetaEncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -11848,7 +12139,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+      - `type BetaBashCodeExecutionToolResultBlock`
 
         - `Type BashCodeExecutionToolResult`
 
@@ -11856,7 +12147,7 @@ func main() {
 
         - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-          - `type BetaBashCodeExecutionToolResultError struct{…}`
+          - `type BetaBashCodeExecutionToolResultError`
 
             - `Type BashCodeExecutionToolResultError`
 
@@ -11874,7 +12165,7 @@ func main() {
 
               - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-          - `type BetaBashCodeExecutionResultBlock struct{…}`
+          - `type BetaBashCodeExecutionResultBlock`
 
             - `Type BashCodeExecutionResult`
 
@@ -11898,7 +12189,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultBlock`
 
         - `Type TextEditorCodeExecutionToolResult`
 
@@ -11906,7 +12197,7 @@ func main() {
 
         - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-          - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+          - `type BetaTextEditorCodeExecutionToolResultError`
 
             - `Type TextEditorCodeExecutionToolResultError`
 
@@ -11926,7 +12217,7 @@ func main() {
 
             - `ErrorMessage string`
 
-          - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionViewResultBlock`
 
             - `Type TextEditorCodeExecutionViewResult`
 
@@ -11948,7 +12239,7 @@ func main() {
 
             - `TotalLines int64`
 
-          - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
             - `Type TextEditorCodeExecutionCreateResult`
 
@@ -11956,7 +12247,7 @@ func main() {
 
             - `IsFileUpdate bool`
 
-          - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
             - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -11976,7 +12267,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaToolSearchToolResultBlock struct{…}`
+      - `type BetaToolSearchToolResultBlock`
 
         - `Type ToolSearchToolResult`
 
@@ -11984,7 +12275,7 @@ func main() {
 
         - `Content BetaToolSearchToolResultBlockContentUnion`
 
-          - `type BetaToolSearchToolResultError struct{…}`
+          - `type BetaToolSearchToolResultError`
 
             - `Type ToolSearchToolResultError`
 
@@ -12002,7 +12293,7 @@ func main() {
 
             - `ErrorMessage string`
 
-          - `type BetaToolSearchToolSearchResultBlock struct{…}`
+          - `type BetaToolSearchToolSearchResultBlock`
 
             - `Type ToolSearchToolSearchResult`
 
@@ -12022,7 +12313,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaMCPToolUseBlock struct{…}`
+      - `type BetaMCPToolUseBlock`
 
         - `Type MCPToolUse`
 
@@ -12042,7 +12333,7 @@ func main() {
 
           The name of the MCP server
 
-      - `type BetaMCPToolResultBlock struct{…}`
+      - `type BetaMCPToolResultBlock`
 
         - `Type MCPToolResult`
 
@@ -12076,7 +12367,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type BetaContainerUploadBlock struct{…}`
+      - `type BetaContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
@@ -12086,7 +12377,7 @@ func main() {
 
         - `FileID string`
 
-      - `type BetaCompactionBlock struct{…}`
+      - `type BetaCompactionBlock`
 
         A compaction block returned when autocompact is triggered.
 
@@ -12106,7 +12397,11 @@ func main() {
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `type BetaFallbackBlock struct{…}`
+        - `Signature string Optional`
+
+          Signature over the summary, to be sent back with the block verbatim
+
+      - `type BetaFallbackBlock`
 
         Marks the point in `content` where one model's output gives way to the next.
 
@@ -12256,7 +12551,7 @@ func main() {
 
         List of context management edits that were applied.
 
-        - `type BetaClearToolUses20250919EditResponse struct{…}`
+        - `type BetaClearToolUses20250919EditResponse`
 
           - `Type ClearToolUses20250919`
 
@@ -12276,7 +12571,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaClearThinking20251015EditResponse struct{…}`
+        - `type BetaClearThinking20251015EditResponse`
 
           - `Type ClearThinking20251015`
 
@@ -12305,7 +12600,7 @@ func main() {
 
         Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-        - `type BetaCacheMissModelChanged struct{…}`
+        - `type BetaCacheMissModelChanged`
 
           - `Type ModelChanged`
 
@@ -12315,7 +12610,7 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissSystemChanged struct{…}`
+        - `type BetaCacheMissSystemChanged`
 
           - `Type SystemChanged`
 
@@ -12325,7 +12620,7 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissToolsChanged struct{…}`
+        - `type BetaCacheMissToolsChanged`
 
           - `Type ToolsChanged`
 
@@ -12335,7 +12630,7 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissMessagesChanged struct{…}`
+        - `type BetaCacheMissMessagesChanged`
 
           - `Type MessagesChanged`
 
@@ -12345,13 +12640,13 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+        - `type BetaCacheMissPreviousMessageNotFound`
 
           - `Type PreviousMessageNotFound`
 
             default: previous_message_not_found
 
-        - `type BetaCacheMissUnavailable struct{…}`
+        - `type BetaCacheMissUnavailable`
 
           - `Type Unavailable`
 
@@ -12549,7 +12844,7 @@ func main() {
           resulting shift is zero because there was nothing to move. `not_applied`:
           no reprice was applied; the arm's `reason` says why.
 
-          - `type BetaFallbackCreditRedeemed struct{…}`
+          - `type BetaFallbackCreditRedeemed`
 
             The reprice was applied: the retry is billed as if the conversation
             had been on the retry model all along.
@@ -12558,7 +12853,7 @@ func main() {
 
               default: redeemed
 
-          - `type BetaFallbackCreditNotApplied struct{…}`
+          - `type BetaFallbackCreditNotApplied`
 
             No reprice was applied; `reason` says why.
 
@@ -12630,7 +12925,7 @@ func main() {
 
         A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-        - `type BetaMessageIterationUsage struct{…}`
+        - `type BetaMessageIterationUsage`
 
           Token usage for a sampling iteration.
 
@@ -12674,7 +12969,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCompactionIterationUsage struct{…}`
+        - `type BetaCompactionIterationUsage`
 
           Token usage for a compaction iteration.
 
@@ -12712,7 +13007,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaAdvisorMessageIterationUsage struct{…}`
+        - `type BetaAdvisorMessageIterationUsage`
 
           Token usage for an advisor sub-inference iteration.
 
@@ -12756,7 +13051,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaFallbackMessageIterationUsage struct{…}`
+        - `type BetaFallbackMessageIterationUsage`
 
           Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -12869,59 +13164,101 @@ func main() {
 
         - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-    - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+    - `InputTransformations []BetaInputTransformationUnion Optional`
 
-      Changes the API made to the request's input before showing it to the model:
-      one entry per change, in request order. Today the only entry type is
-      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-      block from the request's `messages` that was removed from the prompt instead
-      of being shown to the model because it failed a binding check. More entry
-      types may be added over time; ignore types you do not recognize.
+      Changes the API made to the request's input before showing it to the model,
+      and blocks that failed a binding check but were left unchanged: one entry per
+      block, in request order. Two entry types today. `thinking_dropped` — a
+      `thinking`, `redacted_thinking` or `connector_text` block from the request's
+      `messages` that was removed from the prompt instead of being shown to the
+      model because it failed a binding check. `thinking_mismatch_allowed` — a
+      `thinking` or `redacted_thinking` block that failed the conversation check
+      (the conversation before it differs from the one it was created in, or it
+      carries no record of one on a model that requires it) and was shown to the
+      model all the same, because that check is not enforced for this request.
+      More entry types may be added over time; ignore types you do not recognize.
 
       Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
       every such response from a model that supports extended thinking, as `[]`
-      when nothing was changed; without the beta, blocks are removed all the same
-      but nothing is reported. Removed blocks contribute nothing to
-      `usage.input_tokens`. When streaming, the array is final in `message_start`;
-      the final `message_delta` event carries it only when a server-side model
-      fallback happened mid-stream, in which case it holds the serving model's
-      entries and replaces the one in `message_start`.
+      when there is no entry to report; without the beta, blocks are removed or
+      left in place all the same but nothing is reported. Removed blocks contribute
+      nothing to `usage.input_tokens`; blocks left in place count as sent. When
+      streaming, the array is final in `message_start`; the final `message_delta`
+      event carries it only when a server-side model fallback happened mid-stream,
+      in which case it holds the serving model's entries and replaces the one in
+      `message_start`.
 
-      - `Type ThinkingDropped`
+      - `type BetaThinkingDroppedInputTransformation`
 
-        Always `thinking_dropped` for this entry type.
+        - `Type ThinkingDropped`
 
-        default: thinking_dropped
+          Always `thinking_dropped` for this entry type.
 
-      - `Path string`
+          default: thinking_dropped
 
-        Where the removed block was in your request, as `messages.{i}.content.{j}`:
-        `i` indexes the `messages` array you sent and `j` that message's `content`
-        array — the same form error messages use.
+        - `Path string`
 
-      - `Reason BetaThinkingDroppedInputTransformationReason`
+          Where the removed block was in your request, as `messages.{i}.content.{j}`:
+          `i` indexes the `messages` array you sent and `j` that message's `content`
+          array — the same form error messages use.
 
-        Which binding check removed the block: `model_binding_mismatch` — it was
-        created by a model whose reasoning the requested model may not read;
-        `prefix_binding_mismatch` — the conversation before it differs from the
-        conversation it was created in (the rest of that turn's consecutive thinking
-        blocks are removed with it, each with this reason);
-        `organization_binding_mismatch` — it was created under a different
-        organization (an Anthropic organization, AWS account or Google Cloud project)
-        and this organization is not one of its additional organizations;
-        `end_user_binding_mismatch` — it was created for a different end user, or
-        was removed by the consumer-organization binding. A block that would fail
-        several checks reports one reason, in this order of precedence:
-        `organization_binding_mismatch`, `end_user_binding_mismatch`,
-        `model_binding_mismatch`, `prefix_binding_mismatch`.
+        - `Reason BetaThinkingDroppedInputTransformationReason`
 
-        - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+          Which binding check removed the block: `model_binding_mismatch` — it was
+          created by a model whose reasoning the requested model may not read;
+          `prefix_binding_mismatch` — the conversation before it differs from the
+          conversation it was created in (the rest of that turn's consecutive thinking
+          blocks are removed with it, each with this reason);
+          `organization_binding_mismatch` — it was created under a different
+          organization (an Anthropic organization, AWS account or Google Cloud project)
+          and this organization is not one of its additional organizations;
+          `end_user_binding_mismatch` — it was created for a different end user, or
+          was removed by the consumer-organization binding. A block that would fail
+          several checks reports one reason, in this order of precedence:
+          `organization_binding_mismatch`, `end_user_binding_mismatch`,
+          `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-        - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+          - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-        - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+          - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-        - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+          - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+
+          - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+      - `type BetaThinkingMismatchAllowedInputTransformation`
+
+        - `Type ThinkingMismatchAllowed`
+
+          Always `thinking_mismatch_allowed` for this entry type.
+
+          default: thinking_mismatch_allowed
+
+        - `Path string`
+
+          Where the block is in your request, as `messages.{i}.content.{j}`:
+          `i` indexes the `messages` array you sent and `j` that message's `content`
+          array — the same form error messages use.
+
+        - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+          Which binding check the block failed; the block was shown to the model all
+          the same. Always `prefix_binding_mismatch` today — the conversation before
+          the block differs from the conversation it was created in, or the block
+          carries no record of one on a model that requires it. Were the check
+          enforced for this request, the block would have been removed or the request
+          rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+          takes the rest of that turn's consecutive thinking blocks, whereas here each
+          block is checked on its own, so `thinking_mismatch_allowed` entries are a
+          lower bound on what enforcement would remove.
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
 
 ---
 

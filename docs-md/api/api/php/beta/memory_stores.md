@@ -37,7 +37,7 @@ Create a memory store
 
 ### Returns
 
-- `BetaManagedAgentsMemoryStore`
+- `class BetaManagedAgentsMemoryStore`
 
   - `Type type`
 
@@ -144,7 +144,7 @@ List memory stores
 
 ### Returns
 
-- `BetaManagedAgentsMemoryStore`
+- `class BetaManagedAgentsMemoryStore`
 
   - `Type type`
 
@@ -240,7 +240,7 @@ Retrieve a memory store
 
 ### Returns
 
-- `BetaManagedAgentsMemoryStore`
+- `class BetaManagedAgentsMemoryStore`
 
   - `Type type`
 
@@ -339,7 +339,7 @@ Update a memory store
 
 ### Returns
 
-- `BetaManagedAgentsMemoryStore`
+- `class BetaManagedAgentsMemoryStore`
 
   - `Type type`
 
@@ -429,7 +429,7 @@ Delete a memory store
 
 ### Returns
 
-- `BetaManagedAgentsDeletedMemoryStore`
+- `class BetaManagedAgentsDeletedMemoryStore`
 
   - `Type type`
 
@@ -484,7 +484,7 @@ Archive a memory store
 
 ### Returns
 
-- `BetaManagedAgentsMemoryStore`
+- `class BetaManagedAgentsMemoryStore`
 
   - `Type type`
 
@@ -555,7 +555,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 ### Beta Managed Agents Deleted Memory Store
 
-- `BetaManagedAgentsDeletedMemoryStore`
+- `class BetaManagedAgentsDeletedMemoryStore`
 
   - `Type type`
 
@@ -565,7 +565,7 @@ var_dump($betaManagedAgentsMemoryStore);
 
 ### Beta Managed Agents Memory Store
 
-- `BetaManagedAgentsMemoryStore`
+- `class BetaManagedAgentsMemoryStore`
 
   - `Type type`
 
@@ -631,7 +631,7 @@ Create a memory
 
 #### Returns
 
-- `ManagedAgentsMemory`
+- `class ManagedAgentsMemory`
 
   - `Type type`
 
@@ -749,9 +749,9 @@ List memories
 
 #### Returns
 
-- `ManagedAgentsMemoryListItem`
+- `class ManagedAgentsMemoryListItem`
 
-  - `ManagedAgentsMemory`
+  - `class ManagedAgentsMemory`
 
     - `Type type`
 
@@ -791,7 +791,7 @@ List memories
 
       The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-  - `ManagedAgentsMemoryPrefix`
+  - `class ManagedAgentsMemoryPrefix`
 
     - `Type type`
 
@@ -870,7 +870,7 @@ Retrieve a memory
 
 #### Returns
 
-- `ManagedAgentsMemory`
+- `class ManagedAgentsMemory`
 
   - `Type type`
 
@@ -985,7 +985,7 @@ Update a memory
 
 #### Returns
 
-- `ManagedAgentsMemory`
+- `class ManagedAgentsMemory`
 
   - `Type type`
 
@@ -1093,7 +1093,7 @@ Delete a memory
 
 #### Returns
 
-- `ManagedAgentsDeletedMemory`
+- `class ManagedAgentsDeletedMemory`
 
   - `Type type`
 
@@ -1192,7 +1192,7 @@ List memory versions
 
 #### Returns
 
-- `ManagedAgentsMemoryVersion`
+- `class ManagedAgentsMemoryVersion`
 
   - `Type type`
 
@@ -1329,7 +1329,7 @@ Retrieve a memory version
 
 #### Returns
 
-- `ManagedAgentsMemoryVersion`
+- `class ManagedAgentsMemoryVersion`
 
   - `Type type`
 
@@ -1453,7 +1453,7 @@ Redact a memory version
 
 #### Returns
 
-- `ManagedAgentsMemoryVersion`
+- `class ManagedAgentsMemoryVersion`
 
   - `Type type`
 

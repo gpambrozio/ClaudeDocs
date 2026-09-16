@@ -37,7 +37,7 @@ Create Credential
 
 ## Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 

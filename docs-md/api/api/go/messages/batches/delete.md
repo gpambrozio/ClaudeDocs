@@ -33,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ## Returns
 
-- `type DeletedMessageBatch struct{…}`
+- `type DeletedMessageBatch`
 
   - `Type MessageBatchDeleted`
 

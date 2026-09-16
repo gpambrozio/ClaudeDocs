@@ -131,11 +131,13 @@ The Models API response can be used to determine which models are available for 
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class ModelInfo:`
+- `class ModelInfo`
 
   - `JsonValue type = "model"`
 
@@ -479,11 +481,13 @@ The Models API response can be used to determine information about a specific mo
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class ModelInfo:`
+- `class ModelInfo`
 
   - `JsonValue type = "model"`
 
@@ -712,7 +716,7 @@ public final class Main {
 
 ### Capability Support
 
-- `class CapabilitySupport:`
+- `class CapabilitySupport`
 
   Indicates whether a capability is supported.
 
@@ -722,7 +726,7 @@ public final class Main {
 
 ### Context Management Capability
 
-- `class ContextManagementCapability:`
+- `class ContextManagementCapability`
 
   Context management capability details.
 
@@ -748,7 +752,7 @@ public final class Main {
 
 ### Effort Capability
 
-- `class EffortCapability:`
+- `class EffortCapability`
 
   Effort (reasoning_effort) capability details.
 
@@ -782,7 +786,7 @@ public final class Main {
 
 ### Model Capabilities
 
-- `class ModelCapabilities:`
+- `class ModelCapabilities`
 
   Model capability information.
 
@@ -884,7 +888,7 @@ public final class Main {
 
 ### Model Info
 
-- `class ModelInfo:`
+- `class ModelInfo`
 
   - `JsonValue type = "model"`
 
@@ -1016,7 +1020,7 @@ public final class Main {
 
 ### Thinking Capability
 
-- `class ThinkingCapability:`
+- `class ThinkingCapability`
 
   Thinking capability details.
 
@@ -1042,7 +1046,7 @@ public final class Main {
 
 ### Thinking Types
 
-- `class ThinkingTypes:`
+- `class ThinkingTypes`
 
   Supported thinking type configurations.
 

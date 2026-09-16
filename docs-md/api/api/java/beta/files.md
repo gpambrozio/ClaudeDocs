@@ -113,6 +113,8 @@ Upload File
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
   - `String file`
@@ -129,7 +131,7 @@ Upload File
 
 ### Returns
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonValue type = "file"`
 
@@ -359,11 +361,13 @@ List Files
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonValue type = "file"`
 
@@ -578,6 +582,8 @@ Download File
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Example
@@ -711,11 +717,13 @@ Get File Metadata
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonValue type = "file"`
 
@@ -925,11 +933,13 @@ Delete File
 
     - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
   - `Optional<String> workspaceId`
 
 ### Returns
 
-- `class BetaDeletedFile:`
+- `class BetaDeletedFile`
 
   - `Optional<Type> type`
 
@@ -975,7 +985,7 @@ public final class Main {
 
 ### Beta Deleted File
 
-- `class BetaDeletedFile:`
+- `class BetaDeletedFile`
 
   - `Optional<Type> type`
 
@@ -989,7 +999,7 @@ public final class Main {
 
 ### Beta File Metadata
 
-- `class BetaFileMetadata:`
+- `class BetaFileMetadata`
 
   - `JsonValue type = "file"`
 
@@ -1051,7 +1061,7 @@ public final class Main {
 
 ### Beta File Scope
 
-- `class BetaFileScope:`
+- `class BetaFileScope`
 
   - `JsonValue type = "session"`
 

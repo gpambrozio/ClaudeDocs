@@ -112,7 +112,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           - `Array<ContentBlockParam>`
 
-            - `TextBlockParam`
+            - `interface TextBlockParam`
 
               - `type: "text"`
 
@@ -143,7 +143,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `citations?: Array<TextCitationParam> | null`
 
-                - `CitationCharLocationParam`
+                - `interface CitationCharLocationParam`
 
                   - `type: "char_location"`
 
@@ -163,7 +163,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minimum: 0
 
-                - `CitationPageLocationParam`
+                - `interface CitationPageLocationParam`
 
                   - `type: "page_location"`
 
@@ -183,7 +183,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minimum: 1
 
-                - `CitationContentBlockLocationParam`
+                - `interface CitationContentBlockLocationParam`
 
                   - `type: "content_block_location"`
 
@@ -213,7 +213,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minimum: 0
 
-                - `CitationWebSearchResultLocationParam`
+                - `interface CitationWebSearchResultLocationParam`
 
                   - `type: "web_search_result_location"`
 
@@ -229,7 +229,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minLength: 1
 
-                - `CitationSearchResultLocationParam`
+                - `interface CitationSearchResultLocationParam`
 
                   - `type: "search_result_location"`
 
@@ -263,13 +263,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `title: string | null`
 
-            - `ImageBlockParam`
+            - `interface ImageBlockParam`
 
               - `type: "image"`
 
               - `source: Base64ImageSource | URLImageSource | FileImageSource`
 
-                - `Base64ImageSource`
+                - `interface Base64ImageSource`
 
                   - `type: "base64"`
 
@@ -287,13 +287,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `"image/webp"`
 
-                - `URLImageSource`
+                - `interface URLImageSource`
 
                   - `type: "url"`
 
                   - `url: string`
 
-                - `FileImageSource`
+                - `interface FileImageSource`
 
                   - `type: "file"`
 
@@ -315,13 +315,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `"error"`
 
-            - `DocumentBlockParam`
+            - `interface DocumentBlockParam`
 
               - `type: "document"`
 
               - `source: Base64PDFSource | PlainTextSource | ContentBlockSource | 2 more`
 
-                - `Base64PDFSource`
+                - `interface Base64PDFSource`
 
                   - `type: "base64"`
 
@@ -331,7 +331,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `media_type: "application/pdf"`
 
-                - `PlainTextSource`
+                - `interface PlainTextSource`
 
                   - `type: "text"`
 
@@ -339,7 +339,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `media_type: "text/plain"`
 
-                - `ContentBlockSource`
+                - `interface ContentBlockSource`
 
                   - `type: "content"`
 
@@ -349,17 +349,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `Array<ContentBlockSourceContent>`
 
-                      - `TextBlockParam`
+                      - `interface TextBlockParam`
 
-                      - `ImageBlockParam`
+                      - `interface ImageBlockParam`
 
-                - `URLPDFSource`
+                - `interface URLPDFSource`
 
                   - `type: "url"`
 
                   - `url: string`
 
-                - `FileDocumentSource`
+                - `interface FileDocumentSource`
 
                   - `type: "file"`
 
@@ -381,7 +381,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 maxLength: 500, minLength: 1
 
-            - `SearchResultBlockParam`
+            - `interface SearchResultBlockParam`
 
               - `type: "search_result"`
 
@@ -409,7 +409,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `citations?: CitationsConfigParam`
 
-            - `ThinkingBlockParam`
+            - `interface ThinkingBlockParam`
 
               - `type: "thinking"`
 
@@ -423,7 +423,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 The `thinking` text of this block as returned by the API.
 
-            - `RedactedThinkingBlockParam`
+            - `interface RedactedThinkingBlockParam`
 
               - `type: "redacted_thinking"`
 
@@ -431,7 +431,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `ToolUseBlockParam`
+            - `interface ToolUseBlockParam`
 
               - `type: "tool_use"`
 
@@ -451,13 +451,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `type: "direct"`
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -467,7 +467,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
                   - `type: "code_execution_20260120"`
 
@@ -481,7 +481,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `ToolResultBlockParam`
+            - `interface ToolResultBlockParam`
 
               - `type: "tool_result"`
 
@@ -499,15 +499,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `Array<TextBlockParam | ImageBlockParam | SearchResultBlockParam | 3 more>`
 
-                  - `TextBlockParam`
+                  - `interface TextBlockParam`
 
-                  - `ImageBlockParam`
+                  - `interface ImageBlockParam`
 
-                  - `SearchResultBlockParam`
+                  - `interface SearchResultBlockParam`
 
-                  - `DocumentBlockParam`
+                  - `interface DocumentBlockParam`
 
-                  - `ToolReferenceBlockParam`
+                  - `interface ToolReferenceBlockParam`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -521,7 +521,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                       Create a cache control breakpoint at this content block.
 
-                  - `BrowserStateBlockParam`
+                  - `interface BrowserStateBlockParam`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -571,7 +571,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                       maxItems: 200, minItems: 1
 
-                      - `BrowserStateChangeTabOpened`
+                      - `interface BrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -589,7 +589,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `BrowserStateChangeDownloadStarted`
+                      - `interface BrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -607,7 +607,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `BrowserStateChangeDownloadCompleted`
+                      - `interface BrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -640,7 +640,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           minimum: 0
 
-                      - `BrowserStateChangeDownloadFailed`
+                      - `interface BrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -672,7 +672,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `ServerToolUseBlockParam`
+            - `interface ServerToolUseBlockParam`
 
               - `type: "server_tool_use"`
 
@@ -704,17 +704,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
-            - `WebSearchToolResultBlockParam`
+            - `interface WebSearchToolResultBlockParam`
 
               - `type: "web_search_tool_result"`
 
@@ -732,7 +732,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `page_age?: string | null`
 
-                - `WebSearchToolRequestError`
+                - `interface WebSearchToolRequestError`
 
                   - `type: "web_search_tool_result_error"`
 
@@ -760,23 +760,23 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
-            - `WebFetchToolResultBlockParam`
+            - `interface WebFetchToolResultBlockParam`
 
               - `type: "web_fetch_tool_result"`
 
               - `content: WebFetchToolResultErrorBlockParam | WebFetchBlockParam`
 
-                - `WebFetchToolResultErrorBlockParam`
+                - `interface WebFetchToolResultErrorBlockParam`
 
                   - `type: "web_fetch_tool_result_error"`
 
@@ -802,7 +802,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `"content_too_large"`
 
-                - `WebFetchBlockParam`
+                - `interface WebFetchBlockParam`
 
                   - `type: "web_fetch_result"`
 
@@ -826,23 +826,23 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `caller?: DirectCaller | ServerToolCaller | ServerToolCaller20260120`
 
-                - `DirectCaller`
+                - `interface DirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `ServerToolCaller`
+                - `interface ServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `ServerToolCaller20260120`
+                - `interface ServerToolCaller20260120`
 
-            - `CodeExecutionToolResultBlockParam`
+            - `interface CodeExecutionToolResultBlockParam`
 
               - `type: "code_execution_tool_result"`
 
               - `content: CodeExecutionToolResultBlockParamContent`
 
-                - `CodeExecutionToolResultErrorParam`
+                - `interface CodeExecutionToolResultErrorParam`
 
                   - `type: "code_execution_tool_result_error"`
 
@@ -856,7 +856,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `"execution_time_exceeded"`
 
-                - `CodeExecutionResultBlockParam`
+                - `interface CodeExecutionResultBlockParam`
 
                   - `type: "code_execution_result"`
 
@@ -872,7 +872,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `stdout: string`
 
-                - `EncryptedCodeExecutionResultBlockParam`
+                - `interface EncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -898,13 +898,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `BashCodeExecutionToolResultBlockParam`
+            - `interface BashCodeExecutionToolResultBlockParam`
 
               - `type: "bash_code_execution_tool_result"`
 
               - `content: BashCodeExecutionToolResultErrorParam | BashCodeExecutionResultBlockParam`
 
-                - `BashCodeExecutionToolResultErrorParam`
+                - `interface BashCodeExecutionToolResultErrorParam`
 
                   - `type: "bash_code_execution_tool_result_error"`
 
@@ -920,7 +920,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `"output_file_too_large"`
 
-                - `BashCodeExecutionResultBlockParam`
+                - `interface BashCodeExecutionResultBlockParam`
 
                   - `type: "bash_code_execution_result"`
 
@@ -944,13 +944,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `TextEditorCodeExecutionToolResultBlockParam`
+            - `interface TextEditorCodeExecutionToolResultBlockParam`
 
               - `type: "text_editor_code_execution_tool_result"`
 
               - `content: TextEditorCodeExecutionToolResultErrorParam | TextEditorCodeExecutionViewResultBlockParam | TextEditorCodeExecutionCreateResultBlockParam | TextEditorCodeExecutionStrReplaceResultBlockParam`
 
-                - `TextEditorCodeExecutionToolResultErrorParam`
+                - `interface TextEditorCodeExecutionToolResultErrorParam`
 
                   - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -968,7 +968,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `error_message?: string | null`
 
-                - `TextEditorCodeExecutionViewResultBlockParam`
+                - `interface TextEditorCodeExecutionViewResultBlockParam`
 
                   - `type: "text_editor_code_execution_view_result"`
 
@@ -988,13 +988,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `total_lines?: number | null`
 
-                - `TextEditorCodeExecutionCreateResultBlockParam`
+                - `interface TextEditorCodeExecutionCreateResultBlockParam`
 
                   - `type: "text_editor_code_execution_create_result"`
 
                   - `is_file_update: boolean`
 
-                - `TextEditorCodeExecutionStrReplaceResultBlockParam`
+                - `interface TextEditorCodeExecutionStrReplaceResultBlockParam`
 
                   - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -1016,13 +1016,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `ToolSearchToolResultBlockParam`
+            - `interface ToolSearchToolResultBlockParam`
 
               - `type: "tool_search_tool_result"`
 
               - `content: ToolSearchToolResultErrorParam | ToolSearchToolSearchResultBlockParam`
 
-                - `ToolSearchToolResultErrorParam`
+                - `interface ToolSearchToolResultErrorParam`
 
                   - `type: "tool_search_tool_result_error"`
 
@@ -1038,7 +1038,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `error_message?: string | null`
 
-                - `ToolSearchToolSearchResultBlockParam`
+                - `interface ToolSearchToolSearchResultBlockParam`
 
                   - `type: "tool_search_tool_search_result"`
 
@@ -1062,7 +1062,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `ContainerUploadBlockParam`
+            - `interface ContainerUploadBlockParam`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -1169,7 +1169,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         Container identifier for reuse across requests.
 
-        - `ContainerParams`
+        - `interface ContainerParams`
 
           Container parameters with skills to be loaded.
 
@@ -1303,7 +1303,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         See [extended thinking](../../../build-with-claude/extended-thinking.md) for details.
 
-        - `ThinkingConfigEnabled`
+        - `interface ThinkingConfigEnabled`
 
           - `type: "enabled"`
 
@@ -1325,11 +1325,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `"omitted"`
 
-        - `ThinkingConfigDisabled`
+        - `interface ThinkingConfigDisabled`
 
           - `type: "disabled"`
 
-        - `ThinkingConfigAdaptive`
+        - `interface ThinkingConfigAdaptive`
 
           - `type: "adaptive"`
 
@@ -1345,7 +1345,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `ToolChoiceAuto`
+        - `interface ToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -1357,7 +1357,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `ToolChoiceAny`
+        - `interface ToolChoiceAny`
 
           The model will use any available tools.
 
@@ -1369,7 +1369,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `ToolChoiceTool`
+        - `interface ToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -1385,7 +1385,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `ToolChoiceNone`
+        - `interface ToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -1455,7 +1455,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         See our [guide](../../../agents-and-tools/tool-use/overview.md) for more details.
 
-        - `Tool`
+        - `interface Tool`
 
           - `type?: "custom" | null`
 
@@ -1513,7 +1513,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolBash20250124`
+        - `interface ToolBash20250124`
 
           - `type: "bash_20250124"`
 
@@ -1547,7 +1547,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20250522`
+        - `interface CodeExecutionTool20250522`
 
           - `type: "code_execution_20250522"`
 
@@ -1579,7 +1579,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20250825`
+        - `interface CodeExecutionTool20250825`
 
           - `type: "code_execution_20250825"`
 
@@ -1611,7 +1611,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20260120`
+        - `interface CodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -1645,7 +1645,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `CodeExecutionTool20260521`
+        - `interface CodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -1679,7 +1679,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `BrowserToolset20260801`
+        - `interface BrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -2073,7 +2073,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `MemoryTool20250818`
+        - `interface MemoryTool20250818`
 
           - `type: "memory_20250818"`
 
@@ -2107,7 +2107,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ComputerToolset20260801`
+        - `interface ComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -2337,7 +2337,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `ToolTextEditor20250124`
+        - `interface ToolTextEditor20250124`
 
           - `type: "text_editor_20250124"`
 
@@ -2371,7 +2371,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolTextEditor20250429`
+        - `interface ToolTextEditor20250429`
 
           - `type: "text_editor_20250429"`
 
@@ -2405,7 +2405,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolTextEditor20250728`
+        - `interface ToolTextEditor20250728`
 
           - `type: "text_editor_20250728"`
 
@@ -2445,7 +2445,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebSearchTool20250305`
+        - `interface WebSearchTool20250305`
 
           - `type: "web_search_20250305"`
 
@@ -2521,7 +2521,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               maxLength: 255, minLength: 1
 
-        - `WebFetchTool20250910`
+        - `interface WebFetchTool20250910`
 
           - `type: "web_fetch_20250910"`
 
@@ -2577,7 +2577,98 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebSearchTool20260209`
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `client_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `interface WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `type: "all"`
+
+              - `interface WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `type: "none"`
+
+              - `interface WebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `type: "only"`
+
+                - `tools: Array<WebFetchURLSourceToolReference>`
+
+                  - `type: "tool_reference"`
+
+                  - `name: string`
+
+              - `interface WebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `type: "except"`
+
+                - `tools: Array<WebFetchURLSourceToolReference>`
+
+                  - `type: "tool_reference"`
+
+                  - `name: string`
+
+            - `server_tool_results?: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `interface WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `interface WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `interface WebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `interface WebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `user_input?: WebFetchURLSourceAll | WebFetchURLSourceNone`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `interface WebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `interface WebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `interface WebSearchTool20260209`
 
           - `type: "web_search_20260209"`
 
@@ -2627,7 +2718,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `WebFetchTool20260209`
+        - `interface WebFetchTool20260209`
 
           - `type: "web_fetch_20260209"`
 
@@ -2683,7 +2774,16 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `WebFetchTool20260309`
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `interface WebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -2741,11 +2841,20 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `use_cache?: boolean`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `WebSearchTool20260318`
+        - `interface WebSearchTool20260318`
 
           - `type: "web_search_20260318"`
 
@@ -2803,7 +2912,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `WebFetchTool20260318`
+        - `interface WebFetchTool20260318`
 
           - `type: "web_fetch_20260318"`
 
@@ -2867,11 +2976,20 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `url_sources?: WebFetchURLSources | null`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `use_cache?: boolean`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `ToolSearchToolBm25_20251119`
+        - `interface ToolSearchToolBm25_20251119`
 
           - `type: "tool_search_tool_bm25_20251119" | "tool_search_tool_bm25"`
 
@@ -2907,7 +3025,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `ToolSearchToolRegex20251119`
+        - `interface ToolSearchToolRegex20251119`
 
           - `type: "tool_search_tool_regex_20251119" | "tool_search_tool_regex"`
 
@@ -2991,7 +3109,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 ### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -3173,7 +3291,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 ### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -3356,7 +3474,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 ### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -3537,7 +3655,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 ### Returns
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -3710,7 +3828,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 ### Returns
 
-- `DeletedMessageBatch`
+- `interface DeletedMessageBatch`
 
   - `type: "message_batch_deleted"`
 
@@ -3775,7 +3893,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 ### Returns
 
-- `MessageBatchIndividualResponse`
+- `interface MessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -3791,7 +3909,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `MessageBatchSucceededResult`
+    - `interface MessageBatchSucceededResult`
 
       - `type: "succeeded"`
 
@@ -3880,7 +3998,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `TextBlock`
+          - `interface TextBlock`
 
             - `type: "text"`
 
@@ -3892,7 +4010,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `CitationCharLocation`
+              - `interface CitationCharLocation`
 
                 - `type: "char_location"`
 
@@ -3914,7 +4032,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 0
 
-              - `CitationPageLocation`
+              - `interface CitationPageLocation`
 
                 - `type: "page_location"`
 
@@ -3936,7 +4054,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 1
 
-              - `CitationContentBlockLocation`
+              - `interface CitationContentBlockLocation`
 
                 - `type: "content_block_location"`
 
@@ -3968,7 +4086,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 0
 
-              - `CitationsWebSearchResultLocation`
+              - `interface CitationsWebSearchResultLocation`
 
                 - `type: "web_search_result_location"`
 
@@ -3984,7 +4102,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `url: string`
 
-              - `CitationsSearchResultLocation`
+              - `interface CitationsSearchResultLocation`
 
                 - `type: "search_result_location"`
 
@@ -4024,7 +4142,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               minLength: 0
 
-          - `ThinkingBlock`
+          - `interface ThinkingBlock`
 
             - `type: "thinking"`
 
@@ -4042,7 +4160,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               The text of Claude's thinking process for this block.
 
-          - `RedactedThinkingBlock`
+          - `interface RedactedThinkingBlock`
 
             - `type: "redacted_thinking"`
 
@@ -4056,7 +4174,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `ToolUseBlock`
+          - `interface ToolUseBlock`
 
             - `type: "tool_use"`
 
@@ -4070,13 +4188,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `type: "direct"`
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -4086,7 +4204,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
                 - `type: "code_execution_20260120"`
 
@@ -4106,7 +4224,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `ServerToolUseBlock`
+          - `interface ServerToolUseBlock`
 
             - `type: "server_tool_use"`
 
@@ -4120,15 +4238,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `input: Record<string, unknown>`
 
@@ -4148,7 +4266,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `"tool_search_tool_bm25"`
 
-          - `WebSearchToolResultBlock`
+          - `interface WebSearchToolResultBlock`
 
             - `type: "web_search_tool_result"`
 
@@ -4158,19 +4276,19 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError`
+              - `interface WebSearchToolResultError`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -4208,7 +4326,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `WebFetchToolResultBlock`
+          - `interface WebFetchToolResultBlock`
 
             - `type: "web_fetch_tool_result"`
 
@@ -4218,19 +4336,19 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-              - `WebFetchToolResultErrorBlock`
+              - `interface WebFetchToolResultErrorBlock`
 
                 - `type: "web_fetch_tool_result_error"`
 
@@ -4258,7 +4376,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `"content_too_large"`
 
-              - `WebFetchBlock`
+              - `interface WebFetchBlock`
 
                 - `type: "web_fetch_result"`
 
@@ -4280,7 +4398,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `source: Base64PDFSource | PlainTextSource`
 
-                    - `Base64PDFSource`
+                    - `interface Base64PDFSource`
 
                       - `type: "base64"`
 
@@ -4290,7 +4408,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                       - `media_type: "application/pdf"`
 
-                    - `PlainTextSource`
+                    - `interface PlainTextSource`
 
                       - `type: "text"`
 
@@ -4314,7 +4432,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CodeExecutionToolResultBlock`
+          - `interface CodeExecutionToolResultBlock`
 
             - `type: "code_execution_tool_result"`
 
@@ -4322,7 +4440,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `CodeExecutionToolResultError`
+              - `interface CodeExecutionToolResultError`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -4338,7 +4456,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `"execution_time_exceeded"`
 
-              - `CodeExecutionResultBlock`
+              - `interface CodeExecutionResultBlock`
 
                 - `type: "code_execution_result"`
 
@@ -4358,7 +4476,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `stdout: string`
 
-              - `EncryptedCodeExecutionResultBlock`
+              - `interface EncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -4384,7 +4502,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `BashCodeExecutionToolResultBlock`
+          - `interface BashCodeExecutionToolResultBlock`
 
             - `type: "bash_code_execution_tool_result"`
 
@@ -4392,7 +4510,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError`
+              - `interface BashCodeExecutionToolResultError`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -4410,7 +4528,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `"output_file_too_large"`
 
-              - `BashCodeExecutionResultBlock`
+              - `interface BashCodeExecutionResultBlock`
 
                 - `type: "bash_code_execution_result"`
 
@@ -4434,7 +4552,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `TextEditorCodeExecutionToolResultBlock`
+          - `interface TextEditorCodeExecutionToolResultBlock`
 
             - `type: "text_editor_code_execution_tool_result"`
 
@@ -4442,7 +4560,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError`
+              - `interface TextEditorCodeExecutionToolResultError`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -4462,7 +4580,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `error_message: string | null`
 
-              - `TextEditorCodeExecutionViewResultBlock`
+              - `interface TextEditorCodeExecutionViewResultBlock`
 
                 - `type: "text_editor_code_execution_view_result"`
 
@@ -4484,7 +4602,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `total_lines: number | null`
 
-              - `TextEditorCodeExecutionCreateResultBlock`
+              - `interface TextEditorCodeExecutionCreateResultBlock`
 
                 - `type: "text_editor_code_execution_create_result"`
 
@@ -4492,7 +4610,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `is_file_update: boolean`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlock`
+              - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -4512,7 +4630,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ToolSearchToolResultBlock`
+          - `interface ToolSearchToolResultBlock`
 
             - `type: "tool_search_tool_result"`
 
@@ -4520,7 +4638,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError`
+              - `interface ToolSearchToolResultError`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -4538,7 +4656,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `error_message: string | null`
 
-              - `ToolSearchToolSearchResultBlock`
+              - `interface ToolSearchToolSearchResultBlock`
 
                 - `type: "tool_search_tool_search_result"`
 
@@ -4558,7 +4676,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ContainerUploadBlock`
+          - `interface ContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -4838,7 +4956,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `"batch"`
 
-    - `MessageBatchErroredResult`
+    - `interface MessageBatchErroredResult`
 
       - `type: "errored"`
 
@@ -4852,7 +4970,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError`
+          - `interface InvalidRequestError`
 
             - `type: "invalid_request_error"`
 
@@ -4862,7 +4980,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Invalid request
 
-          - `AuthenticationError`
+          - `interface AuthenticationError`
 
             - `type: "authentication_error"`
 
@@ -4872,7 +4990,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Authentication error
 
-          - `BillingError`
+          - `interface BillingError`
 
             - `type: "billing_error"`
 
@@ -4882,7 +5000,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Billing error
 
-          - `PermissionError`
+          - `interface PermissionError`
 
             - `type: "permission_error"`
 
@@ -4892,7 +5010,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Permission denied
 
-          - `NotFoundError`
+          - `interface NotFoundError`
 
             - `type: "not_found_error"`
 
@@ -4902,7 +5020,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Not found
 
-          - `RateLimitError`
+          - `interface RateLimitError`
 
             - `type: "rate_limit_error"`
 
@@ -4912,7 +5030,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Rate limited
 
-          - `GatewayTimeoutError`
+          - `interface GatewayTimeoutError`
 
             - `type: "timeout_error"`
 
@@ -4922,7 +5040,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Request timeout
 
-          - `APIErrorObject`
+          - `interface APIErrorObject`
 
             - `type: "api_error"`
 
@@ -4932,7 +5050,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Internal server error
 
-          - `OverloadedError`
+          - `interface OverloadedError`
 
             - `type: "overloaded_error"`
 
@@ -4944,13 +5062,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `request_id: string | null`
 
-    - `MessageBatchCanceledResult`
+    - `interface MessageBatchCanceledResult`
 
       - `type: "canceled"`
 
         default: canceled
 
-    - `MessageBatchExpiredResult`
+    - `interface MessageBatchExpiredResult`
 
       - `type: "expired"`
 
@@ -4976,7 +5094,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Deleted Message Batch
 
-- `DeletedMessageBatch`
+- `interface DeletedMessageBatch`
 
   - `type: "message_batch_deleted"`
 
@@ -4992,7 +5110,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch
 
-- `MessageBatch`
+- `interface MessageBatch`
 
   - `type: "message_batch"`
 
@@ -5102,7 +5220,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch Canceled Result
 
-- `MessageBatchCanceledResult`
+- `interface MessageBatchCanceledResult`
 
   - `type: "canceled"`
 
@@ -5110,7 +5228,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch Errored Result
 
-- `MessageBatchErroredResult`
+- `interface MessageBatchErroredResult`
 
   - `type: "errored"`
 
@@ -5124,7 +5242,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
     - `error: ErrorObject`
 
-      - `InvalidRequestError`
+      - `interface InvalidRequestError`
 
         - `type: "invalid_request_error"`
 
@@ -5134,7 +5252,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Invalid request
 
-      - `AuthenticationError`
+      - `interface AuthenticationError`
 
         - `type: "authentication_error"`
 
@@ -5144,7 +5262,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Authentication error
 
-      - `BillingError`
+      - `interface BillingError`
 
         - `type: "billing_error"`
 
@@ -5154,7 +5272,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Billing error
 
-      - `PermissionError`
+      - `interface PermissionError`
 
         - `type: "permission_error"`
 
@@ -5164,7 +5282,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Permission denied
 
-      - `NotFoundError`
+      - `interface NotFoundError`
 
         - `type: "not_found_error"`
 
@@ -5174,7 +5292,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Not found
 
-      - `RateLimitError`
+      - `interface RateLimitError`
 
         - `type: "rate_limit_error"`
 
@@ -5184,7 +5302,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Rate limited
 
-      - `GatewayTimeoutError`
+      - `interface GatewayTimeoutError`
 
         - `type: "timeout_error"`
 
@@ -5194,7 +5312,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Request timeout
 
-      - `APIErrorObject`
+      - `interface APIErrorObject`
 
         - `type: "api_error"`
 
@@ -5204,7 +5322,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: Internal server error
 
-      - `OverloadedError`
+      - `interface OverloadedError`
 
         - `type: "overloaded_error"`
 
@@ -5218,7 +5336,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch Expired Result
 
-- `MessageBatchExpiredResult`
+- `interface MessageBatchExpiredResult`
 
   - `type: "expired"`
 
@@ -5226,7 +5344,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch Individual Response
 
-- `MessageBatchIndividualResponse`
+- `interface MessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -5242,7 +5360,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `MessageBatchSucceededResult`
+    - `interface MessageBatchSucceededResult`
 
       - `type: "succeeded"`
 
@@ -5331,7 +5449,7 @@ console.log(messageBatchIndividualResponse.custom_id);
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `TextBlock`
+          - `interface TextBlock`
 
             - `type: "text"`
 
@@ -5343,7 +5461,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `CitationCharLocation`
+              - `interface CitationCharLocation`
 
                 - `type: "char_location"`
 
@@ -5365,7 +5483,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   minimum: 0
 
-              - `CitationPageLocation`
+              - `interface CitationPageLocation`
 
                 - `type: "page_location"`
 
@@ -5387,7 +5505,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   minimum: 1
 
-              - `CitationContentBlockLocation`
+              - `interface CitationContentBlockLocation`
 
                 - `type: "content_block_location"`
 
@@ -5419,7 +5537,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   minimum: 0
 
-              - `CitationsWebSearchResultLocation`
+              - `interface CitationsWebSearchResultLocation`
 
                 - `type: "web_search_result_location"`
 
@@ -5435,7 +5553,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `url: string`
 
-              - `CitationsSearchResultLocation`
+              - `interface CitationsSearchResultLocation`
 
                 - `type: "search_result_location"`
 
@@ -5475,7 +5593,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               minLength: 0
 
-          - `ThinkingBlock`
+          - `interface ThinkingBlock`
 
             - `type: "thinking"`
 
@@ -5493,7 +5611,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               The text of Claude's thinking process for this block.
 
-          - `RedactedThinkingBlock`
+          - `interface RedactedThinkingBlock`
 
             - `type: "redacted_thinking"`
 
@@ -5507,7 +5625,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `ToolUseBlock`
+          - `interface ToolUseBlock`
 
             - `type: "tool_use"`
 
@@ -5521,13 +5639,13 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `type: "direct"`
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -5537,7 +5655,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
                 - `type: "code_execution_20260120"`
 
@@ -5557,7 +5675,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `ServerToolUseBlock`
+          - `interface ServerToolUseBlock`
 
             - `type: "server_tool_use"`
 
@@ -5571,15 +5689,15 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `input: Record<string, unknown>`
 
@@ -5599,7 +5717,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `"tool_search_tool_bm25"`
 
-          - `WebSearchToolResultBlock`
+          - `interface WebSearchToolResultBlock`
 
             - `type: "web_search_tool_result"`
 
@@ -5609,19 +5727,19 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError`
+              - `interface WebSearchToolResultError`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -5659,7 +5777,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `WebFetchToolResultBlock`
+          - `interface WebFetchToolResultBlock`
 
             - `type: "web_fetch_tool_result"`
 
@@ -5669,19 +5787,19 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: {"type":"direct"}
 
-              - `DirectCaller`
+              - `interface DirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `ServerToolCaller`
+              - `interface ServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `ServerToolCaller20260120`
+              - `interface ServerToolCaller20260120`
 
             - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-              - `WebFetchToolResultErrorBlock`
+              - `interface WebFetchToolResultErrorBlock`
 
                 - `type: "web_fetch_tool_result_error"`
 
@@ -5709,7 +5827,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   - `"content_too_large"`
 
-              - `WebFetchBlock`
+              - `interface WebFetchBlock`
 
                 - `type: "web_fetch_result"`
 
@@ -5731,7 +5849,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   - `source: Base64PDFSource | PlainTextSource`
 
-                    - `Base64PDFSource`
+                    - `interface Base64PDFSource`
 
                       - `type: "base64"`
 
@@ -5741,7 +5859,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                       - `media_type: "application/pdf"`
 
-                    - `PlainTextSource`
+                    - `interface PlainTextSource`
 
                       - `type: "text"`
 
@@ -5765,7 +5883,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CodeExecutionToolResultBlock`
+          - `interface CodeExecutionToolResultBlock`
 
             - `type: "code_execution_tool_result"`
 
@@ -5773,7 +5891,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `CodeExecutionToolResultError`
+              - `interface CodeExecutionToolResultError`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -5789,7 +5907,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   - `"execution_time_exceeded"`
 
-              - `CodeExecutionResultBlock`
+              - `interface CodeExecutionResultBlock`
 
                 - `type: "code_execution_result"`
 
@@ -5809,7 +5927,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `stdout: string`
 
-              - `EncryptedCodeExecutionResultBlock`
+              - `interface EncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -5835,7 +5953,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `BashCodeExecutionToolResultBlock`
+          - `interface BashCodeExecutionToolResultBlock`
 
             - `type: "bash_code_execution_tool_result"`
 
@@ -5843,7 +5961,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError`
+              - `interface BashCodeExecutionToolResultError`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -5861,7 +5979,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   - `"output_file_too_large"`
 
-              - `BashCodeExecutionResultBlock`
+              - `interface BashCodeExecutionResultBlock`
 
                 - `type: "bash_code_execution_result"`
 
@@ -5885,7 +6003,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `TextEditorCodeExecutionToolResultBlock`
+          - `interface TextEditorCodeExecutionToolResultBlock`
 
             - `type: "text_editor_code_execution_tool_result"`
 
@@ -5893,7 +6011,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError`
+              - `interface TextEditorCodeExecutionToolResultError`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -5913,7 +6031,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `error_message: string | null`
 
-              - `TextEditorCodeExecutionViewResultBlock`
+              - `interface TextEditorCodeExecutionViewResultBlock`
 
                 - `type: "text_editor_code_execution_view_result"`
 
@@ -5935,7 +6053,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `total_lines: number | null`
 
-              - `TextEditorCodeExecutionCreateResultBlock`
+              - `interface TextEditorCodeExecutionCreateResultBlock`
 
                 - `type: "text_editor_code_execution_create_result"`
 
@@ -5943,7 +6061,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `is_file_update: boolean`
 
-              - `TextEditorCodeExecutionStrReplaceResultBlock`
+              - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -5963,7 +6081,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ToolSearchToolResultBlock`
+          - `interface ToolSearchToolResultBlock`
 
             - `type: "tool_search_tool_result"`
 
@@ -5971,7 +6089,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError`
+              - `interface ToolSearchToolResultError`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -5989,7 +6107,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `error_message: string | null`
 
-              - `ToolSearchToolSearchResultBlock`
+              - `interface ToolSearchToolSearchResultBlock`
 
                 - `type: "tool_search_tool_search_result"`
 
@@ -6009,7 +6127,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ContainerUploadBlock`
+          - `interface ContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -6289,7 +6407,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `"batch"`
 
-    - `MessageBatchErroredResult`
+    - `interface MessageBatchErroredResult`
 
       - `type: "errored"`
 
@@ -6303,7 +6421,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError`
+          - `interface InvalidRequestError`
 
             - `type: "invalid_request_error"`
 
@@ -6313,7 +6431,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Invalid request
 
-          - `AuthenticationError`
+          - `interface AuthenticationError`
 
             - `type: "authentication_error"`
 
@@ -6323,7 +6441,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Authentication error
 
-          - `BillingError`
+          - `interface BillingError`
 
             - `type: "billing_error"`
 
@@ -6333,7 +6451,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Billing error
 
-          - `PermissionError`
+          - `interface PermissionError`
 
             - `type: "permission_error"`
 
@@ -6343,7 +6461,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Permission denied
 
-          - `NotFoundError`
+          - `interface NotFoundError`
 
             - `type: "not_found_error"`
 
@@ -6353,7 +6471,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Not found
 
-          - `RateLimitError`
+          - `interface RateLimitError`
 
             - `type: "rate_limit_error"`
 
@@ -6363,7 +6481,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Rate limited
 
-          - `GatewayTimeoutError`
+          - `interface GatewayTimeoutError`
 
             - `type: "timeout_error"`
 
@@ -6373,7 +6491,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Request timeout
 
-          - `APIErrorObject`
+          - `interface APIErrorObject`
 
             - `type: "api_error"`
 
@@ -6383,7 +6501,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               default: Internal server error
 
-          - `OverloadedError`
+          - `interface OverloadedError`
 
             - `type: "overloaded_error"`
 
@@ -6395,13 +6513,13 @@ console.log(messageBatchIndividualResponse.custom_id);
 
         - `request_id: string | null`
 
-    - `MessageBatchCanceledResult`
+    - `interface MessageBatchCanceledResult`
 
       - `type: "canceled"`
 
         default: canceled
 
-    - `MessageBatchExpiredResult`
+    - `interface MessageBatchExpiredResult`
 
       - `type: "expired"`
 
@@ -6409,7 +6527,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch Request Counts
 
-- `MessageBatchRequestCounts`
+- `interface MessageBatchRequestCounts`
 
   - `canceled: number`
 
@@ -6451,13 +6569,13 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch Result
 
-- `MessageBatchResult = MessageBatchSucceededResult | MessageBatchErroredResult | MessageBatchCanceledResult | MessageBatchExpiredResult`
+- `type MessageBatchResult = MessageBatchSucceededResult | MessageBatchErroredResult | MessageBatchCanceledResult | MessageBatchExpiredResult`
 
   Processing result for this request.
 
   Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-  - `MessageBatchSucceededResult`
+  - `interface MessageBatchSucceededResult`
 
     - `type: "succeeded"`
 
@@ -6546,7 +6664,7 @@ console.log(messageBatchIndividualResponse.custom_id);
         [{"type": "text", "text": "B)"}]
         ```
 
-        - `TextBlock`
+        - `interface TextBlock`
 
           - `type: "text"`
 
@@ -6558,7 +6676,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `CitationCharLocation`
+            - `interface CitationCharLocation`
 
               - `type: "char_location"`
 
@@ -6580,7 +6698,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 minimum: 0
 
-            - `CitationPageLocation`
+            - `interface CitationPageLocation`
 
               - `type: "page_location"`
 
@@ -6602,7 +6720,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 minimum: 1
 
-            - `CitationContentBlockLocation`
+            - `interface CitationContentBlockLocation`
 
               - `type: "content_block_location"`
 
@@ -6634,7 +6752,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 minimum: 0
 
-            - `CitationsWebSearchResultLocation`
+            - `interface CitationsWebSearchResultLocation`
 
               - `type: "web_search_result_location"`
 
@@ -6650,7 +6768,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `url: string`
 
-            - `CitationsSearchResultLocation`
+            - `interface CitationsSearchResultLocation`
 
               - `type: "search_result_location"`
 
@@ -6690,7 +6808,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             minLength: 0
 
-        - `ThinkingBlock`
+        - `interface ThinkingBlock`
 
           - `type: "thinking"`
 
@@ -6708,7 +6826,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             The text of Claude's thinking process for this block.
 
-        - `RedactedThinkingBlock`
+        - `interface RedactedThinkingBlock`
 
           - `type: "redacted_thinking"`
 
@@ -6722,7 +6840,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `ToolUseBlock`
+        - `interface ToolUseBlock`
 
           - `type: "tool_use"`
 
@@ -6736,13 +6854,13 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
               - `type: "direct"`
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -6752,7 +6870,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
               - `type: "code_execution_20260120"`
 
@@ -6772,7 +6890,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `ServerToolUseBlock`
+        - `interface ServerToolUseBlock`
 
           - `type: "server_tool_use"`
 
@@ -6786,15 +6904,15 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
           - `input: Record<string, unknown>`
 
@@ -6814,7 +6932,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `"tool_search_tool_bm25"`
 
-        - `WebSearchToolResultBlock`
+        - `interface WebSearchToolResultBlock`
 
           - `type: "web_search_tool_result"`
 
@@ -6824,19 +6942,19 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
           - `content: WebSearchToolResultBlockContent`
 
-            - `WebSearchToolResultError`
+            - `interface WebSearchToolResultError`
 
               - `type: "web_search_tool_result_error"`
 
@@ -6874,7 +6992,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `WebFetchToolResultBlock`
+        - `interface WebFetchToolResultBlock`
 
           - `type: "web_fetch_tool_result"`
 
@@ -6884,19 +7002,19 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: {"type":"direct"}
 
-            - `DirectCaller`
+            - `interface DirectCaller`
 
               Tool invocation directly from the model.
 
-            - `ServerToolCaller`
+            - `interface ServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `ServerToolCaller20260120`
+            - `interface ServerToolCaller20260120`
 
           - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-            - `WebFetchToolResultErrorBlock`
+            - `interface WebFetchToolResultErrorBlock`
 
               - `type: "web_fetch_tool_result_error"`
 
@@ -6924,7 +7042,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `"content_too_large"`
 
-            - `WebFetchBlock`
+            - `interface WebFetchBlock`
 
               - `type: "web_fetch_result"`
 
@@ -6946,7 +7064,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `source: Base64PDFSource | PlainTextSource`
 
-                  - `Base64PDFSource`
+                  - `interface Base64PDFSource`
 
                     - `type: "base64"`
 
@@ -6956,7 +7074,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                     - `media_type: "application/pdf"`
 
-                  - `PlainTextSource`
+                  - `interface PlainTextSource`
 
                     - `type: "text"`
 
@@ -6980,7 +7098,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `CodeExecutionToolResultBlock`
+        - `interface CodeExecutionToolResultBlock`
 
           - `type: "code_execution_tool_result"`
 
@@ -6988,7 +7106,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `content: CodeExecutionToolResultBlockContent`
 
-            - `CodeExecutionToolResultError`
+            - `interface CodeExecutionToolResultError`
 
               - `type: "code_execution_tool_result_error"`
 
@@ -7004,7 +7122,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `"execution_time_exceeded"`
 
-            - `CodeExecutionResultBlock`
+            - `interface CodeExecutionResultBlock`
 
               - `type: "code_execution_result"`
 
@@ -7024,7 +7142,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `stdout: string`
 
-            - `EncryptedCodeExecutionResultBlock`
+            - `interface EncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -7050,7 +7168,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `BashCodeExecutionToolResultBlock`
+        - `interface BashCodeExecutionToolResultBlock`
 
           - `type: "bash_code_execution_tool_result"`
 
@@ -7058,7 +7176,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-            - `BashCodeExecutionToolResultError`
+            - `interface BashCodeExecutionToolResultError`
 
               - `type: "bash_code_execution_tool_result_error"`
 
@@ -7076,7 +7194,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                 - `"output_file_too_large"`
 
-            - `BashCodeExecutionResultBlock`
+            - `interface BashCodeExecutionResultBlock`
 
               - `type: "bash_code_execution_result"`
 
@@ -7100,7 +7218,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `TextEditorCodeExecutionToolResultBlock`
+        - `interface TextEditorCodeExecutionToolResultBlock`
 
           - `type: "text_editor_code_execution_tool_result"`
 
@@ -7108,7 +7226,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-            - `TextEditorCodeExecutionToolResultError`
+            - `interface TextEditorCodeExecutionToolResultError`
 
               - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -7128,7 +7246,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `error_message: string | null`
 
-            - `TextEditorCodeExecutionViewResultBlock`
+            - `interface TextEditorCodeExecutionViewResultBlock`
 
               - `type: "text_editor_code_execution_view_result"`
 
@@ -7150,7 +7268,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `total_lines: number | null`
 
-            - `TextEditorCodeExecutionCreateResultBlock`
+            - `interface TextEditorCodeExecutionCreateResultBlock`
 
               - `type: "text_editor_code_execution_create_result"`
 
@@ -7158,7 +7276,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `is_file_update: boolean`
 
-            - `TextEditorCodeExecutionStrReplaceResultBlock`
+            - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
               - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -7178,7 +7296,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ToolSearchToolResultBlock`
+        - `interface ToolSearchToolResultBlock`
 
           - `type: "tool_search_tool_result"`
 
@@ -7186,7 +7304,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-            - `ToolSearchToolResultError`
+            - `interface ToolSearchToolResultError`
 
               - `type: "tool_search_tool_result_error"`
 
@@ -7204,7 +7322,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `error_message: string | null`
 
-            - `ToolSearchToolSearchResultBlock`
+            - `interface ToolSearchToolSearchResultBlock`
 
               - `type: "tool_search_tool_search_result"`
 
@@ -7224,7 +7342,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `ContainerUploadBlock`
+        - `interface ContainerUploadBlock`
 
           Response model for a file uploaded to the container.
 
@@ -7504,7 +7622,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `"batch"`
 
-  - `MessageBatchErroredResult`
+  - `interface MessageBatchErroredResult`
 
     - `type: "errored"`
 
@@ -7518,7 +7636,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
       - `error: ErrorObject`
 
-        - `InvalidRequestError`
+        - `interface InvalidRequestError`
 
           - `type: "invalid_request_error"`
 
@@ -7528,7 +7646,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Invalid request
 
-        - `AuthenticationError`
+        - `interface AuthenticationError`
 
           - `type: "authentication_error"`
 
@@ -7538,7 +7656,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Authentication error
 
-        - `BillingError`
+        - `interface BillingError`
 
           - `type: "billing_error"`
 
@@ -7548,7 +7666,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Billing error
 
-        - `PermissionError`
+        - `interface PermissionError`
 
           - `type: "permission_error"`
 
@@ -7558,7 +7676,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Permission denied
 
-        - `NotFoundError`
+        - `interface NotFoundError`
 
           - `type: "not_found_error"`
 
@@ -7568,7 +7686,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Not found
 
-        - `RateLimitError`
+        - `interface RateLimitError`
 
           - `type: "rate_limit_error"`
 
@@ -7578,7 +7696,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Rate limited
 
-        - `GatewayTimeoutError`
+        - `interface GatewayTimeoutError`
 
           - `type: "timeout_error"`
 
@@ -7588,7 +7706,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Request timeout
 
-        - `APIErrorObject`
+        - `interface APIErrorObject`
 
           - `type: "api_error"`
 
@@ -7598,7 +7716,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             default: Internal server error
 
-        - `OverloadedError`
+        - `interface OverloadedError`
 
           - `type: "overloaded_error"`
 
@@ -7610,13 +7728,13 @@ console.log(messageBatchIndividualResponse.custom_id);
 
       - `request_id: string | null`
 
-  - `MessageBatchCanceledResult`
+  - `interface MessageBatchCanceledResult`
 
     - `type: "canceled"`
 
       default: canceled
 
-  - `MessageBatchExpiredResult`
+  - `interface MessageBatchExpiredResult`
 
     - `type: "expired"`
 
@@ -7624,7 +7742,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
 ### Message Batch Succeeded Result
 
-- `MessageBatchSucceededResult`
+- `interface MessageBatchSucceededResult`
 
   - `type: "succeeded"`
 
@@ -7713,7 +7831,7 @@ console.log(messageBatchIndividualResponse.custom_id);
       [{"type": "text", "text": "B)"}]
       ```
 
-      - `TextBlock`
+      - `interface TextBlock`
 
         - `type: "text"`
 
@@ -7725,7 +7843,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `CitationCharLocation`
+          - `interface CitationCharLocation`
 
             - `type: "char_location"`
 
@@ -7747,7 +7865,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               minimum: 0
 
-          - `CitationPageLocation`
+          - `interface CitationPageLocation`
 
             - `type: "page_location"`
 
@@ -7769,7 +7887,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               minimum: 1
 
-          - `CitationContentBlockLocation`
+          - `interface CitationContentBlockLocation`
 
             - `type: "content_block_location"`
 
@@ -7801,7 +7919,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               minimum: 0
 
-          - `CitationsWebSearchResultLocation`
+          - `interface CitationsWebSearchResultLocation`
 
             - `type: "web_search_result_location"`
 
@@ -7817,7 +7935,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `url: string`
 
-          - `CitationsSearchResultLocation`
+          - `interface CitationsSearchResultLocation`
 
             - `type: "search_result_location"`
 
@@ -7857,7 +7975,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           minLength: 0
 
-      - `ThinkingBlock`
+      - `interface ThinkingBlock`
 
         - `type: "thinking"`
 
@@ -7875,7 +7993,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           The text of Claude's thinking process for this block.
 
-      - `RedactedThinkingBlock`
+      - `interface RedactedThinkingBlock`
 
         - `type: "redacted_thinking"`
 
@@ -7889,7 +8007,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `ToolUseBlock`
+      - `interface ToolUseBlock`
 
         - `type: "tool_use"`
 
@@ -7903,13 +8021,13 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
             - `type: "direct"`
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -7919,7 +8037,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
             - `type: "code_execution_20260120"`
 
@@ -7939,7 +8057,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `ServerToolUseBlock`
+      - `interface ServerToolUseBlock`
 
         - `type: "server_tool_use"`
 
@@ -7953,15 +8071,15 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
         - `input: Record<string, unknown>`
 
@@ -7981,7 +8099,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           - `"tool_search_tool_bm25"`
 
-      - `WebSearchToolResultBlock`
+      - `interface WebSearchToolResultBlock`
 
         - `type: "web_search_tool_result"`
 
@@ -7991,19 +8109,19 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
         - `content: WebSearchToolResultBlockContent`
 
-          - `WebSearchToolResultError`
+          - `interface WebSearchToolResultError`
 
             - `type: "web_search_tool_result_error"`
 
@@ -8041,7 +8159,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `WebFetchToolResultBlock`
+      - `interface WebFetchToolResultBlock`
 
         - `type: "web_fetch_tool_result"`
 
@@ -8051,19 +8169,19 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           default: {"type":"direct"}
 
-          - `DirectCaller`
+          - `interface DirectCaller`
 
             Tool invocation directly from the model.
 
-          - `ServerToolCaller`
+          - `interface ServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `ServerToolCaller20260120`
+          - `interface ServerToolCaller20260120`
 
         - `content: WebFetchToolResultErrorBlock | WebFetchBlock`
 
-          - `WebFetchToolResultErrorBlock`
+          - `interface WebFetchToolResultErrorBlock`
 
             - `type: "web_fetch_tool_result_error"`
 
@@ -8091,7 +8209,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `"content_too_large"`
 
-          - `WebFetchBlock`
+          - `interface WebFetchBlock`
 
             - `type: "web_fetch_result"`
 
@@ -8113,7 +8231,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `source: Base64PDFSource | PlainTextSource`
 
-                - `Base64PDFSource`
+                - `interface Base64PDFSource`
 
                   - `type: "base64"`
 
@@ -8123,7 +8241,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
                   - `media_type: "application/pdf"`
 
-                - `PlainTextSource`
+                - `interface PlainTextSource`
 
                   - `type: "text"`
 
@@ -8147,7 +8265,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `CodeExecutionToolResultBlock`
+      - `interface CodeExecutionToolResultBlock`
 
         - `type: "code_execution_tool_result"`
 
@@ -8155,7 +8273,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
         - `content: CodeExecutionToolResultBlockContent`
 
-          - `CodeExecutionToolResultError`
+          - `interface CodeExecutionToolResultError`
 
             - `type: "code_execution_tool_result_error"`
 
@@ -8171,7 +8289,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `"execution_time_exceeded"`
 
-          - `CodeExecutionResultBlock`
+          - `interface CodeExecutionResultBlock`
 
             - `type: "code_execution_result"`
 
@@ -8191,7 +8309,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `stdout: string`
 
-          - `EncryptedCodeExecutionResultBlock`
+          - `interface EncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -8217,7 +8335,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `BashCodeExecutionToolResultBlock`
+      - `interface BashCodeExecutionToolResultBlock`
 
         - `type: "bash_code_execution_tool_result"`
 
@@ -8225,7 +8343,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
         - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
 
-          - `BashCodeExecutionToolResultError`
+          - `interface BashCodeExecutionToolResultError`
 
             - `type: "bash_code_execution_tool_result_error"`
 
@@ -8243,7 +8361,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
               - `"output_file_too_large"`
 
-          - `BashCodeExecutionResultBlock`
+          - `interface BashCodeExecutionResultBlock`
 
             - `type: "bash_code_execution_result"`
 
@@ -8267,7 +8385,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `TextEditorCodeExecutionToolResultBlock`
+      - `interface TextEditorCodeExecutionToolResultBlock`
 
         - `type: "text_editor_code_execution_tool_result"`
 
@@ -8275,7 +8393,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
         - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-          - `TextEditorCodeExecutionToolResultError`
+          - `interface TextEditorCodeExecutionToolResultError`
 
             - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -8295,7 +8413,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `error_message: string | null`
 
-          - `TextEditorCodeExecutionViewResultBlock`
+          - `interface TextEditorCodeExecutionViewResultBlock`
 
             - `type: "text_editor_code_execution_view_result"`
 
@@ -8317,7 +8435,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `total_lines: number | null`
 
-          - `TextEditorCodeExecutionCreateResultBlock`
+          - `interface TextEditorCodeExecutionCreateResultBlock`
 
             - `type: "text_editor_code_execution_create_result"`
 
@@ -8325,7 +8443,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `is_file_update: boolean`
 
-          - `TextEditorCodeExecutionStrReplaceResultBlock`
+          - `interface TextEditorCodeExecutionStrReplaceResultBlock`
 
             - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -8345,7 +8463,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `ToolSearchToolResultBlock`
+      - `interface ToolSearchToolResultBlock`
 
         - `type: "tool_search_tool_result"`
 
@@ -8353,7 +8471,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
         - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
 
-          - `ToolSearchToolResultError`
+          - `interface ToolSearchToolResultError`
 
             - `type: "tool_search_tool_result_error"`
 
@@ -8371,7 +8489,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
             - `error_message: string | null`
 
-          - `ToolSearchToolSearchResultBlock`
+          - `interface ToolSearchToolSearchResultBlock`
 
             - `type: "tool_search_tool_search_result"`
 
@@ -8391,7 +8509,7 @@ console.log(messageBatchIndividualResponse.custom_id);
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `ContainerUploadBlock`
+      - `interface ContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 

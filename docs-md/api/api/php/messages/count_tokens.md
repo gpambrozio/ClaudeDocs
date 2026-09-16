@@ -174,7 +174,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
 ## Returns
 
-- `MessageTokensCount`
+- `class MessageTokensCount`
 
   - `int inputTokens`
 

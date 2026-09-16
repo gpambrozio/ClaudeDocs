@@ -90,7 +90,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `[]BetaContentBlockParamUnionResp`
 
-        - `type BetaTextBlockParamResp struct{…}`
+        - `type BetaTextBlockParamResp`
 
           - `Type Text`
 
@@ -121,7 +121,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Citations []BetaTextCitationParamUnionResp Optional`
 
-            - `type BetaCitationCharLocationParamResp struct{…}`
+            - `type BetaCitationCharLocationParamResp`
 
               - `Type CharLocation`
 
@@ -141,7 +141,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 minimum: 0
 
-            - `type BetaCitationPageLocationParamResp struct{…}`
+            - `type BetaCitationPageLocationParamResp`
 
               - `Type PageLocation`
 
@@ -161,7 +161,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocationParamResp struct{…}`
+            - `type BetaCitationContentBlockLocationParamResp`
 
               - `Type ContentBlockLocation`
 
@@ -191,7 +191,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 minimum: 0
 
-            - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationWebSearchResultLocationParamResp`
 
               - `Type WebSearchResultLocation`
 
@@ -207,7 +207,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 minLength: 1
 
-            - `type BetaCitationSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationSearchResultLocationParamResp`
 
               - `Type SearchResultLocation`
 
@@ -241,13 +241,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `Title string`
 
-        - `type BetaImageBlockParamResp struct{…}`
+        - `type BetaImageBlockParamResp`
 
           - `Type Image`
 
           - `Source BetaImageBlockParamSourceUnionResp`
 
-            - `type BetaBase64ImageSource struct{…}`
+            - `type BetaBase64ImageSource`
 
               - `Type Base64`
 
@@ -265,13 +265,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-            - `type BetaURLImageSource struct{…}`
+            - `type BetaURLImageSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileImageSource struct{…}`
+            - `type BetaFileImageSource`
 
               - `Type File`
 
@@ -293,13 +293,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-        - `type BetaRequestDocumentBlock struct{…}`
+        - `type BetaRequestDocumentBlock`
 
           - `Type Document`
 
           - `Source BetaRequestDocumentBlockSourceUnion`
 
-            - `type BetaBase64PDFSource struct{…}`
+            - `type BetaBase64PDFSource`
 
               - `Type Base64`
 
@@ -309,7 +309,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `MediaType ApplicationPDF`
 
-            - `type BetaPlainTextSource struct{…}`
+            - `type BetaPlainTextSource`
 
               - `Type Text`
 
@@ -317,7 +317,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `MediaType TextPlain`
 
-            - `type BetaContentBlockSource struct{…}`
+            - `type BetaContentBlockSource`
 
               - `Type Content`
 
@@ -327,17 +327,17 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 - `[]BetaContentBlockSourceContentUnion`
 
-                  - `type BetaTextBlockParamResp struct{…}`
+                  - `type BetaTextBlockParamResp`
 
-                  - `type BetaImageBlockParamResp struct{…}`
+                  - `type BetaImageBlockParamResp`
 
-            - `type BetaURLPDFSource struct{…}`
+            - `type BetaURLPDFSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileDocumentSource struct{…}`
+            - `type BetaFileDocumentSource`
 
               - `Type File`
 
@@ -359,7 +359,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             maxLength: 500, minLength: 1
 
-        - `type BetaSearchResultBlockParamResp struct{…}`
+        - `type BetaSearchResultBlockParamResp`
 
           - `Type SearchResult`
 
@@ -387,7 +387,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Citations BetaCitationsConfigParamResp Optional`
 
-        - `type BetaThinkingBlockParamResp struct{…}`
+        - `type BetaThinkingBlockParamResp`
 
           - `Type Thinking`
 
@@ -401,7 +401,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             The `thinking` text of this block as returned by the API.
 
-        - `type BetaRedactedThinkingBlockParamResp struct{…}`
+        - `type BetaRedactedThinkingBlockParamResp`
 
           - `Type RedactedThinking`
 
@@ -409,7 +409,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type BetaToolUseBlockParamResp struct{…}`
+        - `type BetaToolUseBlockParamResp`
 
           - `Type ToolUse`
 
@@ -429,13 +429,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -445,7 +445,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -459,7 +459,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaToolResultBlockParamResp struct{…}`
+        - `type BetaToolResultBlockParamResp`
 
           - `Type ToolResult`
 
@@ -475,15 +475,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `[]BetaToolResultBlockParamContentUnionResp`
 
-              - `type BetaTextBlockParamResp struct{…}`
+              - `type BetaTextBlockParamResp`
 
-              - `type BetaImageBlockParamResp struct{…}`
+              - `type BetaImageBlockParamResp`
 
-              - `type BetaSearchResultBlockParamResp struct{…}`
+              - `type BetaSearchResultBlockParamResp`
 
-              - `type BetaRequestDocumentBlock struct{…}`
+              - `type BetaRequestDocumentBlock`
 
-              - `type BetaToolReferenceBlockParamResp struct{…}`
+              - `type BetaToolReferenceBlockParamResp`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -497,7 +497,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BetaBrowserStateBlockParamResp struct{…}`
+              - `type BetaBrowserStateBlockParamResp`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -547,7 +547,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                   maxItems: 200, minItems: 1
 
-                  - `type BetaBrowserStateChangeTabOpened struct{…}`
+                  - `type BetaBrowserStateChangeTabOpened`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -565,7 +565,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
 
@@ -583,7 +583,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadCompleted`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -616,7 +616,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                       minimum: 0
 
-                  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                  - `type BetaBrowserStateChangeDownloadFailed`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -648,7 +648,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlockParamResp struct{…}`
+        - `type BetaServerToolUseBlockParamResp`
 
           - `Type ServerToolUse`
 
@@ -682,17 +682,17 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+        - `type BetaWebSearchToolResultBlockParamResp`
 
           - `Type WebSearchToolResult`
 
@@ -710,7 +710,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `PageAge string Optional`
 
-            - `type BetaWebSearchToolRequestError struct{…}`
+            - `type BetaWebSearchToolRequestError`
 
               - `Type WebSearchToolResultError`
 
@@ -738,23 +738,23 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+        - `type BetaWebFetchToolResultBlockParamResp`
 
           - `Type WebFetchToolResult`
 
           - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-            - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+            - `type BetaWebFetchToolResultErrorBlockParamResp`
 
               - `Type WebFetchToolResultError`
 
@@ -780,7 +780,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlockParamResp struct{…}`
+            - `type BetaWebFetchBlockParamResp`
 
               - `Type WebFetchResult`
 
@@ -804,23 +804,23 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+        - `type BetaAdvisorToolResultBlockParamResp`
 
           - `Type AdvisorToolResult`
 
           - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-            - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+            - `type BetaAdvisorToolResultErrorParamResp`
 
               - `Type AdvisorToolResultError`
 
@@ -840,7 +840,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlockParamResp struct{…}`
+            - `type BetaAdvisorResultBlockParamResp`
 
               - `Type AdvisorResult`
 
@@ -848,7 +848,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `StopReason string Optional`
 
-            - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+            - `type BetaAdvisorRedactedResultBlockParamResp`
 
               - `Type AdvisorRedactedResult`
 
@@ -866,13 +866,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaCodeExecutionToolResultBlockParamResp`
 
           - `Type CodeExecutionToolResult`
 
           - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaCodeExecutionToolResultErrorParamResp`
 
               - `Type CodeExecutionToolResultError`
 
@@ -886,7 +886,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaCodeExecutionResultBlockParamResp`
 
               - `Type CodeExecutionResult`
 
@@ -902,7 +902,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -928,13 +928,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
           - `Type BashCodeExecutionToolResult`
 
           - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -950,7 +950,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaBashCodeExecutionResultBlockParamResp`
 
               - `Type BashCodeExecutionResult`
 
@@ -974,13 +974,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
           - `Type TextEditorCodeExecutionToolResult`
 
           - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -998,7 +998,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -1018,13 +1018,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `TotalLines int64 Optional`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -1046,13 +1046,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+        - `type BetaToolSearchToolResultBlockParamResp`
 
           - `Type ToolSearchToolResult`
 
           - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-            - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+            - `type BetaToolSearchToolResultErrorParamResp`
 
               - `Type ToolSearchToolResultError`
 
@@ -1068,7 +1068,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+            - `type BetaToolSearchToolSearchResultBlockParamResp`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -1092,7 +1092,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaMCPToolUseBlockParamResp struct{…}`
+        - `type BetaMCPToolUseBlockParamResp`
 
           - `Type MCPToolUse`
 
@@ -1112,7 +1112,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+        - `type BetaRequestMCPToolResultBlockParamResp`
 
           - `Type MCPToolResult`
 
@@ -1144,7 +1144,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `IsError bool Optional`
 
-        - `type BetaContainerUploadBlockParamResp struct{…}`
+        - `type BetaContainerUploadBlockParamResp`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -1157,7 +1157,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCompactionBlockParamResp struct{…}`
+        - `type BetaCompactionBlockParamResp`
 
           A compaction block containing summary of previous context.
 
@@ -1181,7 +1181,11 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaRequestToolAdditionBlock struct{…}`
+          - `Signature string Optional`
+
+            The block's signature as returned, to be sent back verbatim
+
+        - `type BetaRequestToolAdditionBlock`
 
           Mid-conversation directive to surface a declared tool.
 
@@ -1193,7 +1197,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -1206,7 +1210,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -1217,7 +1221,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `ServerName string`
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -1229,7 +1233,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestToolRemovalBlock struct{…}`
+        - `type BetaRequestToolRemovalBlock`
 
           Mid-conversation directive to withdraw a tool.
 
@@ -1241,19 +1245,19 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
               server assigns to MCP-resolved tools — use `mcp_tool_reference` or
               `mcp_toolset_reference` for those.
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -1261,7 +1265,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaFallbackBlockParamResp struct{…}`
+        - `type BetaFallbackBlockParamResp`
 
           A `fallback` block echoed back from a prior response.
 
@@ -1421,11 +1425,22 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+  - `Compaction param.Field[BetaCompactionConfig] Optional`
+
+    Body param: Compact the whole conversation and return a signed `compaction` block,
+    alone, that a later request sends back first in `messages`, in place of
+    the messages it summarizes. There is no trigger and no pause flag: sending
+    the parameter compacts, and nothing is sampled after the block.
+
+    The summarization prompt is the server's own unless `instructions` are
+    given, which then replace it for this request; a value that is empty or
+    only whitespace counts as absent.
+
   - `Container param.Field[BetaMessageNewParamsContainerUnion] Optional`
 
     Body param: Container identifier for reuse across requests.
 
-    - `type BetaContainerParamsResp struct{…}`
+    - `type BetaContainerParamsResp`
 
       Container parameters with skills to be loaded.
 
@@ -1497,7 +1512,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `string`
 
-    - `type BetaFallbackCreditTokenParamResp struct{…}`
+    - `type BetaFallbackCreditTokenParamResp`
 
       Object form of `fallback_credit_token`: the token plus a redemption
       mode.
@@ -1679,7 +1694,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     See our [guide](../../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type BetaTool struct{…}`
+    - `type BetaTool`
 
       - `Type BetaToolType Optional`
 
@@ -1737,7 +1752,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20241022 struct{…}`
+    - `type BetaToolBash20241022`
 
       - `Type Bash20241022`
 
@@ -1771,7 +1786,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20250124 struct{…}`
+    - `type BetaToolBash20250124`
 
       - `Type Bash20250124`
 
@@ -1805,7 +1820,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250522 struct{…}`
+    - `type BetaCodeExecutionTool20250522`
 
       - `Type CodeExecution20250522`
 
@@ -1837,7 +1852,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250825 struct{…}`
+    - `type BetaCodeExecutionTool20250825`
 
       - `Type CodeExecution20250825`
 
@@ -1869,7 +1884,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260120 struct{…}`
+    - `type BetaCodeExecutionTool20260120`
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -1903,7 +1918,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260521 struct{…}`
+    - `type BetaCodeExecutionTool20260521`
 
       Code execution tool with REPL state persistence.
 
@@ -1937,7 +1952,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaBrowserToolset20260801 struct{…}`
+    - `type BetaBrowserToolset20260801`
 
       The browser toolset: a single `tools[]` entry (carrying no
       `name`) that declares the browser tool family. The model is served
@@ -2331,7 +2346,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolComputerUse20241022 struct{…}`
+    - `type BetaToolComputerUse20241022`
 
       - `Type Computer20241022`
 
@@ -2383,7 +2398,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMemoryTool20250818 struct{…}`
+    - `type BetaMemoryTool20250818`
 
       - `Type Memory20250818`
 
@@ -2417,7 +2432,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20250124 struct{…}`
+    - `type BetaToolComputerUse20250124`
 
       - `Type Computer20250124`
 
@@ -2469,7 +2484,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20241022 struct{…}`
+    - `type BetaToolTextEditor20241022`
 
       - `Type TextEditor20241022`
 
@@ -2503,7 +2518,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20251124 struct{…}`
+    - `type BetaToolComputerUse20251124`
 
       - `Type Computer20251124`
 
@@ -2559,7 +2574,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaComputerToolset20260801 struct{…}`
+    - `type BetaComputerToolset20260801`
 
       The computer toolset: a single `tools[]` entry (carrying no
       `name`) that declares the computer tool family. The model is
@@ -2789,7 +2804,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolTextEditor20250124 struct{…}`
+    - `type BetaToolTextEditor20250124`
 
       - `Type TextEditor20250124`
 
@@ -2823,7 +2838,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250429 struct{…}`
+    - `type BetaToolTextEditor20250429`
 
       - `Type TextEditor20250429`
 
@@ -2857,7 +2872,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250728 struct{…}`
+    - `type BetaToolTextEditor20250728`
 
       - `Type TextEditor20250728`
 
@@ -2897,7 +2912,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20250305 struct{…}`
+    - `type BetaWebSearchTool20250305`
 
       - `Type WebSearch20250305`
 
@@ -2973,7 +2988,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           maxLength: 255, minLength: 1
 
-    - `type BetaWebFetchTool20250910 struct{…}`
+    - `type BetaWebFetchTool20250910`
 
       - `Type WebFetch20250910`
 
@@ -3029,7 +3044,98 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20260209 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+        - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+          Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+            - `Type All`
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+            - `Type None`
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+            - `Type Only`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+            - `Type Except`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+        - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+          Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+        - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+          Whether URLs in user messages are fetchable: "all" or "none".
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+    - `type BetaWebSearchTool20260209`
 
       - `Type WebSearch20260209`
 
@@ -3079,7 +3185,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260209 struct{…}`
+    - `type BetaWebFetchTool20260209`
 
       - `Type WebFetch20260209`
 
@@ -3135,7 +3241,16 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebFetchTool20260309 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+    - `type BetaWebFetchTool20260309`
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -3193,11 +3308,20 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaWebSearchTool20260318 struct{…}`
+    - `type BetaWebSearchTool20260318`
 
       - `Type WebSearch20260318`
 
@@ -3255,7 +3379,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260318 struct{…}`
+    - `type BetaWebFetchTool20260318`
 
       - `Type WebFetch20260318`
 
@@ -3319,11 +3443,20 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaAdvisorTool20260301 struct{…}`
+    - `type BetaAdvisorTool20260301`
 
       - `Type Advisor20260301`
 
@@ -3377,7 +3510,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolBm25_20251119 struct{…}`
+    - `type BetaToolSearchToolBm25_20251119`
 
       - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -3413,7 +3546,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolRegex20251119 struct{…}`
+    - `type BetaToolSearchToolRegex20251119`
 
       - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -3449,7 +3582,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMCPToolset struct{…}`
+    - `type BetaMCPToolset`
 
       Configuration for a group of tools from an MCP server.
 
@@ -3582,6 +3715,8 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
@@ -3638,7 +3773,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
 ### Returns
 
-- `type BetaMessage struct{…}`
+- `type BetaMessage`
 
   - `Type Message`
 
@@ -3721,7 +3856,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `type BetaTextBlock struct{…}`
+    - `type BetaTextBlock`
 
       - `Type Text`
 
@@ -3733,7 +3868,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type BetaCitationCharLocation struct{…}`
+        - `type BetaCitationCharLocation`
 
           - `Type CharLocation`
 
@@ -3755,7 +3890,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             minimum: 0
 
-        - `type BetaCitationPageLocation struct{…}`
+        - `type BetaCitationPageLocation`
 
           - `Type PageLocation`
 
@@ -3777,7 +3912,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             minimum: 1
 
-        - `type BetaCitationContentBlockLocation struct{…}`
+        - `type BetaCitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -3809,7 +3944,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             minimum: 0
 
-        - `type BetaCitationsWebSearchResultLocation struct{…}`
+        - `type BetaCitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -3825,7 +3960,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `URL string`
 
-        - `type BetaCitationSearchResultLocation struct{…}`
+        - `type BetaCitationSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -3865,7 +4000,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         minLength: 0
 
-    - `type BetaThinkingBlock struct{…}`
+    - `type BetaThinkingBlock`
 
       - `Type Thinking`
 
@@ -3883,7 +4018,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         The text of Claude's thinking process for this block.
 
-    - `type BetaRedactedThinkingBlock struct{…}`
+    - `type BetaRedactedThinkingBlock`
 
       - `Type RedactedThinking`
 
@@ -3897,7 +4032,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type BetaToolUseBlock struct{…}`
+    - `type BetaToolUseBlock`
 
       - `Type ToolUse`
 
@@ -3915,13 +4050,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Caller BetaToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
           - `Type Direct`
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -3931,7 +4066,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
           - `Type CodeExecution20260120`
 
@@ -3945,7 +4080,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaServerToolUseBlock struct{…}`
+    - `type BetaServerToolUseBlock`
 
       - `Type ServerToolUse`
 
@@ -3977,17 +4112,17 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebSearchToolResultBlock struct{…}`
+    - `type BetaWebSearchToolResultBlock`
 
       - `Type WebSearchToolResult`
 
@@ -3995,7 +4130,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Content BetaWebSearchToolResultBlockContentUnion`
 
-        - `type BetaWebSearchToolResultError struct{…}`
+        - `type BetaWebSearchToolResultError`
 
           - `Type WebSearchToolResultError`
 
@@ -4035,17 +4170,17 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebFetchToolResultBlock struct{…}`
+    - `type BetaWebFetchToolResultBlock`
 
       - `Type WebFetchToolResult`
 
@@ -4053,7 +4188,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Content BetaWebFetchToolResultBlockContentUnion`
 
-        - `type BetaWebFetchToolResultErrorBlock struct{…}`
+        - `type BetaWebFetchToolResultErrorBlock`
 
           - `Type WebFetchToolResultError`
 
@@ -4081,7 +4216,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-        - `type BetaWebFetchBlock struct{…}`
+        - `type BetaWebFetchBlock`
 
           - `Type WebFetchResult`
 
@@ -4103,7 +4238,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `Source BetaDocumentBlockSourceUnion`
 
-              - `type BetaBase64PDFSource struct{…}`
+              - `type BetaBase64PDFSource`
 
                 - `Type Base64`
 
@@ -4113,7 +4248,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                 - `MediaType ApplicationPDF`
 
-              - `type BetaPlainTextSource struct{…}`
+              - `type BetaPlainTextSource`
 
                 - `Type Text`
 
@@ -4139,17 +4274,17 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaAdvisorToolResultBlock struct{…}`
+    - `type BetaAdvisorToolResultBlock`
 
       - `Type AdvisorToolResult`
 
@@ -4157,7 +4292,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Content BetaAdvisorToolResultBlockContentUnion`
 
-        - `type BetaAdvisorToolResultError struct{…}`
+        - `type BetaAdvisorToolResultError`
 
           - `Type AdvisorToolResultError`
 
@@ -4179,7 +4314,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-        - `type BetaAdvisorResultBlock struct{…}`
+        - `type BetaAdvisorResultBlock`
 
           - `Type AdvisorResult`
 
@@ -4191,7 +4326,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Text string`
 
-        - `type BetaAdvisorRedactedResultBlock struct{…}`
+        - `type BetaAdvisorRedactedResultBlock`
 
           - `Type AdvisorRedactedResult`
 
@@ -4209,7 +4344,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaCodeExecutionToolResultBlock struct{…}`
+    - `type BetaCodeExecutionToolResultBlock`
 
       - `Type CodeExecutionToolResult`
 
@@ -4217,7 +4352,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaCodeExecutionToolResultError struct{…}`
+        - `type BetaCodeExecutionToolResultError`
 
           - `Type CodeExecutionToolResultError`
 
@@ -4233,7 +4368,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-        - `type BetaCodeExecutionResultBlock struct{…}`
+        - `type BetaCodeExecutionResultBlock`
 
           - `Type CodeExecutionResult`
 
@@ -4253,7 +4388,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `Stdout string`
 
-        - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+        - `type BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -4279,7 +4414,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+    - `type BetaBashCodeExecutionToolResultBlock`
 
       - `Type BashCodeExecutionToolResult`
 
@@ -4287,7 +4422,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaBashCodeExecutionToolResultError struct{…}`
+        - `type BetaBashCodeExecutionToolResultError`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -4305,7 +4440,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-        - `type BetaBashCodeExecutionResultBlock struct{…}`
+        - `type BetaBashCodeExecutionResultBlock`
 
           - `Type BashCodeExecutionResult`
 
@@ -4329,7 +4464,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+    - `type BetaTextEditorCodeExecutionToolResultBlock`
 
       - `Type TextEditorCodeExecutionToolResult`
 
@@ -4337,7 +4472,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultError`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -4357,7 +4492,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `ErrorMessage string`
 
-        - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionViewResultBlock`
 
           - `Type TextEditorCodeExecutionViewResult`
 
@@ -4379,7 +4514,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `TotalLines int64`
 
-        - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
           - `Type TextEditorCodeExecutionCreateResult`
 
@@ -4387,7 +4522,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `IsFileUpdate bool`
 
-        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
           - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -4407,7 +4542,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaToolSearchToolResultBlock struct{…}`
+    - `type BetaToolSearchToolResultBlock`
 
       - `Type ToolSearchToolResult`
 
@@ -4415,7 +4550,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Content BetaToolSearchToolResultBlockContentUnion`
 
-        - `type BetaToolSearchToolResultError struct{…}`
+        - `type BetaToolSearchToolResultError`
 
           - `Type ToolSearchToolResultError`
 
@@ -4433,7 +4568,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           - `ErrorMessage string`
 
-        - `type BetaToolSearchToolSearchResultBlock struct{…}`
+        - `type BetaToolSearchToolSearchResultBlock`
 
           - `Type ToolSearchToolSearchResult`
 
@@ -4453,7 +4588,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaMCPToolUseBlock struct{…}`
+    - `type BetaMCPToolUseBlock`
 
       - `Type MCPToolUse`
 
@@ -4473,7 +4608,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         The name of the MCP server
 
-    - `type BetaMCPToolResultBlock struct{…}`
+    - `type BetaMCPToolResultBlock`
 
       - `Type MCPToolResult`
 
@@ -4507,7 +4642,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaContainerUploadBlock struct{…}`
+    - `type BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -4517,7 +4652,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `FileID string`
 
-    - `type BetaCompactionBlock struct{…}`
+    - `type BetaCompactionBlock`
 
       A compaction block returned when autocompact is triggered.
 
@@ -4537,7 +4672,11 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `type BetaFallbackBlock struct{…}`
+      - `Signature string Optional`
+
+        Signature over the summary, to be sent back with the block verbatim
+
+    - `type BetaFallbackBlock`
 
       Marks the point in `content` where one model's output gives way to the next.
 
@@ -4687,7 +4826,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       List of context management edits that were applied.
 
-      - `type BetaClearToolUses20250919EditResponse struct{…}`
+      - `type BetaClearToolUses20250919EditResponse`
 
         - `Type ClearToolUses20250919`
 
@@ -4707,7 +4846,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-      - `type BetaClearThinking20251015EditResponse struct{…}`
+      - `type BetaClearThinking20251015EditResponse`
 
         - `Type ClearThinking20251015`
 
@@ -4736,7 +4875,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-      - `type BetaCacheMissModelChanged struct{…}`
+      - `type BetaCacheMissModelChanged`
 
         - `Type ModelChanged`
 
@@ -4746,7 +4885,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissSystemChanged struct{…}`
+      - `type BetaCacheMissSystemChanged`
 
         - `Type SystemChanged`
 
@@ -4756,7 +4895,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissToolsChanged struct{…}`
+      - `type BetaCacheMissToolsChanged`
 
         - `Type ToolsChanged`
 
@@ -4766,7 +4905,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissMessagesChanged struct{…}`
+      - `type BetaCacheMissMessagesChanged`
 
         - `Type MessagesChanged`
 
@@ -4776,13 +4915,13 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+      - `type BetaCacheMissPreviousMessageNotFound`
 
         - `Type PreviousMessageNotFound`
 
           default: previous_message_not_found
 
-      - `type BetaCacheMissUnavailable struct{…}`
+      - `type BetaCacheMissUnavailable`
 
         - `Type Unavailable`
 
@@ -4980,7 +5119,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
         resulting shift is zero because there was nothing to move. `not_applied`:
         no reprice was applied; the arm's `reason` says why.
 
-        - `type BetaFallbackCreditRedeemed struct{…}`
+        - `type BetaFallbackCreditRedeemed`
 
           The reprice was applied: the retry is billed as if the conversation
           had been on the retry model all along.
@@ -4989,7 +5128,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             default: redeemed
 
-        - `type BetaFallbackCreditNotApplied struct{…}`
+        - `type BetaFallbackCreditNotApplied`
 
           No reprice was applied; `reason` says why.
 
@@ -5061,7 +5200,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-      - `type BetaMessageIterationUsage struct{…}`
+      - `type BetaMessageIterationUsage`
 
         Token usage for a sampling iteration.
 
@@ -5105,7 +5244,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-      - `type BetaCompactionIterationUsage struct{…}`
+      - `type BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
 
@@ -5143,7 +5282,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-      - `type BetaAdvisorMessageIterationUsage struct{…}`
+      - `type BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
 
@@ -5187,7 +5326,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-      - `type BetaFallbackMessageIterationUsage struct{…}`
+      - `type BetaFallbackMessageIterationUsage`
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -5300,63 +5439,105 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-  - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+  - `InputTransformations []BetaInputTransformationUnion Optional`
 
-    Changes the API made to the request's input before showing it to the model:
-    one entry per change, in request order. Today the only entry type is
-    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-    block from the request's `messages` that was removed from the prompt instead
-    of being shown to the model because it failed a binding check. More entry
-    types may be added over time; ignore types you do not recognize.
+    Changes the API made to the request's input before showing it to the model,
+    and blocks that failed a binding check but were left unchanged: one entry per
+    block, in request order. Two entry types today. `thinking_dropped` — a
+    `thinking`, `redacted_thinking` or `connector_text` block from the request's
+    `messages` that was removed from the prompt instead of being shown to the
+    model because it failed a binding check. `thinking_mismatch_allowed` — a
+    `thinking` or `redacted_thinking` block that failed the conversation check
+    (the conversation before it differs from the one it was created in, or it
+    carries no record of one on a model that requires it) and was shown to the
+    model all the same, because that check is not enforced for this request.
+    More entry types may be added over time; ignore types you do not recognize.
 
     Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
     every such response from a model that supports extended thinking, as `[]`
-    when nothing was changed; without the beta, blocks are removed all the same
-    but nothing is reported. Removed blocks contribute nothing to
-    `usage.input_tokens`. When streaming, the array is final in `message_start`;
-    the final `message_delta` event carries it only when a server-side model
-    fallback happened mid-stream, in which case it holds the serving model's
-    entries and replaces the one in `message_start`.
+    when there is no entry to report; without the beta, blocks are removed or
+    left in place all the same but nothing is reported. Removed blocks contribute
+    nothing to `usage.input_tokens`; blocks left in place count as sent. When
+    streaming, the array is final in `message_start`; the final `message_delta`
+    event carries it only when a server-side model fallback happened mid-stream,
+    in which case it holds the serving model's entries and replaces the one in
+    `message_start`.
 
-    - `Type ThinkingDropped`
+    - `type BetaThinkingDroppedInputTransformation`
 
-      Always `thinking_dropped` for this entry type.
+      - `Type ThinkingDropped`
 
-      default: thinking_dropped
+        Always `thinking_dropped` for this entry type.
 
-    - `Path string`
+        default: thinking_dropped
 
-      Where the removed block was in your request, as `messages.{i}.content.{j}`:
-      `i` indexes the `messages` array you sent and `j` that message's `content`
-      array — the same form error messages use.
+      - `Path string`
 
-    - `Reason BetaThinkingDroppedInputTransformationReason`
+        Where the removed block was in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
 
-      Which binding check removed the block: `model_binding_mismatch` — it was
-      created by a model whose reasoning the requested model may not read;
-      `prefix_binding_mismatch` — the conversation before it differs from the
-      conversation it was created in (the rest of that turn's consecutive thinking
-      blocks are removed with it, each with this reason);
-      `organization_binding_mismatch` — it was created under a different
-      organization (an Anthropic organization, AWS account or Google Cloud project)
-      and this organization is not one of its additional organizations;
-      `end_user_binding_mismatch` — it was created for a different end user, or
-      was removed by the consumer-organization binding. A block that would fail
-      several checks reports one reason, in this order of precedence:
-      `organization_binding_mismatch`, `end_user_binding_mismatch`,
-      `model_binding_mismatch`, `prefix_binding_mismatch`.
+      - `Reason BetaThinkingDroppedInputTransformationReason`
 
-      - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+        Which binding check removed the block: `model_binding_mismatch` — it was
+        created by a model whose reasoning the requested model may not read;
+        `prefix_binding_mismatch` — the conversation before it differs from the
+        conversation it was created in (the rest of that turn's consecutive thinking
+        blocks are removed with it, each with this reason);
+        `organization_binding_mismatch` — it was created under a different
+        organization (an Anthropic organization, AWS account or Google Cloud project)
+        and this organization is not one of its additional organizations;
+        `end_user_binding_mismatch` — it was created for a different end user, or
+        was removed by the consumer-organization binding. A block that would fail
+        several checks reports one reason, in this order of precedence:
+        `organization_binding_mismatch`, `end_user_binding_mismatch`,
+        `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaThinkingMismatchAllowedInputTransformation`
+
+      - `Type ThinkingMismatchAllowed`
+
+        Always `thinking_mismatch_allowed` for this entry type.
+
+        default: thinking_mismatch_allowed
+
+      - `Path string`
+
+        Where the block is in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
+
+      - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+        Which binding check the block failed; the block was shown to the model all
+        the same. Always `prefix_binding_mismatch` today — the conversation before
+        the block differs from the conversation it was created in, or the block
+        carries no record of one on a model that requires it. Were the check
+        enforced for this request, the block would have been removed or the request
+        rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+        takes the rest of that turn's consecutive thinking blocks, whereas here each
+        block is checked on its own, so `thinking_mismatch_allowed` entries are a
+        lower bound on what enforcement would remove.
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
 
 - `type BetaRawMessageStreamEventUnion interface{…}`
 
-  - `type BetaRawMessageStartEvent struct{…}`
+  - `type BetaRawMessageStartEvent`
 
     - `Type MessageStart`
 
@@ -5364,7 +5545,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `Message BetaMessage`
 
-  - `type BetaRawMessageDeltaEvent struct{…}`
+  - `type BetaRawMessageDeltaEvent`
 
     - `Type MessageDelta`
 
@@ -5451,59 +5632,41 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         The number of server tool requests.
 
-    - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+    - `InputTransformations []BetaInputTransformationUnion Optional`
 
-      Changes the API made to the request's input before showing it to the model:
-      one entry per change, in request order. Today the only entry type is
-      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-      block from the request's `messages` that was removed from the prompt instead
-      of being shown to the model because it failed a binding check. More entry
-      types may be added over time; ignore types you do not recognize.
+      Changes the API made to the request's input before showing it to the model,
+      and blocks that failed a binding check but were left unchanged: one entry per
+      block, in request order. Two entry types today. `thinking_dropped` — a
+      `thinking`, `redacted_thinking` or `connector_text` block from the request's
+      `messages` that was removed from the prompt instead of being shown to the
+      model because it failed a binding check. `thinking_mismatch_allowed` — a
+      `thinking` or `redacted_thinking` block that failed the conversation check
+      (the conversation before it differs from the one it was created in, or it
+      carries no record of one on a model that requires it) and was shown to the
+      model all the same, because that check is not enforced for this request.
+      More entry types may be added over time; ignore types you do not recognize.
 
       Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
       every such response from a model that supports extended thinking, as `[]`
-      when nothing was changed; without the beta, blocks are removed all the same
-      but nothing is reported. Removed blocks contribute nothing to
-      `usage.input_tokens`. When streaming, the array is final in `message_start`;
-      the final `message_delta` event carries it only when a server-side model
-      fallback happened mid-stream, in which case it holds the serving model's
-      entries and replaces the one in `message_start`.
+      when there is no entry to report; without the beta, blocks are removed or
+      left in place all the same but nothing is reported. Removed blocks contribute
+      nothing to `usage.input_tokens`; blocks left in place count as sent. When
+      streaming, the array is final in `message_start`; the final `message_delta`
+      event carries it only when a server-side model fallback happened mid-stream,
+      in which case it holds the serving model's entries and replaces the one in
+      `message_start`.
 
-      - `Type ThinkingDropped`
+      - `type BetaThinkingDroppedInputTransformation`
 
-        Always `thinking_dropped` for this entry type.
+      - `type BetaThinkingMismatchAllowedInputTransformation`
 
-        default: thinking_dropped
-
-      - `Path string`
-
-        Where the removed block was in your request, as `messages.{i}.content.{j}`:
-        `i` indexes the `messages` array you sent and `j` that message's `content`
-        array — the same form error messages use.
-
-      - `Reason BetaThinkingDroppedInputTransformationReason`
-
-        Which binding check removed the block: `model_binding_mismatch` — it was
-        created by a model whose reasoning the requested model may not read;
-        `prefix_binding_mismatch` — the conversation before it differs from the
-        conversation it was created in (the rest of that turn's consecutive thinking
-        blocks are removed with it, each with this reason);
-        `organization_binding_mismatch` — it was created under a different
-        organization (an Anthropic organization, AWS account or Google Cloud project)
-        and this organization is not one of its additional organizations;
-        `end_user_binding_mismatch` — it was created for a different end user, or
-        was removed by the consumer-organization binding. A block that would fail
-        several checks reports one reason, in this order of precedence:
-        `organization_binding_mismatch`, `end_user_binding_mismatch`,
-        `model_binding_mismatch`, `prefix_binding_mismatch`.
-
-  - `type BetaRawMessageStopEvent struct{…}`
+  - `type BetaRawMessageStopEvent`
 
     - `Type MessageStop`
 
       default: message_stop
 
-  - `type BetaRawContentBlockStartEvent struct{…}`
+  - `type BetaRawContentBlockStartEvent`
 
     - `Type ContentBlockStart`
 
@@ -5511,39 +5674,39 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `ContentBlock BetaRawContentBlockStartEventContentBlockUnion`
 
-      - `type BetaTextBlock struct{…}`
+      - `type BetaTextBlock`
 
-      - `type BetaThinkingBlock struct{…}`
+      - `type BetaThinkingBlock`
 
-      - `type BetaRedactedThinkingBlock struct{…}`
+      - `type BetaRedactedThinkingBlock`
 
-      - `type BetaToolUseBlock struct{…}`
+      - `type BetaToolUseBlock`
 
-      - `type BetaServerToolUseBlock struct{…}`
+      - `type BetaServerToolUseBlock`
 
-      - `type BetaWebSearchToolResultBlock struct{…}`
+      - `type BetaWebSearchToolResultBlock`
 
-      - `type BetaWebFetchToolResultBlock struct{…}`
+      - `type BetaWebFetchToolResultBlock`
 
-      - `type BetaAdvisorToolResultBlock struct{…}`
+      - `type BetaAdvisorToolResultBlock`
 
-      - `type BetaCodeExecutionToolResultBlock struct{…}`
+      - `type BetaCodeExecutionToolResultBlock`
 
-      - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+      - `type BetaBashCodeExecutionToolResultBlock`
 
-      - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultBlock`
 
-      - `type BetaToolSearchToolResultBlock struct{…}`
+      - `type BetaToolSearchToolResultBlock`
 
-      - `type BetaMCPToolUseBlock struct{…}`
+      - `type BetaMCPToolUseBlock`
 
-      - `type BetaMCPToolResultBlock struct{…}`
+      - `type BetaMCPToolResultBlock`
 
-      - `type BetaContainerUploadBlock struct{…}`
+      - `type BetaContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
-      - `type BetaCompactionBlock struct{…}`
+      - `type BetaCompactionBlock`
 
         A compaction block returned when autocompact is triggered.
 
@@ -5551,7 +5714,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
 
-      - `type BetaFallbackBlock struct{…}`
+      - `type BetaFallbackBlock`
 
         Marks the point in `content` where one model's output gives way to the next.
 
@@ -5567,7 +5730,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `Index int64`
 
-  - `type BetaRawContentBlockDeltaEvent struct{…}`
+  - `type BetaRawContentBlockDeltaEvent`
 
     - `Type ContentBlockDelta`
 
@@ -5575,7 +5738,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `Delta BetaRawContentBlockDeltaUnion`
 
-      - `type BetaTextDelta struct{…}`
+      - `type BetaTextDelta`
 
         - `Type TextDelta`
 
@@ -5583,7 +5746,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         - `Text string`
 
-      - `type BetaInputJSONDelta struct{…}`
+      - `type BetaInputJSONDelta`
 
         - `Type InputJSONDelta`
 
@@ -5591,7 +5754,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         - `PartialJSON string`
 
-      - `type BetaCitationsDelta struct{…}`
+      - `type BetaCitationsDelta`
 
         - `Type CitationsDelta`
 
@@ -5599,17 +5762,17 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         - `Citation BetaCitationsDeltaCitationUnion`
 
-          - `type BetaCitationCharLocation struct{…}`
+          - `type BetaCitationCharLocation`
 
-          - `type BetaCitationPageLocation struct{…}`
+          - `type BetaCitationPageLocation`
 
-          - `type BetaCitationContentBlockLocation struct{…}`
+          - `type BetaCitationContentBlockLocation`
 
-          - `type BetaCitationsWebSearchResultLocation struct{…}`
+          - `type BetaCitationsWebSearchResultLocation`
 
-          - `type BetaCitationSearchResultLocation struct{…}`
+          - `type BetaCitationSearchResultLocation`
 
-      - `type BetaThinkingDelta struct{…}`
+      - `type BetaThinkingDelta`
 
         - `Type ThinkingDelta`
 
@@ -5623,7 +5786,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `type BetaSignatureDelta struct{…}`
+      - `type BetaSignatureDelta`
 
         - `Type SignatureDelta`
 
@@ -5633,7 +5796,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-      - `type BetaCompactionContentBlockDelta struct{…}`
+      - `type BetaCompactionContentBlockDelta`
 
         - `Type CompactionDelta`
 
@@ -5647,7 +5810,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `Index int64`
 
-  - `type BetaRawContentBlockStopEvent struct{…}`
+  - `type BetaRawContentBlockStopEvent`
 
     - `Type ContentBlockStop`
 
@@ -5872,7 +6035,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       - `[]BetaContentBlockParamUnionResp`
 
-        - `type BetaTextBlockParamResp struct{…}`
+        - `type BetaTextBlockParamResp`
 
           - `Type Text`
 
@@ -5903,7 +6066,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Citations []BetaTextCitationParamUnionResp Optional`
 
-            - `type BetaCitationCharLocationParamResp struct{…}`
+            - `type BetaCitationCharLocationParamResp`
 
               - `Type CharLocation`
 
@@ -5923,7 +6086,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 minimum: 0
 
-            - `type BetaCitationPageLocationParamResp struct{…}`
+            - `type BetaCitationPageLocationParamResp`
 
               - `Type PageLocation`
 
@@ -5943,7 +6106,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocationParamResp struct{…}`
+            - `type BetaCitationContentBlockLocationParamResp`
 
               - `Type ContentBlockLocation`
 
@@ -5973,7 +6136,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 minimum: 0
 
-            - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationWebSearchResultLocationParamResp`
 
               - `Type WebSearchResultLocation`
 
@@ -5989,7 +6152,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 minLength: 1
 
-            - `type BetaCitationSearchResultLocationParamResp struct{…}`
+            - `type BetaCitationSearchResultLocationParamResp`
 
               - `Type SearchResultLocation`
 
@@ -6023,13 +6186,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `Title string`
 
-        - `type BetaImageBlockParamResp struct{…}`
+        - `type BetaImageBlockParamResp`
 
           - `Type Image`
 
           - `Source BetaImageBlockParamSourceUnionResp`
 
-            - `type BetaBase64ImageSource struct{…}`
+            - `type BetaBase64ImageSource`
 
               - `Type Base64`
 
@@ -6047,13 +6210,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-            - `type BetaURLImageSource struct{…}`
+            - `type BetaURLImageSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileImageSource struct{…}`
+            - `type BetaFileImageSource`
 
               - `Type File`
 
@@ -6075,13 +6238,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-        - `type BetaRequestDocumentBlock struct{…}`
+        - `type BetaRequestDocumentBlock`
 
           - `Type Document`
 
           - `Source BetaRequestDocumentBlockSourceUnion`
 
-            - `type BetaBase64PDFSource struct{…}`
+            - `type BetaBase64PDFSource`
 
               - `Type Base64`
 
@@ -6091,7 +6254,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `MediaType ApplicationPDF`
 
-            - `type BetaPlainTextSource struct{…}`
+            - `type BetaPlainTextSource`
 
               - `Type Text`
 
@@ -6099,7 +6262,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `MediaType TextPlain`
 
-            - `type BetaContentBlockSource struct{…}`
+            - `type BetaContentBlockSource`
 
               - `Type Content`
 
@@ -6109,17 +6272,17 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 - `[]BetaContentBlockSourceContentUnion`
 
-                  - `type BetaTextBlockParamResp struct{…}`
+                  - `type BetaTextBlockParamResp`
 
-                  - `type BetaImageBlockParamResp struct{…}`
+                  - `type BetaImageBlockParamResp`
 
-            - `type BetaURLPDFSource struct{…}`
+            - `type BetaURLPDFSource`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileDocumentSource struct{…}`
+            - `type BetaFileDocumentSource`
 
               - `Type File`
 
@@ -6141,7 +6304,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             maxLength: 500, minLength: 1
 
-        - `type BetaSearchResultBlockParamResp struct{…}`
+        - `type BetaSearchResultBlockParamResp`
 
           - `Type SearchResult`
 
@@ -6169,7 +6332,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Citations BetaCitationsConfigParamResp Optional`
 
-        - `type BetaThinkingBlockParamResp struct{…}`
+        - `type BetaThinkingBlockParamResp`
 
           - `Type Thinking`
 
@@ -6183,7 +6346,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             The `thinking` text of this block as returned by the API.
 
-        - `type BetaRedactedThinkingBlockParamResp struct{…}`
+        - `type BetaRedactedThinkingBlockParamResp`
 
           - `Type RedactedThinking`
 
@@ -6191,7 +6354,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type BetaToolUseBlockParamResp struct{…}`
+        - `type BetaToolUseBlockParamResp`
 
           - `Type ToolUse`
 
@@ -6211,13 +6374,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -6227,7 +6390,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -6241,7 +6404,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaToolResultBlockParamResp struct{…}`
+        - `type BetaToolResultBlockParamResp`
 
           - `Type ToolResult`
 
@@ -6257,15 +6420,15 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `[]BetaToolResultBlockParamContentUnionResp`
 
-              - `type BetaTextBlockParamResp struct{…}`
+              - `type BetaTextBlockParamResp`
 
-              - `type BetaImageBlockParamResp struct{…}`
+              - `type BetaImageBlockParamResp`
 
-              - `type BetaSearchResultBlockParamResp struct{…}`
+              - `type BetaSearchResultBlockParamResp`
 
-              - `type BetaRequestDocumentBlock struct{…}`
+              - `type BetaRequestDocumentBlock`
 
-              - `type BetaToolReferenceBlockParamResp struct{…}`
+              - `type BetaToolReferenceBlockParamResp`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -6279,7 +6442,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BetaBrowserStateBlockParamResp struct{…}`
+              - `type BetaBrowserStateBlockParamResp`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -6329,7 +6492,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                   maxItems: 200, minItems: 1
 
-                  - `type BetaBrowserStateChangeTabOpened struct{…}`
+                  - `type BetaBrowserStateChangeTabOpened`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -6347,7 +6510,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadStarted`
 
                     A file download that started during this call.
 
@@ -6365,7 +6528,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                  - `type BetaBrowserStateChangeDownloadCompleted`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -6398,7 +6561,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                       minimum: 0
 
-                  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                  - `type BetaBrowserStateChangeDownloadFailed`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -6430,7 +6593,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlockParamResp struct{…}`
+        - `type BetaServerToolUseBlockParamResp`
 
           - `Type ServerToolUse`
 
@@ -6464,17 +6627,17 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+        - `type BetaWebSearchToolResultBlockParamResp`
 
           - `Type WebSearchToolResult`
 
@@ -6492,7 +6655,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `PageAge string Optional`
 
-            - `type BetaWebSearchToolRequestError struct{…}`
+            - `type BetaWebSearchToolRequestError`
 
               - `Type WebSearchToolResultError`
 
@@ -6520,23 +6683,23 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+        - `type BetaWebFetchToolResultBlockParamResp`
 
           - `Type WebFetchToolResult`
 
           - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-            - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+            - `type BetaWebFetchToolResultErrorBlockParamResp`
 
               - `Type WebFetchToolResultError`
 
@@ -6562,7 +6725,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlockParamResp struct{…}`
+            - `type BetaWebFetchBlockParamResp`
 
               - `Type WebFetchResult`
 
@@ -6586,23 +6749,23 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+        - `type BetaAdvisorToolResultBlockParamResp`
 
           - `Type AdvisorToolResult`
 
           - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-            - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+            - `type BetaAdvisorToolResultErrorParamResp`
 
               - `Type AdvisorToolResultError`
 
@@ -6622,7 +6785,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlockParamResp struct{…}`
+            - `type BetaAdvisorResultBlockParamResp`
 
               - `Type AdvisorResult`
 
@@ -6630,7 +6793,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `StopReason string Optional`
 
-            - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+            - `type BetaAdvisorRedactedResultBlockParamResp`
 
               - `Type AdvisorRedactedResult`
 
@@ -6648,13 +6811,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaCodeExecutionToolResultBlockParamResp`
 
           - `Type CodeExecutionToolResult`
 
           - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaCodeExecutionToolResultErrorParamResp`
 
               - `Type CodeExecutionToolResultError`
 
@@ -6668,7 +6831,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaCodeExecutionResultBlockParamResp`
 
               - `Type CodeExecutionResult`
 
@@ -6684,7 +6847,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -6710,13 +6873,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
           - `Type BashCodeExecutionToolResult`
 
           - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -6732,7 +6895,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+            - `type BetaBashCodeExecutionResultBlockParamResp`
 
               - `Type BashCodeExecutionResult`
 
@@ -6756,13 +6919,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
           - `Type TextEditorCodeExecutionToolResult`
 
           - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -6780,7 +6943,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `ErrorMessage string Optional`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -6800,13 +6963,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `TotalLines int64 Optional`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -6828,13 +6991,13 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+        - `type BetaToolSearchToolResultBlockParamResp`
 
           - `Type ToolSearchToolResult`
 
           - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-            - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+            - `type BetaToolSearchToolResultErrorParamResp`
 
               - `Type ToolSearchToolResultError`
 
@@ -6850,7 +7013,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `ErrorMessage string Optional`
 
-            - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+            - `type BetaToolSearchToolSearchResultBlockParamResp`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -6874,7 +7037,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaMCPToolUseBlockParamResp struct{…}`
+        - `type BetaMCPToolUseBlockParamResp`
 
           - `Type MCPToolUse`
 
@@ -6894,7 +7057,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+        - `type BetaRequestMCPToolResultBlockParamResp`
 
           - `Type MCPToolResult`
 
@@ -6926,7 +7089,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `IsError bool Optional`
 
-        - `type BetaContainerUploadBlockParamResp struct{…}`
+        - `type BetaContainerUploadBlockParamResp`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -6939,7 +7102,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCompactionBlockParamResp struct{…}`
+        - `type BetaCompactionBlockParamResp`
 
           A compaction block containing summary of previous context.
 
@@ -6963,7 +7126,11 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaRequestToolAdditionBlock struct{…}`
+          - `Signature string Optional`
+
+            The block's signature as returned, to be sent back verbatim
+
+        - `type BetaRequestToolAdditionBlock`
 
           Mid-conversation directive to surface a declared tool.
 
@@ -6975,7 +7142,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -6988,7 +7155,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -6999,7 +7166,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               - `ServerName string`
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -7011,7 +7178,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestToolRemovalBlock struct{…}`
+        - `type BetaRequestToolRemovalBlock`
 
           Mid-conversation directive to withdraw a tool.
 
@@ -7023,19 +7190,19 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-            - `type BetaToolChangeToolReference struct{…}`
+            - `type BetaToolChangeToolReference`
 
               Reference to a single tool the caller declared directly in
               `tools[]`. Does not accept the composed `{server}_{name}` form the
               server assigns to MCP-resolved tools — use `mcp_tool_reference` or
               `mcp_toolset_reference` for those.
 
-            - `type BetaToolChangeMCPToolReference struct{…}`
+            - `type BetaToolChangeMCPToolReference`
 
               Reference to a single MCP tool by its server and remote name — the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
-            - `type BetaToolChangeMCPToolsetReference struct{…}`
+            - `type BetaToolChangeMCPToolsetReference`
 
               Reference to every tool in the named MCP server's toolset.
 
@@ -7043,7 +7210,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaFallbackBlockParamResp struct{…}`
+        - `type BetaFallbackBlockParamResp`
 
           A `fallback` block echoed back from a prior response.
 
@@ -7203,6 +7370,17 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
     Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+  - `Compaction param.Field[BetaCompactionConfig] Optional`
+
+    Body param: Compact the whole conversation and return a signed `compaction` block,
+    alone, that a later request sends back first in `messages`, in place of
+    the messages it summarizes. There is no trigger and no pause flag: sending
+    the parameter compacts, and nothing is sampled after the block.
+
+    The summarization prompt is the server's own unless `instructions` are
+    given, which then replace it for this request; a value that is empty or
+    only whitespace counts as absent.
+
   - `ContextManagement param.Field[BetaContextManagementConfig] Optional`
 
     Body param: Context management configuration.
@@ -7339,7 +7517,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
     See our [guide](../../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type BetaTool struct{…}`
+    - `type BetaTool`
 
       - `Type BetaToolType Optional`
 
@@ -7397,7 +7575,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20241022 struct{…}`
+    - `type BetaToolBash20241022`
 
       - `Type Bash20241022`
 
@@ -7431,7 +7609,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolBash20250124 struct{…}`
+    - `type BetaToolBash20250124`
 
       - `Type Bash20250124`
 
@@ -7465,7 +7643,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250522 struct{…}`
+    - `type BetaCodeExecutionTool20250522`
 
       - `Type CodeExecution20250522`
 
@@ -7497,7 +7675,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20250825 struct{…}`
+    - `type BetaCodeExecutionTool20250825`
 
       - `Type CodeExecution20250825`
 
@@ -7529,7 +7707,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260120 struct{…}`
+    - `type BetaCodeExecutionTool20260120`
 
       Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -7563,7 +7741,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaCodeExecutionTool20260521 struct{…}`
+    - `type BetaCodeExecutionTool20260521`
 
       Code execution tool with REPL state persistence.
 
@@ -7597,7 +7775,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaBrowserToolset20260801 struct{…}`
+    - `type BetaBrowserToolset20260801`
 
       The browser toolset: a single `tools[]` entry (carrying no
       `name`) that declares the browser tool family. The model is served
@@ -7991,7 +8169,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolComputerUse20241022 struct{…}`
+    - `type BetaToolComputerUse20241022`
 
       - `Type Computer20241022`
 
@@ -8043,7 +8221,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMemoryTool20250818 struct{…}`
+    - `type BetaMemoryTool20250818`
 
       - `Type Memory20250818`
 
@@ -8077,7 +8255,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20250124 struct{…}`
+    - `type BetaToolComputerUse20250124`
 
       - `Type Computer20250124`
 
@@ -8129,7 +8307,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20241022 struct{…}`
+    - `type BetaToolTextEditor20241022`
 
       - `Type TextEditor20241022`
 
@@ -8163,7 +8341,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolComputerUse20251124 struct{…}`
+    - `type BetaToolComputerUse20251124`
 
       - `Type Computer20251124`
 
@@ -8219,7 +8397,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaComputerToolset20260801 struct{…}`
+    - `type BetaComputerToolset20260801`
 
       The computer toolset: a single `tools[]` entry (carrying no
       `name`) that declares the computer tool family. The model is
@@ -8449,7 +8627,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-    - `type BetaToolTextEditor20250124 struct{…}`
+    - `type BetaToolTextEditor20250124`
 
       - `Type TextEditor20250124`
 
@@ -8483,7 +8661,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250429 struct{…}`
+    - `type BetaToolTextEditor20250429`
 
       - `Type TextEditor20250429`
 
@@ -8517,7 +8695,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolTextEditor20250728 struct{…}`
+    - `type BetaToolTextEditor20250728`
 
       - `Type TextEditor20250728`
 
@@ -8557,7 +8735,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20250305 struct{…}`
+    - `type BetaWebSearchTool20250305`
 
       - `Type WebSearch20250305`
 
@@ -8633,7 +8811,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
           maxLength: 255, minLength: 1
 
-    - `type BetaWebFetchTool20250910 struct{…}`
+    - `type BetaWebFetchTool20250910`
 
       - `Type WebFetch20250910`
 
@@ -8689,7 +8867,98 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebSearchTool20260209 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+        - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+          Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+            - `Type All`
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+            - `Type None`
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+            - `Type Only`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+            - `Type Except`
+
+            - `Tools []BetaWebFetchURLSourceToolReference`
+
+              - `Type ToolReference`
+
+              - `Name string`
+
+        - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+          Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+          - `type BetaWebFetchURLSourceOnly`
+
+            The tool filter variant under which only the named tools' results
+            contribute.
+
+          - `type BetaWebFetchURLSourceExcept`
+
+            The tool filter variant under which every result but the named
+            tools' contributes.
+
+        - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+          Whether URLs in user messages are fetchable: "all" or "none".
+
+          - `type BetaWebFetchURLSourceAll`
+
+            The `url_sources` variant under which a source contributes in
+            full: every result of the tool filter's source, or all user input.
+
+          - `type BetaWebFetchURLSourceNone`
+
+            The `url_sources` variant under which a source contributes nothing:
+            no result of the tool filter's source, or no user input.
+
+    - `type BetaWebSearchTool20260209`
 
       - `Type WebSearch20260209`
 
@@ -8739,7 +9008,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260209 struct{…}`
+    - `type BetaWebFetchTool20260209`
 
       - `Type WebFetch20260209`
 
@@ -8795,7 +9064,16 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaWebFetchTool20260309 struct{…}`
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
+    - `type BetaWebFetchTool20260309`
 
       Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -8853,11 +9131,20 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaWebSearchTool20260318 struct{…}`
+    - `type BetaWebSearchTool20260318`
 
       - `Type WebSearch20260318`
 
@@ -8915,7 +9202,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         Parameters for the user's location. Used to provide more relevant search results.
 
-    - `type BetaWebFetchTool20260318 struct{…}`
+    - `type BetaWebFetchTool20260318`
 
       - `Type WebFetch20260318`
 
@@ -8979,11 +9266,20 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
+      - `URLSources BetaWebFetchURLSources Optional`
+
+        Which sources contribute to the set of URLs web fetch may fetch.
+
+        Each key is a tagged variant: `user_input` is `all` or `none`; the
+        two tool filters are `all`, `none`, `only` (only the named tools'
+        results) or `except` (every result but the named tools'). A named tool
+        must be declared in this request's `tools[]`.
+
       - `UseCache bool Optional`
 
         Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-    - `type BetaAdvisorTool20260301 struct{…}`
+    - `type BetaAdvisorTool20260301`
 
       - `Type Advisor20260301`
 
@@ -9037,7 +9333,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolBm25_20251119 struct{…}`
+    - `type BetaToolSearchToolBm25_20251119`
 
       - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -9073,7 +9369,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaToolSearchToolRegex20251119 struct{…}`
+    - `type BetaToolSearchToolRegex20251119`
 
       - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -9109,7 +9405,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         When true, guarantees schema validation on tool names and inputs
 
-    - `type BetaMCPToolset struct{…}`
+    - `type BetaMCPToolset`
 
       Configuration for a group of tools from an MCP server.
 
@@ -9242,6 +9538,8 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
@@ -9262,7 +9560,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
 ### Returns
 
-- `type BetaMessageTokensCount struct{…}`
+- `type BetaMessageTokensCount`
 
   - `ContextManagement BetaCountTokensContextManagementResponse`
 
@@ -9326,7 +9624,7 @@ func main() {
 
 ### Beta Advisor Message Iteration Usage
 
-- `type BetaAdvisorMessageIterationUsage struct{…}`
+- `type BetaAdvisorMessageIterationUsage`
 
   Token usage for an advisor sub-inference iteration.
 
@@ -9460,7 +9758,7 @@ func main() {
 
 ### Beta Advisor Redacted Result Block
 
-- `type BetaAdvisorRedactedResultBlock struct{…}`
+- `type BetaAdvisorRedactedResultBlock`
 
   - `Type AdvisorRedactedResult`
 
@@ -9476,7 +9774,7 @@ func main() {
 
 ### Beta Advisor Redacted Result Block Param
 
-- `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+- `type BetaAdvisorRedactedResultBlockParamResp`
 
   - `Type AdvisorRedactedResult`
 
@@ -9488,7 +9786,7 @@ func main() {
 
 ### Beta Advisor Result Block
 
-- `type BetaAdvisorResultBlock struct{…}`
+- `type BetaAdvisorResultBlock`
 
   - `Type AdvisorResult`
 
@@ -9502,7 +9800,7 @@ func main() {
 
 ### Beta Advisor Result Block Param
 
-- `type BetaAdvisorResultBlockParamResp struct{…}`
+- `type BetaAdvisorResultBlockParamResp`
 
   - `Type AdvisorResult`
 
@@ -9512,7 +9810,7 @@ func main() {
 
 ### Beta Advisor Tool 20260301
 
-- `type BetaAdvisorTool20260301 struct{…}`
+- `type BetaAdvisorTool20260301`
 
   - `Type Advisor20260301`
 
@@ -9661,7 +9959,7 @@ func main() {
 
 ### Beta Advisor Tool Result Block
 
-- `type BetaAdvisorToolResultBlock struct{…}`
+- `type BetaAdvisorToolResultBlock`
 
   - `Type AdvisorToolResult`
 
@@ -9669,7 +9967,7 @@ func main() {
 
   - `Content BetaAdvisorToolResultBlockContentUnion`
 
-    - `type BetaAdvisorToolResultError struct{…}`
+    - `type BetaAdvisorToolResultError`
 
       - `Type AdvisorToolResultError`
 
@@ -9691,7 +9989,7 @@ func main() {
 
         - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-    - `type BetaAdvisorResultBlock struct{…}`
+    - `type BetaAdvisorResultBlock`
 
       - `Type AdvisorResult`
 
@@ -9703,7 +10001,7 @@ func main() {
 
       - `Text string`
 
-    - `type BetaAdvisorRedactedResultBlock struct{…}`
+    - `type BetaAdvisorRedactedResultBlock`
 
       - `Type AdvisorRedactedResult`
 
@@ -9723,13 +10021,13 @@ func main() {
 
 ### Beta Advisor Tool Result Block Param
 
-- `type BetaAdvisorToolResultBlockParamResp struct{…}`
+- `type BetaAdvisorToolResultBlockParamResp`
 
   - `Type AdvisorToolResult`
 
   - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-    - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+    - `type BetaAdvisorToolResultErrorParamResp`
 
       - `Type AdvisorToolResultError`
 
@@ -9749,7 +10047,7 @@ func main() {
 
         - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-    - `type BetaAdvisorResultBlockParamResp struct{…}`
+    - `type BetaAdvisorResultBlockParamResp`
 
       - `Type AdvisorResult`
 
@@ -9757,7 +10055,7 @@ func main() {
 
       - `StopReason string Optional`
 
-    - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+    - `type BetaAdvisorRedactedResultBlockParamResp`
 
       - `Type AdvisorRedactedResult`
 
@@ -9794,7 +10092,7 @@ func main() {
 
 ### Beta Advisor Tool Result Error
 
-- `type BetaAdvisorToolResultError struct{…}`
+- `type BetaAdvisorToolResultError`
 
   - `Type AdvisorToolResultError`
 
@@ -9818,7 +10116,7 @@ func main() {
 
 ### Beta Advisor Tool Result Error Param
 
-- `type BetaAdvisorToolResultErrorParamResp struct{…}`
+- `type BetaAdvisorToolResultErrorParamResp`
 
   - `Type AdvisorToolResultError`
 
@@ -9840,13 +10138,13 @@ func main() {
 
 ### Beta All Thinking Turns
 
-- `type BetaAllThinkingTurns struct{…}`
+- `type BetaAllThinkingTurns`
 
   - `Type All`
 
 ### Beta Base64 Image Source
 
-- `type BetaBase64ImageSource struct{…}`
+- `type BetaBase64ImageSource`
 
   - `Type Base64`
 
@@ -9866,7 +10164,7 @@ func main() {
 
 ### Beta Base64 PDF Source
 
-- `type BetaBase64PDFSource struct{…}`
+- `type BetaBase64PDFSource`
 
   - `Type Base64`
 
@@ -9878,7 +10176,7 @@ func main() {
 
 ### Beta Bash Code Execution Output Block
 
-- `type BetaBashCodeExecutionOutputBlock struct{…}`
+- `type BetaBashCodeExecutionOutputBlock`
 
   - `Type BashCodeExecutionOutput`
 
@@ -9888,7 +10186,7 @@ func main() {
 
 ### Beta Bash Code Execution Output Block Param
 
-- `type BetaBashCodeExecutionOutputBlockParamResp struct{…}`
+- `type BetaBashCodeExecutionOutputBlockParamResp`
 
   - `Type BashCodeExecutionOutput`
 
@@ -9896,7 +10194,7 @@ func main() {
 
 ### Beta Bash Code Execution Result Block
 
-- `type BetaBashCodeExecutionResultBlock struct{…}`
+- `type BetaBashCodeExecutionResultBlock`
 
   - `Type BashCodeExecutionResult`
 
@@ -9918,7 +10216,7 @@ func main() {
 
 ### Beta Bash Code Execution Result Block Param
 
-- `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+- `type BetaBashCodeExecutionResultBlockParamResp`
 
   - `Type BashCodeExecutionResult`
 
@@ -9936,7 +10234,7 @@ func main() {
 
 ### Beta Bash Code Execution Tool Result Block
 
-- `type BetaBashCodeExecutionToolResultBlock struct{…}`
+- `type BetaBashCodeExecutionToolResultBlock`
 
   - `Type BashCodeExecutionToolResult`
 
@@ -9944,7 +10242,7 @@ func main() {
 
   - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-    - `type BetaBashCodeExecutionToolResultError struct{…}`
+    - `type BetaBashCodeExecutionToolResultError`
 
       - `Type BashCodeExecutionToolResultError`
 
@@ -9962,7 +10260,7 @@ func main() {
 
         - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-    - `type BetaBashCodeExecutionResultBlock struct{…}`
+    - `type BetaBashCodeExecutionResultBlock`
 
       - `Type BashCodeExecutionResult`
 
@@ -9988,13 +10286,13 @@ func main() {
 
 ### Beta Bash Code Execution Tool Result Block Param
 
-- `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+- `type BetaBashCodeExecutionToolResultBlockParamResp`
 
   - `Type BashCodeExecutionToolResult`
 
   - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-    - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+    - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
       - `Type BashCodeExecutionToolResultError`
 
@@ -10010,7 +10308,7 @@ func main() {
 
         - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-    - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+    - `type BetaBashCodeExecutionResultBlockParamResp`
 
       - `Type BashCodeExecutionResult`
 
@@ -10053,7 +10351,7 @@ func main() {
 
 ### Beta Bash Code Execution Tool Result Error
 
-- `type BetaBashCodeExecutionToolResultError struct{…}`
+- `type BetaBashCodeExecutionToolResultError`
 
   - `Type BashCodeExecutionToolResultError`
 
@@ -10073,7 +10371,7 @@ func main() {
 
 ### Beta Bash Code Execution Tool Result Error Param
 
-- `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+- `type BetaBashCodeExecutionToolResultErrorParamResp`
 
   - `Type BashCodeExecutionToolResultError`
 
@@ -10091,7 +10389,7 @@ func main() {
 
 ### Beta Browser Close Tab Config
 
-- `type BetaBrowserCloseTabConfig struct{…}`
+- `type BetaBrowserCloseTabConfig`
 
   `close_tab`'s config overrides.
 
@@ -10105,7 +10403,7 @@ func main() {
 
 ### Beta Browser Double Click Config
 
-- `type BetaBrowserDoubleClickConfig struct{…}`
+- `type BetaBrowserDoubleClickConfig`
 
   `double_click`'s config overrides.
 
@@ -10119,7 +10417,7 @@ func main() {
 
 ### Beta Browser File Upload Config
 
-- `type BetaBrowserFileUploadConfig struct{…}`
+- `type BetaBrowserFileUploadConfig`
 
   `file_upload`'s config overrides.
 
@@ -10133,7 +10431,7 @@ func main() {
 
 ### Beta Browser Find Config
 
-- `type BetaBrowserFindConfig struct{…}`
+- `type BetaBrowserFindConfig`
 
   `find`'s config overrides.
 
@@ -10147,7 +10445,7 @@ func main() {
 
 ### Beta Browser Form Input Config
 
-- `type BetaBrowserFormInputConfig struct{…}`
+- `type BetaBrowserFormInputConfig`
 
   `form_input`'s config overrides.
 
@@ -10161,7 +10459,7 @@ func main() {
 
 ### Beta Browser Get Page Text Config
 
-- `type BetaBrowserGetPageTextConfig struct{…}`
+- `type BetaBrowserGetPageTextConfig`
 
   `get_page_text`'s config overrides.
 
@@ -10175,7 +10473,7 @@ func main() {
 
 ### Beta Browser Hold Key Config
 
-- `type BetaBrowserHoldKeyConfig struct{…}`
+- `type BetaBrowserHoldKeyConfig`
 
   `hold_key`'s config overrides.
 
@@ -10189,7 +10487,7 @@ func main() {
 
 ### Beta Browser Hover Config
 
-- `type BetaBrowserHoverConfig struct{…}`
+- `type BetaBrowserHoverConfig`
 
   `hover`'s config overrides.
 
@@ -10203,7 +10501,7 @@ func main() {
 
 ### Beta Browser Javascript Exec Config
 
-- `type BetaBrowserJavascriptExecConfig struct{…}`
+- `type BetaBrowserJavascriptExecConfig`
 
   `javascript_exec`'s config overrides.
 
@@ -10217,7 +10515,7 @@ func main() {
 
 ### Beta Browser Key Config
 
-- `type BetaBrowserKeyConfig struct{…}`
+- `type BetaBrowserKeyConfig`
 
   `key`'s config overrides.
 
@@ -10231,7 +10529,7 @@ func main() {
 
 ### Beta Browser Left Click Config
 
-- `type BetaBrowserLeftClickConfig struct{…}`
+- `type BetaBrowserLeftClickConfig`
 
   `left_click`'s config overrides.
 
@@ -10245,7 +10543,7 @@ func main() {
 
 ### Beta Browser Left Click Drag Config
 
-- `type BetaBrowserLeftClickDragConfig struct{…}`
+- `type BetaBrowserLeftClickDragConfig`
 
   `left_click_drag`'s config overrides.
 
@@ -10259,7 +10557,7 @@ func main() {
 
 ### Beta Browser Left Mouse Down Config
 
-- `type BetaBrowserLeftMouseDownConfig struct{…}`
+- `type BetaBrowserLeftMouseDownConfig`
 
   `left_mouse_down`'s config overrides.
 
@@ -10273,7 +10571,7 @@ func main() {
 
 ### Beta Browser Left Mouse Up Config
 
-- `type BetaBrowserLeftMouseUpConfig struct{…}`
+- `type BetaBrowserLeftMouseUpConfig`
 
   `left_mouse_up`'s config overrides.
 
@@ -10287,7 +10585,7 @@ func main() {
 
 ### Beta Browser List Tabs Config
 
-- `type BetaBrowserListTabsConfig struct{…}`
+- `type BetaBrowserListTabsConfig`
 
   `list_tabs`'s config overrides.
 
@@ -10301,7 +10599,7 @@ func main() {
 
 ### Beta Browser Middle Click Config
 
-- `type BetaBrowserMiddleClickConfig struct{…}`
+- `type BetaBrowserMiddleClickConfig`
 
   `middle_click`'s config overrides.
 
@@ -10315,7 +10613,7 @@ func main() {
 
 ### Beta Browser Mouse Move Config
 
-- `type BetaBrowserMouseMoveConfig struct{…}`
+- `type BetaBrowserMouseMoveConfig`
 
   `mouse_move`'s config overrides.
 
@@ -10329,7 +10627,7 @@ func main() {
 
 ### Beta Browser Navigate Config
 
-- `type BetaBrowserNavigateConfig struct{…}`
+- `type BetaBrowserNavigateConfig`
 
   `navigate`'s config overrides.
 
@@ -10343,7 +10641,7 @@ func main() {
 
 ### Beta Browser New Tab Config
 
-- `type BetaBrowserNewTabConfig struct{…}`
+- `type BetaBrowserNewTabConfig`
 
   `new_tab`'s config overrides.
 
@@ -10357,7 +10655,7 @@ func main() {
 
 ### Beta Browser Read Console Config
 
-- `type BetaBrowserReadConsoleConfig struct{…}`
+- `type BetaBrowserReadConsoleConfig`
 
   `read_console`'s config overrides.
 
@@ -10371,7 +10669,7 @@ func main() {
 
 ### Beta Browser Read Network Config
 
-- `type BetaBrowserReadNetworkConfig struct{…}`
+- `type BetaBrowserReadNetworkConfig`
 
   `read_network`'s config overrides.
 
@@ -10385,7 +10683,7 @@ func main() {
 
 ### Beta Browser Read Page Config
 
-- `type BetaBrowserReadPageConfig struct{…}`
+- `type BetaBrowserReadPageConfig`
 
   `read_page`'s config overrides.
 
@@ -10399,7 +10697,7 @@ func main() {
 
 ### Beta Browser Right Click Config
 
-- `type BetaBrowserRightClickConfig struct{…}`
+- `type BetaBrowserRightClickConfig`
 
   `right_click`'s config overrides.
 
@@ -10413,7 +10711,7 @@ func main() {
 
 ### Beta Browser Screenshot Config
 
-- `type BetaBrowserScreenshotConfig struct{…}`
+- `type BetaBrowserScreenshotConfig`
 
   `screenshot`'s config overrides.
 
@@ -10427,7 +10725,7 @@ func main() {
 
 ### Beta Browser Scroll Config
 
-- `type BetaBrowserScrollConfig struct{…}`
+- `type BetaBrowserScrollConfig`
 
   `scroll`'s config overrides.
 
@@ -10441,7 +10739,7 @@ func main() {
 
 ### Beta Browser Scroll To Config
 
-- `type BetaBrowserScrollToConfig struct{…}`
+- `type BetaBrowserScrollToConfig`
 
   `scroll_to`'s config overrides.
 
@@ -10455,7 +10753,7 @@ func main() {
 
 ### Beta Browser State Block Param
 
-- `type BetaBrowserStateBlockParamResp struct{…}`
+- `type BetaBrowserStateBlockParamResp`
 
   The caller's browser state after a browser toolset member call —
   the full inventory of open tabs, which tab is active, and any side
@@ -10522,7 +10820,7 @@ func main() {
 
     maxItems: 200, minItems: 1
 
-    - `type BetaBrowserStateChangeTabOpened struct{…}`
+    - `type BetaBrowserStateChangeTabOpened`
 
       A tab this call's execution opened that remains open at its end —
       the creation delta of the `tabs` inventory, not an event log.
@@ -10540,7 +10838,7 @@ func main() {
 
         maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+    - `type BetaBrowserStateChangeDownloadStarted`
 
       A file download that started during this call.
 
@@ -10558,7 +10856,7 @@ func main() {
 
         maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-    - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+    - `type BetaBrowserStateChangeDownloadCompleted`
 
       A file download that finished during this call, reported with the
       same `download_id` as its `download_started` — or without a prior
@@ -10591,7 +10889,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+    - `type BetaBrowserStateChangeDownloadFailed`
 
       A file download that failed — or was cancelled — during this call.
 
@@ -10619,7 +10917,7 @@ func main() {
 
 - `type BetaBrowserStateChangeUnion interface{…}`
 
-  - `type BetaBrowserStateChangeTabOpened struct{…}`
+  - `type BetaBrowserStateChangeTabOpened`
 
     A tab this call's execution opened that remains open at its end —
     the creation delta of the `tabs` inventory, not an event log.
@@ -10637,7 +10935,7 @@ func main() {
 
       maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+  - `type BetaBrowserStateChangeDownloadStarted`
 
     A file download that started during this call.
 
@@ -10655,7 +10953,7 @@ func main() {
 
       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+  - `type BetaBrowserStateChangeDownloadCompleted`
 
     A file download that finished during this call, reported with the
     same `download_id` as its `download_started` — or without a prior
@@ -10688,7 +10986,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+  - `type BetaBrowserStateChangeDownloadFailed`
 
     A file download that failed — or was cancelled — during this call.
 
@@ -10714,7 +11012,7 @@ func main() {
 
 ### Beta Browser State Change Download Completed
 
-- `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+- `type BetaBrowserStateChangeDownloadCompleted`
 
   A file download that finished during this call, reported with the
   same `download_id` as its `download_started` — or without a prior
@@ -10749,7 +11047,7 @@ func main() {
 
 ### Beta Browser State Change Download Failed
 
-- `type BetaBrowserStateChangeDownloadFailed struct{…}`
+- `type BetaBrowserStateChangeDownloadFailed`
 
   A file download that failed — or was cancelled — during this call.
 
@@ -10775,7 +11073,7 @@ func main() {
 
 ### Beta Browser State Change Download Started
 
-- `type BetaBrowserStateChangeDownloadStarted struct{…}`
+- `type BetaBrowserStateChangeDownloadStarted`
 
   A file download that started during this call.
 
@@ -10795,7 +11093,7 @@ func main() {
 
 ### Beta Browser State Change Tab Opened
 
-- `type BetaBrowserStateChangeTabOpened struct{…}`
+- `type BetaBrowserStateChangeTabOpened`
 
   A tab this call's execution opened that remains open at its end —
   the creation delta of the `tabs` inventory, not an event log.
@@ -10815,7 +11113,7 @@ func main() {
 
 ### Beta Browser State Tab Entry
 
-- `type BetaBrowserStateTabEntry struct{…}`
+- `type BetaBrowserStateTabEntry`
 
   One open browser tab reported in a `browser_state` block's `tabs`
   inventory.
@@ -10850,7 +11148,7 @@ func main() {
 
 ### Beta Browser Switch Tab Config
 
-- `type BetaBrowserSwitchTabConfig struct{…}`
+- `type BetaBrowserSwitchTabConfig`
 
   `switch_tab`'s config overrides.
 
@@ -10864,7 +11162,7 @@ func main() {
 
 ### Beta Browser Toolset 20260801
 
-- `type BetaBrowserToolset20260801 struct{…}`
+- `type BetaBrowserToolset20260801`
 
   The browser toolset: a single `tools[]` entry (carrying no
   `name`) that declares the browser tool family. The model is served
@@ -11277,7 +11575,7 @@ func main() {
 
 ### Beta Browser Toolset Configs
 
-- `type BetaBrowserToolsetConfigs struct{…}`
+- `type BetaBrowserToolsetConfigs`
 
   Per-member configuration for `browser_toolset_20260801`: one
   optional field per member tool, keyed by the member name — the same
@@ -11660,7 +11958,7 @@ func main() {
 
 ### Beta Browser Triple Click Config
 
-- `type BetaBrowserTripleClickConfig struct{…}`
+- `type BetaBrowserTripleClickConfig`
 
   `triple_click`'s config overrides.
 
@@ -11674,7 +11972,7 @@ func main() {
 
 ### Beta Browser Type Config
 
-- `type BetaBrowserTypeConfig struct{…}`
+- `type BetaBrowserTypeConfig`
 
   `type`'s config overrides.
 
@@ -11688,7 +11986,7 @@ func main() {
 
 ### Beta Browser Wait Config
 
-- `type BetaBrowserWaitConfig struct{…}`
+- `type BetaBrowserWaitConfig`
 
   `wait`'s config overrides.
 
@@ -11702,7 +12000,7 @@ func main() {
 
 ### Beta Browser Zoom Config
 
-- `type BetaBrowserZoomConfig struct{…}`
+- `type BetaBrowserZoomConfig`
 
   `zoom`'s config overrides.
 
@@ -11716,7 +12014,7 @@ func main() {
 
 ### Beta Cache Control Ephemeral
 
-- `type BetaCacheControlEphemeral struct{…}`
+- `type BetaCacheControlEphemeral`
 
   - `Type Ephemeral`
 
@@ -11737,7 +12035,7 @@ func main() {
 
 ### Beta Cache Creation
 
-- `type BetaCacheCreation struct{…}`
+- `type BetaCacheCreation`
 
   - `Ephemeral1hInputTokens int64`
 
@@ -11753,7 +12051,7 @@ func main() {
 
 ### Beta Cache Miss Messages Changed
 
-- `type BetaCacheMissMessagesChanged struct{…}`
+- `type BetaCacheMissMessagesChanged`
 
   - `Type MessagesChanged`
 
@@ -11765,7 +12063,7 @@ func main() {
 
 ### Beta Cache Miss Model Changed
 
-- `type BetaCacheMissModelChanged struct{…}`
+- `type BetaCacheMissModelChanged`
 
   - `Type ModelChanged`
 
@@ -11777,7 +12075,7 @@ func main() {
 
 ### Beta Cache Miss Previous Message Not Found
 
-- `type BetaCacheMissPreviousMessageNotFound struct{…}`
+- `type BetaCacheMissPreviousMessageNotFound`
 
   - `Type PreviousMessageNotFound`
 
@@ -11785,7 +12083,7 @@ func main() {
 
 ### Beta Cache Miss System Changed
 
-- `type BetaCacheMissSystemChanged struct{…}`
+- `type BetaCacheMissSystemChanged`
 
   - `Type SystemChanged`
 
@@ -11797,7 +12095,7 @@ func main() {
 
 ### Beta Cache Miss Tools Changed
 
-- `type BetaCacheMissToolsChanged struct{…}`
+- `type BetaCacheMissToolsChanged`
 
   - `Type ToolsChanged`
 
@@ -11809,7 +12107,7 @@ func main() {
 
 ### Beta Cache Miss Unavailable
 
-- `type BetaCacheMissUnavailable struct{…}`
+- `type BetaCacheMissUnavailable`
 
   - `Type Unavailable`
 
@@ -11817,7 +12115,7 @@ func main() {
 
 ### Beta Citation Char Location
 
-- `type BetaCitationCharLocation struct{…}`
+- `type BetaCitationCharLocation`
 
   - `Type CharLocation`
 
@@ -11841,7 +12139,7 @@ func main() {
 
 ### Beta Citation Char Location Param
 
-- `type BetaCitationCharLocationParamResp struct{…}`
+- `type BetaCitationCharLocationParamResp`
 
   - `Type CharLocation`
 
@@ -11863,7 +12161,7 @@ func main() {
 
 ### Beta Citation Config
 
-- `type BetaCitationConfig struct{…}`
+- `type BetaCitationConfig`
 
   - `Enabled bool`
 
@@ -11871,7 +12169,7 @@ func main() {
 
 ### Beta Citation Content Block Location
 
-- `type BetaCitationContentBlockLocation struct{…}`
+- `type BetaCitationContentBlockLocation`
 
   - `Type ContentBlockLocation`
 
@@ -11905,7 +12203,7 @@ func main() {
 
 ### Beta Citation Content Block Location Param
 
-- `type BetaCitationContentBlockLocationParamResp struct{…}`
+- `type BetaCitationContentBlockLocationParamResp`
 
   - `Type ContentBlockLocation`
 
@@ -11937,7 +12235,7 @@ func main() {
 
 ### Beta Citation Page Location
 
-- `type BetaCitationPageLocation struct{…}`
+- `type BetaCitationPageLocation`
 
   - `Type PageLocation`
 
@@ -11961,7 +12259,7 @@ func main() {
 
 ### Beta Citation Page Location Param
 
-- `type BetaCitationPageLocationParamResp struct{…}`
+- `type BetaCitationPageLocationParamResp`
 
   - `Type PageLocation`
 
@@ -11983,7 +12281,7 @@ func main() {
 
 ### Beta Citation Search Result Location
 
-- `type BetaCitationSearchResultLocation struct{…}`
+- `type BetaCitationSearchResultLocation`
 
   - `Type SearchResultLocation`
 
@@ -12021,7 +12319,7 @@ func main() {
 
 ### Beta Citation Search Result Location Param
 
-- `type BetaCitationSearchResultLocationParamResp struct{…}`
+- `type BetaCitationSearchResultLocationParamResp`
 
   - `Type SearchResultLocation`
 
@@ -12057,7 +12355,7 @@ func main() {
 
 ### Beta Citation Web Search Result Location Param
 
-- `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+- `type BetaCitationWebSearchResultLocationParamResp`
 
   - `Type WebSearchResultLocation`
 
@@ -12075,13 +12373,13 @@ func main() {
 
 ### Beta Citations Config Param
 
-- `type BetaCitationsConfigParamResp struct{…}`
+- `type BetaCitationsConfigParamResp`
 
   - `Enabled bool Optional`
 
 ### Beta Citations Delta
 
-- `type BetaCitationsDelta struct{…}`
+- `type BetaCitationsDelta`
 
   - `Type CitationsDelta`
 
@@ -12089,7 +12387,7 @@ func main() {
 
   - `Citation BetaCitationsDeltaCitationUnion`
 
-    - `type BetaCitationCharLocation struct{…}`
+    - `type BetaCitationCharLocation`
 
       - `Type CharLocation`
 
@@ -12111,7 +12409,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCitationPageLocation struct{…}`
+    - `type BetaCitationPageLocation`
 
       - `Type PageLocation`
 
@@ -12133,7 +12431,7 @@ func main() {
 
         minimum: 1
 
-    - `type BetaCitationContentBlockLocation struct{…}`
+    - `type BetaCitationContentBlockLocation`
 
       - `Type ContentBlockLocation`
 
@@ -12165,7 +12463,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCitationsWebSearchResultLocation struct{…}`
+    - `type BetaCitationsWebSearchResultLocation`
 
       - `Type WebSearchResultLocation`
 
@@ -12181,7 +12479,7 @@ func main() {
 
       - `URL string`
 
-    - `type BetaCitationSearchResultLocation struct{…}`
+    - `type BetaCitationSearchResultLocation`
 
       - `Type SearchResultLocation`
 
@@ -12219,7 +12517,7 @@ func main() {
 
 ### Beta Citations Web Search Result Location
 
-- `type BetaCitationsWebSearchResultLocation struct{…}`
+- `type BetaCitationsWebSearchResultLocation`
 
   - `Type WebSearchResultLocation`
 
@@ -12237,7 +12535,7 @@ func main() {
 
 ### Beta Clear Thinking 20251015 Edit
 
-- `type BetaClearThinking20251015Edit struct{…}`
+- `type BetaClearThinking20251015Edit`
 
   - `Type ClearThinking20251015`
 
@@ -12245,7 +12543,7 @@ func main() {
 
     Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-    - `type BetaThinkingTurns struct{…}`
+    - `type BetaThinkingTurns`
 
       - `Type ThinkingTurns`
 
@@ -12253,7 +12551,7 @@ func main() {
 
         minimum: 1
 
-    - `type BetaAllThinkingTurns struct{…}`
+    - `type BetaAllThinkingTurns`
 
       - `Type All`
 
@@ -12261,7 +12559,7 @@ func main() {
 
 ### Beta Clear Thinking 20251015 Edit Response
 
-- `type BetaClearThinking20251015EditResponse struct{…}`
+- `type BetaClearThinking20251015EditResponse`
 
   - `Type ClearThinking20251015`
 
@@ -12283,7 +12581,7 @@ func main() {
 
 ### Beta Clear Tool Uses 20250919 Edit
 
-- `type BetaClearToolUses20250919Edit struct{…}`
+- `type BetaClearToolUses20250919Edit`
 
   - `Type ClearToolUses20250919`
 
@@ -12323,7 +12621,7 @@ func main() {
 
     Condition that triggers the context management strategy
 
-    - `type BetaInputTokensTrigger struct{…}`
+    - `type BetaInputTokensTrigger`
 
       - `Type InputTokens`
 
@@ -12331,7 +12629,7 @@ func main() {
 
         minimum: 1
 
-    - `type BetaToolUsesTrigger struct{…}`
+    - `type BetaToolUsesTrigger`
 
       - `Type ToolUses`
 
@@ -12341,7 +12639,7 @@ func main() {
 
 ### Beta Clear Tool Uses 20250919 Edit Response
 
-- `type BetaClearToolUses20250919EditResponse struct{…}`
+- `type BetaClearToolUses20250919EditResponse`
 
   - `Type ClearToolUses20250919`
 
@@ -12363,7 +12661,7 @@ func main() {
 
 ### Beta Code Execution Output Block
 
-- `type BetaCodeExecutionOutputBlock struct{…}`
+- `type BetaCodeExecutionOutputBlock`
 
   - `Type CodeExecutionOutput`
 
@@ -12373,7 +12671,7 @@ func main() {
 
 ### Beta Code Execution Output Block Param
 
-- `type BetaCodeExecutionOutputBlockParamResp struct{…}`
+- `type BetaCodeExecutionOutputBlockParamResp`
 
   - `Type CodeExecutionOutput`
 
@@ -12381,7 +12679,7 @@ func main() {
 
 ### Beta Code Execution Result Block
 
-- `type BetaCodeExecutionResultBlock struct{…}`
+- `type BetaCodeExecutionResultBlock`
 
   - `Type CodeExecutionResult`
 
@@ -12403,7 +12701,7 @@ func main() {
 
 ### Beta Code Execution Result Block Param
 
-- `type BetaCodeExecutionResultBlockParamResp struct{…}`
+- `type BetaCodeExecutionResultBlockParamResp`
 
   - `Type CodeExecutionResult`
 
@@ -12421,7 +12719,7 @@ func main() {
 
 ### Beta Code Execution Tool 20250522
 
-- `type BetaCodeExecutionTool20250522 struct{…}`
+- `type BetaCodeExecutionTool20250522`
 
   - `Type CodeExecution20250522`
 
@@ -12472,7 +12770,7 @@ func main() {
 
 ### Beta Code Execution Tool 20250825
 
-- `type BetaCodeExecutionTool20250825 struct{…}`
+- `type BetaCodeExecutionTool20250825`
 
   - `Type CodeExecution20250825`
 
@@ -12523,7 +12821,7 @@ func main() {
 
 ### Beta Code Execution Tool 20260120
 
-- `type BetaCodeExecutionTool20260120 struct{…}`
+- `type BetaCodeExecutionTool20260120`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -12576,7 +12874,7 @@ func main() {
 
 ### Beta Code Execution Tool 20260521
 
-- `type BetaCodeExecutionTool20260521 struct{…}`
+- `type BetaCodeExecutionTool20260521`
 
   Code execution tool with REPL state persistence.
 
@@ -12629,7 +12927,7 @@ func main() {
 
 ### Beta Code Execution Tool Result Block
 
-- `type BetaCodeExecutionToolResultBlock struct{…}`
+- `type BetaCodeExecutionToolResultBlock`
 
   - `Type CodeExecutionToolResult`
 
@@ -12637,7 +12935,7 @@ func main() {
 
   - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-    - `type BetaCodeExecutionToolResultError struct{…}`
+    - `type BetaCodeExecutionToolResultError`
 
       - `Type CodeExecutionToolResultError`
 
@@ -12653,7 +12951,7 @@ func main() {
 
         - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-    - `type BetaCodeExecutionResultBlock struct{…}`
+    - `type BetaCodeExecutionResultBlock`
 
       - `Type CodeExecutionResult`
 
@@ -12673,7 +12971,7 @@ func main() {
 
       - `Stdout string`
 
-    - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+    - `type BetaEncryptedCodeExecutionResultBlock`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12703,7 +13001,7 @@ func main() {
 
 - `type BetaCodeExecutionToolResultBlockContentUnion interface{…}`
 
-  - `type BetaCodeExecutionToolResultError struct{…}`
+  - `type BetaCodeExecutionToolResultError`
 
     - `Type CodeExecutionToolResultError`
 
@@ -12719,7 +13017,7 @@ func main() {
 
       - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-  - `type BetaCodeExecutionResultBlock struct{…}`
+  - `type BetaCodeExecutionResultBlock`
 
     - `Type CodeExecutionResult`
 
@@ -12739,7 +13037,7 @@ func main() {
 
     - `Stdout string`
 
-  - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+  - `type BetaEncryptedCodeExecutionResultBlock`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12763,13 +13061,13 @@ func main() {
 
 ### Beta Code Execution Tool Result Block Param
 
-- `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+- `type BetaCodeExecutionToolResultBlockParamResp`
 
   - `Type CodeExecutionToolResult`
 
   - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-    - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+    - `type BetaCodeExecutionToolResultErrorParamResp`
 
       - `Type CodeExecutionToolResultError`
 
@@ -12783,7 +13081,7 @@ func main() {
 
         - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-    - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+    - `type BetaCodeExecutionResultBlockParamResp`
 
       - `Type CodeExecutionResult`
 
@@ -12799,7 +13097,7 @@ func main() {
 
       - `Stdout string`
 
-    - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+    - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
       Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12846,7 +13144,7 @@ func main() {
 
 - `type BetaCodeExecutionToolResultBlockParamContentUnionResp interface{…}`
 
-  - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+  - `type BetaCodeExecutionToolResultErrorParamResp`
 
     - `Type CodeExecutionToolResultError`
 
@@ -12860,7 +13158,7 @@ func main() {
 
       - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-  - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+  - `type BetaCodeExecutionResultBlockParamResp`
 
     - `Type CodeExecutionResult`
 
@@ -12876,7 +13174,7 @@ func main() {
 
     - `Stdout string`
 
-  - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+  - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
     Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -12896,7 +13194,7 @@ func main() {
 
 ### Beta Code Execution Tool Result Error
 
-- `type BetaCodeExecutionToolResultError struct{…}`
+- `type BetaCodeExecutionToolResultError`
 
   - `Type CodeExecutionToolResultError`
 
@@ -12926,7 +13224,7 @@ func main() {
 
 ### Beta Code Execution Tool Result Error Param
 
-- `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+- `type BetaCodeExecutionToolResultErrorParamResp`
 
   - `Type CodeExecutionToolResultError`
 
@@ -12942,7 +13240,7 @@ func main() {
 
 ### Beta Compact 20260112 Edit
 
-- `type BetaCompact20260112Edit struct{…}`
+- `type BetaCompact20260112Edit`
 
   Automatically compact older context when reaching the configured trigger threshold.
 
@@ -12968,7 +13266,7 @@ func main() {
 
 ### Beta Compaction Block
 
-- `type BetaCompactionBlock struct{…}`
+- `type BetaCompactionBlock`
 
   A compaction block returned when autocompact is triggered.
 
@@ -12988,9 +13286,13 @@ func main() {
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
 
+  - `Signature string Optional`
+
+    Signature over the summary, to be sent back with the block verbatim
+
 ### Beta Compaction Block Param
 
-- `type BetaCompactionBlockParamResp struct{…}`
+- `type BetaCompactionBlockParamResp`
 
   A compaction block containing summary of previous context.
 
@@ -13031,9 +13333,34 @@ func main() {
 
     Opaque metadata from prior compaction, to be round-tripped verbatim
 
+  - `Signature string Optional`
+
+    The block's signature as returned, to be sent back verbatim
+
+### Beta Compaction Config
+
+- `type BetaCompactionConfig`
+
+  Compact the whole conversation and return a signed `compaction` block,
+  alone, that a later request sends back first in `messages`, in place of
+  the messages it summarizes. There is no trigger and no pause flag: sending
+  the parameter compacts, and nothing is sampled after the block.
+
+  The summarization prompt is the server's own unless `instructions` are
+  given, which then replace it for this request; a value that is empty or
+  only whitespace counts as absent.
+
+  - `Type Summarize`
+
+  - `Instructions string Optional`
+
+    Replaces the server's default summarization prompt for this request. An empty or whitespace-only value counts as absent.
+
+    maxLength: 16384
+
 ### Beta Compaction Content Block Delta
 
-- `type BetaCompactionContentBlockDelta struct{…}`
+- `type BetaCompactionContentBlockDelta`
 
   - `Type CompactionDelta`
 
@@ -13047,7 +13374,7 @@ func main() {
 
 ### Beta Compaction Iteration Usage
 
-- `type BetaCompactionIterationUsage struct{…}`
+- `type BetaCompactionIterationUsage`
 
   Token usage for a compaction iteration.
 
@@ -13099,7 +13426,7 @@ func main() {
 
 ### Beta Computer Cursor Position Config
 
-- `type BetaComputerCursorPositionConfig struct{…}`
+- `type BetaComputerCursorPositionConfig`
 
   `cursor_position`'s config overrides.
 
@@ -13113,7 +13440,7 @@ func main() {
 
 ### Beta Computer Double Click Config
 
-- `type BetaComputerDoubleClickConfig struct{…}`
+- `type BetaComputerDoubleClickConfig`
 
   `double_click`'s config overrides.
 
@@ -13127,7 +13454,7 @@ func main() {
 
 ### Beta Computer Hold Key Config
 
-- `type BetaComputerHoldKeyConfig struct{…}`
+- `type BetaComputerHoldKeyConfig`
 
   `hold_key`'s config overrides.
 
@@ -13141,7 +13468,7 @@ func main() {
 
 ### Beta Computer Key Config
 
-- `type BetaComputerKeyConfig struct{…}`
+- `type BetaComputerKeyConfig`
 
   `key`'s config overrides.
 
@@ -13155,7 +13482,7 @@ func main() {
 
 ### Beta Computer Left Click Config
 
-- `type BetaComputerLeftClickConfig struct{…}`
+- `type BetaComputerLeftClickConfig`
 
   `left_click`'s config overrides.
 
@@ -13169,7 +13496,7 @@ func main() {
 
 ### Beta Computer Left Click Drag Config
 
-- `type BetaComputerLeftClickDragConfig struct{…}`
+- `type BetaComputerLeftClickDragConfig`
 
   `left_click_drag`'s config overrides.
 
@@ -13183,7 +13510,7 @@ func main() {
 
 ### Beta Computer Left Mouse Down Config
 
-- `type BetaComputerLeftMouseDownConfig struct{…}`
+- `type BetaComputerLeftMouseDownConfig`
 
   `left_mouse_down`'s config overrides.
 
@@ -13197,7 +13524,7 @@ func main() {
 
 ### Beta Computer Left Mouse Up Config
 
-- `type BetaComputerLeftMouseUpConfig struct{…}`
+- `type BetaComputerLeftMouseUpConfig`
 
   `left_mouse_up`'s config overrides.
 
@@ -13211,7 +13538,7 @@ func main() {
 
 ### Beta Computer Middle Click Config
 
-- `type BetaComputerMiddleClickConfig struct{…}`
+- `type BetaComputerMiddleClickConfig`
 
   `middle_click`'s config overrides.
 
@@ -13225,7 +13552,7 @@ func main() {
 
 ### Beta Computer Mouse Move Config
 
-- `type BetaComputerMouseMoveConfig struct{…}`
+- `type BetaComputerMouseMoveConfig`
 
   `mouse_move`'s config overrides.
 
@@ -13239,7 +13566,7 @@ func main() {
 
 ### Beta Computer Right Click Config
 
-- `type BetaComputerRightClickConfig struct{…}`
+- `type BetaComputerRightClickConfig`
 
   `right_click`'s config overrides.
 
@@ -13253,7 +13580,7 @@ func main() {
 
 ### Beta Computer Screenshot Config
 
-- `type BetaComputerScreenshotConfig struct{…}`
+- `type BetaComputerScreenshotConfig`
 
   `screenshot`'s config overrides.
 
@@ -13267,7 +13594,7 @@ func main() {
 
 ### Beta Computer Scroll Config
 
-- `type BetaComputerScrollConfig struct{…}`
+- `type BetaComputerScrollConfig`
 
   `scroll`'s config overrides.
 
@@ -13281,7 +13608,7 @@ func main() {
 
 ### Beta Computer Toolset 20260801
 
-- `type BetaComputerToolset20260801 struct{…}`
+- `type BetaComputerToolset20260801`
 
   The computer toolset: a single `tools[]` entry (carrying no
   `name`) that declares the computer tool family. The model is
@@ -13530,7 +13857,7 @@ func main() {
 
 ### Beta Computer Toolset Configs
 
-- `type BetaComputerToolsetConfigs struct{…}`
+- `type BetaComputerToolsetConfigs`
 
   Per-member configuration for `computer_toolset_20260801`: one
   optional field per member tool, keyed by the member name — the same
@@ -13745,7 +14072,7 @@ func main() {
 
 ### Beta Computer Triple Click Config
 
-- `type BetaComputerTripleClickConfig struct{…}`
+- `type BetaComputerTripleClickConfig`
 
   `triple_click`'s config overrides.
 
@@ -13759,7 +14086,7 @@ func main() {
 
 ### Beta Computer Type Config
 
-- `type BetaComputerTypeConfig struct{…}`
+- `type BetaComputerTypeConfig`
 
   `type`'s config overrides.
 
@@ -13773,7 +14100,7 @@ func main() {
 
 ### Beta Computer Wait Config
 
-- `type BetaComputerWaitConfig struct{…}`
+- `type BetaComputerWaitConfig`
 
   `wait`'s config overrides.
 
@@ -13787,7 +14114,7 @@ func main() {
 
 ### Beta Computer Zoom Config
 
-- `type BetaComputerZoomConfig struct{…}`
+- `type BetaComputerZoomConfig`
 
   `zoom`'s config overrides.
 
@@ -13801,7 +14128,7 @@ func main() {
 
 ### Beta Container
 
-- `type BetaContainer struct{…}`
+- `type BetaContainer`
 
   Information about the container used in the request (for the code execution tool)
 
@@ -13841,7 +14168,7 @@ func main() {
 
 ### Beta Container Params
 
-- `type BetaContainerParamsResp struct{…}`
+- `type BetaContainerParamsResp`
 
   Container parameters with skills to be loaded.
 
@@ -13877,7 +14204,7 @@ func main() {
 
 ### Beta Container Skill
 
-- `type BetaContainerSkill struct{…}`
+- `type BetaContainerSkill`
 
   A skill that was loaded in a container (response model).
 
@@ -13903,7 +14230,7 @@ func main() {
 
 ### Beta Container Upload Block
 
-- `type BetaContainerUploadBlock struct{…}`
+- `type BetaContainerUploadBlock`
 
   Response model for a file uploaded to the container.
 
@@ -13915,7 +14242,7 @@ func main() {
 
 ### Beta Container Upload Block Param
 
-- `type BetaContainerUploadBlockParamResp struct{…}`
+- `type BetaContainerUploadBlockParamResp`
 
   A content block that represents a file to be uploaded to the container
   Files uploaded via this block will be available in the container's input directory.
@@ -13949,7 +14276,7 @@ func main() {
 
 - `type BetaContentBlockUnion interface{…}`
 
-  - `type BetaTextBlock struct{…}`
+  - `type BetaTextBlock`
 
     - `Type Text`
 
@@ -13961,7 +14288,7 @@ func main() {
 
       The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-      - `type BetaCitationCharLocation struct{…}`
+      - `type BetaCitationCharLocation`
 
         - `Type CharLocation`
 
@@ -13983,7 +14310,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationPageLocation struct{…}`
+      - `type BetaCitationPageLocation`
 
         - `Type PageLocation`
 
@@ -14005,7 +14332,7 @@ func main() {
 
           minimum: 1
 
-      - `type BetaCitationContentBlockLocation struct{…}`
+      - `type BetaCitationContentBlockLocation`
 
         - `Type ContentBlockLocation`
 
@@ -14037,7 +14364,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationsWebSearchResultLocation struct{…}`
+      - `type BetaCitationsWebSearchResultLocation`
 
         - `Type WebSearchResultLocation`
 
@@ -14053,7 +14380,7 @@ func main() {
 
         - `URL string`
 
-      - `type BetaCitationSearchResultLocation struct{…}`
+      - `type BetaCitationSearchResultLocation`
 
         - `Type SearchResultLocation`
 
@@ -14093,7 +14420,7 @@ func main() {
 
       minLength: 0
 
-  - `type BetaThinkingBlock struct{…}`
+  - `type BetaThinkingBlock`
 
     - `Type Thinking`
 
@@ -14111,7 +14438,7 @@ func main() {
 
       The text of Claude's thinking process for this block.
 
-  - `type BetaRedactedThinkingBlock struct{…}`
+  - `type BetaRedactedThinkingBlock`
 
     - `Type RedactedThinking`
 
@@ -14125,7 +14452,7 @@ func main() {
 
       See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-  - `type BetaToolUseBlock struct{…}`
+  - `type BetaToolUseBlock`
 
     - `Type ToolUse`
 
@@ -14143,13 +14470,13 @@ func main() {
 
     - `Caller BetaToolUseBlockCallerUnion Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
         - `Type Direct`
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
@@ -14159,7 +14486,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
         - `Type CodeExecution20260120`
 
@@ -14173,7 +14500,7 @@ func main() {
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type BetaServerToolUseBlock struct{…}`
+  - `type BetaServerToolUseBlock`
 
     - `Type ServerToolUse`
 
@@ -14205,17 +14532,17 @@ func main() {
 
     - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
-  - `type BetaWebSearchToolResultBlock struct{…}`
+  - `type BetaWebSearchToolResultBlock`
 
     - `Type WebSearchToolResult`
 
@@ -14223,7 +14550,7 @@ func main() {
 
     - `Content BetaWebSearchToolResultBlockContentUnion`
 
-      - `type BetaWebSearchToolResultError struct{…}`
+      - `type BetaWebSearchToolResultError`
 
         - `Type WebSearchToolResultError`
 
@@ -14263,17 +14590,17 @@ func main() {
 
     - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
-  - `type BetaWebFetchToolResultBlock struct{…}`
+  - `type BetaWebFetchToolResultBlock`
 
     - `Type WebFetchToolResult`
 
@@ -14281,7 +14608,7 @@ func main() {
 
     - `Content BetaWebFetchToolResultBlockContentUnion`
 
-      - `type BetaWebFetchToolResultErrorBlock struct{…}`
+      - `type BetaWebFetchToolResultErrorBlock`
 
         - `Type WebFetchToolResultError`
 
@@ -14309,7 +14636,7 @@ func main() {
 
           - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-      - `type BetaWebFetchBlock struct{…}`
+      - `type BetaWebFetchBlock`
 
         - `Type WebFetchResult`
 
@@ -14331,7 +14658,7 @@ func main() {
 
           - `Source BetaDocumentBlockSourceUnion`
 
-            - `type BetaBase64PDFSource struct{…}`
+            - `type BetaBase64PDFSource`
 
               - `Type Base64`
 
@@ -14341,7 +14668,7 @@ func main() {
 
               - `MediaType ApplicationPDF`
 
-            - `type BetaPlainTextSource struct{…}`
+            - `type BetaPlainTextSource`
 
               - `Type Text`
 
@@ -14367,17 +14694,17 @@ func main() {
 
     - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
-  - `type BetaAdvisorToolResultBlock struct{…}`
+  - `type BetaAdvisorToolResultBlock`
 
     - `Type AdvisorToolResult`
 
@@ -14385,7 +14712,7 @@ func main() {
 
     - `Content BetaAdvisorToolResultBlockContentUnion`
 
-      - `type BetaAdvisorToolResultError struct{…}`
+      - `type BetaAdvisorToolResultError`
 
         - `Type AdvisorToolResultError`
 
@@ -14407,7 +14734,7 @@ func main() {
 
           - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-      - `type BetaAdvisorResultBlock struct{…}`
+      - `type BetaAdvisorResultBlock`
 
         - `Type AdvisorResult`
 
@@ -14419,7 +14746,7 @@ func main() {
 
         - `Text string`
 
-      - `type BetaAdvisorRedactedResultBlock struct{…}`
+      - `type BetaAdvisorRedactedResultBlock`
 
         - `Type AdvisorRedactedResult`
 
@@ -14437,7 +14764,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type BetaCodeExecutionToolResultBlock struct{…}`
+  - `type BetaCodeExecutionToolResultBlock`
 
     - `Type CodeExecutionToolResult`
 
@@ -14445,7 +14772,7 @@ func main() {
 
     - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-      - `type BetaCodeExecutionToolResultError struct{…}`
+      - `type BetaCodeExecutionToolResultError`
 
         - `Type CodeExecutionToolResultError`
 
@@ -14461,7 +14788,7 @@ func main() {
 
           - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-      - `type BetaCodeExecutionResultBlock struct{…}`
+      - `type BetaCodeExecutionResultBlock`
 
         - `Type CodeExecutionResult`
 
@@ -14481,7 +14808,7 @@ func main() {
 
         - `Stdout string`
 
-      - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+      - `type BetaEncryptedCodeExecutionResultBlock`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -14507,7 +14834,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+  - `type BetaBashCodeExecutionToolResultBlock`
 
     - `Type BashCodeExecutionToolResult`
 
@@ -14515,7 +14842,7 @@ func main() {
 
     - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-      - `type BetaBashCodeExecutionToolResultError struct{…}`
+      - `type BetaBashCodeExecutionToolResultError`
 
         - `Type BashCodeExecutionToolResultError`
 
@@ -14533,7 +14860,7 @@ func main() {
 
           - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-      - `type BetaBashCodeExecutionResultBlock struct{…}`
+      - `type BetaBashCodeExecutionResultBlock`
 
         - `Type BashCodeExecutionResult`
 
@@ -14557,7 +14884,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+  - `type BetaTextEditorCodeExecutionToolResultBlock`
 
     - `Type TextEditorCodeExecutionToolResult`
 
@@ -14565,7 +14892,7 @@ func main() {
 
     - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-      - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultError`
 
         - `Type TextEditorCodeExecutionToolResultError`
 
@@ -14585,7 +14912,7 @@ func main() {
 
         - `ErrorMessage string`
 
-      - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionViewResultBlock`
 
         - `Type TextEditorCodeExecutionViewResult`
 
@@ -14607,7 +14934,7 @@ func main() {
 
         - `TotalLines int64`
 
-      - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
         - `Type TextEditorCodeExecutionCreateResult`
 
@@ -14615,7 +14942,7 @@ func main() {
 
         - `IsFileUpdate bool`
 
-      - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
         - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -14635,7 +14962,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type BetaToolSearchToolResultBlock struct{…}`
+  - `type BetaToolSearchToolResultBlock`
 
     - `Type ToolSearchToolResult`
 
@@ -14643,7 +14970,7 @@ func main() {
 
     - `Content BetaToolSearchToolResultBlockContentUnion`
 
-      - `type BetaToolSearchToolResultError struct{…}`
+      - `type BetaToolSearchToolResultError`
 
         - `Type ToolSearchToolResultError`
 
@@ -14661,7 +14988,7 @@ func main() {
 
         - `ErrorMessage string`
 
-      - `type BetaToolSearchToolSearchResultBlock struct{…}`
+      - `type BetaToolSearchToolSearchResultBlock`
 
         - `Type ToolSearchToolSearchResult`
 
@@ -14681,7 +15008,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `type BetaMCPToolUseBlock struct{…}`
+  - `type BetaMCPToolUseBlock`
 
     - `Type MCPToolUse`
 
@@ -14701,7 +15028,7 @@ func main() {
 
       The name of the MCP server
 
-  - `type BetaMCPToolResultBlock struct{…}`
+  - `type BetaMCPToolResultBlock`
 
     - `Type MCPToolResult`
 
@@ -14735,7 +15062,7 @@ func main() {
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type BetaContainerUploadBlock struct{…}`
+  - `type BetaContainerUploadBlock`
 
     Response model for a file uploaded to the container.
 
@@ -14745,7 +15072,7 @@ func main() {
 
     - `FileID string`
 
-  - `type BetaCompactionBlock struct{…}`
+  - `type BetaCompactionBlock`
 
     A compaction block returned when autocompact is triggered.
 
@@ -14765,7 +15092,11 @@ func main() {
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `type BetaFallbackBlock struct{…}`
+    - `Signature string Optional`
+
+      Signature over the summary, to be sent back with the block verbatim
+
+  - `type BetaFallbackBlock`
 
     Marks the point in `content` where one model's output gives way to the next.
 
@@ -14909,7 +15240,7 @@ func main() {
 
 - `type BetaContentBlockParamUnionResp interface{…}`
 
-  - `type BetaTextBlockParamResp struct{…}`
+  - `type BetaTextBlockParamResp`
 
     - `Type Text`
 
@@ -14940,7 +15271,7 @@ func main() {
 
     - `Citations []BetaTextCitationParamUnionResp Optional`
 
-      - `type BetaCitationCharLocationParamResp struct{…}`
+      - `type BetaCitationCharLocationParamResp`
 
         - `Type CharLocation`
 
@@ -14960,7 +15291,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationPageLocationParamResp struct{…}`
+      - `type BetaCitationPageLocationParamResp`
 
         - `Type PageLocation`
 
@@ -14980,7 +15311,7 @@ func main() {
 
           minimum: 1
 
-      - `type BetaCitationContentBlockLocationParamResp struct{…}`
+      - `type BetaCitationContentBlockLocationParamResp`
 
         - `Type ContentBlockLocation`
 
@@ -15010,7 +15341,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+      - `type BetaCitationWebSearchResultLocationParamResp`
 
         - `Type WebSearchResultLocation`
 
@@ -15026,7 +15357,7 @@ func main() {
 
           minLength: 1
 
-      - `type BetaCitationSearchResultLocationParamResp struct{…}`
+      - `type BetaCitationSearchResultLocationParamResp`
 
         - `Type SearchResultLocation`
 
@@ -15060,13 +15391,13 @@ func main() {
 
         - `Title string`
 
-  - `type BetaImageBlockParamResp struct{…}`
+  - `type BetaImageBlockParamResp`
 
     - `Type Image`
 
     - `Source BetaImageBlockParamSourceUnionResp`
 
-      - `type BetaBase64ImageSource struct{…}`
+      - `type BetaBase64ImageSource`
 
         - `Type Base64`
 
@@ -15084,13 +15415,13 @@ func main() {
 
           - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-      - `type BetaURLImageSource struct{…}`
+      - `type BetaURLImageSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type BetaFileImageSource struct{…}`
+      - `type BetaFileImageSource`
 
         - `Type File`
 
@@ -15112,13 +15443,13 @@ func main() {
 
         - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-  - `type BetaRequestDocumentBlock struct{…}`
+  - `type BetaRequestDocumentBlock`
 
     - `Type Document`
 
     - `Source BetaRequestDocumentBlockSourceUnion`
 
-      - `type BetaBase64PDFSource struct{…}`
+      - `type BetaBase64PDFSource`
 
         - `Type Base64`
 
@@ -15128,7 +15459,7 @@ func main() {
 
         - `MediaType ApplicationPDF`
 
-      - `type BetaPlainTextSource struct{…}`
+      - `type BetaPlainTextSource`
 
         - `Type Text`
 
@@ -15136,7 +15467,7 @@ func main() {
 
         - `MediaType TextPlain`
 
-      - `type BetaContentBlockSource struct{…}`
+      - `type BetaContentBlockSource`
 
         - `Type Content`
 
@@ -15146,17 +15477,17 @@ func main() {
 
           - `[]BetaContentBlockSourceContentUnion`
 
-            - `type BetaTextBlockParamResp struct{…}`
+            - `type BetaTextBlockParamResp`
 
-            - `type BetaImageBlockParamResp struct{…}`
+            - `type BetaImageBlockParamResp`
 
-      - `type BetaURLPDFSource struct{…}`
+      - `type BetaURLPDFSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type BetaFileDocumentSource struct{…}`
+      - `type BetaFileDocumentSource`
 
         - `Type File`
 
@@ -15178,7 +15509,7 @@ func main() {
 
       maxLength: 500, minLength: 1
 
-  - `type BetaSearchResultBlockParamResp struct{…}`
+  - `type BetaSearchResultBlockParamResp`
 
     - `Type SearchResult`
 
@@ -15206,7 +15537,7 @@ func main() {
 
     - `Citations BetaCitationsConfigParamResp Optional`
 
-  - `type BetaThinkingBlockParamResp struct{…}`
+  - `type BetaThinkingBlockParamResp`
 
     - `Type Thinking`
 
@@ -15220,7 +15551,7 @@ func main() {
 
       The `thinking` text of this block as returned by the API.
 
-  - `type BetaRedactedThinkingBlockParamResp struct{…}`
+  - `type BetaRedactedThinkingBlockParamResp`
 
     - `Type RedactedThinking`
 
@@ -15228,7 +15559,7 @@ func main() {
 
       The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-  - `type BetaToolUseBlockParamResp struct{…}`
+  - `type BetaToolUseBlockParamResp`
 
     - `Type ToolUse`
 
@@ -15248,13 +15579,13 @@ func main() {
 
     - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
         - `Type Direct`
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
@@ -15264,7 +15595,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
         - `Type CodeExecution20260120`
 
@@ -15278,7 +15609,7 @@ func main() {
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type BetaToolResultBlockParamResp struct{…}`
+  - `type BetaToolResultBlockParamResp`
 
     - `Type ToolResult`
 
@@ -15294,15 +15625,15 @@ func main() {
 
       - `[]BetaToolResultBlockParamContentUnionResp`
 
-        - `type BetaTextBlockParamResp struct{…}`
+        - `type BetaTextBlockParamResp`
 
-        - `type BetaImageBlockParamResp struct{…}`
+        - `type BetaImageBlockParamResp`
 
-        - `type BetaSearchResultBlockParamResp struct{…}`
+        - `type BetaSearchResultBlockParamResp`
 
-        - `type BetaRequestDocumentBlock struct{…}`
+        - `type BetaRequestDocumentBlock`
 
-        - `type BetaToolReferenceBlockParamResp struct{…}`
+        - `type BetaToolReferenceBlockParamResp`
 
           Tool reference block that can be included in tool_result content.
 
@@ -15316,7 +15647,7 @@ func main() {
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBrowserStateBlockParamResp struct{…}`
+        - `type BetaBrowserStateBlockParamResp`
 
           The caller's browser state after a browser toolset member call —
           the full inventory of open tabs, which tab is active, and any side
@@ -15366,7 +15697,7 @@ func main() {
 
             maxItems: 200, minItems: 1
 
-            - `type BetaBrowserStateChangeTabOpened struct{…}`
+            - `type BetaBrowserStateChangeTabOpened`
 
               A tab this call's execution opened that remains open at its end —
               the creation delta of the `tabs` inventory, not an event log.
@@ -15384,7 +15715,7 @@ func main() {
 
                 maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+            - `type BetaBrowserStateChangeDownloadStarted`
 
               A file download that started during this call.
 
@@ -15402,7 +15733,7 @@ func main() {
 
                 maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-            - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+            - `type BetaBrowserStateChangeDownloadCompleted`
 
               A file download that finished during this call, reported with the
               same `download_id` as its `download_started` — or without a prior
@@ -15435,7 +15766,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+            - `type BetaBrowserStateChangeDownloadFailed`
 
               A file download that failed — or was cancelled — during this call.
 
@@ -15467,7 +15798,7 @@ func main() {
 
       maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-  - `type BetaServerToolUseBlockParamResp struct{…}`
+  - `type BetaServerToolUseBlockParamResp`
 
     - `Type ServerToolUse`
 
@@ -15501,17 +15832,17 @@ func main() {
 
     - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
-  - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+  - `type BetaWebSearchToolResultBlockParamResp`
 
     - `Type WebSearchToolResult`
 
@@ -15529,7 +15860,7 @@ func main() {
 
         - `PageAge string Optional`
 
-      - `type BetaWebSearchToolRequestError struct{…}`
+      - `type BetaWebSearchToolRequestError`
 
         - `Type WebSearchToolResultError`
 
@@ -15557,23 +15888,23 @@ func main() {
 
     - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
-  - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+  - `type BetaWebFetchToolResultBlockParamResp`
 
     - `Type WebFetchToolResult`
 
     - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-      - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+      - `type BetaWebFetchToolResultErrorBlockParamResp`
 
         - `Type WebFetchToolResultError`
 
@@ -15599,7 +15930,7 @@ func main() {
 
           - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-      - `type BetaWebFetchBlockParamResp struct{…}`
+      - `type BetaWebFetchBlockParamResp`
 
         - `Type WebFetchResult`
 
@@ -15623,23 +15954,23 @@ func main() {
 
     - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-      - `type BetaDirectCaller struct{…}`
+      - `type BetaDirectCaller`
 
         Tool invocation directly from the model.
 
-      - `type BetaServerToolCaller struct{…}`
+      - `type BetaServerToolCaller`
 
         Tool invocation generated by a server-side tool.
 
-      - `type BetaServerToolCaller20260120 struct{…}`
+      - `type BetaServerToolCaller20260120`
 
-  - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+  - `type BetaAdvisorToolResultBlockParamResp`
 
     - `Type AdvisorToolResult`
 
     - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-      - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+      - `type BetaAdvisorToolResultErrorParamResp`
 
         - `Type AdvisorToolResultError`
 
@@ -15659,7 +15990,7 @@ func main() {
 
           - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-      - `type BetaAdvisorResultBlockParamResp struct{…}`
+      - `type BetaAdvisorResultBlockParamResp`
 
         - `Type AdvisorResult`
 
@@ -15667,7 +15998,7 @@ func main() {
 
         - `StopReason string Optional`
 
-      - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+      - `type BetaAdvisorRedactedResultBlockParamResp`
 
         - `Type AdvisorRedactedResult`
 
@@ -15685,13 +16016,13 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+  - `type BetaCodeExecutionToolResultBlockParamResp`
 
     - `Type CodeExecutionToolResult`
 
     - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-      - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+      - `type BetaCodeExecutionToolResultErrorParamResp`
 
         - `Type CodeExecutionToolResultError`
 
@@ -15705,7 +16036,7 @@ func main() {
 
           - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-      - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+      - `type BetaCodeExecutionResultBlockParamResp`
 
         - `Type CodeExecutionResult`
 
@@ -15721,7 +16052,7 @@ func main() {
 
         - `Stdout string`
 
-      - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+      - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
         Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -15747,13 +16078,13 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+  - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
     - `Type BashCodeExecutionToolResult`
 
     - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-      - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+      - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
         - `Type BashCodeExecutionToolResultError`
 
@@ -15769,7 +16100,7 @@ func main() {
 
           - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-      - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+      - `type BetaBashCodeExecutionResultBlockParamResp`
 
         - `Type BashCodeExecutionResult`
 
@@ -15793,13 +16124,13 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+  - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
     - `Type TextEditorCodeExecutionToolResult`
 
     - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-      - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
         - `Type TextEditorCodeExecutionToolResultError`
 
@@ -15817,7 +16148,7 @@ func main() {
 
         - `ErrorMessage string Optional`
 
-      - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+      - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionViewResult`
 
@@ -15837,13 +16168,13 @@ func main() {
 
         - `TotalLines int64 Optional`
 
-      - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+      - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionCreateResult`
 
         - `IsFileUpdate bool`
 
-      - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+      - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -15865,13 +16196,13 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+  - `type BetaToolSearchToolResultBlockParamResp`
 
     - `Type ToolSearchToolResult`
 
     - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-      - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+      - `type BetaToolSearchToolResultErrorParamResp`
 
         - `Type ToolSearchToolResultError`
 
@@ -15887,7 +16218,7 @@ func main() {
 
         - `ErrorMessage string Optional`
 
-      - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+      - `type BetaToolSearchToolSearchResultBlockParamResp`
 
         - `Type ToolSearchToolSearchResult`
 
@@ -15911,7 +16242,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaMCPToolUseBlockParamResp struct{…}`
+  - `type BetaMCPToolUseBlockParamResp`
 
     - `Type MCPToolUse`
 
@@ -15931,7 +16262,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+  - `type BetaRequestMCPToolResultBlockParamResp`
 
     - `Type MCPToolResult`
 
@@ -15963,7 +16294,7 @@ func main() {
 
     - `IsError bool Optional`
 
-  - `type BetaContainerUploadBlockParamResp struct{…}`
+  - `type BetaContainerUploadBlockParamResp`
 
     A content block that represents a file to be uploaded to the container
     Files uploaded via this block will be available in the container's input directory.
@@ -15976,7 +16307,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaCompactionBlockParamResp struct{…}`
+  - `type BetaCompactionBlockParamResp`
 
     A compaction block containing summary of previous context.
 
@@ -16000,7 +16331,11 @@ func main() {
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `type BetaRequestToolAdditionBlock struct{…}`
+    - `Signature string Optional`
+
+      The block's signature as returned, to be sent back verbatim
+
+  - `type BetaRequestToolAdditionBlock`
 
     Mid-conversation directive to surface a declared tool.
 
@@ -16012,7 +16347,7 @@ func main() {
 
     - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-      - `type BetaToolChangeToolReference struct{…}`
+      - `type BetaToolChangeToolReference`
 
         Reference to a single tool the caller declared directly in
         `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -16025,7 +16360,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-      - `type BetaToolChangeMCPToolReference struct{…}`
+      - `type BetaToolChangeMCPToolReference`
 
         Reference to a single MCP tool by its server and remote name — the
         same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -16036,7 +16371,7 @@ func main() {
 
         - `ServerName string`
 
-      - `type BetaToolChangeMCPToolsetReference struct{…}`
+      - `type BetaToolChangeMCPToolsetReference`
 
         Reference to every tool in the named MCP server's toolset.
 
@@ -16048,7 +16383,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaRequestToolRemovalBlock struct{…}`
+  - `type BetaRequestToolRemovalBlock`
 
     Mid-conversation directive to withdraw a tool.
 
@@ -16060,19 +16395,19 @@ func main() {
 
     - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-      - `type BetaToolChangeToolReference struct{…}`
+      - `type BetaToolChangeToolReference`
 
         Reference to a single tool the caller declared directly in
         `tools[]`. Does not accept the composed `{server}_{name}` form the
         server assigns to MCP-resolved tools — use `mcp_tool_reference` or
         `mcp_toolset_reference` for those.
 
-      - `type BetaToolChangeMCPToolReference struct{…}`
+      - `type BetaToolChangeMCPToolReference`
 
         Reference to a single MCP tool by its server and remote name — the
         same `server_name`/`name` pair `mcp_tool_use` carries.
 
-      - `type BetaToolChangeMCPToolsetReference struct{…}`
+      - `type BetaToolChangeMCPToolsetReference`
 
         Reference to every tool in the named MCP server's toolset.
 
@@ -16080,7 +16415,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-  - `type BetaFallbackBlockParamResp struct{…}`
+  - `type BetaFallbackBlockParamResp`
 
     A `fallback` block echoed back from a prior response.
 
@@ -16194,7 +16529,7 @@ func main() {
 
 ### Beta Content Block Source
 
-- `type BetaContentBlockSource struct{…}`
+- `type BetaContentBlockSource`
 
   - `Type Content`
 
@@ -16204,7 +16539,7 @@ func main() {
 
     - `[]BetaContentBlockSourceContentUnion`
 
-      - `type BetaTextBlockParamResp struct{…}`
+      - `type BetaTextBlockParamResp`
 
         - `Type Text`
 
@@ -16235,7 +16570,7 @@ func main() {
 
         - `Citations []BetaTextCitationParamUnionResp Optional`
 
-          - `type BetaCitationCharLocationParamResp struct{…}`
+          - `type BetaCitationCharLocationParamResp`
 
             - `Type CharLocation`
 
@@ -16255,7 +16590,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationPageLocationParamResp struct{…}`
+          - `type BetaCitationPageLocationParamResp`
 
             - `Type PageLocation`
 
@@ -16275,7 +16610,7 @@ func main() {
 
               minimum: 1
 
-          - `type BetaCitationContentBlockLocationParamResp struct{…}`
+          - `type BetaCitationContentBlockLocationParamResp`
 
             - `Type ContentBlockLocation`
 
@@ -16305,7 +16640,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+          - `type BetaCitationWebSearchResultLocationParamResp`
 
             - `Type WebSearchResultLocation`
 
@@ -16321,7 +16656,7 @@ func main() {
 
               minLength: 1
 
-          - `type BetaCitationSearchResultLocationParamResp struct{…}`
+          - `type BetaCitationSearchResultLocationParamResp`
 
             - `Type SearchResultLocation`
 
@@ -16355,13 +16690,13 @@ func main() {
 
             - `Title string`
 
-      - `type BetaImageBlockParamResp struct{…}`
+      - `type BetaImageBlockParamResp`
 
         - `Type Image`
 
         - `Source BetaImageBlockParamSourceUnionResp`
 
-          - `type BetaBase64ImageSource struct{…}`
+          - `type BetaBase64ImageSource`
 
             - `Type Base64`
 
@@ -16379,13 +16714,13 @@ func main() {
 
               - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-          - `type BetaURLImageSource struct{…}`
+          - `type BetaURLImageSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type BetaFileImageSource struct{…}`
+          - `type BetaFileImageSource`
 
             - `Type File`
 
@@ -16411,7 +16746,7 @@ func main() {
 
 - `type BetaContentBlockSourceContentUnion interface{…}`
 
-  - `type BetaTextBlockParamResp struct{…}`
+  - `type BetaTextBlockParamResp`
 
     - `Type Text`
 
@@ -16442,7 +16777,7 @@ func main() {
 
     - `Citations []BetaTextCitationParamUnionResp Optional`
 
-      - `type BetaCitationCharLocationParamResp struct{…}`
+      - `type BetaCitationCharLocationParamResp`
 
         - `Type CharLocation`
 
@@ -16462,7 +16797,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationPageLocationParamResp struct{…}`
+      - `type BetaCitationPageLocationParamResp`
 
         - `Type PageLocation`
 
@@ -16482,7 +16817,7 @@ func main() {
 
           minimum: 1
 
-      - `type BetaCitationContentBlockLocationParamResp struct{…}`
+      - `type BetaCitationContentBlockLocationParamResp`
 
         - `Type ContentBlockLocation`
 
@@ -16512,7 +16847,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+      - `type BetaCitationWebSearchResultLocationParamResp`
 
         - `Type WebSearchResultLocation`
 
@@ -16528,7 +16863,7 @@ func main() {
 
           minLength: 1
 
-      - `type BetaCitationSearchResultLocationParamResp struct{…}`
+      - `type BetaCitationSearchResultLocationParamResp`
 
         - `Type SearchResultLocation`
 
@@ -16562,13 +16897,13 @@ func main() {
 
         - `Title string`
 
-  - `type BetaImageBlockParamResp struct{…}`
+  - `type BetaImageBlockParamResp`
 
     - `Type Image`
 
     - `Source BetaImageBlockParamSourceUnionResp`
 
-      - `type BetaBase64ImageSource struct{…}`
+      - `type BetaBase64ImageSource`
 
         - `Type Base64`
 
@@ -16586,13 +16921,13 @@ func main() {
 
           - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-      - `type BetaURLImageSource struct{…}`
+      - `type BetaURLImageSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type BetaFileImageSource struct{…}`
+      - `type BetaFileImageSource`
 
         - `Type File`
 
@@ -16616,7 +16951,7 @@ func main() {
 
 ### Beta Context Management Config
 
-- `type BetaContextManagementConfig struct{…}`
+- `type BetaContextManagementConfig`
 
   - `Edits []BetaContextManagementConfigEditUnion Optional`
 
@@ -16624,7 +16959,7 @@ func main() {
 
     minItems: 0
 
-    - `type BetaClearToolUses20250919Edit struct{…}`
+    - `type BetaClearToolUses20250919Edit`
 
       - `Type ClearToolUses20250919`
 
@@ -16664,7 +16999,7 @@ func main() {
 
         Condition that triggers the context management strategy
 
-        - `type BetaInputTokensTrigger struct{…}`
+        - `type BetaInputTokensTrigger`
 
           - `Type InputTokens`
 
@@ -16672,7 +17007,7 @@ func main() {
 
             minimum: 1
 
-        - `type BetaToolUsesTrigger struct{…}`
+        - `type BetaToolUsesTrigger`
 
           - `Type ToolUses`
 
@@ -16680,7 +17015,7 @@ func main() {
 
             minimum: 1
 
-    - `type BetaClearThinking20251015Edit struct{…}`
+    - `type BetaClearThinking20251015Edit`
 
       - `Type ClearThinking20251015`
 
@@ -16688,7 +17023,7 @@ func main() {
 
         Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-        - `type BetaThinkingTurns struct{…}`
+        - `type BetaThinkingTurns`
 
           - `Type ThinkingTurns`
 
@@ -16696,13 +17031,13 @@ func main() {
 
             minimum: 1
 
-        - `type BetaAllThinkingTurns struct{…}`
+        - `type BetaAllThinkingTurns`
 
           - `Type All`
 
         - `All`
 
-    - `type BetaCompact20260112Edit struct{…}`
+    - `type BetaCompact20260112Edit`
 
       Automatically compact older context when reaching the configured trigger threshold.
 
@@ -16722,13 +17057,13 @@ func main() {
 
 ### Beta Context Management Response
 
-- `type BetaContextManagementResponse struct{…}`
+- `type BetaContextManagementResponse`
 
   - `AppliedEdits []BetaContextManagementResponseAppliedEditUnion`
 
     List of context management edits that were applied.
 
-    - `type BetaClearToolUses20250919EditResponse struct{…}`
+    - `type BetaClearToolUses20250919EditResponse`
 
       - `Type ClearToolUses20250919`
 
@@ -16748,7 +17083,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaClearThinking20251015EditResponse struct{…}`
+    - `type BetaClearThinking20251015EditResponse`
 
       - `Type ClearThinking20251015`
 
@@ -16770,7 +17105,7 @@ func main() {
 
 ### Beta Count Tokens Context Management Response
 
-- `type BetaCountTokensContextManagementResponse struct{…}`
+- `type BetaCountTokensContextManagementResponse`
 
   - `OriginalInputTokens int64`
 
@@ -16778,7 +17113,7 @@ func main() {
 
 ### Beta Diagnostics
 
-- `type BetaDiagnostics struct{…}`
+- `type BetaDiagnostics`
 
   Response envelope for request-level diagnostics. Present (possibly
   null) whenever the caller supplied `diagnostics` on the request.
@@ -16787,7 +17122,7 @@ func main() {
 
     Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-    - `type BetaCacheMissModelChanged struct{…}`
+    - `type BetaCacheMissModelChanged`
 
       - `Type ModelChanged`
 
@@ -16797,7 +17132,7 @@ func main() {
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-    - `type BetaCacheMissSystemChanged struct{…}`
+    - `type BetaCacheMissSystemChanged`
 
       - `Type SystemChanged`
 
@@ -16807,7 +17142,7 @@ func main() {
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-    - `type BetaCacheMissToolsChanged struct{…}`
+    - `type BetaCacheMissToolsChanged`
 
       - `Type ToolsChanged`
 
@@ -16817,7 +17152,7 @@ func main() {
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-    - `type BetaCacheMissMessagesChanged struct{…}`
+    - `type BetaCacheMissMessagesChanged`
 
       - `Type MessagesChanged`
 
@@ -16827,13 +17162,13 @@ func main() {
 
         Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-    - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+    - `type BetaCacheMissPreviousMessageNotFound`
 
       - `Type PreviousMessageNotFound`
 
         default: previous_message_not_found
 
-    - `type BetaCacheMissUnavailable struct{…}`
+    - `type BetaCacheMissUnavailable`
 
       - `Type Unavailable`
 
@@ -16841,7 +17176,7 @@ func main() {
 
 ### Beta Diagnostics Param
 
-- `type BetaDiagnosticsParamResp struct{…}`
+- `type BetaDiagnosticsParamResp`
 
   Request-level diagnostics. Currently carries the previous response
   id for prompt-cache divergence reporting.
@@ -16854,7 +17189,7 @@ func main() {
 
 ### Beta Direct Caller
 
-- `type BetaDirectCaller struct{…}`
+- `type BetaDirectCaller`
 
   Tool invocation directly from the model.
 
@@ -16862,7 +17197,7 @@ func main() {
 
 ### Beta Document Block
 
-- `type BetaDocumentBlock struct{…}`
+- `type BetaDocumentBlock`
 
   - `Type Document`
 
@@ -16878,7 +17213,7 @@ func main() {
 
   - `Source BetaDocumentBlockSourceUnion`
 
-    - `type BetaBase64PDFSource struct{…}`
+    - `type BetaBase64PDFSource`
 
       - `Type Base64`
 
@@ -16888,7 +17223,7 @@ func main() {
 
       - `MediaType ApplicationPDF`
 
-    - `type BetaPlainTextSource struct{…}`
+    - `type BetaPlainTextSource`
 
       - `Type Text`
 
@@ -16902,7 +17237,7 @@ func main() {
 
 ### Beta Encrypted Code Execution Result Block
 
-- `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+- `type BetaEncryptedCodeExecutionResultBlock`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -16926,7 +17261,7 @@ func main() {
 
 ### Beta Encrypted Code Execution Result Block Param
 
-- `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+- `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -16946,7 +17281,7 @@ func main() {
 
 ### Beta Fallback Block
 
-- `type BetaFallbackBlock struct{…}`
+- `type BetaFallbackBlock`
 
   Marks the point in `content` where one model's output gives way to the next.
 
@@ -17088,7 +17423,7 @@ func main() {
 
 ### Beta Fallback Block Param
 
-- `type BetaFallbackBlockParamResp struct{…}`
+- `type BetaFallbackBlockParamResp`
 
   A `fallback` block echoed back from a prior response.
 
@@ -17202,7 +17537,7 @@ func main() {
 
 ### Beta Fallback Credit Not Applied
 
-- `type BetaFallbackCreditNotApplied struct{…}`
+- `type BetaFallbackCreditNotApplied`
 
   No reprice was applied; `reason` says why.
 
@@ -17254,7 +17589,7 @@ func main() {
 
 ### Beta Fallback Credit Redeemed
 
-- `type BetaFallbackCreditRedeemed struct{…}`
+- `type BetaFallbackCreditRedeemed`
 
   The reprice was applied: the retry is billed as if the conversation
   had been on the retry model all along.
@@ -17265,7 +17600,7 @@ func main() {
 
 ### Beta Fallback Credit Token Param
 
-- `type BetaFallbackCreditTokenParamResp struct{…}`
+- `type BetaFallbackCreditTokenParamResp`
 
   Object form of `fallback_credit_token`: the token plus a redemption
   mode.
@@ -17291,7 +17626,7 @@ func main() {
 
 ### Beta Fallback Credit Usage
 
-- `type BetaFallbackCreditUsage struct{…}`
+- `type BetaFallbackCreditUsage`
 
   Outcome of the `fallback_credit_token` presented on this request.
 
@@ -17304,7 +17639,7 @@ func main() {
     resulting shift is zero because there was nothing to move. `not_applied`:
     no reprice was applied; the arm's `reason` says why.
 
-    - `type BetaFallbackCreditRedeemed struct{…}`
+    - `type BetaFallbackCreditRedeemed`
 
       The reprice was applied: the retry is billed as if the conversation
       had been on the retry model all along.
@@ -17313,7 +17648,7 @@ func main() {
 
         default: redeemed
 
-    - `type BetaFallbackCreditNotApplied struct{…}`
+    - `type BetaFallbackCreditNotApplied`
 
       No reprice was applied; `reason` says why.
 
@@ -17365,7 +17700,7 @@ func main() {
 
 ### Beta Fallback Info
 
-- `type BetaFallbackInfo struct{…}`
+- `type BetaFallbackInfo`
 
   Identifies one hop of a fallback transition.
 
@@ -17453,7 +17788,7 @@ func main() {
 
 ### Beta Fallback Info Param
 
-- `type BetaFallbackInfoParamResp struct{…}`
+- `type BetaFallbackInfoParamResp`
 
   Identifies one hop of a fallback transition.
 
@@ -17541,7 +17876,7 @@ func main() {
 
 ### Beta Fallback Message Iteration Usage
 
-- `type BetaFallbackMessageIterationUsage struct{…}`
+- `type BetaFallbackMessageIterationUsage`
 
   Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -17682,7 +18017,7 @@ func main() {
 
 ### Beta Fallback Param
 
-- `type BetaFallbackParamResp struct{…}`
+- `type BetaFallbackParamResp`
 
   One entry in the `fallbacks` chain on a `/v1/messages` request.
 
@@ -17831,7 +18166,7 @@ func main() {
 
   - `Thinking BetaFallbackParamThinkingUnionResp Optional`
 
-    - `type BetaThinkingConfigEnabled struct{…}`
+    - `type BetaThinkingConfigEnabled`
 
       - `Type Enabled`
 
@@ -17873,11 +18208,11 @@ func main() {
 
         - `const BetaThinkingConfigEnabledDisplayUpdates BetaThinkingConfigEnabledDisplay = "updates"`
 
-    - `type BetaThinkingConfigDisabled struct{…}`
+    - `type BetaThinkingConfigDisabled`
 
       - `Type Disabled`
 
-    - `type BetaThinkingConfigAdaptive struct{…}`
+    - `type BetaThinkingConfigAdaptive`
 
       - `Type Adaptive`
 
@@ -17899,7 +18234,7 @@ func main() {
 
 ### Beta Fallback Refusal Trigger
 
-- `type BetaFallbackRefusalTrigger struct{…}`
+- `type BetaFallbackRefusalTrigger`
 
   The `from` model declined for policy reasons.
 
@@ -18079,7 +18414,7 @@ func main() {
 
     - `Thinking BetaFallbackParamThinkingUnionResp Optional`
 
-      - `type BetaThinkingConfigEnabled struct{…}`
+      - `type BetaThinkingConfigEnabled`
 
         - `Type Enabled`
 
@@ -18121,11 +18456,11 @@ func main() {
 
           - `const BetaThinkingConfigEnabledDisplayUpdates BetaThinkingConfigEnabledDisplay = "updates"`
 
-      - `type BetaThinkingConfigDisabled struct{…}`
+      - `type BetaThinkingConfigDisabled`
 
         - `Type Disabled`
 
-      - `type BetaThinkingConfigAdaptive struct{…}`
+      - `type BetaThinkingConfigAdaptive`
 
         - `Type Adaptive`
 
@@ -18149,7 +18484,7 @@ func main() {
 
 ### Beta File Document Source
 
-- `type BetaFileDocumentSource struct{…}`
+- `type BetaFileDocumentSource`
 
   - `Type File`
 
@@ -18157,7 +18492,7 @@ func main() {
 
 ### Beta File Image Source
 
-- `type BetaFileImageSource struct{…}`
+- `type BetaFileImageSource`
 
   - `Type File`
 
@@ -18165,13 +18500,13 @@ func main() {
 
 ### Beta Image Block Param
 
-- `type BetaImageBlockParamResp struct{…}`
+- `type BetaImageBlockParamResp`
 
   - `Type Image`
 
   - `Source BetaImageBlockParamSourceUnionResp`
 
-    - `type BetaBase64ImageSource struct{…}`
+    - `type BetaBase64ImageSource`
 
       - `Type Base64`
 
@@ -18189,13 +18524,13 @@ func main() {
 
         - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-    - `type BetaURLImageSource struct{…}`
+    - `type BetaURLImageSource`
 
       - `Type URL`
 
       - `URL string`
 
-    - `type BetaFileImageSource struct{…}`
+    - `type BetaFileImageSource`
 
       - `Type File`
 
@@ -18236,7 +18571,7 @@ func main() {
 
 ### Beta Image Transformations Param
 
-- `type BetaImageTransformationsParamResp struct{…}`
+- `type BetaImageTransformationsParamResp`
 
   Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
@@ -18250,7 +18585,7 @@ func main() {
 
 ### Beta Input JSON Delta
 
-- `type BetaInputJSONDelta struct{…}`
+- `type BetaInputJSONDelta`
 
   - `Type InputJSONDelta`
 
@@ -18260,7 +18595,7 @@ func main() {
 
 ### Beta Input Tokens Clear At Least
 
-- `type BetaInputTokensClearAtLeast struct{…}`
+- `type BetaInputTokensClearAtLeast`
 
   - `Type InputTokens`
 
@@ -18270,13 +18605,94 @@ func main() {
 
 ### Beta Input Tokens Trigger
 
-- `type BetaInputTokensTrigger struct{…}`
+- `type BetaInputTokensTrigger`
 
   - `Type InputTokens`
 
   - `Value int64`
 
     minimum: 1
+
+### Beta Input Transformation
+
+- `type BetaInputTransformationUnion interface{…}`
+
+  One entry of `input_transformations`: either a change the API made to the
+  request's input before showing it to the model, or a block that failed a
+  binding check and was still shown to the model unchanged. The `type` field
+  says which.
+
+  - `type BetaThinkingDroppedInputTransformation`
+
+    - `Type ThinkingDropped`
+
+      Always `thinking_dropped` for this entry type.
+
+      default: thinking_dropped
+
+    - `Path string`
+
+      Where the removed block was in your request, as `messages.{i}.content.{j}`:
+      `i` indexes the `messages` array you sent and `j` that message's `content`
+      array — the same form error messages use.
+
+    - `Reason BetaThinkingDroppedInputTransformationReason`
+
+      Which binding check removed the block: `model_binding_mismatch` — it was
+      created by a model whose reasoning the requested model may not read;
+      `prefix_binding_mismatch` — the conversation before it differs from the
+      conversation it was created in (the rest of that turn's consecutive thinking
+      blocks are removed with it, each with this reason);
+      `organization_binding_mismatch` — it was created under a different
+      organization (an Anthropic organization, AWS account or Google Cloud project)
+      and this organization is not one of its additional organizations;
+      `end_user_binding_mismatch` — it was created for a different end user, or
+      was removed by the consumer-organization binding. A block that would fail
+      several checks reports one reason, in this order of precedence:
+      `organization_binding_mismatch`, `end_user_binding_mismatch`,
+      `model_binding_mismatch`, `prefix_binding_mismatch`.
+
+      - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+
+      - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+
+      - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+
+      - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+  - `type BetaThinkingMismatchAllowedInputTransformation`
+
+    - `Type ThinkingMismatchAllowed`
+
+      Always `thinking_mismatch_allowed` for this entry type.
+
+      default: thinking_mismatch_allowed
+
+    - `Path string`
+
+      Where the block is in your request, as `messages.{i}.content.{j}`:
+      `i` indexes the `messages` array you sent and `j` that message's `content`
+      array — the same form error messages use.
+
+    - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+      Which binding check the block failed; the block was shown to the model all
+      the same. Always `prefix_binding_mismatch` today — the conversation before
+      the block differs from the conversation it was created in, or the block
+      carries no record of one on a model that requires it. Were the check
+      enforced for this request, the block would have been removed or the request
+      rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+      takes the rest of that turn's consecutive thinking blocks, whereas here each
+      block is checked on its own, so `thinking_mismatch_allowed` entries are a
+      lower bound on what enforcement would remove.
+
+      - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+      - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+      - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+      - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
 
 ### Beta Iterations Usage
 
@@ -18292,7 +18708,7 @@ func main() {
 
   A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-  - `type BetaMessageIterationUsage struct{…}`
+  - `type BetaMessageIterationUsage`
 
     Token usage for a sampling iteration.
 
@@ -18424,7 +18840,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaCompactionIterationUsage struct{…}`
+  - `type BetaCompactionIterationUsage`
 
     Token usage for a compaction iteration.
 
@@ -18462,7 +18878,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaAdvisorMessageIterationUsage struct{…}`
+  - `type BetaAdvisorMessageIterationUsage`
 
     Token usage for an advisor sub-inference iteration.
 
@@ -18506,7 +18922,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaFallbackMessageIterationUsage struct{…}`
+  - `type BetaFallbackMessageIterationUsage`
 
     Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -18559,7 +18975,7 @@ func main() {
 
 ### Beta JSON Output Format
 
-- `type BetaJSONOutputFormat struct{…}`
+- `type BetaJSONOutputFormat`
 
   - `Type JSONSchema`
 
@@ -18569,7 +18985,7 @@ func main() {
 
 ### Beta MCP Tool Config
 
-- `type BetaMCPToolConfig struct{…}`
+- `type BetaMCPToolConfig`
 
   Configuration for a specific tool in an MCP toolset.
 
@@ -18579,7 +18995,7 @@ func main() {
 
 ### Beta MCP Tool Default Config
 
-- `type BetaMCPToolDefaultConfig struct{…}`
+- `type BetaMCPToolDefaultConfig`
 
   Default configuration for tools in an MCP toolset.
 
@@ -18589,7 +19005,7 @@ func main() {
 
 ### Beta MCP Tool Result Block
 
-- `type BetaMCPToolResultBlock struct{…}`
+- `type BetaMCPToolResultBlock`
 
   - `Type MCPToolResult`
 
@@ -18611,7 +19027,7 @@ func main() {
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type BetaCitationCharLocation struct{…}`
+        - `type BetaCitationCharLocation`
 
           - `Type CharLocation`
 
@@ -18633,7 +19049,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationPageLocation struct{…}`
+        - `type BetaCitationPageLocation`
 
           - `Type PageLocation`
 
@@ -18655,7 +19071,7 @@ func main() {
 
             minimum: 1
 
-        - `type BetaCitationContentBlockLocation struct{…}`
+        - `type BetaCitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -18687,7 +19103,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationsWebSearchResultLocation struct{…}`
+        - `type BetaCitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -18703,7 +19119,7 @@ func main() {
 
           - `URL string`
 
-        - `type BetaCitationSearchResultLocation struct{…}`
+        - `type BetaCitationSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -18753,7 +19169,7 @@ func main() {
 
 ### Beta MCP Tool Use Block
 
-- `type BetaMCPToolUseBlock struct{…}`
+- `type BetaMCPToolUseBlock`
 
   - `Type MCPToolUse`
 
@@ -18775,7 +19191,7 @@ func main() {
 
 ### Beta MCP Tool Use Block Param
 
-- `type BetaMCPToolUseBlockParamResp struct{…}`
+- `type BetaMCPToolUseBlockParamResp`
 
   - `Type MCPToolUse`
 
@@ -18814,7 +19230,7 @@ func main() {
 
 ### Beta MCP Toolset
 
-- `type BetaMCPToolset struct{…}`
+- `type BetaMCPToolset`
 
   Configuration for a group of tools from an MCP server.
 
@@ -18868,7 +19284,7 @@ func main() {
 
 ### Beta Memory Tool 20250818
 
-- `type BetaMemoryTool20250818 struct{…}`
+- `type BetaMemoryTool20250818`
 
   - `Type Memory20250818`
 
@@ -18923,7 +19339,7 @@ func main() {
 
 - `type BetaMemoryTool20250818CommandUnion interface{…}`
 
-  - `type BetaMemoryTool20250818ViewCommand struct{…}`
+  - `type BetaMemoryTool20250818ViewCommand`
 
     - `Command View`
 
@@ -18941,7 +19357,7 @@ func main() {
 
       minItems: 2, maxItems: 2
 
-  - `type BetaMemoryTool20250818CreateCommand struct{…}`
+  - `type BetaMemoryTool20250818CreateCommand`
 
     - `Command Create`
 
@@ -18957,7 +19373,7 @@ func main() {
 
       Path where the file should be created
 
-  - `type BetaMemoryTool20250818StrReplaceCommand struct{…}`
+  - `type BetaMemoryTool20250818StrReplaceCommand`
 
     - `Command StrReplace`
 
@@ -18977,7 +19393,7 @@ func main() {
 
       Path to the file where text should be replaced
 
-  - `type BetaMemoryTool20250818InsertCommand struct{…}`
+  - `type BetaMemoryTool20250818InsertCommand`
 
     - `Command Insert`
 
@@ -18999,7 +19415,7 @@ func main() {
 
       Path to the file where text should be inserted
 
-  - `type BetaMemoryTool20250818DeleteCommand struct{…}`
+  - `type BetaMemoryTool20250818DeleteCommand`
 
     - `Command Delete`
 
@@ -19011,7 +19427,7 @@ func main() {
 
       Path to the file or directory to delete
 
-  - `type BetaMemoryTool20250818RenameCommand struct{…}`
+  - `type BetaMemoryTool20250818RenameCommand`
 
     - `Command Rename`
 
@@ -19029,7 +19445,7 @@ func main() {
 
 ### Beta Memory Tool 20250818 Create Command
 
-- `type BetaMemoryTool20250818CreateCommand struct{…}`
+- `type BetaMemoryTool20250818CreateCommand`
 
   - `Command Create`
 
@@ -19047,7 +19463,7 @@ func main() {
 
 ### Beta Memory Tool 20250818 Delete Command
 
-- `type BetaMemoryTool20250818DeleteCommand struct{…}`
+- `type BetaMemoryTool20250818DeleteCommand`
 
   - `Command Delete`
 
@@ -19061,7 +19477,7 @@ func main() {
 
 ### Beta Memory Tool 20250818 Insert Command
 
-- `type BetaMemoryTool20250818InsertCommand struct{…}`
+- `type BetaMemoryTool20250818InsertCommand`
 
   - `Command Insert`
 
@@ -19085,7 +19501,7 @@ func main() {
 
 ### Beta Memory Tool 20250818 Rename Command
 
-- `type BetaMemoryTool20250818RenameCommand struct{…}`
+- `type BetaMemoryTool20250818RenameCommand`
 
   - `Command Rename`
 
@@ -19103,7 +19519,7 @@ func main() {
 
 ### Beta Memory Tool 20250818 Str Replace Command
 
-- `type BetaMemoryTool20250818StrReplaceCommand struct{…}`
+- `type BetaMemoryTool20250818StrReplaceCommand`
 
   - `Command StrReplace`
 
@@ -19125,7 +19541,7 @@ func main() {
 
 ### Beta Memory Tool 20250818 View Command
 
-- `type BetaMemoryTool20250818ViewCommand struct{…}`
+- `type BetaMemoryTool20250818ViewCommand`
 
   - `Command View`
 
@@ -19145,7 +19561,7 @@ func main() {
 
 ### Beta Message
 
-- `type BetaMessage struct{…}`
+- `type BetaMessage`
 
   - `Type Message`
 
@@ -19228,7 +19644,7 @@ func main() {
     [{"type": "text", "text": "B)"}]
     ```
 
-    - `type BetaTextBlock struct{…}`
+    - `type BetaTextBlock`
 
       - `Type Text`
 
@@ -19240,7 +19656,7 @@ func main() {
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type BetaCitationCharLocation struct{…}`
+        - `type BetaCitationCharLocation`
 
           - `Type CharLocation`
 
@@ -19262,7 +19678,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationPageLocation struct{…}`
+        - `type BetaCitationPageLocation`
 
           - `Type PageLocation`
 
@@ -19284,7 +19700,7 @@ func main() {
 
             minimum: 1
 
-        - `type BetaCitationContentBlockLocation struct{…}`
+        - `type BetaCitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -19316,7 +19732,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationsWebSearchResultLocation struct{…}`
+        - `type BetaCitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -19332,7 +19748,7 @@ func main() {
 
           - `URL string`
 
-        - `type BetaCitationSearchResultLocation struct{…}`
+        - `type BetaCitationSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -19372,7 +19788,7 @@ func main() {
 
         minLength: 0
 
-    - `type BetaThinkingBlock struct{…}`
+    - `type BetaThinkingBlock`
 
       - `Type Thinking`
 
@@ -19390,7 +19806,7 @@ func main() {
 
         The text of Claude's thinking process for this block.
 
-    - `type BetaRedactedThinkingBlock struct{…}`
+    - `type BetaRedactedThinkingBlock`
 
       - `Type RedactedThinking`
 
@@ -19404,7 +19820,7 @@ func main() {
 
         See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type BetaToolUseBlock struct{…}`
+    - `type BetaToolUseBlock`
 
       - `Type ToolUse`
 
@@ -19422,13 +19838,13 @@ func main() {
 
       - `Caller BetaToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
           - `Type Direct`
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -19438,7 +19854,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
           - `Type CodeExecution20260120`
 
@@ -19452,7 +19868,7 @@ func main() {
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaServerToolUseBlock struct{…}`
+    - `type BetaServerToolUseBlock`
 
       - `Type ServerToolUse`
 
@@ -19484,17 +19900,17 @@ func main() {
 
       - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebSearchToolResultBlock struct{…}`
+    - `type BetaWebSearchToolResultBlock`
 
       - `Type WebSearchToolResult`
 
@@ -19502,7 +19918,7 @@ func main() {
 
       - `Content BetaWebSearchToolResultBlockContentUnion`
 
-        - `type BetaWebSearchToolResultError struct{…}`
+        - `type BetaWebSearchToolResultError`
 
           - `Type WebSearchToolResultError`
 
@@ -19542,17 +19958,17 @@ func main() {
 
       - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebFetchToolResultBlock struct{…}`
+    - `type BetaWebFetchToolResultBlock`
 
       - `Type WebFetchToolResult`
 
@@ -19560,7 +19976,7 @@ func main() {
 
       - `Content BetaWebFetchToolResultBlockContentUnion`
 
-        - `type BetaWebFetchToolResultErrorBlock struct{…}`
+        - `type BetaWebFetchToolResultErrorBlock`
 
           - `Type WebFetchToolResultError`
 
@@ -19588,7 +20004,7 @@ func main() {
 
             - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-        - `type BetaWebFetchBlock struct{…}`
+        - `type BetaWebFetchBlock`
 
           - `Type WebFetchResult`
 
@@ -19610,7 +20026,7 @@ func main() {
 
             - `Source BetaDocumentBlockSourceUnion`
 
-              - `type BetaBase64PDFSource struct{…}`
+              - `type BetaBase64PDFSource`
 
                 - `Type Base64`
 
@@ -19620,7 +20036,7 @@ func main() {
 
                 - `MediaType ApplicationPDF`
 
-              - `type BetaPlainTextSource struct{…}`
+              - `type BetaPlainTextSource`
 
                 - `Type Text`
 
@@ -19646,17 +20062,17 @@ func main() {
 
       - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaAdvisorToolResultBlock struct{…}`
+    - `type BetaAdvisorToolResultBlock`
 
       - `Type AdvisorToolResult`
 
@@ -19664,7 +20080,7 @@ func main() {
 
       - `Content BetaAdvisorToolResultBlockContentUnion`
 
-        - `type BetaAdvisorToolResultError struct{…}`
+        - `type BetaAdvisorToolResultError`
 
           - `Type AdvisorToolResultError`
 
@@ -19686,7 +20102,7 @@ func main() {
 
             - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-        - `type BetaAdvisorResultBlock struct{…}`
+        - `type BetaAdvisorResultBlock`
 
           - `Type AdvisorResult`
 
@@ -19698,7 +20114,7 @@ func main() {
 
           - `Text string`
 
-        - `type BetaAdvisorRedactedResultBlock struct{…}`
+        - `type BetaAdvisorRedactedResultBlock`
 
           - `Type AdvisorRedactedResult`
 
@@ -19716,7 +20132,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaCodeExecutionToolResultBlock struct{…}`
+    - `type BetaCodeExecutionToolResultBlock`
 
       - `Type CodeExecutionToolResult`
 
@@ -19724,7 +20140,7 @@ func main() {
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaCodeExecutionToolResultError struct{…}`
+        - `type BetaCodeExecutionToolResultError`
 
           - `Type CodeExecutionToolResultError`
 
@@ -19740,7 +20156,7 @@ func main() {
 
             - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-        - `type BetaCodeExecutionResultBlock struct{…}`
+        - `type BetaCodeExecutionResultBlock`
 
           - `Type CodeExecutionResult`
 
@@ -19760,7 +20176,7 @@ func main() {
 
           - `Stdout string`
 
-        - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+        - `type BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -19786,7 +20202,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+    - `type BetaBashCodeExecutionToolResultBlock`
 
       - `Type BashCodeExecutionToolResult`
 
@@ -19794,7 +20210,7 @@ func main() {
 
       - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaBashCodeExecutionToolResultError struct{…}`
+        - `type BetaBashCodeExecutionToolResultError`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -19812,7 +20228,7 @@ func main() {
 
             - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-        - `type BetaBashCodeExecutionResultBlock struct{…}`
+        - `type BetaBashCodeExecutionResultBlock`
 
           - `Type BashCodeExecutionResult`
 
@@ -19836,7 +20252,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+    - `type BetaTextEditorCodeExecutionToolResultBlock`
 
       - `Type TextEditorCodeExecutionToolResult`
 
@@ -19844,7 +20260,7 @@ func main() {
 
       - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultError`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -19864,7 +20280,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionViewResultBlock`
 
           - `Type TextEditorCodeExecutionViewResult`
 
@@ -19886,7 +20302,7 @@ func main() {
 
           - `TotalLines int64`
 
-        - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
           - `Type TextEditorCodeExecutionCreateResult`
 
@@ -19894,7 +20310,7 @@ func main() {
 
           - `IsFileUpdate bool`
 
-        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
           - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -19914,7 +20330,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaToolSearchToolResultBlock struct{…}`
+    - `type BetaToolSearchToolResultBlock`
 
       - `Type ToolSearchToolResult`
 
@@ -19922,7 +20338,7 @@ func main() {
 
       - `Content BetaToolSearchToolResultBlockContentUnion`
 
-        - `type BetaToolSearchToolResultError struct{…}`
+        - `type BetaToolSearchToolResultError`
 
           - `Type ToolSearchToolResultError`
 
@@ -19940,7 +20356,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type BetaToolSearchToolSearchResultBlock struct{…}`
+        - `type BetaToolSearchToolSearchResultBlock`
 
           - `Type ToolSearchToolSearchResult`
 
@@ -19960,7 +20376,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaMCPToolUseBlock struct{…}`
+    - `type BetaMCPToolUseBlock`
 
       - `Type MCPToolUse`
 
@@ -19980,7 +20396,7 @@ func main() {
 
         The name of the MCP server
 
-    - `type BetaMCPToolResultBlock struct{…}`
+    - `type BetaMCPToolResultBlock`
 
       - `Type MCPToolResult`
 
@@ -20014,7 +20430,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaContainerUploadBlock struct{…}`
+    - `type BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -20024,7 +20440,7 @@ func main() {
 
       - `FileID string`
 
-    - `type BetaCompactionBlock struct{…}`
+    - `type BetaCompactionBlock`
 
       A compaction block returned when autocompact is triggered.
 
@@ -20044,7 +20460,11 @@ func main() {
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `type BetaFallbackBlock struct{…}`
+      - `Signature string Optional`
+
+        Signature over the summary, to be sent back with the block verbatim
+
+    - `type BetaFallbackBlock`
 
       Marks the point in `content` where one model's output gives way to the next.
 
@@ -20194,7 +20614,7 @@ func main() {
 
       List of context management edits that were applied.
 
-      - `type BetaClearToolUses20250919EditResponse struct{…}`
+      - `type BetaClearToolUses20250919EditResponse`
 
         - `Type ClearToolUses20250919`
 
@@ -20214,7 +20634,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaClearThinking20251015EditResponse struct{…}`
+      - `type BetaClearThinking20251015EditResponse`
 
         - `Type ClearThinking20251015`
 
@@ -20243,7 +20663,7 @@ func main() {
 
       Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-      - `type BetaCacheMissModelChanged struct{…}`
+      - `type BetaCacheMissModelChanged`
 
         - `Type ModelChanged`
 
@@ -20253,7 +20673,7 @@ func main() {
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissSystemChanged struct{…}`
+      - `type BetaCacheMissSystemChanged`
 
         - `Type SystemChanged`
 
@@ -20263,7 +20683,7 @@ func main() {
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissToolsChanged struct{…}`
+      - `type BetaCacheMissToolsChanged`
 
         - `Type ToolsChanged`
 
@@ -20273,7 +20693,7 @@ func main() {
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissMessagesChanged struct{…}`
+      - `type BetaCacheMissMessagesChanged`
 
         - `Type MessagesChanged`
 
@@ -20283,13 +20703,13 @@ func main() {
 
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-      - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+      - `type BetaCacheMissPreviousMessageNotFound`
 
         - `Type PreviousMessageNotFound`
 
           default: previous_message_not_found
 
-      - `type BetaCacheMissUnavailable struct{…}`
+      - `type BetaCacheMissUnavailable`
 
         - `Type Unavailable`
 
@@ -20487,7 +20907,7 @@ func main() {
         resulting shift is zero because there was nothing to move. `not_applied`:
         no reprice was applied; the arm's `reason` says why.
 
-        - `type BetaFallbackCreditRedeemed struct{…}`
+        - `type BetaFallbackCreditRedeemed`
 
           The reprice was applied: the retry is billed as if the conversation
           had been on the retry model all along.
@@ -20496,7 +20916,7 @@ func main() {
 
             default: redeemed
 
-        - `type BetaFallbackCreditNotApplied struct{…}`
+        - `type BetaFallbackCreditNotApplied`
 
           No reprice was applied; `reason` says why.
 
@@ -20568,7 +20988,7 @@ func main() {
 
       A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-      - `type BetaMessageIterationUsage struct{…}`
+      - `type BetaMessageIterationUsage`
 
         Token usage for a sampling iteration.
 
@@ -20612,7 +21032,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCompactionIterationUsage struct{…}`
+      - `type BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
 
@@ -20650,7 +21070,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaAdvisorMessageIterationUsage struct{…}`
+      - `type BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
 
@@ -20694,7 +21114,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaFallbackMessageIterationUsage struct{…}`
+      - `type BetaFallbackMessageIterationUsage`
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -20807,63 +21227,105 @@ func main() {
 
       - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-  - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+  - `InputTransformations []BetaInputTransformationUnion Optional`
 
-    Changes the API made to the request's input before showing it to the model:
-    one entry per change, in request order. Today the only entry type is
-    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-    block from the request's `messages` that was removed from the prompt instead
-    of being shown to the model because it failed a binding check. More entry
-    types may be added over time; ignore types you do not recognize.
+    Changes the API made to the request's input before showing it to the model,
+    and blocks that failed a binding check but were left unchanged: one entry per
+    block, in request order. Two entry types today. `thinking_dropped` — a
+    `thinking`, `redacted_thinking` or `connector_text` block from the request's
+    `messages` that was removed from the prompt instead of being shown to the
+    model because it failed a binding check. `thinking_mismatch_allowed` — a
+    `thinking` or `redacted_thinking` block that failed the conversation check
+    (the conversation before it differs from the one it was created in, or it
+    carries no record of one on a model that requires it) and was shown to the
+    model all the same, because that check is not enforced for this request.
+    More entry types may be added over time; ignore types you do not recognize.
 
     Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
     every such response from a model that supports extended thinking, as `[]`
-    when nothing was changed; without the beta, blocks are removed all the same
-    but nothing is reported. Removed blocks contribute nothing to
-    `usage.input_tokens`. When streaming, the array is final in `message_start`;
-    the final `message_delta` event carries it only when a server-side model
-    fallback happened mid-stream, in which case it holds the serving model's
-    entries and replaces the one in `message_start`.
+    when there is no entry to report; without the beta, blocks are removed or
+    left in place all the same but nothing is reported. Removed blocks contribute
+    nothing to `usage.input_tokens`; blocks left in place count as sent. When
+    streaming, the array is final in `message_start`; the final `message_delta`
+    event carries it only when a server-side model fallback happened mid-stream,
+    in which case it holds the serving model's entries and replaces the one in
+    `message_start`.
 
-    - `Type ThinkingDropped`
+    - `type BetaThinkingDroppedInputTransformation`
 
-      Always `thinking_dropped` for this entry type.
+      - `Type ThinkingDropped`
 
-      default: thinking_dropped
+        Always `thinking_dropped` for this entry type.
 
-    - `Path string`
+        default: thinking_dropped
 
-      Where the removed block was in your request, as `messages.{i}.content.{j}`:
-      `i` indexes the `messages` array you sent and `j` that message's `content`
-      array — the same form error messages use.
+      - `Path string`
 
-    - `Reason BetaThinkingDroppedInputTransformationReason`
+        Where the removed block was in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
 
-      Which binding check removed the block: `model_binding_mismatch` — it was
-      created by a model whose reasoning the requested model may not read;
-      `prefix_binding_mismatch` — the conversation before it differs from the
-      conversation it was created in (the rest of that turn's consecutive thinking
-      blocks are removed with it, each with this reason);
-      `organization_binding_mismatch` — it was created under a different
-      organization (an Anthropic organization, AWS account or Google Cloud project)
-      and this organization is not one of its additional organizations;
-      `end_user_binding_mismatch` — it was created for a different end user, or
-      was removed by the consumer-organization binding. A block that would fail
-      several checks reports one reason, in this order of precedence:
-      `organization_binding_mismatch`, `end_user_binding_mismatch`,
-      `model_binding_mismatch`, `prefix_binding_mismatch`.
+      - `Reason BetaThinkingDroppedInputTransformationReason`
 
-      - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+        Which binding check removed the block: `model_binding_mismatch` — it was
+        created by a model whose reasoning the requested model may not read;
+        `prefix_binding_mismatch` — the conversation before it differs from the
+        conversation it was created in (the rest of that turn's consecutive thinking
+        blocks are removed with it, each with this reason);
+        `organization_binding_mismatch` — it was created under a different
+        organization (an Anthropic organization, AWS account or Google Cloud project)
+        and this organization is not one of its additional organizations;
+        `end_user_binding_mismatch` — it was created for a different end user, or
+        was removed by the consumer-organization binding. A block that would fail
+        several checks reports one reason, in this order of precedence:
+        `organization_binding_mismatch`, `end_user_binding_mismatch`,
+        `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaThinkingMismatchAllowedInputTransformation`
+
+      - `Type ThinkingMismatchAllowed`
+
+        Always `thinking_mismatch_allowed` for this entry type.
+
+        default: thinking_mismatch_allowed
+
+      - `Path string`
+
+        Where the block is in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
+
+      - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+        Which binding check the block failed; the block was shown to the model all
+        the same. Always `prefix_binding_mismatch` today — the conversation before
+        the block differs from the conversation it was created in, or the block
+        carries no record of one on a model that requires it. Were the check
+        enforced for this request, the block would have been removed or the request
+        rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+        takes the rest of that turn's consecutive thinking blocks, whereas here each
+        block is checked on its own, so `thinking_mismatch_allowed` entries are a
+        lower bound on what enforcement would remove.
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
 
 ### Beta Message Delta Usage
 
-- `type BetaMessageDeltaUsage struct{…}`
+- `type BetaMessageDeltaUsage`
 
   - `CacheCreationInputTokens int64`
 
@@ -20890,7 +21352,7 @@ func main() {
       resulting shift is zero because there was nothing to move. `not_applied`:
       no reprice was applied; the arm's `reason` says why.
 
-      - `type BetaFallbackCreditRedeemed struct{…}`
+      - `type BetaFallbackCreditRedeemed`
 
         The reprice was applied: the retry is billed as if the conversation
         had been on the retry model all along.
@@ -20899,7 +21361,7 @@ func main() {
 
           default: redeemed
 
-      - `type BetaFallbackCreditNotApplied struct{…}`
+      - `type BetaFallbackCreditNotApplied`
 
         No reprice was applied; `reason` says why.
 
@@ -20967,7 +21429,7 @@ func main() {
 
     A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-    - `type BetaMessageIterationUsage struct{…}`
+    - `type BetaMessageIterationUsage`
 
       Token usage for a sampling iteration.
 
@@ -21099,7 +21561,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCompactionIterationUsage struct{…}`
+    - `type BetaCompactionIterationUsage`
 
       Token usage for a compaction iteration.
 
@@ -21137,7 +21599,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaAdvisorMessageIterationUsage struct{…}`
+    - `type BetaAdvisorMessageIterationUsage`
 
       Token usage for an advisor sub-inference iteration.
 
@@ -21181,7 +21643,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaFallbackMessageIterationUsage struct{…}`
+    - `type BetaFallbackMessageIterationUsage`
 
       Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -21276,7 +21738,7 @@ func main() {
 
 ### Beta Message Iteration Usage
 
-- `type BetaMessageIterationUsage struct{…}`
+- `type BetaMessageIterationUsage`
 
   Token usage for a sampling iteration.
 
@@ -21410,13 +21872,13 @@ func main() {
 
 ### Beta Message Param
 
-- `type BetaMessageParamResp struct{…}`
+- `type BetaMessageParamResp`
 
   - `Content []BetaContentBlockParamUnionResp`
 
     - `[]BetaContentBlockParamUnionResp`
 
-      - `type BetaTextBlockParamResp struct{…}`
+      - `type BetaTextBlockParamResp`
 
         - `Type Text`
 
@@ -21447,7 +21909,7 @@ func main() {
 
         - `Citations []BetaTextCitationParamUnionResp Optional`
 
-          - `type BetaCitationCharLocationParamResp struct{…}`
+          - `type BetaCitationCharLocationParamResp`
 
             - `Type CharLocation`
 
@@ -21467,7 +21929,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationPageLocationParamResp struct{…}`
+          - `type BetaCitationPageLocationParamResp`
 
             - `Type PageLocation`
 
@@ -21487,7 +21949,7 @@ func main() {
 
               minimum: 1
 
-          - `type BetaCitationContentBlockLocationParamResp struct{…}`
+          - `type BetaCitationContentBlockLocationParamResp`
 
             - `Type ContentBlockLocation`
 
@@ -21517,7 +21979,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+          - `type BetaCitationWebSearchResultLocationParamResp`
 
             - `Type WebSearchResultLocation`
 
@@ -21533,7 +21995,7 @@ func main() {
 
               minLength: 1
 
-          - `type BetaCitationSearchResultLocationParamResp struct{…}`
+          - `type BetaCitationSearchResultLocationParamResp`
 
             - `Type SearchResultLocation`
 
@@ -21567,13 +22029,13 @@ func main() {
 
             - `Title string`
 
-      - `type BetaImageBlockParamResp struct{…}`
+      - `type BetaImageBlockParamResp`
 
         - `Type Image`
 
         - `Source BetaImageBlockParamSourceUnionResp`
 
-          - `type BetaBase64ImageSource struct{…}`
+          - `type BetaBase64ImageSource`
 
             - `Type Base64`
 
@@ -21591,13 +22053,13 @@ func main() {
 
               - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-          - `type BetaURLImageSource struct{…}`
+          - `type BetaURLImageSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type BetaFileImageSource struct{…}`
+          - `type BetaFileImageSource`
 
             - `Type File`
 
@@ -21619,13 +22081,13 @@ func main() {
 
             - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-      - `type BetaRequestDocumentBlock struct{…}`
+      - `type BetaRequestDocumentBlock`
 
         - `Type Document`
 
         - `Source BetaRequestDocumentBlockSourceUnion`
 
-          - `type BetaBase64PDFSource struct{…}`
+          - `type BetaBase64PDFSource`
 
             - `Type Base64`
 
@@ -21635,7 +22097,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type BetaPlainTextSource struct{…}`
+          - `type BetaPlainTextSource`
 
             - `Type Text`
 
@@ -21643,7 +22105,7 @@ func main() {
 
             - `MediaType TextPlain`
 
-          - `type BetaContentBlockSource struct{…}`
+          - `type BetaContentBlockSource`
 
             - `Type Content`
 
@@ -21653,17 +22115,17 @@ func main() {
 
               - `[]BetaContentBlockSourceContentUnion`
 
-                - `type BetaTextBlockParamResp struct{…}`
+                - `type BetaTextBlockParamResp`
 
-                - `type BetaImageBlockParamResp struct{…}`
+                - `type BetaImageBlockParamResp`
 
-          - `type BetaURLPDFSource struct{…}`
+          - `type BetaURLPDFSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type BetaFileDocumentSource struct{…}`
+          - `type BetaFileDocumentSource`
 
             - `Type File`
 
@@ -21685,7 +22147,7 @@ func main() {
 
           maxLength: 500, minLength: 1
 
-      - `type BetaSearchResultBlockParamResp struct{…}`
+      - `type BetaSearchResultBlockParamResp`
 
         - `Type SearchResult`
 
@@ -21713,7 +22175,7 @@ func main() {
 
         - `Citations BetaCitationsConfigParamResp Optional`
 
-      - `type BetaThinkingBlockParamResp struct{…}`
+      - `type BetaThinkingBlockParamResp`
 
         - `Type Thinking`
 
@@ -21727,7 +22189,7 @@ func main() {
 
           The `thinking` text of this block as returned by the API.
 
-      - `type BetaRedactedThinkingBlockParamResp struct{…}`
+      - `type BetaRedactedThinkingBlockParamResp`
 
         - `Type RedactedThinking`
 
@@ -21735,7 +22197,7 @@ func main() {
 
           The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-      - `type BetaToolUseBlockParamResp struct{…}`
+      - `type BetaToolUseBlockParamResp`
 
         - `Type ToolUse`
 
@@ -21755,13 +22217,13 @@ func main() {
 
         - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
             - `Type Direct`
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -21771,7 +22233,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
             - `Type CodeExecution20260120`
 
@@ -21785,7 +22247,7 @@ func main() {
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type BetaToolResultBlockParamResp struct{…}`
+      - `type BetaToolResultBlockParamResp`
 
         - `Type ToolResult`
 
@@ -21801,15 +22263,15 @@ func main() {
 
           - `[]BetaToolResultBlockParamContentUnionResp`
 
-            - `type BetaTextBlockParamResp struct{…}`
+            - `type BetaTextBlockParamResp`
 
-            - `type BetaImageBlockParamResp struct{…}`
+            - `type BetaImageBlockParamResp`
 
-            - `type BetaSearchResultBlockParamResp struct{…}`
+            - `type BetaSearchResultBlockParamResp`
 
-            - `type BetaRequestDocumentBlock struct{…}`
+            - `type BetaRequestDocumentBlock`
 
-            - `type BetaToolReferenceBlockParamResp struct{…}`
+            - `type BetaToolReferenceBlockParamResp`
 
               Tool reference block that can be included in tool_result content.
 
@@ -21823,7 +22285,7 @@ func main() {
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaBrowserStateBlockParamResp struct{…}`
+            - `type BetaBrowserStateBlockParamResp`
 
               The caller's browser state after a browser toolset member call —
               the full inventory of open tabs, which tab is active, and any side
@@ -21873,7 +22335,7 @@ func main() {
 
                 maxItems: 200, minItems: 1
 
-                - `type BetaBrowserStateChangeTabOpened struct{…}`
+                - `type BetaBrowserStateChangeTabOpened`
 
                   A tab this call's execution opened that remains open at its end —
                   the creation delta of the `tabs` inventory, not an event log.
@@ -21891,7 +22353,7 @@ func main() {
 
                     maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                - `type BetaBrowserStateChangeDownloadStarted`
 
                   A file download that started during this call.
 
@@ -21909,7 +22371,7 @@ func main() {
 
                     maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                - `type BetaBrowserStateChangeDownloadCompleted`
 
                   A file download that finished during this call, reported with the
                   same `download_id` as its `download_started` — or without a prior
@@ -21942,7 +22404,7 @@ func main() {
 
                     minimum: 0
 
-                - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                - `type BetaBrowserStateChangeDownloadFailed`
 
                   A file download that failed — or was cancelled — during this call.
 
@@ -21974,7 +22436,7 @@ func main() {
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type BetaServerToolUseBlockParamResp struct{…}`
+      - `type BetaServerToolUseBlockParamResp`
 
         - `Type ServerToolUse`
 
@@ -22008,17 +22470,17 @@ func main() {
 
         - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+      - `type BetaWebSearchToolResultBlockParamResp`
 
         - `Type WebSearchToolResult`
 
@@ -22036,7 +22498,7 @@ func main() {
 
             - `PageAge string Optional`
 
-          - `type BetaWebSearchToolRequestError struct{…}`
+          - `type BetaWebSearchToolRequestError`
 
             - `Type WebSearchToolResultError`
 
@@ -22064,23 +22526,23 @@ func main() {
 
         - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+      - `type BetaWebFetchToolResultBlockParamResp`
 
         - `Type WebFetchToolResult`
 
         - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-          - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+          - `type BetaWebFetchToolResultErrorBlockParamResp`
 
             - `Type WebFetchToolResultError`
 
@@ -22106,7 +22568,7 @@ func main() {
 
               - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-          - `type BetaWebFetchBlockParamResp struct{…}`
+          - `type BetaWebFetchBlockParamResp`
 
             - `Type WebFetchResult`
 
@@ -22130,23 +22592,23 @@ func main() {
 
         - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+      - `type BetaAdvisorToolResultBlockParamResp`
 
         - `Type AdvisorToolResult`
 
         - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-          - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+          - `type BetaAdvisorToolResultErrorParamResp`
 
             - `Type AdvisorToolResultError`
 
@@ -22166,7 +22628,7 @@ func main() {
 
               - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-          - `type BetaAdvisorResultBlockParamResp struct{…}`
+          - `type BetaAdvisorResultBlockParamResp`
 
             - `Type AdvisorResult`
 
@@ -22174,7 +22636,7 @@ func main() {
 
             - `StopReason string Optional`
 
-          - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+          - `type BetaAdvisorRedactedResultBlockParamResp`
 
             - `Type AdvisorRedactedResult`
 
@@ -22192,13 +22654,13 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+      - `type BetaCodeExecutionToolResultBlockParamResp`
 
         - `Type CodeExecutionToolResult`
 
         - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-          - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+          - `type BetaCodeExecutionToolResultErrorParamResp`
 
             - `Type CodeExecutionToolResultError`
 
@@ -22212,7 +22674,7 @@ func main() {
 
               - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-          - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+          - `type BetaCodeExecutionResultBlockParamResp`
 
             - `Type CodeExecutionResult`
 
@@ -22228,7 +22690,7 @@ func main() {
 
             - `Stdout string`
 
-          - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+          - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -22254,13 +22716,13 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+      - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
         - `Type BashCodeExecutionToolResult`
 
         - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-          - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+          - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
             - `Type BashCodeExecutionToolResultError`
 
@@ -22276,7 +22738,7 @@ func main() {
 
               - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-          - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+          - `type BetaBashCodeExecutionResultBlockParamResp`
 
             - `Type BashCodeExecutionResult`
 
@@ -22300,13 +22762,13 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
         - `Type TextEditorCodeExecutionToolResult`
 
         - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-          - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+          - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
             - `Type TextEditorCodeExecutionToolResultError`
 
@@ -22324,7 +22786,7 @@ func main() {
 
             - `ErrorMessage string Optional`
 
-          - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+          - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
             - `Type TextEditorCodeExecutionViewResult`
 
@@ -22344,13 +22806,13 @@ func main() {
 
             - `TotalLines int64 Optional`
 
-          - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+          - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
             - `Type TextEditorCodeExecutionCreateResult`
 
             - `IsFileUpdate bool`
 
-          - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+          - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
             - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -22372,13 +22834,13 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+      - `type BetaToolSearchToolResultBlockParamResp`
 
         - `Type ToolSearchToolResult`
 
         - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-          - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+          - `type BetaToolSearchToolResultErrorParamResp`
 
             - `Type ToolSearchToolResultError`
 
@@ -22394,7 +22856,7 @@ func main() {
 
             - `ErrorMessage string Optional`
 
-          - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+          - `type BetaToolSearchToolSearchResultBlockParamResp`
 
             - `Type ToolSearchToolSearchResult`
 
@@ -22418,7 +22880,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaMCPToolUseBlockParamResp struct{…}`
+      - `type BetaMCPToolUseBlockParamResp`
 
         - `Type MCPToolUse`
 
@@ -22438,7 +22900,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+      - `type BetaRequestMCPToolResultBlockParamResp`
 
         - `Type MCPToolResult`
 
@@ -22470,7 +22932,7 @@ func main() {
 
         - `IsError bool Optional`
 
-      - `type BetaContainerUploadBlockParamResp struct{…}`
+      - `type BetaContainerUploadBlockParamResp`
 
         A content block that represents a file to be uploaded to the container
         Files uploaded via this block will be available in the container's input directory.
@@ -22483,7 +22945,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaCompactionBlockParamResp struct{…}`
+      - `type BetaCompactionBlockParamResp`
 
         A compaction block containing summary of previous context.
 
@@ -22507,7 +22969,11 @@ func main() {
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `type BetaRequestToolAdditionBlock struct{…}`
+        - `Signature string Optional`
+
+          The block's signature as returned, to be sent back verbatim
+
+      - `type BetaRequestToolAdditionBlock`
 
         Mid-conversation directive to surface a declared tool.
 
@@ -22519,7 +22985,7 @@ func main() {
 
         - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-          - `type BetaToolChangeToolReference struct{…}`
+          - `type BetaToolChangeToolReference`
 
             Reference to a single tool the caller declared directly in
             `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -22532,7 +22998,7 @@ func main() {
 
               pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-          - `type BetaToolChangeMCPToolReference struct{…}`
+          - `type BetaToolChangeMCPToolReference`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -22543,7 +23009,7 @@ func main() {
 
             - `ServerName string`
 
-          - `type BetaToolChangeMCPToolsetReference struct{…}`
+          - `type BetaToolChangeMCPToolsetReference`
 
             Reference to every tool in the named MCP server's toolset.
 
@@ -22555,7 +23021,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaRequestToolRemovalBlock struct{…}`
+      - `type BetaRequestToolRemovalBlock`
 
         Mid-conversation directive to withdraw a tool.
 
@@ -22567,19 +23033,19 @@ func main() {
 
         - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-          - `type BetaToolChangeToolReference struct{…}`
+          - `type BetaToolChangeToolReference`
 
             Reference to a single tool the caller declared directly in
             `tools[]`. Does not accept the composed `{server}_{name}` form the
             server assigns to MCP-resolved tools — use `mcp_tool_reference` or
             `mcp_toolset_reference` for those.
 
-          - `type BetaToolChangeMCPToolReference struct{…}`
+          - `type BetaToolChangeMCPToolReference`
 
             Reference to a single MCP tool by its server and remote name — the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
-          - `type BetaToolChangeMCPToolsetReference struct{…}`
+          - `type BetaToolChangeMCPToolsetReference`
 
             Reference to every tool in the named MCP server's toolset.
 
@@ -22587,7 +23053,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaFallbackBlockParamResp struct{…}`
+      - `type BetaFallbackBlockParamResp`
 
         A `fallback` block echoed back from a prior response.
 
@@ -22739,7 +23205,7 @@ func main() {
 
 ### Beta Message Tokens Count
 
-- `type BetaMessageTokensCount struct{…}`
+- `type BetaMessageTokensCount`
 
   - `ContextManagement BetaCountTokensContextManagementResponse`
 
@@ -22755,7 +23221,7 @@ func main() {
 
 ### Beta Metadata
 
-- `type BetaMetadata struct{…}`
+- `type BetaMetadata`
 
   - `UserID string Optional`
 
@@ -22767,7 +23233,7 @@ func main() {
 
 ### Beta Output Config
 
-- `type BetaOutputConfig struct{…}`
+- `type BetaOutputConfig`
 
   - `Effort BetaOutputConfigEffort Optional`
 
@@ -22815,7 +23281,7 @@ func main() {
 
 ### Beta Output Tokens Details
 
-- `type BetaOutputTokensDetails struct{…}`
+- `type BetaOutputTokensDetails`
 
   - `ThinkingTokens int64`
 
@@ -22832,7 +23298,7 @@ func main() {
 
 ### Beta Plain Text Source
 
-- `type BetaPlainTextSource struct{…}`
+- `type BetaPlainTextSource`
 
   - `Type Text`
 
@@ -22844,7 +23310,7 @@ func main() {
 
 - `type BetaRawContentBlockDeltaUnion interface{…}`
 
-  - `type BetaTextDelta struct{…}`
+  - `type BetaTextDelta`
 
     - `Type TextDelta`
 
@@ -22852,7 +23318,7 @@ func main() {
 
     - `Text string`
 
-  - `type BetaInputJSONDelta struct{…}`
+  - `type BetaInputJSONDelta`
 
     - `Type InputJSONDelta`
 
@@ -22860,7 +23326,7 @@ func main() {
 
     - `PartialJSON string`
 
-  - `type BetaCitationsDelta struct{…}`
+  - `type BetaCitationsDelta`
 
     - `Type CitationsDelta`
 
@@ -22868,7 +23334,7 @@ func main() {
 
     - `Citation BetaCitationsDeltaCitationUnion`
 
-      - `type BetaCitationCharLocation struct{…}`
+      - `type BetaCitationCharLocation`
 
         - `Type CharLocation`
 
@@ -22890,7 +23356,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationPageLocation struct{…}`
+      - `type BetaCitationPageLocation`
 
         - `Type PageLocation`
 
@@ -22912,7 +23378,7 @@ func main() {
 
           minimum: 1
 
-      - `type BetaCitationContentBlockLocation struct{…}`
+      - `type BetaCitationContentBlockLocation`
 
         - `Type ContentBlockLocation`
 
@@ -22944,7 +23410,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationsWebSearchResultLocation struct{…}`
+      - `type BetaCitationsWebSearchResultLocation`
 
         - `Type WebSearchResultLocation`
 
@@ -22960,7 +23426,7 @@ func main() {
 
         - `URL string`
 
-      - `type BetaCitationSearchResultLocation struct{…}`
+      - `type BetaCitationSearchResultLocation`
 
         - `Type SearchResultLocation`
 
@@ -22996,7 +23462,7 @@ func main() {
 
         - `Title string`
 
-  - `type BetaThinkingDelta struct{…}`
+  - `type BetaThinkingDelta`
 
     - `Type ThinkingDelta`
 
@@ -23010,7 +23476,7 @@ func main() {
 
       The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-  - `type BetaSignatureDelta struct{…}`
+  - `type BetaSignatureDelta`
 
     - `Type SignatureDelta`
 
@@ -23020,7 +23486,7 @@ func main() {
 
       The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-  - `type BetaCompactionContentBlockDelta struct{…}`
+  - `type BetaCompactionContentBlockDelta`
 
     - `Type CompactionDelta`
 
@@ -23034,7 +23500,7 @@ func main() {
 
 ### Beta Raw Content Block Delta Event
 
-- `type BetaRawContentBlockDeltaEvent struct{…}`
+- `type BetaRawContentBlockDeltaEvent`
 
   - `Type ContentBlockDelta`
 
@@ -23042,7 +23508,7 @@ func main() {
 
   - `Delta BetaRawContentBlockDeltaUnion`
 
-    - `type BetaTextDelta struct{…}`
+    - `type BetaTextDelta`
 
       - `Type TextDelta`
 
@@ -23050,7 +23516,7 @@ func main() {
 
       - `Text string`
 
-    - `type BetaInputJSONDelta struct{…}`
+    - `type BetaInputJSONDelta`
 
       - `Type InputJSONDelta`
 
@@ -23058,7 +23524,7 @@ func main() {
 
       - `PartialJSON string`
 
-    - `type BetaCitationsDelta struct{…}`
+    - `type BetaCitationsDelta`
 
       - `Type CitationsDelta`
 
@@ -23066,7 +23532,7 @@ func main() {
 
       - `Citation BetaCitationsDeltaCitationUnion`
 
-        - `type BetaCitationCharLocation struct{…}`
+        - `type BetaCitationCharLocation`
 
           - `Type CharLocation`
 
@@ -23088,7 +23554,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationPageLocation struct{…}`
+        - `type BetaCitationPageLocation`
 
           - `Type PageLocation`
 
@@ -23110,7 +23576,7 @@ func main() {
 
             minimum: 1
 
-        - `type BetaCitationContentBlockLocation struct{…}`
+        - `type BetaCitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -23142,7 +23608,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationsWebSearchResultLocation struct{…}`
+        - `type BetaCitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -23158,7 +23624,7 @@ func main() {
 
           - `URL string`
 
-        - `type BetaCitationSearchResultLocation struct{…}`
+        - `type BetaCitationSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -23194,7 +23660,7 @@ func main() {
 
           - `Title string`
 
-    - `type BetaThinkingDelta struct{…}`
+    - `type BetaThinkingDelta`
 
       - `Type ThinkingDelta`
 
@@ -23208,7 +23674,7 @@ func main() {
 
         The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-    - `type BetaSignatureDelta struct{…}`
+    - `type BetaSignatureDelta`
 
       - `Type SignatureDelta`
 
@@ -23218,7 +23684,7 @@ func main() {
 
         The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-    - `type BetaCompactionContentBlockDelta struct{…}`
+    - `type BetaCompactionContentBlockDelta`
 
       - `Type CompactionDelta`
 
@@ -23234,7 +23700,7 @@ func main() {
 
 ### Beta Raw Content Block Start Event
 
-- `type BetaRawContentBlockStartEvent struct{…}`
+- `type BetaRawContentBlockStartEvent`
 
   - `Type ContentBlockStart`
 
@@ -23242,7 +23708,7 @@ func main() {
 
   - `ContentBlock BetaRawContentBlockStartEventContentBlockUnion`
 
-    - `type BetaTextBlock struct{…}`
+    - `type BetaTextBlock`
 
       - `Type Text`
 
@@ -23254,7 +23720,7 @@ func main() {
 
         The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-        - `type BetaCitationCharLocation struct{…}`
+        - `type BetaCitationCharLocation`
 
           - `Type CharLocation`
 
@@ -23276,7 +23742,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationPageLocation struct{…}`
+        - `type BetaCitationPageLocation`
 
           - `Type PageLocation`
 
@@ -23298,7 +23764,7 @@ func main() {
 
             minimum: 1
 
-        - `type BetaCitationContentBlockLocation struct{…}`
+        - `type BetaCitationContentBlockLocation`
 
           - `Type ContentBlockLocation`
 
@@ -23330,7 +23796,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationsWebSearchResultLocation struct{…}`
+        - `type BetaCitationsWebSearchResultLocation`
 
           - `Type WebSearchResultLocation`
 
@@ -23346,7 +23812,7 @@ func main() {
 
           - `URL string`
 
-        - `type BetaCitationSearchResultLocation struct{…}`
+        - `type BetaCitationSearchResultLocation`
 
           - `Type SearchResultLocation`
 
@@ -23386,7 +23852,7 @@ func main() {
 
         minLength: 0
 
-    - `type BetaThinkingBlock struct{…}`
+    - `type BetaThinkingBlock`
 
       - `Type Thinking`
 
@@ -23404,7 +23870,7 @@ func main() {
 
         The text of Claude's thinking process for this block.
 
-    - `type BetaRedactedThinkingBlock struct{…}`
+    - `type BetaRedactedThinkingBlock`
 
       - `Type RedactedThinking`
 
@@ -23418,7 +23884,7 @@ func main() {
 
         See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-    - `type BetaToolUseBlock struct{…}`
+    - `type BetaToolUseBlock`
 
       - `Type ToolUse`
 
@@ -23436,13 +23902,13 @@ func main() {
 
       - `Caller BetaToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
           - `Type Direct`
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
@@ -23452,7 +23918,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
           - `Type CodeExecution20260120`
 
@@ -23466,7 +23932,7 @@ func main() {
 
         maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaServerToolUseBlock struct{…}`
+    - `type BetaServerToolUseBlock`
 
       - `Type ServerToolUse`
 
@@ -23498,17 +23964,17 @@ func main() {
 
       - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebSearchToolResultBlock struct{…}`
+    - `type BetaWebSearchToolResultBlock`
 
       - `Type WebSearchToolResult`
 
@@ -23516,7 +23982,7 @@ func main() {
 
       - `Content BetaWebSearchToolResultBlockContentUnion`
 
-        - `type BetaWebSearchToolResultError struct{…}`
+        - `type BetaWebSearchToolResultError`
 
           - `Type WebSearchToolResultError`
 
@@ -23556,17 +24022,17 @@ func main() {
 
       - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaWebFetchToolResultBlock struct{…}`
+    - `type BetaWebFetchToolResultBlock`
 
       - `Type WebFetchToolResult`
 
@@ -23574,7 +24040,7 @@ func main() {
 
       - `Content BetaWebFetchToolResultBlockContentUnion`
 
-        - `type BetaWebFetchToolResultErrorBlock struct{…}`
+        - `type BetaWebFetchToolResultErrorBlock`
 
           - `Type WebFetchToolResultError`
 
@@ -23602,7 +24068,7 @@ func main() {
 
             - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-        - `type BetaWebFetchBlock struct{…}`
+        - `type BetaWebFetchBlock`
 
           - `Type WebFetchResult`
 
@@ -23624,7 +24090,7 @@ func main() {
 
             - `Source BetaDocumentBlockSourceUnion`
 
-              - `type BetaBase64PDFSource struct{…}`
+              - `type BetaBase64PDFSource`
 
                 - `Type Base64`
 
@@ -23634,7 +24100,7 @@ func main() {
 
                 - `MediaType ApplicationPDF`
 
-              - `type BetaPlainTextSource struct{…}`
+              - `type BetaPlainTextSource`
 
                 - `Type Text`
 
@@ -23660,17 +24126,17 @@ func main() {
 
       - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-        - `type BetaDirectCaller struct{…}`
+        - `type BetaDirectCaller`
 
           Tool invocation directly from the model.
 
-        - `type BetaServerToolCaller struct{…}`
+        - `type BetaServerToolCaller`
 
           Tool invocation generated by a server-side tool.
 
-        - `type BetaServerToolCaller20260120 struct{…}`
+        - `type BetaServerToolCaller20260120`
 
-    - `type BetaAdvisorToolResultBlock struct{…}`
+    - `type BetaAdvisorToolResultBlock`
 
       - `Type AdvisorToolResult`
 
@@ -23678,7 +24144,7 @@ func main() {
 
       - `Content BetaAdvisorToolResultBlockContentUnion`
 
-        - `type BetaAdvisorToolResultError struct{…}`
+        - `type BetaAdvisorToolResultError`
 
           - `Type AdvisorToolResultError`
 
@@ -23700,7 +24166,7 @@ func main() {
 
             - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-        - `type BetaAdvisorResultBlock struct{…}`
+        - `type BetaAdvisorResultBlock`
 
           - `Type AdvisorResult`
 
@@ -23712,7 +24178,7 @@ func main() {
 
           - `Text string`
 
-        - `type BetaAdvisorRedactedResultBlock struct{…}`
+        - `type BetaAdvisorRedactedResultBlock`
 
           - `Type AdvisorRedactedResult`
 
@@ -23730,7 +24196,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaCodeExecutionToolResultBlock struct{…}`
+    - `type BetaCodeExecutionToolResultBlock`
 
       - `Type CodeExecutionToolResult`
 
@@ -23738,7 +24204,7 @@ func main() {
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaCodeExecutionToolResultError struct{…}`
+        - `type BetaCodeExecutionToolResultError`
 
           - `Type CodeExecutionToolResultError`
 
@@ -23754,7 +24220,7 @@ func main() {
 
             - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-        - `type BetaCodeExecutionResultBlock struct{…}`
+        - `type BetaCodeExecutionResultBlock`
 
           - `Type CodeExecutionResult`
 
@@ -23774,7 +24240,7 @@ func main() {
 
           - `Stdout string`
 
-        - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+        - `type BetaEncryptedCodeExecutionResultBlock`
 
           Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -23800,7 +24266,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+    - `type BetaBashCodeExecutionToolResultBlock`
 
       - `Type BashCodeExecutionToolResult`
 
@@ -23808,7 +24274,7 @@ func main() {
 
       - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaBashCodeExecutionToolResultError struct{…}`
+        - `type BetaBashCodeExecutionToolResultError`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -23826,7 +24292,7 @@ func main() {
 
             - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-        - `type BetaBashCodeExecutionResultBlock struct{…}`
+        - `type BetaBashCodeExecutionResultBlock`
 
           - `Type BashCodeExecutionResult`
 
@@ -23850,7 +24316,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+    - `type BetaTextEditorCodeExecutionToolResultBlock`
 
       - `Type TextEditorCodeExecutionToolResult`
 
@@ -23858,7 +24324,7 @@ func main() {
 
       - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultError`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -23878,7 +24344,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionViewResultBlock`
 
           - `Type TextEditorCodeExecutionViewResult`
 
@@ -23900,7 +24366,7 @@ func main() {
 
           - `TotalLines int64`
 
-        - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
           - `Type TextEditorCodeExecutionCreateResult`
 
@@ -23908,7 +24374,7 @@ func main() {
 
           - `IsFileUpdate bool`
 
-        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
           - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -23928,7 +24394,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaToolSearchToolResultBlock struct{…}`
+    - `type BetaToolSearchToolResultBlock`
 
       - `Type ToolSearchToolResult`
 
@@ -23936,7 +24402,7 @@ func main() {
 
       - `Content BetaToolSearchToolResultBlockContentUnion`
 
-        - `type BetaToolSearchToolResultError struct{…}`
+        - `type BetaToolSearchToolResultError`
 
           - `Type ToolSearchToolResultError`
 
@@ -23954,7 +24420,7 @@ func main() {
 
           - `ErrorMessage string`
 
-        - `type BetaToolSearchToolSearchResultBlock struct{…}`
+        - `type BetaToolSearchToolSearchResultBlock`
 
           - `Type ToolSearchToolSearchResult`
 
@@ -23974,7 +24440,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaMCPToolUseBlock struct{…}`
+    - `type BetaMCPToolUseBlock`
 
       - `Type MCPToolUse`
 
@@ -23994,7 +24460,7 @@ func main() {
 
         The name of the MCP server
 
-    - `type BetaMCPToolResultBlock struct{…}`
+    - `type BetaMCPToolResultBlock`
 
       - `Type MCPToolResult`
 
@@ -24028,7 +24494,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-    - `type BetaContainerUploadBlock struct{…}`
+    - `type BetaContainerUploadBlock`
 
       Response model for a file uploaded to the container.
 
@@ -24038,7 +24504,7 @@ func main() {
 
       - `FileID string`
 
-    - `type BetaCompactionBlock struct{…}`
+    - `type BetaCompactionBlock`
 
       A compaction block returned when autocompact is triggered.
 
@@ -24058,7 +24524,11 @@ func main() {
 
         Opaque metadata from prior compaction, to be round-tripped verbatim
 
-    - `type BetaFallbackBlock struct{…}`
+      - `Signature string Optional`
+
+        Signature over the summary, to be sent back with the block verbatim
+
+    - `type BetaFallbackBlock`
 
       Marks the point in `content` where one model's output gives way to the next.
 
@@ -24202,7 +24672,7 @@ func main() {
 
 ### Beta Raw Content Block Stop Event
 
-- `type BetaRawContentBlockStopEvent struct{…}`
+- `type BetaRawContentBlockStopEvent`
 
   - `Type ContentBlockStop`
 
@@ -24212,7 +24682,7 @@ func main() {
 
 ### Beta Raw Message Delta Event
 
-- `type BetaRawMessageDeltaEvent struct{…}`
+- `type BetaRawMessageDeltaEvent`
 
   - `Type MessageDelta`
 
@@ -24226,7 +24696,7 @@ func main() {
 
       List of context management edits that were applied.
 
-      - `type BetaClearToolUses20250919EditResponse struct{…}`
+      - `type BetaClearToolUses20250919EditResponse`
 
         - `Type ClearToolUses20250919`
 
@@ -24246,7 +24716,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaClearThinking20251015EditResponse struct{…}`
+      - `type BetaClearThinking20251015EditResponse`
 
         - `Type ClearThinking20251015`
 
@@ -24450,7 +24920,7 @@ func main() {
         resulting shift is zero because there was nothing to move. `not_applied`:
         no reprice was applied; the arm's `reason` says why.
 
-        - `type BetaFallbackCreditRedeemed struct{…}`
+        - `type BetaFallbackCreditRedeemed`
 
           The reprice was applied: the retry is billed as if the conversation
           had been on the retry model all along.
@@ -24459,7 +24929,7 @@ func main() {
 
             default: redeemed
 
-        - `type BetaFallbackCreditNotApplied struct{…}`
+        - `type BetaFallbackCreditNotApplied`
 
           No reprice was applied; `reason` says why.
 
@@ -24527,7 +24997,7 @@ func main() {
 
       A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-      - `type BetaMessageIterationUsage struct{…}`
+      - `type BetaMessageIterationUsage`
 
         Token usage for a sampling iteration.
 
@@ -24659,7 +25129,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCompactionIterationUsage struct{…}`
+      - `type BetaCompactionIterationUsage`
 
         Token usage for a compaction iteration.
 
@@ -24697,7 +25167,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaAdvisorMessageIterationUsage struct{…}`
+      - `type BetaAdvisorMessageIterationUsage`
 
         Token usage for an advisor sub-inference iteration.
 
@@ -24741,7 +25211,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaFallbackMessageIterationUsage struct{…}`
+      - `type BetaFallbackMessageIterationUsage`
 
         Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -24834,63 +25304,105 @@ func main() {
 
         default: 0, minimum: 0
 
-  - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+  - `InputTransformations []BetaInputTransformationUnion Optional`
 
-    Changes the API made to the request's input before showing it to the model:
-    one entry per change, in request order. Today the only entry type is
-    `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-    block from the request's `messages` that was removed from the prompt instead
-    of being shown to the model because it failed a binding check. More entry
-    types may be added over time; ignore types you do not recognize.
+    Changes the API made to the request's input before showing it to the model,
+    and blocks that failed a binding check but were left unchanged: one entry per
+    block, in request order. Two entry types today. `thinking_dropped` — a
+    `thinking`, `redacted_thinking` or `connector_text` block from the request's
+    `messages` that was removed from the prompt instead of being shown to the
+    model because it failed a binding check. `thinking_mismatch_allowed` — a
+    `thinking` or `redacted_thinking` block that failed the conversation check
+    (the conversation before it differs from the one it was created in, or it
+    carries no record of one on a model that requires it) and was shown to the
+    model all the same, because that check is not enforced for this request.
+    More entry types may be added over time; ignore types you do not recognize.
 
     Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
     every such response from a model that supports extended thinking, as `[]`
-    when nothing was changed; without the beta, blocks are removed all the same
-    but nothing is reported. Removed blocks contribute nothing to
-    `usage.input_tokens`. When streaming, the array is final in `message_start`;
-    the final `message_delta` event carries it only when a server-side model
-    fallback happened mid-stream, in which case it holds the serving model's
-    entries and replaces the one in `message_start`.
+    when there is no entry to report; without the beta, blocks are removed or
+    left in place all the same but nothing is reported. Removed blocks contribute
+    nothing to `usage.input_tokens`; blocks left in place count as sent. When
+    streaming, the array is final in `message_start`; the final `message_delta`
+    event carries it only when a server-side model fallback happened mid-stream,
+    in which case it holds the serving model's entries and replaces the one in
+    `message_start`.
 
-    - `Type ThinkingDropped`
+    - `type BetaThinkingDroppedInputTransformation`
 
-      Always `thinking_dropped` for this entry type.
+      - `Type ThinkingDropped`
 
-      default: thinking_dropped
+        Always `thinking_dropped` for this entry type.
 
-    - `Path string`
+        default: thinking_dropped
 
-      Where the removed block was in your request, as `messages.{i}.content.{j}`:
-      `i` indexes the `messages` array you sent and `j` that message's `content`
-      array — the same form error messages use.
+      - `Path string`
 
-    - `Reason BetaThinkingDroppedInputTransformationReason`
+        Where the removed block was in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
 
-      Which binding check removed the block: `model_binding_mismatch` — it was
-      created by a model whose reasoning the requested model may not read;
-      `prefix_binding_mismatch` — the conversation before it differs from the
-      conversation it was created in (the rest of that turn's consecutive thinking
-      blocks are removed with it, each with this reason);
-      `organization_binding_mismatch` — it was created under a different
-      organization (an Anthropic organization, AWS account or Google Cloud project)
-      and this organization is not one of its additional organizations;
-      `end_user_binding_mismatch` — it was created for a different end user, or
-      was removed by the consumer-organization binding. A block that would fail
-      several checks reports one reason, in this order of precedence:
-      `organization_binding_mismatch`, `end_user_binding_mismatch`,
-      `model_binding_mismatch`, `prefix_binding_mismatch`.
+      - `Reason BetaThinkingDroppedInputTransformationReason`
 
-      - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+        Which binding check removed the block: `model_binding_mismatch` — it was
+        created by a model whose reasoning the requested model may not read;
+        `prefix_binding_mismatch` — the conversation before it differs from the
+        conversation it was created in (the rest of that turn's consecutive thinking
+        blocks are removed with it, each with this reason);
+        `organization_binding_mismatch` — it was created under a different
+        organization (an Anthropic organization, AWS account or Google Cloud project)
+        and this organization is not one of its additional organizations;
+        `end_user_binding_mismatch` — it was created for a different end user, or
+        was removed by the consumer-organization binding. A block that would fail
+        several checks reports one reason, in this order of precedence:
+        `organization_binding_mismatch`, `end_user_binding_mismatch`,
+        `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-      - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-      - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+        - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaThinkingMismatchAllowedInputTransformation`
+
+      - `Type ThinkingMismatchAllowed`
+
+        Always `thinking_mismatch_allowed` for this entry type.
+
+        default: thinking_mismatch_allowed
+
+      - `Path string`
+
+        Where the block is in your request, as `messages.{i}.content.{j}`:
+        `i` indexes the `messages` array you sent and `j` that message's `content`
+        array — the same form error messages use.
+
+      - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+        Which binding check the block failed; the block was shown to the model all
+        the same. Always `prefix_binding_mismatch` today — the conversation before
+        the block differs from the conversation it was created in, or the block
+        carries no record of one on a model that requires it. Were the check
+        enforced for this request, the block would have been removed or the request
+        rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+        takes the rest of that turn's consecutive thinking blocks, whereas here each
+        block is checked on its own, so `thinking_mismatch_allowed` entries are a
+        lower bound on what enforcement would remove.
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+        - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
 
 ### Beta Raw Message Start Event
 
-- `type BetaRawMessageStartEvent struct{…}`
+- `type BetaRawMessageStartEvent`
 
   - `Type MessageStart`
 
@@ -24979,7 +25491,7 @@ func main() {
       [{"type": "text", "text": "B)"}]
       ```
 
-      - `type BetaTextBlock struct{…}`
+      - `type BetaTextBlock`
 
         - `Type Text`
 
@@ -24991,7 +25503,7 @@ func main() {
 
           The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-          - `type BetaCitationCharLocation struct{…}`
+          - `type BetaCitationCharLocation`
 
             - `Type CharLocation`
 
@@ -25013,7 +25525,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationPageLocation struct{…}`
+          - `type BetaCitationPageLocation`
 
             - `Type PageLocation`
 
@@ -25035,7 +25547,7 @@ func main() {
 
               minimum: 1
 
-          - `type BetaCitationContentBlockLocation struct{…}`
+          - `type BetaCitationContentBlockLocation`
 
             - `Type ContentBlockLocation`
 
@@ -25067,7 +25579,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationsWebSearchResultLocation struct{…}`
+          - `type BetaCitationsWebSearchResultLocation`
 
             - `Type WebSearchResultLocation`
 
@@ -25083,7 +25595,7 @@ func main() {
 
             - `URL string`
 
-          - `type BetaCitationSearchResultLocation struct{…}`
+          - `type BetaCitationSearchResultLocation`
 
             - `Type SearchResultLocation`
 
@@ -25123,7 +25635,7 @@ func main() {
 
           minLength: 0
 
-      - `type BetaThinkingBlock struct{…}`
+      - `type BetaThinkingBlock`
 
         - `Type Thinking`
 
@@ -25141,7 +25653,7 @@ func main() {
 
           The text of Claude's thinking process for this block.
 
-      - `type BetaRedactedThinkingBlock struct{…}`
+      - `type BetaRedactedThinkingBlock`
 
         - `Type RedactedThinking`
 
@@ -25155,7 +25667,7 @@ func main() {
 
           See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-      - `type BetaToolUseBlock struct{…}`
+      - `type BetaToolUseBlock`
 
         - `Type ToolUse`
 
@@ -25173,13 +25685,13 @@ func main() {
 
         - `Caller BetaToolUseBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
             - `Type Direct`
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
@@ -25189,7 +25701,7 @@ func main() {
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
             - `Type CodeExecution20260120`
 
@@ -25203,7 +25715,7 @@ func main() {
 
           maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type BetaServerToolUseBlock struct{…}`
+      - `type BetaServerToolUseBlock`
 
         - `Type ServerToolUse`
 
@@ -25235,17 +25747,17 @@ func main() {
 
         - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaWebSearchToolResultBlock struct{…}`
+      - `type BetaWebSearchToolResultBlock`
 
         - `Type WebSearchToolResult`
 
@@ -25253,7 +25765,7 @@ func main() {
 
         - `Content BetaWebSearchToolResultBlockContentUnion`
 
-          - `type BetaWebSearchToolResultError struct{…}`
+          - `type BetaWebSearchToolResultError`
 
             - `Type WebSearchToolResultError`
 
@@ -25293,17 +25805,17 @@ func main() {
 
         - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaWebFetchToolResultBlock struct{…}`
+      - `type BetaWebFetchToolResultBlock`
 
         - `Type WebFetchToolResult`
 
@@ -25311,7 +25823,7 @@ func main() {
 
         - `Content BetaWebFetchToolResultBlockContentUnion`
 
-          - `type BetaWebFetchToolResultErrorBlock struct{…}`
+          - `type BetaWebFetchToolResultErrorBlock`
 
             - `Type WebFetchToolResultError`
 
@@ -25339,7 +25851,7 @@ func main() {
 
               - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-          - `type BetaWebFetchBlock struct{…}`
+          - `type BetaWebFetchBlock`
 
             - `Type WebFetchResult`
 
@@ -25361,7 +25873,7 @@ func main() {
 
               - `Source BetaDocumentBlockSourceUnion`
 
-                - `type BetaBase64PDFSource struct{…}`
+                - `type BetaBase64PDFSource`
 
                   - `Type Base64`
 
@@ -25371,7 +25883,7 @@ func main() {
 
                   - `MediaType ApplicationPDF`
 
-                - `type BetaPlainTextSource struct{…}`
+                - `type BetaPlainTextSource`
 
                   - `Type Text`
 
@@ -25397,17 +25909,17 @@ func main() {
 
         - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-          - `type BetaDirectCaller struct{…}`
+          - `type BetaDirectCaller`
 
             Tool invocation directly from the model.
 
-          - `type BetaServerToolCaller struct{…}`
+          - `type BetaServerToolCaller`
 
             Tool invocation generated by a server-side tool.
 
-          - `type BetaServerToolCaller20260120 struct{…}`
+          - `type BetaServerToolCaller20260120`
 
-      - `type BetaAdvisorToolResultBlock struct{…}`
+      - `type BetaAdvisorToolResultBlock`
 
         - `Type AdvisorToolResult`
 
@@ -25415,7 +25927,7 @@ func main() {
 
         - `Content BetaAdvisorToolResultBlockContentUnion`
 
-          - `type BetaAdvisorToolResultError struct{…}`
+          - `type BetaAdvisorToolResultError`
 
             - `Type AdvisorToolResultError`
 
@@ -25437,7 +25949,7 @@ func main() {
 
               - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-          - `type BetaAdvisorResultBlock struct{…}`
+          - `type BetaAdvisorResultBlock`
 
             - `Type AdvisorResult`
 
@@ -25449,7 +25961,7 @@ func main() {
 
             - `Text string`
 
-          - `type BetaAdvisorRedactedResultBlock struct{…}`
+          - `type BetaAdvisorRedactedResultBlock`
 
             - `Type AdvisorRedactedResult`
 
@@ -25467,7 +25979,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaCodeExecutionToolResultBlock struct{…}`
+      - `type BetaCodeExecutionToolResultBlock`
 
         - `Type CodeExecutionToolResult`
 
@@ -25475,7 +25987,7 @@ func main() {
 
         - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-          - `type BetaCodeExecutionToolResultError struct{…}`
+          - `type BetaCodeExecutionToolResultError`
 
             - `Type CodeExecutionToolResultError`
 
@@ -25491,7 +26003,7 @@ func main() {
 
               - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-          - `type BetaCodeExecutionResultBlock struct{…}`
+          - `type BetaCodeExecutionResultBlock`
 
             - `Type CodeExecutionResult`
 
@@ -25511,7 +26023,7 @@ func main() {
 
             - `Stdout string`
 
-          - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+          - `type BetaEncryptedCodeExecutionResultBlock`
 
             Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -25537,7 +26049,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+      - `type BetaBashCodeExecutionToolResultBlock`
 
         - `Type BashCodeExecutionToolResult`
 
@@ -25545,7 +26057,7 @@ func main() {
 
         - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-          - `type BetaBashCodeExecutionToolResultError struct{…}`
+          - `type BetaBashCodeExecutionToolResultError`
 
             - `Type BashCodeExecutionToolResultError`
 
@@ -25563,7 +26075,7 @@ func main() {
 
               - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-          - `type BetaBashCodeExecutionResultBlock struct{…}`
+          - `type BetaBashCodeExecutionResultBlock`
 
             - `Type BashCodeExecutionResult`
 
@@ -25587,7 +26099,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultBlock`
 
         - `Type TextEditorCodeExecutionToolResult`
 
@@ -25595,7 +26107,7 @@ func main() {
 
         - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-          - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+          - `type BetaTextEditorCodeExecutionToolResultError`
 
             - `Type TextEditorCodeExecutionToolResultError`
 
@@ -25615,7 +26127,7 @@ func main() {
 
             - `ErrorMessage string`
 
-          - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionViewResultBlock`
 
             - `Type TextEditorCodeExecutionViewResult`
 
@@ -25637,7 +26149,7 @@ func main() {
 
             - `TotalLines int64`
 
-          - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
             - `Type TextEditorCodeExecutionCreateResult`
 
@@ -25645,7 +26157,7 @@ func main() {
 
             - `IsFileUpdate bool`
 
-          - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
             - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -25665,7 +26177,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaToolSearchToolResultBlock struct{…}`
+      - `type BetaToolSearchToolResultBlock`
 
         - `Type ToolSearchToolResult`
 
@@ -25673,7 +26185,7 @@ func main() {
 
         - `Content BetaToolSearchToolResultBlockContentUnion`
 
-          - `type BetaToolSearchToolResultError struct{…}`
+          - `type BetaToolSearchToolResultError`
 
             - `Type ToolSearchToolResultError`
 
@@ -25691,7 +26203,7 @@ func main() {
 
             - `ErrorMessage string`
 
-          - `type BetaToolSearchToolSearchResultBlock struct{…}`
+          - `type BetaToolSearchToolSearchResultBlock`
 
             - `Type ToolSearchToolSearchResult`
 
@@ -25711,7 +26223,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `type BetaMCPToolUseBlock struct{…}`
+      - `type BetaMCPToolUseBlock`
 
         - `Type MCPToolUse`
 
@@ -25731,7 +26243,7 @@ func main() {
 
           The name of the MCP server
 
-      - `type BetaMCPToolResultBlock struct{…}`
+      - `type BetaMCPToolResultBlock`
 
         - `Type MCPToolResult`
 
@@ -25765,7 +26277,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-      - `type BetaContainerUploadBlock struct{…}`
+      - `type BetaContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
@@ -25775,7 +26287,7 @@ func main() {
 
         - `FileID string`
 
-      - `type BetaCompactionBlock struct{…}`
+      - `type BetaCompactionBlock`
 
         A compaction block returned when autocompact is triggered.
 
@@ -25795,7 +26307,11 @@ func main() {
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `type BetaFallbackBlock struct{…}`
+        - `Signature string Optional`
+
+          Signature over the summary, to be sent back with the block verbatim
+
+      - `type BetaFallbackBlock`
 
         Marks the point in `content` where one model's output gives way to the next.
 
@@ -25945,7 +26461,7 @@ func main() {
 
         List of context management edits that were applied.
 
-        - `type BetaClearToolUses20250919EditResponse struct{…}`
+        - `type BetaClearToolUses20250919EditResponse`
 
           - `Type ClearToolUses20250919`
 
@@ -25965,7 +26481,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaClearThinking20251015EditResponse struct{…}`
+        - `type BetaClearThinking20251015EditResponse`
 
           - `Type ClearThinking20251015`
 
@@ -25994,7 +26510,7 @@ func main() {
 
         Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-        - `type BetaCacheMissModelChanged struct{…}`
+        - `type BetaCacheMissModelChanged`
 
           - `Type ModelChanged`
 
@@ -26004,7 +26520,7 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissSystemChanged struct{…}`
+        - `type BetaCacheMissSystemChanged`
 
           - `Type SystemChanged`
 
@@ -26014,7 +26530,7 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissToolsChanged struct{…}`
+        - `type BetaCacheMissToolsChanged`
 
           - `Type ToolsChanged`
 
@@ -26024,7 +26540,7 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissMessagesChanged struct{…}`
+        - `type BetaCacheMissMessagesChanged`
 
           - `Type MessagesChanged`
 
@@ -26034,13 +26550,13 @@ func main() {
 
             Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-        - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+        - `type BetaCacheMissPreviousMessageNotFound`
 
           - `Type PreviousMessageNotFound`
 
             default: previous_message_not_found
 
-        - `type BetaCacheMissUnavailable struct{…}`
+        - `type BetaCacheMissUnavailable`
 
           - `Type Unavailable`
 
@@ -26238,7 +26754,7 @@ func main() {
           resulting shift is zero because there was nothing to move. `not_applied`:
           no reprice was applied; the arm's `reason` says why.
 
-          - `type BetaFallbackCreditRedeemed struct{…}`
+          - `type BetaFallbackCreditRedeemed`
 
             The reprice was applied: the retry is billed as if the conversation
             had been on the retry model all along.
@@ -26247,7 +26763,7 @@ func main() {
 
               default: redeemed
 
-          - `type BetaFallbackCreditNotApplied struct{…}`
+          - `type BetaFallbackCreditNotApplied`
 
             No reprice was applied; `reason` says why.
 
@@ -26319,7 +26835,7 @@ func main() {
 
         A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-        - `type BetaMessageIterationUsage struct{…}`
+        - `type BetaMessageIterationUsage`
 
           Token usage for a sampling iteration.
 
@@ -26363,7 +26879,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCompactionIterationUsage struct{…}`
+        - `type BetaCompactionIterationUsage`
 
           Token usage for a compaction iteration.
 
@@ -26401,7 +26917,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaAdvisorMessageIterationUsage struct{…}`
+        - `type BetaAdvisorMessageIterationUsage`
 
           Token usage for an advisor sub-inference iteration.
 
@@ -26445,7 +26961,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaFallbackMessageIterationUsage struct{…}`
+        - `type BetaFallbackMessageIterationUsage`
 
           Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -26558,63 +27074,105 @@ func main() {
 
         - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-    - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+    - `InputTransformations []BetaInputTransformationUnion Optional`
 
-      Changes the API made to the request's input before showing it to the model:
-      one entry per change, in request order. Today the only entry type is
-      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-      block from the request's `messages` that was removed from the prompt instead
-      of being shown to the model because it failed a binding check. More entry
-      types may be added over time; ignore types you do not recognize.
+      Changes the API made to the request's input before showing it to the model,
+      and blocks that failed a binding check but were left unchanged: one entry per
+      block, in request order. Two entry types today. `thinking_dropped` — a
+      `thinking`, `redacted_thinking` or `connector_text` block from the request's
+      `messages` that was removed from the prompt instead of being shown to the
+      model because it failed a binding check. `thinking_mismatch_allowed` — a
+      `thinking` or `redacted_thinking` block that failed the conversation check
+      (the conversation before it differs from the one it was created in, or it
+      carries no record of one on a model that requires it) and was shown to the
+      model all the same, because that check is not enforced for this request.
+      More entry types may be added over time; ignore types you do not recognize.
 
       Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
       every such response from a model that supports extended thinking, as `[]`
-      when nothing was changed; without the beta, blocks are removed all the same
-      but nothing is reported. Removed blocks contribute nothing to
-      `usage.input_tokens`. When streaming, the array is final in `message_start`;
-      the final `message_delta` event carries it only when a server-side model
-      fallback happened mid-stream, in which case it holds the serving model's
-      entries and replaces the one in `message_start`.
+      when there is no entry to report; without the beta, blocks are removed or
+      left in place all the same but nothing is reported. Removed blocks contribute
+      nothing to `usage.input_tokens`; blocks left in place count as sent. When
+      streaming, the array is final in `message_start`; the final `message_delta`
+      event carries it only when a server-side model fallback happened mid-stream,
+      in which case it holds the serving model's entries and replaces the one in
+      `message_start`.
 
-      - `Type ThinkingDropped`
+      - `type BetaThinkingDroppedInputTransformation`
 
-        Always `thinking_dropped` for this entry type.
+        - `Type ThinkingDropped`
 
-        default: thinking_dropped
+          Always `thinking_dropped` for this entry type.
 
-      - `Path string`
+          default: thinking_dropped
 
-        Where the removed block was in your request, as `messages.{i}.content.{j}`:
-        `i` indexes the `messages` array you sent and `j` that message's `content`
-        array — the same form error messages use.
+        - `Path string`
 
-      - `Reason BetaThinkingDroppedInputTransformationReason`
+          Where the removed block was in your request, as `messages.{i}.content.{j}`:
+          `i` indexes the `messages` array you sent and `j` that message's `content`
+          array — the same form error messages use.
 
-        Which binding check removed the block: `model_binding_mismatch` — it was
-        created by a model whose reasoning the requested model may not read;
-        `prefix_binding_mismatch` — the conversation before it differs from the
-        conversation it was created in (the rest of that turn's consecutive thinking
-        blocks are removed with it, each with this reason);
-        `organization_binding_mismatch` — it was created under a different
-        organization (an Anthropic organization, AWS account or Google Cloud project)
-        and this organization is not one of its additional organizations;
-        `end_user_binding_mismatch` — it was created for a different end user, or
-        was removed by the consumer-organization binding. A block that would fail
-        several checks reports one reason, in this order of precedence:
-        `organization_binding_mismatch`, `end_user_binding_mismatch`,
-        `model_binding_mismatch`, `prefix_binding_mismatch`.
+        - `Reason BetaThinkingDroppedInputTransformationReason`
 
-        - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+          Which binding check removed the block: `model_binding_mismatch` — it was
+          created by a model whose reasoning the requested model may not read;
+          `prefix_binding_mismatch` — the conversation before it differs from the
+          conversation it was created in (the rest of that turn's consecutive thinking
+          blocks are removed with it, each with this reason);
+          `organization_binding_mismatch` — it was created under a different
+          organization (an Anthropic organization, AWS account or Google Cloud project)
+          and this organization is not one of its additional organizations;
+          `end_user_binding_mismatch` — it was created for a different end user, or
+          was removed by the consumer-organization binding. A block that would fail
+          several checks reports one reason, in this order of precedence:
+          `organization_binding_mismatch`, `end_user_binding_mismatch`,
+          `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-        - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+          - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-        - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+          - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-        - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+          - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+
+          - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+      - `type BetaThinkingMismatchAllowedInputTransformation`
+
+        - `Type ThinkingMismatchAllowed`
+
+          Always `thinking_mismatch_allowed` for this entry type.
+
+          default: thinking_mismatch_allowed
+
+        - `Path string`
+
+          Where the block is in your request, as `messages.{i}.content.{j}`:
+          `i` indexes the `messages` array you sent and `j` that message's `content`
+          array — the same form error messages use.
+
+        - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+          Which binding check the block failed; the block was shown to the model all
+          the same. Always `prefix_binding_mismatch` today — the conversation before
+          the block differs from the conversation it was created in, or the block
+          carries no record of one on a model that requires it. Were the check
+          enforced for this request, the block would have been removed or the request
+          rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+          takes the rest of that turn's consecutive thinking blocks, whereas here each
+          block is checked on its own, so `thinking_mismatch_allowed` entries are a
+          lower bound on what enforcement would remove.
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+          - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
 
 ### Beta Raw Message Stop Event
 
-- `type BetaRawMessageStopEvent struct{…}`
+- `type BetaRawMessageStopEvent`
 
   - `Type MessageStop`
 
@@ -26624,7 +27182,7 @@ func main() {
 
 - `type BetaRawMessageStreamEventUnion interface{…}`
 
-  - `type BetaRawMessageStartEvent struct{…}`
+  - `type BetaRawMessageStartEvent`
 
     - `Type MessageStart`
 
@@ -26713,7 +27271,7 @@ func main() {
         [{"type": "text", "text": "B)"}]
         ```
 
-        - `type BetaTextBlock struct{…}`
+        - `type BetaTextBlock`
 
           - `Type Text`
 
@@ -26725,7 +27283,7 @@ func main() {
 
             The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-            - `type BetaCitationCharLocation struct{…}`
+            - `type BetaCitationCharLocation`
 
               - `Type CharLocation`
 
@@ -26747,7 +27305,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaCitationPageLocation struct{…}`
+            - `type BetaCitationPageLocation`
 
               - `Type PageLocation`
 
@@ -26769,7 +27327,7 @@ func main() {
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocation struct{…}`
+            - `type BetaCitationContentBlockLocation`
 
               - `Type ContentBlockLocation`
 
@@ -26801,7 +27359,7 @@ func main() {
 
                 minimum: 0
 
-            - `type BetaCitationsWebSearchResultLocation struct{…}`
+            - `type BetaCitationsWebSearchResultLocation`
 
               - `Type WebSearchResultLocation`
 
@@ -26817,7 +27375,7 @@ func main() {
 
               - `URL string`
 
-            - `type BetaCitationSearchResultLocation struct{…}`
+            - `type BetaCitationSearchResultLocation`
 
               - `Type SearchResultLocation`
 
@@ -26857,7 +27415,7 @@ func main() {
 
             minLength: 0
 
-        - `type BetaThinkingBlock struct{…}`
+        - `type BetaThinkingBlock`
 
           - `Type Thinking`
 
@@ -26875,7 +27433,7 @@ func main() {
 
             The text of Claude's thinking process for this block.
 
-        - `type BetaRedactedThinkingBlock struct{…}`
+        - `type BetaRedactedThinkingBlock`
 
           - `Type RedactedThinking`
 
@@ -26889,7 +27447,7 @@ func main() {
 
             See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-        - `type BetaToolUseBlock struct{…}`
+        - `type BetaToolUseBlock`
 
           - `Type ToolUse`
 
@@ -26907,13 +27465,13 @@ func main() {
 
           - `Caller BetaToolUseBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
               - `Type Direct`
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
@@ -26923,7 +27481,7 @@ func main() {
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
               - `Type CodeExecution20260120`
 
@@ -26937,7 +27495,7 @@ func main() {
 
             maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlock struct{…}`
+        - `type BetaServerToolUseBlock`
 
           - `Type ServerToolUse`
 
@@ -26969,17 +27527,17 @@ func main() {
 
           - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlock struct{…}`
+        - `type BetaWebSearchToolResultBlock`
 
           - `Type WebSearchToolResult`
 
@@ -26987,7 +27545,7 @@ func main() {
 
           - `Content BetaWebSearchToolResultBlockContentUnion`
 
-            - `type BetaWebSearchToolResultError struct{…}`
+            - `type BetaWebSearchToolResultError`
 
               - `Type WebSearchToolResultError`
 
@@ -27027,17 +27585,17 @@ func main() {
 
           - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlock struct{…}`
+        - `type BetaWebFetchToolResultBlock`
 
           - `Type WebFetchToolResult`
 
@@ -27045,7 +27603,7 @@ func main() {
 
           - `Content BetaWebFetchToolResultBlockContentUnion`
 
-            - `type BetaWebFetchToolResultErrorBlock struct{…}`
+            - `type BetaWebFetchToolResultErrorBlock`
 
               - `Type WebFetchToolResultError`
 
@@ -27073,7 +27631,7 @@ func main() {
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlock struct{…}`
+            - `type BetaWebFetchBlock`
 
               - `Type WebFetchResult`
 
@@ -27095,7 +27653,7 @@ func main() {
 
                 - `Source BetaDocumentBlockSourceUnion`
 
-                  - `type BetaBase64PDFSource struct{…}`
+                  - `type BetaBase64PDFSource`
 
                     - `Type Base64`
 
@@ -27105,7 +27663,7 @@ func main() {
 
                     - `MediaType ApplicationPDF`
 
-                  - `type BetaPlainTextSource struct{…}`
+                  - `type BetaPlainTextSource`
 
                     - `Type Text`
 
@@ -27131,17 +27689,17 @@ func main() {
 
           - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-            - `type BetaDirectCaller struct{…}`
+            - `type BetaDirectCaller`
 
               Tool invocation directly from the model.
 
-            - `type BetaServerToolCaller struct{…}`
+            - `type BetaServerToolCaller`
 
               Tool invocation generated by a server-side tool.
 
-            - `type BetaServerToolCaller20260120 struct{…}`
+            - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlock struct{…}`
+        - `type BetaAdvisorToolResultBlock`
 
           - `Type AdvisorToolResult`
 
@@ -27149,7 +27707,7 @@ func main() {
 
           - `Content BetaAdvisorToolResultBlockContentUnion`
 
-            - `type BetaAdvisorToolResultError struct{…}`
+            - `type BetaAdvisorToolResultError`
 
               - `Type AdvisorToolResultError`
 
@@ -27171,7 +27729,7 @@ func main() {
 
                 - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlock struct{…}`
+            - `type BetaAdvisorResultBlock`
 
               - `Type AdvisorResult`
 
@@ -27183,7 +27741,7 @@ func main() {
 
               - `Text string`
 
-            - `type BetaAdvisorRedactedResultBlock struct{…}`
+            - `type BetaAdvisorRedactedResultBlock`
 
               - `Type AdvisorRedactedResult`
 
@@ -27201,7 +27759,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaCodeExecutionToolResultBlock struct{…}`
+        - `type BetaCodeExecutionToolResultBlock`
 
           - `Type CodeExecutionToolResult`
 
@@ -27209,7 +27767,7 @@ func main() {
 
           - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-            - `type BetaCodeExecutionToolResultError struct{…}`
+            - `type BetaCodeExecutionToolResultError`
 
               - `Type CodeExecutionToolResultError`
 
@@ -27225,7 +27783,7 @@ func main() {
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlock struct{…}`
+            - `type BetaCodeExecutionResultBlock`
 
               - `Type CodeExecutionResult`
 
@@ -27245,7 +27803,7 @@ func main() {
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+            - `type BetaEncryptedCodeExecutionResultBlock`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -27271,7 +27829,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+        - `type BetaBashCodeExecutionToolResultBlock`
 
           - `Type BashCodeExecutionToolResult`
 
@@ -27279,7 +27837,7 @@ func main() {
 
           - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-            - `type BetaBashCodeExecutionToolResultError struct{…}`
+            - `type BetaBashCodeExecutionToolResultError`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -27297,7 +27855,7 @@ func main() {
 
                 - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlock struct{…}`
+            - `type BetaBashCodeExecutionResultBlock`
 
               - `Type BashCodeExecutionResult`
 
@@ -27321,7 +27879,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+        - `type BetaTextEditorCodeExecutionToolResultBlock`
 
           - `Type TextEditorCodeExecutionToolResult`
 
@@ -27329,7 +27887,7 @@ func main() {
 
           - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-            - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultError`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -27349,7 +27907,7 @@ func main() {
 
               - `ErrorMessage string`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+            - `type BetaTextEditorCodeExecutionViewResultBlock`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -27371,7 +27929,7 @@ func main() {
 
               - `TotalLines int64`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+            - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
@@ -27379,7 +27937,7 @@ func main() {
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -27399,7 +27957,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaToolSearchToolResultBlock struct{…}`
+        - `type BetaToolSearchToolResultBlock`
 
           - `Type ToolSearchToolResult`
 
@@ -27407,7 +27965,7 @@ func main() {
 
           - `Content BetaToolSearchToolResultBlockContentUnion`
 
-            - `type BetaToolSearchToolResultError struct{…}`
+            - `type BetaToolSearchToolResultError`
 
               - `Type ToolSearchToolResultError`
 
@@ -27425,7 +27983,7 @@ func main() {
 
               - `ErrorMessage string`
 
-            - `type BetaToolSearchToolSearchResultBlock struct{…}`
+            - `type BetaToolSearchToolSearchResultBlock`
 
               - `Type ToolSearchToolSearchResult`
 
@@ -27445,7 +28003,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `type BetaMCPToolUseBlock struct{…}`
+        - `type BetaMCPToolUseBlock`
 
           - `Type MCPToolUse`
 
@@ -27465,7 +28023,7 @@ func main() {
 
             The name of the MCP server
 
-        - `type BetaMCPToolResultBlock struct{…}`
+        - `type BetaMCPToolResultBlock`
 
           - `Type MCPToolResult`
 
@@ -27499,7 +28057,7 @@ func main() {
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaContainerUploadBlock struct{…}`
+        - `type BetaContainerUploadBlock`
 
           Response model for a file uploaded to the container.
 
@@ -27509,7 +28067,7 @@ func main() {
 
           - `FileID string`
 
-        - `type BetaCompactionBlock struct{…}`
+        - `type BetaCompactionBlock`
 
           A compaction block returned when autocompact is triggered.
 
@@ -27529,7 +28087,11 @@ func main() {
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaFallbackBlock struct{…}`
+          - `Signature string Optional`
+
+            Signature over the summary, to be sent back with the block verbatim
+
+        - `type BetaFallbackBlock`
 
           Marks the point in `content` where one model's output gives way to the next.
 
@@ -27679,7 +28241,7 @@ func main() {
 
           List of context management edits that were applied.
 
-          - `type BetaClearToolUses20250919EditResponse struct{…}`
+          - `type BetaClearToolUses20250919EditResponse`
 
             - `Type ClearToolUses20250919`
 
@@ -27699,7 +28261,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaClearThinking20251015EditResponse struct{…}`
+          - `type BetaClearThinking20251015EditResponse`
 
             - `Type ClearThinking20251015`
 
@@ -27728,7 +28290,7 @@ func main() {
 
           Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-          - `type BetaCacheMissModelChanged struct{…}`
+          - `type BetaCacheMissModelChanged`
 
             - `Type ModelChanged`
 
@@ -27738,7 +28300,7 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissSystemChanged struct{…}`
+          - `type BetaCacheMissSystemChanged`
 
             - `Type SystemChanged`
 
@@ -27748,7 +28310,7 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissToolsChanged struct{…}`
+          - `type BetaCacheMissToolsChanged`
 
             - `Type ToolsChanged`
 
@@ -27758,7 +28320,7 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissMessagesChanged struct{…}`
+          - `type BetaCacheMissMessagesChanged`
 
             - `Type MessagesChanged`
 
@@ -27768,13 +28330,13 @@ func main() {
 
               Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-          - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+          - `type BetaCacheMissPreviousMessageNotFound`
 
             - `Type PreviousMessageNotFound`
 
               default: previous_message_not_found
 
-          - `type BetaCacheMissUnavailable struct{…}`
+          - `type BetaCacheMissUnavailable`
 
             - `Type Unavailable`
 
@@ -27972,7 +28534,7 @@ func main() {
             resulting shift is zero because there was nothing to move. `not_applied`:
             no reprice was applied; the arm's `reason` says why.
 
-            - `type BetaFallbackCreditRedeemed struct{…}`
+            - `type BetaFallbackCreditRedeemed`
 
               The reprice was applied: the retry is billed as if the conversation
               had been on the retry model all along.
@@ -27981,7 +28543,7 @@ func main() {
 
                 default: redeemed
 
-            - `type BetaFallbackCreditNotApplied struct{…}`
+            - `type BetaFallbackCreditNotApplied`
 
               No reprice was applied; `reason` says why.
 
@@ -28053,7 +28615,7 @@ func main() {
 
           A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-          - `type BetaMessageIterationUsage struct{…}`
+          - `type BetaMessageIterationUsage`
 
             Token usage for a sampling iteration.
 
@@ -28097,7 +28659,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCompactionIterationUsage struct{…}`
+          - `type BetaCompactionIterationUsage`
 
             Token usage for a compaction iteration.
 
@@ -28135,7 +28697,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaAdvisorMessageIterationUsage struct{…}`
+          - `type BetaAdvisorMessageIterationUsage`
 
             Token usage for an advisor sub-inference iteration.
 
@@ -28179,7 +28741,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaFallbackMessageIterationUsage struct{…}`
+          - `type BetaFallbackMessageIterationUsage`
 
             Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -28292,61 +28854,103 @@ func main() {
 
           - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-      - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+      - `InputTransformations []BetaInputTransformationUnion Optional`
 
-        Changes the API made to the request's input before showing it to the model:
-        one entry per change, in request order. Today the only entry type is
-        `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-        block from the request's `messages` that was removed from the prompt instead
-        of being shown to the model because it failed a binding check. More entry
-        types may be added over time; ignore types you do not recognize.
+        Changes the API made to the request's input before showing it to the model,
+        and blocks that failed a binding check but were left unchanged: one entry per
+        block, in request order. Two entry types today. `thinking_dropped` — a
+        `thinking`, `redacted_thinking` or `connector_text` block from the request's
+        `messages` that was removed from the prompt instead of being shown to the
+        model because it failed a binding check. `thinking_mismatch_allowed` — a
+        `thinking` or `redacted_thinking` block that failed the conversation check
+        (the conversation before it differs from the one it was created in, or it
+        carries no record of one on a model that requires it) and was shown to the
+        model all the same, because that check is not enforced for this request.
+        More entry types may be added over time; ignore types you do not recognize.
 
         Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
         every such response from a model that supports extended thinking, as `[]`
-        when nothing was changed; without the beta, blocks are removed all the same
-        but nothing is reported. Removed blocks contribute nothing to
-        `usage.input_tokens`. When streaming, the array is final in `message_start`;
-        the final `message_delta` event carries it only when a server-side model
-        fallback happened mid-stream, in which case it holds the serving model's
-        entries and replaces the one in `message_start`.
+        when there is no entry to report; without the beta, blocks are removed or
+        left in place all the same but nothing is reported. Removed blocks contribute
+        nothing to `usage.input_tokens`; blocks left in place count as sent. When
+        streaming, the array is final in `message_start`; the final `message_delta`
+        event carries it only when a server-side model fallback happened mid-stream,
+        in which case it holds the serving model's entries and replaces the one in
+        `message_start`.
 
-        - `Type ThinkingDropped`
+        - `type BetaThinkingDroppedInputTransformation`
 
-          Always `thinking_dropped` for this entry type.
+          - `Type ThinkingDropped`
 
-          default: thinking_dropped
+            Always `thinking_dropped` for this entry type.
 
-        - `Path string`
+            default: thinking_dropped
 
-          Where the removed block was in your request, as `messages.{i}.content.{j}`:
-          `i` indexes the `messages` array you sent and `j` that message's `content`
-          array — the same form error messages use.
+          - `Path string`
 
-        - `Reason BetaThinkingDroppedInputTransformationReason`
+            Where the removed block was in your request, as `messages.{i}.content.{j}`:
+            `i` indexes the `messages` array you sent and `j` that message's `content`
+            array — the same form error messages use.
 
-          Which binding check removed the block: `model_binding_mismatch` — it was
-          created by a model whose reasoning the requested model may not read;
-          `prefix_binding_mismatch` — the conversation before it differs from the
-          conversation it was created in (the rest of that turn's consecutive thinking
-          blocks are removed with it, each with this reason);
-          `organization_binding_mismatch` — it was created under a different
-          organization (an Anthropic organization, AWS account or Google Cloud project)
-          and this organization is not one of its additional organizations;
-          `end_user_binding_mismatch` — it was created for a different end user, or
-          was removed by the consumer-organization binding. A block that would fail
-          several checks reports one reason, in this order of precedence:
-          `organization_binding_mismatch`, `end_user_binding_mismatch`,
-          `model_binding_mismatch`, `prefix_binding_mismatch`.
+          - `Reason BetaThinkingDroppedInputTransformationReason`
 
-          - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+            Which binding check removed the block: `model_binding_mismatch` — it was
+            created by a model whose reasoning the requested model may not read;
+            `prefix_binding_mismatch` — the conversation before it differs from the
+            conversation it was created in (the rest of that turn's consecutive thinking
+            blocks are removed with it, each with this reason);
+            `organization_binding_mismatch` — it was created under a different
+            organization (an Anthropic organization, AWS account or Google Cloud project)
+            and this organization is not one of its additional organizations;
+            `end_user_binding_mismatch` — it was created for a different end user, or
+            was removed by the consumer-organization binding. A block that would fail
+            several checks reports one reason, in this order of precedence:
+            `organization_binding_mismatch`, `end_user_binding_mismatch`,
+            `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-          - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+            - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-          - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+            - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-          - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+            - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
 
-  - `type BetaRawMessageDeltaEvent struct{…}`
+            - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+        - `type BetaThinkingMismatchAllowedInputTransformation`
+
+          - `Type ThinkingMismatchAllowed`
+
+            Always `thinking_mismatch_allowed` for this entry type.
+
+            default: thinking_mismatch_allowed
+
+          - `Path string`
+
+            Where the block is in your request, as `messages.{i}.content.{j}`:
+            `i` indexes the `messages` array you sent and `j` that message's `content`
+            array — the same form error messages use.
+
+          - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+            Which binding check the block failed; the block was shown to the model all
+            the same. Always `prefix_binding_mismatch` today — the conversation before
+            the block differs from the conversation it was created in, or the block
+            carries no record of one on a model that requires it. Were the check
+            enforced for this request, the block would have been removed or the request
+            rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+            takes the rest of that turn's consecutive thinking blocks, whereas here each
+            block is checked on its own, so `thinking_mismatch_allowed` entries are a
+            lower bound on what enforcement would remove.
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+            - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
+
+  - `type BetaRawMessageDeltaEvent`
 
     - `Type MessageDelta`
 
@@ -28433,59 +29037,41 @@ func main() {
 
         The number of server tool requests.
 
-    - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+    - `InputTransformations []BetaInputTransformationUnion Optional`
 
-      Changes the API made to the request's input before showing it to the model:
-      one entry per change, in request order. Today the only entry type is
-      `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-      block from the request's `messages` that was removed from the prompt instead
-      of being shown to the model because it failed a binding check. More entry
-      types may be added over time; ignore types you do not recognize.
+      Changes the API made to the request's input before showing it to the model,
+      and blocks that failed a binding check but were left unchanged: one entry per
+      block, in request order. Two entry types today. `thinking_dropped` — a
+      `thinking`, `redacted_thinking` or `connector_text` block from the request's
+      `messages` that was removed from the prompt instead of being shown to the
+      model because it failed a binding check. `thinking_mismatch_allowed` — a
+      `thinking` or `redacted_thinking` block that failed the conversation check
+      (the conversation before it differs from the one it was created in, or it
+      carries no record of one on a model that requires it) and was shown to the
+      model all the same, because that check is not enforced for this request.
+      More entry types may be added over time; ignore types you do not recognize.
 
       Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
       every such response from a model that supports extended thinking, as `[]`
-      when nothing was changed; without the beta, blocks are removed all the same
-      but nothing is reported. Removed blocks contribute nothing to
-      `usage.input_tokens`. When streaming, the array is final in `message_start`;
-      the final `message_delta` event carries it only when a server-side model
-      fallback happened mid-stream, in which case it holds the serving model's
-      entries and replaces the one in `message_start`.
+      when there is no entry to report; without the beta, blocks are removed or
+      left in place all the same but nothing is reported. Removed blocks contribute
+      nothing to `usage.input_tokens`; blocks left in place count as sent. When
+      streaming, the array is final in `message_start`; the final `message_delta`
+      event carries it only when a server-side model fallback happened mid-stream,
+      in which case it holds the serving model's entries and replaces the one in
+      `message_start`.
 
-      - `Type ThinkingDropped`
+      - `type BetaThinkingDroppedInputTransformation`
 
-        Always `thinking_dropped` for this entry type.
+      - `type BetaThinkingMismatchAllowedInputTransformation`
 
-        default: thinking_dropped
-
-      - `Path string`
-
-        Where the removed block was in your request, as `messages.{i}.content.{j}`:
-        `i` indexes the `messages` array you sent and `j` that message's `content`
-        array — the same form error messages use.
-
-      - `Reason BetaThinkingDroppedInputTransformationReason`
-
-        Which binding check removed the block: `model_binding_mismatch` — it was
-        created by a model whose reasoning the requested model may not read;
-        `prefix_binding_mismatch` — the conversation before it differs from the
-        conversation it was created in (the rest of that turn's consecutive thinking
-        blocks are removed with it, each with this reason);
-        `organization_binding_mismatch` — it was created under a different
-        organization (an Anthropic organization, AWS account or Google Cloud project)
-        and this organization is not one of its additional organizations;
-        `end_user_binding_mismatch` — it was created for a different end user, or
-        was removed by the consumer-organization binding. A block that would fail
-        several checks reports one reason, in this order of precedence:
-        `organization_binding_mismatch`, `end_user_binding_mismatch`,
-        `model_binding_mismatch`, `prefix_binding_mismatch`.
-
-  - `type BetaRawMessageStopEvent struct{…}`
+  - `type BetaRawMessageStopEvent`
 
     - `Type MessageStop`
 
       default: message_stop
 
-  - `type BetaRawContentBlockStartEvent struct{…}`
+  - `type BetaRawContentBlockStartEvent`
 
     - `Type ContentBlockStart`
 
@@ -28493,39 +29079,39 @@ func main() {
 
     - `ContentBlock BetaRawContentBlockStartEventContentBlockUnion`
 
-      - `type BetaTextBlock struct{…}`
+      - `type BetaTextBlock`
 
-      - `type BetaThinkingBlock struct{…}`
+      - `type BetaThinkingBlock`
 
-      - `type BetaRedactedThinkingBlock struct{…}`
+      - `type BetaRedactedThinkingBlock`
 
-      - `type BetaToolUseBlock struct{…}`
+      - `type BetaToolUseBlock`
 
-      - `type BetaServerToolUseBlock struct{…}`
+      - `type BetaServerToolUseBlock`
 
-      - `type BetaWebSearchToolResultBlock struct{…}`
+      - `type BetaWebSearchToolResultBlock`
 
-      - `type BetaWebFetchToolResultBlock struct{…}`
+      - `type BetaWebFetchToolResultBlock`
 
-      - `type BetaAdvisorToolResultBlock struct{…}`
+      - `type BetaAdvisorToolResultBlock`
 
-      - `type BetaCodeExecutionToolResultBlock struct{…}`
+      - `type BetaCodeExecutionToolResultBlock`
 
-      - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+      - `type BetaBashCodeExecutionToolResultBlock`
 
-      - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+      - `type BetaTextEditorCodeExecutionToolResultBlock`
 
-      - `type BetaToolSearchToolResultBlock struct{…}`
+      - `type BetaToolSearchToolResultBlock`
 
-      - `type BetaMCPToolUseBlock struct{…}`
+      - `type BetaMCPToolUseBlock`
 
-      - `type BetaMCPToolResultBlock struct{…}`
+      - `type BetaMCPToolResultBlock`
 
-      - `type BetaContainerUploadBlock struct{…}`
+      - `type BetaContainerUploadBlock`
 
         Response model for a file uploaded to the container.
 
-      - `type BetaCompactionBlock struct{…}`
+      - `type BetaCompactionBlock`
 
         A compaction block returned when autocompact is triggered.
 
@@ -28533,7 +29119,7 @@ func main() {
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
 
-      - `type BetaFallbackBlock struct{…}`
+      - `type BetaFallbackBlock`
 
         Marks the point in `content` where one model's output gives way to the next.
 
@@ -28549,7 +29135,7 @@ func main() {
 
     - `Index int64`
 
-  - `type BetaRawContentBlockDeltaEvent struct{…}`
+  - `type BetaRawContentBlockDeltaEvent`
 
     - `Type ContentBlockDelta`
 
@@ -28557,7 +29143,7 @@ func main() {
 
     - `Delta BetaRawContentBlockDeltaUnion`
 
-      - `type BetaTextDelta struct{…}`
+      - `type BetaTextDelta`
 
         - `Type TextDelta`
 
@@ -28565,7 +29151,7 @@ func main() {
 
         - `Text string`
 
-      - `type BetaInputJSONDelta struct{…}`
+      - `type BetaInputJSONDelta`
 
         - `Type InputJSONDelta`
 
@@ -28573,7 +29159,7 @@ func main() {
 
         - `PartialJSON string`
 
-      - `type BetaCitationsDelta struct{…}`
+      - `type BetaCitationsDelta`
 
         - `Type CitationsDelta`
 
@@ -28581,17 +29167,17 @@ func main() {
 
         - `Citation BetaCitationsDeltaCitationUnion`
 
-          - `type BetaCitationCharLocation struct{…}`
+          - `type BetaCitationCharLocation`
 
-          - `type BetaCitationPageLocation struct{…}`
+          - `type BetaCitationPageLocation`
 
-          - `type BetaCitationContentBlockLocation struct{…}`
+          - `type BetaCitationContentBlockLocation`
 
-          - `type BetaCitationsWebSearchResultLocation struct{…}`
+          - `type BetaCitationsWebSearchResultLocation`
 
-          - `type BetaCitationSearchResultLocation struct{…}`
+          - `type BetaCitationSearchResultLocation`
 
-      - `type BetaThinkingDelta struct{…}`
+      - `type BetaThinkingDelta`
 
         - `Type ThinkingDelta`
 
@@ -28605,7 +29191,7 @@ func main() {
 
           The incremental `thinking` text for this content block. Concatenate the `thinking` values of successive `thinking_delta` events to assemble the block's full `thinking` value.
 
-      - `type BetaSignatureDelta struct{…}`
+      - `type BetaSignatureDelta`
 
         - `Type SignatureDelta`
 
@@ -28615,7 +29201,7 @@ func main() {
 
           The `signature` for this thinking block: an opaque value used to verify that the block was generated by Claude when it is passed back to the API. Delivered in a `signature_delta` event just before the block's `content_block_stop` event.
 
-      - `type BetaCompactionContentBlockDelta struct{…}`
+      - `type BetaCompactionContentBlockDelta`
 
         - `Type CompactionDelta`
 
@@ -28629,7 +29215,7 @@ func main() {
 
     - `Index int64`
 
-  - `type BetaRawContentBlockStopEvent struct{…}`
+  - `type BetaRawContentBlockStopEvent`
 
     - `Type ContentBlockStop`
 
@@ -28639,7 +29225,7 @@ func main() {
 
 ### Beta Redacted Thinking Block
 
-- `type BetaRedactedThinkingBlock struct{…}`
+- `type BetaRedactedThinkingBlock`
 
   - `Type RedactedThinking`
 
@@ -28655,7 +29241,7 @@ func main() {
 
 ### Beta Redacted Thinking Block Param
 
-- `type BetaRedactedThinkingBlockParamResp struct{…}`
+- `type BetaRedactedThinkingBlockParamResp`
 
   - `Type RedactedThinking`
 
@@ -28665,7 +29251,7 @@ func main() {
 
 ### Beta Refusal Stop Details
 
-- `type BetaRefusalStopDetails struct{…}`
+- `type BetaRefusalStopDetails`
 
   Structured information about a refusal.
 
@@ -28754,13 +29340,13 @@ func main() {
 
 ### Beta Request Document Block
 
-- `type BetaRequestDocumentBlock struct{…}`
+- `type BetaRequestDocumentBlock`
 
   - `Type Document`
 
   - `Source BetaRequestDocumentBlockSourceUnion`
 
-    - `type BetaBase64PDFSource struct{…}`
+    - `type BetaBase64PDFSource`
 
       - `Type Base64`
 
@@ -28770,7 +29356,7 @@ func main() {
 
       - `MediaType ApplicationPDF`
 
-    - `type BetaPlainTextSource struct{…}`
+    - `type BetaPlainTextSource`
 
       - `Type Text`
 
@@ -28778,7 +29364,7 @@ func main() {
 
       - `MediaType TextPlain`
 
-    - `type BetaContentBlockSource struct{…}`
+    - `type BetaContentBlockSource`
 
       - `Type Content`
 
@@ -28788,7 +29374,7 @@ func main() {
 
         - `[]BetaContentBlockSourceContentUnion`
 
-          - `type BetaTextBlockParamResp struct{…}`
+          - `type BetaTextBlockParamResp`
 
             - `Type Text`
 
@@ -28819,7 +29405,7 @@ func main() {
 
             - `Citations []BetaTextCitationParamUnionResp Optional`
 
-              - `type BetaCitationCharLocationParamResp struct{…}`
+              - `type BetaCitationCharLocationParamResp`
 
                 - `Type CharLocation`
 
@@ -28839,7 +29425,7 @@ func main() {
 
                   minimum: 0
 
-              - `type BetaCitationPageLocationParamResp struct{…}`
+              - `type BetaCitationPageLocationParamResp`
 
                 - `Type PageLocation`
 
@@ -28859,7 +29445,7 @@ func main() {
 
                   minimum: 1
 
-              - `type BetaCitationContentBlockLocationParamResp struct{…}`
+              - `type BetaCitationContentBlockLocationParamResp`
 
                 - `Type ContentBlockLocation`
 
@@ -28889,7 +29475,7 @@ func main() {
 
                   minimum: 0
 
-              - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+              - `type BetaCitationWebSearchResultLocationParamResp`
 
                 - `Type WebSearchResultLocation`
 
@@ -28905,7 +29491,7 @@ func main() {
 
                   minLength: 1
 
-              - `type BetaCitationSearchResultLocationParamResp struct{…}`
+              - `type BetaCitationSearchResultLocationParamResp`
 
                 - `Type SearchResultLocation`
 
@@ -28939,13 +29525,13 @@ func main() {
 
                 - `Title string`
 
-          - `type BetaImageBlockParamResp struct{…}`
+          - `type BetaImageBlockParamResp`
 
             - `Type Image`
 
             - `Source BetaImageBlockParamSourceUnionResp`
 
-              - `type BetaBase64ImageSource struct{…}`
+              - `type BetaBase64ImageSource`
 
                 - `Type Base64`
 
@@ -28963,13 +29549,13 @@ func main() {
 
                   - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-              - `type BetaURLImageSource struct{…}`
+              - `type BetaURLImageSource`
 
                 - `Type URL`
 
                 - `URL string`
 
-              - `type BetaFileImageSource struct{…}`
+              - `type BetaFileImageSource`
 
                 - `Type File`
 
@@ -28991,13 +29577,13 @@ func main() {
 
                 - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-    - `type BetaURLPDFSource struct{…}`
+    - `type BetaURLPDFSource`
 
       - `Type URL`
 
       - `URL string`
 
-    - `type BetaFileDocumentSource struct{…}`
+    - `type BetaFileDocumentSource`
 
       - `Type File`
 
@@ -29021,7 +29607,7 @@ func main() {
 
 ### Beta Request MCP Server Tool Configuration
 
-- `type BetaRequestMCPServerToolConfiguration struct{…}`
+- `type BetaRequestMCPServerToolConfiguration`
 
   - `AllowedTools []string Optional`
 
@@ -29029,7 +29615,7 @@ func main() {
 
 ### Beta Request MCP Server URL Definition
 
-- `type BetaRequestMCPServerURLDefinition struct{…}`
+- `type BetaRequestMCPServerURLDefinition`
 
   - `Type URL`
 
@@ -29047,7 +29633,7 @@ func main() {
 
 ### Beta Request MCP Tool Result Block Param
 
-- `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+- `type BetaRequestMCPToolResultBlockParamResp`
 
   - `Type MCPToolResult`
 
@@ -29094,7 +29680,7 @@ func main() {
 
       - `Citations []BetaTextCitationParamUnionResp Optional`
 
-        - `type BetaCitationCharLocationParamResp struct{…}`
+        - `type BetaCitationCharLocationParamResp`
 
           - `Type CharLocation`
 
@@ -29114,7 +29700,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationPageLocationParamResp struct{…}`
+        - `type BetaCitationPageLocationParamResp`
 
           - `Type PageLocation`
 
@@ -29134,7 +29720,7 @@ func main() {
 
             minimum: 1
 
-        - `type BetaCitationContentBlockLocationParamResp struct{…}`
+        - `type BetaCitationContentBlockLocationParamResp`
 
           - `Type ContentBlockLocation`
 
@@ -29164,7 +29750,7 @@ func main() {
 
             minimum: 0
 
-        - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+        - `type BetaCitationWebSearchResultLocationParamResp`
 
           - `Type WebSearchResultLocation`
 
@@ -29180,7 +29766,7 @@ func main() {
 
             minLength: 1
 
-        - `type BetaCitationSearchResultLocationParamResp struct{…}`
+        - `type BetaCitationSearchResultLocationParamResp`
 
           - `Type SearchResultLocation`
 
@@ -29218,7 +29804,7 @@ func main() {
 
 ### Beta Request Tool Addition Block
 
-- `type BetaRequestToolAdditionBlock struct{…}`
+- `type BetaRequestToolAdditionBlock`
 
   Mid-conversation directive to surface a declared tool.
 
@@ -29230,7 +29816,7 @@ func main() {
 
   - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-    - `type BetaToolChangeToolReference struct{…}`
+    - `type BetaToolChangeToolReference`
 
       Reference to a single tool the caller declared directly in
       `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -29243,7 +29829,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-    - `type BetaToolChangeMCPToolReference struct{…}`
+    - `type BetaToolChangeMCPToolReference`
 
       Reference to a single MCP tool by its server and remote name — the
       same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -29254,7 +29840,7 @@ func main() {
 
       - `ServerName string`
 
-    - `type BetaToolChangeMCPToolsetReference struct{…}`
+    - `type BetaToolChangeMCPToolsetReference`
 
       Reference to every tool in the named MCP server's toolset.
 
@@ -29285,7 +29871,7 @@ func main() {
 
 ### Beta Request Tool Removal Block
 
-- `type BetaRequestToolRemovalBlock struct{…}`
+- `type BetaRequestToolRemovalBlock`
 
   Mid-conversation directive to withdraw a tool.
 
@@ -29297,7 +29883,7 @@ func main() {
 
   - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-    - `type BetaToolChangeToolReference struct{…}`
+    - `type BetaToolChangeToolReference`
 
       Reference to a single tool the caller declared directly in
       `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -29310,7 +29896,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-    - `type BetaToolChangeMCPToolReference struct{…}`
+    - `type BetaToolChangeMCPToolReference`
 
       Reference to a single MCP tool by its server and remote name — the
       same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -29321,7 +29907,7 @@ func main() {
 
       - `ServerName string`
 
-    - `type BetaToolChangeMCPToolsetReference struct{…}`
+    - `type BetaToolChangeMCPToolsetReference`
 
       Reference to every tool in the named MCP server's toolset.
 
@@ -29352,7 +29938,7 @@ func main() {
 
 ### Beta Search Result Block Param
 
-- `type BetaSearchResultBlockParamResp struct{…}`
+- `type BetaSearchResultBlockParamResp`
 
   - `Type SearchResult`
 
@@ -29387,7 +29973,7 @@ func main() {
 
     - `Citations []BetaTextCitationParamUnionResp Optional`
 
-      - `type BetaCitationCharLocationParamResp struct{…}`
+      - `type BetaCitationCharLocationParamResp`
 
         - `Type CharLocation`
 
@@ -29407,7 +29993,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationPageLocationParamResp struct{…}`
+      - `type BetaCitationPageLocationParamResp`
 
         - `Type PageLocation`
 
@@ -29427,7 +30013,7 @@ func main() {
 
           minimum: 1
 
-      - `type BetaCitationContentBlockLocationParamResp struct{…}`
+      - `type BetaCitationContentBlockLocationParamResp`
 
         - `Type ContentBlockLocation`
 
@@ -29457,7 +30043,7 @@ func main() {
 
           minimum: 0
 
-      - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+      - `type BetaCitationWebSearchResultLocationParamResp`
 
         - `Type WebSearchResultLocation`
 
@@ -29473,7 +30059,7 @@ func main() {
 
           minLength: 1
 
-      - `type BetaCitationSearchResultLocationParamResp struct{…}`
+      - `type BetaCitationSearchResultLocationParamResp`
 
         - `Type SearchResultLocation`
 
@@ -29521,7 +30107,7 @@ func main() {
 
 ### Beta Server Tool Caller
 
-- `type BetaServerToolCaller struct{…}`
+- `type BetaServerToolCaller`
 
   Tool invocation generated by a server-side tool.
 
@@ -29533,7 +30119,7 @@ func main() {
 
 ### Beta Server Tool Caller 20260120
 
-- `type BetaServerToolCaller20260120 struct{…}`
+- `type BetaServerToolCaller20260120`
 
   - `Type CodeExecution20260120`
 
@@ -29543,7 +30129,7 @@ func main() {
 
 ### Beta Server Tool Usage
 
-- `type BetaServerToolUsage struct{…}`
+- `type BetaServerToolUsage`
 
   - `WebFetchRequests int64`
 
@@ -29559,7 +30145,7 @@ func main() {
 
 ### Beta Server Tool Use Block
 
-- `type BetaServerToolUseBlock struct{…}`
+- `type BetaServerToolUseBlock`
 
   - `Type ServerToolUse`
 
@@ -29591,13 +30177,13 @@ func main() {
 
   - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -29607,7 +30193,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -29617,7 +30203,7 @@ func main() {
 
 ### Beta Server Tool Use Block Param
 
-- `type BetaServerToolUseBlockParamResp struct{…}`
+- `type BetaServerToolUseBlockParamResp`
 
   - `Type ServerToolUse`
 
@@ -29668,13 +30254,13 @@ func main() {
 
   - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -29684,7 +30270,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -29694,7 +30280,7 @@ func main() {
 
 ### Beta Signature Delta
 
-- `type BetaSignatureDelta struct{…}`
+- `type BetaSignatureDelta`
 
   - `Type SignatureDelta`
 
@@ -29706,7 +30292,7 @@ func main() {
 
 ### Beta Skill Params
 
-- `type BetaSkillParamsResp struct{…}`
+- `type BetaSkillParamsResp`
 
   Specification for a skill to be loaded in a container (request model).
 
@@ -29750,9 +30336,30 @@ func main() {
 
   - `const BetaStopReasonModelContextWindowExceeded BetaStopReason = "model_context_window_exceeded"`
 
+### Beta Summarize Compaction
+
+- `type BetaSummarizeCompaction`
+
+  Compact the whole conversation and return a signed `compaction` block,
+  alone, that a later request sends back first in `messages`, in place of
+  the messages it summarizes. There is no trigger and no pause flag: sending
+  the parameter compacts, and nothing is sampled after the block.
+
+  The summarization prompt is the server's own unless `instructions` are
+  given, which then replace it for this request; a value that is empty or
+  only whitespace counts as absent.
+
+  - `Type Summarize`
+
+  - `Instructions string Optional`
+
+    Replaces the server's default summarization prompt for this request. An empty or whitespace-only value counts as absent.
+
+    maxLength: 16384
+
 ### Beta System Message Output Config
 
-- `type BetaSystemMessageOutputConfig struct{…}`
+- `type BetaSystemMessageOutputConfig`
 
   Per-message output configuration on a role:"system" input message.
 
@@ -29776,7 +30383,7 @@ func main() {
 
 ### Beta Text Block
 
-- `type BetaTextBlock struct{…}`
+- `type BetaTextBlock`
 
   - `Type Text`
 
@@ -29788,7 +30395,7 @@ func main() {
 
     The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-    - `type BetaCitationCharLocation struct{…}`
+    - `type BetaCitationCharLocation`
 
       - `Type CharLocation`
 
@@ -29810,7 +30417,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCitationPageLocation struct{…}`
+    - `type BetaCitationPageLocation`
 
       - `Type PageLocation`
 
@@ -29832,7 +30439,7 @@ func main() {
 
         minimum: 1
 
-    - `type BetaCitationContentBlockLocation struct{…}`
+    - `type BetaCitationContentBlockLocation`
 
       - `Type ContentBlockLocation`
 
@@ -29864,7 +30471,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCitationsWebSearchResultLocation struct{…}`
+    - `type BetaCitationsWebSearchResultLocation`
 
       - `Type WebSearchResultLocation`
 
@@ -29880,7 +30487,7 @@ func main() {
 
       - `URL string`
 
-    - `type BetaCitationSearchResultLocation struct{…}`
+    - `type BetaCitationSearchResultLocation`
 
       - `Type SearchResultLocation`
 
@@ -29922,7 +30529,7 @@ func main() {
 
 ### Beta Text Block Param
 
-- `type BetaTextBlockParamResp struct{…}`
+- `type BetaTextBlockParamResp`
 
   - `Type Text`
 
@@ -29953,7 +30560,7 @@ func main() {
 
   - `Citations []BetaTextCitationParamUnionResp Optional`
 
-    - `type BetaCitationCharLocationParamResp struct{…}`
+    - `type BetaCitationCharLocationParamResp`
 
       - `Type CharLocation`
 
@@ -29973,7 +30580,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCitationPageLocationParamResp struct{…}`
+    - `type BetaCitationPageLocationParamResp`
 
       - `Type PageLocation`
 
@@ -29993,7 +30600,7 @@ func main() {
 
         minimum: 1
 
-    - `type BetaCitationContentBlockLocationParamResp struct{…}`
+    - `type BetaCitationContentBlockLocationParamResp`
 
       - `Type ContentBlockLocation`
 
@@ -30023,7 +30630,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+    - `type BetaCitationWebSearchResultLocationParamResp`
 
       - `Type WebSearchResultLocation`
 
@@ -30039,7 +30646,7 @@ func main() {
 
         minLength: 1
 
-    - `type BetaCitationSearchResultLocationParamResp struct{…}`
+    - `type BetaCitationSearchResultLocationParamResp`
 
       - `Type SearchResultLocation`
 
@@ -30077,7 +30684,7 @@ func main() {
 
 - `type BetaTextCitationUnion interface{…}`
 
-  - `type BetaCitationCharLocation struct{…}`
+  - `type BetaCitationCharLocation`
 
     - `Type CharLocation`
 
@@ -30099,7 +30706,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaCitationPageLocation struct{…}`
+  - `type BetaCitationPageLocation`
 
     - `Type PageLocation`
 
@@ -30121,7 +30728,7 @@ func main() {
 
       minimum: 1
 
-  - `type BetaCitationContentBlockLocation struct{…}`
+  - `type BetaCitationContentBlockLocation`
 
     - `Type ContentBlockLocation`
 
@@ -30153,7 +30760,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaCitationsWebSearchResultLocation struct{…}`
+  - `type BetaCitationsWebSearchResultLocation`
 
     - `Type WebSearchResultLocation`
 
@@ -30169,7 +30776,7 @@ func main() {
 
     - `URL string`
 
-  - `type BetaCitationSearchResultLocation struct{…}`
+  - `type BetaCitationSearchResultLocation`
 
     - `Type SearchResultLocation`
 
@@ -30209,7 +30816,7 @@ func main() {
 
 - `type BetaTextCitationParamUnionResp interface{…}`
 
-  - `type BetaCitationCharLocationParamResp struct{…}`
+  - `type BetaCitationCharLocationParamResp`
 
     - `Type CharLocation`
 
@@ -30229,7 +30836,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaCitationPageLocationParamResp struct{…}`
+  - `type BetaCitationPageLocationParamResp`
 
     - `Type PageLocation`
 
@@ -30249,7 +30856,7 @@ func main() {
 
       minimum: 1
 
-  - `type BetaCitationContentBlockLocationParamResp struct{…}`
+  - `type BetaCitationContentBlockLocationParamResp`
 
     - `Type ContentBlockLocation`
 
@@ -30279,7 +30886,7 @@ func main() {
 
       minimum: 0
 
-  - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+  - `type BetaCitationWebSearchResultLocationParamResp`
 
     - `Type WebSearchResultLocation`
 
@@ -30295,7 +30902,7 @@ func main() {
 
       minLength: 1
 
-  - `type BetaCitationSearchResultLocationParamResp struct{…}`
+  - `type BetaCitationSearchResultLocationParamResp`
 
     - `Type SearchResultLocation`
 
@@ -30331,7 +30938,7 @@ func main() {
 
 ### Beta Text Delta
 
-- `type BetaTextDelta struct{…}`
+- `type BetaTextDelta`
 
   - `Type TextDelta`
 
@@ -30341,7 +30948,7 @@ func main() {
 
 ### Beta Text Editor Code Execution Create Result Block
 
-- `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+- `type BetaTextEditorCodeExecutionCreateResultBlock`
 
   - `Type TextEditorCodeExecutionCreateResult`
 
@@ -30351,7 +30958,7 @@ func main() {
 
 ### Beta Text Editor Code Execution Create Result Block Param
 
-- `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+- `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionCreateResult`
 
@@ -30359,7 +30966,7 @@ func main() {
 
 ### Beta Text Editor Code Execution Str Replace Result Block
 
-- `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+- `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -30377,7 +30984,7 @@ func main() {
 
 ### Beta Text Editor Code Execution Str Replace Result Block Param
 
-- `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+- `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -30393,7 +31000,7 @@ func main() {
 
 ### Beta Text Editor Code Execution Tool Result Block
 
-- `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+- `type BetaTextEditorCodeExecutionToolResultBlock`
 
   - `Type TextEditorCodeExecutionToolResult`
 
@@ -30401,7 +31008,7 @@ func main() {
 
   - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-    - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+    - `type BetaTextEditorCodeExecutionToolResultError`
 
       - `Type TextEditorCodeExecutionToolResultError`
 
@@ -30421,7 +31028,7 @@ func main() {
 
       - `ErrorMessage string`
 
-    - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+    - `type BetaTextEditorCodeExecutionViewResultBlock`
 
       - `Type TextEditorCodeExecutionViewResult`
 
@@ -30443,7 +31050,7 @@ func main() {
 
       - `TotalLines int64`
 
-    - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+    - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
       - `Type TextEditorCodeExecutionCreateResult`
 
@@ -30451,7 +31058,7 @@ func main() {
 
       - `IsFileUpdate bool`
 
-    - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+    - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
       - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -30473,13 +31080,13 @@ func main() {
 
 ### Beta Text Editor Code Execution Tool Result Block Param
 
-- `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+- `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionToolResult`
 
   - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-    - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+    - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
       - `Type TextEditorCodeExecutionToolResultError`
 
@@ -30497,7 +31104,7 @@ func main() {
 
       - `ErrorMessage string Optional`
 
-    - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+    - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
       - `Type TextEditorCodeExecutionViewResult`
 
@@ -30517,13 +31124,13 @@ func main() {
 
       - `TotalLines int64 Optional`
 
-    - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+    - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
       - `Type TextEditorCodeExecutionCreateResult`
 
       - `IsFileUpdate bool`
 
-    - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+    - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
       - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -30564,7 +31171,7 @@ func main() {
 
 ### Beta Text Editor Code Execution Tool Result Error
 
-- `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+- `type BetaTextEditorCodeExecutionToolResultError`
 
   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -30586,7 +31193,7 @@ func main() {
 
 ### Beta Text Editor Code Execution Tool Result Error Param
 
-- `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+- `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -30606,7 +31213,7 @@ func main() {
 
 ### Beta Text Editor Code Execution View Result Block
 
-- `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+- `type BetaTextEditorCodeExecutionViewResultBlock`
 
   - `Type TextEditorCodeExecutionViewResult`
 
@@ -30630,7 +31237,7 @@ func main() {
 
 ### Beta Text Editor Code Execution View Result Block Param
 
-- `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+- `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
   - `Type TextEditorCodeExecutionViewResult`
 
@@ -30652,7 +31259,7 @@ func main() {
 
 ### Beta Thinking Block
 
-- `type BetaThinkingBlock struct{…}`
+- `type BetaThinkingBlock`
 
   - `Type Thinking`
 
@@ -30672,7 +31279,7 @@ func main() {
 
 ### Beta Thinking Block Binding
 
-- `type BetaThinkingBlockBinding struct{…}`
+- `type BetaThinkingBlockBinding`
 
   Controls for block binding: what happens when a thinking block this
   request sends back fails the conversation check. Every field is optional;
@@ -30692,7 +31299,7 @@ func main() {
 
 ### Beta Thinking Block Param
 
-- `type BetaThinkingBlockParamResp struct{…}`
+- `type BetaThinkingBlockParamResp`
 
   - `Type Thinking`
 
@@ -30708,7 +31315,7 @@ func main() {
 
 ### Beta Thinking Config Adaptive
 
-- `type BetaThinkingConfigAdaptive struct{…}`
+- `type BetaThinkingConfigAdaptive`
 
   - `Type Adaptive`
 
@@ -30742,13 +31349,13 @@ func main() {
 
 ### Beta Thinking Config Disabled
 
-- `type BetaThinkingConfigDisabled struct{…}`
+- `type BetaThinkingConfigDisabled`
 
   - `Type Disabled`
 
 ### Beta Thinking Config Enabled
 
-- `type BetaThinkingConfigEnabled struct{…}`
+- `type BetaThinkingConfigEnabled`
 
   - `Type Enabled`
 
@@ -30800,7 +31407,7 @@ func main() {
 
   See [extended thinking](../../../build-with-claude/extended-thinking.md) for details.
 
-  - `type BetaThinkingConfigEnabled struct{…}`
+  - `type BetaThinkingConfigEnabled`
 
     - `Type Enabled`
 
@@ -30842,11 +31449,11 @@ func main() {
 
       - `const BetaThinkingConfigEnabledDisplayUpdates BetaThinkingConfigEnabledDisplay = "updates"`
 
-  - `type BetaThinkingConfigDisabled struct{…}`
+  - `type BetaThinkingConfigDisabled`
 
     - `Type Disabled`
 
-  - `type BetaThinkingConfigAdaptive struct{…}`
+  - `type BetaThinkingConfigAdaptive`
 
     - `Type Adaptive`
 
@@ -30868,7 +31475,7 @@ func main() {
 
 ### Beta Thinking Delta
 
-- `type BetaThinkingDelta struct{…}`
+- `type BetaThinkingDelta`
 
   - `Type ThinkingDelta`
 
@@ -30884,7 +31491,7 @@ func main() {
 
 ### Beta Thinking Dropped Input Transformation
 
-- `type BetaThinkingDroppedInputTransformation struct{…}`
+- `type BetaThinkingDroppedInputTransformation`
 
   - `Type ThinkingDropped`
 
@@ -30922,6 +31529,42 @@ func main() {
 
     - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
 
+### Beta Thinking Mismatch Allowed Input Transformation
+
+- `type BetaThinkingMismatchAllowedInputTransformation`
+
+  - `Type ThinkingMismatchAllowed`
+
+    Always `thinking_mismatch_allowed` for this entry type.
+
+    default: thinking_mismatch_allowed
+
+  - `Path string`
+
+    Where the block is in your request, as `messages.{i}.content.{j}`:
+    `i` indexes the `messages` array you sent and `j` that message's `content`
+    array — the same form error messages use.
+
+  - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+    Which binding check the block failed; the block was shown to the model all
+    the same. Always `prefix_binding_mismatch` today — the conversation before
+    the block differs from the conversation it was created in, or the block
+    carries no record of one on a model that requires it. Were the check
+    enforced for this request, the block would have been removed or the request
+    rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+    takes the rest of that turn's consecutive thinking blocks, whereas here each
+    block is checked on its own, so `thinking_mismatch_allowed` entries are a
+    lower bound on what enforcement would remove.
+
+    - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+    - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+    - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+    - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
+
 ### Beta Thinking Prefix Mismatch Behavior
 
 - `type BetaThinkingPrefixMismatchBehavior string`
@@ -30938,7 +31581,7 @@ func main() {
 
 ### Beta Thinking Turns
 
-- `type BetaThinkingTurns struct{…}`
+- `type BetaThinkingTurns`
 
   - `Type ThinkingTurns`
 
@@ -30948,7 +31591,7 @@ func main() {
 
 ### Beta Token Task Budget
 
-- `type BetaTokenTaskBudget struct{…}`
+- `type BetaTokenTaskBudget`
 
   User-configurable total token budget across contexts.
 
@@ -30970,7 +31613,7 @@ func main() {
 
 ### Beta Tool
 
-- `type BetaTool struct{…}`
+- `type BetaTool`
 
   - `Type BetaToolType Optional`
 
@@ -31047,7 +31690,7 @@ func main() {
 
 ### Beta Tool Bash 20241022
 
-- `type BetaToolBash20241022 struct{…}`
+- `type BetaToolBash20241022`
 
   - `Type Bash20241022`
 
@@ -31100,7 +31743,7 @@ func main() {
 
 ### Beta Tool Bash 20250124
 
-- `type BetaToolBash20250124 struct{…}`
+- `type BetaToolBash20250124`
 
   - `Type Bash20250124`
 
@@ -31153,7 +31796,7 @@ func main() {
 
 ### Beta Tool Change MCP Tool Reference
 
-- `type BetaToolChangeMCPToolReference struct{…}`
+- `type BetaToolChangeMCPToolReference`
 
   Reference to a single MCP tool by its server and remote name — the
   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -31166,7 +31809,7 @@ func main() {
 
 ### Beta Tool Change MCP Toolset Reference
 
-- `type BetaToolChangeMCPToolsetReference struct{…}`
+- `type BetaToolChangeMCPToolsetReference`
 
   Reference to every tool in the named MCP server's toolset.
 
@@ -31176,7 +31819,7 @@ func main() {
 
 ### Beta Tool Change Tool Reference
 
-- `type BetaToolChangeToolReference struct{…}`
+- `type BetaToolChangeToolReference`
 
   Reference to a single tool the caller declared directly in
   `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -31195,7 +31838,7 @@ func main() {
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `type BetaToolChoiceAuto struct{…}`
+  - `type BetaToolChoiceAuto`
 
     The model will automatically decide whether to use tools.
 
@@ -31207,7 +31850,7 @@ func main() {
 
       Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-  - `type BetaToolChoiceAny struct{…}`
+  - `type BetaToolChoiceAny`
 
     The model will use any available tools.
 
@@ -31219,7 +31862,7 @@ func main() {
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `type BetaToolChoiceTool struct{…}`
+  - `type BetaToolChoiceTool`
 
     The model will use the specified tool with `tool_choice.name`.
 
@@ -31235,7 +31878,7 @@ func main() {
 
       Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-  - `type BetaToolChoiceNone struct{…}`
+  - `type BetaToolChoiceNone`
 
     The model will not be allowed to use tools.
 
@@ -31243,7 +31886,7 @@ func main() {
 
 ### Beta Tool Choice Any
 
-- `type BetaToolChoiceAny struct{…}`
+- `type BetaToolChoiceAny`
 
   The model will use any available tools.
 
@@ -31257,7 +31900,7 @@ func main() {
 
 ### Beta Tool Choice Auto
 
-- `type BetaToolChoiceAuto struct{…}`
+- `type BetaToolChoiceAuto`
 
   The model will automatically decide whether to use tools.
 
@@ -31271,7 +31914,7 @@ func main() {
 
 ### Beta Tool Choice None
 
-- `type BetaToolChoiceNone struct{…}`
+- `type BetaToolChoiceNone`
 
   The model will not be allowed to use tools.
 
@@ -31279,7 +31922,7 @@ func main() {
 
 ### Beta Tool Choice Tool
 
-- `type BetaToolChoiceTool struct{…}`
+- `type BetaToolChoiceTool`
 
   The model will use the specified tool with `tool_choice.name`.
 
@@ -31297,7 +31940,7 @@ func main() {
 
 ### Beta Tool Computer Use 20241022
 
-- `type BetaToolComputerUse20241022 struct{…}`
+- `type BetaToolComputerUse20241022`
 
   - `Type Computer20241022`
 
@@ -31368,7 +32011,7 @@ func main() {
 
 ### Beta Tool Computer Use 20250124
 
-- `type BetaToolComputerUse20250124 struct{…}`
+- `type BetaToolComputerUse20250124`
 
   - `Type Computer20250124`
 
@@ -31439,7 +32082,7 @@ func main() {
 
 ### Beta Tool Computer Use 20251124
 
-- `type BetaToolComputerUse20251124 struct{…}`
+- `type BetaToolComputerUse20251124`
 
   - `Type Computer20251124`
 
@@ -31514,7 +32157,7 @@ func main() {
 
 ### Beta Tool Reference Block
 
-- `type BetaToolReferenceBlock struct{…}`
+- `type BetaToolReferenceBlock`
 
   - `Type ToolReference`
 
@@ -31526,7 +32169,7 @@ func main() {
 
 ### Beta Tool Reference Block Param
 
-- `type BetaToolReferenceBlockParamResp struct{…}`
+- `type BetaToolReferenceBlockParamResp`
 
   Tool reference block that can be included in tool_result content.
 
@@ -31559,7 +32202,7 @@ func main() {
 
 ### Beta Tool Result Block Param
 
-- `type BetaToolResultBlockParamResp struct{…}`
+- `type BetaToolResultBlockParamResp`
 
   - `Type ToolResult`
 
@@ -31592,7 +32235,7 @@ func main() {
 
     - `[]BetaToolResultBlockParamContentUnionResp`
 
-      - `type BetaTextBlockParamResp struct{…}`
+      - `type BetaTextBlockParamResp`
 
         - `Type Text`
 
@@ -31606,7 +32249,7 @@ func main() {
 
         - `Citations []BetaTextCitationParamUnionResp Optional`
 
-          - `type BetaCitationCharLocationParamResp struct{…}`
+          - `type BetaCitationCharLocationParamResp`
 
             - `Type CharLocation`
 
@@ -31626,7 +32269,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationPageLocationParamResp struct{…}`
+          - `type BetaCitationPageLocationParamResp`
 
             - `Type PageLocation`
 
@@ -31646,7 +32289,7 @@ func main() {
 
               minimum: 1
 
-          - `type BetaCitationContentBlockLocationParamResp struct{…}`
+          - `type BetaCitationContentBlockLocationParamResp`
 
             - `Type ContentBlockLocation`
 
@@ -31676,7 +32319,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+          - `type BetaCitationWebSearchResultLocationParamResp`
 
             - `Type WebSearchResultLocation`
 
@@ -31692,7 +32335,7 @@ func main() {
 
               minLength: 1
 
-          - `type BetaCitationSearchResultLocationParamResp struct{…}`
+          - `type BetaCitationSearchResultLocationParamResp`
 
             - `Type SearchResultLocation`
 
@@ -31726,13 +32369,13 @@ func main() {
 
             - `Title string`
 
-      - `type BetaImageBlockParamResp struct{…}`
+      - `type BetaImageBlockParamResp`
 
         - `Type Image`
 
         - `Source BetaImageBlockParamSourceUnionResp`
 
-          - `type BetaBase64ImageSource struct{…}`
+          - `type BetaBase64ImageSource`
 
             - `Type Base64`
 
@@ -31750,13 +32393,13 @@ func main() {
 
               - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-          - `type BetaURLImageSource struct{…}`
+          - `type BetaURLImageSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type BetaFileImageSource struct{…}`
+          - `type BetaFileImageSource`
 
             - `Type File`
 
@@ -31778,7 +32421,7 @@ func main() {
 
             - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-      - `type BetaSearchResultBlockParamResp struct{…}`
+      - `type BetaSearchResultBlockParamResp`
 
         - `Type SearchResult`
 
@@ -31808,13 +32451,13 @@ func main() {
 
           - `Enabled bool Optional`
 
-      - `type BetaRequestDocumentBlock struct{…}`
+      - `type BetaRequestDocumentBlock`
 
         - `Type Document`
 
         - `Source BetaRequestDocumentBlockSourceUnion`
 
-          - `type BetaBase64PDFSource struct{…}`
+          - `type BetaBase64PDFSource`
 
             - `Type Base64`
 
@@ -31824,7 +32467,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type BetaPlainTextSource struct{…}`
+          - `type BetaPlainTextSource`
 
             - `Type Text`
 
@@ -31832,7 +32475,7 @@ func main() {
 
             - `MediaType TextPlain`
 
-          - `type BetaContentBlockSource struct{…}`
+          - `type BetaContentBlockSource`
 
             - `Type Content`
 
@@ -31842,17 +32485,17 @@ func main() {
 
               - `[]BetaContentBlockSourceContentUnion`
 
-                - `type BetaTextBlockParamResp struct{…}`
+                - `type BetaTextBlockParamResp`
 
-                - `type BetaImageBlockParamResp struct{…}`
+                - `type BetaImageBlockParamResp`
 
-          - `type BetaURLPDFSource struct{…}`
+          - `type BetaURLPDFSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type BetaFileDocumentSource struct{…}`
+          - `type BetaFileDocumentSource`
 
             - `Type File`
 
@@ -31872,7 +32515,7 @@ func main() {
 
           maxLength: 500, minLength: 1
 
-      - `type BetaToolReferenceBlockParamResp struct{…}`
+      - `type BetaToolReferenceBlockParamResp`
 
         Tool reference block that can be included in tool_result content.
 
@@ -31886,7 +32529,7 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
-      - `type BetaBrowserStateBlockParamResp struct{…}`
+      - `type BetaBrowserStateBlockParamResp`
 
         The caller's browser state after a browser toolset member call —
         the full inventory of open tabs, which tab is active, and any side
@@ -31936,7 +32579,7 @@ func main() {
 
           maxItems: 200, minItems: 1
 
-          - `type BetaBrowserStateChangeTabOpened struct{…}`
+          - `type BetaBrowserStateChangeTabOpened`
 
             A tab this call's execution opened that remains open at its end —
             the creation delta of the `tabs` inventory, not an event log.
@@ -31954,7 +32597,7 @@ func main() {
 
               maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-          - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+          - `type BetaBrowserStateChangeDownloadStarted`
 
             A file download that started during this call.
 
@@ -31972,7 +32615,7 @@ func main() {
 
               maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-          - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+          - `type BetaBrowserStateChangeDownloadCompleted`
 
             A file download that finished during this call, reported with the
             same `download_id` as its `download_started` — or without a prior
@@ -32005,7 +32648,7 @@ func main() {
 
               minimum: 0
 
-          - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+          - `type BetaBrowserStateChangeDownloadFailed`
 
             A file download that failed — or was cancelled — during this call.
 
@@ -32039,7 +32682,7 @@ func main() {
 
 ### Beta Tool Search Tool Bm25 20251119
 
-- `type BetaToolSearchToolBm25_20251119 struct{…}`
+- `type BetaToolSearchToolBm25_20251119`
 
   - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -32094,7 +32737,7 @@ func main() {
 
 ### Beta Tool Search Tool Regex 20251119
 
-- `type BetaToolSearchToolRegex20251119 struct{…}`
+- `type BetaToolSearchToolRegex20251119`
 
   - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -32149,7 +32792,7 @@ func main() {
 
 ### Beta Tool Search Tool Result Block
 
-- `type BetaToolSearchToolResultBlock struct{…}`
+- `type BetaToolSearchToolResultBlock`
 
   - `Type ToolSearchToolResult`
 
@@ -32157,7 +32800,7 @@ func main() {
 
   - `Content BetaToolSearchToolResultBlockContentUnion`
 
-    - `type BetaToolSearchToolResultError struct{…}`
+    - `type BetaToolSearchToolResultError`
 
       - `Type ToolSearchToolResultError`
 
@@ -32175,7 +32818,7 @@ func main() {
 
       - `ErrorMessage string`
 
-    - `type BetaToolSearchToolSearchResultBlock struct{…}`
+    - `type BetaToolSearchToolSearchResultBlock`
 
       - `Type ToolSearchToolSearchResult`
 
@@ -32197,13 +32840,13 @@ func main() {
 
 ### Beta Tool Search Tool Result Block Param
 
-- `type BetaToolSearchToolResultBlockParamResp struct{…}`
+- `type BetaToolSearchToolResultBlockParamResp`
 
   - `Type ToolSearchToolResult`
 
   - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-    - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+    - `type BetaToolSearchToolResultErrorParamResp`
 
       - `Type ToolSearchToolResultError`
 
@@ -32219,7 +32862,7 @@ func main() {
 
       - `ErrorMessage string Optional`
 
-    - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+    - `type BetaToolSearchToolSearchResultBlockParamResp`
 
       - `Type ToolSearchToolSearchResult`
 
@@ -32262,7 +32905,7 @@ func main() {
 
 ### Beta Tool Search Tool Result Error
 
-- `type BetaToolSearchToolResultError struct{…}`
+- `type BetaToolSearchToolResultError`
 
   - `Type ToolSearchToolResultError`
 
@@ -32282,7 +32925,7 @@ func main() {
 
 ### Beta Tool Search Tool Result Error Param
 
-- `type BetaToolSearchToolResultErrorParamResp struct{…}`
+- `type BetaToolSearchToolResultErrorParamResp`
 
   - `Type ToolSearchToolResultError`
 
@@ -32300,7 +32943,7 @@ func main() {
 
 ### Beta Tool Search Tool Search Result Block
 
-- `type BetaToolSearchToolSearchResultBlock struct{…}`
+- `type BetaToolSearchToolSearchResultBlock`
 
   - `Type ToolSearchToolSearchResult`
 
@@ -32318,7 +32961,7 @@ func main() {
 
 ### Beta Tool Search Tool Search Result Block Param
 
-- `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+- `type BetaToolSearchToolSearchResultBlockParamResp`
 
   - `Type ToolSearchToolSearchResult`
 
@@ -32353,7 +32996,7 @@ func main() {
 
 ### Beta Tool Text Editor 20241022
 
-- `type BetaToolTextEditor20241022 struct{…}`
+- `type BetaToolTextEditor20241022`
 
   - `Type TextEditor20241022`
 
@@ -32406,7 +33049,7 @@ func main() {
 
 ### Beta Tool Text Editor 20250124
 
-- `type BetaToolTextEditor20250124 struct{…}`
+- `type BetaToolTextEditor20250124`
 
   - `Type TextEditor20250124`
 
@@ -32459,7 +33102,7 @@ func main() {
 
 ### Beta Tool Text Editor 20250429
 
-- `type BetaToolTextEditor20250429 struct{…}`
+- `type BetaToolTextEditor20250429`
 
   - `Type TextEditor20250429`
 
@@ -32512,7 +33155,7 @@ func main() {
 
 ### Beta Tool Text Editor 20250728
 
-- `type BetaToolTextEditor20250728 struct{…}`
+- `type BetaToolTextEditor20250728`
 
   - `Type TextEditor20250728`
 
@@ -32573,7 +33216,7 @@ func main() {
 
 - `type BetaToolUnion interface{…}`
 
-  - `type BetaTool struct{…}`
+  - `type BetaTool`
 
     - `Type BetaToolType Optional`
 
@@ -32648,7 +33291,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolBash20241022 struct{…}`
+  - `type BetaToolBash20241022`
 
     - `Type Bash20241022`
 
@@ -32682,7 +33325,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolBash20250124 struct{…}`
+  - `type BetaToolBash20250124`
 
     - `Type Bash20250124`
 
@@ -32716,7 +33359,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaCodeExecutionTool20250522 struct{…}`
+  - `type BetaCodeExecutionTool20250522`
 
     - `Type CodeExecution20250522`
 
@@ -32748,7 +33391,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaCodeExecutionTool20250825 struct{…}`
+  - `type BetaCodeExecutionTool20250825`
 
     - `Type CodeExecution20250825`
 
@@ -32780,7 +33423,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaCodeExecutionTool20260120 struct{…}`
+  - `type BetaCodeExecutionTool20260120`
 
     Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -32814,7 +33457,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaCodeExecutionTool20260521 struct{…}`
+  - `type BetaCodeExecutionTool20260521`
 
     Code execution tool with REPL state persistence.
 
@@ -32848,7 +33491,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaBrowserToolset20260801 struct{…}`
+  - `type BetaBrowserToolset20260801`
 
     The browser toolset: a single `tools[]` entry (carrying no
     `name`) that declares the browser tool family. The model is served
@@ -33242,7 +33885,7 @@ func main() {
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type BetaToolComputerUse20241022 struct{…}`
+  - `type BetaToolComputerUse20241022`
 
     - `Type Computer20241022`
 
@@ -33294,7 +33937,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaMemoryTool20250818 struct{…}`
+  - `type BetaMemoryTool20250818`
 
     - `Type Memory20250818`
 
@@ -33328,7 +33971,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolComputerUse20250124 struct{…}`
+  - `type BetaToolComputerUse20250124`
 
     - `Type Computer20250124`
 
@@ -33380,7 +34023,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolTextEditor20241022 struct{…}`
+  - `type BetaToolTextEditor20241022`
 
     - `Type TextEditor20241022`
 
@@ -33414,7 +34057,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolComputerUse20251124 struct{…}`
+  - `type BetaToolComputerUse20251124`
 
     - `Type Computer20251124`
 
@@ -33470,7 +34113,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaComputerToolset20260801 struct{…}`
+  - `type BetaComputerToolset20260801`
 
     The computer toolset: a single `tools[]` entry (carrying no
     `name`) that declares the computer tool family. The model is
@@ -33700,7 +34343,7 @@ func main() {
 
           Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-  - `type BetaToolTextEditor20250124 struct{…}`
+  - `type BetaToolTextEditor20250124`
 
     - `Type TextEditor20250124`
 
@@ -33734,7 +34377,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolTextEditor20250429 struct{…}`
+  - `type BetaToolTextEditor20250429`
 
     - `Type TextEditor20250429`
 
@@ -33768,7 +34411,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolTextEditor20250728 struct{…}`
+  - `type BetaToolTextEditor20250728`
 
     - `Type TextEditor20250728`
 
@@ -33808,7 +34451,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaWebSearchTool20250305 struct{…}`
+  - `type BetaWebSearchTool20250305`
 
     - `Type WebSearch20250305`
 
@@ -33884,7 +34527,7 @@ func main() {
 
         maxLength: 255, minLength: 1
 
-  - `type BetaWebFetchTool20250910 struct{…}`
+  - `type BetaWebFetchTool20250910`
 
     - `Type WebFetch20250910`
 
@@ -33942,7 +34585,98 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaWebSearchTool20260209 struct{…}`
+    - `URLSources BetaWebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+      - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+        Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+        - `type BetaWebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+          - `Type All`
+
+        - `type BetaWebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+          - `Type None`
+
+        - `type BetaWebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+          - `Type Only`
+
+          - `Tools []BetaWebFetchURLSourceToolReference`
+
+            - `Type ToolReference`
+
+            - `Name string`
+
+        - `type BetaWebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+          - `Type Except`
+
+          - `Tools []BetaWebFetchURLSourceToolReference`
+
+            - `Type ToolReference`
+
+            - `Name string`
+
+      - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+        Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+        - `type BetaWebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `type BetaWebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+        - `type BetaWebFetchURLSourceOnly`
+
+          The tool filter variant under which only the named tools' results
+          contribute.
+
+        - `type BetaWebFetchURLSourceExcept`
+
+          The tool filter variant under which every result but the named
+          tools' contributes.
+
+      - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+        Whether URLs in user messages are fetchable: "all" or "none".
+
+        - `type BetaWebFetchURLSourceAll`
+
+          The `url_sources` variant under which a source contributes in
+          full: every result of the tool filter's source, or all user input.
+
+        - `type BetaWebFetchURLSourceNone`
+
+          The `url_sources` variant under which a source contributes nothing:
+          no result of the tool filter's source, or no user input.
+
+  - `type BetaWebSearchTool20260209`
 
     - `Type WebSearch20260209`
 
@@ -33992,7 +34726,7 @@ func main() {
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `type BetaWebFetchTool20260209 struct{…}`
+  - `type BetaWebFetchTool20260209`
 
     - `Type WebFetch20260209`
 
@@ -34048,7 +34782,16 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaWebFetchTool20260309 struct{…}`
+    - `URLSources BetaWebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
+  - `type BetaWebFetchTool20260309`
 
     Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -34106,11 +34849,20 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `URLSources BetaWebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `UseCache bool Optional`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `type BetaWebSearchTool20260318 struct{…}`
+  - `type BetaWebSearchTool20260318`
 
     - `Type WebSearch20260318`
 
@@ -34168,7 +34920,7 @@ func main() {
 
       Parameters for the user's location. Used to provide more relevant search results.
 
-  - `type BetaWebFetchTool20260318 struct{…}`
+  - `type BetaWebFetchTool20260318`
 
     - `Type WebFetch20260318`
 
@@ -34232,11 +34984,20 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
+    - `URLSources BetaWebFetchURLSources Optional`
+
+      Which sources contribute to the set of URLs web fetch may fetch.
+
+      Each key is a tagged variant: `user_input` is `all` or `none`; the
+      two tool filters are `all`, `none`, `only` (only the named tools'
+      results) or `except` (every result but the named tools'). A named tool
+      must be declared in this request's `tools[]`.
+
     - `UseCache bool Optional`
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `type BetaAdvisorTool20260301 struct{…}`
+  - `type BetaAdvisorTool20260301`
 
     - `Type Advisor20260301`
 
@@ -34366,7 +35127,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolSearchToolBm25_20251119 struct{…}`
+  - `type BetaToolSearchToolBm25_20251119`
 
     - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -34402,7 +35163,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaToolSearchToolRegex20251119 struct{…}`
+  - `type BetaToolSearchToolRegex20251119`
 
     - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -34438,7 +35199,7 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
-  - `type BetaMCPToolset struct{…}`
+  - `type BetaMCPToolset`
 
     Configuration for a group of tools from an MCP server.
 
@@ -34475,7 +35236,7 @@ func main() {
 
 ### Beta Tool Use Block
 
-- `type BetaToolUseBlock struct{…}`
+- `type BetaToolUseBlock`
 
   - `Type ToolUse`
 
@@ -34493,13 +35254,13 @@ func main() {
 
   - `Caller BetaToolUseBlockCallerUnion Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -34509,7 +35270,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -34525,7 +35286,7 @@ func main() {
 
 ### Beta Tool Use Block Param
 
-- `type BetaToolUseBlockParamResp struct{…}`
+- `type BetaToolUseBlockParamResp`
 
   - `Type ToolUse`
 
@@ -34562,13 +35323,13 @@ func main() {
 
   - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -34578,7 +35339,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -34594,7 +35355,7 @@ func main() {
 
 ### Beta Tool Uses Keep
 
-- `type BetaToolUsesKeep struct{…}`
+- `type BetaToolUsesKeep`
 
   - `Type ToolUses`
 
@@ -34604,7 +35365,7 @@ func main() {
 
 ### Beta Tool Uses Trigger
 
-- `type BetaToolUsesTrigger struct{…}`
+- `type BetaToolUsesTrigger`
 
   - `Type ToolUses`
 
@@ -34614,7 +35375,7 @@ func main() {
 
 ### Beta URL Image Source
 
-- `type BetaURLImageSource struct{…}`
+- `type BetaURLImageSource`
 
   - `Type URL`
 
@@ -34622,7 +35383,7 @@ func main() {
 
 ### Beta URL PDF Source
 
-- `type BetaURLPDFSource struct{…}`
+- `type BetaURLPDFSource`
 
   - `Type URL`
 
@@ -34630,7 +35391,7 @@ func main() {
 
 ### Beta Usage
 
-- `type BetaUsage struct{…}`
+- `type BetaUsage`
 
   - `CacheCreation BetaCacheCreation`
 
@@ -34673,7 +35434,7 @@ func main() {
       resulting shift is zero because there was nothing to move. `not_applied`:
       no reprice was applied; the arm's `reason` says why.
 
-      - `type BetaFallbackCreditRedeemed struct{…}`
+      - `type BetaFallbackCreditRedeemed`
 
         The reprice was applied: the retry is billed as if the conversation
         had been on the retry model all along.
@@ -34682,7 +35443,7 @@ func main() {
 
           default: redeemed
 
-      - `type BetaFallbackCreditNotApplied struct{…}`
+      - `type BetaFallbackCreditNotApplied`
 
         No reprice was applied; `reason` says why.
 
@@ -34754,7 +35515,7 @@ func main() {
 
     A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-    - `type BetaMessageIterationUsage struct{…}`
+    - `type BetaMessageIterationUsage`
 
       Token usage for a sampling iteration.
 
@@ -34874,7 +35635,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaCompactionIterationUsage struct{…}`
+    - `type BetaCompactionIterationUsage`
 
       Token usage for a compaction iteration.
 
@@ -34912,7 +35673,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaAdvisorMessageIterationUsage struct{…}`
+    - `type BetaAdvisorMessageIterationUsage`
 
       Token usage for an advisor sub-inference iteration.
 
@@ -34956,7 +35717,7 @@ func main() {
 
         minimum: 0
 
-    - `type BetaFallbackMessageIterationUsage struct{…}`
+    - `type BetaFallbackMessageIterationUsage`
 
       Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -35071,7 +35832,7 @@ func main() {
 
 ### Beta User Location
 
-- `type BetaUserLocation struct{…}`
+- `type BetaUserLocation`
 
   - `Type Approximate`
 
@@ -35101,7 +35862,7 @@ func main() {
 
 ### Beta Web Fetch Block
 
-- `type BetaWebFetchBlock struct{…}`
+- `type BetaWebFetchBlock`
 
   - `Type WebFetchResult`
 
@@ -35123,7 +35884,7 @@ func main() {
 
     - `Source BetaDocumentBlockSourceUnion`
 
-      - `type BetaBase64PDFSource struct{…}`
+      - `type BetaBase64PDFSource`
 
         - `Type Base64`
 
@@ -35133,7 +35894,7 @@ func main() {
 
         - `MediaType ApplicationPDF`
 
-      - `type BetaPlainTextSource struct{…}`
+      - `type BetaPlainTextSource`
 
         - `Type Text`
 
@@ -35155,7 +35916,7 @@ func main() {
 
 ### Beta Web Fetch Block Param
 
-- `type BetaWebFetchBlockParamResp struct{…}`
+- `type BetaWebFetchBlockParamResp`
 
   - `Type WebFetchResult`
 
@@ -35165,7 +35926,7 @@ func main() {
 
     - `Source BetaRequestDocumentBlockSourceUnion`
 
-      - `type BetaBase64PDFSource struct{…}`
+      - `type BetaBase64PDFSource`
 
         - `Type Base64`
 
@@ -35175,7 +35936,7 @@ func main() {
 
         - `MediaType ApplicationPDF`
 
-      - `type BetaPlainTextSource struct{…}`
+      - `type BetaPlainTextSource`
 
         - `Type Text`
 
@@ -35183,7 +35944,7 @@ func main() {
 
         - `MediaType TextPlain`
 
-      - `type BetaContentBlockSource struct{…}`
+      - `type BetaContentBlockSource`
 
         - `Type Content`
 
@@ -35193,7 +35954,7 @@ func main() {
 
           - `[]BetaContentBlockSourceContentUnion`
 
-            - `type BetaTextBlockParamResp struct{…}`
+            - `type BetaTextBlockParamResp`
 
               - `Type Text`
 
@@ -35224,7 +35985,7 @@ func main() {
 
               - `Citations []BetaTextCitationParamUnionResp Optional`
 
-                - `type BetaCitationCharLocationParamResp struct{…}`
+                - `type BetaCitationCharLocationParamResp`
 
                   - `Type CharLocation`
 
@@ -35244,7 +36005,7 @@ func main() {
 
                     minimum: 0
 
-                - `type BetaCitationPageLocationParamResp struct{…}`
+                - `type BetaCitationPageLocationParamResp`
 
                   - `Type PageLocation`
 
@@ -35264,7 +36025,7 @@ func main() {
 
                     minimum: 1
 
-                - `type BetaCitationContentBlockLocationParamResp struct{…}`
+                - `type BetaCitationContentBlockLocationParamResp`
 
                   - `Type ContentBlockLocation`
 
@@ -35294,7 +36055,7 @@ func main() {
 
                     minimum: 0
 
-                - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationWebSearchResultLocationParamResp`
 
                   - `Type WebSearchResultLocation`
 
@@ -35310,7 +36071,7 @@ func main() {
 
                     minLength: 1
 
-                - `type BetaCitationSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationSearchResultLocationParamResp`
 
                   - `Type SearchResultLocation`
 
@@ -35344,13 +36105,13 @@ func main() {
 
                   - `Title string`
 
-            - `type BetaImageBlockParamResp struct{…}`
+            - `type BetaImageBlockParamResp`
 
               - `Type Image`
 
               - `Source BetaImageBlockParamSourceUnionResp`
 
-                - `type BetaBase64ImageSource struct{…}`
+                - `type BetaBase64ImageSource`
 
                   - `Type Base64`
 
@@ -35368,13 +36129,13 @@ func main() {
 
                     - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-                - `type BetaURLImageSource struct{…}`
+                - `type BetaURLImageSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileImageSource struct{…}`
+                - `type BetaFileImageSource`
 
                   - `Type File`
 
@@ -35396,13 +36157,13 @@ func main() {
 
                   - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-      - `type BetaURLPDFSource struct{…}`
+      - `type BetaURLPDFSource`
 
         - `Type URL`
 
         - `URL string`
 
-      - `type BetaFileDocumentSource struct{…}`
+      - `type BetaFileDocumentSource`
 
         - `Type File`
 
@@ -35434,7 +36195,7 @@ func main() {
 
 ### Beta Web Fetch Tool 20250910
 
-- `type BetaWebFetchTool20250910 struct{…}`
+- `type BetaWebFetchTool20250910`
 
   - `Type WebFetch20250910`
 
@@ -35509,9 +36270,100 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources BetaWebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
 ### Beta Web Fetch Tool 20260209
 
-- `type BetaWebFetchTool20260209 struct{…}`
+- `type BetaWebFetchTool20260209`
 
   - `Type WebFetch20260209`
 
@@ -35586,9 +36438,100 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources BetaWebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
 ### Beta Web Fetch Tool 20260309
 
-- `type BetaWebFetchTool20260309 struct{…}`
+- `type BetaWebFetchTool20260309`
 
   Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -35665,13 +36608,104 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources BetaWebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
   - `UseCache bool Optional`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Beta Web Fetch Tool 20260318
 
-- `type BetaWebFetchTool20260318 struct{…}`
+- `type BetaWebFetchTool20260318`
 
   - `Type WebFetch20260318`
 
@@ -35754,13 +36788,104 @@ func main() {
 
     When true, guarantees schema validation on tool names and inputs
 
+  - `URLSources BetaWebFetchURLSources Optional`
+
+    Which sources contribute to the set of URLs web fetch may fetch.
+
+    Each key is a tagged variant: `user_input` is `all` or `none`; the
+    two tool filters are `all`, `none`, `only` (only the named tools'
+    results) or `except` (every result but the named tools'). A named tool
+    must be declared in this request's `tools[]`.
+
+    - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+      Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+        - `Type All`
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+        - `Type None`
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+        - `Type Only`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+        - `Type Except`
+
+        - `Tools []BetaWebFetchURLSourceToolReference`
+
+          - `Type ToolReference`
+
+          - `Name string`
+
+    - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+      Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
+      - `type BetaWebFetchURLSourceOnly`
+
+        The tool filter variant under which only the named tools' results
+        contribute.
+
+      - `type BetaWebFetchURLSourceExcept`
+
+        The tool filter variant under which every result but the named
+        tools' contributes.
+
+    - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+      Whether URLs in user messages are fetchable: "all" or "none".
+
+      - `type BetaWebFetchURLSourceAll`
+
+        The `url_sources` variant under which a source contributes in
+        full: every result of the tool filter's source, or all user input.
+
+      - `type BetaWebFetchURLSourceNone`
+
+        The `url_sources` variant under which a source contributes nothing:
+        no result of the tool filter's source, or no user input.
+
   - `UseCache bool Optional`
 
     Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
 ### Beta Web Fetch Tool Result Block
 
-- `type BetaWebFetchToolResultBlock struct{…}`
+- `type BetaWebFetchToolResultBlock`
 
   - `Type WebFetchToolResult`
 
@@ -35768,7 +36893,7 @@ func main() {
 
   - `Content BetaWebFetchToolResultBlockContentUnion`
 
-    - `type BetaWebFetchToolResultErrorBlock struct{…}`
+    - `type BetaWebFetchToolResultErrorBlock`
 
       - `Type WebFetchToolResultError`
 
@@ -35796,7 +36921,7 @@ func main() {
 
         - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-    - `type BetaWebFetchBlock struct{…}`
+    - `type BetaWebFetchBlock`
 
       - `Type WebFetchResult`
 
@@ -35818,7 +36943,7 @@ func main() {
 
         - `Source BetaDocumentBlockSourceUnion`
 
-          - `type BetaBase64PDFSource struct{…}`
+          - `type BetaBase64PDFSource`
 
             - `Type Base64`
 
@@ -35828,7 +36953,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type BetaPlainTextSource struct{…}`
+          - `type BetaPlainTextSource`
 
             - `Type Text`
 
@@ -35854,13 +36979,13 @@ func main() {
 
   - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -35870,7 +36995,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -35880,13 +37005,13 @@ func main() {
 
 ### Beta Web Fetch Tool Result Block Param
 
-- `type BetaWebFetchToolResultBlockParamResp struct{…}`
+- `type BetaWebFetchToolResultBlockParamResp`
 
   - `Type WebFetchToolResult`
 
   - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-    - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+    - `type BetaWebFetchToolResultErrorBlockParamResp`
 
       - `Type WebFetchToolResultError`
 
@@ -35912,7 +37037,7 @@ func main() {
 
         - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-    - `type BetaWebFetchBlockParamResp struct{…}`
+    - `type BetaWebFetchBlockParamResp`
 
       - `Type WebFetchResult`
 
@@ -35922,7 +37047,7 @@ func main() {
 
         - `Source BetaRequestDocumentBlockSourceUnion`
 
-          - `type BetaBase64PDFSource struct{…}`
+          - `type BetaBase64PDFSource`
 
             - `Type Base64`
 
@@ -35932,7 +37057,7 @@ func main() {
 
             - `MediaType ApplicationPDF`
 
-          - `type BetaPlainTextSource struct{…}`
+          - `type BetaPlainTextSource`
 
             - `Type Text`
 
@@ -35940,7 +37065,7 @@ func main() {
 
             - `MediaType TextPlain`
 
-          - `type BetaContentBlockSource struct{…}`
+          - `type BetaContentBlockSource`
 
             - `Type Content`
 
@@ -35950,7 +37075,7 @@ func main() {
 
               - `[]BetaContentBlockSourceContentUnion`
 
-                - `type BetaTextBlockParamResp struct{…}`
+                - `type BetaTextBlockParamResp`
 
                   - `Type Text`
 
@@ -35981,7 +37106,7 @@ func main() {
 
                   - `Citations []BetaTextCitationParamUnionResp Optional`
 
-                    - `type BetaCitationCharLocationParamResp struct{…}`
+                    - `type BetaCitationCharLocationParamResp`
 
                       - `Type CharLocation`
 
@@ -36001,7 +37126,7 @@ func main() {
 
                         minimum: 0
 
-                    - `type BetaCitationPageLocationParamResp struct{…}`
+                    - `type BetaCitationPageLocationParamResp`
 
                       - `Type PageLocation`
 
@@ -36021,7 +37146,7 @@ func main() {
 
                         minimum: 1
 
-                    - `type BetaCitationContentBlockLocationParamResp struct{…}`
+                    - `type BetaCitationContentBlockLocationParamResp`
 
                       - `Type ContentBlockLocation`
 
@@ -36051,7 +37176,7 @@ func main() {
 
                         minimum: 0
 
-                    - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+                    - `type BetaCitationWebSearchResultLocationParamResp`
 
                       - `Type WebSearchResultLocation`
 
@@ -36067,7 +37192,7 @@ func main() {
 
                         minLength: 1
 
-                    - `type BetaCitationSearchResultLocationParamResp struct{…}`
+                    - `type BetaCitationSearchResultLocationParamResp`
 
                       - `Type SearchResultLocation`
 
@@ -36101,13 +37226,13 @@ func main() {
 
                       - `Title string`
 
-                - `type BetaImageBlockParamResp struct{…}`
+                - `type BetaImageBlockParamResp`
 
                   - `Type Image`
 
                   - `Source BetaImageBlockParamSourceUnionResp`
 
-                    - `type BetaBase64ImageSource struct{…}`
+                    - `type BetaBase64ImageSource`
 
                       - `Type Base64`
 
@@ -36125,13 +37250,13 @@ func main() {
 
                         - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-                    - `type BetaURLImageSource struct{…}`
+                    - `type BetaURLImageSource`
 
                       - `Type URL`
 
                       - `URL string`
 
-                    - `type BetaFileImageSource struct{…}`
+                    - `type BetaFileImageSource`
 
                       - `Type File`
 
@@ -36153,13 +37278,13 @@ func main() {
 
                       - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-          - `type BetaURLPDFSource struct{…}`
+          - `type BetaURLPDFSource`
 
             - `Type URL`
 
             - `URL string`
 
-          - `type BetaFileDocumentSource struct{…}`
+          - `type BetaFileDocumentSource`
 
             - `Type File`
 
@@ -36199,13 +37324,13 @@ func main() {
 
   - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -36215,7 +37340,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -36225,7 +37350,7 @@ func main() {
 
 ### Beta Web Fetch Tool Result Error Block
 
-- `type BetaWebFetchToolResultErrorBlock struct{…}`
+- `type BetaWebFetchToolResultErrorBlock`
 
   - `Type WebFetchToolResultError`
 
@@ -36255,7 +37380,7 @@ func main() {
 
 ### Beta Web Fetch Tool Result Error Block Param
 
-- `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+- `type BetaWebFetchToolResultErrorBlockParamResp`
 
   - `Type WebFetchToolResultError`
 
@@ -36305,9 +37430,161 @@ func main() {
 
   - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
+### Beta Web Fetch URL Source All
+
+- `type BetaWebFetchURLSourceAll`
+
+  The `url_sources` variant under which a source contributes in
+  full: every result of the tool filter's source, or all user input.
+
+  - `Type All`
+
+### Beta Web Fetch URL Source Except
+
+- `type BetaWebFetchURLSourceExcept`
+
+  The tool filter variant under which every result but the named
+  tools' contributes.
+
+  - `Type Except`
+
+  - `Tools []BetaWebFetchURLSourceToolReference`
+
+    - `Type ToolReference`
+
+    - `Name string`
+
+### Beta Web Fetch URL Source None
+
+- `type BetaWebFetchURLSourceNone`
+
+  The `url_sources` variant under which a source contributes nothing:
+  no result of the tool filter's source, or no user input.
+
+  - `Type None`
+
+### Beta Web Fetch URL Source Only
+
+- `type BetaWebFetchURLSourceOnly`
+
+  The tool filter variant under which only the named tools' results
+  contribute.
+
+  - `Type Only`
+
+  - `Tools []BetaWebFetchURLSourceToolReference`
+
+    - `Type ToolReference`
+
+    - `Name string`
+
+### Beta Web Fetch URL Source Tool Reference
+
+- `type BetaWebFetchURLSourceToolReference`
+
+  One entry of a tool filter's `tools`: it must name a tool declared
+  in this request's `tools[]`.
+
+  - `Type ToolReference`
+
+  - `Name string`
+
+### Beta Web Fetch URL Sources
+
+- `type BetaWebFetchURLSources`
+
+  Which sources contribute to the set of URLs web fetch may fetch.
+
+  Each key is a tagged variant: `user_input` is `all` or `none`; the
+  two tool filters are `all`, `none`, `only` (only the named tools'
+  results) or `except` (every result but the named tools'). A named tool
+  must be declared in this request's `tools[]`.
+
+  - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+    Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+    - `type BetaWebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+      - `Type All`
+
+    - `type BetaWebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+      - `Type None`
+
+    - `type BetaWebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+      - `Type Only`
+
+      - `Tools []BetaWebFetchURLSourceToolReference`
+
+        - `Type ToolReference`
+
+        - `Name string`
+
+    - `type BetaWebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+      - `Type Except`
+
+      - `Tools []BetaWebFetchURLSourceToolReference`
+
+        - `Type ToolReference`
+
+        - `Name string`
+
+  - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+    Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+    - `type BetaWebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `type BetaWebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
+    - `type BetaWebFetchURLSourceOnly`
+
+      The tool filter variant under which only the named tools' results
+      contribute.
+
+    - `type BetaWebFetchURLSourceExcept`
+
+      The tool filter variant under which every result but the named
+      tools' contributes.
+
+  - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+    Whether URLs in user messages are fetchable: "all" or "none".
+
+    - `type BetaWebFetchURLSourceAll`
+
+      The `url_sources` variant under which a source contributes in
+      full: every result of the tool filter's source, or all user input.
+
+    - `type BetaWebFetchURLSourceNone`
+
+      The `url_sources` variant under which a source contributes nothing:
+      no result of the tool filter's source, or no user input.
+
 ### Beta Web Search Result Block
 
-- `type BetaWebSearchResultBlock struct{…}`
+- `type BetaWebSearchResultBlock`
 
   - `Type WebSearchResult`
 
@@ -36323,7 +37600,7 @@ func main() {
 
 ### Beta Web Search Result Block Param
 
-- `type BetaWebSearchResultBlockParamResp struct{…}`
+- `type BetaWebSearchResultBlockParamResp`
 
   - `Type WebSearchResult`
 
@@ -36337,7 +37614,7 @@ func main() {
 
 ### Beta Web Search Tool 20250305
 
-- `type BetaWebSearchTool20250305 struct{…}`
+- `type BetaWebSearchTool20250305`
 
   - `Type WebSearch20250305`
 
@@ -36432,7 +37709,7 @@ func main() {
 
 ### Beta Web Search Tool 20260209
 
-- `type BetaWebSearchTool20260209 struct{…}`
+- `type BetaWebSearchTool20260209`
 
   - `Type WebSearch20260209`
 
@@ -36527,7 +37804,7 @@ func main() {
 
 ### Beta Web Search Tool 20260318
 
-- `type BetaWebSearchTool20260318 struct{…}`
+- `type BetaWebSearchTool20260318`
 
   - `Type WebSearch20260318`
 
@@ -36630,7 +37907,7 @@ func main() {
 
 ### Beta Web Search Tool Request Error
 
-- `type BetaWebSearchToolRequestError struct{…}`
+- `type BetaWebSearchToolRequestError`
 
   - `Type WebSearchToolResultError`
 
@@ -36650,7 +37927,7 @@ func main() {
 
 ### Beta Web Search Tool Result Block
 
-- `type BetaWebSearchToolResultBlock struct{…}`
+- `type BetaWebSearchToolResultBlock`
 
   - `Type WebSearchToolResult`
 
@@ -36658,7 +37935,7 @@ func main() {
 
   - `Content BetaWebSearchToolResultBlockContentUnion`
 
-    - `type BetaWebSearchToolResultError struct{…}`
+    - `type BetaWebSearchToolResultError`
 
       - `Type WebSearchToolResultError`
 
@@ -36698,13 +37975,13 @@ func main() {
 
   - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -36714,7 +37991,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -36726,7 +38003,7 @@ func main() {
 
 - `type BetaWebSearchToolResultBlockContentUnion interface{…}`
 
-  - `type BetaWebSearchToolResultError struct{…}`
+  - `type BetaWebSearchToolResultError`
 
     - `Type WebSearchToolResultError`
 
@@ -36762,7 +38039,7 @@ func main() {
 
 ### Beta Web Search Tool Result Block Param
 
-- `type BetaWebSearchToolResultBlockParamResp struct{…}`
+- `type BetaWebSearchToolResultBlockParamResp`
 
   - `Type WebSearchToolResult`
 
@@ -36780,7 +38057,7 @@ func main() {
 
       - `PageAge string Optional`
 
-    - `type BetaWebSearchToolRequestError struct{…}`
+    - `type BetaWebSearchToolRequestError`
 
       - `Type WebSearchToolResultError`
 
@@ -36825,13 +38102,13 @@ func main() {
 
   - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-    - `type BetaDirectCaller struct{…}`
+    - `type BetaDirectCaller`
 
       Tool invocation directly from the model.
 
       - `Type Direct`
 
-    - `type BetaServerToolCaller struct{…}`
+    - `type BetaServerToolCaller`
 
       Tool invocation generated by a server-side tool.
 
@@ -36841,7 +38118,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `type BetaServerToolCaller20260120 struct{…}`
+    - `type BetaServerToolCaller20260120`
 
       - `Type CodeExecution20260120`
 
@@ -36865,7 +38142,7 @@ func main() {
 
     - `PageAge string Optional`
 
-  - `type BetaWebSearchToolRequestError struct{…}`
+  - `type BetaWebSearchToolRequestError`
 
     - `Type WebSearchToolResultError`
 
@@ -36885,7 +38162,7 @@ func main() {
 
 ### Beta Web Search Tool Result Error
 
-- `type BetaWebSearchToolResultError struct{…}`
+- `type BetaWebSearchToolResultError`
 
   - `Type WebSearchToolResultError`
 
@@ -37026,7 +38303,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           - `[]BetaContentBlockParamUnionResp`
 
-            - `type BetaTextBlockParamResp struct{…}`
+            - `type BetaTextBlockParamResp`
 
               - `Type Text`
 
@@ -37057,7 +38334,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Citations []BetaTextCitationParamUnionResp Optional`
 
-                - `type BetaCitationCharLocationParamResp struct{…}`
+                - `type BetaCitationCharLocationParamResp`
 
                   - `Type CharLocation`
 
@@ -37077,7 +38354,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minimum: 0
 
-                - `type BetaCitationPageLocationParamResp struct{…}`
+                - `type BetaCitationPageLocationParamResp`
 
                   - `Type PageLocation`
 
@@ -37097,7 +38374,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minimum: 1
 
-                - `type BetaCitationContentBlockLocationParamResp struct{…}`
+                - `type BetaCitationContentBlockLocationParamResp`
 
                   - `Type ContentBlockLocation`
 
@@ -37127,7 +38404,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minimum: 0
 
-                - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationWebSearchResultLocationParamResp`
 
                   - `Type WebSearchResultLocation`
 
@@ -37143,7 +38420,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     minLength: 1
 
-                - `type BetaCitationSearchResultLocationParamResp struct{…}`
+                - `type BetaCitationSearchResultLocationParamResp`
 
                   - `Type SearchResultLocation`
 
@@ -37177,13 +38454,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `Title string`
 
-            - `type BetaImageBlockParamResp struct{…}`
+            - `type BetaImageBlockParamResp`
 
               - `Type Image`
 
               - `Source BetaImageBlockParamSourceUnionResp`
 
-                - `type BetaBase64ImageSource struct{…}`
+                - `type BetaBase64ImageSource`
 
                   - `Type Base64`
 
@@ -37201,13 +38478,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-                - `type BetaURLImageSource struct{…}`
+                - `type BetaURLImageSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileImageSource struct{…}`
+                - `type BetaFileImageSource`
 
                   - `Type File`
 
@@ -37229,13 +38506,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-            - `type BetaRequestDocumentBlock struct{…}`
+            - `type BetaRequestDocumentBlock`
 
               - `Type Document`
 
               - `Source BetaRequestDocumentBlockSourceUnion`
 
-                - `type BetaBase64PDFSource struct{…}`
+                - `type BetaBase64PDFSource`
 
                   - `Type Base64`
 
@@ -37245,7 +38522,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `MediaType ApplicationPDF`
 
-                - `type BetaPlainTextSource struct{…}`
+                - `type BetaPlainTextSource`
 
                   - `Type Text`
 
@@ -37253,7 +38530,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `MediaType TextPlain`
 
-                - `type BetaContentBlockSource struct{…}`
+                - `type BetaContentBlockSource`
 
                   - `Type Content`
 
@@ -37263,17 +38540,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `[]BetaContentBlockSourceContentUnion`
 
-                      - `type BetaTextBlockParamResp struct{…}`
+                      - `type BetaTextBlockParamResp`
 
-                      - `type BetaImageBlockParamResp struct{…}`
+                      - `type BetaImageBlockParamResp`
 
-                - `type BetaURLPDFSource struct{…}`
+                - `type BetaURLPDFSource`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileDocumentSource struct{…}`
+                - `type BetaFileDocumentSource`
 
                   - `Type File`
 
@@ -37295,7 +38572,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 maxLength: 500, minLength: 1
 
-            - `type BetaSearchResultBlockParamResp struct{…}`
+            - `type BetaSearchResultBlockParamResp`
 
               - `Type SearchResult`
 
@@ -37323,7 +38600,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Citations BetaCitationsConfigParamResp Optional`
 
-            - `type BetaThinkingBlockParamResp struct{…}`
+            - `type BetaThinkingBlockParamResp`
 
               - `Type Thinking`
 
@@ -37337,7 +38614,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 The `thinking` text of this block as returned by the API.
 
-            - `type BetaRedactedThinkingBlockParamResp struct{…}`
+            - `type BetaRedactedThinkingBlockParamResp`
 
               - `Type RedactedThinking`
 
@@ -37345,7 +38622,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type BetaToolUseBlockParamResp struct{…}`
+            - `type BetaToolUseBlockParamResp`
 
               - `Type ToolUse`
 
@@ -37365,13 +38642,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
                   - `Type Direct`
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
@@ -37381,7 +38658,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
                   - `Type CodeExecution20260120`
 
@@ -37395,7 +38672,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaToolResultBlockParamResp struct{…}`
+            - `type BetaToolResultBlockParamResp`
 
               - `Type ToolResult`
 
@@ -37411,15 +38688,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `[]BetaToolResultBlockParamContentUnionResp`
 
-                  - `type BetaTextBlockParamResp struct{…}`
+                  - `type BetaTextBlockParamResp`
 
-                  - `type BetaImageBlockParamResp struct{…}`
+                  - `type BetaImageBlockParamResp`
 
-                  - `type BetaSearchResultBlockParamResp struct{…}`
+                  - `type BetaSearchResultBlockParamResp`
 
-                  - `type BetaRequestDocumentBlock struct{…}`
+                  - `type BetaRequestDocumentBlock`
 
-                  - `type BetaToolReferenceBlockParamResp struct{…}`
+                  - `type BetaToolReferenceBlockParamResp`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -37433,7 +38710,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type BetaBrowserStateBlockParamResp struct{…}`
+                  - `type BetaBrowserStateBlockParamResp`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -37483,7 +38760,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                       maxItems: 200, minItems: 1
 
-                      - `type BetaBrowserStateChangeTabOpened struct{…}`
+                      - `type BetaBrowserStateChangeTabOpened`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -37501,7 +38778,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+                      - `type BetaBrowserStateChangeDownloadStarted`
 
                         A file download that started during this call.
 
@@ -37519,7 +38796,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+                      - `type BetaBrowserStateChangeDownloadCompleted`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -37552,7 +38829,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           minimum: 0
 
-                      - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+                      - `type BetaBrowserStateChangeDownloadFailed`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -37584,7 +38861,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaServerToolUseBlockParamResp struct{…}`
+            - `type BetaServerToolUseBlockParamResp`
 
               - `Type ServerToolUse`
 
@@ -37618,17 +38895,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebSearchToolResultBlockParamResp struct{…}`
+            - `type BetaWebSearchToolResultBlockParamResp`
 
               - `Type WebSearchToolResult`
 
@@ -37646,7 +38923,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `PageAge string Optional`
 
-                - `type BetaWebSearchToolRequestError struct{…}`
+                - `type BetaWebSearchToolRequestError`
 
                   - `Type WebSearchToolResultError`
 
@@ -37674,23 +38951,23 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebFetchToolResultBlockParamResp struct{…}`
+            - `type BetaWebFetchToolResultBlockParamResp`
 
               - `Type WebFetchToolResult`
 
               - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
 
-                - `type BetaWebFetchToolResultErrorBlockParamResp struct{…}`
+                - `type BetaWebFetchToolResultErrorBlockParamResp`
 
                   - `Type WebFetchToolResultError`
 
@@ -37716,7 +38993,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-                - `type BetaWebFetchBlockParamResp struct{…}`
+                - `type BetaWebFetchBlockParamResp`
 
                   - `Type WebFetchResult`
 
@@ -37740,23 +39017,23 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
 
-                - `type BetaDirectCaller struct{…}`
+                - `type BetaDirectCaller`
 
                   Tool invocation directly from the model.
 
-                - `type BetaServerToolCaller struct{…}`
+                - `type BetaServerToolCaller`
 
                   Tool invocation generated by a server-side tool.
 
-                - `type BetaServerToolCaller20260120 struct{…}`
+                - `type BetaServerToolCaller20260120`
 
-            - `type BetaAdvisorToolResultBlockParamResp struct{…}`
+            - `type BetaAdvisorToolResultBlockParamResp`
 
               - `Type AdvisorToolResult`
 
               - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
 
-                - `type BetaAdvisorToolResultErrorParamResp struct{…}`
+                - `type BetaAdvisorToolResultErrorParamResp`
 
                   - `Type AdvisorToolResultError`
 
@@ -37776,7 +39053,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-                - `type BetaAdvisorResultBlockParamResp struct{…}`
+                - `type BetaAdvisorResultBlockParamResp`
 
                   - `Type AdvisorResult`
 
@@ -37784,7 +39061,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `StopReason string Optional`
 
-                - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
+                - `type BetaAdvisorRedactedResultBlockParamResp`
 
                   - `Type AdvisorRedactedResult`
 
@@ -37802,13 +39079,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaCodeExecutionToolResultBlockParamResp`
 
               - `Type CodeExecutionToolResult`
 
               - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaCodeExecutionToolResultErrorParamResp`
 
                   - `Type CodeExecutionToolResultError`
 
@@ -37822,7 +39099,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-                - `type BetaCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaCodeExecutionResultBlockParamResp`
 
                   - `Type CodeExecutionResult`
 
@@ -37838,7 +39115,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `Stdout string`
 
-                - `type BetaEncryptedCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaEncryptedCodeExecutionResultBlockParamResp`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -37864,13 +39141,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaBashCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaBashCodeExecutionToolResultBlockParamResp`
 
               - `Type BashCodeExecutionToolResult`
 
               - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaBashCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaBashCodeExecutionToolResultErrorParamResp`
 
                   - `Type BashCodeExecutionToolResultError`
 
@@ -37886,7 +39163,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-                - `type BetaBashCodeExecutionResultBlockParamResp struct{…}`
+                - `type BetaBashCodeExecutionResultBlockParamResp`
 
                   - `Type BashCodeExecutionResult`
 
@@ -37910,13 +39187,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}`
+            - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
 
               - `Type TextEditorCodeExecutionToolResult`
 
               - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
 
-                - `type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
 
                   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -37934,7 +39211,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionViewResult`
 
@@ -37954,13 +39231,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `TotalLines int64 Optional`
 
-                - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionCreateResult`
 
                   - `IsFileUpdate bool`
 
-                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}`
+                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
 
                   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -37982,13 +39259,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaToolSearchToolResultBlockParamResp struct{…}`
+            - `type BetaToolSearchToolResultBlockParamResp`
 
               - `Type ToolSearchToolResult`
 
               - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
 
-                - `type BetaToolSearchToolResultErrorParamResp struct{…}`
+                - `type BetaToolSearchToolResultErrorParamResp`
 
                   - `Type ToolSearchToolResultError`
 
@@ -38004,7 +39281,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaToolSearchToolSearchResultBlockParamResp struct{…}`
+                - `type BetaToolSearchToolSearchResultBlockParamResp`
 
                   - `Type ToolSearchToolSearchResult`
 
@@ -38028,7 +39305,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaMCPToolUseBlockParamResp struct{…}`
+            - `type BetaMCPToolUseBlockParamResp`
 
               - `Type MCPToolUse`
 
@@ -38048,7 +39325,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestMCPToolResultBlockParamResp struct{…}`
+            - `type BetaRequestMCPToolResultBlockParamResp`
 
               - `Type MCPToolResult`
 
@@ -38080,7 +39357,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `IsError bool Optional`
 
-            - `type BetaContainerUploadBlockParamResp struct{…}`
+            - `type BetaContainerUploadBlockParamResp`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -38093,7 +39370,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCompactionBlockParamResp struct{…}`
+            - `type BetaCompactionBlockParamResp`
 
               A compaction block containing summary of previous context.
 
@@ -38117,7 +39394,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `type BetaRequestToolAdditionBlock struct{…}`
+              - `Signature string Optional`
+
+                The block's signature as returned, to be sent back verbatim
+
+            - `type BetaRequestToolAdditionBlock`
 
               Mid-conversation directive to surface a declared tool.
 
@@ -38129,7 +39410,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Tool BetaRequestToolAdditionBlockToolUnion`
 
-                - `type BetaToolChangeToolReference struct{…}`
+                - `type BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
@@ -38142,7 +39423,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `type BetaToolChangeMCPToolReference struct{…}`
+                - `type BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -38153,7 +39434,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `ServerName string`
 
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
+                - `type BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -38165,7 +39446,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestToolRemovalBlock struct{…}`
+            - `type BetaRequestToolRemovalBlock`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -38177,19 +39458,19 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Tool BetaRequestToolRemovalBlockToolUnion`
 
-                - `type BetaToolChangeToolReference struct{…}`
+                - `type BetaToolChangeToolReference`
 
                   Reference to a single tool the caller declared directly in
                   `tools[]`. Does not accept the composed `{server}_{name}` form the
                   server assigns to MCP-resolved tools — use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `type BetaToolChangeMCPToolReference struct{…}`
+                - `type BetaToolChangeMCPToolReference`
 
                   Reference to a single MCP tool by its server and remote name — the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
+                - `type BetaToolChangeMCPToolsetReference`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -38197,7 +39478,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaFallbackBlockParamResp struct{…}`
+            - `type BetaFallbackBlockParamResp`
 
               A `fallback` block echoed back from a prior response.
 
@@ -38357,11 +39638,30 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
+      - `Compaction BetaCompactionConfig Optional`
+
+        Compact the whole conversation and return a signed `compaction` block,
+        alone, that a later request sends back first in `messages`, in place of
+        the messages it summarizes. There is no trigger and no pause flag: sending
+        the parameter compacts, and nothing is sampled after the block.
+
+        The summarization prompt is the server's own unless `instructions` are
+        given, which then replace it for this request; a value that is empty or
+        only whitespace counts as absent.
+
+        - `Type Summarize`
+
+        - `Instructions string Optional`
+
+          Replaces the server's default summarization prompt for this request. An empty or whitespace-only value counts as absent.
+
+          maxLength: 16384
+
       - `Container BetaMessageBatchNewParamsRequestParamsContainerUnion Optional`
 
         Container identifier for reuse across requests.
 
-        - `type BetaContainerParamsResp struct{…}`
+        - `type BetaContainerParamsResp`
 
           Container parameters with skills to be loaded.
 
@@ -38409,7 +39709,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           minItems: 0
 
-          - `type BetaClearToolUses20250919Edit struct{…}`
+          - `type BetaClearToolUses20250919Edit`
 
             - `Type ClearToolUses20250919`
 
@@ -38449,7 +39749,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Condition that triggers the context management strategy
 
-              - `type BetaInputTokensTrigger struct{…}`
+              - `type BetaInputTokensTrigger`
 
                 - `Type InputTokens`
 
@@ -38457,7 +39757,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 1
 
-              - `type BetaToolUsesTrigger struct{…}`
+              - `type BetaToolUsesTrigger`
 
                 - `Type ToolUses`
 
@@ -38465,7 +39765,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 1
 
-          - `type BetaClearThinking20251015Edit struct{…}`
+          - `type BetaClearThinking20251015Edit`
 
             - `Type ClearThinking20251015`
 
@@ -38473,7 +39773,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-              - `type BetaThinkingTurns struct{…}`
+              - `type BetaThinkingTurns`
 
                 - `Type ThinkingTurns`
 
@@ -38481,13 +39781,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 1
 
-              - `type BetaAllThinkingTurns struct{…}`
+              - `type BetaAllThinkingTurns`
 
                 - `Type All`
 
               - `All`
 
-          - `type BetaCompact20260112Edit struct{…}`
+          - `type BetaCompact20260112Edit`
 
             Automatically compact older context when reaching the configured trigger threshold.
 
@@ -38541,7 +39841,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `string`
 
-        - `type BetaFallbackCreditTokenParamResp struct{…}`
+        - `type BetaFallbackCreditTokenParamResp`
 
           Object form of `fallback_credit_token`: the token plus a redemption
           mode.
@@ -38635,7 +39935,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           - `Thinking BetaFallbackParamThinkingUnionResp Optional`
 
-            - `type BetaThinkingConfigEnabled struct{…}`
+            - `type BetaThinkingConfigEnabled`
 
               - `Type Enabled`
 
@@ -38677,11 +39977,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `const BetaThinkingConfigEnabledDisplayUpdates BetaThinkingConfigEnabledDisplay = "updates"`
 
-            - `type BetaThinkingConfigDisabled struct{…}`
+            - `type BetaThinkingConfigDisabled`
 
               - `Type Disabled`
 
-            - `type BetaThinkingConfigAdaptive struct{…}`
+            - `type BetaThinkingConfigAdaptive`
 
               - `Type Adaptive`
 
@@ -38803,17 +40103,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         See [extended thinking](../../../build-with-claude/extended-thinking.md) for details.
 
-        - `type BetaThinkingConfigEnabled struct{…}`
+        - `type BetaThinkingConfigEnabled`
 
-        - `type BetaThinkingConfigDisabled struct{…}`
+        - `type BetaThinkingConfigDisabled`
 
-        - `type BetaThinkingConfigAdaptive struct{…}`
+        - `type BetaThinkingConfigAdaptive`
 
       - `ToolChoice BetaToolChoiceUnion Optional`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `type BetaToolChoiceAuto struct{…}`
+        - `type BetaToolChoiceAuto`
 
           The model will automatically decide whether to use tools.
 
@@ -38825,7 +40125,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `type BetaToolChoiceAny struct{…}`
+        - `type BetaToolChoiceAny`
 
           The model will use any available tools.
 
@@ -38837,7 +40137,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceTool struct{…}`
+        - `type BetaToolChoiceTool`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -38853,7 +40153,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceNone struct{…}`
+        - `type BetaToolChoiceNone`
 
           The model will not be allowed to use tools.
 
@@ -38923,7 +40223,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         See our [guide](../../../agents-and-tools/tool-use/overview.md) for more details.
 
-        - `type BetaTool struct{…}`
+        - `type BetaTool`
 
           - `Type BetaToolType Optional`
 
@@ -38981,7 +40281,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolBash20241022 struct{…}`
+        - `type BetaToolBash20241022`
 
           - `Type Bash20241022`
 
@@ -39015,7 +40315,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolBash20250124 struct{…}`
+        - `type BetaToolBash20250124`
 
           - `Type Bash20250124`
 
@@ -39049,7 +40349,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20250522 struct{…}`
+        - `type BetaCodeExecutionTool20250522`
 
           - `Type CodeExecution20250522`
 
@@ -39081,7 +40381,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20250825 struct{…}`
+        - `type BetaCodeExecutionTool20250825`
 
           - `Type CodeExecution20250825`
 
@@ -39113,7 +40413,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20260120 struct{…}`
+        - `type BetaCodeExecutionTool20260120`
 
           Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -39147,7 +40447,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaCodeExecutionTool20260521 struct{…}`
+        - `type BetaCodeExecutionTool20260521`
 
           Code execution tool with REPL state persistence.
 
@@ -39181,7 +40481,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaBrowserToolset20260801 struct{…}`
+        - `type BetaBrowserToolset20260801`
 
           The browser toolset: a single `tools[]` entry (carrying no
           `name`) that declares the browser tool family. The model is served
@@ -39575,7 +40875,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type BetaToolComputerUse20241022 struct{…}`
+        - `type BetaToolComputerUse20241022`
 
           - `Type Computer20241022`
 
@@ -39627,7 +40927,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaMemoryTool20250818 struct{…}`
+        - `type BetaMemoryTool20250818`
 
           - `Type Memory20250818`
 
@@ -39661,7 +40961,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolComputerUse20250124 struct{…}`
+        - `type BetaToolComputerUse20250124`
 
           - `Type Computer20250124`
 
@@ -39713,7 +41013,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20241022 struct{…}`
+        - `type BetaToolTextEditor20241022`
 
           - `Type TextEditor20241022`
 
@@ -39747,7 +41047,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolComputerUse20251124 struct{…}`
+        - `type BetaToolComputerUse20251124`
 
           - `Type Computer20251124`
 
@@ -39803,7 +41103,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaComputerToolset20260801 struct{…}`
+        - `type BetaComputerToolset20260801`
 
           The computer toolset: a single `tools[]` entry (carrying no
           `name`) that declares the computer tool family. The model is
@@ -40033,7 +41333,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
-        - `type BetaToolTextEditor20250124 struct{…}`
+        - `type BetaToolTextEditor20250124`
 
           - `Type TextEditor20250124`
 
@@ -40067,7 +41367,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20250429 struct{…}`
+        - `type BetaToolTextEditor20250429`
 
           - `Type TextEditor20250429`
 
@@ -40101,7 +41401,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolTextEditor20250728 struct{…}`
+        - `type BetaToolTextEditor20250728`
 
           - `Type TextEditor20250728`
 
@@ -40141,7 +41441,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebSearchTool20250305 struct{…}`
+        - `type BetaWebSearchTool20250305`
 
           - `Type WebSearch20250305`
 
@@ -40217,7 +41517,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               maxLength: 255, minLength: 1
 
-        - `type BetaWebFetchTool20250910 struct{…}`
+        - `type BetaWebFetchTool20250910`
 
           - `Type WebFetch20250910`
 
@@ -40273,7 +41573,98 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebSearchTool20260209 struct{…}`
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+            - `ClientToolResults BetaWebFetchURLSourcesClientToolResultsUnion Optional`
+
+              Which client tools' results contribute fetchable URLs: "all", "none", or an only or except list of client tool names from tools[].
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+                - `Type All`
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+                - `Type None`
+
+              - `type BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+                - `Type Only`
+
+                - `Tools []BetaWebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+              - `type BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+                - `Type Except`
+
+                - `Tools []BetaWebFetchURLSourceToolReference`
+
+                  - `Type ToolReference`
+
+                  - `Name string`
+
+            - `ServerToolResults BetaWebFetchURLSourcesServerToolResultsUnion Optional`
+
+              Which server tools' results contribute fetchable URLs: "all", "none", or an only or except list of server tool names from tools[]; only web_search and web_fetch results ever contribute.
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+              - `type BetaWebFetchURLSourceOnly`
+
+                The tool filter variant under which only the named tools' results
+                contribute.
+
+              - `type BetaWebFetchURLSourceExcept`
+
+                The tool filter variant under which every result but the named
+                tools' contributes.
+
+            - `UserInput BetaWebFetchURLSourcesUserInputUnion Optional`
+
+              Whether URLs in user messages are fetchable: "all" or "none".
+
+              - `type BetaWebFetchURLSourceAll`
+
+                The `url_sources` variant under which a source contributes in
+                full: every result of the tool filter's source, or all user input.
+
+              - `type BetaWebFetchURLSourceNone`
+
+                The `url_sources` variant under which a source contributes nothing:
+                no result of the tool filter's source, or no user input.
+
+        - `type BetaWebSearchTool20260209`
 
           - `Type WebSearch20260209`
 
@@ -40323,7 +41714,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type BetaWebFetchTool20260209 struct{…}`
+        - `type BetaWebFetchTool20260209`
 
           - `Type WebFetch20260209`
 
@@ -40379,7 +41770,16 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaWebFetchTool20260309 struct{…}`
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
+        - `type BetaWebFetchTool20260309`
 
           Web fetch tool with use_cache parameter for bypassing cached content.
 
@@ -40437,11 +41837,20 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type BetaWebSearchTool20260318 struct{…}`
+        - `type BetaWebSearchTool20260318`
 
           - `Type WebSearch20260318`
 
@@ -40499,7 +41908,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Parameters for the user's location. Used to provide more relevant search results.
 
-        - `type BetaWebFetchTool20260318 struct{…}`
+        - `type BetaWebFetchTool20260318`
 
           - `Type WebFetch20260318`
 
@@ -40563,11 +41972,20 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
+          - `URLSources BetaWebFetchURLSources Optional`
+
+            Which sources contribute to the set of URLs web fetch may fetch.
+
+            Each key is a tagged variant: `user_input` is `all` or `none`; the
+            two tool filters are `all`, `none`, `only` (only the named tools'
+            results) or `except` (every result but the named tools'). A named tool
+            must be declared in this request's `tools[]`.
+
           - `UseCache bool Optional`
 
             Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-        - `type BetaAdvisorTool20260301 struct{…}`
+        - `type BetaAdvisorTool20260301`
 
           - `Type Advisor20260301`
 
@@ -40621,7 +42039,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolSearchToolBm25_20251119 struct{…}`
+        - `type BetaToolSearchToolBm25_20251119`
 
           - `Type BetaToolSearchToolBm25_20251119Type`
 
@@ -40657,7 +42075,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaToolSearchToolRegex20251119 struct{…}`
+        - `type BetaToolSearchToolRegex20251119`
 
           - `Type BetaToolSearchToolRegex20251119Type`
 
@@ -40693,7 +42111,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             When true, guarantees schema validation on tool names and inputs
 
-        - `type BetaMCPToolset struct{…}`
+        - `type BetaMCPToolset`
 
           Configuration for a group of tools from an MCP server.
 
@@ -40870,6 +42288,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `UserProfileID param.Field[string] Optional`
 
     Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -40882,7 +42302,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -41170,6 +42590,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41178,7 +42600,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -41466,6 +42888,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41474,7 +42898,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -41755,6 +43179,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41763,7 +43189,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 #### Returns
 
-- `type BetaMessageBatch struct{…}`
+- `type BetaMessageBatch`
 
   - `Type MessageBatch`
 
@@ -42041,6 +43467,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -42049,7 +43477,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 #### Returns
 
-- `type BetaDeletedMessageBatch struct{…}`
+- `type BetaDeletedMessageBatch`
 
   - `Type MessageBatchDeleted`
 
@@ -42219,6 +43647,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
 
+      - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
   - `WorkspaceID param.Field[string] Optional`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -42227,7 +43657,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 #### Returns
 
-- `type BetaMessageBatchIndividualResponse struct{…}`
+- `type BetaMessageBatchIndividualResponse`
 
   This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -42243,7 +43673,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-    - `type BetaMessageBatchSucceededResult struct{…}`
+    - `type BetaMessageBatchSucceededResult`
 
       - `Type Succeeded`
 
@@ -42332,7 +43762,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
           [{"type": "text", "text": "B)"}]
           ```
 
-          - `type BetaTextBlock struct{…}`
+          - `type BetaTextBlock`
 
             - `Type Text`
 
@@ -42344,7 +43774,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-              - `type BetaCitationCharLocation struct{…}`
+              - `type BetaCitationCharLocation`
 
                 - `Type CharLocation`
 
@@ -42366,7 +43796,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 0
 
-              - `type BetaCitationPageLocation struct{…}`
+              - `type BetaCitationPageLocation`
 
                 - `Type PageLocation`
 
@@ -42388,7 +43818,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 1
 
-              - `type BetaCitationContentBlockLocation struct{…}`
+              - `type BetaCitationContentBlockLocation`
 
                 - `Type ContentBlockLocation`
 
@@ -42420,7 +43850,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   minimum: 0
 
-              - `type BetaCitationsWebSearchResultLocation struct{…}`
+              - `type BetaCitationsWebSearchResultLocation`
 
                 - `Type WebSearchResultLocation`
 
@@ -42436,7 +43866,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `URL string`
 
-              - `type BetaCitationSearchResultLocation struct{…}`
+              - `type BetaCitationSearchResultLocation`
 
                 - `Type SearchResultLocation`
 
@@ -42476,7 +43906,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               minLength: 0
 
-          - `type BetaThinkingBlock struct{…}`
+          - `type BetaThinkingBlock`
 
             - `Type Thinking`
 
@@ -42494,7 +43924,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               The text of Claude's thinking process for this block.
 
-          - `type BetaRedactedThinkingBlock struct{…}`
+          - `type BetaRedactedThinkingBlock`
 
             - `Type RedactedThinking`
 
@@ -42508,7 +43938,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
-          - `type BetaToolUseBlock struct{…}`
+          - `type BetaToolUseBlock`
 
             - `Type ToolUse`
 
@@ -42526,13 +43956,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Caller BetaToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
                 - `Type Direct`
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
@@ -42542,7 +43972,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
                 - `Type CodeExecution20260120`
 
@@ -42556,7 +43986,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaServerToolUseBlock struct{…}`
+          - `type BetaServerToolUseBlock`
 
             - `Type ServerToolUse`
 
@@ -42588,17 +44018,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Caller BetaServerToolUseBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebSearchToolResultBlock struct{…}`
+          - `type BetaWebSearchToolResultBlock`
 
             - `Type WebSearchToolResult`
 
@@ -42606,7 +44036,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Content BetaWebSearchToolResultBlockContentUnion`
 
-              - `type BetaWebSearchToolResultError struct{…}`
+              - `type BetaWebSearchToolResultError`
 
                 - `Type WebSearchToolResultError`
 
@@ -42646,17 +44076,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Caller BetaWebSearchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaWebFetchToolResultBlock struct{…}`
+          - `type BetaWebFetchToolResultBlock`
 
             - `Type WebFetchToolResult`
 
@@ -42664,7 +44094,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Content BetaWebFetchToolResultBlockContentUnion`
 
-              - `type BetaWebFetchToolResultErrorBlock struct{…}`
+              - `type BetaWebFetchToolResultErrorBlock`
 
                 - `Type WebFetchToolResultError`
 
@@ -42692,7 +44122,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-              - `type BetaWebFetchBlock struct{…}`
+              - `type BetaWebFetchBlock`
 
                 - `Type WebFetchResult`
 
@@ -42714,7 +44144,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `Source BetaDocumentBlockSourceUnion`
 
-                    - `type BetaBase64PDFSource struct{…}`
+                    - `type BetaBase64PDFSource`
 
                       - `Type Base64`
 
@@ -42724,7 +44154,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                       - `MediaType ApplicationPDF`
 
-                    - `type BetaPlainTextSource struct{…}`
+                    - `type BetaPlainTextSource`
 
                       - `Type Text`
 
@@ -42750,17 +44180,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Caller BetaWebFetchToolResultBlockCallerUnion Optional`
 
-              - `type BetaDirectCaller struct{…}`
+              - `type BetaDirectCaller`
 
                 Tool invocation directly from the model.
 
-              - `type BetaServerToolCaller struct{…}`
+              - `type BetaServerToolCaller`
 
                 Tool invocation generated by a server-side tool.
 
-              - `type BetaServerToolCaller20260120 struct{…}`
+              - `type BetaServerToolCaller20260120`
 
-          - `type BetaAdvisorToolResultBlock struct{…}`
+          - `type BetaAdvisorToolResultBlock`
 
             - `Type AdvisorToolResult`
 
@@ -42768,7 +44198,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Content BetaAdvisorToolResultBlockContentUnion`
 
-              - `type BetaAdvisorToolResultError struct{…}`
+              - `type BetaAdvisorToolResultError`
 
                 - `Type AdvisorToolResultError`
 
@@ -42790,7 +44220,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
 
-              - `type BetaAdvisorResultBlock struct{…}`
+              - `type BetaAdvisorResultBlock`
 
                 - `Type AdvisorResult`
 
@@ -42802,7 +44232,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `Text string`
 
-              - `type BetaAdvisorRedactedResultBlock struct{…}`
+              - `type BetaAdvisorRedactedResultBlock`
 
                 - `Type AdvisorRedactedResult`
 
@@ -42820,7 +44250,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaCodeExecutionToolResultBlock struct{…}`
+          - `type BetaCodeExecutionToolResultBlock`
 
             - `Type CodeExecutionToolResult`
 
@@ -42828,7 +44258,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaCodeExecutionToolResultError struct{…}`
+              - `type BetaCodeExecutionToolResultError`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -42844,7 +44274,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-              - `type BetaCodeExecutionResultBlock struct{…}`
+              - `type BetaCodeExecutionResultBlock`
 
                 - `Type CodeExecutionResult`
 
@@ -42864,7 +44294,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `Stdout string`
 
-              - `type BetaEncryptedCodeExecutionResultBlock struct{…}`
+              - `type BetaEncryptedCodeExecutionResultBlock`
 
                 Code execution result with encrypted stdout for PFC + web_search results.
 
@@ -42890,7 +44320,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaBashCodeExecutionToolResultBlock struct{…}`
+          - `type BetaBashCodeExecutionToolResultBlock`
 
             - `Type BashCodeExecutionToolResult`
 
@@ -42898,7 +44328,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaBashCodeExecutionToolResultError struct{…}`
+              - `type BetaBashCodeExecutionToolResultError`
 
                 - `Type BashCodeExecutionToolResultError`
 
@@ -42916,7 +44346,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
 
-              - `type BetaBashCodeExecutionResultBlock struct{…}`
+              - `type BetaBashCodeExecutionResultBlock`
 
                 - `Type BashCodeExecutionResult`
 
@@ -42940,7 +44370,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaTextEditorCodeExecutionToolResultBlock struct{…}`
+          - `type BetaTextEditorCodeExecutionToolResultBlock`
 
             - `Type TextEditorCodeExecutionToolResult`
 
@@ -42948,7 +44378,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaTextEditorCodeExecutionToolResultError struct{…}`
+              - `type BetaTextEditorCodeExecutionToolResultError`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
@@ -42968,7 +44398,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `ErrorMessage string`
 
-              - `type BetaTextEditorCodeExecutionViewResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionViewResultBlock`
 
                 - `Type TextEditorCodeExecutionViewResult`
 
@@ -42990,7 +44420,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `TotalLines int64`
 
-              - `type BetaTextEditorCodeExecutionCreateResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionCreateResultBlock`
 
                 - `Type TextEditorCodeExecutionCreateResult`
 
@@ -42998,7 +44428,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `IsFileUpdate bool`
 
-              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock struct{…}`
+              - `type BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
                 - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -43018,7 +44448,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaToolSearchToolResultBlock struct{…}`
+          - `type BetaToolSearchToolResultBlock`
 
             - `Type ToolSearchToolResult`
 
@@ -43026,7 +44456,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Content BetaToolSearchToolResultBlockContentUnion`
 
-              - `type BetaToolSearchToolResultError struct{…}`
+              - `type BetaToolSearchToolResultError`
 
                 - `Type ToolSearchToolResultError`
 
@@ -43044,7 +44474,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `ErrorMessage string`
 
-              - `type BetaToolSearchToolSearchResultBlock struct{…}`
+              - `type BetaToolSearchToolSearchResultBlock`
 
                 - `Type ToolSearchToolSearchResult`
 
@@ -43064,7 +44494,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `type BetaMCPToolUseBlock struct{…}`
+          - `type BetaMCPToolUseBlock`
 
             - `Type MCPToolUse`
 
@@ -43084,7 +44514,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               The name of the MCP server
 
-          - `type BetaMCPToolResultBlock struct{…}`
+          - `type BetaMCPToolResultBlock`
 
             - `Type MCPToolResult`
 
@@ -43118,7 +44548,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-          - `type BetaContainerUploadBlock struct{…}`
+          - `type BetaContainerUploadBlock`
 
             Response model for a file uploaded to the container.
 
@@ -43128,7 +44558,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `FileID string`
 
-          - `type BetaCompactionBlock struct{…}`
+          - `type BetaCompactionBlock`
 
             A compaction block returned when autocompact is triggered.
 
@@ -43148,7 +44578,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-          - `type BetaFallbackBlock struct{…}`
+            - `Signature string Optional`
+
+              Signature over the summary, to be sent back with the block verbatim
+
+          - `type BetaFallbackBlock`
 
             Marks the point in `content` where one model's output gives way to the next.
 
@@ -43298,7 +44732,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             List of context management edits that were applied.
 
-            - `type BetaClearToolUses20250919EditResponse struct{…}`
+            - `type BetaClearToolUses20250919EditResponse`
 
               - `Type ClearToolUses20250919`
 
@@ -43318,7 +44752,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-            - `type BetaClearThinking20251015EditResponse struct{…}`
+            - `type BetaClearThinking20251015EditResponse`
 
               - `Type ClearThinking20251015`
 
@@ -43347,7 +44781,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-            - `type BetaCacheMissModelChanged struct{…}`
+            - `type BetaCacheMissModelChanged`
 
               - `Type ModelChanged`
 
@@ -43357,7 +44791,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissSystemChanged struct{…}`
+            - `type BetaCacheMissSystemChanged`
 
               - `Type SystemChanged`
 
@@ -43367,7 +44801,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissToolsChanged struct{…}`
+            - `type BetaCacheMissToolsChanged`
 
               - `Type ToolsChanged`
 
@@ -43377,7 +44811,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissMessagesChanged struct{…}`
+            - `type BetaCacheMissMessagesChanged`
 
               - `Type MessagesChanged`
 
@@ -43387,13 +44821,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
-            - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+            - `type BetaCacheMissPreviousMessageNotFound`
 
               - `Type PreviousMessageNotFound`
 
                 default: previous_message_not_found
 
-            - `type BetaCacheMissUnavailable struct{…}`
+            - `type BetaCacheMissUnavailable`
 
               - `Type Unavailable`
 
@@ -43591,7 +45025,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
               resulting shift is zero because there was nothing to move. `not_applied`:
               no reprice was applied; the arm's `reason` says why.
 
-              - `type BetaFallbackCreditRedeemed struct{…}`
+              - `type BetaFallbackCreditRedeemed`
 
                 The reprice was applied: the retry is billed as if the conversation
                 had been on the retry model all along.
@@ -43600,7 +45034,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   default: redeemed
 
-              - `type BetaFallbackCreditNotApplied struct{…}`
+              - `type BetaFallbackCreditNotApplied`
 
                 No reprice was applied; `reason` says why.
 
@@ -43672,7 +45106,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             A `compaction` entry reports the token usage of the compaction operation itself — the server-side request that summarizes the context being closed — NOT the size of the context that was compacted away, and its token counts can be much smaller than that closed context (for example, a compaction that closes a ~200k-token context can report only a few thousand tokens). Do not derive the context window size from a `compaction` entry, even when it is the last entry. A `compaction` entry's tokens are not included in the top-level `usage` fields. When an input-token trigger is in effect (the default — 150,000 tokens unless configured otherwise), each `compaction` entry closes a context that had reached at least that threshold, though the context can exceed it by the final iteration's output and tool results.
 
-            - `type BetaMessageIterationUsage struct{…}`
+            - `type BetaMessageIterationUsage`
 
               Token usage for a sampling iteration.
 
@@ -43716,7 +45150,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-            - `type BetaCompactionIterationUsage struct{…}`
+            - `type BetaCompactionIterationUsage`
 
               Token usage for a compaction iteration.
 
@@ -43754,7 +45188,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-            - `type BetaAdvisorMessageIterationUsage struct{…}`
+            - `type BetaAdvisorMessageIterationUsage`
 
               Token usage for an advisor sub-inference iteration.
 
@@ -43798,7 +45232,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-            - `type BetaFallbackMessageIterationUsage struct{…}`
+            - `type BetaFallbackMessageIterationUsage`
 
               Token usage for the fallback-model attempt of a server-side fallback request.
 
@@ -43911,61 +45345,103 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `const BetaUsageSpeedFast BetaUsageSpeed = "fast"`
 
-        - `InputTransformations []BetaThinkingDroppedInputTransformation Optional`
+        - `InputTransformations []BetaInputTransformationUnion Optional`
 
-          Changes the API made to the request's input before showing it to the model:
-          one entry per change, in request order. Today the only entry type is
-          `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text`
-          block from the request's `messages` that was removed from the prompt instead
-          of being shown to the model because it failed a binding check. More entry
-          types may be added over time; ignore types you do not recognize.
+          Changes the API made to the request's input before showing it to the model,
+          and blocks that failed a binding check but were left unchanged: one entry per
+          block, in request order. Two entry types today. `thinking_dropped` — a
+          `thinking`, `redacted_thinking` or `connector_text` block from the request's
+          `messages` that was removed from the prompt instead of being shown to the
+          model because it failed a binding check. `thinking_mismatch_allowed` — a
+          `thinking` or `redacted_thinking` block that failed the conversation check
+          (the conversation before it differs from the one it was created in, or it
+          carries no record of one on a model that requires it) and was shown to the
+          model all the same, because that check is not enforced for this request.
+          More entry types may be added over time; ignore types you do not recognize.
 
           Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
           every such response from a model that supports extended thinking, as `[]`
-          when nothing was changed; without the beta, blocks are removed all the same
-          but nothing is reported. Removed blocks contribute nothing to
-          `usage.input_tokens`. When streaming, the array is final in `message_start`;
-          the final `message_delta` event carries it only when a server-side model
-          fallback happened mid-stream, in which case it holds the serving model's
-          entries and replaces the one in `message_start`.
+          when there is no entry to report; without the beta, blocks are removed or
+          left in place all the same but nothing is reported. Removed blocks contribute
+          nothing to `usage.input_tokens`; blocks left in place count as sent. When
+          streaming, the array is final in `message_start`; the final `message_delta`
+          event carries it only when a server-side model fallback happened mid-stream,
+          in which case it holds the serving model's entries and replaces the one in
+          `message_start`.
 
-          - `Type ThinkingDropped`
+          - `type BetaThinkingDroppedInputTransformation`
 
-            Always `thinking_dropped` for this entry type.
+            - `Type ThinkingDropped`
 
-            default: thinking_dropped
+              Always `thinking_dropped` for this entry type.
 
-          - `Path string`
+              default: thinking_dropped
 
-            Where the removed block was in your request, as `messages.{i}.content.{j}`:
-            `i` indexes the `messages` array you sent and `j` that message's `content`
-            array — the same form error messages use.
+            - `Path string`
 
-          - `Reason BetaThinkingDroppedInputTransformationReason`
+              Where the removed block was in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
 
-            Which binding check removed the block: `model_binding_mismatch` — it was
-            created by a model whose reasoning the requested model may not read;
-            `prefix_binding_mismatch` — the conversation before it differs from the
-            conversation it was created in (the rest of that turn's consecutive thinking
-            blocks are removed with it, each with this reason);
-            `organization_binding_mismatch` — it was created under a different
-            organization (an Anthropic organization, AWS account or Google Cloud project)
-            and this organization is not one of its additional organizations;
-            `end_user_binding_mismatch` — it was created for a different end user, or
-            was removed by the consumer-organization binding. A block that would fail
-            several checks reports one reason, in this order of precedence:
-            `organization_binding_mismatch`, `end_user_binding_mismatch`,
-            `model_binding_mismatch`, `prefix_binding_mismatch`.
+            - `Reason BetaThinkingDroppedInputTransformationReason`
 
-            - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
+              Which binding check removed the block: `model_binding_mismatch` — it was
+              created by a model whose reasoning the requested model may not read;
+              `prefix_binding_mismatch` — the conversation before it differs from the
+              conversation it was created in (the rest of that turn's consecutive thinking
+              blocks are removed with it, each with this reason);
+              `organization_binding_mismatch` — it was created under a different
+              organization (an Anthropic organization, AWS account or Google Cloud project)
+              and this organization is not one of its additional organizations;
+              `end_user_binding_mismatch` — it was created for a different end user, or
+              was removed by the consumer-organization binding. A block that would fail
+              several checks reports one reason, in this order of precedence:
+              `organization_binding_mismatch`, `end_user_binding_mismatch`,
+              `model_binding_mismatch`, `prefix_binding_mismatch`.
 
-            - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonModelBindingMismatch BetaThinkingDroppedInputTransformationReason = "model_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonPrefixBindingMismatch BetaThinkingDroppedInputTransformationReason = "prefix_binding_mismatch"`
 
-            - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+              - `const BetaThinkingDroppedInputTransformationReasonOrganizationBindingMismatch BetaThinkingDroppedInputTransformationReason = "organization_binding_mismatch"`
 
-    - `type BetaMessageBatchErroredResult struct{…}`
+              - `const BetaThinkingDroppedInputTransformationReasonEndUserBindingMismatch BetaThinkingDroppedInputTransformationReason = "end_user_binding_mismatch"`
+
+          - `type BetaThinkingMismatchAllowedInputTransformation`
+
+            - `Type ThinkingMismatchAllowed`
+
+              Always `thinking_mismatch_allowed` for this entry type.
+
+              default: thinking_mismatch_allowed
+
+            - `Path string`
+
+              Where the block is in your request, as `messages.{i}.content.{j}`:
+              `i` indexes the `messages` array you sent and `j` that message's `content`
+              array — the same form error messages use.
+
+            - `Reason BetaThinkingMismatchAllowedInputTransformationReason`
+
+              Which binding check the block failed; the block was shown to the model all
+              the same. Always `prefix_binding_mismatch` today — the conversation before
+              the block differs from the conversation it was created in, or the block
+              carries no record of one on a model that requires it. Were the check
+              enforced for this request, the block would have been removed or the request
+              rejected (`thinking.block_binding.prefix_mismatch_behavior`). A removal also
+              takes the rest of that turn's consecutive thinking blocks, whereas here each
+              block is checked on its own, so `thinking_mismatch_allowed` entries are a
+              lower bound on what enforcement would remove.
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonModelBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "model_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonPrefixBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "prefix_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonOrganizationBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "organization_binding_mismatch"`
+
+              - `const BetaThinkingMismatchAllowedInputTransformationReasonEndUserBindingMismatch BetaThinkingMismatchAllowedInputTransformationReason = "end_user_binding_mismatch"`
+
+    - `type BetaMessageBatchErroredResult`
 
       - `Type Errored`
 
@@ -43979,7 +45455,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `Error BetaErrorUnion`
 
-          - `type BetaInvalidRequestError struct{…}`
+          - `type BetaInvalidRequestError`
 
             - `Type InvalidRequestError`
 
@@ -43989,7 +45465,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Invalid request
 
-          - `type BetaAuthenticationError struct{…}`
+          - `type BetaAuthenticationError`
 
             - `Type AuthenticationError`
 
@@ -43999,7 +45475,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Authentication error
 
-          - `type BetaBillingError struct{…}`
+          - `type BetaBillingError`
 
             - `Type BillingError`
 
@@ -44009,7 +45485,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Billing error
 
-          - `type BetaPermissionError struct{…}`
+          - `type BetaPermissionError`
 
             - `Type PermissionError`
 
@@ -44019,7 +45495,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Permission denied
 
-          - `type BetaNotFoundError struct{…}`
+          - `type BetaNotFoundError`
 
             - `Type NotFoundError`
 
@@ -44029,7 +45505,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Not found
 
-          - `type BetaRateLimitError struct{…}`
+          - `type BetaRateLimitError`
 
             - `Type RateLimitError`
 
@@ -44039,7 +45515,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Rate limited
 
-          - `type BetaGatewayTimeoutError struct{…}`
+          - `type BetaGatewayTimeoutError`
 
             - `Type TimeoutError`
 
@@ -44049,7 +45525,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Request timeout
 
-          - `type BetaAPIError struct{…}`
+          - `type BetaAPIError`
 
             - `Type APIError`
 
@@ -44059,7 +45535,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Internal server error
 
-          - `type BetaOverloadedError struct{…}`
+          - `type BetaOverloadedError`
 
             - `Type OverloadedError`
 
@@ -44071,13 +45547,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `RequestID string`
 
-    - `type BetaMessageBatchCanceledResult struct{…}`
+    - `type BetaMessageBatchCanceledResult`
 
       - `Type Canceled`
 
         default: canceled
 
-    - `type BetaMessageBatchExpiredResult struct{…}`
+    - `type BetaMessageBatchExpiredResult`
 
       - `Type Expired`
 

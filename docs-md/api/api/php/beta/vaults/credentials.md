@@ -39,7 +39,7 @@ Create Credential
 
 ### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -153,7 +153,7 @@ List Credentials
 
 ### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -258,7 +258,7 @@ Get Credential
 
 ### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -368,7 +368,7 @@ Update Credential
 
 ### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -480,7 +480,7 @@ Delete Credential
 
 ### Returns
 
-- `ManagedAgentsDeletedCredential`
+- `class ManagedAgentsDeletedCredential`
 
   - `Type type`
 
@@ -542,7 +542,7 @@ Archive Credential
 
 ### Returns
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -640,7 +640,7 @@ Validate Credential
 
 ### Returns
 
-- `ManagedAgentsCredentialValidation`
+- `class ManagedAgentsCredentialValidation`
 
   - `Type type`
 
@@ -730,7 +730,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Credential
 
-- `ManagedAgentsCredential`
+- `class ManagedAgentsCredential`
 
   - `Type type`
 
@@ -768,13 +768,13 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Credential Networking Params
 
-- `ManagedAgentsCredentialNetworkingParams`
+- `class ManagedAgentsCredentialNetworkingParams`
 
-  - `ManagedAgentsUnrestrictedCredentialNetworkingParams`
+  - `class ManagedAgentsUnrestrictedCredentialNetworkingParams`
 
     - `Type type`
 
-  - `ManagedAgentsLimitedCredentialNetworkingParams`
+  - `class ManagedAgentsLimitedCredentialNetworkingParams`
 
     - `Type type`
 
@@ -784,7 +784,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Credential Validation
 
-- `ManagedAgentsCredentialValidation`
+- `class ManagedAgentsCredentialValidation`
 
   - `Type type`
 
@@ -818,7 +818,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Credential Validation Status
 
-- `ManagedAgentsCredentialValidationStatus`
+- `enum ManagedAgentsCredentialValidationStatus`
 
   - `"valid"`
 
@@ -828,7 +828,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Deleted Credential
 
-- `ManagedAgentsDeletedCredential`
+- `class ManagedAgentsDeletedCredential`
 
   - `Type type`
 
@@ -838,7 +838,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Environment Variable Auth Response
 
-- `ManagedAgentsEnvironmentVariableAuthResponse`
+- `class ManagedAgentsEnvironmentVariableAuthResponse`
 
   - `Type type`
 
@@ -856,7 +856,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Environment Variable Create Params
 
-- `ManagedAgentsEnvironmentVariableCreateParams`
+- `class ManagedAgentsEnvironmentVariableCreateParams`
 
   - `Type type`
 
@@ -878,7 +878,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Environment Variable Update Params
 
-- `ManagedAgentsEnvironmentVariableUpdateParams`
+- `class ManagedAgentsEnvironmentVariableUpdateParams`
 
   - `Type type`
 
@@ -896,7 +896,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Injection Location Params
 
-- `ManagedAgentsInjectionLocationParams`
+- `class ManagedAgentsInjectionLocationParams`
 
   - `?bool body`
 
@@ -908,7 +908,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Injection Location Response
 
-- `ManagedAgentsInjectionLocationResponse`
+- `class ManagedAgentsInjectionLocationResponse`
 
   - `bool body`
 
@@ -920,7 +920,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Injection Location Update Params
 
-- `ManagedAgentsInjectionLocationUpdateParams`
+- `class ManagedAgentsInjectionLocationUpdateParams`
 
   - `?bool body`
 
@@ -932,7 +932,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Limited Credential Networking Params
 
-- `ManagedAgentsLimitedCredentialNetworkingParams`
+- `class ManagedAgentsLimitedCredentialNetworkingParams`
 
   - `Type type`
 
@@ -942,7 +942,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Limited Credential Networking Response
 
-- `ManagedAgentsLimitedCredentialNetworkingResponse`
+- `class ManagedAgentsLimitedCredentialNetworkingResponse`
 
   - `Type type`
 
@@ -952,7 +952,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
-- `ManagedAgentsMCPOAuthAuthResponse`
+- `class ManagedAgentsMCPOAuthAuthResponse`
 
   - `Type type`
 
@@ -970,7 +970,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents MCP OAuth Create Params
 
-- `ManagedAgentsMCPOAuthCreateParams`
+- `class ManagedAgentsMCPOAuthCreateParams`
 
   - `Type type`
 
@@ -992,7 +992,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents MCP OAuth Refresh Params
 
-- `ManagedAgentsMCPOAuthRefreshParams`
+- `class ManagedAgentsMCPOAuthRefreshParams`
 
   - `string clientID`
 
@@ -1018,7 +1018,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents MCP OAuth Refresh Response
 
-- `ManagedAgentsMCPOAuthRefreshResponse`
+- `class ManagedAgentsMCPOAuthRefreshResponse`
 
   - `string clientID`
 
@@ -1040,7 +1040,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents MCP OAuth Refresh Update Params
 
-- `ManagedAgentsMCPOAuthRefreshUpdateParams`
+- `class ManagedAgentsMCPOAuthRefreshUpdateParams`
 
   - `?string refreshToken`
 
@@ -1054,7 +1054,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents MCP OAuth Update Params
 
-- `ManagedAgentsMCPOAuthUpdateParams`
+- `class ManagedAgentsMCPOAuthUpdateParams`
 
   - `Type type`
 
@@ -1072,7 +1072,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents MCP Probe
 
-- `ManagedAgentsMCPProbe`
+- `class ManagedAgentsMCPProbe`
 
   - `?ManagedAgentsRefreshHTTPResponse httpResponse`
 
@@ -1084,7 +1084,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Refresh HTTP Response
 
-- `ManagedAgentsRefreshHTTPResponse`
+- `class ManagedAgentsRefreshHTTPResponse`
 
   - `string body`
 
@@ -1104,7 +1104,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Refresh Object
 
-- `ManagedAgentsRefreshObject`
+- `class ManagedAgentsRefreshObject`
 
   - `?ManagedAgentsRefreshHTTPResponse httpResponse`
 
@@ -1116,7 +1116,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Static Bearer Auth Response
 
-- `ManagedAgentsStaticBearerAuthResponse`
+- `class ManagedAgentsStaticBearerAuthResponse`
 
   - `Type type`
 
@@ -1126,7 +1126,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Static Bearer Create Params
 
-- `ManagedAgentsStaticBearerCreateParams`
+- `class ManagedAgentsStaticBearerCreateParams`
 
   - `Type type`
 
@@ -1140,7 +1140,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Static Bearer Update Params
 
-- `ManagedAgentsStaticBearerUpdateParams`
+- `class ManagedAgentsStaticBearerUpdateParams`
 
   - `Type type`
 
@@ -1150,7 +1150,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Token Endpoint Auth Basic Param
 
-- `ManagedAgentsTokenEndpointAuthBasicParam`
+- `class ManagedAgentsTokenEndpointAuthBasicParam`
 
   - `Type type`
 
@@ -1160,13 +1160,13 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Token Endpoint Auth Basic Response
 
-- `ManagedAgentsTokenEndpointAuthBasicResponse`
+- `class ManagedAgentsTokenEndpointAuthBasicResponse`
 
   - `Type type`
 
 ### Beta Managed Agents Token Endpoint Auth Basic Update Param
 
-- `ManagedAgentsTokenEndpointAuthBasicUpdateParam`
+- `class ManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
   - `Type type`
 
@@ -1176,19 +1176,19 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Token Endpoint Auth None Param
 
-- `ManagedAgentsTokenEndpointAuthNoneParam`
+- `class ManagedAgentsTokenEndpointAuthNoneParam`
 
   - `Type type`
 
 ### Beta Managed Agents Token Endpoint Auth None Response
 
-- `ManagedAgentsTokenEndpointAuthNoneResponse`
+- `class ManagedAgentsTokenEndpointAuthNoneResponse`
 
   - `Type type`
 
 ### Beta Managed Agents Token Endpoint Auth Post Param
 
-- `ManagedAgentsTokenEndpointAuthPostParam`
+- `class ManagedAgentsTokenEndpointAuthPostParam`
 
   - `Type type`
 
@@ -1198,13 +1198,13 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Token Endpoint Auth Post Response
 
-- `ManagedAgentsTokenEndpointAuthPostResponse`
+- `class ManagedAgentsTokenEndpointAuthPostResponse`
 
   - `Type type`
 
 ### Beta Managed Agents Token Endpoint Auth Post Update Param
 
-- `ManagedAgentsTokenEndpointAuthPostUpdateParam`
+- `class ManagedAgentsTokenEndpointAuthPostUpdateParam`
 
   - `Type type`
 
@@ -1214,13 +1214,13 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ### Beta Managed Agents Unrestricted Credential Networking Params
 
-- `ManagedAgentsUnrestrictedCredentialNetworkingParams`
+- `class ManagedAgentsUnrestrictedCredentialNetworkingParams`
 
   - `Type type`
 
 ### Beta Managed Agents Unrestricted Credential Networking Response
 
-- `ManagedAgentsUnrestrictedCredentialNetworkingResponse`
+- `class ManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
   - `Type type`
 

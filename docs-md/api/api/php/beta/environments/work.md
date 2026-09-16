@@ -31,7 +31,7 @@ Retrieve detailed information about a specific work item.
 
 ### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -161,7 +161,7 @@ Long poll for work items in the queue.
 
 ### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -282,7 +282,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 ### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -409,7 +409,7 @@ Record a heartbeat for a work item to maintain the lease.
 
 ### Returns
 
-- `SelfHostedWorkHeartbeatResponse`
+- `class SelfHostedWorkHeartbeatResponse`
 
   - `"work_heartbeat" type`
 
@@ -497,7 +497,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 ### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -626,7 +626,7 @@ List work items in an environment.
 
 ### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -757,7 +757,7 @@ Update work item metadata with merge semantics.
 
 ### Returns
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -876,7 +876,7 @@ Get statistics about the work queue for an environment.
 
 ### Returns
 
-- `SelfHostedWorkQueueStats`
+- `class SelfHostedWorkQueueStats`
 
   - `"work_queue_stats" type`
 
@@ -932,7 +932,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ### Beta Self Hosted Work
 
-- `SelfHostedWork`
+- `class SelfHostedWork`
 
   - `"work" type`
 
@@ -988,7 +988,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ### Beta Self Hosted Work Heartbeat Response
 
-- `SelfHostedWorkHeartbeatResponse`
+- `class SelfHostedWorkHeartbeatResponse`
 
   - `"work_heartbeat" type`
 
@@ -1012,7 +1012,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ### Beta Self Hosted Work List Response
 
-- `SelfHostedWorkListResponse`
+- `class SelfHostedWorkListResponse`
 
   - `list<SelfHostedWork> data`
 
@@ -1024,7 +1024,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ### Beta Self Hosted Work Queue Stats
 
-- `SelfHostedWorkQueueStats`
+- `class SelfHostedWorkQueueStats`
 
   - `"work_queue_stats" type`
 
@@ -1048,7 +1048,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ### Beta Self Hosted Work Stop Request
 
-- `SelfHostedWorkStopRequest`
+- `class SelfHostedWorkStopRequest`
 
   - `?bool force`
 
@@ -1056,7 +1056,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ### Beta Self Hosted Work Update Request
 
-- `SelfHostedWorkUpdateRequest`
+- `class SelfHostedWorkUpdateRequest`
 
   - `array<string,string> metadata`
 
@@ -1064,7 +1064,7 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ### Beta Session Work Data
 
-- `SessionWorkData`
+- `class SessionWorkData`
 
   - `"session" type`
 
