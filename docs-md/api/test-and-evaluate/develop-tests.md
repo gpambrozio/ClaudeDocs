@@ -414,7 +414,7 @@ function contentText($message): string
 {
     $text = '';
     foreach ($message->content as $block) {
-        if ($block instanceof TextBlock) {
+        if ($block instanceof \Anthropic\Messages\TextBlock) {
             $text .= $block->text;
         }
     }
@@ -1060,7 +1060,7 @@ function contentText($message): string
 {
     $text = '';
     foreach ($message->content as $block) {
-        if ($block instanceof TextBlock) {
+        if ($block instanceof \Anthropic\Messages\TextBlock) {
             $text .= $block->text;
         }
     }
@@ -1537,7 +1537,7 @@ function contentText($message): string
 {
     $text = '';
     foreach ($message->content as $block) {
-        if ($block instanceof TextBlock) {
+        if ($block instanceof \Anthropic\Messages\TextBlock) {
             $text .= $block->text;
         }
     }
@@ -2069,7 +2069,7 @@ function contentText($message): string
 {
     $text = '';
     foreach ($message->content as $block) {
-        if ($block instanceof TextBlock) {
+        if ($block instanceof \Anthropic\Messages\TextBlock) {
             $text .= $block->text;
         }
     }
@@ -2697,7 +2697,7 @@ function contentText($message): string
 {
     $text = '';
     foreach ($message->content as $block) {
-        if ($block instanceof TextBlock) {
+        if ($block instanceof \Anthropic\Messages\TextBlock) {
             $text .= $block->text;
         }
     }
@@ -3186,7 +3186,7 @@ function contentText($message): string
 {
     $text = '';
     foreach ($message->content as $block) {
-        if ($block instanceof TextBlock) {
+        if ($block instanceof \Anthropic\Messages\TextBlock) {
             $text .= $block->text;
         }
     }

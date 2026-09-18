@@ -80,7 +80,7 @@ Because batches can take longer than 5 minutes to process, consider using the [1
 The Batches API offers significant cost savings. All usage is charged at 50% of the standard API prices.
 
 | Model                                                                                                                                 | Batch input  | Batch output  |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------- |
+| :------------------------------------------------------------------------------------------------------------------------------------ | :----------- | :------------ |
 | Claude Fable 5.1                                                                                                                      | $5 / MTok    | $25 / MTok    |
 | Claude Mythos 5.1 ([limited availability](https://anthropic.com/glasswing))                                                           | $5 / MTok    | $25 / MTok    |
 | Claude Fable 5                                                                                                                        | $5 / MTok    | $25 / MTok    |
@@ -740,11 +740,12 @@ client = anthropic.Anthropic()
 for result in client.messages.batches.results(
     "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d",
 ):
-    match result.result.type:
+    outcome = result.result
+    match outcome.type:
         case "succeeded":
             print(f"Success! {result.custom_id}")
         case "errored":
-            if result.result.error.error.type == "invalid_request_error":
+            if outcome.error.error.type == "invalid_request_error":
                 # Request body must be fixed before re-sending request
                 print(f"Validation error {result.custom_id}")
             else:
@@ -852,39 +853,43 @@ import com.anthropic.models.messages.batches.MessageBatchIndividualResponse;
       streamResponse
         .stream()
         .forEach(result -> {
-          if (result.result().isSucceeded()) {
-            System.out.println("Success! " + result.customId());
-          } else if (result.result().isErrored()) {
-            if (result.result().asErrored().error().error().isInvalidRequestError()) {
-              // Request body must be fixed before re-sending request
-              System.out.println("Validation error: " + result.customId());
-            } else {
-              // Request can be retried directly
-              System.out.println("Server error: " + result.customId());
+          switch (result.result().type().value()) {
+            case SUCCEEDED -> System.out.println("Success! " + result.customId());
+            case ERRORED -> {
+              if (result.result().asErrored().error().error().isInvalidRequestError()) {
+                // Request body must be fixed before re-sending request
+                System.out.println("Validation error: " + result.customId());
+              } else {
+                // Request can be retried directly
+                System.out.println("Server error: " + result.customId());
+              }
             }
-          } else if (result.result().isExpired()) {
-            System.out.println("Request expired: " + result.customId());
+            case EXPIRED -> System.out.println("Request expired: " + result.customId());
           }
         });
     }
 ```
 
 ```php PHP
+use Anthropic\Messages\Batches\MessageBatchErroredResult;
+use Anthropic\Messages\Batches\MessageBatchExpiredResult;
+use Anthropic\Messages\Batches\MessageBatchSucceededResult;
+
 $client = new Client();
 
 foreach ($client->messages->batches->resultsStream(messageBatchID: 'msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d') as $result) {
-    switch ($result->result->type) {
-        case "succeeded":
+    switch (true) {
+        case $result->result instanceof MessageBatchSucceededResult:
             echo "Success! {$result->customID}\n";
             break;
-        case "errored":
+        case $result->result instanceof MessageBatchErroredResult:
             if ($result->result->error->error->type === "invalid_request_error") {
                 echo "Validation error: {$result->customID}\n";
             } else {
                 echo "Server error: {$result->customID}\n";
             }
             break;
-        case "expired":
+        case $result->result instanceof MessageBatchExpiredResult:
             echo "Request expired: {$result->customID}\n";
             break;
     }
@@ -895,16 +900,17 @@ foreach ($client->messages->batches->resultsStream(messageBatchID: 'msgbatch_01H
 client = Anthropic::Client.new
 
 client.messages.batches.results_streaming("msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d").each do |result|
-  case result.result.type
-  when :succeeded
+  outcome = result.result
+  case outcome
+  when Anthropic::Models::Messages::MessageBatchSucceededResult
     puts "Success! #{result.custom_id}"
-  when :errored
-    if result.result.error.type == :invalid_request
+  when Anthropic::Models::Messages::MessageBatchErroredResult
+    if outcome.error.type == :invalid_request
       puts "Validation error: #{result.custom_id}"
     else
       puts "Server error: #{result.custom_id}"
     end
-  when :expired
+  when Anthropic::Models::Messages::MessageBatchExpiredResult
     puts "Request expired: #{result.custom_id}"
   end
 end

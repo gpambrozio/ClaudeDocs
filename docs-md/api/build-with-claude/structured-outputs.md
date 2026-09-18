@@ -2517,10 +2517,13 @@ const response = await client.messages.create({
 // Claude may call the tool first (tool_use) or respond with JSON (text)
 console.log("Stop reason:", response.stop_reason);
 for (const block of response.content) {
-  if (block.type === "tool_use") {
-    console.log(`Tool call: ${block.name}(${JSON.stringify(block.input)})`);
-  } else if (block.type === "text") {
-    console.log("Response:", block.text);
+  switch (block.type) {
+    case "tool_use":
+      console.log(`Tool call: ${block.name}(${JSON.stringify(block.input)})`);
+      break;
+    case "text":
+      console.log("Response:", block.text);
+      break;
   }
 }
 ```

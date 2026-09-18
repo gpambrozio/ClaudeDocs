@@ -654,12 +654,13 @@ go get github.com/anthropics/anthropic-sdk-go/mcp
 
 **Java**
 
-The helpers live in the separate `anthropic-java-mcp` artifact, which requires Java 17 or later (the core SDK supports Java 8):
+The helpers live in the separate `anthropic-java-mcp` artifact, which requires Java 17 or later (the base SDK supports Java 8). Add it alongside the base `anthropic-java` dependency:
 
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java-mcp:2.60.0")
+implementation("com.anthropic:anthropic-java:2.63.0")
+implementation("com.anthropic:anthropic-java-mcp:2.63.0")
 ```
 
 **Maven**
@@ -667,8 +668,13 @@ implementation("com.anthropic:anthropic-java-mcp:2.60.0")
 ```xml
 <dependency>
     <groupId>com.anthropic</groupId>
+    <artifactId>anthropic-java</artifactId>
+    <version>2.63.0</version>
+</dependency>
+<dependency>
+    <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-mcp</artifactId>
-    <version>2.60.0</version>
+    <version>2.63.0</version>
 </dependency>
 ```
 

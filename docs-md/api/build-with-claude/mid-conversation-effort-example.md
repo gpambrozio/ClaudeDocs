@@ -246,7 +246,6 @@ static final Path JOURNAL_PATH = Path.of(Optional.ofNullable(System.getenv("ORCH
 
 ```php PHP
 use Anthropic\Client;
-use Anthropic\Messages\TextBlock;
 use Anthropic\Messages\ToolUseBlock;
 
 $client = new Client();
@@ -1404,15 +1403,15 @@ end
 # so reshape each block to the request schema before echoing it back.
 def assistant_content_param(content)
   content.map do |block|
-    case block.type
-    when :tool_use
+    case block
+    when Anthropic::Models::ToolUseBlock
       input = parse_tool_input(block.input)
       {type: "tool_use", id: block.id, name: block.name, input: input}
-    when :text
+    when Anthropic::Models::TextBlock
       {type: "text", text: block.text}
-    when :thinking
+    when Anthropic::Models::ThinkingBlock
       {type: "thinking", thinking: block.thinking, signature: block.signature}
-    when :redacted_thinking then {type: "redacted_thinking", data: block.data}
+    when Anthropic::Models::RedactedThinkingBlock then {type: "redacted_thinking", data: block.data}
     else
       block.to_h
     end
@@ -1458,13 +1457,14 @@ def run_subagent(model: str, prompt: str) -> str:
         for block in response.content:
             if block.type != "tool_use":
                 continue
-            if block.name == "report_findings":
-                report = json.dumps(block.input, indent=2)
-                output, is_error = "Findings recorded.", False
-            elif block.name == "bash":
-                output, is_error = handle_bash_block(block)
-            else:
-                output, is_error = f"unknown tool: {block.name}", True
+            match block.name:
+                case "report_findings":
+                    report = json.dumps(block.input, indent=2)
+                    output, is_error = "Findings recorded.", False
+                case "bash":
+                    output, is_error = handle_bash_block(block)
+                case _:
+                    output, is_error = f"unknown tool: {block.name}", True
             tool_results.append(
                 {
                     "type": "tool_result",
@@ -1524,15 +1524,18 @@ async function runSubagent(model: string, prompt: string): Promise<string> {
       }
       let output: string;
       let isError: boolean;
-      if (block.name === "report_findings") {
-        report = JSON.stringify(block.input, null, 2);
-        output = "Findings recorded.";
-        isError = false;
-      } else if (block.name === "bash") {
-        ({ output, isError } = await handleBashBlock(block));
-      } else {
-        output = `unknown tool: ${block.name}`;
-        isError = true;
+      switch (block.name) {
+        case "report_findings":
+          report = JSON.stringify(block.input, null, 2);
+          output = "Findings recorded.";
+          isError = false;
+          break;
+        case "bash":
+          ({ output, isError } = await handleBashBlock(block));
+          break;
+        default:
+          output = `unknown tool: ${block.name}`;
+          isError = true;
       }
       toolResults.push({
         type: "tool_result",
@@ -1821,7 +1824,7 @@ function drainMessageStream(iterable $events): array
         }
     }
     foreach ($jsonBuffers as $index => $buffer) {
-        if ($buffer !== '' && $blocks[$index] instanceof ToolUseBlock) {
+        if ($buffer !== '' && $blocks[$index] instanceof \Anthropic\Messages\ToolUseBlock) {
             $decoded = json_decode($buffer, true);
             $blocks[$index] = $blocks[$index]->withInput(is_array($decoded) ? $decoded : []);
         }
@@ -1858,7 +1861,7 @@ function runSubagent(Client $client, string $model, string $prompt): string
         if ($stopReason !== 'tool_use') {
             $text = '';
             foreach ($content as $block) {
-                if ($block instanceof TextBlock) {
+                if ($block instanceof \Anthropic\Messages\TextBlock) {
                     $text .= $block->text;
                 }
             }
@@ -1870,7 +1873,7 @@ function runSubagent(Client $client, string $model, string $prompt): string
         $report = null;
         $toolResults = [];
         foreach ($content as $block) {
-            if (!$block instanceof ToolUseBlock) {
+            if (!$block instanceof \Anthropic\Messages\ToolUseBlock) {
                 continue;
             }
             if ($block->name === 'report_findings') {
@@ -3003,12 +3006,13 @@ class ModeAgent:
             for block in response.content:
                 if block.type != "tool_use":
                     continue
-                if block.name == "Workflow":
-                    output, is_error = run_workflow(self.model, block.input.get("subtasks", []))
-                elif block.name == "bash":
-                    output, is_error = handle_bash_block(block)
-                else:
-                    output, is_error = f"unknown tool: {block.name}", True
+                match block.name:
+                    case "Workflow":
+                        output, is_error = run_workflow(self.model, block.input.get("subtasks", []))
+                    case "bash":
+                        output, is_error = handle_bash_block(block)
+                    case _:
+                        output, is_error = f"unknown tool: {block.name}", True
                 tool_results.append(
                     {
                         "type": "tool_result",
@@ -3121,14 +3125,18 @@ class ModeAgent {
         }
         let output: string;
         let isError: boolean;
-        if (block.name === "Workflow") {
-          const input = block.input as { subtasks?: unknown };
-          ({ output, isError } = await runWorkflow(this.model, input.subtasks ?? []));
-        } else if (block.name === "bash") {
-          ({ output, isError } = await handleBashBlock(block));
-        } else {
-          output = `unknown tool: ${block.name}`;
-          isError = true;
+        switch (block.name) {
+          case "Workflow": {
+            const input = block.input as { subtasks?: unknown };
+            ({ output, isError } = await runWorkflow(this.model, input.subtasks ?? []));
+            break;
+          }
+          case "bash":
+            ({ output, isError } = await handleBashBlock(block));
+            break;
+          default:
+            output = `unknown tool: ${block.name}`;
+            isError = true;
         }
         toolResults.push({
           type: "tool_result",
@@ -3621,7 +3629,7 @@ class ModeAgent
             if ($stopReason !== 'tool_use') {
                 $text = '';
                 foreach ($content as $block) {
-                    if ($block instanceof TextBlock) {
+                    if ($block instanceof \Anthropic\Messages\TextBlock) {
                         $text .= $block->text;
                     }
                 }
@@ -3635,7 +3643,7 @@ class ModeAgent
 
             $toolResults = [];
             foreach ($content as $block) {
-                if (!$block instanceof ToolUseBlock) {
+                if (!$block instanceof \Anthropic\Messages\ToolUseBlock) {
                     continue;
                 }
                 if ($block->name === 'Workflow') {

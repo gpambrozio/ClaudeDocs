@@ -46,20 +46,20 @@ go get github.com/anthropics/anthropic-sdk-go
 **Java**
 
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java:2.60.0")
-implementation("com.anthropic:anthropic-java-vertex:2.60.0")
+implementation("com.anthropic:anthropic-java:2.63.0")
+implementation("com.anthropic:anthropic-java-vertex:2.63.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.60.0</version>
+    <version>2.63.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.60.0</version>
+    <version>2.63.0</version>
 </dependency>
 ```
 

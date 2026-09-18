@@ -283,10 +283,11 @@ response = client.messages.create(
 
 # The response contains summarized thinking blocks and text blocks
 for block in response.content:
-    if block.type == "thinking":
-        print(f"\nThinking summary: {block.thinking}")
-    elif block.type == "text":
-        print(f"\nResponse: {block.text}")
+    match block.type:
+        case "thinking":
+            print(f"\nThinking summary: {block.thinking}")
+        case "text":
+            print(f"\nResponse: {block.text}")
 ```
 
 Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](build-with-claude/thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](claude_api_primer.md#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
@@ -513,12 +514,13 @@ response = client.beta.messages.create(
 )
 
 for block in response.content:
-    if block.type == "thinking":
-        print(f"Thinking: {block.thinking}")
-    elif block.type == "tool_use":
-        print(f"Tool call: {block.name}({block.input})")
-    elif block.type == "text":
-        print(f"Response: {block.text}")
+    match block.type:
+        case "thinking":
+            print(f"Thinking: {block.thinking}")
+        case "tool_use":
+            print(f"Tool call: {block.name}({block.input})")
+        case "text":
+            print(f"Response: {block.text}")
 ```
 
 With interleaved thinking and ONLY with interleaved thinking (not regular manual extended thinking), the `budget_tokens` can exceed the `max_tokens` parameter, as `budget_tokens` in this case represents the total budget across all thinking blocks within one assistant turn.

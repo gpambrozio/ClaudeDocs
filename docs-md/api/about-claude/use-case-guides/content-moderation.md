@@ -770,7 +770,7 @@ $moderateMessage = function (string $message, array $unsafeCategories) use ($cli
 
     // Parse the JSON response from Claude. The SDK decodes each content block
     // into its concrete class, so find the TextBlock before reading the text.
-    $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+    $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
         ?? throw new RuntimeException('Expected a text block in the response.');
     $assessment = json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);
 
@@ -1319,7 +1319,7 @@ $assessRiskLevel = function (string $message, array $unsafeCategories) use ($cli
 
     // Parse the JSON response from Claude. The SDK decodes each content block
     // into its concrete class, so find the TextBlock before reading the text.
-    $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+    $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
         ?? throw new RuntimeException('Expected a text block in the response.');
     $assessment = json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);
 
@@ -2053,7 +2053,7 @@ $moderateMessageWithDefinitions = function (string $message, array $unsafeCatego
 
     // Parse the JSON response from Claude. The SDK decodes each content block
     // into its concrete class, so find the TextBlock before reading the text.
-    $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+    $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
         ?? throw new RuntimeException('Expected a text block in the response.');
     $assessment = json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);
 
@@ -2623,7 +2623,7 @@ $batchModerateMessages = function (array $messages, array $unsafeCategories) use
 
     // Parse the JSON response from Claude. The SDK decodes each content block
     // into its concrete class, so find the TextBlock before reading the text.
-    $textBlock = array_find($response->content, fn ($block) => $block instanceof TextBlock)
+    $textBlock = array_find($response->content, fn ($block) => $block instanceof \Anthropic\Messages\TextBlock)
         ?? throw new RuntimeException('Expected a text block in the response.');
 
     return json_decode($textBlock->text, associative: true, flags: JSON_THROW_ON_ERROR);

@@ -426,7 +426,7 @@ java {
 }
 
 dependencies {
-    implementation("com.anthropic:anthropic-java:2.60.0")
+    implementation("com.anthropic:anthropic-java:2.63.0")
 }
 
 application {
@@ -452,7 +452,7 @@ Save this as `pom.xml`:
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>2.60.0</version>
+      <version>2.63.0</version>
     </dependency>
   </dependencies>
 </project>
