@@ -913,13 +913,11 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/eve
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
+  -H "content-type: application/json"
 ```
 
 ```bash CLI
-ant beta:sessions:events list --session-id "$SESSION_ID" \
-  --format jsonl --transform '{type,processed_at}'
+ant beta:sessions:events list --session-id "$SESSION_ID" --format jsonl
 ```
 
 ```python Python
@@ -982,14 +980,13 @@ Pass a `types` filter to return only specific event types:
 curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true&types[]=agent.tool_use&types[]=agent.tool_result" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
+  -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
 ```bash CLI
 ant beta:sessions:events list --session-id "$SESSION_ID" \
   --type agent.tool_use --type agent.tool_result \
-  --format jsonl --transform '{type,processed_at}'
+  --format jsonl
 ```
 
 ```python Python

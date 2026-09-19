@@ -35,7 +35,7 @@ Once your agent works as expected:
 2. Reference them in your code when [creating sessions](sessions.md):
 
 ```bash cURL
-session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -44,7 +44,7 @@ session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     "agent": "agent_01J8XkN5uT3vHpLqRfWdY2",
     "environment_id": "env_01K2mPsT7hNwR4jXuLvCqD8",
     "title": "My first session"
-  }')
+  }'
 ```
 
 ```bash CLI

@@ -49,7 +49,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --transform content --format yaml <<'YAML'
+  --format yaml <<'YAML'
 model: claude-sonnet-4-6
 max_tokens: 16000
 thinking:

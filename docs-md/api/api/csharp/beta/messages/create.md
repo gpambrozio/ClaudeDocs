@@ -1214,7 +1214,7 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
             - `class BetaToolChangeMcpToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
               - `JsonElement Type = "mcp_tool_reference"`
@@ -1256,7 +1256,7 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
             - `class BetaToolChangeMcpToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
             - `class BetaToolChangeMcpToolsetReference`

@@ -17,7 +17,7 @@ A session is an agent instance within an environment. Each session references an
 A session requires an `agent` ID and an `environment` ID. Agents are versioned resources; passing in the `agent` ID as a string creates the session with the latest agent version.
 
 ```bash cURL
-session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -28,8 +28,6 @@ session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   "environment_id": "$ENVIRONMENT_ID"
 }
 EOF
-)
-SESSION_ID=$(jq -r '.id' <<< "$session")
 ```
 
 ```bash CLI
@@ -96,7 +94,7 @@ session = client.beta.sessions.create(
 To pin a session to a specific agent version, pass an object. This lets you control exactly which version runs and stage rollouts of new versions independently.
 
 ```bash cURL
-pinned_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -107,8 +105,6 @@ pinned_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   "environment_id": "$ENVIRONMENT_ID"
 }
 EOF
-)
-PINNED_SESSION_ID=$(jq -r '.id' <<< "$pinned_session")
 ```
 
 ```bash CLI
@@ -478,7 +474,7 @@ In the response, the `agent` object reflects the configuration the session runs 
 The following example starts a session that overrides the model and clears the system prompt:
 
 ```bash cURL
-override_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -494,17 +490,12 @@ override_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   "environment_id": "$ENVIRONMENT_ID"
 }
 EOF
-)
-jq '.agent | {id, version, model, system}' <<< "$override_session"
-OVERRIDE_SESSION_ID=$(jq -r '.id' <<< "$override_session")
 ```
 
 ```bash CLI
 # The response's `agent` is the resolved snapshot: each override replaces that
 # field for this session only, and the agent resource keeps its id and version.
-ant beta:sessions create \
-  --transform 'agent.{id,version,model,system}' \
-  --format json <<YAML
+ant beta:sessions create <<YAML
 agent:
   type: agent_with_overrides
   id: $AGENT_ID
@@ -827,7 +818,7 @@ See [Session budgets](budgets.md) for how enforcement works, what counts toward 
 If your agent uses MCP tools that require authentication, pass `vault_ids` at session creation to reference a vault containing stored OAuth credentials. Anthropic manages token refresh on your behalf. See [Authenticate with vaults](vaults.md) for how to create vaults and register credentials.
 
 ```bash cURL
-vault_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -839,8 +830,6 @@ vault_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   "vault_ids": ["$VAULT_ID"]
 }
 EOF
-)
-VAULT_SESSION_ID=$(jq -r '.id' <<< "$vault_session")
 ```
 
 ```bash CLI

@@ -23,13 +23,12 @@ When creating a deployment, you pass the [session configurations](sessions.md) r
 * In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 
 ```bash cURL
-DEPLOYMENT_ID=$(
-  curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -d @- <<EOF | jq -er '.id'
+curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d @- <<EOF
 {
   "name": "Weekly compliance scan",
   "agent": "$AGENT_ID",
@@ -44,11 +43,10 @@ DEPLOYMENT_ID=$(
   }
 }
 EOF
-)
 ```
 
 ```bash CLI
-DEPLOYMENT_ID=$(ant beta:deployments create <<YAML | jq -er '.id'
+ant beta:deployments create <<YAML
 name: Weekly compliance scan
 agent: $AGENT_ID
 environment_id: $ENVIRONMENT_ID
@@ -62,7 +60,6 @@ schedule:
   expression: "0 20 * * 5"
   timezone: America/New_York
 YAML
-)
 ```
 
 ```python Python

@@ -117,6 +117,24 @@ Any `EncryptionContext` condition must allow the all-zeros value plus the compar
 
 To attach the key to an additional workspace, add that workspace's compartment ID to the condition with `kms:PutKeyPolicy` before attaching.
 
+You can set up the key in the Claude Console or through the Admin API, with the same result.
+
+**Claude Console**
+
+**Register the key with Anthropic**
+
+In the Claude Console, open **Settings > Encryption keys** and click **Add key**. Enter a display name, choose **AWS KMS**, and click **Continue**. Paste the key ARN into **KMS key ARN**, and click **Add**.
+
+**Validate the key**
+
+On the **Encryption keys** page, click **Verify** next to the key. **Connected** appears when the check passes. If it fails, a message gives the reason.
+
+**Attach the key to a workspace**
+
+Open **Settings > Workspaces**, choose the workspace, and open its **Security** tab. Under **Encryption key**, select the key, click **Save**, and confirm. Attaching a key can't be undone. For a workspace that already receives requests, the key can take [up to a day to take effect](cmek.md#how-it-works).
+
+**API**
+
 **Register the key with Anthropic**
 
 Create an external key configuration through the Admin API.

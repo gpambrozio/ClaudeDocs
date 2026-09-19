@@ -17,7 +17,7 @@ A session budget is an optional hard spend ceiling you set when you [create a se
 Pass the optional `budget` field when you create the session:
 
 ```bash cURL
-session=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -32,17 +32,14 @@ session=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
   }
 }
 EOF
-)
-SESSION_ID=$(jq -r '.id' <<< "$session")
 ```
 
 ```bash CLI
 # Keep the amount quoted so it is sent as a string, not a number.
-SESSION_ID=$(ant beta:sessions create \
+ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
-  --budget '{type: limit, max_list_cost: {amount: "125", currency: USD}}' \
-  --transform id --raw-output)
+  --budget '{type: limit, max_list_cost: {amount: "125", currency: USD}}'
 ```
 
 ```python Python

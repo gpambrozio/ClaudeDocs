@@ -1,4 +1,4 @@
-# `list --format json` emits one JSON object per item.
+# Memory
 
 ---
 title: Using agent memory
@@ -29,21 +29,18 @@ Every change to a memory creates an immutable **memory version**, giving you an 
 Give the store a `name` and a `description`. The description is passed to the agent, telling it what the store contains.
 
 ```bash cURL
-store=$(curl -s https://api.anthropic.com/v1/memory_stores \
+curl -s https://api.anthropic.com/v1/memory_stores \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
-  -d '{"name": "User Preferences", "description": "Per-user preferences and project context."}')
-store_id=$(jq -r '.id' <<< "$store")
-echo "$store_id"  # memstore_01Hx...
+  -d '{"name": "User Preferences", "description": "Per-user preferences and project context."}'
 ```
 
 ```bash CLI
-store_id=$(ant beta:memory-stores create \
+ant beta:memory-stores create \
   --name "User Preferences" \
-  --description "Per-user preferences and project context." \
-  --transform id --raw-output)
+  --description "Per-user preferences and project context."
 ```
 
 ```python Python
@@ -392,7 +389,7 @@ List the memories in a store. Results are returned in a stable, server-defined o
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories?path_prefix=/" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: agent-memory-2026-07-22" | jq -r '.data[] | "\(.type)  \(.path)"'
+  -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
 ```bash CLI
@@ -486,7 +483,7 @@ Fetching an individual memory returns the full content.
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: agent-memory-2026-07-22" | jq -r '.content'
+  -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
 ```bash CLI
@@ -556,24 +553,19 @@ See the [Retrieve a memory reference](../api/beta/memory_stores/memories/retriev
 `memories.create` creates a memory at a given `path`. Create does not overwrite; to change an existing memory, use [`memories.update`](memory.md#update-a-memory).
 
 ```bash cURL
-mem=$(curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
+curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
-  -d '{"path": "/preferences/formatting.md", "content": "Always use tabs, not spaces."}')
-mem_id=$(jq -r '.id' <<< "$mem")
-mem_sha=$(jq -r '.content_sha256' <<< "$mem")
+  -d '{"path": "/preferences/formatting.md", "content": "Always use tabs, not spaces."}'
 ```
 
 ```bash CLI
-mem=$(ant beta:memory-stores:memories create \
+ant beta:memory-stores:memories create \
   --memory-store-id "$store_id" \
   --path "/preferences/formatting.md" \
-  --content "Always use tabs, not spaces." \
-  --format json)
-mem_id=$(jq -r '.id' <<< "$mem")
-mem_sha=$(jq -r '.content_sha256' <<< "$mem")
+  --content "Always use tabs, not spaces."
 ```
 
 ```python Python
@@ -904,22 +896,17 @@ Past memory versions might be deleted after 30 days. To preserve memory history 
 List version history for a store, newest first. The example filters to a single memory's history:
 
 ```bash cURL
-versions=$(curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions?memory_id=$mem_id" \
+curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions?memory_id=$mem_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: agent-memory-2026-07-22")
-jq -r '.data[] | "\(.id): \(.operation)"' <<< "$versions"
-version_id=$(jq -r '.data[1].id' <<< "$versions")
+  -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
 ```bash CLI
-versions=$(ant beta:memory-stores:memory-versions list \
+ant beta:memory-stores:memory-versions list \
   --memory-store-id "$store_id" \
   --memory-id "$mem_id" \
-  --format json)
-# `list --format json` emits one JSON object per item.
-jq -r '"\(.id): \(.operation)"' <<< "$versions"
-version_id=$(jq -rs '.[1].id' <<< "$versions")
+  --format json
 ```
 
 ```python Python
@@ -1179,7 +1166,7 @@ List stores in the workspace. Archived stores are excluded by default; pass `inc
 curl -s "https://api.anthropic.com/v1/memory_stores?include_archived=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: agent-memory-2026-07-22" | jq '.data[] | {id, name, archived_at}'
+  -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
 ```bash CLI

@@ -2412,7 +2412,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `interface BetaToolChangeMCPToolReference`
 
-                Reference to a single MCP tool by its server and remote name — the
+                Reference to a single MCP tool by its server and remote name; the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
 
                 - `type: "mcp_tool_reference"`
@@ -2454,7 +2454,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `interface BetaToolChangeMCPToolReference`
 
-                Reference to a single MCP tool by its server and remote name — the
+                Reference to a single MCP tool by its server and remote name; the
                 same `server_name`/`name` pair `mcp_tool_use` carries.
 
               - `interface BetaToolChangeMCPToolsetReference`
@@ -8685,7 +8685,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `interface BetaToolChangeMCPToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
               - `type: "mcp_tool_reference"`
@@ -8727,7 +8727,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `interface BetaToolChangeMCPToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
             - `interface BetaToolChangeMCPToolsetReference`
@@ -12625,7 +12625,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `interface BetaToolChangeMCPToolReference`
 
-                  Reference to a single MCP tool by its server and remote name — the
+                  Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
                   - `type: "mcp_tool_reference"`
@@ -12667,7 +12667,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `interface BetaToolChangeMCPToolReference`
 
-                  Reference to a single MCP tool by its server and remote name — the
+                  Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
                 - `interface BetaToolChangeMCPToolsetReference`

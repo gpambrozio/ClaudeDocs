@@ -28,8 +28,9 @@ These work on every provider:
 * [Checkpoints](checkpointing.md), [sandboxing](sandboxing.md), and [Workflows](workflows.md)
 * [OpenTelemetry metrics](monitoring-usage.md) and the [managed settings file](managed-settings.md#delivery-mechanisms)
 
-Three of these have provider-specific differences:
+These have provider-specific differences:
 
+* **CLAUDE.md memory**: `CLAUDE.md` files load on every provider. Reading [`AGENTS.md` files](memory.md#agents-md) as project instructions also requires a session that [fetches feature flags](env-vars.md#features-that-need-feature-flag-fetching)
 * **MCP servers**: [connectors from claude.ai](mcp.md#use-mcp-servers-from-claude-ai) load only when your claude.ai subscription is the active authentication method. [Tool search](mcp.md#configure-tool-search) is off by default when `ANTHROPIC_BASE_URL` points to a non-first-party host, and isn't supported on Google Cloud's Agent Platform models earlier than the Claude 4.5 generation or on Microsoft Foundry [deployments hosted on Azure](../api/build-with-claude/claude-in-microsoft-foundry.md#hosting-options)
 * **Subagents**: the built-in [Explore subagent](sub-agents.md#built-in-subagents) caps its inherited model at Opus on the Claude API, and inherits the main conversation's model directly on any other provider, including Claude Platform on AWS
 * **[Commands](commands.md#all-commands)**:
@@ -211,6 +212,8 @@ Organization-level controls and usage visibility.
 <span id="fn5" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>5</sup> Requires Claude Code v2.1.224 or later on macOS and Linux, including Linux inside WSL 2. On native Windows, requires Claude Code v2.1.234 or later. With API key authentication, messaging is same-machine only. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, messaging is same-machine only and requires Claude Code v2.1.248 or later. Claude can find your [cloud sessions](claude-code-on-the-web.md) and your sessions on other machines only from a session that is connected to [Remote Control](remote-control.md). To connect, you need a claude.ai sign-in and the other [Remote Control requirements](remote-control.md#requirements). See [Message sessions on other machines](cross-session-messaging.md#message-sessions-on-other-machines).
 
 If you authenticate through an [LLM gateway](llm-gateway.md), feature availability matches the underlying provider the gateway forwards to, except for the features Claude Code itself turns off. Whenever `ANTHROPIC_BASE_URL` points at a host other than `api.anthropic.com`, Claude Code turns off features such as [Remote Control](remote-control.md#requirements) and [server-managed settings](server-managed-settings.md#platform-availability), whatever the gateway forwards. Some Anthropic-only features such as the [Advisor](advisor.md) work only if the gateway forwards requests intact to the Anthropic API.
+
+For how the requests Claude Code sends differ between an Amazon Bedrock- or Agent Platform-format gateway, an `ANTHROPIC_BASE_URL` gateway, and a Claude apps gateway sign-in, see [client behavior by connection method](llm-gateway-protocol.md#how-the-connection-method-changes-client-behavior).
 
 ### Summary by provider
 

@@ -21,24 +21,21 @@ Vaults and credentials are workspace-scoped, meaning any API key with workspace 
 A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
 
 ```bash cURL
-vault_id=$(curl --fail-with-body -sS https://api.anthropic.com/v1/vaults \
+curl --fail-with-body -sS https://api.anthropic.com/v1/vaults \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<'EOF' | jq -r '.id'
+  --data @- <<'EOF'
 {
   "display_name": "Alice",
   "metadata": {"external_user_id": "usr_abc123"}
 }
 EOF
-)
-echo "$vault_id"  # "vlt_01ABC..."
 ```
 
 ```bash CLI
-VAULT_ID=$(ant beta:vaults create --transform id --raw-output < alice.vault.yaml)
-echo "$VAULT_ID"  # "vlt_01ABC..."
+ant beta:vaults create < alice.vault.yaml
 ```
 
 ```yaml
@@ -145,12 +142,12 @@ The `refresh.token_endpoint_auth.type` field indicates how to authenticate the r
 * `client_secret_post`: client secret in the POST body
 
 ```bash cURL
-credential_id=$(curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
+curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<'EOF' | jq -r '.id'
+  --data @- <<'EOF'
 {
   "display_name": "Alice's Slack",
   "auth": {
@@ -168,14 +165,12 @@ credential_id=$(curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$
   }
 }
 EOF
-)
 ```
 
 ```bash CLI
-CREDENTIAL_ID=$(ant beta:vaults:credentials create \
+ant beta:vaults:credentials create \
   --vault-id "$VAULT_ID" \
-  --display-name "Alice's Slack" \
-  --transform id --raw-output <<'YAML'
+  --display-name "Alice's Slack" <<'YAML'
 auth:
   type: mcp_oauth
   mcp_server_url: https://mcp.slack.com/mcp
@@ -190,7 +185,6 @@ auth:
       type: client_secret_post
       client_secret: abc123...
 YAML
-)
 ```
 
 ```python Python
@@ -363,7 +357,7 @@ Set `refresh.token_endpoint` to the token endpoint of the OAuth flow that issued
 Use `static_bearer` when the MCP server accepts a fixed bearer token (API key, personal access token, or similar). No refresh flow is needed.
 
 ```bash cURL
-curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
+curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -492,12 +486,12 @@ Limiting domains is strongly recommended for security purposes, and prevents you
 The optional `injection_location` field scopes where the secret is substituted; the full semantics follow the example.
 
 ```bash cURL
-curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
+curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<'EOF' | jq '.auth.injection_location'
+  --data @- <<'EOF'
 {
   "auth": {
     "type": "environment_variable",
@@ -515,9 +509,7 @@ EOF
 ```
 
 ```bash CLI
-ant beta:vaults:credentials create \
-  --vault-id "$VAULT_ID" \
-  --transform 'auth.injection_location' --format json <<'YAML'
+ant beta:vaults:credentials create --vault-id "$VAULT_ID" <<'YAML'
 display_name: Notion API key for sandbox
 auth:
   type: environment_variable
@@ -722,29 +714,27 @@ Constraints:
 Pass `vault_ids` when creating a session:
 
 ```bash cURL
-session_id=$(curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
+curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<EOF | jq -r '.id'
+  --data @- <<EOF
 {
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "vault_ids": ["$vault_id"],
+  "agent": "$AGENT_ID",
+  "environment_id": "$ENVIRONMENT_ID",
+  "vault_ids": ["$VAULT_ID"],
   "title": "Alice's Slack digest"
 }
 EOF
-)
 ```
 
 ```bash CLI
-SESSION_ID=$(ant beta:sessions create \
+ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
   --vault-id "$VAULT_ID" \
-  --title "Alice's Slack digest" \
-  --transform id --raw-output)
+  --title "Alice's Slack digest"
 ```
 
 ```python Python
@@ -828,7 +818,7 @@ Secret values, `display_name`, and (on environment variable credentials) `inject
 
 ```bash cURL
 curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id" \
+  "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -989,7 +979,7 @@ The top-level `status` tells you what to do next:
 
 ```bash cURL
 curl --fail-with-body -sS -X POST \
-  "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id/mcp_oauth_validate?beta=true" \
+  "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mcp_oauth_validate?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01"
@@ -998,8 +988,7 @@ curl --fail-with-body -sS -X POST \
 ```bash CLI
 ant beta:vaults:credentials mcp-oauth-validate \
   --vault-id "$VAULT_ID" \
-  --credential-id "$CREDENTIAL_ID" \
-  --transform status --raw-output  # "valid", "invalid", or "unknown"
+  --credential-id "$CREDENTIAL_ID"
 ```
 
 ```python Python

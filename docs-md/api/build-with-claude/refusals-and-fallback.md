@@ -30,7 +30,7 @@ curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
     "max_tokens": 1024,
     "fallbacks": "default",
     "messages": [{"role": "user", "content": "Hello, Claude"}]
-  }' | jq -r '.model'
+  }'
 ```
 
 ```bash CLI
@@ -39,8 +39,7 @@ ant beta:messages create \
   --max-tokens 1024 \
   --message '{"role":"user","content":"Hello, Claude"}' \
   --fallbacks default \
-  --beta server-side-fallback-2026-07-01 \
-  --transform model --raw-output
+  --beta server-side-fallback-2026-07-01
 ```
 
 ```python Python
@@ -495,7 +494,7 @@ curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
     "max_tokens": 1024,
     "fallbacks": [{"model": "claude-opus-4-8"}],
     "messages": [{"role": "user", "content": "Hello, Claude"}]
-  }' | jq -r '.model'
+  }'
 ```
 
 ```bash CLI
@@ -504,8 +503,7 @@ ant beta:messages create \
   --max-tokens 1024 \
   --message '{"role":"user","content":"Hello, Claude"}' \
   --fallbacks '[{"model":"claude-opus-4-8"}]' \
-  --beta server-side-fallback-2026-07-01 \
-  --transform model --raw-output
+  --beta server-side-fallback-2026-07-01
 ```
 
 ```python Python

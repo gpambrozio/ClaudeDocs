@@ -1212,7 +1212,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `type BetaToolChangeMCPToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
               - `Type MCPToolReference`
@@ -1254,7 +1254,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
             - `type BetaToolChangeMCPToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
             - `type BetaToolChangeMCPToolsetReference`
@@ -7157,7 +7157,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `type BetaToolChangeMCPToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
               - `Type MCPToolReference`
@@ -7199,7 +7199,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
             - `type BetaToolChangeMCPToolReference`
 
-              Reference to a single MCP tool by its server and remote name — the
+              Reference to a single MCP tool by its server and remote name; the
               same `server_name`/`name` pair `mcp_tool_use` carries.
 
             - `type BetaToolChangeMCPToolsetReference`
@@ -16362,7 +16362,7 @@ func main() {
 
       - `type BetaToolChangeMCPToolReference`
 
-        Reference to a single MCP tool by its server and remote name — the
+        Reference to a single MCP tool by its server and remote name; the
         same `server_name`/`name` pair `mcp_tool_use` carries.
 
         - `Type MCPToolReference`
@@ -16404,7 +16404,7 @@ func main() {
 
       - `type BetaToolChangeMCPToolReference`
 
-        Reference to a single MCP tool by its server and remote name — the
+        Reference to a single MCP tool by its server and remote name; the
         same `server_name`/`name` pair `mcp_tool_use` carries.
 
       - `type BetaToolChangeMCPToolsetReference`
@@ -23000,7 +23000,7 @@ func main() {
 
           - `type BetaToolChangeMCPToolReference`
 
-            Reference to a single MCP tool by its server and remote name — the
+            Reference to a single MCP tool by its server and remote name; the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
             - `Type MCPToolReference`
@@ -23042,7 +23042,7 @@ func main() {
 
           - `type BetaToolChangeMCPToolReference`
 
-            Reference to a single MCP tool by its server and remote name — the
+            Reference to a single MCP tool by its server and remote name; the
             same `server_name`/`name` pair `mcp_tool_use` carries.
 
           - `type BetaToolChangeMCPToolsetReference`
@@ -29831,7 +29831,7 @@ func main() {
 
     - `type BetaToolChangeMCPToolReference`
 
-      Reference to a single MCP tool by its server and remote name — the
+      Reference to a single MCP tool by its server and remote name; the
       same `server_name`/`name` pair `mcp_tool_use` carries.
 
       - `Type MCPToolReference`
@@ -29898,7 +29898,7 @@ func main() {
 
     - `type BetaToolChangeMCPToolReference`
 
-      Reference to a single MCP tool by its server and remote name — the
+      Reference to a single MCP tool by its server and remote name; the
       same `server_name`/`name` pair `mcp_tool_use` carries.
 
       - `Type MCPToolReference`
@@ -31798,7 +31798,7 @@ func main() {
 
 - `type BetaToolChangeMCPToolReference`
 
-  Reference to a single MCP tool by its server and remote name — the
+  Reference to a single MCP tool by its server and remote name; the
   same `server_name`/`name` pair `mcp_tool_use` carries.
 
   - `Type MCPToolReference`
@@ -39425,7 +39425,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `type BetaToolChangeMCPToolReference`
 
-                  Reference to a single MCP tool by its server and remote name — the
+                  Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
                   - `Type MCPToolReference`
@@ -39467,7 +39467,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `type BetaToolChangeMCPToolReference`
 
-                  Reference to a single MCP tool by its server and remote name — the
+                  Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
                 - `type BetaToolChangeMCPToolsetReference`

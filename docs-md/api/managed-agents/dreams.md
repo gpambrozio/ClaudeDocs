@@ -28,7 +28,7 @@ The dream produces another **output memory store**, separate from the input. The
 ## Create a dream
 
 ```bash cURL
-dream=$(curl -s https://api.anthropic.com/v1/dreams \
+curl -s https://api.anthropic.com/v1/dreams \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01,dreaming-2026-04-21" \
@@ -43,13 +43,10 @@ dream=$(curl -s https://api.anthropic.com/v1/dreams \
   "instructions": "Focus on coding-style preferences; ignore one-off debugging notes."
 }
 EOF
-)
-dream_id=$(jq -r '.id' <<< "$dream")
-echo "$dream_id"  # drm_01...
 ```
 
 ```bash CLI
-dream_id=$(ant beta:dreams create --transform id --raw-output <<YAML
+ant beta:dreams create <<YAML
 inputs:
   - type: memory_store
     memory_store_id: $store_id
@@ -58,7 +55,6 @@ inputs:
 model: claude-opus-4-8
 instructions: Focus on coding-style preferences; ignore one-off debugging notes.
 YAML
-)
 ```
 
 ```python Python

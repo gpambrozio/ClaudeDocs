@@ -141,7 +141,6 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta thinking-binding-controls-2026-08-01 \
-  --transform '{content.#(type=="text")#.text,input_transformations}' \
   --format yaml <<'YAML'
 model: claude-fable-5-1
 max_tokens: 16000

@@ -218,11 +218,10 @@ A session [created with a budget](sessions.md#set-a-session-budget) accepts two 
 ## Retrieving a session
 
 ```bash cURL
-retrieved=$(curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
+curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01")
-echo "Status: $(jq -r '.status' <<< "$retrieved")"
+  -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
 ```bash CLI

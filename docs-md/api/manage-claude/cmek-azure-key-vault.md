@@ -129,6 +129,24 @@ How you register the key depends on which product you use.
 
 **Claude Platform**
 
+You can set up the key in the Claude Console or through the Admin API, with the same result.
+
+**Claude Console**
+
+**Register the key with Anthropic**
+
+In the Claude Console, open **Settings > Encryption keys** and click **Add key**. Enter a display name, choose **Azure Key Vault**, and click **Continue**. Fill in **Vault URI**, **Key name**, and **Tenant ID**, and click **Add**.
+
+**Validate the key**
+
+On the **Encryption keys** page, click **Verify** next to the key. **Connected** appears when the check passes. If it fails, a message gives the reason.
+
+**Attach the key to a workspace**
+
+Open **Settings > Workspaces**, choose the workspace, and open its **Security** tab. Under **Encryption key**, select the key, click **Save**, and confirm. Attaching a key can't be undone. For a workspace that already receives requests, the key can take [up to a day to take effect](cmek.md#how-it-works).
+
+**API**
+
 **Register the key with Anthropic**
 
 Create an external key configuration through the Admin API.
