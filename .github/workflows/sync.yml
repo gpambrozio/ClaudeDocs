@@ -135,6 +135,8 @@ jobs:
             printf '%s\n' "3. Inspect the changes by running 'git show --stat ${DOCS_SHA}' and 'git show ${DOCS_SHA} -- <path>'. There are no uncommitted changes to review."
             printf '%s\n' "4. You have read-only git access. Do NOT run git add, git commit, git commit --amend, git reset, git rebase, or git push."
             printf '%s\n' "5. Your only write action is to create the changelog file at changelogs/${YYYY}/${MM}/changelog-${ISO}.md using the Write tool. Do NOT commit it; the workflow commits and pushes it for you."
+            printf '%s\n' "6. This is a single non-interactive session with no follow-up turn. Nobody will reply to you, no notification will reach you, and the session ends the moment you stop. There is nothing to wait for: do every part of the analysis yourself, in this turn, and call Write before your closing message. A turn that ends without the file having been written produces no changelog at all."
+            printf '%s\n' "7. Permission rules match command prefixes and do not cover shell control flow, so a 'for' loop, a subshell, or a command substitution is denied however safe its body is. Issue one command per Bash call, chained with '&&' or '|' if needed. Scratch files belong in /tmp."
             printf '%s\n' ""
             printf '%s\n' "--- Changelog format and analysis instructions ---"
             printf '%s\n' ""
@@ -160,12 +162,29 @@ jobs:
           # creates parent directories itself, but the model tends to reach for
           # `mkdir -p` first and a denial there costs it a turn.
           #
+          # `Edit(/tmp/**)` is what makes `git show ... > /tmp/diff.txt` work. A
+          # redirect target is checked against Edit rules rather than the rule
+          # that allows the command, so without it every attempt to park a large
+          # diff in a scratch file was denied. /tmp is off the repo, so nothing
+          # written there can reach a commit.
+          #
           # The value MUST be quoted: patterns like "Bash(git show:*)" contain a
           # space, and the action tokenizes claude_args on whitespace. Without the
           # quotes the allowlist is split into garbage ("Bash(git", "show:*)", ...)
           # and the model loses all git access.
+          #
+          # The deny list is the fix for the failure that silently cost this
+          # repo most of its changelogs: handed a diff this large, the model
+          # farms it out to background subagents and then ends its turn waiting
+          # for them. In a GitHub Action there is no next turn, so the session
+          # ends and no changelog is ever written -- while the run still goes
+          # green. A bare tool name in --disallowedTools removes the tool from
+          # the model's context, so the deferral it keeps reaching for is not
+          # available to reach for. Every tool here is one that only pays off in
+          # a session that continues after the turn ends.
           claude_args: |
-            --allowedTools "Read,Write,Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git rev-parse:*),Bash(git ls-files:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(tail:*),Bash(grep:*),Bash(find:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(cut:*),Bash(tr:*),Bash(diff:*),Bash(sed -n:*),Bash(basename:*),Bash(dirname:*),Bash(echo:*),Bash(mkdir -p:*)"
+            --allowedTools "Read,Write,Edit(/tmp/**),Bash(git show:*),Bash(git diff:*),Bash(git log:*),Bash(git status:*),Bash(git rev-parse:*),Bash(git ls-files:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(tail:*),Bash(grep:*),Bash(find:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(cut:*),Bash(tr:*),Bash(comm:*),Bash(diff:*),Bash(sed -n:*),Bash(basename:*),Bash(dirname:*),Bash(echo:*),Bash(printf:*),Bash(mkdir -p:*)"
+            --disallowedTools "Agent,Task,Workflow,ScheduleWakeup,ListAgents,SendMessage,Monitor,AskUserQuestion"
 
       # The action hides Claude's output ("full output hidden for security"),
       # so a run that ends without writing the changelog leaves nothing behind to
@@ -236,13 +255,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          MISSING=false
           if [ -f "$CHANGELOG" ]; then
             echo "Processing changelog: $CHANGELOG"
             uv run add_source_anchors.py "$CHANGELOG"
             git add "$CHANGELOG"
             git commit -m "Add changelog for $HUMAN"
           else
-            echo "::warning::Claude did not create $CHANGELOG; pushing documentation update only."
+            # Recorded, but not acted on until after the push: the documentation
+            # commit is good on its own and must not be stranded on the runner.
+            MISSING=true
+            echo "::error::Claude did not create $CHANGELOG; pushing documentation update only."
           fi
 
           # Re-authenticate (claude-code-action revokes its token) and push.
@@ -255,3 +278,11 @@ jobs:
 
           # Trigger pages workflow (GITHUB_TOKEN pushes don't trigger other workflows)
           gh workflow run pages.yml
+
+          # A day whose documentation changed but whose changelog never got
+          # written is a failure, and has to look like one. As a warning it went
+          # unnoticed for weeks of green runs while the site stopped publishing.
+          if [ "$MISSING" = true ]; then
+            echo "The documentation commit was pushed; the changelog for $HUMAN is missing."
+            exit 1
+          fi
