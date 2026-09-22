@@ -117,6 +117,10 @@ Create a memory store
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
   - `String name`
 
     Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
@@ -352,6 +356,10 @@ List memory stores
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore`
@@ -451,6 +459,8 @@ Retrieve a memory store
 
   - `Optional<String> memoryStoreId`
 
+    ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`.
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -548,6 +558,10 @@ Retrieve a memory store
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -643,6 +657,8 @@ Update a memory store
 
   - `Optional<String> memoryStoreId`
 
+    ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -740,6 +756,10 @@ Update a memory store
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
   - `Optional<String> description`
 
@@ -851,6 +871,8 @@ Delete a memory store
 
   - `Optional<String> memoryStoreId`
 
+    ID of the memory store to permanently delete (a `memstore_...` identifier). Required. Deletion cascades to all memories and memory versions in the store and cannot be undone.
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -948,6 +970,10 @@ Delete a memory store
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -1005,6 +1031,8 @@ Archive a memory store
 
   - `Optional<String> memoryStoreId`
 
+    ID of the memory store to archive (a `memstore_...` identifier). Required. Archiving is one-way and idempotent; archived stores cannot be unarchived. Enumerate IDs via `GET /v1/memory_stores`.
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -1102,6 +1130,10 @@ Archive a memory store
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -1255,9 +1287,11 @@ Create a memory
 
   - `Optional<String> memoryStoreId`
 
+    The ID of the memory store to create the memory in (`memstore_...`).
+
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -1356,6 +1390,10 @@ Create a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
   - `Optional<String> content`
 
@@ -1473,6 +1511,8 @@ List memories
 - `MemoryListParams params`
 
   - `Optional<String> memoryStoreId`
+
+    The ID of the memory store to list memories from (`memstore_...`).
 
   - `Optional<Long> depth`
 
@@ -1596,6 +1636,10 @@ List memories
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsMemoryListItem: union`
@@ -1717,11 +1761,15 @@ Retrieve a memory
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the memory (`memstore_...`).
+
   - `Optional<String> memoryId`
+
+    The ID of the memory to retrieve (`mem_...`).
 
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -1820,6 +1868,10 @@ Retrieve a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -1927,11 +1979,15 @@ Update a memory
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the memory (`memstore_...`).
+
   - `Optional<String> memoryId`
+
+    The ID of the memory to update (`mem_...`).
 
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -2030,6 +2086,10 @@ Update a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
   - `Optional<String> content`
 
@@ -2151,11 +2211,17 @@ Delete a memory
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the memory (`memstore_...`).
+
   - `Optional<String> memoryId`
+
+    The ID of the memory to delete (`mem_...`).
 
   - `Optional<String> expectedContentSha256`
 
-    Query parameter for expected_content_sha256
+    Delete the memory only if its current `content_sha256` equals this value, given as 64 lowercase hexadecimal characters. Omit it to delete unconditionally.
+
+    If the hashes differ, the request fails with HTTP status 409 and nothing is deleted.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -2254,6 +2320,10 @@ Delete a memory
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
   - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 #### Returns
 
@@ -2317,9 +2387,11 @@ List memory versions
 
   - `Optional<String> memoryStoreId`
 
+    The ID of the memory store whose version history to list (`memstore_...`).
+
   - `Optional<String> apiKeyId`
 
-    Query parameter for api_key_id
+    Return only versions written with the API key that has this ID.
 
   - `Optional<LocalDateTime> createdAtGte`
 
@@ -2335,33 +2407,35 @@ List memory versions
 
   - `Optional<Long> limit`
 
-    Query parameter for limit
+    The maximum number of versions to return per page. Defaults to 20.
 
     format: int32
 
   - `Optional<String> memoryId`
 
-    Query parameter for memory_id
+    Return only versions of the memory with this ID (`mem_...`).
+
+    The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
 
   - `Optional<BetaManagedAgentsMemoryVersionOperation> operation`
 
-    Query parameter for operation
+    Return only versions that record this kind of change.
 
   - `Optional<String> page`
 
-    Query parameter for page
+    The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
   - `Optional<String> serviceAccountId`
 
-    Query parameter for service_account_id
+    Return only versions written by the service account with this ID (`svac_...`).
 
   - `Optional<String> sessionId`
 
-    Query parameter for session_id
+    Return only versions written by the session with this ID.
 
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -2461,6 +2535,10 @@ List memory versions
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsMemoryVersion`
@@ -2493,9 +2571,15 @@ List memory versions
 
     - `CREATED("created")`
 
+      The memory was created. The first version in any memory's lineage.
+
     - `MODIFIED("modified")`
 
+      The memory's `content`, `path`, or both were changed via update. Writes the agent makes through the filesystem mount also appear as `modified`.
+
     - `DELETED("deleted")`
+
+      The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
   - `Optional<String> content`
 
@@ -2643,11 +2727,15 @@ Retrieve a memory version
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the version (`memstore_...`).
+
   - `Optional<String> memoryVersionId`
+
+    The ID of the memory version to retrieve (`memver_...`).
 
   - `Optional<BetaManagedAgentsMemoryView> view`
 
-    Query parameter for view
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -2747,6 +2835,10 @@ Retrieve a memory version
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsMemoryVersion`
@@ -2779,9 +2871,15 @@ Retrieve a memory version
 
     - `CREATED("created")`
 
+      The memory was created. The first version in any memory's lineage.
+
     - `MODIFIED("modified")`
 
+      The memory's `content`, `path`, or both were changed via update. Writes the agent makes through the filesystem mount also appear as `modified`.
+
     - `DELETED("deleted")`
+
+      The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
   - `Optional<String> content`
 
@@ -2928,7 +3026,11 @@ Redact a memory version
 
   - `String memoryStoreId`
 
+    The ID of the memory store that holds the version (`memstore_...`).
+
   - `Optional<String> memoryVersionId`
+
+    The ID of the memory version to redact (`memver_...`).
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -3028,6 +3130,10 @@ Redact a memory version
 
   - `Optional<String> workspaceId`
 
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 #### Returns
 
 - `class BetaManagedAgentsMemoryVersion`
@@ -3060,9 +3166,15 @@ Redact a memory version
 
     - `CREATED("created")`
 
+      The memory was created. The first version in any memory's lineage.
+
     - `MODIFIED("modified")`
 
+      The memory's `content`, `path`, or both were changed via update. Writes the agent makes through the filesystem mount also appear as `modified`.
+
     - `DELETED("deleted")`
+
+      The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
   - `Optional<String> content`
 

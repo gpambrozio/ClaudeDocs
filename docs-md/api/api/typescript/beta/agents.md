@@ -107,13 +107,23 @@ Create Agent
 
           - `"low"`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `"medium"`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `"high"`
 
+            High effort. Favors reasoning depth.
+
           - `"xhigh"`
 
+            Extra-high effort. Not all models accept this level.
+
           - `"max"`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `interface BetaManagedAgentsEffortLow`
 
@@ -2320,6 +2330,8 @@ Get Agent
 
 - `agentID: string`
 
+  Unique identifier of the agent to retrieve.
+
 - `params: AgentRetrieveParams`
 
   - `version?: number`
@@ -3115,6 +3127,8 @@ Update Agent
 
 - `agentID: string`
 
+  Unique identifier of the agent to update.
+
 - `params: AgentUpdateParams`
 
   - `description?: string | null`
@@ -3233,13 +3247,23 @@ Update Agent
 
           - `"low"`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `"medium"`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `"high"`
 
+            High effort. Favors reasoning depth.
+
           - `"xhigh"`
 
+            Extra-high effort. Not all models accept this level.
+
           - `"max"`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `interface BetaManagedAgentsEffortLow`
 
@@ -4606,6 +4630,8 @@ Archive Agent
 ### Parameters
 
 - `agentID: string`
+
+  Unique identifier of the agent to archive.
 
 - `params: AgentArchiveParams`
 
@@ -8378,13 +8404,23 @@ console.log(betaManagedAgentsAgent.id);
 
       - `"low"`
 
+        Low effort. Favors latency over reasoning depth.
+
       - `"medium"`
+
+        Medium effort. Balances latency and reasoning depth.
 
       - `"high"`
 
+        High effort. Favors reasoning depth.
+
       - `"xhigh"`
 
+        Extra-high effort. Not all models accept this level.
+
       - `"max"`
+
+        Maximum effort. Favors reasoning depth over latency.
 
     - `interface BetaManagedAgentsEffortLow`
 
@@ -9531,6 +9567,8 @@ List Agent Versions
 #### Parameters
 
 - `agentID: string`
+
+  Agent ID to list versions for.
 
 - `params: VersionListParams`
 

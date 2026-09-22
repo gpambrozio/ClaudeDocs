@@ -2332,7 +2332,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2354,19 +2354,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 
@@ -2448,7 +2448,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2471,19 +2471,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 
@@ -2518,7 +2518,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2544,19 +2544,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 
@@ -2594,7 +2594,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2625,19 +2625,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 

@@ -17,6 +17,8 @@ Update Vault
 
 - `vaultID string`
 
+  Unique identifier of the vault to update.
+
 - `params BetaVaultUpdateParams`
 
   - `DisplayName param.Field[string] Optional`

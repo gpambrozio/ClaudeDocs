@@ -19,7 +19,7 @@ Delete Vault
 
   - `required string vaultID`
 
-    Path parameter vault_id
+    Unique identifier of the vault to delete.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 

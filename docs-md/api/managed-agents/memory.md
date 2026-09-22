@@ -4,11 +4,10 @@
 title: Using agent memory
 url: https://platform.claude.com/docs/en/managed-agents/memory
 description: Give your agents persistent memory that survives across sessions using memory stores.
+featureMetadata:
+  status: beta
+  betaHeader: agent-memory-2026-07-22
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/beta-headers.md): `agent-memory-2026-07-22`
 
 Each Managed Agents session starts with a fresh context by default. When a session ends, any state the agent built up is gone. Memory stores let the agent carry information across sessions: user preferences, project conventions, prior mistakes, and domain context.
 
@@ -38,9 +37,12 @@ curl -s https://api.anthropic.com/v1/memory_stores \
 ```
 
 ```bash CLI
-ant beta:memory-stores create \
-  --name "User Preferences" \
-  --description "Per-user preferences and project context."
+ant apply memory_store.yaml
+```
+
+```yaml
+name: User Preferences
+description: Per-user preferences and project context.
 ```
 
 ```python Python

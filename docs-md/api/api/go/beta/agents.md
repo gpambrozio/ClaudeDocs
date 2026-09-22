@@ -105,13 +105,23 @@ Create Agent
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMedium BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "medium"`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelHigh BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "high"`
 
+            High effort. Favors reasoning depth.
+
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelXhigh BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "xhigh"`
 
+            Extra-high effort. Not all models accept this level.
+
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMax BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "max"`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `type BetaManagedAgentsEffortLow`
 
@@ -2305,6 +2315,8 @@ Get Agent
 
 - `agentID string`
 
+  Unique identifier of the agent to retrieve.
+
 - `params BetaAgentGetParams`
 
   - `Version param.Field[int64] Optional`
@@ -3117,6 +3129,8 @@ Update Agent
 
 - `agentID string`
 
+  Unique identifier of the agent to update.
+
 - `params BetaAgentUpdateParams`
 
   - `Description param.Field[string] Optional`
@@ -3233,13 +3247,23 @@ Update Agent
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMedium BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "medium"`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelHigh BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "high"`
 
+            High effort. Favors reasoning depth.
+
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelXhigh BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "xhigh"`
 
+            Extra-high effort. Not all models accept this level.
+
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMax BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "max"`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `type BetaManagedAgentsEffortLow`
 
@@ -4580,6 +4604,8 @@ Archive Agent
 ### Parameters
 
 - `agentID string`
+
+  Unique identifier of the agent to archive.
 
 - `body BetaAgentArchiveParams`
 
@@ -8385,13 +8411,23 @@ func main() {
 
       - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
+        Low effort. Favors latency over reasoning depth.
+
       - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMedium BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "medium"`
+
+        Medium effort. Balances latency and reasoning depth.
 
       - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelHigh BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "high"`
 
+        High effort. Favors reasoning depth.
+
       - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelXhigh BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "xhigh"`
 
+        Extra-high effort. Not all models accept this level.
+
       - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelMax BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "max"`
+
+        Maximum effort. Favors reasoning depth over latency.
 
     - `type BetaManagedAgentsEffortLow`
 
@@ -9542,6 +9578,8 @@ List Agent Versions
 #### Parameters
 
 - `agentID string`
+
+  Agent ID to list versions for.
 
 - `params BetaAgentVersionListParams`
 

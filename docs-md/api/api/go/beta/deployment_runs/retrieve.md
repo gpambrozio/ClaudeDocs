@@ -17,6 +17,8 @@ Get Deployment Run
 
 - `deploymentRunID string`
 
+  Unique identifier of the deployment run.
+
 - `query BetaDeploymentRunGetParams`
 
   - `Betas param.Field[[]AnthropicBeta] Optional`

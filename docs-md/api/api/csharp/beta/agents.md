@@ -161,13 +161,23 @@ Create Agent
 
           - `Low("low")`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `Medium("medium")`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `High("high")`
 
+            High effort. Favors reasoning depth.
+
           - `Xhigh("xhigh")`
 
+            Extra-high effort. Not all models accept this level.
+
           - `Max("max")`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `class BetaManagedAgentsEffortLow`
 
@@ -2310,7 +2320,7 @@ Get Agent
 
   - `required string agentID`
 
-    Path param: Path parameter agent_id
+    Path param: Unique identifier of the agent to retrieve.
 
   - `int version`
 
@@ -3096,7 +3106,7 @@ Update Agent
 
   - `required string agentID`
 
-    Path param: Path parameter agent_id
+    Path param: Unique identifier of the agent to update.
 
   - `string? description`
 
@@ -3268,13 +3278,23 @@ Update Agent
 
           - `Low("low")`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `Medium("medium")`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `High("high")`
 
+            High effort. Favors reasoning depth.
+
           - `Xhigh("xhigh")`
 
+            Extra-high effort. Not all models accept this level.
+
           - `Max("max")`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `class BetaManagedAgentsEffortLow`
 
@@ -4588,7 +4608,7 @@ Archive Agent
 
   - `required string agentID`
 
-    Path parameter agent_id
+    Unique identifier of the agent to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -8270,13 +8290,23 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       - `Low("low")`
 
+        Low effort. Favors latency over reasoning depth.
+
       - `Medium("medium")`
+
+        Medium effort. Balances latency and reasoning depth.
 
       - `High("high")`
 
+        High effort. Favors reasoning depth.
+
       - `Xhigh("xhigh")`
 
+        Extra-high effort. Not all models accept this level.
+
       - `Max("max")`
+
+        Maximum effort. Favors reasoning depth over latency.
 
     - `class BetaManagedAgentsEffortLow`
 
@@ -9422,7 +9452,7 @@ List Agent Versions
 
   - `required string agentID`
 
-    Path param: Path parameter agent_id
+    Path param: Agent ID to list versions for.
 
   - `int limit`
 

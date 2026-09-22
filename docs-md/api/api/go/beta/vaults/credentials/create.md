@@ -17,6 +17,8 @@ Create Credential
 
 - `vaultID string`
 
+  Identifier of the vault to create the credential in.
+
 - `params BetaVaultCredentialNewParams`
 
   - `Auth param.Field[BetaVaultCredentialNewParamsAuthUnion]`

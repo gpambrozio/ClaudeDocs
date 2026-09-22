@@ -32,7 +32,7 @@ Match your situation to a row.
 | You are choosing or switching models             | Compare on cost per completed task, not per token                                                                                                                                                                                                                         | [Compare models](optimizing-for-cost-and-intelligence.md#compare-models-on-cost-per-task)                                                                                                                                            |
 | Quality isn't good enough                        | If you lowered effort, restore it; otherwise try the next tier up at `low` effort                                                                                                                                                                                         | [Tune effort](optimizing-for-cost-and-intelligence.md#tune-effort) · [Compare models](optimizing-for-cost-and-intelligence.md#compare-models-on-cost-per-task)                  |
 | Attempts end with `stop_reason: max_tokens`      | Raise `max_tokens`; 64,000 covered all but 2 of 14,000 turns measured at the default effort, and 128,000 cost nothing extra per solved task                                                                                                                               | [Set budgets](optimizing-for-cost-and-intelligence.md#set-budgets-and-output-caps)                                                                                                                                                   |
-| You can check outputs (tests, a verifier)        | Run everything at low effort and re-run failures at the default (`high`); on the coding benchmark measured, the pass rate held at about half the cost                                                                                                                     | [Re-run failures](optimizing-for-cost-and-intelligence.md#re-run-failures-at-higher-effort)                                                                                                                                          |
+| You can check outputs (tests, a verifier)        | Run everything at low effort and re-run failures at `high`; on the coding benchmark measured, the pass rate held at about half the cost                                                                                                                                   | [Re-run failures](optimizing-for-cost-and-intelligence.md#re-run-failures-at-higher-effort)                                                                                                                                          |
 | Agent loops with a few very costly runs          | Set a task budget (beta; check the support table for which models), a Claude Managed Agents session budget, and a workspace spend limit                                                                                                                                   | [Set budgets](optimizing-for-cost-and-intelligence.md#set-budgets-and-output-caps)                                                                                                                                                   |
 | A lower-cost model stalls only on hard decisions | Add a frontier advisor. It pays off when priced well above the executor and actually consulted, so first price the advisor's model alone at low effort and measure the consult rate                                                                                       | [Advisor strategy](optimizing-for-cost-and-intelligence.md#advisor-strategy-escalate-hard-decisions)                                                                                                                                 |
 | The work exceeds one context window              | Delegate partitions to cheaper workers                                                                                                                                                                                                                                    | [Orchestrator strategy](optimizing-for-cost-and-intelligence.md#orchestrator-strategy-delegate-bulk-work)                                                                                                                            |
@@ -134,7 +134,7 @@ Changing a [task budget](../../build-with-claude/task-budgets.md) partway throug
 Most agent requests carry tokens that never influence the answer. Trimming them rarely costs output quality, although not every lever here saved money when measured. Two places to look:
 
 * **Input trimming.** [Dynamic filtering](../../agents-and-tools/tool-use/web-fetch-tool.md#dynamic-filtering) in the web fetch tool keeps boilerplate out of fetched pages, [image resizing](../../build-with-claude/vision.md#evaluate-image-size) right-sizes vision inputs, and [tool search with deferred loading](../../agents-and-tools/tool-use/tool-search-tool.md) loads tool definitions only when needed (measured later in this section). [Programmatic tool calling](../../agents-and-tools/tool-use/programmatic-tool-calling.md) lets Claude run several tool calls from code so only the filtered result enters the context; its documentation reports 24% fewer input tokens on agentic search benchmarks, with a higher score. [Manage tool context](../../agents-and-tools/tool-use/manage-tool-context.md) compares tool search, programmatic tool calling, prompt caching, and context editing.
-* **Context lifecycle.** [Context editing](../../build-with-claude/context-editing.md) clears stale tool results, and [automatic compaction](../../build-with-claude/compaction.md) with its threshold stops long loops from carrying their whole history forward.
+* **Context lifecycle.** [Context editing](../../build-with-claude/context-editing.md) clears stale tool results, and [automatic compaction](../../build-with-claude/compaction-threshold.md) with its threshold stops long loops from carrying their whole history forward.
 
 The levers interact with the cache and each other, so judge them by net effect, and use [cache diagnostics](../../build-with-claude/cache-diagnostics.md) to confirm your cached prefix survives each change. Anthropic measured them on an issue-triage agent working through 20 real bug reports with screenshots from a public repository, and on a longer variant of the same job with 2.6 times the tokens. With caching on, input trimming (image resizing and tool search) took a further 26% off the short run and 21% off the long one.
 
@@ -268,7 +268,7 @@ If you are a model or two behind, the cheapest lever is the model string. Anthro
 
 ![Two charts of cost per solved task against tasks solved: on SWE-bench Pro every model solves most tasks and the upgrade steps are small; on Terminal-Bench 3 the Opus ladder falls from $183 to $63 to $28 per solved task](https://platform.claude.com/docs/images/cost-intel-upgrade-ladder.png)
 
-Anthropic prices the Opus line identically per token across versions, so any difference comes from how much work each model does per task: priced as a customer is billed, Claude Opus 4.8 solves the same share of tasks as Claude Opus 4.7 for 14% less per solved task, and Claude Opus 5 then solves 12 more points of tasks at 21% more per solved task. Claude Opus 5 at `low` effort beats Opus 4.8's default on this benchmark for about 30% of its cost per solved task, so the cheapest upgrade is the new model at a lower setting. Sonnet 5's saving comes from its lower per-token price, which more than offsets the extra tokens it uses per task compared with Sonnet 4.6: 15% less per solved task for 5 more points. The frontier tier gained the same way: Claude Fable 5.1 matches Claude Fable 5's score for 43% less per solved task, most of it the lower cache-read price. That direction is not guaranteed: on DeepResearch Bench II[7](optimizing-for-cost-and-intelligence.md#refs) the same upgrade costs 41% more per task at `high` (79% more at `low`) for its 2 to 3 extra points on the tasks clean in every arm (reference 7), because the new model does more work per task there. The input and output prices are the same and the cache read is 4x cheaper, so measure the upgrade on your own workload before assuming it saves.
+Anthropic prices Claude Opus 4.7, Opus 4.8, and Opus 5 identically per token, so any difference among them comes from how much work each model does per task: priced as a customer is billed, Claude Opus 4.8 solves the same share of tasks as Claude Opus 4.7 for 14% less per solved task, and Claude Opus 5 then solves 12 more points of tasks at 21% more per solved task. Claude Opus 5 at `low` effort beats Opus 4.8's default on this benchmark for about 30% of its cost per solved task, so the cheapest upgrade is the new model at a lower setting. Sonnet 5's saving comes from its lower per-token price, which more than offsets the extra tokens it uses per task compared with Sonnet 4.6: 15% less per solved task for 5 more points. The frontier tier gained the same way: Claude Fable 5.1 matches Claude Fable 5's score for 43% less per solved task, most of it the lower cache-read price. That direction is not guaranteed: on DeepResearch Bench II[7](optimizing-for-cost-and-intelligence.md#refs) the same upgrade costs 41% more per task at `high` (79% more at `low`) for its 2 to 3 extra points on the tasks clean in every arm (reference 7), because the new model does more work per task there. The input and output prices are the same and the cache read is 4x cheaper, so measure the upgrade on your own workload before assuming it saves.
 
 On harder work the gap widens. On Terminal-Bench 3[20](optimizing-for-cost-and-intelligence.md#refs), where the tasks are hard enough that pass rate rather than tokens sets the bill, Claude Opus 4.7, Opus 4.8, and Opus 5 each spend $8 to $15 per task but solve 7%, 15%, and 41% of tasks, so cost per solved task falls from $183 to $63 to $28 up the ladder. The 21% premium Claude Opus 5 carries over Opus 4.8 on the saturated coding subset becomes a 56% saving on Terminal-Bench 3, where the older model mostly fails: the more your workload defeats the old model, the more the upgrade saves per result.
 
@@ -459,7 +459,7 @@ The following example computes one request's step 1 cost at Claude Opus 5's list
 ```bash cURL
 # Per-million-token prices from the pricing page; change these three for another model.
 INPUT_PER_MTOK=5.00 # Claude Opus 5
-CACHE_READ_PER_MTOK=0.50 # 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+CACHE_READ_PER_MTOK=0.50 # 0.1x the input price on Claude Opus 5; some models use a different multiplier
 OUTPUT_PER_MTOK=25.00
 
 response=$(curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
@@ -486,7 +486,7 @@ printf 'Request cost: $%.6f\n' "$cost"
 ```bash CLI
 # Per-million-token prices from the pricing page; change these three for another model.
 INPUT_PER_MTOK=5.00 # Claude Opus 5
-CACHE_READ_PER_MTOK=0.50 # 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+CACHE_READ_PER_MTOK=0.50 # 0.1x the input price on Claude Opus 5; some models use a different multiplier
 OUTPUT_PER_MTOK=25.00
 
 USAGE=$(ant messages create \
@@ -508,7 +508,7 @@ printf 'Request cost: $%.6f\n' "$COST"
 ```python Python
 # Per-million-token prices from the pricing page; change these three for another model.
 INPUT_PER_MTOK = 5.00  # Claude Opus 5
-# 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+# 0.1x the input price on Claude Opus 5; some models use a different multiplier
 CACHE_READ_PER_MTOK = 0.50
 OUTPUT_PER_MTOK = 25.00
 
@@ -536,7 +536,7 @@ print(f"Request cost: ${cost:.6f}")
 ```typescript TypeScript
 // Per-million-token prices from the pricing page; change these three for another model.
 const INPUT_PER_MTOK = 5.0; // Claude Opus 5
-const CACHE_READ_PER_MTOK = 0.5; // 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+const CACHE_READ_PER_MTOK = 0.5; // 0.1x the input price on Claude Opus 5; some models use a different multiplier
 const OUTPUT_PER_MTOK = 25.0;
 
 const client = new Anthropic();
@@ -559,7 +559,7 @@ console.log(`Request cost: $${cost.toFixed(6)}`);
 ```csharp C#
 // Per-million-token prices from the pricing page; change these three for another model.
 const double InputPerMtok = 5.00; // Claude Opus 5
-const double CacheReadPerMtok = 0.50; // 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+const double CacheReadPerMtok = 0.50; // 0.1x the input price on Claude Opus 5; some models use a different multiplier
 const double OutputPerMtok = 25.00;
 
 AnthropicClient client = new();
@@ -587,7 +587,7 @@ Console.WriteLine($"Request cost: ${cost:F6}");
 // Per-million-token prices from the pricing page; change these three for another model.
 const (
 	inputPerMTok     = 5.00 // Claude Opus 5
-	cacheReadPerMTok = 0.50 // 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+	cacheReadPerMTok = 0.50 // 0.1x the input price on Claude Opus 5; some models use a different multiplier
 	outputPerMTok    = 25.00
 )
 
@@ -617,7 +617,7 @@ const (
 ```java Java
 // Per-million-token prices from the pricing page; change these three for another model.
 static final double INPUT_PER_MTOK = 5.00; // Claude Opus 5
-static final double CACHE_READ_PER_MTOK = 0.50; // 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+static final double CACHE_READ_PER_MTOK = 0.50; // 0.1x the input price on Claude Opus 5; some models use a different multiplier
 static final double OUTPUT_PER_MTOK = 25.00;
 
 void main() {
@@ -644,7 +644,7 @@ void main() {
 ```php PHP
 // Per-million-token prices from the pricing page; change these three for another model.
 const INPUT_PER_MTOK = 5.00; // Claude Opus 5
-const CACHE_READ_PER_MTOK = 0.50; // 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+const CACHE_READ_PER_MTOK = 0.50; // 0.1x the input price on Claude Opus 5; some models use a different multiplier
 const OUTPUT_PER_MTOK = 25.00;
 
 $client = new Client();
@@ -667,7 +667,7 @@ printf("Request cost: \$%.6f\n", $cost);
 ```ruby Ruby
 # Per-million-token prices from the pricing page; change these three for another model.
 INPUT_PER_MTOK = 5.00 # Claude Opus 5
-CACHE_READ_PER_MTOK = 0.50 # 0.1x the input price; 0.025x on Claude Fable 5.1 and Claude Mythos 5.1
+CACHE_READ_PER_MTOK = 0.50 # 0.1x the input price on Claude Opus 5; some models use a different multiplier
 OUTPUT_PER_MTOK = 25.00
 
 client = Anthropic::Client.new
@@ -687,7 +687,7 @@ cost = (
 puts format("Request cost: $%.6f", cost)
 ```
 
-In agent loops the cache-read term is usually the largest of the five; if not, check that caching is engaged. When the [advisor tool](../../agents-and-tools/tool-use/advisor-tool.md#usage-and-billing) or [compaction](../../build-with-claude/compaction.md#understanding-usage) is enabled, some tokens are reported only in `usage.iterations` and not in the top-level totals, so sum over `usage.iterations` instead, pricing `advisor_message` entries at the advisor model's rates.
+In agent loops the cache-read term is usually the largest of the five; if not, check that caching is engaged. When the [advisor tool](../../agents-and-tools/tool-use/advisor-tool.md#usage-and-billing) or [compaction](../../build-with-claude/compaction-threshold.md#understanding-usage) is enabled, some tokens are reported only in `usage.iterations` and not in the top-level totals, so sum over `usage.iterations` instead, pricing `advisor_message` entries at the advisor model's rates.
 
 The following table lists the levers in the order to try them:
 

@@ -4,11 +4,13 @@
 title: Tools
 url: https://platform.claude.com/docs/en/managed-agents/tools
 description: Configure tools available to your agent.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/beta-headers.md): `managed-agents-2026-04-01`
 
 Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a [session](sessions.md). You control which tools are available by specifying them in the agent configuration.
 
@@ -61,7 +63,11 @@ EOF
 ```
 
 ```bash CLI
-ant beta:agents create <<'YAML'
+ant apply agent.md
+```
+
+```markdown
+---
 name: Coding Assistant
 model: claude-opus-5
 tools:
@@ -69,7 +75,7 @@ tools:
     configs:
       - name: web_fetch
         enabled: false
-YAML
+---
 ```
 
 ```python Python
@@ -296,7 +302,11 @@ jq '.tools[0].configs' <<< "$agent"
 ```
 
 ```bash CLI
-ant beta:agents create --transform tools.0.configs <<'YAML'
+ant apply agent.md
+```
+
+```markdown
+---
 name: Research Agent
 model: claude-opus-5
 tools:
@@ -313,7 +323,7 @@ tools:
         name: web_fetch
         blocked_domains: [ads.example.com]
         max_content_tokens: 50000
-YAML
+---
 ```
 
 ```python Python
@@ -588,6 +598,8 @@ in Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401 => toolset
   puts JSON.pretty_generate(toolset.configs.map(&:to_h))
 end
 ```
+
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the agent and prints its ID, not the `configs` array.
 
 In the Claude Console, set allowed or blocked domains from the `web_search` and `web_fetch` rows of the **Built-in tools** card on the agent form; set `max_content_tokens` and `user_location` in the **Raw** view of the agent's configuration.
 

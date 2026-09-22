@@ -4,11 +4,13 @@
 title: Session operations
 url: https://platform.claude.com/docs/en/managed-agents/session-operations
 description: Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/beta-headers.md): `managed-agents-2026-04-01`
 
 Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](sessions.md) for creating a session and sending it work.
 

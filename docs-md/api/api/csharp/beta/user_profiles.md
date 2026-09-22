@@ -25,7 +25,11 @@ Create User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? externalID`
 
@@ -159,6 +163,10 @@ Create User Profile
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -203,7 +211,11 @@ Create User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -219,9 +231,15 @@ Create User Profile
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -321,29 +339,39 @@ List User Profiles
 
   - `int limit`
 
-    Query param: Query parameter for limit
+    Query param: The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
   - `Order order`
 
-    Query param: Query parameter for order
+    Query param: The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
 
     - `Asc("asc")`
 
+      Oldest first when `order_by` is `created_at`, or names in ascending order when `order_by` is `name`.
+
     - `Desc("desc")`
+
+      Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
 
   - `OrderBy orderBy`
 
-    Query param: Query parameter for order_by
+    Query param: The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
 
     - `CreatedAt("created_at")`
 
+      Sort by when each user profile was created. This is the default.
+
     - `Name("name")`
+
+      Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
 
   - `string page`
 
-    Query param: Query parameter for page
+    Query param: The cursor for the page to return, taken from `next_page` in a previous response.
+
+    Leave it out to get the first page.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -451,6 +479,10 @@ List User Profiles
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -495,7 +527,11 @@ List User Profiles
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -511,9 +547,15 @@ List User Profiles
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -620,7 +662,7 @@ Get User Profile
 
   - `required string userProfileID`
 
-    Path parameter user_profile_id
+    The ID of the user profile to get (`uprof_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -728,6 +770,10 @@ Get User Profile
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -772,7 +818,11 @@ Get User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -788,9 +838,15 @@ Get User Profile
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -893,7 +949,7 @@ Update User Profile
 
   - `required string userProfileID`
 
-    Path param: Path parameter user_profile_id
+    Path param: The ID of the user profile to update (`uprof_...`).
 
   - `AccessType? accessType`
 
@@ -901,7 +957,11 @@ Update User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? externalID`
 
@@ -1035,6 +1095,10 @@ Update User Profile
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -1079,7 +1143,11 @@ Update User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -1095,9 +1163,15 @@ Update User Profile
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -1200,7 +1274,7 @@ Create Enrollment URL
 
   - `required string userProfileID`
 
-    Path parameter user_profile_id
+    The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -1308,6 +1382,8 @@ Create Enrollment URL
 
 - `class BetaUserProfileEnrollmentUrl`
 
+  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+
   - `required Type Type`
 
     Object type. Always `enrollment_url`.
@@ -1350,6 +1426,10 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 ### Beta User Profile
 
 - `class BetaUserProfile`
+
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
   - `required Type Type`
 
@@ -1395,7 +1475,11 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -1411,9 +1495,15 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -1463,6 +1553,8 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
 - `class BetaUserProfileEnrollmentUrl`
 
+  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+
   - `required Type Type`
 
     Object type. Always `enrollment_url`.
@@ -1489,9 +1581,15 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
     - `Active("active")`
 
+      The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
     - `Suspended("suspended")`
 
+      The platform has restricted the account of the entity that the user profile represents and may restore it.
+
     - `Blocked("blocked")`
+
+      The platform has barred the account of the entity that the user profile represents.
 
   - `required string? Country`
 
@@ -1537,9 +1635,15 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
     - `Active("active")`
 
+      The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
     - `Suspended("suspended")`
 
+      The platform has restricted the account of the entity that the user profile represents and may restore it.
+
     - `Blocked("blocked")`
+
+      The platform has barred the account of the entity that the user profile represents.
 
   - `string? Country`
 
@@ -1584,6 +1688,8 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 ### Beta User Profile Trust Grant
 
 - `class BetaUserProfileTrustGrant`
+
+  The status of one trust grant on a user profile, listed in the profile's `trust_grants` map under the grant's name.
 
   - `required Status Status`
 

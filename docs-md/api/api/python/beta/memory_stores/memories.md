@@ -19,6 +19,8 @@ Create a memory
 
 - `memory_store_id: str`
 
+  The ID of the memory store to create the memory in (`memstore_...`).
+
 - `content: Optional[str]`
 
   UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
@@ -31,11 +33,15 @@ Create a memory
 
 - `view: Optional[BetaManagedAgentsMemoryView]`
 
-  Query parameter for view
+  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `"basic"`
 
+    Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
+
   - `"full"`
+
+    Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -138,6 +144,10 @@ Create a memory
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -237,6 +247,8 @@ List memories
 
 - `memory_store_id: str`
 
+  The ID of the memory store to list memories from (`memstore_...`).
+
 - `depth: Optional[int]`
 
   `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
@@ -263,7 +275,11 @@ List memories
 
   - `"basic"`
 
+    Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
+
   - `"full"`
+
+    Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -366,6 +382,10 @@ List memories
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -483,15 +503,23 @@ Retrieve a memory
 
 - `memory_store_id: str`
 
+  The ID of the memory store that holds the memory (`memstore_...`).
+
 - `memory_id: str`
+
+  The ID of the memory to retrieve (`mem_...`).
 
 - `view: Optional[BetaManagedAgentsMemoryView]`
 
-  Query parameter for view
+  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `"basic"`
 
+    Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
+
   - `"full"`
+
+    Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -595,6 +623,10 @@ Retrieve a memory
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemory`
@@ -692,15 +724,23 @@ Update a memory
 
 - `memory_store_id: str`
 
+  The ID of the memory store that holds the memory (`memstore_...`).
+
 - `memory_id: str`
+
+  The ID of the memory to update (`mem_...`).
 
 - `view: Optional[BetaManagedAgentsMemoryView]`
 
-  Query parameter for view
+  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `"basic"`
 
+    Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
+
   - `"full"`
+
+    Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 - `content: Optional[str]`
 
@@ -824,6 +864,10 @@ Update a memory
 
 - `workspace_id: Optional[str]`
 
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
 ### Returns
 
 - `class BetaManagedAgentsMemory`
@@ -921,11 +965,17 @@ Delete a memory
 
 - `memory_store_id: str`
 
+  The ID of the memory store that holds the memory (`memstore_...`).
+
 - `memory_id: str`
+
+  The ID of the memory to delete (`mem_...`).
 
 - `expected_content_sha256: Optional[str]`
 
-  Query parameter for expected_content_sha256
+  Delete the memory only if its current `content_sha256` equals this value, given as 64 lowercase hexadecimal characters. Omit it to delete unconditionally.
+
+  If the hashes differ, the request fails with HTTP status 409 and nothing is deleted.
 
 - `betas: Optional[List[AnthropicBetaParam]]`
 
@@ -1028,6 +1078,10 @@ Delete a memory
     - `"compact-2026-09-04"`
 
 - `workspace_id: Optional[str]`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
 ### Returns
 
@@ -1198,19 +1252,39 @@ print(beta_managed_agents_deleted_memory.id)
 
   - `class BetaManagedAgentsMemoryPreconditionFailedError`
 
+    The error returned with HTTP status 409 when a request's precondition doesn't hold for the memory's current state, such as `precondition` on an update or `expected_content_sha256` on a delete.
+
+    The error doesn't include the memory's current state. Retrieve the memory to see its current content and `content_sha256` before you retry.
+
+    See the [memory guide](../../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
+
     - `type: Literal["memory_precondition_failed_error"]`
 
     - `message: Optional[str]`
 
+      A human-readable explanation of why the precondition failed.
+
   - `class BetaManagedAgentsMemoryPathConflictError`
+
+    The error returned with HTTP status 409 when a create or rename targets a path that another memory uses, or a path that overlaps another memory's path.
+
+    Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
     - `type: Literal["memory_path_conflict_error"]`
 
     - `conflicting_memory_id: Optional[str]`
 
+      The ID of the memory that blocked the write (`mem_...`), or an empty string if that memory can't be identified.
+
+      Retry the request when it is empty.
+
     - `conflicting_path: Optional[str]`
 
+      The path that blocked the write: the requested path, or the path of a memory that is an ancestor or descendant of it.
+
     - `message: Optional[str]`
+
+      A human-readable explanation of the conflict. To handle the error in code, use `conflicting_path` and `conflicting_memory_id` instead.
 
   - `class BetaManagedAgentsConflictError`
 
@@ -1336,21 +1410,41 @@ print(beta_managed_agents_deleted_memory.id)
 
 - `class BetaManagedAgentsMemoryPathConflictError`
 
+  The error returned with HTTP status 409 when a create or rename targets a path that another memory uses, or a path that overlaps another memory's path.
+
+  Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
+
   - `type: Literal["memory_path_conflict_error"]`
 
   - `conflicting_memory_id: Optional[str]`
 
+    The ID of the memory that blocked the write (`mem_...`), or an empty string if that memory can't be identified.
+
+    Retry the request when it is empty.
+
   - `conflicting_path: Optional[str]`
 
+    The path that blocked the write: the requested path, or the path of a memory that is an ancestor or descendant of it.
+
   - `message: Optional[str]`
+
+    A human-readable explanation of the conflict. To handle the error in code, use `conflicting_path` and `conflicting_memory_id` instead.
 
 ### Beta Managed Agents Memory Precondition Failed Error
 
 - `class BetaManagedAgentsMemoryPreconditionFailedError`
 
+  The error returned with HTTP status 409 when a request's precondition doesn't hold for the memory's current state, such as `precondition` on an update or `expected_content_sha256` on a delete.
+
+  The error doesn't include the memory's current state. Retrieve the memory to see its current content and `content_sha256` before you retry.
+
+  See the [memory guide](../../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
+
   - `type: Literal["memory_precondition_failed_error"]`
 
   - `message: Optional[str]`
+
+    A human-readable explanation of why the precondition failed.
 
 ### Beta Managed Agents Memory Prefix
 
@@ -1370,9 +1464,16 @@ print(beta_managed_agents_deleted_memory.id)
 
   Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
+  - `basic` - Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
+  - `full` - Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
+
   - `"basic"`
 
+    Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
+
   - `"full"`
+
+    Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
 ### Beta Managed Agents Precondition
 

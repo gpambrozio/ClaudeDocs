@@ -408,7 +408,7 @@ Get Vault
 
   - `required string vaultID`
 
-    Path parameter vault_id
+    Unique identifier of the vault to retrieve.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -593,7 +593,7 @@ Update Vault
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Unique identifier of the vault to update.
 
   - `string? displayName`
 
@@ -788,7 +788,7 @@ Delete Vault
 
   - `required string vaultID`
 
-    Path parameter vault_id
+    Unique identifier of the vault to delete.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -940,7 +940,7 @@ Archive Vault
 
   - `required string vaultID`
 
-    Path parameter vault_id
+    Unique identifier of the vault to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -1179,7 +1179,7 @@ Create Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault to create the credential in.
 
   - `required Auth auth`
 
@@ -1663,7 +1663,7 @@ List Credentials
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault to list credentials for.
 
   - `bool includeArchived`
 
@@ -1990,11 +1990,11 @@ Get Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to retrieve.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -2301,11 +2301,11 @@ Update Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to update.
 
   - `Auth auth`
 
@@ -2742,11 +2742,11 @@ Delete Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to delete.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -2899,11 +2899,11 @@ Archive Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -3210,11 +3210,11 @@ Validate Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to validate.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -3378,11 +3378,19 @@ Validate Credential
 
       - `Succeeded("succeeded")`
 
+        The token endpoint returned a new access token.
+
       - `Failed("failed")`
+
+        The token endpoint returned an error response. See `http_response` for detail.
 
       - `ConnectError("connect_error")`
 
+        The token endpoint could not be reached (DNS, TLS, or connection error).
+
       - `NoRefreshToken("no_refresh_token")`
+
+        No refresh token is stored for the credential, so no exchange was attempted.
 
   - `required BetaManagedAgentsCredentialValidationStatus Status`
 
@@ -3390,9 +3398,15 @@ Validate Credential
 
     - `Valid("valid")`
 
+      The credential successfully authenticated against its MCP server.
+
     - `Invalid("invalid")`
 
+      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+
     - `Unknown("unknown")`
+
+      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
 
   - `required DateTimeOffset ValidatedAt`
 

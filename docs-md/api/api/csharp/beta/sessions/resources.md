@@ -27,7 +27,7 @@ Add Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string fileID`
 
@@ -209,7 +209,7 @@ List Session Resources
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `int limit`
 
@@ -488,11 +488,11 @@ Get Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string resourceID`
 
-    Path param: Path parameter resource_id
+    Path param
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -749,11 +749,11 @@ Update Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string resourceID`
 
-    Path param: Path parameter resource_id
+    Path param
 
   - `required string authorizationToken`
 
@@ -1017,11 +1017,11 @@ Delete Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string resourceID`
 
-    Path param: Path parameter resource_id
+    Path param
 
   - `IReadOnlyList<AnthropicBeta> betas`
 

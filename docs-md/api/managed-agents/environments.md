@@ -4,11 +4,13 @@
 title: Cloud environment setup
 url: https://platform.claude.com/docs/en/managed-agents/environments
 description: Customize cloud sandboxes for your sessions.
+featureMetadata:
+  topic:
+    title: Managed Agents
+    url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
+  betaHeader: managed-agents-2026-04-01
 ---
-
-## Compatibility
-- Status: Beta
-- [Beta header](../api/beta-headers.md): `managed-agents-2026-04-01`
 
 Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated sandbox (a fresh Linux container).
 
@@ -129,6 +131,8 @@ environment = client.beta.environments.create(
 
 puts "Environment ID: #{environment.id}"
 ```
+
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the environment from `environment.yaml`, prints its ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` updates this environment instead of trying to create it again.
 
 Use a unique, descriptive `name` so you can tell environments apart.
 

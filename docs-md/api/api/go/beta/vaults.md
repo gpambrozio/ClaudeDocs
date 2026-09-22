@@ -444,6 +444,8 @@ Get Vault
 
 - `vaultID string`
 
+  Unique identifier of the vault to retrieve.
+
 - `query BetaVaultGetParams`
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
@@ -646,6 +648,8 @@ Update Vault
 ### Parameters
 
 - `vaultID string`
+
+  Unique identifier of the vault to update.
 
 - `params BetaVaultUpdateParams`
 
@@ -860,6 +864,8 @@ Delete Vault
 
 - `vaultID string`
 
+  Unique identifier of the vault to delete.
+
 - `body BetaVaultDeleteParams`
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
@@ -1029,6 +1035,8 @@ Archive Vault
 ### Parameters
 
 - `vaultID string`
+
+  Unique identifier of the vault to archive.
 
 - `body BetaVaultArchiveParams`
 
@@ -1286,6 +1294,8 @@ Create Credential
 #### Parameters
 
 - `vaultID string`
+
+  Identifier of the vault to create the credential in.
 
 - `params BetaVaultCredentialNewParams`
 
@@ -1791,6 +1801,8 @@ List Credentials
 
 - `vaultID string`
 
+  Identifier of the vault to list credentials for.
+
 - `params BetaVaultCredentialListParams`
 
   - `IncludeArchived param.Field[bool] Optional`
@@ -2134,11 +2146,13 @@ Get Credential
 
 - `credentialID string`
 
+  Unique identifier of the credential to retrieve.
+
 - `params BetaVaultCredentialGetParams`
 
   - `VaultID param.Field[string]`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -2464,11 +2478,13 @@ Update Credential
 
 - `credentialID string`
 
+  Unique identifier of the credential to update.
+
 - `params BetaVaultCredentialUpdateParams`
 
   - `VaultID param.Field[string]`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `Auth param.Field[BetaVaultCredentialUpdateParamsAuthUnion] Optional`
 
@@ -2924,11 +2940,13 @@ Delete Credential
 
 - `credentialID string`
 
+  Unique identifier of the credential to delete.
+
 - `params BetaVaultCredentialDeleteParams`
 
   - `VaultID param.Field[string]`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -3100,11 +3118,13 @@ Archive Credential
 
 - `credentialID string`
 
+  Unique identifier of the credential to archive.
+
 - `params BetaVaultCredentialArchiveParams`
 
   - `VaultID param.Field[string]`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -3430,11 +3450,13 @@ Validate Credential
 
 - `credentialID string`
 
+  Unique identifier of the credential to validate.
+
 - `params BetaVaultCredentialMCPOAuthValidateParams`
 
   - `VaultID param.Field[string]`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -3602,11 +3624,19 @@ Validate Credential
 
       - `const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"`
 
+        The token endpoint returned a new access token.
+
       - `const BetaManagedAgentsRefreshObjectStatusFailed BetaManagedAgentsRefreshObjectStatus = "failed"`
+
+        The token endpoint returned an error response. See `http_response` for detail.
 
       - `const BetaManagedAgentsRefreshObjectStatusConnectError BetaManagedAgentsRefreshObjectStatus = "connect_error"`
 
+        The token endpoint could not be reached (DNS, TLS, or connection error).
+
       - `const BetaManagedAgentsRefreshObjectStatusNoRefreshToken BetaManagedAgentsRefreshObjectStatus = "no_refresh_token"`
+
+        No refresh token is stored for the credential, so no exchange was attempted.
 
   - `Status BetaManagedAgentsCredentialValidationStatus`
 
@@ -3614,9 +3644,15 @@ Validate Credential
 
     - `const BetaManagedAgentsCredentialValidationStatusValid BetaManagedAgentsCredentialValidationStatus = "valid"`
 
+      The credential successfully authenticated against its MCP server.
+
     - `const BetaManagedAgentsCredentialValidationStatusInvalid BetaManagedAgentsCredentialValidationStatus = "invalid"`
 
+      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+
     - `const BetaManagedAgentsCredentialValidationStatusUnknown BetaManagedAgentsCredentialValidationStatus = "unknown"`
+
+      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
 
   - `ValidatedAt Time`
 

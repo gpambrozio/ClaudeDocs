@@ -19,6 +19,8 @@ List Agent Versions
 
 - `agentID string`
 
+  Agent ID to list versions for.
+
 - `params BetaAgentVersionListParams`
 
   - `Limit param.Field[int64] Optional`

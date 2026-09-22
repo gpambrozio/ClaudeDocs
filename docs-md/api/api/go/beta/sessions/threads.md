@@ -151,7 +151,7 @@ List Session Threads
 
   - `Agent BetaManagedAgentsSessionThreadAgentUnion`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `type BetaManagedAgentsSessionThreadAgent`
 
@@ -958,7 +958,7 @@ Get Session Thread
 
   - `SessionID param.Field[string]`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -1080,7 +1080,7 @@ Get Session Thread
 
   - `Agent BetaManagedAgentsSessionThreadAgentUnion`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `type BetaManagedAgentsSessionThreadAgent`
 
@@ -1884,7 +1884,7 @@ Archive Session Thread
 
   - `SessionID param.Field[string]`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -2006,7 +2006,7 @@ Archive Session Thread
 
   - `Agent BetaManagedAgentsSessionThreadAgentUnion`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `type BetaManagedAgentsSessionThreadAgent`
 
@@ -2810,7 +2810,7 @@ func main() {
 
   - `Agent BetaManagedAgentsSessionThreadAgentUnion`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `type BetaManagedAgentsSessionThreadAgent`
 
@@ -5892,17 +5892,17 @@ List Session Thread Events
 
   - `SessionID param.Field[string]`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `Limit param.Field[int64] Optional`
 
-    Query param: Query parameter for limit
+    Query param
 
     format: int32
 
   - `Page param.Field[string] Optional`
 
-    Query param: Query parameter for page
+    Query param
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -8310,7 +8310,7 @@ Stream Session Thread Events
 
   - `SessionID param.Field[string]`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `EventDeltas param.Field[[]BetaManagedAgentsDeltaType] Optional`
 

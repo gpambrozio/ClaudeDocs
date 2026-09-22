@@ -4,12 +4,18 @@
 title: Files API
 url: https://platform.claude.com/docs/en/build-with-claude/files
 description: Upload files once, reference them by file_id in Messages requests, and download outputs created by skills or the code execution tool.
+featureMetadata:
+  status: ga
+  zdr: not-eligible
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: beta
+    Amazon Bedrock: not available
+    Google Cloud: not available
+    Microsoft Foundry:
+      availability: beta
+      note: On [Microsoft Foundry](claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
 ---
-
-## Compatibility
-- [ZDR](../manage-claude/api-and-data-retention.md): not eligible
-- Platforms: Claude API, Claude Platform on AWS (beta), Microsoft Foundry (beta) [1]; not available on Amazon Bedrock, Google Cloud
-1. On [Microsoft Foundry](claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
 
 The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](../api/files/upload.md), in addition to this guide.
 

@@ -447,7 +447,7 @@ Get Deployment Run
 
   - `required string deploymentRunID`
 
-    Path parameter deployment_run_id
+    Unique identifier of the deployment run.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -1237,7 +1237,11 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `Schedule("schedule")`
 
+    The run was fired by the deployment's cron schedule.
+
   - `Manual("manual")`
+
+    The run was started manually by creating a session directly against the deployment.
 
 ### Beta Managed Agents Unknown Run Error
 

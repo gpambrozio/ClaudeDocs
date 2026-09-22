@@ -17,6 +17,8 @@ Retrieve a memory store
 
 - `memoryStoreID string`
 
+  ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`.
+
 - `query BetaMemoryStoreGetParams`
 
   - `Betas param.Field[[]AnthropicBeta] Optional`

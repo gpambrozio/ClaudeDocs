@@ -17,7 +17,7 @@ Archive Agent
 
 - `--agent-id: string`
 
-  Path parameter agent_id
+  Unique identifier of the agent to archive.
 
 - `--beta: optional array of AnthropicBeta`
 

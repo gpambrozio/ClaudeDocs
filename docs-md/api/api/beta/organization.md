@@ -9014,21 +9014,85 @@ the remaining entries.
 
     default: workspace_rate_limit
 
-  - `group_type: "batch" or "files" or "model_group" or 3 more`
+  - `group: BetaOrganizationRateLimitModelGroup or BetaOrganizationRateLimitBatchGroup or BetaOrganizationRateLimitTokenCountGroup or 3 more`
 
-    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
 
-    - `"batch"`
+    - `BetaOrganizationRateLimitModelGroup object`
 
-    - `"files"`
+      - `type: "model_group"`
 
-    - `"model_group"`
+        Always `model_group`: a family of models.
 
-    - `"skills"`
+        default: model_group
 
-    - `"token_count"`
+      - `id: string`
 
-    - `"web_search"`
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+      - `display_name: string`
+
+        Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For display only; it may change.
+
+    - `BetaOrganizationRateLimitBatchGroup object`
+
+      - `type: "batch"`
+
+        Always `batch`: the Message Batches API.
+
+        default: batch
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitTokenCountGroup object`
+
+      - `type: "token_count"`
+
+        Always `token_count`: the Token Count API.
+
+        default: token_count
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitFilesGroup object`
+
+      - `type: "files"`
+
+        Always `files`: the Files API.
+
+        default: files
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitSkillsGroup object`
+
+      - `type: "skills"`
+
+        Always `skills`: the Skills API.
+
+        default: skills
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitWebSearchGroup object`
+
+      - `type: "web_search"`
+
+        Always `web_search`: the Messages API web search tool.
+
+        default: web_search
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
 
   - `limits: array of BetaWorkspaceRateLimitValue`
 
@@ -9052,11 +9116,29 @@ the remaining entries.
 
   - `rate_limit_id: string`
 
-    The `id` of the RateLimit group this override applies to.
+    The `id` of the organization's RateLimit entry this override applies to.
 
   - `workspace_id: string`
 
     ID of the Workspace this override applies to.
+
+  - `group_type: "batch" or "files" or "model_group" or 3 more`
+
+    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
+
+    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
+
+    - `"batch"`
+
+    - `"files"`
+
+    - `"model_group"`
+
+    - `"skills"`
+
+    - `"token_count"`
+
+    - `"web_search"`
 
 - `next_page: string or null`
 
@@ -9076,6 +9158,11 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 {
   "data": [
     {
+      "group": {
+        "id": "id",
+        "display_name": "display_name",
+        "type": "model_group"
+      },
       "group_type": "batch",
       "limits": [
         {
@@ -10524,23 +10611,87 @@ the remaining entries.
 
   - `id: string`
 
-    Stable identifier for this rate-limit group within the organization.
+    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`.
 
-  - `group_type: "batch" or "files" or "model_group" or 3 more`
+  - `group: BetaOrganizationRateLimitModelGroup or BetaOrganizationRateLimitBatchGroup or BetaOrganizationRateLimitTokenCountGroup or 3 more`
 
-    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
 
-    - `"batch"`
+    - `BetaOrganizationRateLimitModelGroup object`
 
-    - `"files"`
+      - `type: "model_group"`
 
-    - `"model_group"`
+        Always `model_group`: a family of models.
 
-    - `"skills"`
+        default: model_group
 
-    - `"token_count"`
+      - `id: string`
 
-    - `"web_search"`
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+      - `display_name: string`
+
+        Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For display only; it may change.
+
+    - `BetaOrganizationRateLimitBatchGroup object`
+
+      - `type: "batch"`
+
+        Always `batch`: the Message Batches API.
+
+        default: batch
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitTokenCountGroup object`
+
+      - `type: "token_count"`
+
+        Always `token_count`: the Token Count API.
+
+        default: token_count
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitFilesGroup object`
+
+      - `type: "files"`
+
+        Always `files`: the Files API.
+
+        default: files
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitSkillsGroup object`
+
+      - `type: "skills"`
+
+        Always `skills`: the Skills API.
+
+        default: skills
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `BetaOrganizationRateLimitWebSearchGroup object`
+
+      - `type: "web_search"`
+
+        Always `web_search`: the Messages API web search tool.
+
+        default: web_search
+
+      - `id: string`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
 
   - `limits: array of BetaOrganizationRateLimitValue`
 
@@ -10557,6 +10708,24 @@ the remaining entries.
   - `models: array of string or null`
 
     Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+  - `group_type: "batch" or "files" or "model_group" or 3 more`
+
+    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
+
+    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
+
+    - `"batch"`
+
+    - `"files"`
+
+    - `"model_group"`
+
+    - `"skills"`
+
+    - `"token_count"`
+
+    - `"web_search"`
 
 - `next_page: string or null`
 
@@ -10577,6 +10746,11 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
   "data": [
     {
       "id": "id",
+      "group": {
+        "id": "id",
+        "display_name": "display_name",
+        "type": "model_group"
+      },
       "group_type": "batch",
       "limits": [
         {
@@ -19052,7 +19226,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     Name of the RBAC Group. Not uniqueness-enforced.
 
-  - `roles: array of string or null`
+  - `role_ids: array of string or null`
 
     RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
@@ -19069,6 +19243,12 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+  - `roles: array of string or null`
+
+    **Deprecated**: Use `role_ids` instead; `roles` always has the same value.
+
+    Deprecated: use `role_ids` instead. IDs of the RBAC Roles attached to this RBAC Group; always the same value as `role_ids`, `null` included.
 
 - `has_more: boolean`
 
@@ -19095,6 +19275,9 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups \
       "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "created_at": "2024-10-30T23:58:27.427722Z",
       "name": "Engineering",
+      "role_ids": [
+        "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
+      ],
       "roles": [
         "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
       ],
@@ -19110,7 +19293,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups \
 
 ### Get RBAC Group
 
-**GET** `/v1/organizations/rbac_groups/{group_id}`
+**GET** `/v1/organizations/rbac_groups/{rbac_group_id}`
 
 Retrieve an RBAC Group by ID.
 
@@ -19118,7 +19301,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `group_id: string`
+- `rbac_group_id: string`
 
   ID of the RBAC Group.
 
@@ -19148,7 +19331,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     Name of the RBAC Group. Not uniqueness-enforced.
 
-  - `roles: array of string or null`
+  - `role_ids: array of string or null`
 
     RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
@@ -19166,10 +19349,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+  - `roles: array of string or null`
+
+    **Deprecated**: Use `role_ids` instead; `roles` always has the same value.
+
+    Deprecated: use `role_ids` instead. IDs of the RBAC Roles attached to this RBAC Group; always the same value as `role_ids`, `null` included.
+
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
+curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
@@ -19181,6 +19370,9 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
   "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "name": "Engineering",
+  "role_ids": [
+    "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
+  ],
   "roles": [
     "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
   ],
@@ -19232,7 +19424,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     Name of the RBAC Group. Not uniqueness-enforced.
 
-  - `roles: array of string or null`
+  - `role_ids: array of string or null`
 
     RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
@@ -19249,6 +19441,12 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+  - `roles: array of string or null`
+
+    **Deprecated**: Use `role_ids` instead; `roles` always has the same value.
+
+    Deprecated: use `role_ids` instead. IDs of the RBAC Roles attached to this RBAC Group; always the same value as `role_ids`, `null` included.
 
 #### Example
 
@@ -19269,6 +19467,9 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups \
   "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "name": "Engineering",
+  "role_ids": [
+    "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
+  ],
   "roles": [
     "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
   ],
@@ -19280,7 +19481,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups \
 
 ### Update RBAC Group
 
-**POST** `/v1/organizations/rbac_groups/{group_id}`
+**POST** `/v1/organizations/rbac_groups/{rbac_group_id}`
 
 Update an RBAC Group's name. Groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning.
 
@@ -19288,7 +19489,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `group_id: string`
+- `rbac_group_id: string`
 
   ID of the RBAC Group.
 
@@ -19326,7 +19527,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     Name of the RBAC Group. Not uniqueness-enforced.
 
-  - `roles: array of string or null`
+  - `role_ids: array of string or null`
 
     RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 
@@ -19344,10 +19545,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+  - `roles: array of string or null`
+
+    **Deprecated**: Use `role_ids` instead; `roles` always has the same value.
+
+    Deprecated: use `role_ids` instead. IDs of the RBAC Roles attached to this RBAC Group; always the same value as `role_ids`, `null` included.
+
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
+curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
@@ -19363,6 +19570,9 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
   "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "name": "Engineering",
+  "role_ids": [
+    "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
+  ],
   "roles": [
     "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s"
   ],
@@ -19374,7 +19584,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
 ### Delete RBAC Group
 
-**DELETE** `/v1/organizations/rbac_groups/{group_id}`
+**DELETE** `/v1/organizations/rbac_groups/{rbac_group_id}`
 
 Delete an RBAC Group. Groups provisioned by an identity provider (source type `"scim"`) cannot be deleted via the API while an organization in the tenant uses SCIM provisioning.
 
@@ -19382,7 +19592,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `group_id: string`
+- `rbac_group_id: string`
 
   ID of the RBAC Group.
 
@@ -19405,7 +19615,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
+curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -19424,7 +19634,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID \
 
 ### List RBAC Group Members
 
-**GET** `/v1/organizations/rbac_groups/{group_id}/members`
+**GET** `/v1/organizations/rbac_groups/{rbac_group_id}/members`
 
 List members of an RBAC Group.
 
@@ -19432,7 +19642,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `group_id: string`
+- `rbac_group_id: string`
 
   ID of the RBAC Group.
 
@@ -19472,13 +19682,19 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     Email of the User.
 
-  - `group_id: string`
+  - `rbac_group_id: string`
 
     ID of the RBAC Group.
 
   - `user_id: string`
 
     ID of the User.
+
+  - `group_id: string`
+
+    **Deprecated**: Use `rbac_group_id` instead; `group_id` always has the same value.
+
+    Deprecated: use `rbac_group_id` instead. ID of the RBAC Group; always the same value as `rbac_group_id`.
 
 - `has_more: boolean`
 
@@ -19491,7 +19707,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
+curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID/members \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
@@ -19505,6 +19721,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
       "created_at": "2024-10-30T23:58:27.427722Z",
       "email": "user@emaildomain.com",
       "group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+      "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "type": "rbac_group_member",
       "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
     }
@@ -19516,7 +19733,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
 
 ### Add RBAC Group Member
 
-**POST** `/v1/organizations/rbac_groups/{group_id}/members`
+**POST** `/v1/organizations/rbac_groups/{rbac_group_id}/members`
 
 Add a User to an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning.
 
@@ -19524,7 +19741,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `group_id: string`
+- `rbac_group_id: string`
 
   ID of the RBAC Group.
 
@@ -19556,7 +19773,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     Email of the User.
 
-  - `group_id: string`
+  - `rbac_group_id: string`
 
     ID of the RBAC Group.
 
@@ -19564,10 +19781,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+  - `group_id: string`
+
+    **Deprecated**: Use `rbac_group_id` instead; `group_id` always has the same value.
+
+    Deprecated: use `rbac_group_id` instead. ID of the RBAC Group; always the same value as `rbac_group_id`.
+
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
+curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID/members \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
@@ -19583,6 +19806,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
   "created_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "type": "rbac_group_member",
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
 }
@@ -19590,7 +19814,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members \
 
 ### Remove RBAC Group Member
 
-**DELETE** `/v1/organizations/rbac_groups/{group_id}/members/{user_id}`
+**DELETE** `/v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}`
 
 Remove a User from an RBAC Group. Membership of groups provisioned by an identity provider (source type `"scim"`) cannot be modified via the API while an organization in the tenant uses SCIM provisioning.
 
@@ -19598,7 +19822,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `group_id: string`
+- `rbac_group_id: string`
 
   ID of the RBAC Group.
 
@@ -19616,7 +19840,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     default: rbac_group_member_deleted
 
-  - `group_id: string`
+  - `rbac_group_id: string`
 
     ID of the RBAC Group.
 
@@ -19624,10 +19848,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+  - `group_id: string`
+
+    **Deprecated**: Use `rbac_group_id` instead; `group_id` always has the same value.
+
+    Deprecated: use `rbac_group_id` instead. ID of the RBAC Group; always the same value as `rbac_group_id`.
+
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$USER_ID \
+curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID/members/$USER_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
@@ -19638,6 +19868,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$GROUP_ID/members/$U
 ```json
 {
   "group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "type": "rbac_group_member_deleted",
   "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
 }
@@ -19736,7 +19967,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles \
 
 ### Get RBAC Role
 
-**GET** `/v1/organizations/rbac_roles/{role_id}`
+**GET** `/v1/organizations/rbac_roles/{rbac_role_id}`
 
 Retrieve an RBAC Role by ID.
 
@@ -19744,7 +19975,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `role_id: string`
+- `rbac_role_id: string`
 
   ID of the RBAC Role.
 
@@ -19783,7 +20014,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID \
+curl https://api.anthropic.com/v1/organizations/rbac_roles/$RBAC_ROLE_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
@@ -19804,7 +20035,7 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID \
 
 ### List RBAC Role Permissions
 
-**GET** `/v1/organizations/rbac_roles/{role_id}/permissions`
+**GET** `/v1/organizations/rbac_roles/{rbac_role_id}/permissions`
 
 List the permissions an RBAC Role grants.
 
@@ -19812,7 +20043,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 #### Path parameters
 
-- `role_id: string`
+- `rbac_role_id: string`
 
   ID of the RBAC Role.
 
@@ -19955,7 +20186,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 #### Example
 
 ```bash
-curl https://api.anthropic.com/v1/organizations/rbac_roles/$ROLE_ID/permissions \
+curl https://api.anthropic.com/v1/organizations/rbac_roles/$RBAC_ROLE_ID/permissions \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```

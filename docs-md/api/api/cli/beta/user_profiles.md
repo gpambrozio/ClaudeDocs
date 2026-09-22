@@ -61,6 +61,10 @@ Create User Profile
 
 - `beta_user_profile: object`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `type: "user_profile"`
 
     Object type. Always `user_profile`.
@@ -105,7 +109,11 @@ Create User Profile
 
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id: optional string`
 
@@ -121,9 +129,15 @@ Create User Profile
 
       - `"active"`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string`
 
@@ -218,21 +232,23 @@ List User Profiles
 
 - `--limit: optional number`
 
-  Query param: Query parameter for limit
+  Query param: The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
   format: int32
 
 - `--order: optional "asc" or "desc"`
 
-  Query param: Query parameter for order
+  Query param: The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
 
 - `--order-by: optional "created_at" or "name"`
 
-  Query param: Query parameter for order_by
+  Query param: The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
 
 - `--page: optional string`
 
-  Query param: Query parameter for page
+  Query param: The cursor for the page to return, taken from `next_page` in a previous response.
+
+  Leave it out to get the first page.
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -247,6 +263,8 @@ List User Profiles
 ### Returns
 
 - `BetaListUserProfilesResponse: object`
+
+  A page of user profiles, sorted by the request's `order_by` and `order`.
 
   - `data: array of BetaUserProfile`
 
@@ -296,7 +314,11 @@ List User Profiles
 
       - `"application"`
 
+        The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
       - `"passthrough"`
+
+        The user profile represents a company that the platform resells Claude access to.
 
     - `external_id: optional string`
 
@@ -312,9 +334,15 @@ List User Profiles
 
         - `"active"`
 
+          The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
         - `"suspended"`
 
+          The platform has restricted the account of the entity that the user profile represents and may restore it.
+
         - `"blocked"`
+
+          The platform has barred the account of the entity that the user profile represents.
 
       - `country: string`
 
@@ -418,7 +446,7 @@ Get User Profile
 
 - `--user-profile-id: string`
 
-  Path parameter user_profile_id
+  The ID of the user profile to get (`uprof_...`).
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -433,6 +461,10 @@ Get User Profile
 ### Returns
 
 - `beta_user_profile: object`
+
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
   - `type: "user_profile"`
 
@@ -478,7 +510,11 @@ Get User Profile
 
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id: optional string`
 
@@ -494,9 +530,15 @@ Get User Profile
 
       - `"active"`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string`
 
@@ -592,7 +634,7 @@ Update User Profile
 
 - `--user-profile-id: string`
 
-  Path param: Path parameter user_profile_id
+  Path param: The ID of the user profile to update (`uprof_...`).
 
 - `--access-type: optional "application" or "passthrough"`
 
@@ -638,6 +680,10 @@ Update User Profile
 
 - `beta_user_profile: object`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `type: "user_profile"`
 
     Object type. Always `user_profile`.
@@ -682,7 +728,11 @@ Update User Profile
 
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id: optional string`
 
@@ -698,9 +748,15 @@ Update User Profile
 
       - `"active"`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string`
 
@@ -796,7 +852,7 @@ Create Enrollment URL
 
 - `--user-profile-id: string`
 
-  Path parameter user_profile_id
+  The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -811,6 +867,8 @@ Create Enrollment URL
 ### Returns
 
 - `beta_user_profile_enrollment_url: object`
+
+  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
 
   - `type: "enrollment_url"`
 
@@ -849,6 +907,10 @@ ant beta:user-profiles create-enrollment-url \
 ### Beta User Profile
 
 - `beta_user_profile: object`
+
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
   - `type: "user_profile"`
 
@@ -894,7 +956,11 @@ ant beta:user-profiles create-enrollment-url \
 
     - `"application"`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `"passthrough"`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `external_id: optional string`
 
@@ -910,9 +976,15 @@ ant beta:user-profiles create-enrollment-url \
 
       - `"active"`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `"suspended"`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `"blocked"`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `country: string`
 
@@ -962,6 +1034,8 @@ ant beta:user-profiles create-enrollment-url \
 
 - `beta_user_profile_enrollment_url: object`
 
+  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+
   - `type: "enrollment_url"`
 
     Object type. Always `enrollment_url`.
@@ -988,9 +1062,15 @@ ant beta:user-profiles create-enrollment-url \
 
     - `"active"`
 
+      The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
     - `"suspended"`
 
+      The platform has restricted the account of the entity that the user profile represents and may restore it.
+
     - `"blocked"`
+
+      The platform has barred the account of the entity that the user profile represents.
 
   - `country: string`
 
@@ -1036,9 +1116,15 @@ ant beta:user-profiles create-enrollment-url \
 
     - `"active"`
 
+      The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
     - `"suspended"`
 
+      The platform has restricted the account of the entity that the user profile represents and may restore it.
+
     - `"blocked"`
+
+      The platform has barred the account of the entity that the user profile represents.
 
   - `country: optional string`
 
@@ -1083,6 +1169,8 @@ ant beta:user-profiles create-enrollment-url \
 ### Beta User Profile Trust Grant
 
 - `beta_user_profile_trust_grant: object`
+
+  The status of one trust grant on a user profile, listed in the profile's `trust_grants` map under the grant's name.
 
   - `status: "active" or "pending" or "rejected"`
 

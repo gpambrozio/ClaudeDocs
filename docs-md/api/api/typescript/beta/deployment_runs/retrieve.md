@@ -17,6 +17,8 @@ Get Deployment Run
 
 - `deploymentRunID: string`
 
+  Unique identifier of the deployment run.
+
 - `params: DeploymentRunRetrieveParams`
 
   - `betas?: Array<AnthropicBeta>`

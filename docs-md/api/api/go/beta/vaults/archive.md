@@ -17,6 +17,8 @@ Archive Vault
 
 - `vaultID string`
 
+  Unique identifier of the vault to archive.
+
 - `body BetaVaultArchiveParams`
 
   - `Betas param.Field[[]AnthropicBeta] Optional`

@@ -19,6 +19,8 @@ Create Credential
 
 - `vaultID: string`
 
+  Identifier of the vault to create the credential in.
+
 - `params: CredentialCreateParams`
 
   - `auth: BetaManagedAgentsMCPOAuthCreateParams | BetaManagedAgentsStaticBearerCreateParams | BetaManagedAgentsEnvironmentVariableCreateParams`
@@ -509,6 +511,8 @@ List Credentials
 
 - `vaultID: string`
 
+  Identifier of the vault to list credentials for.
+
 - `params: CredentialListParams`
 
   - `include_archived?: boolean`
@@ -840,11 +844,13 @@ Get Credential
 
 - `credentialID: string`
 
+  Unique identifier of the credential to retrieve.
+
 - `params: CredentialRetrieveParams`
 
   - `vault_id: string`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -1156,11 +1162,13 @@ Update Credential
 
 - `credentialID: string`
 
+  Unique identifier of the credential to update.
+
 - `params: CredentialUpdateParams`
 
   - `vault_id: string`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `auth?: BetaManagedAgentsMCPOAuthUpdateParams | BetaManagedAgentsStaticBearerUpdateParams | BetaManagedAgentsEnvironmentVariableUpdateParams`
 
@@ -1602,11 +1610,13 @@ Delete Credential
 
 - `credentialID: string`
 
+  Unique identifier of the credential to delete.
+
 - `params: CredentialDeleteParams`
 
   - `vault_id: string`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -1764,11 +1774,13 @@ Archive Credential
 
 - `credentialID: string`
 
+  Unique identifier of the credential to archive.
+
 - `params: CredentialArchiveParams`
 
   - `vault_id: string`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -2080,11 +2092,13 @@ Validate Credential
 
 - `credentialID: string`
 
+  Unique identifier of the credential to validate.
+
 - `params: CredentialMCPOAuthValidateParams`
 
   - `vault_id: string`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `betas?: Array<AnthropicBeta>`
 
@@ -2250,13 +2264,26 @@ Validate Credential
 
       Outcome of a refresh-token exchange attempted during credential validation.
 
+      - `succeeded` - The token endpoint returned a new access token.
+      - `failed` - The token endpoint returned an error response. See `http_response` for detail.
+      - `connect_error` - The token endpoint could not be reached (DNS, TLS, or connection error).
+      - `no_refresh_token` - No refresh token is stored for the credential, so no exchange was attempted.
+
       - `"succeeded"`
+
+        The token endpoint returned a new access token.
 
       - `"failed"`
 
+        The token endpoint returned an error response. See `http_response` for detail.
+
       - `"connect_error"`
 
+        The token endpoint could not be reached (DNS, TLS, or connection error).
+
       - `"no_refresh_token"`
+
+        No refresh token is stored for the credential, so no exchange was attempted.
 
   - `status: BetaManagedAgentsCredentialValidationStatus`
 
@@ -2264,9 +2291,15 @@ Validate Credential
 
     - `"valid"`
 
+      The credential successfully authenticated against its MCP server.
+
     - `"invalid"`
 
+      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+
     - `"unknown"`
+
+      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
 
   - `validated_at: string`
 
@@ -2560,13 +2593,26 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
       Outcome of a refresh-token exchange attempted during credential validation.
 
+      - `succeeded` - The token endpoint returned a new access token.
+      - `failed` - The token endpoint returned an error response. See `http_response` for detail.
+      - `connect_error` - The token endpoint could not be reached (DNS, TLS, or connection error).
+      - `no_refresh_token` - No refresh token is stored for the credential, so no exchange was attempted.
+
       - `"succeeded"`
+
+        The token endpoint returned a new access token.
 
       - `"failed"`
 
+        The token endpoint returned an error response. See `http_response` for detail.
+
       - `"connect_error"`
 
+        The token endpoint could not be reached (DNS, TLS, or connection error).
+
       - `"no_refresh_token"`
+
+        No refresh token is stored for the credential, so no exchange was attempted.
 
   - `status: BetaManagedAgentsCredentialValidationStatus`
 
@@ -2574,9 +2620,15 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     - `"valid"`
 
+      The credential successfully authenticated against its MCP server.
+
     - `"invalid"`
 
+      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+
     - `"unknown"`
+
+      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
 
   - `validated_at: string`
 
@@ -2594,11 +2646,21 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
   Overall verdict of a credential validation probe.
 
+  - `valid` - The credential successfully authenticated against its MCP server.
+  - `invalid` - The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+  - `unknown` - The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
+
   - `"valid"`
+
+    The credential successfully authenticated against its MCP server.
 
   - `"invalid"`
 
+    The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+
   - `"unknown"`
+
+    The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
 
 ### Beta Managed Agents Deleted Credential
 
@@ -3274,13 +3336,26 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 
     Outcome of a refresh-token exchange attempted during credential validation.
 
+    - `succeeded` - The token endpoint returned a new access token.
+    - `failed` - The token endpoint returned an error response. See `http_response` for detail.
+    - `connect_error` - The token endpoint could not be reached (DNS, TLS, or connection error).
+    - `no_refresh_token` - No refresh token is stored for the credential, so no exchange was attempted.
+
     - `"succeeded"`
+
+      The token endpoint returned a new access token.
 
     - `"failed"`
 
+      The token endpoint returned an error response. See `http_response` for detail.
+
     - `"connect_error"`
 
+      The token endpoint could not be reached (DNS, TLS, or connection error).
+
     - `"no_refresh_token"`
+
+      No refresh token is stored for the credential, so no exchange was attempted.
 
 ### Beta Managed Agents Static Bearer Auth Response
 

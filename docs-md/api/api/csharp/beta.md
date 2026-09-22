@@ -5717,8 +5717,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `required BetaDiagnostics? Diagnostics`
 
-    Response envelope for request-level diagnostics. Present (possibly
-    null) whenever the caller supplied `diagnostics` on the request.
+    Request-level diagnostics: why the prompt cache could not fully reuse
+    the prefix of the request named by `diagnostics.previous_message_id`.
 
     - `required CacheMissReason? CacheMissReason`
 
@@ -16875,8 +16875,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `required BetaDiagnostics? Diagnostics`
 
-          Response envelope for request-level diagnostics. Present (possibly
-          null) whenever the caller supplied `diagnostics` on the request.
+          Request-level diagnostics: why the prompt cache could not fully reuse
+          the prefix of the request named by `diagnostics.previous_message_id`.
 
           - `required CacheMissReason? CacheMissReason`
 
@@ -17751,13 +17751,23 @@ Create Agent
 
           - `Low("low")`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `Medium("medium")`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `High("high")`
 
+            High effort. Favors reasoning depth.
+
           - `Xhigh("xhigh")`
 
+            Extra-high effort. Not all models accept this level.
+
           - `Max("max")`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `class BetaManagedAgentsEffortLow`
 
@@ -19900,7 +19910,7 @@ Get Agent
 
   - `required string agentID`
 
-    Path param: Path parameter agent_id
+    Path param: Unique identifier of the agent to retrieve.
 
   - `int version`
 
@@ -20686,7 +20696,7 @@ Update Agent
 
   - `required string agentID`
 
-    Path param: Path parameter agent_id
+    Path param: Unique identifier of the agent to update.
 
   - `string? description`
 
@@ -20858,13 +20868,23 @@ Update Agent
 
           - `Low("low")`
 
+            Low effort. Favors latency over reasoning depth.
+
           - `Medium("medium")`
+
+            Medium effort. Balances latency and reasoning depth.
 
           - `High("high")`
 
+            High effort. Favors reasoning depth.
+
           - `Xhigh("xhigh")`
 
+            Extra-high effort. Not all models accept this level.
+
           - `Max("max")`
+
+            Maximum effort. Favors reasoning depth over latency.
 
         - `class BetaManagedAgentsEffortLow`
 
@@ -22178,7 +22198,7 @@ Archive Agent
 
   - `required string agentID`
 
-    Path parameter agent_id
+    Unique identifier of the agent to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -22960,7 +22980,7 @@ List Agent Versions
 
   - `required string agentID`
 
-    Path param: Path parameter agent_id
+    Path param: Agent ID to list versions for.
 
   - `int limit`
 
@@ -27727,13 +27747,23 @@ Create Session
 
               - `Low("low")`
 
+                Low effort. Favors latency over reasoning depth.
+
               - `Medium("medium")`
+
+                Medium effort. Balances latency and reasoning depth.
 
               - `High("high")`
 
+                High effort. Favors reasoning depth.
+
               - `Xhigh("xhigh")`
 
+                Extra-high effort. Not all models accept this level.
+
               - `Max("max")`
+
+                Maximum effort. Favors reasoning depth over latency.
 
             - `class BetaManagedAgentsEffortLow`
 
@@ -29471,11 +29501,19 @@ Create Session
 
     - `Rescheduling("rescheduling")`
 
+      Transient error occurred, retrying automatically.
+
     - `Running("running")`
+
+      Agent is actively executing.
 
     - `Idle("idle")`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `Terminated("terminated")`
+
+      Session has ended, either due to an error or completion.
 
   - `required string? Title`
 
@@ -29847,11 +29885,19 @@ List Sessions
 
     - `Rescheduling("rescheduling")`
 
+      Transient error occurred, retrying automatically.
+
     - `Running("running")`
+
+      Agent is actively executing.
 
     - `Idle("idle")`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `Terminated("terminated")`
+
+      Session has ended, either due to an error or completion.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -30745,11 +30791,19 @@ List Sessions
 
     - `Rescheduling("rescheduling")`
 
+      Transient error occurred, retrying automatically.
+
     - `Running("running")`
+
+      Agent is actively executing.
 
     - `Idle("idle")`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `Terminated("terminated")`
+
+      Session has ended, either due to an error or completion.
 
   - `required string? Title`
 
@@ -31056,8 +31110,6 @@ Get Session
 - `SessionRetrieveParams parameters`
 
   - `required string sessionID`
-
-    Path parameter session_id
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -31951,11 +32003,19 @@ Get Session
 
     - `Rescheduling("rescheduling")`
 
+      Transient error occurred, retrying automatically.
+
     - `Running("running")`
+
+      Agent is actively executing.
 
     - `Idle("idle")`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `Terminated("terminated")`
+
+      Session has ended, either due to an error or completion.
 
   - `required string? Title`
 
@@ -32258,7 +32318,7 @@ Update Session
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `BetaManagedAgentsSessionAgentUpdate agent`
 
@@ -33174,11 +33234,19 @@ Update Session
 
     - `Rescheduling("rescheduling")`
 
+      Transient error occurred, retrying automatically.
+
     - `Running("running")`
+
+      Agent is actively executing.
 
     - `Idle("idle")`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `Terminated("terminated")`
+
+      Session has ended, either due to an error or completion.
 
   - `required string? Title`
 
@@ -33481,8 +33549,6 @@ Delete Session
 
   - `required string sessionID`
 
-    Path parameter session_id
-
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -33630,8 +33696,6 @@ Archive Session
 - `SessionArchiveParams parameters`
 
   - `required string sessionID`
-
-    Path parameter session_id
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -34525,11 +34589,19 @@ Archive Session
 
     - `Rescheduling("rescheduling")`
 
+      Transient error occurred, retrying automatically.
+
     - `Running("running")`
+
+      Agent is actively executing.
 
     - `Idle("idle")`
 
+      Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
+
     - `Terminated("terminated")`
+
+      Session has ended, either due to an error or completion.
 
   - `required string? Title`
 
@@ -34834,7 +34906,7 @@ List Events
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `DateTimeOffset createdAtGt`
 
@@ -34862,7 +34934,7 @@ List Events
 
   - `int limit`
 
-    Query param: Query parameter for limit
+    Query param
 
     format: int32
 
@@ -37269,7 +37341,7 @@ Send Events
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required IReadOnlyList<BetaManagedAgentsEventParams> events`
 
@@ -38243,7 +38315,7 @@ Stream Events
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `IReadOnlyList<BetaManagedAgentsDeltaType> eventDeltas`
 
@@ -40683,7 +40755,7 @@ Add Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string fileID`
 
@@ -40865,7 +40937,7 @@ List Session Resources
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `int limit`
 
@@ -41144,11 +41216,11 @@ Get Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string resourceID`
 
-    Path param: Path parameter resource_id
+    Path param
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -41405,11 +41477,11 @@ Update Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string resourceID`
 
-    Path param: Path parameter resource_id
+    Path param
 
   - `required string authorizationToken`
 
@@ -41673,11 +41745,11 @@ Delete Session Resource
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string resourceID`
 
-    Path param: Path parameter resource_id
+    Path param
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -41830,7 +41902,7 @@ List Session Threads
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `int limit`
 
@@ -41958,7 +42030,7 @@ List Session Threads
 
   - `required Agent Agent`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `class BetaManagedAgentsSessionThreadAgent`
 
@@ -42741,11 +42813,11 @@ Get Session Thread
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string threadID`
 
-    Path param: Path parameter thread_id
+    Path param
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -42863,7 +42935,7 @@ Get Session Thread
 
   - `required Agent Agent`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `class BetaManagedAgentsSessionThreadAgent`
 
@@ -43640,11 +43712,11 @@ Archive Session Thread
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string threadID`
 
-    Path param: Path parameter thread_id
+    Path param
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -43762,7 +43834,7 @@ Archive Session Thread
 
   - `required Agent Agent`
 
-    The resolved agent a session thread runs: a saved-agent snapshot, the platform advisor entry, or an inline-defined (ephemeral) agent snapshot.
+    The resolved agent a `session_thread` runs.
 
     - `class BetaManagedAgentsSessionThreadAgent`
 
@@ -44541,21 +44613,21 @@ List Session Thread Events
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string threadID`
 
-    Path param: Path parameter thread_id
+    Path param
 
   - `int limit`
 
-    Query param: Query parameter for limit
+    Query param
 
     format: int32
 
   - `string page`
 
-    Query param: Query parameter for page
+    Query param
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -46934,11 +47006,11 @@ Stream Session Thread Events
 
   - `required string sessionID`
 
-    Path param: Path parameter session_id
+    Path param
 
   - `required string threadID`
 
-    Path param: Path parameter thread_id
+    Path param
 
   - `IReadOnlyList<BetaManagedAgentsDeltaType> eventDeltas`
 
@@ -50331,7 +50403,11 @@ Create Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -51092,7 +51168,11 @@ List Deployments
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -51220,7 +51300,7 @@ Get Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -51810,7 +51890,11 @@ Get Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -51934,7 +52018,7 @@ Update Deployment
 
   - `required string deploymentID`
 
-    Path param: Path parameter deployment_id
+    Path param: Unique identifier of the deployment to update.
 
   - `Agent agent`
 
@@ -52896,7 +52980,11 @@ Update Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -53020,7 +53108,7 @@ Archive Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -53610,7 +53698,11 @@ Archive Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -53734,7 +53826,7 @@ Run Deployment Now
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to run.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -54114,7 +54206,7 @@ Pause Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to pause.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -54704,7 +54796,11 @@ Pause Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -54828,7 +54924,7 @@ Unpause Deployment
 
   - `required string deploymentID`
 
-    Path parameter deployment_id
+    Unique identifier of the deployment to unpause.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -55418,7 +55514,11 @@ Unpause Deployment
 
     - `Active("active")`
 
+      The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
+
     - `Paused("paused")`
+
+      The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
   - `required DateTimeOffset UpdatedAt`
 
@@ -55970,7 +56070,7 @@ Get Deployment Run
 
   - `required string deploymentRunID`
 
-    Path parameter deployment_run_id
+    Unique identifier of the deployment run.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -56739,7 +56839,7 @@ Get Vault
 
   - `required string vaultID`
 
-    Path parameter vault_id
+    Unique identifier of the vault to retrieve.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -56924,7 +57024,7 @@ Update Vault
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Unique identifier of the vault to update.
 
   - `string? displayName`
 
@@ -57119,7 +57219,7 @@ Delete Vault
 
   - `required string vaultID`
 
-    Path parameter vault_id
+    Unique identifier of the vault to delete.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -57271,7 +57371,7 @@ Archive Vault
 
   - `required string vaultID`
 
-    Path parameter vault_id
+    Unique identifier of the vault to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -57458,7 +57558,7 @@ Create Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault to create the credential in.
 
   - `required Auth auth`
 
@@ -57942,7 +58042,7 @@ List Credentials
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault to list credentials for.
 
   - `bool includeArchived`
 
@@ -58269,11 +58369,11 @@ Get Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to retrieve.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -58580,11 +58680,11 @@ Update Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to update.
 
   - `Auth auth`
 
@@ -59021,11 +59121,11 @@ Delete Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to delete.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -59178,11 +59278,11 @@ Archive Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to archive.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -59489,11 +59589,11 @@ Validate Credential
 
   - `required string vaultID`
 
-    Path param: Path parameter vault_id
+    Path param: Identifier of the vault containing the credential.
 
   - `required string credentialID`
 
-    Path param: Path parameter credential_id
+    Path param: Unique identifier of the credential to validate.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -59657,11 +59757,19 @@ Validate Credential
 
       - `Succeeded("succeeded")`
 
+        The token endpoint returned a new access token.
+
       - `Failed("failed")`
+
+        The token endpoint returned an error response. See `http_response` for detail.
 
       - `ConnectError("connect_error")`
 
+        The token endpoint could not be reached (DNS, TLS, or connection error).
+
       - `NoRefreshToken("no_refresh_token")`
+
+        No refresh token is stored for the credential, so no exchange was attempted.
 
   - `required BetaManagedAgentsCredentialValidationStatus Status`
 
@@ -59669,9 +59777,15 @@ Validate Credential
 
     - `Valid("valid")`
 
+      The credential successfully authenticated against its MCP server.
+
     - `Invalid("invalid")`
 
+      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+
     - `Unknown("unknown")`
+
+      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
 
   - `required DateTimeOffset ValidatedAt`
 
@@ -60159,7 +60273,7 @@ Retrieve a memory store
 
   - `required string memoryStoreID`
 
-    Path parameter memory_store_id
+    ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -60349,7 +60463,7 @@ Update a memory store
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
 
   - `string? description`
 
@@ -60555,7 +60669,7 @@ Delete a memory store
 
   - `required string memoryStoreID`
 
-    Path parameter memory_store_id
+    ID of the memory store to permanently delete (a `memstore_...` identifier). Required. Deletion cascades to all memories and memory versions in the store and cannot be undone.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -60707,7 +60821,7 @@ Archive a memory store
 
   - `required string memoryStoreID`
 
-    Path parameter memory_store_id
+    ID of the memory store to archive (a `memstore_...` identifier). Required. Archiving is one-way and idempotent; archived stores cannot be unarchived. Enumerate IDs via `GET /v1/memory_stores`.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -60899,7 +61013,7 @@ Create a memory
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store to create the memory in (`memstore_...`).
 
   - `required string? content`
 
@@ -60913,7 +61027,7 @@ Create a memory
 
   - `BetaManagedAgentsMemoryView view`
 
-    Query param: Query parameter for view
+    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -61113,7 +61227,7 @@ List memories
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store to list memories from (`memstore_...`).
 
   - `int depth`
 
@@ -61353,15 +61467,15 @@ Retrieve a memory
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store that holds the memory (`memstore_...`).
 
   - `required string memoryID`
 
-    Path param: Path parameter memory_id
+    Path param: The ID of the memory to retrieve (`mem_...`).
 
   - `BetaManagedAgentsMemoryView view`
 
-    Query param: Query parameter for view
+    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -61560,15 +61674,15 @@ Update a memory
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store that holds the memory (`memstore_...`).
 
   - `required string memoryID`
 
-    Path param: Path parameter memory_id
+    Path param: The ID of the memory to update (`mem_...`).
 
   - `BetaManagedAgentsMemoryView view`
 
-    Query param: Query parameter for view
+    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `string? content`
 
@@ -61781,15 +61895,17 @@ Delete a memory
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store that holds the memory (`memstore_...`).
 
   - `required string memoryID`
 
-    Path param: Path parameter memory_id
+    Path param: The ID of the memory to delete (`mem_...`).
 
   - `string expectedContentSha256`
 
-    Query param: Query parameter for expected_content_sha256
+    Query param: Delete the memory only if its current `content_sha256` equals this value, given as 64 lowercase hexadecimal characters. Omit it to delete unconditionally.
+
+    If the hashes differ, the request fails with HTTP status 409 and nothing is deleted.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -61944,11 +62060,11 @@ List memory versions
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store whose version history to list (`memstore_...`).
 
   - `string apiKeyID`
 
-    Query param: Query parameter for api_key_id
+    Query param: Return only versions written with the API key that has this ID.
 
   - `DateTimeOffset createdAtGte`
 
@@ -61964,33 +62080,35 @@ List memory versions
 
   - `int limit`
 
-    Query param: Query parameter for limit
+    Query param: The maximum number of versions to return per page. Defaults to 20.
 
     format: int32
 
   - `string memoryID`
 
-    Query param: Query parameter for memory_id
+    Query param: Return only versions of the memory with this ID (`mem_...`).
+
+    The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
 
   - `BetaManagedAgentsMemoryVersionOperation operation`
 
-    Query param: Query parameter for operation
+    Query param: Return only versions that record this kind of change.
 
   - `string page`
 
-    Query param: Query parameter for page
+    Query param: The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
   - `string serviceAccountID`
 
-    Query param: Query parameter for service_account_id
+    Query param: Return only versions written by the service account with this ID (`svac_...`).
 
   - `string sessionID`
 
-    Query param: Query parameter for session_id
+    Query param: Return only versions written by the session with this ID.
 
   - `BetaManagedAgentsMemoryView view`
 
-    Query param: Query parameter for view
+    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -62126,9 +62244,15 @@ List memory versions
 
     - `Created("created")`
 
+      The memory was created. The first version in any memory's lineage.
+
     - `Modified("modified")`
 
+      The memory's `content`, `path`, or both were changed via update. Writes the agent makes through the filesystem mount also appear as `modified`.
+
     - `Deleted("deleted")`
+
+      The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
   - `string? Content`
 
@@ -62270,15 +62394,15 @@ Retrieve a memory version
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store that holds the version (`memstore_...`).
 
   - `required string memoryVersionID`
 
-    Path param: Path parameter memory_version_id
+    Path param: The ID of the memory version to retrieve (`memver_...`).
 
   - `BetaManagedAgentsMemoryView view`
 
-    Query param: Query parameter for view
+    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -62414,9 +62538,15 @@ Retrieve a memory version
 
     - `Created("created")`
 
+      The memory was created. The first version in any memory's lineage.
+
     - `Modified("modified")`
 
+      The memory's `content`, `path`, or both were changed via update. Writes the agent makes through the filesystem mount also appear as `modified`.
+
     - `Deleted("deleted")`
+
+      The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
   - `string? Content`
 
@@ -62552,11 +62682,11 @@ Redact a memory version
 
   - `required string memoryStoreID`
 
-    Path param: Path parameter memory_store_id
+    Path param: The ID of the memory store that holds the version (`memstore_...`).
 
   - `required string memoryVersionID`
 
-    Path param: Path parameter memory_version_id
+    Path param: The ID of the memory version to redact (`memver_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -62692,9 +62822,15 @@ Redact a memory version
 
     - `Created("created")`
 
+      The memory was created. The first version in any memory's lineage.
+
     - `Modified("modified")`
 
+      The memory's `content`, `path`, or both were changed via update. Writes the agent makes through the filesystem mount also appear as `modified`.
+
     - `Deleted("deleted")`
+
+      The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
   - `string? Content`
 
@@ -65510,7 +65646,11 @@ Create User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? externalID`
 
@@ -65644,6 +65784,10 @@ Create User Profile
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -65688,7 +65832,11 @@ Create User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -65704,9 +65852,15 @@ Create User Profile
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -65806,29 +65960,39 @@ List User Profiles
 
   - `int limit`
 
-    Query param: Query parameter for limit
+    Query param: The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
   - `Order order`
 
-    Query param: Query parameter for order
+    Query param: The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
 
     - `Asc("asc")`
 
+      Oldest first when `order_by` is `created_at`, or names in ascending order when `order_by` is `name`.
+
     - `Desc("desc")`
+
+      Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
 
   - `OrderBy orderBy`
 
-    Query param: Query parameter for order_by
+    Query param: The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
 
     - `CreatedAt("created_at")`
 
+      Sort by when each user profile was created. This is the default.
+
     - `Name("name")`
+
+      Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
 
   - `string page`
 
-    Query param: Query parameter for page
+    Query param: The cursor for the page to return, taken from `next_page` in a previous response.
+
+    Leave it out to get the first page.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -65936,6 +66100,10 @@ List User Profiles
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -65980,7 +66148,11 @@ List User Profiles
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -65996,9 +66168,15 @@ List User Profiles
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -66105,7 +66283,7 @@ Get User Profile
 
   - `required string userProfileID`
 
-    Path parameter user_profile_id
+    The ID of the user profile to get (`uprof_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -66213,6 +66391,10 @@ Get User Profile
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -66257,7 +66439,11 @@ Get User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -66273,9 +66459,15 @@ Get User Profile
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -66378,7 +66570,7 @@ Update User Profile
 
   - `required string userProfileID`
 
-    Path param: Path parameter user_profile_id
+    Path param: The ID of the user profile to update (`uprof_...`).
 
   - `AccessType? accessType`
 
@@ -66386,7 +66578,11 @@ Update User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? externalID`
 
@@ -66520,6 +66716,10 @@ Update User Profile
 
 - `class BetaUserProfile`
 
+  A record of an entity that the platform serves through the API, such as an end-user of the platform's product or a company that the platform resells Claude access to.
+
+  A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
+
   - `required Type Type`
 
     Object type. Always `user_profile`.
@@ -66564,7 +66764,11 @@ Update User Profile
 
     - `Application("application")`
 
+      The user profile represents an individual end-user of a product that the platform builds on the API. New profiles get this value by default.
+
     - `Passthrough("passthrough")`
+
+      The user profile represents a company that the platform resells Claude access to.
 
   - `string? ExternalID`
 
@@ -66580,9 +66784,15 @@ Update User Profile
 
       - `Active("active")`
 
+        The platform has neither restricted nor barred the account of the entity that the user profile represents.
+
       - `Suspended("suspended")`
 
+        The platform has restricted the account of the entity that the user profile represents and may restore it.
+
       - `Blocked("blocked")`
+
+        The platform has barred the account of the entity that the user profile represents.
 
     - `required string? Country`
 
@@ -66685,7 +66895,7 @@ Create Enrollment URL
 
   - `required string userProfileID`
 
-    Path parameter user_profile_id
+    The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -66793,6 +67003,8 @@ Create Enrollment URL
 
 - `class BetaUserProfileEnrollmentUrl`
 
+  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+
   - `required Type Type`
 
     Object type. Always `enrollment_url`.
@@ -66838,7 +67050,11 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
 **POST** `/v1/dreams`
 
-Create a Dream
+Start an asynchronous job that uses past sessions to produce a reorganized version of a memory store and get back the dream to poll for the result.
+
+By default the dream writes its result to a new memory store and doesn't change the input memory store. The response has `status` set to `pending` and an empty `outputs` array. Poll the dream until `status` is `completed`, `failed`, or `canceled`.
+
+See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn more about creating dreams.
 
 #### Parameters
 
@@ -66846,39 +67062,59 @@ Create a Dream
 
   - `required IReadOnlyList<BetaDreamInput> inputs`
 
-    Body param
+    Body param: The memory store and sessions for the dream to read, as exactly one `memory_store` entry and exactly one `sessions` entry.
 
     - `class BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
+      The memory store that a dream reads, given as an entry in `inputs`.
+
+      With `output_behavior` set to `update_existing`, the dream writes its result into this memory store. Otherwise the dream doesn't change it.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to read (`memstore_...`).
+
+        The memory store must be in the same workspace as the dream and must not be archived.
+
         minLength: 1
 
     - `class BetaDreamSessionsInput`
 
-      Input session transcripts the dream reads.
+      The sessions that a dream reads, given as an entry in `inputs`.
 
       - `required Type Type`
 
       - `required IReadOnlyList<string> SessionIds`
 
+        The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
+
+        Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
+
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
+
   - `required Model model`
 
-    Body param
+    Body param: The model that runs a dream, given as a model ID or as an object with `id` and `speed`.
+
+    In the object form, `speed` can only be `standard`.
+
+    The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
 
     - `string`
 
     - `class BetaDreamModelConfigParam`
 
-      Model identifier and configuration applied to every pipeline stage.
+      The object form of `model` in a request to create a dream.
 
       - `required string ID`
 
-        Model identifier, e.g. "claude-opus-5". 1-256 characters.
+        The ID of the model to run the dream with.
+
+        The ID can be 1 to 256 characters long.
+
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
 
         minLength: 1, maxLength: 256
 
@@ -66892,13 +67128,15 @@ Create a Dream
 
   - `string? instructions`
 
-    Body param
+    Body param: Guidance that steers how the dream reads the sessions and organizes the output memory store, from 1 to 4,096 characters.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#steer-with-instructions) for what kinds of instructions work well.
 
     minLength: 1, maxLength: 4096
 
   - `BetaOutputBehavior outputBehavior`
 
-    Body param
+    Body param: Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -67006,11 +67244,17 @@ Create a Dream
 
 - `class BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
+
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `required Type Type`
 
   - `required string ID`
+
+    The unique ID of the dream (`drm_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 
@@ -67036,37 +67280,61 @@ Create a Dream
 
     - `required string Type`
 
+      A code for why the dream failed, such as `timeout` or `internal_error`.
+
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
+
     - `required string Message`
+
+      A human-readable explanation of why the dream failed.
 
   - `required IReadOnlyList<BetaDreamInput> Inputs`
 
+    The sources that the dream reads, from the request that created it.
+
     - `class BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
+      The memory store that a dream reads, given as an entry in `inputs`.
+
+      With `output_behavior` set to `update_existing`, the dream writes its result into this memory store. Otherwise the dream doesn't change it.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to read (`memstore_...`).
+
+        The memory store must be in the same workspace as the dream and must not be archived.
+
         minLength: 1
 
     - `class BetaDreamSessionsInput`
 
-      Input session transcripts the dream reads.
+      The sessions that a dream reads, given as an entry in `inputs`.
 
       - `required Type Type`
 
       - `required IReadOnlyList<string> SessionIds`
 
+        The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
+
+        Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
+
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
+
   - `required string? Instructions`
+
+    The guidance given when the dream was created, or `null` if none was given.
 
   - `required BetaDreamModelConfig Model`
 
-    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+    The model that runs a dream, from the request that created it.
+
+    The dream uses this model for all of its work. The response always gives the model as an object, even if the request gave only a model ID.
 
     - `required string ID`
 
-      Model identifier, e.g. "claude-opus-5". 1-256 characters.
+      The ID of the model that runs the dream, as given in the request that created it.
 
       minLength: 1, maxLength: 256
 
@@ -67080,69 +67348,119 @@ Create a Dream
 
   - `required BetaOutputBehavior OutputBehavior`
 
+    Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
+
     - `class BetaOutputBehaviorCreateNew`
 
-      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+      Write the result to a new memory store that starts as a copy of the input memory store. This is the default.
+
+      The new memory store is in the same workspace as the dream. The dream doesn't change the input memory store.
 
       - `required Type Type`
 
     - `class BetaOutputBehaviorUpdateExisting`
 
-      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+      Write the result into the input memory store instead of a new memory store.
+
+      The credential must be allowed to write memory stores, or the request returns a 403 error. While another `update_existing` dream on the same memory store hasn't fully stopped, the request returns a 409 error.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to write its result to (`memstore_...`). It must be the memory store in the `memory_store` entry of `inputs`.
+
         minLength: 1
 
   - `required IReadOnlyList<BetaDreamOutput> Outputs`
+
+    The memory store that holds the dream's result, as a one-item array, or an empty array until the dream records that memory store.
+
+    The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `required Type Type`
 
     - `required string MemoryStoreID`
 
+      The ID of the memory store that the dream writes its result to (`memstore_...`).
+
+      With `output_behavior` set to `create_new`, this is a new memory store. With `update_existing`, it is the input memory store.
+
   - `required string? SessionID`
+
+    The ID of the session that runs the dream (`sesn_...`), or `null` if that session hasn't started.
+
+    Stream that session's events to follow what the dream reads and writes.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `required BetaDreamStatus Status`
 
-    Lifecycle status of a Dream.
+    Where a dream is in its lifecycle.
+
+    `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `Pending("pending")`
 
+      The dream is waiting to start and hasn't read its inputs yet.
+
+      `outputs` is empty and every `usage` count is zero.
+
     - `Running("running")`
+
+      The dream is reading its inputs and writing its result.
+
+      `usage` updates while the dream has this status.
 
     - `Completed("completed")`
 
+      The dream finished and its output memory store holds the complete result.
+
     - `Failed("failed")`
+
+      The dream stopped with an error, which `error` describes.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote before it stopped.
 
     - `Canceled("canceled")`
 
+      A cancel request stopped the dream before it reached `completed` or `failed`.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
+
   - `required BetaDreamUsage Usage`
 
-    Cumulative token usage for the dream across every pipeline stage.
+    The tokens that a dream has used so far.
+
+    The counts are zero while the dream is `pending` and update while it is `running`. They can keep changing after a cancel.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#billing) for how dreams are billed. See the [prompt caching guide](../../build-with-claude/prompt-caching.md#tracking-cache-performance) for how the input token counts add up.
 
     - `required int CacheCreationInputTokens`
 
-      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+      The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
     - `required int CacheReadInputTokens`
 
-      Total tokens read from prompt cache.
+      The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
     - `required int InputTokens`
 
-      Total uncached input tokens consumed across every pipeline stage.
+      The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
     - `required int OutputTokens`
 
-      Total output tokens generated across every pipeline stage.
+      The tokens that the model generated for the dream.
 
       format: int32
 
@@ -67217,7 +67535,11 @@ Console.WriteLine(betaDream);
 
 **GET** `/v1/dreams`
 
-List Dreams
+List the dreams in the workspace, newest first.
+
+Archived dreams are left out unless `include_archived` is `true`.
+
+See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to page through dreams.
 
 #### Parameters
 
@@ -67225,43 +67547,65 @@ List Dreams
 
   - `DateTimeOffset createdAtGt`
 
-    Query param: Return dreams with `created_at` strictly after this timestamp (exclusive lower bound, RFC 3339). Unset applies no lower bound.
+    Query param: Return only dreams created after this time (exclusive), in RFC 3339.
 
     format: date-time
 
   - `DateTimeOffset createdAtLt`
 
-    Query param: Return dreams with `created_at` strictly before this timestamp (exclusive upper bound, RFC 3339). Unset applies no upper bound.
+    Query param: Return only dreams created before this time (exclusive), in RFC 3339.
 
     format: date-time
 
   - `bool includeArchived`
 
-    Query param: Query parameter for include_archived
+    Query param: Whether to include archived dreams. Defaults to `false`.
 
   - `int limit`
 
-    Query param: Query parameter for limit
+    Query param: The maximum number of dreams to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
   - `string page`
 
-    Query param: Query parameter for page
+    Query param: The cursor for the page to return, taken from `next_page` in a previous response.
+
+    Leave it out to get the first page.
 
   - `IReadOnlyList<BetaDreamStatus> statuses`
 
-    Query param: Filter by lifecycle status. Repeat the parameter to match any of multiple statuses. Empty applies no status filter.
+    Query param: Return only dreams that have one of these statuses.
+
+    Repeat the parameter to give more than one status. Leave it out to return dreams of every status.
 
     - `Pending("pending")`
 
+      The dream is waiting to start and hasn't read its inputs yet.
+
+      `outputs` is empty and every `usage` count is zero.
+
     - `Running("running")`
+
+      The dream is reading its inputs and writing its result.
+
+      `usage` updates while the dream has this status.
 
     - `Completed("completed")`
 
+      The dream finished and its output memory store holds the complete result.
+
     - `Failed("failed")`
 
+      The dream stopped with an error, which `error` describes.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote before it stopped.
+
     - `Canceled("canceled")`
+
+      A cancel request stopped the dream before it reached `completed` or `failed`.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -67369,11 +67713,17 @@ List Dreams
 
 - `class BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
+
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `required Type Type`
 
   - `required string ID`
+
+    The unique ID of the dream (`drm_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 
@@ -67399,37 +67749,61 @@ List Dreams
 
     - `required string Type`
 
+      A code for why the dream failed, such as `timeout` or `internal_error`.
+
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
+
     - `required string Message`
+
+      A human-readable explanation of why the dream failed.
 
   - `required IReadOnlyList<BetaDreamInput> Inputs`
 
+    The sources that the dream reads, from the request that created it.
+
     - `class BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
+      The memory store that a dream reads, given as an entry in `inputs`.
+
+      With `output_behavior` set to `update_existing`, the dream writes its result into this memory store. Otherwise the dream doesn't change it.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to read (`memstore_...`).
+
+        The memory store must be in the same workspace as the dream and must not be archived.
+
         minLength: 1
 
     - `class BetaDreamSessionsInput`
 
-      Input session transcripts the dream reads.
+      The sessions that a dream reads, given as an entry in `inputs`.
 
       - `required Type Type`
 
       - `required IReadOnlyList<string> SessionIds`
 
+        The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
+
+        Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
+
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
+
   - `required string? Instructions`
+
+    The guidance given when the dream was created, or `null` if none was given.
 
   - `required BetaDreamModelConfig Model`
 
-    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+    The model that runs a dream, from the request that created it.
+
+    The dream uses this model for all of its work. The response always gives the model as an object, even if the request gave only a model ID.
 
     - `required string ID`
 
-      Model identifier, e.g. "claude-opus-5". 1-256 characters.
+      The ID of the model that runs the dream, as given in the request that created it.
 
       minLength: 1, maxLength: 256
 
@@ -67443,69 +67817,119 @@ List Dreams
 
   - `required BetaOutputBehavior OutputBehavior`
 
+    Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
+
     - `class BetaOutputBehaviorCreateNew`
 
-      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+      Write the result to a new memory store that starts as a copy of the input memory store. This is the default.
+
+      The new memory store is in the same workspace as the dream. The dream doesn't change the input memory store.
 
       - `required Type Type`
 
     - `class BetaOutputBehaviorUpdateExisting`
 
-      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+      Write the result into the input memory store instead of a new memory store.
+
+      The credential must be allowed to write memory stores, or the request returns a 403 error. While another `update_existing` dream on the same memory store hasn't fully stopped, the request returns a 409 error.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to write its result to (`memstore_...`). It must be the memory store in the `memory_store` entry of `inputs`.
+
         minLength: 1
 
   - `required IReadOnlyList<BetaDreamOutput> Outputs`
+
+    The memory store that holds the dream's result, as a one-item array, or an empty array until the dream records that memory store.
+
+    The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `required Type Type`
 
     - `required string MemoryStoreID`
 
+      The ID of the memory store that the dream writes its result to (`memstore_...`).
+
+      With `output_behavior` set to `create_new`, this is a new memory store. With `update_existing`, it is the input memory store.
+
   - `required string? SessionID`
+
+    The ID of the session that runs the dream (`sesn_...`), or `null` if that session hasn't started.
+
+    Stream that session's events to follow what the dream reads and writes.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `required BetaDreamStatus Status`
 
-    Lifecycle status of a Dream.
+    Where a dream is in its lifecycle.
+
+    `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `Pending("pending")`
 
+      The dream is waiting to start and hasn't read its inputs yet.
+
+      `outputs` is empty and every `usage` count is zero.
+
     - `Running("running")`
+
+      The dream is reading its inputs and writing its result.
+
+      `usage` updates while the dream has this status.
 
     - `Completed("completed")`
 
+      The dream finished and its output memory store holds the complete result.
+
     - `Failed("failed")`
+
+      The dream stopped with an error, which `error` describes.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote before it stopped.
 
     - `Canceled("canceled")`
 
+      A cancel request stopped the dream before it reached `completed` or `failed`.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
+
   - `required BetaDreamUsage Usage`
 
-    Cumulative token usage for the dream across every pipeline stage.
+    The tokens that a dream has used so far.
+
+    The counts are zero while the dream is `pending` and update while it is `running`. They can keep changing after a cancel.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#billing) for how dreams are billed. See the [prompt caching guide](../../build-with-claude/prompt-caching.md#tracking-cache-performance) for how the input token counts add up.
 
     - `required int CacheCreationInputTokens`
 
-      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+      The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
     - `required int CacheReadInputTokens`
 
-      Total tokens read from prompt cache.
+      The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
     - `required int InputTokens`
 
-      Total uncached input tokens consumed across every pipeline stage.
+      The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
     - `required int OutputTokens`
 
-      Total output tokens generated across every pipeline stage.
+      The tokens that the model generated for the dream.
 
       format: int32
 
@@ -67576,7 +68000,11 @@ await foreach (var item in page.Paginate())
 
 **GET** `/v1/dreams/{dream_id}`
 
-Get a Dream
+Get a dream by ID to check its status, output memory store, and token usage.
+
+Archived dreams are returned too.
+
+See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to poll a dream and what each status means.
 
 #### Parameters
 
@@ -67584,7 +68012,7 @@ Get a Dream
 
   - `required string dreamID`
 
-    Path parameter dream_id
+    The ID of the dream to get (`drm_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -67692,11 +68120,17 @@ Get a Dream
 
 - `class BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
+
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `required Type Type`
 
   - `required string ID`
+
+    The unique ID of the dream (`drm_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 
@@ -67722,37 +68156,61 @@ Get a Dream
 
     - `required string Type`
 
+      A code for why the dream failed, such as `timeout` or `internal_error`.
+
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
+
     - `required string Message`
+
+      A human-readable explanation of why the dream failed.
 
   - `required IReadOnlyList<BetaDreamInput> Inputs`
 
+    The sources that the dream reads, from the request that created it.
+
     - `class BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
+      The memory store that a dream reads, given as an entry in `inputs`.
+
+      With `output_behavior` set to `update_existing`, the dream writes its result into this memory store. Otherwise the dream doesn't change it.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to read (`memstore_...`).
+
+        The memory store must be in the same workspace as the dream and must not be archived.
+
         minLength: 1
 
     - `class BetaDreamSessionsInput`
 
-      Input session transcripts the dream reads.
+      The sessions that a dream reads, given as an entry in `inputs`.
 
       - `required Type Type`
 
       - `required IReadOnlyList<string> SessionIds`
 
+        The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
+
+        Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
+
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
+
   - `required string? Instructions`
+
+    The guidance given when the dream was created, or `null` if none was given.
 
   - `required BetaDreamModelConfig Model`
 
-    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+    The model that runs a dream, from the request that created it.
+
+    The dream uses this model for all of its work. The response always gives the model as an object, even if the request gave only a model ID.
 
     - `required string ID`
 
-      Model identifier, e.g. "claude-opus-5". 1-256 characters.
+      The ID of the model that runs the dream, as given in the request that created it.
 
       minLength: 1, maxLength: 256
 
@@ -67766,69 +68224,119 @@ Get a Dream
 
   - `required BetaOutputBehavior OutputBehavior`
 
+    Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
+
     - `class BetaOutputBehaviorCreateNew`
 
-      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+      Write the result to a new memory store that starts as a copy of the input memory store. This is the default.
+
+      The new memory store is in the same workspace as the dream. The dream doesn't change the input memory store.
 
       - `required Type Type`
 
     - `class BetaOutputBehaviorUpdateExisting`
 
-      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+      Write the result into the input memory store instead of a new memory store.
+
+      The credential must be allowed to write memory stores, or the request returns a 403 error. While another `update_existing` dream on the same memory store hasn't fully stopped, the request returns a 409 error.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to write its result to (`memstore_...`). It must be the memory store in the `memory_store` entry of `inputs`.
+
         minLength: 1
 
   - `required IReadOnlyList<BetaDreamOutput> Outputs`
+
+    The memory store that holds the dream's result, as a one-item array, or an empty array until the dream records that memory store.
+
+    The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `required Type Type`
 
     - `required string MemoryStoreID`
 
+      The ID of the memory store that the dream writes its result to (`memstore_...`).
+
+      With `output_behavior` set to `create_new`, this is a new memory store. With `update_existing`, it is the input memory store.
+
   - `required string? SessionID`
+
+    The ID of the session that runs the dream (`sesn_...`), or `null` if that session hasn't started.
+
+    Stream that session's events to follow what the dream reads and writes.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `required BetaDreamStatus Status`
 
-    Lifecycle status of a Dream.
+    Where a dream is in its lifecycle.
+
+    `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `Pending("pending")`
 
+      The dream is waiting to start and hasn't read its inputs yet.
+
+      `outputs` is empty and every `usage` count is zero.
+
     - `Running("running")`
+
+      The dream is reading its inputs and writing its result.
+
+      `usage` updates while the dream has this status.
 
     - `Completed("completed")`
 
+      The dream finished and its output memory store holds the complete result.
+
     - `Failed("failed")`
+
+      The dream stopped with an error, which `error` describes.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote before it stopped.
 
     - `Canceled("canceled")`
 
+      A cancel request stopped the dream before it reached `completed` or `failed`.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
+
   - `required BetaDreamUsage Usage`
 
-    Cumulative token usage for the dream across every pipeline stage.
+    The tokens that a dream has used so far.
+
+    The counts are zero while the dream is `pending` and update while it is `running`. They can keep changing after a cancel.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#billing) for how dreams are billed. See the [prompt caching guide](../../build-with-claude/prompt-caching.md#tracking-cache-performance) for how the input token counts add up.
 
     - `required int CacheCreationInputTokens`
 
-      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+      The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
     - `required int CacheReadInputTokens`
 
-      Total tokens read from prompt cache.
+      The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
     - `required int InputTokens`
 
-      Total uncached input tokens consumed across every pipeline stage.
+      The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
     - `required int OutputTokens`
 
-      Total output tokens generated across every pipeline stage.
+      The tokens that the model generated for the dream.
 
       format: int32
 
@@ -67892,7 +68400,11 @@ Console.WriteLine(betaDream);
 
 **POST** `/v1/dreams/{dream_id}/cancel`
 
-Cancel a Dream
+Stop a `pending` or `running` dream.
+
+The response shows `status` as `canceled`, unless the dream reached `completed` or `failed` first. `usage` can keep changing after the response. Canceling a `canceled` dream returns it unchanged. Canceling a `completed` or `failed` dream returns a 400 error.
+
+See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn more about canceling dreams.
 
 #### Parameters
 
@@ -67900,7 +68412,7 @@ Cancel a Dream
 
   - `required string dreamID`
 
-    Path parameter dream_id
+    The ID of the dream to cancel (`drm_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -68008,11 +68520,17 @@ Cancel a Dream
 
 - `class BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
+
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `required Type Type`
 
   - `required string ID`
+
+    The unique ID of the dream (`drm_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 
@@ -68038,37 +68556,61 @@ Cancel a Dream
 
     - `required string Type`
 
+      A code for why the dream failed, such as `timeout` or `internal_error`.
+
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
+
     - `required string Message`
+
+      A human-readable explanation of why the dream failed.
 
   - `required IReadOnlyList<BetaDreamInput> Inputs`
 
+    The sources that the dream reads, from the request that created it.
+
     - `class BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
+      The memory store that a dream reads, given as an entry in `inputs`.
+
+      With `output_behavior` set to `update_existing`, the dream writes its result into this memory store. Otherwise the dream doesn't change it.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to read (`memstore_...`).
+
+        The memory store must be in the same workspace as the dream and must not be archived.
+
         minLength: 1
 
     - `class BetaDreamSessionsInput`
 
-      Input session transcripts the dream reads.
+      The sessions that a dream reads, given as an entry in `inputs`.
 
       - `required Type Type`
 
       - `required IReadOnlyList<string> SessionIds`
 
+        The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
+
+        Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
+
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
+
   - `required string? Instructions`
+
+    The guidance given when the dream was created, or `null` if none was given.
 
   - `required BetaDreamModelConfig Model`
 
-    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+    The model that runs a dream, from the request that created it.
+
+    The dream uses this model for all of its work. The response always gives the model as an object, even if the request gave only a model ID.
 
     - `required string ID`
 
-      Model identifier, e.g. "claude-opus-5". 1-256 characters.
+      The ID of the model that runs the dream, as given in the request that created it.
 
       minLength: 1, maxLength: 256
 
@@ -68082,69 +68624,119 @@ Cancel a Dream
 
   - `required BetaOutputBehavior OutputBehavior`
 
+    Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
+
     - `class BetaOutputBehaviorCreateNew`
 
-      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+      Write the result to a new memory store that starts as a copy of the input memory store. This is the default.
+
+      The new memory store is in the same workspace as the dream. The dream doesn't change the input memory store.
 
       - `required Type Type`
 
     - `class BetaOutputBehaviorUpdateExisting`
 
-      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+      Write the result into the input memory store instead of a new memory store.
+
+      The credential must be allowed to write memory stores, or the request returns a 403 error. While another `update_existing` dream on the same memory store hasn't fully stopped, the request returns a 409 error.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to write its result to (`memstore_...`). It must be the memory store in the `memory_store` entry of `inputs`.
+
         minLength: 1
 
   - `required IReadOnlyList<BetaDreamOutput> Outputs`
+
+    The memory store that holds the dream's result, as a one-item array, or an empty array until the dream records that memory store.
+
+    The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `required Type Type`
 
     - `required string MemoryStoreID`
 
+      The ID of the memory store that the dream writes its result to (`memstore_...`).
+
+      With `output_behavior` set to `create_new`, this is a new memory store. With `update_existing`, it is the input memory store.
+
   - `required string? SessionID`
+
+    The ID of the session that runs the dream (`sesn_...`), or `null` if that session hasn't started.
+
+    Stream that session's events to follow what the dream reads and writes.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `required BetaDreamStatus Status`
 
-    Lifecycle status of a Dream.
+    Where a dream is in its lifecycle.
+
+    `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `Pending("pending")`
 
+      The dream is waiting to start and hasn't read its inputs yet.
+
+      `outputs` is empty and every `usage` count is zero.
+
     - `Running("running")`
+
+      The dream is reading its inputs and writing its result.
+
+      `usage` updates while the dream has this status.
 
     - `Completed("completed")`
 
+      The dream finished and its output memory store holds the complete result.
+
     - `Failed("failed")`
+
+      The dream stopped with an error, which `error` describes.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote before it stopped.
 
     - `Canceled("canceled")`
 
+      A cancel request stopped the dream before it reached `completed` or `failed`.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
+
   - `required BetaDreamUsage Usage`
 
-    Cumulative token usage for the dream across every pipeline stage.
+    The tokens that a dream has used so far.
+
+    The counts are zero while the dream is `pending` and update while it is `running`. They can keep changing after a cancel.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#billing) for how dreams are billed. See the [prompt caching guide](../../build-with-claude/prompt-caching.md#tracking-cache-performance) for how the input token counts add up.
 
     - `required int CacheCreationInputTokens`
 
-      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+      The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
     - `required int CacheReadInputTokens`
 
-      Total tokens read from prompt cache.
+      The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
     - `required int InputTokens`
 
-      Total uncached input tokens consumed across every pipeline stage.
+      The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
     - `required int OutputTokens`
 
-      Total output tokens generated across every pipeline stage.
+      The tokens that the model generated for the dream.
 
       format: int32
 
@@ -68208,7 +68800,11 @@ Console.WriteLine(betaDream);
 
 **POST** `/v1/dreams/{dream_id}/archive`
 
-Archive a Dream
+Hide a `completed`, `failed`, or `canceled` dream from the default list of dreams.
+
+Archiving a `pending` or `running` dream returns a 400 error, so cancel it first. Archiving an archived dream returns it unchanged. An archived dream can still be fetched by ID. Archiving can't be undone.
+
+See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn more about archiving dreams.
 
 #### Parameters
 
@@ -68216,7 +68812,7 @@ Archive a Dream
 
   - `required string dreamID`
 
-    Path parameter dream_id
+    The ID of the dream to archive (`drm_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -68324,11 +68920,17 @@ Archive a Dream
 
 - `class BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous job that reads a memory store and past sessions, then writes a reorganized version of that memory store.
+
+  By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead. The Dreams API is in research preview, so this resource can still change.
+
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `required Type Type`
 
   - `required string ID`
+
+    The unique ID of the dream (`drm_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 
@@ -68354,37 +68956,61 @@ Archive a Dream
 
     - `required string Type`
 
+      A code for why the dream failed, such as `timeout` or `internal_error`.
+
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
+
     - `required string Message`
+
+      A human-readable explanation of why the dream failed.
 
   - `required IReadOnlyList<BetaDreamInput> Inputs`
 
+    The sources that the dream reads, from the request that created it.
+
     - `class BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
+      The memory store that a dream reads, given as an entry in `inputs`.
+
+      With `output_behavior` set to `update_existing`, the dream writes its result into this memory store. Otherwise the dream doesn't change it.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to read (`memstore_...`).
+
+        The memory store must be in the same workspace as the dream and must not be archived.
+
         minLength: 1
 
     - `class BetaDreamSessionsInput`
 
-      Input session transcripts the dream reads.
+      The sessions that a dream reads, given as an entry in `inputs`.
 
       - `required Type Type`
 
       - `required IReadOnlyList<string> SessionIds`
 
+        The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
+
+        Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
+
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
+
   - `required string? Instructions`
+
+    The guidance given when the dream was created, or `null` if none was given.
 
   - `required BetaDreamModelConfig Model`
 
-    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+    The model that runs a dream, from the request that created it.
+
+    The dream uses this model for all of its work. The response always gives the model as an object, even if the request gave only a model ID.
 
     - `required string ID`
 
-      Model identifier, e.g. "claude-opus-5". 1-256 characters.
+      The ID of the model that runs the dream, as given in the request that created it.
 
       minLength: 1, maxLength: 256
 
@@ -68398,69 +69024,119 @@ Archive a Dream
 
   - `required BetaOutputBehavior OutputBehavior`
 
+    Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
+
     - `class BetaOutputBehaviorCreateNew`
 
-      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+      Write the result to a new memory store that starts as a copy of the input memory store. This is the default.
+
+      The new memory store is in the same workspace as the dream. The dream doesn't change the input memory store.
 
       - `required Type Type`
 
     - `class BetaOutputBehaviorUpdateExisting`
 
-      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+      Write the result into the input memory store instead of a new memory store.
+
+      The credential must be allowed to write memory stores, or the request returns a 403 error. While another `update_existing` dream on the same memory store hasn't fully stopped, the request returns a 409 error.
 
       - `required Type Type`
 
       - `required string MemoryStoreID`
 
+        The ID of the memory store for the dream to write its result to (`memstore_...`). It must be the memory store in the `memory_store` entry of `inputs`.
+
         minLength: 1
 
   - `required IReadOnlyList<BetaDreamOutput> Outputs`
+
+    The memory store that holds the dream's result, as a one-item array, or an empty array until the dream records that memory store.
+
+    The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `required Type Type`
 
     - `required string MemoryStoreID`
 
+      The ID of the memory store that the dream writes its result to (`memstore_...`).
+
+      With `output_behavior` set to `create_new`, this is a new memory store. With `update_existing`, it is the input memory store.
+
   - `required string? SessionID`
+
+    The ID of the session that runs the dream (`sesn_...`), or `null` if that session hasn't started.
+
+    Stream that session's events to follow what the dream reads and writes.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `required BetaDreamStatus Status`
 
-    Lifecycle status of a Dream.
+    Where a dream is in its lifecycle.
+
+    `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `Pending("pending")`
 
+      The dream is waiting to start and hasn't read its inputs yet.
+
+      `outputs` is empty and every `usage` count is zero.
+
     - `Running("running")`
+
+      The dream is reading its inputs and writing its result.
+
+      `usage` updates while the dream has this status.
 
     - `Completed("completed")`
 
+      The dream finished and its output memory store holds the complete result.
+
     - `Failed("failed")`
+
+      The dream stopped with an error, which `error` describes.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote before it stopped.
 
     - `Canceled("canceled")`
 
+      A cancel request stopped the dream before it reached `completed` or `failed`.
+
+      If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
+
   - `required BetaDreamUsage Usage`
 
-    Cumulative token usage for the dream across every pipeline stage.
+    The tokens that a dream has used so far.
+
+    The counts are zero while the dream is `pending` and update while it is `running`. They can keep changing after a cancel.
+
+    See the [Dreams guide](../../managed-agents/dreams.md#billing) for how dreams are billed. See the [prompt caching guide](../../build-with-claude/prompt-caching.md#tracking-cache-performance) for how the input token counts add up.
 
     - `required int CacheCreationInputTokens`
 
-      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+      The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
     - `required int CacheReadInputTokens`
 
-      Total tokens read from prompt cache.
+      The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
     - `required int InputTokens`
 
-      Total uncached input tokens consumed across every pipeline stage.
+      The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
     - `required int OutputTokens`
 
-      Total output tokens generated across every pipeline stage.
+      The tokens that the model generated for the dream.
 
       format: int32
 
@@ -68713,7 +69389,7 @@ Fetches a tunnel by ID.
 
   - `required string tunnelID`
 
-    Path parameter tunnel_id
+    ID of the tunnel (`tnl_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -69080,7 +69756,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
   - `required string tunnelID`
 
-    Path parameter tunnel_id
+    ID of the tunnel (`tnl_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -69255,7 +69931,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
   - `required string tunnelID`
 
-    Path parameter tunnel_id
+    ID of the tunnel (`tnl_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -69411,7 +70087,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   - `required string tunnelID`
 
-    Path param: Path parameter tunnel_id
+    Path param: ID of the tunnel (`tnl_...`).
 
   - `string? reason`
 
@@ -69575,7 +70251,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   - `required string tunnelID`
 
-    Path param: Path parameter tunnel_id
+    Path param: ID of the tunnel (`tnl_...`).
 
   - `required string caCertificatePem`
 
@@ -69767,11 +70443,11 @@ Fetches a tunnel certificate by ID.
 
   - `required string tunnelID`
 
-    Path param: Path parameter tunnel_id
+    Path param: ID of the tunnel (`tnl_...`).
 
   - `required string certificateID`
 
-    Path param: Path parameter certificate_id
+    Path param: ID of the certificate (`tcrt_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -69957,7 +70633,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   - `required string tunnelID`
 
-    Path param: Path parameter tunnel_id
+    Path param: ID of the tunnel (`tnl_...`).
 
   - `bool includeArchived`
 
@@ -70160,11 +70836,11 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   - `required string tunnelID`
 
-    Path param: Path parameter tunnel_id
+    Path param: ID of the tunnel (`tnl_...`).
 
   - `required string certificateID`
 
-    Path param: Path parameter certificate_id
+    Path param: ID of the certificate to archive (`tcrt_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -79163,21 +79839,73 @@ the remaining entries.
 
     Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
-  - `required GroupType GroupType`
+  - `required Group Group`
 
-    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
 
-    - `Batch("batch")`
+    - `class BetaOrganizationRateLimitModelGroup`
 
-    - `Files("files")`
+      - `JsonElement Type = "model_group"`
 
-    - `ModelGroup("model_group")`
+        Always `model_group`: a family of models.
 
-    - `Skills("skills")`
+      - `required string ID`
 
-    - `TokenCount("token_count")`
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
 
-    - `WebSearch("web_search")`
+      - `required string DisplayName`
+
+        Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For display only; it may change.
+
+    - `class BetaOrganizationRateLimitBatchGroup`
+
+      - `JsonElement Type = "batch"`
+
+        Always `batch`: the Message Batches API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitTokenCountGroup`
+
+      - `JsonElement Type = "token_count"`
+
+        Always `token_count`: the Token Count API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitFilesGroup`
+
+      - `JsonElement Type = "files"`
+
+        Always `files`: the Files API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitSkillsGroup`
+
+      - `JsonElement Type = "skills"`
+
+        Always `skills`: the Skills API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitWebSearchGroup`
+
+      - `JsonElement Type = "web_search"`
+
+        Always `web_search`: the Messages API web search tool.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
 
   - `required IReadOnlyList<BetaWorkspaceRateLimitValue> Limits`
 
@@ -79201,11 +79929,29 @@ the remaining entries.
 
   - `required string RateLimitID`
 
-    The `id` of the RateLimit group this override applies to.
+    The `id` of the organization's RateLimit entry this override applies to.
 
   - `required string WorkspaceID`
 
     ID of the Workspace this override applies to.
+
+  - `required GroupType GroupType`
+
+    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
+
+    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
+
+    - `Batch("batch")`
+
+    - `Files("files")`
+
+    - `ModelGroup("model_group")`
+
+    - `Skills("skills")`
+
+    - `TokenCount("token_count")`
+
+    - `WebSearch("web_search")`
 
 #### Example
 
@@ -79225,6 +79971,11 @@ await foreach (var item in page.Paginate())
 {
   "data": [
     {
+      "group": {
+        "id": "id",
+        "display_name": "display_name",
+        "type": "model_group"
+      },
       "group_type": "batch",
       "limits": [
         {
@@ -80645,23 +81396,75 @@ the remaining entries.
 
   - `required string ID`
 
-    Stable identifier for this rate-limit group within the organization.
+    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`.
 
-  - `required GroupType GroupType`
+  - `required Group Group`
 
-    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
 
-    - `Batch("batch")`
+    - `class BetaOrganizationRateLimitModelGroup`
 
-    - `Files("files")`
+      - `JsonElement Type = "model_group"`
 
-    - `ModelGroup("model_group")`
+        Always `model_group`: a family of models.
 
-    - `Skills("skills")`
+      - `required string ID`
 
-    - `TokenCount("token_count")`
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
 
-    - `WebSearch("web_search")`
+      - `required string DisplayName`
+
+        Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For display only; it may change.
+
+    - `class BetaOrganizationRateLimitBatchGroup`
+
+      - `JsonElement Type = "batch"`
+
+        Always `batch`: the Message Batches API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitTokenCountGroup`
+
+      - `JsonElement Type = "token_count"`
+
+        Always `token_count`: the Token Count API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitFilesGroup`
+
+      - `JsonElement Type = "files"`
+
+        Always `files`: the Files API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitSkillsGroup`
+
+      - `JsonElement Type = "skills"`
+
+        Always `skills`: the Skills API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitWebSearchGroup`
+
+      - `JsonElement Type = "web_search"`
+
+        Always `web_search`: the Messages API web search tool.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
 
   - `required IReadOnlyList<BetaOrganizationRateLimitValue> Limits`
 
@@ -80678,6 +81481,24 @@ the remaining entries.
   - `required IReadOnlyList<string>? Models`
 
     Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+  - `required GroupType GroupType`
+
+    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
+
+    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
+
+    - `Batch("batch")`
+
+    - `Files("files")`
+
+    - `ModelGroup("model_group")`
+
+    - `Skills("skills")`
+
+    - `TokenCount("token_count")`
+
+    - `WebSearch("web_search")`
 
 #### Example
 
@@ -80698,6 +81519,11 @@ await foreach (var item in page.Paginate())
   "data": [
     {
       "id": "id",
+      "group": {
+        "id": "id",
+        "display_name": "display_name",
+        "type": "model_group"
+      },
       "group_type": "batch",
       "limits": [
         {

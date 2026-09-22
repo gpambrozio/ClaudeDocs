@@ -17,6 +17,8 @@ Get Vault
 
 - `vaultID: string`
 
+  Unique identifier of the vault to retrieve.
+
 - `params: VaultRetrieveParams`
 
   - `betas?: Array<AnthropicBeta>`
