@@ -13,6 +13,7 @@ featureMetadata:
     - claude-fable-5
     - claude-mythos-5
     - claude-mythos-preview
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -51,7 +52,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-09-04" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {"role": "user", "content": "I am building a recipe app. Help me name the main entities in the data model."},
@@ -67,7 +68,7 @@ ant beta:messages create --beta compact-2026-09-04 < request.yaml
 ```
 
 ```yaml
-model: claude-opus-5
+model: claude-opus-5-5
 # max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
 max_tokens: 4096
 messages:
@@ -99,7 +100,7 @@ history: list[BetaMessageParam] = [
 ]
 
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     # max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
     max_tokens=4096,
     betas=["compact-2026-09-04"],
@@ -126,7 +127,7 @@ const history: Anthropic.Beta.Messages.BetaMessageParam[] = [
 ];
 
 const response = await client.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
   max_tokens: 4096,
   betas: ["compact-2026-09-04"],
@@ -160,7 +161,7 @@ List<BetaMessageParam> history =
 
 var response = await client.Beta.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
     MaxTokens = 4096,
     Betas = [AnthropicBeta.Compact2026_09_04],
@@ -184,7 +185,7 @@ history := []anthropic.BetaMessageParam{
 }
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model: anthropic.ModelClaudeOpus5,
+	Model: anthropic.ModelClaudeOpus5_5,
 	// max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
 	MaxTokens: 4096,
 	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
@@ -208,7 +209,7 @@ void main() {
     var client = AnthropicOkHttpClient.fromEnv();
 
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
         .maxTokens(4096)
         .addBeta(AnthropicBeta.COMPACT_2026_09_04)
@@ -244,7 +245,7 @@ $history = [
 ];
 
 $response = $client->beta->messages->create(
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     // max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
     maxTokens: 4096,
     betas: [AnthropicBeta::COMPACT_2026_09_04],
@@ -271,7 +272,7 @@ history = [
 ]
 
 response = client.beta.messages.create(
-  model: Anthropic::Model::CLAUDE_OPUS_5,
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   # max_tokens caps the whole call, including any thinking, so allow several thousand tokens.
   max_tokens: 4096,
   betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],
@@ -286,7 +287,7 @@ puts "Stop reason: #{response.stop_reason}"
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message",
   "role": "assistant",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "content": [
     {
       "type": "compaction",
@@ -315,7 +316,7 @@ In your history, replace the messages you sent with the returned assistant messa
 
 ```json
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 2048,
   "messages": [
     {
@@ -385,7 +386,7 @@ history: list[BetaMessageParam] = []
 for turn, question in enumerate(QUESTIONS, start=1):
     history.append({"role": "user", "content": question})
     response = client.beta.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=8192,
         system=SYSTEM,
         betas=["compact-2026-09-04"],
@@ -397,7 +398,7 @@ for turn, question in enumerate(QUESTIONS, start=1):
     conversation_tokens = response.usage.input_tokens + response.usage.output_tokens
     if conversation_tokens > COMPACT_AT_TOKENS and turn < len(QUESTIONS):
         summary = client.beta.messages.create(
-            model="claude-opus-5",
+            model="claude-opus-5-5",
             max_tokens=4096,
             system=SYSTEM,
             betas=["compact-2026-09-04"],
@@ -432,7 +433,7 @@ for (const [index, question] of questions.entries()) {
   const turn = index + 1;
   history.push({ role: "user", content: question });
   const response = await client.beta.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 8192,
     system: systemPrompt,
     betas: ["compact-2026-09-04"],
@@ -444,7 +445,7 @@ for (const [index, question] of questions.entries()) {
   const conversationTokens = response.usage.input_tokens + response.usage.output_tokens;
   if (conversationTokens > compactAtTokens && turn < questions.length) {
     const summary = await client.beta.messages.create({
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       system: systemPrompt,
       betas: ["compact-2026-09-04"],
@@ -489,7 +490,7 @@ foreach (var (index, question) in questions.Index())
     history.Add(new() { Role = Role.User, Content = question });
     var response = await client.Beta.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 8192,
         System = SystemPrompt,
         Betas = [AnthropicBeta.Compact2026_09_04],
@@ -507,7 +508,7 @@ foreach (var (index, question) in questions.Index())
     {
         var summary = await client.Beta.Messages.Create(new MessageCreateParams
         {
-            Model = Model.ClaudeOpus5,
+            Model = Model.ClaudeOpus5_5,
             MaxTokens = 4096,
             System = SystemPrompt,
             Betas = [AnthropicBeta.Compact2026_09_04],
@@ -554,7 +555,7 @@ for i, question := range questions {
 	turn := i + 1
 	history = append(history, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(question)))
 	response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 8192,
 		System:    system,
 		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
@@ -569,7 +570,7 @@ for i, question := range questions {
 	conversationTokens := response.Usage.InputTokens + response.Usage.OutputTokens
 	if conversationTokens > compactAtTokens && turn < len(questions) {
 		summary, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 4096,
 			System:    system,
 			Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
@@ -621,7 +622,7 @@ void main() {
             .content(questions.get(turn - 1))
             .build());
         var params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(8192)
             .system(SYSTEM)
             .addBeta(AnthropicBeta.COMPACT_2026_09_04)
@@ -634,7 +635,7 @@ void main() {
         long conversationTokens = response.usage().inputTokens() + response.usage().outputTokens();
         if (conversationTokens > COMPACT_AT_TOKENS && turn < questions.size()) {
             var summaryParams = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5)
+                .model(Model.CLAUDE_OPUS_5_5)
                 .maxTokens(4096)
                 .system(SYSTEM)
                 .addBeta(AnthropicBeta.COMPACT_2026_09_04)
@@ -681,7 +682,7 @@ foreach ($questions as $index => $question) {
     $turn = $index + 1;
     $history[] = BetaMessageParam::with(role: Role::USER, content: $question);
     $response = $client->beta->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 8192,
         system: SYSTEM,
         betas: [AnthropicBeta::COMPACT_2026_09_04],
@@ -693,7 +694,7 @@ foreach ($questions as $index => $question) {
     $conversationTokens = $response->usage->inputTokens + $response->usage->outputTokens;
     if ($conversationTokens > COMPACT_AT_TOKENS && $turn < count($questions)) {
         $summary = $client->beta->messages->create(
-            model: Model::CLAUDE_OPUS_5,
+            model: Model::CLAUDE_OPUS_5_5,
             maxTokens: 4096,
             system: SYSTEM,
             betas: [AnthropicBeta::COMPACT_2026_09_04],
@@ -730,7 +731,7 @@ history = []
 questions.each.with_index(1) do |question, turn|
   history << { role: "user", content: question }
   response = client.beta.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 8192,
     system_: SYSTEM,
     betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],
@@ -742,7 +743,7 @@ questions.each.with_index(1) do |question, turn|
   conversation_tokens = response.usage.input_tokens + response.usage.output_tokens
   if conversation_tokens > COMPACT_AT_TOKENS && turn < questions.length
     summary = client.beta.messages.create(
-      model: Anthropic::Model::CLAUDE_OPUS_5,
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 4096,
       system_: SYSTEM,
       betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],

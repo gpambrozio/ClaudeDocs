@@ -72,7 +72,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -96,7 +96,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -116,7 +116,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
@@ -132,7 +132,7 @@ response = client.messages.create(
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -163,7 +163,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -189,7 +189,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -224,7 +224,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .addSkill(SkillParams.builder()
@@ -250,7 +250,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Create a presentation about renewable energy']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             [
@@ -272,7 +272,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -315,7 +315,7 @@ RESPONSE=$(curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -355,7 +355,7 @@ echo "Downloaded: $FILENAME"
 FILE_ID=$(ant messages create \
   --transform 'content.#.content.content.#.file_id|@flatten|0' \
   --raw-output <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -388,7 +388,7 @@ client = anthropic.Anthropic()
 
 # Step 1: Use a Skill to create a file
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -431,7 +431,7 @@ const client = new Anthropic();
 
 // Step 1: Use a Skill to create a file
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -474,7 +474,7 @@ AnthropicClient client = new();
 // Step 1: Use a Skill to create a file
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -526,7 +526,7 @@ func main() {
 
 	// Step 1: Use a Skill to create a file
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     "claude-opus-5",
+		Model:     "claude-opus-5-5",
 		MaxTokens: 4096,
 		Container: anthropic.MessageCreateParamsContainerUnion{
 			OfContainers: &anthropic.ContainerParams{
@@ -608,7 +608,7 @@ void main() throws Exception {
 
     // Step 1: Use a Skill to create a file
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .addSkill(SkillParams.builder()
@@ -660,7 +660,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Create an Excel file with a simple budget spreadsheet']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest']
@@ -703,7 +703,7 @@ client = Anthropic::Client.new
 
 # Step 1: Use a Skill to create a file
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -932,7 +932,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
 CONTAINER_ID=$(ant messages create \
   --transform container.id \
   --raw-output <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -947,7 +947,7 @@ YAML
 
 # Continue conversation with same container
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   id: $CONTAINER_ID  # Reuse container
@@ -970,7 +970,7 @@ client = anthropic.Anthropic()
 
 # First request creates container
 response1 = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -995,7 +995,7 @@ messages = [
 ]
 
 response2 = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "id": response1.container.id,  # Reuse container
@@ -1011,7 +1011,7 @@ const client = new Anthropic();
 
 // First request creates container
 const response1 = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -1035,7 +1035,7 @@ const messages: Anthropic.MessageParam[] = [
 ];
 
 const response2 = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     id: response1.container!.id, // Reuse container
@@ -1052,7 +1052,7 @@ AnthropicClient client = new();
 // First request with a Skill
 var parameters1 = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -1081,7 +1081,7 @@ var assistantText = string.Join(
 
 var parameters2 = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -1113,7 +1113,7 @@ Console.WriteLine(response2);
 client := anthropic.NewClient()
 
 response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -1147,7 +1147,7 @@ for _, block := range response1.Content {
 assistantText := strings.Join(textParts, "\n")
 
 response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -1190,7 +1190,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params1 = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .addSkill(SkillParams.builder()
@@ -1206,7 +1206,7 @@ void main() {
     Message response1 = client.messages().create(params1);
 
     MessageCreateParams params2 = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .id(response1.container().get().id())
@@ -1239,7 +1239,7 @@ $response1 = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Create a sample sales dataset and analyze it']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest']
@@ -1263,7 +1263,7 @@ $messages = [
 $response2 = $client->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'id' => $response1->container->id,
         'skills' => [
@@ -1282,7 +1282,7 @@ echo $response2;
 client = Anthropic::Client.new
 
 response1 = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -1306,7 +1306,7 @@ messages = [
 ]
 
 response2 = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     id: response1.container.id,
@@ -1334,7 +1334,7 @@ RESPONSE=$(curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -1366,7 +1366,7 @@ RESPONSE=$(curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d "{
-    \"model\": \"claude-opus-5\",
+    \"model\": \"claude-opus-5-5\",
     \"max_tokens\": 4096,
     \"container\": {
       \"id\": \"$CONTAINER_ID\",
@@ -1389,7 +1389,7 @@ RESP=$(mktemp)
 
 # Initial request: capture the full JSON response to a temp file
 ant messages create > "$RESP" <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -1410,7 +1410,7 @@ YAML
 CONTAINER_ID=$(jq -r '.container.id' "$RESP")
 
 ant messages create > "$RESP" <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   id: $CONTAINER_ID
@@ -1432,7 +1432,7 @@ messages = [{"role": "user", "content": "Generate and process a large sample dat
 max_retries = 10
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [
@@ -1454,7 +1454,7 @@ for _ in range(max_retries):
 
     messages.append({"role": "assistant", "content": response.content})
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=4096,
         container={
             "id": response.container.id,
@@ -1479,7 +1479,7 @@ const messages: Anthropic.MessageParam[] = [
 const maxRetries = 10;
 
 let response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{ type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest" }]
@@ -1499,7 +1499,7 @@ for (let i = 0; i < maxRetries; i++) {
     content: response.content as Anthropic.ContentBlockParam[]
   });
   response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       id: response.container!.id,
@@ -1531,7 +1531,7 @@ for (var i = 0; i < maxRetries; i++)
 {
     var parameters = new MessageCreateParams
     {
-        Model = "claude-opus-5",
+        Model = "claude-opus-5-5",
         MaxTokens = 4096,
         Container = containerId is null
             ? new ContainerParams
@@ -1588,7 +1588,7 @@ messages := []anthropic.MessageParam{
 maxRetries := 10
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -1618,7 +1618,7 @@ for i := 0; i < maxRetries; i++ {
 	messages = append(messages, response.ToParam())
 
 	response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     "claude-opus-5",
+		Model:     "claude-opus-5-5",
 		MaxTokens: 4096,
 		Container: anthropic.MessageCreateParamsContainerUnion{
 			OfContainers: &anthropic.ContainerParams{
@@ -1665,7 +1665,7 @@ void main() {
 
     Message response = client.messages().create(
         MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(4096L)
             .container(ContainerParams.builder()
                 .addSkill(SkillParams.builder()
@@ -1688,7 +1688,7 @@ void main() {
 
         response = client.messages().create(
             MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5)
+                .model(Model.CLAUDE_OPUS_5_5)
                 .maxTokens(4096L)
                 .container(ContainerParams.builder()
                     .id(response.container().get().id())
@@ -1716,7 +1716,7 @@ $maxRetries = 10;
 $response = $client->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             [
@@ -1739,7 +1739,7 @@ for ($i = 0; $i < $maxRetries; $i++) {
     $response = $client->messages->create(
         maxTokens: 4096,
         messages: $messages,
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         container: [
             'id' => $response->container->id,
             'skills' => [
@@ -1764,7 +1764,7 @@ messages = [
 max_retries = 10
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -1785,7 +1785,7 @@ max_retries.times do
   messages << { role: "assistant", content: response.content }
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       id: response.container.id,
@@ -1815,7 +1815,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -1849,7 +1849,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -1875,7 +1875,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [
@@ -1899,7 +1899,7 @@ response = client.messages.create(
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -1940,7 +1940,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -1978,7 +1978,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -2023,7 +2023,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .skills(List.of(
@@ -2061,7 +2061,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Analyze sales data and create a presentation']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             [
@@ -2093,7 +2093,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -2770,7 +2770,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d "{
-    \"model\": \"claude-opus-5\",
+    \"model\": \"claude-opus-5-5\",
     \"max_tokens\": 4096,
     \"container\": {
       \"skills\": [{
@@ -2789,7 +2789,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [{
@@ -2813,7 +2813,7 @@ VERSION_ID=$(ant skills:versions create \
 
 # Use specific version
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -2830,7 +2830,7 @@ YAML
 
 # Use latest version
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -2860,7 +2860,7 @@ new_version = client.skills.versions.create(
 
 # Use specific version
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [
@@ -2877,7 +2877,7 @@ response = client.messages.create(
 
 # Use latest version
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [
@@ -2905,7 +2905,7 @@ const newVersion = await client.skills.versions.create("skill_01AbCdEfGhIjKlMnOp
 
 // Use specific version
 const specificVersionResponse = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -2922,7 +2922,7 @@ const specificVersionResponse = await client.messages.create({
 
 // Use latest version
 const latestVersionResponse = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -2967,7 +2967,7 @@ var newVersion = await client.Skills.Versions.Create("skill_01AbCdEfGhIjKlMnOpQr
 // Use specific version
 var specificVersionParams = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -2991,7 +2991,7 @@ Console.WriteLine(response);
 // Use latest version
 var latestVersionParams = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -3044,7 +3044,7 @@ if err != nil {
 
 // Use specific version
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -3071,7 +3071,7 @@ fmt.Println(response)
 
 // Use latest version
 latestResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -3127,7 +3127,7 @@ SkillVersion newVersion = client.skills().versions()
 
 // Use specific version
 MessageCreateParams specificVersionParams = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(4096L)
     .container(ContainerParams.builder()
         .addSkill(SkillParams.builder()
@@ -3145,7 +3145,7 @@ System.out.println(response);
 
 // Use latest version
 MessageCreateParams latestVersionParams = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(4096L)
     .container(ContainerParams.builder()
         .addSkill(SkillParams.builder()
@@ -3189,7 +3189,7 @@ $newVersion = $client->skills->versions->create(
 $response = $client->messages->create(
     maxTokens: 4096,
     messages: [['role' => 'user', 'content' => 'Use updated Skill']],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [[
             'type' => 'custom',
@@ -3205,7 +3205,7 @@ echo $response;
 $latestResponse = $client->messages->create(
     maxTokens: 4096,
     messages: [['role' => 'user', 'content' => 'Use latest Skill version']],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [[
             'type' => 'custom',
@@ -3240,7 +3240,7 @@ new_version = client.skills.versions.create(
 
 # Use specific version
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{
@@ -3256,7 +3256,7 @@ puts response
 
 # Use latest version
 latest_response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{
@@ -3430,7 +3430,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -3459,7 +3459,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -3486,7 +3486,7 @@ dcf_skill_id = "skill_01AbCdEfGhIjKlMnOpQrStUv"
 
 # Use with Excel to create financial model
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [
@@ -3513,7 +3513,7 @@ const dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv";
 
 // Use with Excel to create financial model
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -3541,7 +3541,7 @@ var dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv";
 // Use with Excel to create financial model
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -3577,7 +3577,7 @@ dcfSkillID := "skill_01AbCdEfGhIjKlMnOpQrStUv"
 
 // Use with Excel to create financial model
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -3621,7 +3621,7 @@ void main() {
 
     // Use with Excel Skill to create financial model
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .skills(List.of(
@@ -3658,7 +3658,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Build a DCF valuation model for a SaaS company']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest'],
@@ -3680,7 +3680,7 @@ dcf_skill_id = "skill_01AbCdEfGhIjKlMnOpQrStUv"
 
 # Use with Excel to create financial model
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -3752,7 +3752,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [{
@@ -3769,7 +3769,7 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 # Pin to specific versions for stability
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -3891,7 +3891,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [{
@@ -3908,7 +3908,7 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 # Use latest for active development
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -4032,7 +4032,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -4049,7 +4049,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "container": {
       "skills": [
@@ -4065,7 +4065,7 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 # Skills render into the system prompt in a fixed, cache-friendly order
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -4082,7 +4082,7 @@ YAML
 
 # Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -4106,7 +4106,7 @@ client = anthropic.Anthropic()
 
 # Skills render into the system prompt in a fixed, cache-friendly order
 response1 = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
@@ -4117,7 +4117,7 @@ response1 = client.messages.create(
 
 # Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
 response2 = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container={
         "skills": [
@@ -4139,7 +4139,7 @@ const client = new Anthropic();
 
 // Skills render into the system prompt in a fixed, cache-friendly order
 const response1 = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -4150,7 +4150,7 @@ const response1 = await client.messages.create({
 
 // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
 const response2 = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -4169,7 +4169,7 @@ AnthropicClient client = new();
 // Skills render into the system prompt in a fixed, cache-friendly order
 var parameters1 = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -4193,7 +4193,7 @@ Console.WriteLine(response1);
 // Different Skill set ([xlsx] vs [xlsx, pptx]) = a different prefix: a cache miss (an identical set is a cache hit)
 var parameters2 = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -4226,7 +4226,7 @@ client := anthropic.NewClient()
 
 // Skills render into the system prompt in a fixed, cache-friendly order
 response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -4253,7 +4253,7 @@ fmt.Println(response1)
 
 // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
 response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -4294,7 +4294,7 @@ void main() {
 
     // Skills render into the system prompt in a fixed, cache-friendly order
     MessageCreateParams params1 = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .skills(List.of(
@@ -4314,7 +4314,7 @@ void main() {
 
     // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
     MessageCreateParams params2 = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container(ContainerParams.builder()
             .skills(List.of(
@@ -4348,7 +4348,7 @@ $response1 = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Analyze sales data']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest']
@@ -4366,7 +4366,7 @@ $response2 = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Create a presentation']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: [
         'skills' => [
             ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest'],
@@ -4385,7 +4385,7 @@ client = Anthropic::Client.new
 
 # Skills render into the system prompt in a fixed, cache-friendly order
 response1 = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
@@ -4397,7 +4397,7 @@ puts response1
 
 # Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
 response2 = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: {
     skills: [
@@ -4428,7 +4428,7 @@ Handle Skill-related errors gracefully:
 if ! RESULT=$(ant messages create \
   --transform-error error.message \
   --format-error yaml 2>&1 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container:
   skills:
@@ -4461,7 +4461,7 @@ client = anthropic.Anthropic()
 
 try:
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=4096,
         container={
             "skills": [
@@ -4488,7 +4488,7 @@ const client = new Anthropic();
 
 try {
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [
@@ -4518,7 +4518,7 @@ try
 {
     var parameters = new MessageCreateParams
     {
-        Model = "claude-opus-5",
+        Model = "claude-opus-5-5",
         MaxTokens = 4096,
         Container = new ContainerParams
         {
@@ -4549,7 +4549,7 @@ catch (AnthropicBadRequestException e) when (e.Message.Contains("skill"))
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5",
+	Model:     "claude-opus-5-5",
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -4594,7 +4594,7 @@ void main() {
 
     try {
         MessageCreateParams params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(4096L)
             .container(ContainerParams.builder()
                 .addSkill(SkillParams.builder()
@@ -4630,7 +4630,7 @@ try {
         messages: [
             ['role' => 'user', 'content' => 'Process data']
         ],
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         container: [
             'skills' => [
                 [
@@ -4659,7 +4659,7 @@ client = Anthropic::Client.new
 
 begin
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     container: {
       skills: [

@@ -42,7 +42,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="claude-opus-5",  # Claude model name
+    model="claude-opus-5-5",  # Claude model name
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who are you?"},
@@ -65,7 +65,7 @@ const response = await openai.chat.completions.create({
     { role: "system", content: "You are a helpful assistant." },
     { role: "user", content: "Who are you?" }
   ],
-  model: "claude-opus-5" // Claude model name
+  model: "claude-opus-5-5" // Claude model name
 });
 
 console.log(response.choices[0].message.content);
@@ -77,7 +77,7 @@ using OpenAI;
 using OpenAI.Chat;
 
 ChatClient chatClient = new(
-    model: "claude-opus-5", // Claude model name
+    model: "claude-opus-5-5", // Claude model name
     credential: new ApiKeyCredential(
         Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")), // Your Claude API key
     options: new OpenAIClientOptions()
@@ -111,7 +111,7 @@ func main() {
 	)
 
 	response, err := client.Chat.Completions.New(context.Background(), openai.ChatCompletionNewParams{
-		Model: "claude-opus-5", // Claude model name
+		Model: "claude-opus-5-5", // Claude model name
 		Messages: []openai.ChatCompletionMessageParamUnion{
 			openai.SystemMessage("You are a helpful assistant."),
 			openai.UserMessage("Who are you?"),
@@ -139,7 +139,7 @@ public class QuickStart {
                 .build();
 
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-                .model("claude-opus-5") // Claude model name
+                .model("claude-opus-5-5") // Claude model name
                 .addSystemMessage("You are a helpful assistant.")
                 .addUserMessage("Who are you?")
                 .build();
@@ -166,7 +166,7 @@ openai = OpenAI::Client.new(
 )
 
 response = openai.chat.completions.create(
-  model: "claude-opus-5", # Claude model name
+  model: "claude-opus-5-5", # Claude model name
   messages: [
     {role: "system", content: "You are a helpful assistant."},
     {role: "user", content: "Who are you?"}

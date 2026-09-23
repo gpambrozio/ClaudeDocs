@@ -51,20 +51,29 @@ gcloud kms keyrings create <your-keyring-name> \
 
 Create a symmetric key with the `ENCRYPT_DECRYPT` purpose. Anthropic strongly recommends HSM protection: Cloud KMS HSM keys are FIPS 140-2 Level 3 validated, and the cost delta over software keys is small.
 
+The `--labels` option adds the organization label, `anthropic-org-<ORGANIZATION_UUID>` with the value `true`, where `<ORGANIZATION_UUID>` is your Anthropic organization ID in lowercase. The label is required for Anthropic to validate the key.
+
+**Finding your organization ID:** Copy the **Organization ID** field under **Settings > Organization** in the Claude Console, or under **Organization settings > Organization** in claude.ai, or read the `id` field from the [Organization Info](../api/beta/organization/retrieve.md) endpoint. Use the bare UUID, not the `org_`-prefixed ID.
+
 ```bash
-gcloud kms keys create <your-key-name> \
-  --project=<your-project-id> \
-  --location=<region> \
-  --keyring=<your-keyring-name> \
+gcloud kms keys create <KEY_NAME> \
+  --project=<PROJECT_ID> \
+  --location=<REGION> \
+  --keyring=<KEYRING_NAME> \
   --purpose=encryption \
-  --protection-level=hsm
+  --protection-level=hsm \
+  --labels=anthropic-org-<ORGANIZATION_UUID>=true
 ```
 
 For software protection instead, omit `--protection-level=hsm`. Nothing else in this guide changes.
 
 You can also create the key from the Google Cloud Console. Open the key ring, click **Create key**, select **Generated key**, set the purpose and algorithm to symmetric encrypt and decrypt, and choose **HSM** under protection level.
 
-![Google Cloud KMS Create key page with HSM protection level and a Symmetric encrypt/decrypt purpose.](https://platform.claude.com/docs/images/cmek/gcp-create-key.png)
+![Google Cloud KMS Create key page with HSM protection, symmetric encrypt/decrypt, and the anthropic-org label set to true.](https://platform.claude.com/docs/images/cmek/gcp-create-key-label.png)
+
+To share one key among several Anthropic organizations, add one such label for each organization. A key can carry at most 64 labels, including your own.
+
+To add the label to a key that doesn't have it, run `gcloud kms keys update <KEY_NAME> --project=<PROJECT_ID> --location=<REGION> --keyring=<KEYRING_NAME> --update-labels=anthropic-org-<ORGANIZATION_UUID>=true`. It merges the label with any labels the key already has.
 
 **Grant Anthropic's service account access to the key**
 
@@ -132,13 +141,15 @@ You can set up the key in the Claude Console or through the Admin API, with the 
 
 In the Claude Console, open **Settings > Encryption keys** and click **Add key**. Enter a display name, choose **Google Cloud KMS**, and click **Continue**. Paste the full key resource name into **Key resource name**, and click **Add**.
 
+The key details step shows the organization label. Add it to the key, as [the create step](cmek-google-cloud-kms.md#organization-label) describes, before you click **Add**.
+
 **Validate the key**
 
 On the **Encryption keys** page, click **Verify** next to the key. **Connected** appears when the check passes. If it fails, a message gives the reason.
 
 **Attach the key to a workspace**
 
-Open **Settings > Workspaces**, choose the workspace, and open its **Security** tab. Under **Encryption key**, select the key, click **Save**, and confirm. Attaching a key can't be undone. For a workspace that already receives requests, the key can take [up to a day to take effect](cmek.md#how-it-works).
+In the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. Under **Encryption key**, select the key, click **Save**, and confirm. Attaching a key can't be undone. For a workspace that already receives requests, the key can take [up to a day to take effect](cmek.md#how-it-works).
 
 **API**
 

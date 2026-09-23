@@ -12,6 +12,7 @@ featureMetadata:
     - claude-mythos-5-1
     - claude-fable-5
     - claude-mythos-5
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -51,7 +52,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 4096,
         "messages": [
             {
@@ -85,7 +86,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -116,7 +117,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=[
         {
@@ -148,7 +149,7 @@ print(response)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [
     {
@@ -189,7 +190,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Messages = [
         new() {
@@ -224,7 +225,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue")),
@@ -261,7 +262,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .addUserMessage("Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue")
         .addTool(CodeExecutionTool20260120.builder().build())
@@ -294,7 +295,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Query sales data for the West, East, and Central regions, then tell me which region had the highest revenue'],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         [
             'type' => 'code_execution_20260120',
@@ -325,7 +326,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [
     {
@@ -517,7 +518,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 4096,
         "container": "container_xyz789",
         "messages": [
@@ -587,7 +588,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 container: container_xyz789
 messages:
@@ -642,7 +643,7 @@ YAML
 
 ```python Python
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     container="container_xyz789",  # Reuse the container
     messages=[
@@ -709,7 +710,7 @@ print(response)
 
 ```typescript TypeScript
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: "container_xyz789", // Reuse the container
   messages: [
@@ -785,7 +786,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = "container_xyz789",
     Messages =
@@ -861,7 +862,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfString: anthropic.String("container_xyz789"),
@@ -936,7 +937,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .container("container_xyz789")
         .addUserMessage("Query customer purchase history from the last quarter and identify our top 5 customers by revenue")
@@ -1035,7 +1036,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     container: 'container_xyz789',
     // Same tools array as the original request
     tools: [
@@ -1070,7 +1071,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   container: "container_xyz789",
   messages: [

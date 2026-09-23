@@ -35,7 +35,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [
       {
@@ -55,7 +55,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --tool '{type: text_editor_20250728, name: str_replace_based_edit_tool, max_characters: 10000}' \
   --message '{role: user, content: There is a syntax error in my primes.py file. Can you help me fix it?}'
@@ -65,7 +65,7 @@ ant messages create \
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[
         {
@@ -89,7 +89,7 @@ print(response)
 const anthropic = new Anthropic();
 
 const response = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -115,7 +115,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = [new ToolTextEditor20250728 { MaxCharacters = 10000 }],
         Messages =
@@ -136,7 +136,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfTextEditor20250728: &anthropic.ToolTextEditor20250728Param{
@@ -165,7 +165,7 @@ void main() {
       .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addTool(editorTool)
     .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
@@ -180,7 +180,7 @@ void main() {
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: [ToolTextEditor20250728::with(maxCharacters: 10000)],
     messages: [
@@ -198,7 +198,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -387,7 +387,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [
       {
@@ -406,7 +406,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --tool '{type: text_editor_20250728, name: str_replace_based_edit_tool}' \
   --message '{role: user, content: There is a syntax error in my primes.py file. Can you help me fix it?}'
@@ -416,7 +416,7 @@ ant messages create \
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -434,7 +434,7 @@ print(response)
 const anthropic = new Anthropic();
 
 const response = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -459,7 +459,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = [new ToolTextEditor20250728()],
         Messages =
@@ -480,7 +480,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfTextEditor20250728: &anthropic.ToolTextEditor20250728Param{}},
@@ -505,7 +505,7 @@ void main() {
     ToolTextEditor20250728.builder().build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addTool(editorTool)
     .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
@@ -520,7 +520,7 @@ void main() {
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: [new ToolTextEditor20250728()],
     messages: [
@@ -538,7 +538,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{type: "text_editor_20250728", name: "str_replace_based_edit_tool"}],
   messages: [
@@ -557,7 +557,7 @@ Claude uses the text editor tool first to view the file:
 ```json Output
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -586,7 +586,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [
       {
@@ -633,7 +633,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - type: text_editor_20250728
@@ -696,7 +696,7 @@ YAML
 
 ```python Python
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -739,7 +739,7 @@ print(response)
 const anthropic = new Anthropic();
 
 const response = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -793,7 +793,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = [new ToolTextEditor20250728()],
         Messages =
@@ -847,7 +847,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfTextEditor20250728: &anthropic.ToolTextEditor20250728Param{}},
@@ -881,7 +881,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5)
+  .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
   .addTool(ToolTextEditor20250728.builder().build())
   .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
@@ -926,7 +926,7 @@ System.out.println(message);
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: [new ToolTextEditor20250728()],
     messages: [
@@ -969,7 +969,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{type: "text_editor_20250728", name: "str_replace_based_edit_tool"}],
   messages: [
@@ -1017,7 +1017,7 @@ Claude identifies the syntax error and uses the `str_replace` command to fix it:
 ```json Output
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -1048,7 +1048,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [
       {
@@ -1093,7 +1093,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - type: text_editor_20250728
@@ -1125,7 +1125,7 @@ YAML
 
 ```python Python
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -1168,7 +1168,7 @@ print(response)
 
 ```typescript TypeScript
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -1220,7 +1220,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = [new ToolTextEditor20250728()],
         Messages =
@@ -1272,7 +1272,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfTextEditor20250728: &anthropic.ToolTextEditor20250728Param{}},
@@ -1311,7 +1311,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5)
+  .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
   .addTool(ToolTextEditor20250728.builder().build())
   // Previous messages would go here
@@ -1366,7 +1366,7 @@ System.out.println(message);
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: [new ToolTextEditor20250728()],
     messages: [
@@ -1411,7 +1411,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{type: "text_editor_20250728", name: "str_replace_based_edit_tool"}],
   messages: [
@@ -1457,7 +1457,7 @@ Finally, Claude provides a complete explanation of the fix:
 ````json Output
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "end_turn",
   "role": "assistant",
   "content": [

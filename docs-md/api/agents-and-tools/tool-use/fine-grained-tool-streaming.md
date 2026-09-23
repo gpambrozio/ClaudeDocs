@@ -26,7 +26,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 65536,
     "tools": [
       {
@@ -61,7 +61,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create --stream --format jsonl <<'YAML' |
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 65536
 tools:
   - name: make_file
@@ -91,7 +91,7 @@ client = anthropic.Anthropic()
 
 with client.messages.stream(
     max_tokens=65536,
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     tools=[
         {
             "name": "make_file",
@@ -135,7 +135,7 @@ for block in final_message.content:
 const client = new Anthropic();
 
 const stream = client.messages.stream({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 65536,
   tools: [
     {
@@ -184,7 +184,7 @@ AnthropicClient client = new();
 
 MessageCreateParams parameters = new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 65536,
     Tools =
     [
@@ -270,7 +270,7 @@ makeFileTool := anthropic.ToolParam{
 }
 
 stream := client.Messages.NewStreaming(context.Background(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 65536,
 	Tools:     []anthropic.ToolUnionParam{{OfTool: &makeFileTool}},
 	Messages: []anthropic.MessageParam{
@@ -326,7 +326,7 @@ Tool makeFileTool = Tool.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(65536L)
     .addTool(makeFileTool)
     .addUserMessage("Can you write a long poem and make a file called poem.txt?")
@@ -365,7 +365,7 @@ $client = new Client();
 
 $stream = $client->messages->createStream(
     maxTokens: 65536,
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [
         [
             'name' => 'make_file',
@@ -424,7 +424,7 @@ foreach ($toolInputs as $toolInput) {
 client = Anthropic::Client.new
 
 stream = client.messages.stream(
-  model: Anthropic::Models::Model::CLAUDE_OPUS_5,
+  model: Anthropic::Models::Model::CLAUDE_OPUS_5_5,
   max_tokens: 65_536,
   tools: [
     {
@@ -508,7 +508,7 @@ client = anthropic.Anthropic()
 tool_inputs: dict[int, str] = {}  # index -> accumulated JSON string
 
 with client.messages.stream(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[
         {
@@ -548,7 +548,7 @@ const client = new Anthropic();
 const toolInputs = new Map<number, string>();
 
 const stream = client.messages.stream({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -601,7 +601,7 @@ AnthropicClient client = new();
 
 MessageCreateParams parameters = new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools =
     [
@@ -670,7 +670,7 @@ client := anthropic.NewClient()
 toolInputs := map[int64]string{} // content block index -> accumulated JSON
 
 stream := client.Messages.NewStreaming(context.Background(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{{
 		OfTool: &anthropic.ToolParam{
@@ -735,7 +735,7 @@ Tool weatherTool = Tool.builder()
         .build();
 
 MessageCreateParams createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addTool(weatherTool)
         .addUserMessage("Weather in Paris?")
@@ -796,7 +796,7 @@ $toolInputs = []; // index => accumulated JSON string
 
 $stream = $client->messages->createStream(
     maxTokens: 1024,
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [
         [
             'name' => 'get_weather',
@@ -847,7 +847,7 @@ client = Anthropic::Client.new
 tool_inputs = {} # index -> accumulated JSON string
 
 stream = client.messages.stream_raw(
-  model: Anthropic::Models::Model::CLAUDE_OPUS_5,
+  model: Anthropic::Models::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   tools: [
     {

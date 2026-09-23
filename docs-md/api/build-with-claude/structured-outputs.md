@@ -15,6 +15,7 @@ featureMetadata:
     - claude-fable-5
     - claude-mythos-5
     - claude-mythos-preview
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -75,7 +76,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -106,7 +107,7 @@ curl https://api.anthropic.com/v1/messages \
 ant messages create \
   --transform 'content.#(type=="text").text|@fromstr' \
   --format jsonl <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -133,7 +134,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -165,7 +166,7 @@ print(next(block.text for block in response.content if block.type == "text"))
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -208,7 +209,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan." }],
     OutputConfig = new OutputConfig
@@ -241,7 +242,7 @@ client := anthropic.NewClient()
 
 response, _ := client.Messages.New(context.Background(),
 	anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(
@@ -285,7 +286,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     StructuredMessageCreateParams<ContactInfo> params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.")
         .outputConfig(ContactInfo.class)
@@ -310,7 +311,7 @@ $response = $client->messages->create(
             'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     outputConfig: [
         'format' => [
             'type' => 'json_schema',
@@ -337,7 +338,7 @@ echo $textBlock->text;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -414,7 +415,7 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 ant messages create \
   --transform 'content.#(type=="text").text|@fromstr|{name,email}' \
   --format yaml <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -450,7 +451,7 @@ class ContactInfo(BaseModel):
 client = Anthropic()
 
 response = client.messages.parse(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -478,7 +479,7 @@ const ContactInfoSchema = z.object({
 const client = new Anthropic();
 
 const response = await client.messages.parse({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -503,7 +504,7 @@ var client = new AnthropicClient();
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() {
         Role = Role.User,
@@ -565,7 +566,7 @@ func generateSchema(v any) map[string]any {
 	schema := generateSchema(&ContactInfo{})
 
 	message, _ := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(
@@ -601,7 +602,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .outputConfig(ContactInfo.class)
         .addUserMessage("Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.")
@@ -636,7 +637,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.'],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     outputConfig: ['format' => ContactInfo::class],
 );
 
@@ -657,7 +658,7 @@ class ContactInfo < Anthropic::BaseModel
 end
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{
     role: "user",
@@ -684,7 +685,7 @@ The CLI passes raw JSON schemas as a YAML heredoc body. Use the GJSON `@fromstr`
 ant messages create \
   --transform 'content.#(type=="text").text|@fromstr|{name,email}' \
   --format yaml <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -725,7 +726,7 @@ class ContactInfo(BaseModel):
     plan_interest: str
 # ...
 response = client.messages.parse(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -757,7 +758,7 @@ schema = transform_schema(schema)
 schema["properties"]["custom_field"] = {"type": "string"}
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "..."}],
     output_config={
@@ -785,7 +786,7 @@ const ContactInfo = z.object({
 const client = new Anthropic();
 
 const response = await client.messages.parse({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -812,7 +813,7 @@ import { jsonSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/json-schema";
 const client = new Anthropic();
 
 const response = await client.messages.parse({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -857,7 +858,7 @@ var client = new AnthropicClient();
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() {
         Role = Role.User,
@@ -923,7 +924,7 @@ func generateSchema(v any) map[string]any {
 	schema := generateSchema(&ContactInfo{})
 
 	message, _ := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(
@@ -968,7 +969,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     StructuredMessageCreateParams<ContactInfo> createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .outputConfig(ContactInfo.class)
         .addUserMessage("Extract contact info: John Smith, john@example.com, interested in the Pro plan")
@@ -1009,7 +1010,7 @@ static class BookList {
 
 void main() {
     StructuredMessageCreateParams<BookList> createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(2048)
         .outputConfig(BookList.class, JsonSchemaLocalValidation.NO)
         .addUserMessage("List some famous late twentieth century novels.")
@@ -1192,7 +1193,7 @@ void main() {
         .build();
 
     MessageCreateParams createParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .outputConfig(outputConfig)
         .addUserMessage(
@@ -1235,7 +1236,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     outputConfig: ['format' => ContactInfo::class],
 );
 
@@ -1308,7 +1309,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan.'],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     outputConfig: OutputConfig::with(format: JSONOutputFormat::with(schema: [
         'type' => 'object',
         'properties' => [
@@ -1342,7 +1343,7 @@ end
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1377,7 +1378,7 @@ class Output < Anthropic::BaseModel
 end
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "give me some famous numbers"}],
   output_config: {format: Output}
@@ -1413,7 +1414,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -1448,7 +1449,7 @@ curl https://api.anthropic.com/v1/messages \
 ant messages create \
   --transform 'content.#(type=="text").text|@fromstr' \
   --format jsonl <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -1485,7 +1486,7 @@ client = anthropic.Anthropic()
 invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
 response = client.messages.parse(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     output_format=Invoice,
     messages=[
@@ -1512,7 +1513,7 @@ const InvoiceSchema = z.object({
 
 const invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 const response = await client.messages.parse({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   output_config: { format: zodOutputFormat(InvoiceSchema) },
   messages: [{ role: "user", content: `Extract invoice data from: ${invoiceText}` }]
@@ -1527,7 +1528,7 @@ string invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     OutputConfig = new OutputConfig
     {
@@ -1595,7 +1596,7 @@ schema := map[string]any{
 }
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	OutputConfig: anthropic.OutputConfigParam{
 		Format: anthropic.JSONOutputFormatParam{
@@ -1654,7 +1655,7 @@ void main() {
     String invoiceText = "Invoice #12345, Date: 2024-01-15, Total: $500.00";
 
     StructuredMessageCreateParams<Invoice> params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .outputConfig(Invoice.class)
         .addUserMessage("Extract invoice data from: " + invoiceText)
@@ -1692,7 +1693,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "Extract invoice data from: $invoiceText"]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     outputConfig: ['format' => Invoice::class],
 );
 
@@ -1721,7 +1722,7 @@ end
 invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   output_config: {format: Invoice},
   messages: [
@@ -1743,7 +1744,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -1774,7 +1775,7 @@ curl https://api.anthropic.com/v1/messages \
 ant messages create \
   --transform 'content.#(type=="text").text|@fromstr' \
   --format jsonl <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -1817,7 +1818,7 @@ class Classification(BaseModel):
 
 feedback_text = "Great product, but the delivery was slow."
 response = client.messages.parse(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     output_format=Classification,
     messages=[{"role": "user", "content": f"Classify this feedback: {feedback_text}"}],
@@ -1841,7 +1842,7 @@ const ClassificationSchema = z.object({
 
 const feedbackText = "Great product, but the delivery was slow.";
 const response = await client.messages.parse({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   output_config: { format: zodOutputFormat(ClassificationSchema) },
   messages: [{ role: "user", content: `Classify this feedback: ${feedbackText}` }]
@@ -1855,7 +1856,7 @@ string feedbackText = "Great product, fast shipping!";
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = $"Classify this feedback: {feedbackText}" }],
     OutputConfig = new OutputConfig
@@ -1899,7 +1900,7 @@ schema := map[string]any{
 }
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	OutputConfig: anthropic.OutputConfigParam{
 		Format: anthropic.JSONOutputFormatParam{
@@ -1946,7 +1947,7 @@ void main() {
     String feedbackText = "Great product, fast shipping!";
 
     StructuredMessageCreateParams<Classification> params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .outputConfig(Classification.class)
         .addUserMessage("Classify this feedback: " + feedbackText)
@@ -1983,7 +1984,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "Classify this feedback: {$feedbackText}"]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     outputConfig: ['format' => Classification::class],
 );
 
@@ -2006,7 +2007,7 @@ end
 feedback_text = "Great product, fast shipping!"
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   output_config: {format: Classification},
   messages: [
@@ -2026,7 +2027,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -2060,7 +2061,7 @@ curl https://api.anthropic.com/v1/messages \
 ant messages create \
   --transform 'content.#(type=="text").text' \
   --raw-output <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 output_config:
   format:
@@ -2104,7 +2105,7 @@ class APIResponse(BaseModel):
     metadata: dict
 
 response = client.messages.parse(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     output_format=APIResponse,
     messages=[{"role": "user", "content": "Process this request: ..."}],
@@ -2127,7 +2128,7 @@ const APIResponseSchema = z.object({
 });
 
 const response = await client.messages.parse({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   output_config: { format: zodOutputFormat(APIResponseSchema) },
   messages: [{ role: "user", content: "Process this request..." }]
@@ -2139,7 +2140,7 @@ console.log(response.parsed_output);
 ```csharp C#
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Process this request: ..." }],
     OutputConfig = new OutputConfig
@@ -2175,7 +2176,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	OutputConfig: anthropic.OutputConfigParam{
 		Format: anthropic.JSONOutputFormatParam{
@@ -2266,7 +2267,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     StructuredMessageCreateParams<APIResponse> params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .outputConfig(APIResponse.class)
         .addUserMessage("Process this request: ...")
@@ -2309,7 +2310,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Process this request: ...']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     outputConfig: ['format' => APIResponse::class],
 );
 
@@ -2343,7 +2344,7 @@ class APIResponse < Anthropic::BaseModel
 end
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   output_config: {format: APIResponse},
   messages: [
@@ -2372,7 +2373,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -2414,7 +2415,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -2453,7 +2454,7 @@ YAML
 
 ```python Python
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -2499,7 +2500,7 @@ print(response)
 
 ```typescript TypeScript
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Help me plan a trip to Paris departing May 15, 2026" }],
   // JSON outputs: structured response format
@@ -2553,7 +2554,7 @@ for (const block of response.content) {
 ```csharp C#
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris departing May 15, 2026" }],
     // JSON outputs: structured response format
@@ -2603,7 +2604,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip to Paris departing May 15, 2026")),
@@ -2670,7 +2671,7 @@ InputSchema toolSchema = InputSchema.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addUserMessage("Help me plan a trip to Paris departing May 15, 2026")
     .outputConfig(OutputConfig.builder()
@@ -2708,7 +2709,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Help me plan a trip to Paris departing May 15, 2026']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     // JSON outputs: structured response format
     outputConfig: ['format' => TripPlan::class],
     // Strict tool use: guaranteed tool parameters
@@ -2742,7 +2743,7 @@ if ($plan instanceof TripPlan) {
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {role: "user", content: "Help me plan a trip to Paris departing May 15, 2026"}

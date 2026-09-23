@@ -792,7 +792,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -838,7 +838,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -879,7 +879,7 @@ client = Anthropic()
 
 # Provide search results directly in the user message
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         MessageParam(
@@ -926,7 +926,7 @@ const client = new Anthropic();
 
 // Provide search results directly in the user message
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -974,7 +974,7 @@ AnthropicClient client = new();
 // Provide search results directly in the user message
 var response = await client.Messages.Create(new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -1010,7 +1010,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -1052,7 +1052,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessageOfBlockParams(List.of(
             ContentBlockParam.ofSearchResult(
@@ -1132,7 +1132,7 @@ $message = $client->messages->create(
             ]
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($message, JSON_PRETTY_PRINT);
@@ -1142,7 +1142,7 @@ echo json_encode($message, JSON_PRETTY_PRINT);
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1303,7 +1303,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [
       {
@@ -1384,7 +1384,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - name: search_knowledge_base
@@ -1462,7 +1462,7 @@ knowledge_base_tool = {
 # Replay a conversation that provides search results both ways: the first
 # user message carries a pre-fetched result, the tool result returns another
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[knowledge_base_tool],
     messages=[
@@ -1548,7 +1548,7 @@ const knowledgeBaseTool: Anthropic.Tool = {
 // Replay a conversation that provides search results both ways: the first
 // user message carries a pre-fetched result, the tool result returns another
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [knowledgeBaseTool],
   messages: [
@@ -1621,7 +1621,7 @@ AnthropicClient client = new();
 // user message carries a pre-fetched result, the tool result returns another
 var response = await client.Messages.Create(new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools =
     [
@@ -1719,7 +1719,7 @@ knowledgeBaseTool := anthropic.ToolUnionParam{
 // Replay a conversation that provides search results both ways: the first
 // user message carries a pre-fetched result, the tool result returns another
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools:     []anthropic.ToolUnionParam{knowledgeBaseTool},
 	Messages: []anthropic.MessageParam{
@@ -1794,7 +1794,7 @@ void main() {
     // Replay a conversation that provides search results both ways: the first
     // user message carries a pre-fetched result, the tool result returns another
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(knowledgeBaseTool)
         .addUserMessageOfBlockParams(List.of(
@@ -1920,7 +1920,7 @@ $response = $client->messages->create(
             ]
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1944,7 +1944,7 @@ knowledge_base_tool = {
 # Replay a conversation that provides search results both ways: the first
 # user message carries a pre-fetched result, the tool result returns another
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [knowledge_base_tool],
   messages: [

@@ -105,7 +105,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "authorization: Bearer $ACCESS_TOKEN" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d '{"model": "claude-opus-5", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hello, Claude"}]}' \
+  -d '{"model": "claude-opus-5-5", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hello, Claude"}]}' \
   | jq -r '.content[] | select(.type == "text") | .text'
 ```
 
@@ -140,7 +140,7 @@ client = anthropic.Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -180,7 +180,7 @@ const client = new Anthropic({
 });
 
 const message = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }]
 });
@@ -245,7 +245,7 @@ func main() {
 		}),
 	)
 	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -295,7 +295,7 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
         .build();
 
 var message = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addUserMessage("Hello, Claude")
         .build());
@@ -319,7 +319,7 @@ using var client = new AnthropicClient(new ClientOptions { Credentials = credent
 
 var message = await client.Messages.Create(new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
 });
@@ -370,7 +370,7 @@ export ANTHROPIC_IDENTITY_TOKEN_FILE
 # ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and
 # ANTHROPIC_IDENTITY_TOKEN_FILE and performs the exchange.
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}'
 ```
@@ -408,7 +408,7 @@ $client = new Client(
 );
 
 $message = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
 );
@@ -444,7 +444,7 @@ client = Anthropic::Client.new(
 )
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}]
 )

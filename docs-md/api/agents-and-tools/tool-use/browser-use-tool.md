@@ -14,6 +14,7 @@ featureMetadata:
     - claude-mythos-5-1
     - claude-fable-5
     - claude-mythos-5
+    - claude-opus-5-5
     - claude-opus-5
     - claude-sonnet-5
     - claude-opus-4-8
@@ -43,7 +44,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 2048,
     "tools": [
       {
@@ -61,7 +62,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 2048
 tools:
   - type: browser_toolset_20260801
@@ -75,7 +76,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=2048,
     tools=[{"type": "browser_toolset_20260801"}],
     messages=[
@@ -92,7 +93,7 @@ print(response)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 2048,
   tools: [{ type: "browser_toolset_20260801" }],
   messages: [
@@ -111,7 +112,7 @@ var client = new AnthropicClient();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 2048,
     Tools = [new BrowserToolset20260801()],
     Messages =
@@ -132,7 +133,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 2048,
 	Tools: []anthropic.ToolUnionParam{
 		{OfBrowserToolset20260801: &anthropic.BrowserToolset20260801Param{}},
@@ -155,7 +156,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(2048L)
         .addTool(BrowserToolset20260801.builder().build())
         .addUserMessage("Open example.com/docs and tell me how to get started.")
@@ -174,7 +175,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Open example.com/docs and tell me how to get started.'],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         ['type' => 'browser_toolset_20260801'],
     ],
@@ -187,7 +188,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 2048,
   tools: [
     { type: "browser_toolset_20260801" }
@@ -210,7 +211,7 @@ Claude's first response ends with `stop_reason: "tool_use"` and carries one or m
   "id": "msg_01HCDu4XSTLzTAcodEQ58vDo",
   "type": "message",
   "role": "assistant",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "content": [
     {
       "type": "text",

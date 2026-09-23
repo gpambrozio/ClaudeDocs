@@ -33,7 +33,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1000,
     "messages": [
       {
@@ -48,7 +48,7 @@ Claude returns a JSON response containing the assistant's message:
 
 ```json Output
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "id": "msg_013mHbppMPd2PrVJzGMZPt2D",
   "type": "message",
   "role": "assistant",
@@ -102,7 +102,7 @@ Run `ant messages create` from your terminal:
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1000 \
   --message '{
     role: user,
@@ -114,7 +114,7 @@ The CLI prints the JSON response:
 
 ```json Output
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "id": "msg_01N1ycuCkM5Mzd7WhTU4fwST",
   "type": "message",
   "role": "assistant",
@@ -159,7 +159,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1000,
     messages=[
         {
@@ -217,7 +217,7 @@ import Anthropic from "@anthropic-ai/sdk";
 const client = new Anthropic();
 
 const message = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1000,
   messages: [
     {
@@ -280,7 +280,7 @@ var client = new AnthropicClient();
 
 var message = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1000,
     Messages =
     [
@@ -354,7 +354,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1000,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What should I search for to find the latest developments in renewable energy?")),
@@ -426,7 +426,7 @@ java {
 }
 
 dependencies {
-    implementation("com.anthropic:anthropic-java:2.63.0")
+    implementation("com.anthropic:anthropic-java:2.65.0")
 }
 
 application {
@@ -452,7 +452,7 @@ Save this as `pom.xml`:
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>2.63.0</version>
+      <version>2.65.0</version>
     </dependency>
   </dependencies>
 </project>
@@ -472,7 +472,7 @@ static void main() {
     var client = AnthropicOkHttpClient.fromEnv();
 
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1000)
         .addUserMessage(
             "What should I search for to find the latest developments in renewable energy?"
@@ -540,7 +540,7 @@ use Anthropic\Messages\TextBlock;
 $client = new Client();
 
 $message = $client->messages->create(
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 1000,
     messages: [
         [
@@ -599,7 +599,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: Anthropic::Model::CLAUDE_OPUS_5,
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1000,
   messages: [
     {

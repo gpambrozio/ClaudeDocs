@@ -834,7 +834,7 @@ curl -sS -D - -o /dev/null https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello, Claude"}]
   }' | grep -i '^anthropic-workspace-id'
@@ -844,7 +844,7 @@ curl -sS -D - -o /dev/null https://api.anthropic.com/v1/messages \
 # --debug prints the HTTP response, including the Anthropic-Workspace-Id
 # header, to stderr; > /dev/null hides the JSON body on stdout
 ant --debug messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}' > /dev/null
 ```
@@ -853,7 +853,7 @@ ant --debug messages create \
 client = anthropic.Anthropic()
 
 response = client.messages.with_raw_response.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -866,7 +866,7 @@ const client = new Anthropic();
 
 const { response } = await client.messages
   .create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }]
   })
@@ -879,7 +879,7 @@ AnthropicClient client = new();
 
 using var response = await client.WithRawResponse.Messages.Create(new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
 });
@@ -894,7 +894,7 @@ var response *http.Response
 _, err := client.Messages.New(
 	context.Background(),
 	anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -922,7 +922,7 @@ void main() {
 
     HttpResponseFor<Message> response = client.messages().withRawResponse().create(
         MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024)
             .addUserMessage("Hello, Claude")
             .build()
@@ -937,7 +937,7 @@ void main() {
 $client = new Client();
 
 $response = $client->messages->raw->create([
-    'model' => Model::CLAUDE_OPUS_5,
+    'model' => Model::CLAUDE_OPUS_5_5,
     'maxTokens' => 1024,
     'messages' => [['role' => 'user', 'content' => 'Hello, Claude']],
 ]);
@@ -958,7 +958,7 @@ read_workspace_id = lambda do |request, call_next|
 end
 
 client.messages.create(
-  model: Anthropic::Model::CLAUDE_OPUS_5,
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }],
   request_options: { middleware: [read_workspace_id] }

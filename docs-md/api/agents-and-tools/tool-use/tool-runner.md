@@ -56,7 +56,7 @@ def calculate_sum(a: int, b: int) -> str:
     return str(a + b)
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -100,7 +100,7 @@ const getWeatherTool = betaZodTool({
 });
 
 const finalMessage = await client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [getWeatherTool],
   messages: [{ role: "user", content: "What's the weather like in Paris?" }]
@@ -140,7 +140,7 @@ const calculateSumTool = betaTool({
 });
 
 const finalMessage = await client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [calculateSumTool],
   messages: [{ role: "user", content: "What's 15 + 27?" }]
@@ -224,7 +224,7 @@ var calculateSumTool = new BetaRunnableTool
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -304,7 +304,7 @@ func main() {
 		[]anthropic.BetaTool{getWeather, calculateSum},
 		anthropic.BetaToolRunnerParams{
 			BetaMessageNewParams: anthropic.BetaMessageNewParams{
-				Model:     anthropic.ModelClaudeOpus5,
+				Model:     anthropic.ModelClaudeOpus5_5,
 				MaxTokens: 1024,
 				Messages: []anthropic.BetaMessageParam{
 					anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(
@@ -390,7 +390,7 @@ void main() {
     BetaToolRunner runner = client.beta()
             .messages()
             .toolRunner(MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_5)
+                    .model(Model.CLAUDE_OPUS_5_5)
                     .maxTokens(1024)
                     .addBeta("structured-outputs-2025-11-13")
                     .addUserMessage("What's the weather like in Paris? Also, what's 15 + 27?")
@@ -484,7 +484,7 @@ $runner = $client->beta->messages->toolRunner(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in Paris? Also, what's 15 + 27?"],
     ],
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [$getWeather, $calculateSum],
 );
 
@@ -546,7 +546,7 @@ end
 
 # Use the tool runner
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [GetWeather.new, CalculateSum.new],
   messages: [
@@ -579,7 +579,7 @@ Use `runner.until_done()` to get the final message.
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[get_weather, calculate_sum],
     messages=[
@@ -603,7 +603,7 @@ for block in final_message.content:
 const client = new Anthropic();
 // ...
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [getWeatherTool],
   messages: [{ role: "user", content: "What's the weather like in Paris?" }]
@@ -627,7 +627,7 @@ var client = new AnthropicClient();
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -663,7 +663,7 @@ runner := client.Beta.Messages.NewToolRunner(
 	[]anthropic.BetaTool{getWeather},
 	anthropic.BetaToolRunnerParams{
 		BetaMessageNewParams: anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Messages: []anthropic.BetaMessageParam{
 				anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(
@@ -695,7 +695,7 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 BetaToolRunner runner = client.beta()
         .messages()
         .toolRunner(MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5)
+                .model(Model.CLAUDE_OPUS_5_5)
                 .maxTokens(1024)
                 .addBeta("structured-outputs-2025-11-13")
                 .addUserMessage("What's the weather like in Paris? Also, what's 15 + 27?")
@@ -724,7 +724,7 @@ $runner = $client->beta->messages->toolRunner(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in Paris? Also, what's 15 + 27?"],
     ],
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [$getWeather, $calculateSum],
 );
 
@@ -744,7 +744,7 @@ Use `runner.run_until_finished` to get all messages.
 client = Anthropic::Client.new
 # ...
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [GetWeather.new, CalculateSum.new],
   messages: [
@@ -805,7 +805,7 @@ Use `generate_tool_call_response()` to inspect or compute the tool result. Calli
 
 ```python
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     max_iterations=10,
     tools=[get_weather],
@@ -841,7 +841,7 @@ The following example retries a truncated response with a larger `max_tokens` bu
 
 ```typescript
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   max_iterations: 10,
   tools: [getWeatherTool],
@@ -881,7 +881,7 @@ Calling `SetParams()` or `PushMessages()` flags state as modified, which causes 
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = "What's the weather in San Francisco?" }],
     },
@@ -938,7 +938,7 @@ runner := client.Beta.Messages.NewToolRunner(
 	[]anthropic.BetaTool{getWeather},
 	anthropic.BetaToolRunnerParams{
 		BetaMessageNewParams: anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Messages: []anthropic.BetaMessageParam{
 				anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(
@@ -976,7 +976,7 @@ BetaToolRunner runner = client.beta()
         .messages()
         .toolRunner(ToolRunnerCreateParams.builder()
                 .initialMessageParams(MessageCreateParams.builder()
-                        .model(Model.CLAUDE_OPUS_5)
+                        .model(Model.CLAUDE_OPUS_5_5)
                         .maxTokens(1024)
                         .addBeta("structured-outputs-2025-11-13")
                         .addUserMessage("Give me a detailed weather report for every major US city.")
@@ -1020,7 +1020,7 @@ $runner = $client->beta->messages->toolRunner(
     messages: [
         ['role' => 'user', 'content' => 'Give a detailed weather report for every major US city.'],
     ],
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [$getWeather],
     maxIterations: 10,
 );
@@ -1056,7 +1056,7 @@ You take over message history when, from inside an `each_message` or `each_strea
 
 ```ruby
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   max_iterations: 10,
   tools: [GetWeather.new],
@@ -1110,7 +1110,7 @@ In the Python and TypeScript SDKs, use the tool response method (`generate_tool_
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[my_tool],
     messages=[{"role": "user", "content": "Run my_tool with the query 'hello'."}],
@@ -1140,7 +1140,7 @@ for message in runner:
 const client = new Anthropic();
 // ...
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [myTool],
   messages: [{ role: "user", content: "Run my_tool with the query 'hello'." }]
@@ -1210,7 +1210,7 @@ var getWeatherTool = new BetaRunnableTool
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -1241,7 +1241,7 @@ The PHP tool runner does not currently expose tool results before they are appen
 client = Anthropic::Client.new
 # ...
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [MyTool.new],
   messages: [{role: "user", content: "Run my_tool with the query 'hello'."}]
@@ -1285,7 +1285,7 @@ In the Python and TypeScript SDKs, use the tool response method to get the tool 
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[search_documents],
     messages=[
@@ -1319,7 +1319,7 @@ for message in runner:
 const client = new Anthropic();
 // ...
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [searchDocuments],
   messages: [
@@ -1381,7 +1381,7 @@ runner := client.Beta.Messages.NewToolRunner(
 	[]anthropic.BetaTool{searchDocuments},
 	anthropic.BetaToolRunnerParams{
 		BetaMessageNewParams: anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Messages: []anthropic.BetaMessageParam{
 				anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(
@@ -1434,7 +1434,7 @@ $runner = $client->beta->messages->toolRunner(
     messages: [
         ['role' => 'user', 'content' => 'Search for information about the climate of San Francisco.'],
     ],
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [$searchDocuments],
 );
 
@@ -1470,7 +1470,7 @@ foreach ($runner as $message) {
 client = Anthropic::Client.new
 # ...
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [SearchDocuments.new],
   messages: [{role: "user", content: "Search for information about the climate of San Francisco"}]
@@ -1512,7 +1512,7 @@ Set `stream=True` and use `get_final_message()` to get the accumulated message.
 client = anthropic.Anthropic()
 # ...
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[calculate_sum],
     messages=[{"role": "user", "content": "What is 15 + 27?"}],
@@ -1536,7 +1536,7 @@ Set `stream: true` and use `finalMessage()` to get the accumulated message.
 const client = new Anthropic();
 // ...
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "What is the weather in San Francisco?" }],
   tools: [getWeatherTool],
@@ -1564,7 +1564,7 @@ var client = new AnthropicClient();
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -1602,7 +1602,7 @@ runner := client.Beta.Messages.NewToolRunnerStreaming(
 	[]anthropic.BetaTool{calculateSum},
 	anthropic.BetaToolRunnerParams{
 		BetaMessageNewParams: anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Messages: []anthropic.BetaMessageParam{
 				anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What is 15 + 27?")),
@@ -1645,7 +1645,7 @@ void main() {
     BetaToolRunner runner = client.beta()
             .messages()
             .toolRunner(MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_5)
+                    .model(Model.CLAUDE_OPUS_5_5)
                     .maxTokens(1024)
                     .addBeta("structured-outputs-2025-11-13")
                     .addUserMessage("What is 15 + 27?")
@@ -1672,7 +1672,7 @@ Use `each_streaming` to iterate over streaming events.
 client = Anthropic::Client.new
 # ...
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [CalculateSum.new],
   messages: [{role: "user", content: "What is 15 + 27?"}]

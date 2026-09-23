@@ -36,7 +36,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-MODEL = "claude-opus-5"
+MODEL = "claude-opus-5-5"
 EFFORT = "xhigh"
 
 SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
@@ -66,7 +66,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
-const MODEL = "claude-opus-5";
+const MODEL = "claude-opus-5-5";
 const EFFORT = "xhigh";
 
 const SYSTEM_PROMPT =
@@ -94,7 +94,7 @@ using Anthropic.Models.Messages;
 
 AnthropicClient client = new();
 
-const Model model = Model.ClaudeOpus5;
+const Model model = Model.ClaudeOpus5_5;
 var effort = Effort.Xhigh;
 
 const string systemPrompt = "You are a helpful general-purpose agent. Answer the user's request directly.";
@@ -140,7 +140,7 @@ import (
 var client = anthropic.NewClient()
 
 const (
-	modelID = anthropic.ModelClaudeOpus5
+	modelID = anthropic.ModelClaudeOpus5_5
 	effort  = anthropic.OutputConfigEffortXhigh
 
 	systemPrompt = "You are a helpful general-purpose agent. Answer the user's request directly."
@@ -222,7 +222,7 @@ import java.util.stream.IntStream;
 
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-static final Model MODEL = Model.CLAUDE_OPUS_5;
+static final Model MODEL = Model.CLAUDE_OPUS_5_5;
 static final boolean DOC_TEST_MODE =
         !Objects.requireNonNullElse(System.getenv("DOC_TEST_MODE"), "").isEmpty();
 static final OutputConfig.Effort EFFORT = OutputConfig.Effort.XHIGH;
@@ -250,7 +250,7 @@ use Anthropic\Messages\ToolUseBlock;
 
 $client = new Client();
 
-const MODEL = 'claude-opus-5';
+const MODEL = 'claude-opus-5-5';
 define('DOC_TEST_MODE', (string) getenv('DOC_TEST_MODE') !== '');
 const EFFORT = 'xhigh';
 
@@ -277,7 +277,7 @@ require "tmpdir"
 
 CLIENT = Anthropic::Client.new
 
-MODEL = "claude-opus-5"
+MODEL = "claude-opus-5-5"
 EFFORT = :xhigh
 
 SYSTEM_PROMPT = "You are a helpful general-purpose agent. Answer the user's request directly."
@@ -2846,7 +2846,7 @@ curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d @- <<'EOF'
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 64000,
   "system": "You are a helpful general-purpose agent. Answer the user's request directly.",
   "output_config": {"effort": "xhigh"},
@@ -2889,7 +2889,7 @@ EOF
 # subagents is shown in the SDK tabs; the Workflow description is condensed here,
 # the SDK examples carry the full standing-consent text.
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 64000
 system: You are a helpful general-purpose agent. Answer the user's request directly.
 output_config: {effort: xhigh}

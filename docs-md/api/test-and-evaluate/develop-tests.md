@@ -147,7 +147,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=50,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -188,7 +188,7 @@ const client = new Anthropic();
 
 async function getCompletion(prompt: string): Promise<string> {
   const message = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 50,
     messages: [{ role: "user", content: prompt }]
   });
@@ -230,7 +230,7 @@ async Task<string> GetCompletion(string prompt)
 {
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 50,
         Messages = [new() { Role = Role.User, Content = prompt }],
     });
@@ -300,7 +300,7 @@ var tweets = []tweet{
 
 func getCompletion(prompt string) string {
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 50,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -353,7 +353,7 @@ String contentText(Message message) {
 
 String getCompletion(String prompt) {
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(50L)
         .addUserMessage(prompt)
         .build();
@@ -393,7 +393,7 @@ $tweets = [
 function getCompletion(Client $client, string $prompt): string
 {
     $message = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 50,
         messages: [
             [
@@ -453,7 +453,7 @@ end
 
 def get_completion(client, prompt)
   message = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 50,
     messages: [
       {
@@ -519,7 +519,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -572,7 +572,7 @@ const client = new Anthropic();
 
 async function getCompletion(prompt: string): Promise<string> {
   const message = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 2048,
     messages: [{ role: "user", content: prompt }]
   });
@@ -656,7 +656,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -699,7 +699,7 @@ const client = new Anthropic();
 
 async function getCompletion(prompt: string): Promise<string> {
   const message = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: prompt }]
   });
@@ -767,7 +767,7 @@ async Task<string> GetCompletion(string prompt)
 {
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = prompt }],
     });
@@ -865,7 +865,7 @@ var articles = []article{
 
 func getCompletion(prompt string) string {
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -951,7 +951,7 @@ String contentText(Message message) {
 
 String getCompletion(String prompt) {
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessage(prompt)
         .build();
@@ -1018,7 +1018,7 @@ $articles = [
 function getCompletion(Client $client, string $prompt): string
 {
     $message = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
         messages: [
             [
@@ -1102,7 +1102,7 @@ end
 
 def get_completion(client, prompt)
   message = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       {
@@ -1174,7 +1174,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -1189,7 +1189,7 @@ def evaluate_likert(model_output, target_tone):
 
     # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=50,
         messages=[{"role": "user", "content": tone_prompt}],
     )
@@ -1229,7 +1229,7 @@ const client = new Anthropic();
 
 async function getCompletion(prompt: string): Promise<string> {
   const message = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 2048,
     messages: [{ role: "user", content: prompt }]
   });
@@ -1246,7 +1246,7 @@ Output only the number.`;
 
   // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 50,
     messages: [{ role: "user", content: tonePrompt }]
   });
@@ -1288,7 +1288,7 @@ async Task<string> GetCompletion(string prompt)
 {
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 2048,
         Messages = [new() { Role = Role.User, Content = prompt }],
     });
@@ -1308,7 +1308,7 @@ async Task<int> EvaluateLikert(string modelOutput, string targetTone)
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var response = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 50,
         Messages = [new() { Role = Role.User, Content = tonePrompt }],
     });
@@ -1369,7 +1369,7 @@ var inquiries = []inquiry{
 
 func getCompletion(prompt string) string {
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 2048,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -1390,7 +1390,7 @@ Output only the number.`, targetTone, modelOutput)
 
 	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 50,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(tonePrompt)),
@@ -1442,7 +1442,7 @@ String contentText(Message message) {
 
 String getCompletion(String prompt) {
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(2048L)
         .addUserMessage(prompt)
         .build();
@@ -1459,7 +1459,7 @@ int evaluateLikert(String modelOutput, String targetTone) {
 
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(50L)
         .addUserMessage(tonePrompt)
         .build();
@@ -1493,7 +1493,7 @@ $inquiries = [
 function getCompletion(Client $client, string $prompt): string
 {
     $message = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 2048,
         messages: [
             [
@@ -1517,7 +1517,7 @@ function evaluateLikert(Client $client, string $modelOutput, string $targetTone)
 
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     $response = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 50,
         messages: [
             [
@@ -1571,7 +1571,7 @@ end
 
 def get_completion(client, prompt)
   message = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 2048,
     messages: [
       {
@@ -1594,7 +1594,7 @@ def evaluate_likert(client, model_output, target_tone)
 
   # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   response = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 50,
     messages: [
       {
@@ -1641,7 +1641,7 @@ client = anthropic.Anthropic()
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -1664,7 +1664,7 @@ def evaluate_binary(model_output, query_contains_phi):
 
     # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=50,
         messages=[{"role": "user", "content": binary_prompt}],
     )
@@ -1711,7 +1711,7 @@ const client = new Anthropic();
 
 async function getCompletion(prompt: string): Promise<string> {
   const message = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: prompt }]
   });
@@ -1740,7 +1740,7 @@ Output only 'yes' or 'no'.`;
 
   // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 50,
     messages: [{ role: "user", content: binaryPrompt }]
   });
@@ -1779,7 +1779,7 @@ async Task<string> GetCompletion(string prompt)
 {
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = prompt }],
     });
@@ -1809,7 +1809,7 @@ async Task<bool> EvaluateBinary(string modelOutput, bool queryContainsPhi)
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var response = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 50,
         Messages = [new() { Role = Role.User, Content = binaryPrompt }],
     });
@@ -1875,7 +1875,7 @@ var patientQueries = []patientQuery{
 
 func getCompletion(prompt string) string {
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -1905,7 +1905,7 @@ Output only 'yes' or 'no'.`, modelOutput)
 
 	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 50,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(binaryPrompt)),
@@ -1956,7 +1956,7 @@ String contentText(Message message) {
 
 String getCompletion(String prompt) {
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessage(prompt)
         .build();
@@ -1982,7 +1982,7 @@ boolean evaluateBinary(String modelOutput, boolean queryContainsPhi) {
 
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(50L)
         .addUserMessage(binaryPrompt)
         .build();
@@ -2020,7 +2020,7 @@ $patientQueries = [
 function getCompletion(Client $client, string $prompt): string
 {
     $message = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
         messages: [
             [
@@ -2053,7 +2053,7 @@ function evaluateBinary(Client $client, string $modelOutput, bool $queryContains
 
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     $response = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 50,
         messages: [
             [
@@ -2109,7 +2109,7 @@ end
 
 def get_completion(client, prompt)
   message = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       {
@@ -2139,7 +2139,7 @@ def evaluate_binary(client, model_output, query_contains_phi)
 
   # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   response = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 50,
     messages: [
       {
@@ -2215,7 +2215,7 @@ client = anthropic.Anthropic()
 
 def get_completion(conversation: list):
     message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=conversation,
     )
@@ -2233,7 +2233,7 @@ def evaluate_ordinal(model_output, conversation):
 
     # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=50,
         messages=[{"role": "user", "content": ordinal_prompt}],
     )
@@ -2297,7 +2297,7 @@ const client = new Anthropic();
 
 async function getCompletion(conversation: Anthropic.MessageParam[]): Promise<string> {
   const message = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: conversation
   });
@@ -2324,7 +2324,7 @@ Output only the number and nothing else.`;
 
   // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 50,
     messages: [{ role: "user", content: ordinalPrompt }]
   });
@@ -2378,7 +2378,7 @@ async Task<string> GetCompletion(Turn[] conversation)
 {
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [.. conversation.Select(turn => new MessageParam
         {
@@ -2407,7 +2407,7 @@ async Task<int> EvaluateOrdinal(string modelOutput, Turn[] conversation)
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var response = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 50,
         Messages = [new() { Role = Role.User, Content = ordinalPrompt }],
     });
@@ -2492,7 +2492,7 @@ func toMessageParams(conversation []turn) []anthropic.MessageParam {
 
 func getCompletion(conversation []turn) string {
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages:  toMessageParams(conversation),
 	})
@@ -2517,7 +2517,7 @@ Output only the number and nothing else.`, conversationText.String(), modelOutpu
 
 	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 50,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(ordinalPrompt)),
@@ -2578,7 +2578,7 @@ String contentText(Message message) {
 
 String getCompletion(List<Turn> conversation) {
     var builder = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L);
     for (var turn : conversation) {
         if (turn.role().equals("user")) {
@@ -2606,7 +2606,7 @@ int evaluateOrdinal(String modelOutput, List<Turn> conversation) {
 
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(50L)
         .addUserMessage(ordinalPrompt)
         .build();
@@ -2652,7 +2652,7 @@ $conversations = [
 function getCompletion(Client $client, array $conversation): string
 {
     $message = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
         messages: $conversation,
     );
@@ -2677,7 +2677,7 @@ function evaluateOrdinal(Client $client, string $modelOutput, array $conversatio
 
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     $response = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 50,
         messages: [
             [
@@ -2743,7 +2743,7 @@ end
 
 def get_completion(client, conversation)
   message = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: conversation
   )
@@ -2764,7 +2764,7 @@ def evaluate_ordinal(client, model_output, conversation)
 
   # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   response = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 50,
     messages: [
       {
@@ -2822,7 +2822,7 @@ def build_grader_prompt(answer, rubric):
 
 def grade_completion(output, golden_answer):
     grader_message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=2048,
         messages=[
             {"role": "user", "content": build_grader_prompt(output, golden_answer)}
@@ -2852,7 +2852,7 @@ eval_data = [
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
@@ -2878,7 +2878,7 @@ Think through your reasoning in <thinking> tags, then output 'correct' or 'incor
 
 async function gradeCompletion(output: string, goldenAnswer: string): Promise<string> {
   const graderResponse = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 2048,
     messages: [{ role: "user", content: buildGraderPrompt(output, goldenAnswer) }]
   });
@@ -2903,7 +2903,7 @@ const evalData = [
 
 async function getCompletion(prompt: string): Promise<string> {
   const message = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: prompt }]
   });
@@ -2937,7 +2937,7 @@ async Task<string> GradeCompletion(string output, string goldenAnswer)
 {
     var graderResponse = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 2048,
         Messages = [new() { Role = Role.User, Content = BuildGraderPrompt(output, goldenAnswer) }],
     });
@@ -2959,7 +2959,7 @@ async Task<string> GetCompletion(string prompt)
 {
     var message = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = prompt }],
     });
@@ -3015,7 +3015,7 @@ Think through your reasoning in <thinking> tags, then output 'correct' or 'incor
 
 func gradeCompletion(output, goldenAnswer string) string {
 	graderResponse, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 2048,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(buildGraderPrompt(output, goldenAnswer))),
@@ -3032,7 +3032,7 @@ func gradeCompletion(output, goldenAnswer string) string {
 
 func getCompletion(prompt string) string {
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -3096,7 +3096,7 @@ String buildGraderPrompt(String answer, String rubric) {
 
 String gradeCompletion(String output, String goldenAnswer) {
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(2048L)
         .addUserMessage(buildGraderPrompt(output, goldenAnswer))
         .build();
@@ -3106,7 +3106,7 @@ String gradeCompletion(String output, String goldenAnswer) {
 
 String getCompletion(String prompt) {
     var params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessage(prompt)
         .build();
@@ -3141,7 +3141,7 @@ function buildGraderPrompt(string $answer, string $rubric): string
 function gradeCompletion(Client $client, string $output, string $goldenAnswer): string
 {
     $graderResponse = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 2048,
         messages: [
             [
@@ -3170,7 +3170,7 @@ $evalData = [
 function getCompletion(Client $client, string $prompt): string
 {
     $message = $client->messages->create(
-        model: Model::CLAUDE_OPUS_5,
+        model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
         messages: [
             [
@@ -3221,7 +3221,7 @@ end
 
 def grade_completion(client, output, golden_answer)
   grader_response = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 2048,
     messages: [
       {
@@ -3247,7 +3247,7 @@ eval_data = [
 
 def get_completion(client, prompt)
   message = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       {

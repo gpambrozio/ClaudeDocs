@@ -58,7 +58,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello, Claude"}]
   }'
@@ -140,7 +140,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-workspace-id: wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello, Claude"}]
   }'
@@ -151,7 +151,7 @@ curl https://api.anthropic.com/v1/messages \
 # Omit --workspace-id for a single-workspace key.
 ant messages create \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}'
 ```
@@ -162,7 +162,7 @@ client = Anthropic()  # reads ANTHROPIC_API_KEY
 # Required on every request for a multi-workspace key.
 # Omit extra_headers for a single-workspace key.
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
     extra_headers={"anthropic-workspace-id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"},
@@ -182,7 +182,7 @@ const client = new Anthropic(); // reads ANTHROPIC_API_KEY
 // Omit the second argument for a single-workspace key.
 const message = await client.messages.create(
   {
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }]
   },
@@ -201,7 +201,7 @@ AnthropicClient client = new(); // reads ANTHROPIC_API_KEY
 
 MessageCreateParams parameters = new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
 };
@@ -237,7 +237,7 @@ client := anthropic.NewClient() // reads ANTHROPIC_API_KEY
 // Required on every request for a multi-workspace key.
 // Omit the option for a single-workspace key.
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -260,7 +260,7 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv(); // reads ANTHROPIC_API
 // Required on every request for a multi-workspace key.
 // Omit putAdditionalHeader for a single-workspace key.
 Message message = client.messages().create(MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessage("Hello, Claude")
     .putAdditionalHeader("anthropic-workspace-id", "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ")
@@ -281,7 +281,7 @@ $client = new Client(); // reads ANTHROPIC_API_KEY
 // Required on every request for a multi-workspace key.
 // Omit requestOptions for a single-workspace key.
 $message = $client->messages->create(
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
     requestOptions: [
@@ -298,7 +298,7 @@ client = Anthropic::Client.new # reads ANTHROPIC_API_KEY
 # Required on every request for a multi-workspace key.
 # Omit request_options for a single-workspace key.
 message = client.messages.create(
-  model: Anthropic::Model::CLAUDE_OPUS_5,
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
   request_options: {extra_headers: {"anthropic-workspace-id" => "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"}}

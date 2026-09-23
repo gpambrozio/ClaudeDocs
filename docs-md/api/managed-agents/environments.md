@@ -1,4 +1,4 @@
-# List environments
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/environment.json
 
 ---
 title: Cloud environment setup
@@ -40,6 +40,7 @@ ant apply environment.yaml
 ```
 
 ```yaml
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/environment.json
 name: python-dev
 config:
   type: cloud
@@ -245,6 +246,7 @@ ant apply environment.yaml
 ```
 
 ```yaml
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/environment.json
 name: data-analysis
 config:
   type: cloud
@@ -417,6 +419,7 @@ ant apply environment.yaml
 ```
 
 ```yaml
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/environment.json
 name: api-access
 config:
   type: cloud

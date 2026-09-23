@@ -141,7 +141,7 @@ curl -sS https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -d @- <<'EOF'
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 1024,
   "tools": [
     {
@@ -178,7 +178,7 @@ EOF
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - name: get_weather
@@ -210,7 +210,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[
         {
@@ -250,7 +250,7 @@ print(response)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -298,7 +298,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = [
         new ToolUnion(new Tool()
@@ -346,7 +346,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfTool: &anthropic.ToolParam{
@@ -400,7 +400,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(Tool.builder()
             .name("get_weather")
@@ -449,7 +449,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         [
             'name' => 'get_weather',
@@ -491,7 +491,7 @@ $message = $client->messages->create(
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -552,8 +552,8 @@ Not every model and setting supports forced tool use. Where it isn't supported, 
 
 | Model or setting                                                                                                                    | Restriction                                                                                                         | What to use instead                                                                                                                                                                                                                                                                                                                                                                |
 | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Manual [extended thinking](../../build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) | `any` and `tool` are not supported and result in an error                                                           | `auto` or `none`. [Adaptive thinking](../../build-with-claude/thinking.md), including on models where thinking is on by default such as Claude Opus 5, supports forced tool use                                                                                                                                                                         |
-| Claude Fable 5.1 and [Claude Mythos 5.1](https://anthropic.com/glasswing)                                                           | `any` and `tool` return a [400 error](../../api/errors.md#forced-tool-use-not-supported) | `auto` with [strict tool use](strict-tool-use.md) to guarantee schema-valid tool inputs, or [structured outputs](../../build-with-claude/structured-outputs.md) when you need a response in a fixed JSON shape. Prompting still influences which tool `auto` picks. `none` is also supported |
+| Manual [extended thinking](../../build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) | `any` and `tool` are not supported and result in an error                                                           | `auto` or `none`. [Adaptive thinking](../../build-with-claude/thinking.md) itself doesn't block forced tool use (Claude Opus 5 supports it with thinking on); the models in the next row reject forced tool use regardless of thinking settings                                                                                                         |
+| Claude Opus 5.5, Claude Fable 5.1, and [Claude Mythos 5.1](https://anthropic.com/glasswing)                                         | `any` and `tool` return a [400 error](../../api/errors.md#forced-tool-use-not-supported) | `auto` with [strict tool use](strict-tool-use.md) to guarantee schema-valid tool inputs, or [structured outputs](../../build-with-claude/structured-outputs.md) when you need a response in a fixed JSON shape. Prompting still influences which tool `auto` picks. `none` is also supported |
 
 On models that support it, the highlighted lines are the only difference from a standard tool use request:
 

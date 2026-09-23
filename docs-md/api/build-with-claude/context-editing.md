@@ -56,7 +56,7 @@ An assistant conversation turn may include multiple content blocks (for example,
 
 Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history. You do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
 
-On Claude Fable 5.1, server-side context management never invalidates thinking blocks. Client-side edits to earlier turns can invalidate the thinking blocks in every later assistant turn. For new accounts created on or after August 31, 2026, a request that replays an invalidated block is rejected unless you opt into dropping it. See [Keeping the prefix unchanged](preserved-thinking.md#prefix-check).
+On Claude Fable 5.1 and Claude Opus 5.5, server-side context management never invalidates thinking blocks. Client-side edits to earlier turns can invalidate the thinking blocks in every later assistant turn. For new accounts created on or after August 31, 2026, a request that replays an invalidated block is rejected unless you opt into dropping it. See [Keeping the prefix unchanged](preserved-thinking.md#prefix-check).
 
 ### Context editing and prompt caching
 
@@ -81,7 +81,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 4096,
         "messages": [
             {
@@ -105,7 +105,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -121,7 +121,7 @@ YAML
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Search for recent developments in AI"}],
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
@@ -136,7 +136,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [
     {
@@ -167,7 +167,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Messages = [
         new() { Role = Role.User, Content = "Search for recent developments in AI" }
@@ -190,7 +190,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Search for recent developments in AI")),
@@ -223,7 +223,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .addUserMessage("Search for recent developments in AI")
         .addTool(BetaWebSearchTool20250305.builder().build())
@@ -246,7 +246,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Search for recent developments in AI']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     tools: [
         ['type' => 'web_search_20250305', 'name' => 'web_search']
@@ -265,7 +265,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Search for recent developments in AI" }
@@ -294,7 +294,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 4096,
         "messages": [
             {
@@ -339,7 +339,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -370,7 +370,7 @@ YAML
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=[
         {
@@ -411,7 +411,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [
     {
@@ -469,7 +469,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Messages = [
         new() { Role = Role.User, Content = "Create a simple command line calculator app using Python" }
@@ -501,7 +501,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Create a simple command line calculator app using Python")),
@@ -554,7 +554,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .addUserMessage("Create a simple command line calculator app using Python")
         .addTool(BetaToolTextEditor20250728.builder()
@@ -596,7 +596,7 @@ $response = $client->beta->messages->create(
             'content' => 'Create a simple command line calculator app using Python'
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     tools: [
         [
@@ -639,7 +639,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [
     {
@@ -695,7 +695,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 16000,
         "messages": [{"role": "user", "content": "Hello"}],
         "context_management": {
@@ -714,7 +714,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 16000
 messages:
   - role: user
@@ -730,7 +730,7 @@ YAML
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=16000,
     messages=[{"role": "user", "content": "Hello"}],
     betas=["context-management-2025-06-27"],
@@ -751,7 +751,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -779,7 +779,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Messages = [
         new() { Role = Role.User, Content = "Hello" }
@@ -804,7 +804,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
@@ -838,7 +838,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(16000L)
         .addUserMessage("Hello")
         .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
@@ -864,7 +864,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     contextManagement: [
         'edits' => [
@@ -886,7 +886,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -924,7 +924,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 16000,
         "messages": [{"role": "user", "content": "Hello"}],
         "context_management": {
@@ -943,7 +943,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 16000
 messages:
   - role: user
@@ -959,7 +959,7 @@ YAML
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=16000,
     messages=[{"role": "user", "content": "Hello"}],
     betas=["context-management-2025-06-27"],
@@ -980,7 +980,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -1008,7 +1008,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Messages = [
         new() { Role = Role.User, Content = "Hello" }
@@ -1033,7 +1033,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
@@ -1061,7 +1061,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(16000L)
     .addUserMessage("Hello")
     .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
@@ -1086,7 +1086,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     contextManagement: [
         'edits' => [
@@ -1108,7 +1108,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -1136,7 +1136,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 16000,
         "messages": [{"role": "user", "content": "Hello"}],
         "context_management": {
@@ -1152,7 +1152,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 16000
 messages:
   - role: user
@@ -1166,7 +1166,7 @@ YAML
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=16000,
     messages=[{"role": "user", "content": "Hello"}],
     betas=["context-management-2025-06-27"],
@@ -1187,7 +1187,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -1212,7 +1212,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Messages = [
         new() { Role = Role.User, Content = "Hello" }
@@ -1237,7 +1237,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
@@ -1263,7 +1263,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(16000L)
     .addUserMessage("Hello")
     .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
@@ -1286,7 +1286,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     contextManagement: [
         'edits' => [
@@ -1305,7 +1305,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -1334,7 +1334,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 16000,
         "messages": [
             {
@@ -1376,7 +1376,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 16000
 messages:
   - role: user
@@ -1403,7 +1403,7 @@ YAML
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=16000,
     messages=[
         {
@@ -1443,7 +1443,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [
     {
@@ -1497,7 +1497,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Messages = [
         new() { Role = Role.User, Content = "Search for the latest developments in quantum error correction and summarize the key breakthroughs." }
@@ -1530,7 +1530,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Search for the latest developments in quantum error correction and summarize the key breakthroughs.")),
@@ -1585,7 +1585,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(16000L)
         .addUserMessage("Search for the latest developments in quantum error correction and summarize the key breakthroughs.")
         .addTool(BetaWebSearchTool20250305.builder()
@@ -1625,7 +1625,7 @@ $response = $client->beta->messages->create(
             'content' => 'Search for the latest developments in quantum error correction and summarize the key breakthroughs.'
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     tools: [
         [
@@ -1665,7 +1665,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   messages: [
     {
@@ -1782,7 +1782,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "messages": [
             {
                 "role": "user",
@@ -1809,7 +1809,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ```bash CLI
 cat > request.yaml <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 messages:
   - role: user
     content: Continue our conversation...
@@ -1840,7 +1840,7 @@ printf 'Savings: %s tokens\n' "$((ORIGINAL - INPUT_TOKENS))"
 
 ```python Python
 response = client.beta.messages.count_tokens(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     messages=[{"role": "user", "content": "Continue our conversation..."}],
     betas=["context-management-2025-06-27"],
     context_management={
@@ -1867,7 +1867,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.countTokens({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages: [
     {
       role: "user",
@@ -1911,7 +1911,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCountTokensParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     Messages = [new() { Role = Role.User, Content = "Continue our conversation..." }],
     Betas = [AnthropicBeta.ContextManagement2025_06_27],
     ContextManagement = new BetaContextManagementConfig
@@ -1937,7 +1937,7 @@ Console.WriteLine($"Savings: {(response.ContextManagement?.OriginalInputTokens ?
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.CountTokens(context.TODO(), anthropic.BetaMessageCountTokensParams{
-	Model: anthropic.ModelClaudeOpus5,
+	Model: anthropic.ModelClaudeOpus5_5,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Continue our conversation...")),
 	},
@@ -1981,7 +1981,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .addUserMessage("Continue our conversation...")
         .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
         .contextManagement(BetaContextManagementConfig.builder()
@@ -2011,7 +2011,7 @@ $response = $client->beta->messages->countTokens(
     messages: [
         ['role' => 'user', 'content' => 'Continue our conversation...']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     contextManagement: [
         'edits' => [
@@ -2039,7 +2039,7 @@ echo "Savings: " . ($response->contextManagement->originalInputTokens - $respons
 client = Anthropic::Client.new
 
 response = client.beta.messages.count_tokens(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages: [
     { role: "user", content: "Continue our conversation..." }
   ],
@@ -2098,7 +2098,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "content-type: application/json" \
     --header "anthropic-beta: context-management-2025-06-27" \
     --data '{
-        "model": "claude-opus-5",
+        "model": "claude-opus-5-5",
         "max_tokens": 4096,
         "messages": [
             {
@@ -2122,7 +2122,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta context-management-2025-06-27 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -2138,7 +2138,7 @@ YAML
 
 ```python Python
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Hello"}],
     tools=[{"type": "memory_20250818", "name": "memory"}],
@@ -2153,7 +2153,7 @@ const anthropic = new Anthropic({
 });
 
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [{ role: "user", content: "Hello" }],
   tools: [
@@ -2179,7 +2179,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Messages::Model.ClaudeOpus5,
+    Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Messages = [
         new() { Role = Role.User, Content = "Hello" }
@@ -2202,7 +2202,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
@@ -2233,7 +2233,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
         .addUserMessage("Hello")
         .addTool(BetaMemoryTool20250818.builder().build())
@@ -2256,7 +2256,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['context-management-2025-06-27'],
     tools: [
         [
@@ -2278,7 +2278,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [{ role: "user", content: "Hello" }],
   tools: [
@@ -2340,7 +2340,7 @@ In v1.0 and later, the Python SDK's tool runner does not support client-side `co
 const client = new Anthropic();
 
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [readFile],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2374,7 +2374,7 @@ The PHP SDK includes a tool runner, but it does not support client-side `compact
 client = Anthropic::Client.new
 
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [ReadFile.new],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2456,7 +2456,7 @@ In v1.0 and later, the Python SDK's tool runner does not support client-side `co
 const client = new Anthropic();
 
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [readFile],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2491,7 +2491,7 @@ The PHP SDK includes a tool runner, but it does not support client-side `compact
 client = Anthropic::Client.new
 
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [ReadFile.new],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2526,7 +2526,7 @@ In v1.0 and later, the Python SDK's tool runner does not support client-side `co
 const client = new Anthropic();
 
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [readFile],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2564,7 +2564,7 @@ The PHP SDK includes a tool runner, but it does not support client-side `compact
 client = Anthropic::Client.new
 
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [ReadFile.new],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2602,7 +2602,7 @@ In v1.0 and later, the Python SDK's tool runner does not support client-side `co
 const client = new Anthropic();
 
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [readFile],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2645,7 +2645,7 @@ The PHP SDK includes a tool runner, but it does not support client-side `compact
 client = Anthropic::Client.new
 
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [ReadFile.new],
   messages: [{ role: "user", content: "What's in config.json?" }],
@@ -2803,7 +2803,7 @@ The Ruby SDK supports an `on_compact:` callback that fires when compaction occur
 client = Anthropic::Client.new
 
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [ReadFile.new],
   messages: [{ role: "user", content: "What's in config.json?" }],

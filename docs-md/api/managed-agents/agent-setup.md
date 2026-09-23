@@ -46,7 +46,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -H "content-type: application/json" \
   -d '{
     "name": "Coding Assistant",
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "system": "You are a helpful coding agent.",
     "tools": [{"type": "agent_toolset_20260401"}]
   }')
@@ -62,7 +62,7 @@ ant apply coding-assistant.md
 ```markdown
 ---
 name: Coding Assistant
-model: claude-opus-5
+model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
 ---
@@ -73,7 +73,7 @@ You are a helpful coding agent.
 ```python Python
 agent = client.beta.agents.create(
     name="Coding Assistant",
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     system="You are a helpful coding agent.",
     tools=[
         {"type": "agent_toolset_20260401"},
@@ -84,7 +84,7 @@ agent = client.beta.agents.create(
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Coding Assistant",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system: "You are a helpful coding agent.",
   tools: [{ type: "agent_toolset_20260401" }],
 });
@@ -94,7 +94,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Coding Assistant",
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     System = "You are a helpful coding agent.",
     Tools =
     [
@@ -110,7 +110,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Coding Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	System: anthropic.String("You are a helpful coding agent."),
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -128,7 +128,7 @@ if err != nil {
 var agent = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("Coding Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
         .system("You are a helpful coding agent.")
         .addTool(
             BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -142,7 +142,7 @@ var agent = client.beta().agents().create(
 ```php PHP
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     system: 'You are a helpful coding agent.',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
@@ -155,7 +155,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Coding Assistant",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system_: "You are a helpful coding agent.",
   tools: [{type: "agent_toolset_20260401"}]
 )
@@ -171,7 +171,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
   "type": "agent",
   "name": "Coding Assistant",
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": { "type": "high" },
     "speed": "standard"
   },
@@ -198,7 +198,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
 
 The `default_config` on the toolset shows its default [permission policy](permission-policies.md), `always_allow`, which applies unless you configure one.
 
-To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](../build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See the fast mode page's [supported models](../build-with-claude/fast-mode.md#supported-models).
+To use Claude Opus 5.5, Claude Opus 5, or Claude Opus 4.8 with [fast mode](../build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See the fast mode page's [supported models](../build-with-claude/fast-mode.md#supported-models).
 
 To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](../build-with-claude/effort.md#effort-levels) for what each level does.
 
@@ -216,7 +216,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -H "content-type: application/json" \
   -d '{
     "name": "Geo-pinned assistant",
-    "model": {"id": "claude-opus-5", "inference_geo": "us"},
+    "model": {"id": "claude-opus-5-5", "inference_geo": "us"},
     "system": "You are a helpful assistant."
   }')
 
@@ -231,7 +231,7 @@ ant apply geo-pinned-assistant.md
 ---
 name: Geo-pinned assistant
 model:
-  id: claude-opus-5
+  id: claude-opus-5-5
   inference_geo: us
 ---
 
@@ -242,7 +242,7 @@ You are a helpful assistant.
 agent = client.beta.agents.create(
     name="Geo-pinned assistant",
     model={
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "inference_geo": "us",
     },
     system="You are a helpful assistant.",
@@ -254,7 +254,7 @@ print(f"Inference geo: {agent.model.inference_geo}")
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Geo-pinned assistant",
-  model: { id: "claude-opus-5", inference_geo: "us" },
+  model: { id: "claude-opus-5-5", inference_geo: "us" },
   system: "You are a helpful assistant.",
 });
 
@@ -267,7 +267,7 @@ var agent = await client.Beta.Agents.Create(new()
     Name = "Geo-pinned assistant",
     Model = new BetaManagedAgentsModelConfigParams
     {
-        ID = BetaManagedAgentsModel.ClaudeOpus5,
+        ID = BetaManagedAgentsModel.ClaudeOpus5_5,
         InferenceGeo = "us",
     },
     System = "You are a helpful assistant.",
@@ -280,7 +280,7 @@ Console.WriteLine($"Inference geo: {agent.Model.InferenceGeo}");
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Geo-pinned assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID:           anthropic.BetaManagedAgentsModelClaudeOpus5,
+		ID:           anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 		InferenceGeo: anthropic.String("us"),
 	},
 	System: anthropic.String("You are a helpful assistant."),
@@ -298,7 +298,7 @@ var agent = client.beta().agents().create(
         .name("Geo-pinned assistant")
         .model(
             BetaManagedAgentsModelConfigParams.builder()
-                .id(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+                .id(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
                 .inferenceGeo("us")
                 .build()
         )
@@ -313,7 +313,7 @@ IO.println("Inference geo: " + agent.model().inferenceGeo().orElseThrow());
 $agent = $client->beta->agents->create(
     name: 'Geo-pinned assistant',
     model: BetaManagedAgentsModelConfigParams::with(
-        id: 'claude-opus-5',
+        id: 'claude-opus-5-5',
         inferenceGeo: 'us',
     ),
     system: 'You are a helpful assistant.',
@@ -325,7 +325,7 @@ echo "Inference geo: {$agent->model->inferenceGeo}\n";
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Geo-pinned assistant",
-  model: {id: "claude-opus-5", inference_geo: "us"},
+  model: {id: "claude-opus-5-5", inference_geo: "us"},
   system_: "You are a helpful assistant."
 )
 
@@ -366,7 +366,7 @@ ant apply coding-assistant.md
 ```markdown
 ---
 name: Coding Assistant
-model: claude-opus-5
+model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
 ---

@@ -279,7 +279,7 @@ end
     {
       "type": "rate_limit",
       "group_type": "model_group",
-      "models": ["claude-opus-5"],
+      "models": ["claude-opus-5-5"],
       "limits": [
         { "type": "requests_per_minute", "value": 4000 },
         { "type": "input_tokens_per_minute", "value": 10000000 },
@@ -605,7 +605,7 @@ end
     {
       "type": "workspace_rate_limit",
       "group_type": "model_group",
-      "models": ["claude-opus-5"],
+      "models": ["claude-opus-5-5"],
       "limits": [
         { "type": "requests_per_minute", "value": 1000, "org_limit": 4000 },
         { "type": "input_tokens_per_minute", "value": 500000, "org_limit": 10000000 }

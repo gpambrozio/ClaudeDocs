@@ -13,6 +13,7 @@ featureMetadata:
     - claude-fable-5
     - claude-mythos-5
     - claude-mythos-preview
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -91,7 +92,7 @@ for turn, question in enumerate(QUESTIONS, start=1):
 
     history.append({"role": "user", "content": question})
     response = client.beta.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=8192,
         system=SYSTEM,
         betas=["compact-2026-09-04"],
@@ -109,7 +110,7 @@ for turn, question in enumerate(QUESTIONS, start=1):
         sent = len(history)
         pending = executor.submit(
             client.beta.messages.create,
-            model="claude-opus-5",
+            model="claude-opus-5-5",
             max_tokens=4096,
             system=SYSTEM,
             betas=["compact-2026-09-04"],
@@ -169,7 +170,7 @@ for (const [index, question] of questions.entries()) {
 
   history.push({ role: "user", content: question });
   const response = await client.beta.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 8192,
     system: systemPrompt,
     betas: ["compact-2026-09-04"],
@@ -182,7 +183,7 @@ for (const [index, question] of questions.entries()) {
   if (conversationTokens > compactAtTokens && turn < questions.length && !pending) {
     sent = history.length;
     pending = client.beta.messages.create({
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       system: systemPrompt,
       betas: ["compact-2026-09-04"],
@@ -260,7 +261,7 @@ foreach (var (index, question) in questions.Index())
     history.Add(new() { Role = Role.User, Content = question });
     var response = await client.Beta.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 8192,
         System = SystemPrompt,
         Betas = [AnthropicBeta.Compact2026_09_04],
@@ -279,7 +280,7 @@ foreach (var (index, question) in questions.Index())
         sent = history.Count;
         pending = client.Beta.Messages.Create(new MessageCreateParams
         {
-            Model = Model.ClaudeOpus5,
+            Model = Model.ClaudeOpus5_5,
             MaxTokens = 4096,
             System = SystemPrompt,
             Betas = [AnthropicBeta.Compact2026_09_04],
@@ -339,7 +340,7 @@ for i, question := range questions {
 
 	history = append(history, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(question)))
 	response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 8192,
 		System:    system,
 		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
@@ -357,7 +358,7 @@ for i, question := range questions {
 		pending = make(chan *anthropic.BetaMessage, 1)
 		go func(messages []anthropic.BetaMessageParam, result chan<- *anthropic.BetaMessage) {
 			summary, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-				Model:     anthropic.ModelClaudeOpus5,
+				Model:     anthropic.ModelClaudeOpus5_5,
 				MaxTokens: 4096,
 				System:    system,
 				Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaCompact2026_09_04},
@@ -430,7 +431,7 @@ void main() {
             .content(questions.get(turn - 1))
             .build());
         var params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(8192)
             .system(SYSTEM)
             .addBeta(AnthropicBeta.COMPACT_2026_09_04)
@@ -444,7 +445,7 @@ void main() {
         if (conversationTokens > COMPACT_AT_TOKENS && turn < questions.size() && pending == null) {
             sent = history.size();
             var summaryParams = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5)
+                .model(Model.CLAUDE_OPUS_5_5)
                 .maxTokens(4096)
                 .system(SYSTEM)
                 .addBeta(AnthropicBeta.COMPACT_2026_09_04)
@@ -500,7 +501,7 @@ questions.each.with_index(1) do |question, turn|
 
   history << { role: "user", content: question }
   response = client.beta.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 8192,
     system_: SYSTEM,
     betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],
@@ -514,7 +515,7 @@ questions.each.with_index(1) do |question, turn|
     sent = history.length
     pending = Thread.new(history.dup) do |snapshot|
       client.beta.messages.create(
-        model: Anthropic::Model::CLAUDE_OPUS_5,
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 4096,
         system_: SYSTEM,
         betas: [Anthropic::AnthropicBeta::COMPACT_2026_09_04],

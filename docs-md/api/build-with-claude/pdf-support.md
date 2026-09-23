@@ -104,7 +104,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{
         "role": "user",
@@ -125,7 +125,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create --transform content --format yaml <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -142,7 +142,7 @@ YAML
 ```python Python
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -168,7 +168,7 @@ print(message.content)
 const anthropic = new Anthropic();
 
 const response = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -208,7 +208,7 @@ var documentParam = new DocumentBlockParam
 // Create a message with document and text content blocks
 var message = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -231,7 +231,7 @@ Console.WriteLine(string.Join("\n", message.Content));
 client := anthropic.NewClient()
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -265,7 +265,7 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
 
 // Create a message with document and text content blocks
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5)
+  .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
   .addUserMessageOfBlockParams(
     List.of(
@@ -306,7 +306,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo $message;
@@ -316,7 +316,7 @@ echo $message;
 anthropic = Anthropic::Client.new
 
 message = anthropic.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -345,7 +345,7 @@ The response returns Claude's analysis as text blocks in `content`, with token c
   "id": "msg_01Hfp8YuFjQ55VgWbpdHDehB",
   "type": "message",
   "role": "assistant",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "content": [
     {
       "type": "text",
@@ -373,7 +373,7 @@ curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Mode
 
 # Create a JSON request file using the pdf_base64.txt content
 jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{
         "role": "user",
@@ -402,7 +402,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --transform content \
   --format yaml <<'YAML'
@@ -436,7 +436,7 @@ pdf_data = base64.standard_b64encode(
 # Send to Claude using base64 encoding
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -474,7 +474,7 @@ const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
 // Send the API request with base64-encoded PDF
 const anthropic = new Anthropic();
 const response = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -520,7 +520,7 @@ var documentParam = new DocumentBlockParam
 // Create a message with document and text content blocks
 var message = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -560,7 +560,7 @@ pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 // Send to Claude using base64 encoding
 client := anthropic.NewClient()
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -604,7 +604,7 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
 
 // Create a message with document and text content blocks
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5)
+  .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
   .addUserMessageOfBlockParams(
     List.of(
@@ -654,7 +654,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo $message;
@@ -674,7 +674,7 @@ pdf_data = [pdf_bytes].pack("m0") # Base64-encode without newlines
 # Send to Claude using base64 encoding
 anthropic = Anthropic::Client.new
 message = anthropic.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -715,7 +715,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -d @- <<EOF
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 1024,
   "messages": [{
     "role": "user",
@@ -746,7 +746,7 @@ FILE_ID=$(ant files upload \
 ant messages create \
   --transform content \
   --format yaml <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -769,7 +769,7 @@ with open("/path/to/document.pdf", "rb") as f:
 
 # Use the uploaded file in a message
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -803,7 +803,7 @@ const fileUpload = await anthropic.files.upload({
 
 // Use the uploaded file in a message
 const response = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -845,7 +845,7 @@ var fileUpload = await client.Files.Upload(new FileUploadParams
 // Use the uploaded file in a message
 var message = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -886,7 +886,7 @@ if err != nil {
 
 // Use the uploaded file in a message
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -914,7 +914,7 @@ FileMetadata file = client
 
 // Use the uploaded file in a message
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5)
+  .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
   .addUserMessageOfBlockParams(
     List.of(
@@ -965,7 +965,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo $message;
@@ -983,7 +983,7 @@ end
 
 # Use the uploaded file in a message
 message = anthropic.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1059,7 +1059,7 @@ Cache PDFs with [prompt caching](prompt-caching.md) to improve performance on re
 curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf" | base64 | tr -d '\n' > pdf_base64.txt
 # Create a JSON request file using the pdf_base64.txt content
 jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{
         "role": "user",
@@ -1091,7 +1091,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create --transform content --format yaml <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -1121,7 +1121,7 @@ pdf_data = base64.standard_b64encode(
 # Create a message with the cached document
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -1159,7 +1159,7 @@ const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
 // Create a message with the cached document
 const anthropic = new Anthropic();
 const response = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1196,7 +1196,7 @@ var pdfBase64 = Convert.ToBase64String(await httpClient.GetByteArrayAsync(pdfUrl
 
 var message = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -1236,7 +1236,7 @@ pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 // Create a document block with cache control
 client := anthropic.NewClient()
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -1277,7 +1277,7 @@ HttpResponse<byte[]> response = httpClient.send(
 String pdfBase64 = Base64.getEncoder().encodeToString(response.body());
 
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5)
+  .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
   .addUserMessageOfBlockParams(
     List.of(
@@ -1331,7 +1331,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo $message;
@@ -1348,7 +1348,7 @@ pdf_data = [pdf_bytes].pack("m0") # Base64-encode without newlines
 anthropic = Anthropic::Client.new
 
 message = anthropic.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1387,7 +1387,7 @@ jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
     {
         "custom_id": "my-first-request",
         "params": {
-            "model": "claude-opus-5",
+            "model": "claude-opus-5-5",
             "max_tokens": 1024,
             "messages": [{
                 "role": "user",
@@ -1409,7 +1409,7 @@ jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
     {
         "custom_id": "my-second-request",
         "params": {
-            "model": "claude-opus-5",
+            "model": "claude-opus-5-5",
             "max_tokens": 1024,
             "messages": [{
                 "role": "user",
@@ -1443,7 +1443,7 @@ ant messages:batches create <<'YAML'
 requests:
   - custom_id: my-first-request
     params:
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       messages:
         - role: user
@@ -1459,7 +1459,7 @@ requests:
                 across each use-case?
   - custom_id: my-second-request
     params:
-      model: claude-opus-5
+      model: claude-opus-5-5
       max_tokens: 1024
       messages:
         - role: user
@@ -1491,7 +1491,7 @@ message_batch = client.messages.batches.create(
         {
             "custom_id": "my-first-request",
             "params": {
-                "model": "claude-opus-5",
+                "model": "claude-opus-5-5",
                 "max_tokens": 1024,
                 "messages": [
                     {
@@ -1517,7 +1517,7 @@ message_batch = client.messages.batches.create(
         {
             "custom_id": "my-second-request",
             "params": {
-                "model": "claude-opus-5",
+                "model": "claude-opus-5-5",
                 "max_tokens": 1024,
                 "messages": [
                     {
@@ -1561,7 +1561,7 @@ const response = await anthropic.messages.batches.create({
     {
       custom_id: "my-first-request",
       params: {
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1587,7 +1587,7 @@ const response = await anthropic.messages.batches.create({
     {
       custom_id: "my-second-request",
       params: {
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1633,7 +1633,7 @@ var batch = await client.Messages.Batches.Create(new BatchCreateParams
             CustomID = "my-first-request",
             Params = new()
             {
-                Model = Model.ClaudeOpus5,
+                Model = Model.ClaudeOpus5_5,
                 MaxTokens = 1024,
                 Messages =
                 [
@@ -1657,7 +1657,7 @@ var batch = await client.Messages.Batches.Create(new BatchCreateParams
             CustomID = "my-second-request",
             Params = new()
             {
-                Model = Model.ClaudeOpus5,
+                Model = Model.ClaudeOpus5_5,
                 MaxTokens = 1024,
                 Messages =
                 [
@@ -1703,7 +1703,7 @@ batch, err := client.Messages.Batches.New(context.TODO(), anthropic.MessageBatch
 		{
 			CustomID: "my-first-request",
 			Params: anthropic.MessageBatchNewParamsRequestParams{
-				Model:     anthropic.ModelClaudeOpus5,
+				Model:     anthropic.ModelClaudeOpus5_5,
 				MaxTokens: 1024,
 				Messages: []anthropic.MessageParam{
 					anthropic.NewUserMessage(
@@ -1718,7 +1718,7 @@ batch, err := client.Messages.Batches.New(context.TODO(), anthropic.MessageBatch
 		{
 			CustomID: "my-second-request",
 			Params: anthropic.MessageBatchNewParamsRequestParams{
-				Model:     anthropic.ModelClaudeOpus5,
+				Model:     anthropic.ModelClaudeOpus5_5,
 				MaxTokens: 1024,
 				Messages: []anthropic.MessageParam{
 					anthropic.NewUserMessage(
@@ -1760,7 +1760,7 @@ BatchCreateParams params = BatchCreateParams.builder()
       .customId("my-first-request")
       .params(
         BatchCreateParams.Request.Params.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .addUserMessageOfBlockParams(
             List.of(
@@ -1787,7 +1787,7 @@ BatchCreateParams params = BatchCreateParams.builder()
       .customId("my-second-request")
       .params(
         BatchCreateParams.Request.Params.builder()
-          .model(Model.CLAUDE_OPUS_5)
+          .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
           .addUserMessageOfBlockParams(
             List.of(
@@ -1825,7 +1825,7 @@ $batch = $client->messages->batches->create(
         [
             'custom_id' => 'my-first-request',
             'params' => [
-                'model' => 'claude-opus-5',
+                'model' => 'claude-opus-5-5',
                 'max_tokens' => 1024,
                 'messages' => [
                     [
@@ -1851,7 +1851,7 @@ $batch = $client->messages->batches->create(
         [
             'custom_id' => 'my-second-request',
             'params' => [
-                'model' => 'claude-opus-5',
+                'model' => 'claude-opus-5-5',
                 'max_tokens' => 1024,
                 'messages' => [
                     [
@@ -1895,7 +1895,7 @@ message_batch = anthropic.messages.batches.create(
     {
       custom_id: "my-first-request",
       params: {
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {
@@ -1921,7 +1921,7 @@ message_batch = anthropic.messages.batches.create(
     {
       custom_id: "my-second-request",
       params: {
-        model: "claude-opus-5",
+        model: "claude-opus-5-5",
         max_tokens: 1024,
         messages: [
           {

@@ -21,7 +21,7 @@ ant apply agents/summarizer.md
 ```markdown
 ---
 name: Summarizer
-model: claude-opus-5
+model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
 ---
@@ -107,7 +107,7 @@ Resources refer to each other by path. Wherever the API expects another resource
 ```markdown
 ---
 name: Code reviewer
-model: claude-opus-5
+model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
 skills:
@@ -120,7 +120,7 @@ You review pull requests for correctness, security, and readability.
 ```markdown
 ---
 name: Engineering lead
-model: claude-opus-5
+model: claude-opus-5-5
 multiagent:
   type: coordinator
   agents:
@@ -142,6 +142,7 @@ List what changed, why, and anything a reviewer should look at closely, in three
 ```
 
 ```yaml
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/environment.json
 name: review-env
 description: Cloud container with unrestricted networking for review sessions.
 config:
@@ -151,6 +152,7 @@ config:
 ```
 
 ```yaml
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/memory_store.json
 name: Review notes
 description: Recurring issues and house-style decisions the reviewer has recorded between runs.
 ```

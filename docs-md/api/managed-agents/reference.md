@@ -78,9 +78,9 @@ Span events are observability markers that wrap activity for timing and usage tr
 
 **System events**
 
-| Type             | Description                                                                                                                                                                                                                                                                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `system.message` | Append privileged system-level context that applies to the accompanying turn and all subsequent turns. Supported on Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, and Claude Opus 4.8. On an unsupported primary model the event is rejected with `model_does_not_support_mid_conversation_system`. |
+| Type             | Description                                                                                                                                                                                                                                                                                                                                                 |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `system.message` | Append privileged system-level context that applies to the accompanying turn and all subsequent turns. Supported on Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8. On an unsupported primary model the event is rejected with `model_does_not_support_mid_conversation_system`. |
 
 **Event deltas**
 

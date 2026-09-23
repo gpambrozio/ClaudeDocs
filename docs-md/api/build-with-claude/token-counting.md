@@ -49,7 +49,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "content-type: application/json" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "system": "You are a scientist",
     "messages": [{
       "role": "user",
@@ -60,7 +60,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ```bash CLI
 ant messages count-tokens \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --system "You are a scientist" \
   --message '{role: user, content: "Hello, Claude"}'
 ```
@@ -69,7 +69,7 @@ ant messages count-tokens \
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     system="You are a scientist",
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -81,7 +81,7 @@ print(response.json())
 const client = new Anthropic();
 
 const response = await client.messages.countTokens({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system: "You are a scientist",
   messages: [
     {
@@ -104,7 +104,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCountTokensParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     System = "You are a scientist",
     Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
 };
@@ -117,7 +117,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-	Model: anthropic.ModelClaudeOpus5,
+	Model: anthropic.ModelClaudeOpus5_5,
 	System: anthropic.MessageCountTokensParamsSystemUnion{
 		OfString: anthropic.String("You are a scientist"),
 	},
@@ -143,7 +143,7 @@ public class CountTokensExample {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .system("You are a scientist")
       .addUserMessage("Hello, Claude")
       .build();
@@ -161,7 +161,7 @@ $response = $client->messages->countTokens(
     messages: [
         ['role' => 'user', 'content' => 'Hello, Claude']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     system: 'You are a scientist',
 );
 
@@ -172,7 +172,7 @@ echo json_encode($response);
 client = Anthropic::Client.new
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system: "You are a scientist",
   messages: [
     { role: "user", content: "Hello, Claude" }
@@ -196,7 +196,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "content-type: application/json" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "tools": [
       {
         "name": "get_weather",
@@ -224,7 +224,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ```bash CLI
 ant messages count-tokens <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 tools:
   - name: get_weather
     description: Get the current weather in a given location
@@ -246,7 +246,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     tools=[
         {
             "name": "get_weather",
@@ -273,7 +273,7 @@ print(response.json())
 const client = new Anthropic();
 
 const response = await client.messages.countTokens({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   tools: [
     {
       name: "get_weather",
@@ -308,7 +308,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCountTokensParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     Tools =
     [
         new MessageCountTokensTool(new Tool()
@@ -336,7 +336,7 @@ Console.WriteLine(count);
 client := anthropic.NewClient()
 
 response, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-	Model: anthropic.ModelClaudeOpus5,
+	Model: anthropic.ModelClaudeOpus5_5,
 	Tools: []anthropic.MessageCountTokensToolUnionParam{
 		{OfTool: &anthropic.ToolParam{
 			Name:        "get_weather",
@@ -388,7 +388,7 @@ import com.anthropic.models.messages.MessageTokensCount;
       .build();
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .addTool(
         Tool.builder()
           .name("get_weather")
@@ -410,7 +410,7 @@ $response = $client->messages->countTokens(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         [
             'name' => 'get_weather',
@@ -436,7 +436,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 client = Anthropic::Client.new
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   tools: [
     {
       name: "get_weather",
@@ -480,7 +480,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "content-type: application/json" \
   -d @- <<EOF
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "messages": [
     {"role": "user", "content": [
       {"type": "image", "source": {
@@ -500,7 +500,7 @@ IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
 curl -s "$IMAGE_URL" -o ./vision-example.jpg
 
 ant messages count-tokens <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 messages:
   - role: user
     content:
@@ -525,7 +525,7 @@ image_data = base64.standard_b64encode(httpx2.get(image_url).content).decode("ut
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     messages=[
         {
             "role": "user",
@@ -555,7 +555,7 @@ const imageArrayBuffer = await (await fetch(imageUrl)).arrayBuffer();
 const imageData = Buffer.from(imageArrayBuffer).toString("base64");
 
 const response = await anthropic.messages.countTokens({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages: [
     {
       role: "user",
@@ -597,7 +597,7 @@ string imageData = Convert.ToBase64String(imageBytes);
 
 var parameters = new MessageCountTokensParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     Messages =
     [
         new()
@@ -646,7 +646,7 @@ imageData := base64.StdEncoding.EncodeToString(imageBytes)
 client := anthropic.NewClient()
 
 response, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-	Model: anthropic.ModelClaudeOpus5,
+	Model: anthropic.ModelClaudeOpus5_5,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
 			anthropic.NewImageBlockBase64("image/jpeg", imageData),
@@ -696,7 +696,7 @@ import com.anthropic.models.messages.MessageTokensCount;
     );
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .addUserMessageOfBlockParams(List.of(imageBlock, textBlock))
       .build();
 
@@ -728,7 +728,7 @@ $response = $client->messages->countTokens(
             ]
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 print_r($response);
 ```
@@ -746,7 +746,7 @@ image_data = Base64.strict_encode64(Net::HTTP.get(uri))
 client = Anthropic::Client.new
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages: [
     {
       role: "user",
@@ -786,7 +786,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "content-type: application/json" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "thinking": {
       "type": "adaptive"
     },
@@ -819,7 +819,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ```bash CLI
 ant messages count-tokens <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 thinking:
   type: adaptive
 messages:
@@ -843,7 +843,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     thinking={"type": "adaptive"},
     messages=[
         {
@@ -875,7 +875,7 @@ print(response.json())
 const client = new Anthropic();
 
 const response = await client.messages.countTokens({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   thinking: { type: "adaptive" },
   messages: [
     {
@@ -919,7 +919,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCountTokensParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     Thinking = new ThinkingConfigAdaptive(),
     Messages =
     [
@@ -966,7 +966,7 @@ textBlock := anthropic.NewTextBlock(
 )
 
 response, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-	Model: anthropic.ModelClaudeOpus5,
+	Model: anthropic.ModelClaudeOpus5_5,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
 	},
@@ -1011,7 +1011,7 @@ import com.anthropic.models.messages.ThinkingConfigAdaptive;
     );
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .thinking(ThinkingConfigAdaptive.builder().build())
       .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
       .addAssistantMessageOfBlockParams(assistantBlocks)
@@ -1050,7 +1050,7 @@ $response = $client->messages->countTokens(
             'content' => 'Can you write a formal proof?'
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     thinking: ['type' => 'adaptive'],
 );
 
@@ -1061,7 +1061,7 @@ echo json_encode($response);
 client = Anthropic::Client.new
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   thinking: {
     type: "adaptive"
   },
@@ -1109,7 +1109,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "anthropic-version: 2023-06-01" \
   -d @- <<EOF
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "messages": [{
     "role": "user",
     "content": [
@@ -1133,7 +1133,7 @@ EOF
 
 ```bash CLI
 ant messages count-tokens <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 messages:
   - role: user
     content:
@@ -1157,7 +1157,7 @@ with open("/path/to/document.pdf", "rb") as pdf_file:
     pdf_base64 = base64.standard_b64encode(pdf_file.read()).decode("utf-8")
 
 response = client.messages.count_tokens(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     messages=[
         {
             "role": "user",
@@ -1187,7 +1187,7 @@ const client = new Anthropic();
 const pdfBase64 = await readFile("/path/to/document.pdf", { encoding: "base64" });
 
 const response = await client.messages.countTokens({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages: [
     {
       role: "user",
@@ -1227,7 +1227,7 @@ string pdfBase64 = Convert.ToBase64String(pdfBytes);
 
 var parameters = new MessageCountTokensParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     Messages =
     [
         new()
@@ -1261,7 +1261,7 @@ if err != nil {
 pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 
 response, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-	Model: anthropic.ModelClaudeOpus5,
+	Model: anthropic.ModelClaudeOpus5_5,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
 			anthropic.NewDocumentBlock(anthropic.Base64PDFSourceParam{
@@ -1301,7 +1301,7 @@ import com.anthropic.models.messages.MessageTokensCount;
     );
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
+      .model(Model.CLAUDE_OPUS_5_5)
       .addUserMessageOfBlockParams(List.of(documentBlock, textBlock))
       .build();
 
@@ -1334,7 +1334,7 @@ $response = $client->messages->countTokens(
             ]
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($response);
@@ -1348,7 +1348,7 @@ client = Anthropic::Client.new
 pdf_base64 = Base64.strict_encode64(File.binread("/path/to/document.pdf"))
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages: [
     {
       role: "user",

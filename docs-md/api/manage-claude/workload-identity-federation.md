@@ -118,7 +118,7 @@ curl -sS https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d @- <<'JSON' | jq -r '.content[] | select(.type == "text") | .text'
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 1024,
   "messages": [{"role": "user", "content": "Hello, Claude"}]
 }
@@ -141,7 +141,7 @@ client = Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -166,7 +166,7 @@ const client = new Anthropic({
 });
 
 const message = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }]
 });
@@ -191,7 +191,7 @@ client := anthropic.NewClient(
 )
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -238,7 +238,7 @@ void main() {
             .build();
 
     var message = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024)
             .addUserMessage("Hello, Claude")
             .build());
@@ -263,7 +263,7 @@ using var client = new AnthropicClient(new ClientOptions { Credentials = credent
 
 var message = await client.Messages.Create(new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
 });
@@ -296,7 +296,7 @@ $client = new Client(credentials: new CredentialResult(
 ));
 
 $message = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
 );
@@ -319,7 +319,7 @@ client = Anthropic::Client.new(
 )
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}]
 )

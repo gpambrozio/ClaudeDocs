@@ -90,7 +90,7 @@ messages = [
 # Make initial request
 print("Requesting parallel tool calls...")
 response = client.messages.create(
-    model="claude-opus-5", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-5-5", max_tokens=1024, messages=messages, tools=tools
 )
 
 # Check for parallel tool calls
@@ -133,7 +133,7 @@ messages.extend(
 # Get final response
 print("\nGetting final response...")
 final_response = client.messages.create(
-    model="claude-opus-5", max_tokens=1024, messages=messages, tools=tools
+    model="claude-opus-5-5", max_tokens=1024, messages=messages, tools=tools
 )
 
 final_text = next(
@@ -186,7 +186,7 @@ const tools: Anthropic.Tool[] = [
 // Make initial request
 console.log("Requesting parallel tool calls...");
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -236,7 +236,7 @@ const toolResults: Anthropic.ToolResultBlockParam[] = toolUses
 // Get final response with correct formatting
 console.log("\nGetting final response...");
 const finalResponse = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -298,7 +298,7 @@ var tools = new List<ToolUnion>
 Console.WriteLine("Requesting parallel tool calls...");
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "What's the weather in SF and NYC, and what time is it there?" }],
     Tools = tools
@@ -356,7 +356,7 @@ foreach (var toolUse in toolUses)
 Console.WriteLine("\nGetting final response...");
 var finalParameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [
         new() { Role = Role.User, Content = "What's the weather in SF and NYC, and what time is it there?" },
@@ -410,7 +410,7 @@ tools := []anthropic.ToolUnionParam{
 
 fmt.Println("Requesting parallel tool calls...")
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in SF and NYC, and what time is it there?")),
@@ -475,7 +475,7 @@ for _, toolUse := range toolUses {
 
 fmt.Println("\nGetting final response...")
 finalResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather in SF and NYC, and what time is it there?")),
@@ -536,7 +536,7 @@ Tool timeTool = Tool.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addTool(weatherTool)
     .addTool(timeTool)
@@ -588,7 +588,7 @@ for (ToolUseBlock toolUse : toolUses) {
 
 IO.println("\nGetting final response...");
 MessageCreateParams finalParams = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addTool(weatherTool)
     .addTool(timeTool)
@@ -648,7 +648,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather in SF and NYC, and what time is it there?"]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: $tools,
 );
 
@@ -691,7 +691,7 @@ $finalResponse = $client->messages->create(
         ['role' => 'assistant', 'content' => $response->content],
         ['role' => 'user', 'content' => $toolResults]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: $tools,
 );
 
@@ -740,7 +740,7 @@ tools = [
 
 puts "Requesting parallel tool calls..."
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "What's the weather in SF and NYC, and what time is it there?" }
@@ -778,7 +778,7 @@ end
 
 puts "\nGetting final response..."
 final_response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "What's the weather in SF and NYC, and what time is it there?" },
@@ -852,7 +852,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [{
       "name": "get_weather",
@@ -877,7 +877,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - name: get_weather
@@ -902,7 +902,7 @@ YAML
 client = Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[
         {
@@ -935,7 +935,7 @@ print(response.content)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -964,7 +964,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = [
         new ToolUnion(new Tool()
@@ -993,7 +993,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfTool: &anthropic.ToolParam{
@@ -1043,7 +1043,7 @@ InputSchema schema = InputSchema.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addTool(
         Tool.builder()
@@ -1068,7 +1068,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'What is the weather in San Francisco and New York?']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     toolChoice: ['type' => 'auto', 'disableParallelToolUse' => true],
     tools: [
         [
@@ -1095,7 +1095,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [
     {
@@ -1123,7 +1123,7 @@ puts response.content
 
 ### Exactly one tool call
 
-When `tool_choice` type is `any` or `tool`, setting `disable_parallel_tool_use: true` means Claude calls exactly one tool. Claude Fable 5.1 and Claude Mythos 5.1 don't support these `tool_choice` types (see [Forcing tool use](define-tools.md#forcing-tool-use)). The following example uses `any`. The same field works with `tool`:
+When `tool_choice` type is `any` or `tool`, setting `disable_parallel_tool_use: true` means Claude calls exactly one tool. Claude Opus 5.5, Claude Fable 5.1, and Claude Mythos 5.1 don't support these `tool_choice` types (see [Forcing tool use](define-tools.md#forcing-tool-use)). The following example uses `any`. The same field works with `tool`:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \

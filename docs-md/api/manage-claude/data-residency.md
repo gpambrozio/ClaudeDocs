@@ -32,7 +32,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "inference_geo": "us",
     "messages": [{
@@ -44,7 +44,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --inference-geo us \
   --message '{role: user, content: "Summarize the key points of this document."}' \
@@ -55,7 +55,7 @@ ant messages create \
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     inference_geo="us",
     messages=[
@@ -74,7 +74,7 @@ print(f"Inference geo: {response.usage.inference_geo}")
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   inference_geo: "us",
   messages: [
@@ -99,7 +99,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         InferenceGeo = "us",
         Messages =
@@ -125,7 +125,7 @@ Console.WriteLine($"Inference geo: {response.Usage.InferenceGeo}");
 client := anthropic.NewClient()
 
 message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-	Model:        anthropic.ModelClaudeOpus5,
+	Model:        anthropic.ModelClaudeOpus5_5,
 	MaxTokens:    1024,
 	InferenceGeo: anthropic.String("us"),
 	Messages: []anthropic.MessageParam{
@@ -150,7 +150,7 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 Message response = client.messages().create(
         MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5)
+                .model(Model.CLAUDE_OPUS_5_5)
                 .maxTokens(1024L)
                 .inferenceGeo("us")
                 .addUserMessage("Summarize the key points of this document.")
@@ -167,7 +167,7 @@ IO.println("Inference geo: " + response.usage().inferenceGeo().get());
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     inferenceGeo: 'us',
     messages: [
@@ -188,7 +188,7 @@ echo "Inference geo: {$response->usage->inferenceGeo}\n";
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   inference_geo: "us",
   messages: [

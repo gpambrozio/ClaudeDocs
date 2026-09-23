@@ -59,7 +59,7 @@ response=$(curl -N https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "messages": [{"role": "user", "content": "Hello"}],
     "max_tokens": 1024,
     "stream": true
@@ -86,7 +86,7 @@ try:
     with client.messages.stream(
         max_tokens=1024,
         messages=messages + [{"role": "user", "content": "Hello"}],
-        model="claude-opus-5",
+        model="claude-opus-5-5",
     ) as stream:
         for event in stream:
             # Check for refusal in message delta
@@ -111,7 +111,7 @@ function resetConversation() {
 try {
   const stream = await client.messages.stream({
     messages: [...messages, { role: "user", content: "Hello" }],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024
   });
 
@@ -133,7 +133,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello" }]
 };
@@ -175,7 +175,7 @@ func resetConversation() {
 	client := anthropic.NewClient()
 
 	stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello")),
@@ -211,7 +211,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessage("Hello")
         .build();
@@ -252,7 +252,7 @@ try {
         messages: [
             ['role' => 'user', 'content' => 'Hello']
         ],
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
     );
 
     foreach ($stream as $event) {
@@ -277,7 +277,7 @@ end
 
 begin
   stream = client.messages.stream(
-    model: :"claude-opus-5",
+    model: :"claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello" }]
   )

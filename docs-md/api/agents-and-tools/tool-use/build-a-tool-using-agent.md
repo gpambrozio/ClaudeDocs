@@ -66,7 +66,7 @@ RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
     --argjson tools "$TOOLS" \
     --arg msg "$USER_MSG" \
     '{
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 1024,
       tools: $tools,
       tool_choice: {type: "auto", disable_parallel_tool_use: true},
@@ -103,7 +103,7 @@ FOLLOWUP=$(curl -s https://api.anthropic.com/v1/messages \
     --arg tool_use_id "$TOOL_USE_ID" \
     --arg result "$RESULT" \
     '{
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 1024,
       tools: $tools,
       tool_choice: {type: "auto", disable_parallel_tool_use: true},
@@ -143,7 +143,7 @@ call_api() {
   # JSON, which YAML accepts as flow syntax.
   {
     cat <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tool_choice: {type: auto, disable_parallel_tool_use: true}
 tools:
@@ -254,7 +254,7 @@ tools = [
 # Send the user's request along with the tool definition. Claude decides
 # whether to call the tool based on the request and the tool description.
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -284,7 +284,7 @@ result = {"event_id": "evt_123", "status": "created"}
 # its tool_use_id must match the id from the tool_use block above. The
 # assistant's previous response is included so Claude has the full history.
 followup = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -357,7 +357,7 @@ const tools: Anthropic.Tool[] = [
 // Send the user's request along with the tool definition. Claude decides
 // whether to call the tool based on the request and the tool description.
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools,
   tool_choice: { type: "auto", disable_parallel_tool_use: true },
@@ -390,7 +390,7 @@ const result = { event_id: "evt_123", status: "created" };
 // its tool_use_id must match the id from the tool_use block above. The
 // assistant's previous response is included so Claude has the full history.
 const followup = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools,
   tool_choice: { type: "auto", disable_parallel_tool_use: true },
@@ -486,7 +486,7 @@ const string userPrompt =
 // whether to call the tool based on the request and the tool description.
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     ToolChoice = toolChoice,
@@ -529,7 +529,7 @@ List<ContentBlockParam> toolResults =
 
 var followup = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     ToolChoice = toolChoice,
@@ -614,7 +614,7 @@ func main() {
 	// Send the user's request along with the tool definition. Claude decides
 	// whether to call the tool based on the request and the tool description.
 	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-		Model:      anthropic.ModelClaudeOpus5,
+		Model:      anthropic.ModelClaudeOpus5_5,
 		MaxTokens:  1024,
 		Tools:      tools,
 		ToolChoice: toolChoice,
@@ -653,7 +653,7 @@ func main() {
 	}
 
 	followup, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-		Model:      anthropic.ModelClaudeOpus5,
+		Model:      anthropic.ModelClaudeOpus5_5,
 		MaxTokens:  1024,
 		Tools:      tools,
 		ToolChoice: toolChoice,
@@ -740,7 +740,7 @@ void main() {
     // Send the user's request along with the tool definition. Claude decides
     // whether to call the tool based on the request and the tool description.
     Message response = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(calendarTool)
         .toolChoice(toolChoice)
@@ -768,7 +768,7 @@ void main() {
     // its tool_use_id must match the id from the tool_use block above. The
     // assistant's previous response is included so Claude has the full history.
     Message followup = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(calendarTool)
         .toolChoice(toolChoice)
@@ -844,7 +844,7 @@ $toolChoice = ToolChoiceAuto::with(disableParallelToolUse: true);
 // Send the user's request along with the tool definition. Claude decides
 // whether to call the tool based on the request and the tool description.
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: $tools,
     toolChoice: $toolChoice,
@@ -875,7 +875,7 @@ $result = ['event_id' => 'evt_123', 'status' => 'created'];
 // its tool_use_id must match the id from the tool_use block above. The
 // assistant's previous response is included so Claude has the full history.
 $followup = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: $tools,
     toolChoice: $toolChoice,
@@ -956,7 +956,7 @@ tool_choice = {type: "auto", disable_parallel_tool_use: true}
 # Send the user's request along with the tool definition. Claude decides
 # whether to call the tool based on the request and the tool description.
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   tool_choice: tool_choice,
@@ -981,7 +981,7 @@ result = {event_id: "evt_123", status: "created"}
 # its tool_use_id must match the id from the tool_use block above. The
 # assistant's previous response is included so Claude has the full history.
 followup = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   tool_choice: tool_choice,
@@ -1075,7 +1075,7 @@ call_api() {
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d "$(jq -n --argjson tools "$TOOLS" --argjson messages "$MESSAGES" \
-      '{model: "claude-opus-5", max_tokens: 1024, tools: $tools, tool_choice: {type: "auto", disable_parallel_tool_use: true}, messages: $messages}')"
+      '{model: "claude-opus-5-5", max_tokens: 1024, tools: $tools, tool_choice: {type: "auto", disable_parallel_tool_use: true}, messages: $messages}')"
 }
 
 RESPONSE=$(call_api)
@@ -1133,7 +1133,7 @@ call_api() {
   # JSON, which YAML accepts as flow syntax.
   {
     cat <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tool_choice: {type: auto, disable_parallel_tool_use: true}
 tools:
@@ -1238,7 +1238,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -1266,7 +1266,7 @@ while response.stop_reason == "tool_use":
     )
 
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         tools=tools,
         tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -1329,7 +1329,7 @@ const messages: Anthropic.MessageParam[] = [
 ];
 
 let response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools,
   tool_choice: { type: "auto", disable_parallel_tool_use: true },
@@ -1357,7 +1357,7 @@ while (response.stop_reason === "tool_use") {
   });
 
   response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools,
     tool_choice: { type: "auto", disable_parallel_tool_use: true },
@@ -1443,7 +1443,7 @@ List<MessageParam> messages =
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     ToolChoice = toolChoice,
@@ -1481,7 +1481,7 @@ while (response.StopReason == StopReason.ToolUse)
 
     response = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = tools,
         ToolChoice = toolChoice,
@@ -1562,7 +1562,7 @@ func main() {
 	}
 
 	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-		Model:      anthropic.ModelClaudeOpus5,
+		Model:      anthropic.ModelClaudeOpus5_5,
 		MaxTokens:  1024,
 		Tools:      tools,
 		ToolChoice: toolChoice,
@@ -1599,7 +1599,7 @@ func main() {
 		))
 
 		response, err = client.Messages.New(ctx, anthropic.MessageNewParams{
-			Model:      anthropic.ModelClaudeOpus5,
+			Model:      anthropic.ModelClaudeOpus5_5,
 			MaxTokens:  1024,
 			Tools:      tools,
 			ToolChoice: toolChoice,
@@ -1688,7 +1688,7 @@ void main() {
         .build());
 
     Message response = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(calendarTool)
         .toolChoice(toolChoice)
@@ -1716,7 +1716,7 @@ void main() {
             .build());
 
         response = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024L)
             .addTool(calendarTool)
             .toolChoice(toolChoice)
@@ -1791,7 +1791,7 @@ $messages = [
 ];
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: $tools,
     toolChoice: $toolChoice,
@@ -1824,7 +1824,7 @@ while ($response->stopReason === 'tool_use') {
     ];
 
     $response = $client->messages->create(
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         maxTokens: 1024,
         tools: $tools,
         toolChoice: $toolChoice,
@@ -1893,7 +1893,7 @@ messages = [
 ]
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   tool_choice: tool_choice,
@@ -1919,7 +1919,7 @@ while response.stop_reason == :tool_use
   }
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools: tools,
     tool_choice: tool_choice,
@@ -2002,7 +2002,7 @@ call_api() {
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d "$(jq -n --argjson tools "$TOOLS" --argjson messages "$MESSAGES" \
-      '{model: "claude-opus-5", max_tokens: 1024, tools: $tools, messages: $messages}')"
+      '{model: "claude-opus-5-5", max_tokens: 1024, tools: $tools, messages: $messages}')"
 }
 
 RESPONSE=$(call_api)
@@ -2059,7 +2059,7 @@ call_api() {
   # which YAML accepts as flow syntax.
   {
     cat <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - name: create_calendar_event
@@ -2183,7 +2183,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=tools,
     messages=messages,
@@ -2208,7 +2208,7 @@ while response.stop_reason == "tool_use":
     messages.append({"role": "user", "content": tool_results})
 
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         tools=tools,
         messages=messages,
@@ -2285,7 +2285,7 @@ const messages: Anthropic.MessageParam[] = [
 ];
 
 let response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools,
   messages,
@@ -2310,7 +2310,7 @@ while (response.stop_reason === "tool_use") {
   messages.push({ role: "user", content: toolResults });
 
   response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools,
     messages,
@@ -2408,7 +2408,7 @@ List<MessageParam> messages =
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     Messages = messages,
@@ -2440,7 +2440,7 @@ while (response.StopReason == StopReason.ToolUse)
 
     response = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = tools,
         Messages = messages,
@@ -2528,7 +2528,7 @@ func main() {
 	}
 
 	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Tools:     tools,
 		Messages:  messages,
@@ -2560,7 +2560,7 @@ func main() {
 		messages = append(messages, anthropic.NewUserMessage(toolResults...))
 
 		response, err = client.Messages.New(ctx, anthropic.MessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Tools:     tools,
 			Messages:  messages,
@@ -2657,7 +2657,7 @@ void main() {
         .build());
 
     Message response = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(calendarTool)
         .addTool(listTool)
@@ -2687,7 +2687,7 @@ void main() {
             .build());
 
         response = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024L)
             .addTool(calendarTool)
             .addTool(listTool)
@@ -2774,7 +2774,7 @@ $messages = [
 ];
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: $tools,
     messages: $messages,
@@ -2798,7 +2798,7 @@ while ($response->stopReason === 'tool_use') {
     $messages[] = ['role' => 'user', 'content' => $toolResults];
 
     $response = $client->messages->create(
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         maxTokens: 1024,
         tools: $tools,
         messages: $messages,
@@ -2876,7 +2876,7 @@ messages = [
 ]
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   messages: messages
@@ -2897,7 +2897,7 @@ while response.stop_reason == :tool_use
   messages << {role: "user", content: tool_results}
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools: tools,
     messages: messages
@@ -2912,7 +2912,7 @@ end
 **What to expect**
 
 ```text Output wrap
-I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
+I checked your calendar for Monday, March 30 and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
 ```
 
 For more on concurrent execution and ordering guarantees, see [Parallel tool use](parallel-tool-use.md).
@@ -2984,7 +2984,7 @@ call_api() {
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d "$(jq -n --argjson tools "$TOOLS" --argjson messages "$MESSAGES" \
-      '{model: "claude-opus-5", max_tokens: 1024, tools: $tools, messages: $messages}')"
+      '{model: "claude-opus-5-5", max_tokens: 1024, tools: $tools, messages: $messages}')"
 }
 
 RESPONSE=$(call_api)
@@ -3053,7 +3053,7 @@ call_api() {
   # which YAML accepts as flow syntax.
   {
     cat <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - name: create_calendar_event
@@ -3183,7 +3183,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=tools,
     messages=messages,
@@ -3213,7 +3213,7 @@ while response.stop_reason == "tool_use":
     messages.append({"role": "user", "content": tool_results})
 
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         tools=tools,
         messages=messages,
@@ -3294,7 +3294,7 @@ const messages: Anthropic.MessageParam[] = [
 ];
 
 let response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools,
   messages,
@@ -3327,7 +3327,7 @@ while (response.stop_reason === "tool_use") {
   messages.push({ role: "user", content: toolResults });
 
   response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools,
     messages,
@@ -3428,7 +3428,7 @@ List<MessageParam> messages =
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     Messages = messages,
@@ -3469,7 +3469,7 @@ while (response.StopReason == StopReason.ToolUse)
 
     response = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = tools,
         Messages = messages,
@@ -3566,7 +3566,7 @@ func main() {
 	}
 
 	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Tools:     tools,
 		Messages:  messages,
@@ -3601,7 +3601,7 @@ func main() {
 		messages = append(messages, anthropic.NewUserMessage(toolResults...))
 
 		response, err = client.Messages.New(ctx, anthropic.MessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Tools:     tools,
 			Messages:  messages,
@@ -3711,7 +3711,7 @@ void main() {
         .build());
 
     Message response = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(calendarTool)
         .addTool(listTool)
@@ -3743,7 +3743,7 @@ void main() {
             .build());
 
         response = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024L)
             .addTool(calendarTool)
             .addTool(listTool)
@@ -3836,7 +3836,7 @@ $messages = [
 ];
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: $tools,
     messages: $messages,
@@ -3868,7 +3868,7 @@ while ($response->stopReason === 'tool_use') {
     $messages[] = ['role' => 'user', 'content' => $toolResults];
 
     $response = $client->messages->create(
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         maxTokens: 1024,
         tools: $tools,
         messages: $messages,
@@ -3950,7 +3950,7 @@ messages = [
 ]
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   messages: messages
@@ -3979,7 +3979,7 @@ while response.stop_reason == :tool_use
   messages << {role: "user", content: tool_results}
 
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools: tools,
     messages: messages
@@ -4069,7 +4069,7 @@ def list_calendar_events(date: str) -> str:
     return json.dumps({"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]})
 
 final_message = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[create_calendar_event, list_calendar_events],
     messages=[
@@ -4136,7 +4136,7 @@ const listCalendarEvents = betaZodTool({
 });
 
 const finalMessage = await client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [createCalendarEvent, listCalendarEvents],
   messages: [
@@ -4247,7 +4247,7 @@ var listCalendarEvents = new BetaRunnableTool
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -4354,7 +4354,7 @@ func main() {
 		[]anthropic.BetaTool{createCalendarEvent, listCalendarEvents},
 		anthropic.BetaToolRunnerParams{
 			BetaMessageNewParams: anthropic.BetaMessageNewParams{
-				Model:     anthropic.ModelClaudeOpus5,
+				Model:     anthropic.ModelClaudeOpus5_5,
 				MaxTokens: 1024,
 				Messages: []anthropic.BetaMessageParam{
 					anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(
@@ -4440,7 +4440,7 @@ void main() {
     BetaToolRunner runner = client.beta()
             .messages()
             .toolRunner(MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_5)
+                    .model(Model.CLAUDE_OPUS_5_5)
                     .maxTokens(1024)
                     .addBeta("structured-outputs-2025-11-13")
                     .addUserMessage("Check what I have next Monday, then schedule a planning session that avoids any conflicts.")
@@ -4539,7 +4539,7 @@ $runner = $client->beta->messages->toolRunner(
             'content' => 'Check what I have next Monday, then schedule a planning session that avoids any conflicts.',
         ],
     ],
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [$createCalendarEvent, $listCalendarEvents],
 );
 
@@ -4605,7 +4605,7 @@ end
 # The runner calls the API, runs requested tools, and feeds results back
 # until Claude produces a final answer.
 runner = client.beta.messages.tool_runner(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [CreateCalendarEvent.new, ListCalendarEvents.new],
   messages: [
@@ -4627,7 +4627,7 @@ end
 **What to expect**
 
 ```text Output wrap
-I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
+I checked your calendar for Monday, March 30 and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
 ```
 
 The output is identical to Ring 3. The difference is in the code: roughly half the lines, no manual loop, and the schema lives next to the implementation.

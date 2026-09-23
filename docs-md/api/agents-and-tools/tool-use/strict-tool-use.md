@@ -35,7 +35,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "What is the weather in San Francisco?"}
@@ -65,7 +65,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create --transform content <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -92,7 +92,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "What's the weather like in San Francisco?"}],
     tools=[
@@ -128,7 +128,7 @@ const client = new Anthropic({
 });
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -171,7 +171,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }],
     Tools = [
@@ -202,7 +202,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("What's the weather like in San Francisco?")),
@@ -259,7 +259,7 @@ InputSchema schema = InputSchema.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addUserMessage("What's the weather like in San Francisco?")
     .addTool(
@@ -284,7 +284,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         [
             'name' => 'get_weather',
@@ -316,7 +316,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "What's the weather like in San Francisco?" }
@@ -392,7 +392,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Search for flights to Tokyo departing June 1, 2026"}
@@ -416,7 +416,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -443,7 +443,7 @@ YAML
 ```python Python
 client = Anthropic()
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -494,7 +494,7 @@ const searchFlightsTool: Anthropic.Tool = {
 };
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Search for flights to Tokyo departing June 1, 2026" }],
   tools: [searchFlightsTool]
@@ -512,7 +512,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Search for flights to Tokyo departing June 1, 2026" }],
     Tools = [
@@ -543,7 +543,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Search for flights to Tokyo departing June 1, 2026")),
@@ -600,7 +600,7 @@ InputSchema schema = InputSchema.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addUserMessage("Search for flights to Tokyo departing June 1, 2026")
     .addTool(
@@ -624,7 +624,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Search for flights to Tokyo departing June 1, 2026']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         [
             'name' => 'search_flights',
@@ -653,7 +653,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Search for flights to Tokyo departing June 1, 2026" }
@@ -691,7 +691,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026"}
@@ -732,7 +732,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -767,7 +767,7 @@ YAML
 ```python Python
 client = Anthropic()
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -847,7 +847,7 @@ const tools: Anthropic.Tool[] = [
 ];
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -871,7 +871,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }],
     Tools = [
@@ -919,7 +919,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026")),
@@ -995,7 +995,7 @@ InputSchema hotelsSchema = InputSchema.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addUserMessage("Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026")
     .addTool(
@@ -1026,7 +1026,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         [
             'name' => 'search_flights',
@@ -1067,7 +1067,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }

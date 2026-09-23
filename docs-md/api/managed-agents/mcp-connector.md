@@ -36,7 +36,7 @@ agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
   -d @- <<'EOF'
 {
   "name": "GitHub Assistant",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "mcp_servers": [
     {
       "type": "url",
@@ -61,7 +61,7 @@ ant apply github-assistant.md
 ```markdown
 ---
 name: GitHub Assistant
-model: claude-opus-5
+model: claude-opus-5-5
 mcp_servers:
   - type: url
     name: github
@@ -76,7 +76,7 @@ tools:
 ```python Python
 agent = client.beta.agents.create(
     name="GitHub Assistant",
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     mcp_servers=[
         {
             "type": "url",
@@ -94,7 +94,7 @@ agent = client.beta.agents.create(
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "GitHub Assistant",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   mcp_servers: [
     {
       type: "url",
@@ -113,7 +113,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "GitHub Assistant",
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     McpServers =
     [
         new() { Type = "url", Name = "github", Url = "https://api.githubcopilot.com/mcp/" },
@@ -133,7 +133,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "GitHub Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
 		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -163,7 +163,7 @@ if err != nil {
 var agent = client.beta().agents().create(
     AgentCreateParams.builder()
         .name("GitHub Assistant")
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
         .addMcpServer(
             BetaManagedAgentsUrlMcpServerParams.builder()
                 .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -189,7 +189,7 @@ var agent = client.beta().agents().create(
 ```php PHP
 $agent = $client->beta->agents->create(
     name: 'GitHub Assistant',
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     mcpServers: [
         BetaManagedAgentsURLMCPServerParams::with(
             type: 'url',
@@ -212,7 +212,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "GitHub Assistant",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   mcp_servers: [
     {
       type: "url",

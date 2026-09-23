@@ -31,7 +31,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -60,7 +60,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -83,7 +83,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -112,7 +112,7 @@ print(response)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -146,7 +146,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -180,7 +180,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -225,7 +225,7 @@ TextBlockParam textBlockParam = TextBlockParam.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessageOfBlockParams(
         List.of(
@@ -266,7 +266,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -276,7 +276,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -392,7 +392,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -419,7 +419,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --model claude-opus-5 --max-tokens 1024 <<'YAML'
+ant messages create --model claude-opus-5-5 --max-tokens 1024 <<'YAML'
 messages:
   - role: user
     content:
@@ -446,7 +446,7 @@ long_document = (
 )  # Minimum cacheable length
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -483,7 +483,7 @@ const longDocument =
   "This is a very long document with thousands of words..." + " ... ".repeat(1000); // Minimum cacheable length
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -521,7 +521,7 @@ var longDocument =
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -555,7 +555,7 @@ longDocument := "This is a very long document with thousands of words..." +
 	strings.Repeat(" ... ", 1000) // Minimum cacheable length
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -597,7 +597,7 @@ TextBlockParam textBlockParam = TextBlockParam.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessageOfBlockParams(
         List.of(
@@ -642,7 +642,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -657,7 +657,7 @@ long_document =
   " ... " * 1000 # Minimum cacheable length
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -739,7 +739,7 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d @- <<EOF
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 1024,
   "messages": [
     {
@@ -765,7 +765,7 @@ EOF
 
 ```bash CLI
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -785,7 +785,7 @@ YAML
 
 ```python Python
 cited_response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -808,7 +808,7 @@ print(cited_response)
 
 ```typescript TypeScript
 const citedResponse = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -836,7 +836,7 @@ console.log(citedResponse);
 var citedResponse = await client.Messages.Create(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -864,7 +864,7 @@ Console.WriteLine(citedResponse);
 ```go Go
 citedMsg, err := client.Messages.New(context.Background(),
 	anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(
@@ -890,7 +890,7 @@ fmt.Println(citedMsg)
 
 ```java Java
 MessageCreateParams citedParams = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessageOfBlockParams(List.of(
         ContentBlockParam.ofDocument(DocumentBlockParam.builder()
@@ -927,7 +927,7 @@ $citedResponse = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo $citedResponse;
@@ -935,7 +935,7 @@ echo $citedResponse;
 
 ```ruby Ruby
 cited_response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -987,7 +987,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -1016,7 +1016,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -1043,7 +1043,7 @@ pdf_base64 = base64.standard_b64encode(
 ).decode()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -1074,7 +1074,7 @@ const client = new Anthropic();
 const pdfBase64 = Buffer.from(await readFile("/path/to/document.pdf")).toString("base64");
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1110,7 +1110,7 @@ var pdfBase64 = Convert.ToBase64String(await File.ReadAllBytesAsync("/path/to/do
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -1147,7 +1147,7 @@ if err != nil {
 pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -1187,7 +1187,7 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessageOfBlockParams(
         List.of(
@@ -1230,7 +1230,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1242,7 +1242,7 @@ client = Anthropic::Client.new
 pdf_base64 = Base64.strict_encode64(File.binread("/path/to/document.pdf"))
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1279,7 +1279,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -1307,7 +1307,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -1329,7 +1329,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -1357,7 +1357,7 @@ print(response)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1390,7 +1390,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -1424,7 +1424,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -1463,7 +1463,7 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessageOfBlockParams(
         List.of(
@@ -1503,7 +1503,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1513,7 +1513,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1552,7 +1552,7 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d @- <<EOF
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 1024,
   "messages": [
     {
@@ -1578,7 +1578,7 @@ EOF
 
 ```bash CLI
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -1598,7 +1598,7 @@ YAML
 
 ```python Python
 cited_response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -1621,7 +1621,7 @@ print(cited_response)
 
 ```typescript TypeScript
 const citedResponse = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1649,7 +1649,7 @@ console.log(citedResponse);
 var citedResponse = await client.Messages.Create(
     new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -1677,7 +1677,7 @@ Console.WriteLine(citedResponse);
 ```go Go
 citedMsg, err := client.Messages.New(context.Background(),
 	anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(
@@ -1703,7 +1703,7 @@ fmt.Println(citedMsg)
 
 ```java Java
 MessageCreateParams citedParams = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessageOfBlockParams(List.of(
         ContentBlockParam.ofDocument(DocumentBlockParam.builder()
@@ -1740,7 +1740,7 @@ $citedResponse = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo $citedResponse;
@@ -1748,7 +1748,7 @@ echo $citedResponse;
 
 ```ruby Ruby
 cited_response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1796,7 +1796,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -1827,7 +1827,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -1853,7 +1853,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -1884,7 +1884,7 @@ print(response)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1920,7 +1920,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -1958,7 +1958,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -2007,7 +2007,7 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .addUserMessageOfBlockParams(
         List.of(
@@ -2050,7 +2050,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -2060,7 +2060,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {

@@ -213,7 +213,7 @@ Your status line command receives this JSON structure via stdin:
   "prompt_id": "550e8400-e29b-41d4-a716-446655440000",
   "transcript_path": "/path/to/transcript.jsonl",
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "display_name": "Opus"
   },
   "workspace": {

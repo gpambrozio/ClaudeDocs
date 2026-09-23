@@ -29,7 +29,7 @@ agent_id=$(curl -fsS https://api.anthropic.com/v1/agents \
   --data @- <<JSON | jq -r '.id'
 {
   "name": "Code Reviewer",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "system": "You are a code review assistant with access to GitHub.",
   "mcp_servers": [
     {
@@ -57,7 +57,7 @@ ant apply code-reviewer.md
 ```markdown
 ---
 name: Code Reviewer
-model: claude-opus-5
+model: claude-opus-5-5
 mcp_servers:
   - type: url
     name: github
@@ -74,7 +74,7 @@ You are a code review assistant with access to GitHub.
 ```python Python
 agent = client.beta.agents.create(
     name="Code Reviewer",
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     system="You are a code review assistant with access to GitHub.",
     mcp_servers=[
         {
@@ -96,7 +96,7 @@ agent = client.beta.agents.create(
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Code Reviewer",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system: "You are a code review assistant with access to GitHub.",
   mcp_servers: [
     {
@@ -119,7 +119,7 @@ const agent = await client.beta.agents.create({
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Code Reviewer",
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     System = "You are a code review assistant with access to GitHub.",
     McpServers =
     [
@@ -144,7 +144,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Code Reviewer",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	System: anthropic.String("You are a code review assistant with access to GitHub."),
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{
@@ -176,7 +176,7 @@ if err != nil {
 ```java Java
 var agent = client.beta().agents().create(AgentCreateParams.builder()
     .name("Code Reviewer")
-    .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+    .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
     .system("You are a code review assistant with access to GitHub.")
     .addMcpServer(BetaManagedAgentsUrlMcpServerParams.builder()
         .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -196,7 +196,7 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
 ```php PHP
 $agent = $client->beta->agents->create(
     name: 'Code Reviewer',
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     system: 'You are a code review assistant with access to GitHub.',
     mcpServers: [
         [
@@ -218,7 +218,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Code Reviewer",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system_: "You are a code review assistant with access to GitHub.",
   mcp_servers: [
     {

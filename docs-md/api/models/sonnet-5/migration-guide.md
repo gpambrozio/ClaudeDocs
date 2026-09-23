@@ -68,7 +68,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
        "messages": [
          {
            "role": "user",
-           "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+           "content": "Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024."
          }
        ]
      }'
@@ -85,7 +85,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
      effort: high
    messages:
      - role: user
-       content: Are there an infinite number of prime numbers such that n mod 4 == 3?
+       content: Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024.
    YAML
    ```
 
@@ -100,7 +100,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
        messages=[
            {
                "role": "user",
-               "content": "Are there an infinite number of prime numbers such that n mod 4 == 3?",
+               "content": "Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024.",
            }
        ],
    )
@@ -130,7 +130,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
      messages: [
        {
          role: "user",
-         content: "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+         content: "Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024."
        }
      ]
    });
@@ -162,7 +162,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
            new()
            {
                Role = Role.User,
-               Content = "Are there an infinite number of prime numbers such that n mod 4 == 3?",
+               Content = "Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024.",
            },
        ],
    });
@@ -196,7 +196,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
    		Effort: anthropic.OutputConfigEffortHigh,
    	},
    	Messages: []anthropic.MessageParam{
-   		anthropic.NewUserMessage(anthropic.NewTextBlock("Are there an infinite number of prime numbers such that n mod 4 == 3?")),
+   		anthropic.NewUserMessage(anthropic.NewTextBlock("Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024.")),
    	},
    })
    if err != nil {
@@ -233,7 +233,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
            .outputConfig(OutputConfig.builder()
                .effort(OutputConfig.Effort.HIGH)
                .build())
-           .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
+           .addUserMessage("Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024.")
            .build();
 
        var response = client.messages().create(params);
@@ -264,7 +264,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
        messages: [
            [
                'role' => 'user',
-               'content' => 'Are there an infinite number of prime numbers such that n mod 4 == 3?',
+               'content' => 'Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024.',
            ],
        ],
    );
@@ -290,7 +290,7 @@ Items 4 and 5 in the following list are breaking changes. `max_tokens` remains a
      messages: [
        {
          role: :user,
-         content: "Are there an infinite number of prime numbers such that n mod 4 == 3?"
+         content: "Find all pairs of positive integers (x, y) such that x^2 - y^2 = 2024."
        }
      ]
    )

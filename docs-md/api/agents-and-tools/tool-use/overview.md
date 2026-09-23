@@ -16,7 +16,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [{"type": "web_search_20260209", "name": "web_search"}],
     "messages": [{"role": "user", "content": "What'\''s the latest on the Mars rover?"}]
@@ -25,7 +25,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create --transform content --format yaml \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --tool '{type: web_search_20260209, name: web_search}' \
   --message '{role: user, content: "What is the latest on the Mars rover?"}'
@@ -34,7 +34,7 @@ ant messages create --transform content --format yaml \
 ```python Python
 client = anthropic.Anthropic()
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[{"type": "web_search_20260209", "name": "web_search"}],
     messages=[{"role": "user", "content": "What's the latest on the Mars rover?"}],
@@ -45,7 +45,7 @@ print(response.content)
 ```typescript TypeScript
 const client = new Anthropic();
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{ type: "web_search_20260209", name: "web_search" }],
   messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
@@ -58,7 +58,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = [new ToolUnion(new WebSearchTool20260209())],
     Messages = [new() { Role = Role.User, Content = "What's the latest on the Mars rover?" }]
@@ -72,7 +72,7 @@ Console.WriteLine(message.Content);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfWebSearchTool20260209: &anthropic.WebSearchTool20260209Param{}},
@@ -94,7 +94,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(WebSearchTool20260209.builder().build())
         .addUserMessage("What's the latest on the Mars rover?")
@@ -109,7 +109,7 @@ void main() {
 $client = new Client();
 
 $message = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: [
         ['type' => 'web_search_20260209', 'name' => 'web_search'],
@@ -126,7 +126,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{ type: "web_search_20260209", name: "web_search" }],
   messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
@@ -163,7 +163,7 @@ RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d "$(jq -n --argjson tools "$TOOLS" --arg msg "$USER_MSG" '{
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools: $tools,
     # Ask for at most one tool call per turn.
@@ -187,7 +187,7 @@ curl -s https://api.anthropic.com/v1/messages \
     --arg tool_use_id "$(echo "$TOOL_USE" | jq -r '.id')" \
     --arg weather "$WEATHER" \
     '{
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 1024,
       tools: $tools,
       tool_choice: {type: "auto", disable_parallel_tool_use: true},
@@ -209,7 +209,7 @@ MESSAGES=$(jq -n --arg msg "$USER_MSG" '[{role: "user", content: $msg}]')
 call_api() {
   {
     cat <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 # Ask for at most one tool call per turn.
 tool_choice: {type: auto, disable_parallel_tool_use: true}
@@ -271,7 +271,7 @@ messages = [{"role": "user", "content": "What's the weather in San Francisco?"}]
 
 # Claude replies with a tool_use block naming the tool and its arguments.
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=tools,
     # Ask for at most one tool call per turn.
@@ -293,7 +293,7 @@ messages += [
     },
 ]
 followup = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -327,7 +327,7 @@ const messages: Anthropic.MessageParam[] = [
 
 // Claude replies with a tool_use block naming the tool and its arguments.
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools,
   // Ask for at most one tool call per turn.
@@ -349,7 +349,7 @@ messages.push(
   }
 );
 const followup = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools,
   tool_choice: { type: "auto", disable_parallel_tool_use: true },
@@ -395,7 +395,7 @@ const string userPrompt = "What's the weather in San Francisco?";
 // Claude replies with a tool_use block naming the tool and its arguments.
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     ToolChoice = toolChoice,
@@ -424,7 +424,7 @@ List<ContentBlockParam> toolResults =
 ];
 var followup = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     ToolChoice = toolChoice,
@@ -475,7 +475,7 @@ messages := []anthropic.MessageParam{
 
 // Claude replies with a tool_use block naming the tool and its arguments.
 response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-	Model:      anthropic.ModelClaudeOpus5,
+	Model:      anthropic.ModelClaudeOpus5_5,
 	MaxTokens:  1024,
 	Tools:      tools,
 	ToolChoice: toolChoice,
@@ -504,7 +504,7 @@ messages = append(messages,
 	anthropic.NewUserMessage(anthropic.NewToolResultBlock(toolUse.ID, weather, false)),
 )
 followup, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-	Model:      anthropic.ModelClaudeOpus5,
+	Model:      anthropic.ModelClaudeOpus5_5,
 	MaxTokens:  1024,
 	Tools:      tools,
 	ToolChoice: toolChoice,
@@ -559,7 +559,7 @@ void main() {
 
     // Claude replies with a tool_use block naming the tool and its arguments.
     Message response = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(weatherTool)
         .toolChoice(toolChoice)
@@ -574,7 +574,7 @@ void main() {
     // Run the tool, then send the result back in a tool_result block.
     String weather = "15 degrees Celsius, partly cloudy";
     Message followup = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(weatherTool)
         .toolChoice(toolChoice)
@@ -622,7 +622,7 @@ $toolChoice = ToolChoiceAuto::with(disableParallelToolUse: true);
 
 // Claude replies with a tool_use block naming the tool and its arguments.
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: $tools,
     toolChoice: $toolChoice,
@@ -640,7 +640,7 @@ printf("Claude called %s with %s\n", $toolUse->name, json_encode($toolUse->input
 // Run the tool, then send the result back in a tool_result block.
 $weather = '15 degrees Celsius, partly cloudy';
 $followup = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: $tools,
     toolChoice: $toolChoice,
@@ -688,7 +688,7 @@ messages = [{role: "user", content: "What's the weather in San Francisco?"}]
 
 # Claude replies with a tool_use block naming the tool and its arguments.
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   # Ask for at most one tool call per turn.
@@ -710,7 +710,7 @@ messages += [
   }
 ]
 followup = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   tool_choice: {type: "auto", disable_parallel_tool_use: true},
@@ -854,6 +854,7 @@ When you use `tools`, the API also automatically includes a special system promp
 
 | Model                                                                                                                                 | Tool choice                    | Tool use system prompt token count |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------- |
+| Claude Opus 5.5                                                                                                                       | `auto`, `none`                 | 286 tokens                         |
 | Claude Opus 5                                                                                                                         | `auto`, `none`***`any`, `tool` | 286 tokens***406 tokens            |
 | Claude Opus 4.8                                                                                                                       | `auto`, `none`***`any`, `tool` | 290 tokens***410 tokens            |
 | Claude Opus 4.7                                                                                                                       | `auto`, `none`***`any`, `tool` | 675 tokens***804 tokens            |

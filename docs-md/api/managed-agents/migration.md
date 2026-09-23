@@ -35,7 +35,7 @@ If you built an agent by calling `messages.create` in a `while` loop, running to
 messages = [{"role": "user", "content": task}]
 while True:
     response = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=messages,
         tools=tools,
@@ -64,7 +64,7 @@ while True:
 const messages: Anthropic.MessageParam[] = [{ role: "user", content: task }];
 while (true) {
   const response = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages,
     tools
@@ -97,7 +97,7 @@ while (true)
 {
     var response = await client.Messages.Create(new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = messages,
         Tools = tools,
@@ -132,7 +132,7 @@ messages := []anthropic.MessageParam{
 }
 for {
 	response, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages:  messages,
 		Tools:     tools,
@@ -163,7 +163,7 @@ messages.add(MessageParam.builder()
     .build());
 while (true) {
     var response = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .messages(messages)
         .tools(tools)
@@ -192,7 +192,7 @@ while (true) {
 $messages = [['role' => 'user', 'content' => $task]];
 while (true) {
     $response = $client->messages->create(
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         maxTokens: 1024,
         messages: $messages,
         tools: $tools,
@@ -223,7 +223,7 @@ while (true) {
 messages = [{ role: "user", content: task }]
 loop do
   response = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: messages,
     tools: tools
@@ -257,7 +257,7 @@ agent=$(
     -H "anthropic-beta: managed-agents-2026-04-01" \
     --json '{
       "name": "Task Runner",
-      "model": "claude-opus-5",
+      "model": "claude-opus-5-5",
       "tools": [{"type": "agent_toolset_20260401"}]
     }'
 )
@@ -327,7 +327,7 @@ exec {stream}<&-
 ```markdown
 ---
 name: Task Runner
-model: claude-opus-5
+model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
 ---
@@ -336,7 +336,7 @@ tools:
 ```python Python
 agent = client.beta.agents.create(
     name="Task Runner",
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     tools=[{"type": "agent_toolset_20260401"}],
 )
 
@@ -358,7 +358,7 @@ with client.beta.sessions.events.stream(session.id) as stream:
 ```typescript TypeScript
 const agent = await client.beta.agents.create({
   name: "Task Runner",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   tools: [{ type: "agent_toolset_20260401" }]
 });
 
@@ -389,7 +389,7 @@ for await (const event of stream) {
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Task Runner",
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -437,7 +437,7 @@ await foreach (var streamEvent in stream)
 	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		Name: "Task Runner",
 		Model: anthropic.BetaManagedAgentsModelConfigParams{
-			ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+			ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 		},
 		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -498,7 +498,7 @@ await foreach (var streamEvent in stream)
     var agent = client.beta().agents().create(
         AgentCreateParams.builder()
             .name("Task Runner")
-            .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+            .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
             .addTool(
                 BetaManagedAgentsAgentToolset20260401Params.builder()
                     .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -541,7 +541,7 @@ await foreach (var streamEvent in stream)
 ```php PHP
 $agent = $client->beta->agents->create(
     name: 'Task Runner',
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
             type: 'agent_toolset_20260401',
@@ -580,7 +580,7 @@ foreach ($stream as $event) {
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Task Runner",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   tools: [{type: "agent_toolset_20260401"}]
 )
 
@@ -640,7 +640,7 @@ async def get_weather(args: dict) -> dict:
     return {"content": [{"type": "text", "text": f"{args['city']}: 18°C, clear"}]}
 
 options = ClaudeAgentOptions(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     system_prompt="You are a concise weather assistant.",
     mcp_servers={
         "weather": create_sdk_mcp_server("weather", "1.0", tools=[get_weather])
@@ -669,7 +669,7 @@ const getWeather = tool(
 for await (const message of query({
   prompt: "What's the weather in Tokyo?",
   options: {
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     systemPrompt: "You are a concise weather assistant.",
     mcpServers: {
       weather: createSdkMcpServer({ name: "weather", version: "1.0", tools: [getWeather] })
@@ -689,7 +689,7 @@ client = Anthropic()
 
 agent = client.beta.agents.create(
     name="weather-agent",
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     system="You are a concise weather assistant.",
     tools=[
         {
@@ -759,7 +759,7 @@ const client = new Anthropic();
 
 const agent = await client.beta.agents.create({
   name: "weather-agent",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system: "You are a concise weather assistant.",
   tools: [
     {
@@ -843,7 +843,7 @@ AnthropicClient client = new();
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "weather-agent",
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     System = "You are a concise weather assistant.",
     Tools =
     [
@@ -945,7 +945,7 @@ ctx := context.Background()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "weather-agent",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	System: anthropic.String("You are a concise weather assistant."),
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -1080,7 +1080,7 @@ var client = AnthropicOkHttpClient.fromEnv();
 
 var agent = client.beta().agents().create(AgentCreateParams.builder()
     .name("weather-agent")
-    .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+    .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
     .system("You are a concise weather assistant.")
     .addTool(BetaManagedAgentsCustomToolParams.builder()
         .type(BetaManagedAgentsCustomToolParams.Type.CUSTOM)
@@ -1169,7 +1169,7 @@ $client = new Client();
 
 $agent = $client->beta->agents->create(
     name: 'weather-agent',
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     system: 'You are a concise weather assistant.',
     tools: [
         BetaManagedAgentsCustomToolParams::with(
@@ -1253,7 +1253,7 @@ client = Anthropic::Client.new
 
 agent = client.beta.agents.create(
   name: "weather-agent",
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   system_: "You are a concise weather assistant.",
   tools: [
     {
@@ -1343,7 +1343,7 @@ curl -sS --fail-with-body "https://api.anthropic.com/v1/agents/$AGENT_ID?beta=tr
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
-  --json "$(jq -n --argjson version "$AGENT_VERSION" '{version: $version, model: "claude-opus-5"}')"
+  --json "$(jq -n --argjson version "$AGENT_VERSION" '{version: $version, model: "claude-opus-5-5"}')"
 ```
 
 ```bash CLI
@@ -1353,7 +1353,7 @@ ant apply agent.md
 ```markdown
 ---
 name: Task Runner
-model: claude-opus-5
+model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
 ---
@@ -1365,14 +1365,14 @@ You are a task automation agent. Complete the task you are given end to end.
 client.beta.agents.update(
     agent.id,
     version=agent.version,
-    model="claude-opus-5",
+    model="claude-opus-5-5",
 )
 ```
 
 ```typescript TypeScript
 await client.beta.agents.update(agent.id, {
   version: agent.version,
-  model: "claude-opus-5"
+  model: "claude-opus-5-5"
 });
 ```
 
@@ -1380,7 +1380,7 @@ await client.beta.agents.update(agent.id, {
 await client.Beta.Agents.Update(agent.ID, new()
 {
     Version = agent.Version,
-    Model = BetaManagedAgentsModel.ClaudeOpus5,
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
 });
 ```
 
@@ -1388,7 +1388,7 @@ await client.Beta.Agents.Update(agent.ID, new()
 _, err = client.Beta.Agents.Update(ctx, agent.ID, anthropic.BetaAgentUpdateParams{
 	Version: agent.Version,
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 })
 if err != nil {
@@ -1401,7 +1401,7 @@ client.beta().agents().update(
     agent.id(),
     AgentUpdateParams.builder()
         .version(agent.version())
-        .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+        .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
         .build()
 );
 ```
@@ -1410,7 +1410,7 @@ client.beta().agents().update(
 $client->beta->agents->update(
     $agent->id,
     version: $agent->version,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 ```
 
@@ -1418,7 +1418,7 @@ $client->beta->agents->update(
 client.beta.agents.update(
   agent.id,
   version: agent.version,
-  model: "claude-opus-5"
+  model: "claude-opus-5-5"
 )
 ```
 

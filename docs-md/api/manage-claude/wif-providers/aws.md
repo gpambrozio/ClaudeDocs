@@ -128,7 +128,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello from AWS"}]
   }' | jq -r '.content[] | select(.type == "text") | .text'
@@ -161,7 +161,7 @@ client = anthropic.Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello from AWS"}],
 )
@@ -199,7 +199,7 @@ const client = new Anthropic({
 });
 
 const message = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello from AWS" }]
 });
@@ -240,7 +240,7 @@ client := anthropic.NewClient(
 )
 
 message, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from AWS")),
@@ -277,7 +277,7 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
         .build();
 
 var message = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addUserMessage("Hello from AWS")
         .build());
@@ -304,7 +304,7 @@ using var client = new AnthropicClient(new ClientOptions { Credentials = credent
 
 var message = await client.Messages.Create(new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello from AWS" }],
 });
@@ -346,7 +346,7 @@ export ANTHROPIC_IDENTITY_TOKEN_FILE="$TOKEN_FILE"
 # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, and
 # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello from AWS"}'
 ```
@@ -370,7 +370,7 @@ $client = new Client(credentials: new WorkloadIdentityCredentials(
 ));
 
 $message = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello from AWS']],
 );
@@ -400,7 +400,7 @@ client = Anthropic::Client.new(
 )
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello from AWS"}]
 )
@@ -587,7 +587,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello from EKS"}]
   }' | jq -r '.content[] | select(.type == "text") | .text'
@@ -612,7 +612,7 @@ client = anthropic.Anthropic(
 )
 
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello from EKS"}],
 )
@@ -637,7 +637,7 @@ const client = new Anthropic({
 });
 
 const message = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello from EKS" }]
 });
@@ -669,7 +669,7 @@ client := anthropic.NewClient(
 )
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from EKS")),
@@ -690,7 +690,7 @@ for _, block := range message.Content {
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 var message = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addUserMessage("Hello from EKS")
         .build());
@@ -706,7 +706,7 @@ using var client = new AnthropicClient();
 
 var message = await client.Messages.Create(new()
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello from EKS" }],
 });
@@ -723,7 +723,7 @@ foreach (var block in message.Content)
 # Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
 # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello from EKS"}'
 ```
@@ -736,7 +736,7 @@ use Anthropic\Client;
 $client = new Client();
 
 $message = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello from EKS']],
 );
@@ -752,7 +752,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello from EKS"}]
 )

@@ -28,7 +28,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Hello, Claude"}
@@ -38,14 +38,14 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}'
 ```
 
 ```python Python
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -56,7 +56,7 @@ print(message)
 const anthropic = new Anthropic();
 
 const message = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude" }]
 });
@@ -68,7 +68,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
 };
@@ -80,7 +80,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -96,7 +96,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addUserMessage("Hello, Claude")
     .build();
@@ -111,7 +111,7 @@ $client = new Client();
 $message = $client->messages->create(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
 ```
@@ -120,7 +120,7 @@ echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Hello, Claude" }
@@ -140,7 +140,7 @@ puts message
       "text": "Hello!"
     }
   ],
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -163,7 +163,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": "Hello, Claude"},
@@ -176,7 +176,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --message '{role: user, content: "Hello, Claude"}' \
   --message '{role: assistant, content: "Hello!"}' \
@@ -185,7 +185,7 @@ ant messages create \
 
 ```python Python
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "Hello, Claude"},
@@ -200,7 +200,7 @@ print(message)
 const anthropic = new Anthropic();
 
 const message = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Hello, Claude" },
@@ -216,7 +216,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -234,7 +234,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -252,7 +252,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addUserMessage("Hello, Claude")
     .addAssistantMessage("Hello!")
@@ -273,7 +273,7 @@ $message = $client->messages->create(
         ['role' => 'assistant', 'content' => 'Hello!'],
         ['role' => 'user', 'content' => 'Can you describe LLMs to me?'],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 
 echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
@@ -283,7 +283,7 @@ echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Hello, Claude" },
@@ -305,7 +305,7 @@ puts message
       "text": "Sure, I'd be happy to provide..."
     }
   ],
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -317,7 +317,7 @@ puts message
 
 ### System role in messages
 
-On Claude Fable 5.1, [Claude Mythos 5.1](https://anthropic.com/glasswing), Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 4.8, and Claude Opus 5, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](mid-conversation-system-messages.md#limitations)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`. Use the top-level `system` field for instructions that apply from the start.
+On Claude Fable 5.1, [Claude Mythos 5.1](https://anthropic.com/glasswing), Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 5.5, Claude Opus 4.8, and Claude Opus 5, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](mid-conversation-system-messages.md#limitations)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`. Use the top-level `system` field for instructions that apply from the start.
 
 A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
 
@@ -507,7 +507,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d @- <<EOF
 {
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "max_tokens": 1024,
   "messages": [
     {"role": "user", "content": [
@@ -528,7 +528,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {"role": "user", "content": [
@@ -549,7 +549,7 @@ IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
 curl -s "$IMAGE_URL" -o ./vision-example.jpg
 
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -565,7 +565,7 @@ YAML
 
 # Option 2: URL-referenced image
 ant messages create <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -589,7 +589,7 @@ image_media_type = "image/jpeg"
 image_data = base64.standard_b64encode(httpx2.get(image_url).content).decode("utf-8")
 
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -612,7 +612,7 @@ print(message)
 
 # Option 2: URL-referenced image
 message_from_url = anthropic.Anthropic().messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -643,7 +643,7 @@ const imageArrayBuffer = await (await fetch(imageUrl)).arrayBuffer();
 const imageData = Buffer.from(imageArrayBuffer).toString("base64");
 
 const message = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -669,7 +669,7 @@ console.log(message);
 
 // Option 2: URL-referenced image
 const messageFromUrl = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -710,7 +710,7 @@ string imageData = Convert.ToBase64String(imageBytes);
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -738,7 +738,7 @@ Console.WriteLine(message);
 // Option 2: URL-referenced image
 var parametersFromUrl = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages =
     [
@@ -788,7 +788,7 @@ if err != nil {
 imageData := base64.StdEncoding.EncodeToString(imageBytes)
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -804,7 +804,7 @@ fmt.Println(message)
 
 // Option 2: URL-referenced image
 messageFromURL, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(
@@ -848,7 +848,7 @@ List<ContentBlockParam> base64Content = List.of(
 
 Message message = client.messages().create(
     MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessageOfBlockParams(base64Content)
         .build());
@@ -870,7 +870,7 @@ List<ContentBlockParam> urlContent = List.of(
 
 Message messageFromUrl = client.messages().create(
     MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessageOfBlockParams(urlContent)
         .build());
@@ -906,7 +906,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 echo $message;
 
@@ -931,7 +931,7 @@ $message_from_url = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
 );
 echo $message_from_url;
 ```
@@ -948,7 +948,7 @@ image_media_type = "image/jpeg"
 image_data = Base64.strict_encode64(Net::HTTP.get(URI(image_url)))
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -974,7 +974,7 @@ puts message
 
 # Option 2: URL-referenced image
 message_from_url = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -1009,7 +1009,7 @@ puts message_from_url
       "text": "This image is a beautiful minimalist/flat-design illustration of a sunset landscape. Here's what it contains:\n\n**Sky & Sun:**\n- A warm gradient sky transitioning from golden-yellow at the top to deep orange toward the horizon\n- A large pale yellow sun positioned in the upper-right area\n\n**Birds:**\n- Three small silhouetted birds flying in the upper-left portion of the sky, depicted as simple \"M\" or \"v\" shapes\n\n**Mountains:**\n- Multiple layered mountain peaks in purple and maroon tones\n- The mountains overlap to create depth, with varying shades of dusty purple and deep burgundy\n\n**Water:**\n- A dark purple body of water at the bottom of the image\n- A reflection of the sun shown as horizontal cream/peach colored lines in the center-bottom area\n\nThe overall style is clean, geometric, and uses a warm sunset color palette (oranges, yellows, purples, and maroons), giving it a peaceful, serene aesthetic typical of modern vector/flat design artwork."
     }
   ],
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {

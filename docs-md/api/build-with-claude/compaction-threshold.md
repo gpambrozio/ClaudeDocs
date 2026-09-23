@@ -16,6 +16,7 @@ featureMetadata:
     - claude-fable-5
     - claude-mythos-5
     - claude-mythos-preview
+    - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
@@ -65,7 +66,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -85,7 +86,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -103,7 +104,7 @@ messages = [{"role": "user", "content": "Help me build a website"}]
 
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -122,7 +123,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -152,7 +153,7 @@ var messages = new List<BetaMessageParam>
 var parameters = new MessageCreateParams
 {
     Betas = ["compact-2026-01-12"],
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Messages = messages,
     ContextManagement = new BetaContextManagementConfig
@@ -181,7 +182,7 @@ messages := []anthropic.BetaMessageParam{
 }
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages:  messages,
 	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -209,7 +210,7 @@ import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
 
         MessageCreateParams params = MessageCreateParams.builder()
             .addBeta("compact-2026-01-12")
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .addUserMessage("Help me build a website")
             .contextManagement(BetaContextManagementConfig.builder()
@@ -234,7 +235,7 @@ $messages = [
 $response = $client->beta->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [
@@ -258,7 +259,7 @@ messages = [
 
 response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: messages,
   context_management: {
@@ -292,7 +293,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -316,7 +317,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -335,7 +336,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -357,7 +358,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -380,7 +381,7 @@ List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Betas = ["compact-2026-01-12"],
     Messages = messages,
@@ -402,7 +403,7 @@ client := anthropic.NewClient()
 messages := []anthropic.BetaMessageParam{anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude"))}
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages:  messages,
 	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -428,7 +429,7 @@ import com.anthropic.models.beta.messages.BetaInputTokensTrigger;
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .addBeta("compact-2026-01-12")
             .addUserMessage("Hello, Claude")
@@ -452,7 +453,7 @@ $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 $message = $client->beta->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [
@@ -476,7 +477,7 @@ messages = [{ role: "user", content: "Hello, Claude" }]
 
 response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: messages,
   context_management: {
@@ -511,7 +512,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -532,7 +533,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -551,7 +552,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -573,7 +574,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -594,7 +595,7 @@ AnthropicClient client = new();
 var parameters = new MessageCreateParams
 {
     Betas = ["compact-2026-01-12"],
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Messages =
     [
@@ -619,7 +620,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Help me build a Python web scraper")),
@@ -649,7 +650,7 @@ import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
 
         MessageCreateParams params = MessageCreateParams.builder()
             .addBeta("compact-2026-01-12")
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .addUserMessage("Help me build a Python web scraper")
             .addAssistantMessage("I'll help you build a web scraper...")
@@ -675,7 +676,7 @@ $response = $client->beta->messages->create(
         ['role' => 'assistant', 'content' => "I'll help you build a web scraper..."],
         ['role' => 'user', 'content' => 'Add support for JavaScript-rendered pages']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [
@@ -695,7 +696,7 @@ client = Anthropic::Client.new
 
 response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Help me build a Python web scraper" },
@@ -735,7 +736,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -760,7 +761,7 @@ curl https://api.anthropic.com/v1/messages \
 # step doesn't translate well to a one-off CLI command; see the SDK tabs
 # for the full pause-and-continue flow. Single paused request:
 ant beta:messages create --beta compact-2026-01-12 --format jsonl <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -777,7 +778,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -793,7 +794,7 @@ if response.stop_reason == "compaction":
     # Continue the request
     response = client.beta.messages.create(
         betas=["compact-2026-01-12"],
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=4096,
         messages=messages,
         context_management={"edits": [{"type": "compact_20260112"}]},
@@ -808,7 +809,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 let response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -832,7 +833,7 @@ if (response.stop_reason === "compaction") {
   // Continue the request
   response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -851,7 +852,7 @@ var messages = new List<BetaMessageParam>
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Betas = ["compact-2026-01-12"],
     Messages = messages,
@@ -876,7 +877,7 @@ if (response.StopReason == BetaStopReason.Compaction)
 
     parameters = new()
     {
-        Model = "claude-opus-5",
+        Model = "claude-opus-5-5",
         MaxTokens = 4096,
         Betas = ["compact-2026-01-12"],
         Messages = messages,
@@ -905,7 +906,7 @@ compactEdit := anthropic.BetaContextManagementConfigParam{
 }
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:             anthropic.ModelClaudeOpus5,
+	Model:             anthropic.ModelClaudeOpus5_5,
 	MaxTokens:         4096,
 	Messages:          messages,
 	ContextManagement: compactEdit,
@@ -919,7 +920,7 @@ if response.StopReason == "compaction" {
 	messages = append(messages, response.ToParam())
 
 	response, err = client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 4096,
 		Messages:  messages,
 		ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -945,7 +946,7 @@ import com.anthropic.models.beta.messages.BetaStopReason;
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .addBeta("compact-2026-01-12")
             .addUserMessage("Help me build a website")
@@ -964,7 +965,7 @@ import com.anthropic.models.beta.messages.BetaStopReason;
             // Append the compaction block and continue the request
             // by building a new request with the compacted context
             MessageCreateParams continueParams = MessageCreateParams.builder()
-                .model("claude-opus-5")
+                .model("claude-opus-5-5")
                 .maxTokens(4096L)
                 .addBeta("compact-2026-01-12")
                 .addUserMessage("Help me build a website")
@@ -987,7 +988,7 @@ $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 $response = $client->beta->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [
@@ -1008,7 +1009,7 @@ if ($response->stopReason === 'compaction') {
     $response = $client->beta->messages->create(
         maxTokens: 4096,
         messages: $messages,
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         betas: ['compact-2026-01-12'],
         contextManagement: [
             'edits' => [
@@ -1027,7 +1028,7 @@ messages = [{ role: "user", content: "Hello, Claude" }]
 
 response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: messages,
   context_management: {
@@ -1045,7 +1046,7 @@ if response.stop_reason == :compaction
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -1072,7 +1073,7 @@ n_compactions = 0
 
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -1111,7 +1112,7 @@ let compactionCount = 0;
 
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -1150,7 +1151,7 @@ int compactionCount = 0;
 var response = await client.Beta.Messages.Create(new()
 {
     Betas = ["compact-2026-01-12"],
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Messages = messages,
     ContextManagement = new BetaContextManagementConfig
@@ -1195,7 +1196,7 @@ const totalTokenBudget = 3_000_000
 compactionCount := 0
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages:  messages,
 	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -1245,7 +1246,7 @@ import com.anthropic.models.beta.messages.BetaStopReason;
 
         MessageCreateParams params = MessageCreateParams.builder()
             .addBeta("compact-2026-01-12")
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .messages(messages)
             .contextManagement(BetaContextManagementConfig.builder()
@@ -1289,7 +1290,7 @@ $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 $response = $client->beta->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [
@@ -1325,7 +1326,7 @@ compaction_count = 0
 
 response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: messages,
   context_management: {
@@ -1389,7 +1390,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -1412,7 +1413,7 @@ ant beta:messages create \
   --beta compact-2026-01-12 \
   --transform content \
   --format jsonl <<'YAML' > content.json
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -1425,7 +1426,7 @@ YAML
 # After receiving a response with a compaction block, append it as the
 # assistant turn and continue the conversation
 ant beta:messages create --beta compact-2026-01-12 <<YAML
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -1445,7 +1446,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -1458,7 +1459,7 @@ messages.append({"role": "user", "content": "Now add error handling"})
 
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -1473,7 +1474,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -1492,7 +1493,7 @@ messages.push({ role: "user", content: "Now add error handling" });
 
 const nextResponse = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -1512,7 +1513,7 @@ var messages = new List<BetaMessageParam>
 var response = await client.Beta.Messages.Create(new()
 {
     Betas = ["compact-2026-01-12"],
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Messages = messages,
     ContextManagement = new BetaContextManagementConfig
@@ -1532,7 +1533,7 @@ messages.Add(new BetaMessageParam { Role = Role.User, Content = "Now add error h
 var nextResponse = await client.Beta.Messages.Create(new()
 {
     Betas = ["compact-2026-01-12"],
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Messages = messages,
     ContextManagement = new BetaContextManagementConfig
@@ -1558,7 +1559,7 @@ compactEdit := anthropic.BetaContextManagementConfigParam{
 }
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:             anthropic.ModelClaudeOpus5,
+	Model:             anthropic.ModelClaudeOpus5_5,
 	MaxTokens:         4096,
 	Messages:          messages,
 	ContextManagement: compactEdit,
@@ -1573,7 +1574,7 @@ messages = append(messages, response.ToParam())
 messages = append(messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Now add error handling")))
 
 nextResponse, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:             anthropic.ModelClaudeOpus5,
+	Model:             anthropic.ModelClaudeOpus5_5,
 	MaxTokens:         4096,
 	Messages:          messages,
 	ContextManagement: compactEdit,
@@ -1596,7 +1597,7 @@ import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
         BetaMessage response = client.beta().messages().create(
             MessageCreateParams.builder()
                 .addBeta("compact-2026-01-12")
-                .model("claude-opus-5")
+                .model("claude-opus-5-5")
                 .maxTokens(4096L)
                 .addUserMessage("Help me build a web scraper")
                 .contextManagement(BetaContextManagementConfig.builder()
@@ -1609,7 +1610,7 @@ import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
         BetaMessage nextResponse = client.beta().messages().create(
             MessageCreateParams.builder()
                 .addBeta("compact-2026-01-12")
-                .model("claude-opus-5")
+                .model("claude-opus-5-5")
                 .maxTokens(4096L)
                 .addUserMessage("Help me build a web scraper")
                 .addMessage(response)
@@ -1632,7 +1633,7 @@ $messages = [
 $response = $client->beta->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [['type' => 'compact_20260112']]
@@ -1646,7 +1647,7 @@ $messages[] = ['role' => 'user', 'content' => 'Now add error handling'];
 $nextResponse = $client->beta->messages->create(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [['type' => 'compact_20260112']]
@@ -1665,7 +1666,7 @@ messages = [
 
 response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: messages,
   context_management: {
@@ -1679,7 +1680,7 @@ messages << { role: "user", content: "Now add error handling" }
 
 next_response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: messages,
   context_management: {
@@ -1697,7 +1698,7 @@ When the API receives a `compaction` block, all content blocks before it are ign
 * Keep the original messages in your list and let the API handle removing the compacted content
 * Manually drop the compacted messages and only include the compaction block onwards
 
-On Claude Fable 5.1 and Claude Mythos 5.1, thinking blocks from before a `compaction` block aren't carried forward, so the summary is all the model has of that earlier work. If you write your own `instructions`, tell the model what the summary must retain; see [Tell the model what to preserve in compaction summaries](prompt-engineering/prompting-claude-fable-5-1.md#tell-the-model-what-to-preserve-in-compaction-summaries).
+On Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5.5, thinking blocks from before a `compaction` block aren't carried forward, so the summary is all the model has of that earlier work. If you write your own `instructions`, tell the model what the summary must retain; see [Tell the model what to preserve in compaction summaries](prompt-engineering/prompting-claude-fable-5-1.md#tell-the-model-what-to-preserve-in-compaction-summaries).
 
 ### Streaming
 
@@ -1710,7 +1711,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "stream": true,
     "messages": [
@@ -1734,7 +1735,7 @@ ant beta:messages create \
   --stream \
   --beta compact-2026-01-12 \
   --format jsonl <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -1751,7 +1752,7 @@ messages = [{"role": "user", "content": "Hello, Claude"}]
 
 with client.beta.messages.stream(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -1787,7 +1788,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 const stream = await client.beta.messages.stream({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages,
   context_management: {
@@ -1835,7 +1836,7 @@ List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }
 var parameters = new MessageCreateParams
 {
     Betas = ["compact-2026-01-12"],
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Messages = messages,
     ContextManagement = new BetaContextManagementConfig
@@ -1876,7 +1877,7 @@ client := anthropic.NewClient()
 messages := []anthropic.BetaMessageParam{anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude"))}
 
 stream := client.Beta.Messages.NewStreaming(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Messages:  messages,
 	ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -1918,7 +1919,7 @@ import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .addBeta("compact-2026-01-12")
             .addUserMessage("Hello, Claude")
@@ -1964,7 +1965,7 @@ $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 $stream = $client->beta->messages->createStream(
     maxTokens: 4096,
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [
@@ -2005,7 +2006,7 @@ messages = [{ role: "user", content: "Hello, Claude" }]
 
 stream = client.beta.messages.stream(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   messages: messages,
   context_management: {
@@ -2071,7 +2072,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "system": [
       {
@@ -2100,7 +2101,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta compact-2026-01-12 <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 system:
   - type: text
@@ -2121,7 +2122,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     system=[
         {
@@ -2145,7 +2146,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 const response = await client.beta.messages.create({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   system: [
     {
@@ -2167,7 +2168,7 @@ var client = new AnthropicClient();
 var parameters = new MessageCreateParams
 {
     Betas = ["compact-2026-01-12"],
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     System = new List<BetaTextBlockParam>
     {
@@ -2192,7 +2193,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	System: []anthropic.BetaTextBlockParam{
 		{
@@ -2222,7 +2223,7 @@ import com.anthropic.models.beta.messages.BetaCacheControlEphemeral;
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCreateParams params = MessageCreateParams.builder()
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .addBeta("compact-2026-01-12")
             .systemOfBetaTextBlockParams(List.of(
@@ -2247,7 +2248,7 @@ $client = new Client();
 $response = $client->beta->messages->create(
     maxTokens: 4096,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     system: [
         [
@@ -2273,7 +2274,7 @@ client = Anthropic::Client.new
 
 response = client.beta.messages.create(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   system: [
     {
@@ -2342,7 +2343,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "messages": [
       {
         "role": "user",
@@ -2361,7 +2362,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ```bash CLI
 cat > request.yaml <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 messages:
   - role: user
     content: Hello, Claude
@@ -2389,7 +2390,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 count_response = client.beta.messages.count_tokens(
     betas=["compact-2026-01-12"],
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
 )
@@ -2406,7 +2407,7 @@ const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
 
 const countResponse = await client.beta.messages.countTokens({
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages,
   context_management: {
     edits: [{ type: "compact_20260112" }]
@@ -2423,7 +2424,7 @@ List<BetaMessageParam> messages = [new() { Role = Role.User, Content = "Hello" }
 
 var countParams = new MessageCountTokensParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     Messages = messages,
     ContextManagement = new BetaContextManagementConfig
     {
@@ -2442,7 +2443,7 @@ client := anthropic.NewClient()
 messages := []anthropic.BetaMessageParam{anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude"))}
 
 countResponse, err := client.Beta.Messages.CountTokens(context.TODO(), anthropic.BetaMessageCountTokensParams{
-	Model:    anthropic.ModelClaudeOpus5,
+	Model:    anthropic.ModelClaudeOpus5_5,
 	Messages: messages,
 	ContextManagement: anthropic.BetaContextManagementConfigParam{
 		Edits: []anthropic.BetaContextManagementConfigEditUnionParam{
@@ -2468,7 +2469,7 @@ import com.anthropic.models.beta.messages.BetaCompact20260112Edit;
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         MessageCountTokensParams params = MessageCountTokensParams.builder()
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .addUserMessage("Hello, Claude")
             .contextManagement(BetaContextManagementConfig.builder()
                 .addEdit(BetaCompact20260112Edit.builder().build())
@@ -2487,7 +2488,7 @@ $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
 $countResponse = $client->beta->messages->countTokens(
     messages: $messages,
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     betas: ['compact-2026-01-12'],
     contextManagement: [
         'edits' => [
@@ -2506,7 +2507,7 @@ messages = [{ role: "user", content: "Hello, Claude" }]
 
 count_response = client.beta.messages.count_tokens(
   betas: ["compact-2026-01-12"],
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   messages: messages,
   context_management: {
     edits: [{ type: "compact_20260112" }]
@@ -2531,7 +2532,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -2561,7 +2562,7 @@ ant beta:messages create \
   --beta compact-2026-01-12 \
   --transform 'content.#(type=="text").text' \
   --raw-output <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -2585,7 +2586,7 @@ def chat(user_message: str) -> str:
 
     response = client.beta.messages.create(
         betas=["compact-2026-01-12"],
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=4096,
         messages=messages,
         context_management={
@@ -2621,7 +2622,7 @@ async function chat(userMessage: string): Promise<string> {
 
   const response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -2664,7 +2665,7 @@ static async Task<string> Chat(AnthropicClient client, List<BetaMessageParam> me
     var parameters = new MessageCreateParams
     {
         Betas = ["compact-2026-01-12"],
-        Model = "claude-opus-5",
+        Model = "claude-opus-5-5",
         MaxTokens = 4096,
         Messages = messages,
         ContextManagement = new BetaContextManagementConfig
@@ -2712,7 +2713,7 @@ func chat(userMessage string) string {
 	messages = append(messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(userMessage)))
 
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 4096,
 		Messages:  messages,
 		ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -2767,7 +2768,7 @@ import com.anthropic.models.beta.messages.BetaInputTokensTrigger;
 
         MessageCreateParams params = MessageCreateParams.builder()
             .addBeta("compact-2026-01-12")
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .messages(messages)
             .contextManagement(BetaContextManagementConfig.builder()
@@ -2802,7 +2803,7 @@ function chat($client, &$messages, $userMessage) {
     $response = $client->beta->messages->create(
         maxTokens: 4096,
         messages: $messages,
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         betas: ['compact-2026-01-12'],
         contextManagement: [
             'edits' => [
@@ -2838,7 +2839,7 @@ def chat(client, messages, user_message)
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -2861,7 +2862,7 @@ puts chat(client, messages, "Add support for JavaScript-rendered pages")
 puts chat(client, messages, "Now add rate limiting and error handling")
 ```
 
-On Claude Fable 5.1, remove the `thinking` and `redacted_thinking` blocks from any assistant turn you re-insert after the compaction block, or send `thinking.block_binding.prefix_mismatch_behavior: "drop_block"` with the `thinking-binding-controls-2026-08-01` [beta header](../api/beta-headers.md). Those blocks were produced when the full history was present, so they no longer pass the [conversation check](thinking.md#preserved-in-conversation). Where the check is enforced, the continuation request is rejected with a 400 error. The preserved text and tool blocks can stay as they are. Letting the API summarize everything, without re-inserting earlier turns, avoids this.
+On Claude Fable 5.1 and Claude Opus 5.5, remove the `thinking` and `redacted_thinking` blocks from any assistant turn you re-insert after the compaction block, or send `thinking.block_binding.prefix_mismatch_behavior: "drop_block"` with the `thinking-binding-controls-2026-08-01` [beta header](../api/beta-headers.md). Those blocks were produced when the full history was present, so they no longer pass the [conversation check](thinking.md#preserved-in-conversation). Where the check is enforced, the continuation request is rejected with a 400 error. The preserved text and tool blocks can stay as they are. Letting the API summarize everything, without re-inserting earlier turns, avoids this.
 
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
@@ -2875,7 +2876,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: compact-2026-01-12" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "messages": [
       {
@@ -2906,7 +2907,7 @@ ant beta:messages create \
   --beta compact-2026-01-12 \
   --transform 'content.#(type=="text").text' \
   --raw-output <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 messages:
   - role: user
@@ -2933,7 +2934,7 @@ def chat(user_message: str) -> str:
 
     response = client.beta.messages.create(
         betas=["compact-2026-01-12"],
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=4096,
         messages=messages,
         context_management={
@@ -2965,7 +2966,7 @@ def chat(user_message: str) -> str:
         # Continue the request with the compacted context + preserved messages
         response = client.beta.messages.create(
             betas=["compact-2026-01-12"],
-            model="claude-opus-5",
+            model="claude-opus-5-5",
             max_tokens=4096,
             messages=messages_after_compaction,
             context_management={"edits": [{"type": "compact_20260112"}]},
@@ -2998,7 +2999,7 @@ async function chat(userMessage: string): Promise<string> {
 
   let response = await client.beta.messages.create({
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages,
     context_management: {
@@ -3030,7 +3031,7 @@ async function chat(userMessage: string): Promise<string> {
     // Continue the request with the compacted context + preserved messages
     response = await client.beta.messages.create({
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages: messagesAfterCompaction,
       context_management: {
@@ -3072,7 +3073,7 @@ async Task<string> Chat(string userMessage)
     var response = await client.Beta.Messages.Create(new()
     {
         Betas = ["compact-2026-01-12"],
-        Model = "claude-opus-5",
+        Model = "claude-opus-5-5",
         MaxTokens = 4096,
         Messages = messages,
         ContextManagement = new BetaContextManagementConfig
@@ -3107,7 +3108,7 @@ async Task<string> Chat(string userMessage)
         response = await client.Beta.Messages.Create(new()
         {
             Betas = ["compact-2026-01-12"],
-            Model = "claude-opus-5",
+            Model = "claude-opus-5-5",
             MaxTokens = 4096,
             Messages = messagesAfterCompaction,
             ContextManagement = new BetaContextManagementConfig
@@ -3162,7 +3163,7 @@ func chat(userMessage string) string {
 	}
 
 	response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-		Model:             anthropic.ModelClaudeOpus5,
+		Model:             anthropic.ModelClaudeOpus5_5,
 		MaxTokens:         4096,
 		Messages:          messages,
 		ContextManagement: compactEdit,
@@ -3188,7 +3189,7 @@ func chat(userMessage string) string {
 		messagesAfterCompaction = append(messagesAfterCompaction, preserved...)
 
 		response, err = client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 4096,
 			Messages:  messagesAfterCompaction,
 			ContextManagement: anthropic.BetaContextManagementConfigParam{
@@ -3239,7 +3240,7 @@ import com.anthropic.models.beta.messages.BetaStopReason;
 
         MessageCreateParams params = MessageCreateParams.builder()
             .addBeta("compact-2026-01-12")
-            .model("claude-opus-5")
+            .model("claude-opus-5-5")
             .maxTokens(4096L)
             .messages(messages)
             .contextManagement(BetaContextManagementConfig.builder()
@@ -3270,7 +3271,7 @@ import com.anthropic.models.beta.messages.BetaStopReason;
             // Continue the request with the compacted context + preserved messages
             MessageCreateParams continueParams = MessageCreateParams.builder()
                 .addBeta("compact-2026-01-12")
-                .model("claude-opus-5")
+                .model("claude-opus-5-5")
                 .maxTokens(4096L)
                 .messages(messagesAfterCompaction)
                 .contextManagement(BetaContextManagementConfig.builder()
@@ -3312,7 +3313,7 @@ function chat($client, &$messages, $userMessage) {
     $response = $client->beta->messages->create(
         maxTokens: 4096,
         messages: $messages,
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         betas: ['compact-2026-01-12'],
         contextManagement: [
             'edits' => [
@@ -3340,7 +3341,7 @@ function chat($client, &$messages, $userMessage) {
         $response = $client->beta->messages->create(
             maxTokens: 4096,
             messages: $messagesAfterCompaction,
-            model: 'claude-opus-5',
+            model: 'claude-opus-5-5',
             betas: ['compact-2026-01-12'],
             contextManagement: [
                 'edits' => [['type' => 'compact_20260112']]
@@ -3374,7 +3375,7 @@ def chat(client, messages, user_message)
 
   response = client.beta.messages.create(
     betas: ["compact-2026-01-12"],
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 4096,
     messages: messages,
     context_management: {
@@ -3399,7 +3400,7 @@ def chat(client, messages, user_message)
 
     response = client.beta.messages.create(
       betas: ["compact-2026-01-12"],
-      model: "claude-opus-5",
+      model: "claude-opus-5-5",
       max_tokens: 4096,
       messages: messages_after_compaction,
       context_management: {

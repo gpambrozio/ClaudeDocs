@@ -37,7 +37,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -53,7 +53,7 @@ curl https://api.anthropic.com/v1/messages \
 # Initial request. If "stop_reason" in the output is "pause_turn", re-run with
 # the assistant content appended to messages (see the SDK tabs).
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - {type: web_search_20250305, name: web_search, max_uses: 10}
@@ -67,7 +67,7 @@ client = anthropic.Anthropic()
 
 # Initial request with web search
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -91,7 +91,7 @@ if response.stop_reason == "pause_turn":
 
     # Send the continuation request
     continuation = client.messages.create(
-        model="claude-opus-5",
+        model="claude-opus-5-5",
         max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],
@@ -107,7 +107,7 @@ const client = new Anthropic();
 
 // Initial request with web search
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -139,7 +139,7 @@ if (response.stop_reason === "pause_turn") {
 
   // Send the continuation request
   const continuation = await client.messages.create({
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages,
     tools: [
@@ -162,7 +162,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [
         new() {
@@ -180,7 +180,7 @@ if (response.StopReason?.Value() == StopReason.PauseTurn)
     // Continue the conversation with the paused content
     var continuationParams = new MessageCreateParams
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [
             new() {
@@ -214,7 +214,7 @@ webSearchTool := []anthropic.ToolUnionParam{
 }
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
@@ -228,7 +228,7 @@ if err != nil {
 if response.StopReason == anthropic.StopReasonPauseTurn {
 	// Pass the paused response back as-is so Claude can continue the turn
 	continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus5,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
@@ -253,7 +253,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
         .addTool(WebSearchTool20250305.builder()
@@ -266,7 +266,7 @@ void main() {
     if (response.stopReason().isPresent()
             && response.stopReason().get().equals(StopReason.PAUSE_TURN)) {
         MessageCreateParams continuationParams = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024L)
             .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
             .addMessage(response)
@@ -294,7 +294,7 @@ $response = $client->messages->create(
             'content' => 'Search for comprehensive information about quantum computing breakthroughs in 2025'
         ]
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     tools: [
         [
             'type' => 'web_search_20250305',
@@ -319,7 +319,7 @@ if ($response->stopReason === 'pause_turn') {
     $continuation = $client->messages->create(
         maxTokens: 1024,
         messages: $messages,
-        model: 'claude-opus-5',
+        model: 'claude-opus-5-5',
         tools: [
             [
                 'type' => 'web_search_20250305',
@@ -339,7 +339,7 @@ if ($response->stopReason === 'pause_turn') {
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -370,7 +370,7 @@ if response.stop_reason == :pause_turn
   ]
 
   continuation = client.messages.create(
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: messages,
     tools: [

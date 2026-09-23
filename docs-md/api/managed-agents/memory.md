@@ -1,4 +1,4 @@
-# Memory
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/memory_store.json
 
 ---
 title: Using agent memory
@@ -41,6 +41,7 @@ ant apply memory_store.yaml
 ```
 
 ```yaml
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/memory_store.json
 name: User Preferences
 description: Per-user preferences and project context.
 ```

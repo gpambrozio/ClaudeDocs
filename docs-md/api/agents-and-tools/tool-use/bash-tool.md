@@ -29,7 +29,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [
       {
@@ -48,7 +48,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --tool '{type: bash_20250124, name: bash}' \
   --message '{role: user, content: List all Python files in the current directory.}'
@@ -58,7 +58,7 @@ ant messages create \
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[{"type": "bash_20250124", "name": "bash"}],
     messages=[
@@ -73,7 +73,7 @@ print(response)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{ type: "bash_20250124", name: "bash" }],
   messages: [
@@ -93,7 +93,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = [new ToolBash20250124()],
         Messages =
@@ -114,7 +114,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
@@ -137,7 +137,7 @@ void main() {
 
     Message response = client.messages().create(
         MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_5)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024)
             .addTool(ToolBash20250124.builder().build())
             .addUserMessage("List all Python files in the current directory.")
@@ -154,7 +154,7 @@ use Anthropic\Messages\ToolBash20250124;
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: [new ToolBash20250124()],
     messages: [
@@ -169,7 +169,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{type: "bash_20250124", name: "bash"}],
   messages: [
@@ -185,7 +185,7 @@ Claude responds with `stop_reason: "tool_use"` and a `tool_use` block that conta
 ```json Output
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -832,7 +832,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "tools": [
       {
@@ -874,7 +874,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 tools:
   - type: bash_20250124
@@ -903,7 +903,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     tools=[{"type": "bash_20250124", "name": "bash"}],
     messages=[
@@ -939,7 +939,7 @@ print(response.content)
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{ type: "bash_20250124", name: "bash" }],
   messages: [
@@ -980,7 +980,7 @@ var client = new AnthropicClient();
 var response = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = [new ToolBash20250124()],
         Messages =
@@ -1029,7 +1029,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools: []anthropic.ToolUnionParam{
 		{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
@@ -1070,7 +1070,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addTool(ToolBash20250124.builder().build())
         .addUserMessage("List all Python files in the current directory.")
@@ -1112,7 +1112,7 @@ use Anthropic\Messages\ToolBash20250124;
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     tools: [new ToolBash20250124()],
     messages: [
@@ -1148,7 +1148,7 @@ print_r($response->content);
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [{type: "bash_20250124", name: "bash"}],
   messages: [

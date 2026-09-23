@@ -50,7 +50,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "system": "Always respond in French, regardless of the language the user writes in.",
     "messages": [
@@ -61,7 +61,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-5 \
+  --model claude-opus-5-5 \
   --max-tokens 1024 \
   --system "Always respond in French, regardless of the language the user writes in." \
   --message '{role: user, content: "How do I reset my password?"}'
@@ -71,7 +71,7 @@ ant messages create \
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     system="Always respond in French, regardless of the language the user writes in.",
     messages=[{"role": "user", "content": "How do I reset my password?"}],
@@ -84,7 +84,7 @@ print(message.content)
 const client = new Anthropic();
 
 const message = await client.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   system: "Always respond in French, regardless of the language the user writes in.",
   messages: [{ role: "user", content: "How do I reset my password?" }]
@@ -98,7 +98,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     System = "Always respond in French, regardless of the language the user writes in.",
     Messages =
@@ -115,7 +115,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	System: []anthropic.TextBlockParam{
 		{Text: "Always respond in French, regardless of the language the user writes in."},
@@ -134,7 +134,7 @@ fmt.Println(message.Content)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024)
     .system("Always respond in French, regardless of the language the user writes in.")
     .addUserMessage("How do I reset my password?")
@@ -152,7 +152,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'How do I reset my password?']
     ],
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     system: 'Always respond in French, regardless of the language the user writes in.',
 );
 
@@ -163,7 +163,7 @@ echo json_encode($message->content, JSON_PRETTY_PRINT), PHP_EOL;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   system: "Always respond in French, regardless of the language the user writes in.",
   messages: [

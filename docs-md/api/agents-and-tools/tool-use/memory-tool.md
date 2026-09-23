@@ -115,7 +115,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 2048,
     "messages": [
       {
@@ -132,7 +132,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 2048
 tools:
   - type: memory_20250818
@@ -147,7 +147,7 @@ YAML
 client = anthropic.Anthropic()
 
 message = client.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=2048,
     messages=[
         {
@@ -165,7 +165,7 @@ print(message)
 const anthropic = new Anthropic();
 
 const message = await anthropic.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 2048,
   messages: [
     {
@@ -185,7 +185,7 @@ var client = new AnthropicClient();
 var message = await client.Messages.Create(
     new()
     {
-        Model = Model.ClaudeOpus5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 2048,
         Messages =
         [
@@ -206,7 +206,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 2048,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Help me respond to this customer service ticket.")),
@@ -227,7 +227,7 @@ import com.anthropic.models.messages.MemoryTool20250818;
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(2048L)
     .addTool(MemoryTool20250818.builder().build())
     .addUserMessage("Help me respond to this customer service ticket.")
@@ -241,7 +241,7 @@ import com.anthropic.models.messages.MemoryTool20250818;
 $client = new Client();
 
 $message = $client->messages->create(
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 2048,
     messages: [
         [
@@ -259,7 +259,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: Anthropic::Model::CLAUDE_OPUS_5,
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 2048,
   messages: [
     {
@@ -291,7 +291,7 @@ client = anthropic.Anthropic()
 memory = BetaLocalFilesystemMemoryTool(base_path="./memory")
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
         {
@@ -317,7 +317,7 @@ const backend = await BetaLocalFilesystemMemoryTool.init("./memory");
 const memory = betaMemoryTool(backend); // or pass your own handlers object
 
 const runner = client.beta.messages.toolRunner({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [
     {
@@ -346,7 +346,7 @@ var memory = new FilesystemMemoryTool("./memories");
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Anthropic.Models.Messages.Model.ClaudeOpus5,
+        Model = Anthropic.Models.Messages.Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [
@@ -471,7 +471,7 @@ func main() {
 
 	for {
 		message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Messages:  messages,
 			Tools:     tools,
@@ -517,7 +517,7 @@ void main() {
   BetaMemoryToolHandler handler = new FileSystemMemoryToolHandler(Path.of("memories"));
 
   MessageCreateParams createParams = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(1024L)
     .addTool(BetaMemoryTool20250818.builder().build())
     .addUserMessage("Remember that customer Acme Corp prefers email follow-ups.")
@@ -617,7 +617,7 @@ $memory = new BetaRunnableTool(
 $runner = $client->beta->messages->toolRunner(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Remember that customer Acme Corp prefers email follow-ups.']],
-    model: Model::CLAUDE_OPUS_5,
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [$memory],
     maxIterations: 10,
 );
@@ -687,7 +687,7 @@ end
 messages = [{role: "user", content: "Remember that customer Acme Corp prefers email follow-ups."}]
 loop do
   message = client.messages.create(
-    model: Anthropic::Model::CLAUDE_OPUS_5,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: messages,
     tools: TOOLS

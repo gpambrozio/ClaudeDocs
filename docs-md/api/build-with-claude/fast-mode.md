@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/build-with-claude/fast-mode
 description: Get up to 2.5x higher output tokens per second from supported Claude Opus models.
 ---
 
-Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 5 and Claude Opus 4.8 at premium pricing. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on your request to opt in.
+Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8 at premium pricing. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on your request to opt in.
 
 Fast mode is in research preview. Contact your account manager to request access. If you do not have an account manager, [join the waitlist](https://claude.com/fast-mode) for fast mode.
 
@@ -16,14 +16,15 @@ To learn how zero data retention (ZDR) applies to this feature, see [API and dat
 
 Fast mode is supported on the following models:
 
+* Claude Opus 5.5 (claude-opus-5-5)
 * Claude Opus 5 (claude-opus-5)
 * Claude Opus 4.8 (claude-opus-4-8)
 
-Fast mode for Claude Opus 5 and Claude Opus 4.8 is available as a research preview on the Claude API, including [Claude Managed Agents](../managed-agents/overview.md), only. It is not available on Amazon Bedrock, Claude Platform on AWS, Google Cloud, or Microsoft Foundry.
+Fast mode for Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8 is available as a research preview on the Claude API, including [Claude Managed Agents](../managed-agents/overview.md), only. It is not available on Amazon Bedrock, Claude Platform on AWS, Google Cloud, or Microsoft Foundry.
 
-Fast mode is not available on Claude Opus 4.7. Requests to `claude-opus-4-7` with `speed: "fast"` return an error; unlike Claude Opus 4.6 (see the following note), requests do not fall back to standard speed. The model itself remains available at standard speed. To continue using fast mode, migrate to [Claude Opus 5](../models/opus-5/migration-guide.md#migrating-from-claude-opus-47) or Claude Opus 4.8.
+Fast mode is not available on Claude Opus 4.7. Requests to `claude-opus-4-7` with `speed: "fast"` return an error; unlike Claude Opus 4.6 (see the following note), requests do not fall back to standard speed. The model itself remains available at standard speed. To continue using fast mode, migrate to Claude Opus 5.5, [Claude Opus 5](../models/opus-5/migration-guide.md#migrating-from-claude-opus-47), or Claude Opus 4.8.
 
-Fast mode is not available on Claude Opus 4.6. Requests to `claude-opus-4-6` with `speed: "fast"` do not return an error: they run at standard speed and are billed at [standard rates](../about-claude/pricing.md) rather than fast mode's premium rates, and the response reports [`usage.speed: "standard"`](fast-mode.md#checking-which-speed-was-used). To continue using fast mode, migrate to [Claude Opus 5](../models/opus-5/migration-guide.md#migrating-from-claude-opus-46) or Claude Opus 4.8.
+Fast mode is not available on Claude Opus 4.6. Requests to `claude-opus-4-6` with `speed: "fast"` do not return an error: they run at standard speed and are billed at [standard rates](../about-claude/pricing.md) rather than fast mode's premium rates, and the response reports [`usage.speed: "standard"`](fast-mode.md#checking-which-speed-was-used). To continue using fast mode, migrate to Claude Opus 5.5, [Claude Opus 5](../models/opus-5/migration-guide.md#migrating-from-claude-opus-46), or Claude Opus 4.8.
 
 ## How fast mode works
 
@@ -43,7 +44,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: fast-mode-2026-02-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 4096,
     "speed": "fast",
     "messages": [{
@@ -58,7 +59,7 @@ ant beta:messages create \
   --beta fast-mode-2026-02-01 \
   --transform 'content.#(type=="text").text' \
   --raw-output <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 4096
 speed: fast
 messages:
@@ -71,7 +72,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=4096,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
@@ -89,7 +90,7 @@ for block in response.content:
 const client = new Anthropic();
 
 const response = await client.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   speed: "fast",
   betas: ["fast-mode-2026-02-01"],
@@ -112,7 +113,7 @@ AnthropicClient client = new();
 
 var response = await client.Beta.Messages.Create(new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 4096,
     Speed = Speed.Fast,
     Betas = ["fast-mode-2026-02-01"],
@@ -134,7 +135,7 @@ foreach (var block in response.Content)
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Speed:     anthropic.BetaMessageNewParamsSpeedFast,
 	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFastMode2026_02_01},
@@ -157,7 +158,7 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 BetaMessage response = client.beta().messages().create(
         MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5)
+                .model(Model.CLAUDE_OPUS_5_5)
                 .maxTokens(4096L)
                 .speed(MessageCreateParams.Speed.FAST)
                 .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
@@ -173,7 +174,7 @@ response.content().stream()
 $client = new Client();
 
 $response = $client->beta->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 4096,
     speed: 'fast',
     betas: ['fast-mode-2026-02-01'],
@@ -193,7 +194,7 @@ foreach ($response->content as $block) {
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 4096,
   speed: "fast",
   betas: ["fast-mode-2026-02-01"],
@@ -211,6 +212,7 @@ Fast mode is priced at a multiplier on standard rates across the full context wi
 
 | Model                           | Input          | Output         |
 | ------------------------------- | -------------- | -------------- |
+| Claude Opus 5.5                 | $8 USD / MTok  | $40 USD / MTok |
 | Claude Opus 5 / Claude Opus 4.8 | $10 USD / MTok | $50 USD / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
@@ -248,7 +250,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-beta: fast-mode-2026-02-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-5",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "speed": "fast",
     "messages": [{"role": "user", "content": "Hello"}]
@@ -260,7 +262,7 @@ ant beta:messages create \
   --beta fast-mode-2026-02-01 \
   --transform usage.speed \
   --raw-output <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 speed: fast
 messages:
@@ -273,7 +275,7 @@ YAML
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
@@ -287,7 +289,7 @@ print(response.usage.speed)  # "fast" or "standard"
 const client = new Anthropic();
 
 const response = await client.beta.messages.create({
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   speed: "fast",
   betas: ["fast-mode-2026-02-01"],
@@ -302,7 +304,7 @@ AnthropicClient client = new();
 
 var response = await client.Beta.Messages.Create(new MessageCreateParams
 {
-    Model = "claude-opus-5",
+    Model = "claude-opus-5-5",
     MaxTokens = 1024,
     Speed = Speed.Fast,
     Betas = ["fast-mode-2026-02-01"],
@@ -316,7 +318,7 @@ Console.WriteLine(response.Usage.Speed);  // "fast" or "standard"
 client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-	Model:     anthropic.ModelClaudeOpus5,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Speed:     anthropic.BetaMessageNewParamsSpeedFast,
 	Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFastMode2026_02_01},
@@ -334,7 +336,7 @@ fmt.Println(response.Usage.Speed) // "fast" or "standard"
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .speed(MessageCreateParams.Speed.FAST)
         .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
@@ -349,7 +351,7 @@ IO.println(response.usage().speed().orElseThrow());  // "fast" or "standard"
 $client = new Client();
 
 $response = $client->beta->messages->create(
-    model: 'claude-opus-5',
+    model: 'claude-opus-5-5',
     maxTokens: 1024,
     speed: 'fast',
     betas: ['fast-mode-2026-02-01'],
@@ -363,7 +365,7 @@ echo $response->usage->speed;  // "fast" or "standard"
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   speed: "fast",
   betas: ["fast-mode-2026-02-01"],
@@ -435,7 +437,7 @@ create_message_with_fast_fallback() {
 
 MESSAGE=$(
   create_message_with_fast_fallback fast <<'YAML'
-model: claude-opus-5
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -470,7 +472,7 @@ def create_message_with_fast_fallback(max_retries=0, max_attempts=3, **params):
         raise
 
 message = create_message_with_fast_fallback(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello"}],
     betas=["fast-mode-2026-02-01"],
@@ -508,7 +510,7 @@ async function createMessageWithFastFallback(
 
 const message = await createMessageWithFastFallback(
   {
-    model: "claude-opus-5",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello" }],
     betas: ["fast-mode-2026-02-01"],
@@ -556,7 +558,7 @@ async Task<BetaMessage> CreateMessageWithFastFallback(
 var message = await CreateMessageWithFastFallback(
     new MessageCreateParams
     {
-        Model = "claude-opus-5",
+        Model = "claude-opus-5-5",
         MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = "Hello" }],
         Betas = ["fast-mode-2026-02-01"],
@@ -596,7 +598,7 @@ func main() {
 		context.TODO(),
 		&client,
 		anthropic.BetaMessageNewParams{
-			Model:     anthropic.ModelClaudeOpus5,
+			Model:     anthropic.ModelClaudeOpus5_5,
 			MaxTokens: 1024,
 			Messages: []anthropic.BetaMessageParam{
 				anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
@@ -645,7 +647,7 @@ BetaMessage createMessageWithFastFallback(
 void main() {
     BetaMessage message = createMessageWithFastFallback(
             MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_5)
+                    .model(Model.CLAUDE_OPUS_5_5)
                     .maxTokens(1024L)
                     .addUserMessage("Hello")
                     .addBeta(AnthropicBeta.FAST_MODE_2026_02_01)
@@ -696,7 +698,7 @@ function createMessageWithFastFallback(
 $message = createMessageWithFastFallback(
     $client,
     [
-        'model' => 'claude-opus-5',
+        'model' => 'claude-opus-5-5',
         'maxTokens' => 1024,
         'messages' => [['role' => 'user', 'content' => 'Hello']],
         'betas' => ['fast-mode-2026-02-01'],
@@ -722,7 +724,7 @@ end
 
 message = create_message_with_fast_fallback(
   client,
-  model: "claude-opus-5",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["fast-mode-2026-02-01"],
@@ -734,7 +736,7 @@ message = create_message_with_fast_fallback(
 ## Considerations
 
 * **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
-* **Supported models:** Fast mode is supported on Claude Opus 5 and Claude Opus 4.8. See [Supported models](fast-mode.md#supported-models).
+* **Supported models:** Fast mode is supported on Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8. See [Supported models](fast-mode.md#supported-models).
 * **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 * **Batch API:** Fast mode is not available with the [Batch API](batch-processing.md).
 * **Priority Tier:** Fast mode is not available with a [Priority Tier](../api/service-tiers.md) commitment.
