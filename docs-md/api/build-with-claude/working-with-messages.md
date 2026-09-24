@@ -19,7 +19,7 @@ To learn how zero data retention (ZDR) applies to this feature, see [API and dat
 
 ## Basic request and response
 
-The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](../models/opus-5/migration-guide.md#migrating-from-claude-opus-47).
+The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](../models/opus-5-5/migration-guide.md#opus-46-breaking-changes).
 
 ```bash cURL
 #!/bin/sh

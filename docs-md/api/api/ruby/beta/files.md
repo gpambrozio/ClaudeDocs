@@ -35,7 +35,7 @@ Upload File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -128,6 +128,10 @@ Upload File
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -264,7 +268,7 @@ List Files
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -357,6 +361,10 @@ List Files
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -482,7 +490,7 @@ Download File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -575,6 +583,10 @@ Download File
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -618,7 +630,7 @@ Get File Metadata
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -711,6 +723,10 @@ Get File Metadata
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 
@@ -831,7 +847,7 @@ Delete File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 43 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 45 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -924,6 +940,10 @@ Delete File
     - `:"mid-conversation-system-clear-at-2026-08-21"`
 
     - `:"compact-2026-09-04"`
+
+    - `:"inline-tools-2026-09-15"`
+
+    - `:"mcp-client-2026-09-15"`
 
 - `workspace_id: String`
 

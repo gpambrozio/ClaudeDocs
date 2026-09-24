@@ -69,7 +69,7 @@ List Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 45 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -162,6 +162,10 @@ List Events
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `workspace_id: Optional[str]`
 
@@ -581,7 +585,7 @@ List Events
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
 
@@ -719,15 +723,9 @@ List Events
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
-
-      - `"allow"`
-
-      - `"ask"`
-
-      - `"deny"`
 
     - `evaluation: Optional[BetaManagedAgentsAgentToolEvaluation]`
 
@@ -1697,12 +1695,13 @@ List Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-fable-5-1", "claude-sonnet-5", "claude-fable-5", 11 more]`
+          - `Literal["claude-opus-5-5", "claude-fable-5-1", "claude-sonnet-5", 12 more]`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-5-5` - Powerful intelligence for coding, knowledge work, and long-running agents
             - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
             - `claude-sonnet-5` - High-performance model for coding and agents
             - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
@@ -1717,6 +1716,10 @@ List Events
             - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
             - `claude-sonnet-4-5` - High-performance model for agents and coding
             - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+            - `"claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
 
             - `"claude-fable-5-1"`
 
@@ -2846,7 +2849,7 @@ Send Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 45 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2939,6 +2942,10 @@ Send Events
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `workspace_id: Optional[str]`
 
@@ -3466,7 +3473,7 @@ Stream Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 43 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 45 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3559,6 +3566,10 @@ Stream Events
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `workspace_id: Optional[str]`
 
@@ -3978,7 +3989,7 @@ Stream Events
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
 
@@ -4116,15 +4127,9 @@ Stream Events
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
-
-      - `"allow"`
-
-      - `"ask"`
-
-      - `"deny"`
 
     - `evaluation: Optional[BetaManagedAgentsAgentToolEvaluation]`
 
@@ -5094,12 +5099,13 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-fable-5-1", "claude-sonnet-5", "claude-fable-5", 11 more]`
+          - `Literal["claude-opus-5-5", "claude-fable-5-1", "claude-sonnet-5", 12 more]`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-5-5` - Powerful intelligence for coding, knowledge work, and long-running agents
             - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
             - `claude-sonnet-5` - High-performance model for coding and agents
             - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
@@ -5114,6 +5120,10 @@ Stream Events
             - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
             - `claude-sonnet-4-5` - High-performance model for agents and coding
             - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+            - `"claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
 
             - `"claude-fable-5-1"`
 
@@ -6002,6 +6012,18 @@ for event in client.beta.sessions.events.stream(
 
     When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
+### Beta Managed Agents Agent Evaluated Permission
+
+- `type BetaManagedAgentsAgentEvaluatedPermission = Literal["allow", "ask", "deny"]`
+
+  AgentEvaluatedPermission enum
+
+  - `"allow"`
+
+  - `"ask"`
+
+  - `"deny"`
+
 ### Beta Managed Agents Agent MCP Tool Result Event
 
 - `class BetaManagedAgentsAgentMCPToolResultEvent`
@@ -6240,7 +6262,7 @@ for event in client.beta.sessions.events.stream(
 
     format: date-time
 
-  - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+  - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
     AgentEvaluatedPermission enum
 
@@ -7088,7 +7110,7 @@ for event in client.beta.sessions.events.stream(
 
     format: date-time
 
-  - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+  - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
     AgentEvaluatedPermission enum
 
@@ -9256,7 +9278,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
 
@@ -9394,15 +9416,9 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
-
-      - `"allow"`
-
-      - `"ask"`
-
-      - `"deny"`
 
     - `evaluation: Optional[BetaManagedAgentsAgentToolEvaluation]`
 
@@ -10372,12 +10388,13 @@ for event in client.beta.sessions.events.stream(
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-fable-5-1", "claude-sonnet-5", "claude-fable-5", 11 more]`
+          - `Literal["claude-opus-5-5", "claude-fable-5-1", "claude-sonnet-5", 12 more]`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-5-5` - Powerful intelligence for coding, knowledge work, and long-running agents
             - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
             - `claude-sonnet-5` - High-performance model for coding and agents
             - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
@@ -10392,6 +10409,10 @@ for event in client.beta.sessions.events.stream(
             - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
             - `claude-sonnet-4-5` - High-performance model for agents and coding
             - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+            - `"claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
 
             - `"claude-fable-5-1"`
 
@@ -12109,7 +12130,7 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
 
@@ -12247,15 +12268,9 @@ for event in client.beta.sessions.events.stream(
 
       format: date-time
 
-    - `evaluated_permission: Optional[Literal["allow", "ask", "deny"]]`
+    - `evaluated_permission: Optional[BetaManagedAgentsAgentEvaluatedPermission]`
 
       AgentEvaluatedPermission enum
-
-      - `"allow"`
-
-      - `"ask"`
-
-      - `"deny"`
 
     - `evaluation: Optional[BetaManagedAgentsAgentToolEvaluation]`
 
@@ -13225,12 +13240,13 @@ for event in client.beta.sessions.events.stream(
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-fable-5-1", "claude-sonnet-5", "claude-fable-5", 11 more]`
+          - `Literal["claude-opus-5-5", "claude-fable-5-1", "claude-sonnet-5", 12 more]`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `claude-opus-5-5` - Powerful intelligence for coding, knowledge work, and long-running agents
             - `claude-fable-5-1` - Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
             - `claude-sonnet-5` - High-performance model for coding and agents
             - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
@@ -13245,6 +13261,10 @@ for event in client.beta.sessions.events.stream(
             - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
             - `claude-sonnet-4-5` - High-performance model for agents and coding
             - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
+
+            - `"claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
 
             - `"claude-fable-5-1"`
 

@@ -23,13 +23,17 @@ Create Agent
 
     Body param: Model identifier. Accepts the [model string](../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-    - `type BetaManagedAgentsModel = "claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more | (string & {})`
+    - `type BetaManagedAgentsModel = "claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more | (string & {})`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -731,7 +735,7 @@ Create Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -825,6 +829,10 @@ Create Agent
 
       - `"compact-2026-09-04"`
 
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -875,7 +883,11 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -1545,7 +1557,7 @@ List Agents
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1639,6 +1651,10 @@ List Agents
 
       - `"compact-2026-09-04"`
 
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1689,7 +1705,11 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -2346,7 +2366,7 @@ Get Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2440,6 +2460,10 @@ Get Agent
 
       - `"compact-2026-09-04"`
 
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2490,7 +2514,11 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -3163,13 +3191,17 @@ Update Agent
 
     Body param: Model identifier. Accepts the [model string](../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-    - `type BetaManagedAgentsModel = "claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more | (string & {})`
+    - `type BetaManagedAgentsModel = "claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more | (string & {})`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -3849,7 +3881,7 @@ Update Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3943,6 +3975,10 @@ Update Agent
 
       - `"compact-2026-09-04"`
 
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3993,7 +4029,11 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -4641,7 +4681,7 @@ Archive Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -4735,6 +4775,10 @@ Archive Agent
 
       - `"compact-2026-09-04"`
 
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
+
   - `workspace_id?: string`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4785,7 +4829,11 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -5468,7 +5516,11 @@ console.log(betaManagedAgentsAgent.id);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -8140,13 +8192,17 @@ console.log(betaManagedAgentsAgent.id);
 
 ### Beta Managed Agents Model
 
-- `type BetaManagedAgentsModel = "claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more | (string & {})`
+- `type BetaManagedAgentsModel = "claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more | (string & {})`
 
   The model that will power your agent.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+  - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+    - `"claude-opus-5-5"`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
 
     - `"claude-fable-5-1"`
 
@@ -8218,7 +8274,11 @@ console.log(betaManagedAgentsAgent.id);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+    - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+      - `"claude-opus-5-5"`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `"claude-fable-5-1"`
 
@@ -8336,7 +8396,11 @@ console.log(betaManagedAgentsAgent.id);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+    - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+      - `"claude-opus-5-5"`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `"claude-fable-5-1"`
 
@@ -8658,7 +8722,11 @@ console.log(betaManagedAgentsAgent.id);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 
@@ -9588,7 +9656,7 @@ List Agent Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -9682,6 +9750,10 @@ List Agent Versions
 
       - `"compact-2026-09-04"`
 
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
+
   - `workspace_id?: string`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -9732,7 +9804,11 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5-1" | "claude-sonnet-5" | "claude-fable-5" | 11 more`
+      - `"claude-opus-5-5" | "claude-fable-5-1" | "claude-sonnet-5" | 12 more`
+
+        - `"claude-opus-5-5"`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
 
         - `"claude-fable-5-1"`
 

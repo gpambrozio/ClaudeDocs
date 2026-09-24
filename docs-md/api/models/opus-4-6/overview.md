@@ -8,7 +8,7 @@ description: "Claude Opus 4.6 reference: lifecycle status, model IDs on every pl
 
 **Legacy.** Released February 5, 2026.
 
-Although Claude Opus 4.6 is still available, you should consider migrating to Claude Opus 5.5 for improved performance. [See Claude Opus 5.5](../opus-5-5/overview.md) · [Migrate to Claude Opus 5.5](../opus-5-5/migration-guide.md)
+Although Claude Opus 4.6 is still available, you should consider migrating to Claude Opus 5.5 for improved performance. [See Claude Opus 5.5](../opus-5-5/overview.md) · [Migrate to Claude Opus 5.5](../opus-5-5/migration-guide.md#migrating-from-claude-opus-46)
 
 Model ID: `claude-opus-4-6`
 
@@ -47,15 +47,16 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok
 
 ### Pricing
 
-| Feature                                                                                | Value                                                               |
-| :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
-| Input                                                                                  | $5 / MTok                                                           |
-| Output                                                                                 | $25 / MTok                                                          |
-| [5m cache write](../../build-with-claude/prompt-caching.md) | $6.25 / MTok                                                        |
-| [1h cache write](../../build-with-claude/prompt-caching.md) | $10 / MTok                                                          |
-| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.50 / MTok                                                        |
-| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](../../about-claude/pricing.md) |
+| Feature                                                                                | Value                            |
+| :------------------------------------------------------------------------------------- | :------------------------------- |
+| Input                                                                                  | $5 / MTok                        |
+| Output                                                                                 | $25 / MTok                       |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $6.25 / MTok                     |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $10 / MTok                       |
+| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.50 / MTok                     |
+| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output |
+
+[Full price list](../../about-claude/pricing.md)
 
 ### Capabilities
 
@@ -83,7 +84,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $5 / MTok
 
 **Migrate to Claude Opus 5.5**
 
-What changes when moving from Claude Opus 4.7 and earlier Opus models to Claude Opus 5.5.
+What changes when moving from Claude Opus 4.6 to Claude Opus 5.5.
 
 **Claude Opus 5.5**
 

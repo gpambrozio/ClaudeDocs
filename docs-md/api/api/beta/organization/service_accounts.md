@@ -31,7 +31,7 @@ accounts.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -124,6 +124,10 @@ accounts.
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 ### Body parameters
 
@@ -278,7 +282,7 @@ archived service accounts.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -371,6 +375,10 @@ archived service accounts.
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 ### Returns
 
@@ -487,7 +495,7 @@ Retrieve a service account by its ID (`svac_...`).
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -580,6 +588,10 @@ Retrieve a service account by its ID (`svac_...`).
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 ### Returns
 
@@ -697,7 +709,7 @@ interactive credential (a user OAuth token or a Console session).
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -790,6 +802,10 @@ interactive credential (a user OAuth token or a Console session).
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 ### Body parameters
 
@@ -925,7 +941,7 @@ those rules first or change their target to another service account.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1018,6 +1034,10 @@ those rules first or change their target to another service account.
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 ### Returns
 
@@ -1243,7 +1263,7 @@ rejected.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1336,6 +1356,10 @@ rejected.
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 #### Body parameters
 
@@ -1467,7 +1491,7 @@ page to recover.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1560,6 +1584,10 @@ page to recover.
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 #### Returns
 
@@ -1663,7 +1691,7 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1756,6 +1784,10 @@ to the implicit `workspace_user` membership. Archived workspaces return
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 #### Returns
 

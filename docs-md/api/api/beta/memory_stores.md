@@ -21,7 +21,7 @@ Create a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -114,6 +114,10 @@ Create a memory store
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -253,7 +257,7 @@ List memory stores
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -346,6 +350,10 @@ List memory stores
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -450,7 +458,7 @@ Retrieve a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -543,6 +551,10 @@ Retrieve a memory store
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -638,7 +650,7 @@ Update a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -731,6 +743,10 @@ Update a memory store
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -846,7 +862,7 @@ Delete a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -939,6 +955,10 @@ Delete a memory store
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -997,7 +1017,7 @@ Archive a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1090,6 +1110,10 @@ Archive a memory store
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1258,7 +1282,7 @@ Create a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1351,6 +1375,10 @@ Create a memory
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1505,7 +1533,7 @@ List memories
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1598,6 +1626,10 @@ List memories
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1742,7 +1774,7 @@ Retrieve a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1835,6 +1867,10 @@ Retrieve a memory
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1956,7 +1992,7 @@ Update a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2049,6 +2085,10 @@ Update a memory
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2188,7 +2228,7 @@ Delete a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2281,6 +2321,10 @@ Delete a memory
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2411,7 +2455,7 @@ List memory versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2504,6 +2548,10 @@ List memory versions
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2715,7 +2763,7 @@ Retrieve a memory version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2808,6 +2856,10 @@ Retrieve a memory version
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2996,7 +3048,7 @@ Redact a memory version
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3089,6 +3141,10 @@ Redact a memory version
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 

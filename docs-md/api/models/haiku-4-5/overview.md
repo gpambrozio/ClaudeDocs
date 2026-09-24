@@ -49,15 +49,16 @@ Context window: 200K tokens · Max output: 64K tokens · Input pricing: $1 / MTo
 
 ### Pricing
 
-| Feature                                                                                | Value                                                               |
-| :------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
-| Input                                                                                  | $1 / MTok                                                           |
-| Output                                                                                 | $5 / MTok                                                           |
-| [5m cache write](../../build-with-claude/prompt-caching.md) | $1.25 / MTok                                                        |
-| [1h cache write](../../build-with-claude/prompt-caching.md) | $2 / MTok                                                           |
-| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.10 / MTok                                                        |
-| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output                                    |
-| Full price list                                                                        | [Pricing](../../about-claude/pricing.md) |
+| Feature                                                                                | Value                            |
+| :------------------------------------------------------------------------------------- | :------------------------------- |
+| Input                                                                                  | $1 / MTok                        |
+| Output                                                                                 | $5 / MTok                        |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $1.25 / MTok                     |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $2 / MTok                        |
+| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.10 / MTok                     |
+| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output |
+
+[Full price list](../../about-claude/pricing.md)
 
 ### Capabilities
 

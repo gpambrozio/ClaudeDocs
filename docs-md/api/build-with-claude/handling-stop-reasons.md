@@ -891,14 +891,45 @@ end
 If Claude's response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
 ```bash CLI
-RESPONSE=$(ant messages create --max-tokens 1024 --format jsonl < request.yaml)
+RESPONSE=$(ant messages create --max-tokens 1024 --format jsonl <<'YAML'
+model: claude-opus-5-5
+tools:
+  - name: get_weather
+    description: Get the current weather in a given location
+    input_schema:
+      type: object
+      properties:
+        location:
+          type: string
+      required:
+        - location
+messages:
+  - role: user
+    content: What is the weather in San Francisco?
+YAML
+)
 
 # Check if the response was truncated mid tool use
 STOP_REASON=$(jq -r '.stop_reason' <<<"$RESPONSE")
 LAST_TYPE=$(jq -r '.content[-1].type' <<<"$RESPONSE")
 if [ "$STOP_REASON" = "max_tokens" ] && [ "$LAST_TYPE" = "tool_use" ]; then
   # Retry with a higher max_tokens
-  ant messages create --max-tokens 4096 < request.yaml
+  ant messages create --max-tokens 4096 <<'YAML'
+model: claude-opus-5-5
+tools:
+  - name: get_weather
+    description: Get the current weather in a given location
+    input_schema:
+      type: object
+      properties:
+        location:
+          type: string
+      required:
+        - location
+messages:
+  - role: user
+    content: What is the weather in San Francisco?
+YAML
 fi
 ```
 

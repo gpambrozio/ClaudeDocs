@@ -108,10 +108,6 @@ Built for demanding reasoning and long-horizon agentic work
 
 The latest Opus model: breaking changes, new features, and behavior differences
 
-**What's new in Claude Opus 5**
-
-Explore the improvements in Claude Opus 5
-
 **What's new in Claude Sonnet 5**
 
 For everyday workloads that balance speed and capability

@@ -21,7 +21,7 @@ Create Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -114,6 +114,10 @@ Create Vault
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -233,7 +237,7 @@ List Vaults
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -326,6 +330,10 @@ List Vaults
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -425,7 +433,7 @@ Get Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -518,6 +526,10 @@ Get Vault
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -608,7 +620,7 @@ Update Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -701,6 +713,10 @@ Update Vault
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -810,7 +826,7 @@ Delete Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -903,6 +919,10 @@ Delete Vault
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -961,7 +981,7 @@ Archive Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1054,6 +1074,10 @@ Archive Vault
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1199,7 +1223,7 @@ Create Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1292,6 +1316,10 @@ Create Credential
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1705,7 +1733,7 @@ List Credentials
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1798,6 +1826,10 @@ List Credentials
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2022,7 +2054,7 @@ Get Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2115,6 +2147,10 @@ Get Credential
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2330,7 +2366,7 @@ Update Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2423,6 +2459,10 @@ Update Credential
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2777,7 +2817,7 @@ Delete Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2870,6 +2910,10 @@ Delete Credential
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2932,7 +2976,7 @@ Archive Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3025,6 +3069,10 @@ Archive Credential
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -3241,7 +3289,7 @@ Validate Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3334,6 +3382,10 @@ Validate Credential
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 

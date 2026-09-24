@@ -529,10 +529,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant beta:messages create --beta inline-tools-2026-09-15 < request.yaml
-```
-
-```yaml
+ant beta:messages create --beta inline-tools-2026-09-15 <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 # Keep at least one non-deferred tool in `tools`, so a tool defined
@@ -568,6 +565,7 @@ messages:
                   type: string
               required:
                 - sql
+YAML
 ```
 
 ```python Python

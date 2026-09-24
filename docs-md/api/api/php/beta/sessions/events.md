@@ -227,7 +227,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -283,7 +283,7 @@ List Events
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -1119,7 +1119,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -1175,7 +1175,7 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -1818,6 +1818,16 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
+### Beta Managed Agents Agent Evaluated Permission
+
+- `enum ManagedAgentsAgentEvaluatedPermission`
+
+  - `"allow"`
+
+  - `"ask"`
+
+  - `"deny"`
+
 ### Beta Managed Agents Agent MCP Tool Result Event
 
 - `class ManagedAgentsAgentMCPToolResultEvent`
@@ -1870,7 +1880,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     A timestamp in RFC 3339 format
 
-  - `?EvaluatedPermission evaluatedPermission`
+  - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
     AgentEvaluatedPermission enum
 
@@ -2070,7 +2080,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
     A timestamp in RFC 3339 format
 
-  - `?EvaluatedPermission evaluatedPermission`
+  - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
     AgentEvaluatedPermission enum
 
@@ -2680,7 +2690,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -2736,7 +2746,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -3774,7 +3784,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 
@@ -3830,7 +3840,7 @@ var_dump($betaManagedAgentsStreamSessionEvents);
 
       A timestamp in RFC 3339 format
 
-    - `?EvaluatedPermission evaluatedPermission`
+    - `?ManagedAgentsAgentEvaluatedPermission evaluatedPermission`
 
       AgentEvaluatedPermission enum
 

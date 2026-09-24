@@ -1639,11 +1639,15 @@ List Events
 
           Model identifier and configuration.
 
-          - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+          - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
 
             - `"claude-fable-5-1"`
 
@@ -1779,7 +1783,7 @@ List Events
 
                 Model identifier and configuration.
 
-                - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+                - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
                   The model that will power your agent.
 
@@ -4510,11 +4514,15 @@ Stream Events
 
         Model identifier and configuration.
 
-        - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+        - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
 
           - `"claude-fable-5-1"`
 
@@ -4650,7 +4658,7 @@ Stream Events
 
               Model identifier and configuration.
 
-              - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+              - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
                 The model that will power your agent.
 
@@ -5431,6 +5439,18 @@ ant beta:sessions:events stream \
   - `session_thread_id: optional string`
 
     When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
+
+### Beta Managed Agents Agent Evaluated Permission
+
+- `beta_managed_agents_agent_evaluated_permission: "allow" or "ask" or "deny"`
+
+  AgentEvaluatedPermission enum
+
+  - `"allow"`
+
+  - `"ask"`
+
+  - `"deny"`
 
 ### Beta Managed Agents Agent MCP Tool Result Event
 
@@ -9836,11 +9856,15 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+        - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
 
           - `"claude-fable-5-1"`
 
@@ -9976,7 +10000,7 @@ ant beta:sessions:events stream \
 
               Model identifier and configuration.
 
-              - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+              - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
                 The model that will power your agent.
 
@@ -12738,11 +12762,15 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+        - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
 
           - `"claude-fable-5-1"`
 
@@ -12878,7 +12906,7 @@ ant beta:sessions:events stream \
 
               Model identifier and configuration.
 
-              - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+              - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
                 The model that will power your agent.
 

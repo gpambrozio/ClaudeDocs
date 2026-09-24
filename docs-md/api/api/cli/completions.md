@@ -29,7 +29,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   minimum: 1
 
-- `--model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+- `--model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -135,7 +135,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     The resulting completion up to and excluding the stop sequences.
 
-  - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+  - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
 
     The model that will complete your prompt.
 
@@ -144,6 +144,10 @@ Future models and features will not be compatible with Text Completions. See our
     - `"claude-fable-5-1"`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+    - `"claude-opus-5-5"`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
 
     - `"claude-mythos-5-1"`
 
@@ -266,7 +270,7 @@ Assistant:'
 
     The resulting completion up to and excluding the stop sequences.
 
-  - `model: "claude-fable-5-1" or "claude-mythos-5-1" or "claude-sonnet-5" or 14 more or string`
+  - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
 
     The model that will complete your prompt.
 
@@ -275,6 +279,10 @@ Assistant:'
     - `"claude-fable-5-1"`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+    - `"claude-opus-5-5"`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
 
     - `"claude-mythos-5-1"`
 

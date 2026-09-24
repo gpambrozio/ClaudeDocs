@@ -43,7 +43,7 @@ Add Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -136,6 +136,10 @@ Add Session Resource
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -227,7 +231,7 @@ List Session Resources
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -320,6 +324,10 @@ List Session Resources
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -504,7 +512,7 @@ Get Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -597,6 +605,10 @@ Get Session Resource
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -776,7 +788,7 @@ Update Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -869,6 +881,10 @@ Update Session Resource
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 
@@ -1042,7 +1058,7 @@ Delete Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 43 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 45 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1135,6 +1151,10 @@ Delete Session Resource
       - `"mid-conversation-system-clear-at-2026-08-21"`
 
       - `"compact-2026-09-04"`
+
+      - `"inline-tools-2026-09-15"`
+
+      - `"mcp-client-2026-09-15"`
 
   - `workspace_id?: string`
 

@@ -25,7 +25,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -118,6 +118,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -596,7 +600,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -689,6 +693,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1004,7 +1012,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1097,6 +1105,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1405,7 +1417,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1498,6 +1510,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1807,7 +1823,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1900,6 +1916,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 

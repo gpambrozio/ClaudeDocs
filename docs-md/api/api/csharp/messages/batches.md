@@ -1093,6 +1093,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+        - `ClaudeOpus5_5("claude-opus-5-5")`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
+
         - `ClaudeMythos5_1("claude-mythos-5-1")`
 
           Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -4650,6 +4654,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+          - `ClaudeOpus5_5("claude-opus-5-5")`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
+
           - `ClaudeMythos5_1("claude-mythos-5-1")`
 
             Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -5892,6 +5900,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+          - `ClaudeOpus5_5("claude-opus-5-5")`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
+
           - `ClaudeMythos5_1("claude-mythos-5-1")`
 
             Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -6951,6 +6963,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
 
+        - `ClaudeOpus5_5("claude-opus-5-5")`
+
+          Powerful intelligence for coding, knowledge work, and long-running agents
+
         - `ClaudeMythos5_1("claude-mythos-5-1")`
 
           Our most capable model for cybersecurity and biology research, available through trusted access programs
@@ -7971,6 +7987,10 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
       - `ClaudeFable5_1("claude-fable-5-1")`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+      - `ClaudeOpus5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `ClaudeMythos5_1("claude-mythos-5-1")`
 

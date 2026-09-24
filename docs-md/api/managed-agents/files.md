@@ -265,10 +265,7 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
 ```bash CLI
 ant beta:sessions create \
   --agent agent_01J8XkN5uT3vHpLqRfWdY2 \
-  --environment-id env_01K2mPsT7hNwR4jXuLvCqD8 < session.yaml
-```
-
-```yaml
+  --environment-id env_01K2mPsT7hNwR4jXuLvCqD8 <<YAML
 resources:
   - type: file
     file_id: file_011CNha8iCJcU1wXNR6q4V8w
@@ -279,6 +276,7 @@ resources:
   - type: file
     file_id: file_011CRb3kQ7tWx9ZsLmDe2Vh4
     mount_path: /src/main.py
+YAML
 ```
 
 ```python Python

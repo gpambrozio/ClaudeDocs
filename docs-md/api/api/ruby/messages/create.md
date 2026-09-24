@@ -1065,7 +1065,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-fable-5-1" | :"claude-mythos-5-1" | :"claude-sonnet-5" | 14 more`
+  - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
     The model that will complete your prompt.
 
@@ -1074,6 +1074,10 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
     - `:"claude-fable-5-1"`
 
       Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+    - `:"claude-opus-5-5"`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
 
     - `:"claude-mythos-5-1"`
 
@@ -3780,7 +3784,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-fable-5-1" | :"claude-mythos-5-1" | :"claude-sonnet-5" | 14 more`
+    - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
       The model that will complete your prompt.
 
@@ -3789,6 +3793,10 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
       - `:"claude-fable-5-1"`
 
         Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+
+      - `:"claude-opus-5-5"`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `:"claude-mythos-5-1"`
 

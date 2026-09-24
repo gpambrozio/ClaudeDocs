@@ -1067,7 +1067,7 @@ run_tool() {
 }
 
 # Keep the full conversation history in a JSON array so each turn sees prior context.
-MESSAGES='[{"role": "user", "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."}]'
+MESSAGES='[{"role": "user", "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."}]'
 
 call_api() {
   curl -s https://api.anthropic.com/v1/messages \
@@ -1124,7 +1124,7 @@ run_tool() {
 
 # Keep the full conversation history in a JSON array so each turn sees
 # prior context.
-MESSAGES='[{"role": "user", "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."}]'
+MESSAGES='[{"role": "user", "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."}]'
 
 call_api() {
   # ant reads the request body as YAML on stdin: no auth headers, no
@@ -1233,7 +1233,7 @@ def run_tool(name, tool_input):
 messages = [
     {
         "role": "user",
-        "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
+        "content": "Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
     }
 ]
 
@@ -1324,7 +1324,7 @@ const messages: Anthropic.MessageParam[] = [
   {
     role: "user",
     content:
-      "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
+      "Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
   },
 ];
 
@@ -1437,7 +1437,7 @@ List<MessageParam> messages =
     new()
     {
         Role = Role.User,
-        Content = "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
+        Content = "Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
     },
 ];
 
@@ -1557,7 +1557,7 @@ func main() {
 	// Keep the full conversation history in a slice so each turn sees prior context.
 	messages := []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock(
-			"Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
+			"Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.",
 		)),
 	}
 
@@ -1684,7 +1684,7 @@ void main() {
     List<MessageParam> messages = new ArrayList<>();
     messages.add(MessageParam.builder()
         .role(MessageParam.Role.USER)
-        .content("Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.")
+        .content("Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.")
         .build());
 
     Message response = client.messages().create(MessageCreateParams.builder()
@@ -1786,7 +1786,7 @@ $toolChoice = ToolChoiceAuto::with(disableParallelToolUse: true);
 $messages = [
     [
         'role' => 'user',
-        'content' => 'Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.',
+        'content' => 'Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com.',
     ],
 ];
 
@@ -1888,7 +1888,7 @@ tool_choice = {type: "auto", disable_parallel_tool_use: true}
 messages = [
   {
     role: "user",
-    content: "Schedule a weekly team standup every Monday at 9am for the next 4 weeks. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."
+    content: "Schedule a weekly team standup every Monday at 9am for the next 4 weeks, starting Monday, March 30, 2026. Invite the whole team: alice@example.com, bob@example.com, carol@example.com."
   }
 ]
 
@@ -1994,7 +1994,7 @@ run_tool() {
   esac
 }
 
-MESSAGES='[{"role": "user", "content": "Check what I have next Monday, then schedule a planning session that avoids any conflicts."}]'
+MESSAGES='[{"role": "user", "content": "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts."}]'
 
 call_api() {
   curl -s https://api.anthropic.com/v1/messages \
@@ -2050,7 +2050,7 @@ run_tool() {
   esac
 }
 
-MESSAGES='[{"role": "user", "content": "Check what I have next Monday, then schedule a planning session that avoids any conflicts."}]'
+MESSAGES='[{"role": "user", "content": "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts."}]'
 
 call_api() {
   # ant reads the request body as YAML on stdin: no auth headers, no
@@ -2178,7 +2178,7 @@ def run_tool(name, tool_input):
 messages = [
     {
         "role": "user",
-        "content": "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+        "content": "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
     }
 ]
 
@@ -2280,7 +2280,7 @@ const messages: Anthropic.MessageParam[] = [
   {
     role: "user",
     content:
-      "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+      "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
   },
 ];
 
@@ -2402,7 +2402,7 @@ List<MessageParam> messages =
     new()
     {
         Role = Role.User,
-        Content = "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+        Content = "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
     },
 ];
 
@@ -2523,7 +2523,7 @@ func main() {
 
 	messages := []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock(
-			"Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+			"Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
 		)),
 	}
 
@@ -2653,7 +2653,7 @@ void main() {
     List<MessageParam> messages = new ArrayList<>();
     messages.add(MessageParam.builder()
         .role(MessageParam.Role.USER)
-        .content("Check what I have next Monday, then schedule a planning session that avoids any conflicts.")
+        .content("Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.")
         .build());
 
     Message response = client.messages().create(MessageCreateParams.builder()
@@ -2769,7 +2769,7 @@ function runTool(string $name, array $input): string
 $messages = [
     [
         'role' => 'user',
-        'content' => 'Check what I have next Monday, then schedule a planning session that avoids any conflicts.',
+        'content' => 'Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.',
     ],
 ];
 
@@ -2871,7 +2871,7 @@ end
 messages = [
   {
     role: "user",
-    content: "Check what I have next Monday, then schedule a planning session that avoids any conflicts."
+    content: "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts."
   }
 ]
 
@@ -2976,7 +2976,7 @@ run_tool() {
 }
 
 EMAILS=$(seq 0 14 | sed 's/.*/user&@example.com/' | paste -sd, -)
-MESSAGES="[{\"role\": \"user\", \"content\": \"Schedule an all-hands with everyone: $EMAILS\"}]"
+MESSAGES="[{\"role\": \"user\", \"content\": \"Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: $EMAILS\"}]"
 
 call_api() {
   curl -s https://api.anthropic.com/v1/messages \
@@ -3043,7 +3043,7 @@ run_tool() {
 }
 
 EMAILS=$(seq 0 14 | sed 's/.*/user&@example.com/' | paste -sd, -)
-MESSAGES=$(jq -n --arg msg "Schedule an all-hands with everyone: $EMAILS" \
+MESSAGES=$(jq -n --arg msg "Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: $EMAILS" \
   '[{role: "user", content: $msg}]')
 
 call_api() {
@@ -3178,7 +3178,7 @@ def run_tool(name, tool_input):
 messages = [
     {
         "role": "user",
-        "content": "Schedule an all-hands with everyone: " + ", ".join(f"user{i}@example.com" for i in range(15)),
+        "content": "Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: " + ", ".join(f"user{i}@example.com" for i in range(15)),
     }
 ]
 
@@ -3289,7 +3289,7 @@ const emails = Array.from({ length: 15 }, (_, i) => `user${i}@example.com`);
 const messages: Anthropic.MessageParam[] = [
   {
     role: "user",
-    content: `Schedule an all-hands with everyone: ${emails.join(", ")}`,
+    content: `Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: ${emails.join(", ")}`,
   },
 ];
 
@@ -3423,7 +3423,7 @@ var emails = string.Join(", ", Enumerable.Range(0, 15).Select(i => $"user{i}@exa
 
 List<MessageParam> messages =
 [
-    new() { Role = Role.User, Content = $"Schedule an all-hands with everyone: {emails}" },
+    new() { Role = Role.User, Content = $"Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: {emails}" },
 ];
 
 var response = await client.Messages.Create(new MessageCreateParams
@@ -3561,7 +3561,7 @@ func main() {
 	}
 	messages := []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock(
-			"Schedule an all-hands with everyone: " + strings.Join(emails, ", "),
+			"Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: " + strings.Join(emails, ", "),
 		)),
 	}
 
@@ -3707,7 +3707,7 @@ void main() {
     List<MessageParam> messages = new ArrayList<>();
     messages.add(MessageParam.builder()
         .role(MessageParam.Role.USER)
-        .content("Schedule an all-hands with everyone: " + emails)
+        .content("Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: " + emails)
         .build());
 
     Message response = client.messages().create(MessageCreateParams.builder()
@@ -3831,7 +3831,7 @@ $emails = array_map(fn (int $i): string => "user{$i}@example.com", range(0, 14))
 $messages = [
     [
         'role' => 'user',
-        'content' => 'Schedule an all-hands with everyone: ' . implode(', ', $emails),
+        'content' => 'Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: ' . implode(', ', $emails),
     ],
 ];
 
@@ -3945,7 +3945,7 @@ emails = (0...15).map { |i| "user#{i}@example.com" }
 messages = [
   {
     role: "user",
-    content: "Schedule an all-hands with everyone: #{emails.join(", ")}"
+    content: "Schedule a one-hour all-hands on Monday, March 30, 2026 at 10am with everyone: #{emails.join(", ")}"
   }
 ]
 
@@ -4075,7 +4075,7 @@ final_message = client.beta.messages.tool_runner(
     messages=[
         {
             "role": "user",
-            "content": "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+            "content": "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
         }
     ],
 ).until_done()
@@ -4143,7 +4143,7 @@ const finalMessage = await client.beta.messages.toolRunner({
     {
       role: "user",
       content:
-        "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+        "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
     },
   ],
 });
@@ -4254,7 +4254,7 @@ var runner = client.Beta.Messages.ToolRunner(
             new()
             {
                 Role = Role.User,
-                Content = "Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+                Content = "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
             },
         ],
     },
@@ -4358,7 +4358,7 @@ func main() {
 				MaxTokens: 1024,
 				Messages: []anthropic.BetaMessageParam{
 					anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(
-						"Check what I have next Monday, then schedule a planning session that avoids any conflicts.",
+						"Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.",
 					)),
 				},
 			},
@@ -4443,7 +4443,7 @@ void main() {
                     .model(Model.CLAUDE_OPUS_5_5)
                     .maxTokens(1024)
                     .addBeta("structured-outputs-2025-11-13")
-                    .addUserMessage("Check what I have next Monday, then schedule a planning session that avoids any conflicts.")
+                    .addUserMessage("Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.")
                     .addTool(CreateCalendarEvent.class)
                     .addTool(ListCalendarEvents.class)
                     .build());
@@ -4536,7 +4536,7 @@ $runner = $client->beta->messages->toolRunner(
     messages: [
         [
             'role' => 'user',
-            'content' => 'Check what I have next Monday, then schedule a planning session that avoids any conflicts.',
+            'content' => 'Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts.',
         ],
     ],
     model: Model::CLAUDE_OPUS_5_5,
@@ -4611,7 +4611,7 @@ runner = client.beta.messages.tool_runner(
   messages: [
     {
       role: "user",
-      content: "Check what I have next Monday, then schedule a planning session that avoids any conflicts."
+      content: "Check what I have on Monday, March 30, 2026, then schedule a one-hour planning session that day that avoids any conflicts."
     }
   ]
 )

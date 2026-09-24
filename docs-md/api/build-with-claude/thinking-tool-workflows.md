@@ -29,6 +29,32 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
 
 Send a request with adaptive thinking enabled and the tool defined. Apart from the `thinking` parameter, this is a standard [tool use](../agents-and-tools/tool-use/overview.md) request:
 
+```bash cURL
+curl https://api.anthropic.com/v1/messages \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -d @- <<'EOF'
+{
+  "model": "claude-opus-4-8",
+  "max_tokens": 16000,
+  "thinking": {"type": "adaptive"},
+  "tools": [{
+    "name": "get_weather",
+    "description": "Get current weather for a location",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "location": {"type": "string", "description": "City name"}
+      },
+      "required": ["location"]
+    }
+  }],
+  "messages": [{"role": "user", "content": "What's the weather in Paris?"}]
+}
+EOF
+```
+
 ```bash CLI
 ant messages create --transform content <<'YAML'
 model: claude-opus-4-8
@@ -288,6 +314,11 @@ To see thinking text like this output, add `display: "summarized"` to the reques
 Run the tool on your side, then send a second request that appends two messages to the conversation. The first is the assistant content echoed back exactly as received, so the thinking block stays unchanged alongside the `tool_use` block. The second is a user message carrying the `tool_result`.
 
 Each sample is a self-contained script: it repeats the first request, then immediately sends the follow-up using the response it just received.
+
+```bash cURL
+# This workflow does not translate well to a one-off shell command.
+# Use one of the SDK examples in this code group instead.
+```
 
 ```bash CLI
 # First turn: write the assistant content array (thinking and tool_use

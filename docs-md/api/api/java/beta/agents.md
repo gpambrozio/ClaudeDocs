@@ -115,6 +115,10 @@ Create Agent
 
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
   - `Optional<String> workspaceId`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -130,6 +134,10 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -824,6 +832,10 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -1590,6 +1602,10 @@ List Agents
 
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
   - `Optional<String> workspaceId`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1639,6 +1655,10 @@ List Agents
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -2389,6 +2409,10 @@ Get Agent
 
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
   - `Optional<String> workspaceId`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2438,6 +2462,10 @@ Get Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -3177,6 +3205,10 @@ Update Agent
 
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
   - `Optional<String> workspaceId`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3220,6 +3252,10 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -3892,6 +3928,10 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -4631,6 +4671,10 @@ Archive Agent
 
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
   - `Optional<String> workspaceId`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4680,6 +4724,10 @@ Archive Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -5364,6 +5412,10 @@ public final class Main {
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -8039,6 +8091,10 @@ public final class Main {
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+    Powerful intelligence for coding, knowledge work, and long-running agents
+
   - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
     Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
@@ -8106,6 +8162,10 @@ public final class Main {
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
 
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -8220,6 +8280,10 @@ public final class Main {
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+      Powerful intelligence for coding, knowledge work, and long-running agents
 
     - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -8540,6 +8604,10 @@ public final class Main {
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 
@@ -9557,6 +9625,10 @@ List Agent Versions
 
     - `COMPACT_2026_09_04("compact-2026-09-04")`
 
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
   - `Optional<String> workspaceId`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -9606,6 +9678,10 @@ List Agent Versions
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_5_5("claude-opus-5-5")`
+
+        Powerful intelligence for coding, knowledge work, and long-running agents
 
       - `CLAUDE_FABLE_5_1("claude-fable-5-1")`
 

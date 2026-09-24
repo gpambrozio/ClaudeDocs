@@ -1611,11 +1611,15 @@ List Session Thread Events
 
           Model identifier and configuration.
 
-          - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+          - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-opus-5-5"`
+
+              Powerful intelligence for coding, knowledge work, and long-running agents
 
             - `"claude-fable-5-1"`
 
@@ -1751,7 +1755,7 @@ List Session Thread Events
 
                 Model identifier and configuration.
 
-                - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+                - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
                   The model that will power your agent.
 
@@ -3973,11 +3977,15 @@ Stream Session Thread Events
 
         Model identifier and configuration.
 
-        - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+        - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-5-5"`
+
+            Powerful intelligence for coding, knowledge work, and long-running agents
 
           - `"claude-fable-5-1"`
 
@@ -4113,7 +4121,7 @@ Stream Session Thread Events
 
               Model identifier and configuration.
 
-              - `id: "claude-fable-5-1" or "claude-sonnet-5" or "claude-fable-5" or 11 more or string`
+              - `id: "claude-opus-5-5" or "claude-fable-5-1" or "claude-sonnet-5" or 12 more or string`
 
                 The model that will power your agent.
 

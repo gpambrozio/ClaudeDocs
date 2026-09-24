@@ -131,6 +131,10 @@ Create a memory store
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -340,6 +344,10 @@ List memory stores
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -533,6 +541,10 @@ Retrieve a memory store
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
     - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
   - `string workspaceID`
 
@@ -740,6 +752,10 @@ Update a memory store
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -930,6 +946,10 @@ Delete a memory store
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1081,6 +1101,10 @@ Archive a memory store
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
     - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
   - `string workspaceID`
 
@@ -1344,6 +1368,10 @@ Create a memory
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1567,6 +1595,10 @@ List memories
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
     - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
   - `string workspaceID`
 
@@ -1792,6 +1824,10 @@ Retrieve a memory
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2013,6 +2049,10 @@ Update a memory
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2222,6 +2262,10 @@ Delete a memory
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2424,6 +2468,10 @@ List memory versions
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
     - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
   - `string workspaceID`
 
@@ -2719,6 +2767,10 @@ Retrieve a memory version
 
     - `Compact2026_09_04("compact-2026-09-04")`
 
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
   - `string workspaceID`
 
     Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3002,6 +3054,10 @@ Redact a memory version
     - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
 
     - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
 
   - `string workspaceID`
 

@@ -89,10 +89,7 @@ model = "claude-mythos-5-1"  # After
    ```
 
    ```bash CLI
-   ant messages create < request.yaml
-   ```
-
-   ```yaml
+   ant messages create <<'YAML'
    model: claude-fable-5
    max_tokens: 16000
    tools:
@@ -110,6 +107,7 @@ model = "claude-mythos-5-1"  # After
    messages:
      - role: user
        content: "Summarize: The meeting moved to Thursday."
+   YAML
    ```
 
    ```python Python
@@ -333,10 +331,7 @@ model = "claude-mythos-5-1"  # After
    ```
 
    ```bash CLI
-   ant messages create < request.yaml
-   ```
-
-   ```yaml
+   ant messages create <<'YAML'
    model: claude-fable-5-1
    max_tokens: 16000
    tools:
@@ -355,6 +350,7 @@ model = "claude-mythos-5-1"  # After
    messages:
      - role: user
        content: "Summarize: The meeting moved to Thursday. Call the record_summary tool with your result."
+   YAML
    ```
 
    ```python Python
@@ -611,10 +607,7 @@ model = "claude-mythos-5-1"  # After
    ```
 
    ```bash CLI
-   ant messages create < request.yaml
-   ```
-
-   ```yaml
+   ant messages create <<'YAML'
    model: claude-fable-5-1
    max_tokens: 16000
    system: You are a customer support assistant for an online electronics store.
@@ -642,6 +635,7 @@ model = "claude-mythos-5-1"  # After
          to the search_help_center tool in your response to the user's latest message.
          Begin your response with the search_help_center tool call. Do not reply with
          text only.
+   YAML
    ```
 
    ```python Python
@@ -966,10 +960,7 @@ model = "claude-mythos-5-1"  # After
    ant beta:messages create \
      --beta thinking-binding-controls-2026-08-01 \
      --transform '{content.#(type=="text")#.text,input_transformations}' \
-     --format yaml < request.yaml
-   ```
-
-   ```yaml
+     --format yaml <<'YAML'
    model: claude-fable-5-1
    max_tokens: 16000
    thinking:
@@ -979,6 +970,7 @@ model = "claude-mythos-5-1"  # After
    messages:
      - role: user
        content: What is the greatest common divisor of 1071 and 462?
+   YAML
    ```
 
    ```python Python
@@ -1256,10 +1248,7 @@ These changes aren't required, but each one lowers cost or latency or removes a 
    ant beta:messages create \
      --beta mid-conversation-output-config-2026-07-01 \
      --transform 'content.#(type=="text").text' \
-     --raw-output < request.yaml
-   ```
-
-   ```yaml
+     --raw-output <<'YAML'
    model: claude-fable-5-1
    max_tokens: 4096
    output_config:
@@ -1276,6 +1265,7 @@ These changes aren't required, but each one lowers cost or latency or removes a 
          effort: low
      - role: user
        content: Summarize the plan in one sentence.
+   YAML
    ```
 
    ```python Python
@@ -1573,7 +1563,7 @@ model = "claude-mythos-5-1"  # After
 
 ## Migrating to Claude Fable 5.1 from Claude Opus 4.8 or earlier
 
-First apply [Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8](../fable-5/migration-guide.md#migrating-from-claude-opus-48) for the API-level changes from Claude Opus 4.8. It covers adaptive thinking, thinking output, refusals, effort, the caching minimum, pricing, and data retention. Then apply the remaining delta in [Migrating to Claude Fable 5.1 from Claude Fable 5](migration-guide.md#migrating-from-claude-fable-5-to-claude-fable-5-1). On Claude Opus 4.7 or earlier, start with the matching [Migrating to Claude Opus 5](../opus-5/migration-guide.md) section.
+First apply [Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8](../fable-5/migration-guide.md#migrating-from-claude-opus-48) for the API-level changes from Claude Opus 4.8. It covers adaptive thinking, thinking output, refusals, effort, the caching minimum, pricing, and data retention. Then apply the remaining delta in [Migrating to Claude Fable 5.1 from Claude Fable 5](migration-guide.md#migrating-from-claude-fable-5-to-claude-fable-5-1). On Claude Opus 4.7 or earlier, start with the matching [Migrating to Claude Opus 5.5](../opus-5-5/migration-guide.md) section.
 
 ### Update your model name
 

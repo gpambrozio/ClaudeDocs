@@ -2361,7 +2361,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ```
 
 ```bash CLI
-cat > request.yaml <<'YAML'
+CURRENT=$(ant beta:messages count-tokens \
+  --beta compact-2026-01-12 \
+  --transform input_tokens \
+  --raw-output <<'YAML'
 model: claude-opus-5-5
 messages:
   - role: user
@@ -2370,16 +2373,21 @@ context_management:
   edits:
     - type: compact_20260112
 YAML
-
-CURRENT=$(ant beta:messages count-tokens \
-  --beta compact-2026-01-12 \
-  --transform input_tokens \
-  --raw-output < request.yaml)
+)
 
 ORIGINAL=$(ant beta:messages count-tokens \
   --beta compact-2026-01-12 \
   --transform context_management.original_input_tokens \
-  --raw-output < request.yaml)
+  --raw-output <<'YAML'
+model: claude-opus-5-5
+messages:
+  - role: user
+    content: Hello, Claude
+context_management:
+  edits:
+    - type: compact_20260112
+YAML
+)
 
 printf 'Current tokens: %s\n' "$CURRENT"
 printf 'Original tokens: %s\n' "$ORIGINAL"

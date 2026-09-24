@@ -29,7 +29,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -122,6 +122,10 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -228,7 +232,7 @@ Fetches a tunnel certificate by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -321,6 +325,10 @@ Fetches a tunnel certificate by ID.
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -427,7 +435,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -520,6 +528,10 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -623,7 +635,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 43 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 45 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -716,6 +728,10 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `"mid-conversation-system-clear-at-2026-08-21"`
 
     - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
 
 - `"anthropic-workspace-id": optional string`
 

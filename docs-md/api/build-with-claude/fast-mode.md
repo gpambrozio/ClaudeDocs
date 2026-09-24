@@ -22,9 +22,9 @@ Fast mode is supported on the following models:
 
 Fast mode for Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8 is available as a research preview on the Claude API, including [Claude Managed Agents](../managed-agents/overview.md), only. It is not available on Amazon Bedrock, Claude Platform on AWS, Google Cloud, or Microsoft Foundry.
 
-Fast mode is not available on Claude Opus 4.7. Requests to `claude-opus-4-7` with `speed: "fast"` return an error; unlike Claude Opus 4.6 (see the following note), requests do not fall back to standard speed. The model itself remains available at standard speed. To continue using fast mode, migrate to Claude Opus 5.5, [Claude Opus 5](../models/opus-5/migration-guide.md#migrating-from-claude-opus-47), or Claude Opus 4.8.
+Fast mode is not available on Claude Opus 4.7. Requests to `claude-opus-4-7` with `speed: "fast"` return an error; unlike Claude Opus 4.6 (see the following note), requests do not fall back to standard speed. The model itself remains available at standard speed. To continue using fast mode, see [Migrating to Claude Opus 5.5 from Claude Opus 4.7](../models/opus-5-5/migration-guide.md#migrating-from-claude-opus-47).
 
-Fast mode is not available on Claude Opus 4.6. Requests to `claude-opus-4-6` with `speed: "fast"` do not return an error: they run at standard speed and are billed at [standard rates](../about-claude/pricing.md) rather than fast mode's premium rates, and the response reports [`usage.speed: "standard"`](fast-mode.md#checking-which-speed-was-used). To continue using fast mode, migrate to Claude Opus 5.5, [Claude Opus 5](../models/opus-5/migration-guide.md#migrating-from-claude-opus-46), or Claude Opus 4.8.
+Fast mode is not available on Claude Opus 4.6. Requests to `claude-opus-4-6` with `speed: "fast"` do not return an error: they run at standard speed and are billed at [standard rates](../about-claude/pricing.md) rather than fast mode's premium rates, and the response reports [`usage.speed: "standard"`](fast-mode.md#checking-which-speed-was-used). To continue using fast mode, see [Migrating to Claude Opus 5.5 from Claude Opus 4.6 and earlier Opus models](../models/opus-5-5/migration-guide.md#migrating-from-claude-opus-46).
 
 ## How fast mode works
 
