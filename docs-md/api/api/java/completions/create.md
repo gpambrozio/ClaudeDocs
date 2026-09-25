@@ -21,7 +21,63 @@ Future models and features will not be compatible with Text Completions. See our
 
 - `CompletionCreateParams params`
 
+  - `Optional<String> workspaceId`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+  - `long maxTokensToSample`
+
+    The maximum number of tokens to generate before stopping.
+
+    Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+    minimum: 1
+
+  - `Model model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `String prompt`
+
+    The prompt that you want Claude to complete.
+
+    For proper response generation you will need to format your prompt using alternating `
+
+    Human:`and`
+
+    Assistant:` conversational turns. For example:
+
+    ```
+    "
+    
+    Human: {userQuestion}
+    
+    Assistant:"
+    ```
+
+    See [prompt validation](../../../build-with-claude/working-with-messages.md) and our guide to [prompt design](../../../build-with-claude/prompt-engineering/overview.md) for more details.
+
+    minLength: 1
+
+  - `Optional<Metadata> metadata`
+
+    An object describing metadata about the request.
+
+  - `Optional<List<String>> stopSequences`
+
+    Sequences that will cause the model to stop generating.
+
+    Our models stop on `"
+
+    Human:"`, and may include additional built-in stop sequences in the future. By providing the stop_sequences parameter, you may include additional strings that will cause the model to stop generating.
+
   - `Optional<List<AnthropicBeta>> betas`
+
+    **Deprecated**: Deprecated. This parameter has no effect on this method and will be removed in a future release.
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -121,60 +177,6 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
 
-  - `Optional<String> workspaceId`
-
-    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
-
-    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
-
-  - `long maxTokensToSample`
-
-    The maximum number of tokens to generate before stopping.
-
-    Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
-
-    minimum: 1
-
-  - `Model model`
-
-    The model that will complete your prompt.
-
-    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-  - `String prompt`
-
-    The prompt that you want Claude to complete.
-
-    For proper response generation you will need to format your prompt using alternating `
-
-    Human:`and`
-
-    Assistant:` conversational turns. For example:
-
-    ```
-    "
-    
-    Human: {userQuestion}
-    
-    Assistant:"
-    ```
-
-    See [prompt validation](../../../build-with-claude/working-with-messages.md) and our guide to [prompt design](../../../build-with-claude/prompt-engineering/overview.md) for more details.
-
-    minLength: 1
-
-  - `Optional<Metadata> metadata`
-
-    An object describing metadata about the request.
-
-  - `Optional<List<String>> stopSequences`
-
-    Sequences that will cause the model to stop generating.
-
-    Our models stop on `"
-
-    Human:"`, and may include additional built-in stop sequences in the future. By providing the stop_sequences parameter, you may include additional strings that will cause the model to stop generating.
-
   - `Optional<Double> temperature`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
@@ -185,7 +187,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
   - `Optional<Long> topK`
 
@@ -209,7 +211,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     Recommended for advanced use cases only.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
 ## Returns
 
@@ -273,10 +275,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       Powerful intelligence for long-running agents and coding
 
-    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
       Powerful intelligence for long-running agents and coding
@@ -308,6 +306,12 @@ Future models and features will not be compatible with Text Completions. See our
     - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
 
       High-performance model for agents and coding
+
+    - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
 
   - `Optional<String> stopReason`
 

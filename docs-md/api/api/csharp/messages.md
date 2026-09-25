@@ -135,7 +135,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `required string? DocumentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `required long EndCharIndex`
 
@@ -155,7 +155,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `required string? DocumentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `required long EndPageNumber`
 
@@ -179,7 +179,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `required string? DocumentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `required long EndBlockIndex`
 
@@ -203,7 +203,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `required string? Title`
 
-                maxLength: 512, minLength: 1
+                minLength: 1, maxLength: 512
 
               - `required string Url`
 
@@ -359,7 +359,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `string? Title`
 
-            maxLength: 500, minLength: 1
+            minLength: 1, maxLength: 500
 
         - `class SearchResultBlockParam`
 
@@ -423,7 +423,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `required string Name`
 
-            maxLength: 200, minLength: 1
+            minLength: 1, maxLength: 200
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -459,7 +459,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             For a toolset member tool_use, the toolset family this member belongs to.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class ToolResultBlockParam`
 
@@ -495,7 +495,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `required string ToolName`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `CacheControlEphemeral? CacheControl`
 
@@ -523,7 +523,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     The caller-assigned identifier for this tab, unique within the inventory.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `required string Title`
 
@@ -549,7 +549,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                  maxItems: 200, minItems: 1
+                  minItems: 1, maxItems: 200
 
                   - `class BrowserStateChangeTabOpened`
 
@@ -567,7 +567,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `class BrowserStateChangeDownloadStarted`
 
@@ -579,7 +579,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `required string Url`
 
@@ -600,7 +600,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `required string Url`
 
@@ -612,7 +612,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `long? SizeBytes`
 
@@ -630,7 +630,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `required string Url`
 
@@ -642,7 +642,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       The failure or cancellation detail, when known.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `bool IsError`
 
@@ -650,7 +650,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             For a toolset member tool_result, the toolset family of the paired tool_use.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class ServerToolUseBlockParam`
 
@@ -1028,7 +1028,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `required string ToolName`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `CacheControlEphemeral? CacheControl`
 
@@ -1076,6 +1076,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
   - `MessageCreateParamsContainer? container`
 
     Body param: Container identifier for reuse across requests.
+
+  - `DiagnosticsParam? diagnostics`
+
+    Body param: Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
   - `string? inferenceGeo`
 
@@ -1227,7 +1231,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
@@ -1444,12 +1448,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `BrowserToolsetConfigs? Configs`
 
-        Per-member configuration for `browser_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `BrowserTypeConfig? Type`
 
@@ -1876,12 +1875,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `ComputerToolsetConfigs? Configs`
 
-        Per-member configuration for `computer_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `ComputerTypeConfig? Type`
 
@@ -2235,7 +2229,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -2251,25 +2245,25 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           The city of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `string? Country`
 
           The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-          maxLength: 2, minLength: 2
+          minLength: 2, maxLength: 2
 
         - `string? Region`
 
           The region of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `string? Timezone`
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
     - `class WebFetchTool20250910`
 
@@ -2315,13 +2309,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -2329,12 +2323,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `ClientToolResults ClientToolResults`
 
@@ -2458,7 +2447,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -2512,13 +2501,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -2526,12 +2515,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `class WebFetchTool20260309`
 
@@ -2579,13 +2563,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -2593,12 +2577,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `bool UseCache`
 
@@ -2644,7 +2623,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `ResponseInclusion ResponseInclusion`
 
@@ -2706,13 +2685,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `ResponseInclusion ResponseInclusion`
 
@@ -2728,12 +2707,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `bool UseCache`
 
@@ -2831,7 +2805,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
   - `long topK`
 
@@ -2855,7 +2829,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Recommended for advanced use cases only.
 
-    maximum: 1, minimum: 0
+    minimum: 0, maximum: 1
 
 ### Returns
 
@@ -2875,7 +2849,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `required Container? Container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
     - `required string ID`
 
@@ -2903,13 +2879,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Skill ID
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
       - `required string Version`
 
         The resolved version: a skill version ID for custom skills.
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
   - `required IReadOnlyList<ContentBlock> Content`
 
@@ -3070,8 +3046,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `required string Text`
 
-        minLength: 0
-
     - `class ThinkingBlock`
 
       - `JsonElement Type = "thinking"`
@@ -3144,7 +3118,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         For a toolset member tool_use, the toolset family.
 
-        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+        minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
     - `class ServerToolUseBlock`
 
@@ -3530,7 +3504,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `required string ToolName`
 
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+              minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
       - `required string ToolUseID`
 
@@ -3543,6 +3517,54 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
       - `JsonElement Type = "container_upload"`
 
       - `required string FileID`
+
+  - `required Diagnostics? Diagnostics`
+
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+    - `required CacheMissReason? CacheMissReason`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `class CacheMissModelChanged`
+
+        - `JsonElement Type = "model_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissSystemChanged`
+
+        - `JsonElement Type = "system_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissToolsChanged`
+
+        - `JsonElement Type = "tools_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissMessagesChanged`
+
+        - `JsonElement Type = "messages_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissPreviousMessageNotFound`
+
+        - `JsonElement Type = "previous_message_not_found"`
+
+      - `class CacheMissUnavailable`
+
+        - `JsonElement Type = "unavailable"`
 
   - `required Model Model`
 
@@ -3586,10 +3608,6 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       Powerful intelligence for long-running agents and coding
 
-    - `ClaudeMythosPreview("claude-mythos-preview")`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
     - `ClaudeOpus4_6("claude-opus-4-6")`
 
       Powerful intelligence for long-running agents and coding
@@ -3622,6 +3640,12 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       High-performance model for agents and coding
 
+    - `ClaudeMythosPreview("claude-mythos-preview")`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
+
   - `JsonElement Role = "assistant"`
 
     Conversational role of the generated message.
@@ -3630,13 +3654,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `required RefusalStopDetails? StopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
     - `JsonElement Type = "refusal"`
 
     - `required Category? Category`
 
-      The policy category that triggered a refusal.
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
 
       - `Cyber("cyber")`
 
@@ -3820,11 +3848,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `required Container? Container`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
       - `required RefusalStopDetails? StopDetails`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
       - `required StopReason? StopReason`
 
@@ -4028,6 +4060,12 @@ Console.WriteLine(message);
       "type": "text"
     }
   ],
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
   "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
@@ -4176,7 +4214,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `required string? DocumentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `required long EndCharIndex`
 
@@ -4196,7 +4234,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `required string? DocumentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `required long EndPageNumber`
 
@@ -4220,7 +4258,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `required string? DocumentTitle`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
               - `required long EndBlockIndex`
 
@@ -4244,7 +4282,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `required string? Title`
 
-                maxLength: 512, minLength: 1
+                minLength: 1, maxLength: 512
 
               - `required string Url`
 
@@ -4400,7 +4438,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `string? Title`
 
-            maxLength: 500, minLength: 1
+            minLength: 1, maxLength: 500
 
         - `class SearchResultBlockParam`
 
@@ -4464,7 +4502,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `required string Name`
 
-            maxLength: 200, minLength: 1
+            minLength: 1, maxLength: 200
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -4500,7 +4538,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             For a toolset member tool_use, the toolset family this member belongs to.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class ToolResultBlockParam`
 
@@ -4536,7 +4574,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `required string ToolName`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `CacheControlEphemeral? CacheControl`
 
@@ -4564,7 +4602,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                     The caller-assigned identifier for this tab, unique within the inventory.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `required string Title`
 
@@ -4590,7 +4628,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                  maxItems: 200, minItems: 1
+                  minItems: 1, maxItems: 200
 
                   - `class BrowserStateChangeTabOpened`
 
@@ -4608,7 +4646,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       The `tab_id` of the opened tab, present in `tabs`.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `class BrowserStateChangeDownloadStarted`
 
@@ -4620,7 +4658,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `required string Url`
 
@@ -4641,7 +4679,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `required string Url`
 
@@ -4653,7 +4691,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `long? SizeBytes`
 
@@ -4671,7 +4709,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `required string Url`
 
@@ -4683,7 +4721,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       The failure or cancellation detail, when known.
 
-                      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `bool IsError`
 
@@ -4691,7 +4729,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             For a toolset member tool_result, the toolset family of the paired tool_use.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class ServerToolUseBlockParam`
 
@@ -5069,7 +5107,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `required string ToolName`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                 - `CacheControlEphemeral? CacheControl`
 
@@ -5238,7 +5276,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         This is how the tool will be called by the model and in `tool_use` blocks.
 
-        maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
       - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
@@ -5455,12 +5493,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `BrowserToolsetConfigs? Configs`
 
-        Per-member configuration for `browser_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `BrowserTypeConfig? Type`
 
@@ -5887,12 +5920,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `ComputerToolsetConfigs? Configs`
 
-        Per-member configuration for `computer_toolset_20260801`: one
-        optional field per member tool, keyed by the member name — the same
-        name the member's `tool_use` blocks carry. Every member is an
-        accepted key, and a member's defaults apply wherever its key is
-        absent. Unknown keys are rejected: the field set is this toolset
-        version's complete member set.
+        Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
         - `ComputerTypeConfig? Type`
 
@@ -6246,7 +6274,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -6262,25 +6290,25 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           The city of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `string? Country`
 
           The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-          maxLength: 2, minLength: 2
+          minLength: 2, maxLength: 2
 
         - `string? Region`
 
           The region of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
         - `string? Timezone`
 
           The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-          maxLength: 255, minLength: 1
+          minLength: 1, maxLength: 255
 
     - `class WebFetchTool20250910`
 
@@ -6326,13 +6354,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -6340,12 +6368,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `ClientToolResults ClientToolResults`
 
@@ -6469,7 +6492,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -6523,13 +6546,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -6537,12 +6560,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `class WebFetchTool20260309`
 
@@ -6590,13 +6608,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `bool Strict`
 
@@ -6604,12 +6622,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `bool UseCache`
 
@@ -6655,7 +6668,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `ResponseInclusion ResponseInclusion`
 
@@ -6717,13 +6730,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `long? MaxUses`
 
         Maximum number of times the tool can be used in the API request.
 
-        exclusiveMinimum: 0
+        minimum: 1
 
       - `ResponseInclusion ResponseInclusion`
 
@@ -6739,12 +6752,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `WebFetchUrlSources? UrlSources`
 
-        Which sources contribute to the set of URLs web fetch may fetch.
-
-        Each key is a tagged variant: `user_input` is `all` or `none`; the
-        two tool filters are `all`, `none`, `only` (only the named tools'
-        results) or `except` (every result but the named tools'). A named tool
-        must be declared in this request's `tools[]`.
+        Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `bool UseCache`
 
@@ -7502,7 +7510,7 @@ Console.WriteLine(messageTokensCount);
 
       The caller-assigned identifier for this tab, unique within the inventory.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `required string Title`
 
@@ -7545,7 +7553,7 @@ Console.WriteLine(messageTokensCount);
 
     Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-    maxItems: 200, minItems: 1
+    minItems: 1, maxItems: 200
 
     - `class BrowserStateChangeTabOpened`
 
@@ -7563,7 +7571,7 @@ Console.WriteLine(messageTokensCount);
 
         The `tab_id` of the opened tab, present in `tabs`.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `class BrowserStateChangeDownloadStarted`
 
@@ -7575,7 +7583,7 @@ Console.WriteLine(messageTokensCount);
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `required string Url`
 
@@ -7596,7 +7604,7 @@ Console.WriteLine(messageTokensCount);
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `required string Url`
 
@@ -7608,7 +7616,7 @@ Console.WriteLine(messageTokensCount);
 
         Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `long? SizeBytes`
 
@@ -7626,7 +7634,7 @@ Console.WriteLine(messageTokensCount);
 
         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
       - `required string Url`
 
@@ -7638,7 +7646,7 @@ Console.WriteLine(messageTokensCount);
 
         The failure or cancellation detail, when known.
 
-        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Change
 
@@ -7660,7 +7668,7 @@ Console.WriteLine(messageTokensCount);
 
       The `tab_id` of the opened tab, present in `tabs`.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `class BrowserStateChangeDownloadStarted`
 
@@ -7672,7 +7680,7 @@ Console.WriteLine(messageTokensCount);
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `required string Url`
 
@@ -7693,7 +7701,7 @@ Console.WriteLine(messageTokensCount);
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `required string Url`
 
@@ -7705,7 +7713,7 @@ Console.WriteLine(messageTokensCount);
 
       Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `long? SizeBytes`
 
@@ -7723,7 +7731,7 @@ Console.WriteLine(messageTokensCount);
 
       The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `required string Url`
 
@@ -7735,7 +7743,7 @@ Console.WriteLine(messageTokensCount);
 
       The failure or cancellation detail, when known.
 
-      pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+      maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Change Download Completed
 
@@ -7752,7 +7760,7 @@ Console.WriteLine(messageTokensCount);
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `required string Url`
 
@@ -7764,7 +7772,7 @@ Console.WriteLine(messageTokensCount);
 
     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `long? SizeBytes`
 
@@ -7784,7 +7792,7 @@ Console.WriteLine(messageTokensCount);
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `required string Url`
 
@@ -7796,7 +7804,7 @@ Console.WriteLine(messageTokensCount);
 
     The failure or cancellation detail, when known.
 
-    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Change Download Started
 
@@ -7810,7 +7818,7 @@ Console.WriteLine(messageTokensCount);
 
     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `required string Url`
 
@@ -7836,7 +7844,7 @@ Console.WriteLine(messageTokensCount);
 
     The `tab_id` of the opened tab, present in `tabs`.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
 ### Browser State Tab Entry
 
@@ -7855,7 +7863,7 @@ Console.WriteLine(messageTokensCount);
 
     The caller-assigned identifier for this tab, unique within the inventory.
 
-    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `required string Title`
 
@@ -7921,12 +7929,7 @@ Console.WriteLine(messageTokensCount);
 
   - `BrowserToolsetConfigs? Configs`
 
-    Per-member configuration for `browser_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
     - `BrowserTypeConfig? Type`
 
@@ -8776,6 +8779,102 @@ Console.WriteLine(messageTokensCount);
 
     minimum: 0
 
+### Cache Miss Messages Changed
+
+- `class CacheMissMessagesChanged`
+
+  - `JsonElement Type = "messages_changed"`
+
+  - `required long CacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Model Changed
+
+- `class CacheMissModelChanged`
+
+  - `JsonElement Type = "model_changed"`
+
+  - `required long CacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Previous Message Not Found
+
+- `class CacheMissPreviousMessageNotFound`
+
+  - `JsonElement Type = "previous_message_not_found"`
+
+### Cache Miss Reason
+
+- `class CacheMissReason: union`
+
+  - `class CacheMissModelChanged`
+
+    - `JsonElement Type = "model_changed"`
+
+    - `required long CacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissSystemChanged`
+
+    - `JsonElement Type = "system_changed"`
+
+    - `required long CacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissToolsChanged`
+
+    - `JsonElement Type = "tools_changed"`
+
+    - `required long CacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissMessagesChanged`
+
+    - `JsonElement Type = "messages_changed"`
+
+    - `required long CacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissPreviousMessageNotFound`
+
+    - `JsonElement Type = "previous_message_not_found"`
+
+  - `class CacheMissUnavailable`
+
+    - `JsonElement Type = "unavailable"`
+
+### Cache Miss System Changed
+
+- `class CacheMissSystemChanged`
+
+  - `JsonElement Type = "system_changed"`
+
+  - `required long CacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Tools Changed
+
+- `class CacheMissToolsChanged`
+
+  - `JsonElement Type = "tools_changed"`
+
+  - `required long CacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Unavailable
+
+- `class CacheMissUnavailable`
+
+  - `JsonElement Type = "unavailable"`
+
 ### Citation Char Location
 
 - `class CitationCharLocation`
@@ -8812,7 +8911,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string? DocumentTitle`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
   - `required long EndCharIndex`
 
@@ -8870,7 +8969,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string? DocumentTitle`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
   - `required long EndBlockIndex`
 
@@ -8920,7 +9019,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string? DocumentTitle`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
   - `required long EndPageNumber`
 
@@ -8976,7 +9075,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string? Title`
 
-    maxLength: 512, minLength: 1
+    minLength: 1, maxLength: 512
 
   - `required string Url`
 
@@ -9941,12 +10040,7 @@ Console.WriteLine(messageTokensCount);
 
   - `ComputerToolsetConfigs? Configs`
 
-    Per-member configuration for `computer_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
     - `ComputerTypeConfig? Type`
 
@@ -10455,13 +10549,13 @@ Console.WriteLine(messageTokensCount);
 
       Skill ID
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
     - `required string Version`
 
       The resolved version: a skill version ID for custom skills.
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
 ### Container Params
 
@@ -10491,13 +10585,13 @@ Console.WriteLine(messageTokensCount);
 
       Skill ID
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
     - `string Version`
 
       Skill version or 'latest' for most recent version
 
-      maxLength: 64, minLength: 1
+      minLength: 1, maxLength: 64
 
 ### Container Skill
 
@@ -10517,13 +10611,13 @@ Console.WriteLine(messageTokensCount);
 
     Skill ID
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
   - `required string Version`
 
     The resolved version: a skill version ID for custom skills.
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
 ### Container Upload Block
 
@@ -10701,8 +10795,6 @@ Console.WriteLine(messageTokensCount);
 
     - `required string Text`
 
-      minLength: 0
-
   - `class ThinkingBlock`
 
     - `JsonElement Type = "thinking"`
@@ -10775,7 +10867,7 @@ Console.WriteLine(messageTokensCount);
 
       For a toolset member tool_use, the toolset family.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
   - `class ServerToolUseBlock`
 
@@ -11161,7 +11253,7 @@ Console.WriteLine(messageTokensCount);
 
           - `required string ToolName`
 
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+            minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
     - `required string ToolUseID`
 
@@ -11222,7 +11314,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndCharIndex`
 
@@ -11242,7 +11334,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndPageNumber`
 
@@ -11266,7 +11358,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndBlockIndex`
 
@@ -11290,7 +11382,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? Title`
 
-          maxLength: 512, minLength: 1
+          minLength: 1, maxLength: 512
 
         - `required string Url`
 
@@ -11446,7 +11538,7 @@ Console.WriteLine(messageTokensCount);
 
     - `string? Title`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
   - `class SearchResultBlockParam`
 
@@ -11510,7 +11602,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string Name`
 
-      maxLength: 200, minLength: 1
+      minLength: 1, maxLength: 200
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -11546,7 +11638,7 @@ Console.WriteLine(messageTokensCount);
 
       For a toolset member tool_use, the toolset family this member belongs to.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
   - `class ToolResultBlockParam`
 
@@ -11582,7 +11674,7 @@ Console.WriteLine(messageTokensCount);
 
           - `required string ToolName`
 
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+            minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -11610,7 +11702,7 @@ Console.WriteLine(messageTokensCount);
 
               The caller-assigned identifier for this tab, unique within the inventory.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `required string Title`
 
@@ -11636,7 +11728,7 @@ Console.WriteLine(messageTokensCount);
 
             Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-            maxItems: 200, minItems: 1
+            minItems: 1, maxItems: 200
 
             - `class BrowserStateChangeTabOpened`
 
@@ -11654,7 +11746,7 @@ Console.WriteLine(messageTokensCount);
 
                 The `tab_id` of the opened tab, present in `tabs`.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `class BrowserStateChangeDownloadStarted`
 
@@ -11666,7 +11758,7 @@ Console.WriteLine(messageTokensCount);
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `required string Url`
 
@@ -11687,7 +11779,7 @@ Console.WriteLine(messageTokensCount);
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `required string Url`
 
@@ -11699,7 +11791,7 @@ Console.WriteLine(messageTokensCount);
 
                 Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `long? SizeBytes`
 
@@ -11717,7 +11809,7 @@ Console.WriteLine(messageTokensCount);
 
                 The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `required string Url`
 
@@ -11729,7 +11821,7 @@ Console.WriteLine(messageTokensCount);
 
                 The failure or cancellation detail, when known.
 
-                pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
     - `bool IsError`
 
@@ -11737,7 +11829,7 @@ Console.WriteLine(messageTokensCount);
 
       For a toolset member tool_result, the toolset family of the paired tool_use.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
   - `class ServerToolUseBlockParam`
 
@@ -12115,7 +12207,7 @@ Console.WriteLine(messageTokensCount);
 
           - `required string ToolName`
 
-            maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+            minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `CacheControlEphemeral? CacheControl`
 
@@ -12197,7 +12289,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndCharIndex`
 
@@ -12217,7 +12309,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndPageNumber`
 
@@ -12241,7 +12333,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndBlockIndex`
 
@@ -12265,7 +12357,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? Title`
 
-              maxLength: 512, minLength: 1
+              minLength: 1, maxLength: 512
 
             - `required string Url`
 
@@ -12404,7 +12496,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndCharIndex`
 
@@ -12424,7 +12516,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndPageNumber`
 
@@ -12448,7 +12540,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndBlockIndex`
 
@@ -12472,7 +12564,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? Title`
 
-          maxLength: 512, minLength: 1
+          minLength: 1, maxLength: 512
 
         - `required string Url`
 
@@ -12563,6 +12655,70 @@ Console.WriteLine(messageTokensCount);
         - `Downsize("downsize")`
 
         - `Error("error")`
+
+### Diagnostics
+
+- `class Diagnostics`
+
+  Request-level diagnostics: why the prompt cache could not fully reuse
+  the prefix of the request named by `diagnostics.previous_message_id`.
+
+  - `required CacheMissReason? CacheMissReason`
+
+    Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+    - `class CacheMissModelChanged`
+
+      - `JsonElement Type = "model_changed"`
+
+      - `required long CacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `class CacheMissSystemChanged`
+
+      - `JsonElement Type = "system_changed"`
+
+      - `required long CacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `class CacheMissToolsChanged`
+
+      - `JsonElement Type = "tools_changed"`
+
+      - `required long CacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `class CacheMissMessagesChanged`
+
+      - `JsonElement Type = "messages_changed"`
+
+      - `required long CacheMissedInputTokens`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+    - `class CacheMissPreviousMessageNotFound`
+
+      - `JsonElement Type = "previous_message_not_found"`
+
+    - `class CacheMissUnavailable`
+
+      - `JsonElement Type = "unavailable"`
+
+### Diagnostics Param
+
+- `class DiagnosticsParam`
+
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
+
+  - `string? PreviousMessageID`
+
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
+    maxLength: 256
 
 ### Direct Caller
 
@@ -12687,7 +12843,7 @@ Console.WriteLine(messageTokensCount);
 
                 - `required string? DocumentTitle`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `required long EndCharIndex`
 
@@ -12707,7 +12863,7 @@ Console.WriteLine(messageTokensCount);
 
                 - `required string? DocumentTitle`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `required long EndPageNumber`
 
@@ -12731,7 +12887,7 @@ Console.WriteLine(messageTokensCount);
 
                 - `required string? DocumentTitle`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `required long EndBlockIndex`
 
@@ -12755,7 +12911,7 @@ Console.WriteLine(messageTokensCount);
 
                 - `required string? Title`
 
-                  maxLength: 512, minLength: 1
+                  minLength: 1, maxLength: 512
 
                 - `required string Url`
 
@@ -12873,7 +13029,7 @@ Console.WriteLine(messageTokensCount);
 
   - `string? Title`
 
-    maxLength: 500, minLength: 1
+    minLength: 1, maxLength: 500
 
 ### Encrypted Code Execution Result Block
 
@@ -13105,7 +13261,9 @@ Console.WriteLine(messageTokensCount);
 
   - `required Container? Container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
     - `required string ID`
 
@@ -13133,13 +13291,13 @@ Console.WriteLine(messageTokensCount);
 
         Skill ID
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
       - `required string Version`
 
         The resolved version: a skill version ID for custom skills.
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
   - `required IReadOnlyList<ContentBlock> Content`
 
@@ -13300,8 +13458,6 @@ Console.WriteLine(messageTokensCount);
 
       - `required string Text`
 
-        minLength: 0
-
     - `class ThinkingBlock`
 
       - `JsonElement Type = "thinking"`
@@ -13374,7 +13530,7 @@ Console.WriteLine(messageTokensCount);
 
         For a toolset member tool_use, the toolset family.
 
-        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+        minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
     - `class ServerToolUseBlock`
 
@@ -13760,7 +13916,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string ToolName`
 
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+              minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
       - `required string ToolUseID`
 
@@ -13773,6 +13929,54 @@ Console.WriteLine(messageTokensCount);
       - `JsonElement Type = "container_upload"`
 
       - `required string FileID`
+
+  - `required Diagnostics? Diagnostics`
+
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+    - `required CacheMissReason? CacheMissReason`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `class CacheMissModelChanged`
+
+        - `JsonElement Type = "model_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissSystemChanged`
+
+        - `JsonElement Type = "system_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissToolsChanged`
+
+        - `JsonElement Type = "tools_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissMessagesChanged`
+
+        - `JsonElement Type = "messages_changed"`
+
+        - `required long CacheMissedInputTokens`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `class CacheMissPreviousMessageNotFound`
+
+        - `JsonElement Type = "previous_message_not_found"`
+
+      - `class CacheMissUnavailable`
+
+        - `JsonElement Type = "unavailable"`
 
   - `required Model Model`
 
@@ -13816,10 +14020,6 @@ Console.WriteLine(messageTokensCount);
 
       Powerful intelligence for long-running agents and coding
 
-    - `ClaudeMythosPreview("claude-mythos-preview")`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
     - `ClaudeOpus4_6("claude-opus-4-6")`
 
       Powerful intelligence for long-running agents and coding
@@ -13852,6 +14052,12 @@ Console.WriteLine(messageTokensCount);
 
       High-performance model for agents and coding
 
+    - `ClaudeMythosPreview("claude-mythos-preview")`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
+
   - `JsonElement Role = "assistant"`
 
     Conversational role of the generated message.
@@ -13860,13 +14066,17 @@ Console.WriteLine(messageTokensCount);
 
   - `required RefusalStopDetails? StopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
     - `JsonElement Type = "refusal"`
 
     - `required Category? Category`
 
-      The policy category that triggered a refusal.
+      The policy category that triggered the refusal.
+
+      `null` when the refusal doesn't map to a named category.
 
       - `Cyber("cyber")`
 
@@ -14060,7 +14270,7 @@ Console.WriteLine(messageTokensCount);
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+      minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
@@ -14294,12 +14504,7 @@ Console.WriteLine(messageTokensCount);
 
     - `BrowserToolsetConfigs? Configs`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `BrowserTypeConfig? Type`
 
@@ -14726,12 +14931,7 @@ Console.WriteLine(messageTokensCount);
 
     - `ComputerToolsetConfigs? Configs`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `ComputerTypeConfig? Type`
 
@@ -15085,7 +15285,7 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -15101,25 +15301,25 @@ Console.WriteLine(messageTokensCount);
 
         The city of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `string? Country`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-        maxLength: 2, minLength: 2
+        minLength: 2, maxLength: 2
 
       - `string? Region`
 
         The region of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `string? Timezone`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
   - `class WebFetchTool20250910`
 
@@ -15167,13 +15367,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -15181,12 +15381,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `ClientToolResults ClientToolResults`
 
@@ -15310,7 +15505,7 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -15364,13 +15559,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -15378,12 +15573,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class WebFetchTool20260309`
 
@@ -15431,13 +15621,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -15445,12 +15635,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `bool UseCache`
 
@@ -15496,7 +15681,7 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `ResponseInclusion ResponseInclusion`
 
@@ -15558,13 +15743,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `ResponseInclusion ResponseInclusion`
 
@@ -15580,12 +15765,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `bool UseCache`
 
@@ -15695,13 +15875,13 @@ Console.WriteLine(messageTokensCount);
 
         Skill ID
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
       - `string Version`
 
         Skill version or 'latest' for most recent version
 
-        maxLength: 64, minLength: 1
+        minLength: 1, maxLength: 64
 
   - `string`
 
@@ -15822,7 +16002,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndCharIndex`
 
@@ -15842,7 +16022,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndPageNumber`
 
@@ -15866,7 +16046,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndBlockIndex`
 
@@ -15890,7 +16070,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? Title`
 
-              maxLength: 512, minLength: 1
+              minLength: 1, maxLength: 512
 
             - `required string Url`
 
@@ -16046,7 +16226,7 @@ Console.WriteLine(messageTokensCount);
 
         - `string? Title`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
       - `class SearchResultBlockParam`
 
@@ -16110,7 +16290,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string Name`
 
-          maxLength: 200, minLength: 1
+          minLength: 1, maxLength: 200
 
         - `CacheControlEphemeral? CacheControl`
 
@@ -16146,7 +16326,7 @@ Console.WriteLine(messageTokensCount);
 
           For a toolset member tool_use, the toolset family this member belongs to.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `class ToolResultBlockParam`
 
@@ -16182,7 +16362,7 @@ Console.WriteLine(messageTokensCount);
 
               - `required string ToolName`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -16210,7 +16390,7 @@ Console.WriteLine(messageTokensCount);
 
                   The caller-assigned identifier for this tab, unique within the inventory.
 
-                  maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                  minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `required string Title`
 
@@ -16236,7 +16416,7 @@ Console.WriteLine(messageTokensCount);
 
                 Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                maxItems: 200, minItems: 1
+                minItems: 1, maxItems: 200
 
                 - `class BrowserStateChangeTabOpened`
 
@@ -16254,7 +16434,7 @@ Console.WriteLine(messageTokensCount);
 
                     The `tab_id` of the opened tab, present in `tabs`.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                 - `class BrowserStateChangeDownloadStarted`
 
@@ -16266,7 +16446,7 @@ Console.WriteLine(messageTokensCount);
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `required string Url`
 
@@ -16287,7 +16467,7 @@ Console.WriteLine(messageTokensCount);
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `required string Url`
 
@@ -16299,7 +16479,7 @@ Console.WriteLine(messageTokensCount);
 
                     Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `long? SizeBytes`
 
@@ -16317,7 +16497,7 @@ Console.WriteLine(messageTokensCount);
 
                     The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                    maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                    minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                   - `required string Url`
 
@@ -16329,7 +16509,7 @@ Console.WriteLine(messageTokensCount);
 
                     The failure or cancellation detail, when known.
 
-                    pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                    maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
         - `bool IsError`
 
@@ -16337,7 +16517,7 @@ Console.WriteLine(messageTokensCount);
 
           For a toolset member tool_result, the toolset family of the paired tool_use.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `class ServerToolUseBlockParam`
 
@@ -16715,7 +16895,7 @@ Console.WriteLine(messageTokensCount);
 
               - `required string ToolName`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -16776,7 +16956,9 @@ Console.WriteLine(messageTokensCount);
 
   - `Effort? Effort`
 
-    All possible effort levels.
+    How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+    Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
     - `Low("low")`
 
@@ -17281,8 +17463,6 @@ Console.WriteLine(messageTokensCount);
 
       - `required string Text`
 
-        minLength: 0
-
     - `class ThinkingBlock`
 
       - `JsonElement Type = "thinking"`
@@ -17355,7 +17535,7 @@ Console.WriteLine(messageTokensCount);
 
         For a toolset member tool_use, the toolset family.
 
-        maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+        minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
     - `class ServerToolUseBlock`
 
@@ -17741,7 +17921,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string ToolName`
 
-              maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+              minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
       - `required string ToolUseID`
 
@@ -17775,7 +17955,9 @@ Console.WriteLine(messageTokensCount);
 
     - `required Container? Container`
 
-      Information about the container used in the request (for the code execution tool)
+      Information about the container used in this request.
+
+      This will be non-null if a container tool (e.g. code execution) was used.
 
       - `required string ID`
 
@@ -17803,23 +17985,27 @@ Console.WriteLine(messageTokensCount);
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `required string Version`
 
           The resolved version: a skill version ID for custom skills.
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `required RefusalStopDetails? StopDetails`
 
-      Structured information about a refusal.
+      Structured information about why model output stopped.
+
+      This is `null` when the `stop_reason` has no additional detail to report.
 
       - `JsonElement Type = "refusal"`
 
       - `required Category? Category`
 
-        The policy category that triggered a refusal.
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
 
         - `Cyber("cyber")`
 
@@ -17959,7 +18145,9 @@ Console.WriteLine(messageTokensCount);
 
     - `required Container? Container`
 
-      Information about the container used in the request (for the code execution tool)
+      Information about the container used in this request.
+
+      This will be non-null if a container tool (e.g. code execution) was used.
 
       - `required string ID`
 
@@ -17987,13 +18175,13 @@ Console.WriteLine(messageTokensCount);
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `required string Version`
 
           The resolved version: a skill version ID for custom skills.
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `required IReadOnlyList<ContentBlock> Content`
 
@@ -18154,8 +18342,6 @@ Console.WriteLine(messageTokensCount);
 
         - `required string Text`
 
-          minLength: 0
-
       - `class ThinkingBlock`
 
         - `JsonElement Type = "thinking"`
@@ -18228,7 +18414,7 @@ Console.WriteLine(messageTokensCount);
 
           For a toolset member tool_use, the toolset family.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `class ServerToolUseBlock`
 
@@ -18614,7 +18800,7 @@ Console.WriteLine(messageTokensCount);
 
               - `required string ToolName`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `required string ToolUseID`
 
@@ -18627,6 +18813,54 @@ Console.WriteLine(messageTokensCount);
         - `JsonElement Type = "container_upload"`
 
         - `required string FileID`
+
+    - `required Diagnostics? Diagnostics`
+
+      Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+      - `required CacheMissReason? CacheMissReason`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class CacheMissModelChanged`
+
+          - `JsonElement Type = "model_changed"`
+
+          - `required long CacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissSystemChanged`
+
+          - `JsonElement Type = "system_changed"`
+
+          - `required long CacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissToolsChanged`
+
+          - `JsonElement Type = "tools_changed"`
+
+          - `required long CacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissMessagesChanged`
+
+          - `JsonElement Type = "messages_changed"`
+
+          - `required long CacheMissedInputTokens`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissPreviousMessageNotFound`
+
+          - `JsonElement Type = "previous_message_not_found"`
+
+        - `class CacheMissUnavailable`
+
+          - `JsonElement Type = "unavailable"`
 
     - `required Model Model`
 
@@ -18670,10 +18904,6 @@ Console.WriteLine(messageTokensCount);
 
         Powerful intelligence for long-running agents and coding
 
-      - `ClaudeMythosPreview("claude-mythos-preview")`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `ClaudeOpus4_6("claude-opus-4-6")`
 
         Powerful intelligence for long-running agents and coding
@@ -18706,6 +18936,12 @@ Console.WriteLine(messageTokensCount);
 
         High-performance model for agents and coding
 
+      - `ClaudeMythosPreview("claude-mythos-preview")`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
+
     - `JsonElement Role = "assistant"`
 
       Conversational role of the generated message.
@@ -18714,13 +18950,17 @@ Console.WriteLine(messageTokensCount);
 
     - `required RefusalStopDetails? StopDetails`
 
-      Structured information about a refusal.
+      Structured information about why model output stopped.
+
+      This is `null` when the `stop_reason` has no additional detail to report.
 
       - `JsonElement Type = "refusal"`
 
       - `required Category? Category`
 
-        The policy category that triggered a refusal.
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
 
         - `Cyber("cyber")`
 
@@ -18918,7 +19158,9 @@ Console.WriteLine(messageTokensCount);
 
       - `required Container? Container`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
         - `required string ID`
 
@@ -18946,13 +19188,13 @@ Console.WriteLine(messageTokensCount);
 
             Skill ID
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
           - `required string Version`
 
             The resolved version: a skill version ID for custom skills.
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
       - `required IReadOnlyList<ContentBlock> Content`
 
@@ -19113,8 +19355,6 @@ Console.WriteLine(messageTokensCount);
 
           - `required string Text`
 
-            minLength: 0
-
         - `class ThinkingBlock`
 
           - `JsonElement Type = "thinking"`
@@ -19187,7 +19427,7 @@ Console.WriteLine(messageTokensCount);
 
             For a toolset member tool_use, the toolset family.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class ServerToolUseBlock`
 
@@ -19573,7 +19813,7 @@ Console.WriteLine(messageTokensCount);
 
                 - `required string ToolName`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `required string ToolUseID`
 
@@ -19586,6 +19826,54 @@ Console.WriteLine(messageTokensCount);
           - `JsonElement Type = "container_upload"`
 
           - `required string FileID`
+
+      - `required Diagnostics? Diagnostics`
+
+        Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+        - `required CacheMissReason? CacheMissReason`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class CacheMissModelChanged`
+
+            - `JsonElement Type = "model_changed"`
+
+            - `required long CacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissSystemChanged`
+
+            - `JsonElement Type = "system_changed"`
+
+            - `required long CacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissToolsChanged`
+
+            - `JsonElement Type = "tools_changed"`
+
+            - `required long CacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissMessagesChanged`
+
+            - `JsonElement Type = "messages_changed"`
+
+            - `required long CacheMissedInputTokens`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissPreviousMessageNotFound`
+
+            - `JsonElement Type = "previous_message_not_found"`
+
+          - `class CacheMissUnavailable`
+
+            - `JsonElement Type = "unavailable"`
 
       - `required Model Model`
 
@@ -19629,10 +19917,6 @@ Console.WriteLine(messageTokensCount);
 
           Powerful intelligence for long-running agents and coding
 
-        - `ClaudeMythosPreview("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
         - `ClaudeOpus4_6("claude-opus-4-6")`
 
           Powerful intelligence for long-running agents and coding
@@ -19665,6 +19949,12 @@ Console.WriteLine(messageTokensCount);
 
           High-performance model for agents and coding
 
+        - `ClaudeMythosPreview("claude-mythos-preview")`
+
+          **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          New class of intelligence, strongest in coding and cybersecurity
+
       - `JsonElement Role = "assistant"`
 
         Conversational role of the generated message.
@@ -19673,13 +19963,17 @@ Console.WriteLine(messageTokensCount);
 
       - `required RefusalStopDetails? StopDetails`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
         - `JsonElement Type = "refusal"`
 
         - `required Category? Category`
 
-          The policy category that triggered a refusal.
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
 
           - `Cyber("cyber")`
 
@@ -19855,11 +20149,15 @@ Console.WriteLine(messageTokensCount);
 
       - `required Container? Container`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
       - `required RefusalStopDetails? StopDetails`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
       - `required StopReason? StopReason`
 
@@ -20042,7 +20340,9 @@ Console.WriteLine(messageTokensCount);
 
   - `required Category? Category`
 
-    The policy category that triggered a refusal.
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
 
     - `Cyber("cyber")`
 
@@ -20119,7 +20419,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndCharIndex`
 
@@ -20139,7 +20439,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndPageNumber`
 
@@ -20163,7 +20463,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? DocumentTitle`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
         - `required long EndBlockIndex`
 
@@ -20187,7 +20487,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string? Title`
 
-          maxLength: 512, minLength: 1
+          minLength: 1, maxLength: 512
 
         - `required string Url`
 
@@ -20434,13 +20734,13 @@ Console.WriteLine(messageTokensCount);
 
     Skill ID
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
   - `string Version`
 
     Skill version or 'latest' for most recent version
 
-    maxLength: 64, minLength: 1
+    minLength: 1, maxLength: 64
 
 ### Stop Reason
 
@@ -20592,8 +20892,6 @@ Console.WriteLine(messageTokensCount);
 
   - `required string Text`
 
-    minLength: 0
-
 ### Text Block Param
 
 - `class TextBlockParam`
@@ -20639,7 +20937,7 @@ Console.WriteLine(messageTokensCount);
 
       - `required string? DocumentTitle`
 
-        maxLength: 500, minLength: 1
+        minLength: 1, maxLength: 500
 
       - `required long EndCharIndex`
 
@@ -20659,7 +20957,7 @@ Console.WriteLine(messageTokensCount);
 
       - `required string? DocumentTitle`
 
-        maxLength: 500, minLength: 1
+        minLength: 1, maxLength: 500
 
       - `required long EndPageNumber`
 
@@ -20683,7 +20981,7 @@ Console.WriteLine(messageTokensCount);
 
       - `required string? DocumentTitle`
 
-        maxLength: 500, minLength: 1
+        minLength: 1, maxLength: 500
 
       - `required long EndBlockIndex`
 
@@ -20707,7 +21005,7 @@ Console.WriteLine(messageTokensCount);
 
       - `required string? Title`
 
-        maxLength: 512, minLength: 1
+        minLength: 1, maxLength: 512
 
       - `required string Url`
 
@@ -20885,7 +21183,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string? DocumentTitle`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
     - `required long EndCharIndex`
 
@@ -20905,7 +21203,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string? DocumentTitle`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
     - `required long EndPageNumber`
 
@@ -20929,7 +21227,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string? DocumentTitle`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
     - `required long EndBlockIndex`
 
@@ -20953,7 +21251,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string? Title`
 
-      maxLength: 512, minLength: 1
+      minLength: 1, maxLength: 512
 
     - `required string Url`
 
@@ -21468,7 +21766,7 @@ Console.WriteLine(messageTokensCount);
 
     This is how the tool will be called by the model and in `tool_use` blocks.
 
-    maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+    minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
   - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
@@ -21688,7 +21986,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string ToolName`
 
-    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Tool Reference Block Param
 
@@ -21700,7 +21998,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string ToolName`
 
-    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
   - `CacheControlEphemeral? CacheControl`
 
@@ -21786,7 +22084,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndCharIndex`
 
@@ -21806,7 +22104,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndPageNumber`
 
@@ -21830,7 +22128,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? DocumentTitle`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
             - `required long EndBlockIndex`
 
@@ -21854,7 +22152,7 @@ Console.WriteLine(messageTokensCount);
 
             - `required string? Title`
 
-              maxLength: 512, minLength: 1
+              minLength: 1, maxLength: 512
 
             - `required string Url`
 
@@ -22038,7 +22336,7 @@ Console.WriteLine(messageTokensCount);
 
         - `string? Title`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
       - `class ToolReferenceBlockParam`
 
@@ -22048,7 +22346,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string ToolName`
 
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+          minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `CacheControlEphemeral? CacheControl`
 
@@ -22076,7 +22374,7 @@ Console.WriteLine(messageTokensCount);
 
             The caller-assigned identifier for this tab, unique within the inventory.
 
-            maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+            minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `required string Title`
 
@@ -22102,7 +22400,7 @@ Console.WriteLine(messageTokensCount);
 
           Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-          maxItems: 200, minItems: 1
+          minItems: 1, maxItems: 200
 
           - `class BrowserStateChangeTabOpened`
 
@@ -22120,7 +22418,7 @@ Console.WriteLine(messageTokensCount);
 
               The `tab_id` of the opened tab, present in `tabs`.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
           - `class BrowserStateChangeDownloadStarted`
 
@@ -22132,7 +22430,7 @@ Console.WriteLine(messageTokensCount);
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `required string Url`
 
@@ -22153,7 +22451,7 @@ Console.WriteLine(messageTokensCount);
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `required string Url`
 
@@ -22165,7 +22463,7 @@ Console.WriteLine(messageTokensCount);
 
               Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-              pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `long? SizeBytes`
 
@@ -22183,7 +22481,7 @@ Console.WriteLine(messageTokensCount);
 
               The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-              maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+              minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `required string Url`
 
@@ -22195,7 +22493,7 @@ Console.WriteLine(messageTokensCount);
 
               The failure or cancellation detail, when known.
 
-              pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+              maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
   - `bool IsError`
 
@@ -22203,7 +22501,7 @@ Console.WriteLine(messageTokensCount);
 
     For a toolset member tool_result, the toolset family of the paired tool_use.
 
-    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+    minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### Tool Search Tool Bm25 20251119
 
@@ -22349,7 +22647,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string ToolName`
 
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+          minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
   - `required string ToolUseID`
 
@@ -22389,7 +22687,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string ToolName`
 
-          maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+          minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `CacheControlEphemeral? CacheControl`
 
@@ -22480,7 +22778,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string ToolName`
 
-      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
 ### Tool Search Tool Search Result Block Param
 
@@ -22494,7 +22792,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string ToolName`
 
-      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
     - `CacheControlEphemeral? CacheControl`
 
@@ -22708,7 +23006,7 @@ Console.WriteLine(messageTokensCount);
 
       This is how the tool will be called by the model and in `tool_use` blocks.
 
-      maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+      minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
@@ -22942,12 +23240,7 @@ Console.WriteLine(messageTokensCount);
 
     - `BrowserToolsetConfigs? Configs`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `BrowserTypeConfig? Type`
 
@@ -23374,12 +23667,7 @@ Console.WriteLine(messageTokensCount);
 
     - `ComputerToolsetConfigs? Configs`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
       - `ComputerTypeConfig? Type`
 
@@ -23733,7 +24021,7 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -23749,25 +24037,25 @@ Console.WriteLine(messageTokensCount);
 
         The city of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `string? Country`
 
         The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-        maxLength: 2, minLength: 2
+        minLength: 2, maxLength: 2
 
       - `string? Region`
 
         The region of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
       - `string? Timezone`
 
         The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-        maxLength: 255, minLength: 1
+        minLength: 1, maxLength: 255
 
   - `class WebFetchTool20250910`
 
@@ -23815,13 +24103,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -23829,12 +24117,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `ClientToolResults ClientToolResults`
 
@@ -23958,7 +24241,7 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -24012,13 +24295,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -24026,12 +24309,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class WebFetchTool20260309`
 
@@ -24079,13 +24357,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `bool Strict`
 
@@ -24093,12 +24371,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `bool UseCache`
 
@@ -24144,7 +24417,7 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `ResponseInclusion ResponseInclusion`
 
@@ -24206,13 +24479,13 @@ Console.WriteLine(messageTokensCount);
 
       Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `long? MaxUses`
 
       Maximum number of times the tool can be used in the API request.
 
-      exclusiveMinimum: 0
+      minimum: 1
 
     - `ResponseInclusion ResponseInclusion`
 
@@ -24228,12 +24501,7 @@ Console.WriteLine(messageTokensCount);
 
     - `WebFetchUrlSources? UrlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `bool UseCache`
 
@@ -24357,7 +24625,7 @@ Console.WriteLine(messageTokensCount);
 
     For a toolset member tool_use, the toolset family.
 
-    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+    minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### Tool Use Block Param
 
@@ -24373,7 +24641,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string Name`
 
-    maxLength: 200, minLength: 1
+    minLength: 1, maxLength: 200
 
   - `CacheControlEphemeral? CacheControl`
 
@@ -24426,7 +24694,7 @@ Console.WriteLine(messageTokensCount);
 
     For a toolset member tool_use, the toolset family this member belongs to.
 
-    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+    minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### URL Image Source
 
@@ -24550,25 +24818,25 @@ Console.WriteLine(messageTokensCount);
 
     The city of the user.
 
-    maxLength: 255, minLength: 1
+    minLength: 1, maxLength: 255
 
   - `string? Country`
 
     The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-    maxLength: 2, minLength: 2
+    minLength: 2, maxLength: 2
 
   - `string? Region`
 
     The region of the user.
 
-    maxLength: 255, minLength: 1
+    minLength: 1, maxLength: 255
 
   - `string? Timezone`
 
     The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-    maxLength: 255, minLength: 1
+    minLength: 1, maxLength: 255
 
 ### Web Fetch Block
 
@@ -24701,7 +24969,7 @@ Console.WriteLine(messageTokensCount);
 
                   - `required string? DocumentTitle`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `required long EndCharIndex`
 
@@ -24721,7 +24989,7 @@ Console.WriteLine(messageTokensCount);
 
                   - `required string? DocumentTitle`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `required long EndPageNumber`
 
@@ -24745,7 +25013,7 @@ Console.WriteLine(messageTokensCount);
 
                   - `required string? DocumentTitle`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `required long EndBlockIndex`
 
@@ -24769,7 +25037,7 @@ Console.WriteLine(messageTokensCount);
 
                   - `required string? Title`
 
-                    maxLength: 512, minLength: 1
+                    minLength: 1, maxLength: 512
 
                   - `required string Url`
 
@@ -24887,7 +25155,7 @@ Console.WriteLine(messageTokensCount);
 
     - `string? Title`
 
-      maxLength: 500, minLength: 1
+      minLength: 1, maxLength: 500
 
   - `required string Url`
 
@@ -24962,13 +25230,13 @@ Console.WriteLine(messageTokensCount);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `long? MaxUses`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `bool Strict`
 
@@ -24976,12 +25244,7 @@ Console.WriteLine(messageTokensCount);
 
   - `WebFetchUrlSources? UrlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `ClientToolResults ClientToolResults`
 
@@ -25130,13 +25393,13 @@ Console.WriteLine(messageTokensCount);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `long? MaxUses`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `bool Strict`
 
@@ -25144,12 +25407,7 @@ Console.WriteLine(messageTokensCount);
 
   - `WebFetchUrlSources? UrlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `ClientToolResults ClientToolResults`
 
@@ -25300,13 +25558,13 @@ Console.WriteLine(messageTokensCount);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `long? MaxUses`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `bool Strict`
 
@@ -25314,12 +25572,7 @@ Console.WriteLine(messageTokensCount);
 
   - `WebFetchUrlSources? UrlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `ClientToolResults ClientToolResults`
 
@@ -25472,13 +25725,13 @@ Console.WriteLine(messageTokensCount);
 
     Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `long? MaxUses`
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `ResponseInclusion ResponseInclusion`
 
@@ -25494,12 +25747,7 @@ Console.WriteLine(messageTokensCount);
 
   - `WebFetchUrlSources? UrlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `ClientToolResults ClientToolResults`
 
@@ -25812,7 +26060,7 @@ Console.WriteLine(messageTokensCount);
 
                       - `required string? DocumentTitle`
 
-                        maxLength: 500, minLength: 1
+                        minLength: 1, maxLength: 500
 
                       - `required long EndCharIndex`
 
@@ -25832,7 +26080,7 @@ Console.WriteLine(messageTokensCount);
 
                       - `required string? DocumentTitle`
 
-                        maxLength: 500, minLength: 1
+                        minLength: 1, maxLength: 500
 
                       - `required long EndPageNumber`
 
@@ -25856,7 +26104,7 @@ Console.WriteLine(messageTokensCount);
 
                       - `required string? DocumentTitle`
 
-                        maxLength: 500, minLength: 1
+                        minLength: 1, maxLength: 500
 
                       - `required long EndBlockIndex`
 
@@ -25880,7 +26128,7 @@ Console.WriteLine(messageTokensCount);
 
                       - `required string? Title`
 
-                        maxLength: 512, minLength: 1
+                        minLength: 1, maxLength: 512
 
                       - `required string Url`
 
@@ -25998,7 +26246,7 @@ Console.WriteLine(messageTokensCount);
 
         - `string? Title`
 
-          maxLength: 500, minLength: 1
+          minLength: 1, maxLength: 500
 
       - `required string Url`
 
@@ -26361,7 +26609,7 @@ Console.WriteLine(messageTokensCount);
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `bool Strict`
 
@@ -26377,25 +26625,25 @@ Console.WriteLine(messageTokensCount);
 
       The city of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `string? Country`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-      maxLength: 2, minLength: 2
+      minLength: 2, maxLength: 2
 
     - `string? Region`
 
       The region of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `string? Timezone`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
 ### Web Search Tool 20260209
 
@@ -26456,7 +26704,7 @@ Console.WriteLine(messageTokensCount);
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `bool Strict`
 
@@ -26472,25 +26720,25 @@ Console.WriteLine(messageTokensCount);
 
       The city of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `string? Country`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-      maxLength: 2, minLength: 2
+      minLength: 2, maxLength: 2
 
     - `string? Region`
 
       The region of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `string? Timezone`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
 ### Web Search Tool 20260318
 
@@ -26551,7 +26799,7 @@ Console.WriteLine(messageTokensCount);
 
     Maximum number of times the tool can be used in the API request.
 
-    exclusiveMinimum: 0
+    minimum: 1
 
   - `ResponseInclusion ResponseInclusion`
 
@@ -26575,25 +26823,25 @@ Console.WriteLine(messageTokensCount);
 
       The city of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `string? Country`
 
       The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-      maxLength: 2, minLength: 2
+      minLength: 2, maxLength: 2
 
     - `string? Region`
 
       The region of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
     - `string? Timezone`
 
       The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-      maxLength: 255, minLength: 1
+      minLength: 1, maxLength: 255
 
 ### Web Search Tool Request Error
 
@@ -26898,7 +27146,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Body param: List of requests for prompt completion. Each is an individual request to create a Message.
 
-    maxItems: 100000, minItems: 1
+    minItems: 1, maxItems: 100000
 
     - `required string CustomID`
 
@@ -26906,7 +27154,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       Must be unique for each request within the Message Batch.
 
-      maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]{1,64}$
 
     - `required Params Params`
 
@@ -27026,7 +27274,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `required string? DocumentTitle`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `required long EndCharIndex`
 
@@ -27046,7 +27294,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `required string? DocumentTitle`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `required long EndPageNumber`
 
@@ -27070,7 +27318,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `required string? DocumentTitle`
 
-                    maxLength: 500, minLength: 1
+                    minLength: 1, maxLength: 500
 
                   - `required long EndBlockIndex`
 
@@ -27094,7 +27342,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `required string? Title`
 
-                    maxLength: 512, minLength: 1
+                    minLength: 1, maxLength: 512
 
                   - `required string Url`
 
@@ -27250,7 +27498,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `string? Title`
 
-                maxLength: 500, minLength: 1
+                minLength: 1, maxLength: 500
 
             - `class SearchResultBlockParam`
 
@@ -27314,7 +27562,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `required string Name`
 
-                maxLength: 200, minLength: 1
+                minLength: 1, maxLength: 200
 
               - `CacheControlEphemeral? CacheControl`
 
@@ -27350,7 +27598,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 For a toolset member tool_use, the toolset family this member belongs to.
 
-                maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+                minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
             - `class ToolResultBlockParam`
 
@@ -27386,7 +27634,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `required string ToolName`
 
-                      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                     - `CacheControlEphemeral? CacheControl`
 
@@ -27414,7 +27662,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         The caller-assigned identifier for this tab, unique within the inventory.
 
-                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `required string Title`
 
@@ -27440,7 +27688,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                      maxItems: 200, minItems: 1
+                      minItems: 1, maxItems: 200
 
                       - `class BrowserStateChangeTabOpened`
 
@@ -27458,7 +27706,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           The `tab_id` of the opened tab, present in `tabs`.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `class BrowserStateChangeDownloadStarted`
 
@@ -27470,7 +27718,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `required string Url`
 
@@ -27491,7 +27739,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `required string Url`
 
@@ -27503,7 +27751,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                          pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                          maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `long? SizeBytes`
 
@@ -27521,7 +27769,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                          maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                          minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                         - `required string Url`
 
@@ -27533,7 +27781,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           The failure or cancellation detail, when known.
 
-                          pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                          maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
               - `bool IsError`
 
@@ -27541,7 +27789,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 For a toolset member tool_result, the toolset family of the paired tool_use.
 
-                maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+                minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
             - `class ServerToolUseBlockParam`
 
@@ -27919,7 +28167,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `required string ToolName`
 
-                      maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                      minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                     - `CacheControlEphemeral? CacheControl`
 
@@ -27996,10 +28244,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           Powerful intelligence for long-running agents and coding
 
-        - `ClaudeMythosPreview("claude-mythos-preview")`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
         - `ClaudeOpus4_6("claude-opus-4-6")`
 
           Powerful intelligence for long-running agents and coding
@@ -28031,6 +28275,12 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
         - `ClaudeSonnet4_5_20250929("claude-sonnet-4-5-20250929")`
 
           High-performance model for agents and coding
+
+        - `ClaudeMythosPreview("claude-mythos-preview")`
+
+          **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          New class of intelligence, strongest in coding and cybersecurity
 
       - `CacheControlEphemeral? CacheControl`
 
@@ -28066,15 +28316,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `string Version`
 
               Skill version or 'latest' for most recent version
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `string`
+
+      - `DiagnosticsParam? Diagnostics`
+
+        Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
+
+        - `string? PreviousMessageID`
+
+          The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
+          maxLength: 256
 
       - `string? InferenceGeo`
 
@@ -28098,7 +28358,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `Effort? Effort`
 
-          All possible effort levels.
+          How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+          Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
           - `Low("low")`
 
@@ -28348,7 +28610,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-            maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+            minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
           - `IReadOnlyList<AllowedCaller> AllowedCallers`
 
@@ -28565,12 +28827,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `BrowserToolsetConfigs? Configs`
 
-            Per-member configuration for `browser_toolset_20260801`: one
-            optional field per member tool, keyed by the member name — the same
-            name the member's `tool_use` blocks carry. Every member is an
-            accepted key, and a member's defaults apply wherever its key is
-            absent. Unknown keys are rejected: the field set is this toolset
-            version's complete member set.
+            Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
             - `BrowserTypeConfig? Type`
 
@@ -28997,12 +29254,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `ComputerToolsetConfigs? Configs`
 
-            Per-member configuration for `computer_toolset_20260801`: one
-            optional field per member tool, keyed by the member name — the same
-            name the member's `tool_use` blocks carry. Every member is an
-            accepted key, and a member's defaults apply wherever its key is
-            absent. Unknown keys are rejected: the field set is this toolset
-            version's complete member set.
+            Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
             - `ComputerTypeConfig? Type`
 
@@ -29356,7 +29608,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `bool Strict`
 
@@ -29372,25 +29624,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               The city of the user.
 
-              maxLength: 255, minLength: 1
+              minLength: 1, maxLength: 255
 
             - `string? Country`
 
               The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-              maxLength: 2, minLength: 2
+              minLength: 2, maxLength: 2
 
             - `string? Region`
 
               The region of the user.
 
-              maxLength: 255, minLength: 1
+              minLength: 1, maxLength: 255
 
             - `string? Timezone`
 
               The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-              maxLength: 255, minLength: 1
+              minLength: 1, maxLength: 255
 
         - `class WebFetchTool20250910`
 
@@ -29436,13 +29688,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `bool Strict`
 
@@ -29450,12 +29702,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `WebFetchUrlSources? UrlSources`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
             - `ClientToolResults ClientToolResults`
 
@@ -29579,7 +29826,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `bool Strict`
 
@@ -29633,13 +29880,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `bool Strict`
 
@@ -29647,12 +29894,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `WebFetchUrlSources? UrlSources`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `class WebFetchTool20260309`
 
@@ -29700,13 +29942,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `bool Strict`
 
@@ -29714,12 +29956,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `WebFetchUrlSources? UrlSources`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
           - `bool UseCache`
 
@@ -29765,7 +30002,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `ResponseInclusion ResponseInclusion`
 
@@ -29827,13 +30064,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `long? MaxUses`
 
             Maximum number of times the tool can be used in the API request.
 
-            exclusiveMinimum: 0
+            minimum: 1
 
           - `ResponseInclusion ResponseInclusion`
 
@@ -29849,12 +30086,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `WebFetchUrlSources? UrlSources`
 
-            Which sources contribute to the set of URLs web fetch may fetch.
-
-            Each key is a tagged variant: `user_input` is `all` or `none`; the
-            two tool filters are `all`, `none`, `only` (only the named tools'
-            results) or `except` (every result but the named tools'). A named tool
-            must be declared in this request's `tools[]`.
+            Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
           - `bool UseCache`
 
@@ -29942,7 +30174,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-        maximum: 1, minimum: 0
+        minimum: 0, maximum: 1
 
       - `long TopK`
 
@@ -29966,7 +30198,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Recommended for advanced use cases only.
 
-        maximum: 1, minimum: 0
+        minimum: 0, maximum: 1
 
   - `string userProfileID`
 
@@ -30111,6 +30343,10 @@ BatchCreateParams parameters = new()
                             Version = "latest",
                         },
                     ],
+                },
+                Diagnostics = new()
+                {
+                    PreviousMessageID = "previous_message_id"
                 },
                 InferenceGeo = "inference_geo",
                 Metadata = new()
@@ -30418,7 +30654,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
-    maximum: 1000, minimum: 1
+    minimum: 1, maximum: 1000
 
   - `string workspaceID`
 
@@ -30846,7 +31082,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `required Container? Container`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `required string ID`
 
@@ -30874,13 +31112,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `required string Version`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `required IReadOnlyList<ContentBlock> Content`
 
@@ -31041,8 +31279,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `required string Text`
 
-              minLength: 0
-
           - `class ThinkingBlock`
 
             - `JsonElement Type = "thinking"`
@@ -31115,7 +31351,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ServerToolUseBlock`
 
@@ -31501,7 +31737,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `required string ToolName`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `required string ToolUseID`
 
@@ -31514,6 +31750,54 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             - `JsonElement Type = "container_upload"`
 
             - `required string FileID`
+
+        - `required Diagnostics? Diagnostics`
+
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+          - `required CacheMissReason? CacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class CacheMissModelChanged`
+
+              - `JsonElement Type = "model_changed"`
+
+              - `required long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissSystemChanged`
+
+              - `JsonElement Type = "system_changed"`
+
+              - `required long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissToolsChanged`
+
+              - `JsonElement Type = "tools_changed"`
+
+              - `required long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissMessagesChanged`
+
+              - `JsonElement Type = "messages_changed"`
+
+              - `required long CacheMissedInputTokens`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissPreviousMessageNotFound`
+
+              - `JsonElement Type = "previous_message_not_found"`
+
+            - `class CacheMissUnavailable`
+
+              - `JsonElement Type = "unavailable"`
 
         - `required Model Model`
 
@@ -31557,10 +31841,6 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Powerful intelligence for long-running agents and coding
 
-          - `ClaudeMythosPreview("claude-mythos-preview")`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
           - `ClaudeOpus4_6("claude-opus-4-6")`
 
             Powerful intelligence for long-running agents and coding
@@ -31593,6 +31873,12 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             High-performance model for agents and coding
 
+          - `ClaudeMythosPreview("claude-mythos-preview")`
+
+            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            New class of intelligence, strongest in coding and cybersecurity
+
         - `JsonElement Role = "assistant"`
 
           Conversational role of the generated message.
@@ -31601,13 +31887,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `required RefusalStopDetails? StopDetails`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `JsonElement Type = "refusal"`
 
           - `required Category? Category`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `Cyber("cyber")`
 

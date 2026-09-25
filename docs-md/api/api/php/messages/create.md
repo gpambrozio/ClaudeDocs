@@ -7,7 +7,7 @@ url: https://platform.claude.com/docs/en/api/php/messages/create
 
 # Create a Message
 
-`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
+`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?DiagnosticsParam diagnostics, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
 
 **POST** `/v1/messages`
 
@@ -93,6 +93,10 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 - `container?:optional MessageCreateParamsContainer`
 
   Container identifier for reuse across requests.
+
+- `diagnostics?:optional DiagnosticsParam`
+
+  Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
 - `inferenceGeo?:optional string`
 
@@ -266,7 +270,9 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   - `?Container container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
   - `list<ContentBlock> content`
 
@@ -297,6 +303,10 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
     [{"type": "text", "text": "B)"}]
     ```
 
+  - `?Diagnostics diagnostics`
+
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
   - `Model model`
 
     The model that will complete your prompt.
@@ -311,7 +321,9 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   - `?RefusalStopDetails stopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
   - `?StopReason stopReason`
 
@@ -419,6 +431,7 @@ $message = $client->messages->create(
       ['skillID' => 'pdf', 'type' => 'anthropic', 'version' => 'latest']
     ],
   ],
+  diagnostics: ['previousMessageID' => 'previous_message_id'],
   inferenceGeo: 'inference_geo',
   metadata: ['userID' => '13803d75-b4b5-4c3e-b2a2-6f21399b021b'],
   outputConfig: [
@@ -507,6 +520,12 @@ var_dump($message);
       "type": "text"
     }
   ],
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
   "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {

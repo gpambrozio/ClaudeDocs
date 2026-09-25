@@ -25,7 +25,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   Body param: List of requests for prompt completion. Each is an individual request to create a Message.
 
-  maxItems: 100000, minItems: 1
+  minItems: 1, maxItems: 100000
 
 - `--user-profile-id: optional string`
 
@@ -343,7 +343,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-  maximum: 1000, minimum: 1
+  minimum: 1, maximum: 1000
 
 - `--workspace-id: optional string`
 
@@ -770,7 +770,9 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `container: object`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `id: string`
 
@@ -798,13 +800,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version: string`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `content: array of ContentBlock`
 
@@ -965,8 +967,6 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `text: string`
 
-              minLength: 0
-
           - `thinking_block: object`
 
             - `type: "thinking"`
@@ -1039,7 +1039,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `server_tool_use_block: object`
 
@@ -1425,7 +1425,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `tool_name: string`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `tool_use_id: string`
 
@@ -1439,7 +1439,55 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `file_id: string`
 
-        - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
+        - `diagnostics: object`
+
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+          - `cache_miss_reason: CacheMissModelChanged or CacheMissSystemChanged or CacheMissToolsChanged or 3 more`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `cache_miss_model_changed: object`
+
+              - `type: "model_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_system_changed: object`
+
+              - `type: "system_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_tools_changed: object`
+
+              - `type: "tools_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_messages_changed: object`
+
+              - `type: "messages_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_previous_message_not_found: object`
+
+              - `type: "previous_message_not_found"`
+
+            - `cache_miss_unavailable: object`
+
+              - `type: "unavailable"`
+
+        - `model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
           The model that will complete your prompt.
 
@@ -1481,10 +1529,6 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Powerful intelligence for long-running agents and coding
 
-          - `"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
           - `"claude-opus-4-6"`
 
             Powerful intelligence for long-running agents and coding
@@ -1517,6 +1561,12 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             High-performance model for agents and coding
 
+          - `"claude-mythos-preview"`
+
+            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            New class of intelligence, strongest in coding and cybersecurity
+
         - `role: "assistant"`
 
           Conversational role of the generated message.
@@ -1525,13 +1575,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `stop_details: object`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `type: "refusal"`
 
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `"cyber"`
 
@@ -2013,7 +2067,9 @@ ant messages:batches results \
 
         - `container: object`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `id: string`
 
@@ -2041,13 +2097,13 @@ ant messages:batches results \
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version: string`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `content: array of ContentBlock`
 
@@ -2208,8 +2264,6 @@ ant messages:batches results \
 
             - `text: string`
 
-              minLength: 0
-
           - `thinking_block: object`
 
             - `type: "thinking"`
@@ -2282,7 +2336,7 @@ ant messages:batches results \
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `server_tool_use_block: object`
 
@@ -2668,7 +2722,7 @@ ant messages:batches results \
 
                   - `tool_name: string`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `tool_use_id: string`
 
@@ -2682,7 +2736,55 @@ ant messages:batches results \
 
             - `file_id: string`
 
-        - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
+        - `diagnostics: object`
+
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+          - `cache_miss_reason: CacheMissModelChanged or CacheMissSystemChanged or CacheMissToolsChanged or 3 more`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `cache_miss_model_changed: object`
+
+              - `type: "model_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_system_changed: object`
+
+              - `type: "system_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_tools_changed: object`
+
+              - `type: "tools_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_messages_changed: object`
+
+              - `type: "messages_changed"`
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `cache_miss_previous_message_not_found: object`
+
+              - `type: "previous_message_not_found"`
+
+            - `cache_miss_unavailable: object`
+
+              - `type: "unavailable"`
+
+        - `model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
           The model that will complete your prompt.
 
@@ -2724,10 +2826,6 @@ ant messages:batches results \
 
             Powerful intelligence for long-running agents and coding
 
-          - `"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
           - `"claude-opus-4-6"`
 
             Powerful intelligence for long-running agents and coding
@@ -2760,6 +2858,12 @@ ant messages:batches results \
 
             High-performance model for agents and coding
 
+          - `"claude-mythos-preview"`
+
+            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            New class of intelligence, strongest in coding and cybersecurity
+
         - `role: "assistant"`
 
           Conversational role of the generated message.
@@ -2768,13 +2872,17 @@ ant messages:batches results \
 
         - `stop_details: object`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `type: "refusal"`
 
           - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `"cyber"`
 
@@ -3076,7 +3184,9 @@ ant messages:batches results \
 
       - `container: object`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
         - `id: string`
 
@@ -3104,13 +3214,13 @@ ant messages:batches results \
 
             Skill ID
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
           - `version: string`
 
             The resolved version: a skill version ID for custom skills.
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
       - `content: array of ContentBlock`
 
@@ -3271,8 +3381,6 @@ ant messages:batches results \
 
           - `text: string`
 
-            minLength: 0
-
         - `thinking_block: object`
 
           - `type: "thinking"`
@@ -3345,7 +3453,7 @@ ant messages:batches results \
 
             For a toolset member tool_use, the toolset family.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `server_tool_use_block: object`
 
@@ -3731,7 +3839,7 @@ ant messages:batches results \
 
                 - `tool_name: string`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `tool_use_id: string`
 
@@ -3745,7 +3853,55 @@ ant messages:batches results \
 
           - `file_id: string`
 
-      - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
+      - `diagnostics: object`
+
+        Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+        - `cache_miss_reason: CacheMissModelChanged or CacheMissSystemChanged or CacheMissToolsChanged or 3 more`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `cache_miss_model_changed: object`
+
+            - `type: "model_changed"`
+
+            - `cache_missed_input_tokens: number`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `cache_miss_system_changed: object`
+
+            - `type: "system_changed"`
+
+            - `cache_missed_input_tokens: number`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `cache_miss_tools_changed: object`
+
+            - `type: "tools_changed"`
+
+            - `cache_missed_input_tokens: number`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `cache_miss_messages_changed: object`
+
+            - `type: "messages_changed"`
+
+            - `cache_missed_input_tokens: number`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `cache_miss_previous_message_not_found: object`
+
+            - `type: "previous_message_not_found"`
+
+          - `cache_miss_unavailable: object`
+
+            - `type: "unavailable"`
+
+      - `model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
         The model that will complete your prompt.
 
@@ -3787,10 +3943,6 @@ ant messages:batches results \
 
           Powerful intelligence for long-running agents and coding
 
-        - `"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
         - `"claude-opus-4-6"`
 
           Powerful intelligence for long-running agents and coding
@@ -3823,6 +3975,12 @@ ant messages:batches results \
 
           High-performance model for agents and coding
 
+        - `"claude-mythos-preview"`
+
+          **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          New class of intelligence, strongest in coding and cybersecurity
+
       - `role: "assistant"`
 
         Conversational role of the generated message.
@@ -3831,13 +3989,17 @@ ant messages:batches results \
 
       - `stop_details: object`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
         - `type: "refusal"`
 
         - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-          The policy category that triggered a refusal.
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
 
           - `"cyber"`
 
@@ -4101,7 +4263,9 @@ ant messages:batches results \
 
     - `container: object`
 
-      Information about the container used in the request (for the code execution tool)
+      Information about the container used in this request.
+
+      This will be non-null if a container tool (e.g. code execution) was used.
 
       - `id: string`
 
@@ -4129,13 +4293,13 @@ ant messages:batches results \
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `version: string`
 
           The resolved version: a skill version ID for custom skills.
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `content: array of ContentBlock`
 
@@ -4296,8 +4460,6 @@ ant messages:batches results \
 
         - `text: string`
 
-          minLength: 0
-
       - `thinking_block: object`
 
         - `type: "thinking"`
@@ -4370,7 +4532,7 @@ ant messages:batches results \
 
           For a toolset member tool_use, the toolset family.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `server_tool_use_block: object`
 
@@ -4756,7 +4918,7 @@ ant messages:batches results \
 
               - `tool_name: string`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `tool_use_id: string`
 
@@ -4770,7 +4932,55 @@ ant messages:batches results \
 
         - `file_id: string`
 
-    - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
+    - `diagnostics: object`
+
+      Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+      - `cache_miss_reason: CacheMissModelChanged or CacheMissSystemChanged or CacheMissToolsChanged or 3 more`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `cache_miss_model_changed: object`
+
+          - `type: "model_changed"`
+
+          - `cache_missed_input_tokens: number`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `cache_miss_system_changed: object`
+
+          - `type: "system_changed"`
+
+          - `cache_missed_input_tokens: number`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `cache_miss_tools_changed: object`
+
+          - `type: "tools_changed"`
+
+          - `cache_missed_input_tokens: number`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `cache_miss_messages_changed: object`
+
+          - `type: "messages_changed"`
+
+          - `cache_missed_input_tokens: number`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `cache_miss_previous_message_not_found: object`
+
+          - `type: "previous_message_not_found"`
+
+        - `cache_miss_unavailable: object`
+
+          - `type: "unavailable"`
+
+    - `model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
       The model that will complete your prompt.
 
@@ -4812,10 +5022,6 @@ ant messages:batches results \
 
         Powerful intelligence for long-running agents and coding
 
-      - `"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `"claude-opus-4-6"`
 
         Powerful intelligence for long-running agents and coding
@@ -4848,6 +5054,12 @@ ant messages:batches results \
 
         High-performance model for agents and coding
 
+      - `"claude-mythos-preview"`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
+
     - `role: "assistant"`
 
       Conversational role of the generated message.
@@ -4856,13 +5068,17 @@ ant messages:batches results \
 
     - `stop_details: object`
 
-      Structured information about a refusal.
+      Structured information about why model output stopped.
+
+      This is `null` when the `stop_reason` has no additional detail to report.
 
       - `type: "refusal"`
 
       - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
-        The policy category that triggered a refusal.
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
 
         - `"cyber"`
 

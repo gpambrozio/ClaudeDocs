@@ -326,6 +326,8 @@ tools:
 ---
 ```
 
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the agent and prints its ID, not the `configs` array.
+
 ```python Python
 client = Anthropic()
 
@@ -598,8 +600,6 @@ in Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401 => toolset
   puts JSON.pretty_generate(toolset.configs.map(&:to_h))
 end
 ```
-
-[`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the agent and prints its ID, not the `configs` array.
 
 In the Claude Console, set allowed or blocked domains from the `web_search` and `web_fetch` rows of the **Built-in tools** card on the agent form; set `max_content_tokens` and `user_location` in the **Raw** view of the agent's configuration.
 

@@ -770,7 +770,7 @@ Tailor your prompt caching strategy to your scenario:
 
 If experiencing unexpected behavior:
 
-[Cache diagnostics](cache-diagnostics.md) (beta) has the API compare consecutive requests and report exactly where the prompt prefix diverged, which automatically handles many of the steps in this list.
+[Cache diagnostics](cache-diagnostics.md) has the API compare consecutive requests and report where the prompt prefix diverged, which automatically handles many of the steps in this list.
 
 * Ensure cached sections are identical across calls. For explicit breakpoints, verify that `cache_control` markers are in the same locations
 * Check that calls are made within the cache lifetime (5 minutes by default)

@@ -67,7 +67,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `container: Container`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `id: String`
 
@@ -95,13 +97,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version: String`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `content: Array[ContentBlock]`
 
@@ -262,8 +264,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `text: String`
 
-              minLength: 0
-
           - `class ThinkingBlock`
 
             - `type: :thinking`
@@ -336,7 +336,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ServerToolUseBlock`
 
@@ -722,7 +722,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `tool_name: String`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `tool_use_id: String`
 
@@ -736,11 +736,61 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `file_id: String`
 
+        - `diagnostics: Diagnostics`
+
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+          - `cache_miss_reason: CacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class CacheMissModelChanged`
+
+              - `type: :model_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissSystemChanged`
+
+              - `type: :system_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissToolsChanged`
+
+              - `type: :tools_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissMessagesChanged`
+
+              - `type: :messages_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissPreviousMessageNotFound`
+
+              - `type: :previous_message_not_found`
+
+            - `class CacheMissUnavailable`
+
+              - `type: :unavailable`
+
         - `model: Model`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `String = String`
 
           - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
@@ -784,10 +834,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               Powerful intelligence for long-running agents and coding
 
-            - `:"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
             - `:"claude-opus-4-6"`
 
               Powerful intelligence for long-running agents and coding
@@ -820,7 +866,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               High-performance model for agents and coding
 
-          - `String = String`
+            - `:"claude-mythos-preview"`
+
+              **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              New class of intelligence, strongest in coding and cybersecurity
 
         - `role: :assistant`
 
@@ -830,13 +880,17 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `stop_details: RefusalStopDetails`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `type: :refusal`
 
           - `category: :cyber | :bio | :frontier_llm | 2 more`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `:cyber`
 

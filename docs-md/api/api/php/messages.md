@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/php/messages
 
 ## Create a Message
 
-`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
+`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?DiagnosticsParam diagnostics, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
 
 **POST** `/v1/messages`
 
@@ -95,6 +95,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 - `container?:optional MessageCreateParamsContainer`
 
   Container identifier for reuse across requests.
+
+- `diagnostics?:optional DiagnosticsParam`
+
+  Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
 - `inferenceGeo?:optional string`
 
@@ -268,7 +272,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `?Container container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
   - `list<ContentBlock> content`
 
@@ -299,6 +305,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     [{"type": "text", "text": "B)"}]
     ```
 
+  - `?Diagnostics diagnostics`
+
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
   - `Model model`
 
     The model that will complete your prompt.
@@ -313,7 +323,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `?RefusalStopDetails stopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
   - `?StopReason stopReason`
 
@@ -421,6 +433,7 @@ $message = $client->messages->create(
       ['skillID' => 'pdf', 'type' => 'anthropic', 'version' => 'latest']
     ],
   ],
+  diagnostics: ['previousMessageID' => 'previous_message_id'],
   inferenceGeo: 'inference_geo',
   metadata: ['userID' => '13803d75-b4b5-4c3e-b2a2-6f21399b021b'],
   outputConfig: [
@@ -509,6 +522,12 @@ var_dump($message);
       "type": "text"
     }
   ],
+  "diagnostics": {
+    "cache_miss_reason": {
+      "cache_missed_input_tokens": 0,
+      "type": "model_changed"
+    }
+  },
   "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
@@ -1407,12 +1426,7 @@ var_dump($messageTokensCount);
 
   - `?BrowserToolsetConfigs configs`
 
-    Per-member configuration for `browser_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
 ### Browser Toolset Configs
 
@@ -1618,6 +1632,102 @@ var_dump($messageTokensCount);
   - `int ephemeral5mInputTokens`
 
     The number of input tokens used to create the 5 minute cache entry.
+
+### Cache Miss Messages Changed
+
+- `class CacheMissMessagesChanged`
+
+  - `"messages_changed" type`
+
+  - `int cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Model Changed
+
+- `class CacheMissModelChanged`
+
+  - `"model_changed" type`
+
+  - `int cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Previous Message Not Found
+
+- `class CacheMissPreviousMessageNotFound`
+
+  - `"previous_message_not_found" type`
+
+### Cache Miss Reason
+
+- `class CacheMissReason`
+
+  - `class CacheMissModelChanged`
+
+    - `"model_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissSystemChanged`
+
+    - `"system_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissToolsChanged`
+
+    - `"tools_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissMessagesChanged`
+
+    - `"messages_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class CacheMissPreviousMessageNotFound`
+
+    - `"previous_message_not_found" type`
+
+  - `class CacheMissUnavailable`
+
+    - `"unavailable" type`
+
+### Cache Miss System Changed
+
+- `class CacheMissSystemChanged`
+
+  - `"system_changed" type`
+
+  - `int cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Tools Changed
+
+- `class CacheMissToolsChanged`
+
+  - `"tools_changed" type`
+
+  - `int cacheMissedInputTokens`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+### Cache Miss Unavailable
+
+- `class CacheMissUnavailable`
+
+  - `"unavailable" type`
 
 ### Citation Char Location
 
@@ -2289,12 +2399,7 @@ var_dump($messageTokensCount);
 
   - `?ComputerToolsetConfigs configs`
 
-    Per-member configuration for `computer_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
 ### Computer Toolset Configs
 
@@ -2872,6 +2977,22 @@ var_dump($messageTokensCount);
 
       Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
+### Diagnostics
+
+- `class Diagnostics`
+
+  - `?CacheMissReason cacheMissReason`
+
+    Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+### Diagnostics Param
+
+- `class DiagnosticsParam`
+
+  - `?string previousMessageID`
+
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 ### Direct Caller
 
 - `class DirectCaller`
@@ -3044,7 +3165,9 @@ var_dump($messageTokensCount);
 
   - `?Container container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
   - `list<ContentBlock> content`
 
@@ -3075,6 +3198,10 @@ var_dump($messageTokensCount);
     [{"type": "text", "text": "B)"}]
     ```
 
+  - `?Diagnostics diagnostics`
+
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
   - `Model model`
 
     The model that will complete your prompt.
@@ -3089,7 +3216,9 @@ var_dump($messageTokensCount);
 
   - `?RefusalStopDetails stopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
   - `?StopReason stopReason`
 
@@ -3303,12 +3432,7 @@ var_dump($messageTokensCount);
 
     - `?BrowserToolsetConfigs configs`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class MemoryTool20250818`
 
@@ -3346,12 +3470,7 @@ var_dump($messageTokensCount);
 
     - `?ComputerToolsetConfigs configs`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class ToolTextEditor20250124`
 
@@ -3521,12 +3640,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class WebSearchTool20260209`
 
@@ -3614,12 +3728,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class WebFetchTool20260309`
 
@@ -3667,12 +3776,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -3772,12 +3876,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -3946,10 +4045,6 @@ var_dump($messageTokensCount);
 
     Powerful intelligence for long-running agents and coding
 
-  - `"claude-mythos-preview"`
-
-    New class of intelligence, strongest in coding and cybersecurity
-
   - `"claude-opus-4-6"`
 
     Powerful intelligence for long-running agents and coding
@@ -3982,13 +4077,21 @@ var_dump($messageTokensCount);
 
     High-performance model for agents and coding
 
+  - `"claude-mythos-preview"`
+
+    **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+    New class of intelligence, strongest in coding and cybersecurity
+
 ### Output Config
 
 - `class OutputConfig`
 
   - `?Effort effort`
 
-    All possible effort levels.
+    How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+    Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
   - `?JSONOutputFormat format`
 
@@ -4205,7 +4308,9 @@ var_dump($messageTokensCount);
 
   - `?Category category`
 
-    The policy category that triggered a refusal.
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
 
   - `?string explanation`
 
@@ -5411,12 +5516,7 @@ var_dump($messageTokensCount);
 
     - `?BrowserToolsetConfigs configs`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class MemoryTool20250818`
 
@@ -5454,12 +5554,7 @@ var_dump($messageTokensCount);
 
     - `?ComputerToolsetConfigs configs`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class ToolTextEditor20250124`
 
@@ -5629,12 +5724,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class WebSearchTool20260209`
 
@@ -5722,12 +5812,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class WebFetchTool20260309`
 
@@ -5775,12 +5860,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -5880,12 +5960,7 @@ var_dump($messageTokensCount);
 
     - `?WebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -6142,12 +6217,7 @@ var_dump($messageTokensCount);
 
   - `?WebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
 ### Web Fetch Tool 20260209
 
@@ -6197,12 +6267,7 @@ var_dump($messageTokensCount);
 
   - `?WebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
 ### Web Fetch Tool 20260309
 
@@ -6252,12 +6317,7 @@ var_dump($messageTokensCount);
 
   - `?WebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `?bool useCache`
 
@@ -6315,12 +6375,7 @@ var_dump($messageTokensCount);
 
   - `?WebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `?bool useCache`
 
@@ -6816,6 +6871,7 @@ $messageBatch = $client->messages->batches->create(
             ['skillID' => 'pdf', 'type' => 'anthropic', 'version' => 'latest']
           ],
         ],
+        'diagnostics' => ['previousMessageID' => 'previous_message_id'],
         'inferenceGeo' => 'inference_geo',
         'metadata' => ['userID' => '13803d75-b4b5-4c3e-b2a2-6f21399b021b'],
         'outputConfig' => [

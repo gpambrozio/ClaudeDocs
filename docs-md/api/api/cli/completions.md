@@ -29,7 +29,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   minimum: 1
 
-- `--model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
+- `--model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
   Body param: The model that will complete your prompt.
 
@@ -69,10 +69,6 @@ Future models and features will not be compatible with Text Completions. See our
 
   Human:"`, and may include additional built-in stop sequences in the future. By providing the stop_sequences parameter, you may include additional strings that will cause the model to stop generating.
 
-- `--beta: optional array of AnthropicBeta`
-
-  Header param: Optional header to specify the beta version(s) you want to use.
-
 - `--workspace-id: optional string`
 
   Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -89,7 +85,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-  maximum: 1, minimum: 0
+  minimum: 0, maximum: 1
 
 - `--top-k: optional number`
 
@@ -113,7 +109,13 @@ Future models and features will not be compatible with Text Completions. See our
 
   Recommended for advanced use cases only.
 
-  maximum: 1, minimum: 0
+  minimum: 0, maximum: 1
+
+- `--beta: optional array of AnthropicBeta`
+
+  **Deprecated**: Deprecated. This parameter has no effect on this method and will be removed in a future release.
+
+  Header param: Optional header to specify the beta version(s) you want to use.
 
 ### Returns
 
@@ -135,7 +137,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     The resulting completion up to and excluding the stop sequences.
 
-  - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
+  - `model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
     The model that will complete your prompt.
 
@@ -177,10 +179,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       Powerful intelligence for long-running agents and coding
 
-    - `"claude-mythos-preview"`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
     - `"claude-opus-4-6"`
 
       Powerful intelligence for long-running agents and coding
@@ -212,6 +210,12 @@ Future models and features will not be compatible with Text Completions. See our
     - `"claude-sonnet-4-5-20250929"`
 
       High-performance model for agents and coding
+
+    - `"claude-mythos-preview"`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
 
   - `stop_reason: string`
 
@@ -270,7 +274,7 @@ Assistant:'
 
     The resulting completion up to and excluding the stop sequences.
 
-  - `model: "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more or string`
+  - `model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
 
     The model that will complete your prompt.
 
@@ -312,10 +316,6 @@ Assistant:'
 
       Powerful intelligence for long-running agents and coding
 
-    - `"claude-mythos-preview"`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
     - `"claude-opus-4-6"`
 
       Powerful intelligence for long-running agents and coding
@@ -347,6 +347,12 @@ Assistant:'
     - `"claude-sonnet-4-5-20250929"`
 
       High-performance model for agents and coding
+
+    - `"claude-mythos-preview"`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
 
   - `stop_reason: string`
 

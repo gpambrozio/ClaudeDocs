@@ -72,7 +72,7 @@ Yes. Cowork sessions in Claude Desktop that run on users' machines, Claude Code 
 
 Local sessions are captured as their requests reach the Claude API, so nothing is installed on the device, and on-device activity that never reaches the API is not captured. Claude Code sessions authenticated with a Claude Console API key, Claude Code sessions run through a third-party cloud platform (Amazon Bedrock, Google Cloud, or Microsoft Foundry), and [Claude Code cloud sessions](../../claude-code/claude-code-on-the-web.md), which run on cloud infrastructure instead of the user's machine, are not captured. These cloud sessions are not remote sessions, even though both run in the cloud; the remote session endpoints return Cowork sessions only. Organizations with [HIPAA readiness](api-and-data-retention.md#hipaa-readiness) enabled get no local session data, and sessions for which [zero data retention (ZDR)](api-and-data-retention.md#zero-data-retention-zdr-scope) is in effect are excluded.
 
-The local and remote session endpoints are stable for Cowork and Claude Code sessions; coverage of Claude Science, Claude for Microsoft 365, and Claude in Chrome sessions is in beta.
+The local and remote session endpoints are stable for Cowork, Claude Code, and Claude for Microsoft 365 sessions; coverage of Claude Science and Claude in Chrome sessions is in beta.
 
 **What do session transcripts include?**
 

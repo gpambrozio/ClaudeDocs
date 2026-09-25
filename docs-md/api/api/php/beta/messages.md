@@ -94,14 +94,9 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
 - `compaction?:optional BetaCompactionConfig`
 
-  Compact the whole conversation and return a signed `compaction` block,
-  alone, that a later request sends back first in `messages`, in place of
-  the messages it summarizes. There is no trigger and no pause flag: sending
-  the parameter compacts, and nothing is sampled after the block.
+  Compaction configuration.
 
-  The summarization prompt is the server's own unless `instructions` are
-  given, which then replace it for this request; a value that is empty or
-  only whitespace counts as absent.
+  When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
 - `container?:optional Container`
 
@@ -115,8 +110,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
 - `diagnostics?:optional BetaDiagnosticsParam`
 
-  Request-level diagnostics. Currently carries the previous response
-  id for prompt-cache divergence reporting.
+  Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
 - `fallbackCreditToken?:optional FallbackCreditToken`
 
@@ -169,7 +163,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
 - `speed?:optional Speed`
 
-  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
 - `stopSequences?:optional list<string>`
 
@@ -337,7 +331,9 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   - `?BetaContainer container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
   - `list<BetaContentBlock> content`
 
@@ -376,8 +372,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   - `?BetaDiagnostics diagnostics`
 
-    Request-level diagnostics: why the prompt cache could not fully reuse
-    the prefix of the request named by `diagnostics.previous_message_id`.
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
   - `Model model`
 
@@ -393,7 +388,9 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   - `?BetaRefusalStopDetails stopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
   - `?BetaStopReason stopReason`
 
@@ -837,14 +834,9 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
 - `compaction?:optional BetaCompactionConfig`
 
-  Compact the whole conversation and return a signed `compaction` block,
-  alone, that a later request sends back first in `messages`, in place of
-  the messages it summarizes. There is no trigger and no pause flag: sending
-  the parameter compacts, and nothing is sampled after the block.
+  Compaction configuration.
 
-  The summarization prompt is the server's own unless `instructions` are
-  given, which then replace it for this request; a value that is empty or
-  only whitespace counts as absent.
+  When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
 - `contextManagement?:optional BetaContextManagementConfig`
 
@@ -862,7 +854,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
 - `speed?:optional Speed`
 
-  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
 - `system?:optional System`
 
@@ -1867,12 +1859,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaBrowserToolsetConfigs configs`
 
-    Per-member configuration for `browser_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
 ### Beta Browser Toolset Configs
 
@@ -2104,6 +2091,50 @@ var_dump($betaMessageTokensCount);
 - `class BetaCacheMissPreviousMessageNotFound`
 
   - `"previous_message_not_found" type`
+
+### Beta Cache Miss Reason
+
+- `class BetaCacheMissReason`
+
+  - `class BetaCacheMissModelChanged`
+
+    - `"model_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissSystemChanged`
+
+    - `"system_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissToolsChanged`
+
+    - `"tools_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissMessagesChanged`
+
+    - `"messages_changed" type`
+
+    - `int cacheMissedInputTokens`
+
+      Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `class BetaCacheMissPreviousMessageNotFound`
+
+    - `"previous_message_not_found" type`
+
+  - `class BetaCacheMissUnavailable`
+
+    - `"unavailable" type`
 
 ### Beta Cache Miss System Changed
 
@@ -2985,12 +3016,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaComputerToolsetConfigs configs`
 
-    Per-member configuration for `computer_toolset_20260801`: one
-    optional field per member tool, keyed by the member name — the same
-    name the member's `tool_use` blocks carry. Every member is an
-    accepted key, and a member's defaults apply wherever its key is
-    absent. Unknown keys are rejected: the field set is this toolset
-    version's complete member set.
+    Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
 ### Beta Computer Toolset Configs
 
@@ -3790,7 +3816,7 @@ var_dump($betaMessageTokensCount);
 
 - `class BetaDiagnostics`
 
-  - `?CacheMissReason cacheMissReason`
+  - `?BetaCacheMissReason cacheMissReason`
 
     Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -4025,7 +4051,7 @@ var_dump($betaMessageTokensCount);
 
   - `?Category category`
 
-    The policy category that triggered a refusal.
+    The policy category that triggered the `from` model's refusal at this hop. `null` when the refusal doesn't map to a named category. Same vocabulary as `stop_details.category`.
 
 ### Beta Fallbacks Param
 
@@ -4687,7 +4713,9 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaContainer container`
 
-    Information about the container used in the request (for the code execution tool)
+    Information about the container used in this request.
+
+    This will be non-null if a container tool (e.g. code execution) was used.
 
   - `list<BetaContentBlock> content`
 
@@ -4726,8 +4754,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaDiagnostics diagnostics`
 
-    Request-level diagnostics: why the prompt cache could not fully reuse
-    the prefix of the request named by `diagnostics.previous_message_id`.
+    Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
   - `Model model`
 
@@ -4743,7 +4770,9 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaRefusalStopDetails stopDetails`
 
-    Structured information about a refusal.
+    Structured information about why model output stopped.
+
+    This is `null` when the `stop_reason` has no additional detail to report.
 
   - `?BetaStopReason stopReason`
 
@@ -4818,6 +4847,10 @@ var_dump($betaMessageTokensCount);
   - `?BetaFallbackCreditUsage fallbackCredit`
 
     Outcome of the `fallback_credit_token` presented on this request.
+
+    Present on every response to a non-batch request that carried a
+    `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+    items accept and ignore the token and carry no outcome object).
 
   - `?int inputTokens`
 
@@ -4934,7 +4967,9 @@ var_dump($betaMessageTokensCount);
 
   - `?Effort effort`
 
-    All possible effort levels.
+    How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+    Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
   - `?BetaJSONOutputFormat format`
 
@@ -4942,7 +4977,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaTokenTaskBudget taskBudget`
 
-    User-configurable total token budget across contexts.
+    Configuration for token budget tracking across contexts.
 
 ### Beta Output Tokens Details
 
@@ -5225,7 +5260,9 @@ var_dump($betaMessageTokensCount);
 
   - `?Category category`
 
-    The policy category that triggered a refusal.
+    The policy category that triggered the refusal.
+
+    `null` when the refusal doesn't map to a named category.
 
   - `?string explanation`
 
@@ -5658,12 +5695,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaBrowserToolsetConfigs configs`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class BetaToolComputerUse20241022`
 
@@ -5845,12 +5877,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaComputerToolsetConfigs configs`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class BetaToolTextEditor20250124`
 
@@ -6020,12 +6047,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class BetaWebSearchTool20260209`
 
@@ -6113,12 +6135,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class BetaWebFetchTool20260309`
 
@@ -6166,12 +6183,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -6271,12 +6283,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -6536,7 +6543,9 @@ var_dump($betaMessageTokensCount);
 
   - `?Effort effort`
 
-    All possible effort levels.
+    How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+    Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
 ### Beta Text Block
 
@@ -6924,11 +6933,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaThinkingPrefixMismatchBehavior prefixMismatchBehavior`
 
-    What happens when a thinking block in `messages` fails the conversation
-    check: it was created in a different conversation, or the messages before
-    it have changed since. `"error"` (the default) fails the request with a
-    400 error. `"drop_block"` removes the failing blocks and the request
-    proceeds; the model no longer sees the dropped reasoning.
+    "error" (default) | "drop_block". What happens when a thinking block in `messages` fails the conversation check (it was created in a different conversation, or the messages before it have changed since). "error" fails the request with a 400 error. "drop_block" removes the failing blocks and the request proceeds; each removal is reported in `input_transformations`.
 
 ### Beta Thinking Block Param
 
@@ -6954,9 +6959,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaThinkingBlockBinding blockBinding`
 
-    Controls for block binding: what happens when a thinking block this
-    request sends back fails the conversation check. Every field is optional;
-    an empty object means every default.
+    Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
   - `?Display display`
 
@@ -6984,9 +6987,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaThinkingBlockBinding blockBinding`
 
-    Controls for block binding: what happens when a thinking block this
-    request sends back fails the conversation check. Every field is optional;
-    an empty object means every default.
+    Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
   - `?Display display`
 
@@ -7010,9 +7011,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaThinkingBlockBinding blockBinding`
 
-      Controls for block binding: what happens when a thinking block this
-      request sends back fails the conversation check. Every field is optional;
-      an empty object means every default.
+      Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
     - `?Display display`
 
@@ -7028,9 +7027,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaThinkingBlockBinding blockBinding`
 
-      Controls for block binding: what happens when a thinking block this
-      request sends back fails the conversation check. Every field is optional;
-      an empty object means every default.
+      Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
     - `?Display display`
 
@@ -7964,12 +7961,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaBrowserToolsetConfigs configs`
 
-      Per-member configuration for `browser_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class BetaToolComputerUse20241022`
 
@@ -8151,12 +8143,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaComputerToolsetConfigs configs`
 
-      Per-member configuration for `computer_toolset_20260801`: one
-      optional field per member tool, keyed by the member name — the same
-      name the member's `tool_use` blocks carry. Every member is an
-      accepted key, and a member's defaults apply wherever its key is
-      absent. Unknown keys are rejected: the field set is this toolset
-      version's complete member set.
+      Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
   - `class BetaToolTextEditor20250124`
 
@@ -8326,12 +8313,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class BetaWebSearchTool20260209`
 
@@ -8419,12 +8401,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `class BetaWebFetchTool20260309`
 
@@ -8472,12 +8449,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -8577,12 +8549,7 @@ var_dump($betaMessageTokensCount);
 
     - `?BetaWebFetchURLSources urlSources`
 
-      Which sources contribute to the set of URLs web fetch may fetch.
-
-      Each key is a tagged variant: `user_input` is `all` or `none`; the
-      two tool filters are `all`, `none`, `only` (only the named tools'
-      results) or `except` (every result but the named tools'). A named tool
-      must be declared in this request's `tools[]`.
+      Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
     - `?bool useCache`
 
@@ -8794,6 +8761,10 @@ var_dump($betaMessageTokensCount);
 
     Outcome of the `fallback_credit_token` presented on this request.
 
+    Present on every response to a non-batch request that carried a
+    `fallback_credit_token`, in either redemption mode; absent otherwise (batch
+    items accept and ignore the token and carry no outcome object).
+
   - `?string inferenceGeo`
 
     The geographic region where inference was performed for this request.
@@ -8837,7 +8808,7 @@ var_dump($betaMessageTokensCount);
 
   - `?Speed speed`
 
-    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+    The inference speed mode used for this request.
 
 ### Beta User Location
 
@@ -8941,12 +8912,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaWebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
 ### Beta Web Fetch Tool 20260209
 
@@ -8996,12 +8962,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaWebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
 ### Beta Web Fetch Tool 20260309
 
@@ -9051,12 +9012,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaWebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `?bool useCache`
 
@@ -9114,12 +9070,7 @@ var_dump($betaMessageTokensCount);
 
   - `?BetaWebFetchURLSources urlSources`
 
-    Which sources contribute to the set of URLs web fetch may fetch.
-
-    Each key is a tagged variant: `user_input` is `all` or `none`; the
-    two tool filters are `all`, `none`, `only` (only the named tools'
-    results) or `except` (every result but the named tools'). A named tool
-    must be declared in this request's `tools[]`.
+    Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
   - `?bool useCache`
 

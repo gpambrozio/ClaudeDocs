@@ -236,7 +236,7 @@ MCP tool definitions are [deferred by default](mcp.md#scale-with-mcp-tool-search
 
 ### Install code intelligence plugins for typed languages
 
-[Code intelligence plugins](discover-plugins.md#code-intelligence) give Claude precise symbol navigation instead of text-based search, reducing unnecessary file reads when exploring unfamiliar code. A single "go to definition" call replaces what might otherwise be a grep followed by reading multiple candidate files. Installed language servers also report type errors automatically after edits, so Claude catches mistakes without running a compiler.
+[Code intelligence plugins](plugins/code-intelligence.md) give Claude precise symbol navigation instead of text-based search, reducing unnecessary file reads when exploring unfamiliar code. A single "go to definition" call replaces what might otherwise be a grep followed by reading multiple candidate files. Installed language servers also report type errors automatically after edits, so Claude catches mistakes without running a compiler.
 
 ### Offload processing to hooks and skills
 
@@ -330,6 +330,8 @@ Claude Code uses tokens for some background functionality even when idle:
 * **Command processing**: Some commands like `/usage` may generate requests to check status
 
 These background processes consume a small amount of tokens (typically under \$0.04 per session) even without active interaction.
+
+When prompt suggestions are on, Claude Code also sends a short request to the model your session is using after Claude responds, to [suggest your next prompt](interactive-mode.md#prompt-suggestions). That request reuses the conversation's prompt cache, so it is mostly cache reads plus a few output tokens. Claude Code [skips it while your account is close to or at its usage limit](interactive-mode.md#when-claude-code-skips-suggestions). To stop these requests, [turn prompt suggestions off](interactive-mode.md#turn-prompt-suggestions-off).
 
 ## Why usage climbs in a long session
 

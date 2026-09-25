@@ -23,7 +23,15 @@ The Models API response can be used to determine information about a specific mo
 
 - `query ModelGetParams`
 
+  - `WorkspaceID param.Field[string] Optional`
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
   - `Betas param.Field[[]AnthropicBeta] Optional`
+
+    **Deprecated**: Deprecated. This parameter will be removed from this method in a future release. To use beta features, call the beta models methods (`client.beta.models`) instead.
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -127,12 +135,6 @@ The Models API response can be used to determine information about a specific mo
 
       - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
 
-  - `WorkspaceID param.Field[string] Optional`
-
-    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
-
-    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
-
 ## Returns
 
 - `type ModelInfo`
@@ -151,7 +153,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `Capabilities ModelCapabilities`
 
-    Model capability information.
+    Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
     - `Batch CapabilitySupport`
 
@@ -175,15 +177,15 @@ The Models API response can be used to determine information about a specific mo
 
       - `ClearThinking20251015 CapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_thinking_20251015 strategy is supported.
 
       - `ClearToolUses20250919 CapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the clear_tool_uses_20250919 strategy is supported.
 
       - `Compact20260112 CapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the compact_20260112 strategy is supported.
 
       - `Supported bool`
 
@@ -215,7 +217,7 @@ The Models API response can be used to determine information about a specific mo
 
       - `Xhigh CapabilitySupport`
 
-        Indicates whether a capability is supported.
+        Whether the model supports xhigh effort level.
 
     - `ImageInput CapabilitySupport`
 

@@ -158,6 +158,8 @@ AGENT_VERSION=$(jq -er '.version' <<<"$agent")
 echo "Agent ID: $AGENT_ID, version: $AGENT_VERSION"
 ```
 
+Save the returned `agent.id`. You'll reference it in every session you create.
+
 ```bash CLI
 ant apply coding-assistant.md
 ```
@@ -192,6 +194,8 @@ agent = client.beta.agents.create(
 print(f"Agent ID: {agent.id}, version: {agent.version}")
 ```
 
+Save the returned `agent.id`. You'll reference it in every session you create.
+
 ```typescript TypeScript
 import Anthropic from "@anthropic-ai/sdk";
 
@@ -208,6 +212,8 @@ const agent = await client.beta.agents.create({
 
 console.log(`Agent ID: ${agent.id}, version: ${agent.version}`);
 ```
+
+Save the returned `agent.id`. You'll reference it in every session you create.
 
 ```csharp C#
 using Anthropic;
@@ -234,6 +240,8 @@ var agent = await client.Beta.Agents.Create(new()
 
 Console.WriteLine($"Agent ID: {agent.ID}, version: {agent.Version}");
 ```
+
+Save the returned `agent.id`. You'll reference it in every session you create.
 
 ```go Go
 package main
@@ -268,6 +276,8 @@ func main() {
 	fmt.Printf("Agent ID: %s, version: %d\n", agent.ID, agent.Version)
 ```
 
+Save the returned `agent.id`. You'll reference it in every session you create.
+
 ```java Java
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.agents.AgentCreateParams;
@@ -296,6 +306,8 @@ void main() {
     IO.println("Agent ID: " + agent.id() + ", version: " + agent.version());
 ```
 
+Save the returned `agent.id`. You'll reference it in every session you create.
+
 ```php PHP
 use Anthropic\Client;
 
@@ -312,6 +324,8 @@ $agent = $client->beta->agents->create(
 
 echo "Agent ID: {$agent->id}, version: {$agent->version}\n";
 ```
+
+Save the returned `agent.id`. You'll reference it in every session you create.
 
 ```ruby Ruby
 require "anthropic"
@@ -359,6 +373,8 @@ ENVIRONMENT_ID=$(jq -er '.id' <<<"$environment")
 echo "Environment ID: $ENVIRONMENT_ID"
 ```
 
+Save the returned `environment.id` too.
+
 ```bash CLI
 ant apply environment.yaml
 ```
@@ -386,6 +402,8 @@ environment = client.beta.environments.create(
 print(f"Environment ID: {environment.id}")
 ```
 
+Save the returned `environment.id` too.
+
 ```typescript TypeScript
 const environment = await client.beta.environments.create({
   name: "quickstart-env",
@@ -398,6 +416,8 @@ const environment = await client.beta.environments.create({
 console.log(`Environment ID: ${environment.id}`);
 ```
 
+Save the returned `environment.id` too.
+
 ```csharp C#
 var environment = await client.Beta.Environments.Create(new()
 {
@@ -407,6 +427,8 @@ var environment = await client.Beta.Environments.Create(new()
 
 Console.WriteLine($"Environment ID: {environment.ID}");
 ```
+
+Save the returned `environment.id` too.
 
 ```go Go
 environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentNewParams{
@@ -426,6 +448,8 @@ if err != nil {
 fmt.Printf("Environment ID: %s\n", environment.ID)
 ```
 
+Save the returned `environment.id` too.
+
 ```java Java
 var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
     .name("quickstart-env")
@@ -437,6 +461,8 @@ var environment = client.beta().environments().create(EnvironmentCreateParams.bu
 IO.println("Environment ID: " + environment.id());
 ```
 
+Save the returned `environment.id` too.
+
 ```php PHP
 $environment = $client->beta->environments->create(
     name: 'quickstart-env',
@@ -445,6 +471,8 @@ $environment = $client->beta->environments->create(
 
 echo "Environment ID: {$environment->id}\n";
 ```
+
+Save the returned `environment.id` too.
 
 ```ruby Ruby
 environment = client.beta.environments.create(

@@ -25,7 +25,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   List of requests for prompt completion. Each is an individual request to create a Message.
 
-  maxItems: 100000, minItems: 1
+  minItems: 1, maxItems: 100000
 
   - `custom_id: String`
 
@@ -33,7 +33,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     Must be unique for each request within the Message Batch.
 
-    maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,64}$
+    minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]{1,64}$
 
   - `params: Params`
 
@@ -153,7 +153,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `document_title: String`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `end_char_index: Integer`
 
@@ -173,7 +173,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `document_title: String`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `end_page_number: Integer`
 
@@ -197,7 +197,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `document_title: String`
 
-                  maxLength: 500, minLength: 1
+                  minLength: 1, maxLength: 500
 
                 - `end_block_index: Integer`
 
@@ -221,7 +221,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `title: String`
 
-                  maxLength: 512, minLength: 1
+                  minLength: 1, maxLength: 512
 
                 - `url: String`
 
@@ -377,7 +377,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `title: String`
 
-              maxLength: 500, minLength: 1
+              minLength: 1, maxLength: 500
 
           - `class SearchResultBlockParam`
 
@@ -441,7 +441,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `name: String`
 
-              maxLength: 200, minLength: 1
+              minLength: 1, maxLength: 200
 
             - `cache_control: CacheControlEphemeral`
 
@@ -477,7 +477,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               For a toolset member tool_use, the toolset family this member belongs to.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ToolResultBlockParam`
 
@@ -513,7 +513,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `tool_name: String`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                   - `cache_control: CacheControlEphemeral`
 
@@ -541,7 +541,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                       The caller-assigned identifier for this tab, unique within the inventory.
 
-                      maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `title: String`
 
@@ -567,7 +567,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
-                    maxItems: 200, minItems: 1
+                    minItems: 1, maxItems: 200
 
                     - `class BrowserStateChangeTabOpened`
 
@@ -585,7 +585,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                         The `tab_id` of the opened tab, present in `tabs`.
 
-                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                     - `class BrowserStateChangeDownloadStarted`
 
@@ -597,7 +597,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `url: String`
 
@@ -618,7 +618,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `url: String`
 
@@ -630,7 +630,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                         Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
 
-                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `size_bytes: Integer`
 
@@ -648,7 +648,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                         The caller-assigned identifier for this download, stable across the state changes reporting it.
 
-                        maxLength: 4096, minLength: 1, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
+                        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
                       - `url: String`
 
@@ -660,7 +660,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                         The failure or cancellation detail, when known.
 
-                        pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$, maxLength: 4096
+                        maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
             - `is_error: bool`
 
@@ -668,7 +668,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               For a toolset member tool_result, the toolset family of the paired tool_use.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ServerToolUseBlockParam`
 
@@ -1046,7 +1046,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `tool_name: String`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
                   - `cache_control: CacheControlEphemeral`
 
@@ -1086,6 +1086,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `String = String`
 
       - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
@@ -1129,10 +1131,6 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Powerful intelligence for long-running agents and coding
 
-        - `:"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
         - `:"claude-opus-4-6"`
 
           Powerful intelligence for long-running agents and coding
@@ -1165,7 +1163,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           High-performance model for agents and coding
 
-      - `String = String`
+        - `:"claude-mythos-preview"`
+
+          **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          New class of intelligence, strongest in coding and cybersecurity
 
     - `cache_control: CacheControlEphemeral`
 
@@ -1201,15 +1203,25 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Skill ID
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
           - `version: String`
 
             Skill version or 'latest' for most recent version
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
       - `String = String`
+
+    - `diagnostics: DiagnosticsParam`
+
+      Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
+
+      - `previous_message_id: String`
+
+        The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
+        maxLength: 256
 
     - `inference_geo: String`
 
@@ -1233,7 +1245,9 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `effort: :low | :medium | :high | 2 more`
 
-        All possible effort levels.
+        How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
+
+        Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
 
         - `:low`
 
@@ -1483,7 +1497,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           This is how the tool will be called by the model and in `tool_use` blocks.
 
-          maxLength: 128, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,128}$
+          minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
         - `allowed_callers: Array[:direct | :code_execution_20250825 | :code_execution_20260120 | :code_execution_20260521]`
 
@@ -1700,12 +1714,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `configs: BrowserToolsetConfigs`
 
-          Per-member configuration for `browser_toolset_20260801`: one
-          optional field per member tool, keyed by the member name — the same
-          name the member's `tool_use` blocks carry. Every member is an
-          accepted key, and a member's defaults apply wherever its key is
-          absent. Unknown keys are rejected: the field set is this toolset
-          version's complete member set.
+          Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
           - `type: BrowserTypeConfig`
 
@@ -2132,12 +2141,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `configs: ComputerToolsetConfigs`
 
-          Per-member configuration for `computer_toolset_20260801`: one
-          optional field per member tool, keyed by the member name — the same
-          name the member's `tool_use` blocks carry. Every member is an
-          accepted key, and a member's defaults apply wherever its key is
-          absent. Unknown keys are rejected: the field set is this toolset
-          version's complete member set.
+          Sparse per-member overrides, keyed by member name. Absent, null, and {} are equivalent; a member's defaults apply wherever its key is absent.
 
           - `type: ComputerTypeConfig`
 
@@ -2491,7 +2495,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Maximum number of times the tool can be used in the API request.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `strict: bool`
 
@@ -2507,25 +2511,25 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             The city of the user.
 
-            maxLength: 255, minLength: 1
+            minLength: 1, maxLength: 255
 
           - `country: String`
 
             The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-            maxLength: 2, minLength: 2
+            minLength: 2, maxLength: 2
 
           - `region: String`
 
             The region of the user.
 
-            maxLength: 255, minLength: 1
+            minLength: 1, maxLength: 255
 
           - `timezone: String`
 
             The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-            maxLength: 255, minLength: 1
+            minLength: 1, maxLength: 255
 
       - `class WebFetchTool20250910`
 
@@ -2571,13 +2575,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `strict: bool`
 
@@ -2585,12 +2589,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `url_sources: WebFetchURLSources`
 
-          Which sources contribute to the set of URLs web fetch may fetch.
-
-          Each key is a tagged variant: `user_input` is `all` or `none`; the
-          two tool filters are `all`, `none`, `only` (only the named tools'
-          results) or `except` (every result but the named tools'). A named tool
-          must be declared in this request's `tools[]`.
+          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
           - `client_tool_results: WebFetchURLSourceAll | WebFetchURLSourceNone | WebFetchURLSourceOnly | WebFetchURLSourceExcept`
 
@@ -2714,7 +2713,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Maximum number of times the tool can be used in the API request.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `strict: bool`
 
@@ -2768,13 +2767,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `strict: bool`
 
@@ -2782,12 +2781,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `url_sources: WebFetchURLSources`
 
-          Which sources contribute to the set of URLs web fetch may fetch.
-
-          Each key is a tagged variant: `user_input` is `all` or `none`; the
-          two tool filters are `all`, `none`, `only` (only the named tools'
-          results) or `except` (every result but the named tools'). A named tool
-          must be declared in this request's `tools[]`.
+          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
       - `class WebFetchTool20260309`
 
@@ -2835,13 +2829,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `strict: bool`
 
@@ -2849,12 +2843,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `url_sources: WebFetchURLSources`
 
-          Which sources contribute to the set of URLs web fetch may fetch.
-
-          Each key is a tagged variant: `user_input` is `all` or `none`; the
-          two tool filters are `all`, `none`, `only` (only the named tools'
-          results) or `except` (every result but the named tools'). A named tool
-          must be declared in this request's `tools[]`.
+          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `use_cache: bool`
 
@@ -2900,7 +2889,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Maximum number of times the tool can be used in the API request.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `response_inclusion: :full | :excluded`
 
@@ -2962,13 +2951,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
           Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
 
-          exclusiveMinimum: 0
+          minimum: 1
 
         - `response_inclusion: :full | :excluded`
 
@@ -2984,12 +2973,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `url_sources: WebFetchURLSources`
 
-          Which sources contribute to the set of URLs web fetch may fetch.
-
-          Each key is a tagged variant: `user_input` is `all` or `none`; the
-          two tool filters are `all`, `none`, `only` (only the named tools'
-          results) or `except` (every result but the named tools'). A named tool
-          must be declared in this request's `tools[]`.
+          Which sources contribute to the set of URLs the tool may fetch. Omitted means every source.
 
         - `use_cache: bool`
 
@@ -3077,7 +3061,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
 
-      maximum: 1, minimum: 0
+      minimum: 0, maximum: 1
 
     - `top_k: Integer`
 
@@ -3101,7 +3085,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       Recommended for advanced use cases only.
 
-      maximum: 1, minimum: 0
+      minimum: 0, maximum: 1
 
 - `user_profile_id: String`
 
@@ -3434,7 +3418,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-  maximum: 1000, minimum: 1
+  minimum: 1, maximum: 1000
 
 - `workspace_id: String`
 
@@ -3860,7 +3844,9 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `container: Container`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `id: String`
 
@@ -3888,13 +3874,13 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version: String`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `content: Array[ContentBlock]`
 
@@ -4055,8 +4041,6 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `text: String`
 
-              minLength: 0
-
           - `class ThinkingBlock`
 
             - `type: :thinking`
@@ -4129,7 +4113,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ServerToolUseBlock`
 
@@ -4515,7 +4499,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `tool_name: String`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `tool_use_id: String`
 
@@ -4529,11 +4513,61 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `file_id: String`
 
+        - `diagnostics: Diagnostics`
+
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+          - `cache_miss_reason: CacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class CacheMissModelChanged`
+
+              - `type: :model_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissSystemChanged`
+
+              - `type: :system_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissToolsChanged`
+
+              - `type: :tools_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissMessagesChanged`
+
+              - `type: :messages_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissPreviousMessageNotFound`
+
+              - `type: :previous_message_not_found`
+
+            - `class CacheMissUnavailable`
+
+              - `type: :unavailable`
+
         - `model: Model`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `String = String`
 
           - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
@@ -4577,10 +4611,6 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Powerful intelligence for long-running agents and coding
 
-            - `:"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
             - `:"claude-opus-4-6"`
 
               Powerful intelligence for long-running agents and coding
@@ -4613,7 +4643,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               High-performance model for agents and coding
 
-          - `String = String`
+            - `:"claude-mythos-preview"`
+
+              **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              New class of intelligence, strongest in coding and cybersecurity
 
         - `role: :assistant`
 
@@ -4623,13 +4657,17 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `stop_details: RefusalStopDetails`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `type: :refusal`
 
           - `category: :cyber | :bio | :frontier_llm | 2 more`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `:cyber`
 
@@ -5115,7 +5153,9 @@ puts(message_batch_individual_response)
 
         - `container: Container`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `id: String`
 
@@ -5143,13 +5183,13 @@ puts(message_batch_individual_response)
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version: String`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `content: Array[ContentBlock]`
 
@@ -5310,8 +5350,6 @@ puts(message_batch_individual_response)
 
             - `text: String`
 
-              minLength: 0
-
           - `class ThinkingBlock`
 
             - `type: :thinking`
@@ -5384,7 +5422,7 @@ puts(message_batch_individual_response)
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `class ServerToolUseBlock`
 
@@ -5770,7 +5808,7 @@ puts(message_batch_individual_response)
 
                   - `tool_name: String`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `tool_use_id: String`
 
@@ -5784,11 +5822,61 @@ puts(message_batch_individual_response)
 
             - `file_id: String`
 
+        - `diagnostics: Diagnostics`
+
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+          - `cache_miss_reason: CacheMissReason`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class CacheMissModelChanged`
+
+              - `type: :model_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissSystemChanged`
+
+              - `type: :system_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissToolsChanged`
+
+              - `type: :tools_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissMessagesChanged`
+
+              - `type: :messages_changed`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `class CacheMissPreviousMessageNotFound`
+
+              - `type: :previous_message_not_found`
+
+            - `class CacheMissUnavailable`
+
+              - `type: :unavailable`
+
         - `model: Model`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `String = String`
 
           - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
@@ -5832,10 +5920,6 @@ puts(message_batch_individual_response)
 
               Powerful intelligence for long-running agents and coding
 
-            - `:"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
             - `:"claude-opus-4-6"`
 
               Powerful intelligence for long-running agents and coding
@@ -5868,7 +5952,11 @@ puts(message_batch_individual_response)
 
               High-performance model for agents and coding
 
-          - `String = String`
+            - `:"claude-mythos-preview"`
+
+              **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              New class of intelligence, strongest in coding and cybersecurity
 
         - `role: :assistant`
 
@@ -5878,13 +5966,17 @@ puts(message_batch_individual_response)
 
         - `stop_details: RefusalStopDetails`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `type: :refusal`
 
           - `category: :cyber | :bio | :frontier_llm | 2 more`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
+
+            `null` when the refusal doesn't map to a named category.
 
             - `:cyber`
 
@@ -6186,7 +6278,9 @@ puts(message_batch_individual_response)
 
       - `container: Container`
 
-        Information about the container used in the request (for the code execution tool)
+        Information about the container used in this request.
+
+        This will be non-null if a container tool (e.g. code execution) was used.
 
         - `id: String`
 
@@ -6214,13 +6308,13 @@ puts(message_batch_individual_response)
 
             Skill ID
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
           - `version: String`
 
             The resolved version: a skill version ID for custom skills.
 
-            maxLength: 64, minLength: 1
+            minLength: 1, maxLength: 64
 
       - `content: Array[ContentBlock]`
 
@@ -6381,8 +6475,6 @@ puts(message_batch_individual_response)
 
           - `text: String`
 
-            minLength: 0
-
         - `class ThinkingBlock`
 
           - `type: :thinking`
@@ -6455,7 +6547,7 @@ puts(message_batch_individual_response)
 
             For a toolset member tool_use, the toolset family.
 
-            maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+            minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
         - `class ServerToolUseBlock`
 
@@ -6841,7 +6933,7 @@ puts(message_batch_individual_response)
 
                 - `tool_name: String`
 
-                  maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                  minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
           - `tool_use_id: String`
 
@@ -6855,11 +6947,61 @@ puts(message_batch_individual_response)
 
           - `file_id: String`
 
+      - `diagnostics: Diagnostics`
+
+        Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+        - `cache_miss_reason: CacheMissReason`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class CacheMissModelChanged`
+
+            - `type: :model_changed`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissSystemChanged`
+
+            - `type: :system_changed`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissToolsChanged`
+
+            - `type: :tools_changed`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissMessagesChanged`
+
+            - `type: :messages_changed`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `class CacheMissPreviousMessageNotFound`
+
+            - `type: :previous_message_not_found`
+
+          - `class CacheMissUnavailable`
+
+            - `type: :unavailable`
+
       - `model: Model`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `String = String`
 
         - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
@@ -6903,10 +7045,6 @@ puts(message_batch_individual_response)
 
             Powerful intelligence for long-running agents and coding
 
-          - `:"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
           - `:"claude-opus-4-6"`
 
             Powerful intelligence for long-running agents and coding
@@ -6939,7 +7077,11 @@ puts(message_batch_individual_response)
 
             High-performance model for agents and coding
 
-        - `String = String`
+          - `:"claude-mythos-preview"`
+
+            **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+            New class of intelligence, strongest in coding and cybersecurity
 
       - `role: :assistant`
 
@@ -6949,13 +7091,17 @@ puts(message_batch_individual_response)
 
       - `stop_details: RefusalStopDetails`
 
-        Structured information about a refusal.
+        Structured information about why model output stopped.
+
+        This is `null` when the `stop_reason` has no additional detail to report.
 
         - `type: :refusal`
 
         - `category: :cyber | :bio | :frontier_llm | 2 more`
 
-          The policy category that triggered a refusal.
+          The policy category that triggered the refusal.
+
+          `null` when the refusal doesn't map to a named category.
 
           - `:cyber`
 
@@ -7219,7 +7365,9 @@ puts(message_batch_individual_response)
 
     - `container: Container`
 
-      Information about the container used in the request (for the code execution tool)
+      Information about the container used in this request.
+
+      This will be non-null if a container tool (e.g. code execution) was used.
 
       - `id: String`
 
@@ -7247,13 +7395,13 @@ puts(message_batch_individual_response)
 
           Skill ID
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
         - `version: String`
 
           The resolved version: a skill version ID for custom skills.
 
-          maxLength: 64, minLength: 1
+          minLength: 1, maxLength: 64
 
     - `content: Array[ContentBlock]`
 
@@ -7414,8 +7562,6 @@ puts(message_batch_individual_response)
 
         - `text: String`
 
-          minLength: 0
-
       - `class ThinkingBlock`
 
         - `type: :thinking`
@@ -7488,7 +7634,7 @@ puts(message_batch_individual_response)
 
           For a toolset member tool_use, the toolset family.
 
-          maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+          minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
       - `class ServerToolUseBlock`
 
@@ -7874,7 +8020,7 @@ puts(message_batch_individual_response)
 
               - `tool_name: String`
 
-                maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
         - `tool_use_id: String`
 
@@ -7888,11 +8034,61 @@ puts(message_batch_individual_response)
 
         - `file_id: String`
 
+    - `diagnostics: Diagnostics`
+
+      Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+      - `cache_miss_reason: CacheMissReason`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class CacheMissModelChanged`
+
+          - `type: :model_changed`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissSystemChanged`
+
+          - `type: :system_changed`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissToolsChanged`
+
+          - `type: :tools_changed`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissMessagesChanged`
+
+          - `type: :messages_changed`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `class CacheMissPreviousMessageNotFound`
+
+          - `type: :previous_message_not_found`
+
+        - `class CacheMissUnavailable`
+
+          - `type: :unavailable`
+
     - `model: Model`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `String = String`
 
       - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
@@ -7936,10 +8132,6 @@ puts(message_batch_individual_response)
 
           Powerful intelligence for long-running agents and coding
 
-        - `:"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
         - `:"claude-opus-4-6"`
 
           Powerful intelligence for long-running agents and coding
@@ -7972,7 +8164,11 @@ puts(message_batch_individual_response)
 
           High-performance model for agents and coding
 
-      - `String = String`
+        - `:"claude-mythos-preview"`
+
+          **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+          New class of intelligence, strongest in coding and cybersecurity
 
     - `role: :assistant`
 
@@ -7982,13 +8178,17 @@ puts(message_batch_individual_response)
 
     - `stop_details: RefusalStopDetails`
 
-      Structured information about a refusal.
+      Structured information about why model output stopped.
+
+      This is `null` when the `stop_reason` has no additional detail to report.
 
       - `type: :refusal`
 
       - `category: :cyber | :bio | :frontier_llm | 2 more`
 
-        The policy category that triggered a refusal.
+        The policy category that triggered the refusal.
+
+        `null` when the refusal doesn't map to a named category.
 
         - `:cyber`
 

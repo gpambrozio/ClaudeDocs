@@ -37,9 +37,9 @@ In Claude Code, run:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
+* The plugin is [not found in the marketplace](plugins/install.md#install-a-plugin): check the plugin name.
 
-When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, see [Apply plugin changes without restarting](discover-plugins.md#apply-plugin-changes-without-restarting) to make the plugin's configure command available.
+When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, see [Apply plugin changes without restarting](plugins/cli-reference.md#reload-plugins) to make the plugin's configure command available.
 
 **Configure your token**
 
@@ -113,9 +113,9 @@ In Claude Code, run:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
+* The plugin is [not found in the marketplace](plugins/install.md#install-a-plugin): check the plugin name.
 
-When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, see [Apply plugin changes without restarting](discover-plugins.md#apply-plugin-changes-without-restarting) to make the plugin's configure command available.
+When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, see [Apply plugin changes without restarting](plugins/cli-reference.md#reload-plugins) to make the plugin's configure command available.
 
 **Configure your token**
 
@@ -176,7 +176,7 @@ In Claude Code, run:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
+* The plugin is [not found in the marketplace](plugins/install.md#install-a-plugin): check the plugin name.
 
 When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects.
 
@@ -229,7 +229,7 @@ Start a Claude Code session and run the install command:
 If the install fails, match the message Claude Code reports:
 
 * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-* The plugin is [not found in the marketplace](discover-plugins.md#install-plugins): check the plugin name.
+* The plugin is [not found in the marketplace](plugins/install.md#install-a-plugin): check the plugin name.
 
 When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects.
 

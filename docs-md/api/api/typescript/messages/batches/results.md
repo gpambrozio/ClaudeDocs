@@ -73,7 +73,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `container: Container | null`
 
-          Information about the container used in the request (for the code execution tool)
+          Information about the container used in this request.
+
+          This will be non-null if a container tool (e.g. code execution) was used.
 
           - `id: string`
 
@@ -101,13 +103,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               Skill ID
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
             - `version: string`
 
               The resolved version: a skill version ID for custom skills.
 
-              maxLength: 64, minLength: 1
+              minLength: 1, maxLength: 64
 
         - `content: Array<ContentBlock>`
 
@@ -280,8 +282,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `text: string`
 
-              minLength: 0
-
           - `interface ThinkingBlock`
 
             - `type: "thinking"`
@@ -362,7 +362,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               For a toolset member tool_use, the toolset family.
 
-              maxLength: 64, minLength: 1, pattern: ^[a-zA-Z0-9_-]+$
+              minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
           - `interface ServerToolUseBlock`
 
@@ -810,7 +810,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `tool_name: string`
 
-                    maxLength: 256, minLength: 1, pattern: ^[a-zA-Z0-9_-]{1,256}$
+                    minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
             - `tool_use_id: string`
 
@@ -826,11 +826,73 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `file_id: string`
 
+        - `diagnostics: Diagnostics | null`
+
+          Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
+
+          - `cache_miss_reason: CacheMissReason | null`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `interface CacheMissModelChanged`
+
+              - `type: "model_changed"`
+
+                default: model_changed
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `interface CacheMissSystemChanged`
+
+              - `type: "system_changed"`
+
+                default: system_changed
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `interface CacheMissToolsChanged`
+
+              - `type: "tools_changed"`
+
+                default: tools_changed
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `interface CacheMissMessagesChanged`
+
+              - `type: "messages_changed"`
+
+                default: messages_changed
+
+              - `cache_missed_input_tokens: number`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `interface CacheMissPreviousMessageNotFound`
+
+              - `type: "previous_message_not_found"`
+
+                default: previous_message_not_found
+
+            - `interface CacheMissUnavailable`
+
+              - `type: "unavailable"`
+
+                default: unavailable
+
         - `model: Model`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `(string & {})`
 
           - `"claude-fable-5-1" | "claude-opus-5-5" | "claude-mythos-5-1" | 15 more`
 
@@ -870,10 +932,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               Powerful intelligence for long-running agents and coding
 
-            - `"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
             - `"claude-opus-4-6"`
 
               Powerful intelligence for long-running agents and coding
@@ -906,7 +964,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               High-performance model for agents and coding
 
-          - `(string & {})`
+            - `"claude-mythos-preview"`
+
+              **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+              New class of intelligence, strongest in coding and cybersecurity
 
         - `role: "assistant"`
 
@@ -918,7 +980,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `stop_details: RefusalStopDetails | null`
 
-          Structured information about a refusal.
+          Structured information about why model output stopped.
+
+          This is `null` when the `stop_reason` has no additional detail to report.
 
           - `type: "refusal"`
 
@@ -926,13 +990,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
-            The policy category that triggered a refusal.
+            The policy category that triggered the refusal.
 
-            - `cyber` - The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
-            - `bio` - The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
-            - `frontier_llm` - The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
-            - `reasoning_extraction` - The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../../../../build-with-claude/thinking-steering-and-cost.md).
-            - `general_harms` - The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+            `null` when the refusal doesn't map to a named category.
 
             - `"cyber"`
 

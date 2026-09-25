@@ -12,6 +12,16 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### September 24, 2026
+
+* We're resuming billing for refusals that arrive before any output when `stop_details.category` is `"bio"`, `"frontier_llm"`, or `"reasoning_extraction"`, the categories where we measure low volumes of false positives. Mid-stream refusals were already billed. Refusals billed under this change are charged like any other request, at the rates of the model that ran it. Refusals before any output in other categories are still not billed, and fallback credit is unchanged. This change applies on all platforms. See [How refusals are billed](../build-with-claude/refusals-and-fallback.md#how-refusals-are-billed).
+* The [Compliance API](../manage-claude/compliance-api.md) local session endpoints are out of beta for Claude for Microsoft 365 sessions in Excel, PowerPoint, Word, and Outlook (`product_surface` values beginning with `office_agents`). See [Sessions on users' machines](../manage-claude/compliance-sessions.md#retrieve-local-sessions).
+* The [Compliance API](../manage-claude/compliance-api.md) [Activity Feed](../manage-claude/compliance-activity-feed.md) no longer returns file names, project document names, or artifact titles. The `filename` and `title` fields on file, project document, and artifact activities are now always empty or omitted, including on activities recorded before this change. To look up a name or title by the ID on the activity, use a Compliance Access Key with the `read:compliance_user_data` scope. See [Understand the Activity object](../manage-claude/compliance-activity-feed.md#understand-the-activity-object).
+
+### September 23, 2026
+
+* [Cache diagnostics](../build-with-claude/cache-diagnostics.md) is out of beta on the Claude API and no longer requires the `cache-diagnosis-2026-04-07` beta header. Include the `diagnostics` object on a Messages request to opt in; requests that still send the header work as before. Responses from `POST /v1/messages` now always include the `diagnostics` field, which is `null` when the request did not include the `diagnostics` object.
+
 ### September 22, 2026
 
 * We've launched **Claude Opus 5.5** (`claude-opus-5-5`), a model for long-running agentic coding and knowledge work. It has a [1M token context window](../build-with-claude/context-windows.md) by default, 128k max output tokens, and always-on [adaptive thinking](../build-with-claude/thinking.md), at $4 / $20 USD per MTok (Claude Opus 5 is $5 / $25). Claude Opus 5.5 is available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude on Google Cloud](../build-with-claude/claude-on-vertex-ai.md), and [Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md). See [What's new in Claude Opus 5.5](../models/opus-5-5/whats-new-opus-5-5.md) for capabilities, API changes, and migration guidance.
@@ -21,6 +31,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### September 18, 2026
 
+* For [cache diagnostics](../build-with-claude/cache-diagnostics.md), a response to a request that sends the `cache-diagnosis-2026-04-07` beta header now always includes the `diagnostics` field. The field is `null` when the request did not include the `diagnostics` object. Previously the field was omitted in that case.
 * The [Compliance API](../manage-claude/compliance-api.md) local session endpoints now also return transcripts of Claude in Chrome sessions (`product_surface` value `claude_in_chrome`), in beta for Claude Enterprise organizations, with your existing Compliance Access Key and the `read:compliance_user_data` scope. See [Sessions on users' machines](../manage-claude/compliance-sessions.md#retrieve-local-sessions).
 
 ### September 14, 2026
@@ -32,6 +43,10 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 * Claude Managed Agents permission policies now include `auto`: the server evaluates each agent or MCP tool call and runs it, denies it, or pauses for your approval. `agent.tool_use` and `agent.mcp_tool_use` events report how each call was evaluated in an `evaluation` field alongside `evaluated_permission`. See [Let the server evaluate each call with `auto`](../managed-agents/permission-policies.md#let-the-server-evaluate-each-call-with-auto).
 * Version 1.32.0 of the `ant` CLI adds `ant beta:sessions connect`, which attaches your terminal to a Claude Managed Agents session. You can follow the session live, send messages, and allow or deny tool calls that are waiting for approval. Pass `--web` to serve the Claude Console's session viewer locally and open the session there instead. See [Connect to a Managed Agents session from your terminal](../cli-sdks-libraries/cli/sessions-connect.md).
+
+### September 9, 2026
+
+* For [cache diagnostics](../build-with-claude/cache-diagnostics.md), the API now stores a request's fingerprint only when the request includes the `diagnostics` object. A request that sends only the `cache-diagnosis-2026-04-07` beta header is still accepted, but no fingerprint is stored. A later turn that points `previous_message_id` at it reports `previous_message_not_found`. Include `diagnostics` on every turn, with `"previous_message_id": null` on the first.
 
 ### September 3, 2026
 
@@ -206,7 +221,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### June 9, 2026
 
-* We've launched **Claude Fable 5** (`claude-fable-5`), our most capable widely released model, alongside **Claude Mythos 5** (`claude-mythos-5`) for Project Glasswing participants. Both models support a [1M token context window](../build-with-claude/context-windows.md) by default, 128k max output tokens, and always-on [adaptive thinking](../build-with-claude/thinking.md). See [Introducing Claude Fable 5 and Claude Mythos 5](../models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) for capabilities, API changes, and availability.
+* We've launched **Claude Fable 5** (`claude-fable-5`), our most capable model open to all customers, alongside **Claude Mythos 5** (`claude-mythos-5`) for Project Glasswing participants. Both models support a [1M token context window](../build-with-claude/context-windows.md) by default, 128k max output tokens, and always-on [adaptive thinking](../build-with-claude/thinking.md). See [Introducing Claude Fable 5 and Claude Mythos 5](../models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) for capabilities, API changes, and availability.
 * Claude Fable 5 and Claude Mythos 5 use the tokenizer introduced with Claude Opus 4.7. Compared to models before Claude Opus 4.7, the same text produces roughly 30% more tokens. The exact increase depends on the content and workload shape. Use the [token counting API](../build-with-claude/token-counting.md#token-counts-on-claude-fable-5) with `model: "claude-fable-5"` to measure your prompts under the new tokenizer.
 * Claude Fable 5 runs safety classifiers on requests and during response generation. When a classifier declines a request, the Messages API returns `stop_reason: "refusal"`. You are not billed for a request refused before any output is generated. An opt-in `fallbacks` parameter (in beta on the Claude API and Claude Platform on AWS; not supported on the Message Batches API) re-runs refused requests on another model, billed at the fallback model's rates. See [Handling stop reasons](../build-with-claude/handling-stop-reasons.md).
 * The [`stop_details.category`](../build-with-claude/refusals-and-fallback.md#refusal-response) field on refusal responses now includes `"reasoning_extraction"` on Claude Fable 5, returned when a request is blocked under Anthropic's Terms of Service restrictions on reverse engineering or duplicating model outputs. The existing `"cyber"` and `"bio"` categories are unchanged. No beta header is required.
@@ -234,7 +249,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### May 28, 2026
 
-* We've launched **Claude Opus 4.8** (claude-opus-4-8), our most capable widely released model. Claude Opus 4.8 supports a [1M token context window](../build-with-claude/context-windows.md) by default on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry, 128k max output tokens, and the same set of tools and platform features as Claude Opus 4.7. See the [migration guide](../about-claude/models/migration-guide.md) for baseline settings, features, and migration guidance.
+* We've launched **Claude Opus 4.8** (claude-opus-4-8), our most capable model. Claude Opus 4.8 supports a [1M token context window](../build-with-claude/context-windows.md) by default on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry, 128k max output tokens, and the same set of tools and platform features as Claude Opus 4.7. See the [migration guide](../about-claude/models/migration-guide.md) for baseline settings, features, and migration guidance.
 * We've launched [mid-conversation system messages](../build-with-claude/mid-conversation-system-messages.md). On Claude Opus 4.8, you can send `role: "system"` messages after a user turn (subject to [placement rules](../build-with-claude/mid-conversation-system-messages.md#limitations)) in the `messages` array, preserving prompt cache hits when instructions change during a long-running session. No beta header is required.
 * The [`stop_details`](../build-with-claude/refusals-and-fallback.md#refusal-response) field on refusal responses is now publicly documented; it returns a `category` (`cyber`, `bio`, or `null`) and a human-readable `explanation`, so your application can route different classes of refusal to the right next step. No beta header is required.
 * On Claude Opus 4.8, the [effort parameter](../build-with-claude/effort.md) defaults to `high` across all surfaces, including Claude Code and the Messages API.
@@ -313,7 +328,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### April 16, 2026
 
-* We've launched [Claude Opus 4.7](https://www.anthropic.com/news/claude-opus-4-7), our most capable widely released model for complex reasoning and agentic coding, at the same $5 / $25 per MTok pricing as Opus 4.6. See [What's new in Claude Opus 4.7](../models/opus-5-5/whats-new-opus-5-5.md) for capability improvements, new features, and the updated tokenizer. Opus 4.7 includes API breaking changes versus Opus 4.6; see the [migration guide](../about-claude/models/migration-guide.md) before upgrading.
+* We've launched [Claude Opus 4.7](https://www.anthropic.com/news/claude-opus-4-7), our most capable model for complex reasoning and agentic coding, at the same $5 / $25 per MTok pricing as Opus 4.6. See [What's new in Claude Opus 4.7](../models/opus-5-5/whats-new-opus-5-5.md) for capability improvements, new features, and the updated tokenizer. Opus 4.7 includes API breaking changes versus Opus 4.6; see the [migration guide](../about-claude/models/migration-guide.md) before upgrading.
 * [Claude in Amazon Bedrock](../build-with-claude/claude-in-amazon-bedrock.md) is now open to all Amazon Bedrock customers. Claude Opus 4.7 and Claude Haiku 4.5 are available self-serve from the Bedrock console through the Messages API endpoint at `/anthropic/v1/messages`, in 27 AWS regions with global and regional endpoints.
 * We've launched [task budgets](../build-with-claude/task-budgets.md) in beta on Claude Opus 4.7. Give Claude an advisory token budget for a full agentic loop (thinking, tool calls, tool results, and output) and the model sees a running countdown, using it to prioritize work and finish gracefully as the budget is consumed. Include the `task-budgets-2026-03-13` beta header in your requests.
 * Claude Opus 4.7 supports [high-resolution image input](../build-with-claude/vision.md#high-resolution-image-support-on-claude-opus-4-7), raising the maximum image resolution from 1568 to 2576 pixels on the long edge for improved performance on computer use, screenshot understanding, and document analysis. High-resolution support is automatic and requires no beta header; images may use up to approximately 3x more image tokens than on prior models.

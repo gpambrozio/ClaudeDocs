@@ -49,6 +49,8 @@ description: Summarize a pull request's changes and risks in the team's review f
 List what changed, why, and anything a reviewer should look at closely, in three short sections.
 ```
 
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) uploads the `skills/pr-summary` directory, prints the new skill's ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` uploads your edits as a new version instead of creating a second skill.
+
 ```python Python
 import anthropic
 from anthropic.lib import files_from_dir
@@ -191,8 +193,6 @@ skill = client.skills.create(
 puts "Created skill: #{skill.id}"
 puts "Latest version: #{skill.latest_version_id}"
 ```
-
-[`ant apply`](../cli-sdks-libraries/cli/apply.md) uploads the `skills/pr-summary` directory, prints the new skill's ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` uploads your edits as a new version instead of creating a second skill.
 
 To list, retrieve, delete, and version custom skills, see [Managing custom skills](../build-with-claude/skills-guide.md#managing-custom-skills). For the full request and response schemas, see the [Create Skill API reference](../api/skills/create.md). Skill bundles upload directly to the Skills API rather than through the [Files API](../build-with-claude/files.md).
 

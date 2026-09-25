@@ -33,6 +33,8 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `String = String`
+
   - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
     The model that will complete your prompt.
@@ -75,10 +77,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       Powerful intelligence for long-running agents and coding
 
-    - `:"claude-mythos-preview"`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
     - `:"claude-opus-4-6"`
 
       Powerful intelligence for long-running agents and coding
@@ -111,7 +109,11 @@ Future models and features will not be compatible with Text Completions. See our
 
       High-performance model for agents and coding
 
-  - `String = String`
+    - `:"claude-mythos-preview"`
+
+      **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+      New class of intelligence, strongest in coding and cybersecurity
 
 - `prompt: String`
 
@@ -161,7 +163,51 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [streaming](../../../build-with-claude/streaming.md) for details.
 
+- `workspace_id: String`
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+- `temperature: Float`
+
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+  Amount of randomness injected into the response.
+
+  Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
+
+  Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+
+  minimum: 0, maximum: 1
+
+- `top_k: Integer`
+
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
+
+  Only sample from the top K options for each subsequent token.
+
+  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
+
+  Recommended for advanced use cases only.
+
+  minimum: 0
+
+- `top_p: Float`
+
+  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
+
+  Use nucleus sampling.
+
+  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
+
+  Recommended for advanced use cases only.
+
+  minimum: 0, maximum: 1
+
 - `betas: Array[AnthropicBeta]`
+
+  **Deprecated**: Deprecated. This parameter has no effect on this method and will be removed in a future release.
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -265,48 +311,6 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `:"mcp-client-2026-09-15"`
 
-- `workspace_id: String`
-
-  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
-
-  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
-
-- `temperature: Float`
-
-  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-  Amount of randomness injected into the response.
-
-  Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-  Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
-  maximum: 1, minimum: 0
-
-- `top_k: Integer`
-
-  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
-
-  Only sample from the top K options for each subsequent token.
-
-  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-
-  Recommended for advanced use cases only.
-
-  minimum: 0
-
-- `top_p: Float`
-
-  **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
-
-  Use nucleus sampling.
-
-  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
-
-  Recommended for advanced use cases only.
-
-  maximum: 1, minimum: 0
-
 ## Returns
 
 - `class Completion`
@@ -332,6 +336,8 @@ Future models and features will not be compatible with Text Completions. See our
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `String = String`
 
     - `Model = :"claude-fable-5-1" | :"claude-opus-5-5" | :"claude-mythos-5-1" | 15 more`
 
@@ -375,10 +381,6 @@ Future models and features will not be compatible with Text Completions. See our
 
         Powerful intelligence for long-running agents and coding
 
-      - `:"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
       - `:"claude-opus-4-6"`
 
         Powerful intelligence for long-running agents and coding
@@ -411,7 +413,11 @@ Future models and features will not be compatible with Text Completions. See our
 
         High-performance model for agents and coding
 
-    - `String = String`
+      - `:"claude-mythos-preview"`
+
+        **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+        New class of intelligence, strongest in coding and cybersecurity
 
   - `stop_reason: String`
 

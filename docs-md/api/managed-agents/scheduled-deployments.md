@@ -65,6 +65,8 @@ schedule:
 Run the weekly compliance scan.
 ```
 
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) prints the new deployment's ID and records it in `claude-lock.json`. To see the deployment object, run `ant beta:deployments retrieve`.
+
 ```python Python
 deployment = client.beta.deployments.create(
     name="Weekly compliance scan",
@@ -220,8 +222,6 @@ deployment = client.beta.deployments.create(
   }
 )
 ```
-
-[`ant apply`](../cli-sdks-libraries/cli/apply.md) prints the new deployment's ID and records it in `claude-lock.json`. To see the deployment object, run `ant beta:deployments retrieve`.
 
 The response includes a deployment object with a populated `schedule.upcoming_runs_at` with the next upcoming fire times, to confirm your schedule was set correctly.
 

@@ -5,13 +5,12 @@ title: Cache diagnostics
 url: https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics
 description: Diagnose unexpected prompt cache misses by comparing consecutive requests and identifying exactly where the prompt prefix diverged.
 featureMetadata:
-  status: beta
-  betaHeader: cache-diagnosis-2026-04-07
+  status: ga
   zdr:
     eligibility: eligible
     note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements).
   supportedPlatforms:
-    Claude API: beta
+    Claude API: ga
     Claude Platform on AWS: not available
     Amazon Bedrock: not available
     Google Cloud: not available
@@ -24,7 +23,7 @@ Cache diagnostics closes that gap. Pass the `id` of your previous response, and 
 
 ## How cache diagnostics works
 
-When the beta header is present, the API stores a lightweight fingerprint of each request, keyed by the response `id`. On your next request, include that `id` as `diagnostics.previous_message_id`. The API rebuilds the fingerprint for the new request, compares it against the stored one, and attaches a `diagnostics` object to the response describing the first point of divergence.
+For each request that includes the `diagnostics` object, the API stores a lightweight fingerprint keyed by the response `id`. It stores nothing for requests that omit the object. On your next request, include the previous response's `id` as `diagnostics.previous_message_id`. The API rebuilds the fingerprint for the new request, compares it against the stored one, and attaches a `diagnostics` object to the response describing the first point of divergence.
 
 The comparison is about request structure, independent of whether the cache actually hit. See [Reading diagnostics alongside usage](cache-diagnostics.md#reading-diagnostics-alongside-usage) for how to combine the `diagnostics` result with `usage.cache_read_input_tokens`.
 
@@ -32,14 +31,13 @@ Fingerprints contain only hashes and token-count estimates (never raw prompt con
 
 ## Basic usage
 
-Send the beta header on every turn. On the first turn, pass `"previous_message_id": null` to opt in without a prior message to compare against. On subsequent turns, pass the `id` from the previous response.
+Include the `diagnostics` object on every turn. The object is the opt-in: the API stores a fingerprint only for requests that include it. On the first turn, pass `"previous_message_id": null` to opt in without a prior message to compare against. On subsequent turns, pass the `id` from the previous response. The `cache-diagnosis-2026-04-07` beta header is no longer required, and requests that still send it work as before.
 
 ```bash cURL
 # Turn 1: establish the cache and opt in to diagnostics
 response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: cache-diagnosis-2026-04-07" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -56,7 +54,6 @@ message_id=$(jq -r '.id' <<< "$response")
 curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: cache-diagnosis-2026-04-07" \
   -H "content-type: application/json" \
   -d @- <<EOF | jq '{id, diagnostics}'  # diagnostics: null means no divergence was found
 {
@@ -77,7 +74,6 @@ EOF
 ```bash CLI
 # Turn 1
 turn1=$(ant beta:messages create \
-  --beta cache-diagnosis-2026-04-07 \
   --transform '{id,usage,diagnostics}' <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
@@ -96,7 +92,6 @@ printf '%s\n' "$turn1"
 # Turn 2: pass the id from turn 1 as previous_message_id
 message_id=$(jq -r '.id' <<<"$turn1")
 ant beta:messages create \
-  --beta cache-diagnosis-2026-04-07 \
   --transform '{id,usage,diagnostics}' <<YAML
 model: claude-opus-5-5
 max_tokens: 1024
@@ -128,7 +123,6 @@ r1 = client.beta.messages.create(
     system=SYSTEM,
     messages=[{"role": "user", "content": "Summarize section 1."}],
     diagnostics={"previous_message_id": None},
-    betas=["cache-diagnosis-2026-04-07"],
 )
 
 # Turn 2: reference the previous response id
@@ -143,7 +137,6 @@ r2 = client.beta.messages.create(
         {"role": "user", "content": "Now summarize section 2."},
     ],
     diagnostics={"previous_message_id": r1.id},
-    betas=["cache-diagnosis-2026-04-07"],
 )
 
 diagnostics = r2.diagnostics
@@ -167,8 +160,7 @@ const r1 = await client.beta.messages.create({
   cache_control: { type: "ephemeral" },
   system: SYSTEM,
   messages: [{ role: "user", content: "Summarize section 1." }],
-  diagnostics: { previous_message_id: null },
-  betas: ["cache-diagnosis-2026-04-07"]
+  diagnostics: { previous_message_id: null }
 });
 
 // Turn 2: reference the previous response id
@@ -182,8 +174,7 @@ const r2 = await client.beta.messages.create({
     { role: "assistant", content: r1.content },
     { role: "user", content: "Now summarize section 2." }
   ],
-  diagnostics: { previous_message_id: r1.id },
-  betas: ["cache-diagnosis-2026-04-07"]
+  diagnostics: { previous_message_id: r1.id }
 });
 
 if (r2.diagnostics === null) {
@@ -212,7 +203,6 @@ var r1 = await client.Beta.Messages.Create(
             new() { Role = Role.User, Content = "Summarize section 1." },
         ],
         Diagnostics = new() { PreviousMessageID = null },
-        Betas = [AnthropicBeta.CacheDiagnosis2026_04_07],
     }
 );
 
@@ -234,7 +224,6 @@ var r2 = await client.Beta.Messages.Create(
             new() { Role = Role.User, Content = "Now summarize section 2." },
         ],
         Diagnostics = new() { PreviousMessageID = r1.ID },
-        Betas = [AnthropicBeta.CacheDiagnosis2026_04_07],
     }
 );
 
@@ -265,7 +254,6 @@ r1, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
 	Diagnostics: anthropic.BetaDiagnosticsParam{
 		PreviousMessageID: param.Null[string](),
 	},
-	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaCacheDiagnosis2026_04_07},
 })
 if err != nil {
 	panic(err)
@@ -284,7 +272,6 @@ r2, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
 	Diagnostics: anthropic.BetaDiagnosticsParam{
 		PreviousMessageID: anthropic.String(r1.ID),
 	},
-	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaCacheDiagnosis2026_04_07},
 })
 if err != nil {
 	panic(err)
@@ -314,7 +301,6 @@ var r1 = client.beta().messages().create(
         .addUserMessage("Summarize section 1.")
         // Pass null on the first turn to opt in without a prior message to compare.
         .diagnostics(BetaDiagnosticsParam.builder().previousMessageId((String) null).build())
-        .addBeta(AnthropicBeta.CACHE_DIAGNOSIS_2026_04_07)
         .build()
 );
 
@@ -328,7 +314,6 @@ var r2 = client.beta().messages().create(
         .addMessage(r1)
         .addUserMessage("Now summarize section 2.")
         .diagnostics(BetaDiagnosticsParam.builder().previousMessageId(r1.id()).build())
-        .addBeta(AnthropicBeta.CACHE_DIAGNOSIS_2026_04_07)
         .build()
 );
 
@@ -359,7 +344,6 @@ $r1 = $client->beta->messages->create(
         ['role' => 'user', 'content' => 'Summarize section 1.'],
     ],
     diagnostics: (new BetaDiagnosticsParam)->withPreviousMessageID(null),
-    betas: [AnthropicBeta::CACHE_DIAGNOSIS_2026_04_07],
 );
 
 $r2 = $client->beta->messages->create(
@@ -373,7 +357,6 @@ $r2 = $client->beta->messages->create(
         ['role' => 'user', 'content' => 'Now summarize section 2.'],
     ],
     diagnostics: (new BetaDiagnosticsParam)->withPreviousMessageID($r1->id),
-    betas: [AnthropicBeta::CACHE_DIAGNOSIS_2026_04_07],
 );
 
 echo match (true) {
@@ -396,8 +379,7 @@ r1 = client.beta.messages.create(
   messages: [
     {role: "user", content: "Summarize section 1."}
   ],
-  diagnostics: {previous_message_id: nil},
-  betas: ["cache-diagnosis-2026-04-07"]
+  diagnostics: {previous_message_id: nil}
 )
 
 r2 = client.beta.messages.create(
@@ -410,8 +392,7 @@ r2 = client.beta.messages.create(
     {role: "assistant", content: r1.content},
     {role: "user", content: "Now summarize section 2."}
   ],
-  diagnostics: {previous_message_id: r1.id},
-  betas: ["cache-diagnosis-2026-04-07"]
+  diagnostics: {previous_message_id: r1.id}
 )
 
 case r2.diagnostics
@@ -434,7 +415,6 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
 curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: cache-diagnosis-2026-04-07" \
   -H "content-type: application/json" \
   -d @- <<EOF | jq -R 'select(startswith("data: ")) | ltrimstr("data: ") | fromjson | select(.type == "message_start") | .message.diagnostics'
 {
@@ -457,7 +437,6 @@ EOF
 # Turn 2: stream. With --stream the CLI emits each SSE event as one JSON object.
 # diagnostics arrives on the message_start event; pick it out with jq.
 ant beta:messages create \
-  --beta cache-diagnosis-2026-04-07 \
   --stream --format jsonl <<YAML |
 model: claude-opus-5-5
 max_tokens: 1024
@@ -490,7 +469,6 @@ with client.beta.messages.stream(
         {"role": "user", "content": "Now summarize section 2."},
     ],
     diagnostics={"previous_message_id": r1.id},
-    betas=["cache-diagnosis-2026-04-07"],
 ) as stream:
     for text in stream.text_stream:
         print(text, end="", flush=True)
@@ -517,8 +495,7 @@ const stream = client.beta.messages.stream({
     { role: "assistant", content: r1.content },
     { role: "user", content: "Now summarize section 2." }
   ],
-  diagnostics: { previous_message_id: r1.id },
-  betas: ["cache-diagnosis-2026-04-07"]
+  diagnostics: { previous_message_id: r1.id }
 });
 
 for await (const event of stream) {
@@ -562,7 +539,6 @@ var stream = client.Beta.Messages.CreateStreaming(
             new() { Role = Role.User, Content = "Now summarize section 2." },
         ],
         Diagnostics = new() { PreviousMessageID = r1.ID },
-        Betas = [AnthropicBeta.CacheDiagnosis2026_04_07],
     }
 );
 
@@ -603,7 +579,6 @@ stream := client.Beta.Messages.NewStreaming(ctx, anthropic.BetaMessageNewParams{
 	Diagnostics: anthropic.BetaDiagnosticsParam{
 		PreviousMessageID: anthropic.String(r1.ID),
 	},
-	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaCacheDiagnosis2026_04_07},
 })
 defer stream.Close()
 
@@ -639,7 +614,6 @@ var params = MessageCreateParams.builder()
     .addMessage(r1)
     .addUserMessage("Now summarize section 2.")
     .diagnostics(BetaDiagnosticsParam.builder().previousMessageId(r1.id()).build())
-    .addBeta(AnthropicBeta.CACHE_DIAGNOSIS_2026_04_07)
     .build();
 
 var accumulator = BetaMessageAccumulator.create();
@@ -680,7 +654,6 @@ $stream = $client->beta->messages->createStream(
         ['role' => 'user', 'content' => 'Now summarize section 2.'],
     ],
     diagnostics: (new BetaDiagnosticsParam)->withPreviousMessageID($r1->id),
-    betas: [AnthropicBeta::CACHE_DIAGNOSIS_2026_04_07],
 );
 
 $diagnostics = null;
@@ -718,8 +691,7 @@ stream = client.beta.messages.stream(
     {role: "assistant", content: r1.content},
     {role: "user", content: "Now summarize section 2."}
   ],
-  diagnostics: {previous_message_id: r1.id},
-  betas: ["cache-diagnosis-2026-04-07"]
+  diagnostics: {previous_message_id: r1.id}
 )
 
 stream.each do |event|
@@ -776,7 +748,6 @@ for i, user_message in enumerate(
         system=SYSTEM,
         messages=messages,
         diagnostics={"previous_message_id": prev_id},
-        betas=["cache-diagnosis-2026-04-07"],
     )
 
     if r.diagnostics is not None and r.diagnostics.cache_miss_reason is not None:
@@ -807,8 +778,7 @@ for (const [i, prompt] of prompts.entries()) {
     cache_control: { type: "ephemeral" },
     system: SYSTEM,
     messages,
-    diagnostics: { previous_message_id: prevId },
-    betas: ["cache-diagnosis-2026-04-07"]
+    diagnostics: { previous_message_id: prevId }
   });
 
   if (r.diagnostics?.cache_miss_reason) {
@@ -844,7 +814,6 @@ for (int i = 0; i < prompts.Length; i++)
             System = system,
             Messages = messages,
             Diagnostics = new() { PreviousMessageID = prevId },
-            Betas = [AnthropicBeta.CacheDiagnosis2026_04_07],
         }
     );
 
@@ -891,7 +860,6 @@ for turn, prompt := range prompts {
 		Diagnostics: anthropic.BetaDiagnosticsParam{
 			PreviousMessageID: prevID,
 		},
-		Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaCacheDiagnosis2026_04_07},
 	})
 	if err != nil {
 		panic(err)
@@ -933,7 +901,6 @@ for (var turn = 0; turn < prompts.size(); turn++) {
             .system(system)
             .messages(messages)
             .diagnostics(BetaDiagnosticsParam.builder().previousMessageId(prevId).build())
-            .addBeta(AnthropicBeta.CACHE_DIAGNOSIS_2026_04_07)
             .build()
     );
 
@@ -971,7 +938,6 @@ foreach (['Summarize section 1.', 'Now section 2.', 'Now section 3.'] as $i => $
         system: $system,
         messages: $messages,
         diagnostics: (new BetaDiagnosticsParam)->withPreviousMessageID($prevId),
-        betas: [AnthropicBeta::CACHE_DIAGNOSIS_2026_04_07],
     );
 
     if ($r->diagnostics?->cacheMissReason !== null) {
@@ -1002,8 +968,7 @@ prev_id = nil
     cache_control: {type: "ephemeral"},
     system_: SYSTEM,
     messages: messages,
-    diagnostics: {previous_message_id: prev_id},
-    betas: ["cache-diagnosis-2026-04-07"]
+    diagnostics: {previous_message_id: prev_id}
   )
 
   if (reason = r.diagnostics&.cache_miss_reason)
@@ -1017,12 +982,11 @@ end
 
 ## Response format
 
-The `diagnostics` field on the response `Message` has four possible states:
+The `diagnostics` field on the response `Message` has three possible values:
 
 | Value                          | Meaning                                                                                                                                                                                         |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| field absent                   | The request did not include `diagnostics`, or the beta header was missing.                                                                                                                      |
-| `null`                         | Either `previous_message_id` was `null` (first turn, nothing to compare), or a comparison ran and found no divergence.                                                                          |
+| `null`                         | The request did not include the `diagnostics` object, `previous_message_id` was `null` (first turn, nothing to compare), or a comparison ran and found no divergence.                           |
 | `{"cache_miss_reason": null}`  | The comparison was still running when the response was serialized. This can happen when the response starts very quickly. Treat it as inconclusive and check the next turn.                     |
 | `{"cache_miss_reason": {...}}` | A `cache_miss_reason` is attached. For `*_changed` types this identifies the first divergence point; `previous_message_not_found` and `unavailable` are cases where no comparison was produced. |
 
@@ -1059,7 +1023,7 @@ When `cache_miss_reason` is non-null, it looks like this:
 | `system_changed`             | The `system` parameter differs. Typically a timestamp, request ID, or other per-request value was interpolated into the system prompt.                                                                                                                                                                                                                                                                                                          | Make the system prompt a byte-stable constant and move dynamic data into the first `user` message after your cache breakpoint.                                                                                                                                                                                |
 | `tools_changed`              | The `tools` array differs: tools were added, removed, or reordered between turns, or tool `input_schema` JSON was serialized non-deterministically.                                                                                                                                                                                                                                                                                             | Send the same tool list on every turn in a fixed order with deterministically serialized schemas (for example, sort keys).                                                                                                                                                                                    |
 | `messages_changed`           | The model, system, and tools all match, but an earlier entry in `messages` was altered, reordered, or removed rather than appended to. Typically conversation history was truncated or edited, or assistant turns and `tool_result` blocks were re-serialized differently on resend.                                                                                                                                                            | Treat the history as append-only; echo assistant `content` and tool results back verbatim.                                                                                                                                                                                                                    |
-| `previous_message_not_found` | No stored fingerprint exists for the supplied `previous_message_id`. This is not evidence that your request changed. Typically the previous request did not carry the beta header, it came from a different workspace, or too much time has passed since it was sent.                                                                                                                                                                           | Send the beta header on every turn and keep consecutive turns close together in time.                                                                                                                                                                                                                         |
+| `previous_message_not_found` | No stored fingerprint exists for the supplied `previous_message_id`. This is not evidence that your request changed. Typically the previous request did not include the `diagnostics` object, it came from a different workspace, or too much time has passed since it was sent.                                                                                                                                                                | Include the `diagnostics` object on every turn and keep consecutive turns close together in time.                                                                                                                                                                                                             |
 | `unavailable`                | Diagnostic information was not available for this request. This includes the case where `model`, `system`, and `tools` match but another prompt-affecting request parameter (`tool_choice`, `thinking`, `context_management`, `output_config`, `output_format`, or the set of active `anthropic-beta` headers) differs, and very long conversations where the divergence is beyond the comparison horizon. Your request was processed normally. | Keep the prompt-affecting request parameters constant for the lifetime of a cached conversation. If persistent, apply the manual checks under [Troubleshooting common issues](prompt-caching.md#troubleshooting-common-issues) on the prompt caching page. |
 
 The four `*_changed` types also carry a `cache_missed_input_tokens` integer: an estimate of how many input tokens fell after the divergence point, giving you a sense of how much cacheable prefix was lost. It is derived from byte lengths before tokenization, so treat it as a magnitude indicator rather than a billing number. It can differ from (and occasionally exceed) `usage.input_tokens`.
@@ -1079,7 +1043,6 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 
 ## Limitations
 
-* **Beta:** Field names and semantics may change while this feature is in beta.
 * **Claude API only:** Not available on Amazon Bedrock or Google Cloud.
 * **Limited retention:** Fingerprints for `previous_message_id` lookup expire after a short period. Run diagnostic comparisons between closely spaced requests.
 * **Same workspace:** The previous request must have run in the same organization and workspace. To check, compare the `anthropic-workspace-id` [response header](../api/overview.md#response-headers) on the two responses.
@@ -1090,7 +1053,7 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 
 Cache diagnostics is ZDR eligible (qualified). Anthropic does not store the raw text of your prompts or Claude's outputs for this feature.
 
-The fingerprint stored for each request consists only of cryptographic hashes and token-count estimates, keyed by the response `id` and scoped to your organization and workspace. Fingerprints expire after a short period and are not used for any other purpose.
+The API stores a fingerprint only for requests that include the `diagnostics` object. The fingerprint consists only of cryptographic hashes and token-count estimates, keyed by the response `id` and scoped to your organization and workspace. Fingerprints expire after a short period and are not used for any other purpose.
 
 For ZDR eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
@@ -1098,7 +1061,6 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
 
 * [Prompt caching](prompt-caching.md)
 * [Token counting](token-counting.md)
-* [Beta headers](../api/beta-headers.md)
 
 ---
 

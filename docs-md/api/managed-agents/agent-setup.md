@@ -30,7 +30,7 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 | `description` | A description of what the agent does.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `metadata`    | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
-You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. An `effort` level set inside a per-session `model` override isn't applied, and because the override replaces the agent's `model` object in full, a session created with a `model` override runs at the model's default effort level; to run at a specific effort level, set `effort` on the agent and don't override `model` for that session. See [Override agent configuration for a session](sessions.md#override-agent-configuration-for-a-session).
+You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. A `model` override replaces the agent's `model` object in full, so the agent's own `effort` isn't carried over. To run the session at a specific effort level, set `effort` inside the override's `model` object. See [Override agent configuration for a session](sessions.md#override-agent-configuration-for-a-session).
 
 ## Create an agent
 
@@ -69,6 +69,8 @@ tools:
 
 You are a helpful coding agent.
 ```
+
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the agent from `coding-assistant.md`, prints its ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` updates this agent instead of creating a second one.
 
 ```python Python
 agent = client.beta.agents.create(
@@ -160,8 +162,6 @@ agent = client.beta.agents.create(
   tools: [{type: "agent_toolset_20260401"}]
 )
 ```
-
-[`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the agent from `coding-assistant.md`, prints its ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` updates this agent instead of creating a second one.
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
 
