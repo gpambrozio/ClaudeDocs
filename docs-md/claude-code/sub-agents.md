@@ -4,7 +4,7 @@
 
 Subagents are specialized AI assistants that handle specific types of tasks. Use one when a side task would flood your main conversation with search results, logs, or file contents you won't reference again: the subagent does that work in its own context and returns only the summary. Define a custom subagent when you keep spawning the same kind of worker with the same instructions.
 
-Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. When Claude encounters a task that matches a subagent's description, it delegates to that subagent, which works independently and returns results. To see the context savings in practice, the [context window visualization](context-window.md) walks through a session where a subagent handles research in its own separate window.
+Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions. It also sends its own requests, which count toward the same [usage limits](costs.md#plan-usage-breakdown) as your main conversation. When Claude encounters a task that matches a subagent's description, it delegates to that subagent, which works independently and returns results. To see the context savings in practice, the [context window visualization](context-window.md) walks through a session where a subagent handles research in its own separate window.
 
 Subagents work within a single session. To run many independent sessions in parallel and monitor them from one place, see [background agents](agent-view.md). For separate sessions that pass messages to each other, see [cross-session messaging](cross-session-messaging.md). For a coordinated team of sessions Claude spawns and supervises, see [agent teams](agent-teams.md).
 
@@ -208,9 +208,13 @@ claude --agents @'
 '@
 ```
 
-The `--agents` flag accepts JSON with a `prompt` field plus these [frontmatter](#supported-frontmatter-fields) fields: `description`, `tools`, `disallowedTools`, `model`, `permissionMode`, `mcpServers`, `hooks`, `maxTurns`, `skills`, `initialPrompt`, `memory`, `effort`, `background`, `omitClaudeMd`, and `isolation`. Use `prompt` for the system prompt, equivalent to the markdown body in file-based subagents. `color` and `experimental` aren't accepted here and are ignored rather than rejected.
+In [non-interactive mode](headless.md), `--agents` also accepts the path to a JSON file holding the same object, for definitions too large to pass on the command line. For example, `claude -p --agents ./agents.json "Review my changes"` reads the definitions from that file. In an interactive session, Claude Code refuses a file path. The file form requires Claude Code v2.1.281 or later.
 
-Each top-level key in the JSON is the agent's name. Don't start a name with `-`.
+Each top-level key in the JSON is an agent's name, and its value is that agent's definition. Don't start a name with `-`. A definition takes these fields:
+
+* **`prompt`**: the agent's system prompt, equivalent to the markdown body in file-based subagents. `prompt` may be empty. If you select an agent with an empty `prompt` and no `memory` field as the session's agent with `--agent`, the session's system prompt is left unchanged. An empty `prompt` requires Claude Code v2.1.281 or later.
+* **[Frontmatter fields](#supported-frontmatter-fields)**: `description`, `tools`, `disallowedTools`, `model`, `permissionMode`, `mcpServers`, `hooks`, `maxTurns`, `skills`, `initialPrompt`, `memory`, `effort`, `background`, `omitClaudeMd`, and `isolation`.
+* **Ignored fields**: `color` and `experimental` aren't accepted here and are ignored rather than rejected.
 
 For what Claude Code does with a value it can't load, and the flags and environment variable that skip that check, see [`Invalid --agents configuration`](errors.md#invalid-agents-configuration).
 
@@ -539,7 +543,7 @@ Managed-settings restrictions apply to every subagent regardless of how it is de
 
 #### Permission modes
 
-Set `permissionMode` to choose the permission mode a subagent runs in. Use the modes' config values, so Manual mode is `default`. If you leave it unset, the subagent inherits the main conversation's mode, which starts as [auto mode](permission-modes.md#eliminate-prompts-with-auto-mode) on Pro, Max, and Team plans unless your settings or your organization change it.
+Set `permissionMode` to choose the permission mode a subagent runs in. Use the modes' config values, so Manual mode is `default`. If you leave it unset, the subagent inherits the main conversation's [permission mode](permission-modes.md).
 
 The main conversation's permission mode decides whether Claude Code uses the value you set:
 
@@ -825,7 +829,7 @@ You can also type the mention manually without using the picker: `@agent-<name>`
 claude --agent code-reviewer
 ```
 
-The subagent's system prompt replaces the default Claude Code system prompt entirely, the same way [`--system-prompt`](cli-reference.md) does. `CLAUDE.md` files and project memory still load through the normal message flow, even when the agent's definition sets [`omitClaudeMd`](#supported-frontmatter-fields).
+Unless the agent's [prompt is empty](#choose-the-subagent-scope), the subagent's system prompt replaces the default Claude Code system prompt entirely, the same way [`--system-prompt`](cli-reference.md) does. `CLAUDE.md` files and project memory still load through the normal message flow, even when the agent's definition sets [`omitClaudeMd`](#supported-frontmatter-fields).
 
 The agent name appears as `@<name>` in the startup header so you can confirm it's active.
 
@@ -945,7 +949,7 @@ Research the authentication, database, and API modules in parallel using separat
 
 Each subagent explores its area independently, then Claude synthesizes the findings. This works best when the research paths don't depend on each other.
 
-When subagents complete, their results return to your main conversation. Running many subagents that each return detailed results can consume significant context.
+When subagents complete, their results return to your main conversation. Running many subagents that each return detailed results can consume significant context, and each subagent spends tokens of its own while it runs.
 
 For work that needs to keep running in parallel or won't fit in one context window, run it in [separate sessions](agents.md) and let Claude [pass findings between them](cross-session-messaging.md).
 

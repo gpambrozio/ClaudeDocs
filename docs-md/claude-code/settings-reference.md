@@ -567,6 +567,7 @@ scope: "Which settings files can set the key: user (~/.claude/settings.json), pr
 | [`autoScrollEnabled`](#autoscrollenabled)                                                             | [Follow new output](fullscreen.md#auto-follow) to the bottom in fullscreen rendering                                                                                                                                       | Interface and terminal             | Any file                |
 | [`autoUpdatesChannel`](#autoupdateschannel)                                                           | Follow the stable [release channel](setup.md#configure-release-channel) instead of latest                                                                                                                                  | Updates and versioning             | Any file                |
 | [`availableModels`](#availablemodels)                                                                 | [Restrict which models](model-config.md#restrict-model-selection) people can pick                                                                                                                                          | Model and responses                | Any file                |
+| [`availableModelsMatch`](#availablemodelsmatch)                                                       | Make each `availableModels` model ID entry [permit only the version it names](model-config.md#block-specific-models-or-versions)                                                                                           | Model and responses                | Managed                 |
 | [`awaySummaryEnabled`](#awaysummaryenabled)                                                           | Turn off the [session recap](interactive-mode.md#session-recap) shown when you come back to the terminal                                                                                                                   | Remote, desktop, and notifications | Any file                |
 | [`awsAuthRefresh`](#awsauthrefresh)                                                                   | Refresh expired [Bedrock credentials](amazon-bedrock.md#advanced-credential-configuration) in `.aws` with your own command                                                                                                 | Authentication and providers       | Any file                |
 | [`awsCredentialExport`](#awscredentialexport)                                                         | Supply [Bedrock credentials](amazon-bedrock.md#advanced-credential-configuration) as JSON from your own command                                                                                                            | Authentication and providers       | Any file                |
@@ -584,6 +585,7 @@ scope: "Which settings files can set the key: user (~/.claude/settings.json), pr
 | [`crossSessionInbound`](#crosssessioninbound)                                                         | Choose whether Claude Code delivers [messages from your other sessions](cross-session-messaging.md#control-inbound-messages), shows a notice without delivering them, or refuses them                                      | Agents, sessions, and worktrees    | Any file                |
 | [`defaultShell`](#defaultshell)                                                                       | Choose whether Bash or PowerShell runs the shell commands you type with the [`!` prefix](interactive-mode.md#shell-mode-with-prefix)                                                                                       | Interface and terminal             | Any file                |
 | [`deniedMcpServers`](#deniedmcpservers)                                                               | Block specific [MCP servers](mcp.md) by URL, command, or name                                                                                                                                                              | MCP                                | Any file                |
+| [`deniedModels`](#deniedmodels)                                                                       | [Block specific models](model-config.md#block-specific-models-or-versions), even ones `availableModels` permits                                                                                                            | Model and responses                | Managed                 |
 | [`desktopSessionCleanupPeriodDays`](#desktopsessioncleanupperioddays)                                 | Set an age limit in days for [Claude Desktop and Cowork transcripts](claude-directory.md#cleaned-up-automatically)                                                                                                         | Privacy and telemetry              | User or managed         |
 | [`dialogExpiry`](#dialogexpiry)                                                                       | Set how long Claude Code waits for [Remote Control](remote-control.md) or an SDK host to answer a forwarded dialog before it cancels the dialog                                                                            | Interface and terminal             | User or managed         |
 | [`diffTool`](#difftool)                                                                               | Choose whether Claude's proposed file changes open in the [VS Code](vs-code.md) or [JetBrains](jetbrains.md#features) diff viewer or stay in the terminal                                                                 | Global config settings             | Global config           |
@@ -640,6 +642,7 @@ scope: "Which settings files can set the key: user (~/.claude/settings.json), pr
 | [`managedMcpServers`](#managedmcpservers)                                                             | Provide remote [MCP servers](managed-mcp.md#provide-servers-through-managed-settings) to every user alongside the ones they add                                                                                            | MCP                                | Managed                 |
 | [`managedSourcesBehavior`](#managedsourcesbehavior)                                                   | Compose every [managed source](managed-settings.md#how-claude-code-combines-managed-sources) you deploy instead of using the highest-priority one alone                                                                    | Enterprise and managed settings    | Managed                 |
 | [`maxEffortLevel`](#maxeffortlevel)                                                                   | Cap the [effort level](model-config.md#adjust-effort-level) for every model or per model, on every provider                                                                                                                | Model and responses                | Any file                |
+| [`maxProseWidth`](#maxprosewidth)                                                                     | Cap how wide the prose in Claude's responses runs in a wide terminal                                                                                                                                                        | Interface and terminal             | Any file                |
 | [`minimumVersion`](#minimumversion)                                                                   | Keep [auto-updates](setup.md#pin-a-minimum-version) from installing anything below a version                                                                                                                               | Updates and versioning             | Any file                |
 | [`model`](#model)                                                                                     | Change the [model](model-config.md#set-a-default-model-for-new-sessions) Claude Code starts with                                                                                                                           | Model and responses                | Any file                |
 | [`modelOverrides`](#modeloverrides)                                                                   | [Map model IDs](model-config.md#override-model-ids-per-version) to your provider's IDs, such as Bedrock ARNs                                                                                                               | Model and responses                | Any file                |
@@ -816,7 +819,7 @@ On models that always think, such as Opus 5.5 and the Fable models, `false` has 
 
 ### `availableModels`
 
-Restrict which models people can select for the main session, [subagents](sub-agents.md), [skills](skills.md), and the [advisor](advisor.md). A managed list constrains `/model`, `--model`, and the `model` key in a developer's own files; a model outside it can't be selected. On its own this doesn't touch the Default option; pair it with [`enforceAvailableModels`](#enforceavailablemodels) for that.
+Restrict which models people can select for the main session, [subagents](sub-agents.md), [skills](skills.md), and the [advisor](advisor.md). A managed list constrains `/model`, `--model`, and the `model` key in a developer's own files; a model outside it can't be selected. With the default prefix matching, this doesn't touch the Default option on its own; pair it with [`enforceAvailableModels`](#enforceavailablemodels) for that.
 
 * **Scope**: [`Any file`](#scopes). Deploy it in managed settings to enforce it for an organization.
 * **Type**: array of model aliases or IDs
@@ -830,7 +833,51 @@ This example lets people select only Sonnet and Haiku models:
 }
 ```
 
-See [Restrict model selection](model-config.md#restrict-model-selection).
+A model ID entry such as `"claude-opus-5"` also permits later versions that extend it, such as Opus 5.5. To block one of those versions, use [`deniedModels`](#deniedmodels). To make each model ID entry permit only the version it names, use [`availableModelsMatch`](#availablemodelsmatch). See [Restrict model selection](model-config.md#restrict-model-selection).
+
+### `availableModelsMatch`
+
+Choose how [`availableModels`](#availablemodels) entries match model IDs. By default a model ID entry also permits later versions that extend it, so `"claude-opus-5"` permits Opus 5.5. With `"exact"`, each model ID entry permits only the version it names, so a newer version of that model stays blocked until you list it. Requires Claude Code v2.1.283 or later.
+
+* **Scope**: [`Managed`](#scopes). Claude Code ignores the key in user, project, and local settings and in `--settings`, with a warning
+* **Type**: string, one of:
+  * `"prefix"`: a model ID entry permits its version and any model ID that extends it with another segment
+  * `"exact"`: a model ID entry permits only the version it names, including that version's dated IDs, so `"claude-opus-5"` permits Opus 5 but not `claude-opus-5-5`. A family alias such as `"opus"` still permits the whole family, and `best`, `opusplan`, and `default` entries are ignored
+* **Default**: `"prefix"`
+
+This example permits Opus 5 and Sonnet 5 and no later release of either:
+
+```json managed-settings.json
+{
+  "availableModels": ["claude-opus-5", "claude-sonnet-5"],
+  "availableModelsMatch": "exact"
+}
+```
+
+With `"exact"`, the Default option is also limited to the listed models whenever the list names at least one model or family. See [Block specific models or versions](model-config.md#block-specific-models-or-versions).
+
+### `deniedModels`
+
+Block specific models, with or without an [`availableModels`](#availablemodels) allowlist and even when that list permits them. Claude Code hides a blocked model from the `/model` picker, and the model can't be selected anywhere `availableModels` is enforced. A session on the Default option doesn't run a blocked model either, as [Block specific models or versions](model-config.md#block-specific-models-or-versions) describes. Requires Claude Code v2.1.283 or later.
+
+* **Scope**: [`Managed`](#scopes). Claude Code ignores the key in user, project, and local settings and in `--settings`, with a warning
+* **Type**: array of model aliases or IDs
+  * A family alias such as `"opus"` blocks every model in that family
+  * A model ID such as `"claude-opus-5-5"` blocks that version in every spelling, including dated and provider-specific IDs
+  * A model ID with no minor version, such as `"claude-opus-5"`, also blocks later minor versions such as Opus 5.5. Write `"claude-opus-5-0"` to block Opus 5 alone
+  * `best`, `opusplan`, and `default` entries are ignored
+* **Default**: unset, so no model is blocked
+
+This example permits Opus and Sonnet models and blocks Opus 5.5:
+
+```json managed-settings.json
+{
+  "availableModels": ["opus", "sonnet"],
+  "deniedModels": ["claude-opus-5-5"]
+}
+```
+
+See [Block specific models or versions](model-config.md#block-specific-models-or-versions).
 
 ### `effortLevel`
 
@@ -861,14 +908,14 @@ In your user settings file, `~/.claude/settings.json`, this key is the older for
 
 ### `enforceAvailableModels`
 
-The `/model` picker has a **Default** option that resolves to your [organization default model](model-config.md#organization-default-model) when one applies, and otherwise to your account type's default. An [`availableModels`](#availablemodels) allowlist limits the models you can name, but on its own it leaves **Default** alone, so **Default** can still resolve to a model outside the list. This key closes that gap. Requires Claude Code v2.1.175 or later.
+The `/model` picker has a **Default** option that resolves to your [organization default model](model-config.md#organization-default-model) when one applies, and otherwise to your account type's default. An [`availableModels`](#availablemodels) allowlist limits the models you can name, but with the default [prefix matching](#availablemodelsmatch) it leaves **Default** alone, so **Default** can still resolve to a model outside the list. This key closes that gap. Requires Claude Code v2.1.175 or later.
 
 When your organization deploys any managed settings, Claude Code reads this key from the managed source alone and ignores it in your other files.
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: Boolean
   * `true`: when **Default** would resolve to a model outside `availableModels`, Claude Code resolves it to the first available model in the list
-  * `false`: **Default** resolves as usual, even to a model outside `availableModels`
+  * `false`: this key doesn't change how **Default** resolves
 * **Default**: `false`
 
 This example restricts named selections to Sonnet and Haiku models and makes **Default** resolve to the first of them that is available:
@@ -1049,10 +1096,12 @@ This example adds two Bedrock deployments after the built-in lineup, under names
 
 The key takes two fields, one for the rows themselves and one for whether they replace the built-in lineup or add to it.
 
-| Field                   | Type                                                                                  | What it does                                                                                                                                                                                                                                                                  |
-| :---------------------- | :------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `options`               | array of rows, each with a required `model` and an optional `label` and `description` | The rows the picker shows, in this order, except that a grayed-out row moves to the bottom. Without a `label`, Claude Code titles the row with the built-in name for a model it knows, or the model ID otherwise, and without a `description` it writes a generic second line |
-| `replaceBuiltInOptions` | Boolean, default `false`                                                              | Set it to `true` to show only these rows, **Default**, and a row for the model the session is already using. Leave it unset to add these rows after the built-in lineup                                                                                                       |
+| Field                   | Type                                                                                             | What it does                                                                                                                                                                                                                                                                  |
+| :---------------------- | :----------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options`               | array of rows, each with a required `model` and optional `label`, `description`, and `behavesAs` | The rows the picker shows, in this order, except that a grayed-out row moves to the bottom. Without a `label`, Claude Code titles the row with the built-in name for a model it knows, or the model ID otherwise, and without a `description` it writes a generic second line |
+| `replaceBuiltInOptions` | Boolean, default `false`                                                                         | Set it to `true` to show only these rows, **Default**, and a row for the model the session is already using. Leave it unset to add these rows after the built-in lineup                                                                                                       |
+
+An entry in `options` can also carry an optional `behavesAs` string beside its `model`, which requires v2.1.257 or later. Set it to the ID of a model your Claude Code version already knows, such as `claude-opus-4-8`, on an entry whose `model` is newer than your version. Claude Code then applies that known model's capabilities and effort defaults to the entry instead of treating its model as unknown. The entry's label and the model ID Claude Code sends in requests don't change.
 
 With `replaceBuiltInOptions` on, Claude Code hides every other row: the built-in lineup, the rows it adds for [`availableModels`](#availablemodels) entries, the models [gateway discovery](llm-gateway-protocol.md#model-discovery) found, and [`ANTHROPIC_CUSTOM_MODEL_OPTION`](model-config.md#add-a-custom-model-option). With it off, Claude Code skips a listed model that the built-in lineup already covers. A label changes what the picker shows, not which model Claude Code runs.
 
@@ -1372,11 +1421,11 @@ The three rule arrays share one syntax; see [Permission rule syntax](#permission
 
 ### `useAutoModeDuringPlan`
 
-Choose whether Claude Code uses the auto mode classifier to review shell commands in plan mode. With the default `true`, the classifier reviews each command during planning when auto mode is available and you see no prompt. Set `false` to get a permission prompt for every command outside the built-in read-only set. Appears in `/config` as **Use auto mode during plan**.
+Choose whether Claude Code uses the auto mode classifier to review shell commands in plan mode. With the default `true`, the classifier reviews each command during planning when auto mode is available and you see no prompt, except for [critical-path removals](permission-modes.md#critical-paths). Set `false` to get a permission prompt for every command outside the built-in read-only set. Appears in `/config` as **Use auto mode during plan**.
 
 * **Scope**: [`User, local, or managed`](#scopes). A repository can't turn it off for you.
 * **Type**: Boolean
-  * `true`: the same as unset; when auto mode is available, the classifier reviews each shell command during planning instead of prompting you for it. A `false` in any of these files still turns it off
+  * `true`: the same as unset; when auto mode is available, the classifier reviews each shell command during planning instead of prompting you for it, except [critical-path removals](permission-modes.md#critical-paths). A `false` in any of these files still turns it off
   * `false`: you get a permission prompt for every command outside the built-in read-only set
 * **Default**: `true`
 
@@ -1518,7 +1567,7 @@ When the session's working directory is a linked [git worktree](worktrees.md), i
 
 ### `permissions.defaultMode`
 
-Set the [permission mode](permission-modes.md) new sessions start in. When you leave it unset, sessions start in the [built-in default](permission-modes.md#which-mode-a-session-starts-in) for your plan and surface.
+Set the [permission mode](permission-modes.md) new sessions start in. When you leave it unset, sessions start in the [built-in default](permission-modes.md#which-mode-a-session-starts-in) for your surface.
 
 * **Scope**: [`Any file`](#scopes). `auto` and `bypassPermissions` don't take effect from project or local settings, so set them in `~/.claude/settings.json` instead. Before v2.1.257, `bypassPermissions` took effect from any file. For conversations the VS Code extension starts, Claude Code reads only user, managed, and `--settings` values.
 * **Type**: string, one of:
@@ -1749,7 +1798,7 @@ To see when commands you type yourself at the [`!` shell-mode prompt](interactiv
 
 ### `sandbox.filesystem`
 
-Control which paths sandboxed commands can read and write. By default they can write to the working directory, the session temp directory, and directories you add with `--add-dir`, `/add-dir`, or `permissions.additionalDirectories`, and can read the rest of the filesystem, including credential files. Widen or narrow that with the four path lists, or switch the filesystem layer off with `disabled`. See [Filesystem isolation](sandboxing.md#filesystem-isolation) for the default boundaries.
+Control which paths sandboxed commands can read and write. By default they can write to the working directory, the per-user temp directory, and directories you add with `--add-dir`, `/add-dir`, or `permissions.additionalDirectories`, and can read the rest of the filesystem, including credential files. Widen or narrow that with the four path lists, or switch the filesystem layer off with `disabled`. See [Filesystem isolation](sandboxing.md#filesystem-isolation) for the default boundaries.
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: object with `allowWrite`, `denyWrite`, `denyRead`, and `allowRead` arrays, plus the `allowManagedReadPathsOnly` and `disabled` Booleans
@@ -1795,11 +1844,11 @@ Claude Code also removes a trailing `/**`, so `~/build/**` and `~/build` cover t
 
 ### `sandbox.filesystem.allowWrite`
 
-Add paths where sandboxed commands can write, beyond the working directory, the session temp directory, and the directories you've added with `--add-dir`, `/add-dir`, or `permissions.additionalDirectories`. Use it when a subprocess such as `kubectl` or a build tool needs to write outside the project.
+Add paths where sandboxed commands can write, beyond the working directory, the per-user temp directory, and the directories you've added with `--add-dir`, `/add-dir`, or `permissions.additionalDirectories`. Use it when a subprocess such as `kubectl` or a build tool needs to write outside the project.
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: array of path strings, using the [sandbox path prefixes](#sandbox-path-prefixes)
-* **Default**: unset, so sandboxed commands can write to the working directory, the session temp directory, directories you've added with `--add-dir` or `/add-dir`, and directories in [`permissions.additionalDirectories`](#permissions-additionaldirectories)
+* **Default**: unset, so sandboxed commands can write to the working directory, the per-user temp directory, directories you've added with `--add-dir` or `/add-dir`, and directories in [`permissions.additionalDirectories`](#permissions-additionaldirectories)
 
 This lets a build write under `/tmp/build` and lets `kubectl` update your kubeconfig:
 
@@ -2770,6 +2819,8 @@ This example turns off automatic compaction and routes API requests through a pr
 * [`CLAUDE_CODE_MESSAGING_SOCKET` and `CLAUDE_CODE_MESSAGING_TOKEN`](env-vars.md#variables), which Claude Code exports itself, are ignored from every file. Ignoring the socket variable requires Claude Code v2.1.224 or later, and ignoring the token requires v2.1.228 or later.
 * [`CLAUDE_CODE_PROJECT_DIR_NAME`](sessions.md#name-the-project-directory-yourself), which Claude Code reads from the launch environment only, is ignored from every file; requires v2.1.234 or later.
 * [`CLAUDE_CODE_RESTRICTED`](env-vars.md#variables), which Claude Code reads from the launch environment only, is ignored from every file.
+* [`CLAUDE_CODE_DISABLE_POWERSHELL_CMD_RM_DENY`](env-vars.md#variables), which Claude Code reads from the launch environment only, is ignored from every file. The variable requires Claude Code v2.1.283 or later.
+* [`CLAUDE_CODE_DISABLE_DANGEROUS_RM_TIMEOUT` and `CLAUDE_CODE_DISABLE_SUBSTITUTION_RM_PROMPT`](env-vars.md#variables), which Claude Code reads from the launch environment only, are ignored from every file.
 
 ### `fileCheckpointingEnabled`
 
@@ -3122,6 +3173,20 @@ In v2.1.238 through v2.1.260, setting it to `"readline"` made `Ctrl+W` delete ba
 * **Scope**: [`Any file`](#scopes)
 * **Type**: string, `"classic"` or `"readline"`
 * **Default**: unset
+
+### `maxProseWidth`
+
+Cap the width of the prose in Claude's responses so lines stay readable in a wide terminal. Paragraphs, headings, lists, and blockquotes wrap within this many columns, while tables and code blocks keep the full terminal width. Requires Claude Code v2.1.282 or later.
+
+* **Scope**: [`Any file`](#scopes)
+* **Type**: number of terminal columns, a whole number, minimum `40`. Claude Code ignores any other value
+* **Default**: unset, so prose wraps at the terminal edge
+
+```json settings.json
+{
+  "maxProseWidth": 80
+}
+```
 
 ### `prefersReducedMotion`
 
@@ -3731,7 +3796,7 @@ Set the attribution text Claude Code adds to git commits, including any trailers
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: string
-* **Default**: unset, so Claude Code adds `Co-Authored-By: <name> <noreply@anthropic.com>`. The name is the session's active model, such as `Claude Sonnet 5`.
+* **Default**: unset, so Claude Code adds `Co-Authored-By: <name> <noreply@anthropic.com>`. The name is the model in use when the commit is made, such as `Claude Sonnet 5`. When a [subagent](sub-agents.md) makes the commit, the trailer names the subagent's model.
   * When Claude Code recognizes the model as a Claude model but can't confirm its exact version, it writes `Claude` alone.
   * When it can't match the model ID to any Claude model, such as a third-party model served through a custom [`ANTHROPIC_BASE_URL`](env-vars.md), it writes `Claude Code`.
 
@@ -5177,7 +5242,7 @@ Connect [Remote Control](remote-control.md) automatically when each interactive 
 * **Type**: Boolean
   * `true`: Claude Code connects Remote Control automatically when each interactive session starts
   * `false`: Claude Code waits for `/remote-control`
-* **Default**: unset, so auto-connect follows your organization's admin default when one is set, and otherwise Claude Code's current default
+* **Default**: unset, so the [auto-connect default](remote-control.md#enable-remote-control-for-all-sessions) applies
 * **Per-session overrides**: `--remote-control` turns Remote Control on for one session even when this key is `false`, and no flag turns it off for one session
 
 ```json settings.json

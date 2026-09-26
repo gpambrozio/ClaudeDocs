@@ -9,11 +9,11 @@ featureMetadata:
   zdr: not-eligible
   supportedPlatforms:
     Claude API: ga
-    Claude Platform on AWS: beta
+    Claude Platform on AWS: ga
     Amazon Bedrock: not available
     Google Cloud: not available
     Microsoft Foundry:
-      availability: beta
+      availability: ga
       note: On [Microsoft Foundry](claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
 ---
 

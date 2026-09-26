@@ -189,12 +189,14 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-For Bash, the Linux default shell:
+For Bash on Linux:
 
 ```bash
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+For Bash on macOS, follow the macOS Bash step in [fix your PATH](troubleshoot-install.md#verify-your-path) instead.
 
 Then open a new terminal and try `claude` again. If it still isn't found, check that the file `~/.local/bin/claude` exists. If it doesn't, the install didn't finish. For more details, see [fix your PATH](troubleshoot-install.md#verify-your-path).
 

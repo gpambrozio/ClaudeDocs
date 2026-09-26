@@ -137,7 +137,7 @@ Here's how Claude loads and uses the custom `pdf-processing` Skill from the earl
 
 Skills are available across Claude's agent products:
 
-Claude Platform on AWS and Microsoft Foundry inherit the same Skills behavior as the Claude API in all following sections.
+Claude Platform on AWS and Microsoft Foundry inherit the same Skills behavior as the Claude API in all following sections, except where [Limitations and constraints](overview.md#limitations-and-constraints) says otherwise.
 
 ### Claude API
 
@@ -263,7 +263,7 @@ For audit logging of Skills API operations, see [Audit logging](../../build-with
 
 ## Limitations and constraints
 
-Claude Platform on AWS and Microsoft Foundry follow the same limitations as the Claude API in the following subsections.
+Claude Platform on AWS and Microsoft Foundry follow the same limitations as the Claude API in the following subsections. In addition, on Microsoft Foundry, the [Skill version download endpoint](../../api/beta/skills/versions/download.md) (`GET /v1/skills/{skill_id}/versions/{version}/content`) is not supported.
 
 ### Cross-surface availability
 
