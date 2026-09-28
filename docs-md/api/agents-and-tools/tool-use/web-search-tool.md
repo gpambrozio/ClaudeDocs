@@ -227,7 +227,7 @@ puts message
 
 ## How to use web search
 
-Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](https://platform.claude.com/settings/privacy), where they can also restrict which domains it searches. If it's disabled, a request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](web-search-tool.md#errors) inside a search result.
+Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](https://platform.claude.com/settings/capabilities), where they can also restrict which domains it searches. If it's disabled, a request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](web-search-tool.md#errors) inside a search result.
 
 These organization-level settings in the Claude Console apply to Messages API requests only. [Claude Managed Agents](../../managed-agents/overview.md) sessions use only the per-tool `allowed_domains` and `blocked_domains` lists on the agent toolset; see [Restrict web search and web fetch domains](../../managed-agents/tools.md#restrict-web-search-and-web-fetch-domains).
 

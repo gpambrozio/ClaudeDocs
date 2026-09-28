@@ -165,6 +165,8 @@ session:
 
 store:
   postgres_url: ${GATEWAY_POSTGRES_URL}          # GKE: ${file:/secrets/postgres-url}
+  # readiness_grace_seconds: 300                 # keep passing the readiness probe
+                                                 # through a Cloud SQL failover
 
 upstreams:
   - provider: vertex
