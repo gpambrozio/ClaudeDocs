@@ -126,9 +126,9 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
 - `stream?:optional bool`
 
-  Whether to incrementally stream the response using server-sent events.
+  Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-  See [streaming](../../../build-with-claude/streaming.md) for details.
+  In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../../../build-with-claude/streaming.md#streaming-with-sdks) for an example in each language.
 
 - `system?:optional System`
 

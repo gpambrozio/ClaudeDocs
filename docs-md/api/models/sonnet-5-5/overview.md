@@ -14,7 +14,7 @@ Model ID: `claude-sonnet-5-5`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $2 / MTok · Output pricing: $10 / MTok
 
-[What’s new](whats-new-sonnet-5-5.md) · [Migration guide](migration-guide.md)
+[Announcement](https://www.anthropic.com/claude-sonnet-5-5) · [What’s new](whats-new-sonnet-5-5.md) · [Migration guide](migration-guide.md)
 
 ## Overview
 
@@ -118,6 +118,14 @@ The control for thinking depth, latency, and cost. Choose a level per workload.
 How adaptive thinking works, which thinking settings each model accepts, and how thinking blocks are preserved.
 
 ## Reference
+
+**System prompt**
+
+The system prompt Claude Sonnet 5.5 uses on claude.ai and the Claude apps.
+
+**System card**
+
+Safety evaluations and deployment decisions for Claude Sonnet 5.5.
 
 **Pricing**
 

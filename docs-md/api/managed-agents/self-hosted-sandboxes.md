@@ -207,7 +207,7 @@ Run this on the worker host.
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=1.35.0
+VERSION=1.36.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -243,7 +243,7 @@ If you need stronger isolation (a fresh filesystem, resource limits, or per-sess
 
 ```text
 FROM your-base-image
-ARG ANT_VERSION=1.35.0
+ARG ANT_VERSION=1.36.0
 ARG TARGETARCH
 RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
     curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \

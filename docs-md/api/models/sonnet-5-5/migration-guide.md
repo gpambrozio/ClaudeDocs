@@ -245,8 +245,6 @@ To turn off up-front thinking on Claude Sonnet 5.5, send `thinking: {"type": "be
 
 With `between_tools`, effort can't change mid-conversation: a per-message `output_config.effort` that differs from the level in effect returns a 400 error. To vary effort per turn, use adaptive thinking. For prompting guidance, see [Running without up-front thinking](../../build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5.md#running-without-up-front-thinking).
 
-In SDK versions that don't define `between_tools`, the Python and TypeScript examples fail type checking. Update the SDK, or pass the value as raw JSON, as the C#, Go, and Java examples do.
-
 Before (Claude Sonnet 5):
 
 ```bash cURL
@@ -399,43 +397,37 @@ await client.messages.create({
 ```
 
 ```csharp C#
-using System.Text.Json;
-
 await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeSonnet5_5,
     MaxTokens = 16000,
-    Thinking = new ThinkingConfigParam(
-        JsonSerializer.SerializeToElement(new { type = "between_tools" })
-    ),
+    Thinking = new ThinkingConfigBetweenTools(),
     OutputConfig = new() { Effort = Effort.High },
     Messages = [new() { Role = Role.User, Content = "..." }],
 });
 ```
 
 ```go Go
-params := anthropic.MessageNewParams{
+client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeSonnet5_5,
 	MaxTokens: 16000,
+	Thinking: anthropic.ThinkingConfigParamUnion{
+		OfBetweenTools: &anthropic.ThinkingConfigBetweenToolsParam{},
+	},
 	OutputConfig: anthropic.OutputConfigParam{
 		Effort: anthropic.OutputConfigEffortHigh,
 	},
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("...")),
 	},
-}
-params.SetExtraFields(map[string]any{
-	"thinking": map[string]any{"type": "between_tools"},
 })
-
-client.Messages.New(context.TODO(), params)
 ```
 
 ```java Java
 MessageCreateParams params = MessageCreateParams.builder()
     .model(Model.CLAUDE_SONNET_5_5)
     .maxTokens(16000L)
-    .putAdditionalBodyProperty("thinking", JsonValue.from(Map.of("type", "between_tools")))
+    .thinking(ThinkingConfigBetweenTools.builder().build())
     .outputConfig(OutputConfig.builder()
         .effort(OutputConfig.Effort.HIGH)
         .build())
@@ -449,7 +441,7 @@ client.messages().create(params);
 $client->messages->create(
     model: Model::CLAUDE_SONNET_5_5,
     maxTokens: 16000,
-    thinking: ['type' => 'between_tools'],
+    thinking: ThinkingConfigBetweenTools::with(),
     outputConfig: OutputConfig::with(effort: Effort::HIGH),
     messages: [['role' => 'user', 'content' => '...']],
 );
@@ -459,7 +451,7 @@ $client->messages->create(
 client.messages.create(
   model: Anthropic::Model::CLAUDE_SONNET_5_5,
   max_tokens: 16000,
-  thinking: { type: :between_tools },
+  thinking: Anthropic::ThinkingConfigBetweenTools.new,
   output_config: { effort: Anthropic::OutputConfig::Effort::HIGH },
   messages: [{ role: "user", content: "..." }]
 )

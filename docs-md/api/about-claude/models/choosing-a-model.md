@@ -112,10 +112,6 @@ The latest Opus model: breaking changes, new features, and behavior differences
 
 The latest Sonnet model: breaking changes, new features, and behavior differences
 
-**What's new in Claude Sonnet 5**
-
-New features and behavior changes in Claude Sonnet 5
-
 **Start building**
 
 Get started with your first API call

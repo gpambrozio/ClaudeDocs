@@ -23,19 +23,19 @@ To install Claude Code, open a terminal and run the command for your system. If 
 
 **macOS, Linux, WSL:**
 
-```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 **Windows PowerShell:**
 
-```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```powershell
 irm https://claude.ai/install.ps1 | iex
 ```
 
 **Windows CMD:**
 
-```batch theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```batch
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
 
@@ -51,7 +51,7 @@ Native installations automatically update in the background to keep you on the l
 
 **Homebrew**
 
-```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```bash
 brew install --cask claude-code
 ```
 
@@ -61,7 +61,7 @@ Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `br
 
 **WinGet**
 
-```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```powershell
 winget install Anthropic.ClaudeCode
 ```
 
@@ -250,21 +250,21 @@ Here are the most important commands for daily use. Shell commands run from your
 
 **Shell commands**
 
-| Command             | What it does                                           | Example                             |
-| ------------------- | ------------------------------------------------------ | ----------------------------------- |
-| `claude`            | Start interactive mode                                 | `claude`                            |
-| `claude "task"`     | Start interactive mode with an initial prompt          | `claude "fix the build error"`      |
-| `claude -p "query"` | Run one-off query, then exit                           | `claude -p "explain this function"` |
-| `claude -c`         | Continue most recent conversation in current directory | `claude -c`                         |
-| `claude -r`         | Resume a previous conversation                         | `claude -r`                         |
+| Command | What it does | Example |
+| - | - | - |
+| `claude` | Start interactive mode | `claude` |
+| `claude "task"` | Start interactive mode with an initial prompt | `claude "fix the build error"` |
+| `claude -p "query"` | Run one-off query, then exit | `claude -p "explain this function"` |
+| `claude -c` | Continue most recent conversation in current directory | `claude -c` |
+| `claude -r` | Resume a previous conversation | `claude -r` |
 
 **Session commands**
 
-| Command                 | What it does               | Example  |
-| ----------------------- | -------------------------- | -------- |
-| `/clear`                | Clear conversation history | `/clear` |
-| `/help`                 | Show available commands    | `/help`  |
-| `/exit` or Ctrl+D twice | Exit Claude Code           | `/exit`  |
+| Command | What it does | Example |
+| - | - | - |
+| `/clear` | Clear conversation history | `/clear` |
+| `/help` | Show available commands | `/help` |
+| `/exit` or Ctrl+D twice | Exit Claude Code | `/exit` |
 
 See the [CLI reference](cli-reference.md) for the complete list of shell commands and the [commands reference](commands.md) for the complete list of session commands.
 

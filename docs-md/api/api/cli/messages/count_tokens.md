@@ -70,7 +70,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: string or "claude-fable-5-1" or "claude-opus-5-5" or "claude-mythos-5-1" or 15 more`
+- `--model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -90,7 +90,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
-- `--thinking: optional ThinkingConfigEnabled or ThinkingConfigDisabled or ThinkingConfigAdaptive`
+- `--thinking: optional ThinkingConfigEnabled or ThinkingConfigDisabled or ThinkingConfigBetweenTools or ThinkingConfigAdaptive`
 
   Body param: Configuration for enabling Claude's extended thinking.
 

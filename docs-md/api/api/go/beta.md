@@ -4217,13 +4217,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                        - `string`
-
                         - `type Model string`
 
                           The model that will complete your prompt.
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                          - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
+
+                            Efficient model for coding and agents
 
                           - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
@@ -4239,7 +4241,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
 
-                            High-performance model for coding and agents
+                            Efficient model for coding and agents
 
                           - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
@@ -4298,6 +4300,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
                             **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                             New class of intelligence, strongest in coding and cybersecurity
+
+                        - `string`
 
                       - `Name Advisor`
 
@@ -7879,13 +7883,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                    - `string`
-
                     - `type Model string`
 
                       The model that will complete your prompt.
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                      - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
+
+                        Efficient model for coding and agents
 
                       - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
@@ -7901,7 +7907,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
 
-                        High-performance model for coding and agents
+                        Efficient model for coding and agents
 
                       - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
@@ -7960,6 +7966,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
                         **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                         New class of intelligence, strongest in coding and cybersecurity
+
+                    - `string`
 
                   - `Name Advisor`
 
@@ -9392,7 +9400,7 @@ func main() {
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5-1",
+        "model": "claude-sonnet-5-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -12389,13 +12397,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                        - `string`
-
                         - `type Model string`
 
                           The model that will complete your prompt.
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                          - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
+
+                            Efficient model for coding and agents
 
                           - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
@@ -12411,7 +12421,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
 
-                            High-performance model for coding and agents
+                            Efficient model for coding and agents
 
                           - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
@@ -12470,6 +12480,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
                             **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                             New class of intelligence, strongest in coding and cybersecurity
+
+                        - `string`
 
                       - `Name Advisor`
 
@@ -16228,13 +16240,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                            - `string`
-
                             - `type Model string`
 
                               The model that will complete your prompt.
 
                               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                              - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
+
+                                Efficient model for coding and agents
 
                               - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
@@ -16250,7 +16264,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
 
-                                High-performance model for coding and agents
+                                Efficient model for coding and agents
 
                               - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
@@ -16309,6 +16323,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                                 **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                                 New class of intelligence, strongest in coding and cybersecurity
+
+                            - `string`
 
                           - `Name Advisor`
 
@@ -16986,6 +17002,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Type Disabled`
 
+            - `type BetaThinkingConfigBetweenTools`
+
+              - `Type BetweenTools`
+
             - `type BetaThinkingConfigAdaptive`
 
               - `Type Adaptive`
@@ -17074,9 +17094,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `Stream bool Optional`
 
-        Whether to incrementally stream the response using server-sent events.
+        Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-        See [streaming](../../build-with-claude/streaming.md) for details.
+        In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../../build-with-claude/streaming.md#streaming-with-sdks) for an example in each language.
 
       - `System []BetaTextBlockParamResp Optional`
 
@@ -17109,6 +17129,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
         - `type BetaThinkingConfigEnabled`
 
         - `type BetaThinkingConfigDisabled`
+
+        - `type BetaThinkingConfigBetweenTools`
 
         - `type BetaThinkingConfigAdaptive`
 
@@ -21595,13 +21617,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                          - `string`
-
                           - `type Model string`
 
                             The model that will complete your prompt.
 
                             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                            - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
+
+                              Efficient model for coding and agents
 
                             - `const ModelClaudeFable5_1 Model = "claude-fable-5-1"`
 
@@ -21617,7 +21641,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                             - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
 
-                              High-performance model for coding and agents
+                              Efficient model for coding and agents
 
                             - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
@@ -21676,6 +21700,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                               **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                               New class of intelligence, strongest in coding and cybersecurity
+
+                          - `string`
 
                         - `Name Advisor`
 
@@ -22868,13 +22894,15 @@ Create Agent
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type BetaManagedAgentsModel string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -22886,7 +22914,7 @@ Create Agent
 
           - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -22935,6 +22963,8 @@ Create Agent
           - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `string`
 
       - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
 
@@ -23672,13 +23702,15 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `string`
-
       - `type BetaManagedAgentsModel string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -23690,7 +23722,7 @@ Create Agent
 
         - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -23739,6 +23771,8 @@ Create Agent
         - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `string`
 
     - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -24511,13 +24545,15 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `string`
-
       - `type BetaManagedAgentsModel string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -24529,7 +24565,7 @@ List Agents
 
         - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -24578,6 +24614,8 @@ List Agents
         - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `string`
 
     - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -25334,13 +25372,15 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `string`
-
       - `type BetaManagedAgentsModel string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -25352,7 +25392,7 @@ Get Agent
 
         - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -25401,6 +25441,8 @@ Get Agent
         - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `string`
 
     - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -26038,13 +26080,15 @@ Update Agent
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type BetaManagedAgentsModel string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -26056,7 +26100,7 @@ Update Agent
 
           - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -26105,6 +26149,8 @@ Update Agent
           - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `string`
 
       - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
 
@@ -26820,13 +26866,15 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `string`
-
       - `type BetaManagedAgentsModel string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -26838,7 +26886,7 @@ Update Agent
 
         - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -26887,6 +26935,8 @@ Update Agent
         - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `string`
 
     - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -27638,13 +27688,15 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `string`
-
       - `type BetaManagedAgentsModel string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -27656,7 +27708,7 @@ Archive Agent
 
         - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -27705,6 +27757,8 @@ Archive Agent
         - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `string`
 
     - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -28466,13 +28520,15 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `string`
-
       - `type BetaManagedAgentsModel string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -28484,7 +28540,7 @@ List Agent Versions
 
         - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-          High-performance model for coding and agents
+          Efficient model for coding and agents
 
         - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -28533,6 +28589,8 @@ List Agent Versions
         - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `string`
 
     - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -33335,13 +33393,15 @@ Create Session
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `string`
-
             - `type BetaManagedAgentsModel string`
 
               The model that will power your agent.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+                Efficient model for coding and agents
 
               - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -33353,7 +33413,7 @@ Create Session
 
               - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-                High-performance model for coding and agents
+                Efficient model for coding and agents
 
               - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -33402,6 +33462,8 @@ Create Session
               - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
                 High-performance model for agents and coding
+
+            - `string`
 
           - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
 
@@ -34421,13 +34483,15 @@ Create Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type BetaManagedAgentsModel string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -34439,7 +34503,7 @@ Create Session
 
           - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -34488,6 +34552,8 @@ Create Session
           - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `string`
 
       - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -35747,13 +35813,15 @@ List Sessions
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type BetaManagedAgentsModel string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -35765,7 +35833,7 @@ List Sessions
 
           - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -35814,6 +35882,8 @@ List Sessions
           - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `string`
 
       - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -36992,13 +37062,15 @@ Get Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type BetaManagedAgentsModel string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -37010,7 +37082,7 @@ Get Session
 
           - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -37059,6 +37131,8 @@ Get Session
           - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `string`
 
       - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -38257,13 +38331,15 @@ Update Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type BetaManagedAgentsModel string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -38275,7 +38351,7 @@ Update Session
 
           - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -38324,6 +38400,8 @@ Update Session
           - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `string`
 
       - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -39672,13 +39750,15 @@ Archive Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `string`
-
         - `type BetaManagedAgentsModel string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -39690,7 +39770,7 @@ Archive Session
 
           - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-            High-performance model for coding and agents
+            Efficient model for coding and agents
 
           - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -39739,6 +39819,8 @@ Archive Session
           - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `string`
 
       - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -40811,9 +40893,77 @@ List Events
 
     Query param: Opaque pagination cursor from a previous response's `next_page`.
 
-  - `Types param.Field[[]string] Optional`
+  - `Types param.Field[[]BetaManagedAgentsSessionEventType] Optional`
 
     Query param: Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
+
+    - `const BetaManagedAgentsSessionEventTypeUserMessage BetaManagedAgentsSessionEventType = "user.message"`
+
+    - `const BetaManagedAgentsSessionEventTypeUserInterrupt BetaManagedAgentsSessionEventType = "user.interrupt"`
+
+    - `const BetaManagedAgentsSessionEventTypeUserToolConfirmation BetaManagedAgentsSessionEventType = "user.tool_confirmation"`
+
+    - `const BetaManagedAgentsSessionEventTypeUserCustomToolResult BetaManagedAgentsSessionEventType = "user.custom_tool_result"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentCustomToolUse BetaManagedAgentsSessionEventType = "agent.custom_tool_use"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentMessage BetaManagedAgentsSessionEventType = "agent.message"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentThinking BetaManagedAgentsSessionEventType = "agent.thinking"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentMCPToolUse BetaManagedAgentsSessionEventType = "agent.mcp_tool_use"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentMCPToolResult BetaManagedAgentsSessionEventType = "agent.mcp_tool_result"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentToolUse BetaManagedAgentsSessionEventType = "agent.tool_use"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentToolResult BetaManagedAgentsSessionEventType = "agent.tool_result"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentThreadMessageReceived BetaManagedAgentsSessionEventType = "agent.thread_message_received"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentThreadMessageSent BetaManagedAgentsSessionEventType = "agent.thread_message_sent"`
+
+    - `const BetaManagedAgentsSessionEventTypeAgentThreadContextCompacted BetaManagedAgentsSessionEventType = "agent.thread_context_compacted"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionError BetaManagedAgentsSessionEventType = "session.error"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionStatusRescheduled BetaManagedAgentsSessionEventType = "session.status_rescheduled"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionStatusRunning BetaManagedAgentsSessionEventType = "session.status_running"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionStatusIdle BetaManagedAgentsSessionEventType = "session.status_idle"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionStatusTerminated BetaManagedAgentsSessionEventType = "session.status_terminated"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionThreadCreated BetaManagedAgentsSessionEventType = "session.thread_created"`
+
+    - `const BetaManagedAgentsSessionEventTypeSpanOutcomeEvaluationStart BetaManagedAgentsSessionEventType = "span.outcome_evaluation_start"`
+
+    - `const BetaManagedAgentsSessionEventTypeSpanOutcomeEvaluationEnd BetaManagedAgentsSessionEventType = "span.outcome_evaluation_end"`
+
+    - `const BetaManagedAgentsSessionEventTypeSpanModelRequestStart BetaManagedAgentsSessionEventType = "span.model_request_start"`
+
+    - `const BetaManagedAgentsSessionEventTypeSpanModelRequestEnd BetaManagedAgentsSessionEventType = "span.model_request_end"`
+
+    - `const BetaManagedAgentsSessionEventTypeSpanOutcomeEvaluationOngoing BetaManagedAgentsSessionEventType = "span.outcome_evaluation_ongoing"`
+
+    - `const BetaManagedAgentsSessionEventTypeUserDefineOutcome BetaManagedAgentsSessionEventType = "user.define_outcome"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionThreadStatusRunning BetaManagedAgentsSessionEventType = "session.thread_status_running"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionThreadStatusIdle BetaManagedAgentsSessionEventType = "session.thread_status_idle"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionThreadStatusTerminated BetaManagedAgentsSessionEventType = "session.thread_status_terminated"`
+
+    - `const BetaManagedAgentsSessionEventTypeUserToolResult BetaManagedAgentsSessionEventType = "user.tool_result"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionThreadStatusRescheduled BetaManagedAgentsSessionEventType = "session.thread_status_rescheduled"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionUpdated BetaManagedAgentsSessionEventType = "session.updated"`
+
+    - `const BetaManagedAgentsSessionEventTypeSystemMessage BetaManagedAgentsSessionEventType = "system.message"`
+
+    - `const BetaManagedAgentsSessionEventTypeSessionUsage BetaManagedAgentsSessionEventType = "session.usage"`
 
   - `Betas param.Field[[]AnthropicBeta] Optional`
 
@@ -42447,13 +42597,15 @@ List Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `string`
-
           - `type BetaManagedAgentsModel string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -42465,7 +42617,7 @@ List Events
 
             - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -42514,6 +42666,8 @@ List Events
             - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
               High-performance model for agents and coding
+
+          - `string`
 
         - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -45863,13 +46017,15 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `string`
-
           - `type BetaManagedAgentsModel string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -45881,7 +46037,7 @@ Stream Events
 
             - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -45930,6 +46086,8 @@ Stream Events
             - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
               High-performance model for agents and coding
+
+          - `string`
 
         - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -48102,13 +48260,15 @@ List Session Threads
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `string`
-
           - `type BetaManagedAgentsModel string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -48120,7 +48280,7 @@ List Session Threads
 
             - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -48169,6 +48329,8 @@ List Session Threads
             - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
               High-performance model for agents and coding
+
+          - `string`
 
         - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -49039,13 +49201,15 @@ Get Session Thread
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `string`
-
           - `type BetaManagedAgentsModel string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -49057,7 +49221,7 @@ Get Session Thread
 
             - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -49106,6 +49270,8 @@ Get Session Thread
             - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
               High-performance model for agents and coding
+
+          - `string`
 
         - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -49973,13 +50139,15 @@ Archive Session Thread
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `string`
-
           - `type BetaManagedAgentsModel string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -49991,7 +50159,7 @@ Archive Session Thread
 
             - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -50040,6 +50208,8 @@ Archive Session Thread
             - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
               High-performance model for agents and coding
+
+          - `string`
 
         - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -52397,13 +52567,15 @@ List Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `string`
-
           - `type BetaManagedAgentsModel string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -52415,7 +52587,7 @@ List Session Thread Events
 
             - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -52464,6 +52636,8 @@ List Session Thread Events
             - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
               High-performance model for agents and coding
+
+          - `string`
 
         - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
@@ -54815,13 +54989,15 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `string`
-
           - `type BetaManagedAgentsModel string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
+
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeOpus5_5 BetaManagedAgentsModel = "claude-opus-5-5"`
 
@@ -54833,7 +55009,7 @@ Stream Session Thread Events
 
             - `const BetaManagedAgentsModelClaudeSonnet5 BetaManagedAgentsModel = "claude-sonnet-5"`
 
-              High-performance model for coding and agents
+              Efficient model for coding and agents
 
             - `const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"`
 
@@ -54882,6 +55058,8 @@ Stream Session Thread Events
             - `const BetaManagedAgentsModelClaudeSonnet4_5_20250929 BetaManagedAgentsModel = "claude-sonnet-4-5-20250929"`
 
               High-performance model for agents and coding
+
+          - `string`
 
         - `Effort BetaManagedAgentsModelConfigEffortUnion Optional`
 
