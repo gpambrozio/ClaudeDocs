@@ -42,7 +42,7 @@ Set the key as an environment variable:
 export ANTHROPIC_API_KEY="sk-ant-api03-..."
 ```
 
-The [client SDKs](cli-sdks-libraries/overview.md) read `ANTHROPIC_API_KEY` automatically. Direct HTTP requests send the key in the `x-api-key` header. If your API key works on multiple workspaces, you must also send the `anthropic-workspace-id` header on each Claude API request, as shown in [Select a workspace](manage-claude/authentication.md#select-a-workspace). For the Admin API, see [API keys and the Admin API](get-api-key.md#api-keys-and-the-admin-api).
+The [client SDK](cli-sdks-libraries/overview.md) reads `ANTHROPIC_API_KEY` automatically. Direct HTTP requests send the key in the `x-api-key` header. If your API key works on multiple workspaces, you must also send the `anthropic-workspace-id` header on each Claude API request, as shown in [Select a workspace](manage-claude/authentication.md#select-a-workspace). For the Admin API, see [API keys and the Admin API](get-api-key.md#api-keys-and-the-admin-api).
 
 To make your first request, follow the [Quickstart](get-started.md), and see [Authentication](manage-claude/authentication.md) for the full picture, including short-lived credentials with Workload Identity Federation.
 

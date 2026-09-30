@@ -288,7 +288,7 @@ void main() {
 use Anthropic\Vertex;
 
 $client = Vertex\Client::fromEnvironment(
-    location: 'global',
+    region: 'global',
     projectId: 'MY_PROJECT_ID',
 );
 
@@ -405,7 +405,7 @@ This applies to Claude Sonnet 4.5 and future models only. Older models (Claude S
 
 **Using global endpoints (recommended):**
 
-Set the `region` (php: `location`) parameter to `"global"` when initializing the client:
+Set the `region` parameter to `"global"` when initializing the client:
 
 ```bash cURL
 MODEL_ID=claude-opus-5-5
@@ -557,7 +557,7 @@ void main() throws Exception {
 use Anthropic\Vertex;
 
 $client = Vertex\Client::fromEnvironment(
-    location: 'global',
+    region: 'global',
     projectId: 'MY_PROJECT_ID',
 );
 
@@ -592,7 +592,7 @@ puts message.content.find { it.type == :text }.text
 
 **Using multi-region endpoints:**
 
-Set the `region` (php: `location`) parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
+Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
 
 ```bash cURL
 MODEL_ID=claude-opus-5-5
@@ -745,7 +745,7 @@ void main() throws Exception {
 use Anthropic\Vertex;
 
 $client = Vertex\Client::fromEnvironment(
-    location: 'us', // Multi-region identifier: "us" or "eu"
+    region: 'us', // Multi-region identifier: "us" or "eu"
     projectId: 'MY_PROJECT_ID',
 );
 
@@ -938,7 +938,7 @@ void main() throws Exception {
 use Anthropic\Vertex;
 
 $client = Vertex\Client::fromEnvironment(
-    location: 'us-east5',
+    region: 'us-east5',
     projectId: 'MY_PROJECT_ID',
 );
 

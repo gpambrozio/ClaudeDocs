@@ -519,13 +519,13 @@ See the [client SDKs](../cli-sdks-libraries/overview.md) for more details, and t
 
 You can authenticate with Bedrock using bearer tokens instead of AWS credentials. This is useful in corporate environments where teams need access to Bedrock without managing AWS credentials, IAM roles, or account-level permissions.
 
-The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which each SDK detects automatically when resolving credentials from the environment.
+The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which the SDK detects automatically when resolving credentials from the environment.
 
 To provide a token programmatically:
 
 **cURL**
 
-This section shows how to configure a bearer token in an SDK client. The SDKs also read the token from the `AWS_BEARER_TOKEN_BEDROCK` environment variable. To make direct HTTP requests with a bearer token, see the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
+This section shows how to configure a bearer token in an SDK client, which also reads the token from the `AWS_BEARER_TOKEN_BEDROCK` environment variable. To make direct HTTP requests with a bearer token, see the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
 
 **CLI**
 

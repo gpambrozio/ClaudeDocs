@@ -39,10 +39,10 @@ client = anthropic.Anthropic()
 
 rate_limits = client.beta.organization.rate_limits.list()
 
-for group in rate_limits:
-    models = f" ({', '.join(group.models)})" if group.models else ""
-    print(f"{group.group_type}{models}")
-    for limit in group.limits:
+for entry in rate_limits:
+    models = f" ({', '.join(entry.models)})" if entry.models else ""
+    print(f"{entry.group.type}{models}")
+    for limit in entry.limits:
         print(f"  {limit.type}: {limit.value}")
 ```
 
@@ -51,10 +51,10 @@ const client = new Anthropic();
 
 const rateLimits = await client.beta.organization.rateLimits.list();
 
-for await (const group of rateLimits) {
-  const models = group.models ? ` (${group.models.join(", ")})` : "";
-  console.log(`${group.group_type}${models}`);
-  for (const limit of group.limits) {
+for await (const entry of rateLimits) {
+  const models = entry.models ? ` (${entry.models.join(", ")})` : "";
+  console.log(`${entry.group.type}${models}`);
+  for (const limit of entry.limits) {
     console.log(`  ${limit.type}: ${limit.value}`);
   }
 }
@@ -65,11 +65,11 @@ AnthropicClient client = new();
 
 var rateLimits = await client.Beta.Organization.RateLimits.List();
 
-await foreach (var group in rateLimits.Paginate())
+await foreach (var entry in rateLimits.Paginate())
 {
-    var models = group.Models is null ? "" : $" ({string.Join(", ", group.Models)})";
-    Console.WriteLine($"{group.GroupType.Raw()}{models}");
-    foreach (var limit in group.Limits)
+    var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
+    Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+    foreach (var limit in entry.Limits)
     {
         Console.WriteLine($"  {limit.Type}: {limit.Value}");
     }
@@ -82,13 +82,13 @@ client := anthropic.NewClient()
 rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.BetaOrganizationRateLimitListParams{})
 
 for rateLimits.Next() {
-	group := rateLimits.Current()
+	entry := rateLimits.Current()
 	models := ""
-	if len(group.Models) > 0 {
-		models = fmt.Sprintf(" (%s)", strings.Join(group.Models, ", "))
+	if len(entry.Models) > 0 {
+		models = fmt.Sprintf(" (%s)", strings.Join(entry.Models, ", "))
 	}
-	fmt.Printf("%s%s\n", group.GroupType, models)
-	for _, limit := range group.Limits {
+	fmt.Printf("%s%s\n", entry.Group.Type, models)
+	for _, limit := range entry.Limits {
 		fmt.Printf("  %s: %d\n", limit.Type, limit.Value)
 	}
 }
@@ -102,12 +102,12 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 var rateLimits = client.beta().organization().rateLimits().list();
 
-for (var group : rateLimits.autoPager()) {
-    var models = group.models()
+for (var entry : rateLimits.autoPager()) {
+    var models = entry.models()
         .map(modelIds -> " (" + String.join(", ", modelIds) + ")")
         .orElse("");
-    IO.println(group.groupType().asString() + models);
-    for (var limit : group.limits()) {
+    IO.println(entry.group().type().asString() + models);
+    for (var limit : entry.limits()) {
         IO.println("  " + limit.type() + ": " + limit.value());
     }
 }
@@ -118,10 +118,10 @@ $client = new Client();
 
 $rateLimits = $client->beta->organization->rateLimits->list();
 
-foreach ($rateLimits->data as $group) {
-    $models = $group->models ? ' (' . implode(', ', $group->models) . ')' : '';
-    echo "{$group->groupType}{$models}\n";
-    foreach ($group->limits as $limit) {
+foreach ($rateLimits->data as $entry) {
+    $models = $entry->models ? ' (' . implode(', ', $entry->models) . ')' : '';
+    echo "{$entry->group->type}{$models}\n";
+    foreach ($entry->limits as $limit) {
         echo "  {$limit->type}: {$limit->value}\n";
     }
 }
@@ -132,10 +132,10 @@ client = Anthropic::Client.new
 
 rate_limits = client.beta.organization.rate_limits.list
 
-rate_limits.data.each do |group|
-  models = group.models ? " (#{group.models.join(", ")})" : ""
-  puts "#{group.group_type}#{models}"
-  group.limits.each do |limit|
+rate_limits.data.each do |entry|
+  models = entry.models ? " (#{entry.models.join(", ")})" : ""
+  puts "#{entry.group.type}#{models}"
+  entry.limits.each do |limit|
     puts "  #{limit.type}: #{limit.value}"
   end
 end
@@ -148,7 +148,9 @@ The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at 
 ### Key concepts
 
 * **Rate limit groups:** Each entry in the response represents one rate limit group. Model rate limits are grouped so that several model versions share a single set of limits, and other groups cover resources such as the Message Batches API, the Files API, the Token Counting API, agent skills, and the web search tool.
-* **`group_type`:** Identifies which category of limits the entry covers. See [Filtering by group type](rate-limits-api.md#filtering-by-group-type) for the list of values.
+* **`group` object:** Present on every entry, it identifies the rate limit group the entry applies to. It always has `type`, which is one of the `group_type` values, and `id`, an opaque identifier with the `rlg_` prefix. On `model_group` entries it also has `display_name`, Anthropic's current label for the group, such as `Claude Sonnet 4.x`. The label is for display only and may change. Other group types have no `display_name`.
+* **The `id` inside `group`:** A group has the same `id` in every organization and on every workspace override, and it never changes. Use it to match entries across organizations or against your own catalog. The entry's own `id` differs per organization, and `models` changes when Anthropic moves a model between groups. Neither is a stable key for the group.
+* **`group_type`:** Deprecated in favor of the `type` inside `group`. It's still returned, always equals that value, and has no removal date. The `group_type` query parameter isn't deprecated. See [Filtering by group type](rate-limits-api.md#filtering-by-group-type) for the list of values.
 * **`models` list:** For `model_group` entries, the `models` field lists every model ID and alias that counts against that group's limits. Use this list to look up which group any model string falls under. For other group types, `models` is `null`.
 * **`limits` list:** Each group carries a list of `{type, value}` pairs. The `type` field identifies the limiter (such as `requests_per_minute`, `input_tokens_per_minute`, or `output_tokens_per_minute`) and `value` is the configured limit. See [Rate limits](../api/rate-limits.md) for how each limiter is measured and enforced.
 
@@ -171,10 +173,10 @@ client = anthropic.Anthropic()
 
 rate_limits = client.beta.organization.rate_limits.list()
 
-for group in rate_limits:
-    models = f" ({', '.join(group.models)})" if group.models else ""
-    print(f"{group.group_type}{models}")
-    for limit in group.limits:
+for entry in rate_limits:
+    models = f" ({', '.join(entry.models)})" if entry.models else ""
+    print(f"{entry.group.type}{models}")
+    for limit in entry.limits:
         print(f"  {limit.type}: {limit.value}")
 ```
 
@@ -183,10 +185,10 @@ const client = new Anthropic();
 
 const rateLimits = await client.beta.organization.rateLimits.list();
 
-for await (const group of rateLimits) {
-  const models = group.models ? ` (${group.models.join(", ")})` : "";
-  console.log(`${group.group_type}${models}`);
-  for (const limit of group.limits) {
+for await (const entry of rateLimits) {
+  const models = entry.models ? ` (${entry.models.join(", ")})` : "";
+  console.log(`${entry.group.type}${models}`);
+  for (const limit of entry.limits) {
     console.log(`  ${limit.type}: ${limit.value}`);
   }
 }
@@ -197,11 +199,11 @@ AnthropicClient client = new();
 
 var rateLimits = await client.Beta.Organization.RateLimits.List();
 
-await foreach (var group in rateLimits.Paginate())
+await foreach (var entry in rateLimits.Paginate())
 {
-    var models = group.Models is null ? "" : $" ({string.Join(", ", group.Models)})";
-    Console.WriteLine($"{group.GroupType.Raw()}{models}");
-    foreach (var limit in group.Limits)
+    var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
+    Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+    foreach (var limit in entry.Limits)
     {
         Console.WriteLine($"  {limit.Type}: {limit.Value}");
     }
@@ -214,13 +216,13 @@ client := anthropic.NewClient()
 rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Background(), anthropic.BetaOrganizationRateLimitListParams{})
 
 for rateLimits.Next() {
-	group := rateLimits.Current()
+	entry := rateLimits.Current()
 	models := ""
-	if len(group.Models) > 0 {
-		models = fmt.Sprintf(" (%s)", strings.Join(group.Models, ", "))
+	if len(entry.Models) > 0 {
+		models = fmt.Sprintf(" (%s)", strings.Join(entry.Models, ", "))
 	}
-	fmt.Printf("%s%s\n", group.GroupType, models)
-	for _, limit := range group.Limits {
+	fmt.Printf("%s%s\n", entry.Group.Type, models)
+	for _, limit := range entry.Limits {
 		fmt.Printf("  %s: %d\n", limit.Type, limit.Value)
 	}
 }
@@ -234,12 +236,12 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 var rateLimits = client.beta().organization().rateLimits().list();
 
-for (var group : rateLimits.autoPager()) {
-    var models = group.models()
+for (var entry : rateLimits.autoPager()) {
+    var models = entry.models()
         .map(modelIds -> " (" + String.join(", ", modelIds) + ")")
         .orElse("");
-    IO.println(group.groupType().asString() + models);
-    for (var limit : group.limits()) {
+    IO.println(entry.group().type().asString() + models);
+    for (var limit : entry.limits()) {
         IO.println("  " + limit.type() + ": " + limit.value());
     }
 }
@@ -250,10 +252,10 @@ $client = new Client();
 
 $rateLimits = $client->beta->organization->rateLimits->list();
 
-foreach ($rateLimits->data as $group) {
-    $models = $group->models ? ' (' . implode(', ', $group->models) . ')' : '';
-    echo "{$group->groupType}{$models}\n";
-    foreach ($group->limits as $limit) {
+foreach ($rateLimits->data as $entry) {
+    $models = $entry->models ? ' (' . implode(', ', $entry->models) . ')' : '';
+    echo "{$entry->group->type}{$models}\n";
+    foreach ($entry->limits as $limit) {
         echo "  {$limit->type}: {$limit->value}\n";
     }
 }
@@ -264,10 +266,10 @@ client = Anthropic::Client.new
 
 rate_limits = client.beta.organization.rate_limits.list
 
-rate_limits.data.each do |group|
-  models = group.models ? " (#{group.models.join(", ")})" : ""
-  puts "#{group.group_type}#{models}"
-  group.limits.each do |limit|
+rate_limits.data.each do |entry|
+  models = entry.models ? " (#{entry.models.join(", ")})" : ""
+  puts "#{entry.group.type}#{models}"
+  entry.limits.each do |limit|
     puts "  #{limit.type}: #{limit.value}"
   end
 end
@@ -279,6 +281,11 @@ end
     {
       "type": "rate_limit",
       "group_type": "model_group",
+      "group": {
+        "type": "model_group",
+        "id": "rlg_01Hq7YkP3mZ9dTwRx4cVbN2s",
+        "display_name": "Claude Opus 5.5"
+      },
       "models": ["claude-opus-5-5"],
       "limits": [
         { "type": "requests_per_minute", "value": 4000 },
@@ -289,6 +296,11 @@ end
     {
       "type": "rate_limit",
       "group_type": "model_group",
+      "group": {
+        "type": "model_group",
+        "id": "rlg_01Kd5wMv8nSq2LcXy6tRfJ4b",
+        "display_name": "Claude Opus 4.x"
+      },
       "models": [
         "claude-opus-4-5",
         "claude-opus-4-5-20251101",
@@ -305,6 +317,7 @@ end
     {
       "type": "rate_limit",
       "group_type": "batch",
+      "group": { "type": "batch", "id": "rlg_01Wn3pBz6kCg9vHtQ7mLxD5a" },
       "models": null,
       "limits": [{ "type": "enqueued_batch_requests", "value": 500000 }]
     }
@@ -332,10 +345,10 @@ client = anthropic.Anthropic()
 
 rate_limits = client.beta.organization.rate_limits.list(model="claude-opus-5")
 
-for group in rate_limits:
-    models = f" ({', '.join(group.models)})" if group.models else ""
-    print(f"{group.group_type}{models}")
-    for limit in group.limits:
+for entry in rate_limits:
+    models = f" ({', '.join(entry.models)})" if entry.models else ""
+    print(f"{entry.group.type}{models}")
+    for limit in entry.limits:
         print(f"  {limit.type}: {limit.value}")
 ```
 
@@ -344,10 +357,10 @@ const client = new Anthropic();
 
 const rateLimits = await client.beta.organization.rateLimits.list({ model: "claude-opus-5" });
 
-for await (const group of rateLimits) {
-  const models = group.models ? ` (${group.models.join(", ")})` : "";
-  console.log(`${group.group_type}${models}`);
-  for (const limit of group.limits) {
+for await (const entry of rateLimits) {
+  const models = entry.models ? ` (${entry.models.join(", ")})` : "";
+  console.log(`${entry.group.type}${models}`);
+  for (const limit of entry.limits) {
     console.log(`  ${limit.type}: ${limit.value}`);
   }
 }
@@ -361,11 +374,11 @@ var rateLimits = await client.Beta.Organization.RateLimits.List(new()
     Model = "claude-opus-5"
 });
 
-await foreach (var group in rateLimits.Paginate())
+await foreach (var entry in rateLimits.Paginate())
 {
-    var models = group.Models is null ? "" : $" ({string.Join(", ", group.Models)})";
-    Console.WriteLine($"{group.GroupType.Raw()}{models}");
-    foreach (var limit in group.Limits)
+    var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
+    Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+    foreach (var limit in entry.Limits)
     {
         Console.WriteLine($"  {limit.Type}: {limit.Value}");
     }
@@ -380,13 +393,13 @@ rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Backgro
 })
 
 for rateLimits.Next() {
-	group := rateLimits.Current()
+	entry := rateLimits.Current()
 	models := ""
-	if len(group.Models) > 0 {
-		models = fmt.Sprintf(" (%s)", strings.Join(group.Models, ", "))
+	if len(entry.Models) > 0 {
+		models = fmt.Sprintf(" (%s)", strings.Join(entry.Models, ", "))
 	}
-	fmt.Printf("%s%s\n", group.GroupType, models)
-	for _, limit := range group.Limits {
+	fmt.Printf("%s%s\n", entry.Group.Type, models)
+	for _, limit := range entry.Limits {
 		fmt.Printf("  %s: %d\n", limit.Type, limit.Value)
 	}
 }
@@ -407,12 +420,12 @@ void main() {
         .build();
     var rateLimits = client.beta().organization().rateLimits().list(params);
 
-    for (var group : rateLimits.autoPager()) {
-        var models = group.models()
+    for (var entry : rateLimits.autoPager()) {
+        var models = entry.models()
             .map(modelIds -> " (" + String.join(", ", modelIds) + ")")
             .orElse("");
-        IO.println(group.groupType().asString() + models);
-        for (var limit : group.limits()) {
+        IO.println(entry.group().type().asString() + models);
+        for (var limit : entry.limits()) {
             IO.println("  " + limit.type() + ": " + limit.value());
         }
     }
@@ -428,10 +441,10 @@ $rateLimits = $client->beta->organization->rateLimits->list(
     model: Model::CLAUDE_OPUS_5->value,
 );
 
-foreach ($rateLimits->data as $group) {
-    $models = $group->models ? ' (' . implode(', ', $group->models) . ')' : '';
-    echo "{$group->groupType}{$models}\n";
-    foreach ($group->limits as $limit) {
+foreach ($rateLimits->data as $entry) {
+    $models = $entry->models ? ' (' . implode(', ', $entry->models) . ')' : '';
+    echo "{$entry->group->type}{$models}\n";
+    foreach ($entry->limits as $limit) {
         echo "  {$limit->type}: {$limit->value}\n";
     }
 }
@@ -442,10 +455,10 @@ client = Anthropic::Client.new
 
 rate_limits = client.beta.organization.rate_limits.list(model: Anthropic::Model::CLAUDE_OPUS_5)
 
-rate_limits.data.each do |group|
-  models = group.models ? " (#{group.models.join(", ")})" : ""
-  puts "#{group.group_type}#{models}"
-  group.limits.each do |limit|
+rate_limits.data.each do |entry|
+  models = entry.models ? " (#{entry.models.join(", ")})" : ""
+  puts "#{entry.group.type}#{models}"
+  entry.limits.each do |limit|
     puts "  #{limit.type}: #{limit.value}"
   end
 end
@@ -485,10 +498,10 @@ rate_limits = client.beta.organization.workspaces.rate_limits.list(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 )
 
-for group in rate_limits:
-    models = f" ({', '.join(group.models)})" if group.models else ""
-    print(f"{group.group_type}{models}")
-    for limit in group.limits:
+for entry in rate_limits:
+    models = f" ({', '.join(entry.models)})" if entry.models else ""
+    print(f"{entry.group.type}{models}")
+    for limit in entry.limits:
         print(f"  {limit.type}: {limit.value}")
 ```
 
@@ -499,10 +512,10 @@ const rateLimits = await client.beta.organization.workspaces.rateLimits.list(
   "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 );
 
-for await (const group of rateLimits) {
-  const models = group.models ? ` (${group.models.join(", ")})` : "";
-  console.log(`${group.group_type}${models}`);
-  for (const limit of group.limits) {
+for await (const entry of rateLimits) {
+  const models = entry.models ? ` (${entry.models.join(", ")})` : "";
+  console.log(`${entry.group.type}${models}`);
+  for (const limit of entry.limits) {
     console.log(`  ${limit.type}: ${limit.value}`);
   }
 }
@@ -515,11 +528,11 @@ var rateLimits = await client.Beta.Organization.Workspaces.RateLimits.List(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 );
 
-await foreach (var group in rateLimits.Paginate())
+await foreach (var entry in rateLimits.Paginate())
 {
-    var models = group.Models is null ? "" : $" ({string.Join(", ", group.Models)})";
-    Console.WriteLine($"{group.GroupType.Raw()}{models}");
-    foreach (var limit in group.Limits)
+    var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
+    Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+    foreach (var limit in entry.Limits)
     {
         Console.WriteLine($"  {limit.Type}: {limit.Value}");
     }
@@ -536,13 +549,13 @@ rateLimits := client.Beta.Organization.Workspaces.RateLimits.ListAutoPaging(
 )
 
 for rateLimits.Next() {
-	group := rateLimits.Current()
+	entry := rateLimits.Current()
 	models := ""
-	if len(group.Models) > 0 {
-		models = fmt.Sprintf(" (%s)", strings.Join(group.Models, ", "))
+	if len(entry.Models) > 0 {
+		models = fmt.Sprintf(" (%s)", strings.Join(entry.Models, ", "))
 	}
-	fmt.Printf("%s%s\n", group.GroupType, models)
-	for _, limit := range group.Limits {
+	fmt.Printf("%s%s\n", entry.Group.Type, models)
+	for _, limit := range entry.Limits {
 		fmt.Printf("  %s: %d\n", limit.Type, limit.Value)
 	}
 }
@@ -557,12 +570,12 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 var rateLimits = client.beta().organization().workspaces().rateLimits()
     .list("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ");
 
-for (var group : rateLimits.autoPager()) {
-    var models = group.models()
+for (var entry : rateLimits.autoPager()) {
+    var models = entry.models()
         .map(modelIds -> " (" + String.join(", ", modelIds) + ")")
         .orElse("");
-    IO.println(group.groupType().asString() + models);
-    for (var limit : group.limits()) {
+    IO.println(entry.group().type().asString() + models);
+    for (var limit : entry.limits()) {
         IO.println("  " + limit.type() + ": " + limit.value());
     }
 }
@@ -575,10 +588,10 @@ $rateLimits = $client->beta->organization->workspaces->rateLimits->list(
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
 );
 
-foreach ($rateLimits->data as $group) {
-    $models = $group->models ? ' (' . implode(', ', $group->models) . ')' : '';
-    echo "{$group->groupType}{$models}\n";
-    foreach ($group->limits as $limit) {
+foreach ($rateLimits->data as $entry) {
+    $models = $entry->models ? ' (' . implode(', ', $entry->models) . ')' : '';
+    echo "{$entry->group->type}{$models}\n";
+    foreach ($entry->limits as $limit) {
         echo "  {$limit->type}: {$limit->value}\n";
     }
 }
@@ -590,10 +603,10 @@ client = Anthropic::Client.new
 workspace_id = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 rate_limits = client.beta.organization.workspaces.rate_limits.list(workspace_id)
 
-rate_limits.data.each do |group|
-  models = group.models ? " (#{group.models.join(", ")})" : ""
-  puts "#{group.group_type}#{models}"
-  group.limits.each do |limit|
+rate_limits.data.each do |entry|
+  models = entry.models ? " (#{entry.models.join(", ")})" : ""
+  puts "#{entry.group.type}#{models}"
+  entry.limits.each do |limit|
     puts "  #{limit.type}: #{limit.value}"
   end
 end
@@ -605,6 +618,11 @@ end
     {
       "type": "workspace_rate_limit",
       "group_type": "model_group",
+      "group": {
+        "type": "model_group",
+        "id": "rlg_01Hq7YkP3mZ9dTwRx4cVbN2s",
+        "display_name": "Claude Opus 5.5"
+      },
       "models": ["claude-opus-5-5"],
       "limits": [
         { "type": "requests_per_minute", "value": 1000, "org_limit": 4000 },
@@ -614,6 +632,11 @@ end
     {
       "type": "workspace_rate_limit",
       "group_type": "model_group",
+      "group": {
+        "type": "model_group",
+        "id": "rlg_01Kd5wMv8nSq2LcXy6tRfJ4b",
+        "display_name": "Claude Opus 4.x"
+      },
       "models": [
         "claude-opus-4-5",
         "claude-opus-4-5-20251101",
@@ -650,10 +673,10 @@ client = anthropic.Anthropic()
 
 rate_limits = client.beta.organization.rate_limits.list(group_type="batch")
 
-for group in rate_limits:
-    models = f" ({', '.join(group.models)})" if group.models else ""
-    print(f"{group.group_type}{models}")
-    for limit in group.limits:
+for entry in rate_limits:
+    models = f" ({', '.join(entry.models)})" if entry.models else ""
+    print(f"{entry.group.type}{models}")
+    for limit in entry.limits:
         print(f"  {limit.type}: {limit.value}")
 ```
 
@@ -662,10 +685,10 @@ const client = new Anthropic();
 
 const rateLimits = await client.beta.organization.rateLimits.list({ group_type: "batch" });
 
-for await (const group of rateLimits) {
-  const models = group.models ? ` (${group.models.join(", ")})` : "";
-  console.log(`${group.group_type}${models}`);
-  for (const limit of group.limits) {
+for await (const entry of rateLimits) {
+  const models = entry.models ? ` (${entry.models.join(", ")})` : "";
+  console.log(`${entry.group.type}${models}`);
+  for (const limit of entry.limits) {
     console.log(`  ${limit.type}: ${limit.value}`);
   }
 }
@@ -681,11 +704,11 @@ var rateLimits = await client.Beta.Organization.RateLimits.List(new()
     GroupType = GroupType.Batch
 });
 
-await foreach (var group in rateLimits.Paginate())
+await foreach (var entry in rateLimits.Paginate())
 {
-    var models = group.Models is null ? "" : $" ({string.Join(", ", group.Models)})";
-    Console.WriteLine($"{group.GroupType.Raw()}{models}");
-    foreach (var limit in group.Limits)
+    var models = entry.Models is null ? "" : $" ({string.Join(", ", entry.Models)})";
+    Console.WriteLine($"{entry.Group.Type.GetString()}{models}");
+    foreach (var limit in entry.Limits)
     {
         Console.WriteLine($"  {limit.Type}: {limit.Value}");
     }
@@ -700,13 +723,13 @@ rateLimits := client.Beta.Organization.RateLimits.ListAutoPaging(context.Backgro
 })
 
 for rateLimits.Next() {
-	group := rateLimits.Current()
+	entry := rateLimits.Current()
 	models := ""
-	if len(group.Models) > 0 {
-		models = fmt.Sprintf(" (%s)", strings.Join(group.Models, ", "))
+	if len(entry.Models) > 0 {
+		models = fmt.Sprintf(" (%s)", strings.Join(entry.Models, ", "))
 	}
-	fmt.Printf("%s%s\n", group.GroupType, models)
-	for _, limit := range group.Limits {
+	fmt.Printf("%s%s\n", entry.Group.Type, models)
+	for _, limit := range entry.Limits {
 		fmt.Printf("  %s: %d\n", limit.Type, limit.Value)
 	}
 }
@@ -726,12 +749,12 @@ void main() {
         .build();
     var rateLimits = client.beta().organization().rateLimits().list(params);
 
-    for (var group : rateLimits.autoPager()) {
-        var models = group.models()
+    for (var entry : rateLimits.autoPager()) {
+        var models = entry.models()
             .map(modelIds -> " (" + String.join(", ", modelIds) + ")")
             .orElse("");
-        IO.println(group.groupType().asString() + models);
-        for (var limit : group.limits()) {
+        IO.println(entry.group().type().asString() + models);
+        for (var limit : entry.limits()) {
             IO.println("  " + limit.type() + ": " + limit.value());
         }
     }
@@ -748,10 +771,10 @@ $rateLimits = $client->beta->organization->rateLimits->list(
     groupType: GroupType::BATCH,
 );
 
-foreach ($rateLimits->data as $group) {
-    $models = $group->models ? ' (' . implode(', ', $group->models) . ')' : '';
-    echo "{$group->groupType}{$models}\n";
-    foreach ($group->limits as $limit) {
+foreach ($rateLimits->data as $entry) {
+    $models = $entry->models ? ' (' . implode(', ', $entry->models) . ')' : '';
+    echo "{$entry->group->type}{$models}\n";
+    foreach ($entry->limits as $limit) {
         echo "  {$limit->type}: {$limit->value}\n";
     }
 }
@@ -762,10 +785,10 @@ client = Anthropic::Client.new
 
 rate_limits = client.beta.organization.rate_limits.list(group_type: :batch)
 
-rate_limits.data.each do |group|
-  models = group.models ? " (#{group.models.join(", ")})" : ""
-  puts "#{group.group_type}#{models}"
-  group.limits.each do |limit|
+rate_limits.data.each do |entry|
+  models = entry.models ? " (#{entry.models.join(", ")})" : ""
+  puts "#{entry.group.type}#{models}"
+  entry.limits.each do |limit|
     puts "  #{limit.type}: #{limit.value}"
   end
 end

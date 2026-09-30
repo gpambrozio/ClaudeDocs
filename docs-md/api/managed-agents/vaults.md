@@ -1,4 +1,4 @@
-# Vaults
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/vault.json
 
 ---
 title: Authenticate with vaults
@@ -37,14 +37,15 @@ EOF
 ```
 
 ```bash CLI
-ant beta:vaults create < alice.vault.yaml
+ant apply vaults/service_accounts.yaml
 ```
 
 ```yaml
-display_name: Alice
-metadata:
-  external_user_id: usr_abc123
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/vault.json
+display_name: Service accounts
 ```
+
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the vault from `vaults/service_accounts.yaml`, prints its ID, and records it in `claude-lock.json`. To see the vault record, run `ant beta:vaults retrieve`.
 
 ```python Python
 vault = client.beta.vaults.create(
@@ -172,7 +173,7 @@ EOF
 ```bash CLI
 ant beta:vaults:credentials create \
   --vault-id "$VAULT_ID" \
-  --display-name "Alice's Slack" <<'YAML'
+  --display-name "Slack" <<'YAML'
 auth:
   type: mcp_oauth
   mcp_server_url: https://mcp.slack.com/mcp
@@ -736,7 +737,7 @@ ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
   --vault-id "$VAULT_ID" \
-  --title "Alice's Slack digest"
+  --title "Slack digest"
 ```
 
 ```python Python

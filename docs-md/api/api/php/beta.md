@@ -11,7 +11,9 @@ url: https://platform.claude.com/docs/en/api/php/beta
 
 ### Anthropic Beta
 
-- `enum AnthropicBeta`
+- `class AnthropicBeta`
+
+  - `string`
 
   - `"message-batches-2024-09-24"`
 

@@ -1093,7 +1093,7 @@ runner.run_until_finished
 
 ### Automatic context management
 
-For long-running agentic tasks, the TypeScript and Ruby tool runners support automatic [compaction](../../build-with-claude/context-editing.md#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. Both SDKs have deprecated this client-side option in favor of [server-side compaction](../../build-with-claude/compaction-threshold.md), which works with every SDK's tool runner through the `context_management` request parameter. The Python SDK (v1.0 and later) and the Go, Java, C#, and PHP tool runners don't include client-side compaction. The Python, TypeScript, C#, Go, Java, PHP, and Ruby tool runners have a `compact_before_next_turn()` (typescript, java, php: `compactBeforeNextTurn()`; csharp, go: `CompactBeforeNextTurn()`) helper for on-demand compaction. See [Compact in a loop](../../build-with-claude/compaction-on-demand.md#compact-in-a-loop). Use it or a `context_management` compaction edit on a runner, not both.
+For long-running agentic tasks, the TypeScript and Ruby tool runners support automatic [compaction](../../build-with-claude/context-editing.md#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. Both SDKs have deprecated this client-side option in favor of [server-side compaction](../../build-with-claude/compaction-threshold.md), which works with every SDK's tool runner through the `context_management` request parameter. The Python SDK (v1.0 and later) and the Go, Java, C#, and PHP tool runners don't include client-side compaction. The tool runner has a `compact_before_next_turn()` (typescript, java, php: `compactBeforeNextTurn()`; csharp, go: `CompactBeforeNextTurn()`) helper for on-demand compaction. See [Compact in a loop](../../build-with-claude/compaction-on-demand.md#compact-in-a-loop). Use it or a `context_management` compaction edit on a runner, not both.
 
 ### Debugging tool execution
 
@@ -1114,8 +1114,6 @@ The Go, Ruby, C#, and PHP SDKs don't read `ANTHROPIC_LOG`. Outside Python, no SD
 ### Intercepting tool errors
 
 By default, tool errors are passed back to Claude, which can then respond appropriately. However, you might want to detect errors and handle them differently, for example, to stop execution early or implement custom error handling.
-
-In the Python and TypeScript SDKs, use the tool response method (`generate_tool_call_response()` in Python, `generateToolResponse()` in TypeScript) to intercept tool results and check for errors before they're sent to Claude. The other SDKs don't expose that hook. Their tabs describe the closest alternative:
 
 **Python**
 
@@ -1146,6 +1144,12 @@ for message in runner:
     # Process the message normally
     print(message.content)
 ```
+
+Call 
+
+`runner.generate_tool_call_response()`
+
+ in the loop to get the tool results and check them for errors before the runner sends them to Claude.
 
 **TypeScript**
 
@@ -1179,6 +1183,12 @@ for await (const message of runner) {
   console.log(message.content);
 }
 ```
+
+Call 
+
+`runner.generateToolResponse()`
+
+ in the loop to get the tool results and check them for errors before the runner sends them to Claude.
 
 **C#**
 
@@ -1286,11 +1296,19 @@ loop do
 end
 ```
 
+The Ruby tool runner has no hook that returns the tool results. Once 
+
+`runner.next_message`
+
+ returns, they are the last entry in 
+
+`runner.params[:messages]`
+
+, so check them there before the next request sends them to Claude.
+
 ### Modifying tool results
 
 You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](../../build-with-claude/prompt-caching.md) on tool results, or for transforming the tool output.
-
-In the Python and TypeScript SDKs, use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK. See the code comments in each tab.
 
 **Python**
 
@@ -1326,6 +1344,16 @@ for message in runner:
     print(message.content)
 ```
 
+Call 
+
+`runner.generate_tool_call_response()`
+
+ to get the tool result, modify it, and pass it to 
+
+`runner.append_messages()`
+
+ so the runner does not append the original.
+
 **TypeScript**
 
 ```typescript
@@ -1358,6 +1386,12 @@ for await (const message of runner) {
   console.log(message.content);
 }
 ```
+
+Call 
+
+`runner.generateToolResponse()`
+
+ to get the tool result, then modify it in place. The runner appends the modified result for you.
 
 **C#**
 
@@ -1509,6 +1543,16 @@ loop do
   break if message.stop_reason != :tool_use
 end
 ```
+
+The Ruby tool runner has no hook that returns the tool results. Once 
+
+`runner.next_message`
+
+ returns, they are the last entry in 
+
+`runner.params[:messages]`
+
+, so modify them there before the next request sends them to Claude.
 
 Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (such as document search results) that you want to cache for subsequent API calls. See [Prompt caching](../../build-with-claude/prompt-caching.md) for more details on caching strategies.
 

@@ -38,7 +38,7 @@ Before you begin, ensure you have:
 
 Anthropic's [client SDKs](../cli-sdks-libraries/overview.md) support Foundry through a platform-specific package or client class. The examples on this page also show requests with cURL and the ant CLI. To set up the CLI, see [CLI quickstart](../cli-sdks-libraries/cli/quickstart.md).
 
-Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. Foundry is not currently available in the Go and Ruby SDKs.
+Foundry is supported by the C#, Go, Java, PHP, Python, and TypeScript SDKs. Foundry is not currently available in the Ruby SDK.
 
 **Python**
 
@@ -67,9 +67,10 @@ dotnet add package Anthropic.Foundry
 **Go**
 
 ```bash
-# The Go SDK does not yet support Foundry natively (see the Authentication
-# examples for using the standard Go SDK as a workaround)
-go get github.com/anthropics/anthropic-sdk-go
+go get github.com/anthropics/anthropic-sdk-go/foundry
+
+# For Entra ID authentication, also install the Azure Identity library
+go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 ```
 
 **Java**
@@ -175,7 +176,7 @@ After provisioning your Foundry Claude resource, you can obtain an API key from 
 3. Copy the **Key** value (and note the **Target URI** for your endpoint).
 4. Use either the `api-key` or `x-api-key` header in your requests, or provide it to the SDK.
 
-The Foundry SDKs require an API key and either a resource name or base URL. The C#, Java, PHP, Python, and TypeScript SDKs automatically read these from the following environment variables if they are defined:
+The SDK's Foundry client requires an API key and either a resource name or base URL, and automatically reads them from the following environment variables if they are defined:
 
 * `ANTHROPIC_FOUNDRY_API_KEY` - Your API key
 * `ANTHROPIC_FOUNDRY_RESOURCE` - Your resource name (for example, `example-resource`)
@@ -248,6 +249,8 @@ console.log(message.content);
 using Anthropic.Foundry;
 using Anthropic.Models.Messages;
 
+// The C# client always builds the base URL from the resource name.
+// It does not read ANTHROPIC_FOUNDRY_BASE_URL.
 var client = new AnthropicFoundryClient(
     new AnthropicFoundryApiKeyCredentials(
         Environment.GetEnvironmentVariable("ANTHROPIC_FOUNDRY_API_KEY")!,
@@ -270,13 +273,6 @@ Console.WriteLine(
 ```
 
 ```go Go
-// The Go SDK does not yet support Foundry natively. This example uses the
-// standard Go SDK as a workaround. WithoutEnvironmentDefaults keeps the
-// client from also reading ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN from
-// the environment and sending a Claude API credential to your Foundry
-// endpoint. Features that Foundry does not support fail server-side rather
-// than client-side. For full Foundry support, use the C#, Java, PHP,
-// Python, or TypeScript SDKs.
 package main
 
 import (
@@ -285,15 +281,17 @@ import (
 	"os"
 
 	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/foundry"
 )
 
 func main() {
-	client := anthropic.NewClient(
-		option.WithoutEnvironmentDefaults(),
-		option.WithBaseURL("https://example-resource.services.ai.azure.com/anthropic"),
-		option.WithAPIKey(os.Getenv("ANTHROPIC_FOUNDRY_API_KEY")),
-	)
+	client, err := foundry.NewClient(foundry.ClientConfig{
+		APIKey:   os.Getenv("ANTHROPIC_FOUNDRY_API_KEY"),
+		Resource: "example-resource", // your resource name
+	})
+	if err != nil {
+		panic(err)
+	}
 
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     "claude-opus-5-5",
@@ -358,7 +356,7 @@ echo array_find($message->content, fn ($block) => $block->type === 'text')->text
 # ANTHROPIC_AUTH_TOKEN environment variables and could send a Claude API
 # credential to your Foundry endpoint. Features that Foundry
 # does not support fail server-side rather than client-side. For full
-# Foundry support, use the C#, Java, PHP, Python, or TypeScript SDKs.
+# Foundry support, use the C#, Go, Java, PHP, Python, or TypeScript SDKs.
 require "anthropic"
 
 client = Anthropic::Client.new(
@@ -487,34 +485,38 @@ Console.WriteLine(
 ```
 
 ```go Go
-// The Go SDK does not yet support Foundry natively. This example uses the
-// standard Go SDK as a workaround, with a static Entra ID token: automatic
-// token refresh is not built in, so your application must refresh tokens
-// itself (they typically expire after 1 hour). WithoutEnvironmentDefaults
-// keeps the client from also reading ANTHROPIC_API_KEY or
-// ANTHROPIC_AUTH_TOKEN from the environment and sending a Claude API
-// credential to your Foundry endpoint. For full Foundry support, use the
-// C#, Java, PHP, Python, or TypeScript SDKs.
 package main
 
 import (
 	"context"
 	"fmt"
-	"os"
 
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/foundry"
 )
 
 func main() {
-	// Obtain an Entra ID access token, for example using the Azure CLI:
-	//   az account get-access-token --resource https://ai.azure.com \
-	//     --query accessToken -o tsv
-	client := anthropic.NewClient(
-		option.WithoutEnvironmentDefaults(),
-		option.WithBaseURL("https://example-resource.services.ai.azure.com/anthropic"),
-		option.WithAuthToken(os.Getenv("AZURE_ACCESS_TOKEN")),
-	)
+	credential, err := azidentity.NewDefaultAzureCredential(nil)
+	if err != nil {
+		panic(err)
+	}
+
+	tokenProvider := func(ctx context.Context) (string, error) {
+		token, err := credential.GetToken(ctx, policy.TokenRequestOptions{
+			Scopes: []string{foundry.EntraIDScope},
+		})
+		return token.Token, err
+	}
+
+	client, err := foundry.NewClient(foundry.ClientConfig{
+		Resource:             "example-resource", // your resource name
+		AzureADTokenProvider: tokenProvider,
+	})
+	if err != nil {
+		panic(err)
+	}
 
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     "claude-opus-5-5",
@@ -594,7 +596,7 @@ echo array_find($message->content, fn ($block) => $block->type === 'text')->text
 # itself (they typically expire after 1 hour). Pass credentials explicitly:
 # without them, the client falls back to the ANTHROPIC_API_KEY or
 # ANTHROPIC_AUTH_TOKEN environment variables. For full Foundry support, use
-# the C#, Java, PHP, Python, or TypeScript SDKs.
+# the C#, Go, Java, PHP, Python, or TypeScript SDKs.
 require "anthropic"
 
 # Obtain an Entra ID access token, for example using the Azure CLI:
