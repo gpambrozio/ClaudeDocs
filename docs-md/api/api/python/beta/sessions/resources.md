@@ -135,6 +135,8 @@ Add Session Resource
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `workspace_id: Optional[str]`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -320,6 +322,8 @@ List Session Resources
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `workspace_id: Optional[str]`
 
@@ -597,6 +601,8 @@ Get Session Resource
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `workspace_id: Optional[str]`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -868,6 +874,8 @@ Update Session Resource
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 - `workspace_id: Optional[str]`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1133,6 +1141,8 @@ Delete Session Resource
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 - `workspace_id: Optional[str]`
 

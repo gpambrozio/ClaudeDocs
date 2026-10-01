@@ -1022,7 +1022,10 @@ foreach (var sessionEvent in events.Items)
 
 ```go Go
 events, err := client.Beta.Sessions.Events.List(ctx, session.ID, anthropic.BetaSessionEventListParams{
-	Types: []string{"agent.tool_use", "agent.tool_result"},
+	Types: []anthropic.BetaManagedAgentsSessionEventType{
+		anthropic.BetaManagedAgentsSessionEventTypeAgentToolUse,
+		anthropic.BetaManagedAgentsSessionEventTypeAgentToolResult,
+	},
 })
 if err != nil {
 	panic(err)

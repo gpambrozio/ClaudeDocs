@@ -131,6 +131,8 @@ other scopes require a Console session.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ## Returns
 
 - `BetaFederationRule object`

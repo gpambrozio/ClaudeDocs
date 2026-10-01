@@ -41517,7 +41517,7 @@ compliance activities that can be filtered by various criteria.
 
     - `webhook_url: string`
 
-      The endpoint that inspected prompts and responses are sent to.
+      Scheme and host of the endpoint that Inference hooks sends prompts and responses to after this change, for example `https://hooks.example.com`; the port, path and query are never included. Empty when the address cannot be shown safely, and on activities recorded before this field was limited to scheme and host.
 
     - `id: optional string`
 
@@ -58219,7 +58219,7 @@ compliance activities that can be filtered by various criteria.
 
     - `mcp_server_url: optional string or null`
 
-      Origin (scheme, host and port, the default port omitted) of the MCP server at the time of the change; the path is never included. Null when not available.
+      Origin (scheme, host and port, the default port omitted) of the MCP server at the time of the change; the path is never included. Null when not available, and on activities recorded before this field was limited to the origin.
 
     - `organization_id: optional string or null`
 
@@ -98520,10 +98520,6 @@ compliance activities that can be filtered by various criteria.
 
       Tagged ID of the created app
 
-    - `workspace_id: string`
-
-      Tagged ID of the workspace the app is scoped to
-
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
@@ -98541,6 +98537,10 @@ compliance activities that can be filtered by various criteria.
     - `organization_uuid: optional string or null`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `workspace_id: optional string or null`
+
+      Tagged ID of the workspace the app is scoped to. Null or absent if the app is not scoped to a workspace.
 
   - `PlatformOAuthAppRevoked object`
 
@@ -169878,7 +169878,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `webhook_url: string`
 
-      The endpoint that inspected prompts and responses are sent to.
+      Scheme and host of the endpoint that Inference hooks sends prompts and responses to after this change, for example `https://hooks.example.com`; the port, path and query are never included. Empty when the address cannot be shown safely, and on activities recorded before this field was limited to scheme and host.
 
     - `id: optional string`
 
@@ -186580,7 +186580,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
     - `mcp_server_url: optional string or null`
 
-      Origin (scheme, host and port, the default port omitted) of the MCP server at the time of the change; the path is never included. Null when not available.
+      Origin (scheme, host and port, the default port omitted) of the MCP server at the time of the change; the path is never included. Null when not available, and on activities recorded before this field was limited to the origin.
 
     - `organization_id: optional string or null`
 
@@ -226881,10 +226881,6 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
       Tagged ID of the created app
 
-    - `workspace_id: string`
-
-      Tagged ID of the workspace the app is scoped to
-
     - `id: optional string`
 
       Unique identifier for the activity e.g. 'activity_abcd1234'
@@ -226902,6 +226898,10 @@ curl https://api.anthropic.com/v1/compliance/activities \
     - `organization_uuid: optional string or null`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `workspace_id: optional string or null`
+
+      Tagged ID of the workspace the app is scoped to. Null or absent if the app is not scoped to a workspace.
 
   - `PlatformOAuthAppRevoked object`
 

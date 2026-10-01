@@ -107,7 +107,7 @@ Follow [Use WIF with Kubernetes](../../manage-claude/wif-providers/kubernetes.md
 
 The chart's default audience is `api.anthropic.com` with no scheme, but the Console's federation-rule form suggests `https://api.anthropic.com`. The two must match byte-for-byte or authentication fails. Either set the rule's audience to `api.anthropic.com`, or set `api.wif.audience` in `values.yaml` to `https://api.anthropic.com`.
 
-If the tunnel is in a workspace other than the organization's default, also add the rule's service account as a member of that workspace under **Settings > Workspaces** (the Tunnels API authorizes against the service account's workspace memberships).
+If the tunnel is in a workspace other than the organization's default, also [add the rule's service account to that workspace](../../manage-claude/workspaces.md#role-inheritance) (the Tunnels API authorizes against the service account's workspace memberships).
 
 Note the rule's ID (`fdrl_...`); you'll set it as `api.wif.federationRuleId`.
 

@@ -71,6 +71,8 @@ Click **Create key**, name the key, and select one or more scopes from the follo
 | `delete:compliance_user_data` | Delete user chats, files, and projects                                                                                                                                                                                    |
 | `read:compliance_org_data`    | Read organization metadata (names, types, roles, and groups) and the effective settings in force for organizations under the parent organization. User listings and group membership require `read:compliance_user_data`. |
 
+With the Plugins API, `read:compliance_org_data` also reads your organization's plugin and plugin marketplace inventory through the Admin API, including members' personal plugins and their files. That inventory identifies members: it carries the user ID of each member who owns or created a plugin, or with whom a plugin has been shared individually, and the email address of a plugin's creator while they are still a member; see [Read plugins and plugin marketplaces](compliance-org-data.md#read-plugins-and-plugin-marketplaces).
+
 Choose the smallest scope set that your integration needs:
 
 * An audit pipeline that reads the Activity Feed only needs `read:compliance_activities`.

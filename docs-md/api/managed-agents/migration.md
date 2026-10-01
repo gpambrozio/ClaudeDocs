@@ -706,7 +706,10 @@ agent = client.beta.agents.create(
 )
 environment = client.beta.environments.create(
     name="weather-env",
-    config={"type": "cloud", "networking": {"type": "unrestricted"}},
+    config={
+        "type": "cloud",
+        "networking": {"type": "limited", "allow_package_managers": True},
+    },
 )
 
 session = client.beta.sessions.create(
@@ -776,7 +779,10 @@ const agent = await client.beta.agents.create({
 });
 const environment = await client.beta.environments.create({
   name: "weather-env",
-  config: { type: "cloud", networking: { type: "unrestricted" } }
+  config: {
+    type: "cloud",
+    networking: { type: "limited", allow_package_managers: true }
+  }
 });
 
 const session = await client.beta.sessions.create({
@@ -868,7 +874,7 @@ var environment = await client.Beta.Environments.Create(new()
     Name = "weather-env",
     Config = new BetaCloudConfigParams
     {
-        Networking = new BetaUnrestrictedNetwork(),
+        Networking = new BetaLimitedNetworkParams { AllowPackageManagers = true },
     },
 });
 
@@ -970,7 +976,9 @@ environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentN
 	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
 		OfCloud: &anthropic.BetaCloudConfigParams{
 			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+				OfLimited: &anthropic.BetaLimitedNetworkParams{
+					AllowPackageManagers: anthropic.Bool(true),
+				},
 			},
 		},
 	},
@@ -1067,7 +1075,7 @@ import com.anthropic.models.beta.agents.BetaManagedAgentsCustomToolInputSchema;
 import com.anthropic.models.beta.agents.BetaManagedAgentsCustomToolParams;
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
 import com.anthropic.models.beta.environments.BetaCloudConfigParams;
-import com.anthropic.models.beta.environments.BetaUnrestrictedNetwork;
+import com.anthropic.models.beta.environments.BetaLimitedNetworkParams;
 import com.anthropic.models.beta.environments.EnvironmentCreateParams;
 import com.anthropic.models.beta.sessions.BetaManagedAgentsAgentParams;
 import com.anthropic.models.beta.sessions.SessionCreateParams;
@@ -1097,7 +1105,9 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
 var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
     .name("weather-env")
     .config(BetaCloudConfigParams.builder()
-        .networking(BetaUnrestrictedNetwork.builder().build())
+        .networking(BetaLimitedNetworkParams.builder()
+            .allowPackageManagers(true)
+            .build())
         .build())
     .build());
 
@@ -1185,7 +1195,10 @@ $agent = $client->beta->agents->create(
 );
 $environment = $client->beta->environments->create(
     name: 'weather-env',
-    config: ['type' => 'cloud', 'networking' => ['type' => 'unrestricted']],
+    config: [
+        'type' => 'cloud',
+        'networking' => ['type' => 'limited', 'allow_package_managers' => true],
+    ],
 );
 
 $session = $client->beta->sessions->create(
@@ -1270,7 +1283,7 @@ agent = client.beta.agents.create(
 )
 environment = client.beta.environments.create(
   name: "weather-env",
-  config: {type: "cloud", networking: {type: "unrestricted"}}
+  config: {type: "cloud", networking: {type: "limited", allow_package_managers: true}}
 )
 
 session = client.beta.sessions.create(

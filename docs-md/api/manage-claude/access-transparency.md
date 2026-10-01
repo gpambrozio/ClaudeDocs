@@ -27,7 +27,7 @@ Anthropic personnel access customer content only under defined conditions. Acces
 
 ## What Access Transparency covers
 
-* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. Anthropic's [general ZDR documentation](api-and-data-retention.md) and [ZDR for Claude Code documentation](../../claude-code/zero-data-retention.md) explain which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
+* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. Anthropic's [general ZDR documentation](api-and-data-retention.md) explains which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
 * **Manual views by Anthropic personnel:** Manual views of your covered content by Anthropic reviewers generate events.
 
 ## What Access Transparency does not cover
@@ -37,7 +37,7 @@ Anthropic personnel access customer content only under defined conditions. Acces
 * **Claude for Enterprise and Claude Apps:** claude.ai Enterprise seats, Claude for Work, Cowork, and Claude in Chrome are not covered.
 * **Claude consumer products:** Claude Free, Pro, or Max plans.
 * **Partner-operated platforms:** Amazon Bedrock and Google Cloud; refer to those platforms' transparency controls.
-* **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [ZDR documentation](../../claude-code/zero-data-retention.md#what-zdr-does-not-cover) for additional details.
+* **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [ZDR documentation](api-and-data-retention.md#zero-data-retention-zdr-scope) for additional details.
 
 ## Getting started
 

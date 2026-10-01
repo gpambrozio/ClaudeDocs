@@ -129,6 +129,8 @@ matched as the JWT's `iss` claim and is not fetched.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ### Body parameters
 
 - `issuer_url: string`
@@ -517,6 +519,8 @@ Archived issuers are excluded unless `include_archived=true`.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ### Returns
 
 - `data: array of BetaFederationIssuer`
@@ -815,6 +819,8 @@ Retrieve a federation issuer by its ID (`fdis_...`).
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 ### Returns
 
@@ -1117,6 +1123,8 @@ session.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 ### Body parameters
 
@@ -1497,6 +1505,8 @@ issuer cannot be changed), or recreate them against another issuer.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 ### Returns
 

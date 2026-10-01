@@ -135,6 +135,8 @@ Create a memory store
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -350,6 +352,8 @@ List memory stores
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -547,6 +551,8 @@ Retrieve a memory store
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 
@@ -757,6 +763,8 @@ Update a memory store
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -950,6 +958,8 @@ Delete a memory store
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1104,6 +1114,8 @@ Archive a memory store
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 
@@ -1378,6 +1390,8 @@ Create a memory
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1610,6 +1624,8 @@ List memories
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 
@@ -1846,6 +1862,8 @@ Retrieve a memory
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 
@@ -2084,6 +2102,8 @@ Update a memory
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2294,6 +2314,8 @@ Delete a memory
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 
@@ -2519,6 +2541,8 @@ List memory versions
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 
@@ -2823,6 +2847,8 @@ Retrieve a memory version
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3111,6 +3137,8 @@ Redact a memory version
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 

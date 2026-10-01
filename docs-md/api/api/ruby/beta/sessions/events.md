@@ -233,6 +233,8 @@ List Events
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -959,7 +961,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 10 more`
 
       - `class BetaManagedAgentsUnknownError`
 
@@ -1191,6 +1193,156 @@ List Events
 
           ID of the vault containing the affected credential.
 
+      - `class BetaManagedAgentsRepositoryAuthenticationError`
+
+        The repository host rejected the credentials, or required credentials and received none.
+
+        - `type: :repository_authentication_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryForbiddenError`
+
+        The repository host refused access to the repository.
+
+        - `type: :repository_forbidden_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryNotFoundError`
+
+        The repository host reported the repository as not found.
+
+        - `type: :repository_not_found_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCheckoutError`
+
+        The requested branch or commit does not exist in the repository.
+
+        - `type: :repository_checkout_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCloneError`
+
+        The repository could not be cloned.
+
+        - `type: :repository_clone_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
     - `processed_at: Time`
 
       Timestamp when the error occurred.
@@ -1245,7 +1397,31 @@ List Events
 
       format: date-time
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
+      - `type: :refusal`
+
+      - `category: :cyber | :bio | :frontier_llm | 2 more`
+
+        The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
+
+        - `:cyber`
+
+        - `:bio`
+
+        - `:frontier_llm`
+
+        - `:reasoning_extraction`
+
+        - `:general_harms`
+
+      - `explanation: String`
+
+        Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -1274,6 +1450,12 @@ List Events
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: :budget_reached`
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
+
+        - `type: :refusal`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
@@ -1603,7 +1785,11 @@ List Events
 
       Public sthr_ ID of the thread that went idle.
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -1620,6 +1806,10 @@ List Events
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
 
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
@@ -2987,6 +3177,8 @@ Send Events
 
   - `:"mcp-client-2026-09-15"`
 
+  - `:"ce-plugins-2026-09-01"`
+
 - `workspace_id: String`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3595,6 +3787,8 @@ Stream Events
   - `:"inline-tools-2026-09-15"`
 
   - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
 
 - `workspace_id: String`
 
@@ -4322,7 +4516,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 10 more`
 
       - `class BetaManagedAgentsUnknownError`
 
@@ -4554,6 +4748,156 @@ Stream Events
 
           ID of the vault containing the affected credential.
 
+      - `class BetaManagedAgentsRepositoryAuthenticationError`
+
+        The repository host rejected the credentials, or required credentials and received none.
+
+        - `type: :repository_authentication_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryForbiddenError`
+
+        The repository host refused access to the repository.
+
+        - `type: :repository_forbidden_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryNotFoundError`
+
+        The repository host reported the repository as not found.
+
+        - `type: :repository_not_found_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCheckoutError`
+
+        The requested branch or commit does not exist in the repository.
+
+        - `type: :repository_checkout_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCloneError`
+
+        The repository could not be cloned.
+
+        - `type: :repository_clone_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
     - `processed_at: Time`
 
       Timestamp when the error occurred.
@@ -4608,7 +4952,31 @@ Stream Events
 
       format: date-time
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
+      - `type: :refusal`
+
+      - `category: :cyber | :bio | :frontier_llm | 2 more`
+
+        The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
+
+        - `:cyber`
+
+        - `:bio`
+
+        - `:frontier_llm`
+
+        - `:reasoning_extraction`
+
+        - `:general_harms`
+
+      - `explanation: String`
+
+        Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -4637,6 +5005,12 @@ Stream Events
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: :budget_reached`
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
+
+        - `type: :refusal`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
@@ -4966,7 +5340,11 @@ Stream Events
 
       Public sthr_ ID of the thread that went idle.
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -4983,6 +5361,10 @@ Stream Events
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
 
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
@@ -6015,8 +6397,6 @@ puts(beta_managed_agents_stream_session_events)
 ### Beta Managed Agents Agent Evaluated Permission
 
 - `type BetaManagedAgentsAgentEvaluatedPermission = :allow | :ask | :deny`
-
-  AgentEvaluatedPermission enum
 
   - `:allow`
 
@@ -8048,6 +8428,196 @@ puts(beta_managed_agents_stream_session_events)
 
   - `type: :redacted`
 
+### Beta Managed Agents Repository Authentication Error
+
+- `class BetaManagedAgentsRepositoryAuthenticationError`
+
+  The repository host rejected the credentials, or required credentials and received none.
+
+  - `type: :repository_authentication_error`
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `repository_url: String`
+
+    URL of the repository that could not be cloned. Null when it could not be identified.
+
+  - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+    What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+    - `class BetaManagedAgentsRetryStatusRetrying`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `type: :retrying`
+
+    - `class BetaManagedAgentsRetryStatusExhausted`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `type: :exhausted`
+
+    - `class BetaManagedAgentsRetryStatusTerminal`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: :terminal`
+
+### Beta Managed Agents Repository Checkout Error
+
+- `class BetaManagedAgentsRepositoryCheckoutError`
+
+  The requested branch or commit does not exist in the repository.
+
+  - `type: :repository_checkout_error`
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `repository_url: String`
+
+    URL of the repository that could not be cloned. Null when it could not be identified.
+
+  - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+    What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+    - `class BetaManagedAgentsRetryStatusRetrying`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `type: :retrying`
+
+    - `class BetaManagedAgentsRetryStatusExhausted`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `type: :exhausted`
+
+    - `class BetaManagedAgentsRetryStatusTerminal`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: :terminal`
+
+### Beta Managed Agents Repository Clone Error
+
+- `class BetaManagedAgentsRepositoryCloneError`
+
+  The repository could not be cloned.
+
+  - `type: :repository_clone_error`
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `repository_url: String`
+
+    URL of the repository that could not be cloned. Null when it could not be identified.
+
+  - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+    What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+    - `class BetaManagedAgentsRetryStatusRetrying`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `type: :retrying`
+
+    - `class BetaManagedAgentsRetryStatusExhausted`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `type: :exhausted`
+
+    - `class BetaManagedAgentsRetryStatusTerminal`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: :terminal`
+
+### Beta Managed Agents Repository Forbidden Error
+
+- `class BetaManagedAgentsRepositoryForbiddenError`
+
+  The repository host refused access to the repository.
+
+  - `type: :repository_forbidden_error`
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `repository_url: String`
+
+    URL of the repository that could not be cloned. Null when it could not be identified.
+
+  - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+    What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+    - `class BetaManagedAgentsRetryStatusRetrying`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `type: :retrying`
+
+    - `class BetaManagedAgentsRetryStatusExhausted`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `type: :exhausted`
+
+    - `class BetaManagedAgentsRetryStatusTerminal`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: :terminal`
+
+### Beta Managed Agents Repository Not Found Error
+
+- `class BetaManagedAgentsRepositoryNotFoundError`
+
+  The repository host reported the repository as not found.
+
+  - `type: :repository_not_found_error`
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `repository_url: String`
+
+    URL of the repository that could not be cloned. Null when it could not be identified.
+
+  - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+    What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+    - `class BetaManagedAgentsRetryStatusRetrying`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `type: :retrying`
+
+    - `class BetaManagedAgentsRetryStatusExhausted`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `type: :exhausted`
+
+    - `class BetaManagedAgentsRetryStatusTerminal`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: :terminal`
+
 ### Beta Managed Agents Retry Status Exhausted
 
 - `class BetaManagedAgentsRetryStatusExhausted`
@@ -8628,7 +9198,7 @@ puts(beta_managed_agents_stream_session_events)
 
     Unique identifier for this event.
 
-  - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
+  - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 10 more`
 
     - `class BetaManagedAgentsUnknownError`
 
@@ -8859,6 +9429,156 @@ puts(beta_managed_agents_stream_session_events)
       - `vault_id: String`
 
         ID of the vault containing the affected credential.
+
+    - `class BetaManagedAgentsRepositoryAuthenticationError`
+
+      The repository host rejected the credentials, or required credentials and received none.
+
+      - `type: :repository_authentication_error`
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `repository_url: String`
+
+        URL of the repository that could not be cloned. Null when it could not be identified.
+
+      - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+        What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+        - `class BetaManagedAgentsRetryStatusRetrying`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `class BetaManagedAgentsRetryStatusExhausted`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `class BetaManagedAgentsRetryStatusTerminal`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+    - `class BetaManagedAgentsRepositoryForbiddenError`
+
+      The repository host refused access to the repository.
+
+      - `type: :repository_forbidden_error`
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `repository_url: String`
+
+        URL of the repository that could not be cloned. Null when it could not be identified.
+
+      - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+        What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+        - `class BetaManagedAgentsRetryStatusRetrying`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `class BetaManagedAgentsRetryStatusExhausted`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `class BetaManagedAgentsRetryStatusTerminal`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+    - `class BetaManagedAgentsRepositoryNotFoundError`
+
+      The repository host reported the repository as not found.
+
+      - `type: :repository_not_found_error`
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `repository_url: String`
+
+        URL of the repository that could not be cloned. Null when it could not be identified.
+
+      - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+        What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+        - `class BetaManagedAgentsRetryStatusRetrying`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `class BetaManagedAgentsRetryStatusExhausted`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `class BetaManagedAgentsRetryStatusTerminal`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+    - `class BetaManagedAgentsRepositoryCheckoutError`
+
+      The requested branch or commit does not exist in the repository.
+
+      - `type: :repository_checkout_error`
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `repository_url: String`
+
+        URL of the repository that could not be cloned. Null when it could not be identified.
+
+      - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+        What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+        - `class BetaManagedAgentsRetryStatusRetrying`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `class BetaManagedAgentsRetryStatusExhausted`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `class BetaManagedAgentsRetryStatusTerminal`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+    - `class BetaManagedAgentsRepositoryCloneError`
+
+      The repository could not be cloned.
+
+      - `type: :repository_clone_error`
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `repository_url: String`
+
+        URL of the repository that could not be cloned. Null when it could not be identified.
+
+      - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+        What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+        - `class BetaManagedAgentsRetryStatusRetrying`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `class BetaManagedAgentsRetryStatusExhausted`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `class BetaManagedAgentsRetryStatusTerminal`
+
+          The session encountered a terminal error and will transition to `terminated` state.
 
   - `processed_at: Time`
 
@@ -9586,7 +10306,7 @@ puts(beta_managed_agents_stream_session_events)
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 10 more`
 
       - `class BetaManagedAgentsUnknownError`
 
@@ -9818,6 +10538,156 @@ puts(beta_managed_agents_stream_session_events)
 
           ID of the vault containing the affected credential.
 
+      - `class BetaManagedAgentsRepositoryAuthenticationError`
+
+        The repository host rejected the credentials, or required credentials and received none.
+
+        - `type: :repository_authentication_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryForbiddenError`
+
+        The repository host refused access to the repository.
+
+        - `type: :repository_forbidden_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryNotFoundError`
+
+        The repository host reported the repository as not found.
+
+        - `type: :repository_not_found_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCheckoutError`
+
+        The requested branch or commit does not exist in the repository.
+
+        - `type: :repository_checkout_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCloneError`
+
+        The repository could not be cloned.
+
+        - `type: :repository_clone_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
     - `processed_at: Time`
 
       Timestamp when the error occurred.
@@ -9872,7 +10742,31 @@ puts(beta_managed_agents_stream_session_events)
 
       format: date-time
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
+      - `type: :refusal`
+
+      - `category: :cyber | :bio | :frontier_llm | 2 more`
+
+        The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
+
+        - `:cyber`
+
+        - `:bio`
+
+        - `:frontier_llm`
+
+        - `:reasoning_extraction`
+
+        - `:general_harms`
+
+      - `explanation: String`
+
+        Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -9901,6 +10795,12 @@ puts(beta_managed_agents_stream_session_events)
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: :budget_reached`
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
+
+        - `type: :refusal`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
@@ -10230,7 +11130,11 @@ puts(beta_managed_agents_stream_session_events)
 
       Public sthr_ ID of the thread that went idle.
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -10247,6 +11151,10 @@ puts(beta_managed_agents_stream_session_events)
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
 
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 
@@ -11168,6 +12076,40 @@ puts(beta_managed_agents_stream_session_events)
 
   - `:"session.usage"`
 
+### Beta Managed Agents Session Refusal
+
+- `class BetaManagedAgentsSessionRefusal`
+
+  The turn ended because the model's response was refused, for example by a safety classifier.
+
+  - `type: :refusal`
+
+### Beta Managed Agents Session Refusal Stop Details
+
+- `class BetaManagedAgentsSessionRefusalStopDetails`
+
+  Structured information about a refusal.
+
+  - `type: :refusal`
+
+  - `category: :cyber | :bio | :frontier_llm | 2 more`
+
+    The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
+
+    - `:cyber`
+
+    - `:bio`
+
+    - `:frontier_llm`
+
+    - `:reasoning_extraction`
+
+    - `:general_harms`
+
+  - `explanation: String`
+
+    Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
+
 ### Beta Managed Agents Session Requires Action
 
 - `class BetaManagedAgentsSessionRequiresAction`
@@ -11206,7 +12148,31 @@ puts(beta_managed_agents_stream_session_events)
 
     format: date-time
 
-  - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+  - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+    Structured information about why the session stopped. `null` when there is nothing more to report.
+
+    - `type: :refusal`
+
+    - `category: :cyber | :bio | :frontier_llm | 2 more`
+
+      The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
+
+      - `:cyber`
+
+      - `:bio`
+
+      - `:frontier_llm`
+
+      - `:reasoning_extraction`
+
+      - `:general_harms`
+
+    - `explanation: String`
+
+      Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
+
+  - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
     - `class BetaManagedAgentsSessionEndTurn`
 
@@ -11235,6 +12201,12 @@ puts(beta_managed_agents_stream_session_events)
       The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
       - `type: :budget_reached`
+
+    - `class BetaManagedAgentsSessionRefusal`
+
+      The turn ended because the model's response was refused, for example by a safety classifier.
+
+      - `type: :refusal`
 
 ### Beta Managed Agents Session Status Rescheduled Event
 
@@ -11342,7 +12314,31 @@ puts(beta_managed_agents_stream_session_events)
 
     Public sthr_ ID of the thread that went idle.
 
-  - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+  - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+    Structured information about why the thread stopped. `null` when there is nothing more to report.
+
+    - `type: :refusal`
+
+    - `category: :cyber | :bio | :frontier_llm | 2 more`
+
+      The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
+
+      - `:cyber`
+
+      - `:bio`
+
+      - `:frontier_llm`
+
+      - `:reasoning_extraction`
+
+      - `:general_harms`
+
+    - `explanation: String`
+
+      Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
+
+  - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
     - `class BetaManagedAgentsSessionEndTurn`
 
@@ -11371,6 +12367,12 @@ puts(beta_managed_agents_stream_session_events)
       The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
       - `type: :budget_reached`
+
+    - `class BetaManagedAgentsSessionRefusal`
+
+      The turn ended because the model's response was refused, for example by a safety classifier.
+
+      - `type: :refusal`
 
 ### Beta Managed Agents Session Thread Status Rescheduled Event
 
@@ -12494,7 +13496,7 @@ puts(beta_managed_agents_stream_session_events)
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 10 more`
 
       - `class BetaManagedAgentsUnknownError`
 
@@ -12726,6 +13728,156 @@ puts(beta_managed_agents_stream_session_events)
 
           ID of the vault containing the affected credential.
 
+      - `class BetaManagedAgentsRepositoryAuthenticationError`
+
+        The repository host rejected the credentials, or required credentials and received none.
+
+        - `type: :repository_authentication_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryForbiddenError`
+
+        The repository host refused access to the repository.
+
+        - `type: :repository_forbidden_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryNotFoundError`
+
+        The repository host reported the repository as not found.
+
+        - `type: :repository_not_found_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCheckoutError`
+
+        The requested branch or commit does not exist in the repository.
+
+        - `type: :repository_checkout_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+      - `class BetaManagedAgentsRepositoryCloneError`
+
+        The repository could not be cloned.
+
+        - `type: :repository_clone_error`
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `repository_url: String`
+
+          URL of the repository that could not be cloned. Null when it could not be identified.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next. Always `retrying`: the session keeps running without the repository.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
     - `processed_at: Time`
 
       Timestamp when the error occurred.
@@ -12780,7 +13932,31 @@ puts(beta_managed_agents_stream_session_events)
 
       format: date-time
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the session stopped. `null` when there is nothing more to report.
+
+      - `type: :refusal`
+
+      - `category: :cyber | :bio | :frontier_llm | 2 more`
+
+        The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
+
+        - `:cyber`
+
+        - `:bio`
+
+        - `:frontier_llm`
+
+        - `:reasoning_extraction`
+
+        - `:general_harms`
+
+      - `explanation: String`
+
+        Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -12809,6 +13985,12 @@ puts(beta_managed_agents_stream_session_events)
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
         - `type: :budget_reached`
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
+
+        - `type: :refusal`
 
   - `class BetaManagedAgentsSessionStatusTerminatedEvent`
 
@@ -13138,7 +14320,11 @@ puts(beta_managed_agents_stream_session_events)
 
       Public sthr_ ID of the thread that went idle.
 
-    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | BetaManagedAgentsSessionBudgetReached`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+
+      Structured information about why the thread stopped. `null` when there is nothing more to report.
+
+    - `stop_reason: BetaManagedAgentsSessionEndTurn | BetaManagedAgentsSessionRequiresAction | BetaManagedAgentsSessionRetriesExhausted | 2 more`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -13155,6 +14341,10 @@ puts(beta_managed_agents_stream_session_events)
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+      - `class BetaManagedAgentsSessionRefusal`
+
+        The turn ended because the model's response was refused, for example by a safety classifier.
 
   - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent`
 

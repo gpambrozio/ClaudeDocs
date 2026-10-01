@@ -296,7 +296,7 @@ To run commands in the background, you can either:
 * Prompt Claude Code to run a command in the background
 * Press `Ctrl+B` to move a regular Bash tool invocation to the background. Tmux users must press `Ctrl+B` twice due to tmux's prefix key.
 
-When a command reaches its timeout before it finishes, Claude Code automatically [moves it to the background](tools-reference.md#background-commands) instead of stopping it, unless the command starts with `sleep`. To change how long commands run before that happens, set the [Bash timeout environment variables](tools-reference.md#timeout-and-output-limits).
+When a command reaches its timeout before it finishes, Claude Code automatically [moves it to the background](tools-reference.md#foreground-commands-that-move-to-the-background) instead of stopping it, unless the command starts with `sleep`. If you've turned background tasks off with [`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`](env-vars.md#variables) or by starting in [bare mode](headless.md#start-faster-with-bare-mode), the command stops at its timeout. To change the timeout, set the [Bash timeout environment variables](tools-reference.md#timeout-and-output-limits).
 
 **Key features:**
 
@@ -308,9 +308,10 @@ When a command reaches its timeout before it finishes, Claude Code automatically
 * On macOS and Linux, Claude Code stops your running background tasks when the operating system reports critical memory pressure, provided the session has been idle for at least 30 minutes and no turn or subagent is running. Requires Claude Code v2.1.193 or later
   * The [debug log](debug-your-config.md) says why tasks were stopped, or why a pressure event left them running
   * Set [`CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP`](env-vars.md) to `1` to turn off memory-pressure stops
-* Background commands owned by a [subagent](sub-agents.md) have no time limit, except that a command owned by a subagent running in the foreground ends when that subagent gives its final response; see [Background commands](tools-reference.md#background-commands) in the tools reference. Before v2.1.218, neither the memory-pressure reap nor the former 60-minute limit on subagent commands covered commands moved to the background with `Ctrl+B`
+* Background Bash and PowerShell commands have a time limit, counted from the moment the command enters the background: 30 minutes, or the `timeout` Claude asks for when it starts a command in the background, up to a maximum of 2 hours. A command that moves to the background while it runs, for example with `Ctrl+B`, gets 30 minutes from the move. When a command reaches its limit, Claude Code stops it and tells Claude why, and Claude can start it again with a longer `timeout` if the work still needs it. To lengthen the limits, see [Raise the time limit for background commands](tools-reference.md#raise-the-time-limit-for-background-commands) in the tools reference
+* A background command that a foreground [subagent](sub-agents.md#run-subagents-in-foreground-or-background) started ends when that subagent's run ends, whether it finished, failed, or was interrupted; see [When a background command stops](tools-reference.md#when-a-background-command-stops) in the tools reference
 
-To disable all background task functionality, set the `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` environment variable to `1`. See [Environment variables](env-vars.md) for details.
+To disable all background task functionality, set the [`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`](env-vars.md#variables) environment variable to `1`. Starting in [bare mode](headless.md#start-faster-with-bare-mode) turns it off as well.
 
 **Common backgrounded commands:**
 

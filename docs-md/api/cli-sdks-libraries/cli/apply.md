@@ -145,11 +145,12 @@ List what changed, why, and anything a reviewer should look at closely, in three
 ```yaml
 # yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/environment.json
 name: review-env
-description: Cloud container with unrestricted networking for review sessions.
+description: Cloud container with limited networking for review sessions.
 config:
   type: cloud
   networking:
-    type: unrestricted
+    type: limited
+    allow_package_managers: true
 ```
 
 ```yaml

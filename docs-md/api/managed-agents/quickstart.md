@@ -284,7 +284,7 @@ import com.anthropic.models.beta.agents.AgentCreateParams;
 import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Params;
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
 import com.anthropic.models.beta.environments.BetaCloudConfigParams;
-import com.anthropic.models.beta.environments.BetaUnrestrictedNetwork;
+import com.anthropic.models.beta.environments.BetaLimitedNetworkParams;
 import com.anthropic.models.beta.environments.EnvironmentCreateParams;
 import com.anthropic.models.beta.sessions.SessionCreateParams;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
@@ -348,7 +348,7 @@ The `agent_toolset_20260401` tool type enables the full set of pre-built agent t
 
 **Create an environment**
 
-An environment defines the sandbox where your agent runs.
+An environment defines the sandbox where your agent runs. This one uses `limited` [networking](environments.md#networking) with package managers allowed, so code running in the sandbox can reach public [package registries and code hosts](environments.md#package-manager-hosts) and no other sites. Web search and web fetch run outside the sandbox and are not affected.
 
 ```bash cURL
 environment=$(
@@ -362,7 +362,7 @@ environment=$(
   "name": "quickstart-env",
   "config": {
     "type": "cloud",
-    "networking": {"type": "unrestricted"}
+    "networking": {"type": "limited", "allow_package_managers": true}
   }
 }
 EOF
@@ -385,7 +385,8 @@ name: quickstart-env
 config:
   type: cloud
   networking:
-    type: unrestricted
+    type: limited
+    allow_package_managers: true
 ```
 
 [`ant apply`](../cli-sdks-libraries/cli/apply.md) records the environment's ID in `claude-lock.json` too. To create the agent and the environment with one command, pass both files: `ant apply coding-assistant.md environment.yaml`.
@@ -395,7 +396,7 @@ environment = client.beta.environments.create(
     name="quickstart-env",
     config={
         "type": "cloud",
-        "networking": {"type": "unrestricted"},
+        "networking": {"type": "limited", "allow_package_managers": True},
     },
 )
 
@@ -409,7 +410,7 @@ const environment = await client.beta.environments.create({
   name: "quickstart-env",
   config: {
     type: "cloud",
-    networking: { type: "unrestricted" },
+    networking: { type: "limited", allow_package_managers: true },
   },
 });
 
@@ -422,7 +423,10 @@ Save the returned `environment.id` too.
 var environment = await client.Beta.Environments.Create(new()
 {
     Name = "quickstart-env",
-    Config = new BetaCloudConfigParams { Networking = new BetaUnrestrictedNetwork() },
+    Config = new BetaCloudConfigParams
+    {
+        Networking = new BetaLimitedNetworkParams { AllowPackageManagers = true },
+    },
 });
 
 Console.WriteLine($"Environment ID: {environment.ID}");
@@ -436,7 +440,9 @@ environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentN
 	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
 		OfCloud: &anthropic.BetaCloudConfigParams{
 			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+				OfLimited: &anthropic.BetaLimitedNetworkParams{
+					AllowPackageManagers: anthropic.Bool(true),
+				},
 			},
 		},
 	},
@@ -454,7 +460,9 @@ Save the returned `environment.id` too.
 var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
     .name("quickstart-env")
     .config(BetaCloudConfigParams.builder()
-        .networking(BetaUnrestrictedNetwork.builder().build())
+        .networking(BetaLimitedNetworkParams.builder()
+            .allowPackageManagers(true)
+            .build())
         .build())
     .build());
 
@@ -466,7 +474,10 @@ Save the returned `environment.id` too.
 ```php PHP
 $environment = $client->beta->environments->create(
     name: 'quickstart-env',
-    config: ['type' => 'cloud', 'networking' => ['type' => 'unrestricted']],
+    config: [
+        'type' => 'cloud',
+        'networking' => ['type' => 'limited', 'allow_package_managers' => true],
+    ],
 );
 
 echo "Environment ID: {$environment->id}\n";
@@ -477,7 +488,7 @@ Save the returned `environment.id` too.
 ```ruby Ruby
 environment = client.beta.environments.create(
   name: "quickstart-env",
-  config: {type: "cloud", networking: {type: "unrestricted"}}
+  config: {type: "cloud", networking: {type: "limited", allow_package_managers: true}}
 )
 
 puts "Environment ID: #{environment.id}"

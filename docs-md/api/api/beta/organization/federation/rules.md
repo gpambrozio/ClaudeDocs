@@ -133,6 +133,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ### Body parameters
 
 - `issuer_id: string`
@@ -546,6 +548,8 @@ unless `include_archived=true`.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 ### Returns
 
 - `data: array of BetaFederationRule`
@@ -844,6 +848,8 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 ### Returns
 
@@ -1161,6 +1167,8 @@ Console session.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 ### Body parameters
 
@@ -1550,6 +1558,8 @@ other scopes require a Console session.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 ### Returns
 
@@ -2077,6 +2087,8 @@ other scopes require a Console session.
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 #### Body parameters
 
 - `workspace_id: string`
@@ -2274,6 +2286,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"mcp-client-2026-09-15"`
 
+  - `"ce-plugins-2026-09-01"`
+
 #### Returns
 
 - `data: array of BetaFederationRuleWorkspace`
@@ -2460,6 +2474,8 @@ Console session.
   - `"inline-tools-2026-09-15"`
 
   - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
 
 #### Returns
 

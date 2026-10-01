@@ -73,7 +73,7 @@ Open a new terminal for the change to take effect.
 
 To override the key for a single invocation, pass `--api-key`. To point at a different API host, set `ANTHROPIC_BASE_URL` or pass `--base-url`.
 
-If you are using an API key scoped to multiple workspaces, such as a [personal or service account key](../../manage-claude/authentication.md#key-types), you must [specify the workspace](../../manage-claude/authentication.md#select-a-workspace) to run your command in. Do this by setting an `ANTHROPIC_WORKSPACE_ID` environment variable, which the CLI reads automatically, or by using the [`--workspace-id` flag](using.md#global-flags). The value must be a `wrkspc_...` ID; the literal `default` that the SDKs accept in `ANTHROPIC_WORKSPACE_ID` for [federated token exchange](../../manage-claude/wif-reference.md#environment-variables) isn't valid here.
+If you are using an API key scoped to multiple workspaces, such as a [personal or service account key](../../manage-claude/authentication.md#key-types), you must [specify the workspace](../../manage-claude/authentication.md#select-a-workspace) to run your command in. Do this by setting an `ANTHROPIC_WORKSPACE_ID` environment variable, which the CLI reads automatically, or by using the [`--workspace-id` flag](using.md#global-flags). The value must be a `wrkspc_...` ID.
 
 ```bash CLI
 ant messages create \
