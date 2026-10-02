@@ -176,7 +176,7 @@ If the `bio` classifier blocks your organization's life sciences work, you can a
 
 If you turn on [server-side fallback](../refusals-and-fallback.md#server-side-fallback) (beta), it retries `cyber` and `frontier_llm` declines on Claude Sonnet 5. It doesn't retry `bio`, `reasoning_extraction`, or `general_harms` declines. See [Refusals, fallback, and billing](../../models/sonnet-5-5/whats-new-sonnet-5-5.md#refusals-fallback-and-billing).
 
-If your prompts ask the model to include its reasoning in the response, remove those instructions, because they invite `reasoning_extraction` declines. With adaptive thinking, read the reasoning from [summarized thinking](../thinking.md#summarized-thinking) blocks instead (`display: "summarized"`).
+If your prompts ask the model to include its reasoning in the response, remove those instructions, because they invite `reasoning_extraction` declines. With adaptive thinking, read the reasoning from [summarized thinking](../thinking.md#summarized-thinking) blocks instead (`display: "summarized"`). You can still ask for a short explanation of the answer or a summary of the actions taken; see [Keep reasoning in thinking blocks](../refusals-and-fallback.md#keep-reasoning-in-thinking-blocks).
 
 ---
 

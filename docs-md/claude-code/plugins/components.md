@@ -9,7 +9,6 @@ export const PluginExplorer = ({children}) => {
     id: 'manifest',
     name: 'Manifest',
     path: '.claude-plugin/plugin.json',
-    required: "Required by Anthropic's directory",
     lines: [{
       depth: 0,
       kind: 'folder',
@@ -410,7 +409,7 @@ The explorer shows an example plugin, `my-plugin`, that has one of every kind of
 
 Each file is the smallest valid example of its format, there to show the shape rather than to be useful: a real skill or agent carries full instructions and often supporting files, and a real hook or monitor does real work. The sections after the explorer use the same files as their examples and link to fuller ones. Select a file or folder to read what it's for, see what goes in it, and find the section that covers it.
 
-The [manifest](manifest-reference.md) is the `plugin.json` file in a plugin's `.claude-plugin/` directory. It contains the plugin's metadata and the `userConfig` values that Claude Code prompts the user for. Claude Code loads a plugin without one, but [Anthropic's directory](publish.md#submit-to-anthropics-directory) requires it. Inside the file, only `name` is required. In this one, `description` is the text users see for the plugin in `/plugin`, and `version` keeps users on that version until you change it:
+The [manifest](manifest-reference.md) is the `plugin.json` file in a plugin's `.claude-plugin/` directory. It contains the plugin's metadata and the `userConfig` values that Claude Code prompts the user for. Claude Code loads a plugin without one. Inside the file, only `name` is required. In this one, `description` is the text users see for the plugin in `/plugin`, and `version` keeps users on that version until you change it:
 
 ```json
 {
@@ -472,7 +471,7 @@ A [hook](../hooks-guide.md) runs something automatically at a point in Claude Co
 }
 ```
 
-A monitor is a shell command that Claude Code starts in the background when the session starts and keeps running until it ends, using the [Monitor tool](../tools-reference.md#monitor-tool). What it prints reaches Claude as notifications. A `when` field can instead start it the first time a named skill runs. This one tails an error log:
+A monitor is a shell command that Claude Code starts in the background when the session starts and keeps running until it ends. What it prints reaches Claude as notifications. A `when` field can instead start it the first time a named skill runs. This one tails an error log:
 
 ```json
 [
@@ -719,6 +718,8 @@ Load the plugin and ask Claude to edit a file. A `PostToolUse` hook that exits 0
 
 Hooks in `hooks/hooks.json` and in the `hooks` manifest key both load. For every event and its payload, see [Hook events](../hooks.md#hook-events).
 
+To write hooks as JavaScript functions that run inside Claude Code and can draw in its interface, list a module file under a `modules` key in the same `hooks/hooks.json`. A plugin with one is a mod. See [Create a mod](mods/create.md).
+
 #### When plugin hooks fire
 
 A plugin's hooks don't wait for one of the plugin's skills or commands to be used. Claude Code registers them when a session loads the plugin, and they fire on their events from then on. To limit when a hook runs, narrow its `matcher`.
@@ -941,7 +942,7 @@ The command runs in a shell, in the working directory the session started in.
 
 A monitor's command is limited in where it starts and what it can reference:
 
-* **Interactive sessions only**: plugin monitors start in an interactive session and never in non-interactive mode with the `-p` flag. They also start only where the [Monitor tool](../tools-reference.md#monitor-tool) is available
+* **Interactive sessions only**: plugin monitors start in an interactive session and never in non-interactive mode with the `-p` flag. They also don't start in sessions where the API provider or telemetry settings make the [Monitor tool](../tools-reference.md#monitor-tool) unavailable
 * **No user configuration**: `command` gets the [path variables](#path-variables-and-persistent-data) and `${ENV_VAR}` from the environment, but never `${user_config.*}`. A monitor that references one doesn't start, and monitor processes don't receive `CLAUDE_PLUGIN_OPTION_<KEY>` either
 * **Disabling mid-session**: if you disable a plugin mid-session, Claude Code doesn't stop monitors that are already running. They stop when the session ends
 

@@ -291,20 +291,20 @@ go get github.com/anthropics/anthropic-sdk-go
 **Java**
 
 ```kotlin Gradle
-implementation("com.anthropic:anthropic-java:2.66.0")
-implementation("com.anthropic:anthropic-java-aws:2.66.0")
+implementation("com.anthropic:anthropic-java:2.67.0")
+implementation("com.anthropic:anthropic-java-aws:2.67.0")
 ```
 
 ```xml Maven
 <dependency>
   <groupId>com.anthropic</groupId>
   <artifactId>anthropic-java</artifactId>
-  <version>2.66.0</version>
+  <version>2.67.0</version>
 </dependency>
 <dependency>
   <groupId>com.anthropic</groupId>
   <artifactId>anthropic-java-aws</artifactId>
-  <version>2.66.0</version>
+  <version>2.67.0</version>
 </dependency>
 ```
 
@@ -539,7 +539,7 @@ See the [comparison table](claude-platform-on-aws.md#claude-platform-on-aws-vs-a
 Session behavior on Claude Platform on AWS differs from first-party Claude Managed Agents in two ways:
 
 * **Autonomous-session reauthentication:** A session can run autonomously, without any [user events](../managed-agents/reference.md#event-types), for up to 6 hours. After 6 hours, the session requires reauthentication before it continues. To reauthenticate, send any user-role event to the session (see [Events and streaming](../managed-agents/events-and-streaming.md)). First-party Claude Managed Agents has no autonomous-session runtime limit.
-* **[Memory stores on self-hosted environments](../managed-agents/self-hosted-sandboxes.md#use-memory-stores):** A session that runs on a self-hosted environment cannot attach memory stores; a session that includes one is rejected at creation. Sessions on cloud environments attach memory stores as usual. On first-party Claude Managed Agents, sessions on both cloud and self-hosted environments can attach memory stores.
+* **[Memory stores on self-hosted environments](../managed-agents/self-hosted-sandboxes-memory.md):** A session that runs on a self-hosted environment cannot attach memory stores; a session that includes one is rejected at creation. Sessions on cloud environments attach memory stores as usual. On first-party Claude Managed Agents, sessions on both cloud and self-hosted environments can attach memory stores.
 
 ### Features not supported
 

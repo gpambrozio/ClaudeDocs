@@ -17,7 +17,7 @@ Don't combine `agent-memory-2026-07-22` with `managed-agents-2026-04-01` on a me
 
 ## Overview
 
-A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](tools.md) is required for these interactions; make sure to enable it during [agent creation](agent-setup.md). On [self-hosted sandboxes](self-hosted-sandboxes.md#use-memory-stores), that directory is not a live mount. Instead, the SDK's environment worker downloads each attached store into your sandbox before the agent's tools run and keeps that copy in sync with the store.
+A **memory store** is a workspace-scoped collection of text documents optimized for Claude. When you attach a store to a session, it is mounted as a directory inside the session's sandbox. The agent reads and writes it with the same file tools it uses for the rest of the filesystem, and a note describing each mount is automatically added to the system prompt, telling the agent where to look. The [agent toolset](tools.md) is required for these interactions; make sure to enable it during [agent creation](agent-setup.md). On [self-hosted sandboxes](self-hosted-sandboxes-memory.md), that directory is not a live mount. Instead, your environment worker downloads each attached store into your sandbox before the agent's tools run and keeps that copy in sync with the store.
 
 Each **memory** in a store is addressed by a path and can be read and edited directly through the API or the Claude Console, allowing for tuning, importing, and exporting.
 
@@ -202,7 +202,7 @@ Individual memories within the store are capped at 100 kB (\~25k tokens). A stor
 
 ## Attach a memory store to a session
 
-Memory stores are attached in the session's `resources[]` array when the [session is created](sessions.md#creating-a-session). Unlike file resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported. You attach memory stores the same way for sessions on cloud and [self-hosted environments](self-hosted-sandboxes.md#use-memory-stores); self-hosted environments accept only `memory_store` resources.
+Memory stores are attached in the session's `resources[]` array when the [session is created](sessions.md#creating-a-session). Unlike file resources, memory stores can only be attached at session creation time; adding or removing one from a running session is not supported. You attach memory stores the same way for sessions on cloud and [self-hosted environments](self-hosted-sandboxes-memory.md); self-hosted environments accept only `memory_store` resources.
 
 Optionally include `instructions` to provide session-specific guidance for how the agent should use this store. It is shown to the agent alongside the store's `name` and `description`, and is capped at 4,096 characters.
 
@@ -371,9 +371,9 @@ Each attached store is mounted inside the session's sandbox as a directory under
 
 `access` is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](memory.md#audit-memory-changes) attributed to the session.
 
-On [self-hosted sandboxes](self-hosted-sandboxes.md#use-memory-stores), each store's directory is a local copy that the SDK worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent's `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker's file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
+On [self-hosted sandboxes](self-hosted-sandboxes-memory.md), each store's directory is a local copy that the worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent's `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker's file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
 
-For a `read_only` store, the worker's `write` and `edit` tools refuse changes under that directory and the worker never uploads anything from it. To learn how the worker resolves write conflicts, and what the `bash` tool can still change in a read-only store's local copy, see [Read-only stores and conflicts](self-hosted-sandboxes.md#read-only-stores-and-conflicts).
+For a `read_only` store, the worker's `write` and `edit` tools refuse changes under that directory and the worker never uploads anything from it. To learn how the worker resolves write conflicts, and what the `bash` tool can still change in a read-only store's local copy, see [Read-only stores and conflicts](self-hosted-sandboxes-memory.md#read-only-stores-and-conflicts).
 
 The agent's reads and writes appear in the [event stream](events-and-streaming.md) as ordinary `agent.tool_use` and `agent.tool_result` events for whichever tool touched the mount.
 

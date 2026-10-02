@@ -29,7 +29,7 @@ curl -fsS https://api.anthropic.com/v1/environments \
   "name": "python-dev",
   "config": {
     "type": "cloud",
-    "networking": {"type": "unrestricted"}
+    "networking": {"type": "limited", "allow_package_managers": true}
   }
 }
 EOF
@@ -45,7 +45,8 @@ name: python-dev
 config:
   type: cloud
   networking:
-    type: unrestricted
+    type: limited
+    allow_package_managers: true
 ```
 
 [`ant apply`](../cli-sdks-libraries/cli/apply.md) creates the environment from `environment.yaml`, prints its ID, and records it in `claude-lock.json`. Commit `claude-lock.json` so the next `ant apply` updates this environment instead of trying to create it again.
@@ -55,7 +56,7 @@ environment = client.beta.environments.create(
     name="python-dev",
     config={
         "type": "cloud",
-        "networking": {"type": "unrestricted"},
+        "networking": {"type": "limited", "allow_package_managers": True},
     },
 )
 
@@ -67,7 +68,7 @@ const environment = await client.beta.environments.create({
   name: "python-dev",
   config: {
     type: "cloud",
-    networking: { type: "unrestricted" },
+    networking: { type: "limited", allow_package_managers: true },
   },
 });
 
@@ -80,7 +81,10 @@ var environment = await client.Beta.Environments.Create(new()
     Name = "python-dev",
     Config = new BetaCloudConfigParams
     {
-        Networking = new BetaUnrestrictedNetwork(),
+        Networking = new BetaLimitedNetworkParams
+        {
+            AllowPackageManagers = true,
+        },
     },
 });
 
@@ -93,7 +97,9 @@ environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentN
 	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
 		OfCloud: &anthropic.BetaCloudConfigParams{
 			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+				OfLimited: &anthropic.BetaLimitedNetworkParams{
+					AllowPackageManagers: anthropic.Bool(true),
+				},
 			},
 		},
 	},
@@ -109,7 +115,9 @@ fmt.Printf("Environment ID: %s\n", environment.ID)
 var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
     .name("python-dev")
     .config(BetaCloudConfigParams.builder()
-        .networking(BetaUnrestrictedNetwork.builder().build())
+        .networking(BetaLimitedNetworkParams.builder()
+            .allowPackageManagers(true)
+            .build())
         .build())
     .build());
 IO.println("Environment ID: " + environment.id());
@@ -118,7 +126,10 @@ IO.println("Environment ID: " + environment.id());
 ```php PHP
 $environment = $client->beta->environments->create(
     name: 'python-dev',
-    config: ['type' => 'cloud', 'networking' => ['type' => 'unrestricted']],
+    config: [
+        'type' => 'cloud',
+        'networking' => ['type' => 'limited', 'allow_package_managers' => true],
+    ],
 );
 echo "Environment ID: {$environment->id}\n";
 ```
@@ -128,14 +139,14 @@ environment = client.beta.environments.create(
   name: "python-dev",
   config: {
     type: "cloud",
-    networking: {type: "unrestricted"}
+    networking: {type: "limited", allow_package_managers: true}
   }
 )
 
 puts "Environment ID: #{environment.id}"
 ```
 
-Use a unique, descriptive `name` so you can tell environments apart.
+Use a unique, descriptive `name` so you can tell environments apart. This example uses `limited` [networking](environments.md#networking) with package managers allowed, so the sandbox can reach the package registries and code hosts. To let it reach other hosts, add them to `allowed_hosts`.
 
 ## Use the environment in a session
 
@@ -235,7 +246,7 @@ curl -fsS https://api.anthropic.com/v1/environments \
       "pip": ["pandas", "numpy", "scikit-learn"],
       "npm": ["express"]
     },
-    "networking": {"type": "unrestricted"}
+    "networking": {"type": "limited", "allow_package_managers": true}
   }
 }
 EOF
@@ -258,7 +269,8 @@ config:
     npm:
       - express
   networking:
-    type: unrestricted
+    type: limited
+    allow_package_managers: true
 ```
 
 ```python Python
@@ -270,7 +282,7 @@ environment = client.beta.environments.create(
             "pip": ["pandas", "numpy", "scikit-learn"],
             "npm": ["express"],
         },
-        "networking": {"type": "unrestricted"},
+        "networking": {"type": "limited", "allow_package_managers": True},
     },
 )
 ```
@@ -284,7 +296,7 @@ const environment = await client.beta.environments.create({
       pip: ["pandas", "numpy", "scikit-learn"],
       npm: ["express"]
     },
-    networking: { type: "unrestricted" }
+    networking: { type: "limited", allow_package_managers: true }
   }
 });
 ```
@@ -302,7 +314,10 @@ var environment = await client.Beta.Environments.Create(new()
             Pip = ["pandas", "numpy", "scikit-learn"],
             Npm = ["express"],
         },
-        Networking = new BetaUnrestrictedNetwork(),
+        Networking = new BetaLimitedNetworkParams
+        {
+            AllowPackageManagers = true,
+        },
     },
 });
 ```
@@ -317,7 +332,9 @@ environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentN
 				Npm: []string{"express"},
 			},
 			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+				OfLimited: &anthropic.BetaLimitedNetworkParams{
+					AllowPackageManagers: anthropic.Bool(true),
+				},
 			},
 		},
 	},
@@ -339,7 +356,9 @@ var environment = client.beta().environments().create(EnvironmentCreateParams.bu
             .pip(List.of("pandas", "numpy", "scikit-learn"))
             .npm(List.of("express"))
             .build())
-        .networking(BetaUnrestrictedNetwork.builder().build())
+        .networking(BetaLimitedNetworkParams.builder()
+            .allowPackageManagers(true)
+            .build())
         .build())
     .build());
 ```
@@ -353,7 +372,7 @@ $environment = $client->beta->environments->create(
             'pip' => ['pandas', 'numpy', 'scikit-learn'],
             'npm' => ['express'],
         ],
-        'networking' => ['type' => 'unrestricted'],
+        'networking' => ['type' => 'limited', 'allow_package_managers' => true],
     ],
 );
 ```
@@ -367,7 +386,7 @@ environment = client.beta.environments.create(
       pip: %w[pandas numpy scikit-learn],
       npm: %w[express]
     },
-    networking: {type: "unrestricted"}
+    networking: {type: "limited", allow_package_managers: true}
   }
 )
 ```
@@ -387,10 +406,12 @@ Supported package managers:
 
 The `networking` field controls the sandbox's outbound network access. It does not affect the `web_search` or `web_fetch` tools, which run on Anthropic's servers; to restrict the sites those tools can reach, set `allowed_domains` or `blocked_domains` on the tool's entry in the agent toolset. See [Restrict web search and web fetch domains](tools.md#restrict-web-search-and-web-fetch-domains).
 
-| Mode           | Description                                                                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `unrestricted` | Full outbound network access, except for a general safety blocklist. This is the default.                                                                    |
-| `limited`      | Restricts sandbox network access to the hosts in `allowed_hosts`. Set `allow_package_managers` and `allow_mcp_servers` to `true` to allow additional access. |
+| Mode           | Description                                                                                                                                                                                                                              |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limited`      | Restricts sandbox network access to the hosts in `allowed_hosts`. Set `allow_package_managers` and `allow_mcp_servers` to `true` to allow additional access. Use this mode unless the agent must reach sites you cannot list in advance. |
+| `unrestricted` | Full outbound network access, except for a general safety blocklist. Before you use it, read [Risks of unrestricted networking](environments.md#risks-of-unrestricted-networking).       |
+
+Set `networking` explicitly in API requests; a create request that omits it gets `unrestricted`. The Claude Console's form for creating an environment starts with **Limited** selected and nothing else allowed.
 
 The following example creates an environment with `limited` networking:
 
@@ -546,12 +567,14 @@ environment = client.beta.environments.create(
 )
 ```
 
-For production deployments, use `limited` networking with an explicit `allowed_hosts` list. Follow the principle of least privilege by granting only the minimum network access your agent requires, and regularly audit your allowed domains.
+Use `limited` networking with an explicit `allowed_hosts` list. Follow the principle of least privilege by granting only the minimum network access your agent requires, and regularly audit your allowed domains.
+
+With `limited` networking and no other fields set, no hosts are allowed. Files, memory stores, and GitHub repositories that you attach to the session stay available. When a request from the sandbox on port 80 or 443 is refused because its host is not allowed, the response is a 403 that names the blocked host.
 
 When using `limited` networking:
 
 * `allowed_hosts` specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`). Do not include a URL scheme, port, or path.
-* `allow_mcp_servers` allows outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
+* `allow_mcp_servers` allows outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`. While it is `false`, session creation fails with a 400 error if the agent declares an MCP server whose host is not in `allowed_hosts`. The same applies to [an agent it can delegate to](multiagent-orchestration.md). To fix it, add the host to `allowed_hosts` or set `allow_mcp_servers` to `true`.
 * `allow_package_managers` allows outbound access to a set of public package registries and code hosts beyond those listed in the `allowed_hosts` array. See [Package manager hosts](environments.md#package-manager-hosts) for the list. Defaults to `false`. Set it to `true` whenever the environment specifies `packages`; otherwise the request is rejected with a 400 error, even if the registry hosts are listed in `allowed_hosts`.
 
 #### Package manager hosts
@@ -572,6 +595,32 @@ When `allow_package_managers` is `true`, the sandbox can reach the following hos
 | Containers   | `registry-1.docker.io`, `auth.docker.io`, `production.cloudflare.docker.com`, `download.docker.com`, `ghcr.io`                                                                             |
 
 Network access is granted per host, not per operation. The sandbox can send any request to an allowed host, including uploads such as `git push` and package publishing, with any credential the command supplies. If the agent processes untrusted input (repository files, fetched web content, or third-party tool output), a successful prompt injection could use an allowed host to copy files out of the sandbox. To reduce this risk, set the `bash` tool's [permission policy](permission-policies.md) to `always_ask` or `auto`. If the environment does not specify `packages`, you can instead leave `allow_package_managers` set to `false` and list only the hosts your agent needs in `allowed_hosts`.
+
+#### Risks of unrestricted networking
+
+With `unrestricted` networking, code in the sandbox can send requests to any host on the internet, except for hosts on a general safety blocklist. Before you choose this mode, consider what the agent can do with that access:
+
+* **The agent can change things on external sites, not only read them:** The `bash` tool can send any request. The agent can post data, submit forms, call APIs, and run scripts that change data on external sites. Even a request that only fetches a URL can change data on some sites.
+* **Nothing pauses these requests by default:** The agent toolset's default [permission policy](permission-policies.md) is `always_allow`, so `bash` commands run without approval.
+* **Anything in the sandbox can leave it:** This includes files, tool outputs, and any credentials or secrets you put in the sandbox.
+* **Fetched content can steer the agent:** Web pages, API responses, and other content the agent reads can contain instructions (prompt injection) that change what it does next.
+* **The agent acts on your behalf:** Its actions can violate a site's terms of service, or create accounts and records there.
+* **Model behavior is not a security control:** The agent can act on external sites in ways you did not ask for, including retrying in a different way after a site blocks a request. Use network settings and permission policies to limit what it can do.
+* **The safety blocklist is not an allowlist:** It does not limit which other sites the agent reaches, or what the agent does on them.
+
+To reduce these risks, use `limited` networking with an explicit list of hosts. The following `networking` value allows `api.example.com`, plus the [package manager hosts](environments.md#package-manager-hosts) for an agent that installs packages:
+
+```json
+{
+  "type": "limited",
+  "allowed_hosts": ["api.example.com"],
+  "allow_package_managers": true
+}
+```
+
+An agent that only uses the `web_search` and `web_fetch` tools does not need `unrestricted` networking if you can list the sites it needs. [Networking](environments.md#networking) says when `allowed_hosts` applies to those tools. Where it does, list those sites in `allowed_hosts`. Listing them in `web_search`'s `allowed_domains` too makes it search those sites. A host that you add to `allowed_hosts` is also open to the sandbox. To restrict the tools further, see [Restrict web search and web fetch domains](tools.md#restrict-web-search-and-web-fetch-domains).
+
+Use `unrestricted` only when the agent must reach sites you cannot list in advance. In that case, keep secrets and sensitive files out of the sandbox, and give the agent only the credentials the task needs. Consider setting the `bash` tool's permission policy to `always_ask` or `auto`, and [watch the session's events](events-and-streaming.md).
 
 ## Environment lifecycle
 

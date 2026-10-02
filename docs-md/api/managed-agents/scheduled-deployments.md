@@ -20,7 +20,7 @@ For the launch context and examples of what teams run on schedules, see [schedul
 
 When creating a deployment, you pass the [session configurations](sessions.md) required for execution, in addition to a `schedule`.
 
-* Deployments require [agent configuration](agent-setup.md) and [environment configuration](environments.md), and optionally accept [files](files.md), [GitHub](github.md), [memory stores](memory.md), and [vaults](vaults.md). A deployment that targets a [self-hosted environment](self-hosted-sandboxes.md#use-memory-stores) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
+* Deployments require [agent configuration](agent-setup.md) and [environment configuration](environments.md), and optionally accept [files](files.md), [GitHub](github.md), [memory stores](memory.md), and [vaults](vaults.md). A deployment that targets a [self-hosted environment](self-hosted-sandboxes-memory.md) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
 * Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work. In a deployment file for `ant apply`, the text below the frontmatter becomes that `user.message`.
 * In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 

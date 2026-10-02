@@ -46,7 +46,7 @@ If you're an interactive learner, you can start with the interactive tutorials i
 
 **GitHub prompting tutorial**
 
-An example-filled tutorial that covers the prompt engineering concepts found in the docs.
+An example-filled tutorial on prompt engineering fundamentals. It was written for Claude 3 models, so follow Prompting best practices where the two differ.
 
 **Google Sheets prompting tutorial**
 

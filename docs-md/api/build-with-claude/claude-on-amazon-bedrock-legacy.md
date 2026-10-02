@@ -53,20 +53,20 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 **Java**
 
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java:2.66.0")
-implementation("com.anthropic:anthropic-java-bedrock:2.66.0")
+implementation("com.anthropic:anthropic-java:2.67.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.67.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.66.0</version>
+    <version>2.67.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.66.0</version>
+    <version>2.67.0</version>
 </dependency>
 ```
 
@@ -709,7 +709,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * [Thinking](thinking.md)
 * [Tool use](../agents-and-tools/tool-use/overview.md), including the [Bash tool](../agents-and-tools/tool-use/bash-tool.md), [Computer use tool](../agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](../agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](../agents-and-tools/tool-use/text-editor-tool.md)
 * [Citations](citations.md)
-* [Structured outputs](structured-outputs.md)
+* [Structured outputs](structured-outputs.md), for the models in the Amazon Bedrock note under its [Compatibility](structured-outputs.md#compatibility) section
 
 ### Features not supported
 

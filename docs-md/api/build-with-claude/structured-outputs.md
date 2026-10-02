@@ -31,7 +31,7 @@ featureMetadata:
     Claude Platform on AWS: ga
     Amazon Bedrock:
       availability: ga
-      note: On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
+      note: On Amazon Bedrock, structured outputs are available on the legacy [Amazon Bedrock (Opus 4.6 and earlier)](claude-on-amazon-bedrock-legacy.md) integration for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5, and not on [Claude in Amazon Bedrock](claude-in-amazon-bedrock.md).
     Google Cloud: ga
     Microsoft Foundry: ga
 ---
@@ -2686,6 +2686,8 @@ Claude maintains its safety and helpfulness properties even when using structure
 * You'll receive a 200 status code
 * You'll be billed for the tokens generated
 * The output may not match your schema because the refusal message takes precedence over schema constraints
+
+A property that asks for the model's thinking or step-by-step reasoning may lead to a `reasoning_extraction` refusal. Ask for a short explanation instead. See [Keep reasoning in thinking blocks](refusals-and-fallback.md#keep-reasoning-in-thinking-blocks).
 
 **Token limit reached** (`stop_reason: "max_tokens"`)
 

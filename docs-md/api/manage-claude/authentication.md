@@ -129,7 +129,7 @@ If your API key isn't scoped to a workspace, you must specify the workspace ID i
 
 The [Admin API](admin-api.md) accepts a personal key or service account key only if the key isn't scoped to a specific workspace.
 
-You can find a workspace's ID in the **ID** column of [Settings → Workspaces](https://platform.claude.com/settings/workspaces) in the Claude Console, or by calling the [List Workspaces](../api/beta/organization/workspaces/list.md) endpoint. List Workspaces omits the Default Workspace; its ID is in the `anthropic-workspace-id` [response header](workspaces.md#identify-the-workspace-behind-an-api-response) of any request that runs there.
+You can find a workspace's ID in the **ID** column of [Settings → Workspaces](https://platform.claude.com/settings/workspaces) in the Claude Console, or by calling the [List Workspaces](../api/beta/organization/workspaces/list.md) endpoint. List Workspaces includes the Default Workspace only when you pass `include_default=true`; its ID is also in the `anthropic-workspace-id` [response header](workspaces.md#identify-the-workspace-behind-an-api-response) of any request that runs there.
 
 ```bash cURL
 # Required on every request for a multi-workspace key.

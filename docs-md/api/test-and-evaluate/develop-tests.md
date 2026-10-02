@@ -2807,7 +2807,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 * **Have detailed, clear rubrics:** "The answer should always mention 'Acme Inc.' in the first sentence. If it does not, the answer is automatically graded as 'incorrect.'"
   A given use case, or even a specific success criteria for that use case, might require several rubrics for holistic evaluation.
 * **Empirical or specific:** For example, instruct the LLM to output only 'correct' or 'incorrect', or to judge from a scale of 1–5. Purely qualitative evaluations are hard to assess quickly and at scale.
-* **Encourage reasoning:** Ask the LLM to reason first before producing an evaluation score, and then discard the reasoning. This increases evaluation performance, particularly for tasks requiring complex judgment.
+* **Encourage reasoning:** Use a grader model with [thinking](../build-with-claude/thinking.md) on, so that it reasons before it produces an evaluation score. This increases evaluation performance, particularly for tasks requiring complex judgment.
 
 **Example: LLM-based grading**
 
@@ -2818,7 +2818,7 @@ def build_grader_prompt(answer, rubric):
     return f"""Grade this answer based on the rubric:
     <rubric>{rubric}</rubric>
     <answer>{answer}</answer>
-    Think through your reasoning in <thinking> tags, then output 'correct' or 'incorrect' in <result> tags."""
+    Output 'correct' or 'incorrect' in <result> tags."""
 
 def grade_completion(output, golden_answer):
     grader_message = client.messages.create(
@@ -2873,7 +2873,7 @@ function buildGraderPrompt(answer: string, rubric: string): string {
   return `Grade this answer based on the rubric:
 <rubric>${rubric}</rubric>
 <answer>${answer}</answer>
-Think through your reasoning in <thinking> tags, then output 'correct' or 'incorrect' in <result> tags.`;
+Output 'correct' or 'incorrect' in <result> tags.`;
 }
 
 async function gradeCompletion(output: string, goldenAnswer: string): Promise<string> {
@@ -2929,7 +2929,7 @@ string BuildGraderPrompt(string answer, string rubric)
         Grade this answer based on the rubric:
         <rubric>{rubric}</rubric>
         <answer>{answer}</answer>
-        Think through your reasoning in <thinking> tags, then output 'correct' or 'incorrect' in <result> tags.
+        Output 'correct' or 'incorrect' in <result> tags.
         """;
 }
 
@@ -3010,7 +3010,7 @@ func buildGraderPrompt(answer, rubric string) string {
 	return fmt.Sprintf(`Grade this answer based on the rubric:
 <rubric>%s</rubric>
 <answer>%s</answer>
-Think through your reasoning in <thinking> tags, then output 'correct' or 'incorrect' in <result> tags.`, rubric, answer)
+Output 'correct' or 'incorrect' in <result> tags.`, rubric, answer)
 }
 
 func gradeCompletion(output, goldenAnswer string) string {
@@ -3091,7 +3091,7 @@ String buildGraderPrompt(String answer, String rubric) {
         Grade this answer based on the rubric:
         <rubric>%s</rubric>
         <answer>%s</answer>
-        Think through your reasoning in <thinking> tags, then output 'correct' or 'incorrect' in <result> tags.""".formatted(rubric, answer);
+        Output 'correct' or 'incorrect' in <result> tags.""".formatted(rubric, answer);
 }
 
 String gradeCompletion(String output, String goldenAnswer) {
@@ -3134,7 +3134,7 @@ function buildGraderPrompt(string $answer, string $rubric): string
     Grade this answer based on the rubric:
     <rubric>{$rubric}</rubric>
     <answer>{$answer}</answer>
-    Think through your reasoning in <thinking> tags, then output 'correct' or 'incorrect' in <result> tags.
+    Output 'correct' or 'incorrect' in <result> tags.
     PROMPT;
 }
 
@@ -3215,7 +3215,7 @@ def build_grader_prompt(answer, rubric)
     Grade this answer based on the rubric:
     <rubric>#{rubric}</rubric>
     <answer>#{answer}</answer>
-    Think through your reasoning in <thinking> tags, then output 'correct' or 'incorrect' in <result> tags.
+    Output 'correct' or 'incorrect' in <result> tags.
   PROMPT
 end
 

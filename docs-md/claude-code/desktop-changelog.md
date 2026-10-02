@@ -80,17 +80,19 @@ Earlier versions of the Code tab labeled these modes Ask permissions, Auto accep
 
 The `dontAsk` permission mode is available only in the [CLI](permission-modes.md#allow-only-pre-approved-tools-with-dontask-mode).
 
-<span id="auto-mode-availability" />
-
-Auto mode is available to all users on the Anthropic API and requires Claude Opus 4.6 or later, Sonnet 4.6 or later, or a [Fable model](model-config.md#work-with-fable). Organization administrators can turn auto mode off with the `disableAutoMode` key in [managed settings](#managed-settings).
-
-In Enterprise deployments that route Desktop to Google Cloud's Agent Platform, auto mode is also available by default; see [Auto mode on Bedrock, Agent Platform, or Foundry](permission-modes.md#enable-auto-mode-on-bedrock-agent-platform-or-foundry) for the supported models.
-
 Start complex tasks in Plan so Claude maps out an approach before making changes. Once you approve the plan, switch to Accept edits or Manual to execute it. See [explore first, then plan, then code](best-practices.md#explore-first-then-plan-then-code) for more on this workflow.
 
 Cloud sessions support Accept edits, Plan, and Auto. Accept edits corresponds to `default` mode: cloud sessions pre-approve file edits, so the selector shows Accept edits instead of Manual. Bypass permissions isn't available in cloud sessions, including sessions in a [self-hosted environment](self-hosted-environments.md).
 
 Enterprise admins can restrict which permission modes are available. See [enterprise configuration](#enterprise-configuration) for details.
+
+<h4 id="auto-mode-availability">
+  Auto mode availability
+</h4>
+
+Auto mode is available to all users on the Anthropic API and requires Claude Opus 4.6 or later, Sonnet 4.6 or later, or a [Fable model](model-config.md#work-with-fable). Organization administrators can turn auto mode off with the `disableAutoMode` key in [managed settings](#managed-settings).
+
+In Enterprise deployments that route Desktop to Google Cloud's Agent Platform, auto mode is also available by default; see [Auto mode on Bedrock, Agent Platform, or Foundry](permission-modes.md#enable-auto-mode-on-bedrock-agent-platform-or-foundry) for the supported models.
 
 ### Preview your app
 
@@ -635,7 +637,7 @@ Your administrator can turn off local sessions with the [`disableDesktopLocalSes
 
 Cloud sessions continue in the background even if you close the app. Usage counts toward your [subscription plan limits](costs.md) with no separate compute charges.
 
-You can create custom cloud environments with different network access levels and environment variables. When you start a cloud session, open the environment dropdown in the prompt box to manage them:
+You can create custom cloud environments with different network access levels and environment variables. To manage them, open the environment dropdown in the prompt box and select **Cloud**:
 
 * **Add an environment**: select **Add cloud environment**
 * **Edit or archive one of your own environments**: hover over it and click the gear icon

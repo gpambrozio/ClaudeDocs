@@ -56,7 +56,7 @@ After drafting, review each claim in your press release. For each claim, find a 
 
 ## Advanced techniques
 
-* **Chain-of-thought verification**: Ask Claude to explain its reasoning step-by-step before giving a final answer. This can reveal faulty logic or assumptions.
+* **Chain-of-thought verification**: Use [thinking](../../build-with-claude/thinking.md) with `display: "summarized"`, and review the summarized reasoning in the `thinking` blocks when an answer looks wrong. This can reveal faulty logic or assumptions.
 
 * **Best-of-N verification**: Run Claude through the same prompt multiple times and compare the outputs. Inconsistencies across outputs could indicate hallucinations.
 
