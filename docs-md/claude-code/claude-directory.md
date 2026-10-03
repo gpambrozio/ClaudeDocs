@@ -161,7 +161,7 @@ config/secrets.json`,
           color: '#9B7BC4',
           oneLiner: 'Topic-scoped instructions, optionally gated by file paths',
           when: <>Rules without paths: load at session start. Rules with paths: load when a matching file enters context</>,
-          description: [<>Project instructions split into topic files that can load conditionally based on file paths. A rule without paths: frontmatter loads at session start like CLAUDE.md; a rule with paths: loads only when Claude reads a matching file.</>, <>Like CLAUDE.md, rules are guidance Claude reads, not configuration Claude Code enforces. For guaranteed behavior use hooks or permissions.</>],
+          description: [<>Project instructions split into topic files that can load conditionally based on file paths. A rule without paths: frontmatter loads at session start like CLAUDE.md; a rule with paths: loads only when Claude reads, writes, or edits a matching file.</>, <>Like CLAUDE.md, rules are guidance Claude reads, not configuration Claude Code enforces. For guaranteed behavior use hooks or permissions.</>],
           tips: [<>Use paths: frontmatter with globs to scope rules to directories or file types</>, <>Subdirectories work: .claude/rules/frontend/react.md is discovered automatically</>, 'When CLAUDE.md approaches 200 lines, start splitting into rules'],
           docsLink: '/en/memory#organize-rules-with-claude/rules/',
           children: [{
@@ -1356,7 +1356,7 @@ The scratchpad lives under Claude Code's temp directory rather than `~/.claude`.
 
 `<project>` is your working directory path with every character other than letters and digits replaced by `-`, such as `-Users-you-my-project`. If you set [`CLAUDE_CODE_TMPDIR`](env-vars.md), the tree moves under that directory instead. Hooks receive the current session's path as [`scratchpad_dir`](hooks.md#common-input-fields).
 
-Scratchpad files last as long as the session's transcript: the [retention sweep](#cleaned-up-automatically) deletes the directory when it deletes the transcript, and [`claude project purge`](#clear-local-data) doesn't touch the temp directory. Because the directory sits under the system temp location, your operating system can also clear it, such as on restart. To keep something Claude wrote there, ask Claude to move it into your project.
+Scratchpad files last as long as the session's transcript: the [retention sweep](#cleaned-up-automatically) deletes the directory when it deletes the transcript, and [`claude purge`](#clear-local-data) doesn't touch the temp directory. Because the directory sits under the system temp location, your operating system can also clear it, such as on restart. To keep something Claude wrote there, ask Claude to move it into your project.
 
 A session has a scratchpad only when all of these hold:
 
@@ -1397,7 +1397,7 @@ Transcripts and history are not encrypted at rest. OS file permissions are the o
 
 ### Clear local data
 
-Run `claude project purge` to delete the state Claude Code holds for one project. It deletes:
+Run `claude purge` to delete the state Claude Code holds for one project. It deletes:
 
 * Transcripts and auto memory under `projects/`
 * Per-session `tasks/`, `debug/`, and `file-history/` entries
@@ -1408,12 +1408,14 @@ Images you pasted or attached in the project's sessions and each session's [scra
 
 The command prints the full deletion plan and asks for confirmation before removing anything.
 
+Before v2.1.288, the command was `claude project purge`.
+
 The examples below use `~/work/my-repo` as a placeholder. Replace it with the path to your project. If no state matches the path, the command prints an error and exits with status 1.
 
 Preview the plan without deleting anything:
 
 ```bash
-claude project purge ~/work/my-repo --dry-run
+claude purge ~/work/my-repo --dry-run
 ```
 
 The plan lists each matching item and why it is included:
@@ -1436,7 +1438,7 @@ Dry run: 3 item(s) would be deleted.
 Delete with a single confirmation prompt:
 
 ```bash
-claude project purge ~/work/my-repo
+claude purge ~/work/my-repo
 ```
 
 The command prints the same plan, then asks `Delete 3 item(s) for /home/user/work/my-repo? This cannot be undone. [y/N]` and deletes only if you answer `y`.
@@ -1446,7 +1448,7 @@ Omit the path to pick a project from an interactive list.
 Skip the confirmation prompt for use in scripts:
 
 ```bash
-claude project purge ~/work/my-repo --yes
+claude purge ~/work/my-repo --yes
 ```
 
 Pass `--all` instead of a path to purge state for every project at once, which deletes `history.jsonl` outright rather than filtering it. Pass `-i` to step through the deletion plan one item at a time.
