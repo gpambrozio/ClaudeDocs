@@ -179,7 +179,7 @@ For a marketplace-installed plugin, a `displayName` on the [marketplace entry](p
 
 ### `version`
 
-A version string, not checked against semver. Setting it pins the plugin to that version until you change it; see [Versions and updates](plugins/loading.md#versions-and-updates). A plugin with a [`command` source](plugins/marketplace-reference.md), a plugin from a [marketplace hosted on claude.ai](plugins/install.md#add-from-claude-ai), and a plugin [loaded in place](plugins/loading.md#find-plugins-on-disk) from a marketplace added as a local directory aren't pinned by this field.
+A version string, not checked against semver. Setting it pins the plugin to that version until you change it; see [Versions and updates](plugins/loading.md#versions-and-updates). A plugin with a [`command` source](plugins/marketplace-reference.md), a plugin from a [marketplace hosted on claude.ai](plugins/install.md#add-from-claude-ai), and a plugin [loaded in place](plugins/loading.md#find-plugins-on-disk) from a marketplace added from a local path aren't pinned by this field.
 
 ### `metadata`
 
