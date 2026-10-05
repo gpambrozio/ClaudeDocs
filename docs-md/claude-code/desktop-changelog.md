@@ -196,7 +196,7 @@ Right-click any file path in the chat, diff viewer, or file pane to open a conte
 
 ### Switch view modes
 
-View modes control how much detail appears in the chat transcript. Switch modes from the **Transcript view** dropdown next to the send button, or press **Ctrl+O** on macOS or Windows to cycle through them. The Thinking mode appears in the dropdown only after Claude has produced thinking in the session you're viewing.
+View modes control how much detail appears in the chat transcript. To switch view modes, open the session menu from the caret beside the session title and select **Transcript view**, or press **Ctrl+O** on macOS or Windows to cycle through them. The Thinking mode appears in the menu only after Claude has produced thinking in the session you're viewing.
 
 | Mode | What it shows |
 | - | - |
@@ -705,10 +705,12 @@ Organizations on Team or Enterprise plans can manage desktop app behavior throug
 
 These settings are configured through the [admin settings console](https://claude.ai/admin-settings/claude-code):
 
-* **Code in the desktop**: control whether users in your organization can access Claude Code in the desktop app
-* **Code in the web**: enable or disable [cloud sessions](claude-code-on-the-web.md) for your organization
+* **Desktop**: control whether users in your organization can access Claude Code in the desktop app
+* **Cloud sessions**: enable or disable [cloud sessions](claude-code-on-the-web.md) for your organization
 * **Remote Control**: enable or disable [Remote Control](remote-control.md) for your organization
 * **Disable Bypass permissions mode**: prevent users in your organization from enabling bypass permissions mode
+
+In Enterprise organizations that have HIPAA enabled, the **Desktop** toggle is off by default and an [Owner](server-managed-settings.md#access-control) can turn it on. Applying the [HIPAA configuration](hipaa-setup.md) turns it off, even if it was on, so an Owner has to turn it on afterward. **Cloud sessions** and **Remote Control** are also off by default, and an Owner can't turn them on once the organization has the HIPAA configuration applied.
 
 The OpenTelemetry form for Cowork under **Monitoring** in the admin console's [Data and privacy settings](https://claude.ai/admin-settings/data-privacy-controls) applies to Cowork sessions only. In a Cowork session on this machine, the desktop app passes that collector to Claude Code as `OTEL_*` environment variables, so the form takes effect even though Claude Code in that session [never fetches admin-console settings](#managed-settings).
 
@@ -859,7 +861,7 @@ This table shows the desktop app equivalent for common CLI flags. Flags not list
 | `--dangerously-skip-permissions` | Bypass permissions mode. On Pro and Max plans, enable it in Settings → Claude Code → "Allow bypass permissions mode"; on Team and Enterprise plans, organization policy controls it |
 | `--add-dir` | Add multiple repos with the **+** button in cloud sessions |
 | `--allowedTools`, `--disallowedTools` | No per-session equivalent. Permission rules in [settings files](settings.md) still apply. |
-| `--verbose` | [Verbose view mode](#switch-view-modes) in the Transcript view dropdown |
+| `--verbose` | [Verbose view mode](#switch-view-modes) |
 | `--print`, `--output-format` | Not available. Desktop is interactive only. |
 | `ANTHROPIC_MODEL` env var | Model dropdown next to the send button |
 | `MAX_THINKING_TOKENS` env var | Set in the local environment editor. See [environment configuration](#environment-configuration). |

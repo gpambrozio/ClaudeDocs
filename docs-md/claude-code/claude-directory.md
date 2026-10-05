@@ -425,7 +425,7 @@ Every finding must include a concrete fix.`
         badge: 'local',
         oneLiner: 'App state and UI preferences',
         when: <>Read at session start for your preferences and MCP servers. Claude Code writes back to it when you change settings in /config or approve trust prompts</>,
-        description: <>Holds state that does not belong in settings.json: theme, OAuth session, per-project trust decisions, your personal MCP servers, and UI toggles. Mostly managed through /config rather than editing directly.</>,
+        description: <>Holds state that does not belong in settings.json: OAuth session, per-project trust decisions, your personal MCP servers, and UI toggles. Mostly managed through /config rather than editing directly.</>,
         tips: [<>IDE toggles like autoConnectIde and externalEditorContext live here, not in settings.json</>, <>The projects key tracks per-project state like trust-dialog acceptance and last-session metrics. Permission rules you approve in-session go to .claude/settings.local.json instead</>, <>MCP servers here are yours only: user scope applies across all projects, local scope is per-project but not committed. Team-shared servers go in .mcp.json at the project root instead</>],
         example: `{
   "autoConnectIde": true,
@@ -493,7 +493,7 @@ Every finding must include a concrete fix.`
           oneLiner: 'Custom keyboard shortcuts',
           when: 'Read at session start and hot-reloaded when you edit the file',
           description: <>Rebind keyboard shortcuts in the interactive CLI. Run /keybindings to create or open this file with a schema reference. Ctrl+C, Ctrl+D, Ctrl+M, and Caps Lock are reserved and cannot be rebound.</>,
-          exampleIntro: <>This example binds Ctrl+E to open your external editor and unbinds Ctrl+U by setting it to null. The context field scopes bindings to a specific part of the CLI, here the main chat input.</>,
+          exampleIntro: <>This example binds Ctrl+E to open your external editor and unbinds Ctrl+S by setting it to null. The context field scopes bindings to a specific part of the CLI, here the main chat input.</>,
           example: `{
   "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
   "$docs": "https://code.claude.com/docs/en/keybindings",
@@ -502,7 +502,7 @@ Every finding must include a concrete fix.`
       "context": "Chat",
       "bindings": {
         "ctrl+e": "chat:externalEditor",
-        "ctrl+u": null
+        "ctrl+s": null
       }
     }
   ]
@@ -1337,7 +1337,12 @@ Session files in `sessions/`, auto memory, and Claude Desktop and Cowork transcr
 
 * **`sessions/`**: holds one small file per running session, used to detect concurrent sessions and crashes. It isn't part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
 * **Auto memory**: the sweep doesn't delete the memory files in a project's [auto memory](memory.md#auto-memory) directory, `projects/<project>/memory/`. Claude Code removes that directory only if it has been empty for the whole retention period. Before v2.1.228, the sweep treated folders inside the memory directory as session data and could delete old files beneath it.
-* **Claude Desktop and Cowork transcripts**: Claude Code keeps the transcript of a session you started or most recently continued in Claude Desktop or Cowork at any age. To give these transcripts an age limit, set [`desktopSessionCleanupPeriodDays`](settings-reference.md#desktopsessioncleanupperioddays). When [managed settings](managed-settings.md) set `cleanupPeriodDays`, Claude Code deletes these transcripts after that period instead. Requires Claude Code v2.1.248 or later; earlier versions delete them after `cleanupPeriodDays`.
+* **Claude Desktop and Cowork transcripts**: Claude Code keeps the transcript of a session you started or most recently continued in Claude Desktop or Cowork at any age. To give these transcripts an age limit, set [`desktopSessionCleanupPeriodDays`](settings-reference.md#desktopsessioncleanupperioddays). Requires Claude Code v2.1.248 or later; earlier versions delete them after `cleanupPeriodDays`.
+
+  Claude Code deletes these transcripts after `cleanupPeriodDays` instead in either of these cases:
+
+  * [Managed settings](managed-settings.md) set `cleanupPeriodDays`
+  * Your organization has the HIPAA configuration applied and Claude Code connects directly to the Claude API
 
 Claude Code skips the age-based sweep in these cases:
 
@@ -1366,11 +1371,11 @@ A session has a scratchpad only when all of these hold:
 
 ### Kept until you delete them
 
-The retention cleanup sweep doesn't remove the paths below. Claude Code keeps them until you delete them, apart from the two caches it deletes when you log out.
+Apart from the rows that say otherwise, the retention cleanup sweep doesn't remove the paths below, and Claude Code keeps them until you delete them.
 
 | Path under `~/.claude/` | Contents |
 | - | - |
-| `history.jsonl` | Every prompt you've typed, with timestamp and project path. Used for up-arrow recall, `Ctrl+R` history search, and `!` shell-command completion. |
+| `history.jsonl` | Every prompt you've typed, with timestamp and project path. Used for up-arrow recall, `Ctrl+R` history search, and `!` shell-command completion. In an organization with the HIPAA configuration applied, each sweep removes the entries older than `cleanupPeriodDays` when Claude Code connects directly to the Claude API. |
 | `stats-cache.json` | Aggregated token and cost counts shown by `/usage` |
 | `remote-settings.json` | Cached copy of [server-managed settings](server-managed-settings.md) for your organization, or `{}` when your organization has configured none. Only present when the session [fetches them](server-managed-settings.md#platform-availability). Claude Code checks for updates at startup and hourly during a session. Claude Code deletes it when you log out. |
 | `cache/changelog.md` | Cached copy of the Claude Code changelog, shown by `/release-notes`. Refreshed in the background. |

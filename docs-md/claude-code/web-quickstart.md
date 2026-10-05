@@ -49,7 +49,7 @@ See the [terminal quickstart](quickstart.md), [Desktop app](desktop.md), or [Rem
 
 Connecting GitHub is a one-time step. If you already use the GitHub CLI, you can [do this from your terminal](#connect-from-your-terminal) instead of the browser.
 
-On Team and Enterprise plans, the **Sign in with GitHub** step works only after an [Owner](server-managed-settings.md#access-control) of your Claude organization turns on the GitHub connector at [**Admin settings > Connectors**](https://claude.ai/admin-settings/connectors). Until then, that step shows "GitHub access is required for Claude Code on the web" instead of a sign-in button. After the connector is on, reload [claude.ai/code](https://claude.ai/code) and start again from the first step. A second toggle, [Quick web setup](claude-code-on-the-web.md#quick-web-setup-for-team-and-enterprise) at [**Admin settings > Claude Code**](https://claude.ai/admin-settings/claude-code), is optional: with it on, `/web-setup` works and onboarding creates the environment for members.
+On Team and Enterprise plans, the **Sign in with GitHub** step works only after an [Owner](server-managed-settings.md#access-control) of your Claude organization turns on the GitHub connector at [**Organization settings > Connectors**](https://claude.ai/admin-settings/connectors). Until then, that step shows "GitHub access is required for Claude Code cloud sessions" instead of a sign-in button. After the connector is on, reload [claude.ai/code](https://claude.ai/code) and start again from the first step. A second toggle, [Quick setup](claude-code-on-the-web.md#quick-setup-for-team-and-enterprise) at [**Organization settings > Claude Code**](https://claude.ai/admin-settings/claude-code), is optional: with it on, `/web-setup` works and onboarding creates the environment for members.
 
 **Visit claude.ai/code**
 
@@ -70,7 +70,7 @@ If onboarding prompts you to install the Claude GitHub App at this point and you
 A [cloud environment](cloud-environments.md) is the saved configuration that controls what network access Claude has during sessions and what runs when a session starts. What happens after you connect GitHub depends on your plan:
 
 * **Pro and Max**: onboarding creates an environment named **Default** for you.
-* **Team and Enterprise**: onboarding shows a **Create your first cloud environment** form. Leave the prefilled name and network access unchanged and click **Create & finish** to create the **Default** environment. If an Owner has turned on [Quick web setup](claude-code-on-the-web.md#quick-web-setup-for-team-and-enterprise), onboarding creates **Default** for you instead.
+* **Team and Enterprise**: onboarding shows a **Create your first cloud environment** form. Leave the prefilled name and network access unchanged and click **Create & finish** to create the **Default** environment. If an Owner has turned on [Quick setup](claude-code-on-the-web.md#quick-setup-for-team-and-enterprise), onboarding creates **Default** for you instead.
 
 **Default** uses [`Trusted` network access](cloud-environments.md#access-levels): sessions reach [common package registries](cloud-environments.md#default-allowed-domains) and other allowlisted domains, and nothing else through the session's network. See [Installed tools](cloud-environments.md#installed-tools) for what's available without any configuration.
 
@@ -78,13 +78,13 @@ For a first project, the **Default** environment works as is. To change its netw
 
 ### Connect from your terminal
 
-If you already use the GitHub CLI (`gh`), you can connect GitHub for cloud sessions from your terminal. This requires the [Claude Code CLI](quickstart.md). On Team and Enterprise plans, `/web-setup` is available only after an Owner turns on [Quick web setup](claude-code-on-the-web.md#quick-web-setup-for-team-and-enterprise).
+If you already use the GitHub CLI (`gh`), you can connect GitHub for cloud sessions from your terminal. This requires the [Claude Code CLI](quickstart.md). On Team and Enterprise plans, `/web-setup` is available only after an Owner turns on [Quick setup](claude-code-on-the-web.md#quick-setup-for-team-and-enterprise).
 
 When you run `/web-setup`, Claude Code reads the token that `gh auth token` prints, asks you to confirm, and sends the token to Anthropic. Anthropic stores it encrypted with your claude.ai account, and your cloud sessions use it for GitHub access until you [remove it](#remove-the-web-setup-token). A cloud session you start yourself can then access any repository that token can access, with no Claude GitHub App installation. Threads in a [project](claude-projects.md#set-up-github-access) still need the Claude GitHub App.
 
 If you already connected GitHub in the browser, `/web-setup` warns you that continuing replaces that connection for your cloud sessions.
 
-Organizations with [Zero Data Retention](zero-data-retention.md) enabled cannot use `/web-setup` or other cloud session features. If the GitHub CLI isn't installed or isn't authenticated, Claude Code opens the browser onboarding flow instead.
+Organizations with [Zero Data Retention](zero-data-retention.md) enabled, or with the [HIPAA configuration](hipaa-setup.md) applied, cannot use `/web-setup` or other cloud session features. If the GitHub CLI isn't installed or isn't authenticated, Claude Code opens the browser onboarding flow instead.
 
 **Authenticate with the GitHub CLI**
 
@@ -215,12 +215,12 @@ If `/web-setup` says your GitHub CLI token doesn't have the `workflow` scope, yo
 
 If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn't met. The cause is usually that you're authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account.
 
-On Team and Enterprise plans, the command is hidden by default: the [Quick web setup toggle](claude-code-on-the-web.md#quick-web-setup-for-team-and-enterprise) is off until an Owner turns it on. While it's off, [connect GitHub from the browser](#connect-github) instead.
+On Team and Enterprise plans, the command is hidden by default: the [Quick setup toggle](claude-code-on-the-web.md#quick-setup-for-team-and-enterprise) is off until an Owner turns it on. While it's off, [connect GitHub from the browser](#connect-github) instead.
 
 The command is also hidden in two other cases:
 
 * An administrator has disabled cloud sessions for your organization. In this case, submitting `/web-setup` returns [`Cloud sessions are disabled by your organization's policy`](errors.md#cloud-sessions-are-disabled-by-your-organizations-policy). Before v2.1.268, this case also returned `Unknown command: /web-setup`.
-* Your Enterprise organization has [Zero Data Retention](zero-data-retention.md) enabled, which makes cloud sessions unavailable.
+* Your Enterprise organization has [Zero Data Retention](zero-data-retention.md) enabled, or has the [HIPAA configuration](hipaa-setup.md) applied. Either one makes cloud sessions unavailable.
 
 ### "Could not create a cloud environment" or "No cloud environment available" when using `--cloud`
 

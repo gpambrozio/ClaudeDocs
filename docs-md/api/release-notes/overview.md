@@ -12,6 +12,10 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### October 1, 2026
+
+* We've added a `line` field to the [Models API](../api/models/list.md). `GET /v1/models` and `GET /v1/models/{model_id}` now return the model line each model belongs to. Claude Opus 4.5 and Claude Opus 4.6 both report `opus`, for example. Use `line` to group models without parsing their IDs. `line` is `null` for a model that belongs to no line. See [Using the Models API](../models/overview.md#using-the-models-api).
+
 ### September 30, 2026
 
 * We announced the deprecation of the Claude Sonnet 4.5 model (`claude-sonnet-4-5-20250929`), with retirement on the Claude API scheduled for November 30, 2026. We recommend migrating to [Claude Sonnet 5.5](../models/sonnet-5-5/migration-guide.md#migrating-from-sonnet-45). Read more in [Model deprecations](../about-claude/model-deprecations.md).

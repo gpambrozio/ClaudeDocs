@@ -265,7 +265,9 @@ To make this permanent so you don't have to set it every time, see [configure Gi
 
 **'claude is not recognized'**
 
-This error means the install directory isn't in your PATH. Run these commands in PowerShell to add it:
+If the error started right after Claude Code updated, see [restore `claude.exe` from its backup](troubleshoot-install.md#claude-exe-missing-after-an-update-on-windows) first.
+
+If the install directory isn't in your PATH, add it by running these commands in PowerShell:
 
 ```powershell
 $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')

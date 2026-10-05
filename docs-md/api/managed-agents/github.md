@@ -237,7 +237,7 @@ agent = client.beta.agents.create(
 )
 ```
 
-Then create a session that mounts the GitHub repository. A `limited` [environment](environments.md#networking) blocks an agent's MCP servers unless its networking sets `allow_mcp_servers: true` or lists each server's host in `allowed_hosts`. With neither set, session creation fails with a 400 error.
+Then create a session that mounts the GitHub repository. With a `limited` [environment](environments.md#networking), session creation fails with a 400 error when the agent declares an MCP server whose host is not in `allowed_hosts`. Setting `allow_mcp_servers: true` in the environment's networking turns this check off.
 
 ```bash cURL
 session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \

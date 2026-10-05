@@ -721,7 +721,7 @@ Only [`SessionStart`](#sessionstart) hooks can receive a `model` field, and Clau
 
 There is no `$CLAUDE_MODEL` environment variable. The hook can read `$ANTHROPIC_MODEL` if you set it in your shell, but that value doesn't change when you switch models with `/model` during a session.
 
-A hook process inherits the parent environment, apart from the `OTEL_*` exporter variables that Claude Code [removes from every subprocess it spawns](monitoring-usage.md#administrator-configuration) and, when [`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB`](env-vars.md#variables) is set to `1`, the variables it strips.
+A hook process inherits the parent environment, apart from the `OTEL_*` exporter variables that Claude Code [removes from every subprocess it spawns](monitoring-usage.md#administrator-configuration) and, when [`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB`](env-vars.md#variables) is set to `1`, the variables it strips. In a session that [gets the HIPAA configuration](hipaa-setup.md#check-how-developers-sign-in-and-connect), Claude Code also [removes Anthropic credentials](hipaa-setup.md#anthropic-credentials-in-commands-hooks-and-mcp-servers) from the hook's environment.
 
 For example, a `PreToolUse` hook for a Bash command receives this on stdin:
 
@@ -2516,7 +2516,9 @@ The [`/goal`](goal.md) command is a built-in shortcut for a session-scoped promp
 
 #### Stop input
 
-In addition to the [common input fields](#common-input-fields), Stop hooks receive `stop_hook_active`, `last_assistant_message`, `background_tasks`, and `session_crons`. The `stop_hook_active` field is `true` when Claude Code is already continuing as a result of a stop hook. Check this value or process the transcript to avoid blocking on a condition that will never resolve. Claude Code applies an 8-consecutive-continuation cap: after stop hooks have continued the turn eight times in a row, Claude Code overrides the next block and ends the turn. To raise the cap, set [`CLAUDE_CODE_STOP_HOOK_BLOCK_CAP`](env-vars.md).
+In addition to the [common input fields](#common-input-fields), Stop hooks receive `stop_hook_active`, `last_assistant_message`, `background_tasks`, and `session_crons`. The `stop_hook_active` field is `true` when Claude Code is already continuing as a result of a stop hook. Check this value or process the transcript to avoid blocking on a condition that will never resolve.
+
+Claude Code applies an 8-consecutive-continuation cap: after stop hooks have continued the turn eight times in a row, Claude Code overrides the next block and ends the turn. The count of consecutive continuations resets each time Claude calls a tool. To raise the cap, set [`CLAUDE_CODE_STOP_HOOK_BLOCK_CAP`](env-vars.md).
 
 The `last_assistant_message` field contains the text content of Claude's final response, so hooks can access it without parsing the transcript file. For hooks that act on the just-completed turn, such as read-aloud or notification hooks, use this field rather than reading `transcript_path`: the transcript file isn't guaranteed to include the final message at Stop time on all versions.
 

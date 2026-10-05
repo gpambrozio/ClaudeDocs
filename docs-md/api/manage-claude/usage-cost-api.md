@@ -59,6 +59,10 @@ FinOps platform for cloud and AI cost management
 
 Advanced querying and visualization through OpenTelemetry
 
+**Tempo**
+
+Usage and cost attribution to Jira work items
+
 **Vantage**
 
 FinOps platform for LLM cost & usage observability
