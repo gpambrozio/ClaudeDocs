@@ -65,7 +65,7 @@ The last sentence of the summary tells you whether the plugin is usable in this 
 
 * **Active now**: `Plugin is now active.` No reload is needed.
 * **Active, but a server needs setup**: `Plugin is now active.` is followed by `Its bundled MCP server needs configuration before it can start`. The plugin's [bundled MCP server](plugins/components.md#include-a-packaged-mcpb-server) can't start until you set its options. Select the plugin on the **Installed** tab in `/plugin` and choose **Configure** to set the server's options.
-* **Reload needed**: `Run /reload-plugins to activate.` The panel closes and Claude Code runs that reload for you. If the reload would [invalidate the prompt cache](prompt-caching.md#enabling-or-disabling-a-plugin), it warns and leaves the plugin pending instead. Run `/reload-plugins --force` to activate it anyway, which costs one uncached request.
+* **Reload needed**: `Run /reload-plugins to apply.` The panel closes and Claude Code runs that reload for you. If the reload would [invalidate the prompt cache](prompt-caching.md#enabling-or-disabling-a-plugin), it warns and leaves the plugin pending instead. Run `/reload-plugins --force` to activate it anyway, which costs one uncached request.
 * **Load failed**: `The plugin couldn't be loaded`. Open the **Errors** tab in `/plugin` for the reason, then see [After install: plugin not working](plugins/troubleshooting.md#plugin-installed-but-not-working).
 
 **Confirm the plugin works**
