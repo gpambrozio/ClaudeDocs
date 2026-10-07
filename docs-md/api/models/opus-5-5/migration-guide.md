@@ -1,9 +1,9 @@
 # thinking is always on; effort is the control
 
 ---
-title: Migrating to Claude Opus 5.5
+title: Claude Opus 5.5 migration guide
 url: https://platform.claude.com/docs/en/models/opus-5-5/migration-guide
-description: "Migrate to Claude Opus 5.5 from earlier Opus models or Claude Sonnet 5: request settings that return errors, thinking blocks in every response, and a checklist for each starting model."
+description: Switch to Claude Opus 5.5 from earlier Opus models or Claude Sonnet 5 with this migration guide. The guidance to enable Claude Opus 5.5 includes request settings that return errors, thinking blocks in every response, and a checklist for each starting model.
 ---
 
 This guide covers migrating [Messages API](../../build-with-claude/working-with-messages.md) code. If you use [Claude Managed Agents](../../managed-agents/overview.md), no changes beyond updating the model name are required.

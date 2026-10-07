@@ -1,9 +1,9 @@
 # From Haiku 3.5
 
 ---
-title: Migrating to Claude Haiku 4.5
+title: Claude Haiku 4.5 migration guide
 url: https://platform.claude.com/docs/en/models/haiku-4-5/migration-guide
-description: "Migrate to Claude Haiku 4.5 from earlier Haiku models: model IDs, breaking changes, and a migration checklist."
+description: Switch to Claude Haiku 4.5 from earlier Haiku models with this migration guide. The guidance to enable Claude Haiku 4.5 includes model IDs, breaking changes, and a migration checklist.
 ---
 
 This guide covers migrating [Messages API](../../build-with-claude/working-with-messages.md) code. If you use [Claude Managed Agents](../../managed-agents/overview.md), no changes beyond updating the model name are required.

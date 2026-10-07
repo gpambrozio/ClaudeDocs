@@ -230,7 +230,7 @@ print(next(block.text for block in message_from_url.content if block.type == "te
 
 ## Thinking
 
-Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](build-with-claude/thinking.md) (`thinking: {"type": "adaptive"}`): Claude decides when and how much to think, and you steer thinking depth with the [`effort`](build-with-claude/effort.md) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
+Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](build-with-claude/thinking.md) (`thinking: {"type": "adaptive"}`): Claude determines when and how much to think, and you steer thinking depth with the [`effort`](build-with-claude/effort.md) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
 
 Temperature must be set to 1 (or left unset) whenever thinking is enabled, on all models. On Claude 4.7 and later models and Claude Mythos Preview, `temperature` is deprecated and only its default value is accepted, even when thinking is off.
 
@@ -245,7 +245,7 @@ Thinking is supported in the following models:
 * Claude Opus 4.6 (`claude-opus-4-6`, adaptive or legacy manual thinking)
 * Claude Sonnet 4.6 (`claude-sonnet-4-6`, adaptive or legacy manual thinking)
 * Claude Opus 4.5 (`claude-opus-4-5-20251101`, legacy manual thinking only)
-* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`, legacy manual thinking only)
+* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`, [deprecated](about-claude/model-deprecations.md), legacy manual thinking only)
 * Claude Haiku 4.5 (`claude-haiku-4-5-20251001`, legacy manual thinking only)
 
 On Claude 4.7 and later models, manual extended thinking (`type: enabled` with a `budget_tokens` value) is not supported and returns a 400 error. Use [adaptive thinking](build-with-claude/thinking.md) (`type: adaptive`) instead.
@@ -430,7 +430,7 @@ for block in continuation.content:
 
 ### Interleaved thinking
 
-Interleaved thinking enables Claude to think between tool calls, reasoning about tool results before deciding the next step.
+Interleaved thinking enables Claude to think between tool calls, reasoning about tool results before determining the next step.
 
 On models with [adaptive thinking](build-with-claude/thinking.md) (`thinking: {type: "adaptive"}`), interleaved thinking is automatically enabled. No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
 

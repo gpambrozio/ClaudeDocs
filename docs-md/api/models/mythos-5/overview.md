@@ -3,10 +3,10 @@
 ---
 title: Claude Mythos 5
 url: https://platform.claude.com/docs/en/models/mythos-5/overview
-description: "Claude Mythos 5 reference: the same model as Claude Fable 5, offered by invitation only through Project Glasswing for defensive cybersecurity work. Model IDs, specifications, pricing, and migration resources. Claude Mythos 5.1 is the current Mythos model."
+description: "Claude Mythos 5 reference: the same model as Claude Fable 5, offered for defensive cybersecurity work to organizations verified through Anthropic's verification programs. Model IDs, specifications, pricing, and migration resources. Claude Mythos 5.1 is the current Mythos model."
 ---
 
-**Invite only.** Released June 9, 2026.
+**Verification required.** Released June 9, 2026.
 
 Most capable model for cybersecurity and biology research
 
@@ -16,7 +16,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 
 [Announcement](https://www.anthropic.com/news/claude-fable-5-mythos-5) · [What’s new](../fable-5/introducing-claude-fable-5-and-claude-mythos-5.md) · [Migration guide](../fable-5-1/migration-guide.md#migrating-from-claude-mythos-5-to-claude-mythos-5-1)
 
-Claude Mythos 5 is offered separately, by invitation only, as part of Project Glasswing. It shares Claude Fable 5’s specifications and pricing. For access, contact your Anthropic, AWS, or Google Cloud account team. [See Claude Fable 5](../fable-5/overview.md) · [Project Glasswing](https://anthropic.com/glasswing)
+Claude Mythos 5 is available only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). It has the same specifications and pricing as Claude Fable 5. To request access, apply to the program that covers your use case. [See Claude Fable 5](../fable-5/overview.md) · [How refusals and fallback work](../../build-with-claude/refusals-and-fallback.md)
 
 ## How it compares
 
@@ -75,7 +75,7 @@ Claude Mythos 5 is offered separately, by invitation only, as part of Project Gl
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                           |
 | :---------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](../../about-claude/model-deprecations.md) | Active (invite only)                                                                                                                                                                                                                                                                                            |
+| [Status](../../about-claude/model-deprecations.md) | Active (verification required)                                                                                                                                                                                                                                                                                  |
 | Released                                                                      | June 9, 2026                                                                                                                                                                                                                                                                                                    |
 | Retirement                                                                    | Not sooner than June 9, 2027                                                                                                                                                                                                                                                                                    |
 | Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |

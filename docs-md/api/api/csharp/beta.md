@@ -239,25 +239,25 @@ The Models API response can be used to determine which models are available for 
 
 - `ModelListParams parameters`
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     minimum: 1, maximum: 1000
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -359,9 +359,9 @@ The Models API response can be used to determine which models are available for 
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -644,11 +644,11 @@ The Models API response can be used to determine information about a specific mo
 
 - `ModelRetrieveParams parameters`
 
-  - `required string modelID`
+  - `required string modelID` (path parameter)
 
     Model identifier or alias.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -752,7 +752,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1034,7 +1034,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `required long maxTokens`
 
-    Body param: The maximum number of tokens to generate before stopping.
+    The maximum number of tokens to generate before stopping.
 
     Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
@@ -1046,7 +1046,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `required IReadOnlyList<BetaMessageParam> messages`
 
-    Body param: Input messages.
+    Input messages.
 
     Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
@@ -4422,23 +4422,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `required Model model`
 
-    Body param: The model that will complete your prompt.
+    The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `BetaCacheControlEphemeral? cacheControl`
 
-    Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
   - `BetaCompactionConfig? compaction`
 
-    Body param: Compaction configuration.
+    Compaction configuration.
 
     When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
   - `Container? container`
 
-    Body param: Container identifier for reuse across requests.
+    Container identifier for reuse across requests.
 
     - `class BetaContainerParams`
 
@@ -4478,17 +4478,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `BetaContextManagementConfig? contextManagement`
 
-    Body param: Context management configuration.
+    Context management configuration.
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
   - `BetaDiagnosticsParam? diagnostics`
 
-    Body param: Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
+    Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
   - `FallbackCreditToken? fallbackCreditToken`
 
-    Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+    The `fallback_credit_token` from a prior refusal's `stop_details`.
 
     When a preceding request was refused and returned a `fallback_credit_token`,
     pass that code here on the retry to have the retry's cache-creation tokens
@@ -4537,15 +4537,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `BetaFallbacksParam? fallbacks`
 
-    Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
+    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
   - `string? inferenceGeo`
 
-    Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
+    Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
   - `IReadOnlyList<BetaRequestMcpServerUrlDefinition> mcpServers`
 
-    Body param: MCP servers to be utilized in this request
+    MCP servers to be utilized in this request
 
     maxItems: 20
 
@@ -4565,15 +4565,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `BetaMetadata metadata`
 
-    Body param: An object describing metadata about the request.
+    An object describing metadata about the request.
 
   - `BetaOutputConfig outputConfig`
 
-    Body param: Configuration options for the model's output, such as the output format.
+    Configuration options for the model's output, such as the output format.
 
   - `ServiceTier serviceTier`
 
-    Body param: Determines whether to use priority capacity (if available) or standard capacity for this request.
+    Determines whether to use priority capacity (if available) or standard capacity for this request.
 
     Anthropic offers different levels of service for your API requests. See [service-tiers](../service-tiers.md) for details.
 
@@ -4583,7 +4583,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `Speed? speed`
 
-    Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
     - `Standard("standard")`
 
@@ -4591,7 +4591,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `IReadOnlyList<string> stopSequences`
 
-    Body param: Custom text sequences that will cause the model to stop generating.
+    Custom text sequences that will cause the model to stop generating.
 
     Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
 
@@ -4599,7 +4599,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `System system`
 
-    Body param: System prompt.
+    System prompt.
 
     A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
@@ -4621,7 +4621,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `BetaThinkingConfigParam thinking`
 
-    Body param: Configuration for enabling Claude's extended thinking.
+    Configuration for enabling Claude's extended thinking.
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
@@ -4629,11 +4629,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `BetaToolChoice toolChoice`
 
-    Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
   - `IReadOnlyList<BetaToolUnion> tools`
 
-    Body param: Definitions of tools that the model may use.
+    Definitions of tools that the model may use.
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
@@ -4776,9 +4776,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
       Allows configuring enabled status and defer_loading for all tools
       from an MCP server, with optional per-tool overrides.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -4880,13 +4880,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string userProfileID`
+  - `string userProfileID` (header parameter)
 
-    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -4894,7 +4894,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     **Deprecated**
 
-    Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../../build-with-claude/structured-outputs.md)
+    Deprecated: Use `output_config.format` instead. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
     A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -4902,7 +4902,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-    Body param: Amount of randomness injected into the response.
+    Amount of randomness injected into the response.
 
     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
 
@@ -4914,7 +4914,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
-    Body param: Only sample from the top K options for each subsequent token.
+    Only sample from the top K options for each subsequent token.
 
     Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
@@ -4926,7 +4926,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
-    Body param: Use nucleus sampling.
+    Use nucleus sampling.
 
     In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
@@ -9061,7 +9061,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `required IReadOnlyList<BetaMessageParam> messages`
 
-    Body param: Input messages.
+    Input messages.
 
     Our models are trained to operate on alternating `user` and `assistant` conversational turns. When creating a new `Message`, you specify the prior conversational turns with the `messages` parameter, and the model then generates the next `Message` in the conversation. Consecutive `user` or `assistant` turns in your request will be combined into a single turn.
 
@@ -12437,29 +12437,29 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `required Model model`
 
-    Body param: The model that will complete your prompt.
+    The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
   - `BetaCacheControlEphemeral? cacheControl`
 
-    Body param: Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+    Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
   - `BetaCompactionConfig? compaction`
 
-    Body param: Compaction configuration.
+    Compaction configuration.
 
     When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
   - `BetaContextManagementConfig? contextManagement`
 
-    Body param: Context management configuration.
+    Context management configuration.
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
   - `IReadOnlyList<BetaRequestMcpServerUrlDefinition> mcpServers`
 
-    Body param: MCP servers to be utilized in this request
+    MCP servers to be utilized in this request
 
     maxItems: 20
 
@@ -12479,11 +12479,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `BetaOutputConfig outputConfig`
 
-    Body param: Configuration options for the model's output, such as the output format.
+    Configuration options for the model's output, such as the output format.
 
   - `Speed? speed`
 
-    Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
     - `Standard("standard")`
 
@@ -12491,7 +12491,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `System system`
 
-    Body param: System prompt.
+    System prompt.
 
     A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
@@ -12513,7 +12513,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `BetaThinkingConfigParam thinking`
 
-    Body param: Configuration for enabling Claude's extended thinking.
+    Configuration for enabling Claude's extended thinking.
 
     When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
 
@@ -12521,11 +12521,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `BetaToolChoice toolChoice`
 
-    Body param: How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
+    How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
   - `IReadOnlyList<Tool> tools`
 
-    Body param: Definitions of tools that the model may use.
+    Definitions of tools that the model may use.
 
     If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
@@ -12668,9 +12668,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
       Allows configuring enabled status and defer_loading for all tools
       from an MCP server, with optional per-tool overrides.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -12772,13 +12772,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string userProfileID`
+  - `string userProfileID` (header parameter)
 
-    Header param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -12786,7 +12786,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     **Deprecated**
 
-    Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../../build-with-claude/structured-outputs.md)
+    Deprecated: Use `output_config.format` instead. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
     A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -12860,7 +12860,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
   - `required IReadOnlyList<Request> requests`
 
-    Body param: List of requests for prompt completion. Each is an individual request to create a Message.
+    List of requests for prompt completion. Each is an individual request to create a Message.
 
     minItems: 1, maxItems: 100000
 
@@ -16980,9 +16980,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         minimum: 0, maximum: 1
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -17084,13 +17084,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string userProfileID`
+  - `string userProfileID` (header parameter)
 
-    Header param: The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -17425,11 +17425,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `BatchRetrieveParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -17533,7 +17533,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -17684,25 +17684,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `BatchListParams parameters`
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
-    Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     minimum: 1, maximum: 1000
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -17804,9 +17804,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -17966,11 +17966,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `BatchCancelParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -18074,7 +18074,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -18227,11 +18227,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `BatchDeleteParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -18335,7 +18335,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -18390,11 +18390,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `BatchResultsParams parameters`
 
-  - `required string messageBatchID`
+  - `required string messageBatchID` (path parameter)
 
     ID of the Message Batch.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -18498,7 +18498,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -22303,7 +22303,7 @@ Create Agent
 
   - `required Model model`
 
-    Body param: Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+    Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
     - `enum BetaManagedAgentsModel`
 
@@ -22529,19 +22529,19 @@ Create Agent
 
   - `required string name`
 
-    Body param: Human-readable name for the agent.
+    Human-readable name for the agent.
 
     minLength: 1, maxLength: 256
 
   - `string? description`
 
-    Body param: Description of what the agent does.
+    Description of what the agent does.
 
     maxLength: 2048
 
   - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams> mcpServers`
 
-    Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../managed-agents/mcp-connector.md).
+    MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../managed-agents/mcp-connector.md).
 
     - `required Type Type`
 
@@ -22559,15 +22559,15 @@ Create Agent
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `BetaManagedAgentsMultiagentParams? multiagent`
 
-    Body param: Multiagent orchestration configuration. Currently supports the `coordinator` topology with a roster of 1-20 agents.
+    Multiagent orchestration configuration. Currently supports the `coordinator` topology with a roster of 1-20 agents.
 
   - `IReadOnlyList<BetaManagedAgentsSkillParams> skills`
 
-    Body param: Skills available to the agent.
+    Skills available to the agent.
 
     - `class BetaManagedAgentsAnthropicSkillParams`
 
@@ -22607,13 +22607,13 @@ Create Agent
 
   - `string? system`
 
-    Body param: System prompt for the agent.
+    System prompt for the agent.
 
     maxLength: 100000
 
   - `IReadOnlyList<Tool> tools`
 
-    Body param: Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
+    Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
 
     - `class BetaManagedAgentsAgentToolset20260401Params`
 
@@ -23041,9 +23041,9 @@ Create Agent
 
         minLength: 1, maxLength: 128
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -23145,9 +23145,9 @@ Create Agent
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -23838,35 +23838,35 @@ List Agents
 
 - `AgentListParams parameters`
 
-  - `DateTimeOffset createdAtGte`
+  - `DateTimeOffset createdAtGte` (query parameter)
 
-    Query param: Return agents created at or after this time (inclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLte`
-
-    Query param: Return agents created at or before this time (inclusive).
+    Return agents created at or after this time (inclusive).
 
     format: date-time
 
-  - `bool includeArchived`
+  - `DateTimeOffset createdAtLte` (query parameter)
 
-    Query param: Include archived agents in results. Defaults to false.
+    Return agents created at or before this time (inclusive).
 
-  - `int limit`
+    format: date-time
 
-    Query param: Maximum results per page. Default 20, maximum 100.
+  - `bool includeArchived` (query parameter)
+
+    Include archived agents in results. Defaults to false.
+
+  - `int limit` (query parameter)
+
+    Maximum results per page. Default 20, maximum 100.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor from a previous response.
+    Opaque pagination cursor from a previous response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -23968,9 +23968,9 @@ List Agents
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -24664,19 +24664,19 @@ Get Agent
 
 - `AgentRetrieveParams parameters`
 
-  - `required string agentID`
+  - `required string agentID` (path parameter)
 
-    Path param: Unique identifier of the agent to retrieve.
+    Unique identifier of the agent to retrieve.
 
-  - `int version`
+  - `int version` (query parameter)
 
-    Query param: Agent version. Omit for the most recent version. Must be at least 1 if specified.
+    Agent version. Omit for the most recent version. Must be at least 1 if specified.
 
     format: int32
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -24778,9 +24778,9 @@ Get Agent
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -25470,19 +25470,19 @@ Update Agent
 
 - `AgentUpdateParams parameters`
 
-  - `required string agentID`
+  - `required string agentID` (path parameter)
 
-    Path param: Unique identifier of the agent to update.
+    Unique identifier of the agent to update.
 
   - `string? description`
 
-    Body param: Description. Omit to preserve; send empty string or null to clear.
+    Description. Omit to preserve; send empty string or null to clear.
 
     maxLength: 2048
 
   - `IReadOnlyList<BetaManagedAgentsUrlMcpServerParams>? mcpServers`
 
-    Body param: MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../managed-agents/mcp-connector.md).
+    MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../managed-agents/mcp-connector.md).
 
     - `required Type Type`
 
@@ -25500,11 +25500,11 @@ Update Agent
 
   - `IReadOnlyDictionary<string, string>? metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
   - `Model model`
 
-    Body param: Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+    Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
     - `enum BetaManagedAgentsModel`
 
@@ -25730,17 +25730,17 @@ Update Agent
 
   - `BetaManagedAgentsMultiagentParams? multiagent`
 
-    Body param: Multiagent orchestration configuration. Full replacement. Omit to preserve; send null to clear.
+    Multiagent orchestration configuration. Full replacement. Omit to preserve; send null to clear.
 
   - `string name`
 
-    Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
+    Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
     maxLength: 256
 
   - `IReadOnlyList<BetaManagedAgentsSkillParams>? skills`
 
-    Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear.
+    Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
     - `class BetaManagedAgentsAnthropicSkillParams`
 
@@ -25780,13 +25780,13 @@ Update Agent
 
   - `string? system`
 
-    Body param: System prompt. Omit to preserve; send empty string or null to clear.
+    System prompt. Omit to preserve; send empty string or null to clear.
 
     maxLength: 100000
 
   - `IReadOnlyList<Tool>? tools`
 
-    Body param: Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
+    Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
 
     - `class BetaManagedAgentsAgentToolset20260401Params`
 
@@ -26216,13 +26216,13 @@ Update Agent
 
   - `int version`
 
-    Body param: The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+    The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
 
     format: int32
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -26324,9 +26324,9 @@ Update Agent
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -27016,11 +27016,11 @@ Archive Agent
 
 - `AgentArchiveParams parameters`
 
-  - `required string agentID`
+  - `required string agentID` (path parameter)
 
     Unique identifier of the agent to archive.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -27124,7 +27124,7 @@ Archive Agent
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -27818,23 +27818,23 @@ List Agent Versions
 
 - `VersionListParams parameters`
 
-  - `required string agentID`
+  - `required string agentID` (path parameter)
 
-    Path param: Agent ID to list versions for.
+    Agent ID to list versions for.
 
-  - `int limit`
+  - `int limit` (query parameter)
 
-    Query param: Maximum results per page. Default 20, maximum 100.
+    Maximum results per page. Default 20, maximum 100.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor.
+    Opaque pagination cursor.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -27936,9 +27936,9 @@ List Agent Versions
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -28639,13 +28639,13 @@ Create a new environment with the specified configuration.
 
   - `required string name`
 
-    Body param: Human-readable name for the environment
+    Human-readable name for the environment
 
     minLength: 1, maxLength: 256
 
   - `Config? config`
 
-    Body param: Environment configuration
+    Environment configuration
 
     - `class BetaCloudConfigParams`
 
@@ -28735,25 +28735,25 @@ Create a new environment with the specified configuration.
 
   - `string? description`
 
-    Body param: Optional description of the environment
+    Optional description of the environment
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: User-provided metadata key-value pairs
+    User-provided metadata key-value pairs
 
   - `Scope? scope`
 
-    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
+    The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
 
     - `Organization("organization")`
 
     - `Account("account")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -28855,9 +28855,9 @@ Create a new environment with the specified configuration.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -29062,23 +29062,23 @@ List environments with pagination support.
 
 - `EnvironmentListParams parameters`
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Include archived environments in the response
+    Include archived environments in the response
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Maximum number of environments to return
+    Maximum number of environments to return
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
+    Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -29180,9 +29180,9 @@ List environments with pagination support.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -29394,9 +29394,9 @@ Retrieve a specific environment by ID.
 
 - `EnvironmentRetrieveParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -29500,7 +29500,7 @@ Retrieve a specific environment by ID.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -29710,13 +29710,11 @@ Update an existing environment's configuration.
 
 - `EnvironmentUpdateParams parameters`
 
-  - `required string environmentID`
-
-    Path param
+  - `required string environmentID` (path parameter)
 
   - `Config? config`
 
-    Body param: Updated environment configuration
+    Updated environment configuration
 
     - `class BetaCloudConfigParams`
 
@@ -29806,31 +29804,31 @@ Update an existing environment's configuration.
 
   - `string? description`
 
-    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
+    Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
+    User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
   - `string? name`
 
-    Body param: Updated name for the environment
+    Updated name for the environment
 
     minLength: 1, maxLength: 256
 
   - `Scope? scope`
 
-    Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
+    The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
     - `Organization("organization")`
 
     - `Account("account")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -29932,9 +29930,9 @@ Update an existing environment's configuration.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -30142,9 +30140,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 - `EnvironmentDeleteParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -30248,7 +30246,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -30302,9 +30300,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 - `EnvironmentArchiveParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -30408,7 +30406,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -30622,17 +30620,13 @@ Retrieve detailed information about a specific work item.
 
 - `WorkRetrieveParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `required string workID` (path parameter)
 
-  - `required string workID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -30734,9 +30728,9 @@ Retrieve detailed information about a specific work item.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -30873,25 +30867,23 @@ Long poll for work items in the queue.
 
 - `WorkPollParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `long? blockMs` (query parameter)
 
-  - `long? blockMs`
-
-    Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
+    How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
     minimum: 1
 
-  - `long? reclaimOlderThanMs`
+  - `long? reclaimOlderThanMs` (query parameter)
 
-    Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
+    Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
     minimum: 1
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -30993,9 +30985,9 @@ Long poll for work items in the queue.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string anthropicWorkerID`
+  - `string anthropicWorkerID` (header parameter)
 
-    Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
+    Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
 #### Returns
 
@@ -31129,17 +31121,13 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 - `WorkAckParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `required string workID` (path parameter)
 
-  - `required string workID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -31374,25 +31362,21 @@ Record a heartbeat for a work item to maintain the lease.
 
 - `WorkHeartbeatParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `required string workID` (path parameter)
 
-  - `required string workID`
+  - `long? desiredTtlSeconds` (query parameter)
 
-    Path param
+    Desired TTL in seconds
 
-  - `long? desiredTtlSeconds`
+  - `string? expectedLastHeartbeat` (query parameter)
 
-    Query param: Desired TTL in seconds
+    Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-  - `string? expectedLastHeartbeat`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Query param: Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -31570,21 +31554,17 @@ Stop a work item, initiating graceful or forced shutdown.
 
 - `WorkStopParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
-
-  - `required string workID`
-
-    Path param
+  - `required string workID` (path parameter)
 
   - `bool force`
 
-    Body param: If true, immediately stop work without graceful shutdown
+    If true, immediately stop work without graceful shutdown
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -31686,9 +31666,9 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -31825,23 +31805,21 @@ List work items in an environment.
 
 - `WorkListParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
+  - `long limit` (query parameter)
 
-  - `long limit`
-
-    Query param: Maximum number of work items to return
+    Maximum number of work items to return
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from previous response for pagination
+    Opaque cursor from previous response for pagination
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -32082,21 +32060,17 @@ Update work item metadata with merge semantics.
 
 - `WorkUpdateParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-    Path param
-
-  - `required string workID`
-
-    Path param
+  - `required string workID` (path parameter)
 
   - `required IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -32198,9 +32172,9 @@ Update work item metadata with merge semantics.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -32336,9 +32310,9 @@ Get statistics about the work queue for an environment.
 
 - `WorkStatsParams parameters`
 
-  - `required string environmentID`
+  - `required string environmentID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -32442,7 +32416,7 @@ Get statistics about the work queue for an environment.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -32517,7 +32491,7 @@ Create Session
 
   - `required Agent agent`
 
-    Body param: Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
+    Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
 
     - `string`
 
@@ -33279,17 +33253,17 @@ Create Session
 
   - `required string environmentID`
 
-    Body param: ID of the `environment` defining the container configuration for this session.
+    ID of the `environment` defining the container configuration for this session.
 
     minLength: 1, maxLength: 128
 
   - `BetaManagedAgentsBudgetLimit budget`
 
-    Body param: Enforced spend ceiling for the session. Omit to create an uncapped session. Every model the session can run — the agent's model and each callable agent's model — must have a public list price, or the request is rejected with reason `model_not_budgetable`.
+    Enforced spend ceiling for the session. Omit to create an uncapped session. Every model the session can run — the agent's model and each callable agent's model — must have a public list price, or the request is rejected with reason `model_not_budgetable`.
 
   - `IReadOnlyList<InitialEvent> initialEvents`
 
-    Body param: Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+    Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
 
     - `class BetaManagedAgentsUserMessageEventParams`
 
@@ -33491,11 +33465,11 @@ Create Session
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `IReadOnlyList<Resource> resources`
 
-    Body param: Resources (e.g. repositories, files) to mount into the session's container.
+    Resources (e.g. repositories, files) to mount into the session's container.
 
     - `class BetaManagedAgentsGitHubRepositoryResourceParams`
 
@@ -33589,17 +33563,17 @@ Create Session
 
   - `string? title`
 
-    Body param: Human-readable session title.
+    Human-readable session title.
 
     maxLength: 500
 
   - `IReadOnlyList<string> vaultIds`
 
-    Body param: Vault IDs for stored credentials the agent can use during the session.
+    Vault IDs for stored credentials the agent can use during the session.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -33701,9 +33675,9 @@ Create Session
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -34821,73 +34795,73 @@ List Sessions
 
 - `SessionListParams parameters`
 
-  - `string agentID`
+  - `string agentID` (query parameter)
 
-    Query param: Filter sessions created with this agent ID.
+    Filter sessions created with this agent ID.
 
-  - `int agentVersion`
+  - `int agentVersion` (query parameter)
 
-    Query param: Filter by agent version. Only applies when `agent_id` is also set.
-
-    format: int32
-
-  - `DateTimeOffset createdAtGt`
-
-    Query param: Return sessions created after this time (exclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtGte`
-
-    Query param: Return sessions created at or after this time (inclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLt`
-
-    Query param: Return sessions created before this time (exclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLte`
-
-    Query param: Return sessions created at or before this time (inclusive).
-
-    format: date-time
-
-  - `string deploymentID`
-
-    Query param: Filter sessions created by this deployment ID.
-
-  - `bool includeArchived`
-
-    Query param: When true, includes archived sessions. Default: false (exclude archived).
-
-  - `int limit`
-
-    Query param: Maximum number of results to return.
+    Filter by agent version. Only applies when `agent_id` is also set.
 
     format: int32
 
-  - `string memoryStoreID`
+  - `DateTimeOffset createdAtGt` (query parameter)
 
-    Query param: Filter sessions whose resources contain a `memory_store` with this memory store ID.
+    Return sessions created after this time (exclusive).
 
-  - `Order order`
+    format: date-time
 
-    Query param: Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest first).
+  - `DateTimeOffset createdAtGte` (query parameter)
+
+    Return sessions created at or after this time (inclusive).
+
+    format: date-time
+
+  - `DateTimeOffset createdAtLt` (query parameter)
+
+    Return sessions created before this time (exclusive).
+
+    format: date-time
+
+  - `DateTimeOffset createdAtLte` (query parameter)
+
+    Return sessions created at or before this time (inclusive).
+
+    format: date-time
+
+  - `string deploymentID` (query parameter)
+
+    Filter sessions created by this deployment ID.
+
+  - `bool includeArchived` (query parameter)
+
+    When true, includes archived sessions. Default: false (exclude archived).
+
+  - `int limit` (query parameter)
+
+    Maximum number of results to return.
+
+    format: int32
+
+  - `string memoryStoreID` (query parameter)
+
+    Filter sessions whose resources contain a `memory_store` with this memory store ID.
+
+  - `Order order` (query parameter)
+
+    Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest first).
 
     - `Asc("asc")`
 
     - `Desc("desc")`
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor from a previous response.
+    Opaque pagination cursor from a previous response.
 
-  - `IReadOnlyList<Status> statuses`
+  - `IReadOnlyList<Status> statuses` (query parameter)
 
-    Query param: Filter by session status. Repeat the parameter to match any of multiple statuses.
+    Filter by session status. Repeat the parameter to match any of multiple statuses.
 
     - `Rescheduling("rescheduling")`
 
@@ -34905,9 +34879,9 @@ List Sessions
 
       Session has ended, either due to an error or completion.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -35009,9 +34983,9 @@ List Sessions
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -36133,9 +36107,9 @@ Get Session
 
 - `SessionRetrieveParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -36239,7 +36213,7 @@ Get Session
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -37358,35 +37332,33 @@ Update Session
 
 - `SessionUpdateParams parameters`
 
-  - `required string sessionID`
-
-    Path param
+  - `required string sessionID` (path parameter)
 
   - `BetaManagedAgentsSessionAgentUpdate agent`
 
-    Body param: Agent configuration update. Only `tools` and `mcp_servers` are updatable mid-session. Only valid for sessions created from an agent or deployment reference. The session must not be running.
+    Agent configuration update. Only `tools` and `mcp_servers` are updatable mid-session. Only valid for sessions created from an agent or deployment reference. The session must not be running.
 
   - `BetaManagedAgentsBudgetLimit? budget`
 
-    Body param: Enforced spend ceiling for the session. Set an object to replace the budget of a session that was created with one, or `null` to remove it; omit to preserve. A budget cannot be added to a session created without one (rejected with reason `budget_create_only`), and a removed budget cannot be re-added. Allowed in any non-terminated status. Lowering `max_list_cost` to at or below the session's consumed list cost is rejected with reason `budget_not_raised`, and every model the session can run must have a public list price or the request is rejected with reason `model_not_budgetable`.
+    Enforced spend ceiling for the session. Set an object to replace the budget of a session that was created with one, or `null` to remove it; omit to preserve. A budget cannot be added to a session created without one (rejected with reason `budget_create_only`), and a removed budget cannot be re-added. Allowed in any non-terminated status. Lowering `max_list_cost` to at or below the session's consumed list cost is rejected with reason `budget_not_raised`, and every model the session can run must have a public list price or the request is rejected with reason `model_not_budgetable`.
 
   - `IReadOnlyDictionary<string, string>? metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
 
   - `string? title`
 
-    Body param: Human-readable session title.
+    Human-readable session title.
 
     minLength: 1, maxLength: 500
 
   - `IReadOnlyList<string> vaultIds`
 
-    Body param: Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests setting this field are rejected. Reserved for future use.
+    Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests setting this field are rejected. Reserved for future use.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -37488,9 +37460,9 @@ Update Session
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -38607,9 +38579,9 @@ Delete Session
 
 - `SessionDeleteParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -38713,7 +38685,7 @@ Delete Session
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -38763,9 +38735,9 @@ Archive Session
 
 - `SessionArchiveParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -38869,7 +38841,7 @@ Archive Session
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -39990,55 +39962,51 @@ List Events
 
 - `EventListParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `DateTimeOffset createdAtGt` (query parameter)
 
-  - `DateTimeOffset createdAtGt`
-
-    Query param: Return events created after this time (exclusive). Compared against the event's `processed_at` value.
+    Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `DateTimeOffset createdAtGte`
+  - `DateTimeOffset createdAtGte` (query parameter)
 
-    Query param: Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLt`
-
-    Query param: Return events created before this time (exclusive). Compared against the event's `processed_at` value.
+    Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `DateTimeOffset createdAtLte`
+  - `DateTimeOffset createdAtLt` (query parameter)
 
-    Query param: Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
+    Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `int limit`
+  - `DateTimeOffset createdAtLte` (query parameter)
 
-    Query param
+    Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
+
+    format: date-time
+
+  - `int limit` (query parameter)
 
     format: int32
 
-  - `Order order`
+  - `Order order` (query parameter)
 
-    Query param: Sort direction for results, ordered by the event's `processed_at`. Defaults to `asc` (chronological).
+    Sort direction for results, ordered by the event's `processed_at`. Defaults to `asc` (chronological).
 
     - `Asc("asc")`
 
     - `Desc("desc")`
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor from a previous response's `next_page`.
+    Opaque pagination cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<BetaManagedAgentsSessionEventType> types`
+  - `IReadOnlyList<BetaManagedAgentsSessionEventType> types` (query parameter)
 
-    Query param: Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
+    Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
     - `UserMessage("user.message")`
 
@@ -40108,9 +40076,9 @@ List Events
 
     - `SessionUsage("session.usage")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -40212,9 +40180,9 @@ List Events
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -42695,13 +42663,11 @@ Send Events
 
 - `EventSendParams parameters`
 
-  - `required string sessionID`
-
-    Path param
+  - `required string sessionID` (path parameter)
 
   - `required IReadOnlyList<BetaManagedAgentsEventParams> events`
 
-    Body param: Events to send to the `session`.
+    Events to send to the `session`.
 
     - `class BetaManagedAgentsUserMessageEventParams`
 
@@ -43061,9 +43027,9 @@ Send Events
 
           minLength: 1
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -43165,9 +43131,9 @@ Send Events
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -43677,21 +43643,19 @@ Stream Events
 
 - `EventStreamParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `IReadOnlyList<BetaManagedAgentsDeltaType> eventDeltas` (query parameter)
 
-  - `IReadOnlyList<BetaManagedAgentsDeltaType> eventDeltas`
-
-    Query param: When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+    When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
     - `AgentMessage("agent.message")`
 
     - `AgentThinking("agent.thinking")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -43793,9 +43757,9 @@ Stream Events
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -46313,29 +46277,25 @@ Add Session Resource
 
   - `required Type type`
 
-    Body param
-
     - `File("file")`
 
-  - `required string sessionID`
-
-    Path param
+  - `required string sessionID` (path parameter)
 
   - `required string fileID`
 
-    Body param: ID of a previously uploaded file.
+    ID of a previously uploaded file.
 
     minLength: 1, maxLength: 128
 
   - `string? mountPath`
 
-    Body param: Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+    Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
     minLength: 1, maxLength: 4096
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -46437,9 +46397,9 @@ Add Session Resource
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -46507,23 +46467,21 @@ List Session Resources
 
 - `ResourceListParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `int limit` (query parameter)
 
-  - `int limit`
-
-    Query param: Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
+    Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page` field.
+    Opaque cursor from a previous response's `next_page` field.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -46625,9 +46583,9 @@ List Session Resources
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -46794,17 +46752,13 @@ Get Session Resource
 
 - `ResourceRetrieveParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `required string resourceID` (path parameter)
 
-  - `required string resourceID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -46906,9 +46860,9 @@ Get Session Resource
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -47063,23 +47017,19 @@ Update Session Resource
 
 - `ResourceUpdateParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
-
-  - `required string resourceID`
-
-    Path param
+  - `required string resourceID` (path parameter)
 
   - `required string authorizationToken`
 
-    Body param: New authorization token for the resource. Currently only `github_repository` resources support token rotation.
+    New authorization token for the resource. Currently only `github_repository` resources support token rotation.
 
     minLength: 1, maxLength: 4096
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -47181,9 +47131,9 @@ Update Session Resource
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -47339,17 +47289,13 @@ Delete Session Resource
 
 - `ResourceDeleteParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `required string resourceID` (path parameter)
 
-  - `required string resourceID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -47451,9 +47397,9 @@ Delete Session Resource
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -47504,23 +47450,21 @@ List Session Threads
 
 - `ThreadListParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `int limit` (query parameter)
 
-  - `int limit`
-
-    Query param: Maximum results per page. Defaults to 1000.
+    Maximum results per page. Defaults to 1000.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor from a previous response's `next_page`. Forward-only.
+    Opaque pagination cursor from a previous response's `next_page`. Forward-only.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -47622,9 +47566,9 @@ List Session Threads
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -48435,17 +48379,13 @@ Get Session Thread
 
 - `ThreadRetrieveParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `required string threadID` (path parameter)
 
-  - `required string threadID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -48547,9 +48487,9 @@ Get Session Thread
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -49354,17 +49294,13 @@ Archive Session Thread
 
 - `ThreadArchiveParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `required string threadID` (path parameter)
 
-  - `required string threadID`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Path param
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -49466,9 +49402,9 @@ Archive Session Thread
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -50275,27 +50211,19 @@ List Session Thread Events
 
 - `EventListParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `required string threadID` (path parameter)
 
-  - `required string threadID`
-
-    Path param
-
-  - `int limit`
-
-    Query param
+  - `int limit` (query parameter)
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -50397,9 +50325,9 @@ List Session Thread Events
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -52881,25 +52809,21 @@ Stream Session Thread Events
 
 - `EventStreamParams parameters`
 
-  - `required string sessionID`
+  - `required string sessionID` (path parameter)
 
-    Path param
+  - `required string threadID` (path parameter)
 
-  - `required string threadID`
+  - `IReadOnlyList<BetaManagedAgentsDeltaType> eventDeltas` (query parameter)
 
-    Path param
-
-  - `IReadOnlyList<BetaManagedAgentsDeltaType> eventDeltas`
-
-    Query param: When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+    When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
     - `AgentMessage("agent.message")`
 
     - `AgentThinking("agent.thinking")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -53001,9 +52925,9 @@ Stream Session Thread Events
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -55522,7 +55446,7 @@ Create Deployment
 
   - `required Agent agent`
 
-    Body param: Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
+    Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
 
     - `string`
 
@@ -55546,13 +55470,13 @@ Create Deployment
 
   - `required string environmentID`
 
-    Body param: ID of the `environment` defining the container configuration for sessions created from this deployment.
+    ID of the `environment` defining the container configuration for sessions created from this deployment.
 
     minLength: 1, maxLength: 128
 
   - `required IReadOnlyList<BetaManagedAgentsDeploymentInitialEventParams> initialEvents`
 
-    Body param: Events to send to each session immediately after creation. At least 1, maximum 50.
+    Events to send to each session immediately after creation. At least 1, maximum 50.
 
     - `class BetaManagedAgentsUserMessageEventParams`
 
@@ -55772,27 +55696,27 @@ Create Deployment
 
   - `required string name`
 
-    Body param: Human-readable name for the deployment.
+    Human-readable name for the deployment.
 
     minLength: 1, maxLength: 256
 
   - `BetaManagedAgentsBudgetLimit? budget`
 
-    Body param: Enforced spend ceiling stamped onto each session created from this deployment, copied at session-creation time. Omit to leave sessions uncapped. The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
+    Enforced spend ceiling stamped onto each session created from this deployment, copied at session-creation time. Omit to leave sessions uncapped. The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
   - `string? description`
 
-    Body param: Description of what the deployment does.
+    Description of what the deployment does.
 
     maxLength: 2048
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
   - `IReadOnlyList<Resource> resources`
 
-    Body param: Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
+    Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
     - `class BetaManagedAgentsGitHubRepositoryResourceParams`
 
@@ -55886,15 +55810,15 @@ Create Deployment
 
   - `BetaManagedAgentsScheduleParams? schedule`
 
-    Body param: Optional recurring cron schedule. When present, the deployment fires automatically. Both expression and timezone are required when schedule is set.
+    Optional recurring cron schedule. When present, the deployment fires automatically. Both expression and timezone are required when schedule is set.
 
   - `IReadOnlyList<string> vaultIds`
 
-    Body param: Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
+    Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -55996,9 +55920,9 @@ Create Deployment
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -56631,43 +56555,43 @@ List Deployments
 
 - `DeploymentListParams parameters`
 
-  - `string agentID`
+  - `string agentID` (query parameter)
 
-    Query param: Filter by agent ID.
+    Filter by agent ID.
 
-  - `DateTimeOffset createdAtGte`
+  - `DateTimeOffset createdAtGte` (query parameter)
 
-    Query param: Return deployments created at or after this time (inclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLte`
-
-    Query param: Return deployments created at or before this time (inclusive).
+    Return deployments created at or after this time (inclusive).
 
     format: date-time
 
-  - `bool includeArchived`
+  - `DateTimeOffset createdAtLte` (query parameter)
 
-    Query param: When true, includes archived deployments. Default: false (exclude archived).
+    Return deployments created at or before this time (inclusive).
 
-  - `int limit`
+    format: date-time
 
-    Query param: Maximum results per page. Default 20, maximum 100.
+  - `bool includeArchived` (query parameter)
+
+    When true, includes archived deployments. Default: false (exclude archived).
+
+  - `int limit` (query parameter)
+
+    Maximum results per page. Default 20, maximum 100.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor.
+    Opaque pagination cursor.
 
-  - `BetaManagedAgentsDeploymentStatus status`
+  - `BetaManagedAgentsDeploymentStatus status` (query parameter)
 
-    Query param: Filter by status: `active` or `paused`. Omit for both. To include archived deployments, use `include_archived` instead; the two cannot be combined.
+    Filter by status: `active` or `paused`. Omit for both. To include archived deployments, use `include_archived` instead; the two cannot be combined.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -56769,9 +56693,9 @@ List Deployments
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -57391,11 +57315,11 @@ Get Deployment
 
 - `DeploymentRetrieveParams parameters`
 
-  - `required string deploymentID`
+  - `required string deploymentID` (path parameter)
 
     Unique identifier of the deployment.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -57499,7 +57423,7 @@ Get Deployment
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -58117,13 +58041,13 @@ Update Deployment
 
 - `DeploymentUpdateParams parameters`
 
-  - `required string deploymentID`
+  - `required string deploymentID` (path parameter)
 
-    Path param: Unique identifier of the deployment to update.
+    Unique identifier of the deployment to update.
 
   - `Agent agent`
 
-    Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
+    Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
 
     - `string`
 
@@ -58147,23 +58071,23 @@ Update Deployment
 
   - `BetaManagedAgentsBudgetLimit? budget`
 
-    Body param: Spend ceiling for future sessions. Full replacement. Omit to preserve; send null to clear (sessions created afterwards are uncapped). The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
+    Spend ceiling for future sessions. Full replacement. Omit to preserve; send null to clear (sessions created afterwards are uncapped). The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
   - `string? description`
 
-    Body param: Description. Omit to preserve; send empty string or null to clear.
+    Description. Omit to preserve; send empty string or null to clear.
 
     maxLength: 2048
 
   - `string environmentID`
 
-    Body param: ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
+    ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
 
     maxLength: 128
 
   - `IReadOnlyList<BetaManagedAgentsDeploymentInitialEventParams> initialEvents`
 
-    Body param: Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
+    Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
     - `class BetaManagedAgentsUserMessageEventParams`
 
@@ -58383,17 +58307,17 @@ Update Deployment
 
   - `IReadOnlyDictionary<string, string>? metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
   - `string name`
 
-    Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
+    Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
     maxLength: 256
 
   - `IReadOnlyList<Resource>? resources`
 
-    Body param: Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
+    Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
     - `class BetaManagedAgentsGitHubRepositoryResourceParams`
 
@@ -58487,15 +58411,15 @@ Update Deployment
 
   - `BetaManagedAgentsScheduleParams? schedule`
 
-    Body param: Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to manual-only).
+    Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to manual-only).
 
   - `IReadOnlyList<string>? vaultIds`
 
-    Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
+    Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -58597,9 +58521,9 @@ Update Deployment
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -59215,11 +59139,11 @@ Archive Deployment
 
 - `DeploymentArchiveParams parameters`
 
-  - `required string deploymentID`
+  - `required string deploymentID` (path parameter)
 
     Unique identifier of the deployment to archive.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -59323,7 +59247,7 @@ Archive Deployment
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -59941,11 +59865,11 @@ Run Deployment Now
 
 - `DeploymentRunParams parameters`
 
-  - `required string deploymentID`
+  - `required string deploymentID` (path parameter)
 
     Unique identifier of the deployment to run.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -60049,7 +59973,7 @@ Run Deployment Now
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -60329,11 +60253,11 @@ Pause Deployment
 
 - `DeploymentPauseParams parameters`
 
-  - `required string deploymentID`
+  - `required string deploymentID` (path parameter)
 
     Unique identifier of the deployment to pause.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -60437,7 +60361,7 @@ Pause Deployment
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -61055,11 +60979,11 @@ Unpause Deployment
 
 - `DeploymentUnpauseParams parameters`
 
-  - `required string deploymentID`
+  - `required string deploymentID` (path parameter)
 
     Unique identifier of the deployment to unpause.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -61163,7 +61087,7 @@ Unpause Deployment
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -61783,55 +61707,55 @@ List Deployment Runs
 
 - `DeploymentRunListParams parameters`
 
-  - `DateTimeOffset createdAtGt`
+  - `DateTimeOffset createdAtGt` (query parameter)
 
-    Query param: Return runs created strictly after this time (exclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtGte`
-
-    Query param: Return runs created at or after this time (inclusive).
+    Return runs created strictly after this time (exclusive).
 
     format: date-time
 
-  - `DateTimeOffset createdAtLt`
+  - `DateTimeOffset createdAtGte` (query parameter)
 
-    Query param: Return runs created strictly before this time (exclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLte`
-
-    Query param: Return runs created at or before this time (inclusive).
+    Return runs created at or after this time (inclusive).
 
     format: date-time
 
-  - `string deploymentID`
+  - `DateTimeOffset createdAtLt` (query parameter)
 
-    Query param: Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
+    Return runs created strictly before this time (exclusive).
 
-  - `bool hasError`
+    format: date-time
 
-    Query param: Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
+  - `DateTimeOffset createdAtLte` (query parameter)
 
-  - `int limit`
+    Return runs created at or before this time (inclusive).
 
-    Query param: Maximum results per page. Default 20, maximum 1000.
+    format: date-time
+
+  - `string deploymentID` (query parameter)
+
+    Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
+
+  - `bool hasError` (query parameter)
+
+    Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
+
+  - `int limit` (query parameter)
+
+    Maximum results per page. Default 20, maximum 1000.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
+    Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
-  - `BetaManagedAgentsTriggerType triggerType`
+  - `BetaManagedAgentsTriggerType triggerType` (query parameter)
 
-    Query param: Filter runs by what triggered them. Omit to return all runs.
+    Filter runs by what triggered them. Omit to return all runs.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -61933,9 +61857,9 @@ List Deployment Runs
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -62217,11 +62141,11 @@ Get Deployment Run
 
 - `DeploymentRunRetrieveParams parameters`
 
-  - `required string deploymentRunID`
+  - `required string deploymentRunID` (path parameter)
 
     Unique identifier of the deployment run.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -62325,7 +62249,7 @@ Get Deployment Run
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -62609,17 +62533,17 @@ Create Vault
 
   - `required string displayName`
 
-    Body param: Human-readable name for the vault. 1-255 characters.
+    Human-readable name for the vault. 1-255 characters.
 
     minLength: 1, maxLength: 255
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -62721,9 +62645,9 @@ Create Vault
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -62803,23 +62727,23 @@ List Vaults
 
 - `VaultListParams parameters`
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Whether to include archived vaults in the results.
+    Whether to include archived vaults in the results.
 
-  - `int limit`
+  - `int limit` (query parameter)
 
-    Query param: Maximum number of vaults to return per page. Defaults to 20, maximum 100.
+    Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination token from a previous `list_vaults` response.
+    Opaque pagination token from a previous `list_vaults` response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -62921,9 +62845,9 @@ List Vaults
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -63010,11 +62934,11 @@ Get Vault
 
 - `VaultRetrieveParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
     Unique identifier of the vault to retrieve.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -63118,7 +63042,7 @@ Get Vault
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -63203,23 +63127,23 @@ Update Vault
 
 - `VaultUpdateParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Unique identifier of the vault to update.
+    Unique identifier of the vault to update.
 
   - `string? displayName`
 
-    Body param: Updated human-readable name for the vault. 1-255 characters.
+    Updated human-readable name for the vault. 1-255 characters.
 
     minLength: 1, maxLength: 255
 
   - `IReadOnlyDictionary<string, string>? metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -63321,9 +63245,9 @@ Update Vault
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -63406,11 +63330,11 @@ Delete Vault
 
 - `VaultDeleteParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
     Unique identifier of the vault to delete.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -63514,7 +63438,7 @@ Delete Vault
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -63566,11 +63490,11 @@ Archive Vault
 
 - `VaultArchiveParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
     Unique identifier of the vault to archive.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -63674,7 +63598,7 @@ Archive Vault
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -63761,13 +63685,13 @@ Create Credential
 
 - `CredentialCreateParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Identifier of the vault to create the credential in.
+    Identifier of the vault to create the credential in.
 
   - `required Auth auth`
 
-    Body param: Authentication configuration for the credential.
+    Authentication configuration for the credential.
 
     - `class BetaManagedAgentsMcpOAuthCreateParams`
 
@@ -63929,17 +63853,17 @@ Create Credential
 
   - `string? displayName`
 
-    Body param: Human-readable name for the credential. Up to 255 characters.
+    Human-readable name for the credential. Up to 255 characters.
 
     maxLength: 255
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+    Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -64041,9 +63965,9 @@ Create Credential
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -64253,27 +64177,27 @@ List Credentials
 
 - `CredentialListParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Identifier of the vault to list credentials for.
+    Identifier of the vault to list credentials for.
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Whether to include archived credentials in the results.
+    Whether to include archived credentials in the results.
 
-  - `int limit`
+  - `int limit` (query parameter)
 
-    Query param: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
+    Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination token from a previous `list_credentials` response.
+    Opaque pagination token from a previous `list_credentials` response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -64375,9 +64299,9 @@ List Credentials
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -64588,17 +64512,17 @@ Get Credential
 
 - `CredentialRetrieveParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `required string credentialID`
+  - `required string credentialID` (path parameter)
 
-    Path param: Unique identifier of the credential to retrieve.
+    Unique identifier of the credential to retrieve.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -64700,9 +64624,9 @@ Get Credential
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -64907,17 +64831,17 @@ Update Credential
 
 - `CredentialUpdateParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `required string credentialID`
+  - `required string credentialID` (path parameter)
 
-    Path param: Unique identifier of the credential to update.
+    Unique identifier of the credential to update.
 
   - `Auth auth`
 
-    Body param: Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+    Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
 
     - `class BetaManagedAgentsMcpOAuthUpdateParams`
 
@@ -65037,17 +64961,17 @@ Update Credential
 
   - `string? displayName`
 
-    Body param: Updated human-readable name for the credential. 1-255 characters.
+    Updated human-readable name for the credential. 1-255 characters.
 
     minLength: 1, maxLength: 255
 
   - `IReadOnlyDictionary<string, string>? metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -65149,9 +65073,9 @@ Update Credential
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -65356,17 +65280,17 @@ Delete Credential
 
 - `CredentialDeleteParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `required string credentialID`
+  - `required string credentialID` (path parameter)
 
-    Path param: Unique identifier of the credential to delete.
+    Unique identifier of the credential to delete.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -65468,9 +65392,9 @@ Delete Credential
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -65521,17 +65445,17 @@ Archive Credential
 
 - `CredentialArchiveParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `required string credentialID`
+  - `required string credentialID` (path parameter)
 
-    Path param: Unique identifier of the credential to archive.
+    Unique identifier of the credential to archive.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -65633,9 +65557,9 @@ Archive Credential
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -65840,17 +65764,17 @@ Validate Credential
 
 - `CredentialMcpOAuthValidateParams parameters`
 
-  - `required string vaultID`
+  - `required string vaultID` (path parameter)
 
-    Path param: Identifier of the vault containing the credential.
+    Identifier of the vault containing the credential.
 
-  - `required string credentialID`
+  - `required string credentialID` (path parameter)
 
-    Path param: Unique identifier of the credential to validate.
+    Unique identifier of the credential to validate.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -65952,9 +65876,9 @@ Validate Credential
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -66119,23 +66043,23 @@ Create a memory store
 
   - `required string name`
 
-    Body param: Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
+    Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
 
     minLength: 1, maxLength: 255
 
   - `string description`
 
-    Body param: Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
+    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
+    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -66237,9 +66161,9 @@ Create a memory store
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -66324,35 +66248,35 @@ List memory stores
 
 - `MemoryStoreListParams parameters`
 
-  - `DateTimeOffset createdAtGte`
+  - `DateTimeOffset createdAtGte` (query parameter)
 
-    Query param: Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLte`
-
-    Query param: Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+    Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
     format: date-time
 
-  - `bool includeArchived`
+  - `DateTimeOffset createdAtLte` (query parameter)
 
-    Query param: When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
+    Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
-  - `int limit`
+    format: date-time
 
-    Query param: Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
+  - `bool includeArchived` (query parameter)
+
+    When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
+
+  - `int limit` (query parameter)
+
+    Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+    Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -66454,9 +66378,9 @@ List memory stores
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -66546,11 +66470,11 @@ Retrieve a memory store
 
 - `MemoryStoreRetrieveParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
     ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -66654,7 +66578,7 @@ Retrieve a memory store
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -66744,29 +66668,29 @@ Update a memory store
 
 - `MemoryStoreUpdateParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
+    ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
 
   - `string? description`
 
-    Body param: New description for the store, up to 1024 characters. Pass an empty string to clear it.
+    New description for the store, up to 1024 characters. Pass an empty string to clear it.
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string>? metadata`
 
-    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
   - `string? name`
 
-    Body param: New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
+    New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
 
     minLength: 1, maxLength: 255
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -66868,9 +66792,9 @@ Update a memory store
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -66958,11 +66882,11 @@ Delete a memory store
 
 - `MemoryStoreDeleteParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
     ID of the memory store to permanently delete (a `memstore_...` identifier). Required. Deletion cascades to all memories and memory versions in the store and cannot be undone.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -67066,7 +66990,7 @@ Delete a memory store
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -67118,11 +67042,11 @@ Archive a memory store
 
 - `MemoryStoreArchiveParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
     ID of the memory store to archive (a `memstore_...` identifier). Required. Archiving is one-way and idempotent; archived stores cannot be unarchived. Enumerate IDs via `GET /v1/memory_stores`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -67226,7 +67150,7 @@ Archive a memory store
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -67318,27 +67242,27 @@ Create a memory
 
 - `MemoryCreateParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store to create the memory in (`memstore_...`).
+    The ID of the memory store to create the memory in (`memstore_...`).
 
   - `required string? content`
 
-    Body param: UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
+    UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
 
   - `required string path`
 
-    Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
+    Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
 
     minLength: 2, maxLength: 1024
 
-  - `BetaManagedAgentsMemoryView view`
+  - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -67440,9 +67364,9 @@ Create a memory
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -67540,37 +67464,37 @@ List memories
 
 - `MemoryListParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store to list memories from (`memstore_...`).
+    The ID of the memory store to list memories from (`memstore_...`).
 
-  - `int depth`
+  - `int depth` (query parameter)
 
-    Query param: `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
-
-    format: int32
-
-  - `int limit`
-
-    Query param: Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+    `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
     format: int32
 
-  - `string page`
+  - `int limit` (query parameter)
 
-    Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+    Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
-  - `string pathPrefix`
+    format: int32
 
-    Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+  - `string page` (query parameter)
 
-  - `BetaManagedAgentsMemoryView view`
+    Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-    Query param: Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+  - `string pathPrefix` (query parameter)
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+    Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+  - `BetaManagedAgentsMemoryView view` (query parameter)
+
+    Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -67672,9 +67596,9 @@ List memories
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -67788,21 +67712,21 @@ Retrieve a memory
 
 - `MemoryRetrieveParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store that holds the memory (`memstore_...`).
+    The ID of the memory store that holds the memory (`memstore_...`).
 
-  - `required string memoryID`
+  - `required string memoryID` (path parameter)
 
-    Path param: The ID of the memory to retrieve (`mem_...`).
+    The ID of the memory to retrieve (`mem_...`).
 
-  - `BetaManagedAgentsMemoryView view`
+  - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -67904,9 +67828,9 @@ Retrieve a memory
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -68003,35 +67927,35 @@ Update a memory
 
 - `MemoryUpdateParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store that holds the memory (`memstore_...`).
+    The ID of the memory store that holds the memory (`memstore_...`).
 
-  - `required string memoryID`
+  - `required string memoryID` (path parameter)
 
-    Path param: The ID of the memory to update (`mem_...`).
+    The ID of the memory to update (`mem_...`).
 
-  - `BetaManagedAgentsMemoryView view`
+  - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
   - `string? content`
 
-    Body param: New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
+    New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
 
   - `string? path`
 
-    Body param: New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
+    New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
     minLength: 2, maxLength: 1024
 
   - `BetaManagedAgentsPrecondition precondition`
 
-    Body param: Optional optimistic-concurrency precondition. When supplied, the update applies only if the memory's current state matches; on mismatch the request returns `memory_precondition_failed_error` (HTTP 409). When omitted, the update is unconditional.
+    Optional optimistic-concurrency precondition. When supplied, the update applies only if the memory's current state matches; on mismatch the request returns `memory_precondition_failed_error` (HTTP 409). When omitted, the update is unconditional.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -68133,9 +68057,9 @@ Update a memory
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -68232,23 +68156,23 @@ Delete a memory
 
 - `MemoryDeleteParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store that holds the memory (`memstore_...`).
+    The ID of the memory store that holds the memory (`memstore_...`).
 
-  - `required string memoryID`
+  - `required string memoryID` (path parameter)
 
-    Path param: The ID of the memory to delete (`mem_...`).
+    The ID of the memory to delete (`mem_...`).
 
-  - `string expectedContentSha256`
+  - `string expectedContentSha256` (query parameter)
 
-    Query param: Delete the memory only if its current `content_sha256` equals this value, given as 64 lowercase hexadecimal characters. Omit it to delete unconditionally.
+    Delete the memory only if its current `content_sha256` equals this value, given as 64 lowercase hexadecimal characters. Omit it to delete unconditionally.
 
     If the hashes differ, the request fails with HTTP status 409 and nothing is deleted.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -68350,9 +68274,9 @@ Delete a memory
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -68405,61 +68329,61 @@ List memory versions
 
 - `MemoryVersionListParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store whose version history to list (`memstore_...`).
+    The ID of the memory store whose version history to list (`memstore_...`).
 
-  - `string apiKeyID`
+  - `string apiKeyID` (query parameter)
 
-    Query param: Return only versions written with the API key that has this ID.
+    Return only versions written with the API key that has this ID.
 
-  - `DateTimeOffset createdAtGte`
+  - `DateTimeOffset createdAtGte` (query parameter)
 
-    Query param: Return versions created at or after this time (inclusive).
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLte`
-
-    Query param: Return versions created at or before this time (inclusive).
+    Return versions created at or after this time (inclusive).
 
     format: date-time
 
-  - `int limit`
+  - `DateTimeOffset createdAtLte` (query parameter)
 
-    Query param: The maximum number of versions to return per page. Defaults to 20.
+    Return versions created at or before this time (inclusive).
+
+    format: date-time
+
+  - `int limit` (query parameter)
+
+    The maximum number of versions to return per page. Defaults to 20.
 
     format: int32
 
-  - `string memoryID`
+  - `string memoryID` (query parameter)
 
-    Query param: Return only versions of the memory with this ID (`mem_...`).
+    Return only versions of the memory with this ID (`mem_...`).
 
     The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
 
-  - `BetaManagedAgentsMemoryVersionOperation operation`
+  - `BetaManagedAgentsMemoryVersionOperation operation` (query parameter)
 
-    Query param: Return only versions that record this kind of change.
+    Return only versions that record this kind of change.
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
+    The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
-  - `string serviceAccountID`
+  - `string serviceAccountID` (query parameter)
 
-    Query param: Return only versions written by the service account with this ID (`svac_...`).
+    Return only versions written by the service account with this ID (`svac_...`).
 
-  - `string sessionID`
+  - `string sessionID` (query parameter)
 
-    Query param: Return only versions written by the session with this ID.
+    Return only versions written by the session with this ID.
 
-  - `BetaManagedAgentsMemoryView view`
+  - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -68561,9 +68485,9 @@ List memory versions
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -68747,21 +68671,21 @@ Retrieve a memory version
 
 - `MemoryVersionRetrieveParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store that holds the version (`memstore_...`).
+    The ID of the memory store that holds the version (`memstore_...`).
 
-  - `required string memoryVersionID`
+  - `required string memoryVersionID` (path parameter)
 
-    Path param: The ID of the memory version to retrieve (`memver_...`).
+    The ID of the memory version to retrieve (`memver_...`).
 
-  - `BetaManagedAgentsMemoryView view`
+  - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Query param: Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -68863,9 +68787,9 @@ Retrieve a memory version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -69043,17 +68967,17 @@ Redact a memory version
 
 - `MemoryVersionRedactParams parameters`
 
-  - `required string memoryStoreID`
+  - `required string memoryStoreID` (path parameter)
 
-    Path param: The ID of the memory store that holds the version (`memstore_...`).
+    The ID of the memory store that holds the version (`memstore_...`).
 
-  - `required string memoryVersionID`
+  - `required string memoryVersionID` (path parameter)
 
-    Path param: The ID of the memory version to redact (`memver_...`).
+    The ID of the memory version to redact (`memver_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -69155,9 +69079,9 @@ Redact a memory version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -69339,19 +69263,19 @@ Upload File
 
   - `required string file`
 
-    Body param: The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
+    The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
     format: binary
 
   - `long expiresInSeconds`
 
-    Body param: Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
+    Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
     minimum: 3600, maximum: 7776000
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -69453,9 +69377,9 @@ Upload File
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -69565,29 +69489,29 @@ List Files
 
 - `FileListParams parameters`
 
-  - `IReadOnlyList<string>? ids`
+  - `IReadOnlyList<string>? ids` (query parameter)
 
-    Query param: Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
+    Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
+    Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-  - `string scopeID`
+  - `string scopeID` (query parameter)
 
-    Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+    Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -69689,9 +69613,9 @@ List Files
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -69805,11 +69729,11 @@ Download File
 
 - `FileDownloadParams parameters`
 
-  - `required string fileID`
+  - `required string fileID` (path parameter)
 
     ID of the File.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -69913,7 +69837,7 @@ Download File
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -69941,11 +69865,11 @@ Get File Metadata
 
 - `FileRetrieveMetadataParams parameters`
 
-  - `required string fileID`
+  - `required string fileID` (path parameter)
 
     ID of the File.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -70049,7 +69973,7 @@ Get File Metadata
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -70158,11 +70082,11 @@ Delete File
 
 - `FileDeleteParams parameters`
 
-  - `required string fileID`
+  - `required string fileID` (path parameter)
 
     ID of the File.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -70266,7 +70190,7 @@ Delete File
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -70321,19 +70245,19 @@ Create Skill
 
   - `required IReadOnlyList<string> files`
 
-    Body param: Files to upload for the skill.
+    Files to upload for the skill.
 
     All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
   - `string? displayName`
 
-    Body param: Human-readable, single-line label for the Skill. Maximum 255 characters.
+    Human-readable, single-line label for the Skill. Maximum 255 characters.
     Always set: derived from the SKILL.md frontmatter `name` when omitted at
     creation. Not unique.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -70435,9 +70359,9 @@ Create Skill
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -70553,32 +70477,32 @@ List Skills
 
 - `SkillListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results to return per page.
+    Number of results to return per page.
 
     Ranges from `1` to `1000`. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Pagination token for fetching a specific page of results.
+    Pagination token for fetching a specific page of results.
 
     Pass the value from a previous response's `next_page` field to get the next page of results.
 
-  - `string? source`
+  - `string? source` (query parameter)
 
-    Query param: Filter skills by source.
+    Filter skills by source.
 
     If provided, only skills from the specified source will be returned:
 
     * `"custom"`: only return user-created skills
     * `"anthropic"`: only return Anthropic-created skills
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -70680,9 +70604,9 @@ List Skills
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -70799,13 +70723,13 @@ Get Skill
 
 - `SkillRetrieveParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -70909,7 +70833,7 @@ Get Skill
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -71021,13 +70945,13 @@ Delete Skill
 
 - `SkillDeleteParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -71131,7 +71055,7 @@ Delete Skill
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -71186,21 +71110,21 @@ Create Skill Version
 
 - `VersionCreateParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
   - `required IReadOnlyList<string> files`
 
-    Body param: Files to upload for the skill.
+    Files to upload for the skill.
 
     All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -71302,9 +71226,9 @@ Create Skill Version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -71390,27 +71314,27 @@ List Skill Versions
 
 - `VersionListParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
-    Query param: Number of results to return per page.
+    Number of results to return per page.
 
     Ranges from `1` to `1000`. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Optionally set to the `next_page` token from the previous response.
+    Optionally set to the `next_page` token from the previous response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -71512,9 +71436,9 @@ List Skill Versions
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -71600,21 +71524,21 @@ Download a skill version's content as a zip archive.
 
 - `VersionDownloadParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: Identifies the skill version by its version ID.
+    Identifies the skill version by its version ID.
 
     Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -71716,9 +71640,9 @@ Download a skill version's content as a zip archive.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -71748,21 +71672,21 @@ Get Skill Version
 
 - `VersionRetrieveParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
+    Identifies the skill version: a version ID, or the literal `latest` for the skill's most recent version.
 
     Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -71864,9 +71788,9 @@ Get Skill Version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -71949,21 +71873,21 @@ Delete Skill Version
 
 - `VersionDeleteParams parameters`
 
-  - `required string skillID`
+  - `required string skillID` (path parameter)
 
-    Path param: Unique identifier for the skill.
+    Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: Identifies the skill version by its version ID.
+    Identifies the skill version by its version ID.
 
     Requests carrying the `skills-2025-10-02` beta header address versions by their Unix epoch timestamp instead (e.g., "1759178010641129").
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -72065,9 +71989,9 @@ Delete Skill Version
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -72125,7 +72049,7 @@ Create User Profile
 
   - `AccessType accessType`
 
-    Body param: How the platform uses the API for this entity. `application` (default): the profile represents an individual end-user of the platform's product. `passthrough`: the profile identifies a company the platform resells Claude access to.
+    How the platform uses the API for this entity. `application` (default): the profile represents an individual end-user of the platform's product. `passthrough`: the profile identifies a company the platform resells Claude access to.
 
     - `Application("application")`
 
@@ -72137,33 +72061,33 @@ Create User Profile
 
   - `string? externalID`
 
-    Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+    Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
 
     minLength: 1, maxLength: 255
 
   - `BetaUserProfileExternalUserDetailsParams externalUserDetails`
 
-    Body param: Details about the entity this profile represents, as the platform states them. Every field is optional. Accepted under the `user-profiles-2026-09-04` beta header only.
+    Details about the entity this profile represents, as the platform states them. Every field is optional. Accepted under the `user-profiles-2026-09-04` beta header only.
 
   - `DateTimeOffset externalUserOnboardedAt`
 
-    Body param: When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+    When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
 
     format: date-time
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+    Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
   - `string? name`
 
-    Body param: Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a company the platform resells Claude access to (`access_type` `passthrough`), that company's name where known. Maximum 255 characters.
+    Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a company the platform resells Claude access to (`access_type` `passthrough`), that company's name where known. Maximum 255 characters.
 
     minLength: 1, maxLength: 255
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -72265,9 +72189,9 @@ Create User Profile
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -72449,15 +72373,15 @@ List User Profiles
 
 - `UserProfileListParams parameters`
 
-  - `int limit`
+  - `int limit` (query parameter)
 
-    Query param: The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
+    The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
-  - `Order order`
+  - `Order order` (query parameter)
 
-    Query param: The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
+    The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
 
     - `Asc("asc")`
 
@@ -72467,9 +72391,9 @@ List User Profiles
 
       Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
 
-  - `OrderBy orderBy`
+  - `OrderBy orderBy` (query parameter)
 
-    Query param: The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
+    The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
 
     - `CreatedAt("created_at")`
 
@@ -72479,15 +72403,15 @@ List User Profiles
 
       Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: The cursor for the page to return, taken from `next_page` in a previous response.
+    The cursor for the page to return, taken from `next_page` in a previous response.
 
     Leave it out to get the first page.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -72589,9 +72513,9 @@ List User Profiles
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -72780,11 +72704,11 @@ Get User Profile
 
 - `UserProfileRetrieveParams parameters`
 
-  - `required string userProfileID`
+  - `required string userProfileID` (path parameter)
 
     The ID of the user profile to get (`uprof_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -72888,7 +72812,7 @@ Get User Profile
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -73075,13 +72999,13 @@ Update User Profile
 
 - `UserProfileUpdateParams parameters`
 
-  - `required string userProfileID`
+  - `required string userProfileID` (path parameter)
 
-    Path param: The ID of the user profile to update (`uprof_...`).
+    The ID of the user profile to update (`uprof_...`).
 
   - `AccessType? accessType`
 
-    Body param: If present, replaces the stored access type. Omit to leave unchanged.
+    If present, replaces the stored access type. Omit to leave unchanged.
 
     - `Application("application")`
 
@@ -73093,33 +73017,33 @@ Update User Profile
 
   - `string? externalID`
 
-    Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+    If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
 
     minLength: 1, maxLength: 255
 
   - `BetaUserProfileExternalUserDetailsParams externalUserDetails`
 
-    Body param: Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Accepted under the `user-profiles-2026-09-04` beta header only.
+    Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Accepted under the `user-profiles-2026-09-04` beta header only.
 
   - `DateTimeOffset externalUserOnboardedAt`
 
-    Body param: If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+    If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
 
     format: date-time
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+    Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
   - `string? name`
 
-    Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+    If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
 
     minLength: 1, maxLength: 255
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -73221,9 +73145,9 @@ Update User Profile
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -73408,11 +73332,11 @@ Create Enrollment URL
 
 - `UserProfileCreateEnrollmentUrlParams parameters`
 
-  - `required string userProfileID`
+  - `required string userProfileID` (path parameter)
 
     The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -73516,7 +73440,7 @@ Create Enrollment URL
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -73585,7 +73509,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `required IReadOnlyList<BetaDreamInput> inputs`
 
-    Body param: The memory store and sessions for the dream to read, as exactly one `memory_store` entry and exactly one `sessions` entry.
+    The memory store and sessions for the dream to read, as exactly one `memory_store` entry and exactly one `sessions` entry.
 
     - `class BetaDreamMemoryStoreInput`
 
@@ -73619,7 +73543,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `required Model model`
 
-    Body param: The model that runs a dream, given as a model ID or as an object with `id` and `speed`.
+    The model that runs a dream, given as a model ID or as an object with `id` and `speed`.
 
     In the object form, `speed` can only be `standard`.
 
@@ -73653,7 +73577,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `string? instructions`
 
-    Body param: Guidance that steers how the dream reads the sessions and organizes the output memory store, from 1 to 4,096 characters.
+    Guidance that steers how the dream reads the sessions and organizes the output memory store, from 1 to 4,096 characters.
 
     See the [Dreams guide](../../managed-agents/dreams.md#steer-with-instructions) for what kinds of instructions work well.
 
@@ -73661,11 +73585,11 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `BetaOutputBehavior outputBehavior`
 
-    Body param: Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
+    Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -73767,9 +73691,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -74078,37 +74002,37 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
 - `DreamListParams parameters`
 
-  - `DateTimeOffset createdAtGt`
+  - `DateTimeOffset createdAtGt` (query parameter)
 
-    Query param: Return only dreams created after this time (exclusive), in RFC 3339.
-
-    format: date-time
-
-  - `DateTimeOffset createdAtLt`
-
-    Query param: Return only dreams created before this time (exclusive), in RFC 3339.
+    Return only dreams created after this time (exclusive), in RFC 3339.
 
     format: date-time
 
-  - `bool includeArchived`
+  - `DateTimeOffset createdAtLt` (query parameter)
 
-    Query param: Whether to include archived dreams. Defaults to `false`.
+    Return only dreams created before this time (exclusive), in RFC 3339.
 
-  - `int limit`
+    format: date-time
 
-    Query param: The maximum number of dreams to return, from 1 to 100. Defaults to 20.
+  - `bool includeArchived` (query parameter)
+
+    Whether to include archived dreams. Defaults to `false`.
+
+  - `int limit` (query parameter)
+
+    The maximum number of dreams to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: The cursor for the page to return, taken from `next_page` in a previous response.
+    The cursor for the page to return, taken from `next_page` in a previous response.
 
     Leave it out to get the first page.
 
-  - `IReadOnlyList<BetaDreamStatus> statuses`
+  - `IReadOnlyList<BetaDreamStatus> statuses` (query parameter)
 
-    Query param: Return only dreams that have one of these statuses.
+    Return only dreams that have one of these statuses.
 
     Repeat the parameter to give more than one status. Leave it out to return dreams of every status.
 
@@ -74140,9 +74064,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
       If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -74244,9 +74168,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -74551,11 +74475,11 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
 - `DreamRetrieveParams parameters`
 
-  - `required string dreamID`
+  - `required string dreamID` (path parameter)
 
     The ID of the dream to get (`drm_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -74659,7 +74583,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -74959,11 +74883,11 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
 - `DreamCancelParams parameters`
 
-  - `required string dreamID`
+  - `required string dreamID` (path parameter)
 
     The ID of the dream to cancel (`drm_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -75067,7 +74991,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -75367,11 +75291,11 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
 - `DreamArchiveParams parameters`
 
-  - `required string dreamID`
+  - `required string dreamID` (path parameter)
 
     The ID of the dream to archive (`drm_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -75475,7 +75399,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -75777,194 +75701,11 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
   - `string? displayName`
 
-    Body param: Optional human-readable name for the tunnel (1-255 characters).
+    Optional human-readable name for the tunnel (1-255 characters).
 
     minLength: 1, maxLength: 255
 
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
-
-    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
-
-    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
-
-    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
-
-    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
-
-    - `Pdfs2024_09_25("pdfs-2024-09-25")`
-
-    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
-
-    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `Output128k2025_02_19("output-128k-2025-02-19")`
-
-    - `FilesApi2025_04_14("files-api-2025-04-14")`
-
-    - `McpClient2025_04_04("mcp-client-2025-04-04")`
-
-    - `McpClient2025_11_20("mcp-client-2025-11-20")`
-
-    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
-
-    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `Context1m2025_08_07("context-1m-2025-08-07")`
-
-    - `ContextManagement2025_06_27("context-management-2025-06-27")`
-
-    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `Skills2025_10_02("skills-2025-10-02")`
-
-    - `FastMode2026_02_01("fast-mode-2026-02-01")`
-
-    - `Output300k2026_03_24("output-300k-2026-03-24")`
-
-    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
-
-    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
-
-    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
-
-    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
-
-    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
-
-    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
-
-    - `Dreaming2026_04_21("dreaming-2026-04-21")`
-
-    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
-
-    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
-
-    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
-
-    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
-
-    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
-
-    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
-
-    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
-
-    - `Compact2026_01_12("compact-2026-01-12")`
-
-    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
-
-    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
-
-    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
-
-    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
-
-    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
-
-    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
-
-    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
-
-    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
-
-    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
-
-    - `Compact2026_09_04("compact-2026-09-04")`
-
-    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
-
-    - `McpClient2026_09_15("mcp-client-2026-09-15")`
-
-    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
-
-    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
-
-  - `string workspaceID`
-
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
-
-    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
-
-#### Returns
-
-- `class BetaTunnel`
-
-  An MCP tunnel.
-
-  - `JsonElement Type = "tunnel"`
-
-  - `required string ID`
-
-    Unique identifier for the tunnel, prefixed with `tnl_`.
-
-  - `required DateTimeOffset? ArchivedAt`
-
-    RFC 3339 datetime string indicating when the tunnel was archived. Null if it is not archived.
-
-    format: date-time
-
-  - `required DateTimeOffset CreatedAt`
-
-    RFC 3339 datetime string indicating when the tunnel was created.
-
-    format: date-time
-
-  - `required string? DisplayName`
-
-    Human-readable name for the tunnel (1-255 characters). Null if unset.
-
-  - `required string Domain`
-
-    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
-
-#### Example
-
-```csharp
-TunnelCreateParams parameters = new();
-
-var betaTunnel = await client.Beta.Tunnels.Create(parameters);
-
-Console.WriteLine(betaTunnel);
-```
-
-##### Response (200)
-
-```json
-{
-  "id": "id",
-  "archived_at": "2019-12-27T18:11:19.117Z",
-  "created_at": "2019-12-27T18:11:19.117Z",
-  "display_name": "display_name",
-  "domain": "domain",
-  "type": "tunnel"
-}
-```
-
-### Get Tunnel
-
-`BetaTunnel Beta.Tunnels.Retrieve(parameters, cancellationToken = default)`
-
-**GET** `/v1/tunnels/{tunnel_id}`
-
-The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
-
-Fetches a tunnel by ID.
-
-#### Parameters
-
-- `TunnelRetrieveParams parameters`
-
-  - `required string tunnelID`
-
-    ID of the tunnel (`tnl_...`).
-
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -76068,7 +75809,7 @@ Fetches a tunnel by ID.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -76109,9 +75850,9 @@ Fetches a tunnel by ID.
 #### Example
 
 ```csharp
-TunnelRetrieveParams parameters = new() { TunnelID = "tunnel_id" };
+TunnelCreateParams parameters = new();
 
-var betaTunnel = await client.Beta.Tunnels.Retrieve(parameters);
+var betaTunnel = await client.Beta.Tunnels.Create(parameters);
 
 Console.WriteLine(betaTunnel);
 ```
@@ -76129,37 +75870,27 @@ Console.WriteLine(betaTunnel);
 }
 ```
 
-### List Tunnels
+### Get Tunnel
 
-`TunnelListPage Beta.Tunnels.List(parameters, cancellationToken = default)`
+`BetaTunnel Beta.Tunnels.Retrieve(parameters, cancellationToken = default)`
 
-**GET** `/v1/tunnels`
+**GET** `/v1/tunnels/{tunnel_id}`
 
 The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
 
-Lists tunnels. Results are ordered by creation time, newest first; archived tunnels are excluded unless include_archived is set.
+Fetches a tunnel by ID.
 
 #### Parameters
 
-- `TunnelListParams parameters`
+- `TunnelRetrieveParams parameters`
 
-  - `bool includeArchived`
+  - `required string tunnelID` (path parameter)
 
-    Query param: Whether to include archived tunnels in the results. Defaults to false.
+    ID of the tunnel (`tnl_...`).
 
-  - `int limit`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Query param: Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
-
-    format: int32
-
-  - `string page`
-
-    Query param: Opaque pagination cursor from a previous `list_tunnels` response.
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -76261,9 +75992,202 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Returns
+
+- `class BetaTunnel`
+
+  An MCP tunnel.
+
+  - `JsonElement Type = "tunnel"`
+
+  - `required string ID`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `required DateTimeOffset? ArchivedAt`
+
+    RFC 3339 datetime string indicating when the tunnel was archived. Null if it is not archived.
+
+    format: date-time
+
+  - `required DateTimeOffset CreatedAt`
+
+    RFC 3339 datetime string indicating when the tunnel was created.
+
+    format: date-time
+
+  - `required string? DisplayName`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `required string Domain`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+#### Example
+
+```csharp
+TunnelRetrieveParams parameters = new() { TunnelID = "tunnel_id" };
+
+var betaTunnel = await client.Beta.Tunnels.Retrieve(parameters);
+
+Console.WriteLine(betaTunnel);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "display_name": "display_name",
+  "domain": "domain",
+  "type": "tunnel"
+}
+```
+
+### List Tunnels
+
+`TunnelListPage Beta.Tunnels.List(parameters, cancellationToken = default)`
+
+**GET** `/v1/tunnels`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Lists tunnels. Results are ordered by creation time, newest first; archived tunnels are excluded unless include_archived is set.
+
+#### Parameters
+
+- `TunnelListParams parameters`
+
+  - `bool includeArchived` (query parameter)
+
+    Whether to include archived tunnels in the results. Defaults to false.
+
+  - `int limit` (query parameter)
+
+    Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
+
+    format: int32
+
+  - `string page` (query parameter)
+
+    Opaque pagination cursor from a previous `list_tunnels` response.
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+  - `string workspaceID` (header parameter)
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -76343,11 +76267,11 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 - `TunnelArchiveParams parameters`
 
-  - `required string tunnelID`
+  - `required string tunnelID` (path parameter)
 
     ID of the tunnel (`tnl_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -76451,7 +76375,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -76526,11 +76450,11 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 - `TunnelRevealTokenParams parameters`
 
-  - `required string tunnelID`
+  - `required string tunnelID` (path parameter)
 
     ID of the tunnel (`tnl_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -76634,7 +76558,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -76690,19 +76614,19 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 - `TunnelRotateTokenParams parameters`
 
-  - `required string tunnelID`
+  - `required string tunnelID` (path parameter)
 
-    Path param: ID of the tunnel (`tnl_...`).
+    ID of the tunnel (`tnl_...`).
 
   - `string? reason`
 
-    Body param: Optional free-text reason for the rotation, recorded for audit.
+    Optional free-text reason for the rotation, recorded for audit.
 
     maxLength: 1024
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -76804,9 +76728,9 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -76862,19 +76786,19 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 - `CertificateCreateParams parameters`
 
-  - `required string tunnelID`
+  - `required string tunnelID` (path parameter)
 
-    Path param: ID of the tunnel (`tnl_...`).
+    ID of the tunnel (`tnl_...`).
 
   - `required string caCertificatePem`
 
-    Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
+    PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
 
     maxLength: 8192
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -76976,9 +76900,9 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -77062,17 +76986,17 @@ Fetches a tunnel certificate by ID.
 
 - `CertificateRetrieveParams parameters`
 
-  - `required string tunnelID`
+  - `required string tunnelID` (path parameter)
 
-    Path param: ID of the tunnel (`tnl_...`).
+    ID of the tunnel (`tnl_...`).
 
-  - `required string certificateID`
+  - `required string certificateID` (path parameter)
 
-    Path param: ID of the certificate (`tcrt_...`).
+    ID of the certificate (`tcrt_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -77174,9 +77098,9 @@ Fetches a tunnel certificate by ID.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -77260,27 +77184,27 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 - `CertificateListParams parameters`
 
-  - `required string tunnelID`
+  - `required string tunnelID` (path parameter)
 
-    Path param: ID of the tunnel (`tnl_...`).
+    ID of the tunnel (`tnl_...`).
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Whether to include archived certificates in the results. Defaults to false.
+    Whether to include archived certificates in the results. Defaults to false.
 
-  - `int limit`
+  - `int limit` (query parameter)
 
-    Query param: Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
+    Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
 
     format: int32
 
-  - `string page`
+  - `string page` (query parameter)
 
-    Query param: Opaque pagination cursor from a previous `list_tunnel_certificates` response.
+    Opaque pagination cursor from a previous `list_tunnel_certificates` response.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -77382,9 +77306,9 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -77471,17 +77395,17 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 - `CertificateArchiveParams parameters`
 
-  - `required string tunnelID`
+  - `required string tunnelID` (path parameter)
 
-    Path param: ID of the tunnel (`tnl_...`).
+    ID of the tunnel (`tnl_...`).
 
-  - `required string certificateID`
+  - `required string certificateID` (path parameter)
 
-    Path param: ID of the certificate to archive (`tcrt_...`).
+    ID of the certificate to archive (`tcrt_...`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -77583,9 +77507,9 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
-  - `string workspaceID`
+  - `string workspaceID` (header parameter)
 
-    Header param: Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
@@ -77723,19 +77647,19 @@ List API Keys
 
 - `ApiKeyListParams parameters`
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `string? createdByUserID`
+  - `string? createdByUserID` (query parameter)
 
     Filter by the ID of the User who created the object.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -77743,7 +77667,7 @@ List API Keys
 
     minimum: 1, maximum: 1000
 
-  - `Status? status`
+  - `Status? status` (query parameter)
 
     Filter by API key status.
 
@@ -77755,7 +77679,7 @@ List API Keys
 
     - `Inactive("inactive")`
 
-  - `string? workspaceID`
+  - `string? workspaceID` (query parameter)
 
     Filter by Workspace ID.
 
@@ -77931,7 +77855,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
 - `ApiKeyRetrieveParams parameters`
 
-  - `required string apiKeyID`
+  - `required string apiKeyID` (path parameter)
 
     ID of the API key.
 
@@ -78098,7 +78022,7 @@ Update API Key
 
 - `ApiKeyUpdateParams parameters`
 
-  - `required string apiKeyID`
+  - `required string apiKeyID` (path parameter)
 
     ID of the API key.
 
@@ -78500,13 +78424,13 @@ Results are ordered by creation time (newest first). Use the
 
 - `ExternalKeyListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
@@ -78657,7 +78581,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
 - `ExternalKeyRetrieveParams parameters`
 
-  - `required string externalKeyID`
+  - `required string externalKeyID` (path parameter)
 
     ID of the External Key.
 
@@ -78810,7 +78734,7 @@ encrypted data requires the original key identity to decrypt.
 
 - `ExternalKeyUpdateParams parameters`
 
-  - `required string externalKeyID`
+  - `required string externalKeyID` (path parameter)
 
     ID of the External Key.
 
@@ -79027,7 +78951,7 @@ The request is rejected if any workspace still references this config.
 
 - `ExternalKeyDeleteParams parameters`
 
-  - `required string externalKeyID`
+  - `required string externalKeyID` (path parameter)
 
     ID of the External Key.
 
@@ -79082,7 +79006,7 @@ message if it failed or timed out.
 
 - `ExternalKeyValidateParams parameters`
 
-  - `required string externalKeyID`
+  - `required string externalKeyID` (path parameter)
 
     ID of the External Key.
 
@@ -79162,23 +79086,23 @@ matched as the JWT's `iss` claim and is not fetched.
 
   - `required string issuerUrl`
 
-    Body param: The `iss` claim value to match against.
+    The `iss` claim value to match against.
 
     minLength: 1
 
   - `required string name`
 
-    Body param: Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+    Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
   - `bool? checkJti`
 
-    Body param: Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
+    Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
   - `Jwks jwks`
 
-    Body param: How signing keys are obtained. Defaults to OIDC discovery.
+    How signing keys are obtained. Defaults to OIDC discovery.
 
     - `class BetaJwksDiscovery`
 
@@ -79228,13 +79152,13 @@ matched as the JWT's `iss` claim and is not fetched.
 
   - `long? maxJwtLifetimeSeconds`
 
-    Body param: Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
+    Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
     minimum: 1, maximum: 176400
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -79533,23 +79457,23 @@ Archived issuers are excluded unless `include_archived=true`.
 
 - `IssuerListParams parameters`
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Include archived resources. Defaults to false.
+    Include archived resources. Defaults to false.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results per page.
+    Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page`.
+    Opaque cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -79849,11 +79773,11 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
 - `IssuerRetrieveParams parameters`
 
-  - `required string federationIssuerID`
+  - `required string federationIssuerID` (path parameter)
 
     ID of the federation issuer.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -80158,23 +80082,23 @@ session.
 
 - `IssuerUpdateParams parameters`
 
-  - `required string federationIssuerID`
+  - `required string federationIssuerID` (path parameter)
 
-    Path param: ID of the federation issuer to update.
+    ID of the federation issuer to update.
 
   - `bool? checkJti`
 
-    Body param: Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
+    Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
   - `string? issuerUrl`
 
-    Body param: Replaces the `iss` claim value to match against. For discovery-mode issuers without a `discovery_base`, this is also the URL Anthropic fetches the OIDC discovery document and signing keys from, so changing it repoints the JWKS source. Changing the issuer URL to a well-known shared platform is rejected while any live rule under this issuer would not constrain tenant identity.
+    Replaces the `iss` claim value to match against. For discovery-mode issuers without a `discovery_base`, this is also the URL Anthropic fetches the OIDC discovery document and signing keys from, so changing it repoints the JWKS source. Changing the issuer URL to a well-known shared platform is rejected while any live rule under this issuer would not constrain tenant identity.
 
     minLength: 1
 
   - `Jwks? jwks`
 
-    Body param: Replaces the entire JWKS configuration.
+    Replaces the entire JWKS configuration.
 
     - `class BetaJwksDiscovery`
 
@@ -80224,23 +80148,23 @@ session.
 
   - `bool? jwksPollingDisabled`
 
-    Body param: Only `false` is accepted, to re-enable polling after the system pauses it. Polling is paused automatically; sending `true` is rejected.
+    Only `false` is accepted, to re-enable polling after the system pauses it. Polling is paused automatically; sending `true` is rejected.
 
   - `long? maxJwtLifetimeSeconds`
 
-    Body param: Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
+    Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
     minimum: 1, maximum: 176400
 
   - `string? name`
 
-    Body param: Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+    Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -80541,11 +80465,11 @@ issuer cannot be changed), or recreate them against another issuer.
 
 - `IssuerArchiveParams parameters`
 
-  - `required string federationIssuerID`
+  - `required string federationIssuerID` (path parameter)
 
     ID of the federation issuer to archive.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -80861,55 +80785,55 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `required string issuerID`
 
-    Body param: Tagged ID of the federation issuer.
+    Tagged ID of the federation issuer.
 
   - `required BetaFederationRuleMatch match`
 
-    Body param: Conditions the verified JWT must satisfy for this rule to apply. At least one of `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or `condition` is required; `audience` alone is not sufficient.
+    Conditions the verified JWT must satisfy for this rule to apply. At least one of `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or `condition` is required; `audience` alone is not sufficient.
 
   - `required string name`
 
-    Body param: Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+    Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
   - `required string oauthScope`
 
-    Body param: Space-separated OAuth scopes. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
+    Space-separated OAuth scopes. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
 
     minLength: 1
 
   - `required BetaServiceAccountTarget target`
 
-    Body param: Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+    Identity that tokens minted via this rule act as. Currently always a `service_account` target.
 
   - `bool appliesToAllWorkspaces`
 
-    Body param: When true, enable this rule for every workspace in the org (including workspaces created later).
+    When true, enable this rule for every workspace in the org (including workspaces created later).
 
   - `IReadOnlyDictionary<string, string>? attributes`
 
-    Body param: CEL expressions `{name: expr}` extracting named values from claims. Not yet supported; any non-empty value is rejected with 400.
+    CEL expressions `{name: expr}` extracting named values from claims. Not yet supported; any non-empty value is rejected with 400.
 
   - `string? description`
 
-    Body param: Optional free-text description.
+    Optional free-text description.
 
     maxLength: 2000
 
   - `long tokenLifetimeSeconds`
 
-    Body param: Lifetime in seconds for access tokens minted via this rule (60-86400). Defaults to 3600 (1h). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
+    Lifetime in seconds for access tokens minted via this rule (60-86400). Defaults to 3600 (1h). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
     minimum: 60, maximum: 86400
 
   - `string? workspaceID`
 
-    Body param: Tagged ID of the workspace to enable this rule for. Required unless `applies_to_all_workspaces` is true. Additional workspaces can be added via the `/federation_rules/{federation_rule_id}/workspaces` sub-resource.
+    Tagged ID of the workspace to enable this rule for. Required unless `applies_to_all_workspaces` is true. Additional workspaces can be added via the `/federation_rules/{federation_rule_id}/workspaces` sub-resource.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -81228,27 +81152,27 @@ unless `include_archived=true`.
 
 - `RuleListParams parameters`
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Include archived resources. Defaults to false.
+    Include archived resources. Defaults to false.
 
-  - `string? issuerID`
+  - `string? issuerID` (query parameter)
 
-    Query param: Filter to rules referencing this federation issuer.
+    Filter to rules referencing this federation issuer.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results per page.
+    Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page`.
+    Opaque cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -81554,11 +81478,11 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
 - `RuleRetrieveParams parameters`
 
-  - `required string federationRuleID`
+  - `required string federationRuleID` (path parameter)
 
     ID of the federation rule.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -81878,57 +81802,57 @@ Console session.
 
 - `RuleUpdateParams parameters`
 
-  - `required string federationRuleID`
+  - `required string federationRuleID` (path parameter)
 
-    Path param: ID of the federation rule to update.
+    ID of the federation rule to update.
 
   - `bool? appliesToAllWorkspaces`
 
-    Body param: When true, enables this rule for every workspace in the org (including workspaces created later). Setting `false` is rejected with 400 if no workspace would remain enabled; a rule with only a legacy `workspace_id` binding continues to mint.
+    When true, enables this rule for every workspace in the org (including workspaces created later). Setting `false` is rejected with 400 if no workspace would remain enabled; a rule with only a legacy `workspace_id` binding continues to mint.
 
   - `IReadOnlyDictionary<string, string>? attributes`
 
-    Body param: Replaces the CEL expressions `{name: expr}` extracting named values from claims. Send null to clear them. Not yet supported; any non-empty value is rejected with 400.
+    Replaces the CEL expressions `{name: expr}` extracting named values from claims. Send null to clear them. Not yet supported; any non-empty value is rejected with 400.
 
   - `string? description`
 
-    Body param: Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
+    Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
 
     maxLength: 2000
 
   - `BetaFederationRuleMatch? match`
 
-    Body param: Replaces the entire match object. All populated matcher fields must pass.
+    Replaces the entire match object. All populated matcher fields must pass.
 
   - `string? name`
 
-    Body param: Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+    Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
   - `string? oauthScope`
 
-    Body param: Replaces the space-separated OAuth scopes granted on minted tokens. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
+    Replaces the space-separated OAuth scopes granted on minted tokens. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
 
     minLength: 1
 
   - `BetaServiceAccountTarget? target`
 
-    Body param: Replaces the entire target object. Currently always a `service_account` target.
+    Replaces the entire target object. Currently always a `service_account` target.
 
   - `long? tokenLifetimeSeconds`
 
-    Body param: Replaces the lifetime in seconds for access tokens minted via this rule (60-86400). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
+    Replaces the lifetime in seconds for access tokens minted via this rule (60-86400). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
     minimum: 60, maximum: 86400
 
   - `string? workspaceID`
 
-    Body param: Replaces the existing single workspace enablement (the previous one is removed). Rejected with 400 if the rule is enabled for more than one workspace; use the `/federation_rules/{federation_rule_id}/workspaces` sub-resource instead.
+    Replaces the existing single workspace enablement (the previous one is removed). Rejected with 400 if the rule is enabled for more than one workspace; use the `/federation_rules/{federation_rule_id}/workspaces` sub-resource instead.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -82235,11 +82159,11 @@ other scopes require a Console session.
 
 - `RuleArchiveParams parameters`
 
-  - `required string federationRuleID`
+  - `required string federationRuleID` (path parameter)
 
     ID of the federation rule to archive.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -82554,17 +82478,17 @@ other scopes require a Console session.
 
 - `WorkspaceAddParams parameters`
 
-  - `required string federationRuleID`
+  - `required string federationRuleID` (path parameter)
 
-    Path param: ID of the federation rule.
+    ID of the federation rule.
 
   - `required string workspaceID`
 
-    Body param: Tagged ID of the workspace to enable this rule for.
+    Tagged ID of the workspace to enable this rule for.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -82741,23 +82665,23 @@ rules with `applies_to_all_workspaces` or a legacy single
 
 - `WorkspaceListParams parameters`
 
-  - `required string federationRuleID`
+  - `required string federationRuleID` (path parameter)
 
-    Path param: ID of the federation rule.
+    ID of the federation rule.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results per page.
+    Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page`.
+    Opaque cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -82939,17 +82863,17 @@ Console session.
 
 - `WorkspaceRemoveParams parameters`
 
-  - `required string federationRuleID`
+  - `required string federationRuleID` (path parameter)
 
-    Path param: ID of the federation rule.
+    ID of the federation rule.
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the workspace to disable for.
+    ID of the workspace to disable for.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -83251,21 +83175,21 @@ List the organization's invites.
 
 - `InviteListParams parameters`
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `string email`
+  - `string email` (query parameter)
 
     Filter by the email address the Invite was sent to. Matches the same way as the Users list's `email` filter (normalized, case-insensitive).
 
     format: email
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -83273,13 +83197,13 @@ List the organization's invites.
 
     minimum: 1, maximum: 1000
 
-  - `IReadOnlyList<string> roles`
+  - `IReadOnlyList<string> roles` (query parameter)
 
     Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
     Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
-  - `IReadOnlyList<Status> statuses`
+  - `IReadOnlyList<Status> statuses` (query parameter)
 
     Filter by Invite status. Repeatable; values are OR'ed together. Omit to return `pending`, `accepted`, and `expired` Invites alike.
 
@@ -83412,7 +83336,7 @@ Retrieve an invite by ID.
 
 - `InviteRetrieveParams parameters`
 
-  - `required string inviteID`
+  - `required string inviteID` (path parameter)
 
     ID of the Invite.
 
@@ -83530,7 +83454,7 @@ Delete a pending invite.
 
 - `InviteDeleteParams parameters`
 
-  - `required string inviteID`
+  - `required string inviteID` (path parameter)
 
     ID of the Invite.
 
@@ -83593,27 +83517,27 @@ accounts.
 
   - `required string name`
 
-    Body param: Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
+    Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
   - `string? description`
 
-    Body param: Optional free-text description.
+    Optional free-text description.
 
     maxLength: 2000
 
   - `OrganizationRole organizationRole`
 
-    Body param: Org-level role. Defaults to `developer`.
+    Org-level role. Defaults to `developer`.
 
     - `Admin("admin")`
 
     - `Developer("developer")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -83822,23 +83746,23 @@ archived service accounts.
 
 - `ServiceAccountListParams parameters`
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
-    Query param: Include archived resources. Defaults to false.
+    Include archived resources. Defaults to false.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results per page.
+    Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page`.
+    Opaque cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -84050,11 +83974,11 @@ Retrieve a service account by its ID (`svac_...`).
 
 - `ServiceAccountRetrieveParams parameters`
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
     ID of the service account.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -84269,27 +84193,27 @@ interactive credential (a user OAuth token or a Console session).
 
 - `ServiceAccountUpdateParams parameters`
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
-    Path param: ID of the service account to update.
+    ID of the service account to update.
 
   - `string? description`
 
-    Body param: Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
+    Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
 
     maxLength: 2000
 
   - `OrganizationRole? organizationRole`
 
-    Body param: Replaces the org-level role. Omit or send `null` to leave unchanged.
+    Replaces the org-level role. Omit or send `null` to leave unchanged.
 
     - `Admin("admin")`
 
     - `Developer("developer")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -84502,11 +84426,11 @@ those rules first or change their target to another service account.
 
 - `ServiceAccountArchiveParams parameters`
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
     ID of the service account to archive.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -84725,21 +84649,21 @@ rejected.
 
 - `WorkspaceAddParams parameters`
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
-    Path param: ID of the service account.
+    ID of the service account.
 
   - `required string workspaceID`
 
-    Body param: Tagged workspace ID to add the service account to.
+    Tagged workspace ID to add the service account to.
 
   - `required BetaNoBillingWorkspaceRole workspaceRole`
 
-    Body param: Role to assign to the service account in this workspace.
+    Role to assign to the service account in this workspace.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -84933,23 +84857,23 @@ page to recover.
 
 - `WorkspaceListParams parameters`
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
-    Path param: ID of the service account.
+    ID of the service account.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results per page.
+    Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page`.
+    Opaque cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -85142,17 +85066,17 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
 - `WorkspaceRemoveParams parameters`
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
-    Path param: ID of the service account.
+    ID of the service account.
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the workspace.
+    ID of the workspace.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -85306,21 +85230,21 @@ List the organization's members.
 
 - `UserListParams parameters`
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `string email`
+  - `string email` (query parameter)
 
     Filter by user email.
 
     format: email
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -85328,7 +85252,7 @@ List the organization's members.
 
     minimum: 1, maximum: 1000
 
-  - `IReadOnlyList<string> roles`
+  - `IReadOnlyList<string> roles` (query parameter)
 
     Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
@@ -85428,7 +85352,7 @@ Retrieve a member of the organization by user ID.
 
 - `UserRetrieveParams parameters`
 
-  - `required string userID`
+  - `required string userID` (path parameter)
 
     ID of the User.
 
@@ -85517,7 +85441,7 @@ Update a member's organization role.
 
 - `UserUpdateParams parameters`
 
-  - `required string userID`
+  - `required string userID` (path parameter)
 
     ID of the User.
 
@@ -85626,7 +85550,7 @@ Remove a member from the organization.
 
 - `UserRemoveParams parameters`
 
-  - `required string userID`
+  - `required string userID` (path parameter)
 
     ID of the User.
 
@@ -85677,23 +85601,23 @@ List Workspaces
 
 - `WorkspaceListParams parameters`
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `bool includeArchived`
+  - `bool includeArchived` (query parameter)
 
     Whether to include Workspaces that have been archived in the response
 
-  - `bool includeDefault`
+  - `bool includeDefault` (query parameter)
 
     Whether to include the organization's default Workspace in the response
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -85852,23 +85776,23 @@ Create Workspace
 
   - `required string name`
 
-    Body param: Name of the Workspace.
+    Name of the Workspace.
 
     minLength: 1, maxLength: 40
 
   - `BetaDataResidencyCreateConfig? dataResidency`
 
-    Body param: Data residency configuration for the workspace. If omitted, defaults to `workspace_geo: "us"`, `allowed_inference_geos: "unrestricted"`, and `default_inference_geo: "global"`.
+    Data residency configuration for the workspace. If omitted, defaults to `workspace_geo: "us"`, `allowed_inference_geos: "unrestricted"`, and `default_inference_geo: "global"`.
 
   - `string? displayColor`
 
-    Body param: Hex color code representing the Workspace in the Anthropic Console.
+    Hex color code representing the Workspace in the Anthropic Console.
 
     maxLength: 7, pattern: ^#[0-9A-Fa-f]{6}$
 
   - `string? externalKeyID`
 
-    Body param: ID of the customer-managed encryption key (CMEK) configuration to use for this
+    ID of the customer-managed encryption key (CMEK) configuration to use for this
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
@@ -85882,11 +85806,11 @@ Create Workspace
 
   - `IReadOnlyDictionary<string, string>? tags`
 
-    Body param: User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -86128,7 +86052,7 @@ Get Workspace
 
 - `WorkspaceRetrieveParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
     ID of the Workspace.
 
@@ -86272,7 +86196,7 @@ Update Workspace
 
 - `WorkspaceUpdateParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
   - `BetaDataResidencyUpdateConfig? dataResidency`
 
@@ -86448,7 +86372,7 @@ Archive Workspace
 
 - `WorkspaceArchiveParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
 #### Returns
 
@@ -86602,11 +86526,11 @@ the remaining entries.
 
 - `RateLimitListParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
     The ID of the workspace.
 
-  - `GroupType? groupType`
+  - `GroupType? groupType` (query parameter)
 
     Filter by group type.
 
@@ -86622,11 +86546,11 @@ the remaining entries.
 
     - `WebSearch("web_search")`
 
-  - `bool includeInherited`
+  - `bool includeInherited` (query parameter)
 
     Also list the limiter values the workspace inherits from the organization, including groups with no workspace-level override.
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Maximum number of items to return per page. Ranges from `1` to `1000`.
 
@@ -86634,7 +86558,7 @@ the remaining entries.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
@@ -86836,19 +86760,19 @@ List Workspace Members
 
 - `MemberListParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
     ID of the Workspace.
 
-  - `string afterID`
+  - `string afterID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `string beforeID`
+  - `string beforeID` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -86930,7 +86854,7 @@ Create Workspace Member
 
 - `MemberAddParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
     ID of the Workspace.
 
@@ -87012,11 +86936,11 @@ Get Workspace Member
 
 - `MemberRetrieveParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
     ID of the Workspace.
 
-  - `required string userID`
+  - `required string userID` (path parameter)
 
     ID of the User.
 
@@ -87089,17 +87013,17 @@ Update Workspace Member
 
 - `MemberUpdateParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the Workspace.
+    ID of the Workspace.
 
-  - `required string userID`
+  - `required string userID` (path parameter)
 
-    Path param: ID of the User.
+    ID of the User.
 
   - `required BetaWorkspaceRole workspaceRole`
 
-    Body param: New workspace role for the User.
+    New workspace role for the User.
 
 #### Returns
 
@@ -87171,11 +87095,11 @@ Delete Workspace Member
 
 - `MemberRemoveParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
     ID of the Workspace.
 
-  - `required string userID`
+  - `required string userID` (path parameter)
 
     ID of the User.
 
@@ -87244,23 +87168,23 @@ omitted from the results.
 
 - `ServiceAccountListParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the workspace.
+    ID of the workspace.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of results per page.
+    Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page`.
+    Opaque cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -87451,21 +87375,21 @@ accounts cannot be added and are rejected.
 
 - `ServiceAccountAddParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the workspace.
+    ID of the workspace.
 
   - `required string serviceAccountID`
 
-    Body param: Tagged service account ID to add.
+    Tagged service account ID to add.
 
   - `required BetaNoBillingWorkspaceRole workspaceRole`
 
-    Body param: Role to assign to the service account in this workspace.
+    Role to assign to the service account in this workspace.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -87652,17 +87576,17 @@ account returns 404.
 
 - `ServiceAccountRetrieveParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the workspace.
+    ID of the workspace.
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
-    Path param: ID of the service account.
+    ID of the service account.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -87848,21 +87772,21 @@ rejected.
 
 - `ServiceAccountUpdateParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the workspace.
+    ID of the workspace.
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
-    Path param: ID of the service account.
+    ID of the service account.
 
   - `required BetaNoBillingWorkspaceRole workspaceRole`
 
-    Body param: New role for the service account in this workspace.
+    New role for the service account in this workspace.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -88048,17 +87972,17 @@ membership. Archived workspaces return 400.
 
 - `ServiceAccountRemoveParams parameters`
 
-  - `required string workspaceID`
+  - `required string workspaceID` (path parameter)
 
-    Path param: ID of the workspace.
+    ID of the workspace.
 
-  - `required string serviceAccountID`
+  - `required string serviceAccountID` (path parameter)
 
-    Path param: ID of the service account.
+    ID of the service account.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: Optional header to specify the beta version(s) you want to use.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -88220,7 +88144,7 @@ the remaining entries.
 
 - `RateLimitListParams parameters`
 
-  - `GroupType? groupType`
+  - `GroupType? groupType` (query parameter)
 
     Filter by group type.
 
@@ -88236,7 +88160,7 @@ the remaining entries.
 
     - `WebSearch("web_search")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Maximum number of items to return per page. Ranges from `1` to `1000`.
 
@@ -88244,11 +88168,11 @@ the remaining entries.
 
     minimum: 1, maximum: 1000
 
-  - `string? model`
+  - `string? model` (query parameter)
 
     Filter to the single entry containing this model. Accepts full model names and aliases. Returns 404 if the model is not found or has no rate limits for this organization.
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
@@ -88561,31 +88485,31 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 - `SummaryListParams parameters`
 
-  - `required DateOnly startingDate`
+  - `required DateOnly startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of the date range (inclusive). Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate`
+  - `DateOnly? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive). Data is typically available with a 1-day lag, so this can be at most today — which is also the default when omitted, making the last entry cover the most recent available day. Data may be revised by a few percent over the following days. The range may span at most 366 days.
 
     format: date
 
-  - `IReadOnlyList<string>? filter`
+  - `IReadOnlyList<string>? filter` (query parameter)
 
     Filters as `dimension:value`. Only `rbac_group_id` is supported (e.g. `filter[]=rbac_group_id:{id}`); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. `rbac_group_id` accepts the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
 
     maxItems: 100
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Number of results per page (1-1000, default 100). The day series (at most 366 entries) is currently returned in full in a single page, so `limit` does not yet shorten it.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field. `next_page` is currently always null, so there is never a cursor to send.
 
@@ -88821,25 +88745,25 @@ the `read:analytics` scope.
 
 - `UserListParams parameters`
 
-  - `DateOnly? date`
+  - `DateOnly? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get user activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate`
+  - `DateOnly? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `IReadOnlyList<string>? filter`
+  - `IReadOnlyList<string>? filter` (query parameter)
 
     Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `project_id`, `rbac_group_id`, `user_id`. Value forms: `project_id` takes a tagged project id (`claude_proj_...`) and scopes each member's row to their claude.ai chat activity within that project (it cannot be combined with `group_by[]` or an `rbac_group_id` filter); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
     maxItems: 100
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=rbac_group_id`). Supported on this endpoint: `rbac_group_id`. Rows are already per-member, so the one supported grouping aggregates them per RBAC group instead. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -88847,13 +88771,13 @@ the `read:analytics` scope.
 
     - `RbacGroupID("rbac_group_id")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order? order`
+  - `Order? order` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -88861,15 +88785,15 @@ the `read:analytics` scope.
 
     - `Desc("desc")`
 
-  - `string? orderBy`
+  - `string? orderBy` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate`
+  - `DateOnly? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -89359,25 +89283,25 @@ plan. Requires an API key with the `read:analytics` scope.
 
 - `ProjectListParams parameters`
 
-  - `DateOnly? date`
+  - `DateOnly? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get project activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate`
+  - `DateOnly? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `IReadOnlyList<string>? filter`
+  - `IReadOnlyList<string>? filter` (query parameter)
 
     Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `project_id`, `rbac_group_id`, `user_id`. Value forms: `project_id` takes a tagged project id (`claude_proj_...`); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
     maxItems: 100
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -89387,13 +89311,13 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `UserID("user_id")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order? order`
+  - `Order? order` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -89401,15 +89325,15 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `Desc("desc")`
 
-  - `string? orderBy`
+  - `string? orderBy` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate`
+  - `DateOnly? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -89541,25 +89465,25 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `ConnectorListParams parameters`
 
-  - `DateOnly? date`
+  - `DateOnly? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get connector usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate`
+  - `DateOnly? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `IReadOnlyList<string>? filter`
+  - `IReadOnlyList<string>? filter` (query parameter)
 
     Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `connector_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `connector_name` matches case-insensitively, a display name such as 'GitHub MCP' also matches its normalized stored form ('github'), and for rows whose `connector_name` is an opaque connector id the connector's display name (`connector_display_name`) also matches; `product` is one of `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
     maxItems: 100
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -89571,13 +89495,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `UserID("user_id")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order? order`
+  - `Order? order` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -89585,15 +89509,15 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Desc("desc")`
 
-  - `string? orderBy`
+  - `string? orderBy` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate`
+  - `DateOnly? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -89786,25 +89710,25 @@ range-rollup mode like `/skills`.
 
 - `PluginListParams parameters`
 
-  - `DateOnly? date`
+  - `DateOnly? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get plugin usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate`
+  - `DateOnly? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `IReadOnlyList<string>? filter`
+  - `IReadOnlyList<string>? filter` (query parameter)
 
     Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `plugin_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `plugin_name` matches case-insensitively; `product` is `claude_code` or `cowork` (the only surfaces with plugin attribution); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
     maxItems: 100
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. On this endpoint `product` takes the values `claude_code` or `cowork` only (the surfaces with plugin attribution). Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -89816,13 +89740,13 @@ range-rollup mode like `/skills`.
 
     - `UserID("user_id")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order? order`
+  - `Order? order` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -89830,15 +89754,15 @@ range-rollup mode like `/skills`.
 
     - `Desc("desc")`
 
-  - `string? orderBy`
+  - `string? orderBy` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate`
+  - `DateOnly? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -89968,25 +89892,25 @@ on a Claude Enterprise plan. Requires an API key with the
 
 - `SkillListParams parameters`
 
-  - `DateOnly? date`
+  - `DateOnly? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get skill usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate`
+  - `DateOnly? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `IReadOnlyList<string>? filter`
+  - `IReadOnlyList<string>? filter` (query parameter)
 
     Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`, `skill_name`, `user_id`. Value forms: `product` is one of `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `share_status` is one of `organization`, `private`, or `public`; `skill_name` matches case-insensitively; `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
     maxItems: 100
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -89998,13 +89922,13 @@ on a Claude Enterprise plan. Requires an API key with the
 
     - `UserID("user_id")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order? order`
+  - `Order? order` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -90012,15 +89936,15 @@ on a Claude Enterprise plan. Requires an API key with the
 
     - `Desc("desc")`
 
-  - `string? orderBy`
+  - `string? orderBy` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate`
+  - `DateOnly? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -90218,19 +90142,19 @@ can be broken out per product, per member, or per RBAC group via
 
 - `ArtifactListParams parameters`
 
-  - `required DateOnly date`
+  - `required DateOnly date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get artifact activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `IReadOnlyList<string>? filter`
+  - `IReadOnlyList<string>? filter` (query parameter)
 
     Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `artifact_type`, `is_shared`, `product`, `rbac_group_id`, `user_id`. Value forms: `artifact_type` is a canonical artifact MIME type (e.g. `text/markdown`) or `other`; `is_shared` is `true` or `false`; `product` is `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
     maxItems: 100
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break results out by: `product`, `user_id` and/or `rbac_group_id`. The ungrouped artifact-type cube is finite and returned in full; grouped queries multiply the cube and paginate via `next_page`. `product` takes the values `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts). `rbac_group_id` attributes a user to every group they held at any point during the requested UTC day, so grouped rows are not an exclusive partition. At most 100 entries.
 
@@ -90242,13 +90166,13 @@ can be broken out per product, per member, or per RBAC group via
 
     - `UserID("user_id")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube is finite and returned in full; `limit` is the page size only when `group_by[]` multiplies the cube.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field. Only valid with `group_by[]` — the ungrouped cube is never paginated.
 
@@ -90355,13 +90279,13 @@ key with the `read:analytics` scope.
 
 - `UsageReportListParams parameters`
 
-  - `required DateTimeOffset startingAt`
+  - `required DateTimeOffset startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth bucketWidth`
+  - `BucketWidth bucketWidth` (query parameter)
 
     Time bucket granularity.
 
@@ -90371,7 +90295,7 @@ key with the `read:analytics` scope.
 
     - `Minute("1m")`
 
-  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories`
+  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -90387,13 +90311,13 @@ key with the `read:analytics` scope.
 
     - `Scheduled("scheduled")`
 
-  - `IReadOnlyList<string>? claudeTagUserIds`
+  - `IReadOnlyList<string>? claudeTagUserIds` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows`
+  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -90403,13 +90327,13 @@ key with the `read:analytics` scope.
 
     - `From200kTo1M("200k-1M")`
 
-  - `DateTimeOffset? endingAt`
+  - `DateTimeOffset? endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
@@ -90433,7 +90357,7 @@ key with the `read:analytics` scope.
 
     - `Speed("speed")`
 
-  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos`
+  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -90445,23 +90369,23 @@ key with the `read:analytics` scope.
 
     - `Us("us")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Maximum number of time buckets per page. Defaults and caps vary by `bucket_width` (`1d`: default 7, max 31; `1h`: default 24, max 168; `1m`: default 60, max 256).
 
     minimum: 1
 
-  - `IReadOnlyList<string>? models`
+  - `IReadOnlyList<string>? models` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `IReadOnlyList<BetaAnalyticsProductFilter>? products`
+  - `IReadOnlyList<BetaAnalyticsProductFilter>? products` (query parameter)
 
     Product surfaces to include. Defaults to all products. Use `group_by[]=product` to break out per-product values.
 
@@ -90481,19 +90405,19 @@ key with the `read:analytics` scope.
 
     - `OfficeAgent("office_agent")`
 
-  - `IReadOnlyList<string>? rbacGroupIds`
+  - `IReadOnlyList<string>? rbacGroupIds` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `IReadOnlyList<string>? slackChannelIds`
+  - `IReadOnlyList<string>? slackChannelIds` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `IReadOnlyList<Speed>? speeds`
+  - `IReadOnlyList<Speed>? speeds` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -90503,7 +90427,7 @@ key with the `read:analytics` scope.
 
     - `Standard("standard")`
 
-  - `IReadOnlyList<string>? userIds`
+  - `IReadOnlyList<string>? userIds` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -90705,13 +90629,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `UserUsageReportListParams parameters`
 
-  - `required DateTimeOffset startingAt`
+  - `required DateTimeOffset startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth? bucketWidth`
+  - `BucketWidth? bucketWidth` (query parameter)
 
     Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
 
@@ -90721,7 +90645,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Minute("1m")`
 
-  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories`
+  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -90737,13 +90661,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Scheduled("scheduled")`
 
-  - `IReadOnlyList<string>? claudeTagUserIds`
+  - `IReadOnlyList<string>? claudeTagUserIds` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows`
+  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -90753,17 +90677,17 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `From200kTo1M("200k-1M")`
 
-  - `DateTimeOffset? endingAt`
+  - `DateTimeOffset? endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `bool excludeDeletedUsers`
+  - `bool excludeDeletedUsers` (query parameter)
 
     If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
 
@@ -90787,7 +90711,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Speed("speed")`
 
-  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos`
+  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -90799,19 +90723,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Us("us")`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
 
     minimum: 1, maximum: 1000
 
-  - `IReadOnlyList<string>? models`
+  - `IReadOnlyList<string>? models` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `Order order`
+  - `Order order` (query parameter)
 
     Sort direction. Defaults to `desc`.
 
@@ -90819,7 +90743,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Desc("desc")`
 
-  - `OrderBy orderBy`
+  - `OrderBy orderBy` (query parameter)
 
     Metric to rank actors by. Defaults to `total_tokens`.
 
@@ -90831,11 +90755,11 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `UncachedInputTokens("uncached_input_tokens")`
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `IReadOnlyList<BetaAnalyticsProductFilter>? products`
+  - `IReadOnlyList<BetaAnalyticsProductFilter>? products` (query parameter)
 
     Product surfaces to include. Defaults to all products.
 
@@ -90855,19 +90779,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `OfficeAgent("office_agent")`
 
-  - `IReadOnlyList<string>? rbacGroupIds`
+  - `IReadOnlyList<string>? rbacGroupIds` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `IReadOnlyList<string>? slackChannelIds`
+  - `IReadOnlyList<string>? slackChannelIds` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `IReadOnlyList<Speed>? speeds`
+  - `IReadOnlyList<Speed>? speeds` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -90877,7 +90801,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Standard("standard")`
 
-  - `IReadOnlyList<string>? userIds`
+  - `IReadOnlyList<string>? userIds` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -91105,13 +91029,13 @@ Requires an API key with the `read:analytics` scope.
 
 - `CostReportListParams parameters`
 
-  - `required DateTimeOffset startingAt`
+  - `required DateTimeOffset startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth bucketWidth`
+  - `BucketWidth bucketWidth` (query parameter)
 
     Time bucket granularity.
 
@@ -91121,7 +91045,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `Minute("1m")`
 
-  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories`
+  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -91137,13 +91061,13 @@ Requires an API key with the `read:analytics` scope.
 
     - `Scheduled("scheduled")`
 
-  - `IReadOnlyList<string>? claudeTagUserIds`
+  - `IReadOnlyList<string>? claudeTagUserIds` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows`
+  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -91153,13 +91077,13 @@ Requires an API key with the `read:analytics` scope.
 
     - `From200kTo1M("200k-1M")`
 
-  - `DateTimeOffset? endingAt`
+  - `DateTimeOffset? endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
@@ -91187,7 +91111,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `TokenType("token_type")`
 
-  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos`
+  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -91199,23 +91123,23 @@ Requires an API key with the `read:analytics` scope.
 
     - `Us("us")`
 
-  - `long? limit`
+  - `long? limit` (query parameter)
 
     Maximum number of time buckets per page. Defaults and caps vary by `bucket_width` (`1d`: default 7, max 31; `1h`: default 24, max 168; `1m`: default 60, max 256).
 
     minimum: 1
 
-  - `IReadOnlyList<string>? models`
+  - `IReadOnlyList<string>? models` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `IReadOnlyList<BetaAnalyticsProductFilter>? products`
+  - `IReadOnlyList<BetaAnalyticsProductFilter>? products` (query parameter)
 
     Product surfaces to include. Defaults to all products. Use `group_by[]=product` to break out per-product values.
 
@@ -91235,19 +91159,19 @@ Requires an API key with the `read:analytics` scope.
 
     - `OfficeAgent("office_agent")`
 
-  - `IReadOnlyList<string>? rbacGroupIds`
+  - `IReadOnlyList<string>? rbacGroupIds` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `IReadOnlyList<string>? slackChannelIds`
+  - `IReadOnlyList<string>? slackChannelIds` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `IReadOnlyList<Speed>? speeds`
+  - `IReadOnlyList<Speed>? speeds` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -91257,7 +91181,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `Standard("standard")`
 
-  - `IReadOnlyList<string>? userIds`
+  - `IReadOnlyList<string>? userIds` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -91454,13 +91378,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `UserCostReportListParams parameters`
 
-  - `required DateTimeOffset startingAt`
+  - `required DateTimeOffset startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth? bucketWidth`
+  - `BucketWidth? bucketWidth` (query parameter)
 
     Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
 
@@ -91470,7 +91394,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Minute("1m")`
 
-  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories`
+  - `IReadOnlyList<BetaAnalyticsClaudeTagCategory>? claudeTagCategories` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -91486,13 +91410,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Scheduled("scheduled")`
 
-  - `IReadOnlyList<string>? claudeTagUserIds`
+  - `IReadOnlyList<string>? claudeTagUserIds` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows`
+  - `IReadOnlyList<BetaAnalyticsContextWindow>? contextWindows` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -91502,17 +91426,17 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `From200kTo1M("200k-1M")`
 
-  - `DateTimeOffset? endingAt`
+  - `DateTimeOffset? endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `bool excludeDeletedUsers`
+  - `bool excludeDeletedUsers` (query parameter)
 
     If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
 
-  - `IReadOnlyList<GroupBy>? groupBy`
+  - `IReadOnlyList<GroupBy>? groupBy` (query parameter)
 
     Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/cost_report` endpoint. The `product`, `model`, `context_window`, `inference_geo`, and `speed` dimensions — and the time bucket, when `bucket_width` is set — count toward `limit`. `cost_type` and `token_type` do not: `cost_type` returns one row per cost component (tokens, web search, code execution); `token_type` returns one row per token type, each with `cost_type: "tokens"`; combining both returns the per-token-type rows plus the web-search and code-execution rows. A page can therefore contain more rows than `limit` when `cost_type` or `token_type` is requested.
 
@@ -91540,7 +91464,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `TokenType("token_type")`
 
-  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos`
+  - `IReadOnlyList<BetaAnalyticsInferenceGeoFilter>? inferenceGeos` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -91552,19 +91476,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Us("us")`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
 
     minimum: 1, maximum: 1000
 
-  - `IReadOnlyList<string>? models`
+  - `IReadOnlyList<string>? models` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `Order order`
+  - `Order order` (query parameter)
 
     Sort direction. Defaults to `desc`.
 
@@ -91572,7 +91496,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Desc("desc")`
 
-  - `OrderBy orderBy`
+  - `OrderBy orderBy` (query parameter)
 
     Metric to rank actors by. Defaults to `amount`.
 
@@ -91580,11 +91504,11 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `ListAmount("list_amount")`
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `IReadOnlyList<BetaAnalyticsProductFilter>? products`
+  - `IReadOnlyList<BetaAnalyticsProductFilter>? products` (query parameter)
 
     Product surfaces to include. Defaults to all products.
 
@@ -91604,19 +91528,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `OfficeAgent("office_agent")`
 
-  - `IReadOnlyList<string>? rbacGroupIds`
+  - `IReadOnlyList<string>? rbacGroupIds` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `IReadOnlyList<string>? slackChannelIds`
+  - `IReadOnlyList<string>? slackChannelIds` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `IReadOnlyList<Speed>? speeds`
+  - `IReadOnlyList<Speed>? speeds` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -91626,7 +91550,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `Standard("standard")`
 
-  - `IReadOnlyList<string>? userIds`
+  - `IReadOnlyList<string>? userIds` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -92028,7 +91952,7 @@ Retrieve a spend limit by ID.
 
 - `SpendLimitRetrieveParams parameters`
 
-  - `required string spendLimitID`
+  - `required string spendLimitID` (path parameter)
 
     ID of the Spend Limit.
 
@@ -92177,7 +92101,7 @@ workspace limits. Deleting them through the API is in an early access preview.
 
 - `SpendLimitDeleteParams parameters`
 
-  - `required string spendLimitID`
+  - `required string spendLimitID` (path parameter)
 
     ID of the Spend Limit.
 
@@ -92226,19 +92150,19 @@ is not creation order.
 
 - `SpendLimitListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Maximum number of limits per page. Defaults to `20`.
+    Maximum number of limits per page. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Opaque cursor from a previous response's `next_page` field.
+    Opaque cursor from a previous response's `next_page` field.
 
-  - `IReadOnlyList<ScopeType>? scopeType`
+  - `IReadOnlyList<ScopeType>? scopeType` (query parameter)
 
-    Query param: Return only limits with these scope types. A Claude Console organization has `organization` and `workspace` limits; a Claude Enterprise organization has `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user` limits. Omit for all.
+    Return only limits with these scope types. A Claude Console organization has `organization` and `workspace` limits; a Claude Enterprise organization has `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user` limits. Omit for all.
 
     maxItems: 6
 
@@ -92254,9 +92178,9 @@ is not creation order.
 
     - `Workspace("workspace")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in this header.
+    This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -92510,17 +92434,17 @@ Paginates by member, so a member's periods never split across pages.
 
 - `EffectiveListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Maximum number of members per page. A member's period rows never split across pages, so a page may carry more rows than this. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `IReadOnlyList<Period>? period`
+  - `IReadOnlyList<Period>? period` (query parameter)
 
     Restrict the report to these limit periods. Omit to return one row per period each member resolves a spend limit for.
 
@@ -92532,7 +92456,7 @@ Paginates by member, so a member's periods never split across pages.
 
     - `Weekly("weekly")`
 
-  - `IReadOnlyList<string>? userIds`
+  - `IReadOnlyList<string>? userIds` (query parameter)
 
     Restrict the report to these members, by tagged user ID (`user_...`). At most 100 entries.
 
@@ -92731,19 +92655,19 @@ Requests whose requester is no longer a member are excluded.
 
 - `IncreaseRequestListParams parameters`
 
-  - `IReadOnlyList<string>? actorIds`
+  - `IReadOnlyList<string>? actorIds` (query parameter)
 
     Filter by requester, as `user_...` tagged IDs.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `IReadOnlyList<BetaSpendLimitIncreaseRequestStatus>? status`
+  - `IReadOnlyList<BetaSpendLimitIncreaseRequestStatus>? status` (query parameter)
 
     Filter by status. Omit to return all.
 
@@ -93014,7 +92938,7 @@ requester at the request's period.
 
 - `IncreaseRequestRetrieveParams parameters`
 
-  - `required string spendLimitIncreaseRequestID`
+  - `required string spendLimitIncreaseRequestID` (path parameter)
 
     ID of the spend limit increase request.
 
@@ -93277,7 +93201,7 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `IncreaseRequestApproveParams parameters`
 
-  - `required string spendLimitIncreaseRequestID`
+  - `required string spendLimitIncreaseRequestID` (path parameter)
 
     ID of the spend limit increase request.
 
@@ -93621,7 +93545,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
 - `IncreaseRequestDenyParams parameters`
 
-  - `required string spendLimitIncreaseRequestID`
+  - `required string spendLimitIncreaseRequestID` (path parameter)
 
     ID of the spend limit increase request.
 
@@ -93976,7 +93900,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `RbacGroupListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -93984,7 +93908,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -94081,7 +94005,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `RbacGroupRetrieveParams parameters`
 
-  - `required string rbacGroupID`
+  - `required string rbacGroupID` (path parameter)
 
     ID of the RBAC Group.
 
@@ -94170,7 +94094,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `RbacGroupUpdateParams parameters`
 
-  - `required string rbacGroupID`
+  - `required string rbacGroupID` (path parameter)
 
     ID of the RBAC Group.
 
@@ -94265,7 +94189,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `RbacGroupDeleteParams parameters`
 
-  - `required string rbacGroupID`
+  - `required string rbacGroupID` (path parameter)
 
     ID of the RBAC Group.
 
@@ -94318,11 +94242,11 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `MemberListParams parameters`
 
-  - `required string rbacGroupID`
+  - `required string rbacGroupID` (path parameter)
 
     ID of the RBAC Group.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -94330,7 +94254,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -94407,7 +94331,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `MemberAddParams parameters`
 
-  - `required string rbacGroupID`
+  - `required string rbacGroupID` (path parameter)
 
     ID of the RBAC Group.
 
@@ -94484,11 +94408,11 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `MemberRemoveParams parameters`
 
-  - `required string rbacGroupID`
+  - `required string rbacGroupID` (path parameter)
 
     ID of the RBAC Group.
 
-  - `required string userID`
+  - `required string userID` (path parameter)
 
     ID of the User.
 
@@ -94549,7 +94473,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 - `RbacRoleListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -94557,7 +94481,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -94642,7 +94566,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 - `RbacRoleRetrieveParams parameters`
 
-  - `required string rbacRoleID`
+  - `required string rbacRoleID` (path parameter)
 
     ID of the RBAC Role.
 
@@ -94721,11 +94645,11 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 - `PermissionListParams parameters`
 
-  - `required string rbacRoleID`
+  - `required string rbacRoleID` (path parameter)
 
     ID of the RBAC Role.
 
-  - `long limit`
+  - `long limit` (query parameter)
 
     Number of items to return per page.
 
@@ -94733,7 +94657,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `string? page`
+  - `string? page` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -94915,21 +94839,21 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `required IReadOnlyList<string> files`
 
-    Body param: The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
+    The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
 
   - `string marketplaceID`
 
-    Body param: ID of the organization-owned plugin marketplace to create the Plugin in (prefixed `marketplace_`). It must be a `manual` marketplace, one whose Plugins are uploaded rather than synchronized from a repository. When omitted, the Plugin is created in the organization's library marketplace, an organization-owned `manual` marketplace created on first use.
+    ID of the organization-owned plugin marketplace to create the Plugin in (prefixed `marketplace_`). It must be a `manual` marketplace, one whose Plugins are uploaded rather than synchronized from a repository. When omitted, the Plugin is created in the organization's library marketplace, an organization-owned `manual` marketplace created on first use.
 
   - `string releaseNotes`
 
-    Body param: Release notes stored with the version and shown in its version history in claude.ai; up to 5,000 characters.
+    Release notes stored with the version and shown in its version history in claude.ai; up to 5,000 characters.
 
     maxLength: 5000
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -95293,17 +95217,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginRetrieveParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -95681,17 +95605,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginUpdateParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
   - `required string servedVersionID`
 
-    Body param: Serve this version of the Plugin (prefixed `pluginver_`) and pin the served version to it; `latest` is not accepted.
+    Serve this version of the Plugin (prefixed `pluginver_`) and pin the served version to it; `latest` is not accepted.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -96059,67 +95983,67 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginListParams parameters`
 
-  - `DateTimeOffset? createdAtGt`
+  - `DateTimeOffset? createdAtGt` (query parameter)
 
-    Query param: RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
-
-    format: date-time
-
-  - `DateTimeOffset? createdAtGte`
-
-    Query param: RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
+    RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `DateTimeOffset? createdAtLt`
+  - `DateTimeOffset? createdAtGte` (query parameter)
 
-    Query param: RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
-
-    format: date-time
-
-  - `DateTimeOffset? createdAtLte`
-
-    Query param: RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
+    RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `long limit`
+  - `DateTimeOffset? createdAtLt` (query parameter)
 
-    Query param: Number of items to return per page.
+    RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
+
+    format: date-time
+
+  - `DateTimeOffset? createdAtLte` (query parameter)
+
+    RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
+
+    format: date-time
+
+  - `long limit` (query parameter)
+
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `100`.
 
     minimum: 1, maximum: 100
 
-  - `string? marketplaceID`
+  - `string? marketplaceID` (query parameter)
 
-    Query param: Only Plugins in this plugin marketplace (prefixed `marketplace_`).
+    Only Plugins in this plugin marketplace (prefixed `marketplace_`).
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `OwnerType? ownerType`
+  - `OwnerType? ownerType` (query parameter)
 
-    Query param: `organization` for Plugins in the organization's plugin marketplaces, `user` for Plugins in members' personal plugin marketplaces.
+    `organization` for Plugins in the organization's plugin marketplaces, `user` for Plugins in members' personal plugin marketplaces.
 
     - `Organization("organization")`
 
     - `User("user")`
 
-  - `string? ownerUserID`
+  - `string? ownerUserID` (query parameter)
 
-    Query param: Only Plugins in this member's personal plugin marketplaces (prefixed `user_`); a removed member's ID is accepted.
+    Only Plugins in this member's personal plugin marketplaces (prefixed `user_`); a removed member's ID is accepted.
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Optionally set to the `next_page` token from the previous response.
+    Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -96495,11 +96419,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginDeleteParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
     ID of the Plugin (prefixed `plugin_`).
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -96671,23 +96595,23 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `VersionCreateParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
   - `required IReadOnlyList<string> files`
 
-    Body param: The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
+    The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
 
   - `string releaseNotes`
 
-    Body param: Release notes stored with the version and shown in its version history in claude.ai; up to 5,000 characters.
+    Release notes stored with the version and shown in its version history in claude.ai; up to 5,000 characters.
 
     maxLength: 5000
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -96992,31 +96916,31 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `VersionListParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     minimum: 1, maximum: 1000
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Optionally set to the `next_page` token from the previous response.
+    Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -97318,21 +97242,21 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `VersionRetrieveParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: ID of the Plugin Version (prefixed `pluginver_`), or `latest` for the newest one.
+    ID of the Plugin Version (prefixed `pluginver_`), or `latest` for the newest one.
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -97647,21 +97571,21 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `VersionDownloadParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `required string version`
+  - `required string version` (path parameter)
 
-    Path param: ID of the Plugin Version (prefixed `pluginver_`). `latest` is not accepted here.
+    ID of the Plugin Version (prefixed `pluginver_`). `latest` is not accepted here.
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -97800,39 +97724,39 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `InstallationSettingListParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `100`.
 
     minimum: 1, maximum: 100
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Optionally set to the `next_page` token from the previous response.
+    Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `TargetType? targetType`
+  - `TargetType? targetType` (query parameter)
 
-    Query param: Only settings for this kind of target: `organization` (the organization-wide setting) or `rbac_group` (an RBAC Group's).
+    Only settings for this kind of target: `organization` (the organization-wide setting) or `rbac_group` (an RBAC Group's).
 
     - `Organization("organization")`
 
     - `RbacGroup("rbac_group")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -98064,17 +97988,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `InstallationSettingSetParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `required string target`
+  - `required string target` (path parameter)
 
-    Path param: The target whose setting is written: the literal `organization` for the Plugin's organization-wide setting, or an RBAC Group's ID (prefixed `rbac_group_`) for that group's own setting. Writing the `organization` target stops the Plugin from inheriting its marketplace's default, even when the value written equals that default.
+    The target whose setting is written: the literal `organization` for the Plugin's organization-wide setting, or an RBAC Group's ID (prefixed `rbac_group_`) for that group's own setting. Writing the `organization` target stops the Plugin from inheriting its marketplace's default, even when the value written equals that default.
 
   - `required InstallationPreference installationPreference`
 
-    Body param: The installation setting the target is to hold for this Plugin: one of `required`, `auto_install`, `available`, `not_available`.
+    The installation setting the target is to hold for this Plugin: one of `required`, `auto_install`, `available`, `not_available`.
 
     - `AutoInstall("auto_install")`
 
@@ -98084,9 +98008,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `Required("required")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -98320,17 +98244,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `InstallationSettingRemoveParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `required string target`
+  - `required string target` (path parameter)
 
-    Path param: The target whose own setting is removed: the literal `organization` for the Plugin's organization-wide setting, or an RBAC Group's ID (prefixed `rbac_group_`) for that group's own setting. Removing the `organization` setting returns the Plugin to its marketplace's default.
+    The target whose own setting is removed: the literal `organization` for the Plugin's organization-wide setting, or an RBAC Group's ID (prefixed `rbac_group_`) for that group's own setting. Removing the `organization` setting returns the Plugin to its marketplace's default.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -98528,31 +98452,31 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `ShareListParams parameters`
 
-  - `required string pluginID`
+  - `required string pluginID` (path parameter)
 
-    Path param: ID of the Plugin (prefixed `plugin_`).
+    ID of the Plugin (prefixed `plugin_`).
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `100`.
 
     minimum: 1, maximum: 100
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Optionally set to the `next_page` token from the previous response.
+    Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `TargetType? targetType`
+  - `TargetType? targetType` (query parameter)
 
-    Query param: Only shares with this kind of target: `organization` (every member), `rbac_group` (one RBAC Group), or `organization_member` (one member).
+    Only shares with this kind of target: `organization` (every member), `rbac_group` (one RBAC Group), or `organization_member` (one member).
 
     - `Organization("organization")`
 
@@ -98560,9 +98484,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `RbacGroup("rbac_group")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -98770,35 +98694,35 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginMarketplaceListParams parameters`
 
-  - `long limit`
+  - `long limit` (query parameter)
 
-    Query param: Number of items to return per page.
+    Number of items to return per page.
 
     Defaults to `20`. Ranges from `1` to `1000`.
 
     minimum: 1, maximum: 1000
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `OwnerType? ownerType`
+  - `OwnerType? ownerType` (query parameter)
 
-    Query param: `organization` for the organization's plugin marketplaces, `user` for members' personal plugin marketplaces.
+    `organization` for the organization's plugin marketplaces, `user` for members' personal plugin marketplaces.
 
     - `Organization("organization")`
 
     - `User("user")`
 
-  - `string? page`
+  - `string? page` (query parameter)
 
-    Query param: Optionally set to the `next_page` token from the previous response.
+    Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `Source? source`
+  - `Source? source` (query parameter)
 
-    Query param: Only plugin marketplaces with this `source`: `manual` for those whose Plugins are uploaded; `github`, `gitlab` or `public_git` for those synchronized from a Git repository. `directory` (Anthropic's catalog) is never listed here.
+    Only plugin marketplaces with this `source`: `manual` for those whose Plugins are uploaded; `github`, `gitlab` or `public_git` for those synchronized from a Git repository. `directory` (Anthropic's catalog) is never listed here.
 
     - `Directory("directory")`
 
@@ -98810,9 +98734,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `PublicGit("public_git")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -99060,17 +98984,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginMarketplaceRetrieveParams parameters`
 
-  - `required string marketplaceID`
+  - `required string marketplaceID` (path parameter)
 
-    Path param: ID of the plugin marketplace (prefixed `marketplace_`).
+    ID of the plugin marketplace (prefixed `marketplace_`).
 
-  - `string? organizationID`
+  - `string? organizationID` (query parameter)
 
-    Query param: For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
+    For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -99319,13 +99243,13 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginMarketplaceUpdateParams parameters`
 
-  - `required string marketplaceID`
+  - `required string marketplaceID` (path parameter)
 
-    Path param: ID of the plugin marketplace (prefixed `marketplace_`).
+    ID of the plugin marketplace (prefixed `marketplace_`).
 
   - `required DefaultInstallationPreference defaultInstallationPreference`
 
-    Body param: The organization-wide installation setting every Plugin in the marketplace without one of its own gets: one of `required`, `auto_install`, `available`, `not_available`. Once set it can be changed but not removed.
+    The organization-wide installation setting every Plugin in the marketplace without one of its own gets: one of `required`, `auto_install`, `available`, `not_available`. Once set it can be changed but not removed.
 
     - `AutoInstall("auto_install")`
 
@@ -99335,9 +99259,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `Required("required")`
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -99599,19 +99523,19 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `required string repositoryUrl`
 
-    Body param: The `https://` URL of a public repository on github.com that holds the marketplace. Any other host, a URL with credentials in it, or one that does not name a repository is a 400.
+    The `https://` URL of a public repository on github.com that holds the marketplace. Any other host, a URL with credentials in it, or one that does not name a repository is a 400.
 
     minLength: 1
 
   - `string? ref`
 
-    Body param: The branch to validate the tip of, or the full 40-character SHA of the commit to validate. When omitted, the branch a synchronization would read (usually the repository's default branch); if that is not the default branch, the report's `ref` says which branch was read. An empty string, or a value that is neither a branch name nor a 40-character SHA, is a 400.
+    The branch to validate the tip of, or the full 40-character SHA of the commit to validate. When omitted, the branch a synchronization would read (usually the repository's default branch); if that is not the default branch, the report's `ref` says which branch was read. An empty string, or a value that is neither a branch name nor a 40-character SHA, is a 400.
 
     minLength: 1
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -99862,13 +99786,13 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `required string archive`
 
-    Body param: A .zip of the marketplace directory (its contents at the root, or wrapped in one folder as a Git host's download produces), sent as a file part with a filename; DEFLATE- or STORE-compressed, at most 32 MB. A part sent without a filename, a second archive part, or any other form field is a 400; a larger archive is a 413.
+    A .zip of the marketplace directory (its contents at the root, or wrapped in one folder as a Git host's download produces), sent as a file part with a filename; DEFLATE- or STORE-compressed, at most 32 MB. A part sent without a filename, a second archive part, or any other form field is a 400; a larger archive is a 413.
 
     format: binary
 
-  - `IReadOnlyList<AnthropicBeta> betas`
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    Header param: This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
+    This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 

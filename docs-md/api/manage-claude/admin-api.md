@@ -8,7 +8,7 @@ description: Manage organization members, workspaces, invites, and API keys prog
 
 **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 
-The [Admin API](../api/beta/organization.md) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
+The [Admin API](../api/organization.md) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
 
 **The Admin API requires special access**
 
@@ -26,7 +26,7 @@ The Admin API accepts three credentials:
 
 Authenticate with any of the three credentials. An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](admin-api.md#accessing-organization-info) with an OAuth token and with an Admin API key.
 
-The Python, TypeScript, C#, Go, Java, PHP, and Ruby SDKs expose the Admin API under `client.beta.organization`, and the `ant` CLI under `ant beta:organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](../api/beta/organization.md).
+The Python, TypeScript, C#, Go, Java, PHP, and Ruby SDKs expose the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](../api/organization.md).
 
 ### OAuth bearer token
 
@@ -50,13 +50,13 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
 ```
 
 ```bash CLI
-ant beta:organization retrieve
+ant organization retrieve
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-organization = client.beta.organization.retrieve()
+organization = client.organization.retrieve()
 
 print(f"id: {organization.id}")
 print(f"name: {organization.name}")
@@ -65,7 +65,7 @@ print(f"name: {organization.name}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const organization = await client.beta.organization.retrieve();
+const organization = await client.organization.retrieve();
 
 console.log(`id: ${organization.id}`);
 console.log(`name: ${organization.name}`);
@@ -74,7 +74,7 @@ console.log(`name: ${organization.name}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var organization = await client.Beta.Organization.Retrieve();
+var organization = await client.Organization.Retrieve();
 
 Console.WriteLine($"id: {organization.ID}");
 Console.WriteLine($"name: {organization.Name}");
@@ -83,7 +83,7 @@ Console.WriteLine($"name: {organization.Name}");
 ```go Go
 client := anthropic.NewClient()
 
-organization, err := client.Beta.Organization.Get(context.Background())
+organization, err := client.Organization.Get(context.Background())
 if err != nil {
 	log.Fatal(err)
 }
@@ -95,7 +95,7 @@ fmt.Printf("name: %s\n", organization.Name)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var organization = client.beta().organization().retrieve();
+var organization = client.organization().retrieve();
 
 IO.println("id: " + organization.id());
 IO.println("name: " + organization.name());
@@ -104,7 +104,7 @@ IO.println("name: " + organization.name());
 ```php PHP
 $client = new Client();
 
-$organization = $client->beta->organization->retrieve();
+$organization = $client->organization->retrieve();
 
 echo "id: {$organization->id}\n";
 echo "name: {$organization->name}\n";
@@ -113,7 +113,7 @@ echo "name: {$organization->name}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-organization = client.beta.organization.retrieve
+organization = client.organization.retrieve
 
 puts "id: #{organization.id}"
 puts "name: #{organization.name}"
@@ -134,13 +134,13 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
 ```
 
 ```bash CLI
-ant beta:organization retrieve
+ant organization retrieve
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-organization = client.beta.organization.retrieve()
+organization = client.organization.retrieve()
 
 print(f"id: {organization.id}")
 print(f"name: {organization.name}")
@@ -149,7 +149,7 @@ print(f"name: {organization.name}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const organization = await client.beta.organization.retrieve();
+const organization = await client.organization.retrieve();
 
 console.log(`id: ${organization.id}`);
 console.log(`name: ${organization.name}`);
@@ -158,7 +158,7 @@ console.log(`name: ${organization.name}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var organization = await client.Beta.Organization.Retrieve();
+var organization = await client.Organization.Retrieve();
 
 Console.WriteLine($"id: {organization.ID}");
 Console.WriteLine($"name: {organization.Name}");
@@ -167,7 +167,7 @@ Console.WriteLine($"name: {organization.Name}");
 ```go Go
 client := anthropic.NewClient()
 
-organization, err := client.Beta.Organization.Get(context.Background())
+organization, err := client.Organization.Get(context.Background())
 if err != nil {
 	log.Fatal(err)
 }
@@ -179,7 +179,7 @@ fmt.Printf("name: %s\n", organization.Name)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var organization = client.beta().organization().retrieve();
+var organization = client.organization().retrieve();
 
 IO.println("id: " + organization.id());
 IO.println("name: " + organization.name());
@@ -188,7 +188,7 @@ IO.println("name: " + organization.name());
 ```php PHP
 $client = new Client();
 
-$organization = $client->beta->organization->retrieve();
+$organization = $client->organization->retrieve();
 
 echo "id: {$organization->id}\n";
 echo "name: {$organization->name}\n";
@@ -197,7 +197,7 @@ echo "name: {$organization->name}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-organization = client.beta.organization.retrieve
+organization = client.organization.retrieve
 
 puts "id: #{organization.id}"
 puts "name: #{organization.name}"
@@ -233,7 +233,7 @@ Organization owners and primary owners have all admin permissions and can also m
 
 ### Organization members
 
-List [organization members](../api/beta/organization/users/retrieve.md), update their roles, and remove them.
+List [organization members](../api/organization/users/retrieve.md), update their roles, and remove them.
 
 List the members of your organization:
 
@@ -244,13 +244,13 @@ curl "https://api.anthropic.com/v1/organizations/users?limit=10" \
 ```
 
 ```bash CLI
-ant beta:organization:users list --limit 10
+ant organization:users list --limit 10
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-users = client.beta.organization.users.list(limit=10)
+users = client.organization.users.list(limit=10)
 
 # Automatically fetches more pages as needed.
 for user in users:
@@ -260,7 +260,7 @@ for user in users:
 ```typescript TypeScript
 const client = new Anthropic();
 
-const users = await client.beta.organization.users.list({ limit: 10 });
+const users = await client.organization.users.list({ limit: 10 });
 
 for await (const user of users) {
   console.log(`${user.id}: ${user.email} (${user.role})`);
@@ -270,7 +270,7 @@ for await (const user of users) {
 ```csharp C#
 AnthropicClient client = new();
 
-var page = await client.Beta.Organization.Users.List(new() { Limit = 10 });
+var page = await client.Organization.Users.List(new() { Limit = 10 });
 
 await foreach (var user in page.Paginate())
 {
@@ -281,7 +281,7 @@ await foreach (var user in page.Paginate())
 ```go Go
 client := anthropic.NewClient()
 
-users := client.Beta.Organization.Users.ListAutoPaging(context.Background(), anthropic.BetaOrganizationUserListParams{
+users := client.Organization.Users.ListAutoPaging(context.Background(), anthropic.OrganizationUserListParams{
 	Limit: anthropic.Int(10),
 })
 
@@ -295,7 +295,7 @@ if err := users.Err(); err != nil {
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.users.UserListParams;
+import com.anthropic.models.organization.users.UserListParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -303,7 +303,7 @@ void main() {
     var params = UserListParams.builder()
         .limit(10)
         .build();
-    var users = client.beta().organization().users().list(params);
+    var users = client.organization().users().list(params);
 
     for (var user : users.autoPager()) {
         IO.println(user.id() + ": " + user.email() + " (" + user.role().asString() + ")");
@@ -314,7 +314,7 @@ void main() {
 ```php PHP
 $client = new Client();
 
-$users = $client->beta->organization->users->list(limit: 10);
+$users = $client->organization->users->list(limit: 10);
 
 foreach ($users->getItems() as $user) {
     echo "{$user->id}: {$user->email} ({$user->role})\n";
@@ -324,7 +324,7 @@ foreach ($users->getItems() as $user) {
 ```ruby Ruby
 client = Anthropic::Client.new
 
-users = client.beta.organization.users.list(limit: 10)
+users = client.organization.users.list(limit: 10)
 
 users.data.each do |user|
   puts "#{user.id}: #{user.email} (#{user.role})"
@@ -342,7 +342,7 @@ curl "https://api.anthropic.com/v1/organizations/users/user_01XyDMpzjS89pFZXqSFU
 ```
 
 ```bash CLI
-ant beta:organization:users update \
+ant organization:users update \
   --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
   --role developer
 ```
@@ -350,7 +350,7 @@ ant beta:organization:users update \
 ```python Python
 client = anthropic.Anthropic()
 
-user = client.beta.organization.users.update(
+user = client.organization.users.update(
     "user_01XyDMpzjS89pFZXqSFUBDr6", role="developer"
 )
 
@@ -361,7 +361,7 @@ print(f"role: {user.role}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const user = await client.beta.organization.users.update("user_01XyDMpzjS89pFZXqSFUBDr6", {
+const user = await client.organization.users.update("user_01XyDMpzjS89pFZXqSFUBDr6", {
   role: "developer"
 });
 
@@ -370,12 +370,12 @@ console.log(`role: ${user.role}`);
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Organization.Users;
+using Anthropic.Models.Organization.Users;
 // ...
 
 AnthropicClient client = new();
 
-var user = await client.Beta.Organization.Users.Update(
+var user = await client.Organization.Users.Update(
     "user_01XyDMpzjS89pFZXqSFUBDr6",
     new() { Role = Role.Developer }
 );
@@ -387,11 +387,11 @@ Console.WriteLine($"role: {user.Role.Raw()}");
 ```go Go
 client := anthropic.NewClient()
 
-user, err := client.Beta.Organization.Users.Update(
+user, err := client.Organization.Users.Update(
 	context.Background(),
 	"user_01XyDMpzjS89pFZXqSFUBDr6",
-	anthropic.BetaOrganizationUserUpdateParams{
-		Role: anthropic.BetaOrganizationUserUpdateParamsRoleDeveloper,
+	anthropic.OrganizationUserUpdateParams{
+		Role: anthropic.OrganizationUserUpdateParamsRoleDeveloper,
 	},
 )
 if err != nil {
@@ -403,7 +403,7 @@ fmt.Printf("role: %s\n", user.Role)
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.users.UserUpdateParams;
+import com.anthropic.models.organization.users.UserUpdateParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -411,7 +411,7 @@ void main() {
     var params = UserUpdateParams.builder()
         .role(UserUpdateParams.Role.DEVELOPER)
         .build();
-    var user = client.beta().organization().users()
+    var user = client.organization().users()
         .update("user_01XyDMpzjS89pFZXqSFUBDr6", params);
 
     IO.println("id: " + user.id());
@@ -420,12 +420,12 @@ void main() {
 ```
 
 ```php PHP
-use Anthropic\Beta\Organization\Users\UserUpdateParams\Role;
+use Anthropic\Organization\Users\UserUpdateParams\Role;
 // ...
 
 $client = new Client();
 
-$user = $client->beta->organization->users->update(
+$user = $client->organization->users->update(
     userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
     role: Role::DEVELOPER,
 );
@@ -438,7 +438,7 @@ echo "role: {$user->role}\n";
 client = Anthropic::Client.new
 
 user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
-user = client.beta.organization.users.update(user_id, role: :developer)
+user = client.organization.users.update(user_id, role: :developer)
 
 puts "id: #{user.id}"
 puts "role: #{user.role}"
@@ -453,13 +453,13 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/users/user_01XyDMpzjS
 ```
 
 ```bash CLI
-ant beta:organization:users remove --user-id user_01XyDMpzjS89pFZXqSFUBDr6
+ant organization:users remove --user-id user_01XyDMpzjS89pFZXqSFUBDr6
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-removed_user = client.beta.organization.users.remove("user_01XyDMpzjS89pFZXqSFUBDr6")
+removed_user = client.organization.users.remove("user_01XyDMpzjS89pFZXqSFUBDr6")
 
 print(f"id: {removed_user.id}")
 ```
@@ -467,9 +467,7 @@ print(f"id: {removed_user.id}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const removedUser = await client.beta.organization.users.remove(
-  "user_01XyDMpzjS89pFZXqSFUBDr6"
-);
+const removedUser = await client.organization.users.remove("user_01XyDMpzjS89pFZXqSFUBDr6");
 
 console.log(`id: ${removedUser.id}`);
 ```
@@ -477,7 +475,7 @@ console.log(`id: ${removedUser.id}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var removedUser = await client.Beta.Organization.Users.Remove("user_01XyDMpzjS89pFZXqSFUBDr6");
+var removedUser = await client.Organization.Users.Remove("user_01XyDMpzjS89pFZXqSFUBDr6");
 
 Console.WriteLine($"id: {removedUser.ID}");
 ```
@@ -485,7 +483,7 @@ Console.WriteLine($"id: {removedUser.ID}");
 ```go Go
 client := anthropic.NewClient()
 
-removedUser, err := client.Beta.Organization.Users.Remove(context.Background(), "user_01XyDMpzjS89pFZXqSFUBDr6")
+removedUser, err := client.Organization.Users.Remove(context.Background(), "user_01XyDMpzjS89pFZXqSFUBDr6")
 if err != nil {
 	log.Fatal(err)
 }
@@ -496,7 +494,7 @@ fmt.Printf("id: %s\n", removedUser.ID)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var removedUser = client.beta().organization().users()
+var removedUser = client.organization().users()
     .remove("user_01XyDMpzjS89pFZXqSFUBDr6");
 
 IO.println("id: " + removedUser.id());
@@ -505,7 +503,7 @@ IO.println("id: " + removedUser.id());
 ```php PHP
 $client = new Client();
 
-$removedUser = $client->beta->organization->users->remove(
+$removedUser = $client->organization->users->remove(
     userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
 );
 
@@ -516,14 +514,14 @@ echo "id: {$removedUser->id}\n";
 client = Anthropic::Client.new
 
 user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
-removed_user = client.beta.organization.users.remove(user_id)
+removed_user = client.organization.users.remove(user_id)
 
 puts "id: #{removed_user.id}"
 ```
 
 ### Organization invites
 
-Invite users to your organization and manage pending [invites](../api/beta/organization/invites/retrieve.md).
+Invite users to your organization and manage pending [invites](../api/organization/invites/retrieve.md).
 
 Invite a user to your organization:
 
@@ -539,15 +537,13 @@ curl "https://api.anthropic.com/v1/organizations/invites" \
 ```
 
 ```bash CLI
-ant beta:organization:invites create --email user@example.com --role developer
+ant organization:invites create --email user@example.com --role developer
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-invite = client.beta.organization.invites.create(
-    email="user@example.com", role="developer"
-)
+invite = client.organization.invites.create(email="user@example.com", role="developer")
 
 print(f"id: {invite.id}")
 print(f"email: {invite.email}")
@@ -558,7 +554,7 @@ print(f"expires_at: {invite.expires_at}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const invite = await client.beta.organization.invites.create({
+const invite = await client.organization.invites.create({
   email: "user@example.com",
   role: "developer"
 });
@@ -570,12 +566,12 @@ console.log(`expires_at: ${invite.expires_at}`);
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Organization.Invites;
+using Anthropic.Models.Organization.Invites;
 // ...
 
 AnthropicClient client = new();
 
-var invite = await client.Beta.Organization.Invites.Create(new()
+var invite = await client.Organization.Invites.Create(new()
 {
     Email = "user@example.com",
     Role = Role.Developer
@@ -590,9 +586,9 @@ Console.WriteLine($"expires_at: {invite.ExpiresAt:O}");
 ```go Go
 client := anthropic.NewClient()
 
-invite, err := client.Beta.Organization.Invites.New(context.Background(), anthropic.BetaOrganizationInviteNewParams{
+invite, err := client.Organization.Invites.New(context.Background(), anthropic.OrganizationInviteNewParams{
 	Email: "user@example.com",
-	Role:  anthropic.BetaOrganizationInviteNewParamsRoleDeveloper,
+	Role:  anthropic.OrganizationInviteNewParamsRoleDeveloper,
 })
 if err != nil {
 	log.Fatal(err)
@@ -605,7 +601,7 @@ fmt.Printf("expires_at: %s\n", invite.ExpiresAt.Format(time.RFC3339))
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.invites.InviteCreateParams;
+import com.anthropic.models.organization.invites.InviteCreateParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -614,7 +610,7 @@ void main() {
         .email("user@example.com")
         .role(InviteCreateParams.Role.DEVELOPER)
         .build();
-    var invite = client.beta().organization().invites().create(params);
+    var invite = client.organization().invites().create(params);
 
     IO.println("id: " + invite.id());
     IO.println("email: " + invite.email());
@@ -624,12 +620,12 @@ void main() {
 ```
 
 ```php PHP
-use Anthropic\Beta\Organization\Invites\InviteCreateParams\Role;
+use Anthropic\Organization\Invites\InviteCreateParams\Role;
 // ...
 
 $client = new Client();
 
-$invite = $client->beta->organization->invites->create(
+$invite = $client->organization->invites->create(
     email: 'user@example.com',
     role: Role::DEVELOPER,
 );
@@ -643,7 +639,7 @@ echo "expires_at: {$invite->expiresAt->format(DATE_ATOM)}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-invite = client.beta.organization.invites.create(email: "user@example.com", role: :developer)
+invite = client.organization.invites.create(email: "user@example.com", role: :developer)
 
 puts "id: #{invite.id}"
 puts "email: #{invite.email}"
@@ -660,13 +656,13 @@ curl "https://api.anthropic.com/v1/organizations/invites?limit=10" \
 ```
 
 ```bash CLI
-ant beta:organization:invites list --limit 10
+ant organization:invites list --limit 10
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-invites = client.beta.organization.invites.list(limit=10)
+invites = client.organization.invites.list(limit=10)
 
 # Automatically fetches more pages as needed.
 for invite in invites:
@@ -676,7 +672,7 @@ for invite in invites:
 ```typescript TypeScript
 const client = new Anthropic();
 
-const invites = await client.beta.organization.invites.list({ limit: 10 });
+const invites = await client.organization.invites.list({ limit: 10 });
 
 for await (const invite of invites) {
   console.log(`${invite.id}: ${invite.email} (${invite.status})`);
@@ -686,7 +682,7 @@ for await (const invite of invites) {
 ```csharp C#
 AnthropicClient client = new();
 
-var page = await client.Beta.Organization.Invites.List(new() { Limit = 10 });
+var page = await client.Organization.Invites.List(new() { Limit = 10 });
 
 await foreach (var invite in page.Paginate())
 {
@@ -697,7 +693,7 @@ await foreach (var invite in page.Paginate())
 ```go Go
 client := anthropic.NewClient()
 
-invites := client.Beta.Organization.Invites.ListAutoPaging(context.Background(), anthropic.BetaOrganizationInviteListParams{
+invites := client.Organization.Invites.ListAutoPaging(context.Background(), anthropic.OrganizationInviteListParams{
 	Limit: anthropic.Int(10),
 })
 
@@ -711,7 +707,7 @@ if err := invites.Err(); err != nil {
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.invites.InviteListParams;
+import com.anthropic.models.organization.invites.InviteListParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -719,7 +715,7 @@ void main() {
     var params = InviteListParams.builder()
         .limit(10)
         .build();
-    var invites = client.beta().organization().invites().list(params);
+    var invites = client.organization().invites().list(params);
 
     for (var invite : invites.autoPager()) {
         IO.println(invite.id() + ": " + invite.email() + " (" + invite.status().asString() + ")");
@@ -730,7 +726,7 @@ void main() {
 ```php PHP
 $client = new Client();
 
-$invites = $client->beta->organization->invites->list(limit: 10);
+$invites = $client->organization->invites->list(limit: 10);
 
 foreach ($invites->getItems() as $invite) {
     echo "{$invite->id}: {$invite->email} ({$invite->status})\n";
@@ -740,7 +736,7 @@ foreach ($invites->getItems() as $invite) {
 ```ruby Ruby
 client = Anthropic::Client.new
 
-invites = client.beta.organization.invites.list(limit: 10)
+invites = client.organization.invites.list(limit: 10)
 
 invites.data.each do |invite|
   puts "#{invite.id}: #{invite.email} (#{invite.status})"
@@ -756,15 +752,13 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/invites/invite_015gWx
 ```
 
 ```bash CLI
-ant beta:organization:invites delete --invite-id invite_015gWxHNr6h6TdRPZTmuCGnn
+ant organization:invites delete --invite-id invite_015gWxHNr6h6TdRPZTmuCGnn
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-deleted_invite = client.beta.organization.invites.delete(
-    "invite_015gWxHNr6h6TdRPZTmuCGnn"
-)
+deleted_invite = client.organization.invites.delete("invite_015gWxHNr6h6TdRPZTmuCGnn")
 
 print(f"id: {deleted_invite.id}")
 ```
@@ -772,7 +766,7 @@ print(f"id: {deleted_invite.id}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const deletedInvite = await client.beta.organization.invites.delete(
+const deletedInvite = await client.organization.invites.delete(
   "invite_015gWxHNr6h6TdRPZTmuCGnn"
 );
 
@@ -782,7 +776,7 @@ console.log(`id: ${deletedInvite.id}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var deletedInvite = await client.Beta.Organization.Invites.Delete(
+var deletedInvite = await client.Organization.Invites.Delete(
     "invite_015gWxHNr6h6TdRPZTmuCGnn"
 );
 
@@ -792,7 +786,7 @@ Console.WriteLine($"id: {deletedInvite.ID}");
 ```go Go
 client := anthropic.NewClient()
 
-deletedInvite, err := client.Beta.Organization.Invites.Delete(context.Background(), "invite_015gWxHNr6h6TdRPZTmuCGnn")
+deletedInvite, err := client.Organization.Invites.Delete(context.Background(), "invite_015gWxHNr6h6TdRPZTmuCGnn")
 if err != nil {
 	log.Fatal(err)
 }
@@ -803,7 +797,7 @@ fmt.Printf("id: %s\n", deletedInvite.ID)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var deletedInvite = client.beta().organization().invites()
+var deletedInvite = client.organization().invites()
     .delete("invite_015gWxHNr6h6TdRPZTmuCGnn");
 
 IO.println("id: " + deletedInvite.id());
@@ -812,7 +806,7 @@ IO.println("id: " + deletedInvite.id());
 ```php PHP
 $client = new Client();
 
-$deletedInvite = $client->beta->organization->invites->delete(
+$deletedInvite = $client->organization->invites->delete(
     inviteID: 'invite_015gWxHNr6h6TdRPZTmuCGnn',
 );
 
@@ -823,7 +817,7 @@ echo "id: {$deletedInvite->id}\n";
 client = Anthropic::Client.new
 
 invite_id = "invite_015gWxHNr6h6TdRPZTmuCGnn"
-deleted_invite = client.beta.organization.invites.delete(invite_id)
+deleted_invite = client.organization.invites.delete(invite_id)
 
 puts "id: #{deleted_invite.id}"
 ```
@@ -834,7 +828,7 @@ See [Workspaces](workspaces.md) for Console and API examples.
 
 ### Workspace members
 
-Manage [user access to specific workspaces](../api/beta/organization/workspaces/members/retrieve.md):
+Manage [user access to specific workspaces](../api/organization/workspaces/members/retrieve.md):
 
 Add a member to a workspace:
 
@@ -850,7 +844,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 ```
 
 ```bash CLI
-ant beta:organization:workspaces:members add \
+ant organization:workspaces:members add \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
   --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
   --workspace-role workspace_developer
@@ -859,7 +853,7 @@ ant beta:organization:workspaces:members add \
 ```python Python
 client = anthropic.Anthropic()
 
-member = client.beta.organization.workspaces.members.add(
+member = client.organization.workspaces.members.add(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     user_id="user_01XyDMpzjS89pFZXqSFUBDr6",
     workspace_role="workspace_developer",
@@ -872,7 +866,7 @@ print(f"workspace_role: {member.workspace_role}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const member = await client.beta.organization.workspaces.members.add(
+const member = await client.organization.workspaces.members.add(
   "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   {
     user_id: "user_01XyDMpzjS89pFZXqSFUBDr6",
@@ -885,16 +879,16 @@ console.log(`workspace_role: ${member.workspace_role}`);
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Organization.Workspaces;
+using Anthropic.Models.Organization.Workspaces;
 
 AnthropicClient client = new();
 
-var member = await client.Beta.Organization.Workspaces.Members.Add(
+var member = await client.Organization.Workspaces.Members.Add(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     new()
     {
         UserID = "user_01XyDMpzjS89pFZXqSFUBDr6",
-        WorkspaceRole = BetaNoBillingWorkspaceRole.WorkspaceDeveloper
+        WorkspaceRole = NoBillingWorkspaceRole.WorkspaceDeveloper
     }
 );
 
@@ -905,12 +899,12 @@ Console.WriteLine($"workspace_role: {member.WorkspaceRole.Raw()}");
 ```go Go
 client := anthropic.NewClient()
 
-member, err := client.Beta.Organization.Workspaces.Members.Add(
+member, err := client.Organization.Workspaces.Members.Add(
 	context.Background(),
 	"wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-	anthropic.BetaOrganizationWorkspaceMemberAddParams{
+	anthropic.OrganizationWorkspaceMemberAddParams{
 		UserID:        "user_01XyDMpzjS89pFZXqSFUBDr6",
-		WorkspaceRole: anthropic.BetaNoBillingWorkspaceRoleWorkspaceDeveloper,
+		WorkspaceRole: anthropic.NoBillingWorkspaceRoleWorkspaceDeveloper,
 	},
 )
 if err != nil {
@@ -922,17 +916,17 @@ fmt.Printf("workspace_role: %s\n", member.WorkspaceRole)
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.workspaces.BetaNoBillingWorkspaceRole;
-import com.anthropic.models.beta.organization.workspaces.members.MemberAddParams;
+import com.anthropic.models.organization.workspaces.NoBillingWorkspaceRole;
+import com.anthropic.models.organization.workspaces.members.MemberAddParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     var params = MemberAddParams.builder()
         .userId("user_01XyDMpzjS89pFZXqSFUBDr6")
-        .workspaceRole(BetaNoBillingWorkspaceRole.WORKSPACE_DEVELOPER)
+        .workspaceRole(NoBillingWorkspaceRole.WORKSPACE_DEVELOPER)
         .build();
-    var member = client.beta().organization().workspaces().members()
+    var member = client.organization().workspaces().members()
         .add("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ", params);
 
     IO.println("user_id: " + member.userId());
@@ -941,12 +935,12 @@ void main() {
 ```
 
 ```php PHP
-use Anthropic\Beta\Organization\Workspaces\NoBillingWorkspaceRole;
+use Anthropic\Organization\Workspaces\NoBillingWorkspaceRole;
 // ...
 
 $client = new Client();
 
-$member = $client->beta->organization->workspaces->members->add(
+$member = $client->organization->workspaces->members->add(
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
     userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
     workspaceRole: NoBillingWorkspaceRole::WORKSPACE_DEVELOPER,
@@ -960,7 +954,7 @@ echo "workspace_role: {$member->workspaceRole}\n";
 client = Anthropic::Client.new
 
 workspace_id = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-member = client.beta.organization.workspaces.members.add(
+member = client.organization.workspaces.members.add(
   workspace_id,
   user_id: "user_01XyDMpzjS89pFZXqSFUBDr6",
   workspace_role: :workspace_developer
@@ -979,7 +973,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 ```
 
 ```bash CLI
-ant beta:organization:workspaces:members list \
+ant organization:workspaces:members list \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
   --limit 10
 ```
@@ -987,7 +981,7 @@ ant beta:organization:workspaces:members list \
 ```python Python
 client = anthropic.Anthropic()
 
-members = client.beta.organization.workspaces.members.list(
+members = client.organization.workspaces.members.list(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ", limit=10
 )
 
@@ -999,7 +993,7 @@ for member in members:
 ```typescript TypeScript
 const client = new Anthropic();
 
-const members = await client.beta.organization.workspaces.members.list(
+const members = await client.organization.workspaces.members.list(
   "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   { limit: 10 }
 );
@@ -1012,7 +1006,7 @@ for await (const member of members) {
 ```csharp C#
 AnthropicClient client = new();
 
-var page = await client.Beta.Organization.Workspaces.Members.List(
+var page = await client.Organization.Workspaces.Members.List(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     new() { Limit = 10 }
 );
@@ -1026,10 +1020,10 @@ await foreach (var member in page.Paginate())
 ```go Go
 client := anthropic.NewClient()
 
-members := client.Beta.Organization.Workspaces.Members.ListAutoPaging(
+members := client.Organization.Workspaces.Members.ListAutoPaging(
 	context.Background(),
 	"wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-	anthropic.BetaOrganizationWorkspaceMemberListParams{
+	anthropic.OrganizationWorkspaceMemberListParams{
 		Limit: anthropic.Int(10),
 	},
 )
@@ -1044,7 +1038,7 @@ if err := members.Err(); err != nil {
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.workspaces.members.MemberListParams;
+import com.anthropic.models.organization.workspaces.members.MemberListParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -1052,7 +1046,7 @@ void main() {
     var params = MemberListParams.builder()
         .limit(10)
         .build();
-    var members = client.beta().organization().workspaces().members()
+    var members = client.organization().workspaces().members()
         .list("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ", params);
 
     for (var member : members.autoPager()) {
@@ -1064,7 +1058,7 @@ void main() {
 ```php PHP
 $client = new Client();
 
-$members = $client->beta->organization->workspaces->members->list(
+$members = $client->organization->workspaces->members->list(
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
     limit: 10,
 );
@@ -1078,7 +1072,7 @@ foreach ($members->getItems() as $member) {
 client = Anthropic::Client.new
 
 workspace_id = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
-members = client.beta.organization.workspaces.members.list(workspace_id, limit: 10)
+members = client.organization.workspaces.members.list(workspace_id, limit: 10)
 
 members.data.each do |member|
   puts "#{member.user_id}: #{member.workspace_role}"
@@ -1096,7 +1090,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 ```
 
 ```bash CLI
-ant beta:organization:workspaces:members update \
+ant organization:workspaces:members update \
   --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
   --workspace-role workspace_admin
@@ -1105,7 +1099,7 @@ ant beta:organization:workspaces:members update \
 ```python Python
 client = anthropic.Anthropic()
 
-member = client.beta.organization.workspaces.members.update(
+member = client.organization.workspaces.members.update(
     "user_01XyDMpzjS89pFZXqSFUBDr6",
     workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     workspace_role="workspace_admin",
@@ -1118,7 +1112,7 @@ print(f"workspace_role: {member.workspace_role}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const member = await client.beta.organization.workspaces.members.update(
+const member = await client.organization.workspaces.members.update(
   "user_01XyDMpzjS89pFZXqSFUBDr6",
   {
     workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
@@ -1131,16 +1125,16 @@ console.log(`workspace_role: ${member.workspace_role}`);
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Organization.Workspaces;
+using Anthropic.Models.Organization.Workspaces;
 
 AnthropicClient client = new();
 
-var member = await client.Beta.Organization.Workspaces.Members.Update(
+var member = await client.Organization.Workspaces.Members.Update(
     "user_01XyDMpzjS89pFZXqSFUBDr6",
     new()
     {
         WorkspaceID = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-        WorkspaceRole = BetaWorkspaceRole.WorkspaceAdmin
+        WorkspaceRole = WorkspaceRole.WorkspaceAdmin
     }
 );
 
@@ -1151,12 +1145,12 @@ Console.WriteLine($"workspace_role: {member.WorkspaceRole.Raw()}");
 ```go Go
 client := anthropic.NewClient()
 
-member, err := client.Beta.Organization.Workspaces.Members.Update(
+member, err := client.Organization.Workspaces.Members.Update(
 	context.Background(),
 	"user_01XyDMpzjS89pFZXqSFUBDr6",
-	anthropic.BetaOrganizationWorkspaceMemberUpdateParams{
+	anthropic.OrganizationWorkspaceMemberUpdateParams{
 		WorkspaceID:   "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-		WorkspaceRole: anthropic.BetaWorkspaceRoleWorkspaceAdmin,
+		WorkspaceRole: anthropic.WorkspaceRoleWorkspaceAdmin,
 	},
 )
 if err != nil {
@@ -1168,17 +1162,17 @@ fmt.Printf("workspace_role: %s\n", member.WorkspaceRole)
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.workspaces.BetaWorkspaceRole;
-import com.anthropic.models.beta.organization.workspaces.members.MemberUpdateParams;
+import com.anthropic.models.organization.workspaces.WorkspaceRole;
+import com.anthropic.models.organization.workspaces.members.MemberUpdateParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     var params = MemberUpdateParams.builder()
         .workspaceId("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ")
-        .workspaceRole(BetaWorkspaceRole.WORKSPACE_ADMIN)
+        .workspaceRole(WorkspaceRole.WORKSPACE_ADMIN)
         .build();
-    var member = client.beta().organization().workspaces().members()
+    var member = client.organization().workspaces().members()
         .update("user_01XyDMpzjS89pFZXqSFUBDr6", params);
 
     IO.println("user_id: " + member.userId());
@@ -1187,12 +1181,12 @@ void main() {
 ```
 
 ```php PHP
-use Anthropic\Beta\Organization\Workspaces\WorkspaceRole;
+use Anthropic\Organization\Workspaces\WorkspaceRole;
 // ...
 
 $client = new Client();
 
-$member = $client->beta->organization->workspaces->members->update(
+$member = $client->organization->workspaces->members->update(
     userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
     workspaceRole: WorkspaceRole::WORKSPACE_ADMIN,
@@ -1206,7 +1200,7 @@ echo "workspace_role: {$member->workspaceRole}\n";
 client = Anthropic::Client.new
 
 user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
-member = client.beta.organization.workspaces.members.update(
+member = client.organization.workspaces.members.update(
   user_id,
   workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   workspace_role: :workspace_admin
@@ -1225,7 +1219,7 @@ curl -X DELETE "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01J
 ```
 
 ```bash CLI
-ant beta:organization:workspaces:members remove \
+ant organization:workspaces:members remove \
   --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
 ```
@@ -1233,7 +1227,7 @@ ant beta:organization:workspaces:members remove \
 ```python Python
 client = anthropic.Anthropic()
 
-removed_member = client.beta.organization.workspaces.members.remove(
+removed_member = client.organization.workspaces.members.remove(
     "user_01XyDMpzjS89pFZXqSFUBDr6", workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 )
 
@@ -1243,7 +1237,7 @@ print(f"user_id: {removed_member.user_id}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const removedMember = await client.beta.organization.workspaces.members.remove(
+const removedMember = await client.organization.workspaces.members.remove(
   "user_01XyDMpzjS89pFZXqSFUBDr6",
   { workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" }
 );
@@ -1254,7 +1248,7 @@ console.log(`user_id: ${removedMember.user_id}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var removedMember = await client.Beta.Organization.Workspaces.Members.Remove(
+var removedMember = await client.Organization.Workspaces.Members.Remove(
     "user_01XyDMpzjS89pFZXqSFUBDr6",
     new() { WorkspaceID = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" }
 );
@@ -1265,10 +1259,10 @@ Console.WriteLine($"user_id: {removedMember.UserID}");
 ```go Go
 client := anthropic.NewClient()
 
-removedMember, err := client.Beta.Organization.Workspaces.Members.Remove(
+removedMember, err := client.Organization.Workspaces.Members.Remove(
 	context.Background(),
 	"user_01XyDMpzjS89pFZXqSFUBDr6",
-	anthropic.BetaOrganizationWorkspaceMemberRemoveParams{
+	anthropic.OrganizationWorkspaceMemberRemoveParams{
 		WorkspaceID: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
 	},
 )
@@ -1280,7 +1274,7 @@ fmt.Printf("user_id: %s\n", removedMember.UserID)
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.workspaces.members.MemberRemoveParams;
+import com.anthropic.models.organization.workspaces.members.MemberRemoveParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -1288,7 +1282,7 @@ void main() {
     var params = MemberRemoveParams.builder()
         .workspaceId("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ")
         .build();
-    var removedMember = client.beta().organization().workspaces().members()
+    var removedMember = client.organization().workspaces().members()
         .remove("user_01XyDMpzjS89pFZXqSFUBDr6", params);
 
     IO.println("user_id: " + removedMember.userId());
@@ -1298,7 +1292,7 @@ void main() {
 ```php PHP
 $client = new Client();
 
-$removedMember = $client->beta->organization->workspaces->members->remove(
+$removedMember = $client->organization->workspaces->members->remove(
     userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
 );
@@ -1310,7 +1304,7 @@ echo "user_id: {$removedMember->userID}\n";
 client = Anthropic::Client.new
 
 user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
-removed_member = client.beta.organization.workspaces.members.remove(
+removed_member = client.organization.workspaces.members.remove(
   user_id,
   workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 )
@@ -1320,7 +1314,7 @@ puts "user_id: #{removed_member.user_id}"
 
 ### API keys
 
-Monitor and manage [API keys](../api/beta/organization/api_keys/list.md). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](authentication.md#key-expiration)) and `principal`, the identity it acts as (see [Key types](authentication.md#key-types)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`; for a service account key, `{"type": "service_account_actor", "service_account_id": "svac_..."}`; and for a workspace key, `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. The top-level `workspace_id` field is deprecated and is `null` both for keys bound to the Default Workspace and for keys without a workspace scope; use `scope` to tell them apart. Filtering the list by `workspace_id` with the Default Workspace's ID returns only keys bound to the Default Workspace; keys without a workspace scope aren't returned under any `workspace_id` filter.
+Monitor and manage [API keys](../api/organization/api_keys/list.md). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](authentication.md#key-expiration)) and `principal`, the identity it acts as (see [Key types](authentication.md#key-types)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`; for a service account key, `{"type": "service_account_actor", "service_account_id": "svac_..."}`; and for a workspace key, `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. The top-level `workspace_id` field is deprecated and is `null` both for keys bound to the Default Workspace and for keys without a workspace scope; use `scope` to tell them apart. Filtering the list by `workspace_id` with the Default Workspace's ID returns only keys bound to the Default Workspace; keys without a workspace scope aren't returned under any `workspace_id` filter.
 
 List the active API keys in a workspace:
 
@@ -1331,7 +1325,7 @@ curl "https://api.anthropic.com/v1/organizations/api_keys?limit=10&status=active
 ```
 
 ```bash CLI
-ant beta:organization:api-keys list \
+ant organization:api-keys list \
   --limit 10 \
   --status active \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
@@ -1340,7 +1334,7 @@ ant beta:organization:api-keys list \
 ```python Python
 client = anthropic.Anthropic()
 
-api_keys = client.beta.organization.api_keys.list(
+api_keys = client.organization.api_keys.list(
     limit=10, status="active", workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 )
 
@@ -1352,7 +1346,7 @@ for api_key in api_keys:
 ```typescript TypeScript
 const client = new Anthropic();
 
-const apiKeys = await client.beta.organization.apiKeys.list({
+const apiKeys = await client.organization.apiKeys.list({
   limit: 10,
   status: "active",
   workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -1364,11 +1358,11 @@ for await (const apiKey of apiKeys) {
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Organization.ApiKeys;
+using Anthropic.Models.Organization.ApiKeys;
 
 AnthropicClient client = new();
 
-var page = await client.Beta.Organization.ApiKeys.List(new()
+var page = await client.Organization.ApiKeys.List(new()
 {
     Limit = 10,
     Status = ApiKeyListParamsStatus.Active,
@@ -1384,9 +1378,9 @@ await foreach (var apiKey in page.Paginate())
 ```go Go
 client := anthropic.NewClient()
 
-apiKeys := client.Beta.Organization.APIKeys.ListAutoPaging(context.Background(), anthropic.BetaOrganizationAPIKeyListParams{
+apiKeys := client.Organization.APIKeys.ListAutoPaging(context.Background(), anthropic.OrganizationAPIKeyListParams{
 	Limit:       anthropic.Int(10),
-	Status:      anthropic.BetaOrganizationAPIKeyListParamsStatusActive,
+	Status:      anthropic.OrganizationAPIKeyListParamsStatusActive,
 	WorkspaceID: anthropic.String("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"),
 })
 
@@ -1400,7 +1394,7 @@ if err := apiKeys.Err(); err != nil {
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.apikeys.ApiKeyListParams;
+import com.anthropic.models.organization.apikeys.ApiKeyListParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -1410,7 +1404,7 @@ void main() {
         .status(ApiKeyListParams.Status.ACTIVE)
         .workspaceId("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ")
         .build();
-    var apiKeys = client.beta().organization().apiKeys().list(params);
+    var apiKeys = client.organization().apiKeys().list(params);
 
     for (var apiKey : apiKeys.autoPager()) {
         IO.println(apiKey.id() + ": " + apiKey.name() + " (" + apiKey.status().asString() + ")");
@@ -1419,12 +1413,12 @@ void main() {
 ```
 
 ```php PHP
-use Anthropic\Beta\Organization\APIKeys\APIKeyListParams\Status;
+use Anthropic\Organization\APIKeys\APIKeyListParams\Status;
 // ...
 
 $client = new Client();
 
-$apiKeys = $client->beta->organization->apiKeys->list(
+$apiKeys = $client->organization->apiKeys->list(
     limit: 10,
     status: Status::ACTIVE,
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
@@ -1438,7 +1432,7 @@ foreach ($apiKeys->getItems() as $apiKey) {
 ```ruby Ruby
 client = Anthropic::Client.new
 
-api_keys = client.beta.organization.api_keys.list(
+api_keys = client.organization.api_keys.list(
   limit: 10,
   status: :active,
   workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -1463,7 +1457,7 @@ curl "https://api.anthropic.com/v1/organizations/api_keys/apikey_01Rj2N8SVvo6BeP
 ```
 
 ```bash CLI
-ant beta:organization:api-keys update \
+ant organization:api-keys update \
   --api-key-id apikey_01Rj2N8SVvo6BePZj99NhmiT \
   --status inactive \
   --name "New Key Name"
@@ -1472,7 +1466,7 @@ ant beta:organization:api-keys update \
 ```python Python
 client = anthropic.Anthropic()
 
-api_key = client.beta.organization.api_keys.update(
+api_key = client.organization.api_keys.update(
     "apikey_01Rj2N8SVvo6BePZj99NhmiT", status="inactive", name="New Key Name"
 )
 
@@ -1484,13 +1478,10 @@ print(f"status: {api_key.status}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const apiKey = await client.beta.organization.apiKeys.update(
-  "apikey_01Rj2N8SVvo6BePZj99NhmiT",
-  {
-    status: "inactive",
-    name: "New Key Name"
-  }
-);
+const apiKey = await client.organization.apiKeys.update("apikey_01Rj2N8SVvo6BePZj99NhmiT", {
+  status: "inactive",
+  name: "New Key Name"
+});
 
 console.log(`id: ${apiKey.id}`);
 console.log(`name: ${apiKey.name}`);
@@ -1498,11 +1489,11 @@ console.log(`status: ${apiKey.status}`);
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Organization.ApiKeys;
+using Anthropic.Models.Organization.ApiKeys;
 
 AnthropicClient client = new();
 
-var apiKey = await client.Beta.Organization.ApiKeys.Update(
+var apiKey = await client.Organization.ApiKeys.Update(
     "apikey_01Rj2N8SVvo6BePZj99NhmiT",
     new()
     {
@@ -1519,11 +1510,11 @@ Console.WriteLine($"status: {apiKey.Status.Raw()}");
 ```go Go
 client := anthropic.NewClient()
 
-apiKey, err := client.Beta.Organization.APIKeys.Update(
+apiKey, err := client.Organization.APIKeys.Update(
 	context.Background(),
 	"apikey_01Rj2N8SVvo6BePZj99NhmiT",
-	anthropic.BetaOrganizationAPIKeyUpdateParams{
-		Status: anthropic.BetaOrganizationAPIKeyUpdateParamsStatusInactive,
+	anthropic.OrganizationAPIKeyUpdateParams{
+		Status: anthropic.OrganizationAPIKeyUpdateParamsStatusInactive,
 		Name:   anthropic.String("New Key Name"),
 	},
 )
@@ -1537,7 +1528,7 @@ fmt.Printf("status: %s\n", apiKey.Status)
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.apikeys.ApiKeyUpdateParams;
+import com.anthropic.models.organization.apikeys.ApiKeyUpdateParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -1546,7 +1537,7 @@ void main() {
         .status(ApiKeyUpdateParams.Status.INACTIVE)
         .name("New Key Name")
         .build();
-    var apiKey = client.beta().organization().apiKeys()
+    var apiKey = client.organization().apiKeys()
         .update("apikey_01Rj2N8SVvo6BePZj99NhmiT", params);
 
     IO.println("id: " + apiKey.id());
@@ -1556,12 +1547,12 @@ void main() {
 ```
 
 ```php PHP
-use Anthropic\Beta\Organization\APIKeys\APIKeyUpdateParams\Status;
+use Anthropic\Organization\APIKeys\APIKeyUpdateParams\Status;
 // ...
 
 $client = new Client();
 
-$apiKey = $client->beta->organization->apiKeys->update(
+$apiKey = $client->organization->apiKeys->update(
     apiKeyID: 'apikey_01Rj2N8SVvo6BePZj99NhmiT',
     status: Status::INACTIVE,
     name: 'New Key Name',
@@ -1576,7 +1567,7 @@ echo "status: {$apiKey->status}\n";
 client = Anthropic::Client.new
 
 api_key_id = "apikey_01Rj2N8SVvo6BePZj99NhmiT"
-api_key = client.beta.organization.api_keys.update(
+api_key = client.organization.api_keys.update(
   api_key_id,
   status: :inactive,
   name: "New Key Name"
@@ -1610,13 +1601,13 @@ curl "https://api.anthropic.com/v1/organizations/me" \
 ```
 
 ```bash CLI
-ant beta:organization retrieve
+ant organization retrieve
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-organization = client.beta.organization.retrieve()
+organization = client.organization.retrieve()
 
 print(f"id: {organization.id}")
 print(f"name: {organization.name}")
@@ -1625,7 +1616,7 @@ print(f"name: {organization.name}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const organization = await client.beta.organization.retrieve();
+const organization = await client.organization.retrieve();
 
 console.log(`id: ${organization.id}`);
 console.log(`name: ${organization.name}`);
@@ -1634,7 +1625,7 @@ console.log(`name: ${organization.name}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var organization = await client.Beta.Organization.Retrieve();
+var organization = await client.Organization.Retrieve();
 
 Console.WriteLine($"id: {organization.ID}");
 Console.WriteLine($"name: {organization.Name}");
@@ -1643,7 +1634,7 @@ Console.WriteLine($"name: {organization.Name}");
 ```go Go
 client := anthropic.NewClient()
 
-organization, err := client.Beta.Organization.Get(context.Background())
+organization, err := client.Organization.Get(context.Background())
 if err != nil {
 	log.Fatal(err)
 }
@@ -1655,7 +1646,7 @@ fmt.Printf("name: %s\n", organization.Name)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var organization = client.beta().organization().retrieve();
+var organization = client.organization().retrieve();
 
 IO.println("id: " + organization.id());
 IO.println("name: " + organization.name());
@@ -1664,7 +1655,7 @@ IO.println("name: " + organization.name());
 ```php PHP
 $client = new Client();
 
-$organization = $client->beta->organization->retrieve();
+$organization = $client->organization->retrieve();
 
 echo "id: {$organization->id}\n";
 echo "name: {$organization->name}\n";
@@ -1673,7 +1664,7 @@ echo "name: {$organization->name}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-organization = client.beta.organization.retrieve
+organization = client.organization.retrieve
 
 puts "id: #{organization.id}"
 puts "name: #{organization.name}"
@@ -1687,7 +1678,7 @@ puts "name: #{organization.name}"
 }
 ```
 
-For parameter details and response schemas, see the [Organization Info API reference](../api/beta/organization/retrieve.md).
+For parameter details and response schemas, see the [Organization Info API reference](../api/organization/retrieve.md).
 
 ## Usage and cost reports
 

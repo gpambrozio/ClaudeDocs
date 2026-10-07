@@ -6,11 +6,11 @@ url: https://platform.claude.com/docs/en/about-claude/models/migration-guide
 description: Guides for migrating to the latest Claude models from previous Claude versions
 ---
 
-* [Migrating to Claude Fable 5.1 and Claude Mythos 5.1](../../models/fable-5-1/migration-guide.md)
-* [Migrating to Claude Mythos 5 and Claude Fable 5](../../models/fable-5/migration-guide.md)
-* [Migrating to Claude Opus 5.5](../../models/opus-5-5/migration-guide.md)
-* [Migrating to Claude Sonnet 5.5](../../models/sonnet-5-5/migration-guide.md)
-* [Migrating to Claude Haiku 4.5](../../models/haiku-4-5/migration-guide.md)
+* [Claude Fable 5.1 and Claude Mythos 5.1 migration guide](../../models/fable-5-1/migration-guide.md)
+* [Claude Mythos 5 and Claude Fable 5 migration guide](../../models/fable-5/migration-guide.md)
+* [Claude Opus 5.5 migration guide](../../models/opus-5-5/migration-guide.md)
+* [Claude Sonnet 5.5 migration guide](../../models/sonnet-5-5/migration-guide.md)
+* [Claude Haiku 4.5 migration guide](../../models/haiku-4-5/migration-guide.md)
 
 ## Get help
 

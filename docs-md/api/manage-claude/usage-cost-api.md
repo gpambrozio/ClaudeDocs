@@ -144,9 +144,9 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-To retrieve your organization's API key IDs, use the [List API Keys](../api/beta/organization/api_keys/list.md) endpoint.
+To retrieve your organization's API key IDs, use the [List API Keys](../api/organization/api_keys/list.md) endpoint.
 
-To retrieve your organization's workspace IDs, use the [List Workspaces](../api/beta/organization/workspaces/list.md) endpoint, or find your organization's workspace IDs in the Claude Console.
+To retrieve your organization's workspace IDs, use the [List Workspaces](../api/organization/workspaces/list.md) endpoint, or find your organization's workspace IDs in the Claude Console.
 
 #### Data residency
 

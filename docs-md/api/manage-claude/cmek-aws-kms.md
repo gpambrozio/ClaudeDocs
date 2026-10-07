@@ -48,7 +48,7 @@ To find [your AWS account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/c
 
 In the policy, replace `<AWS_ACCOUNT_ID>` with your AWS account ID and `<ORGANIZATION_UUID>` with your organization ID. The `StringEquals` condition on `kms:EncryptionContext:anthropic:org_uuid` binds the key to your Anthropic organization, and validation refuses a key without it. To share one key among several Anthropic organizations, list each organization ID in the condition value.
 
-**Finding your organization ID:** Copy the **Organization ID** field under **Settings > Organization** in the Claude Console, or under **Organization settings > Organization** in claude.ai, or read the `id` field from the [Organization Info](../api/beta/organization/retrieve.md) endpoint. Use the bare UUID, not the `org_`-prefixed ID.
+**Finding your organization ID:** Copy the **Organization ID** field under **Settings > Organization** in the Claude Console, or under **Organization settings > Organization** in claude.ai, or read the `id` field from the [Organization Info](../api/organization/retrieve.md) endpoint. Use the bare UUID, not the `org_`-prefixed ID.
 
 Save the policy as `key-policy.json`. To create the key in the AWS Console instead, paste the policy there, as described later in this step.
 
@@ -169,7 +169,7 @@ How you register the key depends on which product you use.
 
 **Claude Platform on AWS:** The principal, key policy, and registration flow differ, and there is no separate validation step. Follow [Set up CMEK on Claude Platform on AWS](cmek-aws-kms.md#claude-platform-on-aws) instead of this tab.
 
-**Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. To find it in the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. The ID is under **Encryption key**, in the **Compartment ID** field. You can also read the `compartment_id` field returned by the [Get Workspace](../api/beta/organization/workspaces/retrieve.md) endpoint.
+**Finding your compartment ID:** Each workspace has a compartment ID that scopes its CMEK data. To find it in the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. The ID is under **Encryption key**, in the **Compartment ID** field. You can also read the `compartment_id` field returned by the [Get Workspace](../api/organization/workspaces/retrieve.md) endpoint.
 
 You can set up the key in the Claude Console or through the Admin API, with the same result.
 
@@ -211,7 +211,7 @@ curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
 ```
 
 ```bash CLI
-ant beta:organization:external-keys create <<'YAML'
+ant organization:external-keys create <<'YAML'
 display_name: "<friendly-name>"
 geo: us
 provider_config:
@@ -223,7 +223,7 @@ YAML
 ```python Python
 client = anthropic.Anthropic()
 
-external_key = client.beta.organization.external_keys.create(
+external_key = client.organization.external_keys.create(
     display_name="<friendly-name>",
     geo="us",
     provider_config={"type": "aws", "kms_arn": "<key-arn-from-create-key-step>"},
@@ -236,7 +236,7 @@ print(f"display_name: {external_key.display_name}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const externalKey = await client.beta.organization.externalKeys.create({
+const externalKey = await client.organization.externalKeys.create({
   display_name: "<friendly-name>",
   geo: "us",
   provider_config: {
@@ -250,15 +250,15 @@ console.log(`display_name: ${externalKey.display_name}`);
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Organization.ExternalKeys;
+using Anthropic.Models.Organization.ExternalKeys;
 
 AnthropicClient client = new();
 
-var externalKey = await client.Beta.Organization.ExternalKeys.Create(new()
+var externalKey = await client.Organization.ExternalKeys.Create(new()
 {
     DisplayName = "<friendly-name>",
     Geo = Geo.Us,
-    ProviderConfig = new BetaAwsExternalKeyConfig
+    ProviderConfig = new AwsExternalKeyConfig
     {
         KmsArn = "<key-arn-from-create-key-step>"
     }
@@ -271,11 +271,11 @@ Console.WriteLine($"display_name: {externalKey.DisplayName}");
 ```go Go
 client := anthropic.NewClient()
 
-externalKey, err := client.Beta.Organization.ExternalKeys.New(context.Background(), anthropic.BetaOrganizationExternalKeyNewParams{
+externalKey, err := client.Organization.ExternalKeys.New(context.Background(), anthropic.OrganizationExternalKeyNewParams{
 	DisplayName: anthropic.String("<friendly-name>"),
-	Geo:         anthropic.BetaOrganizationExternalKeyNewParamsGeoUs,
-	ProviderConfig: anthropic.BetaOrganizationExternalKeyNewParamsProviderConfigUnion{
-		OfAWS: &anthropic.BetaAWSExternalKeyConfigParam{
+	Geo:         anthropic.OrganizationExternalKeyNewParamsGeoUs,
+	ProviderConfig: anthropic.OrganizationExternalKeyNewParamsProviderConfigUnion{
+		OfAWS: &anthropic.AWSExternalKeyConfigParam{
 			KMSARN: "<key-arn-from-create-key-step>",
 		},
 	},
@@ -289,8 +289,8 @@ fmt.Printf("display_name: %s\n", externalKey.DisplayName)
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.externalkeys.BetaAwsExternalKeyConfig;
-import com.anthropic.models.beta.organization.externalkeys.ExternalKeyCreateParams;
+import com.anthropic.models.organization.externalkeys.AwsExternalKeyConfig;
+import com.anthropic.models.organization.externalkeys.ExternalKeyCreateParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -298,11 +298,11 @@ void main() {
     var params = ExternalKeyCreateParams.builder()
         .displayName("<friendly-name>")
         .geo(ExternalKeyCreateParams.Geo.US)
-        .providerConfig(BetaAwsExternalKeyConfig.builder()
+        .providerConfig(AwsExternalKeyConfig.builder()
             .kmsArn("<key-arn-from-create-key-step>")
             .build())
         .build();
-    var externalKey = client.beta().organization().externalKeys().create(params);
+    var externalKey = client.organization().externalKeys().create(params);
 
     IO.println("id: " + externalKey.id());
     IO.println("display_name: " + externalKey.displayName().orElseThrow());
@@ -310,12 +310,12 @@ void main() {
 ```
 
 ```php PHP
-use Anthropic\Beta\Organization\ExternalKeys\ExternalKeyCreateParams\Geo;
+use Anthropic\Organization\ExternalKeys\ExternalKeyCreateParams\Geo;
 // ...
 
 $client = new Client();
 
-$externalKey = $client->beta->organization->externalKeys->create(
+$externalKey = $client->organization->externalKeys->create(
     displayName: '<friendly-name>',
     geo: Geo::US,
     providerConfig: [
@@ -331,7 +331,7 @@ echo "display_name: {$externalKey->displayName}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-external_key = client.beta.organization.external_keys.create(
+external_key = client.organization.external_keys.create(
   display_name: "<friendly-name>",
   geo: :us,
   provider_config: {
@@ -365,13 +365,13 @@ curl -sS -X POST "https://api.anthropic.com/v1/organizations/external_keys/ekey_
 ```
 
 ```bash CLI
-ant beta:organization:external-keys validate --external-key-id "ekey_<id>"
+ant organization:external-keys validate --external-key-id "ekey_<id>"
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-validation = client.beta.organization.external_keys.validate("ekey_<id>")
+validation = client.organization.external_keys.validate("ekey_<id>")
 
 print(f"status: {validation.status}")
 print(f"error: {validation.error}")
@@ -380,7 +380,7 @@ print(f"error: {validation.error}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const validation = await client.beta.organization.externalKeys.validate("ekey_<id>");
+const validation = await client.organization.externalKeys.validate("ekey_<id>");
 
 console.log(`status: ${validation.status}`);
 console.log(`error: ${validation.error}`);
@@ -389,7 +389,7 @@ console.log(`error: ${validation.error}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var validation = await client.Beta.Organization.ExternalKeys.Validate("ekey_<id>");
+var validation = await client.Organization.ExternalKeys.Validate("ekey_<id>");
 
 Console.WriteLine($"status: {validation.Status.Raw()}");
 Console.WriteLine($"error: {validation.Error}");
@@ -398,7 +398,7 @@ Console.WriteLine($"error: {validation.Error}");
 ```go Go
 client := anthropic.NewClient()
 
-validation, err := client.Beta.Organization.ExternalKeys.Validate(context.Background(), "ekey_<id>")
+validation, err := client.Organization.ExternalKeys.Validate(context.Background(), "ekey_<id>")
 if err != nil {
 	log.Fatal(err)
 }
@@ -410,7 +410,7 @@ fmt.Printf("error: %s\n", validation.Error)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-var validation = client.beta().organization().externalKeys().validate("ekey_<id>");
+var validation = client.organization().externalKeys().validate("ekey_<id>");
 
 IO.println("status: " + validation.status().asString());
 IO.println("error: " + validation.error().orElse(""));
@@ -419,7 +419,7 @@ IO.println("error: " + validation.error().orElse(""));
 ```php PHP
 $client = new Client();
 
-$validation = $client->beta->organization->externalKeys->validate(
+$validation = $client->organization->externalKeys->validate(
     externalKeyID: 'ekey_<id>',
 );
 
@@ -431,7 +431,7 @@ echo "error: {$validation->error}\n";
 client = Anthropic::Client.new
 
 external_key_id = "ekey_<id>"
-validation = client.beta.organization.external_keys.validate(external_key_id)
+validation = client.organization.external_keys.validate(external_key_id)
 
 puts "status: #{validation.status}"
 puts "error: #{validation.error}"
@@ -465,7 +465,7 @@ curl -sS -X POST "https://api.anthropic.com/v1/organizations/workspaces/<workspa
 ```
 
 ```bash CLI
-ant beta:organization:workspaces update \
+ant organization:workspaces update \
   --workspace-id "<workspace-id>" \
   --external-key-id "ekey_<id>"
 ```
@@ -473,7 +473,7 @@ ant beta:organization:workspaces update \
 ```python Python
 client = anthropic.Anthropic()
 
-workspace = client.beta.organization.workspaces.update(
+workspace = client.organization.workspaces.update(
     "<workspace-id>", external_key_id="ekey_<id>"
 )
 
@@ -484,7 +484,7 @@ print(f"external_key_id: {workspace.external_key_id}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const workspace = await client.beta.organization.workspaces.update("<workspace-id>", {
+const workspace = await client.organization.workspaces.update("<workspace-id>", {
   external_key_id: "ekey_<id>"
 });
 
@@ -495,7 +495,7 @@ console.log(`external_key_id: ${workspace.external_key_id}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var workspace = await client.Beta.Organization.Workspaces.Update("<workspace-id>", new()
+var workspace = await client.Organization.Workspaces.Update("<workspace-id>", new()
 {
     ExternalKeyID = "ekey_<id>"
 });
@@ -507,10 +507,10 @@ Console.WriteLine($"external_key_id: {workspace.ExternalKeyID}");
 ```go Go
 client := anthropic.NewClient()
 
-workspace, err := client.Beta.Organization.Workspaces.Update(
+workspace, err := client.Organization.Workspaces.Update(
 	context.Background(),
 	"<workspace-id>",
-	anthropic.BetaOrganizationWorkspaceUpdateParams{
+	anthropic.OrganizationWorkspaceUpdateParams{
 		ExternalKeyID: anthropic.String("ekey_<id>"),
 	},
 )
@@ -523,7 +523,7 @@ fmt.Printf("external_key_id: %s\n", workspace.ExternalKeyID)
 ```
 
 ```java Java
-import com.anthropic.models.beta.organization.workspaces.WorkspaceUpdateParams;
+import com.anthropic.models.organization.workspaces.WorkspaceUpdateParams;
 
 void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
@@ -531,7 +531,7 @@ void main() {
     var params = WorkspaceUpdateParams.builder()
         .externalKeyId("ekey_<id>")
         .build();
-    var workspace = client.beta().organization().workspaces().update("<workspace-id>", params);
+    var workspace = client.organization().workspaces().update("<workspace-id>", params);
 
     IO.println("id: " + workspace.id());
     IO.println("external_key_id: " + workspace.externalKeyId().orElseThrow());
@@ -541,7 +541,7 @@ void main() {
 ```php PHP
 $client = new Client();
 
-$workspace = $client->beta->organization->workspaces->update(
+$workspace = $client->organization->workspaces->update(
     workspaceID: '<workspace-id>',
     externalKeyID: 'ekey_<id>',
 );
@@ -554,7 +554,7 @@ echo "external_key_id: {$workspace->externalKeyID}\n";
 client = Anthropic::Client.new
 
 workspace_id = "<workspace-id>"
-workspace = client.beta.organization.workspaces.update(
+workspace = client.organization.workspaces.update(
   workspace_id,
   external_key_id: "ekey_<id>"
 )
@@ -594,7 +594,7 @@ Use only this published service principal name. Never trust an identifier provid
 
 The key policy has three statements: your account's root admin statement; a statement that lets the Claude Platform on AWS service principal encrypt, decrypt, and generate data keys; and a separate statement for `kms:DescribeKey`. The crypto statement carries an optional `EncryptionContext` condition that binds the key to the workspaces you list. `DescribeKey` is granted separately because it has no `EncryptionContext` parameter, so an `EncryptionContext` condition on that action would always deny.
 
-If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key), copy its compartment ID, and substitute it for `<compartment-uuid>`. To find the ID in the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. The ID is under **Encryption key**, in the **Compartment ID** field. You can also read it from the `compartment_id` field returned by the [Get Workspace](../api/beta/organization/workspaces/retrieve.md) endpoint. If you don't plan to use the condition, delete the `Condition` block from that statement.
+If you plan to use the optional `EncryptionContext` condition shown here, create the workspace first (without a key), copy its compartment ID, and substitute it for `<compartment-uuid>`. To find the ID in the Claude Console, go to [Manage > Security](https://platform.claude.com/settings/workspaces/default/security-compliance) and select the workspace in the workspace picker at the top of the sidebar. The ID is under **Encryption key**, in the **Compartment ID** field. You can also read it from the `compartment_id` field returned by the [Get Workspace](../api/organization/workspaces/retrieve.md) endpoint. If you don't plan to use the condition, delete the `Condition` block from that statement.
 
 ```bash
 export YOUR_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)

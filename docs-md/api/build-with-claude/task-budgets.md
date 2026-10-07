@@ -659,7 +659,7 @@ Control how thoroughly Claude reasons about each step of an agentic loop.
 
 **Adaptive thinking**
 
-Let Claude decide when and how much to use extended thinking.
+Let Claude determine when and how much to use extended thinking.
 
 **Compaction**
 

@@ -12,6 +12,7 @@ These cases are covered on other pages:
 
 * **Why scopes, the cache, and precedence behave the way they do**: read [Plugin loading reference](loading.md)
 * **Looking up a flag, field, or command**: use the [plugin commands reference](cli-reference.md), the [manifest reference](manifest-reference.md), or the [marketplace reference](marketplace-reference.md)
+* **A `hooks module not loaded` or `hooks module did not load` message**: the plugin is a [mod](mods/overview.md), so read [The mod doesn't load](mods/troubleshoot.md#the-mod-doesn’t-load)
 
 Search for the exact message you saw. Each message is listed under the stage that produces it, which isn't always the command you ran. For example, an install can fail because a marketplace is missing, so that message is under [Add a marketplace](#add-a-marketplace).
 
@@ -85,7 +86,7 @@ The cause isn't the plugin command. Follow [Verify your PATH](../troubleshoot-in
 
 You typed a plugin command you saw somewhere and got `Unknown command: /<name>` in a session, or `error: unknown command '<name>'` or `error: unknown option '<flag>'` from the `claude` binary in your shell.
 
-Several command spellings are in use that Claude Code doesn't have. The table below maps each one to the real command. The [plugin commands reference](cli-reference.md) lists every subcommand and flag.
+Several command spellings are in use that Claude Code doesn't have. The table below maps each one to the real command. The [plugin commands reference](cli-reference.md) lists the subcommands and their flags.
 
 | You typed | What Claude Code says | Use instead |
 | :- | :- | :- |
