@@ -19,6 +19,7 @@ featureMetadata:
     - claude-sonnet-5-5
     - claude-sonnet-5
     - claude-opus-4-8
+    - claude-haiku-5-5
   supportedPlatforms:
     Claude API: ga
     Claude Platform on AWS: not available
@@ -30,6 +31,8 @@ featureMetadata:
 The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. Claude works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through screenshots and viewport coordinates.
 
 The tool is an Anthropic-defined [client toolset](tool-reference.md#client-toolsets): one `browser_toolset_20260801` entry in `tools` gives Claude 27 member tools by default, such as `navigate`, `read_page`, `left_click`, and `screenshot`, plus four more when you [enable them](browser-use-tool.md#enable-optional-member-tools). Your application runs every call against its own browser automation; nothing runs on Anthropic's side. The tool isn't currently available in [Claude Managed Agents](../../managed-agents/tools.md).
+
+The Python and TypeScript SDKs include a class that passes these calls to your browser code, runs the URL and file policies you set, and asks your approval callback. See [Browser and computer use with the SDK toolsets](browser-use-sdk.md).
 
 Choose browser use when the task stays inside webpages and means acting on them, or when pages build their content with JavaScript. When a task needs a whole desktop, use the [computer use tool](computer-use-tool.md), which works through screenshots and coordinates alone. For reading pages you can point Claude to, or finding sources on the web, the [web fetch tool](web-fetch-tool.md) and [web search tool](web-search-tool.md) are lighter. They're [server tools](server-tools.md) that the API runs for you, with no browser to operate.
 
@@ -1560,6 +1563,10 @@ If you also use the computer use tool, bash tool, text editor tool, or your own 
 The browser session, downloads, and uploaded files stay in your environment; the screenshots, page text, and tab state you return are part of your API request content and follow the standard retention policy, or your ZDR arrangement if you have one. The browser use tool is ZDR eligible; see [API and data retention](../../manage-claude/api-and-data-retention.md) for retention periods and eligibility across features.
 
 ## Next steps
+
+**Browser and computer use with the SDK toolsets**
+
+Write a browser driver in Python or TypeScript. The SDK runs the loop and the checks you configure.
 
 **Computer use tool**
 

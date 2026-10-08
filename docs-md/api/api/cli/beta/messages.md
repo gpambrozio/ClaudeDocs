@@ -84,7 +84,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+- `--model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
   The model that will complete your prompt.
 
@@ -3316,11 +3316,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                   - `type: "advisor_20260301"`
 
-                  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                     The model that will complete your prompt.
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                    - `"claude-haiku-5-5"`
+
+                      Fastest model for high-volume, real-time tasks
 
                     - `"claude-sonnet-5-5"`
 
@@ -3689,11 +3693,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -3781,7 +3789,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
@@ -3930,11 +3938,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         - `type: "unavailable"`
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -4327,11 +4339,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -4511,11 +4527,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -4654,11 +4674,15 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -4967,7 +4991,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
@@ -5859,7 +5883,7 @@ ant beta:messages create \
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-sonnet-5-5",
+        "model": "claude-haiku-5-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -5950,7 +5974,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+- `--model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
   The model that will complete your prompt.
 
@@ -6170,11 +6194,15 @@ ant beta:messages count-tokens \
 
     minimum: 0
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -6318,11 +6346,15 @@ ant beta:messages count-tokens \
 
   - `type: "advisor_20260301"`
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -6884,6 +6916,43 @@ ant beta:messages count-tokens \
 
     - `"output_file_too_large"`
 
+### Beta Browser Click Target
+
+- `beta_browser_click_target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+  Where to act: either a viewport coordinate or an element reference.
+
+  - `beta_browser_coordinate_target: object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `beta_browser_ref_target: object`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
 ### Beta Browser Close Tab Config
 
 - `beta_browser_close_tab_config: object`
@@ -6897,6 +6966,87 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Close Tab Input
+
+- `beta_browser_close_tab_input: object`
+
+  Close the tab with the given tab_id.
+
+  - `tab_id: string`
+
+    The tab to close.
+
+### Beta Browser Close Tab Tool Use Block
+
+- `beta_browser_close_tab_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Close the tab with the given tab_id.
+
+    - `tab_id: string`
+
+      The tab to close.
+
+  - `name: "close_tab"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Browser Coordinate Target
+
+- `beta_browser_coordinate_target: object`
+
+  A point in the browser viewport, in viewport pixels (the same frame as a
+  full-viewport screenshot).
+
+  - `type: "coordinate"`
+
+  - `x: number`
+
+    Pixels from the left edge of the viewport.
+
+    minimum: 0
+
+  - `y: number`
+
+    Pixels from the top edge of the viewport.
+
+    minimum: 0
 
 ### Beta Browser Double Click Config
 
@@ -6912,6 +7062,144 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Double Click Input
+
+- `beta_browser_double_click_input: object`
+
+  Double left-click at a viewport coordinate or on an element by reference.
+
+  - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `beta_browser_coordinate_target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `beta_browser_ref_target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Double Click Tool Use Block
+
+- `beta_browser_double_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Double left-click at a viewport coordinate or on an element by reference.
+
+    - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `beta_browser_coordinate_target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `beta_browser_ref_target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "double_click"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser File Upload Config
 
 - `beta_browser_file_upload_config: object`
@@ -6925,6 +7213,116 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser File Upload Input
+
+- `beta_browser_file_upload_input: object`
+
+  Set the value of a file-input element to one or more files. The target must be an
+  element reference; at least one of paths or document_ids is required.
+
+  - `target: object`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `document_ids: optional array of string`
+
+    References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+    minItems: 1
+
+  - `paths: optional array of string`
+
+    File paths on the browser executor's filesystem.
+
+    minItems: 1
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser File Upload Tool Use Block
+
+- `beta_browser_file_upload_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Set the value of a file-input element to one or more files. The target must be an
+    element reference; at least one of paths or document_ids is required.
+
+    - `target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `document_ids: optional array of string`
+
+      References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+      minItems: 1
+
+    - `paths: optional array of string`
+
+      File paths on the browser executor's filesystem.
+
+      minItems: 1
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "file_upload"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Find Config
 
@@ -6940,6 +7338,76 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Find Input
+
+- `beta_browser_find_input: object`
+
+  Find elements matching a natural-language description (e.g. "search bar", "add to
+  cart button") and return up to 20 matches with element references.
+
+  - `query: string`
+
+    Natural-language description of the element(s) to find.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Find Tool Use Block
+
+- `beta_browser_find_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Find elements matching a natural-language description (e.g. "search bar", "add to
+    cart button") and return up to 20 matches with element references.
+
+    - `query: string`
+
+      Natural-language description of the element(s) to find.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "find"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Form Input Config
 
 - `beta_browser_form_input_config: object`
@@ -6953,6 +7421,122 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Form Input Input
+
+- `beta_browser_form_input_input: object`
+
+  Set the value of a form element (input, textarea, select, checkbox). Use a
+  boolean for checkboxes, an option value or text for selects.
+
+  - `target: object`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `value: string or number or boolean`
+
+    The value to set.
+
+    - `union_member_0: string`
+
+    - `union_member_1: number`
+
+    - `union_member_2: boolean`
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Form Input Tool Use Block
+
+- `beta_browser_form_input_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Set the value of a form element (input, textarea, select, checkbox). Use a
+    boolean for checkboxes, an option value or text for selects.
+
+    - `target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `value: string or number or boolean`
+
+      The value to set.
+
+      - `union_member_0: string`
+
+      - `union_member_1: number`
+
+      - `union_member_2: boolean`
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "form_input"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Browser Form Input Value
+
+- `beta_browser_form_input_value: string or number or boolean`
+
+  - `union_member_0: string`
+
+  - `union_member_1: number`
+
+  - `union_member_2: boolean`
 
 ### Beta Browser Get Page Text Config
 
@@ -6968,6 +7552,68 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Get Page Text Input
+
+- `beta_browser_get_page_text_input: object`
+
+  Return the page's visible text content as plain text, prioritizing article
+  content. Suited to articles, documentation, and other text-heavy pages.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Get Page Text Tool Use Block
+
+- `beta_browser_get_page_text_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Return the page's visible text content as plain text, prioritizing article
+    content. Suited to articles, documentation, and other text-heavy pages.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "get_page_text"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Hold Key Config
 
 - `beta_browser_hold_key_config: object`
@@ -6981,6 +7627,88 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hold Key Input
+
+- `beta_browser_hold_key_input: object`
+
+  Hold a key or key chord down for a duration, then release it. Uses the same key
+  names and "+" chord syntax as the key action.
+
+  - `duration: number`
+
+    Seconds to hold the key down (maximum 30).
+
+    minimum: 0, maximum: 30
+
+  - `text: string`
+
+    The key or chord to hold.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Hold Key Tool Use Block
+
+- `beta_browser_hold_key_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Hold a key or key chord down for a duration, then release it. Uses the same key
+    names and "+" chord syntax as the key action.
+
+    - `duration: number`
+
+      Seconds to hold the key down (maximum 30).
+
+      minimum: 0, maximum: 30
+
+    - `text: string`
+
+      The key or chord to hold.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "hold_key"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Hover Config
 
@@ -6996,6 +7724,136 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Hover Input
+
+- `beta_browser_hover_input: object`
+
+  Move the cursor to a coordinate or element without clicking.
+
+  - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `beta_browser_coordinate_target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `beta_browser_ref_target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Hover Tool Use Block
+
+- `beta_browser_hover_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Move the cursor to a coordinate or element without clicking.
+
+    - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `beta_browser_coordinate_target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `beta_browser_ref_target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "hover"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Javascript Exec Config
 
 - `beta_browser_javascript_exec_config: object`
@@ -7010,6 +7868,78 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Javascript Exec Input
+
+- `beta_browser_javascript_exec_input: object`
+
+  Execute JavaScript in the page context and return the value of the last
+  expression. The code runs with access to the DOM, `window`, and page variables.
+  Write the expression you want evaluated — do NOT use `return`.
+
+  - `text: string`
+
+    JavaScript to execute in the page context.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Javascript Exec Tool Use Block
+
+- `beta_browser_javascript_exec_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Execute JavaScript in the page context and return the value of the last
+    expression. The code runs with access to the DOM, `window`, and page variables.
+    Write the expression you want evaluated — do NOT use `return`.
+
+    - `text: string`
+
+      JavaScript to execute in the page context.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "javascript_exec"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Key Config
 
 - `beta_browser_key_config: object`
@@ -7023,6 +7953,90 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Key Input
+
+- `beta_browser_key_input: object`
+
+  Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+  "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+  Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+  - `text: string`
+
+    The key, chord, or space-separated sequence to press.
+
+  - `repeat: optional number`
+
+    Number of times to repeat. Default 1.
+
+    minimum: 1, maximum: 100
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Key Tool Use Block
+
+- `beta_browser_key_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+    "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+    Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+    - `text: string`
+
+      The key, chord, or space-separated sequence to press.
+
+    - `repeat: optional number`
+
+      Number of times to repeat. Default 1.
+
+      minimum: 1, maximum: 100
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "key"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Left Click Config
 
@@ -7052,6 +8066,280 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Left Click Drag Input
+
+- `beta_browser_left_click_drag_input: object`
+
+  Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+  - `from: object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `target: object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Left Click Drag Tool Use Block
+
+- `beta_browser_left_click_drag_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+    - `from: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_click_drag"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Browser Left Click Input
+
+- `beta_browser_left_click_input: object`
+
+  Left-click at a viewport coordinate or on an element by reference.
+
+  - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `beta_browser_coordinate_target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `beta_browser_ref_target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Left Click Tool Use Block
+
+- `beta_browser_left_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Left-click at a viewport coordinate or on an element by reference.
+
+    - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `beta_browser_coordinate_target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `beta_browser_ref_target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_click"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Left Mouse Down Config
 
 - `beta_browser_left_mouse_down_config: object`
@@ -7065,6 +8353,106 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Down Input
+
+- `beta_browser_left_mouse_down_input: object`
+
+  Press and hold the left mouse button at a viewport coordinate. Pair with
+  left_mouse_up to perform a custom drag.
+
+  - `target: object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Left Mouse Down Tool Use Block
+
+- `beta_browser_left_mouse_down_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Press and hold the left mouse button at a viewport coordinate. Pair with
+    left_mouse_up to perform a custom drag.
+
+    - `target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_mouse_down"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Left Mouse Up Config
 
@@ -7080,6 +8468,104 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Left Mouse Up Input
+
+- `beta_browser_left_mouse_up_input: object`
+
+  Release the left mouse button at a viewport coordinate.
+
+  - `target: object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Left Mouse Up Tool Use Block
+
+- `beta_browser_left_mouse_up_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Release the left mouse button at a viewport coordinate.
+
+    - `target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_mouse_up"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser List Tabs Config
 
 - `beta_browser_list_tabs_config: object`
@@ -7093,6 +8579,58 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser List Tabs Input
+
+- `beta_browser_list_tabs_input: object`
+
+  List all open tabs with each tab's tab_id, title, and URL.
+
+### Beta Browser List Tabs Tool Use Block
+
+- `beta_browser_list_tabs_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    List all open tabs with each tab's tab_id, title, and URL.
+
+  - `name: "list_tabs"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Middle Click Config
 
@@ -7108,6 +8646,144 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Middle Click Input
+
+- `beta_browser_middle_click_input: object`
+
+  Middle-click at a viewport coordinate or on an element by reference.
+
+  - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `beta_browser_coordinate_target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `beta_browser_ref_target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Middle Click Tool Use Block
+
+- `beta_browser_middle_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Middle-click at a viewport coordinate or on an element by reference.
+
+    - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `beta_browser_coordinate_target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `beta_browser_ref_target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "middle_click"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Mouse Move Config
 
 - `beta_browser_mouse_move_config: object`
@@ -7121,6 +8797,104 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Mouse Move Input
+
+- `beta_browser_mouse_move_input: object`
+
+  Move the pointer to a viewport coordinate without clicking.
+
+  - `target: object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Mouse Move Tool Use Block
+
+- `beta_browser_mouse_move_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Move the pointer to a viewport coordinate without clicking.
+
+    - `target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "mouse_move"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Navigate Config
 
@@ -7136,6 +8910,76 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Navigate Input
+
+- `beta_browser_navigate_input: object`
+
+  Navigate to a URL, or go back/forward/reload in history. The protocol may be
+  omitted (defaults to https://).
+
+  - `url: string`
+
+    The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Navigate Tool Use Block
+
+- `beta_browser_navigate_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Navigate to a URL, or go back/forward/reload in history. The protocol may be
+    omitted (defaults to https://).
+
+    - `url: string`
+
+      The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "navigate"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser New Tab Config
 
 - `beta_browser_new_tab_config: object`
@@ -7149,6 +8993,58 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser New Tab Input
+
+- `beta_browser_new_tab_input: object`
+
+  Open a new empty tab and return its tab_id.
+
+### Beta Browser New Tab Tool Use Block
+
+- `beta_browser_new_tab_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Open a new empty tab and return its tab_id.
+
+  - `name: "new_tab"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Read Console Config
 
@@ -7164,6 +9060,70 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Read Console Input
+
+- `beta_browser_read_console_input: object`
+
+  Return console output (log entries, errors, warnings) accumulated since the
+  driver attached to the tab and since the last read, one line per entry. An empty
+  result does not mean no traffic for a tab that predates attach.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Read Console Tool Use Block
+
+- `beta_browser_read_console_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Return console output (log entries, errors, warnings) accumulated since the
+    driver attached to the tab and since the last read, one line per entry. An empty
+    result does not mean no traffic for a tab that predates attach.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "read_console"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Read Network Config
 
 - `beta_browser_read_network_config: object`
@@ -7177,6 +9137,70 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Network Input
+
+- `beta_browser_read_network_input: object`
+
+  Return the network requests (method, URL, status, MIME type, timing) recorded
+  since the driver attached to the tab and since the last read, one line per entry.
+  An empty result does not mean no traffic for a tab that predates attach.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Read Network Tool Use Block
+
+- `beta_browser_read_network_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Return the network requests (method, URL, status, MIME type, timing) recorded
+    since the driver attached to the tab and since the last read, one line per entry.
+    An empty result does not mean no traffic for a tab that predates attach.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "read_network"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Read Page Config
 
@@ -7192,6 +9216,130 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Read Page Filter
+
+- `beta_browser_read_page_filter: "all" or "interactive"`
+
+  - `"all"`
+
+  - `"interactive"`
+
+### Beta Browser Read Page Input
+
+- `beta_browser_read_page_input: object`
+
+  Return a structured accessibility tree of the page (or the subtree rooted at
+  `ref`), with element references like [ref_7] that can be used as targets on later
+  actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+  `depth` when exceeded.
+
+  - `depth: optional number`
+
+    Maximum tree depth. Default 15.
+
+    minimum: 1
+
+  - `filter: optional "all" or "interactive"`
+
+    Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+    - `"all"`
+
+    - `"interactive"`
+
+  - `ref: optional string`
+
+    Element reference to read a subtree from. Omit to read from the page root.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Read Page Tool Use Block
+
+- `beta_browser_read_page_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Return a structured accessibility tree of the page (or the subtree rooted at
+    `ref`), with element references like [ref_7] that can be used as targets on later
+    actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+    `depth` when exceeded.
+
+    - `depth: optional number`
+
+      Maximum tree depth. Default 15.
+
+      minimum: 1
+
+    - `filter: optional "all" or "interactive"`
+
+      Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+      - `"all"`
+
+      - `"interactive"`
+
+    - `ref: optional string`
+
+      Element reference to read a subtree from. Omit to read from the page root.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "read_page"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Browser Ref Target
+
+- `beta_browser_ref_target: object`
+
+  An element on the page, identified by a reference from a prior `read_page` or
+  `find` result. References are scoped to the tab that produced them and become
+  stale after navigation or a major re-render.
+
+  - `type: "ref"`
+
+  - `ref: string`
+
+    An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
 ### Beta Browser Right Click Config
 
 - `beta_browser_right_click_config: object`
@@ -7205,6 +9353,144 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Right Click Input
+
+- `beta_browser_right_click_input: object`
+
+  Right-click at a viewport coordinate or on an element by reference.
+
+  - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `beta_browser_coordinate_target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `beta_browser_ref_target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Right Click Tool Use Block
+
+- `beta_browser_right_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Right-click at a viewport coordinate or on an element by reference.
+
+    - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `beta_browser_coordinate_target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `beta_browser_ref_target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "right_click"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Screenshot Config
 
@@ -7220,6 +9506,66 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Screenshot Input
+
+- `beta_browser_screenshot_input: object`
+
+  Capture the current browser viewport.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Screenshot Tool Use Block
+
+- `beta_browser_screenshot_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Capture the current browser viewport.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "screenshot"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Scroll Config
 
 - `beta_browser_scroll_config: object`
@@ -7234,6 +9580,63 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Scroll Direction
+
+- `beta_browser_scroll_direction: "up" or "down" or "left" or "right"`
+
+  - `"up"`
+
+  - `"down"`
+
+  - `"left"`
+
+  - `"right"`
+
+### Beta Browser Scroll Input
+
+- `beta_browser_scroll_input: object`
+
+  Scroll at a viewport position. `target` must be a coordinate target.
+
+  - `scroll_direction: "up" or "down" or "left" or "right"`
+
+    - `"up"`
+
+    - `"down"`
+
+    - `"left"`
+
+    - `"right"`
+
+  - `target: object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `scroll_amount: optional number`
+
+    Scroll-wheel notches (1–10). Default 3.
+
+    minimum: 1, maximum: 10
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
 ### Beta Browser Scroll To Config
 
 - `beta_browser_scroll_to_config: object`
@@ -7247,6 +9650,175 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll To Input
+
+- `beta_browser_scroll_to_input: object`
+
+  Scroll an element into view.
+
+  - `target: object`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Scroll To Tool Use Block
+
+- `beta_browser_scroll_to_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Scroll an element into view.
+
+    - `target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "scroll_to"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Browser Scroll Tool Use Block
+
+- `beta_browser_scroll_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Scroll at a viewport position. `target` must be a coordinate target.
+
+    - `scroll_direction: "up" or "down" or "left" or "right"`
+
+      - `"up"`
+
+      - `"down"`
+
+      - `"left"`
+
+      - `"right"`
+
+    - `target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `scroll_amount: optional number`
+
+      Scroll-wheel notches (1–10). Default 3.
+
+      minimum: 1, maximum: 10
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "scroll"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser State Block Param
 
@@ -7656,6 +10228,1538 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Switch Tab Input
+
+- `beta_browser_switch_tab_input: object`
+
+  Make the tab with the given tab_id the active tab — the tab that actions without
+  a tab_id apply to.
+
+  - `tab_id: string`
+
+    The tab to switch to.
+
+### Beta Browser Switch Tab Tool Use Block
+
+- `beta_browser_switch_tab_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Make the tab with the given tab_id the active tab — the tab that actions without
+    a tab_id apply to.
+
+    - `tab_id: string`
+
+      The tab to switch to.
+
+  - `name: "switch_tab"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Browser Tool Use Block
+
+- `beta_browser_tool_use_block: BetaBrowserNavigateToolUseBlock or BetaBrowserListTabsToolUseBlock or BetaBrowserNewTabToolUseBlock or 28 more`
+
+  - `beta_browser_navigate_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Navigate to a URL, or go back/forward/reload in history. The protocol may be
+      omitted (defaults to https://).
+
+      - `url: string`
+
+        The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "navigate"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+        - `type: "direct"`
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+        - `type: "code_execution_20250825"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+      - `beta_server_tool_caller_20260120: object`
+
+        - `type: "code_execution_20260120"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `beta_browser_list_tabs_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      List all open tabs with each tab's tab_id, title, and URL.
+
+    - `name: "list_tabs"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_new_tab_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Open a new empty tab and return its tab_id.
+
+    - `name: "new_tab"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_switch_tab_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Make the tab with the given tab_id the active tab — the tab that actions without
+      a tab_id apply to.
+
+      - `tab_id: string`
+
+        The tab to switch to.
+
+    - `name: "switch_tab"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_close_tab_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Close the tab with the given tab_id.
+
+      - `tab_id: string`
+
+        The tab to close.
+
+    - `name: "close_tab"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_read_page_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Return a structured accessibility tree of the page (or the subtree rooted at
+      `ref`), with element references like [ref_7] that can be used as targets on later
+      actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+      `depth` when exceeded.
+
+      - `depth: optional number`
+
+        Maximum tree depth. Default 15.
+
+        minimum: 1
+
+      - `filter: optional "all" or "interactive"`
+
+        Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+        - `"all"`
+
+        - `"interactive"`
+
+      - `ref: optional string`
+
+        Element reference to read a subtree from. Omit to read from the page root.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "read_page"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_get_page_text_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Return the page's visible text content as plain text, prioritizing article
+      content. Suited to articles, documentation, and other text-heavy pages.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "get_page_text"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_read_console_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Return console output (log entries, errors, warnings) accumulated since the
+      driver attached to the tab and since the last read, one line per entry. An empty
+      result does not mean no traffic for a tab that predates attach.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "read_console"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_read_network_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Return the network requests (method, URL, status, MIME type, timing) recorded
+      since the driver attached to the tab and since the last read, one line per entry.
+      An empty result does not mean no traffic for a tab that predates attach.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "read_network"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_find_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Find elements matching a natural-language description (e.g. "search bar", "add to
+      cart button") and return up to 20 matches with element references.
+
+      - `query: string`
+
+        Natural-language description of the element(s) to find.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "find"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_form_input_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Set the value of a form element (input, textarea, select, checkbox). Use a
+      boolean for checkboxes, an option value or text for selects.
+
+      - `target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+      - `value: string or number or boolean`
+
+        The value to set.
+
+        - `union_member_0: string`
+
+        - `union_member_1: number`
+
+        - `union_member_2: boolean`
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "form_input"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_file_upload_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Set the value of a file-input element to one or more files. The target must be an
+      element reference; at least one of paths or document_ids is required.
+
+      - `target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+      - `document_ids: optional array of string`
+
+        References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+        minItems: 1
+
+      - `paths: optional array of string`
+
+        File paths on the browser executor's filesystem.
+
+        minItems: 1
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "file_upload"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_scroll_to_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Scroll an element into view.
+
+      - `target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "scroll_to"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_screenshot_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Capture the current browser viewport.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "screenshot"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_zoom_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Return a cropped screenshot of the given viewport region, scaled up for closer
+      inspection — useful for small icons, buttons, or text. Coordinates are in the
+      same viewport-pixel space as a full screenshot.
+
+      - `region: array of number`
+
+        [x0, y0, x1, y1] in viewport pixels.
+
+        minItems: 4, maxItems: 4
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "zoom"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_left_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Left-click at a viewport coordinate or on an element by reference.
+
+      - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+        - `beta_browser_coordinate_target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `beta_browser_ref_target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+          - `type: "ref"`
+
+          - `ref: string`
+
+            An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+      - `modifiers: optional string`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_click"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_right_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Right-click at a viewport coordinate or on an element by reference.
+
+      - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+        - `beta_browser_coordinate_target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `beta_browser_ref_target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+      - `modifiers: optional string`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "right_click"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_middle_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Middle-click at a viewport coordinate or on an element by reference.
+
+      - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+        - `beta_browser_coordinate_target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `beta_browser_ref_target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+      - `modifiers: optional string`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "middle_click"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_double_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Double left-click at a viewport coordinate or on an element by reference.
+
+      - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+        - `beta_browser_coordinate_target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `beta_browser_ref_target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+      - `modifiers: optional string`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "double_click"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_triple_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Triple left-click at a viewport coordinate or on an element by reference
+      (typically selects a line or paragraph).
+
+      - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+        - `beta_browser_coordinate_target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `beta_browser_ref_target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+      - `modifiers: optional string`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "triple_click"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_hover_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Move the cursor to a coordinate or element without clicking.
+
+      - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+        - `beta_browser_coordinate_target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `beta_browser_ref_target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "hover"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_left_click_drag_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+      - `from: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_click_drag"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_left_mouse_down_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Press and hold the left mouse button at a viewport coordinate. Pair with
+      left_mouse_up to perform a custom drag.
+
+      - `target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_mouse_down"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_left_mouse_up_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Release the left mouse button at a viewport coordinate.
+
+      - `target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_mouse_up"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_mouse_move_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Move the pointer to a viewport coordinate without clicking.
+
+      - `target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "mouse_move"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_scroll_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Scroll at a viewport position. `target` must be a coordinate target.
+
+      - `scroll_direction: "up" or "down" or "left" or "right"`
+
+        - `"up"`
+
+        - `"down"`
+
+        - `"left"`
+
+        - `"right"`
+
+      - `target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `scroll_amount: optional number`
+
+        Scroll-wheel notches (1–10). Default 3.
+
+        minimum: 1, maximum: 10
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "scroll"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_type_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Type a literal string at the current focus.
+
+      - `text: string`
+
+        The text to type.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "type"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_key_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+      "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+      Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+      - `text: string`
+
+        The key, chord, or space-separated sequence to press.
+
+      - `repeat: optional number`
+
+        Number of times to repeat. Default 1.
+
+        minimum: 1, maximum: 100
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "key"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_hold_key_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Hold a key or key chord down for a duration, then release it. Uses the same key
+      names and "+" chord syntax as the key action.
+
+      - `duration: number`
+
+        Seconds to hold the key down (maximum 30).
+
+        minimum: 0, maximum: 30
+
+      - `text: string`
+
+        The key or chord to hold.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "hold_key"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_wait_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Pause for the given duration.
+
+      - `duration: number`
+
+        Seconds to wait (maximum 30).
+
+        minimum: 0, maximum: 30
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "wait"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_browser_javascript_exec_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Execute JavaScript in the page context and return the value of the last
+      expression. The code runs with access to the DOM, `window`, and page variables.
+      Write the expression you want evaluated — do NOT use `return`.
+
+      - `text: string`
+
+        JavaScript to execute in the page context.
+
+      - `tab_id: optional string`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "javascript_exec"`
+
+    - `toolset_name: "browser"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
 
 ### Beta Browser Toolset 20260801
 
@@ -8462,6 +12566,146 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Triple Click Input
+
+- `beta_browser_triple_click_input: object`
+
+  Triple left-click at a viewport coordinate or on an element by reference
+  (typically selects a line or paragraph).
+
+  - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `beta_browser_coordinate_target: object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `beta_browser_ref_target: object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Triple Click Tool Use Block
+
+- `beta_browser_triple_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Triple left-click at a viewport coordinate or on an element by reference
+    (typically selects a line or paragraph).
+
+    - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `beta_browser_coordinate_target: object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `beta_browser_ref_target: object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "triple_click"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Type Config
 
 - `beta_browser_type_config: object`
@@ -8475,6 +12719,74 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Type Input
+
+- `beta_browser_type_input: object`
+
+  Type a literal string at the current focus.
+
+  - `text: string`
+
+    The text to type.
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Type Tool Use Block
+
+- `beta_browser_type_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Type a literal string at the current focus.
+
+    - `text: string`
+
+      The text to type.
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "type"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Browser Wait Config
 
@@ -8490,6 +12802,78 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Browser Wait Input
+
+- `beta_browser_wait_input: object`
+
+  Pause for the given duration.
+
+  - `duration: number`
+
+    Seconds to wait (maximum 30).
+
+    minimum: 0, maximum: 30
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Wait Tool Use Block
+
+- `beta_browser_wait_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Pause for the given duration.
+
+    - `duration: number`
+
+      Seconds to wait (maximum 30).
+
+      minimum: 0, maximum: 30
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "wait"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Browser Zoom Config
 
 - `beta_browser_zoom_config: object`
@@ -8503,6 +12887,82 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Zoom Input
+
+- `beta_browser_zoom_input: object`
+
+  Return a cropped screenshot of the given viewport region, scaled up for closer
+  inspection — useful for small icons, buttons, or text. Coordinates are in the
+  same viewport-pixel space as a full screenshot.
+
+  - `region: array of number`
+
+    [x0, y0, x1, y1] in viewport pixels.
+
+    minItems: 4, maxItems: 4
+
+  - `tab_id: optional string`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Beta Browser Zoom Tool Use Block
+
+- `beta_browser_zoom_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Return a cropped screenshot of the given viewport region, scaled up for closer
+    inspection — useful for small icons, buttons, or text. Coordinates are in the
+    same viewport-pixel space as a full screenshot.
+
+    - `region: array of number`
+
+      [x0, y0, x1, y1] in viewport pixels.
+
+      minItems: 4, maxItems: 4
+
+    - `tab_id: optional string`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "zoom"`
+
+  - `toolset_name: "browser"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Cache Control Ephemeral
 
@@ -11948,11 +16408,15 @@ ant beta:messages count-tokens \
 
               - `type: "advisor_20260301"`
 
-              - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+              - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-haiku-5-5"`
+
+                  Fastest model for high-volume, real-time tasks
 
                 - `"claude-sonnet-5-5"`
 
@@ -14555,11 +19019,15 @@ ant beta:messages count-tokens \
 
               - `type: "advisor_20260301"`
 
-              - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+              - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-haiku-5-5"`
+
+                  Fastest model for high-volume, real-time tasks
 
                 - `"claude-sonnet-5-5"`
 
@@ -15037,6 +19505,58 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Cursor Position Input
+
+- `beta_computer_cursor_position_input: object`
+
+  Get the current (x, y) pixel coordinate of the cursor.
+
+### Beta Computer Cursor Position Tool Use Block
+
+- `beta_computer_cursor_position_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Get the current (x, y) pixel coordinate of the cursor.
+
+  - `name: "cursor_position"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Double Click Config
 
 - `beta_computer_double_click_config: object`
@@ -15050,6 +19570,80 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Double Click Input
+
+- `beta_computer_double_click_input: object`
+
+  Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+  the current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Beta Computer Double Click Tool Use Block
+
+- `beta_computer_double_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+    the current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "double_click"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Computer Hold Key Config
 
@@ -15065,6 +19659,80 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Hold Key Input
+
+- `beta_computer_hold_key_input: object`
+
+  Hold down a key or key-combination for a specified duration. Uses the same key
+  syntax as `key`.
+
+  - `duration: number`
+
+    Duration to hold the key, in seconds.
+
+    maximum: 300
+
+  - `text: string`
+
+    The key or key-combination to hold.
+
+### Beta Computer Hold Key Tool Use Block
+
+- `beta_computer_hold_key_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Hold down a key or key-combination for a specified duration. Uses the same key
+    syntax as `key`.
+
+    - `duration: number`
+
+      Duration to hold the key, in seconds.
+
+      maximum: 300
+
+    - `text: string`
+
+      The key or key-combination to hold.
+
+  - `name: "hold_key"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Key Config
 
 - `beta_computer_key_config: object`
@@ -15078,6 +19746,86 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Key Input
+
+- `beta_computer_key_input: object`
+
+  Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+  a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+  case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+  "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+  supported.
+
+  - `text: string`
+
+    The key or key-combination to press.
+
+  - `repeat: optional number`
+
+    Number of times to repeat the key press. Default is 1.
+
+    minimum: 1, maximum: 100
+
+### Beta Computer Key Tool Use Block
+
+- `beta_computer_key_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+    a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+    case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+    "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+    supported.
+
+    - `text: string`
+
+      The key or key-combination to press.
+
+    - `repeat: optional number`
+
+      Number of times to repeat the key press. Default is 1.
+
+      minimum: 1, maximum: 100
+
+  - `name: "key"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Computer Left Click Config
 
@@ -15107,6 +19855,164 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Left Click Drag Input
+
+- `beta_computer_left_click_drag_input: object`
+
+  Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+  - `coordinate: array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `start_coordinate: array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Beta Computer Left Click Drag Tool Use Block
+
+- `beta_computer_left_click_drag_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+    - `coordinate: array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `start_coordinate: array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "left_click_drag"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Computer Left Click Input
+
+- `beta_computer_left_click_input: object`
+
+  Click the left mouse button at the specified (x, y) pixel coordinate, or the
+  current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Beta Computer Left Click Tool Use Block
+
+- `beta_computer_left_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Click the left mouse button at the specified (x, y) pixel coordinate, or the
+    current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "left_click"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Left Mouse Down Config
 
 - `beta_computer_left_mouse_down_config: object`
@@ -15120,6 +20026,58 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Down Input
+
+- `beta_computer_left_mouse_down_input: object`
+
+  Press and hold the left mouse button at the current cursor position.
+
+### Beta Computer Left Mouse Down Tool Use Block
+
+- `beta_computer_left_mouse_down_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Press and hold the left mouse button at the current cursor position.
+
+  - `name: "left_mouse_down"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Computer Left Mouse Up Config
 
@@ -15135,6 +20093,58 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Left Mouse Up Input
+
+- `beta_computer_left_mouse_up_input: object`
+
+  Release the left mouse button.
+
+### Beta Computer Left Mouse Up Tool Use Block
+
+- `beta_computer_left_mouse_up_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Release the left mouse button.
+
+  - `name: "left_mouse_up"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Middle Click Config
 
 - `beta_computer_middle_click_config: object`
@@ -15148,6 +20158,80 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Middle Click Input
+
+- `beta_computer_middle_click_input: object`
+
+  Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+  current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Beta Computer Middle Click Tool Use Block
+
+- `beta_computer_middle_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+    current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "middle_click"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Computer Mouse Move Config
 
@@ -15163,6 +20247,72 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Mouse Move Input
+
+- `beta_computer_mouse_move_input: object`
+
+  Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+  without clicking; otherwise use a click action directly.
+
+  - `coordinate: array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+### Beta Computer Mouse Move Tool Use Block
+
+- `beta_computer_mouse_move_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+    without clicking; otherwise use a click action directly.
+
+    - `coordinate: array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+  - `name: "mouse_move"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Right Click Config
 
 - `beta_computer_right_click_config: object`
@@ -15176,6 +20326,80 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Right Click Input
+
+- `beta_computer_right_click_input: object`
+
+  Click the right mouse button at the specified (x, y) pixel coordinate, or the
+  current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Beta Computer Right Click Tool Use Block
+
+- `beta_computer_right_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Click the right mouse button at the specified (x, y) pixel coordinate, or the
+    current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "right_click"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Computer Screenshot Config
 
@@ -15191,6 +20415,58 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Screenshot Input
+
+- `beta_computer_screenshot_input: object`
+
+  Take a screenshot of the screen.
+
+### Beta Computer Screenshot Tool Use Block
+
+- `beta_computer_screenshot_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Take a screenshot of the screen.
+
+  - `name: "screenshot"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Scroll Config
 
 - `beta_computer_scroll_config: object`
@@ -15204,6 +20480,794 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Scroll Direction
+
+- `beta_computer_scroll_direction: "up" or "down" or "left" or "right"`
+
+  - `"up"`
+
+  - `"down"`
+
+  - `"left"`
+
+  - `"right"`
+
+### Beta Computer Scroll Input
+
+- `beta_computer_scroll_input: object`
+
+  Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+  position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+  - `scroll_amount: number`
+
+    Number of 'clicks' of the scroll wheel.
+
+  - `scroll_direction: "up" or "down" or "left" or "right"`
+
+    - `"up"`
+
+    - `"down"`
+
+    - `"left"`
+
+    - `"right"`
+
+  - `coordinate: optional array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Beta Computer Scroll Tool Use Block
+
+- `beta_computer_scroll_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+    position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+    - `scroll_amount: number`
+
+      Number of 'clicks' of the scroll wheel.
+
+    - `scroll_direction: "up" or "down" or "left" or "right"`
+
+      - `"up"`
+
+      - `"down"`
+
+      - `"left"`
+
+      - `"right"`
+
+    - `coordinate: optional array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "scroll"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Beta Computer Tool Use Block
+
+- `beta_computer_tool_use_block: BetaComputerKeyToolUseBlock or BetaComputerHoldKeyToolUseBlock or BetaComputerTypeToolUseBlock or 14 more`
+
+  - `beta_computer_key_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+      a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+      case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+      "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+      supported.
+
+      - `text: string`
+
+        The key or key-combination to press.
+
+      - `repeat: optional number`
+
+        Number of times to repeat the key press. Default is 1.
+
+        minimum: 1, maximum: 100
+
+    - `name: "key"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+        - `type: "direct"`
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+        - `type: "code_execution_20250825"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+      - `beta_server_tool_caller_20260120: object`
+
+        - `type: "code_execution_20260120"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `beta_computer_hold_key_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Hold down a key or key-combination for a specified duration. Uses the same key
+      syntax as `key`.
+
+      - `duration: number`
+
+        Duration to hold the key, in seconds.
+
+        maximum: 300
+
+      - `text: string`
+
+        The key or key-combination to hold.
+
+    - `name: "hold_key"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_type_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Type a string of text on the keyboard.
+
+      - `text: string`
+
+        The text to type.
+
+    - `name: "type"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_cursor_position_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Get the current (x, y) pixel coordinate of the cursor.
+
+    - `name: "cursor_position"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_mouse_move_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+      without clicking; otherwise use a click action directly.
+
+      - `coordinate: array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+    - `name: "mouse_move"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_left_mouse_down_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Press and hold the left mouse button at the current cursor position.
+
+    - `name: "left_mouse_down"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_left_mouse_up_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Release the left mouse button.
+
+    - `name: "left_mouse_up"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_left_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Click the left mouse button at the specified (x, y) pixel coordinate, or the
+      current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "left_click"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_left_click_drag_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+      - `coordinate: array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `start_coordinate: array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "left_click_drag"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_right_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Click the right mouse button at the specified (x, y) pixel coordinate, or the
+      current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "right_click"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_middle_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+      current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "middle_click"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_double_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+      the current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "double_click"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_triple_click_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+      the current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "triple_click"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_scroll_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+      position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+      - `scroll_amount: number`
+
+        Number of 'clicks' of the scroll wheel.
+
+      - `scroll_direction: "up" or "down" or "left" or "right"`
+
+        - `"up"`
+
+        - `"down"`
+
+        - `"left"`
+
+        - `"right"`
+
+      - `coordinate: optional array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "scroll"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_wait_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Wait for a specified duration.
+
+      - `duration: number`
+
+        Duration to wait, in seconds.
+
+        maximum: 300
+
+    - `name: "wait"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_screenshot_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Take a screenshot of the screen.
+
+    - `name: "screenshot"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_zoom_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: object`
+
+      Take a screenshot of a rectangular region. Region coordinates are in the
+      full-screenshot space (not physical display pixels). The crop is scaled up to
+      fill the image budget so fine details become legible.
+
+      - `region: array of number`
+
+        (x0, y0, x1, y1): The region to capture.
+
+        minItems: 4, maxItems: 4
+
+    - `name: "zoom"`
+
+    - `toolset_name: "computer"`
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `beta_server_tool_caller_20260120: object`
 
 ### Beta Computer Toolset 20260801
 
@@ -15678,6 +21742,80 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Triple Click Input
+
+- `beta_computer_triple_click_input: object`
+
+  Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+  the current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Beta Computer Triple Click Tool Use Block
+
+- `beta_computer_triple_click_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+    the current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "triple_click"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Type Config
 
 - `beta_computer_type_config: object`
@@ -15691,6 +21829,66 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Type Input
+
+- `beta_computer_type_input: object`
+
+  Type a string of text on the keyboard.
+
+  - `text: string`
+
+    The text to type.
+
+### Beta Computer Type Tool Use Block
+
+- `beta_computer_type_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Type a string of text on the keyboard.
+
+    - `text: string`
+
+      The text to type.
+
+  - `name: "type"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Computer Wait Config
 
@@ -15706,6 +21904,70 @@ ant beta:messages count-tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Beta Computer Wait Input
+
+- `beta_computer_wait_input: object`
+
+  Wait for a specified duration.
+
+  - `duration: number`
+
+    Duration to wait, in seconds.
+
+    maximum: 300
+
+### Beta Computer Wait Tool Use Block
+
+- `beta_computer_wait_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Wait for a specified duration.
+
+    - `duration: number`
+
+      Duration to wait, in seconds.
+
+      maximum: 300
+
+  - `name: "wait"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Computer Zoom Config
 
 - `beta_computer_zoom_config: object`
@@ -15719,6 +21981,74 @@ ant beta:messages count-tokens \
   - `enabled: optional boolean`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Zoom Input
+
+- `beta_computer_zoom_input: object`
+
+  Take a screenshot of a rectangular region. Region coordinates are in the
+  full-screenshot space (not physical display pixels). The crop is scaled up to
+  fill the image budget so fine details become legible.
+
+  - `region: array of number`
+
+    (x0, y0, x1, y1): The region to capture.
+
+    minItems: 4, maxItems: 4
+
+### Beta Computer Zoom Tool Use Block
+
+- `beta_computer_zoom_tool_use_block: object`
+
+  - `type: "tool_use"`
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `input: object`
+
+    Take a screenshot of a rectangular region. Region coordinates are in the
+    full-screenshot space (not physical display pixels). The crop is scaled up to
+    fill the image budget so fine details become legible.
+
+    - `region: array of number`
+
+      (x0, y0, x1, y1): The region to capture.
+
+      minItems: 4, maxItems: 4
+
+  - `name: "zoom"`
+
+  - `toolset_name: "computer"`
+
+  - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `beta_direct_caller: object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `beta_server_tool_caller: object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_server_tool_caller_20260120: object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
 ### Beta Container
 
@@ -18784,11 +25114,15 @@ ant beta:messages count-tokens \
 
                 - `type: "advisor_20260301"`
 
-                - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                   The model that will complete your prompt.
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `"claude-haiku-5-5"`
+
+                    Fastest model for high-volume, real-time tasks
 
                   - `"claude-sonnet-5-5"`
 
@@ -19157,11 +25491,15 @@ ant beta:messages count-tokens \
 
       The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -19249,7 +25587,7 @@ ant beta:messages count-tokens \
 
       The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
@@ -22955,11 +29293,15 @@ ant beta:messages count-tokens \
 
                 - `type: "advisor_20260301"`
 
-                - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                   The model that will complete your prompt.
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `"claude-haiku-5-5"`
+
+                    Fastest model for high-volume, real-time tasks
 
                   - `"claude-sonnet-5-5"`
 
@@ -23431,11 +29773,15 @@ ant beta:messages count-tokens \
 
       Identifies one hop of a fallback transition.
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -23523,7 +29869,7 @@ ant beta:messages count-tokens \
 
       Identifies one hop of a fallback transition.
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
@@ -24313,11 +30659,15 @@ ant beta:messages count-tokens \
 
     The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -24405,7 +30755,7 @@ ant beta:messages count-tokens \
 
     The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
@@ -24465,11 +30815,15 @@ ant beta:messages count-tokens \
 
     Identifies one hop of a fallback transition.
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -24557,7 +30911,7 @@ ant beta:messages count-tokens \
 
     Identifies one hop of a fallback transition.
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
@@ -24728,11 +31082,15 @@ ant beta:messages count-tokens \
 
   Identifies one hop of a fallback transition.
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -24822,11 +31180,15 @@ ant beta:messages count-tokens \
 
   Identifies one hop of a fallback transition.
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -24961,11 +31323,15 @@ ant beta:messages count-tokens \
 
     minimum: 0
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -25066,11 +31432,15 @@ ant beta:messages count-tokens \
   attempt only and are validated as if the request were made to `model`.
   Any other key is rejected at parse time.
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -25320,11 +31690,15 @@ ant beta:messages count-tokens \
 
   - `union_member_0: array of BetaFallbackParam`
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -25798,11 +32172,15 @@ ant beta:messages count-tokens \
 
       minimum: 0
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -25982,11 +32360,15 @@ ant beta:messages count-tokens \
 
       minimum: 0
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -26125,11 +32507,15 @@ ant beta:messages count-tokens \
 
       minimum: 0
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -29870,11 +36256,15 @@ ant beta:messages count-tokens \
 
                   - `type: "advisor_20260301"`
 
-                  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                     The model that will complete your prompt.
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                    - `"claude-haiku-5-5"`
+
+                      Fastest model for high-volume, real-time tasks
 
                     - `"claude-sonnet-5-5"`
 
@@ -30243,11 +36633,15 @@ ant beta:messages count-tokens \
 
         The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -30335,7 +36729,7 @@ ant beta:messages count-tokens \
 
         The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
@@ -30484,11 +36878,15 @@ ant beta:messages count-tokens \
 
         - `type: "unavailable"`
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -30881,11 +37279,15 @@ ant beta:messages count-tokens \
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -31065,11 +37467,15 @@ ant beta:messages count-tokens \
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -31208,11 +37614,15 @@ ant beta:messages count-tokens \
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -31604,11 +38014,15 @@ ant beta:messages count-tokens \
 
         minimum: 0
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -31788,11 +38202,15 @@ ant beta:messages count-tokens \
 
         minimum: 0
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -31931,11 +38349,15 @@ ant beta:messages count-tokens \
 
         minimum: 0
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -32111,11 +38533,15 @@ ant beta:messages count-tokens \
 
     minimum: 0
 
-  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
 
     - `"claude-sonnet-5-5"`
 
@@ -35858,11 +42284,15 @@ ant beta:messages count-tokens \
 
                   - `type: "advisor_20260301"`
 
-                  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                     The model that will complete your prompt.
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                    - `"claude-haiku-5-5"`
+
+                      Fastest model for high-volume, real-time tasks
 
                     - `"claude-sonnet-5-5"`
 
@@ -36334,11 +42764,15 @@ ant beta:messages count-tokens \
 
         Identifies one hop of a fallback transition.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -36426,7 +42860,7 @@ ant beta:messages count-tokens \
 
         Identifies one hop of a fallback transition.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
@@ -39851,11 +46285,15 @@ ant beta:messages count-tokens \
 
                   - `type: "advisor_20260301"`
 
-                  - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                  - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                     The model that will complete your prompt.
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                    - `"claude-haiku-5-5"`
+
+                      Fastest model for high-volume, real-time tasks
 
                     - `"claude-sonnet-5-5"`
 
@@ -40224,11 +46662,15 @@ ant beta:messages count-tokens \
 
         The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -40316,7 +46758,7 @@ ant beta:messages count-tokens \
 
         The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
@@ -40738,11 +47180,15 @@ ant beta:messages count-tokens \
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -40922,11 +47368,15 @@ ant beta:messages count-tokens \
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -41065,11 +47515,15 @@ ant beta:messages count-tokens \
 
           minimum: 0
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -44298,11 +50752,15 @@ ant beta:messages count-tokens \
 
                     - `type: "advisor_20260301"`
 
-                    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                       The model that will complete your prompt.
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                      - `"claude-haiku-5-5"`
+
+                        Fastest model for high-volume, real-time tasks
 
                       - `"claude-sonnet-5-5"`
 
@@ -44671,11 +51129,15 @@ ant beta:messages count-tokens \
 
           The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-          - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+          - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-haiku-5-5"`
+
+              Fastest model for high-volume, real-time tasks
 
             - `"claude-sonnet-5-5"`
 
@@ -44763,7 +51225,7 @@ ant beta:messages count-tokens \
 
           The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-          - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+          - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
             The model that will complete your prompt.
 
@@ -44912,11 +51374,15 @@ ant beta:messages count-tokens \
 
           - `type: "unavailable"`
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -45309,11 +51775,15 @@ ant beta:messages count-tokens \
 
             minimum: 0
 
-          - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+          - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-haiku-5-5"`
+
+              Fastest model for high-volume, real-time tasks
 
             - `"claude-sonnet-5-5"`
 
@@ -45493,11 +51963,15 @@ ant beta:messages count-tokens \
 
             minimum: 0
 
-          - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+          - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-haiku-5-5"`
+
+              Fastest model for high-volume, real-time tasks
 
             - `"claude-sonnet-5-5"`
 
@@ -45636,11 +52110,15 @@ ant beta:messages count-tokens \
 
             minimum: 0
 
-          - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+          - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-haiku-5-5"`
+
+              Fastest model for high-volume, real-time tasks
 
             - `"claude-sonnet-5-5"`
 
@@ -48897,11 +55375,15 @@ ant beta:messages count-tokens \
 
                       - `type: "advisor_20260301"`
 
-                      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                         The model that will complete your prompt.
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                        - `"claude-haiku-5-5"`
+
+                          Fastest model for high-volume, real-time tasks
 
                         - `"claude-sonnet-5-5"`
 
@@ -49270,11 +55752,15 @@ ant beta:messages count-tokens \
 
             The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-            - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+            - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-haiku-5-5"`
+
+                Fastest model for high-volume, real-time tasks
 
               - `"claude-sonnet-5-5"`
 
@@ -49362,7 +55848,7 @@ ant beta:messages count-tokens \
 
             The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-            - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+            - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
               The model that will complete your prompt.
 
@@ -49511,11 +55997,15 @@ ant beta:messages count-tokens \
 
             - `type: "unavailable"`
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -49908,11 +56398,15 @@ ant beta:messages count-tokens \
 
               minimum: 0
 
-            - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+            - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-haiku-5-5"`
+
+                Fastest model for high-volume, real-time tasks
 
               - `"claude-sonnet-5-5"`
 
@@ -50092,11 +56586,15 @@ ant beta:messages count-tokens \
 
               minimum: 0
 
-            - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+            - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-haiku-5-5"`
+
+                Fastest model for high-volume, real-time tasks
 
               - `"claude-sonnet-5-5"`
 
@@ -50235,11 +56733,15 @@ ant beta:messages count-tokens \
 
               minimum: 0
 
-            - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+            - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-haiku-5-5"`
+
+                Fastest model for high-volume, real-time tasks
 
               - `"claude-sonnet-5-5"`
 
@@ -54030,11 +60532,15 @@ ant beta:messages count-tokens \
 
           - `type: "advisor_20260301"`
 
-          - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+          - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-haiku-5-5"`
+
+              Fastest model for high-volume, real-time tasks
 
             - `"claude-sonnet-5-5"`
 
@@ -56687,11 +63193,15 @@ ant beta:messages count-tokens \
 
           - `type: "advisor_20260301"`
 
-          - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+          - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-haiku-5-5"`
+
+              Fastest model for high-volume, real-time tasks
 
             - `"claude-sonnet-5-5"`
 
@@ -59246,11 +65756,15 @@ ant beta:messages count-tokens \
 
     - `type: "advisor_20260301"`
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -63544,11 +70058,15 @@ ant beta:messages count-tokens \
 
       - `type: "advisor_20260301"`
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -66026,11 +72544,15 @@ ant beta:messages count-tokens \
 
       - `type: "advisor_20260301"`
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -69995,11 +76517,15 @@ ant beta:messages count-tokens \
 
     - `type: "advisor_20260301"`
 
-    - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+    - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `"claude-sonnet-5-5"`
 
@@ -70434,6 +76960,36 @@ ant beta:messages count-tokens \
 
     minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
+### Beta Tool Use Caller
+
+- `beta_tool_use_caller: BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+  Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+  - `beta_direct_caller: object`
+
+    Tool invocation directly from the model.
+
+    - `type: "direct"`
+
+  - `beta_server_tool_caller: object`
+
+    Tool invocation generated by a server-side tool.
+
+    - `type: "code_execution_20250825"`
+
+    - `tool_id: string`
+
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `beta_server_tool_caller_20260120: object`
+
+    - `type: "code_execution_20260120"`
+
+    - `tool_id: string`
+
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
 ### Beta Tool Uses Keep
 
 - `beta_tool_uses_keep: object`
@@ -70453,6 +77009,2182 @@ ant beta:messages count-tokens \
   - `value: number`
 
     minimum: 1
+
+### Beta Toolset Tool Use Block
+
+- `beta_toolset_tool_use_block: BetaBrowserToolUseBlock or BetaComputerToolUseBlock or BetaToolUseBlock`
+
+  - `beta_browser_tool_use_block: BetaBrowserNavigateToolUseBlock or BetaBrowserListTabsToolUseBlock or BetaBrowserNewTabToolUseBlock or 28 more`
+
+    - `beta_browser_navigate_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Navigate to a URL, or go back/forward/reload in history. The protocol may be
+        omitted (defaults to https://).
+
+        - `url: string`
+
+          The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "navigate"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+          - `type: "direct"`
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+          - `type: "code_execution_20250825"`
+
+          - `tool_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `beta_server_tool_caller_20260120: object`
+
+          - `type: "code_execution_20260120"`
+
+          - `tool_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `beta_browser_list_tabs_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        List all open tabs with each tab's tab_id, title, and URL.
+
+      - `name: "list_tabs"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_new_tab_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Open a new empty tab and return its tab_id.
+
+      - `name: "new_tab"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_switch_tab_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Make the tab with the given tab_id the active tab — the tab that actions without
+        a tab_id apply to.
+
+        - `tab_id: string`
+
+          The tab to switch to.
+
+      - `name: "switch_tab"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_close_tab_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Close the tab with the given tab_id.
+
+        - `tab_id: string`
+
+          The tab to close.
+
+      - `name: "close_tab"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_read_page_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Return a structured accessibility tree of the page (or the subtree rooted at
+        `ref`), with element references like [ref_7] that can be used as targets on later
+        actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+        `depth` when exceeded.
+
+        - `depth: optional number`
+
+          Maximum tree depth. Default 15.
+
+          minimum: 1
+
+        - `filter: optional "all" or "interactive"`
+
+          Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+          - `"all"`
+
+          - `"interactive"`
+
+        - `ref: optional string`
+
+          Element reference to read a subtree from. Omit to read from the page root.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "read_page"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_get_page_text_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Return the page's visible text content as plain text, prioritizing article
+        content. Suited to articles, documentation, and other text-heavy pages.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "get_page_text"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_read_console_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Return console output (log entries, errors, warnings) accumulated since the
+        driver attached to the tab and since the last read, one line per entry. An empty
+        result does not mean no traffic for a tab that predates attach.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "read_console"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_read_network_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Return the network requests (method, URL, status, MIME type, timing) recorded
+        since the driver attached to the tab and since the last read, one line per entry.
+        An empty result does not mean no traffic for a tab that predates attach.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "read_network"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_find_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Find elements matching a natural-language description (e.g. "search bar", "add to
+        cart button") and return up to 20 matches with element references.
+
+        - `query: string`
+
+          Natural-language description of the element(s) to find.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "find"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_form_input_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Set the value of a form element (input, textarea, select, checkbox). Use a
+        boolean for checkboxes, an option value or text for selects.
+
+        - `target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+          - `type: "ref"`
+
+          - `ref: string`
+
+            An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+        - `value: string or number or boolean`
+
+          The value to set.
+
+          - `union_member_0: string`
+
+          - `union_member_1: number`
+
+          - `union_member_2: boolean`
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "form_input"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_file_upload_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Set the value of a file-input element to one or more files. The target must be an
+        element reference; at least one of paths or document_ids is required.
+
+        - `target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+          - `type: "ref"`
+
+          - `ref: string`
+
+            An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+        - `document_ids: optional array of string`
+
+          References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+          minItems: 1
+
+        - `paths: optional array of string`
+
+          File paths on the browser executor's filesystem.
+
+          minItems: 1
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "file_upload"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_scroll_to_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Scroll an element into view.
+
+        - `target: object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+          - `type: "ref"`
+
+          - `ref: string`
+
+            An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "scroll_to"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_screenshot_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Capture the current browser viewport.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "screenshot"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_zoom_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Return a cropped screenshot of the given viewport region, scaled up for closer
+        inspection — useful for small icons, buttons, or text. Coordinates are in the
+        same viewport-pixel space as a full screenshot.
+
+        - `region: array of number`
+
+          [x0, y0, x1, y1] in viewport pixels.
+
+          minItems: 4, maxItems: 4
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "zoom"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_left_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Left-click at a viewport coordinate or on an element by reference.
+
+        - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+          - `beta_browser_coordinate_target: object`
+
+            A point in the browser viewport, in viewport pixels (the same frame as a
+            full-viewport screenshot).
+
+            - `type: "coordinate"`
+
+            - `x: number`
+
+              Pixels from the left edge of the viewport.
+
+              minimum: 0
+
+            - `y: number`
+
+              Pixels from the top edge of the viewport.
+
+              minimum: 0
+
+          - `beta_browser_ref_target: object`
+
+            An element on the page, identified by a reference from a prior `read_page` or
+            `find` result. References are scoped to the tab that produced them and become
+            stale after navigation or a major re-render.
+
+            - `type: "ref"`
+
+            - `ref: string`
+
+              An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+        - `modifiers: optional string`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_click"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_right_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Right-click at a viewport coordinate or on an element by reference.
+
+        - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+          - `beta_browser_coordinate_target: object`
+
+            A point in the browser viewport, in viewport pixels (the same frame as a
+            full-viewport screenshot).
+
+          - `beta_browser_ref_target: object`
+
+            An element on the page, identified by a reference from a prior `read_page` or
+            `find` result. References are scoped to the tab that produced them and become
+            stale after navigation or a major re-render.
+
+        - `modifiers: optional string`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "right_click"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_middle_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Middle-click at a viewport coordinate or on an element by reference.
+
+        - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+          - `beta_browser_coordinate_target: object`
+
+            A point in the browser viewport, in viewport pixels (the same frame as a
+            full-viewport screenshot).
+
+          - `beta_browser_ref_target: object`
+
+            An element on the page, identified by a reference from a prior `read_page` or
+            `find` result. References are scoped to the tab that produced them and become
+            stale after navigation or a major re-render.
+
+        - `modifiers: optional string`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "middle_click"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_double_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Double left-click at a viewport coordinate or on an element by reference.
+
+        - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+          - `beta_browser_coordinate_target: object`
+
+            A point in the browser viewport, in viewport pixels (the same frame as a
+            full-viewport screenshot).
+
+          - `beta_browser_ref_target: object`
+
+            An element on the page, identified by a reference from a prior `read_page` or
+            `find` result. References are scoped to the tab that produced them and become
+            stale after navigation or a major re-render.
+
+        - `modifiers: optional string`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "double_click"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_triple_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Triple left-click at a viewport coordinate or on an element by reference
+        (typically selects a line or paragraph).
+
+        - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+          - `beta_browser_coordinate_target: object`
+
+            A point in the browser viewport, in viewport pixels (the same frame as a
+            full-viewport screenshot).
+
+          - `beta_browser_ref_target: object`
+
+            An element on the page, identified by a reference from a prior `read_page` or
+            `find` result. References are scoped to the tab that produced them and become
+            stale after navigation or a major re-render.
+
+        - `modifiers: optional string`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "triple_click"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_hover_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Move the cursor to a coordinate or element without clicking.
+
+        - `target: BetaBrowserCoordinateTarget or BetaBrowserRefTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+          - `beta_browser_coordinate_target: object`
+
+            A point in the browser viewport, in viewport pixels (the same frame as a
+            full-viewport screenshot).
+
+          - `beta_browser_ref_target: object`
+
+            An element on the page, identified by a reference from a prior `read_page` or
+            `find` result. References are scoped to the tab that produced them and become
+            stale after navigation or a major re-render.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "hover"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_left_click_drag_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+        - `from: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_click_drag"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_left_mouse_down_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Press and hold the left mouse button at a viewport coordinate. Pair with
+        left_mouse_up to perform a custom drag.
+
+        - `target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_mouse_down"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_left_mouse_up_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Release the left mouse button at a viewport coordinate.
+
+        - `target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_mouse_up"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_mouse_move_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Move the pointer to a viewport coordinate without clicking.
+
+        - `target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "mouse_move"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_scroll_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Scroll at a viewport position. `target` must be a coordinate target.
+
+        - `scroll_direction: "up" or "down" or "left" or "right"`
+
+          - `"up"`
+
+          - `"down"`
+
+          - `"left"`
+
+          - `"right"`
+
+        - `target: object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `scroll_amount: optional number`
+
+          Scroll-wheel notches (1–10). Default 3.
+
+          minimum: 1, maximum: 10
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "scroll"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_type_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Type a literal string at the current focus.
+
+        - `text: string`
+
+          The text to type.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "type"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_key_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+        "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+        Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+        - `text: string`
+
+          The key, chord, or space-separated sequence to press.
+
+        - `repeat: optional number`
+
+          Number of times to repeat. Default 1.
+
+          minimum: 1, maximum: 100
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "key"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_hold_key_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Hold a key or key chord down for a duration, then release it. Uses the same key
+        names and "+" chord syntax as the key action.
+
+        - `duration: number`
+
+          Seconds to hold the key down (maximum 30).
+
+          minimum: 0, maximum: 30
+
+        - `text: string`
+
+          The key or chord to hold.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "hold_key"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_wait_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Pause for the given duration.
+
+        - `duration: number`
+
+          Seconds to wait (maximum 30).
+
+          minimum: 0, maximum: 30
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "wait"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_browser_javascript_exec_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Execute JavaScript in the page context and return the value of the last
+        expression. The code runs with access to the DOM, `window`, and page variables.
+        Write the expression you want evaluated — do NOT use `return`.
+
+        - `text: string`
+
+          JavaScript to execute in the page context.
+
+        - `tab_id: optional string`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "javascript_exec"`
+
+      - `toolset_name: "browser"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+  - `beta_computer_tool_use_block: BetaComputerKeyToolUseBlock or BetaComputerHoldKeyToolUseBlock or BetaComputerTypeToolUseBlock or 14 more`
+
+    - `beta_computer_key_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+        a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+        case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+        "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+        supported.
+
+        - `text: string`
+
+          The key or key-combination to press.
+
+        - `repeat: optional number`
+
+          Number of times to repeat the key press. Default is 1.
+
+          minimum: 1, maximum: 100
+
+      - `name: "key"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_hold_key_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Hold down a key or key-combination for a specified duration. Uses the same key
+        syntax as `key`.
+
+        - `duration: number`
+
+          Duration to hold the key, in seconds.
+
+          maximum: 300
+
+        - `text: string`
+
+          The key or key-combination to hold.
+
+      - `name: "hold_key"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_type_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Type a string of text on the keyboard.
+
+        - `text: string`
+
+          The text to type.
+
+      - `name: "type"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_cursor_position_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Get the current (x, y) pixel coordinate of the cursor.
+
+      - `name: "cursor_position"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_mouse_move_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+        without clicking; otherwise use a click action directly.
+
+        - `coordinate: array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+      - `name: "mouse_move"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_left_mouse_down_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Press and hold the left mouse button at the current cursor position.
+
+      - `name: "left_mouse_down"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_left_mouse_up_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Release the left mouse button.
+
+      - `name: "left_mouse_up"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_left_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Click the left mouse button at the specified (x, y) pixel coordinate, or the
+        current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "left_click"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_left_click_drag_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+        - `coordinate: array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `start_coordinate: array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "left_click_drag"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_right_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Click the right mouse button at the specified (x, y) pixel coordinate, or the
+        current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "right_click"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_middle_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+        current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "middle_click"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_double_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+        the current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "double_click"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_triple_click_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+        the current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "triple_click"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_scroll_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+        position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+        - `scroll_amount: number`
+
+          Number of 'clicks' of the scroll wheel.
+
+        - `scroll_direction: "up" or "down" or "left" or "right"`
+
+          - `"up"`
+
+          - `"down"`
+
+          - `"left"`
+
+          - `"right"`
+
+        - `coordinate: optional array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "scroll"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_wait_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Wait for a specified duration.
+
+        - `duration: number`
+
+          Duration to wait, in seconds.
+
+          maximum: 300
+
+      - `name: "wait"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_screenshot_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Take a screenshot of the screen.
+
+      - `name: "screenshot"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+    - `beta_computer_zoom_tool_use_block: object`
+
+      - `type: "tool_use"`
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `input: object`
+
+        Take a screenshot of a rectangular region. Region coordinates are in the
+        full-screenshot space (not physical display pixels). The crop is scaled up to
+        fill the image budget so fine details become legible.
+
+        - `region: array of number`
+
+          (x0, y0, x1, y1): The region to capture.
+
+          minItems: 4, maxItems: 4
+
+      - `name: "zoom"`
+
+      - `toolset_name: "computer"`
+
+      - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `beta_direct_caller: object`
+
+          Tool invocation directly from the model.
+
+        - `beta_server_tool_caller: object`
+
+          Tool invocation generated by a server-side tool.
+
+        - `beta_server_tool_caller_20260120: object`
+
+  - `beta_tool_use_block: object`
+
+    - `type: "tool_use"`
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `input: map[unknown]`
+
+    - `name: string`
+
+      minLength: 1
+
+    - `caller: optional BetaDirectCaller or BetaServerToolCaller or BetaServerToolCaller20260120`
+
+      - `beta_direct_caller: object`
+
+        Tool invocation directly from the model.
+
+        - `type: "direct"`
+
+      - `beta_server_tool_caller: object`
+
+        Tool invocation generated by a server-side tool.
+
+        - `type: "code_execution_20250825"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+      - `beta_server_tool_caller_20260120: object`
+
+        - `type: "code_execution_20260120"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `toolset_name: optional string`
+
+      For a toolset member tool_use, the toolset family.
+
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### Beta URL Image Source
 
@@ -70638,11 +79370,15 @@ ant beta:messages count-tokens \
 
         minimum: 0
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -70822,11 +79558,15 @@ ant beta:messages count-tokens \
 
         minimum: 0
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -70965,11 +79705,15 @@ ant beta:messages count-tokens \
 
         minimum: 0
 
-      - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+      - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `"claude-sonnet-5-5"`
 
@@ -77274,11 +86018,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                         - `type: "advisor_20260301"`
 
-                        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+                        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                           The model that will complete your prompt.
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                          - `"claude-haiku-5-5"`
+
+                            Fastest model for high-volume, real-time tasks
 
                           - `"claude-sonnet-5-5"`
 
@@ -77647,11 +86395,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
 
-              - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+              - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-haiku-5-5"`
+
+                  Fastest model for high-volume, real-time tasks
 
                 - `"claude-sonnet-5-5"`
 
@@ -77739,7 +86491,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               The fallback model producing the content that follows this block. Its `model` is always the canonical id.
 
-              - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+              - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                 The model that will complete your prompt.
 
@@ -77888,11 +86640,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `type: "unavailable"`
 
-        - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+        - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `"claude-sonnet-5-5"`
 
@@ -78285,11 +87041,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-              - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+              - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-haiku-5-5"`
+
+                  Fastest model for high-volume, real-time tasks
 
                 - `"claude-sonnet-5-5"`
 
@@ -78469,11 +87229,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-              - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+              - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-haiku-5-5"`
+
+                  Fastest model for high-volume, real-time tasks
 
                 - `"claude-sonnet-5-5"`
 
@@ -78612,11 +87376,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 minimum: 0
 
-              - `model: "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+              - `model: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-haiku-5-5"`
+
+                  Fastest model for high-volume, real-time tasks
 
                 - `"claude-sonnet-5-5"`
 

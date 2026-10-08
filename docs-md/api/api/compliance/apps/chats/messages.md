@@ -359,7 +359,7 @@ Retrieves message history and file metadata for a specific chat.
 
 - `name: string`
 
-  Chat name
+  Chat name. Empty when `deleted_at` is set.
 
 - `organization_uuid: string`
 
@@ -473,6 +473,9 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
 - `MessageListResponse object`
 
   A single message in a chat conversation.
+
+  When the chat's `deleted_at` is set, `content` is an empty list and `files`,
+  `generated_files` and `artifacts` are null.
 
   - `id: string`
 

@@ -29,7 +29,7 @@ Copy this line, paste it into your terminal (`Cmd + V` on macOS, `Ctrl + Shift +
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-This downloads and runs the Claude Code installer from claude.ai. You'll see text scrolling as it works. When it's done, you'll see "Claude Code successfully installed!" If you see an error instead, check the [troubleshooting section](#macos-and-linux-troubleshooting) below.
+This downloads and runs the Claude Code installer from claude.ai. The command shows no progress while Claude Code downloads, so leave the window open and wait. When the installer finishes, you'll see "Claude Code successfully installed!" If you see an error instead, check the [troubleshooting section](#macos-and-linux-troubleshooting) below.
 
 **Start Claude Code**
 
@@ -92,7 +92,7 @@ Copy this line, paste it into PowerShell with `Ctrl + V` or right-click, and pre
 irm https://claude.ai/install.ps1 | iex
 ```
 
-This downloads and runs the Claude Code installer. `irm` fetches the file and `iex` runs it. You'll see text scrolling as it works. When it's done, you'll see "Claude Code successfully installed!" If you see an error instead, check the [troubleshooting section](#windows-troubleshooting) below.
+This downloads and runs the Claude Code installer. `irm` fetches the file and `iex` runs it. The command shows no progress while Claude Code downloads, so leave the window open and wait. When the installer finishes, you'll see "Claude Code successfully installed!" If you see an error instead, check the [troubleshooting section](#windows-troubleshooting) below.
 
 If you're in CMD instead of PowerShell, use this command:
 

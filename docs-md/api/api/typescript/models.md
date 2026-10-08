@@ -29,6 +29,18 @@ The Models API response can be used to determine which models are available for 
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
+  - `lifecycle?: Array<"active" | "deprecated" | "retired">` (query parameter)
+
+    Filter the list to models in any of the given lifecycle stages (`active`, `deprecated`, or `retired`). Up to 3 values. When omitted, the list contains the `active` and `deprecated` models; `retired` models appear only when `retired` is requested explicitly.
+
+    maxItems: 3
+
+    - `"active"`
+
+    - `"deprecated"`
+
+    - `"retired"`
+
   - `limit?: number` (query parameter)
 
     Number of items to return per page.
@@ -185,7 +197,7 @@ The Models API response can be used to determine which models are available for 
 
     - `code_execution: CapabilitySupport`
 
-      Whether the model supports code execution tools.
+      Whether code that the model runs in the code execution tool can call the request's other tools, as in programmatic tool calling and dynamic filtering for web search and web fetch. Support for the code execution tool itself is in `server_tools.code_execution`.
 
     - `context_management: ContextManagementCapability`
 
@@ -243,6 +255,22 @@ The Models API response can be used to determine which models are available for 
 
       Whether the model accepts PDF content blocks.
 
+    - `server_tools: ServerToolsCapability`
+
+      Whether this model supports the web search and code execution server tools. `supported` is true when the model supports at least one of the tools. A supported tool can still be rejected for your organization, for example when an admin has turned web search off.
+
+      - `code_execution: CapabilitySupport`
+
+        Whether the model supports the code execution tool: true when the model supports at least one version of the tool, not necessarily every version.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `web_search: CapabilitySupport`
+
+        Whether the model supports the web search tool: true when the model supports at least one version of the tool, not necessarily every version.
+
     - `structured_outputs: CapabilitySupport`
 
       Whether the model supports structured output / JSON mode / strict tool schemas.
@@ -261,11 +289,15 @@ The Models API response can be used to determine which models are available for 
 
         - `adaptive: CapabilitySupport`
 
-          Whether the model supports thinking with type 'adaptive' (auto).
+          Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
+
+        - `disabled: CapabilitySupport`
+
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
 
         - `enabled: CapabilitySupport`
 
-          Whether the model supports thinking with type 'enabled'.
+          Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
   - `created_at: string`
 
@@ -273,9 +305,31 @@ The Models API response can be used to determine which models are available for 
 
     format: date-time
 
+  - `deprecated_at: string | null`
+
+    RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
+
+    format: date-time
+
   - `display_name: string`
 
     A human-readable name for the model.
+
+  - `lifecycle: "active" | "deprecated" | "retired"`
+
+    The model's current lifecycle stage.
+
+    - `active`: The model is available for use, open to new adopters, and not scheduled for retirement.
+    - `deprecated`: The model remains callable for organizations with existing access, but is headed for retirement and closed to new adopters.
+    - `retired`: The model is no longer available for use; inference requests naming it fail. It remains in the catalogue as the historical record of its retirement.
+
+    default: active
+
+    - `"active"`
+
+    - `"deprecated"`
+
+    - `"retired"`
 
   - `line: ModelLine | null`
 
@@ -298,6 +352,12 @@ The Models API response can be used to determine which models are available for 
   - `max_tokens: number | null`
 
     Maximum value for the `max_tokens` parameter when using this model.
+
+  - `retires_at: string | null`
+
+    RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
+
+    format: date-time
 
 ### Example
 
@@ -367,6 +427,15 @@ for await (const modelInfo of client.models.list()) {
         "pdf_input": {
           "supported": true
         },
+        "server_tools": {
+          "code_execution": {
+            "supported": true
+          },
+          "supported": true,
+          "web_search": {
+            "supported": true
+          }
+        },
         "structured_outputs": {
           "supported": true
         },
@@ -376,6 +445,9 @@ for await (const modelInfo of client.models.list()) {
             "adaptive": {
               "supported": true
             },
+            "disabled": {
+              "supported": true
+            },
             "enabled": {
               "supported": true
             }
@@ -383,10 +455,13 @@ for await (const modelInfo of client.models.list()) {
         }
       },
       "created_at": "2026-07-24T00:00:00Z",
+      "deprecated_at": "2019-12-27T18:11:19.117Z",
       "display_name": "Claude Opus 5",
+      "lifecycle": "active",
       "line": "haiku",
       "max_input_tokens": 0,
       "max_tokens": 0,
+      "retires_at": "2019-12-27T18:11:19.117Z",
       "type": "model"
     }
   ],
@@ -562,7 +637,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `code_execution: CapabilitySupport`
 
-      Whether the model supports code execution tools.
+      Whether code that the model runs in the code execution tool can call the request's other tools, as in programmatic tool calling and dynamic filtering for web search and web fetch. Support for the code execution tool itself is in `server_tools.code_execution`.
 
     - `context_management: ContextManagementCapability`
 
@@ -620,6 +695,22 @@ The Models API response can be used to determine information about a specific mo
 
       Whether the model accepts PDF content blocks.
 
+    - `server_tools: ServerToolsCapability`
+
+      Whether this model supports the web search and code execution server tools. `supported` is true when the model supports at least one of the tools. A supported tool can still be rejected for your organization, for example when an admin has turned web search off.
+
+      - `code_execution: CapabilitySupport`
+
+        Whether the model supports the code execution tool: true when the model supports at least one version of the tool, not necessarily every version.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `web_search: CapabilitySupport`
+
+        Whether the model supports the web search tool: true when the model supports at least one version of the tool, not necessarily every version.
+
     - `structured_outputs: CapabilitySupport`
 
       Whether the model supports structured output / JSON mode / strict tool schemas.
@@ -638,11 +729,15 @@ The Models API response can be used to determine information about a specific mo
 
         - `adaptive: CapabilitySupport`
 
-          Whether the model supports thinking with type 'adaptive' (auto).
+          Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
+
+        - `disabled: CapabilitySupport`
+
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
 
         - `enabled: CapabilitySupport`
 
-          Whether the model supports thinking with type 'enabled'.
+          Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
   - `created_at: string`
 
@@ -650,9 +745,31 @@ The Models API response can be used to determine information about a specific mo
 
     format: date-time
 
+  - `deprecated_at: string | null`
+
+    RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
+
+    format: date-time
+
   - `display_name: string`
 
     A human-readable name for the model.
+
+  - `lifecycle: "active" | "deprecated" | "retired"`
+
+    The model's current lifecycle stage.
+
+    - `active`: The model is available for use, open to new adopters, and not scheduled for retirement.
+    - `deprecated`: The model remains callable for organizations with existing access, but is headed for retirement and closed to new adopters.
+    - `retired`: The model is no longer available for use; inference requests naming it fail. It remains in the catalogue as the historical record of its retirement.
+
+    default: active
+
+    - `"active"`
+
+    - `"deprecated"`
+
+    - `"retired"`
 
   - `line: ModelLine | null`
 
@@ -675,6 +792,12 @@ The Models API response can be used to determine information about a specific mo
   - `max_tokens: number | null`
 
     Maximum value for the `max_tokens` parameter when using this model.
+
+  - `retires_at: string | null`
+
+    RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
+
+    format: date-time
 
 ### Example
 
@@ -741,6 +864,15 @@ console.log(modelInfo.id);
     "pdf_input": {
       "supported": true
     },
+    "server_tools": {
+      "code_execution": {
+        "supported": true
+      },
+      "supported": true,
+      "web_search": {
+        "supported": true
+      }
+    },
     "structured_outputs": {
       "supported": true
     },
@@ -750,6 +882,9 @@ console.log(modelInfo.id);
         "adaptive": {
           "supported": true
         },
+        "disabled": {
+          "supported": true
+        },
         "enabled": {
           "supported": true
         }
@@ -757,10 +892,13 @@ console.log(modelInfo.id);
     }
   },
   "created_at": "2026-07-24T00:00:00Z",
+  "deprecated_at": "2019-12-27T18:11:19.117Z",
   "display_name": "Claude Opus 5",
+  "lifecycle": "active",
   "line": "haiku",
   "max_input_tokens": 0,
   "max_tokens": 0,
+  "retires_at": "2019-12-27T18:11:19.117Z",
   "type": "model"
 }
 ```
@@ -857,7 +995,7 @@ console.log(modelInfo.id);
 
   - `code_execution: CapabilitySupport`
 
-    Whether the model supports code execution tools.
+    Whether code that the model runs in the code execution tool can call the request's other tools, as in programmatic tool calling and dynamic filtering for web search and web fetch. Support for the code execution tool itself is in `server_tools.code_execution`.
 
   - `context_management: ContextManagementCapability`
 
@@ -915,6 +1053,22 @@ console.log(modelInfo.id);
 
     Whether the model accepts PDF content blocks.
 
+  - `server_tools: ServerToolsCapability`
+
+    Whether this model supports the web search and code execution server tools. `supported` is true when the model supports at least one of the tools. A supported tool can still be rejected for your organization, for example when an admin has turned web search off.
+
+    - `code_execution: CapabilitySupport`
+
+      Whether the model supports the code execution tool: true when the model supports at least one version of the tool, not necessarily every version.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+    - `web_search: CapabilitySupport`
+
+      Whether the model supports the web search tool: true when the model supports at least one version of the tool, not necessarily every version.
+
   - `structured_outputs: CapabilitySupport`
 
     Whether the model supports structured output / JSON mode / strict tool schemas.
@@ -933,11 +1087,15 @@ console.log(modelInfo.id);
 
       - `adaptive: CapabilitySupport`
 
-        Whether the model supports thinking with type 'adaptive' (auto).
+        Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
+
+      - `disabled: CapabilitySupport`
+
+        Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
 
       - `enabled: CapabilitySupport`
 
-        Whether the model supports thinking with type 'enabled'.
+        Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
 ### Model Info
 
@@ -973,7 +1131,7 @@ console.log(modelInfo.id);
 
     - `code_execution: CapabilitySupport`
 
-      Whether the model supports code execution tools.
+      Whether code that the model runs in the code execution tool can call the request's other tools, as in programmatic tool calling and dynamic filtering for web search and web fetch. Support for the code execution tool itself is in `server_tools.code_execution`.
 
     - `context_management: ContextManagementCapability`
 
@@ -1031,6 +1189,22 @@ console.log(modelInfo.id);
 
       Whether the model accepts PDF content blocks.
 
+    - `server_tools: ServerToolsCapability`
+
+      Whether this model supports the web search and code execution server tools. `supported` is true when the model supports at least one of the tools. A supported tool can still be rejected for your organization, for example when an admin has turned web search off.
+
+      - `code_execution: CapabilitySupport`
+
+        Whether the model supports the code execution tool: true when the model supports at least one version of the tool, not necessarily every version.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
+      - `web_search: CapabilitySupport`
+
+        Whether the model supports the web search tool: true when the model supports at least one version of the tool, not necessarily every version.
+
     - `structured_outputs: CapabilitySupport`
 
       Whether the model supports structured output / JSON mode / strict tool schemas.
@@ -1049,11 +1223,15 @@ console.log(modelInfo.id);
 
         - `adaptive: CapabilitySupport`
 
-          Whether the model supports thinking with type 'adaptive' (auto).
+          Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
+
+        - `disabled: CapabilitySupport`
+
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
 
         - `enabled: CapabilitySupport`
 
-          Whether the model supports thinking with type 'enabled'.
+          Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
   - `created_at: string`
 
@@ -1061,9 +1239,31 @@ console.log(modelInfo.id);
 
     format: date-time
 
+  - `deprecated_at: string | null`
+
+    RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
+
+    format: date-time
+
   - `display_name: string`
 
     A human-readable name for the model.
+
+  - `lifecycle: "active" | "deprecated" | "retired"`
+
+    The model's current lifecycle stage.
+
+    - `active`: The model is available for use, open to new adopters, and not scheduled for retirement.
+    - `deprecated`: The model remains callable for organizations with existing access, but is headed for retirement and closed to new adopters.
+    - `retired`: The model is no longer available for use; inference requests naming it fail. It remains in the catalogue as the historical record of its retirement.
+
+    default: active
+
+    - `"active"`
+
+    - `"deprecated"`
+
+    - `"retired"`
 
   - `line: ModelLine | null`
 
@@ -1087,6 +1287,12 @@ console.log(modelInfo.id);
 
     Maximum value for the `max_tokens` parameter when using this model.
 
+  - `retires_at: string | null`
+
+    RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
+
+    format: date-time
+
 ### Model Line
 
 - `type ModelLine = "haiku" | "sonnet" | "opus" | 2 more`
@@ -1102,6 +1308,28 @@ console.log(modelInfo.id);
   - `"fable"`
 
   - `"mythos"`
+
+### Server Tools Capability
+
+- `interface ServerToolsCapability`
+
+  Web search and code execution tool support, with one entry per tool.
+
+  - `code_execution: CapabilitySupport`
+
+    Whether the model supports the code execution tool: true when the model supports at least one version of the tool, not necessarily every version.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
+  - `supported: boolean`
+
+    Whether this capability is supported by the model.
+
+  - `web_search: CapabilitySupport`
+
+    Whether the model supports the web search tool: true when the model supports at least one version of the tool, not necessarily every version.
 
 ### Thinking Capability
 
@@ -1119,33 +1347,41 @@ console.log(modelInfo.id);
 
     - `adaptive: CapabilitySupport`
 
-      Whether the model supports thinking with type 'adaptive' (auto).
+      Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
 
       - `supported: boolean`
 
         Whether this capability is supported by the model.
 
+    - `disabled: CapabilitySupport`
+
+      Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+
     - `enabled: CapabilitySupport`
 
-      Whether the model supports thinking with type 'enabled'.
+      Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
 ### Thinking Types
 
 - `interface ThinkingTypes`
 
-  Supported thinking type configurations.
+  Which `thinking.type` values the model accepts on requests. Read each key on its own: for example, `enabled` can be false while `disabled` is true.
 
   - `adaptive: CapabilitySupport`
 
-    Whether the model supports thinking with type 'adaptive' (auto).
+    Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
 
     - `supported: boolean`
 
       Whether this capability is supported by the model.
 
+  - `disabled: CapabilitySupport`
+
+    Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+
   - `enabled: CapabilitySupport`
 
-    Whether the model supports thinking with type 'enabled'.
+    Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
 ---
 

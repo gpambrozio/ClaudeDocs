@@ -19,6 +19,7 @@ featureMetadata:
     - claude-sonnet-5-5
     - claude-sonnet-5
     - claude-opus-4-8
+    - claude-haiku-5-5
   supportedPlatforms:
     Claude API: ga
     Claude Platform on AWS: beta
@@ -35,6 +36,8 @@ featureMetadata:
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
 
 The computer use tool is an Anthropic-defined [client toolset](tool-reference.md#client-toolsets): one `{"type": "computer_toolset_20260801"}` entry in `tools` gives Claude 17 member tools such as `screenshot`, `left_click`, `type`, and `zoom`, and your application runs every call in an environment you control. It isn't currently available in [Claude Managed Agents](../../managed-agents/tools.md). Claude's calls are `tool_use` blocks whose `name` is the member and which carry `"toolset_name": "computer"`, often several per turn (a [batch action](computer-use-tool.md#batch-actions)).
+
+The Python and TypeScript SDKs include a class that passes these calls to your desktop code and asks your approval callback. See [Browser and computer use with the SDK toolsets](browser-use-sdk.md#computer-toolset).
 
 For tasks that stay inside webpages, the [browser use tool](browser-use-tool.md) is the closer fit: its member tools read and act on the page itself, and it doesn't need a full desktop environment.
 
@@ -1793,7 +1796,7 @@ To keep [Prompt caching](../../build-with-claude/prompt-caching.md) effective wh
 
 * Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the last `tool_result` block of each of the most recent turns, advancing them each turn. Within a [batch action](computer-use-tool.md#batch-actions), markers on several blocks act as a single breakpoint but each still counts toward the limit of four, so use one per turn.
 * Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last three screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events; if your screenshots exceed 2000 px on either side, choose an interval that keeps each request at 20 or fewer images.
-* On Claude Fable 5.1, Claude Opus 5.5, and Claude Sonnet 5.5, avoid pruning on the client: removing an earlier screenshot [invalidates every later thinking block](../../build-with-claude/thinking.md#preserved-in-conversation) in every request that still carries those turns. Resize screenshots to 2000 px or less per side instead, and use server-side [tool result clearing](../../build-with-claude/context-editing.md#tool-result-clearing) to drop old ones from the context. If you must prune, keep [`prefix_mismatch_behavior: "drop_block"`](../../build-with-claude/thinking.md#preserved-thinking-controls) set from then on; after each prune, Claude continues without the thinking produced since the pruned screenshot, on that request and every later one. On Claude Sonnet 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`. With `between_tools`, keep the history append-only, or strip the thinking blocks from the edited turn on.
+* On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, avoid pruning on the client: removing an earlier screenshot [invalidates every later thinking block](../../build-with-claude/thinking.md#preserved-in-conversation) in every request that still carries those turns. Resize screenshots to 2000 px or less per side instead, and use server-side [tool result clearing](../../build-with-claude/context-editing.md#tool-result-clearing) to drop old ones from the context. If you must prune, keep [`prefix_mismatch_behavior: "drop_block"`](../../build-with-claude/thinking.md#preserved-thinking-controls) set from then on; after each prune, Claude continues without the thinking produced since the pruned screenshot, on that request and every later one. On Claude Sonnet 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`. With `between_tools`, keep the history append-only, or strip the thinking blocks from the edited turn on. On Claude Haiku 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`; with `thinking: {"type": "disabled"}`, keep the history append-only, or strip the thinking blocks from the edited turn on.
 
 ### Diagnose click issues
 
@@ -2173,6 +2176,10 @@ Computer use follows the standard [tool use pricing](overview.md#pricing). When 
 If you're also using bash or text editor tools alongside computer use, those tools have their own token costs as documented in their respective pages.
 
 ## Next steps
+
+**Browser and computer use with the SDK toolsets**
+
+Write a desktop driver in Python or TypeScript. The SDK runs the loop and the approval callback you pass.
 
 **Troubleshooting tool use**
 

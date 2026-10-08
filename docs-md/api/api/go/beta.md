@@ -451,15 +451,27 @@ The Models API response can be used to determine which models are available for 
 
 - `params BetaModelListParams`
 
-  - `AfterID param.Field[string] Optional` (query parameter)
+  - `AfterID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional` (query parameter)
+  - `BeforeID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Lifecycle []string Optional` (query parameter)
+
+    Filter the list to models in any of the given lifecycle stages (`active`, `deprecated`, or `retired`). Up to 3 values. When omitted, the list contains the `active` and `deprecated` models; `retired` models appear only when `retired` is requested explicitly.
+
+    maxItems: 3
+
+    - `const BetaModelListParamsLifecycleActive BetaModelListParamsLifecycle = "active"`
+
+    - `const BetaModelListParamsLifecycleDeprecated BetaModelListParamsLifecycle = "deprecated"`
+
+    - `const BetaModelListParamsLifecycleRetired BetaModelListParamsLifecycle = "retired"`
+
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -467,7 +479,7 @@ The Models API response can be used to determine which models are available for 
 
     minimum: 1, maximum: 1000
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -571,7 +583,7 @@ The Models API response can be used to determine which models are available for 
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -615,7 +627,7 @@ The Models API response can be used to determine which models are available for 
 
     - `CodeExecution BetaCapabilitySupport`
 
-      Whether the model supports code execution tools.
+      Whether code that the model runs in the code execution tool can call the request's other tools, as in programmatic tool calling and dynamic filtering for web search and web fetch. Support for the code execution tool itself is in `server_tools.code_execution`.
 
     - `Compaction BetaCompactionCapability`
 
@@ -685,6 +697,22 @@ The Models API response can be used to determine which models are available for 
 
       Whether the model accepts PDF content blocks.
 
+    - `ServerTools BetaServerToolsCapability`
+
+      Whether this model supports the web search and code execution server tools. `supported` is true when the model supports at least one of the tools. A supported tool can still be rejected for your organization, for example when an admin has turned web search off.
+
+      - `CodeExecution BetaCapabilitySupport`
+
+        Whether the model supports the code execution tool: true when the model supports at least one version of the tool, not necessarily every version.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+      - `WebSearch BetaCapabilitySupport`
+
+        Whether the model supports the web search tool: true when the model supports at least one version of the tool, not necessarily every version.
+
     - `StructuredOutputs BetaCapabilitySupport`
 
       Whether the model supports structured output / JSON mode / strict tool schemas.
@@ -703,11 +731,15 @@ The Models API response can be used to determine which models are available for 
 
         - `Adaptive BetaCapabilitySupport`
 
-          Whether the model supports thinking with type 'adaptive' (auto).
+          Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
+
+        - `Disabled BetaCapabilitySupport`
+
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
 
         - `Enabled BetaCapabilitySupport`
 
-          Whether the model supports thinking with type 'enabled'.
+          Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
   - `CreatedAt Time`
 
@@ -715,9 +747,31 @@ The Models API response can be used to determine which models are available for 
 
     format: date-time
 
+  - `DeprecatedAt Time`
+
+    RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
+
+    format: date-time
+
   - `DisplayName string`
 
     A human-readable name for the model.
+
+  - `Lifecycle BetaModelInfoLifecycle`
+
+    The model's current lifecycle stage.
+
+    - `active`: The model is available for use, open to new adopters, and not scheduled for retirement.
+    - `deprecated`: The model remains callable for organizations with existing access, but is headed for retirement and closed to new adopters.
+    - `retired`: The model is no longer available for use; inference requests naming it fail. It remains in the catalogue as the historical record of its retirement.
+
+    default: active
+
+    - `const BetaModelInfoLifecycleActive BetaModelInfoLifecycle = "active"`
+
+    - `const BetaModelInfoLifecycleDeprecated BetaModelInfoLifecycle = "deprecated"`
+
+    - `const BetaModelInfoLifecycleRetired BetaModelInfoLifecycle = "retired"`
 
   - `Line BetaModelLine`
 
@@ -740,6 +794,12 @@ The Models API response can be used to determine which models are available for 
   - `MaxTokens int64`
 
     Maximum value for the `max_tokens` parameter when using this model.
+
+  - `RetiresAt Time`
+
+    RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
+
+    format: date-time
 
 #### Example
 
@@ -828,6 +888,15 @@ func main() {
         "pdf_input": {
           "supported": true
         },
+        "server_tools": {
+          "code_execution": {
+            "supported": true
+          },
+          "supported": true,
+          "web_search": {
+            "supported": true
+          }
+        },
         "structured_outputs": {
           "supported": true
         },
@@ -837,6 +906,9 @@ func main() {
             "adaptive": {
               "supported": true
             },
+            "disabled": {
+              "supported": true
+            },
             "enabled": {
               "supported": true
             }
@@ -844,10 +916,13 @@ func main() {
         }
       },
       "created_at": "2026-07-24T00:00:00Z",
+      "deprecated_at": "2019-12-27T18:11:19.117Z",
       "display_name": "Claude Opus 5",
+      "lifecycle": "active",
       "line": "haiku",
       "max_input_tokens": 0,
       "max_tokens": 0,
+      "retires_at": "2019-12-27T18:11:19.117Z",
       "type": "model"
     }
   ],
@@ -875,7 +950,7 @@ The Models API response can be used to determine information about a specific mo
 
 - `query BetaModelGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -979,7 +1054,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1023,7 +1098,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `CodeExecution BetaCapabilitySupport`
 
-      Whether the model supports code execution tools.
+      Whether code that the model runs in the code execution tool can call the request's other tools, as in programmatic tool calling and dynamic filtering for web search and web fetch. Support for the code execution tool itself is in `server_tools.code_execution`.
 
     - `Compaction BetaCompactionCapability`
 
@@ -1093,6 +1168,22 @@ The Models API response can be used to determine information about a specific mo
 
       Whether the model accepts PDF content blocks.
 
+    - `ServerTools BetaServerToolsCapability`
+
+      Whether this model supports the web search and code execution server tools. `supported` is true when the model supports at least one of the tools. A supported tool can still be rejected for your organization, for example when an admin has turned web search off.
+
+      - `CodeExecution BetaCapabilitySupport`
+
+        Whether the model supports the code execution tool: true when the model supports at least one version of the tool, not necessarily every version.
+
+      - `Supported bool`
+
+        Whether this capability is supported by the model.
+
+      - `WebSearch BetaCapabilitySupport`
+
+        Whether the model supports the web search tool: true when the model supports at least one version of the tool, not necessarily every version.
+
     - `StructuredOutputs BetaCapabilitySupport`
 
       Whether the model supports structured output / JSON mode / strict tool schemas.
@@ -1111,11 +1202,15 @@ The Models API response can be used to determine information about a specific mo
 
         - `Adaptive BetaCapabilitySupport`
 
-          Whether the model supports thinking with type 'adaptive' (auto).
+          Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
+
+        - `Disabled BetaCapabilitySupport`
+
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
 
         - `Enabled BetaCapabilitySupport`
 
-          Whether the model supports thinking with type 'enabled'.
+          Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
   - `CreatedAt Time`
 
@@ -1123,9 +1218,31 @@ The Models API response can be used to determine information about a specific mo
 
     format: date-time
 
+  - `DeprecatedAt Time`
+
+    RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
+
+    format: date-time
+
   - `DisplayName string`
 
     A human-readable name for the model.
+
+  - `Lifecycle BetaModelInfoLifecycle`
+
+    The model's current lifecycle stage.
+
+    - `active`: The model is available for use, open to new adopters, and not scheduled for retirement.
+    - `deprecated`: The model remains callable for organizations with existing access, but is headed for retirement and closed to new adopters.
+    - `retired`: The model is no longer available for use; inference requests naming it fail. It remains in the catalogue as the historical record of its retirement.
+
+    default: active
+
+    - `const BetaModelInfoLifecycleActive BetaModelInfoLifecycle = "active"`
+
+    - `const BetaModelInfoLifecycleDeprecated BetaModelInfoLifecycle = "deprecated"`
+
+    - `const BetaModelInfoLifecycleRetired BetaModelInfoLifecycle = "retired"`
 
   - `Line BetaModelLine`
 
@@ -1148,6 +1265,12 @@ The Models API response can be used to determine information about a specific mo
   - `MaxTokens int64`
 
     Maximum value for the `max_tokens` parameter when using this model.
+
+  - `RetiresAt Time`
+
+    RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
+
+    format: date-time
 
 #### Example
 
@@ -1238,6 +1361,15 @@ func main() {
     "pdf_input": {
       "supported": true
     },
+    "server_tools": {
+      "code_execution": {
+        "supported": true
+      },
+      "supported": true,
+      "web_search": {
+        "supported": true
+      }
+    },
     "structured_outputs": {
       "supported": true
     },
@@ -1247,6 +1379,9 @@ func main() {
         "adaptive": {
           "supported": true
         },
+        "disabled": {
+          "supported": true
+        },
         "enabled": {
           "supported": true
         }
@@ -1254,10 +1389,13 @@ func main() {
     }
   },
   "created_at": "2026-07-24T00:00:00Z",
+  "deprecated_at": "2019-12-27T18:11:19.117Z",
   "display_name": "Claude Opus 5",
+  "lifecycle": "active",
   "line": "haiku",
   "max_input_tokens": 0,
   "max_tokens": 0,
+  "retires_at": "2019-12-27T18:11:19.117Z",
   "type": "model"
 }
 ```
@@ -1280,7 +1418,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 - `params BetaMessageNewParams`
 
-  - `MaxTokens param.Field[int64]`
+  - `MaxTokens int64`
 
     The maximum number of tokens to generate before stopping.
 
@@ -1292,7 +1430,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     minimum: 0
 
-  - `Messages param.Field[[]BetaMessageParamResp]`
+  - `Messages []BetaMessageParam`
 
     Input messages.
 
@@ -4247,6 +4385,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+                          Fastest model for high-volume, real-time tasks
+
                         - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 
                           Efficient model for coding and agents
@@ -4664,23 +4806,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `const BetaSystemMessageOutputConfigEffortMax BetaSystemMessageOutputConfigEffort = "max"`
 
-  - `Model param.Field[Model]`
+  - `Model Model`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `CacheControl param.Field[BetaCacheControlEphemeral] Optional`
+  - `CacheControl BetaCacheControlEphemeralParam Optional`
 
     Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-  - `Compaction param.Field[BetaCompactionConfig] Optional`
+  - `Compaction BetaCompactionConfigParam Optional`
 
     Compaction configuration.
 
     When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
-  - `Container param.Field[BetaMessageNewParamsContainerUnion] Optional`
+  - `Container BetaMessageNewParamsContainerUnion Optional`
 
     Container identifier for reuse across requests.
 
@@ -4720,17 +4862,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `string`
 
-  - `ContextManagement param.Field[BetaContextManagementConfig] Optional`
+  - `ContextManagement BetaContextManagementConfigParam Optional`
 
     Context management configuration.
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-  - `Diagnostics param.Field[BetaDiagnosticsParamResp] Optional`
+  - `Diagnostics BetaDiagnosticsParam Optional`
 
     Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
-  - `FallbackCreditToken param.Field[BetaMessageNewParamsFallbackCreditTokenUnion] Optional`
+  - `FallbackCreditToken BetaMessageNewParamsFallbackCreditTokenUnion Optional`
 
     The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -4779,15 +4921,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `const BetaFallbackCreditTokenParamModeBestEffort BetaFallbackCreditTokenParamMode = "best_effort"`
 
-  - `Fallbacks param.Field[BetaFallbacksParamUnionResp] Optional`
+  - `Fallbacks BetaFallbacksParamUnion Optional`
 
     Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-  - `InferenceGeo param.Field[string] Optional`
+  - `InferenceGeo param.Opt[string] Optional`
 
     Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-  - `MCPServers param.Field[[]BetaRequestMCPServerURLDefinition] Optional`
+  - `MCPServers []BetaRequestMCPServerURLDefinitionParam Optional`
 
     MCP servers to be utilized in this request
 
@@ -4807,15 +4949,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Enabled bool Optional`
 
-  - `Metadata param.Field[BetaMetadata] Optional`
+  - `Metadata BetaMetadataParam Optional`
 
     An object describing metadata about the request.
 
-  - `OutputConfig param.Field[BetaOutputConfig] Optional`
+  - `OutputConfig BetaOutputConfigParam Optional`
 
     Configuration options for the model's output, such as the output format.
 
-  - `ServiceTier param.Field[BetaMessageNewParamsServiceTier] Optional`
+  - `ServiceTier BetaMessageNewParamsServiceTier Optional`
 
     Determines whether to use priority capacity (if available) or standard capacity for this request.
 
@@ -4825,7 +4967,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `const BetaMessageNewParamsServiceTierStandardOnly BetaMessageNewParamsServiceTier = "standard_only"`
 
-  - `Speed param.Field[BetaMessageNewParamsSpeed] Optional`
+  - `Speed BetaMessageNewParamsSpeed Optional`
 
     The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
@@ -4833,7 +4975,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `const BetaMessageNewParamsSpeedFast BetaMessageNewParamsSpeed = "fast"`
 
-  - `StopSequences param.Field[[]string] Optional`
+  - `StopSequences []string Optional`
 
     Custom text sequences that will cause the model to stop generating.
 
@@ -4841,7 +4983,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-  - `System param.Field[[]BetaTextBlockParamResp] Optional`
+  - `System []BetaTextBlockParam Optional`
 
     System prompt.
 
@@ -4861,7 +5003,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Citations []BetaTextCitationParamUnionResp Optional`
 
-  - `Thinking param.Field[BetaThinkingConfigParamUnionResp] Optional`
+  - `Thinking BetaThinkingConfigParamUnion Optional`
 
     Configuration for enabling Claude's extended thinking.
 
@@ -4869,11 +5011,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
-  - `ToolChoice param.Field[BetaToolChoiceUnion] Optional`
+  - `ToolChoice BetaToolChoiceUnionParam Optional`
 
     How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `Tools param.Field[[]BetaToolUnion] Optional`
+  - `Tools []BetaToolUnionParam Optional`
 
     Definitions of tools that the model may use.
 
@@ -5018,7 +5160,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
       Allows configuring enabled status and defer_loading for all tools
       from an MCP server, with optional per-tool overrides.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -5122,17 +5264,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `UserProfileID param.Field[string] Optional` (header parameter)
+  - `UserProfileID param.Opt[string] Optional` (header parameter)
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
-  - `OutputFormat param.Field[BetaJSONOutputFormat] Optional`
+  - `OutputFormat BetaJSONOutputFormatParam Optional`
 
     **Deprecated**
 
@@ -5140,7 +5282,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
-  - `Temperature param.Field[float64] Optional`
+  - `Temperature param.Opt[float64] Optional`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting temperature. A value of 1.0 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
@@ -5152,7 +5294,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     minimum: 0, maximum: 1
 
-  - `TopK param.Field[int64] Optional`
+  - `TopK param.Opt[int64] Optional`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value will be rejected with a 400 error.
 
@@ -5164,7 +5306,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     minimum: 0
 
-  - `TopP param.Field[float64] Optional`
+  - `TopP param.Opt[float64] Optional`
 
     **Deprecated**: Deprecated. Models released after Claude Opus 4.6 do not support setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all other values will be rejected with a 400 error.
 
@@ -7909,6 +8051,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+                      Fastest model for high-volume, real-time tasks
+
                     - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 
                       Efficient model for coding and agents
@@ -9422,7 +9568,7 @@ func main() {
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-sonnet-5-5",
+        "model": "claude-haiku-5-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -9464,7 +9610,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
 - `params BetaMessageCountTokensParams`
 
-  - `Messages param.Field[[]BetaMessageParamResp]`
+  - `Messages []BetaMessageParam`
 
     Input messages.
 
@@ -12419,6 +12565,10 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+                          Fastest model for high-volume, real-time tasks
+
                         - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 
                           Efficient model for coding and agents
@@ -12836,29 +12986,29 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `const BetaSystemMessageOutputConfigEffortMax BetaSystemMessageOutputConfigEffort = "max"`
 
-  - `Model param.Field[Model]`
+  - `Model Model`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `CacheControl param.Field[BetaCacheControlEphemeral] Optional`
+  - `CacheControl BetaCacheControlEphemeralParam Optional`
 
     Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-  - `Compaction param.Field[BetaCompactionConfig] Optional`
+  - `Compaction BetaCompactionConfigParam Optional`
 
     Compaction configuration.
 
     When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
-  - `ContextManagement param.Field[BetaContextManagementConfig] Optional`
+  - `ContextManagement BetaContextManagementConfigParam Optional`
 
     Context management configuration.
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-  - `MCPServers param.Field[[]BetaRequestMCPServerURLDefinition] Optional`
+  - `MCPServers []BetaRequestMCPServerURLDefinitionParam Optional`
 
     MCP servers to be utilized in this request
 
@@ -12878,11 +13028,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `Enabled bool Optional`
 
-  - `OutputConfig param.Field[BetaOutputConfig] Optional`
+  - `OutputConfig BetaOutputConfigParam Optional`
 
     Configuration options for the model's output, such as the output format.
 
-  - `Speed param.Field[BetaMessageCountTokensParamsSpeed] Optional`
+  - `Speed BetaMessageCountTokensParamsSpeed Optional`
 
     The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
@@ -12890,7 +13040,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `const BetaMessageCountTokensParamsSpeedFast BetaMessageCountTokensParamsSpeed = "fast"`
 
-  - `System param.Field[BetaMessageCountTokensParamsSystemUnion] Optional`
+  - `System BetaMessageCountTokensParamsSystemUnion Optional`
 
     System prompt.
 
@@ -12912,7 +13062,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `Citations []BetaTextCitationParamUnionResp Optional`
 
-  - `Thinking param.Field[BetaThinkingConfigParamUnionResp] Optional`
+  - `Thinking BetaThinkingConfigParamUnion Optional`
 
     Configuration for enabling Claude's extended thinking.
 
@@ -12920,11 +13070,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     See [extended thinking](../../build-with-claude/extended-thinking.md) for details.
 
-  - `ToolChoice param.Field[BetaToolChoiceUnion] Optional`
+  - `ToolChoice BetaToolChoiceUnionParam Optional`
 
     How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-  - `Tools param.Field[[]BetaMessageCountTokensParamsToolUnion] Optional`
+  - `Tools []BetaMessageCountTokensParamsToolUnion Optional`
 
     Definitions of tools that the model may use.
 
@@ -13069,7 +13219,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
       Allows configuring enabled status and defer_loading for all tools
       from an MCP server, with optional per-tool overrides.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -13173,17 +13323,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `UserProfileID param.Field[string] Optional` (header parameter)
+  - `UserProfileID param.Opt[string] Optional` (header parameter)
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
-  - `OutputFormat param.Field[BetaJSONOutputFormat] Optional`
+  - `OutputFormat BetaJSONOutputFormatParam Optional`
 
     **Deprecated**
 
@@ -13271,7 +13421,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `params BetaMessageBatchNewParams`
 
-  - `Requests param.Field[[]BetaMessageBatchNewParamsRequest]`
+  - `Requests []BetaMessageBatchNewParamsRequest`
 
     List of requests for prompt completion. Each is an individual request to create a Message.
 
@@ -16258,6 +16408,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                            - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+                              Fastest model for high-volume, real-time tasks
+
                             - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 
                               Efficient model for coding and agents
@@ -17387,7 +17541,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         minimum: 0, maximum: 1
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -17491,11 +17645,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `UserProfileID param.Field[string] Optional` (header parameter)
+  - `UserProfileID param.Opt[string] Optional` (header parameter)
 
     The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -17693,7 +17847,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `query BetaMessageBatchGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -17797,7 +17951,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -17979,15 +18133,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `params BetaMessageBatchListParams`
 
-  - `AfterID param.Field[string] Optional` (query parameter)
+  - `AfterID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional` (query parameter)
+  - `BeforeID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -17995,7 +18149,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     minimum: 1, maximum: 1000
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -18099,7 +18253,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -18290,7 +18444,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `body BetaMessageBatchCancelParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -18394,7 +18548,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -18582,7 +18736,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `body BetaMessageBatchDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -18686,7 +18840,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -18766,7 +18920,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `query BetaMessageBatchResultsParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -18870,7 +19024,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -21631,6 +21785,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `const ModelClaudeHaiku5_5 Model = "claude-haiku-5-5"`
+
+                            Fastest model for high-volume, real-time tasks
+
                           - `const ModelClaudeSonnet5_5 Model = "claude-sonnet-5-5"`
 
                             Efficient model for coding and agents
@@ -22890,7 +23048,7 @@ Create Agent
 
 - `params BetaAgentNewParams`
 
-  - `Model param.Field[BetaManagedAgentsModelConfigParamsResp]`
+  - `Model BetaManagedAgentsModelConfigParams`
 
     Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
@@ -22903,6 +23061,10 @@ Create Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -23040,19 +23202,19 @@ Create Agent
 
         - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Human-readable name for the agent.
 
     minLength: 1, maxLength: 256
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Description of what the agent does.
 
     maxLength: 2048
 
-  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp] Optional`
+  - `MCPServers []BetaManagedAgentsURLMCPServerParams Optional`
 
     MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../managed-agents/mcp-connector.md).
 
@@ -23070,15 +23232,15 @@ Create Agent
 
       maxLength: 2048
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp] Optional`
+  - `Multiagent BetaManagedAgentsMultiagentParams Optional`
 
-    Multiagent orchestration configuration. Currently supports the `coordinator` topology with a roster of 1-20 agents.
+    Multiagent orchestration configuration.
 
-  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp] Optional`
+  - `Skills []BetaManagedAgentsSkillParamsUnion Optional`
 
     Skills available to the agent.
 
@@ -23118,13 +23280,13 @@ Create Agent
 
         minLength: 1, maxLength: 64
 
-  - `System param.Field[string] Optional`
+  - `System param.Opt[string] Optional`
 
     System prompt for the agent.
 
     maxLength: 100000
 
-  - `Tools param.Field[[]BetaAgentNewParamsToolUnion] Optional`
+  - `Tools []BetaAgentNewParamsToolUnion Optional`
 
     Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
 
@@ -23368,6 +23530,102 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
+          - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+
+            Which sources contribute URLs the tool may fetch. Omit to allow every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+
+              Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
+
+              - `type BetaManagedAgentsWebFetchURLSourceShorthand string`
+
+                String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+                - `const BetaManagedAgentsWebFetchURLSourceShorthandAll BetaManagedAgentsWebFetchURLSourceShorthand = "all"`
+
+                - `const BetaManagedAgentsWebFetchURLSourceShorthandNone BetaManagedAgentsWebFetchURLSourceShorthand = "none"`
+
+              - `type BetaManagedAgentsWebFetchURLSourceToolFilterUnion interface{…}`
+
+                Which tools' results contribute URLs that may be fetched.
+
+                - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                  Every URL from this source may be fetched. This is the default.
+
+                  - `Type All`
+
+                - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                  This source contributes no URLs that may be fetched.
+
+                  - `Type None`
+
+                - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                  Only the named tools' results contribute URLs that may be fetched.
+
+                  - `Type Only`
+
+                  - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                    The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                    - `Type ToolReference`
+
+                      Must be "tool_reference".
+
+                    - `Name string`
+
+                      Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                      minLength: 1, maxLength: 128
+
+                - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                  Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                  - `Type Except`
+
+                  - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                    The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                    - `Type ToolReference`
+
+                      Must be "tool_reference".
+
+                    - `Name string`
+
+                      Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                      minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+
+              Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
+
+              - `type BetaManagedAgentsWebFetchURLSourceShorthand string`
+
+                String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+              - `type BetaManagedAgentsWebFetchURLSourceUserInputUnion interface{…}`
+
+                Whether URLs in the text of user messages may be fetched.
+
+                - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                  Every URL from this source may be fetched. This is the default.
+
+                - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                  This source contributes no URLs that may be fetched.
+
         - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
 
           Configuration override for the web_search tool.
@@ -23554,7 +23812,7 @@ Create Agent
 
         minLength: 1, maxLength: 128
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -23658,7 +23916,7 @@ Create Agent
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -23707,6 +23965,10 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -24075,6 +24337,82 @@ Create Agent
             - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+            Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+                - `Type All`
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
+
+                - `Type None`
+
+              - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                Only the named tools' results contribute URLs that may be fetched.
+
+                - `Type Only`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+              - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                - `Type Except`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+              Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
 
           - `AllowedDomains []string Optional`
 
@@ -24322,7 +24660,7 @@ func main() {
       "version": "1"
     },
     {
-      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
       "type": "custom",
       "version": "2"
     }
@@ -24367,33 +24705,33 @@ List Agents
 
 - `params BetaAgentListParams`
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     Return agents created at or after this time (inclusive).
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     Return agents created at or before this time (inclusive).
 
     format: date-time
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Include archived agents in results. Defaults to false.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor from a previous response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -24497,7 +24835,7 @@ List Agents
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -24546,6 +24884,10 @@ List Agents
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -24914,6 +25256,82 @@ List Agents
             - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+            Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+                - `Type All`
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
+
+                - `Type None`
+
+              - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                Only the named tools' results contribute URLs that may be fetched.
+
+                - `Type Only`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+              - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                - `Type Except`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+              Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
 
           - `AllowedDomains []string Optional`
 
@@ -25158,7 +25576,7 @@ func main() {
           "version": "1"
         },
         {
-          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
           "type": "custom",
           "version": "2"
         }
@@ -25210,13 +25628,13 @@ Get Agent
 
 - `params BetaAgentGetParams`
 
-  - `Version param.Field[int64] Optional` (query parameter)
+  - `Version param.Opt[int64] Optional` (query parameter)
 
     Agent version. Omit for the most recent version. Must be at least 1 if specified.
 
     format: int32
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -25320,7 +25738,7 @@ Get Agent
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -25369,6 +25787,10 @@ Get Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -25737,6 +26159,82 @@ Get Agent
             - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+            Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+                - `Type All`
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
+
+                - `Type None`
+
+              - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                Only the named tools' results contribute URLs that may be fetched.
+
+                - `Type Only`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+              - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                - `Type Except`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+              Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
 
           - `AllowedDomains []string Optional`
 
@@ -25983,7 +26481,7 @@ func main() {
       "version": "1"
     },
     {
-      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
       "type": "custom",
       "version": "2"
     }
@@ -26032,13 +26530,13 @@ Update Agent
 
 - `params BetaAgentUpdateParams`
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Description. Omit to preserve; send empty string or null to clear.
 
     maxLength: 2048
 
-  - `MCPServers param.Field[[]BetaManagedAgentsURLMCPServerParamsResp] Optional`
+  - `MCPServers []BetaManagedAgentsURLMCPServerParams Optional`
 
     MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../managed-agents/mcp-connector.md).
 
@@ -26056,11 +26554,11 @@ Update Agent
 
       maxLength: 2048
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-  - `Model param.Field[BetaManagedAgentsModelConfigParamsResp] Optional`
+  - `Model BetaManagedAgentsModelConfigParams Optional`
 
     Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
@@ -26073,6 +26571,10 @@ Update Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -26210,17 +26712,17 @@ Update Agent
 
         - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
-  - `Multiagent param.Field[BetaManagedAgentsMultiagentParamsResp] Optional`
+  - `Multiagent BetaManagedAgentsMultiagentParams Optional`
 
     Multiagent orchestration configuration. Full replacement. Omit to preserve; send null to clear.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
     maxLength: 256
 
-  - `Skills param.Field[[]BetaManagedAgentsSkillParamsUnionResp] Optional`
+  - `Skills []BetaManagedAgentsSkillParamsUnion Optional`
 
     Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
@@ -26260,13 +26762,13 @@ Update Agent
 
         minLength: 1, maxLength: 64
 
-  - `System param.Field[string] Optional`
+  - `System param.Opt[string] Optional`
 
     System prompt. Omit to preserve; send empty string or null to clear.
 
     maxLength: 100000
 
-  - `Tools param.Field[[]BetaAgentUpdateParamsToolUnion] Optional`
+  - `Tools []BetaAgentUpdateParamsToolUnion Optional`
 
     Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
 
@@ -26510,6 +27012,102 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
+          - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+
+            Which sources contribute URLs the tool may fetch. Omit to allow every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+
+              Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
+
+              - `type BetaManagedAgentsWebFetchURLSourceShorthand string`
+
+                String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+                - `const BetaManagedAgentsWebFetchURLSourceShorthandAll BetaManagedAgentsWebFetchURLSourceShorthand = "all"`
+
+                - `const BetaManagedAgentsWebFetchURLSourceShorthandNone BetaManagedAgentsWebFetchURLSourceShorthand = "none"`
+
+              - `type BetaManagedAgentsWebFetchURLSourceToolFilterUnion interface{…}`
+
+                Which tools' results contribute URLs that may be fetched.
+
+                - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                  Every URL from this source may be fetched. This is the default.
+
+                  - `Type All`
+
+                - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                  This source contributes no URLs that may be fetched.
+
+                  - `Type None`
+
+                - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                  Only the named tools' results contribute URLs that may be fetched.
+
+                  - `Type Only`
+
+                  - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                    The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                    - `Type ToolReference`
+
+                      Must be "tool_reference".
+
+                    - `Name string`
+
+                      Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                      minLength: 1, maxLength: 128
+
+                - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                  Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                  - `Type Except`
+
+                  - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                    The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                    - `Type ToolReference`
+
+                      Must be "tool_reference".
+
+                    - `Name string`
+
+                      Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                      minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+
+              Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
+
+              - `type BetaManagedAgentsWebFetchURLSourceShorthand string`
+
+                String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+              - `type BetaManagedAgentsWebFetchURLSourceUserInputUnion interface{…}`
+
+                Whether URLs in the text of user messages may be fetched.
+
+                - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                  Every URL from this source may be fetched. This is the default.
+
+                - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                  This source contributes no URLs that may be fetched.
+
         - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
 
           Configuration override for the web_search tool.
@@ -26696,13 +27294,13 @@ Update Agent
 
         minLength: 1, maxLength: 128
 
-  - `Version param.Field[int64] Optional`
+  - `Version param.Opt[int64] Optional`
 
     The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
 
     format: int32
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -26806,7 +27404,7 @@ Update Agent
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -26855,6 +27453,10 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -27223,6 +27825,82 @@ Update Agent
             - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+            Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+                - `Type All`
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
+
+                - `Type None`
+
+              - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                Only the named tools' results contribute URLs that may be fetched.
+
+                - `Type Only`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+              - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                - `Type Except`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+              Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
 
           - `AllowedDomains []string Optional`
 
@@ -27471,7 +28149,7 @@ func main() {
       "version": "1"
     },
     {
-      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
       "type": "custom",
       "version": "2"
     }
@@ -27520,7 +28198,7 @@ Archive Agent
 
 - `body BetaAgentArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -27624,7 +28302,7 @@ Archive Agent
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -27673,6 +28351,10 @@ Archive Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -28041,6 +28723,82 @@ Archive Agent
             - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+            Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+                - `Type All`
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
+
+                - `Type None`
+
+              - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                Only the named tools' results contribute URLs that may be fetched.
+
+                - `Type Only`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+              - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                - `Type Except`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+              Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
 
           - `AllowedDomains []string Optional`
 
@@ -28287,7 +29045,7 @@ func main() {
       "version": "1"
     },
     {
-      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
       "type": "custom",
       "version": "2"
     }
@@ -28338,17 +29096,17 @@ List Agent Versions
 
 - `params BetaAgentVersionListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -28452,7 +29210,7 @@ List Agent Versions
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -28501,6 +29259,10 @@ List Agent Versions
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
 
       - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -28869,6 +29631,82 @@ List Agent Versions
             - `type BetaManagedAgentsAutoPolicy`
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+          - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+            Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+                - `Type All`
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
+
+                - `Type None`
+
+              - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                Only the named tools' results contribute URLs that may be fetched.
+
+                - `Type Only`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+              - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                - `Type Except`
+
+                - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                  - `Type ToolReference`
+
+                    Must be "tool_reference".
+
+                  - `Name string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+              Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+              - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                Every URL from this source may be fetched. This is the default.
+
+              - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                This source contributes no URLs that may be fetched.
 
           - `AllowedDomains []string Optional`
 
@@ -29117,7 +29955,7 @@ func main() {
           "version": "1"
         },
         {
-          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
           "type": "custom",
           "version": "2"
         }
@@ -29167,13 +30005,13 @@ Create a new environment with the specified configuration.
 
 - `params BetaEnvironmentNewParams`
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Human-readable name for the environment
 
     minLength: 1, maxLength: 256
 
-  - `Config param.Field[BetaEnvironmentNewParamsConfigUnion] Optional`
+  - `Config BetaEnvironmentNewParamsConfigUnion Optional`
 
     Environment configuration
 
@@ -29265,17 +30103,17 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Optional description of the environment
 
     maxLength: 1024
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     User-provided metadata key-value pairs
 
-  - `Scope param.Field[BetaEnvironmentNewParamsScope] Optional`
+  - `Scope BetaEnvironmentNewParamsScope Optional`
 
     The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. API organizations support only 'organization'; 'account' is rejected. If not specified, defaults based on organization type.
 
@@ -29283,7 +30121,7 @@ Create a new environment with the specified configuration.
 
     - `const BetaEnvironmentNewParamsScopeAccount BetaEnvironmentNewParamsScope = "account"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -29387,7 +30225,7 @@ Create a new environment with the specified configuration.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -29615,21 +30453,21 @@ List environments with pagination support.
 
 - `params BetaEnvironmentListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Include archived environments in the response
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of environments to return
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -29733,7 +30571,7 @@ List environments with pagination support.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -29966,7 +30804,7 @@ Retrieve a specific environment by ID.
 
 - `query BetaEnvironmentGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -30070,7 +30908,7 @@ Retrieve a specific environment by ID.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -30302,7 +31140,7 @@ Update an existing environment's configuration.
 
 - `params BetaEnvironmentUpdateParams`
 
-  - `Config param.Field[BetaEnvironmentUpdateParamsConfigUnion] Optional`
+  - `Config BetaEnvironmentUpdateParamsConfigUnion Optional`
 
     Updated environment configuration
 
@@ -30394,23 +31232,23 @@ Update an existing environment's configuration.
 
         Environment type
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
     maxLength: 1024
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Updated name for the environment
 
     minLength: 1, maxLength: 256
 
-  - `Scope param.Field[BetaEnvironmentUpdateParamsScope] Optional`
+  - `Scope BetaEnvironmentUpdateParamsScope Optional`
 
     The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
@@ -30418,7 +31256,7 @@ Update an existing environment's configuration.
 
     - `const BetaEnvironmentUpdateParamsScopeAccount BetaEnvironmentUpdateParamsScope = "account"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -30522,7 +31360,7 @@ Update an existing environment's configuration.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -30754,7 +31592,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 - `body BetaEnvironmentDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -30858,7 +31696,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -30932,7 +31770,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 - `body BetaEnvironmentArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -31036,7 +31874,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -31272,9 +32110,9 @@ Retrieve detailed information about a specific work item.
 
 - `params BetaEnvironmentWorkGetParams`
 
-  - `EnvironmentID param.Field[string]` (path parameter)
+  - `EnvironmentID string` (path parameter)
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -31378,7 +32216,7 @@ Retrieve detailed information about a specific work item.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -31538,19 +32376,19 @@ Long poll for work items in the queue.
 
 - `params BetaEnvironmentWorkPollParams`
 
-  - `BlockMs param.Field[int64] Optional` (query parameter)
+  - `BlockMs param.Opt[int64] Optional` (query parameter)
 
     How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
     minimum: 1
 
-  - `ReclaimOlderThanMs param.Field[int64] Optional` (query parameter)
+  - `ReclaimOlderThanMs param.Opt[int64] Optional` (query parameter)
 
     Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
     minimum: 1
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -31654,7 +32492,7 @@ Long poll for work items in the queue.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `AnthropicWorkerID param.Field[string] Optional` (header parameter)
+  - `AnthropicWorkerID param.Opt[string] Optional` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
@@ -31810,9 +32648,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 - `params BetaEnvironmentWorkAckParams`
 
-  - `EnvironmentID param.Field[string]` (path parameter)
+  - `EnvironmentID string` (path parameter)
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -32070,17 +32908,17 @@ Record a heartbeat for a work item to maintain the lease.
 
 - `params BetaEnvironmentWorkHeartbeatParams`
 
-  - `EnvironmentID param.Field[string]` (path parameter)
+  - `EnvironmentID string` (path parameter)
 
-  - `DesiredTTLSeconds param.Field[int64] Optional` (query parameter)
+  - `DesiredTTLSeconds param.Opt[int64] Optional` (query parameter)
 
     Desired TTL in seconds
 
-  - `ExpectedLastHeartbeat param.Field[string] Optional` (query parameter)
+  - `ExpectedLastHeartbeat param.Opt[string] Optional` (query parameter)
 
     Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -32281,13 +33119,13 @@ Stop a work item, initiating graceful or forced shutdown.
 
 - `params BetaEnvironmentWorkStopParams`
 
-  - `EnvironmentID param.Field[string]` (path parameter)
+  - `EnvironmentID string` (path parameter)
 
-  - `BetaSelfHostedWorkStopRequest param.Field[BetaSelfHostedWorkStopRequest]`
+  - `BetaSelfHostedWorkStopRequest BetaSelfHostedWorkStopRequestParam`
 
     Request to stop a work item.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -32391,7 +33229,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -32552,17 +33390,17 @@ List work items in an environment.
 
 - `params BetaEnvironmentWorkListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of work items to return
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from previous response for pagination
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -32823,13 +33661,13 @@ Update work item metadata with merge semantics.
 
 - `params BetaEnvironmentWorkUpdateParams`
 
-  - `EnvironmentID param.Field[string]` (path parameter)
+  - `EnvironmentID string` (path parameter)
 
-  - `BetaSelfHostedWorkUpdateRequest param.Field[BetaSelfHostedWorkUpdateRequest]`
+  - `BetaSelfHostedWorkUpdateRequest BetaSelfHostedWorkUpdateRequestParam`
 
     Request to update work item metadata.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -32933,7 +33771,7 @@ Update work item metadata with merge semantics.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -33096,7 +33934,7 @@ Get statistics about the work queue for an environment.
 
 - `query BetaEnvironmentWorkStatsParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -33200,7 +34038,7 @@ Get statistics about the work queue for an environment.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -33293,7 +34131,7 @@ Create Session
 
 - `params BetaSessionNewParams`
 
-  - `Agent param.Field[BetaSessionNewParamsAgentUnion]`
+  - `Agent BetaSessionNewParamsAgentUnion`
 
     Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
 
@@ -33360,6 +34198,10 @@ Create Session
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+              Fastest model for high-volume, real-time tasks
 
             - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -33787,6 +34629,102 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
+              - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+
+                Which sources contribute URLs the tool may fetch. Omit to allow every source.
+
+                - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+
+                  Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceShorthand string`
+
+                    String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+                    - `const BetaManagedAgentsWebFetchURLSourceShorthandAll BetaManagedAgentsWebFetchURLSourceShorthand = "all"`
+
+                    - `const BetaManagedAgentsWebFetchURLSourceShorthandNone BetaManagedAgentsWebFetchURLSourceShorthand = "none"`
+
+                  - `type BetaManagedAgentsWebFetchURLSourceToolFilterUnion interface{…}`
+
+                    Which tools' results contribute URLs that may be fetched.
+
+                    - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                      Every URL from this source may be fetched. This is the default.
+
+                      - `Type All`
+
+                    - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                      This source contributes no URLs that may be fetched.
+
+                      - `Type None`
+
+                    - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                      Only the named tools' results contribute URLs that may be fetched.
+
+                      - `Type Only`
+
+                      - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                        The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                        - `Type ToolReference`
+
+                          Must be "tool_reference".
+
+                        - `Name string`
+
+                          Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                          minLength: 1, maxLength: 128
+
+                    - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                      Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                      - `Type Except`
+
+                      - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                        The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                        - `Type ToolReference`
+
+                          Must be "tool_reference".
+
+                        - `Name string`
+
+                          Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                          minLength: 1, maxLength: 128
+
+                - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+
+                  Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
+
+                - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+
+                  Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
+
+                  - `type BetaManagedAgentsWebFetchURLSourceShorthand string`
+
+                    String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceUserInputUnion interface{…}`
+
+                    Whether URLs in the text of user messages may be fetched.
+
+                    - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                      Every URL from this source may be fetched. This is the default.
+
+                    - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                      This source contributes no URLs that may be fetched.
+
             - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
 
               Configuration override for the web_search tool.
@@ -33979,17 +34917,17 @@ Create Session
 
         format: int32
 
-  - `EnvironmentID param.Field[string]`
+  - `EnvironmentID string`
 
     ID of the `environment` defining the container configuration for this session.
 
     minLength: 1, maxLength: 128
 
-  - `Budget param.Field[BetaManagedAgentsBudgetLimit] Optional`
+  - `Budget BetaManagedAgentsBudgetLimitParam Optional`
 
     Enforced spend ceiling for the session. Omit to create an uncapped session. Every model the session can run — the agent's model and each callable agent's model — must have a public list price, or the request is rejected with reason `model_not_budgetable`.
 
-  - `InitialEvents param.Field[[]BetaSessionNewParamsInitialEventUnion] Optional`
+  - `InitialEvents []BetaSessionNewParamsInitialEventUnion Optional`
 
     Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
 
@@ -34191,11 +35129,11 @@ Create Session
 
         format: int32
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Resources param.Field[[]BetaSessionNewParamsResourceUnion] Optional`
+  - `Resources []BetaSessionNewParamsResourceUnion Optional`
 
     Resources (e.g. repositories, files) to mount into the session's container.
 
@@ -34289,17 +35227,17 @@ Create Session
 
         maxLength: 4096
 
-  - `Title param.Field[string] Optional`
+  - `Title param.Opt[string] Optional`
 
     Human-readable session title.
 
     maxLength: 500
 
-  - `VaultIDs param.Field[[]string] Optional`
+  - `VaultIDs []string Optional`
 
     Vault IDs for stored credentials the agent can use during the session.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -34403,7 +35341,7 @@ Create Session
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -34446,6 +35384,10 @@ Create Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -34814,6 +35756,82 @@ Create Session
                     - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                    Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                    - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                        - `Type All`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
+
+                        - `Type None`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                        Only the named tools' results contribute URLs that may be fetched.
+
+                        - `Type Only`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                      - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                        Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                        - `Type Except`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                    - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                    - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                      Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
 
                   - `AllowedDomains []string Optional`
 
@@ -35325,6 +36343,17 @@ func main() {
 			OfString: anthropic.String("agent_011CZkYpogX7uDKUyvBTophP"),
 		},
 		EnvironmentID: "env_011CZkZ9X2dpNyB7HsEFoRfW",
+		InitialEvents: []anthropic.BetaSessionNewParamsInitialEventUnion{anthropic.BetaSessionNewParamsInitialEventUnion{
+			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
+				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
+				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
+						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
+						Text: "Where is my order #1234?",
+					},
+				}},
+			},
+		}},
 	})
 	if err != nil {
 		panic(err.Error())
@@ -35420,7 +36449,7 @@ func main() {
         "version": "1"
       },
       {
-        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
         "type": "custom",
         "version": "2"
       }
@@ -35467,7 +36496,7 @@ func main() {
       "description": "Produce a 2-page summary as summary.md",
       "explanation": "All five sections present with inline citations.",
       "iteration": 0,
-      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVmjxP",
       "result": "satisfied",
       "type": "outcome_evaluation"
     }
@@ -35482,7 +36511,7 @@ func main() {
       "updated_at": "2026-03-15T10:00:00Z"
     },
     {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
       "created_at": "2026-03-15T10:00:00Z",
       "mount_path": "/workspace/example-repo",
       "type": "github_repository",
@@ -35539,59 +36568,59 @@ List Sessions
 
 - `params BetaSessionListParams`
 
-  - `AgentID param.Field[string] Optional` (query parameter)
+  - `AgentID param.Opt[string] Optional` (query parameter)
 
     Filter sessions created with this agent ID.
 
-  - `AgentVersion param.Field[int64] Optional` (query parameter)
+  - `AgentVersion param.Opt[int64] Optional` (query parameter)
 
     Filter by agent version. Only applies when `agent_id` is also set.
 
     format: int32
 
-  - `CreatedAtGt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGt param.Opt[Time] Optional` (query parameter)
 
     Return sessions created after this time (exclusive).
 
     format: date-time
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     Return sessions created at or after this time (inclusive).
 
     format: date-time
 
-  - `CreatedAtLt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLt param.Opt[Time] Optional` (query parameter)
 
     Return sessions created before this time (exclusive).
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     Return sessions created at or before this time (inclusive).
 
     format: date-time
 
-  - `DeploymentID param.Field[string] Optional` (query parameter)
+  - `DeploymentID param.Opt[string] Optional` (query parameter)
 
     Filter sessions created by this deployment ID.
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     When true, includes archived sessions. Default: false (exclude archived).
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of results to return.
 
     format: int32
 
-  - `MemoryStoreID param.Field[string] Optional` (query parameter)
+  - `MemoryStoreID param.Opt[string] Optional` (query parameter)
 
     Filter sessions whose resources contain a `memory_store` with this memory store ID.
 
-  - `Order param.Field[BetaSessionListParamsOrder] Optional` (query parameter)
+  - `Order BetaSessionListParamsOrder Optional` (query parameter)
 
     Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest first).
 
@@ -35599,11 +36628,11 @@ List Sessions
 
     - `const BetaSessionListParamsOrderDesc BetaSessionListParamsOrder = "desc"`
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor from a previous response.
 
-  - `Statuses param.Field[[]string] Optional` (query parameter)
+  - `Statuses []string Optional` (query parameter)
 
     Filter by session status. Repeat the parameter to match any of multiple statuses.
 
@@ -35623,7 +36652,7 @@ List Sessions
 
       Session has ended, either due to an error or completion.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -35727,7 +36756,7 @@ List Sessions
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -35770,6 +36799,10 @@ List Sessions
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -36138,6 +37171,82 @@ List Sessions
                     - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                    Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                    - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                        - `Type All`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
+
+                        - `Type None`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                        Only the named tools' results contribute URLs that may be fetched.
+
+                        - `Type Only`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                      - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                        Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                        - `Type Except`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                    - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                    - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                      Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
 
                   - `AllowedDomains []string Optional`
 
@@ -36741,7 +37850,7 @@ func main() {
             "version": "1"
           },
           {
-            "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+            "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
             "type": "custom",
             "version": "2"
           }
@@ -36788,7 +37897,7 @@ func main() {
           "description": "Produce a 2-page summary as summary.md",
           "explanation": "All five sections present with inline citations.",
           "iteration": 0,
-          "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+          "outcome_id": "outc_011CZkZRSw2kEfs6ncTVmjxP",
           "result": "satisfied",
           "type": "outcome_evaluation"
         }
@@ -36803,7 +37912,7 @@ func main() {
           "updated_at": "2026-03-15T10:00:00Z"
         },
         {
-          "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+          "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
           "created_at": "2026-03-15T10:00:00Z",
           "mount_path": "/workspace/example-repo",
           "type": "github_repository",
@@ -36866,7 +37975,7 @@ Get Session
 
 - `query BetaSessionGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -36970,7 +38079,7 @@ Get Session
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -37013,6 +38122,10 @@ Get Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -37381,6 +38494,82 @@ Get Session
                     - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                    Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                    - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                        - `Type All`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
+
+                        - `Type None`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                        Only the named tools' results contribute URLs that may be fetched.
+
+                        - `Type Only`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                      - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                        Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                        - `Type Except`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                    - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                    - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                      Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
 
                   - `AllowedDomains []string Optional`
 
@@ -37986,7 +39175,7 @@ func main() {
         "version": "1"
       },
       {
-        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
         "type": "custom",
         "version": "2"
       }
@@ -38033,7 +39222,7 @@ func main() {
       "description": "Produce a 2-page summary as summary.md",
       "explanation": "All five sections present with inline citations.",
       "iteration": 0,
-      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVmjxP",
       "result": "satisfied",
       "type": "outcome_evaluation"
     }
@@ -38048,7 +39237,7 @@ func main() {
       "updated_at": "2026-03-15T10:00:00Z"
     },
     {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
       "created_at": "2026-03-15T10:00:00Z",
       "mount_path": "/workspace/example-repo",
       "type": "github_repository",
@@ -38107,29 +39296,29 @@ Update Session
 
 - `params BetaSessionUpdateParams`
 
-  - `Agent param.Field[BetaManagedAgentsSessionAgentUpdate] Optional`
+  - `Agent BetaManagedAgentsSessionAgentUpdateParam Optional`
 
     Agent configuration update. Only `tools` and `mcp_servers` are updatable mid-session. Only valid for sessions created from an agent or deployment reference. The session must not be running.
 
-  - `Budget param.Field[BetaManagedAgentsBudgetLimit] Optional`
+  - `Budget BetaManagedAgentsBudgetLimitParam Optional`
 
     Enforced spend ceiling for the session. Set an object to replace the budget of a session that was created with one, or `null` to remove it; omit to preserve. A budget cannot be added to a session created without one (rejected with reason `budget_create_only`), and a removed budget cannot be re-added. Allowed in any non-terminated status. Lowering `max_list_cost` to at or below the session's consumed list cost is rejected with reason `budget_not_raised`, and every model the session can run must have a public list price or the request is rejected with reason `model_not_budgetable`.
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
 
-  - `Title param.Field[string] Optional`
+  - `Title param.Opt[string] Optional`
 
     Human-readable session title.
 
     minLength: 1, maxLength: 500
 
-  - `VaultIDs param.Field[[]string] Optional`
+  - `VaultIDs []string Optional`
 
     Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests setting this field are rejected. Reserved for future use.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -38233,7 +39422,7 @@ Update Session
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -38276,6 +39465,10 @@ Update Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -38644,6 +39837,82 @@ Update Session
                     - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                    Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                    - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                        - `Type All`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
+
+                        - `Type None`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                        Only the named tools' results contribute URLs that may be fetched.
+
+                        - `Type Only`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                      - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                        Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                        - `Type Except`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                    - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                    - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                      Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
 
                   - `AllowedDomains []string Optional`
 
@@ -39249,7 +40518,7 @@ func main() {
         "version": "1"
       },
       {
-        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
         "type": "custom",
         "version": "2"
       }
@@ -39296,7 +40565,7 @@ func main() {
       "description": "Produce a 2-page summary as summary.md",
       "explanation": "All five sections present with inline citations.",
       "iteration": 0,
-      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVmjxP",
       "result": "satisfied",
       "type": "outcome_evaluation"
     }
@@ -39311,7 +40580,7 @@ func main() {
       "updated_at": "2026-03-15T10:00:00Z"
     },
     {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
       "created_at": "2026-03-15T10:00:00Z",
       "mount_path": "/workspace/example-repo",
       "type": "github_repository",
@@ -39370,7 +40639,7 @@ Delete Session
 
 - `body BetaSessionDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -39474,7 +40743,7 @@ Delete Session
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -39542,7 +40811,7 @@ Archive Session
 
 - `body BetaSessionArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -39646,7 +40915,7 @@ Archive Session
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -39689,6 +40958,10 @@ Archive Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
 
         - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -40057,6 +41330,82 @@ Archive Session
                     - `type BetaManagedAgentsAutoPolicy`
 
                       The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                  - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                    Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                    - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                        - `Type All`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
+
+                        - `Type None`
+
+                      - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                        Only the named tools' results contribute URLs that may be fetched.
+
+                        - `Type Only`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                      - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                        Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                        - `Type Except`
+
+                        - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                          The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                          - `Type ToolReference`
+
+                            Must be "tool_reference".
+
+                          - `Name string`
+
+                            Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                            minLength: 1, maxLength: 128
+
+                    - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                      Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                    - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                      Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                        Every URL from this source may be fetched. This is the default.
+
+                      - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                        This source contributes no URLs that may be fetched.
 
                   - `AllowedDomains []string Optional`
 
@@ -40662,7 +42011,7 @@ func main() {
         "version": "1"
       },
       {
-        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+        "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
         "type": "custom",
         "version": "2"
       }
@@ -40709,7 +42058,7 @@ func main() {
       "description": "Produce a 2-page summary as summary.md",
       "explanation": "All five sections present with inline citations.",
       "iteration": 0,
-      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVljxP",
+      "outcome_id": "outc_011CZkZRSw2kEfs6ncTVmjxP",
       "result": "satisfied",
       "type": "outcome_evaluation"
     }
@@ -40724,7 +42073,7 @@ func main() {
       "updated_at": "2026-03-15T10:00:00Z"
     },
     {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
       "created_at": "2026-03-15T10:00:00Z",
       "mount_path": "/workspace/example-repo",
       "type": "github_repository",
@@ -40785,35 +42134,35 @@ List Events
 
 - `params BetaSessionEventListParams`
 
-  - `CreatedAtGt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGt param.Opt[Time] Optional` (query parameter)
 
     Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `CreatedAtLt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLt param.Opt[Time] Optional` (query parameter)
 
     Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     format: int32
 
-  - `Order param.Field[BetaSessionEventListParamsOrder] Optional` (query parameter)
+  - `Order BetaSessionEventListParamsOrder Optional` (query parameter)
 
     Sort direction for results, ordered by the event's `processed_at`. Defaults to `asc` (chronological).
 
@@ -40821,11 +42170,11 @@ List Events
 
     - `const BetaSessionEventListParamsOrderDesc BetaSessionEventListParamsOrder = "desc"`
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor from a previous response's `next_page`.
 
-  - `Types param.Field[[]BetaManagedAgentsSessionEventType] Optional` (query parameter)
+  - `Types []BetaManagedAgentsSessionEventType Optional` (query parameter)
 
     Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
@@ -40897,7 +42246,7 @@ List Events
 
     - `const BetaManagedAgentsSessionEventTypeSessionUsage BetaManagedAgentsSessionEventType = "session.usage"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -41001,7 +42350,7 @@ List Events
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -42241,7 +43590,7 @@ List Events
 
   - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
-    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+    Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
     - `Type BetaManagedAgentsSessionThreadCreatedEventType`
 
@@ -42717,6 +44066,10 @@ List Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
+
           - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
             Efficient model for coding and agents
@@ -43084,6 +44437,82 @@ List Events
                       - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                    - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                      Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                      - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                          - `Type All`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
+
+                          - `Type None`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                          Only the named tools' results contribute URLs that may be fetched.
+
+                          - `Type Only`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                        - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                          Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                          - `Type Except`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                      - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                      - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                        Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
 
                     - `AllowedDomains []string Optional`
 
@@ -43460,7 +44889,7 @@ func main() {
 {
   "data": [
     {
-      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "id": "sevt_011CZkZGPp1iBcp4kaQSihUm",
       "content": [
         {
           "text": "Where is my order #1234?",
@@ -43471,7 +44900,7 @@ func main() {
       "processed_at": "2026-03-15T10:00:00Z"
     },
     {
-      "id": "sevt_011CZkZHPq1jCdq5lbRTjiVnz",
+      "id": "sevt_011CZkZHPq1jCdq5mbRTjiVn",
       "content": [
         {
           "text": "Let me look up order #1234 for you.",
@@ -43500,7 +44929,7 @@ Send Events
 
 - `params BetaSessionEventSendParams`
 
-  - `Events param.Field[[]BetaManagedAgentsEventParamsUnionResp]`
+  - `Events []BetaManagedAgentsEventParamsUnion`
 
     Events to send to the `session`.
 
@@ -43862,7 +45291,7 @@ Send Events
 
           minLength: 1
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -43966,7 +45395,7 @@ Send Events
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -44465,7 +45894,7 @@ func main() {
 {
   "data": [
     {
-      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "id": "sevt_011CZkZGPp1iBcp4kaQSihUm",
       "content": [
         {
           "text": "Where is my order #1234?",
@@ -44493,7 +45922,7 @@ Stream Events
 
 - `params BetaSessionEventStreamParams`
 
-  - `EventDeltas param.Field[[]BetaManagedAgentsDeltaType] Optional` (query parameter)
+  - `EventDeltas []BetaManagedAgentsDeltaType Optional` (query parameter)
 
     When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
@@ -44501,7 +45930,7 @@ Stream Events
 
     - `const BetaManagedAgentsDeltaTypeAgentThinking BetaManagedAgentsDeltaType = "agent.thinking"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -44605,7 +46034,7 @@ Stream Events
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -45845,7 +47274,7 @@ Stream Events
 
   - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
-    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+    Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
     - `Type BetaManagedAgentsSessionThreadCreatedEventType`
 
@@ -46321,6 +47750,10 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
+
           - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
             Efficient model for coding and agents
@@ -46688,6 +48121,82 @@ Stream Events
                       - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                    - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                      Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                      - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                          - `Type All`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
+
+                          - `Type None`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                          Only the named tools' results contribute URLs that may be fetched.
+
+                          - `Type Only`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                        - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                          Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                          - `Type Except`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                      - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                      - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                        Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
 
                     - `AllowedDomains []string Optional`
 
@@ -47115,7 +48624,7 @@ func main() {
 
 ```json
 {
-  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "id": "sevt_011CZkZGPp1iBcp4kaQSihUm",
   "content": [
     {
       "text": "Where is my order #1234?",
@@ -47143,11 +48652,11 @@ Add Session Resource
 
 - `params BetaSessionResourceAddParams`
 
-  - `BetaManagedAgentsFileResourceParams param.Field[BetaManagedAgentsFileResourceParamsResp]`
+  - `BetaManagedAgentsFileResourceParams BetaManagedAgentsFileResourceParams`
 
     Request parameters for adding a resource to a session.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -47251,7 +48760,7 @@ Add Session Resource
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -47342,17 +48851,17 @@ List Session Resources
 
 - `params BetaSessionResourceListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -47456,7 +48965,7 @@ List Session Resources
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -47611,7 +49120,7 @@ func main() {
       "updated_at": "2026-03-15T10:00:00Z"
     },
     {
-      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
       "created_at": "2026-03-15T10:00:00Z",
       "mount_path": "/workspace/example-repo",
       "type": "github_repository",
@@ -47641,9 +49150,9 @@ Get Session Resource
 
 - `params BetaSessionResourceGetParams`
 
-  - `SessionID param.Field[string]` (path parameter)
+  - `SessionID string` (path parameter)
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -47747,7 +49256,7 @@ Get Session Resource
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -47896,7 +49405,7 @@ func main() {
 
 ```json
 {
-  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
   "created_at": "2026-03-15T10:00:00Z",
   "mount_path": "/workspace/example-repo",
   "type": "github_repository",
@@ -47923,15 +49432,15 @@ Update Session Resource
 
 - `params BetaSessionResourceUpdateParams`
 
-  - `SessionID param.Field[string]` (path parameter)
+  - `SessionID string` (path parameter)
 
-  - `AuthorizationToken param.Field[string]`
+  - `AuthorizationToken string`
 
     New authorization token for the resource. Currently only `github_repository` resources support token rotation.
 
     minLength: 1, maxLength: 4096
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -48035,7 +49544,7 @@ Update Session Resource
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -48185,7 +49694,7 @@ func main() {
 
 ```json
 {
-  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "id": "sesrsc_011CZkZCKr6eXym1gWMPdQiu",
   "created_at": "2026-03-15T10:00:00Z",
   "mount_path": "/workspace/example-repo",
   "type": "github_repository",
@@ -48212,9 +49721,9 @@ Delete Session Resource
 
 - `params BetaSessionResourceDeleteParams`
 
-  - `SessionID param.Field[string]` (path parameter)
+  - `SessionID string` (path parameter)
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -48318,7 +49827,7 @@ Delete Session Resource
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -48390,17 +49899,17 @@ List Session Threads
 
 - `params BetaSessionThreadListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum results per page. Defaults to 1000.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor from a previous response's `next_page`. Forward-only.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -48504,7 +50013,7 @@ List Session Threads
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -48514,7 +50023,7 @@ List Session Threads
 
 - `type BetaManagedAgentsSessionThread`
 
-  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
   - `Type BetaManagedAgentsSessionThreadType`
 
@@ -48553,6 +50062,10 @@ List Session Threads
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -48889,6 +50402,82 @@ List Session Threads
                 - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                  Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                    Every URL from this source may be fetched. This is the default.
+
+                    - `Type All`
+
+                  - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                    This source contributes no URLs that may be fetched.
+
+                    - `Type None`
+
+                  - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                    Only the named tools' results contribute URLs that may be fetched.
+
+                    - `Type Only`
+
+                    - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                      The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                      - `Type ToolReference`
+
+                        Must be "tool_reference".
+
+                      - `Name string`
+
+                        Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                        minLength: 1, maxLength: 128
+
+                  - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                    Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                    - `Type Except`
+
+                    - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                      The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                      - `Type ToolReference`
+
+                        Must be "tool_reference".
+
+                      - `Name string`
+
+                        Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                        minLength: 1, maxLength: 128
+
+                - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                  Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                  Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                    Every URL from this source may be fetched. This is the default.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                    This source contributes no URLs that may be fetched.
 
               - `AllowedDomains []string Optional`
 
@@ -49231,7 +50820,7 @@ func main() {
 {
   "data": [
     {
-      "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+      "id": "sthr_011CZkZVWa6oJjw1rgXZpnBt",
       "agent": {
         "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
         "description": "A focused research subagent.",
@@ -49333,9 +50922,9 @@ Get Session Thread
 
 - `params BetaSessionThreadGetParams`
 
-  - `SessionID param.Field[string]` (path parameter)
+  - `SessionID string` (path parameter)
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -49439,7 +51028,7 @@ Get Session Thread
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -49449,7 +51038,7 @@ Get Session Thread
 
 - `type BetaManagedAgentsSessionThread`
 
-  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
   - `Type BetaManagedAgentsSessionThreadType`
 
@@ -49488,6 +51077,10 @@ Get Session Thread
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -49824,6 +51417,82 @@ Get Session Thread
                 - `type BetaManagedAgentsAutoPolicy`
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+              - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                  Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                    Every URL from this source may be fetched. This is the default.
+
+                    - `Type All`
+
+                  - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                    This source contributes no URLs that may be fetched.
+
+                    - `Type None`
+
+                  - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                    Only the named tools' results contribute URLs that may be fetched.
+
+                    - `Type Only`
+
+                    - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                      The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                      - `Type ToolReference`
+
+                        Must be "tool_reference".
+
+                      - `Name string`
+
+                        Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                        minLength: 1, maxLength: 128
+
+                  - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                    Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                    - `Type Except`
+
+                    - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                      The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                      - `Type ToolReference`
+
+                        Must be "tool_reference".
+
+                      - `Name string`
+
+                        Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                        minLength: 1, maxLength: 128
+
+                - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                  Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                  Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                    Every URL from this source may be fetched. This is the default.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                    This source contributes no URLs that may be fetched.
 
               - `AllowedDomains []string Optional`
 
@@ -50150,7 +51819,7 @@ func main() {
 	)
 	betaManagedAgentsSessionThread, err := client.Beta.Sessions.Threads.Get(
 		context.TODO(),
-		"sthr_011CZkZVWa6oIjw0rgXZpnBt",
+		"sthr_011CZkZVWa6oJjw1rgXZpnBt",
 		anthropic.BetaSessionThreadGetParams{
 			SessionID: "sesn_011CZkZAtmR3yMPDzynEDxu7",
 		},
@@ -50166,7 +51835,7 @@ func main() {
 
 ```json
 {
-  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+  "id": "sthr_011CZkZVWa6oJjw1rgXZpnBt",
   "agent": {
     "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
     "description": "A focused research subagent.",
@@ -50265,9 +51934,9 @@ Archive Session Thread
 
 - `params BetaSessionThreadArchiveParams`
 
-  - `SessionID param.Field[string]` (path parameter)
+  - `SessionID string` (path parameter)
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -50371,7 +52040,7 @@ Archive Session Thread
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -50381,7 +52050,7 @@ Archive Session Thread
 
 - `type BetaManagedAgentsSessionThread`
 
-  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
   - `Type BetaManagedAgentsSessionThreadType`
 
@@ -50420,6 +52089,10 @@ Archive Session Thread
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
 
           - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
@@ -50757,6 +52430,82 @@ Archive Session Thread
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
+              - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                  Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                    Every URL from this source may be fetched. This is the default.
+
+                    - `Type All`
+
+                  - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                    This source contributes no URLs that may be fetched.
+
+                    - `Type None`
+
+                  - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                    Only the named tools' results contribute URLs that may be fetched.
+
+                    - `Type Only`
+
+                    - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                      The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                      - `Type ToolReference`
+
+                        Must be "tool_reference".
+
+                      - `Name string`
+
+                        Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                        minLength: 1, maxLength: 128
+
+                  - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                    Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                    - `Type Except`
+
+                    - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                      The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                      - `Type ToolReference`
+
+                        Must be "tool_reference".
+
+                      - `Name string`
+
+                        Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                        minLength: 1, maxLength: 128
+
+                - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                  Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                  Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                    Every URL from this source may be fetched. This is the default.
+
+                  - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                    This source contributes no URLs that may be fetched.
+
               - `AllowedDomains []string Optional`
 
               - `BlockedDomains []string Optional`
@@ -51082,7 +52831,7 @@ func main() {
 	)
 	betaManagedAgentsSessionThread, err := client.Beta.Sessions.Threads.Archive(
 		context.TODO(),
-		"sthr_011CZkZVWa6oIjw0rgXZpnBt",
+		"sthr_011CZkZVWa6oJjw1rgXZpnBt",
 		anthropic.BetaSessionThreadArchiveParams{
 			SessionID: "sesn_011CZkZAtmR3yMPDzynEDxu7",
 		},
@@ -51098,7 +52847,7 @@ func main() {
 
 ```json
 {
-  "id": "sthr_011CZkZVWa6oIjw0rgXZpnBt",
+  "id": "sthr_011CZkZVWa6oJjw1rgXZpnBt",
   "agent": {
     "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
     "description": "A focused research subagent.",
@@ -51199,15 +52948,15 @@ List Session Thread Events
 
 - `params BetaSessionThreadEventListParams`
 
-  - `SessionID param.Field[string]` (path parameter)
+  - `SessionID string` (path parameter)
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -51311,7 +53060,7 @@ List Session Thread Events
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -52551,7 +54300,7 @@ List Session Thread Events
 
   - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
-    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+    Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
     - `Type BetaManagedAgentsSessionThreadCreatedEventType`
 
@@ -53027,6 +54776,10 @@ List Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
+
           - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
             Efficient model for coding and agents
@@ -53395,6 +55148,82 @@ List Session Thread Events
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
+                    - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                      Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                      - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                          - `Type All`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
+
+                          - `Type None`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                          Only the named tools' results contribute URLs that may be fetched.
+
+                          - `Type Only`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                        - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                          Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                          - `Type Except`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                      - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                      - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                        Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
+
                     - `AllowedDomains []string Optional`
 
                     - `BlockedDomains []string Optional`
@@ -53754,7 +55583,7 @@ func main() {
 	)
 	page, err := client.Beta.Sessions.Threads.Events.List(
 		context.TODO(),
-		"sthr_011CZkZVWa6oIjw0rgXZpnBt",
+		"sthr_011CZkZVWa6oJjw1rgXZpnBt",
 		anthropic.BetaSessionThreadEventListParams{
 			SessionID: "sesn_011CZkZAtmR3yMPDzynEDxu7",
 		},
@@ -53772,7 +55601,7 @@ func main() {
 {
   "data": [
     {
-      "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+      "id": "sevt_011CZkZGPp1iBcp4kaQSihUm",
       "content": [
         {
           "text": "Where is my order #1234?",
@@ -53783,7 +55612,7 @@ func main() {
       "processed_at": "2026-03-15T10:00:00Z"
     },
     {
-      "id": "sevt_011CZkZHPq1jCdq5lbRTjiVnz",
+      "id": "sevt_011CZkZHPq1jCdq5mbRTjiVn",
       "content": [
         {
           "text": "Let me look up order #1234 for you.",
@@ -53812,9 +55641,9 @@ Stream Session Thread Events
 
 - `params BetaSessionThreadEventStreamParams`
 
-  - `SessionID param.Field[string]` (path parameter)
+  - `SessionID string` (path parameter)
 
-  - `EventDeltas param.Field[[]BetaManagedAgentsDeltaType] Optional` (query parameter)
+  - `EventDeltas []BetaManagedAgentsDeltaType Optional` (query parameter)
 
     When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
@@ -53822,7 +55651,7 @@ Stream Session Thread Events
 
     - `const BetaManagedAgentsDeltaTypeAgentThinking BetaManagedAgentsDeltaType = "agent.thinking"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -53926,7 +55755,7 @@ Stream Session Thread Events
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -55166,7 +56995,7 @@ Stream Session Thread Events
 
   - `type BetaManagedAgentsSessionThreadCreatedEvent`
 
-    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+    Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
     - `Type BetaManagedAgentsSessionThreadCreatedEventType`
 
@@ -55642,6 +57471,10 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const BetaManagedAgentsModelClaudeHaiku5_5 BetaManagedAgentsModel = "claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
+
           - `const BetaManagedAgentsModelClaudeSonnet5_5 BetaManagedAgentsModel = "claude-sonnet-5-5"`
 
             Efficient model for coding and agents
@@ -56009,6 +57842,82 @@ Stream Session Thread Events
                       - `type BetaManagedAgentsAutoPolicy`
 
                         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+
+                    - `URLSources BetaManagedAgentsWebFetchURLSources`
+
+                      Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+                      - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                          - `Type All`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
+
+                          - `Type None`
+
+                        - `type BetaManagedAgentsWebFetchURLSourceOnly`
+
+                          Only the named tools' results contribute URLs that may be fetched.
+
+                          - `Type Only`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                        - `type BetaManagedAgentsWebFetchURLSourceExcept`
+
+                          Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                          - `Type Except`
+
+                          - `Tools []BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                            The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                            - `Type ToolReference`
+
+                              Must be "tool_reference".
+
+                            - `Name string`
+
+                              Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                              minLength: 1, maxLength: 128
+
+                      - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterUnion`
+
+                        Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+                      - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputUnion`
+
+                        Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceAll`
+
+                          Every URL from this source may be fetched. This is the default.
+
+                        - `type BetaManagedAgentsWebFetchURLSourceNone`
+
+                          This source contributes no URLs that may be fetched.
 
                     - `AllowedDomains []string Optional`
 
@@ -56419,7 +58328,7 @@ func main() {
 	)
 	stream := client.Beta.Sessions.Threads.Events.StreamEvents(
 		context.TODO(),
-		"sthr_011CZkZVWa6oIjw0rgXZpnBt",
+		"sthr_011CZkZVWa6oJjw1rgXZpnBt",
 		anthropic.BetaSessionThreadEventStreamParams{
 			SessionID: "sesn_011CZkZAtmR3yMPDzynEDxu7",
 		},
@@ -56438,7 +58347,7 @@ func main() {
 
 ```json
 {
-  "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
+  "id": "sevt_011CZkZGPp1iBcp4kaQSihUm",
   "content": [
     {
       "text": "Where is my order #1234?",
@@ -56464,7 +58373,7 @@ Create Deployment
 
 - `params BetaDeploymentNewParams`
 
-  - `Agent param.Field[BetaDeploymentNewParamsAgentUnion]`
+  - `Agent BetaDeploymentNewParamsAgentUnion`
 
     Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
 
@@ -56488,13 +58397,13 @@ Create Deployment
 
         format: int32
 
-  - `EnvironmentID param.Field[string]`
+  - `EnvironmentID string`
 
     ID of the `environment` defining the container configuration for sessions created from this deployment.
 
     minLength: 1, maxLength: 128
 
-  - `InitialEvents param.Field[[]BetaManagedAgentsDeploymentInitialEventParamsUnionResp]`
+  - `InitialEvents []BetaManagedAgentsDeploymentInitialEventParamsUnion`
 
     Events to send to each session immediately after creation. At least 1, maximum 50.
 
@@ -56714,27 +58623,27 @@ Create Deployment
 
           minLength: 1
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Human-readable name for the deployment.
 
     minLength: 1, maxLength: 256
 
-  - `Budget param.Field[BetaManagedAgentsBudgetLimit] Optional`
+  - `Budget BetaManagedAgentsBudgetLimitParam Optional`
 
     Enforced spend ceiling stamped onto each session created from this deployment, copied at session-creation time. Omit to leave sessions uncapped. The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Description of what the deployment does.
 
     maxLength: 2048
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Resources param.Field[[]BetaDeploymentNewParamsResourceUnion] Optional`
+  - `Resources []BetaDeploymentNewParamsResourceUnion Optional`
 
     Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
@@ -56828,15 +58737,15 @@ Create Deployment
 
         maxLength: 4096
 
-  - `Schedule param.Field[BetaManagedAgentsScheduleParamsResp] Optional`
+  - `Schedule BetaManagedAgentsScheduleParams Optional`
 
     Optional recurring cron schedule. When present, the deployment fires automatically. Both expression and timezone are required when schedule is set.
 
-  - `VaultIDs param.Field[[]string] Optional`
+  - `VaultIDs []string Optional`
 
     Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -56940,7 +58849,7 @@ Create Deployment
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -57587,41 +59496,41 @@ List Deployments
 
 - `params BetaDeploymentListParams`
 
-  - `AgentID param.Field[string] Optional` (query parameter)
+  - `AgentID param.Opt[string] Optional` (query parameter)
 
     Filter by agent ID.
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     Return deployments created at or after this time (inclusive).
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     Return deployments created at or before this time (inclusive).
 
     format: date-time
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     When true, includes archived deployments. Default: false (exclude archived).
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor.
 
-  - `Status param.Field[BetaManagedAgentsDeploymentStatus] Optional` (query parameter)
+  - `Status BetaManagedAgentsDeploymentStatus Optional` (query parameter)
 
     Filter by status: `active` or `paused`. Omit for both. To include archived deployments, use `include_archived` instead; the two cannot be combined.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -57725,7 +59634,7 @@ List Deployments
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -58364,7 +60273,7 @@ Get Deployment
 
 - `query BetaDeploymentGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -58468,7 +60377,7 @@ Get Deployment
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -59106,7 +61015,7 @@ Update Deployment
 
 - `params BetaDeploymentUpdateParams`
 
-  - `Agent param.Field[BetaDeploymentUpdateParamsAgentUnion] Optional`
+  - `Agent BetaDeploymentUpdateParamsAgentUnion Optional`
 
     Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
 
@@ -59130,23 +61039,23 @@ Update Deployment
 
         format: int32
 
-  - `Budget param.Field[BetaManagedAgentsBudgetLimit] Optional`
+  - `Budget BetaManagedAgentsBudgetLimitParam Optional`
 
     Spend ceiling for future sessions. Full replacement. Omit to preserve; send null to clear (sessions created afterwards are uncapped). The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Description. Omit to preserve; send empty string or null to clear.
 
     maxLength: 2048
 
-  - `EnvironmentID param.Field[string] Optional`
+  - `EnvironmentID param.Opt[string] Optional`
 
     ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
 
     maxLength: 128
 
-  - `InitialEvents param.Field[[]BetaManagedAgentsDeploymentInitialEventParamsUnionResp] Optional`
+  - `InitialEvents []BetaManagedAgentsDeploymentInitialEventParamsUnion Optional`
 
     Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
@@ -59366,17 +61275,17 @@ Update Deployment
 
           minLength: 1
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
     maxLength: 256
 
-  - `Resources param.Field[[]BetaDeploymentUpdateParamsResourceUnion] Optional`
+  - `Resources []BetaDeploymentUpdateParamsResourceUnion Optional`
 
     Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
@@ -59470,15 +61379,15 @@ Update Deployment
 
         maxLength: 4096
 
-  - `Schedule param.Field[BetaManagedAgentsScheduleParamsResp] Optional`
+  - `Schedule BetaManagedAgentsScheduleParams Optional`
 
     Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to manual-only).
 
-  - `VaultIDs param.Field[[]string] Optional`
+  - `VaultIDs []string Optional`
 
     Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -59582,7 +61491,7 @@ Update Deployment
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -60220,7 +62129,7 @@ Archive Deployment
 
 - `body BetaDeploymentArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -60324,7 +62233,7 @@ Archive Deployment
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -60962,7 +62871,7 @@ Run Deployment Now
 
 - `body BetaDeploymentRunParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -61066,7 +62975,7 @@ Run Deployment Now
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -61366,7 +63275,7 @@ Pause Deployment
 
 - `body BetaDeploymentPauseParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -61470,7 +63379,7 @@ Pause Deployment
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -62108,7 +64017,7 @@ Unpause Deployment
 
 - `body BetaDeploymentUnpauseParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -62212,7 +64121,7 @@ Unpause Deployment
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -62848,53 +64757,53 @@ List Deployment Runs
 
 - `params BetaDeploymentRunListParams`
 
-  - `CreatedAtGt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGt param.Opt[Time] Optional` (query parameter)
 
     Return runs created strictly after this time (exclusive).
 
     format: date-time
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     Return runs created at or after this time (inclusive).
 
     format: date-time
 
-  - `CreatedAtLt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLt param.Opt[Time] Optional` (query parameter)
 
     Return runs created strictly before this time (exclusive).
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     Return runs created at or before this time (inclusive).
 
     format: date-time
 
-  - `DeploymentID param.Field[string] Optional` (query parameter)
+  - `DeploymentID param.Opt[string] Optional` (query parameter)
 
     Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent `deployment_id` returns 200 with empty data.
 
-  - `HasError param.Field[bool] Optional` (query parameter)
+  - `HasError param.Opt[bool] Optional` (query parameter)
 
     Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum results per page. Default 20, maximum 1000.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor. Pass `next_page` from the previous response. Invalid or expired cursors return 400.
 
-  - `TriggerType param.Field[BetaManagedAgentsTriggerType] Optional` (query parameter)
+  - `TriggerType BetaManagedAgentsTriggerType Optional` (query parameter)
 
     Filter runs by what triggered them. Omit to return all runs.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -62998,7 +64907,7 @@ List Deployment Runs
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -63299,7 +65208,7 @@ Get Deployment Run
 
 - `query BetaDeploymentRunGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -63403,7 +65312,7 @@ Get Deployment Run
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -63701,17 +65610,17 @@ Create Vault
 
 - `params BetaVaultNewParams`
 
-  - `DisplayName param.Field[string]`
+  - `DisplayName string`
 
     Human-readable name for the vault. 1-255 characters.
 
     minLength: 1, maxLength: 255
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -63815,7 +65724,7 @@ Create Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -63914,21 +65823,21 @@ List Vaults
 
 - `params BetaVaultListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Whether to include archived vaults in the results.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination token from a previous `list_vaults` response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -64032,7 +65941,7 @@ List Vaults
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -64138,7 +66047,7 @@ Get Vault
 
 - `query BetaVaultGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -64242,7 +66151,7 @@ Get Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -64347,17 +66256,17 @@ Update Vault
 
 - `params BetaVaultUpdateParams`
 
-  - `DisplayName param.Field[string] Optional`
+  - `DisplayName param.Opt[string] Optional`
 
     Updated human-readable name for the vault. 1-255 characters.
 
     minLength: 1, maxLength: 255
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -64461,7 +66370,7 @@ Update Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -64566,7 +66475,7 @@ Delete Vault
 
 - `body BetaVaultDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -64670,7 +66579,7 @@ Delete Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -64742,7 +66651,7 @@ Archive Vault
 
 - `body BetaVaultArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -64846,7 +66755,7 @@ Archive Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -64953,7 +66862,7 @@ Create Credential
 
 - `params BetaVaultCredentialNewParams`
 
-  - `Auth param.Field[BetaVaultCredentialNewParamsAuthUnion]`
+  - `Auth BetaVaultCredentialNewParamsAuthUnion`
 
     Authentication configuration for the credential.
 
@@ -65115,17 +67024,17 @@ Create Credential
 
           Substitute when the placeholder appears in a request header value.
 
-  - `DisplayName param.Field[string] Optional`
+  - `DisplayName param.Opt[string] Optional`
 
     Human-readable name for the credential. Up to 255 characters.
 
     maxLength: 255
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -65229,7 +67138,7 @@ Create Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -65430,7 +67339,7 @@ func main() {
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "archived_at": null,
   "auth": {
     "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
@@ -65463,21 +67372,21 @@ List Credentials
 
 - `params BetaVaultCredentialListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Whether to include archived credentials in the results.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination token from a previous `list_credentials` response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -65581,7 +67490,7 @@ List Credentials
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -65776,7 +67685,7 @@ func main() {
 {
   "data": [
     {
-      "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+      "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
       "archived_at": null,
       "auth": {
         "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
@@ -65812,11 +67721,11 @@ Get Credential
 
 - `params BetaVaultCredentialGetParams`
 
-  - `VaultID param.Field[string]` (path parameter)
+  - `VaultID string` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -65920,7 +67829,7 @@ Get Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -66099,7 +68008,7 @@ func main() {
 	)
 	betaManagedAgentsCredential, err := client.Beta.Vaults.Credentials.Get(
 		context.TODO(),
-		"vcrd_011CZkZEMt8gZan2iYOQfSkw",
+		"vcrd_011CZkZEMt8gZan2iYPQfSkw",
 		anthropic.BetaVaultCredentialGetParams{
 			VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
 		},
@@ -66115,7 +68024,7 @@ func main() {
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "archived_at": null,
   "auth": {
     "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
@@ -66148,11 +68057,11 @@ Update Credential
 
 - `params BetaVaultCredentialUpdateParams`
 
-  - `VaultID param.Field[string]` (path parameter)
+  - `VaultID string` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Auth param.Field[BetaVaultCredentialUpdateParamsAuthUnion] Optional`
+  - `Auth BetaVaultCredentialUpdateParamsAuthUnion Optional`
 
     Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
 
@@ -66272,17 +68181,17 @@ Update Credential
 
         minLength: 1, maxLength: 4096
 
-  - `DisplayName param.Field[string] Optional`
+  - `DisplayName param.Opt[string] Optional`
 
     Updated human-readable name for the credential. 1-255 characters.
 
     minLength: 1, maxLength: 255
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -66386,7 +68295,7 @@ Update Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -66565,7 +68474,7 @@ func main() {
 	)
 	betaManagedAgentsCredential, err := client.Beta.Vaults.Credentials.Update(
 		context.TODO(),
-		"vcrd_011CZkZEMt8gZan2iYOQfSkw",
+		"vcrd_011CZkZEMt8gZan2iYPQfSkw",
 		anthropic.BetaVaultCredentialUpdateParams{
 			VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
 		},
@@ -66581,7 +68490,7 @@ func main() {
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "archived_at": null,
   "auth": {
     "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
@@ -66614,11 +68523,11 @@ Delete Credential
 
 - `params BetaVaultCredentialDeleteParams`
 
-  - `VaultID param.Field[string]` (path parameter)
+  - `VaultID string` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -66722,7 +68631,7 @@ Delete Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -66759,7 +68668,7 @@ func main() {
 	)
 	betaManagedAgentsDeletedCredential, err := client.Beta.Vaults.Credentials.Delete(
 		context.TODO(),
-		"vcrd_011CZkZEMt8gZan2iYOQfSkw",
+		"vcrd_011CZkZEMt8gZan2iYPQfSkw",
 		anthropic.BetaVaultCredentialDeleteParams{
 			VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
 		},
@@ -66775,7 +68684,7 @@ func main() {
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "type": "vault_credential_deleted"
 }
 ```
@@ -66796,11 +68705,11 @@ Archive Credential
 
 - `params BetaVaultCredentialArchiveParams`
 
-  - `VaultID param.Field[string]` (path parameter)
+  - `VaultID string` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -66904,7 +68813,7 @@ Archive Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -67083,7 +68992,7 @@ func main() {
 	)
 	betaManagedAgentsCredential, err := client.Beta.Vaults.Credentials.Archive(
 		context.TODO(),
-		"vcrd_011CZkZEMt8gZan2iYOQfSkw",
+		"vcrd_011CZkZEMt8gZan2iYPQfSkw",
 		anthropic.BetaVaultCredentialArchiveParams{
 			VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
 		},
@@ -67099,7 +69008,7 @@ func main() {
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "archived_at": null,
   "auth": {
     "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",
@@ -67132,11 +69041,11 @@ Validate Credential
 
 - `params BetaVaultCredentialMCPOAuthValidateParams`
 
-  - `VaultID param.Field[string]` (path parameter)
+  - `VaultID string` (path parameter)
 
     Identifier of the vault containing the credential.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -67240,7 +69149,7 @@ Validate Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -67365,7 +69274,7 @@ func main() {
 	)
 	betaManagedAgentsCredentialValidation, err := client.Beta.Vaults.Credentials.MCPOAuthValidate(
 		context.TODO(),
-		"vcrd_011CZkZEMt8gZan2iYOQfSkw",
+		"vcrd_011CZkZEMt8gZan2iYPQfSkw",
 		anthropic.BetaVaultCredentialMCPOAuthValidateParams{
 			VaultID: "vlt_011CZkZDLs7fYzm1hXNPeRjv",
 		},
@@ -67381,7 +69290,7 @@ func main() {
 
 ```json
 {
-  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "has_refresh_token": true,
   "mcp_probe": {
     "http_response": {
@@ -67422,23 +69331,23 @@ Create a memory store
 
 - `params BetaMemoryStoreNewParams`
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
 
     minLength: 1, maxLength: 255
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
     maxLength: 1024
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -67542,7 +69451,7 @@ Create a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -67646,33 +69555,33 @@ List memory stores
 
 - `params BetaMemoryStoreListParams`
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
     format: date-time
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -67776,7 +69685,7 @@ List memory stores
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -67885,7 +69794,7 @@ Retrieve a memory store
 
 - `query BetaMemoryStoreGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -67989,7 +69898,7 @@ Retrieve a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -68099,23 +70008,23 @@ Update a memory store
 
 - `params BetaMemoryStoreUpdateParams`
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     New description for the store, up to 1024 characters. Pass an empty string to clear it.
 
     maxLength: 1024
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
 
     minLength: 1, maxLength: 255
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -68219,7 +70128,7 @@ Update a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -68329,7 +70238,7 @@ Delete a memory store
 
 - `body BetaMemoryStoreDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -68433,7 +70342,7 @@ Delete a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -68505,7 +70414,7 @@ Archive a memory store
 
 - `body BetaMemoryStoreArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -68609,7 +70518,7 @@ Archive a memory store
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -68721,21 +70630,21 @@ Create a memory
 
 - `params BetaMemoryStoreMemoryNewParams`
 
-  - `Content param.Field[string]`
+  - `Content param.Opt[string]`
 
     UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
 
-  - `Path param.Field[string]`
+  - `Path string`
 
     Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
 
     minLength: 2, maxLength: 1024
 
-  - `View param.Field[BetaManagedAgentsMemoryView] Optional` (query parameter)
+  - `View BetaManagedAgentsMemoryView Optional` (query parameter)
 
     Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -68839,7 +70748,7 @@ Create a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -68960,31 +70869,31 @@ List memories
 
 - `params BetaMemoryStoreMemoryListParams`
 
-  - `Depth param.Field[int64] Optional` (query parameter)
+  - `Depth param.Opt[int64] Optional` (query parameter)
 
     `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
     format: int32
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-  - `PathPrefix param.Field[string] Optional` (query parameter)
+  - `PathPrefix param.Opt[string] Optional` (query parameter)
 
     Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-  - `View param.Field[BetaManagedAgentsMemoryView] Optional` (query parameter)
+  - `View BetaManagedAgentsMemoryView Optional` (query parameter)
 
     Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -69088,7 +70997,7 @@ List memories
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -69225,15 +71134,15 @@ Retrieve a memory
 
 - `params BetaMemoryStoreMemoryGetParams`
 
-  - `MemoryStoreID param.Field[string]` (path parameter)
+  - `MemoryStoreID string` (path parameter)
 
     The ID of the memory store that holds the memory (`memstore_...`).
 
-  - `View param.Field[BetaManagedAgentsMemoryView] Optional` (query parameter)
+  - `View BetaManagedAgentsMemoryView Optional` (query parameter)
 
     Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -69337,7 +71246,7 @@ Retrieve a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -69457,29 +71366,29 @@ Update a memory
 
 - `params BetaMemoryStoreMemoryUpdateParams`
 
-  - `MemoryStoreID param.Field[string]` (path parameter)
+  - `MemoryStoreID string` (path parameter)
 
     The ID of the memory store that holds the memory (`memstore_...`).
 
-  - `View param.Field[BetaManagedAgentsMemoryView] Optional` (query parameter)
+  - `View BetaManagedAgentsMemoryView Optional` (query parameter)
 
     Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `Content param.Field[string] Optional`
+  - `Content param.Opt[string] Optional`
 
     New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
 
-  - `Path param.Field[string] Optional`
+  - `Path param.Opt[string] Optional`
 
     New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
     minLength: 2, maxLength: 1024
 
-  - `Precondition param.Field[BetaManagedAgentsPrecondition] Optional`
+  - `Precondition BetaManagedAgentsPreconditionParam Optional`
 
     Optional optimistic-concurrency precondition. When supplied, the update applies only if the memory's current state matches; on mismatch the request returns `memory_precondition_failed_error` (HTTP 409). When omitted, the update is unconditional.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -69583,7 +71492,7 @@ Update a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -69703,17 +71612,17 @@ Delete a memory
 
 - `params BetaMemoryStoreMemoryDeleteParams`
 
-  - `MemoryStoreID param.Field[string]` (path parameter)
+  - `MemoryStoreID string` (path parameter)
 
     The ID of the memory store that holds the memory (`memstore_...`).
 
-  - `ExpectedContentSha256 param.Field[string] Optional` (query parameter)
+  - `ExpectedContentSha256 param.Opt[string] Optional` (query parameter)
 
     Delete the memory only if its current `content_sha256` equals this value, given as 64 lowercase hexadecimal characters. Omit it to delete unconditionally.
 
     If the hashes differ, the request fails with HTTP status 409 and nothing is deleted.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -69817,7 +71726,7 @@ Delete a memory
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -69893,55 +71802,55 @@ List memory versions
 
 - `params BetaMemoryStoreMemoryVersionListParams`
 
-  - `APIKeyID param.Field[string] Optional` (query parameter)
+  - `APIKeyID param.Opt[string] Optional` (query parameter)
 
     Return only versions written with the API key that has this ID.
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     Return versions created at or after this time (inclusive).
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     Return versions created at or before this time (inclusive).
 
     format: date-time
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     The maximum number of versions to return per page. Defaults to 20.
 
     format: int32
 
-  - `MemoryID param.Field[string] Optional` (query parameter)
+  - `MemoryID param.Opt[string] Optional` (query parameter)
 
     Return only versions of the memory with this ID (`mem_...`).
 
     The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
 
-  - `Operation param.Field[BetaManagedAgentsMemoryVersionOperation] Optional` (query parameter)
+  - `Operation BetaManagedAgentsMemoryVersionOperation Optional` (query parameter)
 
     Return only versions that record this kind of change.
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
-  - `ServiceAccountID param.Field[string] Optional` (query parameter)
+  - `ServiceAccountID param.Opt[string] Optional` (query parameter)
 
     Return only versions written by the service account with this ID (`svac_...`).
 
-  - `SessionID param.Field[string] Optional` (query parameter)
+  - `SessionID param.Opt[string] Optional` (query parameter)
 
     Return only versions written by the session with this ID.
 
-  - `View param.Field[BetaManagedAgentsMemoryView] Optional` (query parameter)
+  - `View BetaManagedAgentsMemoryView Optional` (query parameter)
 
     Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -70045,7 +71954,7 @@ List memory versions
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -70249,15 +72158,15 @@ Retrieve a memory version
 
 - `params BetaMemoryStoreMemoryVersionGetParams`
 
-  - `MemoryStoreID param.Field[string]` (path parameter)
+  - `MemoryStoreID string` (path parameter)
 
     The ID of the memory store that holds the version (`memstore_...`).
 
-  - `View param.Field[BetaManagedAgentsMemoryView] Optional` (query parameter)
+  - `View BetaManagedAgentsMemoryView Optional` (query parameter)
 
     Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -70361,7 +72270,7 @@ Retrieve a memory version
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -70562,11 +72471,11 @@ Redact a memory version
 
 - `params BetaMemoryStoreMemoryVersionRedactParams`
 
-  - `MemoryStoreID param.Field[string]` (path parameter)
+  - `MemoryStoreID string` (path parameter)
 
     The ID of the memory store that holds the version (`memstore_...`).
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -70670,7 +72579,7 @@ Redact a memory version
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -70869,19 +72778,19 @@ Upload File
 
 - `params BetaFileUploadParams`
 
-  - `File param.Field[Reader]`
+  - `File Reader`
 
     The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
     format: binary
 
-  - `ExpiresInSeconds param.Field[int64] Optional`
+  - `ExpiresInSeconds param.Opt[int64] Optional`
 
     Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
     minimum: 3600, maximum: 7776000
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -70985,7 +72894,7 @@ Upload File
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -71115,11 +73024,11 @@ List Files
 
 - `params BetaFileListParams`
 
-  - `IDs param.Field[[]string] Optional` (query parameter)
+  - `IDs []string Optional` (query parameter)
 
     Restrict the result set to Files whose `id` is in this list. At most 100 entries (after de-duplication). Mutually exclusive with `page` and `limit`. When supplied, the response is always a single page (`next_page` is null). IDs that do not resolve to a visible File — including deleted Files — are silently omitted.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -71127,15 +73036,15 @@ List Files
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
-  - `ScopeID param.Field[string] Optional` (query parameter)
+  - `ScopeID param.Opt[string] Optional` (query parameter)
 
     Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -71239,7 +73148,7 @@ List Files
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -71374,7 +73283,7 @@ Download File
 
 - `query BetaFileDownloadParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -71478,7 +73387,7 @@ Download File
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -71533,7 +73442,7 @@ Get File Metadata
 
 - `query BetaFileGetMetadataParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -71637,7 +73546,7 @@ Get File Metadata
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -71771,7 +73680,7 @@ Delete File
 
 - `body BetaFileDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -71875,7 +73784,7 @@ Delete File
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -71949,19 +73858,19 @@ Create Skill
 
 - `params BetaSkillNewParams`
 
-  - `Files param.Field[[]Reader]`
+  - `Files []Reader`
 
     Files to upload for the skill.
 
     All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-  - `DisplayName param.Field[string] Optional`
+  - `DisplayName param.Opt[string] Optional`
 
     Human-readable, single-line label for the Skill. Maximum 255 characters.
     Always set: derived from the SKILL.md frontmatter `name` when omitted at
     creation. Not unique.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -72065,7 +73974,7 @@ Create Skill
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -72198,7 +74107,7 @@ List Skills
 
 - `params BetaSkillListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results to return per page.
 
@@ -72206,13 +74115,13 @@ List Skills
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Pagination token for fetching a specific page of results.
 
     Pass the value from a previous response's `next_page` field to get the next page of results.
 
-  - `Source param.Field[string] Optional` (query parameter)
+  - `Source param.Opt[string] Optional` (query parameter)
 
     Filter skills by source.
 
@@ -72221,7 +74130,7 @@ List Skills
     * `"custom"`: only return user-created skills
     * `"anthropic"`: only return Anthropic-created skills
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -72325,7 +74234,7 @@ List Skills
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -72465,7 +74374,7 @@ Get Skill
 
 - `query BetaSkillGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -72569,7 +74478,7 @@ Get Skill
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -72708,7 +74617,7 @@ Delete Skill
 
 - `body BetaSkillDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -72812,7 +74721,7 @@ Delete Skill
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -72894,13 +74803,13 @@ Create Skill Version
 
 - `params BetaSkillVersionNewParams`
 
-  - `Files param.Field[[]Reader]`
+  - `Files []Reader`
 
     Files to upload for the skill.
 
     All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -73004,7 +74913,7 @@ Create Skill Version
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -73116,7 +75025,7 @@ List Skill Versions
 
 - `params BetaSkillVersionListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results to return per page.
 
@@ -73124,11 +75033,11 @@ List Skill Versions
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -73232,7 +75141,7 @@ List Skill Versions
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -73345,13 +75254,13 @@ Download a skill version's content as a zip archive.
 
 - `params BetaSkillVersionDownloadParams`
 
-  - `SkillID param.Field[string]` (path parameter)
+  - `SkillID string` (path parameter)
 
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -73455,7 +75364,7 @@ Download a skill version's content as a zip archive.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -73514,13 +75423,13 @@ Get Skill Version
 
 - `params BetaSkillVersionGetParams`
 
-  - `SkillID param.Field[string]` (path parameter)
+  - `SkillID string` (path parameter)
 
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -73624,7 +75533,7 @@ Get Skill Version
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -73734,13 +75643,13 @@ Delete Skill Version
 
 - `params BetaSkillVersionDeleteParams`
 
-  - `SkillID param.Field[string]` (path parameter)
+  - `SkillID string` (path parameter)
 
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -73844,7 +75753,7 @@ Delete Skill Version
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -73921,7 +75830,7 @@ Create User Profile
 
 - `params BetaUserProfileNewParams`
 
-  - `AccessType param.Field[BetaUserProfileNewParamsAccessType] Optional`
+  - `AccessType BetaUserProfileNewParamsAccessType Optional`
 
     How the platform uses the API for this entity. `application` (default): the profile represents an individual end-user of the platform's product. `passthrough`: the profile identifies a company the platform resells Claude access to.
 
@@ -73933,33 +75842,33 @@ Create User Profile
 
       The user profile represents a company that the platform resells Claude access to.
 
-  - `ExternalID param.Field[string] Optional`
+  - `ExternalID param.Opt[string] Optional`
 
     Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
 
     minLength: 1, maxLength: 255
 
-  - `ExternalUserDetails param.Field[BetaUserProfileExternalUserDetailsParamsResp] Optional`
+  - `ExternalUserDetails BetaUserProfileExternalUserDetailsParams Optional`
 
     Details about the entity this profile represents, as the platform states them. Every field is optional. Accepted under the `user-profiles-2026-09-04` beta header only.
 
-  - `ExternalUserOnboardedAt param.Field[Time] Optional`
+  - `ExternalUserOnboardedAt param.Opt[Time] Optional`
 
     When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
 
     format: date-time
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a company the platform resells Claude access to (`access_type` `passthrough`), that company's name where known. Maximum 255 characters.
 
     minLength: 1, maxLength: 255
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -74063,7 +75972,7 @@ Create User Profile
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -74262,13 +76171,13 @@ List User Profiles
 
 - `params BetaUserProfileListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
-  - `Order param.Field[BetaUserProfileListParamsOrder] Optional` (query parameter)
+  - `Order BetaUserProfileListParamsOrder Optional` (query parameter)
 
     The sort direction, applied to the field that `order_by` selects. Defaults to `desc`.
 
@@ -74280,7 +76189,7 @@ List User Profiles
 
       Newest first when `order_by` is `created_at`, or names in descending order when `order_by` is `name`. This is the default.
 
-  - `OrderBy param.Field[BetaUserProfileListParamsOrderBy] Optional` (query parameter)
+  - `OrderBy BetaUserProfileListParamsOrderBy Optional` (query parameter)
 
     The field to sort user profiles by, in the direction that `order` sets. Defaults to `created_at`.
 
@@ -74292,13 +76201,13 @@ List User Profiles
 
       Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     The cursor for the page to return, taken from `next_page` in a previous response.
 
     Leave it out to get the first page.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -74402,7 +76311,7 @@ List User Profiles
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -74610,7 +76519,7 @@ Get User Profile
 
 - `query BetaUserProfileGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -74714,7 +76623,7 @@ Get User Profile
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -74921,7 +76830,7 @@ Update User Profile
 
 - `params BetaUserProfileUpdateParams`
 
-  - `AccessType param.Field[BetaUserProfileUpdateParamsAccessType] Optional`
+  - `AccessType BetaUserProfileUpdateParamsAccessType Optional`
 
     If present, replaces the stored access type. Omit to leave unchanged.
 
@@ -74933,33 +76842,33 @@ Update User Profile
 
       The user profile represents a company that the platform resells Claude access to.
 
-  - `ExternalID param.Field[string] Optional`
+  - `ExternalID param.Opt[string] Optional`
 
     If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
 
     minLength: 1, maxLength: 255
 
-  - `ExternalUserDetails param.Field[BetaUserProfileExternalUserDetailsParamsResp] Optional`
+  - `ExternalUserDetails BetaUserProfileExternalUserDetailsParams Optional`
 
     Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Accepted under the `user-profiles-2026-09-04` beta header only.
 
-  - `ExternalUserOnboardedAt param.Field[Time] Optional`
+  - `ExternalUserOnboardedAt param.Opt[Time] Optional`
 
     If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
 
     format: date-time
 
-  - `Metadata param.Field[map[string, string]] Optional`
+  - `Metadata map[string, string] Optional`
 
     Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
 
     minLength: 1, maxLength: 255
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -75063,7 +76972,7 @@ Update User Profile
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -75270,7 +77179,7 @@ Create Enrollment URL
 
 - `body BetaUserProfileNewEnrollmentURLParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -75374,7 +77283,7 @@ Create Enrollment URL
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -75457,7 +77366,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
 - `params BetaDreamNewParams`
 
-  - `Inputs param.Field[[]BetaDreamInputUnion]`
+  - `Inputs []BetaDreamInputUnionParam`
 
     The memory store and sessions for the dream to read, as exactly one `memory_store` entry and exactly one `sessions` entry.
 
@@ -75491,7 +77400,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
         The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
-  - `Model param.Field[BetaDreamNewParamsModelUnion]`
+  - `Model BetaDreamNewParamsModelUnion`
 
     The model that runs a dream, given as a model ID or as an object with `id` and `speed`.
 
@@ -75525,7 +77434,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
         - `const BetaDreamModelConfigParamSpeedFast BetaDreamModelConfigParamSpeed = "fast"`
 
-  - `Instructions param.Field[string] Optional`
+  - `Instructions param.Opt[string] Optional`
 
     Guidance that steers how the dream reads the sessions and organizes the output memory store, from 1 to 4,096 characters.
 
@@ -75533,11 +77442,11 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     minLength: 1, maxLength: 4096
 
-  - `OutputBehavior param.Field[BetaOutputBehaviorUnion] Optional`
+  - `OutputBehavior BetaOutputBehaviorUnionParam Optional`
 
     Which memory store a dream writes its result to. Defaults to `create_new` when left out of a create request.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -75641,7 +77550,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -75966,35 +77875,35 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
 - `params BetaDreamListParams`
 
-  - `CreatedAtGt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGt param.Opt[Time] Optional` (query parameter)
 
     Return only dreams created after this time (exclusive), in RFC 3339.
 
     format: date-time
 
-  - `CreatedAtLt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLt param.Opt[Time] Optional` (query parameter)
 
     Return only dreams created before this time (exclusive), in RFC 3339.
 
     format: date-time
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Whether to include archived dreams. Defaults to `false`.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     The maximum number of dreams to return, from 1 to 100. Defaults to 20.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     The cursor for the page to return, taken from `next_page` in a previous response.
 
     Leave it out to get the first page.
 
-  - `Statuses param.Field[[]BetaDreamStatus] Optional` (query parameter)
+  - `Statuses []BetaDreamStatus Optional` (query parameter)
 
     Return only dreams that have one of these statuses.
 
@@ -76028,7 +77937,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
       If `outputs` references a memory store, that memory store keeps what the dream wrote. `usage` can keep changing after the cancel.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -76132,7 +78041,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -76456,7 +78365,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
 - `query BetaDreamGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -76560,7 +78469,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -76883,7 +78792,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
 - `body BetaDreamCancelParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -76987,7 +78896,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -77310,7 +79219,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
 - `body BetaDreamArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -77414,7 +79323,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -77733,13 +79642,13 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 - `params BetaTunnelNewParams`
 
-  - `DisplayName param.Field[string] Optional`
+  - `DisplayName param.Opt[string] Optional`
 
     Optional human-readable name for the tunnel (1-255 characters).
 
     minLength: 1, maxLength: 255
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -77843,7 +79752,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -77937,7 +79846,7 @@ Fetches a tunnel by ID.
 
 - `query BetaTunnelGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -78041,7 +79950,7 @@ Fetches a tunnel by ID.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -78135,21 +80044,21 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 - `params BetaTunnelListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Whether to include archived tunnels in the results. Defaults to false.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor from a previous `list_tunnels` response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -78253,7 +80162,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -78352,7 +80261,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 - `body BetaTunnelArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -78456,7 +80365,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -78554,7 +80463,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 - `body BetaTunnelRevealTokenParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -78658,7 +80567,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -78737,13 +80646,13 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 - `params BetaTunnelRotateTokenParams`
 
-  - `Reason param.Field[string] Optional`
+  - `Reason param.Opt[string] Optional`
 
     Optional free-text reason for the rotation, recorded for audit.
 
     maxLength: 1024
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -78847,7 +80756,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -78928,13 +80837,13 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 - `params BetaTunnelCertificateNewParams`
 
-  - `CACertificatePEM param.Field[string]`
+  - `CACertificatePEM string`
 
     PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
 
     maxLength: 8192
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -79038,7 +80947,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -79145,11 +81054,11 @@ Fetches a tunnel certificate by ID.
 
 - `params BetaTunnelCertificateGetParams`
 
-  - `TunnelID param.Field[string]` (path parameter)
+  - `TunnelID string` (path parameter)
 
     ID of the tunnel (`tnl_...`).
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -79253,7 +81162,7 @@ Fetches a tunnel certificate by ID.
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -79360,21 +81269,21 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 - `params BetaTunnelCertificateListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Whether to include archived certificates in the results. Defaults to false.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
 
     format: int32
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque pagination cursor from a previous `list_tunnel_certificates` response.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -79478,7 +81387,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -79588,11 +81497,11 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 - `params BetaTunnelCertificateArchiveParams`
 
-  - `TunnelID param.Field[string]` (path parameter)
+  - `TunnelID string` (path parameter)
 
     ID of the tunnel (`tnl_...`).
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -79696,7 +81605,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
-  - `WorkspaceID param.Field[string] Optional` (header parameter)
+  - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -79866,19 +81775,19 @@ List API Keys
 
 - `query BetaOrganizationAPIKeyListParams`
 
-  - `AfterID param.Field[string] Optional` (query parameter)
+  - `AfterID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional` (query parameter)
+  - `BeforeID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `CreatedByUserID param.Field[string] Optional` (query parameter)
+  - `CreatedByUserID param.Opt[string] Optional` (query parameter)
 
     Filter by the ID of the User who created the object.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -79886,7 +81795,7 @@ List API Keys
 
     minimum: 1, maximum: 1000
 
-  - `Status param.Field[BetaOrganizationAPIKeyListParamsStatus] Optional` (query parameter)
+  - `Status BetaOrganizationAPIKeyListParamsStatus Optional` (query parameter)
 
     Filter by API key status.
 
@@ -79898,7 +81807,7 @@ List API Keys
 
     - `const BetaOrganizationAPIKeyListParamsStatusInactive BetaOrganizationAPIKeyListParamsStatus = "inactive"`
 
-  - `WorkspaceID param.Field[string] Optional` (query parameter)
+  - `WorkspaceID param.Opt[string] Optional` (query parameter)
 
     Filter by Workspace ID.
 
@@ -80291,13 +82200,13 @@ Update API Key
 
 - `body BetaOrganizationAPIKeyUpdateParams`
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Name of the API key.
 
     minLength: 1, maxLength: 500
 
-  - `Status param.Field[BetaOrganizationAPIKeyUpdateParamsStatus] Optional`
+  - `Status BetaOrganizationAPIKeyUpdateParamsStatus Optional`
 
     Status of the API key.
 
@@ -80501,7 +82410,7 @@ Create an external key config owned by the caller's organization.
 
 - `body BetaOrganizationExternalKeyNewParams`
 
-  - `ProviderConfig param.Field[BetaOrganizationExternalKeyNewParamsProviderConfigUnion]`
+  - `ProviderConfig BetaOrganizationExternalKeyNewParamsProviderConfigUnion`
 
     KMS provider identity and auth coordinates.
 
@@ -80555,13 +82464,13 @@ Create an external key config owned by the caller's organization.
 
         Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-  - `DisplayName param.Field[string] Optional`
+  - `DisplayName param.Opt[string] Optional`
 
     Human-friendly display name.
 
     minLength: 1, maxLength: 255
 
-  - `Geo param.Field[BetaOrganizationExternalKeyNewParamsGeo] Optional`
+  - `Geo BetaOrganizationExternalKeyNewParamsGeo Optional`
 
     Data residency geo. Only `us` is supported.
 
@@ -80737,13 +82646,13 @@ Results are ordered by creation time (newest first). Use the
 
 - `query BetaOrganizationExternalKeyListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
@@ -81088,19 +82997,19 @@ encrypted data requires the original key identity to decrypt.
 
 - `body BetaOrganizationExternalKeyUpdateParams`
 
-  - `DisplayName param.Field[string] Optional`
+  - `DisplayName param.Opt[string] Optional`
 
     Human-friendly display name.
 
     minLength: 1, maxLength: 255
 
-  - `Geo param.Field[BetaOrganizationExternalKeyUpdateParamsGeo] Optional`
+  - `Geo BetaOrganizationExternalKeyUpdateParamsGeo Optional`
 
     Data residency geo. Only `us` is supported.
 
     - `const BetaOrganizationExternalKeyUpdateParamsGeoUs BetaOrganizationExternalKeyUpdateParamsGeo = "us"`
 
-  - `ProviderConfig param.Field[BetaOrganizationExternalKeyUpdateParamsProviderConfigUnion] Optional`
+  - `ProviderConfig BetaOrganizationExternalKeyUpdateParamsProviderConfigUnion Optional`
 
     KMS provider identity and auth coordinates.
 
@@ -81478,23 +83387,23 @@ matched as the JWT's `iss` claim and is not fetched.
 
 - `params BetaOrganizationFederationIssuerNewParams`
 
-  - `IssuerURL param.Field[string]`
+  - `IssuerURL string`
 
     The `iss` claim value to match against.
 
     minLength: 1
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
-  - `CheckJTI param.Field[bool] Optional`
+  - `CheckJTI param.Opt[bool] Optional`
 
     Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-  - `JWKS param.Field[BetaOrganizationFederationIssuerNewParamsJWKSUnion] Optional`
+  - `JWKS BetaOrganizationFederationIssuerNewParamsJWKSUnion Optional`
 
     How signing keys are obtained. Defaults to OIDC discovery.
 
@@ -81544,13 +83453,13 @@ matched as the JWT's `iss` claim and is not fetched.
 
         minItems: 1
 
-  - `MaxJWTLifetimeSeconds param.Field[int64] Optional`
+  - `MaxJWTLifetimeSeconds param.Opt[int64] Optional`
 
     Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
     minimum: 1, maximum: 176400
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -81867,21 +83776,21 @@ Archived issuers are excluded unless `include_archived=true`.
 
 - `params BetaOrganizationFederationIssuerListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Include archived resources. Defaults to false.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -82202,7 +84111,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
 - `query BetaOrganizationFederationIssuerGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -82529,17 +84438,17 @@ session.
 
 - `params BetaOrganizationFederationIssuerUpdateParams`
 
-  - `CheckJTI param.Field[bool] Optional`
+  - `CheckJTI param.Opt[bool] Optional`
 
     Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-  - `IssuerURL param.Field[string] Optional`
+  - `IssuerURL param.Opt[string] Optional`
 
     Replaces the `iss` claim value to match against. For discovery-mode issuers without a `discovery_base`, this is also the URL Anthropic fetches the OIDC discovery document and signing keys from, so changing it repoints the JWKS source. Changing the issuer URL to a well-known shared platform is rejected while any live rule under this issuer would not constrain tenant identity.
 
     minLength: 1
 
-  - `JWKS param.Field[BetaOrganizationFederationIssuerUpdateParamsJWKSUnion] Optional`
+  - `JWKS BetaOrganizationFederationIssuerUpdateParamsJWKSUnion Optional`
 
     Replaces the entire JWKS configuration.
 
@@ -82589,23 +84498,23 @@ session.
 
         minItems: 1
 
-  - `JWKSPollingDisabled param.Field[bool] Optional`
+  - `JWKSPollingDisabled param.Opt[bool] Optional`
 
     Only `false` is accepted, to re-enable polling after the system pauses it. Polling is paused automatically; sending `true` is rejected.
 
-  - `MaxJWTLifetimeSeconds param.Field[int64] Optional`
+  - `MaxJWTLifetimeSeconds param.Opt[int64] Optional`
 
     Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
     minimum: 1, maximum: 176400
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -82930,7 +84839,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
 - `body BetaOrganizationFederationIssuerArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -83262,55 +85171,55 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
 - `params BetaOrganizationFederationRuleNewParams`
 
-  - `IssuerID param.Field[string]`
+  - `IssuerID string`
 
     Tagged ID of the federation issuer.
 
-  - `Match param.Field[BetaFederationRuleMatch]`
+  - `Match BetaFederationRuleMatchParam`
 
     Conditions the verified JWT must satisfy for this rule to apply. At least one of `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or `condition` is required; `audience` alone is not sufficient.
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
-  - `OAuthScope param.Field[string]`
+  - `OAuthScope string`
 
     Space-separated OAuth scopes. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
 
     minLength: 1
 
-  - `Target param.Field[BetaServiceAccountTarget]`
+  - `Target BetaServiceAccountTargetParam`
 
     Identity that tokens minted via this rule act as. Currently always a `service_account` target.
 
-  - `AppliesToAllWorkspaces param.Field[bool] Optional`
+  - `AppliesToAllWorkspaces param.Opt[bool] Optional`
 
     When true, enable this rule for every workspace in the org (including workspaces created later).
 
-  - `Attributes param.Field[map[string, string]] Optional`
+  - `Attributes map[string, string] Optional`
 
     CEL expressions `{name: expr}` extracting named values from claims. Not yet supported; any non-empty value is rejected with 400.
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Optional free-text description.
 
     maxLength: 2000
 
-  - `TokenLifetimeSeconds param.Field[int64] Optional`
+  - `TokenLifetimeSeconds param.Opt[int64] Optional`
 
     Lifetime in seconds for access tokens minted via this rule (60-86400). Defaults to 3600 (1h). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
     minimum: 60, maximum: 86400
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Opt[string] Optional`
 
     Tagged ID of the workspace to enable this rule for. Required unless `applies_to_all_workspaces` is true. Additional workspaces can be added via the `/federation_rules/{federation_rule_id}/workspaces` sub-resource.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -83513,7 +85422,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `Target BetaServiceAccountTarget`
 
-    Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+    What this rule targets. Check `type` before reading the other fields. Tokens minted via a rule whose target `type` is `service_account` act as that service account.
 
     - `Type ServiceAccount`
 
@@ -83639,25 +85548,25 @@ unless `include_archived=true`.
 
 - `params BetaOrganizationFederationRuleListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Include archived resources. Defaults to false.
 
-  - `IssuerID param.Field[string] Optional` (query parameter)
+  - `IssuerID param.Opt[string] Optional` (query parameter)
 
     Filter to rules referencing this federation issuer.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -83860,7 +85769,7 @@ unless `include_archived=true`.
 
   - `Target BetaServiceAccountTarget`
 
-    Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+    What this rule targets. Check `type` before reading the other fields. Tokens minted via a rule whose target `type` is `service_account` act as that service account.
 
     - `Type ServiceAccount`
 
@@ -83984,7 +85893,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
 - `query BetaOrganizationFederationRuleGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -84187,7 +86096,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   - `Target BetaServiceAccountTarget`
 
-    Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+    What this rule targets. Check `type` before reading the other fields. Tokens minted via a rule whose target `type` is `service_account` act as that service account.
 
     - `Type ServiceAccount`
 
@@ -84326,51 +86235,51 @@ Console session.
 
 - `params BetaOrganizationFederationRuleUpdateParams`
 
-  - `AppliesToAllWorkspaces param.Field[bool] Optional`
+  - `AppliesToAllWorkspaces param.Opt[bool] Optional`
 
     When true, enables this rule for every workspace in the org (including workspaces created later). Setting `false` is rejected with 400 if no workspace would remain enabled; a rule with only a legacy `workspace_id` binding continues to mint.
 
-  - `Attributes param.Field[map[string, string]] Optional`
+  - `Attributes map[string, string] Optional`
 
     Replaces the CEL expressions `{name: expr}` extracting named values from claims. Send null to clear them. Not yet supported; any non-empty value is rejected with 400.
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
 
     maxLength: 2000
 
-  - `Match param.Field[BetaFederationRuleMatch] Optional`
+  - `Match BetaFederationRuleMatchParam Optional`
 
     Replaces the entire match object. All populated matcher fields must pass.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Replaces the slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
-  - `OAuthScope param.Field[string] Optional`
+  - `OAuthScope param.Opt[string] Optional`
 
     Replaces the space-separated OAuth scopes granted on minted tokens. OAuth callers may only set `workspace:developer` or `workspace:inference`; other scopes (such as `org:admin`) require a Console session.
 
     minLength: 1
 
-  - `Target param.Field[BetaServiceAccountTarget] Optional`
+  - `Target BetaServiceAccountTargetParam Optional`
 
     Replaces the entire target object. Currently always a `service_account` target.
 
-  - `TokenLifetimeSeconds param.Field[int64] Optional`
+  - `TokenLifetimeSeconds param.Opt[int64] Optional`
 
     Replaces the lifetime in seconds for access tokens minted via this rule (60-86400). Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
     minimum: 60, maximum: 86400
 
-  - `WorkspaceID param.Field[string] Optional`
+  - `WorkspaceID param.Opt[string] Optional`
 
     Replaces the existing single workspace enablement (the previous one is removed). Rejected with 400 if the rule is enabled for more than one workspace; use the `/federation_rules/{federation_rule_id}/workspaces` sub-resource instead.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -84573,7 +86482,7 @@ Console session.
 
   - `Target BetaServiceAccountTarget`
 
-    Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+    What this rule targets. Check `type` before reading the other fields. Tokens minted via a rule whose target `type` is `service_account` act as that service account.
 
     - `Type ServiceAccount`
 
@@ -84704,7 +86613,7 @@ other scopes require a Console session.
 
 - `body BetaOrganizationFederationRuleArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -84907,7 +86816,7 @@ other scopes require a Console session.
 
   - `Target BetaServiceAccountTarget`
 
-    Identity that tokens minted via this rule act as. Currently always a `service_account` target.
+    What this rule targets. Check `type` before reading the other fields. Tokens minted via a rule whose target `type` is `service_account` act as that service account.
 
     - `Type ServiceAccount`
 
@@ -85041,11 +86950,11 @@ other scopes require a Console session.
 
 - `params BetaOrganizationFederationRuleWorkspaceAddParams`
 
-  - `WorkspaceID param.Field[string]`
+  - `WorkspaceID string`
 
     Tagged ID of the workspace to enable this rule for.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -85247,17 +87156,17 @@ rules with `applies_to_all_workspaces` or a legacy single
 
 - `params BetaOrganizationFederationRuleWorkspaceListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -85461,11 +87370,11 @@ Console session.
 
 - `params BetaOrganizationFederationRuleWorkspaceRemoveParams`
 
-  - `FederationRuleID param.Field[string]` (path parameter)
+  - `FederationRuleID string` (path parameter)
 
     ID of the federation rule.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -85642,13 +87551,13 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
 - `body BetaOrganizationInviteNewParams`
 
-  - `Email param.Field[string]`
+  - `Email string`
 
     Email of the User.
 
     format: email
 
-  - `Role param.Field[BetaOrganizationInviteNewParamsRole]`
+  - `Role BetaOrganizationInviteNewParamsRole`
 
     Role for the invited User.
 
@@ -85664,7 +87573,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     - `const BetaOrganizationInviteNewParamsRoleUser BetaOrganizationInviteNewParamsRole = "user"`
 
-  - `RBACGroupIDs param.Field[[]string] Optional`
+  - `RBACGroupIDs []string Optional`
 
     RBAC group IDs to assign to the User when the Invite is accepted. A non-empty array is accepted only for a Claude Enterprise organization with RBAC groups, and requires the key to carry the `write:rbac_groups` scope.
 
@@ -85804,21 +87713,21 @@ List the organization's invites.
 
 - `query BetaOrganizationInviteListParams`
 
-  - `AfterID param.Field[string] Optional` (query parameter)
+  - `AfterID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional` (query parameter)
+  - `BeforeID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `Email param.Field[string] Optional` (query parameter)
+  - `Email param.Opt[string] Optional` (query parameter)
 
     Filter by the email address the Invite was sent to. Matches the same way as the Users list's `email` filter (normalized, case-insensitive).
 
     format: email
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -85826,13 +87735,13 @@ List the organization's invites.
 
     minimum: 1, maximum: 1000
 
-  - `Roles param.Field[[]string] Optional` (query parameter)
+  - `Roles []string Optional` (query parameter)
 
     Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
     Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
-  - `Statuses param.Field[[]string] Optional` (query parameter)
+  - `Statuses []string Optional` (query parameter)
 
     Filter by Invite status. Repeatable; values are OR'ed together. Omit to return `pending`, `accepted`, and `expired` Invites alike.
 
@@ -86189,19 +88098,19 @@ accounts.
 
 - `params BetaOrganizationServiceAccountNewParams`
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
     minLength: 1, maxLength: 255
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Optional free-text description.
 
     maxLength: 2000
 
-  - `OrganizationRole param.Field[BetaOrganizationServiceAccountNewParamsOrganizationRole] Optional`
+  - `OrganizationRole BetaOrganizationServiceAccountNewParamsOrganizationRole Optional`
 
     Org-level role. Defaults to `developer`.
 
@@ -86209,7 +88118,7 @@ accounts.
 
     - `const BetaOrganizationServiceAccountNewParamsOrganizationRoleDeveloper BetaOrganizationServiceAccountNewParamsOrganizationRole = "developer"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -86439,21 +88348,21 @@ archived service accounts.
 
 - `params BetaOrganizationServiceAccountListParams`
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Include archived resources. Defaults to false.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -86686,7 +88595,7 @@ Retrieve a service account by its ID (`svac_...`).
 
 - `query BetaOrganizationServiceAccountGetParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -86923,13 +88832,13 @@ interactive credential (a user OAuth token or a Console session).
 
 - `params BetaOrganizationServiceAccountUpdateParams`
 
-  - `Description param.Field[string] Optional`
+  - `Description param.Opt[string] Optional`
 
     Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
 
     maxLength: 2000
 
-  - `OrganizationRole param.Field[BetaOrganizationServiceAccountUpdateParamsOrganizationRole] Optional`
+  - `OrganizationRole BetaOrganizationServiceAccountUpdateParamsOrganizationRole Optional`
 
     Replaces the org-level role. Omit or send `null` to leave unchanged.
 
@@ -86937,7 +88846,7 @@ interactive credential (a user OAuth token or a Console session).
 
     - `const BetaOrganizationServiceAccountUpdateParamsOrganizationRoleDeveloper BetaOrganizationServiceAccountUpdateParamsOrganizationRole = "developer"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -87174,7 +89083,7 @@ those rules first or change their target to another service account.
 
 - `body BetaOrganizationServiceAccountArchiveParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -87415,15 +89324,15 @@ rejected.
 
 - `params BetaOrganizationServiceAccountWorkspaceAddParams`
 
-  - `WorkspaceID param.Field[string]`
+  - `WorkspaceID string`
 
     Tagged workspace ID to add the service account to.
 
-  - `WorkspaceRole param.Field[BetaNoBillingWorkspaceRole]`
+  - `WorkspaceRole BetaNoBillingWorkspaceRole`
 
     Role to assign to the service account in this workspace.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -87642,17 +89551,17 @@ page to recover.
 
 - `params BetaOrganizationServiceAccountWorkspaceListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -87867,11 +89776,11 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
 - `params BetaOrganizationServiceAccountWorkspaceRemoveParams`
 
-  - `ServiceAccountID param.Field[string]` (path parameter)
+  - `ServiceAccountID string` (path parameter)
 
     ID of the service account.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -88046,21 +89955,21 @@ List the organization's members.
 
 - `query BetaOrganizationUserListParams`
 
-  - `AfterID param.Field[string] Optional` (query parameter)
+  - `AfterID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional` (query parameter)
+  - `BeforeID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `Email param.Field[string] Optional` (query parameter)
+  - `Email param.Opt[string] Optional` (query parameter)
 
     Filter by user email.
 
     format: email
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -88068,7 +89977,7 @@ List the organization's members.
 
     minimum: 1, maximum: 1000
 
-  - `Roles param.Field[[]string] Optional` (query parameter)
+  - `Roles []string Optional` (query parameter)
 
     Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
 
@@ -88291,7 +90200,7 @@ Update a member's organization role.
 
 - `body BetaOrganizationUserUpdateParams`
 
-  - `Role param.Field[BetaOrganizationUserUpdateParamsRole]`
+  - `Role BetaOrganizationUserUpdateParamsRole`
 
     New role for the User.
 
@@ -88481,23 +90390,23 @@ List Workspaces
 
 - `query BetaOrganizationWorkspaceListParams`
 
-  - `AfterID param.Field[string] Optional` (query parameter)
+  - `AfterID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional` (query parameter)
+  - `BeforeID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `IncludeArchived param.Field[bool] Optional` (query parameter)
+  - `IncludeArchived param.Opt[bool] Optional` (query parameter)
 
     Whether to include Workspaces that have been archived in the response
 
-  - `IncludeDefault param.Field[bool] Optional` (query parameter)
+  - `IncludeDefault param.Opt[bool] Optional` (query parameter)
 
     Whether to include the organization's default Workspace in the response
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -88669,23 +90578,23 @@ Create Workspace
 
 - `params BetaOrganizationWorkspaceNewParams`
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Name of the Workspace.
 
     minLength: 1, maxLength: 40
 
-  - `DataResidency param.Field[BetaDataResidencyCreateConfig] Optional`
+  - `DataResidency BetaDataResidencyCreateConfigParam Optional`
 
     Data residency configuration for the workspace. If omitted, defaults to `workspace_geo: "us"`, `allowed_inference_geos: "unrestricted"`, and `default_inference_geo: "global"`.
 
-  - `DisplayColor param.Field[string] Optional`
+  - `DisplayColor param.Opt[string] Optional`
 
     Hex color code representing the Workspace in the Anthropic Console.
 
     maxLength: 7, pattern: ^#[0-9A-Fa-f]{6}$
 
-  - `ExternalKeyID param.Field[string] Optional`
+  - `ExternalKeyID param.Opt[string] Optional`
 
     ID of the customer-managed encryption key (CMEK) configuration to use for this
     Workspace. Setting this field requires CMEK to be enabled for your
@@ -88699,11 +90608,11 @@ Create Workspace
     rotate key material, rotate the underlying key on your cloud KMS; the
     `external_key_id` stays the same.
 
-  - `Tags param.Field[map[string, string]] Optional`
+  - `Tags map[string, string] Optional`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -89127,17 +91036,17 @@ Update Workspace
 
 - `body BetaOrganizationWorkspaceUpdateParams`
 
-  - `DataResidency param.Field[BetaDataResidencyUpdateConfig] Optional`
+  - `DataResidency BetaDataResidencyUpdateConfigParam Optional`
 
     Data residency configuration for the workspace.
 
-  - `DisplayColor param.Field[string] Optional`
+  - `DisplayColor param.Opt[string] Optional`
 
     Hex color code representing the Workspace in the Anthropic Console.
 
     maxLength: 7, pattern: ^#[0-9A-Fa-f]{6}$
 
-  - `ExternalKeyID param.Field[string] Optional`
+  - `ExternalKeyID param.Opt[string] Optional`
 
     ID of the customer-managed encryption key (CMEK) configuration to use for this
     Workspace. Setting this field requires CMEK to be enabled for your
@@ -89151,13 +91060,13 @@ Update Workspace
     rotate key material, rotate the underlying key on your cloud KMS; the
     `external_key_id` stays the same.
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Name of the Workspace.
 
     minLength: 1, maxLength: 40
 
-  - `Tags param.Field[map[string, string]] Optional`
+  - `Tags map[string, string] Optional`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -89495,7 +91404,7 @@ the remaining entries.
 
 - `query BetaOrganizationWorkspaceRateLimitListParams`
 
-  - `GroupType param.Field[BetaOrganizationWorkspaceRateLimitListParamsGroupType] Optional` (query parameter)
+  - `GroupType BetaOrganizationWorkspaceRateLimitListParamsGroupType Optional` (query parameter)
 
     Filter by group type.
 
@@ -89511,11 +91420,11 @@ the remaining entries.
 
     - `const BetaOrganizationWorkspaceRateLimitListParamsGroupTypeWebSearch BetaOrganizationWorkspaceRateLimitListParamsGroupType = "web_search"`
 
-  - `IncludeInherited param.Field[bool] Optional` (query parameter)
+  - `IncludeInherited param.Opt[bool] Optional` (query parameter)
 
     Also list the limiter values the workspace inherits from the organization, including groups with no workspace-level override.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of items to return per page. Ranges from `1` to `1000`.
 
@@ -89523,7 +91432,7 @@ the remaining entries.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
@@ -89764,15 +91673,15 @@ List Workspace Members
 
 - `query BetaOrganizationWorkspaceMemberListParams`
 
-  - `AfterID param.Field[string] Optional` (query parameter)
+  - `AfterID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-  - `BeforeID param.Field[string] Optional` (query parameter)
+  - `BeforeID param.Opt[string] Optional` (query parameter)
 
     ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -89877,11 +91786,11 @@ Create Workspace Member
 
 - `body BetaOrganizationWorkspaceMemberAddParams`
 
-  - `UserID param.Field[string]`
+  - `UserID string`
 
     ID of the User.
 
-  - `WorkspaceRole param.Field[BetaNoBillingWorkspaceRole]`
+  - `WorkspaceRole BetaNoBillingWorkspaceRole`
 
     Role of the new Workspace Member. Cannot be `workspace_billing`.
 
@@ -89978,7 +91887,7 @@ Get Workspace Member
 
 - `query BetaOrganizationWorkspaceMemberGetParams`
 
-  - `WorkspaceID param.Field[string]` (path parameter)
+  - `WorkspaceID string` (path parameter)
 
     ID of the Workspace.
 
@@ -90074,11 +91983,11 @@ Update Workspace Member
 
 - `params BetaOrganizationWorkspaceMemberUpdateParams`
 
-  - `WorkspaceID param.Field[string]` (path parameter)
+  - `WorkspaceID string` (path parameter)
 
     ID of the Workspace.
 
-  - `WorkspaceRole param.Field[BetaWorkspaceRole]`
+  - `WorkspaceRole BetaWorkspaceRole`
 
     New workspace role for the User.
 
@@ -90175,7 +92084,7 @@ Delete Workspace Member
 
 - `body BetaOrganizationWorkspaceMemberRemoveParams`
 
-  - `WorkspaceID param.Field[string]` (path parameter)
+  - `WorkspaceID string` (path parameter)
 
     ID of the Workspace.
 
@@ -90267,17 +92176,17 @@ omitted from the results.
 
 - `params BetaOrganizationWorkspaceServiceAccountListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page.
 
     minimum: 1, maximum: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -90493,15 +92402,15 @@ accounts cannot be added and are rejected.
 
 - `params BetaOrganizationWorkspaceServiceAccountAddParams`
 
-  - `ServiceAccountID param.Field[string]`
+  - `ServiceAccountID string`
 
     Tagged service account ID to add.
 
-  - `WorkspaceRole param.Field[BetaNoBillingWorkspaceRole]`
+  - `WorkspaceRole BetaNoBillingWorkspaceRole`
 
     Role to assign to the service account in this workspace.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -90713,11 +92622,11 @@ account returns 404.
 
 - `params BetaOrganizationWorkspaceServiceAccountGetParams`
 
-  - `WorkspaceID param.Field[string]` (path parameter)
+  - `WorkspaceID string` (path parameter)
 
     ID of the workspace.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -90928,15 +92837,15 @@ rejected.
 
 - `params BetaOrganizationWorkspaceServiceAccountUpdateParams`
 
-  - `WorkspaceID param.Field[string]` (path parameter)
+  - `WorkspaceID string` (path parameter)
 
     ID of the workspace.
 
-  - `WorkspaceRole param.Field[BetaNoBillingWorkspaceRole]`
+  - `WorkspaceRole BetaNoBillingWorkspaceRole`
 
     New role for the service account in this workspace.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -91147,11 +93056,11 @@ membership. Archived workspaces return 400.
 
 - `params BetaOrganizationWorkspaceServiceAccountRemoveParams`
 
-  - `WorkspaceID param.Field[string]` (path parameter)
+  - `WorkspaceID string` (path parameter)
 
     ID of the workspace.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     Optional header to specify the beta version(s) you want to use.
 
@@ -91334,7 +93243,7 @@ the remaining entries.
 
 - `query BetaOrganizationRateLimitListParams`
 
-  - `GroupType param.Field[BetaOrganizationRateLimitListParamsGroupType] Optional` (query parameter)
+  - `GroupType BetaOrganizationRateLimitListParamsGroupType Optional` (query parameter)
 
     Filter by group type.
 
@@ -91350,7 +93259,7 @@ the remaining entries.
 
     - `const BetaOrganizationRateLimitListParamsGroupTypeWebSearch BetaOrganizationRateLimitListParamsGroupType = "web_search"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of items to return per page. Ranges from `1` to `1000`.
 
@@ -91358,11 +93267,11 @@ the remaining entries.
 
     minimum: 1, maximum: 1000
 
-  - `Model param.Field[string] Optional` (query parameter)
+  - `Model param.Opt[string] Optional` (query parameter)
 
     Filter to the single entry containing this model. Accepts full model names and aliases. Returns 404 if the model is not found or has no rate limits for this organization.
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
@@ -91648,7 +93557,7 @@ compliance settings.
 
 - `body BetaOrganizationComplianceSettingUpdateParams`
 
-  - `State param.Field[BetaComplianceSettingsStateParamUnionResp]`
+  - `State BetaComplianceSettingsStateParamUnion`
 
     Desired state. Accepts the string shorthand "enabled" or "disabled" in place of the object form; the response always returns the canonical object form.
 
@@ -91729,7 +93638,7 @@ Get organization-wide activity summaries for a date range.
 Returns one entry per day from `starting_date` (inclusive) to `ending_date`
 (exclusive) in `data`, the same `data` / `next_page` envelope as the other
 analytics list endpoints; the series is currently returned in full, so
-`next_page` is always null (`summaries` is a deprecated alias of `data`).
+`next_page` is always null.
 Data is typically available with a 1-day lag and may be revised by a few
 percent over the following days: when `ending_date` is omitted it
 defaults to the most recent available day + 1, so the last entry covers
@@ -91741,31 +93650,31 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 - `query BetaOrganizationAnalyticsSummaryListParams`
 
-  - `StartingDate param.Field[Time]` (query parameter)
+  - `StartingDate Time` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of the date range (inclusive). Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `EndingDate param.Field[Time] Optional` (query parameter)
+  - `EndingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive). Data is typically available with a 1-day lag, so this can be at most today — which is also the default when omitted, making the last entry cover the most recent available day. Data may be revised by a few percent over the following days. The range may span at most 366 days.
 
     format: date
 
-  - `Filter param.Field[[]string] Optional` (query parameter)
+  - `Filter []string Optional` (query parameter)
 
     Filters as `dimension:value`. Only `rbac_group_id` is supported (e.g. `filter[]=rbac_group_id:{id}`); repeat the param to OR across groups. Scopes the whole day series to members of the matching group(s), re-aggregated from member-level activity — org-wide seat/invite fields and the adoption rates derived from them are null on scoped rows. `rbac_group_id` accepts the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each UTC day (time-of-usage attribution). At most 100 entries.
 
     maxItems: 100
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page (1-1000, default 100). The day series (at most 366 entries) is currently returned in full in a single page, so `limit` does not yet shorten it.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field. `next_page` is currently always null, so there is never a cursor to send.
 
@@ -91830,6 +93739,18 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
   - `WeeklyAdoptionRate float64`
 
     Percentage of assigned seats with activity in the 7-day rolling window (`WAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
+
+  - `ChatCoworkUnifiedDailyActiveUserCount int64 Optional`
+
+    Number of users with activity in Chat and Cowork unified on the requested day. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+
+  - `ChatCoworkUnifiedMonthlyActiveUserCount int64 Optional`
+
+    Number of users with activity in Chat and Cowork unified in the 28-day rolling window (30 days when the request filters by `rbac_group_id`). Omitted from the response on deployments that do not offer Chat and Cowork unified.
+
+  - `ChatCoworkUnifiedWeeklyActiveUserCount int64 Optional`
+
+    Number of users with activity in Chat and Cowork unified in the 7-day rolling window. Omitted from the response on deployments that do not offer Chat and Cowork unified.
 
   - `ChatDailyActiveUserCount int64 Optional`
 
@@ -91942,6 +93863,9 @@ func main() {
       "starting_at": "2019-12-27T18:11:19.117Z",
       "weekly_active_user_count": 0,
       "weekly_adoption_rate": 0,
+      "chat_cowork_unified_daily_active_user_count": 0,
+      "chat_cowork_unified_monthly_active_user_count": 0,
+      "chat_cowork_unified_weekly_active_user_count": 0,
       "chat_daily_active_user_count": 0,
       "chat_monthly_active_user_count": 0,
       "chat_weekly_active_user_count": 0,
@@ -91976,6 +93900,9 @@ func main() {
       "starting_at": "2019-12-27T18:11:19.117Z",
       "weekly_active_user_count": 0,
       "weekly_adoption_rate": 0,
+      "chat_cowork_unified_daily_active_user_count": 0,
+      "chat_cowork_unified_monthly_active_user_count": 0,
+      "chat_cowork_unified_weekly_active_user_count": 0,
       "chat_daily_active_user_count": 0,
       "chat_monthly_active_user_count": 0,
       "chat_weekly_active_user_count": 0,
@@ -92017,25 +93944,25 @@ the `read:analytics` scope.
 
 - `query BetaOrganizationAnalyticsUserListParams`
 
-  - `Date param.Field[Time] Optional` (query parameter)
+  - `Date param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get user activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `EndingDate param.Field[Time] Optional` (query parameter)
+  - `EndingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `Filter param.Field[[]string] Optional` (query parameter)
+  - `Filter []string Optional` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `project_id`, `rbac_group_id`, `user_id`. Value forms: `project_id` takes a tagged project id (`claude_proj_...`) and scopes each member's row to their claude.ai chat activity within that project (it cannot be combined with `group_by[]` or an `rbac_group_id` filter); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `project_id`, `rbac_group_id`, `user_id`. Value forms: `project_id` takes a tagged project id (`claude_proj_...`); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. A `project_id` filter limits each member's row to their claude.ai chat activity in that project and cannot be combined with `group_by[]` or an `rbac_group_id` filter. On these rows, every count in `chat_cowork_unified_metrics.sessions` is 0, because sessions are not measured per project. On any day a member sent a chat message in Chat and Cowork unified, all of that member's project activity for the day is counted in `chat_cowork_unified_metrics.chat` instead of `chat_metrics`.
 
     maxItems: 100
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=rbac_group_id`). Supported on this endpoint: `rbac_group_id`. Rows are already per-member, so the one supported grouping aggregates them per RBAC group instead. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -92043,13 +93970,13 @@ the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsUserListParamsGroupByRBACGroupID BetaOrganizationAnalyticsUserListParamsGroupBy = "rbac_group_id"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order param.Field[BetaOrganizationAnalyticsUserListParamsOrder] Optional` (query parameter)
+  - `Order BetaOrganizationAnalyticsUserListParamsOrder Optional` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -92057,15 +93984,15 @@ the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsUserListParamsOrderDesc BetaOrganizationAnalyticsUserListParamsOrder = "desc"`
 
-  - `OrderBy param.Field[string] Optional` (query parameter)
+  - `OrderBy param.Opt[string] Optional` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `StartingDate param.Field[Time] Optional` (query parameter)
+  - `StartingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -92357,6 +94284,136 @@ the `read:analytics` scope.
 
     Number of web searches performed
 
+  - `ChatCoworkUnifiedMetrics BetaAnalyticsUserActivityChatCoworkUnifiedMetrics Optional`
+
+    Activity recorded while the member had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into `chat` (chat activity) and `sessions` (Cowork activity). Omitted from the response on deployments that do not offer Chat and Cowork unified.
+
+    - `Chat BetaAnalyticsChatCoworkUnifiedChatMetrics`
+
+      Chat activity recorded while members had Chat and Cowork unified turned
+      on.
+
+      - `ConnectorsUsedCount int64`
+
+        Same measure as `chat_metrics.connectors_used_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `DistinctArtifactsCreatedCount int64`
+
+        Same measure as `chat_metrics.distinct_artifacts_created_count`, for activity recorded while members had Chat and Cowork unified turned on. Exact in date-range mode: a creation belongs to exactly one day, so the per-day counts never overlap and their sum over the window is the exact count of distinct creations in it.
+
+      - `DistinctConnectorsUsedCount int64`
+
+        Same measure as `chat_metrics.distinct_connectors_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `DistinctConversationCount int64`
+
+        Same measure as `chat_metrics.distinct_conversation_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `DistinctFilesUploadedCount int64`
+
+        Same measure as `chat_metrics.distinct_files_uploaded_count`, for activity recorded while members had Chat and Cowork unified turned on. It counts uploaded files as well as files Claude created and images returned by Claude's tools, such as screenshots. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `DistinctProjectsCreatedCount int64`
+
+        Same measure as `chat_metrics.distinct_projects_created_count`, for activity recorded while members had Chat and Cowork unified turned on. Exact in date-range mode: a creation belongs to exactly one day, so the per-day counts never overlap and their sum over the window is the exact count of distinct creations in it.
+
+      - `DistinctProjectsUsedCount int64`
+
+        Same measure as `chat_metrics.distinct_projects_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `DistinctSharedArtifactsViewedCount int64`
+
+        Always null: shared-artifact views are not currently measured.
+
+      - `DistinctSkillsUsedCount int64`
+
+        Same measure as `chat_metrics.distinct_skills_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `MessageCount int64`
+
+        Same measure as `chat_metrics.message_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `SharedConversationsViewedCount int64`
+
+        Same measure as `chat_metrics.shared_conversations_viewed_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `ThinkingMessageCount int64`
+
+        Same measure as `chat_metrics.thinking_message_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+    - `Sessions BetaAnalyticsChatCoworkUnifiedSessionsMetrics`
+
+      Cowork session activity recorded while members had Chat and Cowork
+      unified turned on.
+
+      - `ActionCount int64`
+
+        Same measure as `cowork_metrics.action_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `ArtifactsCreatedCount int64`
+
+        Same measure as `cowork_metrics.artifacts_created_count`, for activity recorded while members had Chat and Cowork unified turned on. Exact in date-range mode: a creation belongs to exactly one day, so the per-day counts never overlap and their sum over the window is the exact count of distinct creations in it.
+
+      - `ConnectorsUsedCount int64`
+
+        Same measure as `cowork_metrics.connectors_used_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `DispatchTurnCount int64`
+
+        Same measure as `cowork_metrics.dispatch_turn_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `DistinctConnectorsUsedCount int64`
+
+        Same measure as `cowork_metrics.distinct_connectors_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `DistinctPluginsUsedCount int64`
+
+        Same measure as `cowork_metrics.distinct_plugins_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `DistinctSessionCount int64`
+
+        Same measure as `cowork_metrics.distinct_session_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `DistinctSkillsUsedCount int64`
+
+        Same measure as `cowork_metrics.distinct_skills_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `EditToolCount int64`
+
+        Same measure as `cowork_metrics.edit_tool_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `FileEditCount int64`
+
+        Same measure as `cowork_metrics.file_edit_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `MessageCount int64`
+
+        Same measure as `cowork_metrics.message_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `MultiEditToolCount int64`
+
+        Same measure as `cowork_metrics.multi_edit_tool_count`, for activity recorded while members had Chat and Cowork unified turned on. Claude no longer has a multi-edit tool, so expect 0 when not null; each edit is now a separate Edit tool call, counted in `edit_tool_count` and `file_edit_count`.
+
+      - `NotebookEditToolCount int64`
+
+        Same measure as `cowork_metrics.notebook_edit_tool_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `PluginsUsedCount int64`
+
+        Same measure as `cowork_metrics.plugins_used_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `SessionsWithFileEditsCount int64`
+
+        Same measure as `cowork_metrics.sessions_with_file_edits_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+      - `SkillsUsedCount int64`
+
+        Same measure as `cowork_metrics.skills_used_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
+      - `WriteToolCount int64`
+
+        Same measure as `cowork_metrics.write_tool_count`, for activity recorded while members had Chat and Cowork unified turned on.
+
   - `DistinctUserCount int64 Optional`
 
     Number of distinct active users represented by this row. Only set for grouped rollups (`group_by[]`); null for per-user rows. In date-range mode, recomputed as an exact distinct count of the group's active members over the requested window, never a sum of per-day values.
@@ -92535,6 +94592,41 @@ func main() {
         "skills_used_count": 0
       },
       "web_search_count": 0,
+      "chat_cowork_unified_metrics": {
+        "chat": {
+          "connectors_used_count": 0,
+          "distinct_artifacts_created_count": 0,
+          "distinct_connectors_used_count": 0,
+          "distinct_conversation_count": 0,
+          "distinct_files_uploaded_count": 0,
+          "distinct_projects_created_count": 0,
+          "distinct_projects_used_count": 0,
+          "distinct_shared_artifacts_viewed_count": 0,
+          "distinct_skills_used_count": 0,
+          "message_count": 0,
+          "shared_conversations_viewed_count": 0,
+          "thinking_message_count": 0
+        },
+        "sessions": {
+          "action_count": 0,
+          "artifacts_created_count": 0,
+          "connectors_used_count": 0,
+          "dispatch_turn_count": 0,
+          "distinct_connectors_used_count": 0,
+          "distinct_plugins_used_count": 0,
+          "distinct_session_count": 0,
+          "distinct_skills_used_count": 0,
+          "edit_tool_count": 0,
+          "file_edit_count": 0,
+          "message_count": 0,
+          "multi_edit_tool_count": 0,
+          "notebook_edit_tool_count": 0,
+          "plugins_used_count": 0,
+          "sessions_with_file_edits_count": 0,
+          "skills_used_count": 0,
+          "write_tool_count": 0
+        }
+      },
       "distinct_user_count": 0,
       "last_activity_date": "2019-12-27",
       "rbac_group_id": "rbac_group_id",
@@ -92570,25 +94662,25 @@ plan. Requires an API key with the `read:analytics` scope.
 
 - `query BetaOrganizationAnalyticsAppChatProjectListParams`
 
-  - `Date param.Field[Time] Optional` (query parameter)
+  - `Date param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get project activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `EndingDate param.Field[Time] Optional` (query parameter)
+  - `EndingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `Filter param.Field[[]string] Optional` (query parameter)
+  - `Filter []string Optional` (query parameter)
 
     Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `project_id`, `rbac_group_id`, `user_id`. Value forms: `project_id` takes a tagged project id (`claude_proj_...`); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
     maxItems: 100
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -92598,13 +94690,13 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsAppChatProjectListParamsGroupByUserID BetaOrganizationAnalyticsAppChatProjectListParamsGroupBy = "user_id"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order param.Field[BetaOrganizationAnalyticsAppChatProjectListParamsOrder] Optional` (query parameter)
+  - `Order BetaOrganizationAnalyticsAppChatProjectListParamsOrder Optional` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -92612,15 +94704,15 @@ plan. Requires an API key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsAppChatProjectListParamsOrderDesc BetaOrganizationAnalyticsAppChatProjectListParamsOrder = "desc"`
 
-  - `OrderBy param.Field[string] Optional` (query parameter)
+  - `OrderBy param.Opt[string] Optional` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `StartingDate param.Field[Time] Optional` (query parameter)
+  - `StartingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -92678,7 +94770,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
   - `Product string Optional`
 
-    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
+    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified). These are the canonical Cost & Usage product names; an `office_agent` row's per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`, `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and `chat_cowork_unified` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
   - `RBACGroupID string Optional`
 
@@ -92767,25 +94859,25 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `query BetaOrganizationAnalyticsConnectorListParams`
 
-  - `Date param.Field[Time] Optional` (query parameter)
+  - `Date param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get connector usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `EndingDate param.Field[Time] Optional` (query parameter)
+  - `EndingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `Filter param.Field[[]string] Optional` (query parameter)
+  - `Filter []string Optional` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `connector_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `connector_name` matches case-insensitively, a display name such as 'GitHub MCP' also matches its normalized stored form ('github'), and for rows whose `connector_name` is an opaque connector id the connector's display name (`connector_display_name`) also matches; `product` is one of `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `connector_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `connector_name` matches case-insensitively, a display name such as 'GitHub MCP' also matches its normalized stored form ('github'), and for rows whose `connector_name` is an opaque connector id the connector's display name (`connector_display_name`) also matches; `product` is one of `chat_cowork_unified`, `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
 
     maxItems: 100
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -92797,13 +94889,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsConnectorListParamsGroupByUserID BetaOrganizationAnalyticsConnectorListParamsGroupBy = "user_id"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order param.Field[BetaOrganizationAnalyticsConnectorListParamsOrder] Optional` (query parameter)
+  - `Order BetaOrganizationAnalyticsConnectorListParamsOrder Optional` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -92811,15 +94903,15 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsConnectorListParamsOrderDesc BetaOrganizationAnalyticsConnectorListParamsOrder = "desc"`
 
-  - `OrderBy param.Field[string] Optional` (query parameter)
+  - `OrderBy param.Opt[string] Optional` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `StartingDate param.Field[Time] Optional` (query parameter)
+  - `StartingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -92887,6 +94979,28 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
       Office Agent activity metrics for a single connector on a given day within one Office product.
 
+  - `ChatCoworkUnifiedMetrics BetaAnalyticsConnectorActivityChatCoworkUnifiedMetrics Optional`
+
+    Connector use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into chat conversations and Cowork sessions. A count is null in date-range mode where it cannot be computed. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+
+    - `Chat BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics`
+
+      A connector's use in chat conversations recorded while members had
+      Chat and Cowork unified turned on.
+
+      - `DistinctConversationConnectorUsedCount int64`
+
+        Same measure as `chat_metrics.distinct_conversation_connector_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+    - `Sessions BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics`
+
+      A connector's use in Cowork sessions recorded while members had
+      Chat and Cowork unified turned on.
+
+      - `DistinctSessionConnectorUsedCount int64`
+
+        Same measure as `cowork_metrics.distinct_session_connector_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
   - `ConnectorDisplayName string Optional`
 
     Human-readable display name for rows whose `connector_name` is an opaque connector id rather than a readable name, resolved at request time from the organization's connectors (including connectors that have since been removed). `connector_name` remains the row's stable key for sorting and pagination, and `filter[]=connector_name:{value}` also matches these rows by display name. Display names are not unique, and the same connector's claude.ai usage can appear under a separate row with a readable `connector_name`. Null when `connector_name` is already a readable name, when the id cannot be resolved to one of the organization's connectors, or when display-name resolution is not enabled for this organization.
@@ -92901,7 +95015,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `Product string Optional`
 
-    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
+    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified). These are the canonical Cost & Usage product names; an `office_agent` row's per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`, `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and `chat_cowork_unified` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
   - `RBACGroupID string Optional`
 
@@ -92983,6 +95097,14 @@ func main() {
           "distinct_session_connector_used_count": 0
         }
       },
+      "chat_cowork_unified_metrics": {
+        "chat": {
+          "distinct_conversation_connector_used_count": 0
+        },
+        "sessions": {
+          "distinct_session_connector_used_count": 0
+        }
+      },
       "connector_display_name": "connector_display_name",
       "individual_auth_distinct_user_count": 0,
       "managed_auth_distinct_user_count": 0,
@@ -93025,27 +95147,27 @@ range-rollup mode like `/skills`.
 
 - `query BetaOrganizationAnalyticsPluginListParams`
 
-  - `Date param.Field[Time] Optional` (query parameter)
+  - `Date param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get plugin usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `EndingDate param.Field[Time] Optional` (query parameter)
+  - `EndingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `Filter param.Field[[]string] Optional` (query parameter)
+  - `Filter []string Optional` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `plugin_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `plugin_name` matches case-insensitively; `product` is `claude_code` or `cowork` (the only surfaces with plugin attribution); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `plugin_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `plugin_name` matches case-insensitively; `product` is `chat_cowork_unified`, `claude_code`, or `cowork` (the only surfaces with plugin attribution); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
 
     maxItems: 100
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
-    Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. On this endpoint `product` takes the values `claude_code` or `cowork` only (the surfaces with plugin attribution). Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+    Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. On this endpoint `product` takes the values `chat_cowork_unified`, `claude_code`, or `cowork` only (the surfaces with plugin attribution). Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
     maxItems: 100
 
@@ -93055,13 +95177,13 @@ range-rollup mode like `/skills`.
 
     - `const BetaOrganizationAnalyticsPluginListParamsGroupByUserID BetaOrganizationAnalyticsPluginListParamsGroupBy = "user_id"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order param.Field[BetaOrganizationAnalyticsPluginListParamsOrder] Optional` (query parameter)
+  - `Order BetaOrganizationAnalyticsPluginListParamsOrder Optional` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -93069,15 +95191,15 @@ range-rollup mode like `/skills`.
 
     - `const BetaOrganizationAnalyticsPluginListParamsOrderDesc BetaOrganizationAnalyticsPluginListParamsOrder = "desc"`
 
-  - `OrderBy param.Field[string] Optional` (query parameter)
+  - `OrderBy param.Opt[string] Optional` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `StartingDate param.Field[Time] Optional` (query parameter)
+  - `StartingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -93089,11 +95211,11 @@ range-rollup mode like `/skills`.
 
   Per-plugin install + invocation activity for a given day.
 
-  With `group_by[]=user_id` / `rbac_group_id` / `product` (`cowork` /
-  `claude_code` only on this endpoint) each row is one (plugin, user),
-  (plugin, group), or (plugin, product) cut: the flat `user_id` /
-  `rbac_group_id` / `product` keys carry the cut and the counts are
-  scoped to it.
+  With `group_by[]=user_id` / `rbac_group_id` / `product` (`cowork`,
+  `claude_code` and `chat_cowork_unified` only on this endpoint) each row is
+  one (plugin, user), (plugin, group), or (plugin, product) cut: the flat
+  `user_id` / `rbac_group_id` / `product` keys carry the cut and the counts
+  are scoped to it.
 
   - `ClaudeCodeMetrics BetaAnalyticsPluginClaudeCodeMetrics`
 
@@ -93127,13 +95249,21 @@ range-rollup mode like `/skills`.
 
     Name of the plugin
 
+  - `ChatCoworkUnifiedMetrics BetaAnalyticsPluginActivityChatCoworkUnifiedMetrics Optional`
+
+    Plugin use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on. A count is null in date-range mode where it cannot be computed. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+
+    - `DistinctSessionPluginUsedCount int64`
+
+      Same measure as `cowork_metrics.distinct_session_plugin_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Null on aggregated rows where a distinct count cannot be computed.
+
   - `PluginID string Optional`
 
     Stable plugin identifier when available (e.g. `serena@claude-plugins-official`). Null for third-party Claude Code plugins (redacted at the source) and Cowork slash commands that carry only a hashed id.
 
   - `Product string Optional`
 
-    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
+    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified). These are the canonical Cost & Usage product names; an `office_agent` row's per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`, `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and `chat_cowork_unified` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
   - `RBACGroupID string Optional`
 
@@ -93188,6 +95318,9 @@ func main() {
       "install_count": 0,
       "invocation_count": 0,
       "plugin_name": "plugin_name",
+      "chat_cowork_unified_metrics": {
+        "distinct_session_plugin_used_count": 0
+      },
       "plugin_id": "plugin_id",
       "product": "product",
       "rbac_group_id": "rbac_group_id",
@@ -93220,25 +95353,25 @@ on a Claude Enterprise plan. Requires an API key with the
 
 - `query BetaOrganizationAnalyticsSkillListParams`
 
-  - `Date param.Field[Time] Optional` (query parameter)
+  - `Date param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get skill usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `EndingDate param.Field[Time] Optional` (query parameter)
+  - `EndingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
     format: date
 
-  - `Filter param.Field[[]string] Optional` (query parameter)
+  - `Filter []string Optional` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`, `skill_name`, `user_id`. Value forms: `product` is one of `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `share_status` is one of `organization`, `private`, or `public`; `skill_name` matches case-insensitively; `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`, `skill_name`, `user_id`. Value forms: `product` is one of `chat_cowork_unified`, `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `share_status` is one of `organization`, `private`, or `public`; `skill_name` matches case-insensitively; `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
 
     maxItems: 100
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Dimensions to break results out by (e.g. `group_by[]=user_id`). Supported on this endpoint: `product`, `rbac_group_id`, `user_id`. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via `next_page`; an unsupported dimension returns 400. `rbac_group_id` attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
 
@@ -93250,13 +95383,13 @@ on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsSkillListParamsGroupByUserID BetaOrganizationAnalyticsSkillListParamsGroupBy = "user_id"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of results per page (1-1000, default 100).
 
     minimum: 1, maximum: 1000
 
-  - `Order param.Field[BetaOrganizationAnalyticsSkillListParamsOrder] Optional` (query parameter)
+  - `Order BetaOrganizationAnalyticsSkillListParamsOrder Optional` (query parameter)
 
     Sort direction: `asc` or `desc`. Defaults to `asc` for the endpoint's sort column and to `desc` when `order_by` names a metric (a top-N ranking). Applies to `order_by`, or to the endpoint's default sort field when `order_by` is omitted.
 
@@ -93264,15 +95397,15 @@ on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsSkillListParamsOrderDesc BetaOrganizationAnalyticsSkillListParamsOrder = "desc"`
 
-  - `OrderBy param.Field[string] Optional` (query parameter)
+  - `OrderBy param.Opt[string] Optional` (query parameter)
 
     Sort field. Restricted to the endpoint's sort column plus its rankable metrics (metrics default to descending; a few metrics rank in date-range mode only, per the endpoint's documented orderable set).
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `StartingDate param.Field[Time] Optional` (query parameter)
+  - `StartingDate param.Opt[Time] Optional` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -93344,6 +95477,28 @@ on a Claude Enterprise plan. Requires an API key with the
 
     List-price (rate-card) value of the member requests attributed to this skill, as a decimal string in the minor unit of `currency` (cents for USD), from Claude Code, Cowork, and Office Agent request-level attribution — the value of requests that involved the skill, not the skill's incremental cost. Unlike `estimated_overage_spend` this reflects usage value regardless of how it was funded — seat-covered usage counts — but it is undiscounted and does not tie to billed spend or the organization's spend reporting. claude.ai chat usage carries no request-level attribution and contributes nothing: the field is null on `chat` product rows and on `office_agent` product cuts dated before 2026-06-18 (the Office Agent attribution data-start), and on ungrouped rows it covers the Claude Code + Cowork + Office Agent share only (null when no attributable usage exists). Also null under the same conditions as `estimated_overage_spend` (spend reporting not enabled for this organization, `office_agent` product cuts before the 2026-06-18 data-start). "0" means attributable usage existed but none was attributed to this skill. Addable across days: date-range rollup mode returns the window's sum. On `group_by[]` and `filter[]` shapes both amounts can total below the ungrouped value for the same skill over the same date or range: spend attributed to a member–skill pair with no counted usage on that day is excluded from those cuts.
 
+  - `ChatCoworkUnifiedMetrics BetaAnalyticsSkillActivityChatCoworkUnifiedMetrics Optional`
+
+    Skill use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into chat conversations and Cowork sessions. A count is null in date-range mode where it cannot be computed. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+
+    - `Chat BetaAnalyticsSkillChatCoworkUnifiedChatMetrics`
+
+      A skill's use in chat conversations recorded while members had
+      Chat and Cowork unified turned on.
+
+      - `DistinctConversationSkillUsedCount int64`
+
+        Same measure as `chat_metrics.distinct_conversation_skill_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
+    - `Sessions BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics`
+
+      A skill's use in Cowork sessions recorded while members had Chat
+      and Cowork unified turned on.
+
+      - `DistinctSessionSkillUsedCount int64`
+
+        Same measure as `cowork_metrics.distinct_session_skill_used_count`, for activity recorded while members had Chat and Cowork unified turned on. Approximate (HLL, typical error <2%) in date-range mode. Null on aggregated rows where a distinct count cannot be computed.
+
   - `Currency string Optional`
 
     Currency for this row's monetary fields (`estimated_overage_spend` and `attributed_list_price`), as an uppercase ISO-4217 code. Always "USD" when either amount is populated; null whenever both amounts are null.
@@ -93362,7 +95517,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
   - `Product string Optional`
 
-    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
+    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified). These are the canonical Cost & Usage product names; an `office_agent` row's per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`, `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and `chat_cowork_unified` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
   - `RBACGroupID string Optional`
 
@@ -93447,6 +95602,14 @@ func main() {
       },
       "skill_name": "skill_name",
       "attributed_list_price": "attributed_list_price",
+      "chat_cowork_unified_metrics": {
+        "chat": {
+          "distinct_conversation_skill_used_count": 0
+        },
+        "sessions": {
+          "distinct_session_skill_used_count": 0
+        }
+      },
       "currency": "currency",
       "enable_count": 0,
       "estimated_overage_spend": "estimated_overage_spend",
@@ -93483,21 +95646,21 @@ can be broken out per product, per member, or per RBAC group via
 
 - `query BetaOrganizationAnalyticsArtifactListParams`
 
-  - `Date param.Field[Time]` (query parameter)
+  - `Date Time` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get artifact activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `Filter param.Field[[]string] Optional` (query parameter)
+  - `Filter []string Optional` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `artifact_type`, `is_shared`, `product`, `rbac_group_id`, `user_id`. Value forms: `artifact_type` is a canonical artifact MIME type (e.g. `text/markdown`) or `other`; `is_shared` is `true` or `false`; `product` is `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `artifact_type`, `is_shared`, `product`, `rbac_group_id`, `user_id`. Value forms: `artifact_type` is a canonical artifact MIME type (e.g. `text/markdown`) or `other`; `is_shared` is `true` or `false`; `product` is `chat_cowork_unified`, `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
 
     maxItems: 100
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
-    Dimensions to break results out by: `product`, `user_id` and/or `rbac_group_id`. The ungrouped artifact-type cube is finite and returned in full; grouped queries multiply the cube and paginate via `next_page`. `product` takes the values `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts). `rbac_group_id` attributes a user to every group they held at any point during the requested UTC day, so grouped rows are not an exclusive partition. At most 100 entries.
+    Dimensions to break results out by: `product`, `user_id` and/or `rbac_group_id`. The ungrouped artifact-type cube is finite and returned in full; grouped queries multiply the cube and paginate via `next_page`. `product` takes the values `chat_cowork_unified`, `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts). `rbac_group_id` attributes a user to every group they held at any point during the requested UTC day, so grouped rows are not an exclusive partition. At most 100 entries.
 
     maxItems: 100
 
@@ -93507,13 +95670,13 @@ can be broken out per product, per member, or per RBAC group via
 
     - `const BetaOrganizationAnalyticsArtifactListParamsGroupByUserID BetaOrganizationAnalyticsArtifactListParamsGroupBy = "user_id"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum rows to return (1-1000, default 100). The ungrouped artifact-type cube is finite and returned in full; `limit` is the page size only when `group_by[]` multiplies the cube.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field. Only valid with `group_by[]` — the ungrouped cube is never paginated.
 
@@ -93554,7 +95717,7 @@ can be broken out per product, per member, or per RBAC group via
 
   - `Product string Optional`
 
-    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, or `office_agent` (the canonical Cost & Usage product naming; an `office_agent` row's per-surface breakdown is in its `office_metrics`). On `/plugins` only `cowork` and `claude_code` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, and `cowork` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
+    Product that produced this row's activity: one of `chat`, `claude_code`, `cowork`, `office_agent`, or `chat_cowork_unified` (Chat and Cowork unified). These are the canonical Cost & Usage product names; an `office_agent` row's per-surface breakdown is in its `office_metrics`. On `/plugins` only `cowork`, `claude_code` and `chat_cowork_unified` occur (the only surfaces with plugin attribution); on `/artifacts` only `chat`, `claude_code`, `cowork` and `chat_cowork_unified` occur (the surfaces that create artifacts); `/apps/chat/projects` does not support the product dimension (a `product` entry in `group_by[]` or `filter[]` there is rejected). Present only when the request grouped by `product`.
 
   - `RBACGroupID string Optional`
 
@@ -93636,13 +95799,13 @@ key with the `read:analytics` scope.
 
 - `query BetaOrganizationAnalyticsUsageReportListParams`
 
-  - `StartingAt param.Field[Time]` (query parameter)
+  - `StartingAt Time` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth param.Field[BetaOrganizationAnalyticsUsageReportListParamsBucketWidth] Optional` (query parameter)
+  - `BucketWidth BetaOrganizationAnalyticsUsageReportListParamsBucketWidth Optional` (query parameter)
 
     Time bucket granularity.
 
@@ -93652,7 +95815,7 @@ key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsUsageReportListParamsBucketWidthMinute BetaOrganizationAnalyticsUsageReportListParamsBucketWidth = "1m"`
 
-  - `ClaudeTagCategories param.Field[[]BetaAnalyticsClaudeTagCategory] Optional` (query parameter)
+  - `ClaudeTagCategories []BetaAnalyticsClaudeTagCategory Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -93668,13 +95831,13 @@ key with the `read:analytics` scope.
 
     - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
 
-  - `ClaudeTagUserIDs param.Field[[]string] Optional` (query parameter)
+  - `ClaudeTagUserIDs []string Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `ContextWindows param.Field[[]BetaAnalyticsContextWindow] Optional` (query parameter)
+  - `ContextWindows []BetaAnalyticsContextWindow Optional` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -93684,13 +95847,13 @@ key with the `read:analytics` scope.
 
     - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
 
-  - `EndingAt param.Field[Time] Optional` (query parameter)
+  - `EndingAt param.Opt[Time] Optional` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
@@ -93714,7 +95877,7 @@ key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsUsageReportListParamsGroupBySpeed BetaOrganizationAnalyticsUsageReportListParamsGroupBy = "speed"`
 
-  - `InferenceGeos param.Field[[]BetaAnalyticsInferenceGeoFilter] Optional` (query parameter)
+  - `InferenceGeos []BetaAnalyticsInferenceGeoFilter Optional` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -93726,29 +95889,31 @@ key with the `read:analytics` scope.
 
     - `const BetaAnalyticsInferenceGeoFilterUs BetaAnalyticsInferenceGeoFilter = "us"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of time buckets per page. Defaults and caps vary by `bucket_width` (`1d`: default 7, max 31; `1h`: default 24, max 168; `1m`: default 60, max 256).
 
     minimum: 1
 
-  - `Models param.Field[[]string] Optional` (query parameter)
+  - `Models []string Optional` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `Products param.Field[[]BetaAnalyticsProductFilter] Optional` (query parameter)
+  - `Products []BetaAnalyticsProductFilter Optional` (query parameter)
 
     Product surfaces to include. Defaults to all products. Use `group_by[]=product` to break out per-product values.
 
     maxItems: 100
 
     - `const BetaAnalyticsProductFilterChat BetaAnalyticsProductFilter = "chat"`
+
+    - `const BetaAnalyticsProductFilterChatCoworkUnified BetaAnalyticsProductFilter = "chat_cowork_unified"`
 
     - `const BetaAnalyticsProductFilterClaudeTag BetaAnalyticsProductFilter = "claude-tag"`
 
@@ -93762,19 +95927,19 @@ key with the `read:analytics` scope.
 
     - `const BetaAnalyticsProductFilterOfficeAgent BetaAnalyticsProductFilter = "office_agent"`
 
-  - `RBACGroupIDs param.Field[[]string] Optional` (query parameter)
+  - `RBACGroupIDs []string Optional` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `SlackChannelIDs param.Field[[]string] Optional` (query parameter)
+  - `SlackChannelIDs []string Optional` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `Speeds param.Field[[]string] Optional` (query parameter)
+  - `Speeds []string Optional` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -93784,7 +95949,7 @@ key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsUsageReportListParamsSpeedStandard BetaOrganizationAnalyticsUsageReportListParamsSpeed = "standard"`
 
-  - `UserIDs param.Field[[]string] Optional` (query parameter)
+  - `UserIDs []string Optional` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -93868,7 +96033,7 @@ key with the `read:analytics` scope.
 
     - `Product string`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
 
     - `RBACGroupID string`
 
@@ -93999,13 +96164,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `query BetaOrganizationAnalyticsUserUsageReportListParams`
 
-  - `StartingAt param.Field[Time]` (query parameter)
+  - `StartingAt Time` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth param.Field[BetaOrganizationAnalyticsUserUsageReportListParamsBucketWidth] Optional` (query parameter)
+  - `BucketWidth BetaOrganizationAnalyticsUserUsageReportListParamsBucketWidth Optional` (query parameter)
 
     Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
 
@@ -94015,7 +96180,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserUsageReportListParamsBucketWidthMinute BetaOrganizationAnalyticsUserUsageReportListParamsBucketWidth = "1m"`
 
-  - `ClaudeTagCategories param.Field[[]BetaAnalyticsClaudeTagCategory] Optional` (query parameter)
+  - `ClaudeTagCategories []BetaAnalyticsClaudeTagCategory Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -94031,13 +96196,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
 
-  - `ClaudeTagUserIDs param.Field[[]string] Optional` (query parameter)
+  - `ClaudeTagUserIDs []string Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `ContextWindows param.Field[[]BetaAnalyticsContextWindow] Optional` (query parameter)
+  - `ContextWindows []BetaAnalyticsContextWindow Optional` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -94047,17 +96212,17 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
 
-  - `EndingAt param.Field[Time] Optional` (query parameter)
+  - `EndingAt param.Opt[Time] Optional` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `ExcludeDeletedUsers param.Field[bool] Optional` (query parameter)
+  - `ExcludeDeletedUsers param.Opt[bool] Optional` (query parameter)
 
     If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
 
@@ -94081,7 +96246,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserUsageReportListParamsGroupBySpeed BetaOrganizationAnalyticsUserUsageReportListParamsGroupBy = "speed"`
 
-  - `InferenceGeos param.Field[[]BetaAnalyticsInferenceGeoFilter] Optional` (query parameter)
+  - `InferenceGeos []BetaAnalyticsInferenceGeoFilter Optional` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -94093,19 +96258,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsInferenceGeoFilterUs BetaAnalyticsInferenceGeoFilter = "us"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
 
     minimum: 1, maximum: 1000
 
-  - `Models param.Field[[]string] Optional` (query parameter)
+  - `Models []string Optional` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `Order param.Field[BetaOrganizationAnalyticsUserUsageReportListParamsOrder] Optional` (query parameter)
+  - `Order BetaOrganizationAnalyticsUserUsageReportListParamsOrder Optional` (query parameter)
 
     Sort direction. Defaults to `desc`.
 
@@ -94113,7 +96278,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserUsageReportListParamsOrderDesc BetaOrganizationAnalyticsUserUsageReportListParamsOrder = "desc"`
 
-  - `OrderBy param.Field[BetaOrganizationAnalyticsUserUsageReportListParamsOrderBy] Optional` (query parameter)
+  - `OrderBy BetaOrganizationAnalyticsUserUsageReportListParamsOrderBy Optional` (query parameter)
 
     Metric to rank actors by. Defaults to `total_tokens`.
 
@@ -94125,17 +96290,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserUsageReportListParamsOrderByUncachedInputTokens BetaOrganizationAnalyticsUserUsageReportListParamsOrderBy = "uncached_input_tokens"`
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `Products param.Field[[]BetaAnalyticsProductFilter] Optional` (query parameter)
+  - `Products []BetaAnalyticsProductFilter Optional` (query parameter)
 
     Product surfaces to include. Defaults to all products.
 
     maxItems: 100
 
     - `const BetaAnalyticsProductFilterChat BetaAnalyticsProductFilter = "chat"`
+
+    - `const BetaAnalyticsProductFilterChatCoworkUnified BetaAnalyticsProductFilter = "chat_cowork_unified"`
 
     - `const BetaAnalyticsProductFilterClaudeTag BetaAnalyticsProductFilter = "claude-tag"`
 
@@ -94149,19 +96316,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsProductFilterOfficeAgent BetaAnalyticsProductFilter = "office_agent"`
 
-  - `RBACGroupIDs param.Field[[]string] Optional` (query parameter)
+  - `RBACGroupIDs []string Optional` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `SlackChannelIDs param.Field[[]string] Optional` (query parameter)
+  - `SlackChannelIDs []string Optional` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `Speeds param.Field[[]string] Optional` (query parameter)
+  - `Speeds []string Optional` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -94171,7 +96338,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserUsageReportListParamsSpeedStandard BetaOrganizationAnalyticsUserUsageReportListParamsSpeed = "standard"`
 
-  - `UserIDs param.Field[[]string] Optional` (query parameter)
+  - `UserIDs []string Optional` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -94275,7 +96442,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `Product string`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
 
   - `RBACGroupID string`
 
@@ -94412,13 +96579,13 @@ Requires an API key with the `read:analytics` scope.
 
 - `query BetaOrganizationAnalyticsCostReportListParams`
 
-  - `StartingAt param.Field[Time]` (query parameter)
+  - `StartingAt Time` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth param.Field[BetaOrganizationAnalyticsCostReportListParamsBucketWidth] Optional` (query parameter)
+  - `BucketWidth BetaOrganizationAnalyticsCostReportListParamsBucketWidth Optional` (query parameter)
 
     Time bucket granularity.
 
@@ -94428,7 +96595,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsCostReportListParamsBucketWidthMinute BetaOrganizationAnalyticsCostReportListParamsBucketWidth = "1m"`
 
-  - `ClaudeTagCategories param.Field[[]BetaAnalyticsClaudeTagCategory] Optional` (query parameter)
+  - `ClaudeTagCategories []BetaAnalyticsClaudeTagCategory Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -94444,13 +96611,13 @@ Requires an API key with the `read:analytics` scope.
 
     - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
 
-  - `ClaudeTagUserIDs param.Field[[]string] Optional` (query parameter)
+  - `ClaudeTagUserIDs []string Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `ContextWindows param.Field[[]BetaAnalyticsContextWindow] Optional` (query parameter)
+  - `ContextWindows []BetaAnalyticsContextWindow Optional` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -94460,13 +96627,13 @@ Requires an API key with the `read:analytics` scope.
 
     - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
 
-  - `EndingAt param.Field[Time] Optional` (query parameter)
+  - `EndingAt param.Opt[Time] Optional` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
@@ -94494,7 +96661,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsCostReportListParamsGroupByTokenType BetaOrganizationAnalyticsCostReportListParamsGroupBy = "token_type"`
 
-  - `InferenceGeos param.Field[[]BetaAnalyticsInferenceGeoFilter] Optional` (query parameter)
+  - `InferenceGeos []BetaAnalyticsInferenceGeoFilter Optional` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -94506,29 +96673,31 @@ Requires an API key with the `read:analytics` scope.
 
     - `const BetaAnalyticsInferenceGeoFilterUs BetaAnalyticsInferenceGeoFilter = "us"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of time buckets per page. Defaults and caps vary by `bucket_width` (`1d`: default 7, max 31; `1h`: default 24, max 168; `1m`: default 60, max 256).
 
     minimum: 1
 
-  - `Models param.Field[[]string] Optional` (query parameter)
+  - `Models []string Optional` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `Products param.Field[[]BetaAnalyticsProductFilter] Optional` (query parameter)
+  - `Products []BetaAnalyticsProductFilter Optional` (query parameter)
 
     Product surfaces to include. Defaults to all products. Use `group_by[]=product` to break out per-product values.
 
     maxItems: 100
 
     - `const BetaAnalyticsProductFilterChat BetaAnalyticsProductFilter = "chat"`
+
+    - `const BetaAnalyticsProductFilterChatCoworkUnified BetaAnalyticsProductFilter = "chat_cowork_unified"`
 
     - `const BetaAnalyticsProductFilterClaudeTag BetaAnalyticsProductFilter = "claude-tag"`
 
@@ -94542,19 +96711,19 @@ Requires an API key with the `read:analytics` scope.
 
     - `const BetaAnalyticsProductFilterOfficeAgent BetaAnalyticsProductFilter = "office_agent"`
 
-  - `RBACGroupIDs param.Field[[]string] Optional` (query parameter)
+  - `RBACGroupIDs []string Optional` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `SlackChannelIDs param.Field[[]string] Optional` (query parameter)
+  - `SlackChannelIDs []string Optional` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `Speeds param.Field[[]string] Optional` (query parameter)
+  - `Speeds []string Optional` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -94564,7 +96733,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `const BetaOrganizationAnalyticsCostReportListParamsSpeedStandard BetaOrganizationAnalyticsCostReportListParamsSpeed = "standard"`
 
-  - `UserIDs param.Field[[]string] Optional` (query parameter)
+  - `UserIDs []string Optional` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -94648,7 +96817,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `Product string`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
 
     - `RBACGroupID string`
 
@@ -94776,13 +96945,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `query BetaOrganizationAnalyticsUserCostReportListParams`
 
-  - `StartingAt param.Field[Time]` (query parameter)
+  - `StartingAt Time` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
     format: date-time
 
-  - `BucketWidth param.Field[BetaOrganizationAnalyticsUserCostReportListParamsBucketWidth] Optional` (query parameter)
+  - `BucketWidth BetaOrganizationAnalyticsUserCostReportListParamsBucketWidth Optional` (query parameter)
 
     Time-bucket granularity. When set, each row's `starting_at` and `ending_at` are populated and one actor may span several rows (one per time bucket with usage). The time bucket counts toward `limit`, so one page can return multiple rows for the same actor. `ending_at` is required when `bucket_width` is set, and with `bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the full `[starting_at, ending_at)` range.
 
@@ -94792,7 +96961,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserCostReportListParamsBucketWidthMinute BetaOrganizationAnalyticsUserCostReportListParamsBucketWidth = "1m"`
 
-  - `ClaudeTagCategories param.Field[[]BetaAnalyticsClaudeTagCategory] Optional` (query parameter)
+  - `ClaudeTagCategories []BetaAnalyticsClaudeTagCategory Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
 
@@ -94808,13 +96977,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
 
-  - `ClaudeTagUserIDs param.Field[[]string] Optional` (query parameter)
+  - `ClaudeTagUserIDs []string Optional` (query parameter)
 
     Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
 
     maxItems: 100
 
-  - `ContextWindows param.Field[[]BetaAnalyticsContextWindow] Optional` (query parameter)
+  - `ContextWindows []BetaAnalyticsContextWindow Optional` (query parameter)
 
     Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
 
@@ -94824,17 +96993,17 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
 
-  - `EndingAt param.Field[Time] Optional` (query parameter)
+  - `EndingAt param.Opt[Time] Optional` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
     format: date-time
 
-  - `ExcludeDeletedUsers param.Field[bool] Optional` (query parameter)
+  - `ExcludeDeletedUsers param.Opt[bool] Optional` (query parameter)
 
     If true, omit rows for users who are deleted (`deleted: true`). A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
 
-  - `GroupBy param.Field[[]string] Optional` (query parameter)
+  - `GroupBy []string Optional` (query parameter)
 
     Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/cost_report` endpoint. The `product`, `model`, `context_window`, `inference_geo`, and `speed` dimensions — and the time bucket, when `bucket_width` is set — count toward `limit`. `cost_type` and `token_type` do not: `cost_type` returns one row per cost component (tokens, web search, code execution); `token_type` returns one row per token type, each with `cost_type: "tokens"`; combining both returns the per-token-type rows plus the web-search and code-execution rows. A page can therefore contain more rows than `limit` when `cost_type` or `token_type` is requested.
 
@@ -94862,7 +97031,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserCostReportListParamsGroupByTokenType BetaOrganizationAnalyticsUserCostReportListParamsGroupBy = "token_type"`
 
-  - `InferenceGeos param.Field[[]BetaAnalyticsInferenceGeoFilter] Optional` (query parameter)
+  - `InferenceGeos []BetaAnalyticsInferenceGeoFilter Optional` (query parameter)
 
     Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
 
@@ -94874,19 +97043,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsInferenceGeoFilterUs BetaAnalyticsInferenceGeoFilter = "us"`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of rows per page (1-1000, default 20). One row per actor unless `group_by[]` or `bucket_width` splits an actor across rows; `cost_type`/`token_type` fan-out rows (cost endpoint only) are the exception — they do not count toward this limit, so `data` can exceed it.
 
     minimum: 1, maximum: 1000
 
-  - `Models param.Field[[]string] Optional` (query parameter)
+  - `Models []string Optional` (query parameter)
 
     Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
 
     maxItems: 100
 
-  - `Order param.Field[BetaOrganizationAnalyticsUserCostReportListParamsOrder] Optional` (query parameter)
+  - `Order BetaOrganizationAnalyticsUserCostReportListParamsOrder Optional` (query parameter)
 
     Sort direction. Defaults to `desc`.
 
@@ -94894,7 +97063,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserCostReportListParamsOrderDesc BetaOrganizationAnalyticsUserCostReportListParamsOrder = "desc"`
 
-  - `OrderBy param.Field[BetaOrganizationAnalyticsUserCostReportListParamsOrderBy] Optional` (query parameter)
+  - `OrderBy BetaOrganizationAnalyticsUserCostReportListParamsOrderBy Optional` (query parameter)
 
     Metric to rank actors by. Defaults to `amount`.
 
@@ -94902,17 +97071,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserCostReportListParamsOrderByListAmount BetaOrganizationAnalyticsUserCostReportListParamsOrderBy = "list_amount"`
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `Products param.Field[[]BetaAnalyticsProductFilter] Optional` (query parameter)
+  - `Products []BetaAnalyticsProductFilter Optional` (query parameter)
 
     Product surfaces to include. Defaults to all products.
 
     maxItems: 100
 
     - `const BetaAnalyticsProductFilterChat BetaAnalyticsProductFilter = "chat"`
+
+    - `const BetaAnalyticsProductFilterChatCoworkUnified BetaAnalyticsProductFilter = "chat_cowork_unified"`
 
     - `const BetaAnalyticsProductFilterClaudeTag BetaAnalyticsProductFilter = "claude-tag"`
 
@@ -94926,19 +97097,19 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaAnalyticsProductFilterOfficeAgent BetaAnalyticsProductFilter = "office_agent"`
 
-  - `RBACGroupIDs param.Field[[]string] Optional` (query parameter)
+  - `RBACGroupIDs []string Optional` (query parameter)
 
     Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
     maxItems: 100
 
-  - `SlackChannelIDs param.Field[[]string] Optional` (query parameter)
+  - `SlackChannelIDs []string Optional` (query parameter)
 
     Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
 
     maxItems: 100
 
-  - `Speeds param.Field[[]string] Optional` (query parameter)
+  - `Speeds []string Optional` (query parameter)
 
     Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
 
@@ -94948,7 +97119,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     - `const BetaOrganizationAnalyticsUserCostReportListParamsSpeedStandard BetaOrganizationAnalyticsUserCostReportListParamsSpeed = "standard"`
 
-  - `UserIDs param.Field[[]string] Optional` (query parameter)
+  - `UserIDs []string Optional` (query parameter)
 
     Filter to specific users by tagged user ID.
 
@@ -95052,7 +97223,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `Product string`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, and `claude-tag`. `claude-tag` is Claude Tag, the Claude product in Slack. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
 
   - `RBACGroupID string`
 
@@ -95166,7 +97337,7 @@ func main() {
 
 ### Set Spend Limit
 
-`client.Beta.Organization.SpendLimits.Set(ctx, body) (*BetaSpendLimit, error)`
+`client.Beta.Organization.SpendLimits.Set(ctx, params) (*BetaSpendLimit, error)`
 
 **POST** `/v1/organizations/spend_limits`
 
@@ -95182,13 +97353,13 @@ Anthropic account team.
 
 #### Parameters
 
-- `body BetaOrganizationSpendLimitSetParams`
+- `params BetaOrganizationSpendLimitSetParams`
 
-  - `Amount param.Field[string]`
+  - `Amount param.Opt[string]`
 
     Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
 
-  - `Scope param.Field[BetaOrganizationSpendLimitSetParamsScopeUnion]`
+  - `Scope BetaOrganizationSpendLimitSetParamsScopeUnion`
 
     What the limit applies to. Claude Enterprise organizations set `user` limits. Claude Console organizations set `organization` and `workspace` limits. Any other combination returns 400. Setting `organization` and `workspace` limits through the API is in an early access preview. To request access, contact your Anthropic account team.
 
@@ -95226,7 +97397,111 @@ Anthropic account team.
 
         Tagged ID of the workspace the spend limit applies to.
 
-  - `Period param.Field[BetaSpendLimitPeriod] Optional`
+  - `Period BetaSpendLimitPeriod Optional`
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
 #### Returns
 
@@ -95637,27 +97912,28 @@ A Claude Console organization's limits come in an order that is stable across
 pages. A Claude Enterprise organization's are grouped by scope type,
 in the order `organization`, `seat_tier`, `rbac_group`,
 `organization_service`, `user`; within a type they come in a fixed order that
-is not creation order.
+is not creation order. Listing Claude Console limits is in an early access
+preview. To request access, contact your Anthropic account team.
 
 #### Parameters
 
 - `params BetaOrganizationSpendLimitListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of limits per page. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `ScopeType param.Field[[]string] Optional` (query parameter)
+  - `ScopeType []string Optional` (query parameter)
 
     Return only limits with these scope types. A Claude Console organization has `organization` and `workspace` limits; a Claude Enterprise organization has `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user` limits. Omit for all.
 
-    maxItems: 6
+    maxItems: 100
 
     - `const BetaOrganizationSpendLimitListParamsScopeTypeOrganization BetaOrganizationSpendLimitListParamsScopeType = "organization"`
 
@@ -95671,7 +97947,7 @@ is not creation order.
 
     - `const BetaOrganizationSpendLimitListParamsScopeTypeWorkspace BetaOrganizationSpendLimitListParamsScopeType = "workspace"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in this header.
 
@@ -95948,23 +98224,25 @@ List each member's effective spend limit and period-to-date spend.
 
 Returns one row per (member, period) the member resolves a spend limit
 for, with the `source` scope the spend limit was inherited from.
-Paginates by member, so a member's periods never split across pages.
+Paginates by member, so a member's periods never split across pages. Listing
+Claude Console limits is in an early access preview. To request access,
+contact your Anthropic account team.
 
 #### Parameters
 
 - `query BetaOrganizationSpendLimitEffectiveListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Maximum number of members per page. A member's period rows never split across pages, so a page may carry more rows than this. Defaults to `20`.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `Period param.Field[[]string] Optional` (query parameter)
+  - `Period []string Optional` (query parameter)
 
     Restrict the report to these limit periods. Omit to return one row per period each member resolves a spend limit for.
 
@@ -95976,7 +98254,7 @@ Paginates by member, so a member's periods never split across pages.
 
     - `const BetaOrganizationSpendLimitEffectiveListParamsPeriodWeekly BetaOrganizationSpendLimitEffectiveListParamsPeriod = "weekly"`
 
-  - `UserIDs param.Field[[]string] Optional` (query parameter)
+  - `UserIDs []string Optional` (query parameter)
 
     Restrict the report to these members, by tagged user ID (`user_...`). At most 100 entries.
 
@@ -96206,19 +98484,19 @@ Requests whose requester is no longer a member are excluded.
 
 - `query BetaOrganizationSpendLimitIncreaseRequestListParams`
 
-  - `ActorIDs param.Field[[]string] Optional` (query parameter)
+  - `ActorIDs []string Optional` (query parameter)
 
     Filter by requester, as `user_...` tagged IDs.
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Opaque cursor from a previous response's `next_page`.
 
-  - `Status param.Field[[]BetaSpendLimitIncreaseRequestStatus] Optional` (query parameter)
+  - `Status []BetaSpendLimitIncreaseRequestStatus Optional` (query parameter)
 
     Filter by status. Omit to return all.
 
@@ -96819,13 +99097,13 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `body BetaOrganizationSpendLimitIncreaseRequestApproveParams`
 
-  - `Amount param.Field[string]`
+  - `Amount string`
 
     New per-user spend limit as a non-negative integer decimal string (minor units).
 
-  - `Period param.Field[BetaSpendLimitPeriod] Optional`
+  - `Period BetaSpendLimitPeriod Optional`
 
-  - `SuppressNotification param.Field[bool] Optional`
+  - `SuppressNotification param.Opt[bool] Optional`
 
 #### Returns
 
@@ -97202,7 +99480,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
 - `body BetaOrganizationSpendLimitIncreaseRequestDenyParams`
 
-  - `SuppressNotification param.Field[bool] Optional`
+  - `SuppressNotification param.Opt[bool] Optional`
 
 #### Returns
 
@@ -97498,7 +99776,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `body BetaOrganizationRBACGroupNewParams`
 
-  - `Name param.Field[string]`
+  - `Name string`
 
     Name of the RBAC Group. Not uniqueness-enforced.
 
@@ -97608,7 +99886,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `query BetaOrganizationRBACGroupListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -97616,7 +99894,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -97836,7 +100114,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `body BetaOrganizationRBACGroupUpdateParams`
 
-  - `Name param.Field[string] Optional`
+  - `Name param.Opt[string] Optional`
 
     Name of the RBAC Group. Not uniqueness-enforced.
 
@@ -98020,7 +100298,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `query BetaOrganizationRBACGroupMemberListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -98028,7 +100306,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -98128,7 +100406,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `body BetaOrganizationRBACGroupMemberAddParams`
 
-  - `UserID param.Field[string]`
+  - `UserID string`
 
     ID of the User.
 
@@ -98224,7 +100502,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 - `body BetaOrganizationRBACGroupMemberRemoveParams`
 
-  - `RBACGroupID param.Field[string]` (path parameter)
+  - `RBACGroupID string` (path parameter)
 
     ID of the RBAC Group.
 
@@ -98304,7 +100582,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 - `query BetaOrganizationRBACRoleListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -98312,7 +100590,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -98510,7 +100788,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 - `query BetaOrganizationRBACRolePermissionListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -98518,7 +100796,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     minimum: 1, maximum: 1000
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
@@ -98727,21 +101005,21 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginNewParams`
 
-  - `Files param.Field[[]Reader]`
+  - `Files []Reader`
 
     The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
 
-  - `MarketplaceID param.Field[string] Optional`
+  - `MarketplaceID param.Opt[string] Optional`
 
     ID of the organization-owned plugin marketplace to create the Plugin in (prefixed `marketplace_`). It must be a `manual` marketplace, one whose Plugins are uploaded rather than synchronized from a repository. When omitted, the Plugin is created in the organization's library marketplace, an organization-owned `manual` marketplace created on first use.
 
-  - `ReleaseNotes param.Field[string] Optional`
+  - `ReleaseNotes param.Opt[string] Optional`
 
     Release notes stored with the version and shown in its version history in claude.ai; up to 5,000 characters.
 
     maxLength: 5000
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -99134,11 +101412,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginGetParams`
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -99551,11 +101829,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginUpdateParams`
 
-  - `ServedVersionID param.Field[string]`
+  - `ServedVersionID string`
 
     Serve this version of the Plugin (prefixed `pluginver_`) and pin the served version to it; `latest` is not accepted.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -99952,31 +102230,31 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginListParams`
 
-  - `CreatedAtGt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGt param.Opt[Time] Optional` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `CreatedAtGte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtGte param.Opt[Time] Optional` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `CreatedAtLt param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLt param.Opt[Time] Optional` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `CreatedAtLte param.Field[Time] Optional` (query parameter)
+  - `CreatedAtLte param.Opt[Time] Optional` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -99984,15 +102262,15 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     minimum: 1, maximum: 100
 
-  - `MarketplaceID param.Field[string] Optional` (query parameter)
+  - `MarketplaceID param.Opt[string] Optional` (query parameter)
 
     Only Plugins in this plugin marketplace (prefixed `marketplace_`).
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `OwnerType param.Field[BetaOrganizationPluginListParamsOwnerType] Optional` (query parameter)
+  - `OwnerType BetaOrganizationPluginListParamsOwnerType Optional` (query parameter)
 
     `organization` for Plugins in the organization's plugin marketplaces, `user` for Plugins in members' personal plugin marketplaces.
 
@@ -100000,17 +102278,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const BetaOrganizationPluginListParamsOwnerTypeUser BetaOrganizationPluginListParamsOwnerType = "user"`
 
-  - `OwnerUserID param.Field[string] Optional` (query parameter)
+  - `OwnerUserID param.Opt[string] Optional` (query parameter)
 
     Only Plugins in this member's personal plugin marketplaces (prefixed `user_`); a removed member's ID is accepted.
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -100415,7 +102693,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `body BetaOrganizationPluginDeleteParams`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -100612,17 +102890,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginVersionNewParams`
 
-  - `Files param.Field[[]Reader]`
+  - `Files []Reader`
 
     The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
 
-  - `ReleaseNotes param.Field[string] Optional`
+  - `ReleaseNotes param.Opt[string] Optional`
 
     Release notes stored with the version and shown in its version history in claude.ai; up to 5,000 characters.
 
     maxLength: 5000
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -100955,7 +103233,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginVersionListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -100963,17 +103241,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     minimum: 1, maximum: 1000
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -101304,15 +103582,15 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginVersionGetParams`
 
-  - `PluginID param.Field[string]` (path parameter)
+  - `PluginID string` (path parameter)
 
     ID of the Plugin (prefixed `plugin_`).
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -101656,15 +103934,15 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginVersionDownloadParams`
 
-  - `PluginID param.Field[string]` (path parameter)
+  - `PluginID string` (path parameter)
 
     ID of the Plugin (prefixed `plugin_`).
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -101830,7 +104108,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginInstallationSettingListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -101838,17 +104116,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     minimum: 1, maximum: 100
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `TargetType param.Field[BetaOrganizationPluginInstallationSettingListParamsTargetType] Optional` (query parameter)
+  - `TargetType BetaOrganizationPluginInstallationSettingListParamsTargetType Optional` (query parameter)
 
     Only settings for this kind of target: `organization` (the organization-wide setting) or `rbac_group` (an RBAC Group's).
 
@@ -101856,7 +104134,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const BetaOrganizationPluginInstallationSettingListParamsTargetTypeRBACGroup BetaOrganizationPluginInstallationSettingListParamsTargetType = "rbac_group"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -102119,11 +104397,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginInstallationSettingSetParams`
 
-  - `PluginID param.Field[string]` (path parameter)
+  - `PluginID string` (path parameter)
 
     ID of the Plugin (prefixed `plugin_`).
 
-  - `InstallationPreference param.Field[BetaOrganizationPluginInstallationSettingSetParamsInstallationPreference]`
+  - `InstallationPreference BetaOrganizationPluginInstallationSettingSetParamsInstallationPreference`
 
     The installation setting the target is to hold for this Plugin: one of `required`, `auto_install`, `available`, `not_available`.
 
@@ -102135,7 +104413,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const BetaOrganizationPluginInstallationSettingSetParamsInstallationPreferenceRequired BetaOrganizationPluginInstallationSettingSetParamsInstallationPreference = "required"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -102400,11 +104678,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginInstallationSettingRemoveParams`
 
-  - `PluginID param.Field[string]` (path parameter)
+  - `PluginID string` (path parameter)
 
     ID of the Plugin (prefixed `plugin_`).
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -102633,7 +104911,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginShareListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -102641,17 +104919,17 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     minimum: 1, maximum: 100
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `TargetType param.Field[BetaOrganizationPluginShareListParamsTargetType] Optional` (query parameter)
+  - `TargetType BetaOrganizationPluginShareListParamsTargetType Optional` (query parameter)
 
     Only shares with this kind of target: `organization` (every member), `rbac_group` (one RBAC Group), or `organization_member` (one member).
 
@@ -102661,7 +104939,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const BetaOrganizationPluginShareListParamsTargetTypeRBACGroup BetaOrganizationPluginShareListParamsTargetType = "rbac_group"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -102896,7 +105174,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginMarketplaceListParams`
 
-  - `Limit param.Field[int64] Optional` (query parameter)
+  - `Limit param.Opt[int64] Optional` (query parameter)
 
     Number of items to return per page.
 
@@ -102904,11 +105182,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     minimum: 1, maximum: 1000
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `OwnerType param.Field[BetaOrganizationPluginMarketplaceListParamsOwnerType] Optional` (query parameter)
+  - `OwnerType BetaOrganizationPluginMarketplaceListParamsOwnerType Optional` (query parameter)
 
     `organization` for the organization's plugin marketplaces, `user` for members' personal plugin marketplaces.
 
@@ -102916,13 +105194,13 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const BetaOrganizationPluginMarketplaceListParamsOwnerTypeUser BetaOrganizationPluginMarketplaceListParamsOwnerType = "user"`
 
-  - `Page param.Field[string] Optional` (query parameter)
+  - `Page param.Opt[string] Optional` (query parameter)
 
     Optionally set to the `next_page` token from the previous response.
 
     maxLength: 2048
 
-  - `Source param.Field[BetaOrganizationPluginMarketplaceListParamsSource] Optional` (query parameter)
+  - `Source BetaOrganizationPluginMarketplaceListParamsSource Optional` (query parameter)
 
     Only plugin marketplaces with this `source`: `manual` for those whose Plugins are uploaded; `github`, `gitlab` or `public_git` for those synchronized from a Git repository. `directory` (Anthropic's catalog) is never listed here.
 
@@ -102936,7 +105214,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const BetaOrganizationPluginMarketplaceListParamsSourcePublicGit BetaOrganizationPluginMarketplaceListParamsSource = "public_git"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -103209,11 +105487,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginMarketplaceGetParams`
 
-  - `OrganizationID param.Field[string] Optional` (query parameter)
+  - `OrganizationID param.Opt[string] Optional` (query parameter)
 
     For a `read:org_audit` or `read:compliance_org_data` key created for all of a parent organization's linked organizations: a child organization of that parent to read instead of the organization the key was created in, given as the organization's UUID or its `org_`-prefixed ID. A value that is neither returns a 400; an organization that is not a child of the key's parent, or where the Plugins API is not available, returns a 404. Any other key may pass only its own organization's ID here; another organization returns a 404.
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -103490,7 +105768,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginMarketplaceUpdateParams`
 
-  - `DefaultInstallationPreference param.Field[BetaOrganizationPluginMarketplaceUpdateParamsDefaultInstallationPreference]`
+  - `DefaultInstallationPreference BetaOrganizationPluginMarketplaceUpdateParamsDefaultInstallationPreference`
 
     The organization-wide installation setting every Plugin in the marketplace without one of its own gets: one of `required`, `auto_install`, `available`, `not_available`. Once set it can be changed but not removed.
 
@@ -103502,7 +105780,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const BetaOrganizationPluginMarketplaceUpdateParamsDefaultInstallationPreferenceRequired BetaOrganizationPluginMarketplaceUpdateParamsDefaultInstallationPreference = "required"`
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -103787,19 +106065,19 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginMarketplaceValidateRepositoryParams`
 
-  - `RepositoryURL param.Field[string]`
+  - `RepositoryURL string`
 
     The `https://` URL of a public repository on github.com that holds the marketplace. Any other host, a URL with credentials in it, or one that does not name a repository is a 400.
 
     minLength: 1
 
-  - `Ref param.Field[string] Optional`
+  - `Ref param.Opt[string] Optional`
 
     The branch to validate the tip of, or the full 40-character SHA of the commit to validate. When omitted, the branch a synchronization would read (usually the repository's default branch); if that is not the default branch, the report's `ref` says which branch was read. An empty string, or a value that is neither a branch name nor a 40-character SHA, is a 400.
 
     minLength: 1
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 
@@ -104066,13 +106344,13 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `params BetaOrganizationPluginMarketplaceValidateArchiveParams`
 
-  - `Archive param.Field[Reader]`
+  - `Archive Reader`
 
     A .zip of the marketplace directory (its contents at the root, or wrapped in one folder as a Git host's download produces), sent as a file part with a filename; DEFLATE- or STORE-compressed, at most 32 MB. A part sent without a filename, a second archive part, or any other form field is a 400; a larger archive is a 413.
 
     format: binary
 
-  - `Betas param.Field[[]AnthropicBeta] Optional` (header parameter)
+  - `Betas []AnthropicBeta Optional` (header parameter)
 
     This endpoint is in beta: requests must send `ce-plugins-2026-09-01` in this header.
 

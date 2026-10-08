@@ -345,6 +345,8 @@ When Claude invokes a subagent, it can also pass a `model` parameter for that sp
 3. The [`CLAUDE_CODE_SUBAGENT_MODEL`](model-config.md#environment-variables) environment variable, when you set it to a model alias or model ID
 4. The main conversation's model
 
+If an installed [mod](plugins/mods/overview.md) sets a model in its [`agent.spawn`](plugins/mods/reference.md#subagents) hook, Claude Code uses that model in place of the per-invocation parameter.
+
 In two cases, a family alias such as `opus` in the per-invocation parameter or the frontmatter resolves to the main conversation's model instead of the [version the alias points to](model-config.md#model-aliases):
 
 * **The main conversation's model belongs to that family**: the subagent runs on the main conversation's exact model, including any `[1m]` suffix, so it gets the same [extended context](model-config.md#extended-context) window as the main conversation.
@@ -1056,7 +1058,7 @@ Resumed subagents retain their full conversation history, including all previous
 
 * When a subagent completes, Claude receives its agent ID.
 * The built-in Explore and Plan agents are one-shot and return no agent ID, so Claude can't resume them. Use `general-purpose` or a custom subagent when you need to continue the work.
-* When a subagent stops at its [`maxTurns`](#supported-frontmatter-fields) limit, Claude Code marks the returned output as partial. For subagents that return an agent ID, Claude Code also notes in the result that Claude can message the subagent to continue from where it stopped.
+* When a subagent stops at its [`maxTurns`](#supported-frontmatter-fields) limit, Claude Code marks the returned output as partial, and Claude can resume the subagent to continue its work.
 
 Claude uses the `SendMessage` tool with the agent's ID or name as the `to` field to resume it. `SendMessage` doesn't require [agent teams](agent-teams.md) to be enabled; only structured team-protocol messages such as `shutdown_request` and `plan_approval_response` do. Beyond subagents and teammates, in sessions where cross-session messaging is enabled, Claude can use the same tool to message [your other Claude Code sessions](cross-session-messaging.md), on this machine or [beyond it](cross-session-messaging.md#message-sessions-on-other-machines).
 

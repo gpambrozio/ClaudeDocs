@@ -291,20 +291,20 @@ go get github.com/anthropics/anthropic-sdk-go
 **Java**
 
 ```kotlin Gradle
-implementation("com.anthropic:anthropic-java:2.68.0")
-implementation("com.anthropic:anthropic-java-aws:2.68.0")
+implementation("com.anthropic:anthropic-java:2.70.0")
+implementation("com.anthropic:anthropic-java-aws:2.70.0")
 ```
 
 ```xml Maven
 <dependency>
   <groupId>com.anthropic</groupId>
   <artifactId>anthropic-java</artifactId>
-  <version>2.68.0</version>
+  <version>2.70.0</version>
 </dependency>
 <dependency>
   <groupId>com.anthropic</groupId>
   <artifactId>anthropic-java-aws</artifactId>
-  <version>2.68.0</version>
+  <version>2.70.0</version>
 </dependency>
 ```
 
@@ -340,6 +340,7 @@ The following models are available on Claude Platform on AWS:
 | Claude Sonnet 5                                                                                       | `claude-sonnet-5`   |
 | Claude Sonnet 4.6                                                                                     | `claude-sonnet-4-6` |
 | Claude Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)) | `claude-sonnet-4-5` |
+| Claude Haiku 5.5                                                                                      | `claude-haiku-5-5`  |
 | Claude Haiku 4.5                                                                                      | `claude-haiku-4-5`  |
 
 Model IDs are identical to the first-party Claude API. There are no Bedrock-style ARNs or `anthropic.` prefixes.
@@ -802,7 +803,7 @@ The Claude Console does not support organization switching for Claude Platform o
 
 Organizations on Claude Platform on AWS are placed on the Start tier. Anthropic manages rate limits directly, not through AWS quota systems.
 
-Organizations on Claude Platform on AWS can move to a higher usage tier automatically as they build a history of paid AWS Marketplace invoices. The self-service **Request rate limit increase** flow in the Claude Console is not available: the Rate limits page directs you to your Anthropic account representative instead.
+Organizations on Claude Platform on AWS can move to a higher usage tier automatically as they build a history of paid AWS Marketplace invoices. The self-service **Request tier increase** flow in the Claude Console is not available: the Rate limits page directs you to your Anthropic account representative instead.
 
 To request higher limits, contact your Anthropic account representative or [Anthropic support](https://support.claude.com). Include the following in your request:
 

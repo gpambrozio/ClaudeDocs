@@ -18,7 +18,7 @@ This guide covers migrating [Messages API](../../build-with-claude/working-with-
 
 The skill applies the model ID swap and, as needed, breaking parameter changes, prefill replacement, and effort calibration for your target model across your code base, then produces a checklist of items to verify manually. It asks you to confirm the migration scope (entire working directory, a subdirectory, or a specific file list) before editing any files. The skill also detects Amazon Bedrock and Claude Platform on AWS clients and adjusts model ID formats and feature changes for those platforms.
 
-Claude Sonnet 5.5 has the same prices as Claude Sonnet 5. See [Claude pricing](../../about-claude/pricing.md). For its context window and output limits, see the [Claude Sonnet 5.5 model page](overview.md). For features and prompting, see [What's new in Claude Sonnet 5.5](whats-new-sonnet-5-5.md#feature-support) and [Prompting Claude Sonnet 5.5](../../build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5.md).
+Claude Sonnet 5.5 has the same prices as Claude Sonnet 5, except for prompt cache reads, which cost $0.10 USD per million tokens, half the Claude Sonnet 5 rate. See [Claude pricing](../../about-claude/pricing.md). For its context window and output limits, see the [Claude Sonnet 5.5 model page](overview.md). For features and prompting, see [What's new in Claude Sonnet 5.5](whats-new-sonnet-5-5.md#feature-support) and [Prompting Claude Sonnet 5.5](../../build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5.md).
 
 ## Send a request to Claude Sonnet 5.5
 
