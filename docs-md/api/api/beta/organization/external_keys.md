@@ -13,6 +13,14 @@ url: https://platform.claude.com/docs/en/api/beta/organization/external_keys
 
 Create an external key config owned by the caller's organization.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 ### Body parameters
 
 - `provider_config: BetaAWSExternalKeyConfig or BetaGCPExternalKeyConfig or BetaAzureExternalKeyConfigParam`
@@ -239,6 +247,14 @@ Results are ordered by creation time (newest first). Use the
 
   Opaque cursor from a previous response's `next_page`.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 ### Returns
 
 - `data: array of BetaExternalKey`
@@ -387,6 +403,14 @@ Retrieve a single external key config in the caller's organization by ID.
   ID of the External Key.
 
   maxLength: 2048
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 ### Returns
 
@@ -537,6 +561,14 @@ encrypted data requires the original key identity to decrypt.
   ID of the External Key.
 
   maxLength: 2048
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 ### Body parameters
 
@@ -754,6 +786,14 @@ The request is rejected if any workspace still references this config.
 
   maxLength: 2048
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 ### Returns
 
 - `type: "external_key_deleted"`
@@ -800,6 +840,14 @@ message if it failed or timed out.
   ID of the External Key.
 
   maxLength: 2048
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 ### Returns
 

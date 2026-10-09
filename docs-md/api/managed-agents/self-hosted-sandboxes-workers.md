@@ -436,7 +436,7 @@ Install `ant` and set `ant beta:worker run` as the entrypoint. When a sandbox st
 
 ```dockerfile
 FROM your-base-image
-ARG ANT_VERSION=1.39.1
+ARG ANT_VERSION=1.40.0
 ARG TARGETARCH
 RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
     curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \

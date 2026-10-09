@@ -37,6 +37,14 @@ List Workspace Members
 
   default: 20, minimum: 1, maximum: 1000
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 ### Returns
 
 - `data: array of BetaWorkspaceMember`
@@ -120,6 +128,14 @@ Create Workspace Member
 - `workspace_id: string`
 
   ID of the Workspace.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ### Body parameters
 
@@ -213,6 +229,14 @@ Get Workspace Member
 
   ID of the User.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 ### Returns
 
 - `BetaWorkspaceMember object`
@@ -281,6 +305,14 @@ Update Workspace Member
 - `user_id: string`
 
   ID of the User.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ### Body parameters
 
@@ -370,6 +402,14 @@ Delete Workspace Member
 - `user_id: string`
 
   ID of the User.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ### Returns
 

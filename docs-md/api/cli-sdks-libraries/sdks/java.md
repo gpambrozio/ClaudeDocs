@@ -15,7 +15,7 @@ For API feature documentation with code examples, see the [API reference](../../
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:2.70.0")
+implementation("com.anthropic:anthropic-java:2.71.0")
 ```
 
 **Maven**
@@ -24,7 +24,7 @@ implementation("com.anthropic:anthropic-java:2.70.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.70.0</version>
+    <version>2.71.0</version>
 </dependency>
 ```
 
@@ -680,7 +680,7 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 
 Consider using [streaming](java.md#streaming) for longer running requests.
 
-Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](java.md#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
+Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [time out](java.md#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
 
 The SDK throws an error if a non-streaming request is expected to take longer than 10 minutes. Using a [streaming method](java.md#streaming) or [overriding the timeout](java.md#timeouts) at the client or request level disables the error.
 
@@ -1059,7 +1059,7 @@ For detailed platform setup guides with code examples, see:
 
 The Java SDK supports the following platforms through separate dependencies that provide platform-specific `Backend` implementations:
 
-* **Agent Platform:** `com.anthropic:anthropic-java-vertex`: Use `VertexBackend.fromEnv()` or `VertexBackend.builder()`.
+* **Agent Platform:** `com.anthropic:anthropic-java-vertex`: Use `VertexBackend.builder()` or `VertexBackend.fromEnv()`. `fromEnv()` reads `CLOUD_ML_REGION` and `ANTHROPIC_VERTEX_PROJECT_ID` and uses Application Default Credentials.
 * **Bedrock:** `com.anthropic:anthropic-java-bedrock`: Use `BedrockMantleBackend.fromEnv()` or `BedrockMantleBackend.builder()` for the Messages-API Bedrock endpoint, or `BedrockBackend.fromEnv()` / `BedrockBackend.builder()` (`bedrock-runtime` path).
 * **Claude Platform on AWS:** `com.anthropic:anthropic-java-aws`: Use `AwsBackend.fromEnv()` (reads `ANTHROPIC_AWS_WORKSPACE_ID` and the AWS default region/credential chain) or `AwsBackend.builder()`. Available in beta.
 * **Foundry:** `com.anthropic:anthropic-java-foundry`: Use `FoundryBackend.fromEnv()` or `FoundryBackend.builder()`.

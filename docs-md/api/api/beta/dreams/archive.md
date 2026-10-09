@@ -23,6 +23,8 @@ See the [Dreams guide](../../../managed-agents/dreams.md#archive-a-dream) to lea
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.

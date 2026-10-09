@@ -54,6 +54,12 @@ forward-only via `next_page`; there is no reverse cursor.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 - `"x-api-key": optional string`
 
 #### Returns
@@ -162,6 +168,12 @@ inference call has aged out returns 404.
 - `local_session_id: string`
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -305,6 +317,12 @@ response header.
   default: 10000, minimum: -1, maximum: 2147483647
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -656,6 +674,12 @@ retrieve the next page, and stop when `next_page` is null.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 - `"x-api-key": optional string`
 
 #### Returns
@@ -825,6 +849,12 @@ malformed session identifier returns 400.
   default: 10000, minimum: -1, maximum: 2147483647
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 

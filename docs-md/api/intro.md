@@ -60,7 +60,7 @@ Compare Claude models by capability and cost to pick the best fit for your use c
 
 **Explore features and tools**
 
-Discover what Claude can do: extended thinking, web search, file handling, structured outputs, and more.
+Discover what Claude can do: thinking, web search, file handling, structured outputs, and more.
 
 [Browse the features overview](build-with-claude/overview.md)
 

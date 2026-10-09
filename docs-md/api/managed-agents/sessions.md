@@ -485,7 +485,7 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
   "agent": {
     "type": "agent_with_overrides",
     "id": "$AGENT_ID",
-    "model": {"id": "claude-sonnet-5"},
+    "model": {"id": "claude-sonnet-5-5"},
     "system": null
   },
   "environment_id": "$ENVIRONMENT_ID"
@@ -501,7 +501,7 @@ agent:
   type: agent_with_overrides
   id: $AGENT_ID
   model:
-    id: claude-sonnet-5
+    id: claude-sonnet-5-5
   system: null
 environment_id: $ENVIRONMENT_ID
 YAML
@@ -512,7 +512,7 @@ override_session = client.beta.sessions.create(
     agent={
         "type": "agent_with_overrides",
         "id": agent.id,
-        "model": {"id": "claude-sonnet-5"},
+        "model": {"id": "claude-sonnet-5-5"},
         "system": None,  # clear the agent's system prompt for this session
     },
     environment_id=environment.id,
@@ -527,7 +527,7 @@ const overrideSession = await client.beta.sessions.create({
   agent: {
     type: "agent_with_overrides",
     id: agent.id,
-    model: { id: "claude-sonnet-5" },
+    model: { id: "claude-sonnet-5-5" },
     system: null // clear the agent's system prompt for this session
   },
   environment_id: environment.id
@@ -546,7 +546,7 @@ var overrideSession = await client.Beta.Sessions.Create(new()
         ID = agent.ID,
         Model = new BetaManagedAgentsModelConfigParams
         {
-            ID = BetaManagedAgentsModel.ClaudeSonnet5,
+            ID = BetaManagedAgentsModel.ClaudeSonnet5_5,
         },
         System = null, // clear the agent's system prompt for this session
     },
@@ -564,7 +564,7 @@ overrideSession, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewPa
 			Type: anthropic.BetaManagedAgentsAgentWithOverridesParamsTypeAgentWithOverrides,
 			ID:   agent.ID,
 			Model: anthropic.BetaManagedAgentsModelConfigParams{
-				ID: anthropic.BetaManagedAgentsModelClaudeSonnet5,
+				ID: anthropic.BetaManagedAgentsModelClaudeSonnet5_5,
 			},
 			// Clear the agent's system prompt for this session.
 			System: param.Null[string](),
@@ -586,7 +586,7 @@ var overrideSession = client.beta().sessions().create(SessionCreateParams.builde
         .type(BetaManagedAgentsAgentWithOverridesParams.Type.AGENT_WITH_OVERRIDES)
         .id(agent.id())
         .model(BetaManagedAgentsModelConfigParams.builder()
-            .id(BetaManagedAgentsModel.CLAUDE_SONNET_5)
+            .id(BetaManagedAgentsModel.CLAUDE_SONNET_5_5)
             .build())
         .system((String) null) // clear the agent's system prompt for this session
         .build())
@@ -601,7 +601,7 @@ IO.println("System: " + overrideSession.agent().system().orElse("null"));
 $overrides = BetaManagedAgentsAgentWithOverridesParams::with(
     id: $agent->id,
     type: 'agent_with_overrides',
-    model: ['id' => 'claude-sonnet-5'],
+    model: ['id' => 'claude-sonnet-5-5'],
 );
 // Clear the system prompt for this session. Array access is load-bearing here:
 // create() strips nulls from raw arrays and ::with() treats null args as omitted.
@@ -623,7 +623,7 @@ override_session = client.beta.sessions.create(
   agent: Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams.new(
     type: :agent_with_overrides,
     id: agent.id,
-    model: {id: "claude-sonnet-5"},
+    model: {id: "claude-sonnet-5-5"},
     system_: nil
   ),
   environment_id: environment.id

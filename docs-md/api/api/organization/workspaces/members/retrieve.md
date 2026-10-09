@@ -21,6 +21,14 @@ Get Workspace Member
 
   ID of the User.
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 ## Returns
 
 - `WorkspaceMember object`

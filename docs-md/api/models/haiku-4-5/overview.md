@@ -101,14 +101,6 @@ The current Haiku model: overview, specs, and resources.
 
 Claude Haiku 4.5 supports manual extended thinking with `budget_tokens`.
 
-**Choosing a model**
-
-When to start efficiency-first with Haiku and when to reach for a larger model.
-
-**Reduce latency**
-
-Techniques that pair well with a fast, low-cost model.
-
 ## Reference
 
 **System prompt**

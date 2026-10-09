@@ -2705,6 +2705,14 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
   Opaque cursor from a previous response's `next_page` field. `next_page` is currently always null, so there is never a cursor to send.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsSingleDayActivitySummary`
@@ -3140,6 +3148,14 @@ the `read:analytics` scope.
   UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
   format: date
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -3842,6 +3858,14 @@ plan. Requires an API key with the `read:analytics` scope.
 
   format: date
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsProjectActivity`
@@ -4021,6 +4045,14 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
   format: date
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -4291,6 +4323,14 @@ range-rollup mode like `/skills`.
 
   format: date
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsPluginActivity`
@@ -4471,6 +4511,14 @@ on a Claude Enterprise plan. Requires an API key with the
   UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
   format: date
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -4722,6 +4770,14 @@ can be broken out per product, per member, or per RBAC group via
 
   Opaque cursor from a previous response's `next_page` field. Only valid with `group_by[]` — the ungrouped cube is never paginated.
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsArtifactActivity`
@@ -4967,6 +5023,14 @@ key with the `read:analytics` scope.
   Filter to specific users by tagged user ID.
 
   maxItems: 100
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -5358,6 +5422,14 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   Filter to specific users by tagged user ID.
 
   maxItems: 100
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -5758,6 +5830,14 @@ Requires an API key with the `read:analytics` scope.
 
   maxItems: 100
 
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 #### Returns
 
 - `data: array of BetaAnalyticsCostReportTimeBucket`
@@ -6145,6 +6225,14 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   Filter to specific users by tagged user ID.
 
   maxItems: 100
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 

@@ -51,6 +51,14 @@ List API Keys
 
   Filter by Workspace ID.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 ### Returns
 
 - `data: array of BetaAPIKey`
@@ -241,6 +249,14 @@ Retrieve information about a single API key in your organization, looked up by i
 
   ID of the API key.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 ### Returns
 
 - `BetaAPIKey object`
@@ -411,6 +427,14 @@ Update API Key
 - `api_key_id: string`
 
   ID of the API key.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
 
 ### Body parameters
 

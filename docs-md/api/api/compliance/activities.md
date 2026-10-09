@@ -4277,6 +4277,12 @@ compliance activities that can be filtered by various criteria.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../versioning.md).
+
 - `"x-api-key": optional string`
 
 ### Returns
@@ -83837,7 +83843,7 @@ compliance activities that can be filtered by various criteria.
 
         - `user_agent: optional string or null`
 
-    - `updates: array of Name or Capabilities or RedactContent or 100 more`
+    - `updates: array of Name or Capabilities or RedactContent or 101 more`
 
       - `Name object`
 
@@ -85683,6 +85689,22 @@ compliance activities that can be filtered by various criteria.
         - `type: optional "artifact_type_docs_enabled"`
 
           default: artifact_type_docs_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change. Null means the setting had not been set for the organization, so the plan default applied.
+
+      - `ArtifactTypeMotionEnabled object`
+
+        The setting that lets members create Motion, one of Anthropic's built-in Artifact types, was changed for the organization.
+
+        - `type: optional "artifact_type_motion_enabled"`
+
+          default: artifact_type_motion_enabled
 
         - `current_value: optional boolean or null`
 
@@ -213084,7 +213106,7 @@ curl https://api.anthropic.com/v1/compliance/activities \
 
         - `user_agent: optional string or null`
 
-    - `updates: array of Name or Capabilities or RedactContent or 100 more`
+    - `updates: array of Name or Capabilities or RedactContent or 101 more`
 
       - `Name object`
 
@@ -214930,6 +214952,22 @@ curl https://api.anthropic.com/v1/compliance/activities \
         - `type: optional "artifact_type_docs_enabled"`
 
           default: artifact_type_docs_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change. Null means the setting had not been set for the organization, so the plan default applied.
+
+      - `ArtifactTypeMotionEnabled object`
+
+        The setting that lets members create Motion, one of Anthropic's built-in Artifact types, was changed for the organization.
+
+        - `type: optional "artifact_type_motion_enabled"`
+
+          default: artifact_type_motion_enabled
 
         - `current_value: optional boolean or null`
 

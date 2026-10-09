@@ -78,8 +78,8 @@ go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:2.70.0")
-implementation("com.anthropic:anthropic-java-foundry:2.70.0")
+implementation("com.anthropic:anthropic-java:2.71.0")
+implementation("com.anthropic:anthropic-java-foundry:2.71.0")
 
 // For Entra ID authentication, also add the Azure Identity library
 implementation("com.azure:azure-identity:1.18.3")
@@ -91,12 +91,12 @@ implementation("com.azure:azure-identity:1.18.3")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.70.0</version>
+    <version>2.71.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>2.70.0</version>
+    <version>2.71.0</version>
 </dependency>
 <!-- For Entra ID authentication, also add the Azure Identity library -->
 <dependency>
@@ -637,7 +637,7 @@ Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.
 * Models API
 * Message Batches API
 * Server-side fallback (the [`fallbacks` parameter](refusals-and-fallback.md#server-side-fallback); use the [client-side fallback pattern](refusals-and-fallback.md#client-side-fallback) instead)
-* [Computer use](../agents-and-tools/tool-use/computer-use-tool.md) and [browser use](../agents-and-tools/tool-use/browser-use-tool.md) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Microsoft Foundry; the beta computer use tool versions remain available)
+* [Computer use](../agents-and-tools/tool-use/computer-use-tool.md) and [browser use](../agents-and-tools/tool-use/browser-use-tool.md) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Microsoft Foundry; the beta computer use tool versions remain available for the models listed under [Earlier tool versions](../agents-and-tools/tool-use/computer-use-tool.md#earlier-tool-versions))
 
 ### Additional features not supported when hosted on Azure
 

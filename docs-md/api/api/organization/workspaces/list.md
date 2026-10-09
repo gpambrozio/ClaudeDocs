@@ -41,6 +41,14 @@ List Workspaces
 
   default: 20, minimum: 1, maximum: 1000
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../versioning.md).
+
 ## Returns
 
 - `data: array of Workspace`

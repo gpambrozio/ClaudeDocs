@@ -56,11 +56,9 @@ JOURNAL_PATH = os.environ.get("ORCH_JOURNAL") or "orchestration_journal.json"
 ```typescript TypeScript
 import { exec } from "node:child_process";
 import { createHash } from "node:crypto";
-import { rmSync } from "node:fs";
-import { mkdtemp, readFile, rename, writeFile } from "node:fs/promises";
+import { mkdtempDisposable, readFile, rename, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { promisify } from "node:util";
 
 import Anthropic from "@anthropic-ai/sdk";
 
@@ -100,20 +98,17 @@ var effort = Effort.Xhigh;
 const string systemPrompt = "You are a helpful general-purpose agent. Answer the user's request directly.";
 
 const int requestTimeoutSeconds = 600;
-// The other ports stream with max_tokens 64000. This port uses non-streaming
-// Messages.Create, and the API rejects non-streaming requests at that size.
-// 8192 is the non-streaming ceiling for Opus 4.0 and 4.1 and a conservative
-// choice for newer Opus models.
-const int requestMaxTokens = 8192;
 const int bashTimeoutSeconds = 60;
 const int toolResultMaxChars = 8000;
 const int maxConcurrent = 10;
 var docTestMode = Environment.GetEnvironmentVariable("DOC_TEST_MODE") is { Length: > 0 };
-int maxTotalSubtasks = docTestMode ? 2 : 200;
-int maxSubagentTurns = docTestMode ? 1 : 15;
-int maxMainTurns = docTestMode ? 1 : 30;
+var maxTotalSubtasks = docTestMode ? 2 : 200;
+var maxSubagentTurns = docTestMode ? 1 : 15;
+var maxMainTurns = docTestMode ? 1 : 30;
 const int turnsBetweenRefreshers = 10;
-var journalPath = Environment.GetEnvironmentVariable("ORCH_JOURNAL") is { Length: > 0 } p ? p : "orchestration_journal.json";
+var journalPath = Environment.GetEnvironmentVariable("ORCH_JOURNAL") is { Length: > 0 } configuredPath
+    ? configuredPath
+    : "orchestration_journal.json";
 ```
 
 ```go Go
@@ -170,12 +165,17 @@ func ifTest(test, normal int) int {
 ```
 
 ```java Java
+// java.base (java.util, java.nio.file, java.util.concurrent, ...) is imported
+// implicitly in a compact source file, so only the SDK and Jackson need imports.
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.JsonArray;
+import com.anthropic.core.JsonBoolean;
+import com.anthropic.core.JsonObject;
+import com.anthropic.core.JsonString;
 import com.anthropic.core.JsonValue;
 import com.anthropic.core.RequestOptions;
 import com.anthropic.helpers.MessageAccumulator;
-import com.anthropic.models.messages.ContentBlock;
 import com.anthropic.models.messages.ContentBlockParam;
 import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
@@ -192,33 +192,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.security.MessageDigest;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HexFormat;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
@@ -241,7 +214,8 @@ static final int MAX_SUBAGENT_TURNS = DOC_TEST_MODE ? 1 : 15;
 static final int MAX_MAIN_TURNS = DOC_TEST_MODE ? 1 : 30;
 static final int TURNS_BETWEEN_REFRESHERS = 10;
 static final Path JOURNAL_PATH = Path.of(Optional.ofNullable(System.getenv("ORCH_JOURNAL"))
-        .filter(s -> !s.isEmpty()).orElse("orchestration_journal.json"));
+        .filter(path -> !path.isEmpty())
+        .orElse("orchestration_journal.json"));
 ```
 
 ```php PHP
@@ -354,12 +328,12 @@ const (
 ```
 
 ```java Java
-static final String MODE_ENTER =
-        "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than "
-                + "the fastest one. Use the Workflow tool on every substantive task, sized to the problem's "
-                + "natural decomposition rather than the maximum the tool allows. See the Workflow tool's "
-                + "description for standing consent, granularity guidance, and quality patterns. Work solo "
-                + "only on conversational or trivial turns.";
+static final String MODE_ENTER = """
+        Orchestration mode is on: optimize for the most exhaustive, correct answer rather than \
+        the fastest one. Use the Workflow tool on every substantive task, sized to the problem's \
+        natural decomposition rather than the maximum the tool allows. See the Workflow tool's \
+        description for standing consent, granularity guidance, and quality patterns. Work solo \
+        only on conversational or trivial turns.""";
 static final String MODE_REFRESH =
         "Orchestration mode is still on. Use the Workflow tool; see its standing consent section.";
 static final String MODE_EXIT =
@@ -468,25 +442,26 @@ REPORT_TOOL = {
 ```typescript TypeScript
 const WORKFLOW_TOOL: Anthropic.Tool = {
   name: "Workflow",
-  description:
+  description: [
     "Orchestrate a multiagent workflow: split a large task into independent subtasks " +
-    "and run them as parallel agents, then collect their results.\n\n" +
+      "and run them as parallel agents, then collect their results.",
     "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a " +
-    "system message confirms that orchestration mode is on.\n\n" +
+      "system message confirms that orchestration mode is on.",
     "Quality patterns: adversarial verification (a second wave of agents checks the first " +
-    "wave's findings against the source), a completeness critic (one agent hunts for what " +
-    "the others missed), and multiphase sequencing (understand, design, implement, and " +
-    "review as separate workflow calls, reading results between phases). A useful default " +
-    "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n" +
+      "wave's findings against the source), a completeness critic (one agent hunts for what " +
+      "the others missed), and multiphase sequencing (understand, design, implement, and " +
+      "review as separate workflow calls, reading results between phases). A useful default " +
+      "is hybrid: scout inline first to discover the work-list, then fan out over it.",
     "Granularity: scope each subtask to a distinct concern, component, or question rather " +
-    "than per line or per file section. Scale the count to what the user asked for: a " +
-    "focused review of a module of a few hundred lines rarely needs more than about ten " +
-    "subtasks; a broad audit of a large codebase can justify more.\n\n" +
+      "than per line or per file section. Scale the count to what the user asked for: a " +
+      "focused review of a module of a few hundred lines rarely needs more than about ten " +
+      "subtasks; a broad audit of a large codebase can justify more.",
     "Standing consent: while a system message confirms orchestration mode is on, that " +
-    "opt-in is standing. Author and run a workflow for every substantive task by default, " +
-    "and lean toward verifying findings adversarially. Work solo only on conversational " +
-    "turns or trivial mechanical edits. When a system message says the mode is off, " +
-    "revert to the opt-in rule above.",
+      "opt-in is standing. Author and run a workflow for every substantive task by default, " +
+      "and lean toward verifying findings adversarially. Work solo only on conversational " +
+      "turns or trivial mechanical edits. When a system message says the mode is off, " +
+      "revert to the opt-in rule above.",
+  ].join("\n\n"),
   input_schema: {
     type: "object",
     properties: {
@@ -536,26 +511,18 @@ const REPORT_TOOL: Anthropic.Tool = {
 Tool workflowTool = new()
 {
     Name = "Workflow",
-    Description =
-        "Orchestrate a multiagent workflow: split a large task into independent subtasks "
-        + "and run them as parallel agents, then collect their results.\n\n"
-        + "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a "
-        + "system message confirms that orchestration mode is on.\n\n"
-        + "Quality patterns: adversarial verification (a second wave of agents checks the first "
-        + "wave's findings against the source), a completeness critic (one agent hunts for what "
-        + "the others missed), and multiphase sequencing (understand, design, implement, and "
-        + "review as separate workflow calls, reading results between phases). A useful default "
-        + "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
-        + "Granularity: scope each subtask to a distinct concern, component, or question rather "
-        + "than per line or per file section. Scale the count to what the user asked for: a "
-        + "focused review of a module of a few hundred lines rarely needs more than about ten "
-        + "subtasks; a broad audit of a large codebase can justify more.\n\n"
-        + "Standing consent: while a system message confirms orchestration mode is on, that "
-        + "opt-in is standing. Author and run a workflow for every substantive task by default, "
-        + "and lean toward verifying findings adversarially. Work solo only on conversational "
-        + "turns or trivial mechanical edits. When a system message says the mode is off, "
-        + "revert to the opt-in rule above.",
-    InputSchema = new InputSchema
+    Description = """
+        Orchestrate a multiagent workflow: split a large task into independent subtasks and run them as parallel agents, then collect their results.
+
+        Opt-in: only use this tool when the user explicitly asks for a workflow, or when a system message confirms that orchestration mode is on.
+
+        Quality patterns: adversarial verification (a second wave of agents checks the first wave's findings against the source), a completeness critic (one agent hunts for what the others missed), and multiphase sequencing (understand, design, implement, and review as separate workflow calls, reading results between phases). A useful default is hybrid: scout inline first to discover the work-list, then fan out over it.
+
+        Granularity: scope each subtask to a distinct concern, component, or question rather than per line or per file section. Scale the count to what the user asked for: a focused review of a module of a few hundred lines rarely needs more than about ten subtasks; a broad audit of a large codebase can justify more.
+
+        Standing consent: while a system message confirms orchestration mode is on, that opt-in is standing. Author and run a workflow for every substantive task by default, and lean toward verifying findings adversarially. Work solo only on conversational turns or trivial mechanical edits. When a system message says the mode is off, revert to the opt-in rule above.
+        """,
+    InputSchema = new()
     {
         Properties = new Dictionary<string, JsonElement>
         {
@@ -578,7 +545,7 @@ Tool reportTool = new()
     Description =
         "Report the final findings for your subtask. Call this exactly once, when you are "
         + "done investigating; it ends your task.",
-    InputSchema = new InputSchema
+    InputSchema = new()
     {
         Properties = new Dictionary<string, JsonElement>
         {
@@ -685,30 +652,36 @@ var reportTool = anthropic.ToolUnionParam{
 ```java Java
 static final Tool WORKFLOW_TOOL = Tool.builder()
         .name("Workflow")
-        .description("Orchestrate a multiagent workflow: split a large task into independent subtasks "
-                + "and run them as parallel agents, then collect their results.\n\n"
-                + "Opt-in: only use this tool when the user explicitly asks for a workflow, or when a "
-                + "system message confirms that orchestration mode is on.\n\n"
-                + "Quality patterns: adversarial verification (a second wave of agents checks the first "
-                + "wave's findings against the source), a completeness critic (one agent hunts for what "
-                + "the others missed), and multiphase sequencing (understand, design, implement, and "
-                + "review as separate workflow calls, reading results between phases). A useful default "
-                + "is hybrid: scout inline first to discover the work-list, then fan out over it.\n\n"
-                + "Granularity: scope each subtask to a distinct concern, component, or question rather "
-                + "than per line or per file section. Scale the count to what the user asked for: a "
-                + "focused review of a module of a few hundred lines rarely needs more than about ten "
-                + "subtasks; a broad audit of a large codebase can justify more.\n\n"
-                + "Standing consent: while a system message confirms orchestration mode is on, that "
-                + "opt-in is standing. Author and run a workflow for every substantive task by default, "
-                + "and lean toward verifying findings adversarially. Work solo only on conversational "
-                + "turns or trivial mechanical edits. When a system message says the mode is off, "
-                + "revert to the opt-in rule above.")
+        .description("""
+                Orchestrate a multiagent workflow: split a large task into independent subtasks \
+                and run them as parallel agents, then collect their results.
+
+                Opt-in: only use this tool when the user explicitly asks for a workflow, or when a \
+                system message confirms that orchestration mode is on.
+
+                Quality patterns: adversarial verification (a second wave of agents checks the first \
+                wave's findings against the source), a completeness critic (one agent hunts for what \
+                the others missed), and multiphase sequencing (understand, design, implement, and \
+                review as separate workflow calls, reading results between phases). A useful default \
+                is hybrid: scout inline first to discover the work-list, then fan out over it.
+
+                Granularity: scope each subtask to a distinct concern, component, or question rather \
+                than per line or per file section. Scale the count to what the user asked for: a \
+                focused review of a module of a few hundred lines rarely needs more than about ten \
+                subtasks; a broad audit of a large codebase can justify more.
+
+                Standing consent: while a system message confirms orchestration mode is on, that \
+                opt-in is standing. Author and run a workflow for every substantive task by default, \
+                and lean toward verifying findings adversarially. Work solo only on conversational \
+                turns or trivial mechanical edits. When a system message says the mode is off, \
+                revert to the opt-in rule above.""")
         .inputSchema(Tool.InputSchema.builder()
-                .properties(JsonValue.from(Map.of(
-                        "subtasks", Map.of(
+                .properties(Tool.InputSchema.Properties.builder()
+                        .putAdditionalProperty("subtasks", JsonValue.from(Map.of(
                                 "type", "array",
                                 "items", Map.of("type", "string"),
-                                "description", "Independent subtask prompts to run as parallel agents"))))
+                                "description", "Independent subtask prompts to run as parallel agents")))
+                        .build())
                 .putAdditionalProperty("required", JsonValue.from(List.of("subtasks")))
                 .build())
         .build();
@@ -717,12 +690,15 @@ static final ToolBash20250124 BASH_TOOL = ToolBash20250124.builder().build();
 
 static final Tool REPORT_TOOL = Tool.builder()
         .name("report_findings")
-        .description("Report the final findings for your subtask. Call this exactly once, when you are "
-                + "done investigating; it ends your task.")
+        .description("""
+                Report the final findings for your subtask. Call this exactly once, when you are \
+                done investigating; it ends your task.""")
         .inputSchema(Tool.InputSchema.builder()
-                .properties(JsonValue.from(Map.of(
-                        "summary", Map.of("type", "string", "description", "Two or three sentences of synthesis"),
-                        "findings", Map.of(
+                .properties(Tool.InputSchema.Properties.builder()
+                        .putAdditionalProperty("summary", JsonValue.from(Map.of(
+                                "type", "string",
+                                "description", "Two or three sentences of synthesis")))
+                        .putAdditionalProperty("findings", JsonValue.from(Map.of(
                                 "type", "array",
                                 "items", Map.of(
                                         "type", "object",
@@ -736,7 +712,8 @@ static final Tool REPORT_TOOL = Tool.builder()
                                                 "severity", Map.of(
                                                         "type", "string",
                                                         "enum", List.of("high", "medium", "low", "info"))),
-                                        "required", List.of("claim", "evidence", "severity"))))))
+                                        "required", List.of("claim", "evidence", "severity")))))
+                        .build())
                 .putAdditionalProperty("required", JsonValue.from(List.of("summary", "findings")))
                 .build())
         .build();
@@ -926,74 +903,64 @@ def handle_bash_block(block) -> tuple[str, bool]:
 ```
 
 ```typescript TypeScript
-const execShell = promisify(exec);
+type ToolOutcome = { output: string; isError: boolean };
 
 // Run bash where the example was launched. In DOC_TEST_MODE the docs harness
-// points it at a throwaway fixture directory instead, removed on exit.
-const WORK_DIR = DOC_TEST_MODE
-  ? await mkdtemp(join(tmpdir(), "orchestration-"))
-  : process.cwd();
-if (DOC_TEST_MODE) {
+// points it at a throwaway fixture directory instead, removed when the program ends.
+await using fixtureDir = DOC_TEST_MODE
+  ? await mkdtempDisposable(join(tmpdir(), "orchestration-"))
+  : null;
+const WORK_DIR = fixtureDir?.path ?? process.cwd();
+if (fixtureDir) {
   await writeFile(
     join(WORK_DIR, "sample.py"),
-    "def fib(n):\n" +
-      "    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n" +
-      "print(fib(10))\n",
+    `def fib(n):
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+
+print(fib(10))
+`,
   );
-  process.on("exit", () => rmSync(WORK_DIR, { recursive: true, force: true }));
 }
 
 // Run a shell command and return its output. No sandbox: example code only.
-async function runBash(command: string): Promise<{ output: string; isError: boolean }> {
+function runBash(command: string): Promise<ToolOutcome> {
   console.error(`[bash] ${command}`);
-  let stdout = "";
-  let stderr = "";
-  let exitCode = 0;
-  try {
-    ({ stdout, stderr } = await execShell(command, {
-      shell: "/bin/bash",
-      cwd: WORK_DIR,
-      timeout: BASH_TIMEOUT_SECONDS * 1000,
-      maxBuffer: 16 * 1024 * 1024,
-    }));
-  } catch (error) {
-    const failure = error as {
-      stdout?: string;
-      stderr?: string;
-      code?: number | string;
-      killed?: boolean;
-    };
-    if (failure.killed && failure.code !== "ERR_CHILD_PROCESS_STDIO_MAXBUFFER") {
-      return { output: `command timed out after ${BASH_TIMEOUT_SECONDS}s`, isError: true };
-    }
-    stdout = failure.stdout ?? "";
-    stderr = failure.stderr ?? "";
-    exitCode = typeof failure.code === "number" ? failure.code : 1;
-  }
-  let output = (stdout + stderr).trim() || "(no output)";
-  const codePoints = [...output];
-  if (codePoints.length > TOOL_RESULT_MAX_CHARS) {
-    output =
-      codePoints.slice(0, TOOL_RESULT_MAX_CHARS).join("") +
-      `\n(truncated at ${TOOL_RESULT_MAX_CHARS} chars)`;
-  }
-  if (exitCode !== 0) {
-    output = `(exit code ${exitCode})\n${output}`;
-  }
-  return { output, isError: exitCode !== 0 };
+  const options = {
+    shell: "/bin/bash",
+    cwd: WORK_DIR,
+    timeout: BASH_TIMEOUT_SECONDS * 1000,
+    maxBuffer: 16 * 1024 * 1024,
+  };
+  return new Promise((resolve) => {
+    exec(command, options, (error, stdout, stderr) => {
+      if (error?.killed) {
+        resolve({ output: `command timed out after ${BASH_TIMEOUT_SECONDS}s`, isError: true });
+        return;
+      }
+      const exitCode = error === null ? 0 : typeof error.code === "number" ? error.code : 1;
+      let output = (stdout + stderr).trim() || "(no output)";
+      const codePoints = [...output];
+      if (codePoints.length > TOOL_RESULT_MAX_CHARS) {
+        const kept = codePoints.slice(0, TOOL_RESULT_MAX_CHARS).join("");
+        output = `${kept}\n(truncated at ${TOOL_RESULT_MAX_CHARS} chars)`;
+      }
+      if (exitCode !== 0) {
+        output = `(exit code ${exitCode})\n${output}`;
+      }
+      resolve({ output, isError: exitCode !== 0 });
+    });
+  });
 }
 
-async function handleBashBlock(
-  block: Anthropic.ToolUseBlock,
-): Promise<{ output: string; isError: boolean }> {
-  const input = block.input as { command?: string; restart?: boolean };
-  if (input.restart === true) {
+async function handleBashBlock(block: Anthropic.ToolUseBlock): Promise<ToolOutcome> {
+  const { command, restart } = block.input as { command?: string; restart?: boolean };
+  if (restart === true) {
     return { output: "Shell restarted.", isError: false };
   }
-  if (!input.command) {
+  if (!command) {
     return { output: "bash error: no command was provided.", isError: true };
   }
-  return runBash(input.command);
+  return runBash(command);
 }
 ```
 
@@ -1004,10 +971,13 @@ var workDir = Environment.CurrentDirectory;
 if (docTestMode)
 {
     workDir = Directory.CreateTempSubdirectory("orchestration-").FullName;
-    File.WriteAllText(Path.Combine(workDir, "sample.py"),
-        "def fib(n):\n" +
-        "    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n" +
-        "print(fib(10))\n");
+    await File.WriteAllTextAsync(Path.Combine(workDir, "sample.py"), """
+        def fib(n):
+            return n if n < 2 else fib(n - 1) + fib(n - 2)
+
+        print(fib(10))
+
+        """);
     var fixtureDir = workDir;
     AppDomain.CurrentDomain.ProcessExit += (_, _) =>
     {
@@ -1071,18 +1041,14 @@ async Task<(string Output, bool IsError)> RunBash(string command)
 // Execute one bash tool call requested by the model.
 async Task<(string Output, bool IsError)> HandleBashBlock(ToolUseBlock block)
 {
-    if (block.Input.TryGetValue("restart", out var restart) && restart.ValueKind == JsonValueKind.True)
+    if (block.Input.GetValueOrDefault("restart").ValueKind is JsonValueKind.True)
     {
         return ("Shell restarted.", false);
     }
-    var command = block.Input.TryGetValue("command", out var rawCommand) && rawCommand.ValueKind == JsonValueKind.String
-        ? rawCommand.GetString()!
-        : "";
-    if (command.Length == 0)
-    {
-        return ("bash error: no command was provided.", true);
-    }
-    return await RunBash(command);
+    return block.Input.GetValueOrDefault("command") is { ValueKind: JsonValueKind.String } command
+        && command.GetString() is { Length: > 0 } commandText
+        ? await RunBash(commandText)
+        : ("bash error: no command was provided.", true);
 }
 ```
 
@@ -1101,9 +1067,11 @@ var workDir = func() string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fixture := "def fib(n):\n" +
-		"    return n if n < 2 else fib(n - 1) + fib(n - 2)\n\n" +
-		"print(fib(10))\n"
+	const fixture = `def fib(n):
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+
+print(fib(10))
+`
 	if err := os.WriteFile(filepath.Join(dir, "sample.py"), []byte(fixture), 0o644); err != nil {
 		log.Fatal(err)
 	}
@@ -1132,8 +1100,7 @@ func runBash(ctx context.Context, command string) (string, bool) {
 	if err == nil {
 		return output, false
 	}
-	var exitErr *exec.ExitError
-	if errors.As(err, &exitErr) {
+	if exitErr, ok := errors.AsType[*exec.ExitError](err); ok {
 		return fmt.Sprintf("(exit code %d)\n%s", exitErr.ExitCode(), output), true
 	}
 	return fmt.Sprintf("(%s)\n%s", err, output), true
@@ -1179,13 +1146,12 @@ static Path createWorkDir() {
                 print(fib(10))
                 """);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            // Best-effort cleanup; the OS tmp sweeper handles leftovers.
             try (var paths = Files.walk(dir)) {
-                paths.sorted(Comparator.reverseOrder()).forEach(p -> {
-                    try { Files.deleteIfExists(p); } catch (IOException ignored) {}
+                paths.sorted(Comparator.reverseOrder()).forEach(path -> {
+                    try { Files.deleteIfExists(path); } catch (IOException _) {}
                 });
-            } catch (IOException ignored) {
-                // Best-effort cleanup; the OS tmp sweeper handles leftovers.
-            }
+            } catch (IOException _) {}
         }));
         return dir;
     } catch (IOException error) {
@@ -1209,7 +1175,7 @@ ToolOutput runBash(String command) throws InterruptedException {
     CompletableFuture<String> outputReader = CompletableFuture.supplyAsync(() -> {
         try (var stdout = process.getInputStream()) {
             return new String(stdout.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException error) {
+        } catch (IOException _) {
             return "";
         }
     });
@@ -1218,30 +1184,31 @@ ToolOutput runBash(String command) throws InterruptedException {
         outputReader.cancel(true);
         return new ToolOutput("command timed out after " + BASH_TIMEOUT_SECONDS + "s", true);
     }
-    String output = outputReader.join().trim();
+    String output = outputReader.join().strip();
     if (output.isEmpty()) {
         output = "(no output)";
-    }
-    if (output.length() > TOOL_RESULT_MAX_CHARS) {
+    } else if (output.length() > TOOL_RESULT_MAX_CHARS) {
         output = output.substring(0, TOOL_RESULT_MAX_CHARS)
                 + "\n(truncated at " + TOOL_RESULT_MAX_CHARS + " chars)";
     }
     int exitCode = process.exitValue();
-    if (exitCode != 0) {
-        return new ToolOutput("(exit code " + exitCode + ")\n" + output, true);
-    }
-    return new ToolOutput(output, false);
+    return exitCode == 0
+            ? new ToolOutput(output, false)
+            : new ToolOutput("(exit code " + exitCode + ")\n" + output, true);
+}
+
+// A tool call's input fields, or an empty map if the model sent something other than an object.
+Map<String, JsonValue> toolInput(ToolUseBlock toolUse) {
+    return toolUse._input() instanceof JsonObject object ? object.values() : Map.of();
 }
 
 // Execute one bash tool call requested by the model.
-ToolOutput handleBashBlock(ToolUseBlock block) throws InterruptedException {
-    Map<String, JsonValue> input = (Map<String, JsonValue>) block._input().asObject().orElse(Map.of());
-    JsonValue restart = input.getOrDefault("restart", JsonValue.from(false));
-    if (Boolean.TRUE.equals(restart.asBoolean().orElse(false))) {
+ToolOutput handleBashBlock(ToolUseBlock toolUse) throws InterruptedException {
+    Map<String, JsonValue> input = toolInput(toolUse);
+    if (input.get("restart") instanceof JsonBoolean restart && restart.value()) {
         return new ToolOutput("Shell restarted.", false);
     }
-    JsonValue raw = input.get("command");
-    String command = raw != null && raw.asString().isPresent() ? raw.asStringOrThrow() : "";
+    String command = input.get("command") instanceof JsonString text ? text.value() : "";
     if (command.isEmpty()) {
         return new ToolOutput("bash error: no command was provided.", true);
     }
@@ -1508,8 +1475,7 @@ async function runSubagent(model: string, prompt: string): Promise<string> {
     }
     if (response.stop_reason !== "tool_use") {
       let text = response.content
-        .filter((block): block is Anthropic.TextBlock => block.type === "text")
-        .map((block) => block.text)
+        .flatMap((block) => (block.type === "text" ? [block.text] : []))
         .join("");
       if (response.stop_reason === "max_tokens") {
         text += "\n\n(warning: subagent response was truncated at max_tokens)";
@@ -1522,26 +1488,23 @@ async function runSubagent(model: string, prompt: string): Promise<string> {
       if (block.type !== "tool_use") {
         continue;
       }
-      let output: string;
-      let isError: boolean;
+      let outcome: ToolOutcome;
       switch (block.name) {
         case "report_findings":
           report = JSON.stringify(block.input, null, 2);
-          output = "Findings recorded.";
-          isError = false;
+          outcome = { output: "Findings recorded.", isError: false };
           break;
         case "bash":
-          ({ output, isError } = await handleBashBlock(block));
+          outcome = await handleBashBlock(block);
           break;
         default:
-          output = `unknown tool: ${block.name}`;
-          isError = true;
+          outcome = { output: `unknown tool: ${block.name}`, isError: true };
       }
       toolResults.push({
         type: "tool_result",
         tool_use_id: block.id,
-        content: output,
-        is_error: isError,
+        content: outcome.output,
+        is_error: outcome.isError,
       });
     }
     if (report !== null) {
@@ -1556,6 +1519,8 @@ async function runSubagent(model: string, prompt: string): Promise<string> {
 ```csharp C#
 // One subagent: a small nested agent loop with the bash tool plus report_findings.
 // Subagents inherit the main loop's effort level.
+JsonSerializerOptions indented = new() { WriteIndented = true };
+
 async Task<string> RunSubagent(string prompt)
 {
     const string subagentSystem =
@@ -1566,15 +1531,15 @@ async Task<string> RunSubagent(string prompt)
     for (var turn = 0; turn < maxSubagentTurns; turn++)
     {
         using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(requestTimeoutSeconds));
-        var response = await client.Messages.Create(new MessageCreateParams
+        var response = await client.Messages.CreateStreaming(new MessageCreateParams
         {
             Model = model,
-            MaxTokens = requestMaxTokens,
+            MaxTokens = 64000,
             System = subagentSystem,
             OutputConfig = new OutputConfig { Effort = effort },
             Tools = [bashTool, reportTool],
             Messages = messages,
-        }, cancellationToken: deadline.Token);
+        }, cancellationToken: deadline.Token).Aggregate();
         messages.Add(new()
         {
             Role = Role.Assistant,
@@ -1602,24 +1567,16 @@ async Task<string> RunSubagent(string prompt)
             {
                 continue;
             }
-            string output;
-            bool isError;
             if (toolUse.Name == "report_findings")
             {
-                report = JsonSerializer.Serialize(
-                    toolUse.Input, new JsonSerializerOptions { WriteIndented = true });
-                output = "Findings recorded.";
-                isError = false;
+                report = JsonSerializer.Serialize(toolUse.Input, indented);
             }
-            else if (toolUse.Name == "bash")
+            var (output, isError) = toolUse.Name switch
             {
-                (output, isError) = await HandleBashBlock(toolUse);
-            }
-            else
-            {
-                output = $"unknown tool: {toolUse.Name}";
-                isError = true;
-            }
+                "report_findings" => ("Findings recorded.", false),
+                "bash" => await HandleBashBlock(toolUse),
+                _ => ($"unknown tool: {toolUse.Name}", true),
+            };
             toolResults.Add(new ToolResultBlockParam(toolUse.ID) { Content = output, IsError = isError });
         }
         if (report is not null)
@@ -1633,53 +1590,64 @@ async Task<string> RunSubagent(string prompt)
 ```
 
 ```go Go
+// streamMessage sends one request and accumulates the streamed events into the
+// final message.
+func streamMessage(ctx context.Context, params anthropic.MessageNewParams) (anthropic.Message, error) {
+	ctx, cancel := context.WithTimeout(ctx, requestTimeoutSeconds*time.Second)
+	defer cancel()
+	stream := client.Messages.NewStreaming(ctx, params)
+	defer stream.Close()
+	var message anthropic.Message
+	for stream.Next() {
+		if err := message.Accumulate(stream.Current()); err != nil {
+			return message, err
+		}
+	}
+	return message, stream.Err()
+}
+
+// textOf joins the text blocks of a response.
+func textOf(message anthropic.Message) string {
+	var text strings.Builder
+	for _, block := range message.Content {
+		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+			text.WriteString(textBlock.Text)
+		}
+	}
+	return text.String()
+}
+
 // runSubagent runs one subagent: a small nested agent loop with the bash tool plus
 // report_findings. Subagents inherit the main loop's effort level.
 func runSubagent(ctx context.Context, model string, prompt string) (string, error) {
-	subagentSystem := "You are one agent in a larger parallel fan-out, assigned a single subtask. " +
+	const subagentSystem = "You are one agent in a larger parallel fan-out, assigned a single subtask. " +
 		"Investigate it directly, using bash to check facts rather than guessing, and finish " +
 		"by calling report_findings exactly once. Return findings, not narration."
 	messages := []anthropic.MessageParam{anthropic.NewUserMessage(anthropic.NewTextBlock(prompt))}
 	for range maxSubagentTurns {
-		var response anthropic.Message
-		err := func() error {
-			ctx, cancel := context.WithTimeout(ctx, requestTimeoutSeconds*time.Second)
-			defer cancel()
-			stream := client.Messages.NewStreaming(ctx, anthropic.MessageNewParams{
-				Model:        model,
-				MaxTokens:    64000,
-				System:       []anthropic.TextBlockParam{{Text: subagentSystem}},
-				OutputConfig: anthropic.OutputConfigParam{Effort: effort},
-				Tools:        []anthropic.ToolUnionParam{bashTool, reportTool},
-				Messages:     messages,
-			})
-			defer stream.Close()
-			for stream.Next() {
-				if err := response.Accumulate(stream.Current()); err != nil {
-					return err
-				}
-			}
-			return stream.Err()
-		}()
+		response, err := streamMessage(ctx, anthropic.MessageNewParams{
+			Model:        model,
+			MaxTokens:    64000,
+			System:       []anthropic.TextBlockParam{{Text: subagentSystem}},
+			OutputConfig: anthropic.OutputConfigParam{Effort: effort},
+			Tools:        []anthropic.ToolUnionParam{bashTool, reportTool},
+			Messages:     messages,
+		})
 		if err != nil {
 			return "", err
 		}
 		messages = append(messages, response.ToParam())
-		if response.StopReason == anthropic.StopReasonPauseTurn {
+
+		switch response.StopReason {
+		case anthropic.StopReasonPauseTurn:
 			continue
+		case anthropic.StopReasonMaxTokens:
+			return textOf(response) + "\n\n(warning: subagent response was truncated at max_tokens)", nil
+		case anthropic.StopReasonToolUse:
+		default:
+			return textOf(response), nil
 		}
-		if response.StopReason != anthropic.StopReasonToolUse {
-			var text strings.Builder
-			for _, block := range response.Content {
-				if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
-					text.WriteString(textBlock.Text)
-				}
-			}
-			if response.StopReason == anthropic.StopReasonMaxTokens {
-				text.WriteString("\n\n(warning: subagent response was truncated at max_tokens)")
-			}
-			return text.String(), nil
-		}
+
 		var toolResults []anthropic.ContentBlockParamUnion
 		var report string
 		var reportRecorded bool
@@ -1702,7 +1670,7 @@ func runSubagent(ctx context.Context, model string, prompt string) (string, erro
 			case "bash":
 				output, isError = handleBashBlock(ctx, toolUse)
 			default:
-				output, isError = fmt.Sprintf("unknown tool: %s", toolUse.Name), true
+				output, isError = "unknown tool: "+toolUse.Name, true
 			}
 			toolResults = append(toolResults, anthropic.NewToolResultBlock(toolUse.ID, output, isError))
 		}
@@ -1717,19 +1685,21 @@ func runSubagent(ctx context.Context, model string, prompt string) (string, erro
 ```
 
 ```java Java
+static final String SUBAGENT_SYSTEM = """
+        You are one agent in a larger parallel fan-out, assigned a single subtask. \
+        Investigate it directly, using bash to check facts rather than guessing, and finish \
+        by calling report_findings exactly once. Return findings, not narration.""";
+
 // One subagent: a small nested agent loop with the bash tool plus report_findings.
 // Subagents inherit the main loop's effort level.
 String runSubagent(Model model, String prompt) throws InterruptedException {
-    String subagentSystem = "You are one agent in a larger parallel fan-out, assigned a single subtask. "
-            + "Investigate it directly, using bash to check facts rather than guessing, and finish "
-            + "by calling report_findings exactly once. Return findings, not narration.";
     List<MessageParam> messages = new ArrayList<>();
     messages.add(MessageParam.builder().role(MessageParam.Role.USER).content(prompt).build());
     for (int turn = 0; turn < MAX_SUBAGENT_TURNS; turn++) {
         MessageCreateParams params = MessageCreateParams.builder()
                 .model(model)
                 .maxTokens(64000L)
-                .system(subagentSystem)
+                .system(SUBAGENT_SYSTEM)
                 .outputConfig(OutputConfig.builder().effort(EFFORT).build())
                 .addTool(BASH_TOOL)
                 .addTool(REPORT_TOOL)
@@ -1755,22 +1725,20 @@ String runSubagent(Model model, String prompt) throws InterruptedException {
             }
             return text;
         }
+        List<ToolUseBlock> toolUses = response.content().stream()
+                .flatMap(block -> block.toolUse().stream())
+                .toList();
         List<ContentBlockParam> toolResults = new ArrayList<>();
         String report = null;
-        for (ContentBlock block : response.content()) {
-            if (block.toolUse().isEmpty()) {
-                continue;
-            }
-            ToolUseBlock toolUse = block.toolUse().get();
-            ToolOutput result;
-            if (toolUse.name().equals("report_findings")) {
-                report = toolUse._input().convert(JsonNode.class).toPrettyString();
-                result = new ToolOutput("Findings recorded.", false);
-            } else if (toolUse.name().equals("bash")) {
-                result = handleBashBlock(toolUse);
-            } else {
-                result = new ToolOutput("unknown tool: " + toolUse.name(), true);
-            }
+        for (ToolUseBlock toolUse : toolUses) {
+            ToolOutput result = switch (toolUse.name()) {
+                case "report_findings" -> {
+                    report = toolUse._input().convert(JsonNode.class).toPrettyString();
+                    yield new ToolOutput("Findings recorded.", false);
+                }
+                case "bash" -> handleBashBlock(toolUse);
+                default -> new ToolOutput("unknown tool: " + toolUse.name(), true);
+            };
             toolResults.add(ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
                     .toolUseId(toolUse.id())
                     .content(result.output())
@@ -2058,7 +2026,7 @@ async Task<Dictionary<string, string>> LoadJournal()
 // that never finished are recomputed. Delete the journal file to start fresh.
 async Task<string> Journaled(string prompt, Func<Task<string>> compute)
 {
-    var key = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(prompt))).ToLowerInvariant();
+    var key = Convert.ToHexStringLower(SHA256.HashData(Encoding.UTF8.GetBytes(prompt)));
     if ((await LoadJournal()).TryGetValue(key, out var cached))
     {
         Console.Error.WriteLine($"[journal] cache hit for {key[..12]}");
@@ -2142,7 +2110,7 @@ Map<String, String> loadJournal() {
         return Objects.requireNonNullElseGet(
                 JOURNAL_MAPPER.readValue(Files.readString(JOURNAL_PATH), new TypeReference<HashMap<String, String>>() {}),
                 HashMap::new);
-    } catch (IOException error) {
+    } catch (IOException _) {
         return new HashMap<>();
     }
 }
@@ -2272,7 +2240,10 @@ def verify_prompt_for(subtask: str, result: str) -> str:
         "that contradicts them. Default to refuted if uncertain. Call report_findings with "
         "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
         "output that decided it.\n\n"
-        f"Subtask: {subtask}\n\nResult to verify:\n{result}"
+        f"""Subtask: {subtask}
+
+Result to verify:
+{result}"""
     )
 
 def run_workflow(model: str, raw_subtasks) -> tuple[str, bool]:
@@ -2299,7 +2270,11 @@ def run_workflow(model: str, raw_subtasks) -> tuple[str, bool]:
         verdicts = list(pool.map(run_one, verify_prompts))
 
     joined = "\n\n".join(
-        f"[agent {index + 1}: {task}]\n{result}\n\n[verify {index + 1}]\n{verdict}"
+        f"""[agent {index + 1}: {task}]
+{result}
+
+[verify {index + 1}]
+{verdict}"""
         for index, (task, result, verdict) in enumerate(zip(subtasks, results, verdicts))
     )
     if dropped > 0:
@@ -2332,14 +2307,18 @@ function normalizeSubtasks(raw: unknown): string[] {
 }
 
 function verifyPromptFor(subtask: string, result: string): string {
-  return (
+  const instructions =
     "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the " +
     "claims yourself with bash rather than trusting the result, and look for evidence " +
     "that contradicts them. Default to refuted if uncertain. Call report_findings with " +
     "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command " +
-    "output that decided it.\n\n" +
-    `Subtask: ${subtask}\n\nResult to verify:\n${result}`
-  );
+    "output that decided it.";
+  return `${instructions}
+
+Subtask: ${subtask}
+
+Result to verify:
+${result}`;
 }
 
 // Map with a concurrency limit: at most `limit` tasks are in flight at once.
@@ -2363,10 +2342,7 @@ async function mapWithLimit<In, Out>(
 // Run subtasks as parallel subagents, then run a second verification wave over
 // the results, and return both. MAX_TOTAL_SUBTASKS bounds how many the model can
 // queue; MAX_CONCURRENT bounds how many run at once.
-async function runWorkflow(
-  model: string,
-  rawSubtasks: unknown,
-): Promise<{ output: string; isError: boolean }> {
+async function runWorkflow(model: string, rawSubtasks: unknown): Promise<ToolOutcome> {
   const allSubtasks = normalizeSubtasks(rawSubtasks);
   const subtasks = allSubtasks.slice(0, MAX_TOTAL_SUBTASKS);
   const dropped = allSubtasks.length - subtasks.length;
@@ -2390,19 +2366,21 @@ async function runWorkflow(
   const verifyPrompts = subtasks.map((task, index) => verifyPromptFor(task, results[index]));
   const verdicts = await mapWithLimit(verifyPrompts, MAX_CONCURRENT, runOne);
 
-  let joined = subtasks
+  const report = subtasks
     .map(
-      (task, index) =>
-        `[agent ${index + 1}: ${task}]\n${results[index]}\n\n[verify ${index + 1}]\n${verdicts[index]}`,
+      (task, index) => `[agent ${index + 1}: ${task}]
+${results[index]}
+
+[verify ${index + 1}]
+${verdicts[index]}`,
     )
     .join("\n\n");
-  if (dropped > 0) {
-    joined =
-      `(note: ${dropped} subtasks beyond MAX_TOTAL_SUBTASKS=${MAX_TOTAL_SUBTASKS} were not ` +
-      "run; rerun them in a follow-up Workflow call)\n\n" +
-      joined;
-  }
-  return { output: joined, isError: false };
+  const droppedNote =
+    dropped > 0
+      ? `(note: ${dropped} subtasks beyond MAX_TOTAL_SUBTASKS=${MAX_TOTAL_SUBTASKS} were ` +
+        "not run; rerun them in a follow-up Workflow call)\n\n"
+      : "";
+  return { output: droppedNote + report, isError: false };
 }
 ```
 
@@ -2411,36 +2389,37 @@ async function runWorkflow(
 // JSON-encoded as a single string, or a newline-separated list.
 List<string> NormalizeSubtasks(JsonElement raw)
 {
-    List<string> tasks = [];
-    if (raw.ValueKind == JsonValueKind.Array)
+    IEnumerable<string?> tasks = raw.ValueKind switch
     {
-        tasks = raw.EnumerateArray()
+        JsonValueKind.Array => raw.EnumerateArray()
             .Where(item => item.ValueKind == JsonValueKind.String)
-            .Select(item => item.GetString()!)
-            .ToList();
-    }
-    else if (raw.ValueKind == JsonValueKind.String)
-    {
-        var single = raw.GetString()!;
-        try
-        {
-            tasks = JsonSerializer.Deserialize<List<string>>(single) ?? [];
-        }
-        catch (JsonException)
-        {
-            tasks = [.. single.Split('\n')];
-        }
-    }
-    return tasks.Where(task => task != null).Select(task => task.Trim()).Where(task => task.Length > 0).ToList();
+            .Select(item => item.GetString()),
+        JsonValueKind.String => ParseSubtaskString(raw.GetString()!),
+        _ => [],
+    };
+    return [.. tasks.OfType<string>().Select(task => task.Trim()).Where(task => task.Length > 0)];
 }
 
-string VerifyPromptFor(string subtask, string result) =>
-    "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the "
-    + "claims yourself with bash rather than trusting the result, and look for evidence "
-    + "that contradicts them. Default to refuted if uncertain. Call report_findings with "
-    + "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
-    + "output that decided it.\n\n"
-    + $"Subtask: {subtask}\n\nResult to verify:\n{result}";
+IEnumerable<string?> ParseSubtaskString(string single)
+{
+    try
+    {
+        return JsonSerializer.Deserialize<List<string?>>(single) ?? [];
+    }
+    catch (JsonException)
+    {
+        return single.Split('\n');
+    }
+}
+
+string VerifyPromptFor(string subtask, string result) => $"""
+    Adversarially verify the subagent result below: try to REFUTE it. Re-derive the claims yourself with bash rather than trusting the result, and look for evidence that contradicts them. Default to refuted if uncertain. Call report_findings with summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command output that decided it.
+
+    Subtask: {subtask}
+
+    Result to verify:
+    {result}
+    """;
 
 // Run subtasks as parallel subagents, then run a second verification wave over
 // the results, and return both. maxTotalSubtasks bounds how many the model can
@@ -2448,7 +2427,7 @@ string VerifyPromptFor(string subtask, string result) =>
 async Task<(string Output, bool IsError)> RunWorkflow(JsonElement rawSubtasks)
 {
     var allSubtasks = NormalizeSubtasks(rawSubtasks);
-    var subtasks = allSubtasks.Take(maxTotalSubtasks).ToList();
+    List<string> subtasks = [.. allSubtasks.Take(maxTotalSubtasks)];
     var dropped = allSubtasks.Count - subtasks.Count;
     if (subtasks.Count == 0)
     {
@@ -2477,17 +2456,22 @@ async Task<(string Output, bool IsError)> RunWorkflow(JsonElement rawSubtasks)
 
     var results = await Task.WhenAll(subtasks.Select(RunOne));
     Console.Error.WriteLine($"[workflow] verifying {results.Length} results");
-    var verifyPrompts = subtasks.Select((task, index) => VerifyPromptFor(task, results[index])).ToList();
-    var verdicts = await Task.WhenAll(verifyPrompts.Select(RunOne));
+    var verdicts = await Task.WhenAll(subtasks.Zip(results, VerifyPromptFor).Select(RunOne));
 
-    var joined = string.Join(
-        "\n\n",
-        subtasks.Select((task, index) =>
-            $"[agent {index + 1}: {task}]\n{results[index]}\n\n[verify {index + 1}]\n{verdicts[index]}"));
+    var joined = string.Join("\n\n", subtasks.Select((task, index) => $"""
+        [agent {index + 1}: {task}]
+        {results[index]}
+
+        [verify {index + 1}]
+        {verdicts[index]}
+        """));
     if (dropped > 0)
     {
-        joined = $"(note: {dropped} subtasks beyond maxTotalSubtasks={maxTotalSubtasks} were not run; "
-            + "rerun them in a follow-up Workflow call)\n\n" + joined;
+        joined = $"""
+            (note: {dropped} subtasks beyond maxTotalSubtasks={maxTotalSubtasks} were not run; rerun them in a follow-up Workflow call)
+
+            {joined}
+            """;
     }
     return (joined, false);
 }
@@ -2522,7 +2506,10 @@ func verifyPromptFor(subtask, result string) string {
 		"that contradicts them. Default to refuted if uncertain. Call report_findings with " +
 		"summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command " +
 		"output that decided it.\n\n" +
-		"Subtask: " + subtask + "\n\nResult to verify:\n" + result
+		fmt.Sprintf(`Subtask: %s
+
+Result to verify:
+%s`, subtask, result)
 }
 
 // mapWithLimit runs task over items with at most limit goroutines in flight.
@@ -2531,13 +2518,11 @@ func mapWithLimit(items []string, limit int, task func(string) string) []string 
 	semaphore := make(chan struct{}, limit)
 	var waitGroup sync.WaitGroup
 	for index, item := range items {
-		waitGroup.Add(1)
 		semaphore <- struct{}{}
-		go func() {
-			defer waitGroup.Done()
+		waitGroup.Go(func() {
 			defer func() { <-semaphore }()
 			results[index] = task(item)
-		}()
+		})
 	}
 	waitGroup.Wait()
 	return results
@@ -2548,10 +2533,7 @@ func mapWithLimit(items []string, limit int, task func(string) string) []string 
 // queue; maxConcurrent bounds how many run at once.
 func runWorkflow(ctx context.Context, model string, rawSubtasks json.RawMessage) (string, bool) {
 	allSubtasks := normalizeSubtasks(rawSubtasks)
-	subtasks := allSubtasks
-	if len(subtasks) > maxTotalSubtasks {
-		subtasks = subtasks[:maxTotalSubtasks]
-	}
+	subtasks := allSubtasks[:min(len(allSubtasks), maxTotalSubtasks)]
 	dropped := len(allSubtasks) - len(subtasks)
 	if len(subtasks) == 0 {
 		return "Workflow error: no usable subtasks were provided.", true
@@ -2577,7 +2559,11 @@ func runWorkflow(ctx context.Context, model string, rawSubtasks json.RawMessage)
 
 	sections := make([]string, len(subtasks))
 	for index, task := range subtasks {
-		sections[index] = fmt.Sprintf("[agent %d: %s]\n%s\n\n[verify %d]\n%s",
+		sections[index] = fmt.Sprintf(`[agent %d: %s]
+%s
+
+[verify %d]
+%s`,
 			index+1, task, results[index], index+1, verdicts[index])
 	}
 	joined := strings.Join(sections, "\n\n")
@@ -2593,58 +2579,57 @@ func runWorkflow(ctx context.Context, model string, rawSubtasks json.RawMessage)
 ```java Java
 // Accept the subtasks input in whatever shape the model emits: an array, the array
 // JSON-encoded as a single string, or a newline-separated list.
-List<String> normalizeSubtasks(JsonValue raw) {
-    List<String> tasks = new ArrayList<>();
-    if (raw.asArray().isPresent()) {
-        for (JsonValue item : (List<JsonValue>) raw.asArray().get()) {
-            tasks.add(item.asString().isPresent() ? item.asStringOrThrow() : item.toString());
-        }
-    } else if (raw.asString().isPresent()) {
-        String single = raw.asStringOrThrow();
-        try {
-            String[] parsed = new ObjectMapper().readValue(single, String[].class);
-            if (parsed != null) {
-                for (String task : parsed) {
-                    tasks.add(task);
-                }
-            }
-        } catch (JsonProcessingException error) {
-            for (String task : single.split("\n")) {
-                tasks.add(task);
-            }
-        }
-    }
+List<String> normalizeSubtasks(JsonValue rawSubtasks) {
+    List<String> tasks = switch (rawSubtasks) {
+        case JsonArray array -> array.values().stream()
+                .map(item -> item instanceof JsonString text ? text.value() : item.toString())
+                .toList();
+        case JsonString string -> parseSubtaskString(string.value());
+        default -> List.of();
+    };
     return tasks.stream()
-            .filter(task -> task != null)
-            .map(String::trim)
+            .filter(Objects::nonNull)
+            .map(String::strip)
             .filter(task -> !task.isEmpty())
             .toList();
 }
 
-String verifyPromptFor(String subtask, String result) {
-    return "Adversarially verify the subagent result below: try to REFUTE it. Re-derive the "
-            + "claims yourself with bash rather than trusting the result, and look for evidence "
-            + "that contradicts them. Default to refuted if uncertain. Call report_findings with "
-            + "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
-            + "output that decided it.\n\n"
-            + "Subtask: " + subtask + "\n\nResult to verify:\n" + result;
+List<String> parseSubtaskString(String encoded) {
+    try {
+        String[] parsed = new ObjectMapper().readValue(encoded, String[].class);
+        return parsed == null ? List.of() : Arrays.asList(parsed);
+    } catch (JsonProcessingException _) {
+        return encoded.lines().toList();
+    }
 }
 
+String verifyPromptFor(String subtask, String result) {
+    return """
+            Adversarially verify the subagent result below: try to REFUTE it. Re-derive the \
+            claims yourself with bash rather than trusting the result, and look for evidence \
+            that contradicts them. Default to refuted if uncertain. Call report_findings with \
+            summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command \
+            output that decided it.
+
+            Subtask: %s
+
+            Result to verify:
+            %s""".formatted(subtask, result);
+}
+
+// invokeAll waits for every job, so each future is finished when it is read here.
 List<String> runAll(ExecutorService pool, List<String> prompts, Model model) throws InterruptedException {
     List<Callable<String>> jobs = prompts.stream()
             .<Callable<String>>map(prompt -> () -> journaled(prompt, () -> runSubagent(model, prompt)))
             .toList();
-    List<String> results = new ArrayList<>();
-    for (Future<String> future : pool.invokeAll(jobs)) {
-        try {
-            results.add(future.get());
-        } catch (ExecutionException | CancellationException error) {
-            // Isolation boundary: one bad subagent should not end the run.
-            Throwable cause = error.getCause() != null ? error.getCause() : error;
-            results.add("(subagent failed: " + cause + ")");
-        }
-    }
-    return results;
+    return pool.invokeAll(jobs).stream()
+            .map(future -> switch (future.state()) {
+                case SUCCESS -> future.resultNow();
+                // Isolation boundary: one bad subagent should not end the run.
+                case FAILED -> "(subagent failed: " + future.exceptionNow() + ")";
+                case CANCELLED, RUNNING -> "(subagent failed: cancelled)";
+            })
+            .toList();
 }
 
 // Run subtasks as parallel subagents, then run a second verification wave over
@@ -2670,12 +2655,18 @@ ToolOutput runWorkflow(Model model, JsonValue rawSubtasks) throws InterruptedExc
         verdicts = runAll(pool, verifyPrompts, model);
     }
     String joined = IntStream.range(0, subtasks.size())
-            .mapToObj(index -> "[agent " + (index + 1) + ": " + subtasks.get(index) + "]\n" + results.get(index)
-                    + "\n\n[verify " + (index + 1) + "]\n" + verdicts.get(index))
+            .mapToObj(index -> """
+                    [agent %d: %s]
+                    %s
+
+                    [verify %d]
+                    %s""".formatted(index + 1, subtasks.get(index), results.get(index), index + 1, verdicts.get(index)))
             .collect(Collectors.joining("\n\n"));
     if (dropped > 0) {
-        joined = "(note: " + dropped + " subtasks beyond MAX_TOTAL_SUBTASKS=" + MAX_TOTAL_SUBTASKS
-                + " were not run; rerun them in a follow-up Workflow call)\n\n" + joined;
+        joined = """
+                (note: %d subtasks beyond MAX_TOTAL_SUBTASKS=%d were not run; rerun them in a follow-up Workflow call)
+
+                %s""".formatted(dropped, MAX_TOTAL_SUBTASKS, joined);
     }
     return new ToolOutput(joined, false);
 }
@@ -2709,7 +2700,12 @@ function verifyPromptFor(string $subtask, string $result): string
         . 'that contradicts them. Default to refuted if uncertain. Call report_findings with '
         . "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command "
         . "output that decided it.\n\n"
-        . "Subtask: {$subtask}\n\nResult to verify:\n{$result}";
+        . <<<PROMPT
+            Subtask: {$subtask}
+
+            Result to verify:
+            {$result}
+            PROMPT;
 }
 
 /**
@@ -2776,8 +2772,13 @@ def verify_prompt_for(subtask, result)
     "claims yourself with bash rather than trusting the result, and look for evidence " \
     "that contradicts them. Default to refuted if uncertain. Call report_findings with " \
     "summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command " \
-    "output that decided it.\n\n" \
-    "Subtask: #{subtask}\n\nResult to verify:\n#{result}"
+    "output that decided it.\n\n" +
+    <<~PROMPT.chomp
+      Subtask: #{subtask}
+
+      Result to verify:
+      #{result}
+    PROMPT
 end
 
 # Map with a concurrency limit: at most `limit` threads are in flight at once.
@@ -2819,7 +2820,13 @@ def run_workflow(model, raw_subtasks)
   verdicts = map_with_limit(verify_prompts, MAX_CONCURRENT, &run_one)
 
   joined = subtasks.each_with_index.map do |task, index|
-    "[agent #{index + 1}: #{task}]\n#{results[index]}\n\n[verify #{index + 1}]\n#{verdicts[index]}"
+    <<~ENTRY.chomp
+      [agent #{index + 1}: #{task}]
+      #{results[index]}
+
+      [verify #{index + 1}]
+      #{verdicts[index]}
+    ENTRY
   end.join("\n\n")
   if dropped > 0
     joined =
@@ -2997,7 +3004,7 @@ class ModeAgent:
             if response.stop_reason != "tool_use":
                 text = "".join(block.text for block in response.content if block.type == "text")
                 if response.stop_reason == "max_tokens":
-                    # Drop the truncated assistant message so later turns don't build on it.
+                    # Drop the truncated assistant message so later turns do not build on it.
                     self.messages.pop()
                     text += "\n\n(warning: response was truncated at max_tokens)"
                 return text
@@ -3028,91 +3035,82 @@ class ModeAgent:
 ```typescript TypeScript
 // An agent loop whose orchestration mode is toggled with mid-conversation system messages.
 class ModeAgent {
-  private readonly model: string;
-  private modeOn: boolean;
-  private readonly messages: Anthropic.MessageParam[] = [];
-  private modeAnnounced = false;
-  private exitPending = false;
-  private turnsSinceReminder = 0;
+  readonly #model: string;
+  readonly #messages: Anthropic.MessageParam[] = [];
+  #modeOn: boolean;
+  #modeAnnounced = false;
+  #exitPending = false;
+  #turnsSinceReminder = 0;
 
   constructor(model: string, modeOn = true) {
-    this.model = model;
-    this.modeOn = modeOn;
+    this.#model = model;
+    this.#modeOn = modeOn;
   }
 
   // Turn the mode on or off. The notice is delivered with the next user turn.
   setMode(modeOn: boolean): void {
-    if (modeOn === this.modeOn) {
+    if (modeOn === this.#modeOn) {
       return;
     }
-    if (!modeOn) {
-      if (this.modeAnnounced) {
-        this.exitPending = true;
-      }
-    } else {
-      this.exitPending = false;
-    }
-    this.modeOn = modeOn;
+    // An exit notice is only owed if the model was told the mode was on.
+    this.#exitPending = !modeOn && this.#modeAnnounced;
+    this.#modeOn = modeOn;
   }
 
   // System messages owed on this turn: an exit notice, the full mode text on entry,
   // or a one-line refresher every TURNS_BETWEEN_REFRESHERS user turns.
-  private dueSystemMessages(): Anthropic.MessageParam[] {
-    const due: Array<{ role: "system"; content: string }> = [];
-    if (this.exitPending) {
-      this.exitPending = false;
-      this.modeAnnounced = false;
+  #dueSystemMessages(): Anthropic.MessageParam[] {
+    const due: Anthropic.MessageParam[] = [];
+    if (this.#exitPending) {
+      this.#exitPending = false;
+      this.#modeAnnounced = false;
       due.push({ role: "system", content: MODE_EXIT });
     }
-    if (this.modeOn) {
-      if (!this.modeAnnounced) {
-        this.modeAnnounced = true;
-        this.turnsSinceReminder = 0;
+    if (this.#modeOn) {
+      if (!this.#modeAnnounced) {
+        this.#modeAnnounced = true;
+        this.#turnsSinceReminder = 0;
         due.push({ role: "system", content: MODE_ENTER });
-      } else if (this.turnsSinceReminder >= TURNS_BETWEEN_REFRESHERS) {
-        this.turnsSinceReminder = 0;
+      } else if (this.#turnsSinceReminder >= TURNS_BETWEEN_REFRESHERS) {
+        this.#turnsSinceReminder = 0;
         due.push({ role: "system", content: MODE_REFRESH });
       }
     }
-    // The published SDK types message roles as "user" | "assistant"; typed support for
-    // mid-conversation system messages ships with the SDK release that includes them.
-    return due as unknown as Anthropic.MessageParam[];
+    return due;
   }
 
   async turn(userInput: string): Promise<string> {
     // Mid-conversation system messages follow the user turn they apply to, which keeps
     // the cached prefix ahead of them untouched.
-    this.messages.push({ role: "user", content: userInput });
-    this.messages.push(...this.dueSystemMessages());
-    this.turnsSinceReminder += 1;
+    this.#messages.push({ role: "user", content: userInput }, ...this.#dueSystemMessages());
+    this.#turnsSinceReminder += 1;
 
     for (let turn = 0; turn < MAX_MAIN_TURNS; turn++) {
       const response = await client.messages
         .stream(
           {
-            model: this.model,
+            model: this.#model,
             max_tokens: 64000,
             system: SYSTEM_PROMPT, // static for the whole session
             output_config: { effort: EFFORT },
             tools: [WORKFLOW_TOOL, BASH_TOOL],
-            messages: this.messages,
+            messages: this.#messages,
           },
           { signal: AbortSignal.timeout(REQUEST_TIMEOUT_SECONDS * 1000) },
         )
         .finalMessage();
-      this.messages.push({ role: "assistant", content: response.content });
+      this.#messages.push({ role: "assistant", content: response.content });
 
       if (response.stop_reason === "pause_turn") {
         continue;
       }
       if (response.stop_reason !== "tool_use") {
         let text = response.content
-          .filter((block): block is Anthropic.TextBlock => block.type === "text")
-          .map((block) => block.text)
+          .flatMap((block) => (block.type === "text" ? [block.text] : []))
           .join("");
         if (response.stop_reason === "max_tokens") {
           // Drop the truncated assistant message so later turns do not build on it.
-          this.messages.pop();
+          this.#messages.pop();
           text += "\n\n(warning: response was truncated at max_tokens)";
         }
         return text;
@@ -3123,29 +3121,27 @@ class ModeAgent {
         if (block.type !== "tool_use") {
           continue;
         }
-        let output: string;
-        let isError: boolean;
+        let outcome: ToolOutcome;
         switch (block.name) {
           case "Workflow": {
-            const input = block.input as { subtasks?: unknown };
-            ({ output, isError } = await runWorkflow(this.model, input.subtasks ?? []));
+            const { subtasks } = block.input as { subtasks?: unknown };
+            outcome = await runWorkflow(this.#model, subtasks);
             break;
           }
           case "bash":
-            ({ output, isError } = await handleBashBlock(block));
+            outcome = await handleBashBlock(block);
             break;
           default:
-            output = `unknown tool: ${block.name}`;
-            isError = true;
+            outcome = { output: `unknown tool: ${block.name}`, isError: true };
         }
         toolResults.push({
           type: "tool_result",
           tool_use_id: block.id,
-          content: output,
-          is_error: isError,
+          content: outcome.output,
+          is_error: outcome.isError,
         });
       }
-      this.messages.push({ role: "user", content: toolResults });
+      this.#messages.push({ role: "user", content: toolResults });
     }
     return "(hit the main loop turn limit before finishing)";
   }
@@ -3167,23 +3163,12 @@ void SetMode(bool nextModeOn)
     {
         return;
     }
-    if (!nextModeOn)
-    {
-        if (modeAnnounced)
-        {
-            exitPending = true;
-        }
-    }
-    else
-    {
-        exitPending = false;
-    }
+    // An exit notice is owed only if the model was told the mode was on.
+    exitPending = !nextModeOn && modeAnnounced;
     modeOn = nextModeOn;
 }
 
-// The Role property is an open enum, so the mid-conversation "system" role can be assigned
-// as a raw string; a dedicated constant ships with the SDK release.
-MessageParam SystemMessage(string content) => new() { Role = "system", Content = content };
+MessageParam SystemMessage(string content) => new() { Role = Role.System, Content = content };
 
 // System messages owed on this turn: an exit notice, the full mode text on entry,
 // or a one-line refresher every turnsBetweenRefreshers user turns.
@@ -3225,15 +3210,15 @@ async Task<string> Turn(string userInput)
     for (var turn = 0; turn < maxMainTurns; turn++)
     {
         using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(requestTimeoutSeconds));
-        var response = await client.Messages.Create(new MessageCreateParams
+        var response = await client.Messages.CreateStreaming(new MessageCreateParams
         {
             Model = model,
-            MaxTokens = requestMaxTokens,
+            MaxTokens = 64000,
             System = systemPrompt, // static for the whole session
             OutputConfig = new OutputConfig { Effort = effort },
             Tools = [workflowTool, bashTool],
             Messages = messages,
-        }, cancellationToken: deadline.Token);
+        }, cancellationToken: deadline.Token).Aggregate();
         messages.Add(new()
         {
             Role = Role.Assistant,
@@ -3250,7 +3235,7 @@ async Task<string> Turn(string userInput)
                 response.Content.Select(block => block.TryPickText(out var textBlock) ? textBlock.Text : ""));
             if (response.StopReason == StopReason.MaxTokens)
             {
-                // Drop the truncated assistant message so the next turn does not build on it.
+                // Drop the truncated assistant message so later turns do not build on it.
                 messages.RemoveAt(messages.Count - 1);
                 text += "\n\n(warning: response was truncated at max_tokens)";
             }
@@ -3264,22 +3249,12 @@ async Task<string> Turn(string userInput)
             {
                 continue;
             }
-            string output;
-            bool isError;
-            if (toolUse.Name == "Workflow")
+            var (output, isError) = toolUse.Name switch
             {
-                toolUse.Input.TryGetValue("subtasks", out var rawSubtasks);
-                (output, isError) = await RunWorkflow(rawSubtasks);
-            }
-            else if (toolUse.Name == "bash")
-            {
-                (output, isError) = await HandleBashBlock(toolUse);
-            }
-            else
-            {
-                output = $"unknown tool: {toolUse.Name}";
-                isError = true;
-            }
+                "Workflow" => await RunWorkflow(toolUse.Input.GetValueOrDefault("subtasks")),
+                "bash" => await HandleBashBlock(toolUse),
+                _ => ($"unknown tool: {toolUse.Name}", true),
+            };
             toolResults.Add(new ToolResultBlockParam(toolUse.ID) { Content = output, IsError = isError });
         }
         messages.Add(new() { Role = Role.User, Content = toolResults });
@@ -3322,11 +3297,9 @@ func (agent *modeAgent) setMode(modeOn bool) {
 // dueSystemMessages returns the system messages owed on this turn: an exit notice, the
 // full mode text on entry, or a one-line refresher every turnsBetweenRefreshers user turns.
 func (agent *modeAgent) dueSystemMessages() []anthropic.MessageParam {
-	// MessageParamRole is an open string type, so the mid-conversation "system" role can
-	// be expressed directly; a dedicated constant ships with the SDK release.
 	systemMessage := func(content string) anthropic.MessageParam {
 		return anthropic.MessageParam{
-			Role:    anthropic.MessageParamRole("system"),
+			Role:    anthropic.MessageParamRoleSystem,
 			Content: []anthropic.ContentBlockParamUnion{anthropic.NewTextBlock(content)},
 		}
 	}
@@ -3358,47 +3331,29 @@ func (agent *modeAgent) turn(ctx context.Context, userInput string) (string, err
 	agent.turnsSinceReminder++
 
 	for range maxMainTurns {
-		var response anthropic.Message
-		err := func() error {
-			ctx, cancel := context.WithTimeout(ctx, requestTimeoutSeconds*time.Second)
-			defer cancel()
-			stream := client.Messages.NewStreaming(ctx, anthropic.MessageNewParams{
-				Model:        agent.model,
-				MaxTokens:    64000,
-				System:       []anthropic.TextBlockParam{{Text: systemPrompt}}, // static for the whole session
-				OutputConfig: anthropic.OutputConfigParam{Effort: effort},
-				Tools:        []anthropic.ToolUnionParam{workflowTool, bashTool},
-				Messages:     agent.messages,
-			})
-			defer stream.Close()
-			for stream.Next() {
-				if err := response.Accumulate(stream.Current()); err != nil {
-					return err
-				}
-			}
-			return stream.Err()
-		}()
+		response, err := streamMessage(ctx, anthropic.MessageNewParams{
+			Model:        agent.model,
+			MaxTokens:    64000,
+			System:       []anthropic.TextBlockParam{{Text: systemPrompt}}, // static for the whole session
+			OutputConfig: anthropic.OutputConfigParam{Effort: effort},
+			Tools:        []anthropic.ToolUnionParam{workflowTool, bashTool},
+			Messages:     agent.messages,
+		})
 		if err != nil {
 			return "", err
 		}
 		agent.messages = append(agent.messages, response.ToParam())
 
-		if response.StopReason == anthropic.StopReasonPauseTurn {
+		switch response.StopReason {
+		case anthropic.StopReasonPauseTurn:
 			continue
-		}
-		if response.StopReason != anthropic.StopReasonToolUse {
-			var text strings.Builder
-			for _, block := range response.Content {
-				if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
-					text.WriteString(textBlock.Text)
-				}
-			}
-			if response.StopReason == anthropic.StopReasonMaxTokens {
-				// Drop the truncated assistant message rather than leave a clipped turn in history.
-				agent.messages = agent.messages[:len(agent.messages)-1]
-				text.WriteString("\n\n(warning: response was truncated at max_tokens)")
-			}
-			return text.String(), nil
+		case anthropic.StopReasonMaxTokens:
+			// Drop the truncated assistant message so later turns do not build on it.
+			agent.messages = agent.messages[:len(agent.messages)-1]
+			return textOf(response) + "\n\n(warning: response was truncated at max_tokens)", nil
+		case anthropic.StopReasonToolUse:
+		default:
+			return textOf(response), nil
 		}
 
 		var toolResults []anthropic.ContentBlockParamUnion
@@ -3422,7 +3377,7 @@ func (agent *modeAgent) turn(ctx context.Context, userInput string) (string, err
 			case "bash":
 				output, isError = handleBashBlock(ctx, toolUse)
 			default:
-				output, isError = fmt.Sprintf("unknown tool: %s", toolUse.Name), true
+				output, isError = "unknown tool: "+toolUse.Name, true
 			}
 			toolResults = append(toolResults, anthropic.NewToolResultBlock(toolUse.ID, output, isError))
 		}
@@ -3437,11 +3392,11 @@ func (agent *modeAgent) turn(ctx context.Context, userInput string) (string, err
 // An agent loop whose orchestration mode is toggled with mid-conversation system messages.
 class ModeAgent {
     private final Model model;
-    private boolean modeOn;
     private final List<MessageParam> messages = new ArrayList<>();
-    private boolean modeAnnounced = false;
-    private boolean exitPending = false;
-    private int turnsSinceReminder = 0;
+    private boolean modeOn;
+    private boolean modeAnnounced;
+    private boolean exitPending;
+    private int turnsSinceReminder;
 
     ModeAgent(Model model) {
         this(model, true);
@@ -3452,18 +3407,13 @@ class ModeAgent {
         this.modeOn = modeOn;
     }
 
-    // Turn the mode on or off. The notice is delivered with the next user turn.
+    // Turn the mode on or off. The notice is delivered with the next user turn:
+    // an exit notice is owed only if the model was told the mode was on.
     void setMode(boolean modeOn) {
         if (modeOn == this.modeOn) {
             return;
         }
-        if (!modeOn) {
-            if (modeAnnounced) {
-                exitPending = true;
-            }
-        } else {
-            exitPending = false;
-        }
+        exitPending = !modeOn && modeAnnounced;
         this.modeOn = modeOn;
     }
 
@@ -3489,11 +3439,9 @@ class ModeAgent {
         return due;
     }
 
-    // MessageParam.Role is an open enum, so the mid-conversation "system" role can be
-    // expressed with Role.of; a dedicated constant ships with the SDK release.
     private MessageParam systemMessage(String content) {
         return MessageParam.builder()
-                .role(MessageParam.Role.of("system"))
+                .role(MessageParam.Role.SYSTEM)
                 .content(content)
                 .build();
     }
@@ -3533,26 +3481,21 @@ class ModeAgent {
                         .map(TextBlock::text)
                         .collect(Collectors.joining());
                 if (StopReason.MAX_TOKENS.equals(stopReason)) {
-                    // Drop the truncated assistant message so it does not poison later turns.
+                    // Drop the truncated assistant message so later turns do not build on it.
                     messages.removeLast();
                     text += "\n\n(warning: response was truncated at max_tokens)";
                 }
                 return text;
             }
 
+            List<ToolUseBlock> toolUses = response.content().stream()
+                    .flatMap(block -> block.toolUse().stream())
+                    .toList();
             List<ContentBlockParam> toolResults = new ArrayList<>();
-            for (ContentBlock block : response.content()) {
-                if (block.toolUse().isEmpty()) {
-                    continue;
-                }
-                ToolUseBlock toolUse = block.toolUse().get();
+            for (ToolUseBlock toolUse : toolUses) {
                 ToolOutput result = switch (toolUse.name()) {
-                    case "Workflow" -> {
-                        Map<String, JsonValue> input =
-                                (Map<String, JsonValue>) toolUse._input().asObject().orElse(Map.of());
-                        JsonValue rawSubtasks = input.getOrDefault("subtasks", JsonValue.from(List.of()));
-                        yield runWorkflow(model, rawSubtasks);
-                    }
+                    case "Workflow" -> runWorkflow(model,
+                            toolInput(toolUse).getOrDefault("subtasks", JsonValue.from(List.of())));
                     case "bash" -> handleBashBlock(toolUse);
                     default -> new ToolOutput("unknown tool: " + toolUse.name(), true);
                 };
@@ -3634,7 +3577,7 @@ class ModeAgent
                     }
                 }
                 if ($stopReason === 'max_tokens') {
-                    // Drop the truncated assistant message so the next turn does not build on it.
+                    // Drop the truncated assistant message so later turns do not build on it.
                     array_pop($this->messages);
                     $text .= "\n\n(warning: response was truncated at max_tokens)";
                 }
@@ -3743,7 +3686,8 @@ class ModeAgent
       unless response.stop_reason == :tool_use
         text = response.content.select { |block| block.type == :text }.map(&:text).join
         if response.stop_reason == :max_tokens
-          @messages.pop # drop the truncated assistant message from the history
+          # Drop the truncated assistant message so later turns do not build on it.
+          @messages.pop
           text += "\n\n(warning: response was truncated at max_tokens)"
         end
         return text
@@ -3875,10 +3819,9 @@ func run(ctx context.Context) error {
 
 ```java Java
 void main(String[] args) throws InterruptedException {
-    String task = args.length > 0
-            ? args[0]
-            : "Explore the current directory, then give a thorough review: what it does, "
-                    + "code-quality issues, and concrete improvements.";
+    String task = args.length > 0 ? args[0] : """
+            Explore the current directory, then give a thorough review: what it does, \
+            code-quality issues, and concrete improvements.""";
     ModeAgent agent = new ModeAgent(MODEL);
     IO.println(agent.turn(task));
     agent.setMode(false);

@@ -46,20 +46,20 @@ go get github.com/anthropics/anthropic-sdk-go
 **Java**
 
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java:2.70.0")
-implementation("com.anthropic:anthropic-java-vertex:2.70.0")
+implementation("com.anthropic:anthropic-java:2.71.0")
+implementation("com.anthropic:anthropic-java-vertex:2.71.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.70.0</version>
+    <version>2.71.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.70.0</version>
+    <version>2.71.0</version>
 </dependency>
 ```
 
@@ -70,10 +70,17 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.vertex.backends.VertexBackend;
+import com.google.auth.oauth2.GoogleCredentials;
 
-void main() {
+void main() throws Exception {
     AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(VertexBackend.fromEnv())
+        .backend(
+            VertexBackend.builder()
+                .googleCredentials(GoogleCredentials.getApplicationDefault())
+                .region("global")
+                .project("MY_PROJECT_ID")
+                .build()
+        )
         .build();
 
     MessageCreateParams params = MessageCreateParams.builder()
@@ -262,11 +269,17 @@ import com.anthropic.models.messages.Message;
 import com.anthropic.models.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 import com.anthropic.vertex.backends.VertexBackend;
+import com.google.auth.oauth2.GoogleCredentials;
 
-void main() {
-    // Uses default Google Cloud credentials
+void main() throws Exception {
     AnthropicClient client = AnthropicOkHttpClient.builder()
-        .backend(VertexBackend.fromEnv())
+        .backend(
+            VertexBackend.builder()
+                .googleCredentials(GoogleCredentials.getApplicationDefault())
+                .region("global")
+                .project("MY_PROJECT_ID")
+                .build()
+        )
         .build();
 
     Message message = client
@@ -527,7 +540,6 @@ import com.anthropic.vertex.backends.VertexBackend;
 import com.google.auth.oauth2.GoogleCredentials;
 
 void main() throws Exception {
-    // Uses default Google Cloud credentials
     AnthropicClient client = AnthropicOkHttpClient.builder()
         .backend(
             VertexBackend.builder()
@@ -907,7 +919,6 @@ import com.anthropic.vertex.backends.VertexBackend;
 import com.google.auth.oauth2.GoogleCredentials;
 
 void main() throws Exception {
-    // Uses default Google Cloud credentials with specific region
     AnthropicClient client = AnthropicOkHttpClient.builder()
         .backend(
             VertexBackend.builder()

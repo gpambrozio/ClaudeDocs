@@ -153,7 +153,7 @@ If you already added the marketplace, check the spelling against `/plugin market
   `Invalid marketplace source format`
 </h3>
 
-You ran `/plugin marketplace add <source>` or `claude plugin marketplace add <source>`, and Claude Code replied `Invalid marketplace source format. Try: owner/repo, https://..., or ./path`.
+You ran `/plugin marketplace add <source>`, `claude plugin marketplace add <source>`, or `claude plugin install <plugin> --marketplace <source>`, and Claude Code replied `Invalid marketplace source format. Try: owner/repo, https://..., or ./path`.
 
 Claude Code accepts a source in one of these forms:
 
@@ -550,7 +550,7 @@ Claude Code prints `Successfully added marketplace: claude-plugins-official`, an
   `Marketplace "<name>" is already added from a different source`
 </h3>
 
-You confirmed adding a marketplace through [`/plugin install <plugin> --marketplace <source>`](install.md#add-a-marketplace-and-install-in-one-command), and the catalog Claude Code fetched from that source has the same name as a marketplace you already added from a different source. Claude Code keeps the existing marketplace instead of replacing it, and the plugin isn't installed.
+You named a new marketplace source with [`--marketplace <source>` on the install command](install.md#add-a-marketplace-and-install-in-one-command), in a session or from your shell. The catalog Claude Code fetched from that source has the same name as a marketplace you already added from a different source. Claude Code keeps the existing marketplace instead of replacing it, and the plugin isn't installed.
 
 The full message looks like this:
 
@@ -789,6 +789,24 @@ claude plugin install <name>@<marketplace> --scope project
 After you run `/reload-plugins` in your session, the **Errors** tab entry is gone and the plugin is listed under **Installed**.
 
 If your organization pre-installs plugins for you, it does so through managed settings instead. See [Pre-install and require plugins](org.md#pre-install-and-require-plugins).
+
+<h3 id="a-plugin-stays-installed-after-plugin-uninstall-on-windows">
+  A plugin stays installed after `plugin uninstall` on Windows
+</h3>
+
+On Windows, you run `claude plugin uninstall` at project or local scope and it reports success, but `claude plugin list` or `/plugin` still lists the plugin.
+
+`installed_plugins.json` held two install records of the plugin for the project folder, each spelling the folder's path differently, and one uninstall removes one of them. To check, run `claude plugin list --json` in your shell. The plugin's remaining row has a `projectPath` that spells the folder differently from where you ran the uninstall, such as `c:\work\app` for `C:\work\app`.
+
+Run the same uninstall command again, with the same `--scope`, from the same folder. The second run finds no record under its own spelling of the path, so it removes the one under the other spelling. For a project-scope install:
+
+```shell
+claude plugin uninstall <name>@<marketplace> --scope project
+```
+
+Then run `claude plugin list --json` again to confirm that the row is gone.
+
+Before v2.1.295, the second run fails with `Plugin "<name>" is not installed in project scope`. Run `claude update`, then run the uninstall again.
 
 <h3 id="failed-to-load-hooks-from-and-hooks-that-dont-fire">
   `Failed to load hooks from <path>` and hooks that don't fire

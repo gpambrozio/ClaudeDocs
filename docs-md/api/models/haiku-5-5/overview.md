@@ -92,8 +92,9 @@ For code changes, see the [migration guide](migration-guide.md). For model IDs, 
 ## Good to know
 
 * Adaptive thinking is on by default. Control thinking depth with the [effort parameter](../../build-with-claude/effort.md).
-* Omit `temperature`, `top_p`, and `top_k`, since a non-default value for any of them returns a 400 error.
+* Omit `temperature`, `top_p`, and `top_k`. See [Remove sampling parameters](migration-guide.md#remove-sampling-parameters) for the values that return a 400 error.
 * On the [Message Batches API](../../build-with-claude/batch-processing.md#extended-output-beta), Claude Haiku 5.5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
+* The minimum cacheable prompt length is 512 tokens. See [Prompt caching](../../build-with-claude/prompt-caching.md#cache-limitations).
 * Query limits and capabilities programmatically with the [Models API](../../api/models/list.md).
 
 ## Resources
@@ -112,7 +113,7 @@ Claude Haiku 5.5 determines when and how much to think. Steer depth with `effort
 
 **Context windows**
 
-1M tokens. How the window is counted and managed.
+How the context window is counted and managed.
 
 ## Reference
 

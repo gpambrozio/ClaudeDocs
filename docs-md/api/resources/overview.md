@@ -10,6 +10,10 @@ description: Model cards with detailed documentation for Claude models.
 
 Detailed documentation of Claude Haiku 5.5.
 
+**Claude Sonnet 5.5 System Card**
+
+Detailed documentation of Claude Sonnet 5.5.
+
 **Claude Opus 5.5 System Card**
 
 Detailed documentation of Claude Opus 5.5.

@@ -31,6 +31,12 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -448,6 +454,12 @@ unless `include_archived=true`.
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -750,6 +762,12 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   ID of the federation rule.
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1071,6 +1089,12 @@ Console session.
   ID of the federation rule to update.
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1464,6 +1488,12 @@ other scopes require a Console session.
   ID of the federation rule to archive.
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1995,6 +2025,12 @@ other scopes require a Console session.
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2196,6 +2232,12 @@ rules with `applies_to_all_workspaces` or a legacy single
 
 #### Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2386,6 +2428,12 @@ Console session.
   ID of the workspace to disable for.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
