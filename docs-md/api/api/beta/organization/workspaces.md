@@ -324,7 +324,7 @@ Create Workspace
 
   Name of the Workspace.
 
-  minLength: 1, maxLength: 40
+  minLength: 1, maxLength: 255
 
 - `data_residency: optional BetaDataResidencyCreateConfig or null`
 
@@ -732,7 +732,7 @@ Update Workspace
 
   Name of the Workspace.
 
-  minLength: 1, maxLength: 40
+  minLength: 1, maxLength: 255
 
 - `tags: optional map[string] or null`
 

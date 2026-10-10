@@ -231,11 +231,11 @@ Use the first failing check to locate the problem:
 
 **Log a developer in**
 
-This last step happens on a developer machine, not the server. Set `forceLoginMethod` to `"gateway"` and `forceLoginGatewayUrl` to your gateway's `public_url` in that machine's [managed settings file](managed-settings.md#delivery-mechanisms), then run `/login`, press Enter on the **Cloud gateway** screen, and complete the browser sign-in. [Set the gateway URL](#set-the-gateway-url) below covers distributing both keys to every developer machine.
+This last step happens on a developer machine, not the server. Set `forceLoginMethod` to `"gateway"`, `forceLoginGatewayUrl` to your gateway's `public_url`, and `parentSettingsBehavior` to `"merge"` in that machine's [managed settings file](managed-settings.md#delivery-mechanisms), then run `/login`, press Enter on the **Cloud gateway** screen, and complete the browser sign-in. [Set the gateway URL](#set-the-gateway-url) below covers the three keys and distributing them to every developer machine.
 
 ## Connect developers
 
-Developers connect from their own laptops with one browser sign-in, using their corporate work account. They don't need a claude.ai account, an API key, or a subscription, because requests to the model go through the gateway using the organization's upstream credential. Connection is driven by the [client-side managed settings](claude-apps-gateway-config.md#client-side-managed-settings) you push via MDM, so there is no manual setup on the developer side; this section covers what the admin configures.
+Developers connect from their own laptops with one browser sign-in, using their corporate work account. They don't need a claude.ai account, an API key, or a subscription, because requests to the model go through the gateway using the organization's upstream credential. Connection is driven by the [client-side managed settings](claude-apps-gateway-config.md#client-side-managed-settings) you push via MDM, and this section covers what the admin configures.
 
 The CLI fingerprints the gateway's TLS leaf certificate on first connect and pins it per hostname. It checks that pin again during sign-in, on silent session refreshes, and on managed-settings fetches, while inference requests use standard TLS validation without the pin. Requests routed through an HTTPS proxy skip the pin check, so add the gateway host to `NO_PROXY` to keep them direct.
 
@@ -257,7 +257,7 @@ Sessions refresh silently before `ttl_hours` expiry. When a refresh fails after 
 
 ### Set the gateway URL
 
-Three keys go in the per-OS [managed settings file](managed-settings.md#delivery-mechanisms) you deploy via MDM or directly on disk. `forceLoginMethod` and `forceLoginGatewayUrl` open `/login` directly on the **Cloud gateway** screen with the URL filled in, and `parentSettingsBehavior: "merge"` lets Claude Desktop deliver the gateway's egress allowlist to the Claude Code sessions it launches, explained in [Deliver policy to Claude Desktop sessions](#deliver-policy-to-claude-desktop-sessions):
+Three keys go in the per-OS [managed settings file](managed-settings.md#delivery-mechanisms) you deploy via MDM or directly on disk. For a machine with no managed settings, see [Set the gateway URL in user settings](#set-the-gateway-url-in-user-settings) instead. `forceLoginMethod` and `forceLoginGatewayUrl` open `/login` directly on the **Cloud gateway** screen with the URL filled in, and `parentSettingsBehavior: "merge"` lets Claude Desktop deliver the gateway's egress allowlist to the Claude Code sessions it launches, explained in [Deliver policy to Claude Desktop sessions](#deliver-policy-to-claude-desktop-sessions):
 
 ```json
 {
@@ -269,7 +269,23 @@ Three keys go in the per-OS [managed settings file](managed-settings.md#delivery
 
 The developer presses Enter to connect. The [first-connect TLS fingerprint prompt](#connect-developers) still appears. Once the file is on a machine, a developer who hasn't completed the gateway sign-in sees one of the messages described under [Administrator policy requires a Cloud gateway sign-in](errors.md#administrator-policy-requires-a-cloud-gateway-sign-in). Developers who select a cloud provider through an environment variable such as `CLAUDE_CODE_USE_BEDROCK` don't need the gateway sign-in.
 
-A developer can't set this up manually. The login picker has no gateway option, and `forceLoginGatewayUrl` is ignored in a developer's own settings files. `forceLoginMethod` alone, without a URL, leaves the developer at a "Contact your IT administrator" message. The login keys belong in the file you push to machines, not in the gateway's `managed.policies[].cli` block, which only reaches clients that are already connected.
+The login picker has no gateway option, and in managed settings `forceLoginMethod` alone, without a URL, leaves the developer at a "Contact your IT administrator" message. The login keys belong in the file you push to machines, not in the gateway's `managed.policies[].cli` block, which only reaches clients that are already connected.
+
+#### Set the gateway URL in user settings
+
+On machines with no managed settings, have each developer add `forceLoginMethod` and `forceLoginGatewayUrl` to their own user settings file, `~/.claude/settings.json`. This requires Claude Code v2.1.295 or later on the developer machine. This example names a gateway at `claude-gateway.internal.example.com`:
+
+```json
+{
+  "forceLoginMethod": "gateway",
+  "forceLoginGatewayUrl": "https://claude-gateway.internal.example.com"
+}
+```
+
+When the developer runs `/login` at the Claude Code prompt, the **Cloud gateway** screen opens on that address and they press Enter to connect. The [first-connect TLS fingerprint prompt](#connect-developers) still appears. These limits apply to keys set this way:
+
+* **User settings only**: Claude Code reads the two keys from `~/.claude/settings.json`, not from a project's `.claude/settings.json` or `.claude/settings.local.json`.
+* **Managed settings turn them off**: once an administrator's settings reach the machine through a managed settings file, a macOS plist or Windows HKLM policy, or a [policy helper](settings-reference.md#policyhelper), Claude Code ignores a gateway named in user settings.
 
 ### Allow a gateway on public address space you own
 
@@ -314,9 +330,9 @@ A declared block narrows who can sign in but doesn't prove where a machine is, s
 
 ### Deliver policy to Claude Desktop sessions
 
-Claude Desktop runs its Cowork and Code tabs, plus the Chat tab when you enable it, on embedded Claude Code sessions and sends their model requests through the gateway. It passes policy to each of those sessions, built from the configuration the gateway serves it at `/user/bootstrap`: the model allowlist, disabled tools, and egress allowlist derived from the matched policy's `cli` block, plus the [`desktop` overlay](claude-apps-gateway-config.md#claude-desktop-overlay).
+Claude Desktop runs its Cowork and Code tabs, plus the Chat tab when you enable it, on embedded Claude Code sessions and sends their model requests through the gateway. It passes policy to each of those sessions, built from the configuration the gateway serves it at `/user/bootstrap`: the model allowlist, disabled tools, and egress allowlist derived from the matched policy's `cli` or `code` block, plus the [`desktop` overlay](claude-apps-gateway-config.md#claude-desktop-overlay).
 
-Other `cli` keys, such as hooks, `env`, and scoped permission rules like `Bash(npm *)`, reach only clients that sign in through `/login`. Claude Desktop reads the gateway URL from its own managed configuration and signs in with its own flow, separate from the `forceLoginMethod` and `forceLoginGatewayUrl` keys in [Set the gateway URL](#set-the-gateway-url).
+The block's other keys, such as hooks, `env`, and scoped permission rules like `Bash(npm *)`, reach clients that sign in through `/login`. Under `code`, they also reach the Code tab's session when the [conditions for the Code tab](claude-apps-gateway-config.md#apply-code-settings-in-the-code-tab) hold. They don't reach Cowork or Chat sessions. Claude Desktop reads the gateway URL from its own managed configuration and signs in with its own flow, separate from the `forceLoginMethod` and `forceLoginGatewayUrl` keys in [Set the gateway URL](#set-the-gateway-url).
 
 Settings passed by a launching process are parent settings. Claude Code ignores parent settings on any machine that has an admin-deployed managed source, unless the [source that delivers the policy](managed-settings.md#which-managed-source-claude-code-uses) sets `parentSettingsBehavior: "merge"`.
 
@@ -340,11 +356,15 @@ The [snippet above](#set-the-gateway-url) already includes `parentSettingsBehavi
 
 **Mirror the snippet to any source that outranks the file**
 
-Claude Code reads `parentSettingsBehavior` only from the [selected source](managed-settings.md#which-managed-source-claude-code-uses). Adding any policy key to a source can make that source the selected one, so in a client-side source, mirror the whole snippet rather than `parentSettingsBehavior` alone. [Client-side managed settings](claude-apps-gateway-config.md#client-side-managed-settings) covers fleets that deliver policy through Group Policy or configuration profiles. A managed-preferences plist on macOS or an HKLM policy on Windows outranks the `managed-settings.json` file, and the gateway's own remote managed settings outrank both, so on machines that sign in to the gateway, also set `parentSettingsBehavior` in the gateway policy's [`cli` block](claude-apps-gateway-config.md#managed).
+Claude Code reads `parentSettingsBehavior` only from the [selected source](managed-settings.md#which-managed-source-claude-code-uses). Adding any policy key to a source can make that source the selected one, so in a client-side source, mirror the whole snippet rather than `parentSettingsBehavior` alone. [Client-side managed settings](claude-apps-gateway-config.md#client-side-managed-settings) covers fleets that deliver policy through Group Policy or configuration profiles. A managed-preferences plist on macOS or an HKLM policy on Windows outranks the `managed-settings.json` file, and the gateway's own remote managed settings outrank both, so on machines that sign in to the gateway, also set `parentSettingsBehavior` in the gateway policy's [`cli` or `code` block](claude-apps-gateway-config.md#managed).
 
 **Check which source is selected**
 
-On a machine that only runs Claude Desktop, call the Agent SDK's [`resolveSettings()`](agent-sdk/typescript.md#resolvesettings) and read `policyOrigin` on the `managed` entry in its `sources` list. The value names the selected client-side source, `plist`, `hklm`, or `file`, which is the source that must carry the snippet. Claude Desktop's embedded sessions don't fetch the gateway policy, so the gateway's `cli` block never counts as the selected source for them.
+On a machine that only runs Claude Desktop, call the Agent SDK's [`resolveSettings()`](agent-sdk/typescript.md#resolvesettings) and read `policyOrigin` on the `managed` entry in its `sources` list. The value names the selected client-side source, `plist`, `hklm`, or `file`, which is the source that must carry the snippet.
+
+Cowork and Chat sessions don't fetch the gateway policy, so the gateway's block isn't the selected source for them.
+
+A Code tab session fetches it when the policy's settings are under `code` and the [conditions for the Code tab](claude-apps-gateway-config.md#apply-code-settings-in-the-code-tab) hold. The gateway's `code` settings are then the selected source for that session.
 
 ### Restrict parent settings
 
@@ -386,7 +406,7 @@ To keep parent settings as close to restriction-only as the filter supports, add
 }
 ```
 
-An OS policy, such as an HKLM registry policy or a managed-preferences plist, outranks this file, so deliver the whole snippet through it instead of the file. The gateway's remote managed settings outrank the OS policy and file sources but reach only connected clients. Mirror the locks, the allowlists, and the merge opt-in into the policy's [`cli` block](claude-apps-gateway-config.md#managed) and keep this file deployed, because machines that never connect, including ones that only run Claude Desktop, get their policy from the file alone.
+An OS policy, such as an HKLM registry policy or a managed-preferences plist, outranks this file, so deliver the whole snippet through it instead of the file. The gateway's remote managed settings outrank the OS policy and file sources but reach only connected clients. Mirror the locks, the allowlists, and the merge opt-in into the policy's [`cli` or `code` block](claude-apps-gateway-config.md#managed) and keep this file deployed, because machines that never connect get their policy from the file alone.
 
 #### Lock behavior across sources
 

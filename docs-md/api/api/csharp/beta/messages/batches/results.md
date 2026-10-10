@@ -2836,11 +2836,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           - `ClaudeHaiku4_5("claude-haiku-4-5")`
 
-                            Fastest model with near-frontier intelligence
-
                           - `ClaudeHaiku4_5_20251001("claude-haiku-4-5-20251001")`
-
-                            Fastest model with near-frontier intelligence
 
                           - `ClaudeOpus4_5("claude-opus-4-5")`
 
@@ -3508,7 +3504,6 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-            - Determine which iterations exceeded long context thresholds (>=200k tokens)
             - Calculate the context window size from the last `message` entry
             - Understand token accumulation across server-side tool use loops
 

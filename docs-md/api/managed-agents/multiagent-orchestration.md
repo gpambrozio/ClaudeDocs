@@ -1080,7 +1080,7 @@ Keep the following in mind:
 
 * **Tool names:** The `ant__` prefix is reserved. If your agent already has a custom tool whose name starts with `ant__`, every update fails with a 400 error until you send `tools` without that name. A new session is refused with a 400 error too if its agent, or an agent in either list, has such a tool. Rename or remove the tool in the same update that turns dynamic workflows on. See [Custom tools](tools.md#custom-tools).
 
-* **Budget:** Set a [session budget](budgets.md) when you create the session to cap the session's spend, runs included; you can't add one to an existing session. Runs pause when the session reaches the budget, and runs that the budget paused resume when you raise or remove it. See [Budgets and limits](workflow-runs.md#budgets-and-limits).
+* **Budget:** Set a [session budget](budgets.md) when you create the session to cap the session's spend, runs included; you can't add one to an existing session. Runs pause when the session reaches the budget, and runs that the budget paused resume when you raise or remove it, unless an interrupt also paused them. See [Budgets and limits](workflow-runs.md#budgets-and-limits).
 
 ### Tell the agent when to use a run
 

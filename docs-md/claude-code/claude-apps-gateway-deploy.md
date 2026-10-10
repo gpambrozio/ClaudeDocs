@@ -113,7 +113,7 @@ For a complete worked example on Google Cloud, covering Cloud Run or GKE, Cloud 
 
 ### Push the gateway URL to developer machines
 
-Once the gateway is serving, push `forceLoginMethod`, `forceLoginGatewayUrl`, and `parentSettingsBehavior: "merge"` to each developer's machine through managed settings, via MDM or by writing the per-OS `managed-settings.json` directly. Without this, `/login` shows the standard account picker with no gateway option.
+Once the gateway is serving, push `forceLoginMethod`, `forceLoginGatewayUrl`, and `parentSettingsBehavior: "merge"` to each developer's machine through managed settings, via MDM or by writing the per-OS `managed-settings.json` directly.
 
 Once you deploy the keys, Claude Code stops using a leftover API key or claude.ai login on the machine, so plan the push together with your sign-in instructions. [Administrator policy requires a Cloud gateway sign-in](errors.md#administrator-policy-requires-a-cloud-gateway-sign-in) describes the messages developers see.
 
@@ -328,7 +328,7 @@ The first time a developer starts an interactive terminal session, Claude Code r
 * **A marketplace list**: a [`strictKnownMarketplaces`](plugins/org.md#allowlist-with-strictknownmarketplaces) allowlist that leaves the marketplace out, or a [`blockedMarketplaces`](plugins/org.md#blocklist-with-blockedmarketplaces) entry that names it
 * **An environment variable**: `CLAUDE_CODE_DISABLE_OFFICIAL_MARKETPLACE_AUTOINSTALL` set to `"1"` in the managed [`env` block](plugins/org.md#turn-updates-off-for-the-whole-fleet)
 
-The first registration can run before the developer signs in to the gateway, when no gateway policy has arrived. To cover that first start, deliver your choice in [client-side managed settings](claude-apps-gateway-config.md#client-side-managed-settings) as well as in the gateway policy's [`cli` block](claude-apps-gateway-config.md#what-goes-in-cli).
+The first registration can run before the developer signs in to the gateway, when no gateway policy has arrived. To cover that first start, deliver your choice in [client-side managed settings](claude-apps-gateway-config.md#client-side-managed-settings) as well as in the gateway policy's [`cli` or `code` block](claude-apps-gateway-config.md#what-goes-in-cli).
 
 ## Troubleshooting
 

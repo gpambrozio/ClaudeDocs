@@ -946,11 +946,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           - `"claude-haiku-4-5"`
 
-            Fastest model with near-frontier intelligence
-
           - `"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
 
           - `"claude-opus-4-5"`
 

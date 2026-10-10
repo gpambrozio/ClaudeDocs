@@ -7,7 +7,6 @@ description: Guides for migrating to the latest Claude models from previous Clau
 ---
 
 * [Claude Fable 5.1 and Claude Mythos 5.1 migration guide](../../models/fable-5-1/migration-guide.md)
-* [Claude Mythos 5 and Claude Fable 5 migration guide](../../models/fable-5/migration-guide.md)
 * [Claude Opus 5.5 migration guide](../../models/opus-5-5/migration-guide.md)
 * [Claude Sonnet 5.5 migration guide](../../models/sonnet-5-5/migration-guide.md)
 * [Claude Haiku 5.5 migration guide](../../models/haiku-5-5/migration-guide.md)

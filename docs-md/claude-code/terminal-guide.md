@@ -9,7 +9,9 @@ You can use Claude Code even if you've never used a terminal before. This guide 
 
 Don't want to use the terminal? The Claude Code desktop app lets you skip the terminal entirely. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs), then see the [Desktop quickstart](desktop-quickstart.md) to get started. On Linux, install the app with apt by following the [Linux install instructions](desktop-linux.md).
 
-## macOS and Linux
+<span id="macos-and-linux" />
+
+## Install Claude Code on macOS or Linux
 
 Follow these steps to install and start Claude Code from a macOS or Linux terminal. Claude Code requires macOS 13.0 or later. See the [system requirements](setup.md#system-requirements) for supported Linux distributions.
 
@@ -54,7 +56,9 @@ Once logged in, you can start asking Claude questions about your code or anythin
 
 ***
 
-## Windows
+<span id="windows" />
+
+## Install Claude Code on Windows
 
 Follow these steps to optionally install Git for Windows, set up PowerShell, and start Claude Code on Windows. Claude Code requires Windows 10 version 1809 or later. See the [system requirements](setup.md#system-requirements) for full details.
 

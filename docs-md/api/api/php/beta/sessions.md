@@ -1919,21 +1919,57 @@ var_dump($betaManagedAgentsSession);
 
 - `class BetaManagedAgentsMultiagent`
 
-  - `Type type`
+  - `class BetaManagedAgentsMultiagentCoordinator`
 
-  - `list<Agent> agents`
+    - `Type type`
 
-    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+    - `list<Agent> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+  - `class BetaManagedAgentsMultiagent20261001`
+
+    - `"multiagent_20261001" type`
+
+    - `BetaManagedAgentsMultiagentAdvisor advisor`
+
+      Whether the session's primary thread can consult an advisor model.
+
+    - `BetaManagedAgentsMultiagentSubagents subagents`
+
+      Whether the agent can spawn session threads.
+
+    - `BetaManagedAgentsMultiagentWorkflows workflows`
+
+      Whether the agent can start workflow runs.
 
 ### Beta Managed Agents Multiagent Params
 
 - `class BetaManagedAgentsMultiagentParams`
 
-  - `Type type`
+  - `class BetaManagedAgentsMultiagentCoordinatorParams`
 
-  - `list<BetaManagedAgentsMultiagentRosterEntryParams> agents`
+    - `Type type`
 
-    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+    - `list<BetaManagedAgentsMultiagentRosterEntryParams> agents`
+
+      Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+  - `class BetaManagedAgentsMultiagent20261001Params`
+
+    - `"multiagent_20261001" type`
+
+    - `?BetaManagedAgentsMultiagentAdvisorParams advisor`
+
+      Whether the session's primary thread can consult an advisor model. Defaults to disabled.
+
+    - `?BetaManagedAgentsMultiagentSubagentsParams subagents`
+
+      Whether the agent can spawn session threads. Defaults to enabled.
+
+    - `?BetaManagedAgentsMultiagentWorkflowsParams workflows`
+
+      Whether the agent can start workflow runs. Defaults to enabled.
 
 ### Beta Managed Agents Multiagent Roster Entry Params
 
@@ -2081,7 +2117,7 @@ var_dump($betaManagedAgentsSession);
 
     Model identifier and configuration.
 
-  - `?BetaManagedAgentsSessionMultiagentCoordinator multiagent`
+  - `?BetaManagedAgentsSessionMultiagent multiagent`
 
     Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
@@ -2107,6 +2143,34 @@ var_dump($betaManagedAgentsSession);
 
     Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
+### Beta Managed Agents Session Multiagent
+
+- `class BetaManagedAgentsSessionMultiagent`
+
+  - `class BetaManagedAgentsSessionMultiagentCoordinator`
+
+    - `Type type`
+
+    - `list<Agent> agents`
+
+      Full `agent` definitions the coordinator may spawn as session threads.
+
+  - `class BetaManagedAgentsSessionMultiagent20261001`
+
+    - `"multiagent_20261001" type`
+
+    - `BetaManagedAgentsMultiagentAdvisor advisor`
+
+      Whether the session's primary thread can consult an advisor model.
+
+    - `BetaManagedAgentsSessionMultiagentSubagents subagents`
+
+      Whether the agent can spawn session threads.
+
+    - `BetaManagedAgentsSessionMultiagentWorkflows workflows`
+
+      Whether the agent can start workflow runs.
+
 ### Beta Managed Agents Session Multiagent Coordinator
 
 - `class BetaManagedAgentsSessionMultiagentCoordinator`
@@ -2116,6 +2180,92 @@ var_dump($betaManagedAgentsSession);
   - `list<Agent> agents`
 
     Full `agent` definitions the coordinator may spawn as session threads.
+
+### Beta Managed Agents Session Multiagent Subagents
+
+- `class BetaManagedAgentsSessionMultiagentSubagents`
+
+  - `class BetaManagedAgentsSessionMultiagentSubagentsEnabled`
+
+    - `"enabled" type`
+
+    - `BetaManagedAgentsMultiagentInlineAgents inlineAgents`
+
+      Whether the agent can define inline agents, which are not saved, when it spawns session threads.
+
+    - `list<BetaManagedAgentsSessionThreadAgent> predefinedAgents`
+
+      Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
+
+  - `class BetaManagedAgentsMultiagentSubagentsDisabled`
+
+    - `"disabled" type`
+
+### Beta Managed Agents Session Multiagent Subagents Enabled
+
+- `class BetaManagedAgentsSessionMultiagentSubagentsEnabled`
+
+  - `"enabled" type`
+
+  - `BetaManagedAgentsMultiagentInlineAgents inlineAgents`
+
+    Whether the agent can define inline agents, which are not saved, when it spawns session threads.
+
+  - `list<BetaManagedAgentsSessionThreadAgent> predefinedAgents`
+
+    Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
+
+### Beta Managed Agents Session Multiagent Workflows
+
+- `class BetaManagedAgentsSessionMultiagentWorkflows`
+
+  - `class BetaManagedAgentsSessionMultiagentWorkflowsEnabled`
+
+    - `"enabled" type`
+
+    - `BetaManagedAgentsMultiagentInlineAgents inlineAgents`
+
+      Whether a run's plan can define inline agents, which are not saved.
+
+    - `list<BetaManagedAgentsSessionThreadAgent> predefinedAgents`
+
+      Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
+
+  - `class BetaManagedAgentsMultiagentWorkflowsDisabled`
+
+    - `"disabled" type`
+
+### Beta Managed Agents Session Multiagent Workflows Enabled
+
+- `class BetaManagedAgentsSessionMultiagentWorkflowsEnabled`
+
+  - `"enabled" type`
+
+  - `BetaManagedAgentsMultiagentInlineAgents inlineAgents`
+
+    Whether a run's plan can define inline agents, which are not saved.
+
+  - `list<BetaManagedAgentsSessionThreadAgent> predefinedAgents`
+
+    Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
+
+### Beta Managed Agents Session Multiagent20261001
+
+- `class BetaManagedAgentsSessionMultiagent20261001`
+
+  - `"multiagent_20261001" type`
+
+  - `BetaManagedAgentsMultiagentAdvisor advisor`
+
+    Whether the session's primary thread can consult an advisor model.
+
+  - `BetaManagedAgentsSessionMultiagentSubagents subagents`
+
+    Whether the agent can spawn session threads.
+
+  - `BetaManagedAgentsSessionMultiagentWorkflows workflows`
+
+    Whether the agent can start workflow runs.
 
 ### Beta Managed Agents Session Stats
 
@@ -2429,7 +2579,7 @@ List Events
 
     - `string customToolUseID`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `?list<Content> content`
 
@@ -2762,6 +2912,10 @@ List Events
     - `string sessionThreadID`
 
       Public `sthr_` ID of the newly created thread.
+
+    - `?string workflowRunID`
+
+      Identifier of the workflow run that created the thread, or `null` for any other thread.
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
@@ -3093,6 +3247,150 @@ List Events
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
 
+  - `class ManagedAgentsWorkflowRunCreatedEvent`
+
+    - `"workflow_run.created" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?string description`
+
+      Description that the agent gave the run, passed on as written, or `null` if it gave none.
+
+    - `string name`
+
+      Name that the agent gave the run, passed on as written, or a name that the server assigned.
+
+    - `list<ManagedAgentsWorkflowRunPhase> phases`
+
+      The phases that the run's plan declares, in the plan's order. Can be empty.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusEndedEvent`
+
+    - `"workflow_run.status_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `ManagedAgentsWorkflowRunResult result`
+
+      How the run ended.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunPhaseStartedEvent`
+
+    - `"workflow_run.phase_started" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunPhaseEndedEvent`
+
+    - `"workflow_run.phase_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string phaseStartedID`
+
+      Identifier of the `workflow_run.phase_started` event that opened the phase.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunStatusRunningEvent`
+
+    - `"workflow_run.status_running" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusIdleEvent`
+
+    - `"workflow_run.status_idle" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunErrorEvent`
+
+    - `"workflow_run.error" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `ManagedAgentsWorkflowRunError error`
+
+      Why the run did not finish, or was not created.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `?string workflowRunID`
+
+      Identifier of the run that met the error, or `null` when the error kept a run from being created.
+
 #### Example
 
 ```php
@@ -3329,7 +3627,7 @@ Stream Events
 
     - `string customToolUseID`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `?list<Content> content`
 
@@ -3662,6 +3960,10 @@ Stream Events
     - `string sessionThreadID`
 
       Public `sthr_` ID of the newly created thread.
+
+    - `?string workflowRunID`
+
+      Identifier of the workflow run that created the thread, or `null` for any other thread.
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
@@ -4012,6 +4314,150 @@ Stream Events
     - `?BetaManagedAgentsBudgetLimit budget`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
+
+  - `class ManagedAgentsWorkflowRunCreatedEvent`
+
+    - `"workflow_run.created" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?string description`
+
+      Description that the agent gave the run, passed on as written, or `null` if it gave none.
+
+    - `string name`
+
+      Name that the agent gave the run, passed on as written, or a name that the server assigned.
+
+    - `list<ManagedAgentsWorkflowRunPhase> phases`
+
+      The phases that the run's plan declares, in the plan's order. Can be empty.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusEndedEvent`
+
+    - `"workflow_run.status_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `ManagedAgentsWorkflowRunResult result`
+
+      How the run ended.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunPhaseStartedEvent`
+
+    - `"workflow_run.phase_started" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunPhaseEndedEvent`
+
+    - `"workflow_run.phase_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string phaseStartedID`
+
+      Identifier of the `workflow_run.phase_started` event that opened the phase.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunStatusRunningEvent`
+
+    - `"workflow_run.status_running" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusIdleEvent`
+
+    - `"workflow_run.status_idle" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunErrorEvent`
+
+    - `"workflow_run.error" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `ManagedAgentsWorkflowRunError error`
+
+      Why the run did not finish, or was not created.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `?string workflowRunID`
+
+      Identifier of the run that met the error, or `null` when the error kept a run from being created.
 
 #### Example
 
@@ -4623,7 +5069,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 ### List Session Threads
 
-`$client->beta->sessions->threads->list(string sessionID, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsSessionThread>`
+`$client->beta->sessions->threads->list(string sessionID, ?int limit, ?string page, ?list<ManagedAgentsSessionThreadStatus> statuses, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsSessionThread>`
 
 **GET** `/v1/sessions/{session_id}/threads`
 
@@ -4640,6 +5086,12 @@ List Session Threads
 - `page?:optional string` (query parameter)
 
   Opaque pagination cursor from a previous response's `next_page`. Forward-only.
+
+- `statuses?:optional list<ManagedAgentsSessionThreadStatus>` (query parameter)
+
+  Return only threads that have one of these statuses.
+
+  Repeat the parameter to give more than one status. Leave it out to return threads of every status.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -4697,6 +5149,10 @@ List Session Threads
 
     Cumulative token usage for this thread. Null until the thread's first idle transition.
 
+  - `?string workflowRunID`
+
+    Identifier of the workflow run that created the thread, or `null` for any other thread.
+
 #### Example
 
 ```php
@@ -4710,6 +5166,7 @@ $page = $client->beta->sessions->threads->list(
   'sesn_011CZkZAtmR3yMPDzynEDxu7',
   limit: 0,
   page: 'page',
+  statuses: [ManagedAgentsSessionThreadStatus::RUNNING],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
@@ -4804,7 +5261,8 @@ var_dump($page);
           "web_fetch_requests": 0,
           "web_search_requests": 3
         }
-      }
+      },
+      "workflow_run_id": null
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -4880,6 +5338,10 @@ Get Session Thread
   - `?ManagedAgentsSessionThreadUsage usage`
 
     Cumulative token usage for this thread. Null until the thread's first idle transition.
+
+  - `?string workflowRunID`
+
+    Identifier of the workflow run that created the thread, or `null` for any other thread.
 
 #### Example
 
@@ -4985,7 +5447,8 @@ var_dump($betaManagedAgentsSessionThread);
       "web_fetch_requests": 0,
       "web_search_requests": 3
     }
-  }
+  },
+  "workflow_run_id": null
 }
 ```
 
@@ -5058,6 +5521,10 @@ Archive Session Thread
   - `?ManagedAgentsSessionThreadUsage usage`
 
     Cumulative token usage for this thread. Null until the thread's first idle transition.
+
+  - `?string workflowRunID`
+
+    Identifier of the workflow run that created the thread, or `null` for any other thread.
 
 #### Example
 
@@ -5163,7 +5630,8 @@ var_dump($betaManagedAgentsSessionThread);
       "web_fetch_requests": 0,
       "web_search_requests": 3
     }
-  }
+  },
+  "workflow_run_id": null
 }
 ```
 
@@ -5271,7 +5739,7 @@ List Session Thread Events
 
     - `string customToolUseID`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `?list<Content> content`
 
@@ -5604,6 +6072,10 @@ List Session Thread Events
     - `string sessionThreadID`
 
       Public `sthr_` ID of the newly created thread.
+
+    - `?string workflowRunID`
+
+      Identifier of the workflow run that created the thread, or `null` for any other thread.
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
@@ -5935,6 +6407,150 @@ List Session Thread Events
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
 
+  - `class ManagedAgentsWorkflowRunCreatedEvent`
+
+    - `"workflow_run.created" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?string description`
+
+      Description that the agent gave the run, passed on as written, or `null` if it gave none.
+
+    - `string name`
+
+      Name that the agent gave the run, passed on as written, or a name that the server assigned.
+
+    - `list<ManagedAgentsWorkflowRunPhase> phases`
+
+      The phases that the run's plan declares, in the plan's order. Can be empty.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusEndedEvent`
+
+    - `"workflow_run.status_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `ManagedAgentsWorkflowRunResult result`
+
+      How the run ended.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunPhaseStartedEvent`
+
+    - `"workflow_run.phase_started" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunPhaseEndedEvent`
+
+    - `"workflow_run.phase_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string phaseStartedID`
+
+      Identifier of the `workflow_run.phase_started` event that opened the phase.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunStatusRunningEvent`
+
+    - `"workflow_run.status_running" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusIdleEvent`
+
+    - `"workflow_run.status_idle" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunErrorEvent`
+
+    - `"workflow_run.error" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `ManagedAgentsWorkflowRunError error`
+
+      Why the run did not finish, or was not created.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `?string workflowRunID`
+
+      Identifier of the run that met the error, or `null` when the error kept a run from being created.
+
 #### Example
 
 ```php
@@ -6090,7 +6706,7 @@ Stream Session Thread Events
 
     - `string customToolUseID`
 
-      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+      The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
     - `?list<Content> content`
 
@@ -6423,6 +7039,10 @@ Stream Session Thread Events
     - `string sessionThreadID`
 
       Public `sthr_` ID of the newly created thread.
+
+    - `?string workflowRunID`
+
+      Identifier of the workflow run that created the thread, or `null` for any other thread.
 
   - `class ManagedAgentsSpanOutcomeEvaluationStartEvent`
 
@@ -6773,6 +7393,150 @@ Stream Session Thread Events
     - `?BetaManagedAgentsBudgetLimit budget`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
+
+  - `class ManagedAgentsWorkflowRunCreatedEvent`
+
+    - `"workflow_run.created" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `?string description`
+
+      Description that the agent gave the run, passed on as written, or `null` if it gave none.
+
+    - `string name`
+
+      Name that the agent gave the run, passed on as written, or a name that the server assigned.
+
+    - `list<ManagedAgentsWorkflowRunPhase> phases`
+
+      The phases that the run's plan declares, in the plan's order. Can be empty.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusEndedEvent`
+
+    - `"workflow_run.status_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `ManagedAgentsWorkflowRunResult result`
+
+      How the run ended.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunPhaseStartedEvent`
+
+    - `"workflow_run.phase_started" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunPhaseEndedEvent`
+
+    - `"workflow_run.phase_ended" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `string phaseStartedID`
+
+      Identifier of the `workflow_run.phase_started` event that opened the phase.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+    - `string workflowRunPhaseID`
+
+      Identifier of the phase, as in `phases` on the run's `workflow_run.created` event.
+
+  - `class ManagedAgentsWorkflowRunStatusRunningEvent`
+
+    - `"workflow_run.status_running" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunStatusIdleEvent`
+
+    - `"workflow_run.status_idle" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `string workflowRunID`
+
+      Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
+
+  - `class ManagedAgentsWorkflowRunErrorEvent`
+
+    - `"workflow_run.error" type`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `ManagedAgentsWorkflowRunError error`
+
+      Why the run did not finish, or was not created.
+
+    - `\Datetime processedAt`
+
+      Timestamp when this event was processed.
+
+    - `?string workflowRunID`
+
+      Identifier of the run that met the error, or `null` when the error kept a run from being created.
 
 #### Example
 

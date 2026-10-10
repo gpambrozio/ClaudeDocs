@@ -56,12 +56,10 @@ for await (const thread of client.beta.sessions.threads.list(session.id)) {
 ```
 
 ```csharp C#
-await foreach (var thread in (await client.Beta.Sessions.Threads.List(session.ID)).Paginate())
+await foreach (var sessionThread in (await client.Beta.Sessions.Threads.List(session.ID)).Paginate())
 {
-    var label = thread.Agent.TryPickBetaManagedAgentsSessionThread(out var agent)
-        ? agent.Name
-        : thread.Agent.Json.GetProperty("type").GetString();
-    Console.WriteLine($"[{label}] {thread.Status.Raw()}");
+    var label = sessionThread.Agent.Name ?? sessionThread.Agent.Json.GetProperty("type").GetString();
+    Console.WriteLine($"[{label}] {sessionThread.Status.Raw()}");
 }
 ```
 
@@ -192,7 +190,7 @@ client.beta.sessions.events.send_(
 )
 ```
 
-Against a child thread blocked on `requires_action`, the interrupt closes each pending tool call with an error tool result ("Tool execution was interrupted before completion. Please retry.") and re-emits `session.thread_status_idle` with `stop_reason: end_turn` directly; the model is not sampled. Against a thread that's idle with `end_turn` or `budget_reached`, the interrupt is a no-op. An interrupt that names a terminated thread returns a 400 error. An interrupted child doesn't send the primary thread's agent the report it sends when a turn ends. While that agent waits on the child, it doesn't start another turn until something else reaches it, such as a `user.message` or another thread's report.
+Against a subagent's thread blocked on `requires_action`, the interrupt closes each pending tool call with an error tool result ("Tool execution was interrupted before completion. Please retry.") and re-emits `session.thread_status_idle` with `stop_reason: end_turn` directly; the model is not sampled. Against a child thread that's idle with `end_turn` or `budget_reached`, the interrupt is a no-op. An interrupt that names a terminated thread returns a 400 error. An interrupted child doesn't send the primary thread's agent the report it sends when a turn ends. While that agent waits on the child, it doesn't start another turn until something else reaches it, such as a `user.message` or another thread's report.
 
 ## Archive a session thread
 
@@ -404,7 +402,7 @@ Critical events are proxied to the primary thread. However, you might still want
 
 Each session thread has its own event stream at `/v1/sessions/{session_id}/threads/{thread_id}/stream`, and it accepts the same `event_deltas[]` parameter as the session-level stream, so you can preview a subagent's text as the model generates it. A connection previews only the thread it's reading: a child thread's previews never appear on the session-level stream, so to watch a subagent live, open its own thread stream. See [Preview session thread events](event-deltas.md#preview-session-thread-events) for opting in, accumulating, and reconciling previews.
 
-In a workflow run, the server runs a workflow: a program that the primary thread's agent writes. On each of the run's threads, the first `agent.thread_message_received` is the prompt that the workflow wrote. Its `from_session_thread_id` is the primary thread's ID, and its `from_agent_name` is `null`. The API doesn't guarantee the prompt's text, so don't parse it. The thread's `session.thread_status_terminated` event, on the primary thread's stream, tells you the thread is done. No event records the result it returned to the workflow.
+In a workflow run, the server runs a workflow: a program that the primary thread's agent writes. On each of the run's threads, the first `agent.thread_message_received` is the prompt that the workflow wrote. Its `from_session_thread_id` is the primary thread's ID, and it has no `from_agent_name`. The API doesn't guarantee the prompt's text, so don't parse it. The thread's `session.thread_status_terminated` event, on the primary thread's stream, tells you the thread is done. No event records the result it returned to the workflow.
 
 A thread's stream doesn't replay earlier events. Right after `session.thread_created`, the event list of a run's thread can be empty, because the server writes the thread's first event after it. So open the thread's stream first, then list the thread's events, and skip each streamed event whose `id` the list returned.
 
@@ -477,9 +475,9 @@ await foreach (var evt in client.Beta.Sessions.Threads.Events.StreamStreaming(th
     {
         foreach (var block in message.Content)
         {
-            if (block.Type == "text")
+            if (block.Value is BetaManagedAgentsTextBlock textBlock)
             {
-                Console.Write(block.Text);
+                Console.Write(textBlock.Text);
             }
         }
     }
@@ -608,7 +606,7 @@ for await (const event of client.beta.sessions.threads.events.list(thread.id, {
 var page = await client.Beta.Sessions.Threads.Events.List(thread.ID, new() { SessionID = session.ID });
 await foreach (var evt in page.Paginate())
 {
-    Console.WriteLine($"[{evt.Type}] {evt.ProcessedAt}");
+    Console.WriteLine($"[{evt.Json.GetProperty("type").GetString()}] {evt.ProcessedAt}");
 }
 ```
 
