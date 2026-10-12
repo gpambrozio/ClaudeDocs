@@ -72,11 +72,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
     There is a limit of 100,000 messages in a single request.
 
-    - `Content []BetaContentBlockParamUnionResp`
+    - `Content []BetaContentBlockParamUnion`
 
-      - `[]BetaContentBlockParamUnionResp`
+      - `[]BetaContentBlockParamUnion`
 
-        - `type BetaTextBlockParamResp`
+        - `type BetaTextBlockParam`
 
           - `Type Text`
 
@@ -84,7 +84,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             minLength: 1
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
@@ -105,9 +105,9 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
-          - `Citations []BetaTextCitationParamUnionResp Optional`
+          - `Citations []BetaTextCitationParamUnion Optional`
 
-            - `type BetaCitationCharLocationParamResp`
+            - `type BetaCitationCharLocationParam`
 
               - `Type CharLocation`
 
@@ -127,7 +127,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 minimum: 0
 
-            - `type BetaCitationPageLocationParamResp`
+            - `type BetaCitationPageLocationParam`
 
               - `Type PageLocation`
 
@@ -147,7 +147,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocationParamResp`
+            - `type BetaCitationContentBlockLocationParam`
 
               - `Type ContentBlockLocation`
 
@@ -177,7 +177,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 minimum: 0
 
-            - `type BetaCitationWebSearchResultLocationParamResp`
+            - `type BetaCitationWebSearchResultLocationParam`
 
               - `Type WebSearchResultLocation`
 
@@ -193,7 +193,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 minLength: 1
 
-            - `type BetaCitationSearchResultLocationParamResp`
+            - `type BetaCitationSearchResultLocationParam`
 
               - `Type SearchResultLocation`
 
@@ -227,13 +227,13 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `Title string`
 
-        - `type BetaImageBlockParamResp`
+        - `type BetaImageBlockParam`
 
           - `Type Image`
 
-          - `Source BetaImageBlockParamSourceUnionResp`
+          - `Source BetaImageBlockParamSourceUnion`
 
-            - `type BetaBase64ImageSource`
+            - `type BetaBase64ImageSourceParam`
 
               - `Type Base64`
 
@@ -251,23 +251,23 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-            - `type BetaURLImageSource`
+            - `type BetaURLImageSourceParam`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileImageSource`
+            - `type BetaFileImageSourceParam`
 
               - `Type File`
 
               - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Transformations BetaImageTransformationsParamResp Optional`
+          - `Transformations BetaImageTransformationsParam Optional`
 
             Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
@@ -279,11 +279,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-        - `type BetaRequestDocumentBlock`
+        - `type BetaRequestDocumentBlockParam`
 
           - `Type Document`
 
-          - `Source BetaRequestDocumentBlockSourceUnion`
+          - `Source BetaRequestDocumentBlockSourceUnionParam`
 
             - `type BetaBase64PDFSource`
 
@@ -303,37 +303,37 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `MediaType TextPlain`
 
-            - `type BetaContentBlockSource`
+            - `type BetaContentBlockSourceParam`
 
               - `Type Content`
 
-              - `Content BetaContentBlockSourceContentUnion`
+              - `Content BetaContentBlockSourceContentUnionParam`
 
                 - `string`
 
-                - `[]BetaContentBlockSourceContentUnion`
+                - `[]BetaContentBlockSourceContentUnionParam`
 
-                  - `type BetaTextBlockParamResp`
+                  - `type BetaTextBlockParam`
 
-                  - `type BetaImageBlockParamResp`
+                  - `type BetaImageBlockParam`
 
-            - `type BetaURLPDFSource`
+            - `type BetaURLPDFSourceParam`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileDocumentSource`
+            - `type BetaFileDocumentSourceParam`
 
               - `Type File`
 
               - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Citations BetaCitationsConfigParamResp Optional`
+          - `Citations BetaCitationsConfigParam Optional`
 
             - `Enabled bool Optional`
 
@@ -345,11 +345,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             minLength: 1, maxLength: 500
 
-        - `type BetaSearchResultBlockParamResp`
+        - `type BetaSearchResultBlockParam`
 
           - `Type SearchResult`
 
-          - `Content []BetaTextBlockParamResp`
+          - `Content []BetaTextBlockParam`
 
             - `Type Text`
 
@@ -357,23 +357,23 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               minLength: 1
 
-            - `CacheControl BetaCacheControlEphemeral Optional`
+            - `CacheControl BetaCacheControlEphemeralParam Optional`
 
               Create a cache control breakpoint at this content block.
 
-            - `Citations []BetaTextCitationParamUnionResp Optional`
+            - `Citations []BetaTextCitationParamUnion Optional`
 
           - `Source string`
 
           - `Title string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Citations BetaCitationsConfigParamResp Optional`
+          - `Citations BetaCitationsConfigParam Optional`
 
-        - `type BetaThinkingBlockParamResp`
+        - `type BetaThinkingBlockParam`
 
           - `Type Thinking`
 
@@ -387,7 +387,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             The `thinking` text of this block as returned by the API.
 
-        - `type BetaRedactedThinkingBlockParamResp`
+        - `type BetaRedactedThinkingBlockParam`
 
           - `Type RedactedThinking`
 
@@ -395,7 +395,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type BetaToolUseBlockParamResp`
+        - `type BetaToolUseBlockParam`
 
           - `Type ToolUse`
 
@@ -409,11 +409,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             minLength: 1, maxLength: 200
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
+          - `Caller BetaToolUseBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -445,7 +445,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaToolResultBlockParamResp`
+        - `type BetaToolResultBlockParam`
 
           - `Type ToolResult`
 
@@ -453,23 +453,23 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Content []BetaToolResultBlockParamContentUnionResp Optional`
+          - `Content []BetaToolResultBlockParamContentUnion Optional`
 
-            - `[]BetaToolResultBlockParamContentUnionResp`
+            - `[]BetaToolResultBlockParamContentUnion`
 
-              - `type BetaTextBlockParamResp`
+              - `type BetaTextBlockParam`
 
-              - `type BetaImageBlockParamResp`
+              - `type BetaImageBlockParam`
 
-              - `type BetaSearchResultBlockParamResp`
+              - `type BetaSearchResultBlockParam`
 
-              - `type BetaRequestDocumentBlock`
+              - `type BetaRequestDocumentBlockParam`
 
-              - `type BetaToolReferenceBlockParamResp`
+              - `type BetaToolReferenceBlockParam`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -479,11 +479,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                   minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BetaBrowserStateBlockParamResp`
+              - `type BetaBrowserStateBlockParam`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -495,7 +495,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 - `Type BrowserState`
 
-                - `Tabs []BetaBrowserStateTabEntry`
+                - `Tabs []BetaBrowserStateTabEntryParam`
 
                   All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
@@ -523,17 +523,17 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
-                - `StateChanges []BetaBrowserStateChangeUnion Optional`
+                - `StateChanges []BetaBrowserStateChangeUnionParam Optional`
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
                   minItems: 1, maxItems: 200
 
-                  - `type BetaBrowserStateChangeTabOpened`
+                  - `type BetaBrowserStateChangeTabOpenedParam`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -551,7 +551,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                       minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadStarted`
+                  - `type BetaBrowserStateChangeDownloadStartedParam`
 
                     A file download that started during this call.
 
@@ -569,7 +569,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadCompleted`
+                  - `type BetaBrowserStateChangeDownloadCompletedParam`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -602,7 +602,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                       minimum: 0
 
-                  - `type BetaBrowserStateChangeDownloadFailed`
+                  - `type BetaBrowserStateChangeDownloadFailedParam`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -634,7 +634,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlockParamResp`
+        - `type BetaServerToolUseBlockParam`
 
           - `Type ServerToolUse`
 
@@ -662,11 +662,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             - `const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockParamName = "tool_search_tool_bm25"`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
+          - `Caller BetaServerToolUseBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -678,13 +678,13 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlockParamResp`
+        - `type BetaWebSearchToolResultBlockParam`
 
           - `Type WebSearchToolResult`
 
-          - `Content BetaWebSearchToolResultBlockParamContentUnionResp`
+          - `Content BetaWebSearchToolResultBlockParamContentUnion`
 
-            - `[]BetaWebSearchResultBlockParamResp`
+            - `[]BetaWebSearchResultBlockParam`
 
               - `Type WebSearchResult`
 
@@ -696,7 +696,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `PageAge string Optional`
 
-            - `type BetaWebSearchToolRequestError`
+            - `type BetaWebSearchToolRequestErrorParam`
 
               - `Type WebSearchToolResultError`
 
@@ -718,11 +718,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
+          - `Caller BetaWebSearchToolResultBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -734,13 +734,13 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlockParamResp`
+        - `type BetaWebFetchToolResultBlockParam`
 
           - `Type WebFetchToolResult`
 
-          - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
+          - `Content BetaWebFetchToolResultBlockParamContentUnion`
 
-            - `type BetaWebFetchToolResultErrorBlockParamResp`
+            - `type BetaWebFetchToolResultErrorBlockParam`
 
               - `Type WebFetchToolResultError`
 
@@ -766,11 +766,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlockParamResp`
+            - `type BetaWebFetchBlockParam`
 
               - `Type WebFetchResult`
 
-              - `Content BetaRequestDocumentBlock`
+              - `Content BetaRequestDocumentBlockParam`
 
               - `URL string`
 
@@ -784,11 +784,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
+          - `Caller BetaWebFetchToolResultBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -800,13 +800,13 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlockParamResp`
+        - `type BetaAdvisorToolResultBlockParam`
 
           - `Type AdvisorToolResult`
 
-          - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
+          - `Content BetaAdvisorToolResultBlockParamContentUnion`
 
-            - `type BetaAdvisorToolResultErrorParamResp`
+            - `type BetaAdvisorToolResultErrorParam`
 
               - `Type AdvisorToolResultError`
 
@@ -826,7 +826,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlockParamResp`
+            - `type BetaAdvisorResultBlockParam`
 
               - `Type AdvisorResult`
 
@@ -834,7 +834,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `StopReason string Optional`
 
-            - `type BetaAdvisorRedactedResultBlockParamResp`
+            - `type BetaAdvisorRedactedResultBlockParam`
 
               - `Type AdvisorRedactedResult`
 
@@ -848,17 +848,17 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCodeExecutionToolResultBlockParamResp`
+        - `type BetaCodeExecutionToolResultBlockParam`
 
           - `Type CodeExecutionToolResult`
 
-          - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaCodeExecutionToolResultErrorParamResp`
+            - `type BetaCodeExecutionToolResultErrorParam`
 
               - `Type CodeExecutionToolResultError`
 
@@ -872,11 +872,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlockParamResp`
+            - `type BetaCodeExecutionResultBlockParam`
 
               - `Type CodeExecutionResult`
 
-              - `Content []BetaCodeExecutionOutputBlockParamResp`
+              - `Content []BetaCodeExecutionOutputBlockParam`
 
                 - `Type CodeExecutionOutput`
 
@@ -888,13 +888,13 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlockParamResp`
+            - `type BetaEncryptedCodeExecutionResultBlockParam`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `Type EncryptedCodeExecutionResult`
 
-              - `Content []BetaCodeExecutionOutputBlockParamResp`
+              - `Content []BetaCodeExecutionOutputBlockParam`
 
                 - `Type CodeExecutionOutput`
 
@@ -910,17 +910,17 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBashCodeExecutionToolResultBlockParamResp`
+        - `type BetaBashCodeExecutionToolResultBlockParam`
 
           - `Type BashCodeExecutionToolResult`
 
-          - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaBashCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaBashCodeExecutionToolResultErrorParamResp`
+            - `type BetaBashCodeExecutionToolResultErrorParam`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -936,11 +936,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlockParamResp`
+            - `type BetaBashCodeExecutionResultBlockParam`
 
               - `Type BashCodeExecutionResult`
 
-              - `Content []BetaBashCodeExecutionOutputBlockParamResp`
+              - `Content []BetaBashCodeExecutionOutputBlockParam`
 
                 - `Type BashCodeExecutionOutput`
 
@@ -956,17 +956,17 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
+        - `type BetaTextEditorCodeExecutionToolResultBlockParam`
 
           - `Type TextEditorCodeExecutionToolResult`
 
-          - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
+            - `type BetaTextEditorCodeExecutionToolResultErrorParam`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -984,7 +984,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `ErrorMessage string Optional`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionViewResultBlockParam`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -1004,13 +1004,13 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `TotalLines int64 Optional`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionCreateResultBlockParam`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -1028,17 +1028,17 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaToolSearchToolResultBlockParamResp`
+        - `type BetaToolSearchToolResultBlockParam`
 
           - `Type ToolSearchToolResult`
 
-          - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
+          - `Content BetaToolSearchToolResultBlockParamContentUnion`
 
-            - `type BetaToolSearchToolResultErrorParamResp`
+            - `type BetaToolSearchToolResultErrorParam`
 
               - `Type ToolSearchToolResultError`
 
@@ -1054,11 +1054,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `ErrorMessage string Optional`
 
-            - `type BetaToolSearchToolSearchResultBlockParamResp`
+            - `type BetaToolSearchToolSearchResultBlockParam`
 
               - `Type ToolSearchToolSearchResult`
 
-              - `ToolReferences []BetaToolReferenceBlockParamResp`
+              - `ToolReferences []BetaToolReferenceBlockParam`
 
                 - `Type ToolReference`
 
@@ -1066,7 +1066,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                   minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
@@ -1074,11 +1074,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaMCPToolUseBlockParamResp`
+        - `type BetaMCPToolUseBlockParam`
 
           - `Type MCPToolUse`
 
@@ -1094,11 +1094,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             The name of the MCP server
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestMCPToolResultBlockParamResp`
+        - `type BetaRequestMCPToolResultBlockParam`
 
           - `Type MCPToolResult`
 
@@ -1106,15 +1106,15 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Content BetaRequestMCPToolResultBlockParamContentUnionResp Optional`
+          - `Content BetaRequestMCPToolResultBlockParamContentUnion Optional`
 
             - `string`
 
-            - `[]BetaTextBlockParamResp`
+            - `[]BetaTextBlockParam`
 
               - `Type Text`
 
@@ -1122,15 +1122,15 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                 minLength: 1
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Citations []BetaTextCitationParamUnionResp Optional`
+              - `Citations []BetaTextCitationParamUnion Optional`
 
           - `IsError bool Optional`
 
-        - `type BetaContainerUploadBlockParamResp`
+        - `type BetaContainerUploadBlockParam`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -1139,11 +1139,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
           - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCompactionBlockParamResp`
+        - `type BetaCompactionBlockParam`
 
           A compaction block containing summary of previous context.
 
@@ -1155,7 +1155,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
           - `Type Compaction`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
@@ -1171,11 +1171,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             The block's signature as returned, to be sent back verbatim
 
-          - `ToolChanges []BetaCompactionBlockParamToolChangeUnionResp Optional`
+          - `ToolChanges []BetaCompactionBlockParamToolChangeUnion Optional`
 
             The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
-            - `type BetaRequestToolAdditionBlock`
+            - `type BetaRequestToolAdditionBlockParam`
 
               Mid-conversation directive to make a tool available.
 
@@ -1189,9 +1189,9 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `Type ToolAddition`
 
-              - `Tool BetaRequestToolAdditionBlockToolUnion`
+              - `Tool BetaRequestToolAdditionBlockToolUnionParam`
 
-                - `type BetaToolChangeToolReference`
+                - `type BetaToolChangeToolReferenceParam`
 
                   Reference to a single tool, by the name the model uses to call it: a
                   tool declared in `tools` or defined by an earlier `tool_addition`
@@ -1205,7 +1205,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `type BetaToolChangeMCPToolReference`
+                - `type BetaToolChangeMCPToolReferenceParam`
 
                   Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -1216,7 +1216,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                   - `ServerName string`
 
-                - `type BetaToolChangeMCPToolsetReference`
+                - `type BetaToolChangeMCPToolsetReferenceParam`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -1224,7 +1224,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                   - `ServerName string`
 
-                - `type BetaToolChangeToolDefinitionParamResp`
+                - `type BetaToolChangeToolDefinitionParam`
 
                   A tool defined by value: `definition` is a `tools` entry (any kind
                   `tools` accepts, an MCP toolset included). An `mcp_toolset` given here
@@ -1232,13 +1232,13 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                   - `Type ToolDefinition`
 
-                  - `Definition BetaToolUnion`
+                  - `Definition BetaToolUnionParam`
 
-                    - `type BetaTool`
+                    - `type BetaToolParam`
 
                       - `Type BetaToolType Optional`
 
-                      - `InputSchema BetaToolInputSchema`
+                      - `InputSchema BetaToolInputSchemaParam`
 
                         [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
@@ -1268,7 +1268,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                         - `const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code_execution_20260521"`
 
-                      - `CacheControl BetaCacheControlEphemeral Optional`
+                      - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                         Create a cache control breakpoint at this content block.
 
@@ -3227,11 +3227,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
                           The tool's description as the MCP server lists it.
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestToolRemovalBlock`
+            - `type BetaRequestToolRemovalBlockParam`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -3241,9 +3241,9 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `Type ToolRemoval`
 
-              - `Tool BetaRequestToolRemovalBlockToolUnion`
+              - `Tool BetaRequestToolRemovalBlockToolUnionParam`
 
-                - `type BetaToolChangeToolReference`
+                - `type BetaToolChangeToolReferenceParam`
 
                   Reference to a single tool, by the name the model uses to call it: a
                   tool declared in `tools` or defined by an earlier `tool_addition`
@@ -3251,20 +3251,20 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
                   assigns to MCP-resolved tools; use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `type BetaToolChangeMCPToolReference`
+                - `type BetaToolChangeMCPToolReferenceParam`
 
                   Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `type BetaToolChangeMCPToolsetReference`
+                - `type BetaToolChangeMCPToolsetReferenceParam`
 
                   Reference to every tool in the named MCP server's toolset.
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestToolAdditionBlock`
+        - `type BetaRequestToolAdditionBlockParam`
 
           Mid-conversation directive to make a tool available.
 
@@ -3276,7 +3276,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
           definition also requires the `mcp-client-2026-09-15` beta. The tool is
           offered to the model from this point in the conversation onward.
 
-        - `type BetaRequestToolRemovalBlock`
+        - `type BetaRequestToolRemovalBlockParam`
 
           Mid-conversation directive to withdraw a tool.
 
@@ -3284,7 +3284,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
           request's `tools` or defined earlier in `messages`. It is no longer
           offered to the model from this point in the conversation onward.
 
-        - `type BetaMCPToolListingBlockParamResp`
+        - `type BetaMCPToolListingBlockParam`
 
           The tool listing an MCP server returned while an earlier response was
           produced, as that response carried it. Send the assistant message back
@@ -3299,7 +3299,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
             minLength: 1, maxLength: 255
 
-          - `Tools []BetaMCPToolParamResp`
+          - `Tools []BetaMCPToolParam`
 
             The server's tools, exactly as the response listed them.
 
@@ -3317,7 +3317,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               The tool's description as the MCP server lists it.
 
-        - `type BetaFallbackBlockParamResp`
+        - `type BetaFallbackBlockParam`
 
           A `fallback` block echoed back from a prior response.
 
@@ -3335,7 +3335,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
           - `Type Fallback`
 
-          - `From BetaFallbackInfoParamResp`
+          - `From BetaFallbackInfoParam`
 
             Identifies one hop of a fallback transition.
 
@@ -3345,7 +3345,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `To BetaFallbackInfoParamResp`
+          - `To BetaFallbackInfoParam`
 
             Identifies one hop of a fallback transition.
 
@@ -3369,7 +3369,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
       - `const BetaMessageParamClearAtNever BetaMessageParamClearAt = "never"`
 
-    - `OutputConfig BetaSystemMessageOutputConfig Optional`
+    - `OutputConfig BetaSystemMessageOutputConfigParam Optional`
 
       Per-message output configuration on a role:"system" input message.
 
@@ -3429,7 +3429,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
     - `AuthorizationToken string Optional`
 
-    - `ToolConfiguration BetaRequestMCPServerToolConfiguration Optional`
+    - `ToolConfiguration BetaRequestMCPServerToolConfigurationParam Optional`
 
       - `AllowedTools []string Optional`
 
@@ -3455,7 +3455,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
     - `string`
 
-    - `type BetaMessageCountTokensParamsSystemArray []BetaTextBlockParamResp`
+    - `[]BetaTextBlockParam`
 
       - `Type Text`
 
@@ -3463,11 +3463,11 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
         minLength: 1
 
-      - `CacheControl BetaCacheControlEphemeral Optional`
+      - `CacheControl BetaCacheControlEphemeralParam Optional`
 
         Create a cache control breakpoint at this content block.
 
-      - `Citations []BetaTextCitationParamUnionResp Optional`
+      - `Citations []BetaTextCitationParamUnion Optional`
 
   - `Thinking BetaThinkingConfigParamUnion Optional`
 
@@ -3545,7 +3545,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
     See our [guide](../../../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type BetaTool`
+    - `type BetaToolParam`
 
     - `type BetaToolBash20241022`
 

@@ -603,7 +603,7 @@ end
 
 * **System prompt and model:** Same fields, now on the agent definition.
 * **Custom tools:** Still declared with JSON Schema. Execution moves from inline handling to responding to `agent.custom_tool_use` events. See [Session event stream](events-and-streaming.md).
-* **Web search and web fetch settings:** Same `allowed_domains`, `blocked_domains`, `max_content_tokens`, and `user_location` fields, now set once on the `web_search` and `web_fetch` entries of the agent toolset's `configs` array instead of on every request. The `max_uses`, `citations`, and `cache_control` fields are not available. See [Differences from the Messages API tools](tools-web-restrictions.md#differences-from-the-messages-api-tools).
+* **Web search and web fetch settings:** Same `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`), `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`), `max_content_tokens` (java, php: `maxContentTokens`; csharp, go: `MaxContentTokens`), and `user_location` (java, php: `userLocation`; csharp, go: `UserLocation`) fields, now set once on the `web_search` and `web_fetch` entries of the agent toolset's `configs` (java, php; csharp, go: `Configs`) array instead of on every request. The `max_uses` (java, php: `maxUses`; csharp, go: `MaxUses`), `citations` (java, php; csharp, go: `Citations`), and `cache_control` (java, php: `cacheControl`; csharp, go: `CacheControl`) fields are not available. See [Differences from the Messages API tools](tools-web-restrictions.md#differences-from-the-messages-api-tools).
 * **Context:** You can still inject context through the system prompt, [file resources](files.md), or [skills](skills.md).
 
 ## From the Claude Agent SDK
@@ -619,9 +619,9 @@ If you built with the [Claude Agent SDK](../../claude-code/agent-sdk/overview.md
 | Functions defined with `@tool` (python; typescript: `tool()`), dispatched automatically by the SDK          | Declare as `{"type": "custom", ...}` on the Agent; your client handles `agent.custom_tool_use` events and replies with `user.custom_tool_result`. See [Tools](tools.md).                                                                                                                         |
 | Built-in tools run in your process against your filesystem                                                  | `{"type": "agent_toolset_20260401"}` runs the same tools inside the session sandbox against `/workspace`.                                                                                                                                                                                                                                        |
 | `cwd`, `add_dirs` (python; typescript: `additionalDirectories`) point at local paths                        | Upload or mount [files](files.md) as session resources.                                                                                                                                                                                                                                          |
-| `system_prompt` (python; typescript: `systemPrompt`) and the `CLAUDE.md` hierarchy                          | A single `system` string on the Agent. Each update that changes the agent produces a new server-side version; pin sessions to a specific version to promote or roll back without a deploy. See [Agent setup](agent-setup.md).                                                                    |
+| `system_prompt` (python; typescript: `systemPrompt`) and the `CLAUDE.md` hierarchy                          | A single `system` (java, php; csharp, go: `System`; ruby: `system_`) string on the Agent. Each update that changes the agent produces a new server-side version; pin sessions to a specific version to promote or roll back without a deploy. See [Agent setup](agent-setup.md).                 |
 | `mcp_servers` (python; typescript: `mcpServers`) configured and authenticated in one place                  | Declare servers on the Agent; provide credentials through a [Vault](vaults.md) on the Session.                                                                                                                                                                                                   |
-| `permission_mode` (python; typescript: `permissionMode`), `can_use_tool` (python; typescript: `canUseTool`) | Per-tool [`permission_policy`](permission-policies.md) (`always_allow`, `always_ask`, or `auto`); send `user.tool_confirmation` events for calls that pause for your approval.                                                                                                                   |
+| `permission_mode` (python; typescript: `permissionMode`), `can_use_tool` (python; typescript: `canUseTool`) | Per-tool [`permission_policy` (java, php: `permissionPolicy`; csharp, go: `PermissionPolicy`)](permission-policies.md) (`always_allow`, `always_ask`, or `auto`); send `user.tool_confirmation` events for calls that pause for your approval.                                                   |
 
 ### Code comparison
 
@@ -1343,13 +1343,13 @@ The tradeoff for Anthropic running the agent loop is that a few things the SDK h
 1. [Create an environment](environments.md) with the networking and runtimes your agent needs.
 2. Port your system prompt and tool selection to an [agent definition](agent-setup.md).
 3. Replace your loop: [create a session](sessions.md) with `client.beta.sessions.create()` (python, typescript, ruby; go: `client.Beta.Sessions.New()`; csharp: `client.Beta.Sessions.Create()`; java: `client.beta().sessions().create()`; php: `$client->beta->sessions->create()`; cli: `ant beta:sessions create`; curl: `POST /v1/sessions`) and [stream its events](events-and-streaming.md) with `client.beta.sessions.events.stream()` (python, typescript; ruby: `client.beta.sessions.events.stream_events()`; go: `client.Beta.Sessions.Events.StreamEvents()`; csharp: `client.Beta.Sessions.Events.StreamStreaming()`; java: `client.beta().sessions().events().streamStreaming()`; php: `$client->beta->sessions->events->streamStream()`; cli: `ant beta:sessions:events stream`; curl: `GET /v1/sessions/{session_id}/events/stream`).
-4. For any local files the agent reads, upload them through the [Files API](files.md) and mount them as `resources`.
+4. For any local files the agent reads, upload them through the [Files API](files.md) and mount them as `resources` (java, php; csharp, go: `Resources`).
 5. For any custom tool handlers, move execution into your event loop as responses to `agent.custom_tool_use` events.
 6. Verify with a test session before pointing production traffic at the new flow.
 
 ## Migrating between model versions
 
-When a new Claude model is released, migrating a Claude Managed Agents integration is typically a one-field change: update `model` on your [agent definition](agent-setup.md) and the change takes effect on the next session you create.
+When a new Claude model is released, migrating a Claude Managed Agents integration is typically a one-field change: update `model` (java, php; csharp, go: `Model`) on your [agent definition](agent-setup.md) and the change takes effect on the next session you create.
 
 ```bash cURL
 curl -sS --fail-with-body "https://api.anthropic.com/v1/agents/$AGENT_ID?beta=true" \
@@ -1437,7 +1437,7 @@ client.beta.agents.update(
 
 Most model-level behavior changes documented in the [Messages API migration guide](../about-claude/models/migration-guide.md) do not require action on your side:
 
-* **Request parameter changes** (`max_tokens` defaults, `thinking` configuration) are handled by the Claude Managed Agents runtime. These fields are not exposed on the agent definition.
+* **Request parameter changes** (`max_tokens` (java, php: `maxTokens`; csharp, go: `MaxTokens`) defaults, `thinking` (java, php; csharp, go: `Thinking`) configuration) are handled by the Claude Managed Agents runtime. These fields are not exposed on the agent definition.
 * **Assistant message prefilling** does not exist in the event-based session model, so its removal on newer models is a no-op.
 * **Tool argument JSON escaping** is parsed by the runtime before you receive `agent.custom_tool_use` events. You see structured data, not raw strings.
 

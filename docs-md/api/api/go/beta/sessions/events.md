@@ -417,7 +417,7 @@ List Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -615,7 +615,7 @@ List Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -889,7 +889,7 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -933,7 +933,7 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -3234,7 +3234,7 @@ Send Events
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -3378,13 +3378,13 @@ Send Events
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsUserInterruptEventParamsResp`
+    - `type BetaManagedAgentsUserInterruptEventParams`
 
       Parameters for sending an interrupt to pause the agent.
 
@@ -3394,7 +3394,7 @@ Send Events
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `type BetaManagedAgentsUserToolConfirmationEventParamsResp`
+    - `type BetaManagedAgentsUserToolConfirmationEventParams`
 
       Parameters for confirming or denying a tool execution request.
 
@@ -3420,7 +3420,7 @@ Send Events
 
         maxLength: 10000
 
-    - `type BetaManagedAgentsUserCustomToolResultEventParamsResp`
+    - `type BetaManagedAgentsUserCustomToolResultEventParams`
 
       Parameters for providing the result of a custom tool execution.
 
@@ -3432,7 +3432,7 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionResp Optional`
+      - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnion Optional`
 
         The result content returned by the tool.
 
@@ -3500,7 +3500,7 @@ Send Events
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -3532,7 +3532,7 @@ Send Events
 
         format: int32
 
-    - `type BetaManagedAgentsUserToolResultEventParamsResp`
+    - `type BetaManagedAgentsUserToolResultEventParams`
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -3544,7 +3544,7 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnionResp Optional`
+      - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnion Optional`
 
         The result content returned by the tool.
 
@@ -3568,13 +3568,13 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp`
+    - `type BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsSystemContentBlock`
+      - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
@@ -3860,7 +3860,7 @@ Send Events
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -4495,7 +4495,7 @@ Stream Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -4693,7 +4693,7 @@ Stream Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -4967,7 +4967,7 @@ Stream Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -5011,7 +5011,7 @@ Stream Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -7775,7 +7775,7 @@ func main() {
 
         minLength: 1
 
-    - `type BetaManagedAgentsRedactedBlockParam`
+    - `type BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -7979,7 +7979,7 @@ func main() {
 
         The title of the document.
 
-    - `type BetaManagedAgentsRedactedBlockParam`
+    - `type BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -8155,7 +8155,7 @@ func main() {
 
         The title of the document.
 
-    - `type BetaManagedAgentsRedactedBlockParam`
+    - `type BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -8791,7 +8791,7 @@ func main() {
 
 ### Beta Managed Agents Event Params
 
-- `type BetaManagedAgentsEventParamsUnionResp interface{…}`
+- `type BetaManagedAgentsEventParamsUnion interface{…}`
 
   Union type for event parameters that can be sent to a session.
 
@@ -8801,7 +8801,7 @@ func main() {
 
     - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-    - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+    - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
       Array of content blocks for the user message.
 
@@ -8945,13 +8945,13 @@ func main() {
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
         - `Type BetaManagedAgentsRedactedBlockType`
 
-  - `type BetaManagedAgentsUserInterruptEventParamsResp`
+  - `type BetaManagedAgentsUserInterruptEventParams`
 
     Parameters for sending an interrupt to pause the agent.
 
@@ -8961,7 +8961,7 @@ func main() {
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-  - `type BetaManagedAgentsUserToolConfirmationEventParamsResp`
+  - `type BetaManagedAgentsUserToolConfirmationEventParams`
 
     Parameters for confirming or denying a tool execution request.
 
@@ -8987,7 +8987,7 @@ func main() {
 
       maxLength: 10000
 
-  - `type BetaManagedAgentsUserCustomToolResultEventParamsResp`
+  - `type BetaManagedAgentsUserCustomToolResultEventParams`
 
     Parameters for providing the result of a custom tool execution.
 
@@ -8999,7 +8999,7 @@ func main() {
 
       minLength: 1, maxLength: 128
 
-    - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionResp Optional`
+    - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnion Optional`
 
       The result content returned by the tool.
 
@@ -9067,7 +9067,7 @@ func main() {
 
       What the agent should produce. This is the task specification.
 
-    - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+    - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
       How to grade the outcome. Text or file reference.
 
@@ -9099,7 +9099,7 @@ func main() {
 
       format: int32
 
-  - `type BetaManagedAgentsUserToolResultEventParamsResp`
+  - `type BetaManagedAgentsUserToolResultEventParams`
 
     Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -9111,7 +9111,7 @@ func main() {
 
       minLength: 1, maxLength: 128
 
-    - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnionResp Optional`
+    - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnion Optional`
 
       The result content returned by the tool.
 
@@ -9135,13 +9135,13 @@ func main() {
 
       Whether the tool execution resulted in an error.
 
-  - `type BetaManagedAgentsSystemMessageEventParamsResp`
+  - `type BetaManagedAgentsSystemMessageEventParams`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
     - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-    - `Content []BetaManagedAgentsSystemContentBlock`
+    - `Content []BetaManagedAgentsSystemContentBlockParam`
 
       System content blocks to append. Text-only.
 
@@ -9481,7 +9481,7 @@ func main() {
 
 ### Beta Managed Agents Redacted Block
 
-- `type BetaManagedAgentsRedactedBlockParam`
+- `type BetaManagedAgentsRedactedBlock`
 
   Placeholder for content withheld by Anthropic model policy.
 
@@ -9929,7 +9929,7 @@ func main() {
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -10805,7 +10805,7 @@ func main() {
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -11003,7 +11003,7 @@ func main() {
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -11277,7 +11277,7 @@ func main() {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -11321,7 +11321,7 @@ func main() {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -14489,7 +14489,7 @@ func main() {
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -14687,7 +14687,7 @@ func main() {
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -14961,7 +14961,7 @@ func main() {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -15005,7 +15005,7 @@ func main() {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -17273,13 +17273,13 @@ func main() {
 
 ### Beta Managed Agents System Message Event Params
 
-- `type BetaManagedAgentsSystemMessageEventParamsResp`
+- `type BetaManagedAgentsSystemMessageEventParams`
 
   Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
   - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-  - `Content []BetaManagedAgentsSystemContentBlock`
+  - `Content []BetaManagedAgentsSystemContentBlockParam`
 
     System content blocks to append. Text-only.
 
@@ -17643,7 +17643,7 @@ func main() {
 
 ### Beta Managed Agents User Custom Tool Result Event Params
 
-- `type BetaManagedAgentsUserCustomToolResultEventParamsResp`
+- `type BetaManagedAgentsUserCustomToolResultEventParams`
 
   Parameters for providing the result of a custom tool execution.
 
@@ -17655,7 +17655,7 @@ func main() {
 
     minLength: 1, maxLength: 128
 
-  - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionResp Optional`
+  - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnion Optional`
 
     The result content returned by the tool.
 
@@ -17909,7 +17909,7 @@ func main() {
 
     What the agent should produce. This is the task specification.
 
-  - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+  - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
     How to grade the outcome. Text or file reference.
 
@@ -17965,7 +17965,7 @@ func main() {
 
 ### Beta Managed Agents User Interrupt Event Params
 
-- `type BetaManagedAgentsUserInterruptEventParamsResp`
+- `type BetaManagedAgentsUserInterruptEventParams`
 
   Parameters for sending an interrupt to pause the agent.
 
@@ -18131,7 +18131,7 @@ func main() {
 
         The title of the document.
 
-    - `type BetaManagedAgentsRedactedBlockParam`
+    - `type BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -18151,7 +18151,7 @@ func main() {
 
   - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-  - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+  - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
     Array of content blocks for the user message.
 
@@ -18295,7 +18295,7 @@ func main() {
 
         The title of the document.
 
-    - `type BetaManagedAgentsRedactedBlockParam`
+    - `type BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -18343,7 +18343,7 @@ func main() {
 
 ### Beta Managed Agents User Tool Confirmation Event Params
 
-- `type BetaManagedAgentsUserToolConfirmationEventParamsResp`
+- `type BetaManagedAgentsUserToolConfirmationEventParams`
 
   Parameters for confirming or denying a tool execution request.
 
@@ -18371,7 +18371,7 @@ func main() {
 
 ### Beta Managed Agents User Tool Result Event Params
 
-- `type BetaManagedAgentsUserToolResultEventParamsResp`
+- `type BetaManagedAgentsUserToolResultEventParams`
 
   Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -18383,7 +18383,7 @@ func main() {
 
     minLength: 1, maxLength: 128
 
-  - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnionResp Optional`
+  - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnion Optional`
 
     The result content returned by the tool.
 

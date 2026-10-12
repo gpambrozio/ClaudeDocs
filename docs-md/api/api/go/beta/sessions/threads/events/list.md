@@ -297,7 +297,7 @@ List Session Thread Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -495,7 +495,7 @@ List Session Thread Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -769,7 +769,7 @@ List Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -813,7 +813,7 @@ List Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 

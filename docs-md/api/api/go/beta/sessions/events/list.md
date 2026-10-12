@@ -415,7 +415,7 @@ List Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -613,7 +613,7 @@ List Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -887,7 +887,7 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -931,7 +931,7 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 

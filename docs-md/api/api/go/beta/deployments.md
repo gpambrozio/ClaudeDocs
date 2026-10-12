@@ -25,7 +25,7 @@ Create Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -59,7 +59,7 @@ Create Deployment
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -203,7 +203,7 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -219,7 +219,7 @@ Create Deployment
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -251,13 +251,13 @@ Create Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp`
+    - `type BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsSystemContentBlock`
+      - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
@@ -293,7 +293,7 @@ Create Deployment
 
     Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParams`
 
       Mount a GitHub repository into the session's container.
 
@@ -311,7 +311,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionResp Optional`
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnion Optional`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -341,7 +341,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp`
+    - `type BetaManagedAgentsFileResourceParams`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -359,7 +359,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
+    - `type BetaManagedAgentsMemoryStoreResourceParam`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -699,7 +699,7 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -1484,7 +1484,7 @@ List Deployments
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -2227,7 +2227,7 @@ Get Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -2667,7 +2667,7 @@ Update Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -2711,7 +2711,7 @@ Update Deployment
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -2855,7 +2855,7 @@ Update Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -2871,7 +2871,7 @@ Update Deployment
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -2903,13 +2903,13 @@ Update Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp`
+    - `type BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsSystemContentBlock`
+      - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
@@ -2935,7 +2935,7 @@ Update Deployment
 
     Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParams`
 
       Mount a GitHub repository into the session's container.
 
@@ -2953,7 +2953,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionResp Optional`
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnion Optional`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -2983,7 +2983,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp`
+    - `type BetaManagedAgentsFileResourceParams`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -3001,7 +3001,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
+    - `type BetaManagedAgentsMemoryStoreResourceParam`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -3341,7 +3341,7 @@ Update Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -4083,7 +4083,7 @@ Archive Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -5229,7 +5229,7 @@ Pause Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -5971,7 +5971,7 @@ Unpause Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -6647,7 +6647,7 @@ func main() {
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -7125,7 +7125,7 @@ func main() {
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -7191,7 +7191,7 @@ func main() {
 
 ### Beta Managed Agents Deployment Initial Event Params
 
-- `type BetaManagedAgentsDeploymentInitialEventParamsUnionResp interface{…}`
+- `type BetaManagedAgentsDeploymentInitialEventParamsUnion interface{…}`
 
   An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
 
@@ -7201,7 +7201,7 @@ func main() {
 
     - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-    - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+    - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
       Array of content blocks for the user message.
 
@@ -7345,7 +7345,7 @@ func main() {
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -7361,7 +7361,7 @@ func main() {
 
       What the agent should produce. This is the task specification.
 
-    - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+    - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
       How to grade the outcome. Text or file reference.
 
@@ -7393,13 +7393,13 @@ func main() {
 
       format: int32
 
-  - `type BetaManagedAgentsSystemMessageEventParamsResp`
+  - `type BetaManagedAgentsSystemMessageEventParams`
 
     Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
     - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-    - `Content []BetaManagedAgentsSystemContentBlock`
+    - `Content []BetaManagedAgentsSystemContentBlockParam`
 
       System content blocks to append. Text-only.
 
@@ -7835,7 +7835,7 @@ func main() {
 
         The title of the document.
 
-    - `type BetaManagedAgentsRedactedBlockParam`
+    - `type BetaManagedAgentsRedactedBlock`
 
       Placeholder for content withheld by Anthropic model policy.
 
@@ -8105,7 +8105,7 @@ func main() {
 
 ### Beta Managed Agents Schedule Params
 
-- `type BetaManagedAgentsScheduleParamsResp`
+- `type BetaManagedAgentsScheduleParams`
 
   A recurring schedule. Discriminated union — only cron is supported currently.
 

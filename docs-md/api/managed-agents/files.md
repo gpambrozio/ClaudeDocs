@@ -84,9 +84,9 @@ puts "File ID: #{file.id}"
 
 ## Mounting files in a session
 
-Mount uploaded files into the sandbox by adding them to the `resources` array when creating a session:
+Mount uploaded files into the sandbox by adding them to the `resources` (java, php; csharp, go: `Resources`) array when creating a session:
 
-The `mount_path` is optional, but make sure the uploaded file has a descriptive name so the agent can identify it.
+The `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) is optional, but make sure the uploaded file has a descriptive name so the agent can identify it.
 
 ```bash cURL
 jq -n \
@@ -225,13 +225,13 @@ session = client.beta.sessions.create(
 )
 ```
 
-With the preceding `mount_path`, the agent reads the file at `/mnt/session/uploads/data.csv` (see [File paths](files.md#file-paths)).
+With the preceding `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`), the agent reads the file at `/mnt/session/uploads/data.csv` (see [File paths](files.md#file-paths)).
 
-A new `file_id` is created that references the instance of the file in the session. These copies do not count against your [storage limits](../build-with-claude/files.md).
+A new `file_id` (java: `fileId`; php: `fileID`; csharp, go: `FileID`) is created that references the instance of the file in the session. These copies do not count against your [storage limits](../build-with-claude/files.md).
 
 ## Multiple files
 
-Mount multiple files by adding entries to the `resources` array:
+Mount multiple files by adding entries to the `resources` (java, php; csharp, go: `Resources`) array:
 
 ```bash cURL
 curl -fsSL https://api.anthropic.com/v1/sessions \
@@ -348,7 +348,7 @@ A maximum of 500 files is supported per session.
 
 ## Managing files on a running session
 
-You can add or remove files from a session after creation using the session resources API. Each resource has an `id` returned when it is added (or listed), which you use for deletes.
+You can add or remove files from a session after creation using the session resources API. Each resource has an `id` (java, php; csharp, go: `ID`) returned when it is added (or listed), which you use for deletes.
 
 ```bash cURL
 jq -n --arg file_id "${FILE_ID}" '{type: "file", file_id: $file_id}' \
@@ -545,7 +545,7 @@ client.beta.sessions.resources.delete(resource.id, session_id: session.id)
 
 Use the [Files API](../build-with-claude/files.md) to list files scoped to a session and download them. Files the agent writes to `/mnt/session/outputs/` appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If an output file you expect is missing, list again after a short delay; once it appears in the list, its upload has finished.
 
-Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header, so the list examples call `GET /v1/files` (curl; python, typescript, ruby: `client.beta.files.list()`; go, csharp: `client.Beta.Files.List()`; java: `client.beta().files().list()`; php: `$client->beta->files->list()`; cli: `ant beta:files list`) and pass that header explicitly.
+Filtering by `scope_id` (java: `scopeId`; php: `scopeID`; csharp, go: `ScopeID`) requires the `managed-agents-2026-04-01` beta header, so the list examples call `GET /v1/files` (curl; python, typescript, ruby: `client.beta.files.list()`; go, csharp: `client.Beta.Files.List()`; java: `client.beta().files().list()`; php: `$client->beta->files->list()`; cli: `ant beta:files list`) and pass that header explicitly.
 
 ```bash cURL
 # List files associated with a session
@@ -696,8 +696,8 @@ The agent can work with any file type, including:
 
 Files mounted in the sandbox are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the sandbox.
 
-* The path you specify is rooted under the session's uploads directory: a `mount_path` of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox
-* If you omit `mount_path`, the file is placed at `/mnt/session/uploads/<file_id>`
+* The path you specify is rooted under the session's uploads directory: a `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox
+* If you omit `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`), the file is placed at `/mnt/session/uploads/<file_id>`
 * Parent directories are created automatically
 * Paths should be absolute (starting with `/`)
 * Files the agent writes to `/mnt/session/outputs/` become available through the Files API, scoped to the session; see [Listing and downloading session files](files.md#listing-and-downloading-session-files)

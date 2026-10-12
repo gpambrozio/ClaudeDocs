@@ -1743,7 +1743,7 @@ func main() {
 
 ### Beta User Profile External User Details Params
 
-- `type BetaUserProfileExternalUserDetailsParamsResp`
+- `type BetaUserProfileExternalUserDetailsParams`
 
   - `AccountStatus BetaUserProfileExternalUserDetailsParamsAccountStatus Optional`
 

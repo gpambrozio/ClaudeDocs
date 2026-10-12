@@ -1481,11 +1481,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     There is a limit of 100,000 messages in a single request.
 
-    - `Content []BetaContentBlockParamUnionResp`
+    - `Content []BetaContentBlockParamUnion`
 
-      - `[]BetaContentBlockParamUnionResp`
+      - `[]BetaContentBlockParamUnion`
 
-        - `type BetaTextBlockParamResp`
+        - `type BetaTextBlockParam`
 
           - `Type Text`
 
@@ -1493,7 +1493,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minLength: 1
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
@@ -1514,9 +1514,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
-          - `Citations []BetaTextCitationParamUnionResp Optional`
+          - `Citations []BetaTextCitationParamUnion Optional`
 
-            - `type BetaCitationCharLocationParamResp`
+            - `type BetaCitationCharLocationParam`
 
               - `Type CharLocation`
 
@@ -1536,7 +1536,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 0
 
-            - `type BetaCitationPageLocationParamResp`
+            - `type BetaCitationPageLocationParam`
 
               - `Type PageLocation`
 
@@ -1556,7 +1556,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocationParamResp`
+            - `type BetaCitationContentBlockLocationParam`
 
               - `Type ContentBlockLocation`
 
@@ -1586,7 +1586,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minimum: 0
 
-            - `type BetaCitationWebSearchResultLocationParamResp`
+            - `type BetaCitationWebSearchResultLocationParam`
 
               - `Type WebSearchResultLocation`
 
@@ -1602,7 +1602,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minLength: 1
 
-            - `type BetaCitationSearchResultLocationParamResp`
+            - `type BetaCitationSearchResultLocationParam`
 
               - `Type SearchResultLocation`
 
@@ -1636,13 +1636,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Title string`
 
-        - `type BetaImageBlockParamResp`
+        - `type BetaImageBlockParam`
 
           - `Type Image`
 
-          - `Source BetaImageBlockParamSourceUnionResp`
+          - `Source BetaImageBlockParamSourceUnion`
 
-            - `type BetaBase64ImageSource`
+            - `type BetaBase64ImageSourceParam`
 
               - `Type Base64`
 
@@ -1660,23 +1660,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-            - `type BetaURLImageSource`
+            - `type BetaURLImageSourceParam`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileImageSource`
+            - `type BetaFileImageSourceParam`
 
               - `Type File`
 
               - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Transformations BetaImageTransformationsParamResp Optional`
+          - `Transformations BetaImageTransformationsParam Optional`
 
             Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
@@ -1688,11 +1688,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-        - `type BetaRequestDocumentBlock`
+        - `type BetaRequestDocumentBlockParam`
 
           - `Type Document`
 
-          - `Source BetaRequestDocumentBlockSourceUnion`
+          - `Source BetaRequestDocumentBlockSourceUnionParam`
 
             - `type BetaBase64PDFSource`
 
@@ -1712,37 +1712,37 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `MediaType TextPlain`
 
-            - `type BetaContentBlockSource`
+            - `type BetaContentBlockSourceParam`
 
               - `Type Content`
 
-              - `Content BetaContentBlockSourceContentUnion`
+              - `Content BetaContentBlockSourceContentUnionParam`
 
                 - `string`
 
-                - `[]BetaContentBlockSourceContentUnion`
+                - `[]BetaContentBlockSourceContentUnionParam`
 
-                  - `type BetaTextBlockParamResp`
+                  - `type BetaTextBlockParam`
 
-                  - `type BetaImageBlockParamResp`
+                  - `type BetaImageBlockParam`
 
-            - `type BetaURLPDFSource`
+            - `type BetaURLPDFSourceParam`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileDocumentSource`
+            - `type BetaFileDocumentSourceParam`
 
               - `Type File`
 
               - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Citations BetaCitationsConfigParamResp Optional`
+          - `Citations BetaCitationsConfigParam Optional`
 
             - `Enabled bool Optional`
 
@@ -1754,11 +1754,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minLength: 1, maxLength: 500
 
-        - `type BetaSearchResultBlockParamResp`
+        - `type BetaSearchResultBlockParam`
 
           - `Type SearchResult`
 
-          - `Content []BetaTextBlockParamResp`
+          - `Content []BetaTextBlockParam`
 
             - `Type Text`
 
@@ -1766,23 +1766,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               minLength: 1
 
-            - `CacheControl BetaCacheControlEphemeral Optional`
+            - `CacheControl BetaCacheControlEphemeralParam Optional`
 
               Create a cache control breakpoint at this content block.
 
-            - `Citations []BetaTextCitationParamUnionResp Optional`
+            - `Citations []BetaTextCitationParamUnion Optional`
 
           - `Source string`
 
           - `Title string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Citations BetaCitationsConfigParamResp Optional`
+          - `Citations BetaCitationsConfigParam Optional`
 
-        - `type BetaThinkingBlockParamResp`
+        - `type BetaThinkingBlockParam`
 
           - `Type Thinking`
 
@@ -1796,7 +1796,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The `thinking` text of this block as returned by the API.
 
-        - `type BetaRedactedThinkingBlockParamResp`
+        - `type BetaRedactedThinkingBlockParam`
 
           - `Type RedactedThinking`
 
@@ -1804,7 +1804,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type BetaToolUseBlockParamResp`
+        - `type BetaToolUseBlockParam`
 
           - `Type ToolUse`
 
@@ -1818,11 +1818,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minLength: 1, maxLength: 200
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
+          - `Caller BetaToolUseBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -1854,7 +1854,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaToolResultBlockParamResp`
+        - `type BetaToolResultBlockParam`
 
           - `Type ToolResult`
 
@@ -1862,23 +1862,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Content []BetaToolResultBlockParamContentUnionResp Optional`
+          - `Content []BetaToolResultBlockParamContentUnion Optional`
 
-            - `[]BetaToolResultBlockParamContentUnionResp`
+            - `[]BetaToolResultBlockParamContentUnion`
 
-              - `type BetaTextBlockParamResp`
+              - `type BetaTextBlockParam`
 
-              - `type BetaImageBlockParamResp`
+              - `type BetaImageBlockParam`
 
-              - `type BetaSearchResultBlockParamResp`
+              - `type BetaSearchResultBlockParam`
 
-              - `type BetaRequestDocumentBlock`
+              - `type BetaRequestDocumentBlockParam`
 
-              - `type BetaToolReferenceBlockParamResp`
+              - `type BetaToolReferenceBlockParam`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -1888,11 +1888,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BetaBrowserStateBlockParamResp`
+              - `type BetaBrowserStateBlockParam`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -1904,7 +1904,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `Type BrowserState`
 
-                - `Tabs []BetaBrowserStateTabEntry`
+                - `Tabs []BetaBrowserStateTabEntryParam`
 
                   All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
@@ -1932,17 +1932,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
-                - `StateChanges []BetaBrowserStateChangeUnion Optional`
+                - `StateChanges []BetaBrowserStateChangeUnionParam Optional`
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
                   minItems: 1, maxItems: 200
 
-                  - `type BetaBrowserStateChangeTabOpened`
+                  - `type BetaBrowserStateChangeTabOpenedParam`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -1960,7 +1960,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadStarted`
+                  - `type BetaBrowserStateChangeDownloadStartedParam`
 
                     A file download that started during this call.
 
@@ -1978,7 +1978,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadCompleted`
+                  - `type BetaBrowserStateChangeDownloadCompletedParam`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -2011,7 +2011,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       minimum: 0
 
-                  - `type BetaBrowserStateChangeDownloadFailed`
+                  - `type BetaBrowserStateChangeDownloadFailedParam`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -2043,7 +2043,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlockParamResp`
+        - `type BetaServerToolUseBlockParam`
 
           - `Type ServerToolUse`
 
@@ -2071,11 +2071,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockParamName = "tool_search_tool_bm25"`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
+          - `Caller BetaServerToolUseBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -2087,13 +2087,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlockParamResp`
+        - `type BetaWebSearchToolResultBlockParam`
 
           - `Type WebSearchToolResult`
 
-          - `Content BetaWebSearchToolResultBlockParamContentUnionResp`
+          - `Content BetaWebSearchToolResultBlockParamContentUnion`
 
-            - `[]BetaWebSearchResultBlockParamResp`
+            - `[]BetaWebSearchResultBlockParam`
 
               - `Type WebSearchResult`
 
@@ -2105,7 +2105,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `PageAge string Optional`
 
-            - `type BetaWebSearchToolRequestError`
+            - `type BetaWebSearchToolRequestErrorParam`
 
               - `Type WebSearchToolResultError`
 
@@ -2127,11 +2127,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
+          - `Caller BetaWebSearchToolResultBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -2143,13 +2143,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlockParamResp`
+        - `type BetaWebFetchToolResultBlockParam`
 
           - `Type WebFetchToolResult`
 
-          - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
+          - `Content BetaWebFetchToolResultBlockParamContentUnion`
 
-            - `type BetaWebFetchToolResultErrorBlockParamResp`
+            - `type BetaWebFetchToolResultErrorBlockParam`
 
               - `Type WebFetchToolResultError`
 
@@ -2175,11 +2175,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlockParamResp`
+            - `type BetaWebFetchBlockParam`
 
               - `Type WebFetchResult`
 
-              - `Content BetaRequestDocumentBlock`
+              - `Content BetaRequestDocumentBlockParam`
 
               - `URL string`
 
@@ -2193,11 +2193,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
+          - `Caller BetaWebFetchToolResultBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -2209,13 +2209,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlockParamResp`
+        - `type BetaAdvisorToolResultBlockParam`
 
           - `Type AdvisorToolResult`
 
-          - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
+          - `Content BetaAdvisorToolResultBlockParamContentUnion`
 
-            - `type BetaAdvisorToolResultErrorParamResp`
+            - `type BetaAdvisorToolResultErrorParam`
 
               - `Type AdvisorToolResultError`
 
@@ -2235,7 +2235,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlockParamResp`
+            - `type BetaAdvisorResultBlockParam`
 
               - `Type AdvisorResult`
 
@@ -2243,7 +2243,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `StopReason string Optional`
 
-            - `type BetaAdvisorRedactedResultBlockParamResp`
+            - `type BetaAdvisorRedactedResultBlockParam`
 
               - `Type AdvisorRedactedResult`
 
@@ -2257,17 +2257,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCodeExecutionToolResultBlockParamResp`
+        - `type BetaCodeExecutionToolResultBlockParam`
 
           - `Type CodeExecutionToolResult`
 
-          - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaCodeExecutionToolResultErrorParamResp`
+            - `type BetaCodeExecutionToolResultErrorParam`
 
               - `Type CodeExecutionToolResultError`
 
@@ -2281,11 +2281,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlockParamResp`
+            - `type BetaCodeExecutionResultBlockParam`
 
               - `Type CodeExecutionResult`
 
-              - `Content []BetaCodeExecutionOutputBlockParamResp`
+              - `Content []BetaCodeExecutionOutputBlockParam`
 
                 - `Type CodeExecutionOutput`
 
@@ -2297,13 +2297,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlockParamResp`
+            - `type BetaEncryptedCodeExecutionResultBlockParam`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `Type EncryptedCodeExecutionResult`
 
-              - `Content []BetaCodeExecutionOutputBlockParamResp`
+              - `Content []BetaCodeExecutionOutputBlockParam`
 
                 - `Type CodeExecutionOutput`
 
@@ -2319,17 +2319,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBashCodeExecutionToolResultBlockParamResp`
+        - `type BetaBashCodeExecutionToolResultBlockParam`
 
           - `Type BashCodeExecutionToolResult`
 
-          - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaBashCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaBashCodeExecutionToolResultErrorParamResp`
+            - `type BetaBashCodeExecutionToolResultErrorParam`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -2345,11 +2345,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlockParamResp`
+            - `type BetaBashCodeExecutionResultBlockParam`
 
               - `Type BashCodeExecutionResult`
 
-              - `Content []BetaBashCodeExecutionOutputBlockParamResp`
+              - `Content []BetaBashCodeExecutionOutputBlockParam`
 
                 - `Type BashCodeExecutionOutput`
 
@@ -2365,17 +2365,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
+        - `type BetaTextEditorCodeExecutionToolResultBlockParam`
 
           - `Type TextEditorCodeExecutionToolResult`
 
-          - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
+            - `type BetaTextEditorCodeExecutionToolResultErrorParam`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -2393,7 +2393,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionViewResultBlockParam`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -2413,13 +2413,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `TotalLines int64 Optional`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionCreateResultBlockParam`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -2437,17 +2437,17 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaToolSearchToolResultBlockParamResp`
+        - `type BetaToolSearchToolResultBlockParam`
 
           - `Type ToolSearchToolResult`
 
-          - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
+          - `Content BetaToolSearchToolResultBlockParamContentUnion`
 
-            - `type BetaToolSearchToolResultErrorParamResp`
+            - `type BetaToolSearchToolResultErrorParam`
 
               - `Type ToolSearchToolResultError`
 
@@ -2463,11 +2463,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `ErrorMessage string Optional`
 
-            - `type BetaToolSearchToolSearchResultBlockParamResp`
+            - `type BetaToolSearchToolSearchResultBlockParam`
 
               - `Type ToolSearchToolSearchResult`
 
-              - `ToolReferences []BetaToolReferenceBlockParamResp`
+              - `ToolReferences []BetaToolReferenceBlockParam`
 
                 - `Type ToolReference`
 
@@ -2475,7 +2475,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
@@ -2483,11 +2483,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaMCPToolUseBlockParamResp`
+        - `type BetaMCPToolUseBlockParam`
 
           - `Type MCPToolUse`
 
@@ -2503,11 +2503,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The name of the MCP server
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestMCPToolResultBlockParamResp`
+        - `type BetaRequestMCPToolResultBlockParam`
 
           - `Type MCPToolResult`
 
@@ -2515,15 +2515,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Content BetaRequestMCPToolResultBlockParamContentUnionResp Optional`
+          - `Content BetaRequestMCPToolResultBlockParamContentUnion Optional`
 
             - `string`
 
-            - `[]BetaTextBlockParamResp`
+            - `[]BetaTextBlockParam`
 
               - `Type Text`
 
@@ -2531,15 +2531,15 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 minLength: 1
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Citations []BetaTextCitationParamUnionResp Optional`
+              - `Citations []BetaTextCitationParamUnion Optional`
 
           - `IsError bool Optional`
 
-        - `type BetaContainerUploadBlockParamResp`
+        - `type BetaContainerUploadBlockParam`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -2548,11 +2548,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCompactionBlockParamResp`
+        - `type BetaCompactionBlockParam`
 
           A compaction block containing summary of previous context.
 
@@ -2564,7 +2564,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Type Compaction`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
@@ -2580,11 +2580,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             The block's signature as returned, to be sent back verbatim
 
-          - `ToolChanges []BetaCompactionBlockParamToolChangeUnionResp Optional`
+          - `ToolChanges []BetaCompactionBlockParamToolChangeUnion Optional`
 
             The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
-            - `type BetaRequestToolAdditionBlock`
+            - `type BetaRequestToolAdditionBlockParam`
 
               Mid-conversation directive to make a tool available.
 
@@ -2598,9 +2598,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Type ToolAddition`
 
-              - `Tool BetaRequestToolAdditionBlockToolUnion`
+              - `Tool BetaRequestToolAdditionBlockToolUnionParam`
 
-                - `type BetaToolChangeToolReference`
+                - `type BetaToolChangeToolReferenceParam`
 
                   Reference to a single tool, by the name the model uses to call it: a
                   tool declared in `tools` or defined by an earlier `tool_addition`
@@ -2614,7 +2614,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `type BetaToolChangeMCPToolReference`
+                - `type BetaToolChangeMCPToolReferenceParam`
 
                   Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -2625,7 +2625,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `ServerName string`
 
-                - `type BetaToolChangeMCPToolsetReference`
+                - `type BetaToolChangeMCPToolsetReferenceParam`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -2633,7 +2633,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `ServerName string`
 
-                - `type BetaToolChangeToolDefinitionParamResp`
+                - `type BetaToolChangeToolDefinitionParam`
 
                   A tool defined by value: `definition` is a `tools` entry (any kind
                   `tools` accepts, an MCP toolset included). An `mcp_toolset` given here
@@ -2641,13 +2641,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `Type ToolDefinition`
 
-                  - `Definition BetaToolUnion`
+                  - `Definition BetaToolUnionParam`
 
-                    - `type BetaTool`
+                    - `type BetaToolParam`
 
                       - `Type BetaToolType Optional`
 
-                      - `InputSchema BetaToolInputSchema`
+                      - `InputSchema BetaToolInputSchemaParam`
 
                         [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
@@ -2677,7 +2677,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                         - `const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code_execution_20260521"`
 
-                      - `CacheControl BetaCacheControlEphemeral Optional`
+                      - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                         Create a cache control breakpoint at this content block.
 
@@ -4636,11 +4636,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           The tool's description as the MCP server lists it.
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestToolRemovalBlock`
+            - `type BetaRequestToolRemovalBlockParam`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -4650,9 +4650,9 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               - `Type ToolRemoval`
 
-              - `Tool BetaRequestToolRemovalBlockToolUnion`
+              - `Tool BetaRequestToolRemovalBlockToolUnionParam`
 
-                - `type BetaToolChangeToolReference`
+                - `type BetaToolChangeToolReferenceParam`
 
                   Reference to a single tool, by the name the model uses to call it: a
                   tool declared in `tools` or defined by an earlier `tool_addition`
@@ -4660,20 +4660,20 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
                   assigns to MCP-resolved tools; use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `type BetaToolChangeMCPToolReference`
+                - `type BetaToolChangeMCPToolReferenceParam`
 
                   Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `type BetaToolChangeMCPToolsetReference`
+                - `type BetaToolChangeMCPToolsetReferenceParam`
 
                   Reference to every tool in the named MCP server's toolset.
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestToolAdditionBlock`
+        - `type BetaRequestToolAdditionBlockParam`
 
           Mid-conversation directive to make a tool available.
 
@@ -4685,7 +4685,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           definition also requires the `mcp-client-2026-09-15` beta. The tool is
           offered to the model from this point in the conversation onward.
 
-        - `type BetaRequestToolRemovalBlock`
+        - `type BetaRequestToolRemovalBlockParam`
 
           Mid-conversation directive to withdraw a tool.
 
@@ -4693,7 +4693,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           request's `tools` or defined earlier in `messages`. It is no longer
           offered to the model from this point in the conversation onward.
 
-        - `type BetaMCPToolListingBlockParamResp`
+        - `type BetaMCPToolListingBlockParam`
 
           The tool listing an MCP server returned while an earlier response was
           produced, as that response carried it. Send the assistant message back
@@ -4708,7 +4708,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             minLength: 1, maxLength: 255
 
-          - `Tools []BetaMCPToolParamResp`
+          - `Tools []BetaMCPToolParam`
 
             The server's tools, exactly as the response listed them.
 
@@ -4726,7 +4726,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               The tool's description as the MCP server lists it.
 
-        - `type BetaFallbackBlockParamResp`
+        - `type BetaFallbackBlockParam`
 
           A `fallback` block echoed back from a prior response.
 
@@ -4744,7 +4744,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `Type Fallback`
 
-          - `From BetaFallbackInfoParamResp`
+          - `From BetaFallbackInfoParam`
 
             Identifies one hop of a fallback transition.
 
@@ -4754,7 +4754,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `To BetaFallbackInfoParamResp`
+          - `To BetaFallbackInfoParam`
 
             Identifies one hop of a fallback transition.
 
@@ -4778,7 +4778,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `const BetaMessageParamClearAtNever BetaMessageParamClearAt = "never"`
 
-    - `OutputConfig BetaSystemMessageOutputConfig Optional`
+    - `OutputConfig BetaSystemMessageOutputConfigParam Optional`
 
       Per-message output configuration on a role:"system" input message.
 
@@ -4822,7 +4822,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Container identifier for reuse across requests.
 
-    - `type BetaContainerParamsResp`
+    - `type BetaContainerParams`
 
       Container parameters with skills to be loaded.
 
@@ -4830,7 +4830,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         Container id
 
-      - `Skills []BetaSkillParamsResp Optional`
+      - `Skills []BetaSkillParams Optional`
 
         List of skills to load in the container
 
@@ -4893,7 +4893,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `string`
 
-    - `type BetaFallbackCreditTokenParamResp`
+    - `type BetaFallbackCreditTokenParam`
 
       Object form of `fallback_credit_token`: the token plus a redemption
       mode.
@@ -4939,7 +4939,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `AuthorizationToken string Optional`
 
-    - `ToolConfiguration BetaRequestMCPServerToolConfiguration Optional`
+    - `ToolConfiguration BetaRequestMCPServerToolConfigurationParam Optional`
 
       - `AllowedTools []string Optional`
 
@@ -4993,11 +4993,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         minLength: 1
 
-      - `CacheControl BetaCacheControlEphemeral Optional`
+      - `CacheControl BetaCacheControlEphemeralParam Optional`
 
         Create a cache control breakpoint at this content block.
 
-      - `Citations []BetaTextCitationParamUnionResp Optional`
+      - `Citations []BetaTextCitationParamUnion Optional`
 
   - `Thinking BetaThinkingConfigParamUnion Optional`
 
@@ -5075,7 +5075,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type BetaTool`
+    - `type BetaToolParam`
 
     - `type BetaToolBash20241022`
 
@@ -5693,7 +5693,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `const BetaWebSearchToolResultErrorCodeRequestTooLarge BetaWebSearchToolResultErrorCode = "request_too_large"`
 
-        - `type BetaWebSearchToolResultBlockContentArray []BetaWebSearchResultBlock`
+        - `[]BetaWebSearchResultBlock`
 
           - `Type WebSearchResult`
 
@@ -6161,7 +6161,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `string`
 
-        - `type BetaMCPToolResultBlockContentBetaMCPToolResultBlockContent []BetaTextBlock`
+        - `[]BetaTextBlock`
 
           - `Type Text`
 
@@ -9651,11 +9651,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     There is a limit of 100,000 messages in a single request.
 
-    - `Content []BetaContentBlockParamUnionResp`
+    - `Content []BetaContentBlockParamUnion`
 
-      - `[]BetaContentBlockParamUnionResp`
+      - `[]BetaContentBlockParamUnion`
 
-        - `type BetaTextBlockParamResp`
+        - `type BetaTextBlockParam`
 
           - `Type Text`
 
@@ -9663,7 +9663,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             minLength: 1
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
@@ -9684,9 +9684,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
-          - `Citations []BetaTextCitationParamUnionResp Optional`
+          - `Citations []BetaTextCitationParamUnion Optional`
 
-            - `type BetaCitationCharLocationParamResp`
+            - `type BetaCitationCharLocationParam`
 
               - `Type CharLocation`
 
@@ -9706,7 +9706,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-            - `type BetaCitationPageLocationParamResp`
+            - `type BetaCitationPageLocationParam`
 
               - `Type PageLocation`
 
@@ -9726,7 +9726,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 1
 
-            - `type BetaCitationContentBlockLocationParamResp`
+            - `type BetaCitationContentBlockLocationParam`
 
               - `Type ContentBlockLocation`
 
@@ -9756,7 +9756,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minimum: 0
 
-            - `type BetaCitationWebSearchResultLocationParamResp`
+            - `type BetaCitationWebSearchResultLocationParam`
 
               - `Type WebSearchResultLocation`
 
@@ -9772,7 +9772,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minLength: 1
 
-            - `type BetaCitationSearchResultLocationParamResp`
+            - `type BetaCitationSearchResultLocationParam`
 
               - `Type SearchResultLocation`
 
@@ -9806,13 +9806,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Title string`
 
-        - `type BetaImageBlockParamResp`
+        - `type BetaImageBlockParam`
 
           - `Type Image`
 
-          - `Source BetaImageBlockParamSourceUnionResp`
+          - `Source BetaImageBlockParamSourceUnion`
 
-            - `type BetaBase64ImageSource`
+            - `type BetaBase64ImageSourceParam`
 
               - `Type Base64`
 
@@ -9830,23 +9830,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-            - `type BetaURLImageSource`
+            - `type BetaURLImageSourceParam`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileImageSource`
+            - `type BetaFileImageSourceParam`
 
               - `Type File`
 
               - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Transformations BetaImageTransformationsParamResp Optional`
+          - `Transformations BetaImageTransformationsParam Optional`
 
             Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
@@ -9858,11 +9858,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-        - `type BetaRequestDocumentBlock`
+        - `type BetaRequestDocumentBlockParam`
 
           - `Type Document`
 
-          - `Source BetaRequestDocumentBlockSourceUnion`
+          - `Source BetaRequestDocumentBlockSourceUnionParam`
 
             - `type BetaBase64PDFSource`
 
@@ -9882,37 +9882,37 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `MediaType TextPlain`
 
-            - `type BetaContentBlockSource`
+            - `type BetaContentBlockSourceParam`
 
               - `Type Content`
 
-              - `Content BetaContentBlockSourceContentUnion`
+              - `Content BetaContentBlockSourceContentUnionParam`
 
                 - `string`
 
-                - `[]BetaContentBlockSourceContentUnion`
+                - `[]BetaContentBlockSourceContentUnionParam`
 
-                  - `type BetaTextBlockParamResp`
+                  - `type BetaTextBlockParam`
 
-                  - `type BetaImageBlockParamResp`
+                  - `type BetaImageBlockParam`
 
-            - `type BetaURLPDFSource`
+            - `type BetaURLPDFSourceParam`
 
               - `Type URL`
 
               - `URL string`
 
-            - `type BetaFileDocumentSource`
+            - `type BetaFileDocumentSourceParam`
 
               - `Type File`
 
               - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Citations BetaCitationsConfigParamResp Optional`
+          - `Citations BetaCitationsConfigParam Optional`
 
             - `Enabled bool Optional`
 
@@ -9924,11 +9924,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             minLength: 1, maxLength: 500
 
-        - `type BetaSearchResultBlockParamResp`
+        - `type BetaSearchResultBlockParam`
 
           - `Type SearchResult`
 
-          - `Content []BetaTextBlockParamResp`
+          - `Content []BetaTextBlockParam`
 
             - `Type Text`
 
@@ -9936,23 +9936,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               minLength: 1
 
-            - `CacheControl BetaCacheControlEphemeral Optional`
+            - `CacheControl BetaCacheControlEphemeralParam Optional`
 
               Create a cache control breakpoint at this content block.
 
-            - `Citations []BetaTextCitationParamUnionResp Optional`
+            - `Citations []BetaTextCitationParamUnion Optional`
 
           - `Source string`
 
           - `Title string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Citations BetaCitationsConfigParamResp Optional`
+          - `Citations BetaCitationsConfigParam Optional`
 
-        - `type BetaThinkingBlockParamResp`
+        - `type BetaThinkingBlockParam`
 
           - `Type Thinking`
 
@@ -9966,7 +9966,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The `thinking` text of this block as returned by the API.
 
-        - `type BetaRedactedThinkingBlockParamResp`
+        - `type BetaRedactedThinkingBlockParam`
 
           - `Type RedactedThinking`
 
@@ -9974,7 +9974,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-        - `type BetaToolUseBlockParamResp`
+        - `type BetaToolUseBlockParam`
 
           - `Type ToolUse`
 
@@ -9988,11 +9988,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             minLength: 1, maxLength: 200
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
+          - `Caller BetaToolUseBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -10024,7 +10024,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaToolResultBlockParamResp`
+        - `type BetaToolResultBlockParam`
 
           - `Type ToolResult`
 
@@ -10032,23 +10032,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Content []BetaToolResultBlockParamContentUnionResp Optional`
+          - `Content []BetaToolResultBlockParamContentUnion Optional`
 
-            - `[]BetaToolResultBlockParamContentUnionResp`
+            - `[]BetaToolResultBlockParamContentUnion`
 
-              - `type BetaTextBlockParamResp`
+              - `type BetaTextBlockParam`
 
-              - `type BetaImageBlockParamResp`
+              - `type BetaImageBlockParam`
 
-              - `type BetaSearchResultBlockParamResp`
+              - `type BetaSearchResultBlockParam`
 
-              - `type BetaRequestDocumentBlock`
+              - `type BetaRequestDocumentBlockParam`
 
-              - `type BetaToolReferenceBlockParamResp`
+              - `type BetaToolReferenceBlockParam`
 
                 Tool reference block that can be included in tool_result content.
 
@@ -10058,11 +10058,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
-              - `type BetaBrowserStateBlockParamResp`
+              - `type BetaBrowserStateBlockParam`
 
                 The caller's browser state after a browser toolset member call —
                 the full inventory of open tabs, which tab is active, and any side
@@ -10074,7 +10074,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `Type BrowserState`
 
-                - `Tabs []BetaBrowserStateTabEntry`
+                - `Tabs []BetaBrowserStateTabEntryParam`
 
                   All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
@@ -10102,17 +10102,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                     Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
-                - `StateChanges []BetaBrowserStateChangeUnion Optional`
+                - `StateChanges []BetaBrowserStateChangeUnionParam Optional`
 
                   Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
                   minItems: 1, maxItems: 200
 
-                  - `type BetaBrowserStateChangeTabOpened`
+                  - `type BetaBrowserStateChangeTabOpenedParam`
 
                     A tab this call's execution opened that remains open at its end —
                     the creation delta of the `tabs` inventory, not an event log.
@@ -10130,7 +10130,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadStarted`
+                  - `type BetaBrowserStateChangeDownloadStartedParam`
 
                     A file download that started during this call.
 
@@ -10148,7 +10148,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                  - `type BetaBrowserStateChangeDownloadCompleted`
+                  - `type BetaBrowserStateChangeDownloadCompletedParam`
 
                     A file download that finished during this call, reported with the
                     same `download_id` as its `download_started` — or without a prior
@@ -10181,7 +10181,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       minimum: 0
 
-                  - `type BetaBrowserStateChangeDownloadFailed`
+                  - `type BetaBrowserStateChangeDownloadFailedParam`
 
                     A file download that failed — or was cancelled — during this call.
 
@@ -10213,7 +10213,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-        - `type BetaServerToolUseBlockParamResp`
+        - `type BetaServerToolUseBlockParam`
 
           - `Type ServerToolUse`
 
@@ -10241,11 +10241,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockParamName = "tool_search_tool_bm25"`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
+          - `Caller BetaServerToolUseBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -10257,13 +10257,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebSearchToolResultBlockParamResp`
+        - `type BetaWebSearchToolResultBlockParam`
 
           - `Type WebSearchToolResult`
 
-          - `Content BetaWebSearchToolResultBlockParamContentUnionResp`
+          - `Content BetaWebSearchToolResultBlockParamContentUnion`
 
-            - `[]BetaWebSearchResultBlockParamResp`
+            - `[]BetaWebSearchResultBlockParam`
 
               - `Type WebSearchResult`
 
@@ -10275,7 +10275,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `PageAge string Optional`
 
-            - `type BetaWebSearchToolRequestError`
+            - `type BetaWebSearchToolRequestErrorParam`
 
               - `Type WebSearchToolResultError`
 
@@ -10297,11 +10297,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
+          - `Caller BetaWebSearchToolResultBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -10313,13 +10313,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaWebFetchToolResultBlockParamResp`
+        - `type BetaWebFetchToolResultBlockParam`
 
           - `Type WebFetchToolResult`
 
-          - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
+          - `Content BetaWebFetchToolResultBlockParamContentUnion`
 
-            - `type BetaWebFetchToolResultErrorBlockParamResp`
+            - `type BetaWebFetchToolResultErrorBlockParam`
 
               - `Type WebFetchToolResultError`
 
@@ -10345,11 +10345,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-            - `type BetaWebFetchBlockParamResp`
+            - `type BetaWebFetchBlockParam`
 
               - `Type WebFetchResult`
 
-              - `Content BetaRequestDocumentBlock`
+              - `Content BetaRequestDocumentBlockParam`
 
               - `URL string`
 
@@ -10363,11 +10363,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
+          - `Caller BetaWebFetchToolResultBlockParamCallerUnion Optional`
 
             - `type BetaDirectCaller`
 
@@ -10379,13 +10379,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `type BetaServerToolCaller20260120`
 
-        - `type BetaAdvisorToolResultBlockParamResp`
+        - `type BetaAdvisorToolResultBlockParam`
 
           - `Type AdvisorToolResult`
 
-          - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
+          - `Content BetaAdvisorToolResultBlockParamContentUnion`
 
-            - `type BetaAdvisorToolResultErrorParamResp`
+            - `type BetaAdvisorToolResultErrorParam`
 
               - `Type AdvisorToolResultError`
 
@@ -10405,7 +10405,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-            - `type BetaAdvisorResultBlockParamResp`
+            - `type BetaAdvisorResultBlockParam`
 
               - `Type AdvisorResult`
 
@@ -10413,7 +10413,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `StopReason string Optional`
 
-            - `type BetaAdvisorRedactedResultBlockParamResp`
+            - `type BetaAdvisorRedactedResultBlockParam`
 
               - `Type AdvisorRedactedResult`
 
@@ -10427,17 +10427,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCodeExecutionToolResultBlockParamResp`
+        - `type BetaCodeExecutionToolResultBlockParam`
 
           - `Type CodeExecutionToolResult`
 
-          - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaCodeExecutionToolResultErrorParamResp`
+            - `type BetaCodeExecutionToolResultErrorParam`
 
               - `Type CodeExecutionToolResultError`
 
@@ -10451,11 +10451,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-            - `type BetaCodeExecutionResultBlockParamResp`
+            - `type BetaCodeExecutionResultBlockParam`
 
               - `Type CodeExecutionResult`
 
-              - `Content []BetaCodeExecutionOutputBlockParamResp`
+              - `Content []BetaCodeExecutionOutputBlockParam`
 
                 - `Type CodeExecutionOutput`
 
@@ -10467,13 +10467,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Stdout string`
 
-            - `type BetaEncryptedCodeExecutionResultBlockParamResp`
+            - `type BetaEncryptedCodeExecutionResultBlockParam`
 
               Code execution result with encrypted stdout for PFC + web_search results.
 
               - `Type EncryptedCodeExecutionResult`
 
-              - `Content []BetaCodeExecutionOutputBlockParamResp`
+              - `Content []BetaCodeExecutionOutputBlockParam`
 
                 - `Type CodeExecutionOutput`
 
@@ -10489,17 +10489,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaBashCodeExecutionToolResultBlockParamResp`
+        - `type BetaBashCodeExecutionToolResultBlockParam`
 
           - `Type BashCodeExecutionToolResult`
 
-          - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaBashCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaBashCodeExecutionToolResultErrorParamResp`
+            - `type BetaBashCodeExecutionToolResultErrorParam`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -10515,11 +10515,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-            - `type BetaBashCodeExecutionResultBlockParamResp`
+            - `type BetaBashCodeExecutionResultBlockParam`
 
               - `Type BashCodeExecutionResult`
 
-              - `Content []BetaBashCodeExecutionOutputBlockParamResp`
+              - `Content []BetaBashCodeExecutionOutputBlockParam`
 
                 - `Type BashCodeExecutionOutput`
 
@@ -10535,17 +10535,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
+        - `type BetaTextEditorCodeExecutionToolResultBlockParam`
 
           - `Type TextEditorCodeExecutionToolResult`
 
-          - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
+          - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnion`
 
-            - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
+            - `type BetaTextEditorCodeExecutionToolResultErrorParam`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -10563,7 +10563,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `ErrorMessage string Optional`
 
-            - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionViewResultBlockParam`
 
               - `Type TextEditorCodeExecutionViewResult`
 
@@ -10583,13 +10583,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `TotalLines int64 Optional`
 
-            - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionCreateResultBlockParam`
 
               - `Type TextEditorCodeExecutionCreateResult`
 
               - `IsFileUpdate bool`
 
-            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
               - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -10607,17 +10607,17 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaToolSearchToolResultBlockParamResp`
+        - `type BetaToolSearchToolResultBlockParam`
 
           - `Type ToolSearchToolResult`
 
-          - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
+          - `Content BetaToolSearchToolResultBlockParamContentUnion`
 
-            - `type BetaToolSearchToolResultErrorParamResp`
+            - `type BetaToolSearchToolResultErrorParam`
 
               - `Type ToolSearchToolResultError`
 
@@ -10633,11 +10633,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `ErrorMessage string Optional`
 
-            - `type BetaToolSearchToolSearchResultBlockParamResp`
+            - `type BetaToolSearchToolSearchResultBlockParam`
 
               - `Type ToolSearchToolSearchResult`
 
-              - `ToolReferences []BetaToolReferenceBlockParamResp`
+              - `ToolReferences []BetaToolReferenceBlockParam`
 
                 - `Type ToolReference`
 
@@ -10645,7 +10645,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
@@ -10653,11 +10653,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaMCPToolUseBlockParamResp`
+        - `type BetaMCPToolUseBlockParam`
 
           - `Type MCPToolUse`
 
@@ -10673,11 +10673,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The name of the MCP server
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestMCPToolResultBlockParamResp`
+        - `type BetaRequestMCPToolResultBlockParam`
 
           - `Type MCPToolResult`
 
@@ -10685,15 +10685,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Content BetaRequestMCPToolResultBlockParamContentUnionResp Optional`
+          - `Content BetaRequestMCPToolResultBlockParamContentUnion Optional`
 
             - `string`
 
-            - `[]BetaTextBlockParamResp`
+            - `[]BetaTextBlockParam`
 
               - `Type Text`
 
@@ -10701,15 +10701,15 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 minLength: 1
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Citations []BetaTextCitationParamUnionResp Optional`
+              - `Citations []BetaTextCitationParamUnion Optional`
 
           - `IsError bool Optional`
 
-        - `type BetaContainerUploadBlockParamResp`
+        - `type BetaContainerUploadBlockParam`
 
           A content block that represents a file to be uploaded to the container
           Files uploaded via this block will be available in the container's input directory.
@@ -10718,11 +10718,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `FileID string`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-        - `type BetaCompactionBlockParamResp`
+        - `type BetaCompactionBlockParam`
 
           A compaction block containing summary of previous context.
 
@@ -10734,7 +10734,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Type Compaction`
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
@@ -10750,11 +10750,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             The block's signature as returned, to be sent back verbatim
 
-          - `ToolChanges []BetaCompactionBlockParamToolChangeUnionResp Optional`
+          - `ToolChanges []BetaCompactionBlockParamToolChangeUnion Optional`
 
             The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
-            - `type BetaRequestToolAdditionBlock`
+            - `type BetaRequestToolAdditionBlockParam`
 
               Mid-conversation directive to make a tool available.
 
@@ -10768,9 +10768,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Type ToolAddition`
 
-              - `Tool BetaRequestToolAdditionBlockToolUnion`
+              - `Tool BetaRequestToolAdditionBlockToolUnionParam`
 
-                - `type BetaToolChangeToolReference`
+                - `type BetaToolChangeToolReferenceParam`
 
                   Reference to a single tool, by the name the model uses to call it: a
                   tool declared in `tools` or defined by an earlier `tool_addition`
@@ -10784,7 +10784,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                     pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                - `type BetaToolChangeMCPToolReference`
+                - `type BetaToolChangeMCPToolReferenceParam`
 
                   Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -10795,7 +10795,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   - `ServerName string`
 
-                - `type BetaToolChangeMCPToolsetReference`
+                - `type BetaToolChangeMCPToolsetReferenceParam`
 
                   Reference to every tool in the named MCP server's toolset.
 
@@ -10803,7 +10803,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   - `ServerName string`
 
-                - `type BetaToolChangeToolDefinitionParamResp`
+                - `type BetaToolChangeToolDefinitionParam`
 
                   A tool defined by value: `definition` is a `tools` entry (any kind
                   `tools` accepts, an MCP toolset included). An `mcp_toolset` given here
@@ -10811,13 +10811,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                   - `Type ToolDefinition`
 
-                  - `Definition BetaToolUnion`
+                  - `Definition BetaToolUnionParam`
 
-                    - `type BetaTool`
+                    - `type BetaToolParam`
 
                       - `Type BetaToolType Optional`
 
-                      - `InputSchema BetaToolInputSchema`
+                      - `InputSchema BetaToolInputSchemaParam`
 
                         [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
@@ -10847,7 +10847,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                         - `const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code_execution_20260521"`
 
-                      - `CacheControl BetaCacheControlEphemeral Optional`
+                      - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                         Create a cache control breakpoint at this content block.
 
@@ -12806,11 +12806,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           The tool's description as the MCP server lists it.
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestToolRemovalBlock`
+            - `type BetaRequestToolRemovalBlockParam`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -12820,9 +12820,9 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               - `Type ToolRemoval`
 
-              - `Tool BetaRequestToolRemovalBlockToolUnion`
+              - `Tool BetaRequestToolRemovalBlockToolUnionParam`
 
-                - `type BetaToolChangeToolReference`
+                - `type BetaToolChangeToolReferenceParam`
 
                   Reference to a single tool, by the name the model uses to call it: a
                   tool declared in `tools` or defined by an earlier `tool_addition`
@@ -12830,20 +12830,20 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
                   assigns to MCP-resolved tools; use `mcp_tool_reference` or
                   `mcp_toolset_reference` for those.
 
-                - `type BetaToolChangeMCPToolReference`
+                - `type BetaToolChangeMCPToolReferenceParam`
 
                   Reference to a single MCP tool by its server and remote name; the
                   same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                - `type BetaToolChangeMCPToolsetReference`
+                - `type BetaToolChangeMCPToolsetReferenceParam`
 
                   Reference to every tool in the named MCP server's toolset.
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-        - `type BetaRequestToolAdditionBlock`
+        - `type BetaRequestToolAdditionBlockParam`
 
           Mid-conversation directive to make a tool available.
 
@@ -12855,7 +12855,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
           definition also requires the `mcp-client-2026-09-15` beta. The tool is
           offered to the model from this point in the conversation onward.
 
-        - `type BetaRequestToolRemovalBlock`
+        - `type BetaRequestToolRemovalBlockParam`
 
           Mid-conversation directive to withdraw a tool.
 
@@ -12863,7 +12863,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
           request's `tools` or defined earlier in `messages`. It is no longer
           offered to the model from this point in the conversation onward.
 
-        - `type BetaMCPToolListingBlockParamResp`
+        - `type BetaMCPToolListingBlockParam`
 
           The tool listing an MCP server returned while an earlier response was
           produced, as that response carried it. Send the assistant message back
@@ -12878,7 +12878,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             minLength: 1, maxLength: 255
 
-          - `Tools []BetaMCPToolParamResp`
+          - `Tools []BetaMCPToolParam`
 
             The server's tools, exactly as the response listed them.
 
@@ -12896,7 +12896,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               The tool's description as the MCP server lists it.
 
-        - `type BetaFallbackBlockParamResp`
+        - `type BetaFallbackBlockParam`
 
           A `fallback` block echoed back from a prior response.
 
@@ -12914,7 +12914,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
           - `Type Fallback`
 
-          - `From BetaFallbackInfoParamResp`
+          - `From BetaFallbackInfoParam`
 
             Identifies one hop of a fallback transition.
 
@@ -12924,7 +12924,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `To BetaFallbackInfoParamResp`
+          - `To BetaFallbackInfoParam`
 
             Identifies one hop of a fallback transition.
 
@@ -12948,7 +12948,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
       - `const BetaMessageParamClearAtNever BetaMessageParamClearAt = "never"`
 
-    - `OutputConfig BetaSystemMessageOutputConfig Optional`
+    - `OutputConfig BetaSystemMessageOutputConfigParam Optional`
 
       Per-message output configuration on a role:"system" input message.
 
@@ -13008,7 +13008,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `AuthorizationToken string Optional`
 
-    - `ToolConfiguration BetaRequestMCPServerToolConfiguration Optional`
+    - `ToolConfiguration BetaRequestMCPServerToolConfigurationParam Optional`
 
       - `AllowedTools []string Optional`
 
@@ -13034,7 +13034,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `string`
 
-    - `type BetaMessageCountTokensParamsSystemArray []BetaTextBlockParamResp`
+    - `[]BetaTextBlockParam`
 
       - `Type Text`
 
@@ -13042,11 +13042,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         minLength: 1
 
-      - `CacheControl BetaCacheControlEphemeral Optional`
+      - `CacheControl BetaCacheControlEphemeralParam Optional`
 
         Create a cache control breakpoint at this content block.
 
-      - `Citations []BetaTextCitationParamUnionResp Optional`
+      - `Citations []BetaTextCitationParamUnion Optional`
 
   - `Thinking BetaThinkingConfigParamUnion Optional`
 
@@ -13124,7 +13124,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-    - `type BetaTool`
+    - `type BetaToolParam`
 
     - `type BetaToolBash20241022`
 
@@ -13439,7 +13439,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         minimum: 0
 
-      - `Messages []BetaMessageParamResp`
+      - `Messages []BetaMessageParam`
 
         Input messages.
 
@@ -13490,11 +13490,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         There is a limit of 100,000 messages in a single request.
 
-        - `Content []BetaContentBlockParamUnionResp`
+        - `Content []BetaContentBlockParamUnion`
 
-          - `[]BetaContentBlockParamUnionResp`
+          - `[]BetaContentBlockParamUnion`
 
-            - `type BetaTextBlockParamResp`
+            - `type BetaTextBlockParam`
 
               - `Type Text`
 
@@ -13502,7 +13502,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minLength: 1
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
@@ -13523,9 +13523,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
-              - `Citations []BetaTextCitationParamUnionResp Optional`
+              - `Citations []BetaTextCitationParamUnion Optional`
 
-                - `type BetaCitationCharLocationParamResp`
+                - `type BetaCitationCharLocationParam`
 
                   - `Type CharLocation`
 
@@ -13545,7 +13545,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                - `type BetaCitationPageLocationParamResp`
+                - `type BetaCitationPageLocationParam`
 
                   - `Type PageLocation`
 
@@ -13565,7 +13565,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 1
 
-                - `type BetaCitationContentBlockLocationParamResp`
+                - `type BetaCitationContentBlockLocationParam`
 
                   - `Type ContentBlockLocation`
 
@@ -13595,7 +13595,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minimum: 0
 
-                - `type BetaCitationWebSearchResultLocationParamResp`
+                - `type BetaCitationWebSearchResultLocationParam`
 
                   - `Type WebSearchResultLocation`
 
@@ -13611,7 +13611,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minLength: 1
 
-                - `type BetaCitationSearchResultLocationParamResp`
+                - `type BetaCitationSearchResultLocationParam`
 
                   - `Type SearchResultLocation`
 
@@ -13645,13 +13645,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Title string`
 
-            - `type BetaImageBlockParamResp`
+            - `type BetaImageBlockParam`
 
               - `Type Image`
 
-              - `Source BetaImageBlockParamSourceUnionResp`
+              - `Source BetaImageBlockParamSourceUnion`
 
-                - `type BetaBase64ImageSource`
+                - `type BetaBase64ImageSourceParam`
 
                   - `Type Base64`
 
@@ -13669,23 +13669,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaBase64ImageSourceMediaTypeImageWebP BetaBase64ImageSourceMediaType = "image/webp"`
 
-                - `type BetaURLImageSource`
+                - `type BetaURLImageSourceParam`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileImageSource`
+                - `type BetaFileImageSourceParam`
 
                   - `Type File`
 
                   - `FileID string`
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Transformations BetaImageTransformationsParamResp Optional`
+              - `Transformations BetaImageTransformationsParam Optional`
 
                 Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
@@ -13697,11 +13697,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
-            - `type BetaRequestDocumentBlock`
+            - `type BetaRequestDocumentBlockParam`
 
               - `Type Document`
 
-              - `Source BetaRequestDocumentBlockSourceUnion`
+              - `Source BetaRequestDocumentBlockSourceUnionParam`
 
                 - `type BetaBase64PDFSource`
 
@@ -13721,37 +13721,37 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `MediaType TextPlain`
 
-                - `type BetaContentBlockSource`
+                - `type BetaContentBlockSourceParam`
 
                   - `Type Content`
 
-                  - `Content BetaContentBlockSourceContentUnion`
+                  - `Content BetaContentBlockSourceContentUnionParam`
 
                     - `string`
 
-                    - `[]BetaContentBlockSourceContentUnion`
+                    - `[]BetaContentBlockSourceContentUnionParam`
 
-                      - `type BetaTextBlockParamResp`
+                      - `type BetaTextBlockParam`
 
-                      - `type BetaImageBlockParamResp`
+                      - `type BetaImageBlockParam`
 
-                - `type BetaURLPDFSource`
+                - `type BetaURLPDFSourceParam`
 
                   - `Type URL`
 
                   - `URL string`
 
-                - `type BetaFileDocumentSource`
+                - `type BetaFileDocumentSourceParam`
 
                   - `Type File`
 
                   - `FileID string`
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Citations BetaCitationsConfigParamResp Optional`
+              - `Citations BetaCitationsConfigParam Optional`
 
                 - `Enabled bool Optional`
 
@@ -13763,11 +13763,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minLength: 1, maxLength: 500
 
-            - `type BetaSearchResultBlockParamResp`
+            - `type BetaSearchResultBlockParam`
 
               - `Type SearchResult`
 
-              - `Content []BetaTextBlockParamResp`
+              - `Content []BetaTextBlockParam`
 
                 - `Type Text`
 
@@ -13775,23 +13775,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minLength: 1
 
-                - `CacheControl BetaCacheControlEphemeral Optional`
+                - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                   Create a cache control breakpoint at this content block.
 
-                - `Citations []BetaTextCitationParamUnionResp Optional`
+                - `Citations []BetaTextCitationParamUnion Optional`
 
               - `Source string`
 
               - `Title string`
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Citations BetaCitationsConfigParamResp Optional`
+              - `Citations BetaCitationsConfigParam Optional`
 
-            - `type BetaThinkingBlockParamResp`
+            - `type BetaThinkingBlockParam`
 
               - `Type Thinking`
 
@@ -13805,7 +13805,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The `thinking` text of this block as returned by the API.
 
-            - `type BetaRedactedThinkingBlockParamResp`
+            - `type BetaRedactedThinkingBlockParam`
 
               - `Type RedactedThinking`
 
@@ -13813,7 +13813,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The `data` value of this redacted thinking block, exactly as returned by the API in a previous response. Opaque and encrypted; pass it back unchanged.
 
-            - `type BetaToolUseBlockParamResp`
+            - `type BetaToolUseBlockParam`
 
               - `Type ToolUse`
 
@@ -13827,11 +13827,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minLength: 1, maxLength: 200
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Caller BetaToolUseBlockParamCallerUnionResp Optional`
+              - `Caller BetaToolUseBlockParamCallerUnion Optional`
 
                 - `type BetaDirectCaller`
 
@@ -13863,7 +13863,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaToolResultBlockParamResp`
+            - `type BetaToolResultBlockParam`
 
               - `Type ToolResult`
 
@@ -13871,23 +13871,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^[a-zA-Z0-9_-]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Content []BetaToolResultBlockParamContentUnionResp Optional`
+              - `Content []BetaToolResultBlockParamContentUnion Optional`
 
-                - `[]BetaToolResultBlockParamContentUnionResp`
+                - `[]BetaToolResultBlockParamContentUnion`
 
-                  - `type BetaTextBlockParamResp`
+                  - `type BetaTextBlockParam`
 
-                  - `type BetaImageBlockParamResp`
+                  - `type BetaImageBlockParam`
 
-                  - `type BetaSearchResultBlockParamResp`
+                  - `type BetaSearchResultBlockParam`
 
-                  - `type BetaRequestDocumentBlock`
+                  - `type BetaRequestDocumentBlockParam`
 
-                  - `type BetaToolReferenceBlockParamResp`
+                  - `type BetaToolReferenceBlockParam`
 
                     Tool reference block that can be included in tool_result content.
 
@@ -13897,11 +13897,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `CacheControl BetaCacheControlEphemeral Optional`
+                    - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                       Create a cache control breakpoint at this content block.
 
-                  - `type BetaBrowserStateBlockParamResp`
+                  - `type BetaBrowserStateBlockParam`
 
                     The caller's browser state after a browser toolset member call —
                     the full inventory of open tabs, which tab is active, and any side
@@ -13913,7 +13913,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `Type BrowserState`
 
-                    - `Tabs []BetaBrowserStateTabEntry`
+                    - `Tabs []BetaBrowserStateTabEntryParam`
 
                       All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
 
@@ -13941,17 +13941,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
 
-                    - `CacheControl BetaCacheControlEphemeral Optional`
+                    - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                       Create a cache control breakpoint at this content block.
 
-                    - `StateChanges []BetaBrowserStateChangeUnion Optional`
+                    - `StateChanges []BetaBrowserStateChangeUnionParam Optional`
 
                       Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
 
                       minItems: 1, maxItems: 200
 
-                      - `type BetaBrowserStateChangeTabOpened`
+                      - `type BetaBrowserStateChangeTabOpenedParam`
 
                         A tab this call's execution opened that remains open at its end —
                         the creation delta of the `tabs` inventory, not an event log.
@@ -13969,7 +13969,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadStarted`
+                      - `type BetaBrowserStateChangeDownloadStartedParam`
 
                         A file download that started during this call.
 
@@ -13987,7 +13987,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           maxLength: 4096, pattern: ^[^\x00-\x1f\x7f-\x9f\u2028\u2029]*$
 
-                      - `type BetaBrowserStateChangeDownloadCompleted`
+                      - `type BetaBrowserStateChangeDownloadCompletedParam`
 
                         A file download that finished during this call, reported with the
                         same `download_id` as its `download_started` — or without a prior
@@ -14020,7 +14020,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minimum: 0
 
-                      - `type BetaBrowserStateChangeDownloadFailed`
+                      - `type BetaBrowserStateChangeDownloadFailedParam`
 
                         A file download that failed — or was cancelled — during this call.
 
@@ -14052,7 +14052,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
-            - `type BetaServerToolUseBlockParamResp`
+            - `type BetaServerToolUseBlockParam`
 
               - `Type ServerToolUse`
 
@@ -14080,11 +14080,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockParamName = "tool_search_tool_bm25"`
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Caller BetaServerToolUseBlockParamCallerUnionResp Optional`
+              - `Caller BetaServerToolUseBlockParamCallerUnion Optional`
 
                 - `type BetaDirectCaller`
 
@@ -14096,13 +14096,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebSearchToolResultBlockParamResp`
+            - `type BetaWebSearchToolResultBlockParam`
 
               - `Type WebSearchToolResult`
 
-              - `Content BetaWebSearchToolResultBlockParamContentUnionResp`
+              - `Content BetaWebSearchToolResultBlockParamContentUnion`
 
-                - `[]BetaWebSearchResultBlockParamResp`
+                - `[]BetaWebSearchResultBlockParam`
 
                   - `Type WebSearchResult`
 
@@ -14114,7 +14114,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `PageAge string Optional`
 
-                - `type BetaWebSearchToolRequestError`
+                - `type BetaWebSearchToolRequestErrorParam`
 
                   - `Type WebSearchToolResultError`
 
@@ -14136,11 +14136,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Caller BetaWebSearchToolResultBlockParamCallerUnionResp Optional`
+              - `Caller BetaWebSearchToolResultBlockParamCallerUnion Optional`
 
                 - `type BetaDirectCaller`
 
@@ -14152,13 +14152,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `type BetaServerToolCaller20260120`
 
-            - `type BetaWebFetchToolResultBlockParamResp`
+            - `type BetaWebFetchToolResultBlockParam`
 
               - `Type WebFetchToolResult`
 
-              - `Content BetaWebFetchToolResultBlockParamContentUnionResp`
+              - `Content BetaWebFetchToolResultBlockParamContentUnion`
 
-                - `type BetaWebFetchToolResultErrorBlockParamResp`
+                - `type BetaWebFetchToolResultErrorBlockParam`
 
                   - `Type WebFetchToolResultError`
 
@@ -14184,11 +14184,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaWebFetchToolResultErrorCodeContentTooLarge BetaWebFetchToolResultErrorCode = "content_too_large"`
 
-                - `type BetaWebFetchBlockParamResp`
+                - `type BetaWebFetchBlockParam`
 
                   - `Type WebFetchResult`
 
-                  - `Content BetaRequestDocumentBlock`
+                  - `Content BetaRequestDocumentBlockParam`
 
                   - `URL string`
 
@@ -14202,11 +14202,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Caller BetaWebFetchToolResultBlockParamCallerUnionResp Optional`
+              - `Caller BetaWebFetchToolResultBlockParamCallerUnion Optional`
 
                 - `type BetaDirectCaller`
 
@@ -14218,13 +14218,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `type BetaServerToolCaller20260120`
 
-            - `type BetaAdvisorToolResultBlockParamResp`
+            - `type BetaAdvisorToolResultBlockParam`
 
               - `Type AdvisorToolResult`
 
-              - `Content BetaAdvisorToolResultBlockParamContentUnionResp`
+              - `Content BetaAdvisorToolResultBlockParamContentUnion`
 
-                - `type BetaAdvisorToolResultErrorParamResp`
+                - `type BetaAdvisorToolResultErrorParam`
 
                   - `Type AdvisorToolResultError`
 
@@ -14244,7 +14244,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model_not_found"`
 
-                - `type BetaAdvisorResultBlockParamResp`
+                - `type BetaAdvisorResultBlockParam`
 
                   - `Type AdvisorResult`
 
@@ -14252,7 +14252,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `StopReason string Optional`
 
-                - `type BetaAdvisorRedactedResultBlockParamResp`
+                - `type BetaAdvisorRedactedResultBlockParam`
 
                   - `Type AdvisorRedactedResult`
 
@@ -14266,17 +14266,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCodeExecutionToolResultBlockParamResp`
+            - `type BetaCodeExecutionToolResultBlockParam`
 
               - `Type CodeExecutionToolResult`
 
-              - `Content BetaCodeExecutionToolResultBlockParamContentUnionResp`
+              - `Content BetaCodeExecutionToolResultBlockParamContentUnion`
 
-                - `type BetaCodeExecutionToolResultErrorParamResp`
+                - `type BetaCodeExecutionToolResultErrorParam`
 
                   - `Type CodeExecutionToolResultError`
 
@@ -14290,11 +14290,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaCodeExecutionToolResultErrorCodeExecutionTimeExceeded BetaCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
-                - `type BetaCodeExecutionResultBlockParamResp`
+                - `type BetaCodeExecutionResultBlockParam`
 
                   - `Type CodeExecutionResult`
 
-                  - `Content []BetaCodeExecutionOutputBlockParamResp`
+                  - `Content []BetaCodeExecutionOutputBlockParam`
 
                     - `Type CodeExecutionOutput`
 
@@ -14306,13 +14306,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Stdout string`
 
-                - `type BetaEncryptedCodeExecutionResultBlockParamResp`
+                - `type BetaEncryptedCodeExecutionResultBlockParam`
 
                   Code execution result with encrypted stdout for PFC + web_search results.
 
                   - `Type EncryptedCodeExecutionResult`
 
-                  - `Content []BetaCodeExecutionOutputBlockParamResp`
+                  - `Content []BetaCodeExecutionOutputBlockParam`
 
                     - `Type CodeExecutionOutput`
 
@@ -14328,17 +14328,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaBashCodeExecutionToolResultBlockParamResp`
+            - `type BetaBashCodeExecutionToolResultBlockParam`
 
               - `Type BashCodeExecutionToolResult`
 
-              - `Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp`
+              - `Content BetaBashCodeExecutionToolResultBlockParamContentUnion`
 
-                - `type BetaBashCodeExecutionToolResultErrorParamResp`
+                - `type BetaBashCodeExecutionToolResultErrorParam`
 
                   - `Type BashCodeExecutionToolResultError`
 
@@ -14354,11 +14354,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `const BetaBashCodeExecutionToolResultErrorParamErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorParamErrorCode = "output_file_too_large"`
 
-                - `type BetaBashCodeExecutionResultBlockParamResp`
+                - `type BetaBashCodeExecutionResultBlockParam`
 
                   - `Type BashCodeExecutionResult`
 
-                  - `Content []BetaBashCodeExecutionOutputBlockParamResp`
+                  - `Content []BetaBashCodeExecutionOutputBlockParam`
 
                     - `Type BashCodeExecutionOutput`
 
@@ -14374,17 +14374,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaTextEditorCodeExecutionToolResultBlockParamResp`
+            - `type BetaTextEditorCodeExecutionToolResultBlockParam`
 
               - `Type TextEditorCodeExecutionToolResult`
 
-              - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp`
+              - `Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnion`
 
-                - `type BetaTextEditorCodeExecutionToolResultErrorParamResp`
+                - `type BetaTextEditorCodeExecutionToolResultErrorParam`
 
                   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -14402,7 +14402,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaTextEditorCodeExecutionViewResultBlockParamResp`
+                - `type BetaTextEditorCodeExecutionViewResultBlockParam`
 
                   - `Type TextEditorCodeExecutionViewResult`
 
@@ -14422,13 +14422,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `TotalLines int64 Optional`
 
-                - `type BetaTextEditorCodeExecutionCreateResultBlockParamResp`
+                - `type BetaTextEditorCodeExecutionCreateResultBlockParam`
 
                   - `Type TextEditorCodeExecutionCreateResult`
 
                   - `IsFileUpdate bool`
 
-                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp`
+                - `type BetaTextEditorCodeExecutionStrReplaceResultBlockParam`
 
                   - `Type TextEditorCodeExecutionStrReplaceResult`
 
@@ -14446,17 +14446,17 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaToolSearchToolResultBlockParamResp`
+            - `type BetaToolSearchToolResultBlockParam`
 
               - `Type ToolSearchToolResult`
 
-              - `Content BetaToolSearchToolResultBlockParamContentUnionResp`
+              - `Content BetaToolSearchToolResultBlockParamContentUnion`
 
-                - `type BetaToolSearchToolResultErrorParamResp`
+                - `type BetaToolSearchToolResultErrorParam`
 
                   - `Type ToolSearchToolResultError`
 
@@ -14472,11 +14472,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `ErrorMessage string Optional`
 
-                - `type BetaToolSearchToolSearchResultBlockParamResp`
+                - `type BetaToolSearchToolSearchResultBlockParam`
 
                   - `Type ToolSearchToolSearchResult`
 
-                  - `ToolReferences []BetaToolReferenceBlockParamResp`
+                  - `ToolReferences []BetaToolReferenceBlockParam`
 
                     - `Type ToolReference`
 
@@ -14484,7 +14484,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       minLength: 1, maxLength: 256, pattern: ^[a-zA-Z0-9_-]{1,256}$
 
-                    - `CacheControl BetaCacheControlEphemeral Optional`
+                    - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                       Create a cache control breakpoint at this content block.
 
@@ -14492,11 +14492,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaMCPToolUseBlockParamResp`
+            - `type BetaMCPToolUseBlockParam`
 
               - `Type MCPToolUse`
 
@@ -14512,11 +14512,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The name of the MCP server
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestMCPToolResultBlockParamResp`
+            - `type BetaRequestMCPToolResultBlockParam`
 
               - `Type MCPToolResult`
 
@@ -14524,15 +14524,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 pattern: ^[a-zA-Z0-9_-]+$
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-              - `Content BetaRequestMCPToolResultBlockParamContentUnionResp Optional`
+              - `Content BetaRequestMCPToolResultBlockParamContentUnion Optional`
 
                 - `string`
 
-                - `[]BetaTextBlockParamResp`
+                - `[]BetaTextBlockParam`
 
                   - `Type Text`
 
@@ -14540,15 +14540,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     minLength: 1
 
-                  - `CacheControl BetaCacheControlEphemeral Optional`
+                  - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                     Create a cache control breakpoint at this content block.
 
-                  - `Citations []BetaTextCitationParamUnionResp Optional`
+                  - `Citations []BetaTextCitationParamUnion Optional`
 
               - `IsError bool Optional`
 
-            - `type BetaContainerUploadBlockParamResp`
+            - `type BetaContainerUploadBlockParam`
 
               A content block that represents a file to be uploaded to the container
               Files uploaded via this block will be available in the container's input directory.
@@ -14557,11 +14557,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `FileID string`
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
-            - `type BetaCompactionBlockParamResp`
+            - `type BetaCompactionBlockParam`
 
               A compaction block containing summary of previous context.
 
@@ -14573,7 +14573,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Type Compaction`
 
-              - `CacheControl BetaCacheControlEphemeral Optional`
+              - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                 Create a cache control breakpoint at this content block.
 
@@ -14589,11 +14589,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The block's signature as returned, to be sent back verbatim
 
-              - `ToolChanges []BetaCompactionBlockParamToolChangeUnionResp Optional`
+              - `ToolChanges []BetaCompactionBlockParamToolChangeUnion Optional`
 
                 The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
-                - `type BetaRequestToolAdditionBlock`
+                - `type BetaRequestToolAdditionBlockParam`
 
                   Mid-conversation directive to make a tool available.
 
@@ -14607,9 +14607,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Type ToolAddition`
 
-                  - `Tool BetaRequestToolAdditionBlockToolUnion`
+                  - `Tool BetaRequestToolAdditionBlockToolUnionParam`
 
-                    - `type BetaToolChangeToolReference`
+                    - `type BetaToolChangeToolReferenceParam`
 
                       Reference to a single tool, by the name the model uses to call it: a
                       tool declared in `tools` or defined by an earlier `tool_addition`
@@ -14623,7 +14623,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                    - `type BetaToolChangeMCPToolReference`
+                    - `type BetaToolChangeMCPToolReferenceParam`
 
                       Reference to a single MCP tool by its server and remote name; the
                       same `server_name`/`name` pair `mcp_tool_use` carries.
@@ -14634,7 +14634,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `ServerName string`
 
-                    - `type BetaToolChangeMCPToolsetReference`
+                    - `type BetaToolChangeMCPToolsetReferenceParam`
 
                       Reference to every tool in the named MCP server's toolset.
 
@@ -14642,7 +14642,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `ServerName string`
 
-                    - `type BetaToolChangeToolDefinitionParamResp`
+                    - `type BetaToolChangeToolDefinitionParam`
 
                       A tool defined by value: `definition` is a `tools` entry (any kind
                       `tools` accepts, an MCP toolset included). An `mcp_toolset` given here
@@ -14650,13 +14650,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `Type ToolDefinition`
 
-                      - `Definition BetaToolUnion`
+                      - `Definition BetaToolUnionParam`
 
-                        - `type BetaTool`
+                        - `type BetaToolParam`
 
                           - `Type BetaToolType Optional`
 
-                          - `InputSchema BetaToolInputSchema`
+                          - `InputSchema BetaToolInputSchemaParam`
 
                             [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
@@ -14686,7 +14686,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                             - `const BetaToolAllowedCallerCodeExecution20260521 BetaToolAllowedCaller = "code_execution_20260521"`
 
-                          - `CacheControl BetaCacheControlEphemeral Optional`
+                          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                             Create a cache control breakpoint at this content block.
 
@@ -16645,11 +16645,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               The tool's description as the MCP server lists it.
 
-                  - `CacheControl BetaCacheControlEphemeral Optional`
+                  - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                     Create a cache control breakpoint at this content block.
 
-                - `type BetaRequestToolRemovalBlock`
+                - `type BetaRequestToolRemovalBlockParam`
 
                   Mid-conversation directive to withdraw a tool.
 
@@ -16659,9 +16659,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `Type ToolRemoval`
 
-                  - `Tool BetaRequestToolRemovalBlockToolUnion`
+                  - `Tool BetaRequestToolRemovalBlockToolUnionParam`
 
-                    - `type BetaToolChangeToolReference`
+                    - `type BetaToolChangeToolReferenceParam`
 
                       Reference to a single tool, by the name the model uses to call it: a
                       tool declared in `tools` or defined by an earlier `tool_addition`
@@ -16669,20 +16669,20 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                       assigns to MCP-resolved tools; use `mcp_tool_reference` or
                       `mcp_toolset_reference` for those.
 
-                    - `type BetaToolChangeMCPToolReference`
+                    - `type BetaToolChangeMCPToolReferenceParam`
 
                       Reference to a single MCP tool by its server and remote name; the
                       same `server_name`/`name` pair `mcp_tool_use` carries.
 
-                    - `type BetaToolChangeMCPToolsetReference`
+                    - `type BetaToolChangeMCPToolsetReferenceParam`
 
                       Reference to every tool in the named MCP server's toolset.
 
-                  - `CacheControl BetaCacheControlEphemeral Optional`
+                  - `CacheControl BetaCacheControlEphemeralParam Optional`
 
                     Create a cache control breakpoint at this content block.
 
-            - `type BetaRequestToolAdditionBlock`
+            - `type BetaRequestToolAdditionBlockParam`
 
               Mid-conversation directive to make a tool available.
 
@@ -16694,7 +16694,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               definition also requires the `mcp-client-2026-09-15` beta. The tool is
               offered to the model from this point in the conversation onward.
 
-            - `type BetaRequestToolRemovalBlock`
+            - `type BetaRequestToolRemovalBlockParam`
 
               Mid-conversation directive to withdraw a tool.
 
@@ -16702,7 +16702,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               request's `tools` or defined earlier in `messages`. It is no longer
               offered to the model from this point in the conversation onward.
 
-            - `type BetaMCPToolListingBlockParamResp`
+            - `type BetaMCPToolListingBlockParam`
 
               The tool listing an MCP server returned while an earlier response was
               produced, as that response carried it. Send the assistant message back
@@ -16717,7 +16717,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minLength: 1, maxLength: 255
 
-              - `Tools []BetaMCPToolParamResp`
+              - `Tools []BetaMCPToolParam`
 
                 The server's tools, exactly as the response listed them.
 
@@ -16735,7 +16735,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   The tool's description as the MCP server lists it.
 
-            - `type BetaFallbackBlockParamResp`
+            - `type BetaFallbackBlockParam`
 
               A `fallback` block echoed back from a prior response.
 
@@ -16753,7 +16753,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Type Fallback`
 
-              - `From BetaFallbackInfoParamResp`
+              - `From BetaFallbackInfoParam`
 
                 Identifies one hop of a fallback transition.
 
@@ -16763,7 +16763,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-              - `To BetaFallbackInfoParamResp`
+              - `To BetaFallbackInfoParam`
 
                 Identifies one hop of a fallback transition.
 
@@ -16787,7 +16787,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `const BetaMessageParamClearAtNever BetaMessageParamClearAt = "never"`
 
-        - `OutputConfig BetaSystemMessageOutputConfig Optional`
+        - `OutputConfig BetaSystemMessageOutputConfigParam Optional`
 
           Per-message output configuration on a role:"system" input message.
 
@@ -16817,11 +16817,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `CacheControl BetaCacheControlEphemeral Optional`
+      - `CacheControl BetaCacheControlEphemeralParam Optional`
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-      - `Compaction BetaCompactionConfig Optional`
+      - `Compaction BetaCompactionConfigParam Optional`
 
         Compaction configuration.
 
@@ -16839,7 +16839,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Container identifier for reuse across requests.
 
-        - `type BetaContainerParamsResp`
+        - `type BetaContainerParams`
 
           Container parameters with skills to be loaded.
 
@@ -16847,7 +16847,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Container id
 
-          - `Skills []BetaSkillParamsResp Optional`
+          - `Skills []BetaSkillParams Optional`
 
             List of skills to load in the container
 
@@ -16875,21 +16875,21 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `string`
 
-      - `ContextManagement BetaContextManagementConfig Optional`
+      - `ContextManagement BetaContextManagementConfigParam Optional`
 
         Context management configuration.
 
         This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-        - `Edits []BetaContextManagementConfigEditUnion Optional`
+        - `Edits []BetaContextManagementConfigEditUnionParam Optional`
 
           List of context management edits to apply
 
-          - `type BetaClearToolUses20250919Edit`
+          - `type BetaClearToolUses20250919EditParam`
 
             - `Type ClearToolUses20250919`
 
-            - `ClearAtLeast BetaInputTokensClearAtLeast Optional`
+            - `ClearAtLeast BetaInputTokensClearAtLeastParam Optional`
 
               Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -16899,7 +16899,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 0
 
-            - `ClearToolInputs BetaClearToolUses20250919EditClearToolInputsUnion Optional`
+            - `ClearToolInputs BetaClearToolUses20250919EditClearToolInputsUnionParam Optional`
 
               Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
@@ -16911,7 +16911,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Tool names whose uses are preserved from clearing
 
-            - `Keep BetaToolUsesKeep Optional`
+            - `Keep BetaToolUsesKeepParam Optional`
 
               Number of tool uses to retain in the conversation
 
@@ -16921,11 +16921,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 0
 
-            - `Trigger BetaClearToolUses20250919EditTriggerUnion Optional`
+            - `Trigger BetaClearToolUses20250919EditTriggerUnionParam Optional`
 
               Condition that triggers the context management strategy
 
-              - `type BetaInputTokensTrigger`
+              - `type BetaInputTokensTriggerParam`
 
                 - `Type InputTokens`
 
@@ -16933,7 +16933,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-              - `type BetaToolUsesTrigger`
+              - `type BetaToolUsesTriggerParam`
 
                 - `Type ToolUses`
 
@@ -16941,15 +16941,15 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-          - `type BetaClearThinking20251015Edit`
+          - `type BetaClearThinking20251015EditParam`
 
             - `Type ClearThinking20251015`
 
-            - `Keep BetaClearThinking20251015EditKeepUnion Optional`
+            - `Keep BetaClearThinking20251015EditKeepUnionParam Optional`
 
               Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-              - `type BetaThinkingTurns`
+              - `type BetaThinkingTurnsParam`
 
                 - `Type ThinkingTurns`
 
@@ -16957,13 +16957,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   minimum: 1
 
-              - `type BetaAllThinkingTurns`
+              - `type BetaAllThinkingTurnsParam`
 
                 - `Type All`
 
               - `All`
 
-          - `type BetaCompact20260112Edit`
+          - `type BetaCompact20260112EditParam`
 
             Automatically compact older context when reaching the configured trigger threshold.
 
@@ -16977,11 +16977,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               Whether to pause after compaction and return the compaction block to the user.
 
-            - `Trigger BetaInputTokensTrigger Optional`
+            - `Trigger BetaInputTokensTriggerParam Optional`
 
               When to trigger compaction. Defaults to 150000 input tokens.
 
-      - `Diagnostics BetaDiagnosticsParamResp Optional`
+      - `Diagnostics BetaDiagnosticsParam Optional`
 
         Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
@@ -17016,7 +17016,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `string`
 
-        - `type BetaFallbackCreditTokenParamResp`
+        - `type BetaFallbackCreditTokenParam`
 
           Object form of `fallback_credit_token`: the token plus a redemption
           mode.
@@ -17040,11 +17040,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `const BetaFallbackCreditTokenParamModeBestEffort BetaFallbackCreditTokenParamMode = "best_effort"`
 
-      - `Fallbacks BetaFallbacksParamUnionResp Optional`
+      - `Fallbacks BetaFallbacksParamUnion Optional`
 
         Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. Some models don't support fallbacks; on those models, a list of fallback models returns a 400 error. See [Server-side fallback](../../build-with-claude/refusals-and-fallback.md#server-side-fallback). The string "default" requests the requested model's server-defined default fallback configuration. On a model that doesn't support fallbacks, the request runs on the requested model alone, so a declined request stays declined.
 
-        - `[]BetaFallbackParamResp`
+        - `[]BetaFallbackParam`
 
           - `Model Model`
 
@@ -17054,7 +17054,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `MaxTokens int64 Optional`
 
-          - `OutputConfig BetaOutputConfig Optional`
+          - `OutputConfig BetaOutputConfigParam Optional`
 
             - `Effort BetaOutputConfigEffort Optional`
 
@@ -17072,7 +17072,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"`
 
-            - `Format BetaJSONOutputFormat Optional`
+            - `Format BetaJSONOutputFormatParam Optional`
 
               A schema to specify Claude's output format in responses. See [structured outputs](../../build-with-claude/structured-outputs.md)
 
@@ -17082,7 +17082,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 The JSON schema of the format
 
-            - `TaskBudget BetaTokenTaskBudget Optional`
+            - `TaskBudget BetaTokenTaskBudgetParam Optional`
 
               Configuration for token budget tracking across contexts.
 
@@ -17110,9 +17110,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `const BetaFallbackParamSpeedFast BetaFallbackParamSpeed = "fast"`
 
-          - `Thinking BetaFallbackParamThinkingUnionResp Optional`
+          - `Thinking BetaFallbackParamThinkingUnion Optional`
 
-            - `type BetaThinkingConfigEnabled`
+            - `type BetaThinkingConfigEnabledParam`
 
               - `Type Enabled`
 
@@ -17126,7 +17126,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 1024
 
-              - `BlockBinding BetaThinkingBlockBinding Optional`
+              - `BlockBinding BetaThinkingBlockBindingParam Optional`
 
                 Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -17148,19 +17148,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `const BetaThinkingConfigEnabledDisplayUpdates BetaThinkingConfigEnabledDisplay = "updates"`
 
-            - `type BetaThinkingConfigDisabled`
+            - `type BetaThinkingConfigDisabledParam`
 
               - `Type Disabled`
 
-            - `type BetaThinkingConfigBetweenTools`
+            - `type BetaThinkingConfigBetweenToolsParam`
 
               - `Type BetweenTools`
 
-            - `type BetaThinkingConfigAdaptive`
+            - `type BetaThinkingConfigAdaptiveParam`
 
               - `Type Adaptive`
 
-              - `BlockBinding BetaThinkingBlockBinding Optional`
+              - `BlockBinding BetaThinkingBlockBindingParam Optional`
 
                 Controls for block binding: what happens when a thinking block this request sends back fails the conversation check. `null`, absent or an empty object means every default.
 
@@ -17180,7 +17180,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-      - `MCPServers []BetaRequestMCPServerURLDefinition Optional`
+      - `MCPServers []BetaRequestMCPServerURLDefinitionParam Optional`
 
         MCP servers to be utilized in this request
 
@@ -17194,13 +17194,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `AuthorizationToken string Optional`
 
-        - `ToolConfiguration BetaRequestMCPServerToolConfiguration Optional`
+        - `ToolConfiguration BetaRequestMCPServerToolConfigurationParam Optional`
 
           - `AllowedTools []string Optional`
 
           - `Enabled bool Optional`
 
-      - `Metadata BetaMetadata Optional`
+      - `Metadata BetaMetadataParam Optional`
 
         An object describing metadata about the request.
 
@@ -17212,7 +17212,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           maxLength: 512
 
-      - `OutputConfig BetaOutputConfig Optional`
+      - `OutputConfig BetaOutputConfigParam Optional`
 
         Configuration options for the model's output, such as the output format.
 
@@ -17248,7 +17248,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../../build-with-claude/streaming.md#streaming-with-sdks) for an example in each language.
 
-      - `System []BetaTextBlockParamResp Optional`
+      - `System []BetaTextBlockParam Optional`
 
         System prompt.
 
@@ -17262,13 +17262,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             minLength: 1
 
-          - `CacheControl BetaCacheControlEphemeral Optional`
+          - `CacheControl BetaCacheControlEphemeralParam Optional`
 
             Create a cache control breakpoint at this content block.
 
-          - `Citations []BetaTextCitationParamUnionResp Optional`
+          - `Citations []BetaTextCitationParamUnion Optional`
 
-      - `Thinking BetaThinkingConfigParamUnionResp Optional`
+      - `Thinking BetaThinkingConfigParamUnion Optional`
 
         Configuration for Claude's thinking.
 
@@ -17276,19 +17276,19 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../../build-with-claude/thinking.md#configuring-thinking) for each model's behavior.
 
-        - `type BetaThinkingConfigEnabled`
+        - `type BetaThinkingConfigEnabledParam`
 
-        - `type BetaThinkingConfigDisabled`
+        - `type BetaThinkingConfigDisabledParam`
 
-        - `type BetaThinkingConfigBetweenTools`
+        - `type BetaThinkingConfigBetweenToolsParam`
 
-        - `type BetaThinkingConfigAdaptive`
+        - `type BetaThinkingConfigAdaptiveParam`
 
-      - `ToolChoice BetaToolChoiceUnion Optional`
+      - `ToolChoice BetaToolChoiceUnionParam Optional`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-        - `type BetaToolChoiceAuto`
+        - `type BetaToolChoiceAutoParam`
 
           The model will automatically decide whether to use tools.
 
@@ -17300,7 +17300,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-        - `type BetaToolChoiceAny`
+        - `type BetaToolChoiceAnyParam`
 
           The model will use any available tools.
 
@@ -17312,7 +17312,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceTool`
+        - `type BetaToolChoiceToolParam`
 
           The model will use the specified tool with `tool_choice.name`.
 
@@ -17328,13 +17328,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-        - `type BetaToolChoiceNone`
+        - `type BetaToolChoiceNoneParam`
 
           The model will not be allowed to use tools.
 
           - `Type None`
 
-      - `Tools []BetaToolUnion Optional`
+      - `Tools []BetaToolUnionParam Optional`
 
         Definitions of tools that the model may use.
 
@@ -17398,7 +17398,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         See our [guide](../../agents-and-tools/tool-use/overview.md) for more details.
 
-        - `type BetaTool`
+        - `type BetaToolParam`
 
         - `type BetaToolBash20241022`
 
@@ -17479,7 +17479,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
           Allows configuring enabled status and defer_loading for all tools
           from an MCP server, with optional per-tool overrides.
 
-      - `OutputFormat BetaJSONOutputFormat Optional`
+      - `OutputFormat BetaJSONOutputFormatParam Optional`
 
         **Deprecated**
 
@@ -19413,7 +19413,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `const BetaWebSearchToolResultErrorCodeRequestTooLarge BetaWebSearchToolResultErrorCode = "request_too_large"`
 
-              - `type BetaWebSearchToolResultBlockContentArray []BetaWebSearchResultBlock`
+              - `[]BetaWebSearchResultBlock`
 
                 - `Type WebSearchResult`
 
@@ -19881,7 +19881,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `string`
 
-              - `type BetaMCPToolResultBlockContentBetaMCPToolResultBlockContent []BetaTextBlock`
+              - `[]BetaTextBlock`
 
                 - `Type Text`
 
@@ -23029,7 +23029,7 @@ Create Agent
 
     Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
-    - `type BetaManagedAgentsModelConfigParamsResp`
+    - `type BetaManagedAgentsModelConfigParams`
 
       An object that defines additional configuration control over model use
 
@@ -23107,11 +23107,13 @@ Create Agent
 
           High-performance model for agents and coding
 
-      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
+      - `Effort BetaManagedAgentsModelConfigParamsEffortUnion Optional`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
-        - `string`
+        - `type BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel string`
+
+          How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
@@ -23217,7 +23219,7 @@ Create Agent
 
     Skills available to the agent.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp`
+    - `type BetaManagedAgentsAnthropicSkillParams`
 
       An Anthropic-managed skill.
 
@@ -23235,7 +23237,7 @@ Create Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp`
+    - `type BetaManagedAgentsCustomSkillParams`
 
       A user-created custom skill.
 
@@ -23263,17 +23265,17 @@ Create Agent
 
     Tool configurations available to the agent. Maximum of 256 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
+    - `type BetaManagedAgentsAgentToolset20260401Params`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
       - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp`
+        - `type BetaManagedAgentsBashToolConfigParams`
 
           Configuration override for the bash tool.
 
@@ -23287,7 +23289,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23309,7 +23311,7 @@ Create Agent
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp`
+        - `type BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
 
@@ -23323,7 +23325,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23339,7 +23341,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp`
+        - `type BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
 
@@ -23353,7 +23355,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23369,7 +23371,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp`
+        - `type BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
 
@@ -23383,7 +23385,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23399,7 +23401,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp`
+        - `type BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
 
@@ -23413,7 +23415,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23429,7 +23431,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp`
+        - `type BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
 
@@ -23443,7 +23445,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23459,7 +23461,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
 
@@ -23487,7 +23489,7 @@ Create Agent
 
             format: int32
 
-          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23503,11 +23505,11 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+          - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
             Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -23575,11 +23577,11 @@ Create Agent
 
                       minLength: 1, maxLength: 128
 
-            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
               Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -23599,7 +23601,7 @@ Create Agent
 
                   This source contributes no URLs that may be fetched.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
 
@@ -23621,7 +23623,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23637,7 +23639,7 @@ Create Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `UserLocation BetaManagedAgentsUserLocation Optional`
+          - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
             Approximate user location for search result localization.
 
@@ -23667,7 +23669,7 @@ Create Agent
 
               minLength: 1, maxLength: 255
 
-      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParams Optional`
 
         Default configuration applied to all tools in this set.
 
@@ -23675,7 +23677,7 @@ Create Agent
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23691,7 +23693,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp`
+    - `type BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -23703,7 +23705,7 @@ Create Agent
 
         minLength: 1, maxLength: 255
 
-      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
+      - `Configs []BetaManagedAgentsMCPToolConfigParams Optional`
 
         Per-tool configuration overrides.
 
@@ -23717,7 +23719,7 @@ Create Agent
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
           Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -23733,7 +23735,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParams Optional`
 
         Default configuration for all tools from this server.
 
@@ -23741,7 +23743,7 @@ Create Agent
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools from this server.
 
@@ -23757,7 +23759,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp`
+    - `type BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -23769,7 +23771,7 @@ Create Agent
 
         minLength: 1
 
-      - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+      - `InputSchema BetaManagedAgentsCustomToolInputSchemaParam`
 
         JSON Schema defining the expected input parameters for the tool.
 
@@ -26907,7 +26909,7 @@ Update Agent
 
     Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-    - `type BetaManagedAgentsModelConfigParamsResp`
+    - `type BetaManagedAgentsModelConfigParams`
 
       An object that defines additional configuration control over model use
 
@@ -26985,11 +26987,13 @@ Update Agent
 
           High-performance model for agents and coding
 
-      - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
+      - `Effort BetaManagedAgentsModelConfigParamsEffortUnion Optional`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
-        - `string`
+        - `type BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel string`
+
+          How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
           - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
@@ -27067,7 +27071,7 @@ Update Agent
 
     Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
-    - `type BetaManagedAgentsAnthropicSkillParamsResp`
+    - `type BetaManagedAgentsAnthropicSkillParams`
 
       An Anthropic-managed skill.
 
@@ -27085,7 +27089,7 @@ Update Agent
 
         minLength: 1, maxLength: 64
 
-    - `type BetaManagedAgentsCustomSkillParamsResp`
+    - `type BetaManagedAgentsCustomSkillParams`
 
       A user-created custom skill.
 
@@ -27113,17 +27117,17 @@ Update Agent
 
     Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
 
-    - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
+    - `type BetaManagedAgentsAgentToolset20260401Params`
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
       - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
+      - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
         Per-tool configuration overrides.
 
-        - `type BetaManagedAgentsBashToolConfigParamsResp`
+        - `type BetaManagedAgentsBashToolConfigParams`
 
           Configuration override for the bash tool.
 
@@ -27137,7 +27141,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27159,7 +27163,7 @@ Update Agent
 
               - `Type Auto`
 
-        - `type BetaManagedAgentsEditToolConfigParamsResp`
+        - `type BetaManagedAgentsEditToolConfigParams`
 
           Configuration override for the edit tool.
 
@@ -27173,7 +27177,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27189,7 +27193,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsReadToolConfigParamsResp`
+        - `type BetaManagedAgentsReadToolConfigParams`
 
           Configuration override for the read tool.
 
@@ -27203,7 +27207,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27219,7 +27223,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWriteToolConfigParamsResp`
+        - `type BetaManagedAgentsWriteToolConfigParams`
 
           Configuration override for the write tool.
 
@@ -27233,7 +27237,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27249,7 +27253,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGlobToolConfigParamsResp`
+        - `type BetaManagedAgentsGlobToolConfigParams`
 
           Configuration override for the glob tool.
 
@@ -27263,7 +27267,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27279,7 +27283,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsGrepToolConfigParamsResp`
+        - `type BetaManagedAgentsGrepToolConfigParams`
 
           Configuration override for the grep tool.
 
@@ -27293,7 +27297,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27309,7 +27313,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebFetchToolConfigParams`
 
           Configuration override for the web_fetch tool.
 
@@ -27337,7 +27341,7 @@ Update Agent
 
             format: int32
 
-          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27353,11 +27357,11 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+          - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
             Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -27425,11 +27429,11 @@ Update Agent
 
                       minLength: 1, maxLength: 128
 
-            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+            - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
               Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+            - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
               Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -27449,7 +27453,7 @@ Update Agent
 
                   This source contributes no URLs that may be fetched.
 
-        - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+        - `type BetaManagedAgentsWebSearchToolConfigParams`
 
           Configuration override for the web_search tool.
 
@@ -27471,7 +27475,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+          - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27487,7 +27491,7 @@ Update Agent
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `UserLocation BetaManagedAgentsUserLocation Optional`
+          - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
             Approximate user location for search result localization.
 
@@ -27517,7 +27521,7 @@ Update Agent
 
               minLength: 1, maxLength: 255
 
-      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParams Optional`
 
         Default configuration applied to all tools in this set.
 
@@ -27525,7 +27529,7 @@ Update Agent
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27541,7 +27545,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsMCPToolsetParamsResp`
+    - `type BetaManagedAgentsMCPToolsetParams`
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -27553,7 +27557,7 @@ Update Agent
 
         minLength: 1, maxLength: 255
 
-      - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
+      - `Configs []BetaManagedAgentsMCPToolConfigParams Optional`
 
         Per-tool configuration overrides.
 
@@ -27567,7 +27571,7 @@ Update Agent
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
           Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -27583,7 +27587,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
+      - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParams Optional`
 
         Default configuration for all tools from this server.
 
@@ -27591,7 +27595,7 @@ Update Agent
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+        - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
           Default permission policy for tools from this server.
 
@@ -27607,7 +27611,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `type BetaManagedAgentsCustomToolParamsResp`
+    - `type BetaManagedAgentsCustomToolParams`
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -27619,7 +27623,7 @@ Update Agent
 
         minLength: 1
 
-      - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+      - `InputSchema BetaManagedAgentsCustomToolInputSchemaParam`
 
         JSON Schema defining the expected input parameters for the tool.
 
@@ -30728,7 +30732,7 @@ Create a new environment with the specified configuration.
 
     Environment configuration
 
-    - `type BetaCloudConfigParamsResp`
+    - `type BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -30739,7 +30743,7 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-      - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
+      - `Networking BetaCloudConfigParamsNetworkingUnion Optional`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -30751,7 +30755,7 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetworkParamsResp`
+        - `type BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -30774,7 +30778,7 @@ Create a new environment with the specified configuration.
 
             Specifies domains the container can reach.
 
-      - `Packages BetaPackagesParamsResp Optional`
+      - `Packages BetaPackagesParams Optional`
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
@@ -30808,7 +30812,7 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfigParamsResp`
+    - `type BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
@@ -31857,7 +31861,7 @@ Update an existing environment's configuration.
 
     Updated environment configuration
 
-    - `type BetaCloudConfigParamsResp`
+    - `type BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -31868,7 +31872,7 @@ Update an existing environment's configuration.
 
         Environment type
 
-      - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
+      - `Networking BetaCloudConfigParamsNetworkingUnion Optional`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -31880,7 +31884,7 @@ Update an existing environment's configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetworkParamsResp`
+        - `type BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -31903,7 +31907,7 @@ Update an existing environment's configuration.
 
             Specifies domains the container can reach.
 
-      - `Packages BetaPackagesParamsResp Optional`
+      - `Packages BetaPackagesParams Optional`
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
@@ -31937,7 +31941,7 @@ Update an existing environment's configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfigParamsResp`
+    - `type BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
@@ -34850,7 +34854,7 @@ Create Session
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -34868,7 +34872,7 @@ Create Session
 
         format: int32
 
-    - `type BetaManagedAgentsAgentWithOverridesParamsResp`
+    - `type BetaManagedAgentsAgentWithOverridesParams`
 
       Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
 
@@ -34880,7 +34884,7 @@ Create Session
 
         minLength: 1, maxLength: 128
 
-      - `MCPServers []BetaManagedAgentsURLMCPServerParamsResp Optional`
+      - `MCPServers []BetaManagedAgentsURLMCPServerParams Optional`
 
         Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
 
@@ -34898,11 +34902,11 @@ Create Session
 
           maxLength: 2048
 
-      - `Model BetaManagedAgentsModelConfigParamsResp Optional`
+      - `Model BetaManagedAgentsModelConfigParams Optional`
 
         Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
-        - `type BetaManagedAgentsModelConfigParamsResp`
+        - `type BetaManagedAgentsModelConfigParams`
 
           An object that defines additional configuration control over model use
 
@@ -34980,11 +34984,13 @@ Create Session
 
               High-performance model for agents and coding
 
-          - `Effort BetaManagedAgentsModelConfigParamsEffortUnionResp Optional`
+          - `Effort BetaManagedAgentsModelConfigParamsEffortUnion Optional`
 
             How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
-            - `string`
+            - `type BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel string`
+
+              How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
 
               - `const BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevelLow BetaManagedAgentsModelConfigParamsEffortBetaManagedAgentsEffortLevel = "low"`
 
@@ -35048,11 +35054,11 @@ Create Session
 
             - `const BetaManagedAgentsModelConfigParamsSpeedFast BetaManagedAgentsModelConfigParamsSpeed = "fast"`
 
-      - `Skills []BetaManagedAgentsSkillParamsUnionResp Optional`
+      - `Skills []BetaManagedAgentsSkillParamsUnion Optional`
 
         Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
 
-        - `type BetaManagedAgentsAnthropicSkillParamsResp`
+        - `type BetaManagedAgentsAnthropicSkillParams`
 
           An Anthropic-managed skill.
 
@@ -35070,7 +35076,7 @@ Create Session
 
             minLength: 1, maxLength: 64
 
-        - `type BetaManagedAgentsCustomSkillParamsResp`
+        - `type BetaManagedAgentsCustomSkillParams`
 
           A user-created custom skill.
 
@@ -35094,21 +35100,21 @@ Create Session
 
         maxLength: 100000
 
-      - `Tools []BetaManagedAgentsAgentWithOverridesParamsToolUnionResp Optional`
+      - `Tools []BetaManagedAgentsAgentWithOverridesParamsToolUnion Optional`
 
         Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
 
-        - `type BetaManagedAgentsAgentToolset20260401ParamsResp`
+        - `type BetaManagedAgentsAgentToolset20260401Params`
 
           Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
           - `Type BetaManagedAgentsAgentToolset20260401ParamsType`
 
-          - `Configs []BetaManagedAgentsAgentToolConfigParamsUnionResp Optional`
+          - `Configs []BetaManagedAgentsAgentToolConfigParamsUnion Optional`
 
             Per-tool configuration overrides.
 
-            - `type BetaManagedAgentsBashToolConfigParamsResp`
+            - `type BetaManagedAgentsBashToolConfigParams`
 
               Configuration override for the bash tool.
 
@@ -35122,7 +35128,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35144,7 +35150,7 @@ Create Session
 
                   - `Type Auto`
 
-            - `type BetaManagedAgentsEditToolConfigParamsResp`
+            - `type BetaManagedAgentsEditToolConfigParams`
 
               Configuration override for the edit tool.
 
@@ -35158,7 +35164,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsEditToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35174,7 +35180,7 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsReadToolConfigParamsResp`
+            - `type BetaManagedAgentsReadToolConfigParams`
 
               Configuration override for the read tool.
 
@@ -35188,7 +35194,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35204,7 +35210,7 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWriteToolConfigParamsResp`
+            - `type BetaManagedAgentsWriteToolConfigParams`
 
               Configuration override for the write tool.
 
@@ -35218,7 +35224,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsWriteToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35234,7 +35240,7 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGlobToolConfigParamsResp`
+            - `type BetaManagedAgentsGlobToolConfigParams`
 
               Configuration override for the glob tool.
 
@@ -35248,7 +35254,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsGlobToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35264,7 +35270,7 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsGrepToolConfigParamsResp`
+            - `type BetaManagedAgentsGrepToolConfigParams`
 
               Configuration override for the grep tool.
 
@@ -35278,7 +35284,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsGrepToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35294,7 +35300,7 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-            - `type BetaManagedAgentsWebFetchToolConfigParamsResp`
+            - `type BetaManagedAgentsWebFetchToolConfigParams`
 
               Configuration override for the web_fetch tool.
 
@@ -35322,7 +35328,7 @@ Create Session
 
                 format: int32
 
-              - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35338,11 +35344,11 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `URLSources BetaManagedAgentsWebFetchURLSourcesParamsResp Optional`
+              - `URLSources BetaManagedAgentsWebFetchURLSourcesParams Optional`
 
                 Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-                - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+                - `ClientToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
                   Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -35410,11 +35416,11 @@ Create Session
 
                           minLength: 1, maxLength: 128
 
-                - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnionResp Optional`
+                - `ServerToolResults BetaManagedAgentsWebFetchURLSourceToolFilterParamsUnion Optional`
 
                   Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-                - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnionResp Optional`
+                - `UserInput BetaManagedAgentsWebFetchURLSourceUserInputParamsUnion Optional`
 
                   Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -35434,7 +35440,7 @@ Create Session
 
                       This source contributes no URLs that may be fetched.
 
-            - `type BetaManagedAgentsWebSearchToolConfigParamsResp`
+            - `type BetaManagedAgentsWebSearchToolConfigParams`
 
               Configuration override for the web_search tool.
 
@@ -35456,7 +35462,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnionResp Optional`
+              - `PermissionPolicy BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicyUnion Optional`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35472,7 +35478,7 @@ Create Session
 
                   The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-              - `UserLocation BetaManagedAgentsUserLocation Optional`
+              - `UserLocation BetaManagedAgentsUserLocationParam Optional`
 
                 Approximate user location for search result localization.
 
@@ -35502,7 +35508,7 @@ Create Session
 
                   minLength: 1, maxLength: 255
 
-          - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParamsResp Optional`
+          - `DefaultConfig BetaManagedAgentsAgentToolsetDefaultConfigParams Optional`
 
             Default configuration applied to all tools in this set.
 
@@ -35510,7 +35516,7 @@ Create Session
 
               Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-            - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+            - `PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
               Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -35526,7 +35532,7 @@ Create Session
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsMCPToolsetParamsResp`
+        - `type BetaManagedAgentsMCPToolsetParams`
 
           Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -35538,7 +35544,7 @@ Create Session
 
             minLength: 1, maxLength: 255
 
-          - `Configs []BetaManagedAgentsMCPToolConfigParamsResp Optional`
+          - `Configs []BetaManagedAgentsMCPToolConfigParams Optional`
 
             Per-tool configuration overrides.
 
@@ -35552,7 +35558,7 @@ Create Session
 
               Whether this tool is enabled. Overrides the `default_config` setting.
 
-            - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionResp Optional`
+            - `PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnion Optional`
 
               Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -35568,7 +35574,7 @@ Create Session
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-          - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParamsResp Optional`
+          - `DefaultConfig BetaManagedAgentsMCPToolsetDefaultConfigParams Optional`
 
             Default configuration for all tools from this server.
 
@@ -35576,7 +35582,7 @@ Create Session
 
               Whether tools are enabled by default. Defaults to true if not specified.
 
-            - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionResp Optional`
+            - `PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion Optional`
 
               Default permission policy for tools from this server.
 
@@ -35592,7 +35598,7 @@ Create Session
 
                 The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `type BetaManagedAgentsCustomToolParamsResp`
+        - `type BetaManagedAgentsCustomToolParams`
 
           A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -35604,7 +35610,7 @@ Create Session
 
             minLength: 1
 
-          - `InputSchema BetaManagedAgentsCustomToolInputSchema`
+          - `InputSchema BetaManagedAgentsCustomToolInputSchemaParam`
 
             JSON Schema defining the expected input parameters for the tool.
 
@@ -35646,7 +35652,7 @@ Create Session
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -35790,7 +35796,7 @@ Create Session
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -35806,7 +35812,7 @@ Create Session
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -35846,7 +35852,7 @@ Create Session
 
     Resources (e.g. repositories, files) to mount into the session's container.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParams`
 
       Mount a GitHub repository into the session's container.
 
@@ -35864,7 +35870,7 @@ Create Session
 
         minLength: 1, maxLength: 4096
 
-      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionResp Optional`
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnion Optional`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -35894,7 +35900,7 @@ Create Session
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp`
+    - `type BetaManagedAgentsFileResourceParams`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -35912,7 +35918,7 @@ Create Session
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
+    - `type BetaManagedAgentsMemoryStoreResourceParam`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -43909,7 +43915,7 @@ List Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -44107,7 +44113,7 @@ List Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -44381,7 +44387,7 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -44425,7 +44431,7 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -46726,7 +46732,7 @@ Send Events
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -46870,13 +46876,13 @@ Send Events
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
           - `Type BetaManagedAgentsRedactedBlockType`
 
-    - `type BetaManagedAgentsUserInterruptEventParamsResp`
+    - `type BetaManagedAgentsUserInterruptEventParams`
 
       Parameters for sending an interrupt to pause the agent.
 
@@ -46886,7 +46892,7 @@ Send Events
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-    - `type BetaManagedAgentsUserToolConfirmationEventParamsResp`
+    - `type BetaManagedAgentsUserToolConfirmationEventParams`
 
       Parameters for confirming or denying a tool execution request.
 
@@ -46912,7 +46918,7 @@ Send Events
 
         maxLength: 10000
 
-    - `type BetaManagedAgentsUserCustomToolResultEventParamsResp`
+    - `type BetaManagedAgentsUserCustomToolResultEventParams`
 
       Parameters for providing the result of a custom tool execution.
 
@@ -46924,7 +46930,7 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionResp Optional`
+      - `Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnion Optional`
 
         The result content returned by the tool.
 
@@ -46992,7 +46998,7 @@ Send Events
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -47024,7 +47030,7 @@ Send Events
 
         format: int32
 
-    - `type BetaManagedAgentsUserToolResultEventParamsResp`
+    - `type BetaManagedAgentsUserToolResultEventParams`
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -47036,7 +47042,7 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnionResp Optional`
+      - `Content []BetaManagedAgentsUserToolResultEventParamsContentUnion Optional`
 
         The result content returned by the tool.
 
@@ -47060,13 +47066,13 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp`
+    - `type BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsSystemContentBlock`
+      - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
@@ -47352,7 +47358,7 @@ Send Events
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -47987,7 +47993,7 @@ Stream Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -48185,7 +48191,7 @@ Stream Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -48459,7 +48465,7 @@ Stream Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -48503,7 +48509,7 @@ Stream Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -55562,7 +55568,7 @@ List Session Thread Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -55760,7 +55766,7 @@ List Session Thread Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -56034,7 +56040,7 @@ List Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -56078,7 +56084,7 @@ List Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -58651,7 +58657,7 @@ Stream Session Thread Events
 
           The title of the document.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -58849,7 +58855,7 @@ Stream Session Thread Events
 
         Regular text content.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -59123,7 +59129,7 @@ Stream Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -59167,7 +59173,7 @@ Stream Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-      - `type BetaManagedAgentsRedactedBlockParam`
+      - `type BetaManagedAgentsRedactedBlock`
 
         Placeholder for content withheld by Anthropic model policy.
 
@@ -61503,7 +61509,7 @@ Create Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -61537,7 +61543,7 @@ Create Deployment
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -61681,7 +61687,7 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -61697,7 +61703,7 @@ Create Deployment
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -61729,13 +61735,13 @@ Create Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp`
+    - `type BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsSystemContentBlock`
+      - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
@@ -61771,7 +61777,7 @@ Create Deployment
 
     Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParams`
 
       Mount a GitHub repository into the session's container.
 
@@ -61789,7 +61795,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionResp Optional`
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnion Optional`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -61819,7 +61825,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp`
+    - `type BetaManagedAgentsFileResourceParams`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -61837,7 +61843,7 @@ Create Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
+    - `type BetaManagedAgentsMemoryStoreResourceParam`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -62177,7 +62183,7 @@ Create Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -62962,7 +62968,7 @@ List Deployments
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -63705,7 +63711,7 @@ Get Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -64145,7 +64151,7 @@ Update Deployment
 
     - `string`
 
-    - `type BetaManagedAgentsAgentParamsResp`
+    - `type BetaManagedAgentsAgentParams`
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -64189,7 +64195,7 @@ Update Deployment
 
       - `Type BetaManagedAgentsUserMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp`
+      - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
         Array of content blocks for the user message.
 
@@ -64333,7 +64339,7 @@ Update Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -64349,7 +64355,7 @@ Update Deployment
 
         What the agent should produce. This is the task specification.
 
-      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp`
+      - `Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnion`
 
         How to grade the outcome. Text or file reference.
 
@@ -64381,13 +64387,13 @@ Update Deployment
 
         format: int32
 
-    - `type BetaManagedAgentsSystemMessageEventParamsResp`
+    - `type BetaManagedAgentsSystemMessageEventParams`
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
       - `Type BetaManagedAgentsSystemMessageEventParamsType`
 
-      - `Content []BetaManagedAgentsSystemContentBlock`
+      - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
@@ -64413,7 +64419,7 @@ Update Deployment
 
     Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
-    - `type BetaManagedAgentsGitHubRepositoryResourceParamsResp`
+    - `type BetaManagedAgentsGitHubRepositoryResourceParams`
 
       Mount a GitHub repository into the session's container.
 
@@ -64431,7 +64437,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionResp Optional`
+      - `Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnion Optional`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -64461,7 +64467,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsFileResourceParamsResp`
+    - `type BetaManagedAgentsFileResourceParams`
 
       Mount a file uploaded via the Files API into the session.
 
@@ -64479,7 +64485,7 @@ Update Deployment
 
         minLength: 1, maxLength: 4096
 
-    - `type BetaManagedAgentsMemoryStoreResourceParamResp`
+    - `type BetaManagedAgentsMemoryStoreResourceParam`
 
       Parameters for attaching a memory store to an agent session.
 
@@ -64819,7 +64825,7 @@ Update Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -65561,7 +65567,7 @@ Archive Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -66707,7 +66713,7 @@ Pause Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -67449,7 +67455,7 @@ Unpause Deployment
 
             The title of the document.
 
-        - `type BetaManagedAgentsRedactedBlockParam`
+        - `type BetaManagedAgentsRedactedBlock`
 
           Placeholder for content withheld by Anthropic model policy.
 
@@ -69990,7 +69996,7 @@ Create Credential
 
     Authentication configuration for the credential.
 
-    - `type BetaManagedAgentsMCPOAuthCreateParamsResp`
+    - `type BetaManagedAgentsMCPOAuthCreateParams`
 
       Parameters for creating an MCP OAuth credential.
 
@@ -70014,7 +70020,7 @@ Create Credential
 
         format: date-time
 
-      - `Refresh BetaManagedAgentsMCPOAuthRefreshParamsResp Optional`
+      - `Refresh BetaManagedAgentsMCPOAuthRefreshParams Optional`
 
         Refresh token configuration, if the credential supports token refresh.
 
@@ -70036,15 +70042,15 @@ Create Credential
 
           minLength: 1, maxLength: 2047
 
-        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionResp`
+        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnion`
 
-          - `type BetaManagedAgentsTokenEndpointAuthNoneParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthNoneParam`
 
             Token endpoint requires no client authentication.
 
             - `Type BetaManagedAgentsTokenEndpointAuthNoneParamType`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicParam`
 
             Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -70056,7 +70062,7 @@ Create Credential
 
               minLength: 1, maxLength: 512
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthPostParam`
 
             Token endpoint uses POST body authentication with client credentials.
 
@@ -70080,7 +70086,7 @@ Create Credential
 
           minLength: 1, maxLength: 8192
 
-    - `type BetaManagedAgentsStaticBearerCreateParamsResp`
+    - `type BetaManagedAgentsStaticBearerCreateParams`
 
       Parameters for creating a static bearer token credential.
 
@@ -70098,23 +70104,23 @@ Create Credential
 
         minLength: 1, maxLength: 2047
 
-    - `type BetaManagedAgentsEnvironmentVariableCreateParamsResp`
+    - `type BetaManagedAgentsEnvironmentVariableCreateParams`
 
       Parameters for creating an environment variable credential.
 
       - `Type BetaManagedAgentsEnvironmentVariableCreateParamsType`
 
-      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnionResp`
+      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnion`
 
         Outbound hosts the secret value is substituted on.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -70136,7 +70142,7 @@ Create Credential
 
         minLength: 1, maxLength: 4096
 
-      - `InjectionLocation BetaManagedAgentsInjectionLocationParamsResp Optional`
+      - `InjectionLocation BetaManagedAgentsInjectionLocationParams Optional`
 
         Where in the outbound request the secret value may be substituted.
 
@@ -71189,7 +71195,7 @@ Update Credential
 
     Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
 
-    - `type BetaManagedAgentsMCPOAuthUpdateParamsResp`
+    - `type BetaManagedAgentsMCPOAuthUpdateParams`
 
       Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -71207,7 +71213,7 @@ Update Credential
 
         format: date-time
 
-      - `Refresh BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp Optional`
+      - `Refresh BetaManagedAgentsMCPOAuthRefreshUpdateParams Optional`
 
         Updated refresh token configuration.
 
@@ -71223,9 +71229,9 @@ Update Credential
 
           maxLength: 8192
 
-        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionResp Optional`
+        - `TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnion Optional`
 
-          - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
             Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -71237,7 +71243,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-          - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParamResp`
+          - `type BetaManagedAgentsTokenEndpointAuthPostUpdateParam`
 
             Updated POST body authentication parameters for the token endpoint.
 
@@ -71249,7 +71255,7 @@ Update Credential
 
               minLength: 1, maxLength: 512
 
-    - `type BetaManagedAgentsStaticBearerUpdateParamsResp`
+    - `type BetaManagedAgentsStaticBearerUpdateParams`
 
       Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -71261,13 +71267,13 @@ Update Credential
 
         minLength: 1, maxLength: 8192
 
-    - `type BetaManagedAgentsEnvironmentVariableUpdateParamsResp`
+    - `type BetaManagedAgentsEnvironmentVariableUpdateParams`
 
       Parameters for updating an environment variable credential. `secret_name` is immutable.
 
       - `Type BetaManagedAgentsEnvironmentVariableUpdateParamsType`
 
-      - `InjectionLocation BetaManagedAgentsInjectionLocationUpdateParamsResp Optional`
+      - `InjectionLocation BetaManagedAgentsInjectionLocationUpdateParams Optional`
 
         Updated injection location.
 
@@ -71279,17 +71285,17 @@ Update Credential
 
           Substitute when the placeholder appears in a request header value.
 
-      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnionResp Optional`
+      - `Networking BetaManagedAgentsCredentialNetworkingParamsUnion Optional`
 
         Updated networking scope. Full replacement.
 
-        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
           Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
 
           - `Type BetaManagedAgentsUnrestrictedCredentialNetworkingParamsType`
 
-        - `type BetaManagedAgentsLimitedCredentialNetworkingParamsResp`
+        - `type BetaManagedAgentsLimitedCredentialNetworkingParams`
 
           Substitute the secret only on requests to the listed hosts.
 
@@ -80534,7 +80540,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     - `string`
 
-    - `type BetaDreamModelConfigParamResp`
+    - `type BetaDreamModelConfigParam`
 
       The object form of `model` in a request to create a dream.
 
@@ -85566,7 +85572,7 @@ Create an external key config owned by the caller's organization.
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfigParamResp`
+    - `type BetaAzureExternalKeyConfigParam`
 
       Azure Key Vault provider configuration.
 
@@ -86165,7 +86171,7 @@ encrypted data requires the original key identity to decrypt.
 
         Full resource name of the Cloud KMS key.
 
-    - `type BetaAzureExternalKeyConfigParamResp`
+    - `type BetaAzureExternalKeyConfigParam`
 
       Azure Key Vault provider configuration.
 
@@ -93588,13 +93594,13 @@ List Workspaces
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+      - `[]BetaAllowedInferenceGeo`
 
         - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
 
         - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
-      - `type Unrestricted string`
+      - `Unrestricted`
 
     - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
@@ -93890,13 +93896,13 @@ Create Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+      - `[]BetaAllowedInferenceGeo`
 
         - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
 
         - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
-      - `type Unrestricted string`
+      - `Unrestricted`
 
     - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
@@ -94051,13 +94057,13 @@ Get Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+      - `[]BetaAllowedInferenceGeo`
 
         - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
 
         - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
-      - `type Unrestricted string`
+      - `Unrestricted`
 
     - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
@@ -94244,13 +94250,13 @@ Update Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+      - `[]BetaAllowedInferenceGeo`
 
         - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
 
         - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
-      - `type Unrestricted string`
+      - `Unrestricted`
 
     - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 
@@ -94405,13 +94411,13 @@ Archive Workspace
 
       Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-      - `type BetaDataResidencyAllowedInferenceGeosGeos []BetaAllowedInferenceGeo`
+      - `[]BetaAllowedInferenceGeo`
 
         - `const BetaAllowedInferenceGeoGlobal BetaAllowedInferenceGeo = "global"`
 
         - `const BetaAllowedInferenceGeoUs BetaAllowedInferenceGeo = "us"`
 
-      - `type Unrestricted string`
+      - `Unrestricted`
 
     - `DefaultInferenceGeo BetaDataResidencyDefaultInferenceGeo`
 

@@ -27,7 +27,7 @@ Create a new environment with the specified configuration.
 
     Environment configuration
 
-    - `type BetaCloudConfigParamsResp`
+    - `type BetaCloudConfigParams`
 
       Request params for `cloud` environment configuration.
 
@@ -38,7 +38,7 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-      - `Networking BetaCloudConfigParamsNetworkingUnionResp Optional`
+      - `Networking BetaCloudConfigParamsNetworkingUnion Optional`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -50,7 +50,7 @@ Create a new environment with the specified configuration.
 
             Network policy type
 
-        - `type BetaLimitedNetworkParamsResp`
+        - `type BetaLimitedNetworkParams`
 
           Limited network request params.
 
@@ -73,7 +73,7 @@ Create a new environment with the specified configuration.
 
             Specifies domains the container can reach.
 
-      - `Packages BetaPackagesParamsResp Optional`
+      - `Packages BetaPackagesParams Optional`
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
@@ -107,7 +107,7 @@ Create a new environment with the specified configuration.
 
           Python packages to install
 
-    - `type BetaSelfHostedConfigParamsResp`
+    - `type BetaSelfHostedConfigParams`
 
       Request params for `self_hosted` environment configuration.
 
