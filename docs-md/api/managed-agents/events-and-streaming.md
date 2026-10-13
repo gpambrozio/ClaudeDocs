@@ -262,6 +262,10 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
 ```
 
 ```php PHP
+use Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent;
+use Anthropic\Beta\Sessions\Events\ManagedAgentsSessionErrorEvent;
+use Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock;
+
 // Open the stream first, then send the user message
 $stream = $client->beta->sessions->events->streamStream($session->id);
 $client->beta->sessions->events->send(
@@ -276,11 +280,11 @@ $client->beta->sessions->events->send(
 
 foreach ($stream as $event) {
     match (true) {
-        $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent => array_walk(
+        $event instanceof ManagedAgentsAgentMessageEvent => array_walk(
             $event->content,
-            static fn ($block) => $block instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock ? print($block->text) : null,
+            static fn ($block) => $block instanceof ManagedAgentsTextBlock ? print($block->text) : null,
         ),
-        $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsSessionErrorEvent => printf("\n[Error: %s]", $event->error?->message ?? 'unknown'),
+        $event instanceof ManagedAgentsSessionErrorEvent => printf("\n[Error: %s]", $event->error?->message ?? 'unknown'),
         default => null,
     };
     if ($event->type === 'session.status_idle' || $event->type === 'session.error') {
@@ -412,8 +416,12 @@ for await (const event of client.beta.sessions.events.list(session.id)) {
 // Tail live events, skipping anything already seen
 tail: for await (const event of stream) {
   // Preview events (event_start/event_delta) carry no top-level id
-  if (event.type === "event_start" || event.type === "event_delta") continue;
-  if (seenEventIds.has(event.id)) continue;
+  if (event.type === "event_start" || event.type === "event_delta") {
+    continue;
+  }
+  if (seenEventIds.has(event.id)) {
+    continue;
+  }
   seenEventIds.add(event.id);
   switch (event.type) {
     case "agent.message":
@@ -524,6 +532,9 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
 ```
 
 ```php PHP
+use Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent;
+use Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock;
+
 $stream = $client->beta->sessions->events->streamStream($session->id);
 
 // Stream is open and buffering. List history before tailing live.
@@ -539,9 +550,9 @@ foreach ($stream as $event) {
     }
     $seenEventIds[$event->id] = true;
     match (true) {
-        $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent => array_walk(
+        $event instanceof ManagedAgentsAgentMessageEvent => array_walk(
             $event->content,
-            static fn ($block) => $block instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock ? print($block->text) : null,
+            static fn ($block) => $block instanceof ManagedAgentsTextBlock ? print($block->text) : null,
         ),
         default => null,
     };
@@ -846,7 +857,9 @@ loop: for await (const event of stream) {
       break;
     }
     case "session.status_idle":
-      if (event.stop_reason.type === "end_turn") break loop;
+      if (event.stop_reason.type === "end_turn") {
+        break loop;
+      }
       break;
   }
 }
@@ -1086,9 +1099,15 @@ with client.beta.sessions.events.stream(session.id) as stream:
 const stream = await client.beta.sessions.events.stream(session.id);
 
 for await (const event of stream) {
-  if (event.type !== "session.status_idle") continue;
-  if (event.stop_reason.type === "end_turn") break;
-  if (event.stop_reason.type !== "requires_action") continue;
+  if (event.type !== "session.status_idle") {
+    continue;
+  }
+  if (event.stop_reason.type === "end_turn") {
+    break;
+  }
+  if (event.stop_reason.type !== "requires_action") {
+    continue;
+  }
 
   for (const eventId of event.stop_reason.event_ids) {
     // Approve the pending tool call
@@ -1752,7 +1771,14 @@ for (var event : events.data()) {
 ```
 
 ```php PHP
-// In PHP, pass the types you want on EventListParams; see the Anthropic PHP SDK.
+$events = $client->beta->sessions->events->list(
+    $session->id,
+    types: ['agent.tool_use', 'agent.tool_result'],
+);
+foreach ($events->data as $event) {
+    $processedAt = ($event->processedAt ?? null)?->format(DATE_RFC3339) ?? 'null';
+    echo "[{$event->type}] {$processedAt}\n";
+}
 ```
 
 ```ruby Ruby

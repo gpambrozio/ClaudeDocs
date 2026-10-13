@@ -294,7 +294,9 @@ events: for await (const event of stream) {
       } catch (error) {
         // The server refuses a result that comes too late, after it
         // archived the call's thread. Keep following the run.
-        if (!(error instanceof Anthropic.BadRequestError)) throw error;
+        if (!(error instanceof Anthropic.BadRequestError)) {
+          throw error;
+        }
         console.log(`  Answer to ${event.name} refused: ${error.message}`);
       }
       break;

@@ -7914,7 +7914,7 @@ MessageCreateParams parameters = new()
             OutputConfig = new() { Effort = Effort.Low },
         },
     ],
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
 };
 
 var betaMessage = await client.Beta.Messages.Create(parameters);
@@ -7970,7 +7970,7 @@ Console.WriteLine(betaMessage);
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -11810,7 +11810,7 @@ MessageCountTokensParams parameters = new()
             OutputConfig = new() { Effort = Effort.Low },
         },
     ],
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
 };
 
 var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);
@@ -79619,7 +79619,7 @@ BatchCreateParams parameters = new()
                         OutputConfig = new() { Effort = Effort.Low },
                     },
                 ],
-                Model = Model.ClaudeOpus5,
+                Model = Model.ClaudeOpus5_5,
                 CacheControl = new() { Ttl = Ttl.Ttl5m },
                 Compaction = new() { Instructions = "instructions" },
                 Container = new BetaContainerParams()
@@ -80780,7 +80780,7 @@ Console.WriteLine(betaDeletedMessageBatch);
 
 ### Retrieve Message Batch results
 
-`BetaMessageBatchIndividualResponse Beta.Messages.Batches.ResultsStreaming(parameters, cancellationToken = default)`
+`IAsyncEnumerable<BetaMessageBatchIndividualResponse> Beta.Messages.Batches.ResultsStreaming(parameters, cancellationToken = default)`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 

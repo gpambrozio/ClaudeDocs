@@ -17,7 +17,7 @@ Create Agent
 
 - `model: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-  Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
   - `type BetaManagedAgentsModel = :"claude-haiku-5-5" | :"claude-sonnet-5-5" | :"claude-opus-5-5" | 14 more | String`
 
@@ -1829,7 +1829,7 @@ require "anthropic"
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 beta_managed_agents_agent = anthropic.beta.agents.create(
-  model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5,
+  model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
   name: "My First Agent"
 )
 
@@ -1855,7 +1855,7 @@ puts(beta_managed_agents_agent)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },

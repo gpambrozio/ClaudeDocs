@@ -970,7 +970,7 @@ class ChatBot
                 static fn ($block): bool => $block instanceof TextBlock,
             );
             if (!$firstBlock instanceof TextBlock) {
-                throw new RuntimeException('An error occurred: Unexpected response type');
+                throw new \RuntimeException('An error occurred: Unexpected response type');
             }
 
             $this->messages[] = MessageParam::with(role: 'assistant', content: $firstBlock->text);
@@ -985,7 +985,7 @@ class ChatBot
             return $firstBlock->text;
         }
 
-        throw new RuntimeException('An error occurred: Unexpected response type');
+        throw new \RuntimeException('An error occurred: Unexpected response type');
     }
 
     /**
@@ -999,7 +999,7 @@ class ChatBot
             return sprintf('Quote generated: $%.2f per month', $premium);
         }
 
-        throw new RuntimeException('An unexpected tool was used');
+        throw new \RuntimeException('An unexpected tool was used');
     }
 }
 ```

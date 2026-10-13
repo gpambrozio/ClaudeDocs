@@ -33,7 +33,7 @@ Update Agent
 
 - `model?:optional Model`
 
-  Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
 - `multiagent?:optional BetaManagedAgentsMultiagentParams`
 
@@ -136,7 +136,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
   ],
   metadata: ['foo' => 'string'],
   model: [
-    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_5,
+    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     'effort' => 'low',
     'inferenceGeo' => 'inference_geo',
     'speed' => 'standard',
@@ -191,7 +191,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },

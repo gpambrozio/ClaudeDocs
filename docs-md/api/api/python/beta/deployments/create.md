@@ -253,7 +253,7 @@ Create Deployment
 
     - `type: Literal["system.message"]`
 
-    - `content: List[BetaManagedAgentsSystemContentBlock]`
+    - `content: Iterable[BetaManagedAgentsSystemContentBlockParam]`
 
       System content blocks to append. Text-only.
 

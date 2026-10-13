@@ -315,7 +315,7 @@ $credential = $client->beta->vaults->credentials->create(
         type: 'mcp_oauth',
         mcpServerURL: 'https://mcp.slack.com/mcp',
         accessToken: 'xoxp-...',
-        expiresAt: new DateTimeImmutable('2099-12-31T23:59:59Z'),
+        expiresAt: new \DateTimeImmutable('2099-12-31T23:59:59Z'),
         refresh: ManagedAgentsMCPOAuthRefreshParams::with(
             tokenEndpoint: 'https://slack.com/api/oauth.v2.user.access',
             clientID: '1234567890.0987654321',
@@ -933,7 +933,7 @@ $client->beta->vaults->credentials->update(
     auth: ManagedAgentsMCPOAuthUpdateParams::with(
         type: 'mcp_oauth',
         accessToken: 'xoxp-new-...',
-        expiresAt: new DateTimeImmutable('2099-12-31T23:59:59Z'),
+        expiresAt: new \DateTimeImmutable('2099-12-31T23:59:59Z'),
         refresh: ManagedAgentsMCPOAuthRefreshUpdateParams::with(refreshToken: 'xoxe-1-new-...'),
     ),
 );

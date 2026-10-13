@@ -8381,7 +8381,7 @@ const client = new Anthropic({
 const betaMessage = await client.beta.messages.create({
   max_tokens: 1024,
   messages: [{ content: "Hello, world", role: "user" }],
-  model: "claude-opus-5"
+  model: "claude-opus-5-5"
 });
 
 console.log(betaMessage.id);
@@ -8435,7 +8435,7 @@ console.log(betaMessage.id);
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -12537,7 +12537,7 @@ const client = new Anthropic({
 
 const betaMessageTokensCount = await client.beta.messages.countTokens({
   messages: [{ content: "Hello, world", role: "user" }],
-  model: "claude-opus-5"
+  model: "claude-opus-5-5"
 });
 
 console.log(betaMessageTokensCount.context_management);
@@ -82122,7 +82122,7 @@ const betaMessageBatch = await client.beta.messages.batches.create({
       params: {
         max_tokens: 1024,
         messages: [{ content: "Hello, world", role: "user" }],
-        model: "claude-opus-5"
+        model: "claude-opus-5-5"
       }
     }
   ]
@@ -83180,7 +83180,7 @@ console.log(betaDeletedMessageBatch.id);
 
 ### Retrieve Message Batch results
 
-`client.beta.messages.batches.results(messageBatchID, params?, options?): BetaMessageBatchIndividualResponse | Stream<BetaMessageBatchIndividualResponse>`
+`client.beta.messages.batches.results(messageBatchID, params?, options?): JSONLDecoder<BetaMessageBatchIndividualResponse>`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -87288,11 +87288,10 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaMessageBatchIndividualResponse = await client.beta.messages.batches.results(
-  "message_batch_id"
-);
-
-console.log(betaMessageBatchIndividualResponse.custom_id);
+const stream = await client.beta.messages.batches.results("message_batch_id");
+for await (const betaMessageBatchIndividualResponse of stream) {
+  console.log(betaMessageBatchIndividualResponse.custom_id);
+}
 ```
 
 ---

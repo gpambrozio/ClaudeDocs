@@ -4178,7 +4178,7 @@ Console.WriteLine(betaManagedAgentsSendSessionEvents);
 
 ## Stream Events
 
-`BetaManagedAgentsStreamSessionEvents Beta.Sessions.Events.StreamStreaming(parameters, cancellationToken = default)`
+`IAsyncEnumerable<BetaManagedAgentsStreamSessionEvents> Beta.Sessions.Events.StreamStreaming(parameters, cancellationToken = default)`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 

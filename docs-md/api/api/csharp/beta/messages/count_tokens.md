@@ -3783,7 +3783,7 @@ MessageCountTokensParams parameters = new()
             OutputConfig = new() { Effort = Effort.Low },
         },
     ],
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
 };
 
 var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);

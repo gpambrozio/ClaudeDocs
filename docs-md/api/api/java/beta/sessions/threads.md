@@ -1006,7 +1006,7 @@ public final class Main {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -2062,7 +2062,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -3115,7 +3115,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -10742,7 +10742,7 @@ public final class Main {
 
 ### Stream Session Thread Events
 
-`BetaManagedAgentsStreamSessionThreadEvents beta().sessions().threads().events().streamStreaming(params, requestOptions = RequestOptions.none())`
+`StreamResponse<BetaManagedAgentsStreamSessionThreadEvents> beta().sessions().threads().events().streamStreaming(params, requestOptions = RequestOptions.none())`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 

@@ -75,7 +75,7 @@ Create Session
 
       - `Model BetaManagedAgentsModelConfigParams Optional`
 
-        Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+        Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
         - `type BetaManagedAgentsModelConfigParams`
 
@@ -2398,7 +2398,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -2418,7 +2418,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -3933,7 +3933,7 @@ func main() {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -3953,7 +3953,7 @@ func main() {
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -5392,7 +5392,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -5412,7 +5412,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -6869,7 +6869,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -6889,7 +6889,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -8496,7 +8496,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -8516,7 +8516,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -8764,7 +8764,7 @@ func main() {
 
   - `Model BetaManagedAgentsModelConfigParams Optional`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
     - `type BetaManagedAgentsModelConfigParams`
 
@@ -22782,7 +22782,7 @@ func main() {
 
 ### Stream Events
 
-`client.Beta.Sessions.Events.Stream(ctx, sessionID, params) (*BetaManagedAgentsStreamSessionEventsUnion, error)`
+`client.Beta.Sessions.Events.StreamEvents(ctx, sessionID, params) *ssestream.Stream[BetaManagedAgentsStreamSessionEventsUnion]`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -28158,7 +28158,7 @@ func main() {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -29220,7 +29220,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -30279,7 +30279,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -33444,7 +33444,7 @@ func main() {
 
 ### Stream Session Thread Events
 
-`client.Beta.Sessions.Threads.Events.Stream(ctx, threadID, params) (*BetaManagedAgentsStreamSessionThreadEventsUnion, error)`
+`client.Beta.Sessions.Threads.Events.StreamEvents(ctx, threadID, params) *ssestream.Stream[BetaManagedAgentsStreamSessionThreadEventsUnion]`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 

@@ -4025,7 +4025,7 @@ MessageCreateParams parameters = new()
             Role = Role.User,
         },
     ],
-    Model = Model.ClaudeOpus5,
+    Model = Model.ClaudeOpus5_5,
 };
 
 var message = await client.Messages.Create(parameters);
@@ -4072,7 +4072,7 @@ Console.WriteLine(message);
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",

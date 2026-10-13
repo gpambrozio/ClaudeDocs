@@ -25,11 +25,11 @@ featureMetadata:
     Google Cloud: ga
 ---
 
+**Start with the SDK toolsets:** The Python and TypeScript SDKs have a browser toolset class, in beta. Start from [a partner's integration](browser-use-sdk.md#partner-integrations), or see [Browser and computer use with the SDK toolsets](browser-use-sdk.md). Use this page as the tool reference, or when you handle the tool calls yourself.
+
 The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. Claude works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through screenshots and viewport coordinates.
 
 The tool is an Anthropic-defined [client toolset](tool-reference.md#client-toolsets): one `browser_toolset_20260801` entry in `tools` gives Claude 27 member tools by default, such as `navigate`, `read_page`, `left_click`, and `screenshot`, plus four more when you [enable them](browser-use-tool.md#enable-optional-member-tools). Your application runs every call against its own browser automation; nothing runs on Anthropic's side. The tool isn't currently available in [Claude Managed Agents](../../managed-agents/tools.md).
-
-The Python and TypeScript SDKs include a class that passes these calls to your browser code, runs the URL and file policies you set, and asks your approval callback. See [Browser and computer use with the SDK toolsets](browser-use-sdk.md).
 
 Choose browser use when the task stays inside webpages and means acting on them, or when pages build their content with JavaScript. When a task needs a whole desktop, use the [computer use tool](computer-use-tool.md), which works through screenshots and coordinates alone. For reading pages you can point Claude to, or finding sources on the web, the [web fetch tool](web-fetch-tool.md) and [web search tool](web-search-tool.md) are lighter. They're [server tools](server-tools.md) that the API runs for you, with no browser to operate.
 
@@ -664,7 +664,7 @@ function handleBrowserAction(string $name, array $input): string|array
         'type' => typeText($input['text']),
         'screenshot' => captureScreenshot(),
         // Handle other actions as needed
-        default => throw new RuntimeException("Unknown or unimplemented member: {$name}"),
+        default => throw new \RuntimeException("Unknown or unimplemented member: {$name}"),
     };
 }
 ```
@@ -994,7 +994,7 @@ function processToolCalls(Message $response): array
         try {
             // A real executor also returns a browser_state block on navigation and tab-management results
             $toolResults[] = [...$result, 'content' => handleBrowserAction($block->name, $block->input)];
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $failed = true;
             $toolResults[] = [...$result, 'content' => 'Error: ' . $e->getMessage(), 'is_error' => true];
         }
@@ -1563,7 +1563,7 @@ The browser session, downloads, and uploaded files stay in your environment; the
 
 **Browser and computer use with the SDK toolsets**
 
-Write a browser driver in Python or TypeScript. The SDK runs the loop and the checks you configure.
+Start from a partner's driver, or write your own in Python or TypeScript. The SDK runs the loop and the checks you configure.
 
 **Computer use tool**
 

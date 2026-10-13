@@ -1000,7 +1000,7 @@ await foreach (var item in page.Paginate())
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -2045,7 +2045,7 @@ Console.WriteLine(betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -3087,7 +3087,7 @@ Console.WriteLine(betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -10705,7 +10705,7 @@ await foreach (var item in page.Paginate())
 
 ### Stream Session Thread Events
 
-`BetaManagedAgentsStreamSessionThreadEvents Beta.Sessions.Threads.Events.StreamStreaming(parameters, cancellationToken = default)`
+`IAsyncEnumerable<BetaManagedAgentsStreamSessionThreadEvents> Beta.Sessions.Threads.Events.StreamStreaming(parameters, cancellationToken = default)`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 

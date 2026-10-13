@@ -129,7 +129,7 @@ Create Agent
 
   - `Model model`
 
-    Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+    Model identifier. Accepts the [model string](../../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
     - `enum BetaManagedAgentsModel`
 
@@ -1679,7 +1679,7 @@ public final class Main {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
         AgentCreateParams params = AgentCreateParams.builder()
-            .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+            .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
             .name("My First Agent")
             .build();
         BetaManagedAgentsAgent betaManagedAgentsAgent = client.beta().agents().create(params);
@@ -1706,7 +1706,7 @@ public final class Main {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },

@@ -19,7 +19,7 @@ Create Agent
 
 - `model: Model`
 
-  Model identifier. Accepts the [model string](../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
   - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
 
@@ -97,7 +97,7 @@ Create Agent
 
     An object that defines additional configuration control over model use
 
-    - `id: BetaManagedAgentsModel`
+    - `id: BetaManagedAgentsModelParam`
 
       The model that will power your agent.
 
@@ -283,7 +283,7 @@ Create Agent
 
     - `type: Literal["coordinator"]`
 
-    - `agents: List[BetaManagedAgentsMultiagentRosterEntryParams]`
+    - `agents: Sequence[BetaManagedAgentsMultiagentRosterEntryParams]`
 
       Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -379,7 +379,7 @@ Create Agent
 
             - `type: Literal["disabled"]`
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -413,7 +413,7 @@ Create Agent
 
           Whether a run's plan can define inline agents. Defaults to enabled.
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -489,7 +489,7 @@ Create Agent
 
     - `type: Literal["agent_toolset_20260401"]`
 
-    - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsAgentToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -689,11 +689,11 @@ Create Agent
 
           Must be "web_fetch".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -727,7 +727,7 @@ Create Agent
 
           Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-          - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -793,11 +793,11 @@ Create Agent
 
                     minLength: 1, maxLength: 128
 
-          - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-          - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+          - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
             Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -829,11 +829,11 @@ Create Agent
 
           Must be "web_search".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -857,7 +857,7 @@ Create Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `user_location: Optional[BetaManagedAgentsUserLocation]`
+        - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
           Approximate user location for search result localization.
 
@@ -923,7 +923,7 @@ Create Agent
 
       minLength: 1, maxLength: 255
 
-    - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsMCPToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -989,7 +989,7 @@ Create Agent
 
       minLength: 1
 
-    - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+    - `input_schema: BetaManagedAgentsCustomToolInputSchemaParam`
 
       JSON Schema defining the expected input parameters for the tool.
 
@@ -1897,7 +1897,7 @@ client = Anthropic(
     ),  # This is the default and can be omitted
 )
 beta_managed_agents_agent = client.beta.agents.create(
-    model="claude-opus-5",
+    model="claude-opus-5-5",
     name="My First Agent",
 )
 print(beta_managed_agents_agent.id)
@@ -1922,7 +1922,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -2955,7 +2955,7 @@ print(page.id)
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },
@@ -3974,7 +3974,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -4098,7 +4098,7 @@ Update Agent
 
 - `model: Optional[Model]`
 
-  Model identifier. Accepts the [model string](../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
   - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
 
@@ -4176,7 +4176,7 @@ Update Agent
 
     An object that defines additional configuration control over model use
 
-    - `id: BetaManagedAgentsModel`
+    - `id: BetaManagedAgentsModelParam`
 
       The model that will power your agent.
 
@@ -4328,7 +4328,7 @@ Update Agent
 
     - `type: Literal["coordinator"]`
 
-    - `agents: List[BetaManagedAgentsMultiagentRosterEntryParams]`
+    - `agents: Sequence[BetaManagedAgentsMultiagentRosterEntryParams]`
 
       Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -4424,7 +4424,7 @@ Update Agent
 
             - `type: Literal["disabled"]`
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -4458,7 +4458,7 @@ Update Agent
 
           Whether a run's plan can define inline agents. Defaults to enabled.
 
-        - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+        - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
           Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -4540,7 +4540,7 @@ Update Agent
 
     - `type: Literal["agent_toolset_20260401"]`
 
-    - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsAgentToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -4740,11 +4740,11 @@ Update Agent
 
           Must be "web_fetch".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -4778,7 +4778,7 @@ Update Agent
 
           Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-          - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -4844,11 +4844,11 @@ Update Agent
 
                     minLength: 1, maxLength: 128
 
-          - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+          - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
             Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-          - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+          - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
             Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -4880,11 +4880,11 @@ Update Agent
 
           Must be "web_search".
 
-        - `allowed_domains: Optional[List[str]]`
+        - `allowed_domains: Optional[Sequence[str]]`
 
           Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-        - `blocked_domains: Optional[List[str]]`
+        - `blocked_domains: Optional[Sequence[str]]`
 
           Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -4908,7 +4908,7 @@ Update Agent
 
             The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-        - `user_location: Optional[BetaManagedAgentsUserLocation]`
+        - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
           Approximate user location for search result localization.
 
@@ -4974,7 +4974,7 @@ Update Agent
 
       minLength: 1, maxLength: 255
 
-    - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
+    - `configs: Optional[Iterable[BetaManagedAgentsMCPToolConfigParams]]`
 
       Per-tool configuration overrides.
 
@@ -5040,7 +5040,7 @@ Update Agent
 
       minLength: 1
 
-    - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+    - `input_schema: BetaManagedAgentsCustomToolInputSchemaParam`
 
       JSON Schema defining the expected input parameters for the tool.
 
@@ -5979,7 +5979,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -6989,7 +6989,7 @@ print(beta_managed_agents_agent.id)
     "foo": "bar"
   },
   "model": {
-    "id": "claude-opus-5",
+    "id": "claude-opus-5-5",
     "effort": {
       "type": "low"
     },
@@ -8405,11 +8405,11 @@ print(beta_managed_agents_agent.id)
 
       Must be "web_fetch".
 
-    - `allowed_domains: Optional[List[str]]`
+    - `allowed_domains: Optional[Sequence[str]]`
 
       Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-    - `blocked_domains: Optional[List[str]]`
+    - `blocked_domains: Optional[Sequence[str]]`
 
       Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -8443,7 +8443,7 @@ print(beta_managed_agents_agent.id)
 
       Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-      - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+      - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
         Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -8509,11 +8509,11 @@ print(beta_managed_agents_agent.id)
 
                 minLength: 1, maxLength: 128
 
-      - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+      - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
         Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-      - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+      - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
         Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -8545,11 +8545,11 @@ print(beta_managed_agents_agent.id)
 
       Must be "web_search".
 
-    - `allowed_domains: Optional[List[str]]`
+    - `allowed_domains: Optional[Sequence[str]]`
 
       Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-    - `blocked_domains: Optional[List[str]]`
+    - `blocked_domains: Optional[Sequence[str]]`
 
       Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -8573,7 +8573,7 @@ print(beta_managed_agents_agent.id)
 
         The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-    - `user_location: Optional[BetaManagedAgentsUserLocation]`
+    - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
       Approximate user location for search result localization.
 
@@ -9120,7 +9120,7 @@ print(beta_managed_agents_agent.id)
 
   - `type: Literal["agent_toolset_20260401"]`
 
-  - `configs: Optional[List[BetaManagedAgentsAgentToolConfigParams]]`
+  - `configs: Optional[Iterable[BetaManagedAgentsAgentToolConfigParams]]`
 
     Per-tool configuration overrides.
 
@@ -9320,11 +9320,11 @@ print(beta_managed_agents_agent.id)
 
         Must be "web_fetch".
 
-      - `allowed_domains: Optional[List[str]]`
+      - `allowed_domains: Optional[Sequence[str]]`
 
         Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-      - `blocked_domains: Optional[List[str]]`
+      - `blocked_domains: Optional[Sequence[str]]`
 
         Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -9358,7 +9358,7 @@ print(beta_managed_agents_agent.id)
 
         Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-        - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+        - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
           Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -9424,11 +9424,11 @@ print(beta_managed_agents_agent.id)
 
                   minLength: 1, maxLength: 128
 
-        - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+        - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
           Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-        - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+        - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
           Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -9460,11 +9460,11 @@ print(beta_managed_agents_agent.id)
 
         Must be "web_search".
 
-      - `allowed_domains: Optional[List[str]]`
+      - `allowed_domains: Optional[Sequence[str]]`
 
         Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-      - `blocked_domains: Optional[List[str]]`
+      - `blocked_domains: Optional[Sequence[str]]`
 
         Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -9488,7 +9488,7 @@ print(beta_managed_agents_agent.id)
 
           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-      - `user_location: Optional[BetaManagedAgentsUserLocation]`
+      - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
         Approximate user location for search result localization.
 
@@ -9785,7 +9785,7 @@ print(beta_managed_agents_agent.id)
 
     minLength: 1
 
-  - `input_schema: BetaManagedAgentsCustomToolInputSchema`
+  - `input_schema: BetaManagedAgentsCustomToolInputSchemaParam`
 
     JSON Schema defining the expected input parameters for the tool.
 
@@ -10273,7 +10273,7 @@ print(beta_managed_agents_agent.id)
 
     minLength: 1, maxLength: 255
 
-  - `configs: Optional[List[BetaManagedAgentsMCPToolConfigParams]]`
+  - `configs: Optional[Iterable[BetaManagedAgentsMCPToolConfigParams]]`
 
     Per-tool configuration overrides.
 
@@ -10545,7 +10545,7 @@ print(beta_managed_agents_agent.id)
 
   An object that defines additional configuration control over model use
 
-  - `id: BetaManagedAgentsModel`
+  - `id: BetaManagedAgentsModelParam`
 
     The model that will power your agent.
 
@@ -10817,7 +10817,7 @@ print(beta_managed_agents_agent.id)
 
   - `type: Literal["coordinator"]`
 
-  - `agents: List[BetaManagedAgentsMultiagentRosterEntryParams]`
+  - `agents: Sequence[BetaManagedAgentsMultiagentRosterEntryParams]`
 
     Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
@@ -11089,7 +11089,7 @@ print(beta_managed_agents_agent.id)
 
       - `type: Literal["disabled"]`
 
-  - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+  - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
     Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -11147,7 +11147,7 @@ print(beta_managed_agents_agent.id)
 
         - `type: Literal["disabled"]`
 
-    - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+    - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
       Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -11305,7 +11305,7 @@ print(beta_managed_agents_agent.id)
 
       - `type: Literal["disabled"]`
 
-  - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+  - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
     Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -11363,7 +11363,7 @@ print(beta_managed_agents_agent.id)
 
         - `type: Literal["disabled"]`
 
-    - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+    - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
       Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -11559,7 +11559,7 @@ print(beta_managed_agents_agent.id)
 
           - `type: Literal["disabled"]`
 
-      - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+      - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
         Predefined agents that this agent can spawn as session threads. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `workflows.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -11609,7 +11609,7 @@ print(beta_managed_agents_agent.id)
 
         Whether a run's plan can define inline agents. Defaults to enabled.
 
-      - `predefined_agents: Optional[List[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
+      - `predefined_agents: Optional[Sequence[BetaManagedAgentsMultiagentPredefinedAgentParams]]`
 
         Predefined agents that a run's plan can use. At most 20. Defaults to null. Null and an empty list both mean no predefined agents. This list is separate from `subagents.predefined_agents`, and an agent in one list is not added to the other.
 
@@ -12533,11 +12533,11 @@ print(beta_managed_agents_agent.id)
 
     Must be "web_fetch".
 
-  - `allowed_domains: Optional[List[str]]`
+  - `allowed_domains: Optional[Sequence[str]]`
 
     Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-  - `blocked_domains: Optional[List[str]]`
+  - `blocked_domains: Optional[Sequence[str]]`
 
     Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -12577,7 +12577,7 @@ print(beta_managed_agents_agent.id)
 
     Which sources contribute URLs the tool may fetch. Omit to allow every source.
 
-    - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+    - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
       Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -12643,11 +12643,11 @@ print(beta_managed_agents_agent.id)
 
               minLength: 1, maxLength: 128
 
-    - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+    - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
       Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-    - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+    - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
       Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -12799,7 +12799,7 @@ print(beta_managed_agents_agent.id)
 
 ### Beta Managed Agents Web Fetch URL Source Tool Filter Params
 
-- `type BetaManagedAgentsWebFetchURLSourceToolFilterParams = Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter]`
+- `type BetaManagedAgentsWebFetchURLSourceToolFilterParams = Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilterParam]`
 
   Which tools' results contribute URLs that may be fetched. Accepts the string "all" or "none", or an object whose type is "all", "none", "only" or "except". Responses use the object form.
 
@@ -12901,7 +12901,7 @@ print(beta_managed_agents_agent.id)
 
 ### Beta Managed Agents Web Fetch URL Source User Input Params
 
-- `type BetaManagedAgentsWebFetchURLSourceUserInputParams = Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput]`
+- `type BetaManagedAgentsWebFetchURLSourceUserInputParams = Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInputParam]`
 
   Whether URLs in the text of user messages may be fetched. Accepts the string "all" or "none", or the object {"type": "all"} or {"type": "none"}. Responses use the object form.
 
@@ -13011,7 +13011,7 @@ print(beta_managed_agents_agent.id)
 
   Which sources contribute URLs the web_fetch tool may fetch. When web_fetch is limited to URLs the conversation has already shown the model (in a user message, a custom tool's result, or an earlier web_search or web_fetch result), each key narrows one of those sources and defaults to "all". Setting all three keys to "none" is rejected.
 
-  - `client_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+  - `client_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
     Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
@@ -13077,11 +13077,11 @@ print(beta_managed_agents_agent.id)
 
             minLength: 1, maxLength: 128
 
-  - `server_tool_results: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceToolFilter, null]]`
+  - `server_tool_results: Optional[BetaManagedAgentsWebFetchURLSourceToolFilterParams]`
 
     Which of the web_search and web_fetch tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be "web_search" or "web_fetch".
 
-  - `user_input: Optional[Union[BetaManagedAgentsWebFetchURLSourceShorthand, BetaManagedAgentsWebFetchURLSourceUserInput, null]]`
+  - `user_input: Optional[BetaManagedAgentsWebFetchURLSourceUserInputParams]`
 
     Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
@@ -13183,11 +13183,11 @@ print(beta_managed_agents_agent.id)
 
     Must be "web_search".
 
-  - `allowed_domains: Optional[List[str]]`
+  - `allowed_domains: Optional[Sequence[str]]`
 
     Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
 
-  - `blocked_domains: Optional[List[str]]`
+  - `blocked_domains: Optional[Sequence[str]]`
 
     Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
 
@@ -13217,7 +13217,7 @@ print(beta_managed_agents_agent.id)
 
       - `type: Literal["auto"]`
 
-  - `user_location: Optional[BetaManagedAgentsUserLocation]`
+  - `user_location: Optional[BetaManagedAgentsUserLocationParam]`
 
     Approximate user location for search result localization.
 
@@ -14264,7 +14264,7 @@ print(page.id)
         "foo": "bar"
       },
       "model": {
-        "id": "claude-opus-5",
+        "id": "claude-opus-5-5",
         "effort": {
           "type": "low"
         },

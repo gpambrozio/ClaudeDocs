@@ -190,7 +190,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 ant messages count-tokens \
   --api-key my-anthropic-api-key \
   --message '{content: [{text: x, type: text}], role: user}' \
-  --model claude-opus-5
+  --model claude-opus-5-5
 ```
 
 ### Response (200)

@@ -3808,7 +3808,7 @@ function runTool(string $name, array $input): string
 {
     if ($name === 'create_calendar_event') {
         if (count($input['attendees'] ?? []) > 10) {
-            throw new InvalidArgumentException('Too many attendees (max 10)');
+            throw new \InvalidArgumentException('Too many attendees (max 10)');
         }
 
         return json_encode([
@@ -3823,7 +3823,7 @@ function runTool(string $name, array $input): string
         ]);
     }
 
-    throw new InvalidArgumentException("Unknown tool: {$name}");
+    throw new \InvalidArgumentException("Unknown tool: {$name}");
 }
 
 // Build a request that exceeds the tool's attendee limit so the error path runs.
@@ -3852,7 +3852,7 @@ while ($response->stopReason === 'tool_use') {
                     'tool_use_id' => $block->id,
                     'content' => runTool($block->name, $block->input),
                 ];
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 // Signal failure so Claude can retry or ask for clarification.
                 $toolResults[] = [
                     'type' => 'tool_result',
@@ -4499,7 +4499,7 @@ $createCalendarEvent = new BetaRunnableTool(
     ],
     run: function (array $input): string {
         if (count($input['attendees'] ?? []) > 10) {
-            throw new InvalidArgumentException('Too many attendees (max 10)');
+            throw new \InvalidArgumentException('Too many attendees (max 10)');
         }
 
         return json_encode([

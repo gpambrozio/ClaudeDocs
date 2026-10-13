@@ -549,7 +549,7 @@ $betaMessage = $client->beta->messages->create(
       'outputConfig' => ['effort' => 'low'],
     ],
   ],
-  model: Model::CLAUDE_OPUS_5,
+  model: Model::CLAUDE_OPUS_5_5,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   compaction: ['type' => 'summarize', 'instructions' => 'instructions'],
   container: [
@@ -695,7 +695,7 @@ var_dump($betaMessage);
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -990,7 +990,7 @@ $betaMessageTokensCount = $client->beta->messages->countTokens(
       'outputConfig' => ['effort' => 'low'],
     ],
   ],
-  model: Model::CLAUDE_OPUS_5,
+  model: Model::CLAUDE_OPUS_5_5,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   compaction: ['type' => 'summarize', 'instructions' => 'instructions'],
   contextManagement: [
@@ -13083,7 +13083,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
             'outputConfig' => ['effort' => 'low'],
           ],
         ],
-        'model' => Model::CLAUDE_OPUS_5,
+        'model' => Model::CLAUDE_OPUS_5_5,
         'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
         'compaction' => [
           'type' => 'summarize', 'instructions' => 'instructions'
@@ -13673,7 +13673,7 @@ var_dump($betaDeletedMessageBatch);
 
 ### Retrieve Message Batch results
 
-`$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas, ?string workspaceID): MessageBatchIndividualResponse`
+`$client->beta->messages->batches->resultsStream(string messageBatchID, ?list<AnthropicBeta> betas, ?string workspaceID): BaseStream<MessageBatchIndividualResponse>`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 

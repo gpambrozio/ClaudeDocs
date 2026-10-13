@@ -75,7 +75,7 @@ Create Session
 
       - `model?: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-        Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+        Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
         - `type BetaManagedAgentsModel = "claude-haiku-5-5" | "claude-sonnet-5-5" | "claude-opus-5-5" | 14 more | (string & {})`
 
@@ -2399,7 +2399,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -2419,7 +2419,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -3928,7 +3928,7 @@ for await (const betaManagedAgentsSession of client.beta.sessions.list()) {
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -3948,7 +3948,7 @@ for await (const betaManagedAgentsSession of client.beta.sessions.list()) {
                 }
               ],
               "model": {
-                "id": "claude-opus-5",
+                "id": "claude-opus-5-5",
                 "effort": {
                   "type": "low"
                 },
@@ -5378,7 +5378,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -5398,7 +5398,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -7404,7 +7404,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -7424,7 +7424,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -9011,7 +9011,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -9031,7 +9031,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-opus-5",
+            "id": "claude-opus-5-5",
             "effort": {
               "type": "low"
             },
@@ -9279,7 +9279,7 @@ console.log(betaManagedAgentsSession.id);
 
   - `model?: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
     - `type BetaManagedAgentsModel = "claude-haiku-5-5" | "claude-sonnet-5-5" | "claude-opus-5-5" | 14 more | (string & {})`
 
@@ -23295,7 +23295,7 @@ console.log(betaManagedAgentsSendSessionEvents.data);
 
 ### Stream Events
 
-`client.beta.sessions.events.stream(sessionID, params?, options?): BetaManagedAgentsStreamSessionEvents | Stream<BetaManagedAgentsStreamSessionEvents>`
+`client.beta.sessions.events.stream(sessionID, params?, options?): Stream<BetaManagedAgentsStreamSessionEvents>`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -26380,11 +26380,10 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaManagedAgentsStreamSessionEvents = await client.beta.sessions.events.stream(
-  "sesn_011CZkZAtmR3yMPDzynEDxu7"
-);
-
-console.log(betaManagedAgentsStreamSessionEvents);
+const stream = await client.beta.sessions.events.stream("sesn_011CZkZAtmR3yMPDzynEDxu7");
+for await (const betaManagedAgentsStreamSessionEvents of stream) {
+  console.log(betaManagedAgentsStreamSessionEvents);
+}
 ```
 
 ##### Response (200)
@@ -28599,7 +28598,7 @@ for await (const betaManagedAgentsSessionThread of client.beta.sessions.threads.
           }
         ],
         "model": {
-          "id": "claude-opus-5",
+          "id": "claude-opus-5-5",
           "effort": {
             "type": "low"
           },
@@ -29651,7 +29650,7 @@ console.log(betaManagedAgentsSessionThread.id);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -30700,7 +30699,7 @@ console.log(betaManagedAgentsSessionThread.id);
       }
     ],
     "model": {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "effort": {
         "type": "low"
       },
@@ -33856,7 +33855,7 @@ for await (const betaManagedAgentsSessionEvent of client.beta.sessions.threads.e
 
 ### Stream Session Thread Events
 
-`client.beta.sessions.threads.events.stream(threadID, params, options?): BetaManagedAgentsStreamSessionThreadEvents | Stream<BetaManagedAgentsStreamSessionThreadEvents>`
+`client.beta.sessions.threads.events.stream(threadID, params, options?): Stream<BetaManagedAgentsStreamSessionThreadEvents>`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 
@@ -36943,12 +36942,13 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaManagedAgentsStreamSessionThreadEvents =
-  await client.beta.sessions.threads.events.stream("sthr_011CZkZVWa6oJjw1rgXZpnBt", {
-    session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7"
-  });
-
-console.log(betaManagedAgentsStreamSessionThreadEvents);
+const stream = await client.beta.sessions.threads.events.stream(
+  "sthr_011CZkZVWa6oJjw1rgXZpnBt",
+  { session_id: "sesn_011CZkZAtmR3yMPDzynEDxu7" }
+);
+for await (const betaManagedAgentsStreamSessionThreadEvents of stream) {
+  console.log(betaManagedAgentsStreamSessionThreadEvents);
+}
 ```
 
 ##### Response (200)

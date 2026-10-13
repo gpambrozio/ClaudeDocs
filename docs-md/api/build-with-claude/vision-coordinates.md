@@ -114,7 +114,9 @@ function countImageTokens(width: number, height: number): number {
  */
 function roundTiesToEven(value: number): number {
   const floor = Math.floor(value);
-  if (value - floor !== 0.5) return Math.round(value);
+  if (value - floor !== 0.5) {
+    return Math.round(value);
+  }
   return floor % 2 === 0 ? floor : floor + 1;
 }
 
@@ -136,7 +138,9 @@ function resizedSize(
     Math.ceil(h / 28) * 28 <= maxEdge &&
     countImageTokens(w, h) <= maxTokens;
 
-  if (fits(width, height)) return [width, height];
+  if (fits(width, height)) {
+    return [width, height];
+  }
   if (height > width) {
     const [resizedH, resizedW] = resizedSize(height, width, maxEdge, maxTokens);
     return [resizedW, resizedH];

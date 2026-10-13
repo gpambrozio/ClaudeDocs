@@ -3220,7 +3220,7 @@ BatchCreateParams parameters = new()
                         Role = Role.User,
                     },
                 ],
-                Model = Model.ClaudeOpus5,
+                Model = Model.ClaudeOpus5_5,
                 CacheControl = new() { Ttl = Ttl.Ttl5m },
                 Container = new ContainerParams()
                 {

@@ -8203,7 +8203,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 beta_message = anthropic.beta.messages.create(
   max_tokens: 1024,
   messages: [{content: "Hello, world", role: :user}],
-  model: Anthropic::Model::CLAUDE_OPUS_5
+  model: Anthropic::Model::CLAUDE_OPUS_5_5
 )
 
 puts(beta_message)
@@ -8257,7 +8257,7 @@ puts(beta_message)
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -12355,7 +12355,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 beta_message_tokens_count = anthropic.beta.messages.count_tokens(
   messages: [{content: "Hello, world", role: :user}],
-  model: Anthropic::Model::CLAUDE_OPUS_5
+  model: Anthropic::Model::CLAUDE_OPUS_5_5
 )
 
 puts(beta_message_tokens_count)
@@ -80463,7 +80463,7 @@ beta_message_batch = anthropic.beta.messages.batches.create(
   requests: [
     {
       custom_id: "my-custom-id-1",
-      params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: Anthropic::Model::CLAUDE_OPUS_5}
+      params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: Anthropic::Model::CLAUDE_OPUS_5_5}
     }
   ]
 )
@@ -81465,7 +81465,7 @@ puts(beta_deleted_message_batch)
 
 ### Retrieve Message Batch results
 
-`beta.messages.batches.results(message_batch_id, **kwargs) -> BetaMessageBatchIndividualResponse`
+`beta.messages.batches.results_streaming(message_batch_id, **kwargs) -> JsonLStream<BetaMessageBatchIndividualResponse>`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -85373,9 +85373,11 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_message_batch_individual_response = anthropic.beta.messages.batches.results("message_batch_id")
+stream = anthropic.beta.messages.batches.results_streaming("message_batch_id")
 
-puts(beta_message_batch_individual_response)
+stream.each do |batch|
+  puts(batch)
+end
 ```
 
 ---

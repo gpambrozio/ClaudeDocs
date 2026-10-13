@@ -830,7 +830,7 @@ foreach ($stream as $event) {
                 try {
                     $parsed = json_decode($accumulated, associative: true, flags: JSON_THROW_ON_ERROR);
                     echo "Tool input: " . json_encode($parsed) . "\n";
-                } catch (JsonException $e) {
+                } catch (\JsonException $e) {
                     // The accumulated string is not guaranteed to be valid JSON.
                     // See "Handling invalid JSON in tool responses" on this page.
                     echo "Invalid tool input: {$accumulated}\n";

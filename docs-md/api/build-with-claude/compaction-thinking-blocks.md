@@ -598,7 +598,7 @@ $summary = $client->beta->messages->create(
     compaction: new BetaCompactionConfig(), // type defaults to 'summarize'
 );
 if ($summary->stopReason !== BetaStopReason::COMPACTION->value) {
-    throw new RuntimeException("No summary: {$summary->stopReason}");
+    throw new \RuntimeException("No summary: {$summary->stopReason}");
 }
 
 // 3. Put the block in front of the kept turn and ask the next question.
