@@ -582,7 +582,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5-5",
     "max_tokens": 16000,
     "thinking": {"type": "adaptive"},
     "output_config": {"effort": "high"},
@@ -607,7 +607,7 @@ YAML
 
 # After: adaptive thinking with effort
 ant messages create <<'YAML'
-model: claude-opus-4-8
+model: claude-opus-5-5
 max_tokens: 16000
 thinking:
   type: adaptive
@@ -630,7 +630,7 @@ client.messages.create(
 
 # After: adaptive thinking with effort
 client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5-5",
     max_tokens=16000,
     thinking={"type": "adaptive"},
     output_config={"effort": "high"},
@@ -649,7 +649,7 @@ await client.messages.create({
 
 // After: adaptive thinking with effort
 await client.messages.create({
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: { type: "adaptive" },
   output_config: { effort: "high" },
@@ -670,7 +670,7 @@ await client.Messages.Create(new MessageCreateParams
 // After: adaptive thinking with effort
 await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_8,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigAdaptive(),
     OutputConfig = new OutputConfig { Effort = Effort.High },
@@ -693,7 +693,7 @@ client.Messages.New(ctx, anthropic.MessageNewParams{
 
 // After: adaptive thinking with effort
 client.Messages.New(ctx, anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_8,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
@@ -718,7 +718,7 @@ client.messages().create(MessageCreateParams.builder()
 
 // After: adaptive thinking with effort
 client.messages().create(MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_8)
+    .model(Model.CLAUDE_OPUS_5_5)
     .maxTokens(16000L)
     .thinking(ThinkingConfigAdaptive.builder().build())
     .outputConfig(OutputConfig.builder()
@@ -739,7 +739,7 @@ $client->messages->create(
 
 // After: adaptive thinking with effort
 $client->messages->create(
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5-5',
     maxTokens: 16000,
     thinking: ['type' => 'adaptive'],
     outputConfig: ['effort' => 'high'],
@@ -758,7 +758,7 @@ client.messages.create(
 
 # After: adaptive thinking with effort
 client.messages.create(
-  model: "claude-opus-4-8",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 16000,
   thinking: { type: "adaptive" },
   output_config: { effort: "high" },

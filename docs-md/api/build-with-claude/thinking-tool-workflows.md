@@ -36,7 +36,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -d @- <<'EOF'
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5-5",
   "max_tokens": 16000,
   "thinking": {"type": "adaptive"},
   "tools": [{
@@ -57,7 +57,7 @@ EOF
 
 ```bash CLI
 ant messages create --transform content <<'YAML'
-model: claude-opus-4-8
+model: claude-opus-5-5
 max_tokens: 16000
 thinking:
   type: adaptive
@@ -94,7 +94,7 @@ weather_tool = {
 
 # First request - Claude responds with thinking and tool request
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5-5",
     max_tokens=16000,
     thinking={"type": "adaptive"},
     tools=[weather_tool],
@@ -120,7 +120,7 @@ const weatherTool: Anthropic.Tool = {
 
 // First request - Claude responds with thinking and tool request
 const response = await client.messages.create({
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: {
     type: "adaptive"
@@ -150,7 +150,7 @@ var weatherTool = new ToolUnion(new Tool()
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_8,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigAdaptive(),
     Tools = [weatherTool],
@@ -181,7 +181,7 @@ weatherTool := anthropic.ToolUnionParam{
 }
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_8,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
@@ -203,7 +203,7 @@ import com.anthropic.models.messages.ThinkingConfigAdaptive;
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(16000L)
         .thinking(ThinkingConfigAdaptive.builder().build())
         .addTool(Tool.builder()
@@ -243,7 +243,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather in Paris?"]
     ],
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5-5',
     thinking: ['type' => 'adaptive'],
     tools: [$weatherTool],
 );
@@ -266,7 +266,7 @@ weather_tool = {
 }
 
 message = client.messages.create(
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: {
     type: "adaptive"
@@ -281,9 +281,9 @@ puts message
 
 **Capture the content array to echo back**
 
-You should see `thinking`, `text`, and `tool_use` blocks in the response content on a run where Claude chose to think (on simpler requests, adaptive mode may skip the thinking block). Keep this content array intact: the next step sends it back verbatim.
+You should see `thinking` and `tool_use` blocks in the response content on a run where Claude chose to think (on simpler requests, adaptive mode may skip the thinking block). A note Claude writes before the tool call comes back as a `text` block or, on models that write [progress updates](thinking.md#progress-updates), as another `thinking` block. Keep this content array intact: the next step sends it back verbatim.
 
-To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including claude-opus-4-8, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](thinking.md#controlling-thinking-display).
+To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including Claude Opus 5.5, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](thinking.md#controlling-thinking-display).
 
 ```json Output
 {
@@ -292,10 +292,6 @@ To see thinking text like this output, add `display: "summarized"` to the reques
       "type": "thinking",
       "thinking": "The user wants to know the current weather in Paris. I have access to a function `get_weather`...",
       "signature": "BDaL4VrbR2Oj0hO4XpJxT28J5T...."
-    },
-    {
-      "type": "text",
-      "text": "I can help you get the current weather information for Paris. Let me check that for you"
     },
     {
       "type": "tool_use",
@@ -326,7 +322,7 @@ Each sample is a self-contained script: it repeats the first request, then immed
 # through a file keeps it out of shell-expansion position later.
 ant messages create --transform content --format jsonl \
   > assistant_content.json <<'YAML'
-model: claude-opus-4-8
+model: claude-opus-5-5
 max_tokens: 16000
 thinking:
   type: adaptive
@@ -355,7 +351,7 @@ jq --slurpfile blocks assistant_content.json '
     ($blocks[0][] | select(.type == "tool_use") | .id)
 ' <<'JSON' | ant messages create
 {
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5-5",
   "max_tokens": 16000,
   "thinking": {"type": "adaptive"},
   "tools": [{
@@ -395,7 +391,7 @@ weather_tool = {
     },
 }
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5-5",
     max_tokens=16000,
     thinking={"type": "adaptive"},
     tools=[weather_tool],
@@ -410,7 +406,7 @@ weather_data = {"temperature": 88}
 
 # Second request - Include the assistant turn and the tool result
 continuation = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5-5",
     max_tokens=16000,
     thinking={"type": "adaptive"},
     tools=[weather_tool],
@@ -450,7 +446,7 @@ const weatherTool: Anthropic.Tool = {
 };
 
 const response = await client.messages.create({
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: {
     type: "adaptive"
@@ -471,7 +467,7 @@ const weatherData = { temperature: 88 };
 if (toolUseBlock) {
   // Second request - Include the assistant turn and the tool result
   const continuation = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5-5",
     max_tokens: 16000,
     thinking: {
       type: "adaptive"
@@ -517,7 +513,7 @@ var weatherTool = new ToolUnion(new Tool()
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_8,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigAdaptive(),
     Tools = [weatherTool],
@@ -544,7 +540,7 @@ var weatherData = new { temperature = 88 };
 // Build continuation with tool result
 var continuationParams = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_8,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigAdaptive(),
     Tools = [weatherTool],
@@ -587,7 +583,7 @@ weatherTool := anthropic.ToolUnionParam{
 }
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_8,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
@@ -612,7 +608,7 @@ for _, block := range response.Content {
 weatherData := map[string]int{"temperature": 88}
 
 continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_8,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
@@ -652,7 +648,7 @@ void main() {
         .build();
 
     MessageCreateParams initialParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(16000L)
         .thinking(ThinkingConfigAdaptive.builder().build())
         .addTool(weatherTool)
@@ -673,7 +669,7 @@ void main() {
 
     // Second request: echo the assistant turn as received, then the tool result
     MessageCreateParams continuationParams = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(16000L)
         .thinking(ThinkingConfigAdaptive.builder().build())
         .addTool(weatherTool)
@@ -717,7 +713,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather in Paris?"]
     ],
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5-5',
     thinking: ['type' => 'adaptive'],
     tools: [$weatherTool],
 );
@@ -745,7 +741,7 @@ $continuation = $client->messages->create(
             ]
         ]]
     ],
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5-5',
     thinking: ['type' => 'adaptive'],
     tools: [$weatherTool],
 );
@@ -769,7 +765,7 @@ weather_tool = {
 }
 
 response = client.messages.create(
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: {
     type: "adaptive"
@@ -787,7 +783,7 @@ raise "No tool_use block found" unless tool_use_block
 weather_data = { temperature: 88 }
 
 continuation = client.messages.create(
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: {
     type: "adaptive"

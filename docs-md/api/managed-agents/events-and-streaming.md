@@ -735,7 +735,7 @@ client.beta.sessions.events.send_(
 )
 ```
 
-Every event in the session's history includes a `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) timestamp, set when the event finishes processing. On events you send, `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) is null while the event is still queued behind earlier events. The exceptions are `user.define_outcome`, `user.custom_tool_result`, and `user.tool_result`, which are processed on receipt and echoed back with `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) already populated.
+Every event in the session's history includes a `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) timestamp, set when the event finishes processing. On events you send, `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) is `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `time.Time{}`) while the event is still queued behind earlier events. The exceptions are `user.define_outcome`, `user.custom_tool_result`, and `user.tool_result`, which are processed on receipt and echoed back with `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) already populated.
 
 ## Respond when the session goes idle
 
@@ -1028,7 +1028,7 @@ If the agent has [workflow runs](workflow-runs.md) open, a custom tool call can 
 
 ### Confirm a tool call
 
-Send a `user.tool_confirmation` event, passing the event ID in the `tool_use_id` (java: `toolUseId`; php: `toolUseID`; csharp, go: `ToolUseID`) parameter. Set `result` (java, php; csharp, go: `Result`) to `"allow"` or `"deny"`. See [Respond to confirmation requests](permission-policies.md#respond-to-confirmation-requests) for which calls wait for a confirmation and how to explain a denial.
+Send a `user.tool_confirmation` event, passing the event ID in the `tool_use_id` (java: `toolUseId`; php: `toolUseID`; csharp, go: `ToolUseID`) parameter. Set `result` (csharp, go: `Result`) to `"allow"` or `"deny"`. See [Respond to confirmation requests](permission-policies.md#respond-to-confirmation-requests) for which calls wait for a confirmation and how to explain a denial.
 
 The following example approves every pending call:
 
@@ -1620,7 +1620,7 @@ client.beta.sessions.events.send_(
 
 The call returns as soon as the events are queued. The interrupt then takes effect in this order:
 
-1. The agent applies the interrupt. Until then, the interrupt's `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) stays null and the session stays `running`. A model response in progress stops immediately, but the interrupt can take longer to apply while tool calls are running.
+1. The agent applies the interrupt. Until then, the interrupt's `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) stays `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `time.Time{}`) and the session stays `running`. A model response in progress stops immediately, but the interrupt can take longer to apply while tool calls are running.
 2. The `user.interrupt` event appears on the stream, and the interrupted turn ends with a `session.status_idle` event.
 3. The agent starts its next turn with the `user.message` you sent after the interrupt.
 
@@ -1696,7 +1696,7 @@ events = client.beta.sessions.events.list(session.id)
 events.data.each { puts "[#{it.type}] #{it.processed_at}" }
 ```
 
-Pass a `types` (java, php; csharp, go: `Types`) filter to return only specific event types:
+Pass a `types` (curl: `types[]`; cli: `--type`; csharp, go: `Types`) filter to return only specific event types:
 
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true&types[]=agent.tool_use&types[]=agent.tool_result" \
@@ -1793,7 +1793,7 @@ events.data.each { puts "[#{it.type}] #{it.processed_at}" }
 
 On a [supported model](events-and-streaming.md#supported-models), send a `system.message` event to give the agent privileged system-level context. The context applies to the accompanying turn and all subsequent turns. Use it when the agent needs updated system-level guidance mid-session, for example a different persona, revised constraints, or context fetched at runtime.
 
-The event's `content` (java, php; csharp, go: `Content`) accepts 1–1000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (java, php; csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
+The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
 
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \

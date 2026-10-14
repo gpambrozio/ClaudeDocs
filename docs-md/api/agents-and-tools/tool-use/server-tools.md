@@ -505,7 +505,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -533,7 +533,7 @@ curl https://api.anthropic.com/v1/messages \
 # result block, run the client tools and re-run with a user message of only
 # their tool_result blocks appended (see the SDK tabs).
 ant messages create <<'YAML'
-model: claude-opus-4-8
+model: claude-opus-5-5
 max_tokens: 1024
 messages:
   - role: user
@@ -575,7 +575,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-8", max_tokens=1024, tools=tools, messages=messages
+    model="claude-opus-5-5", max_tokens=1024, tools=tools, messages=messages
 )
 
 tool_results = [
@@ -593,7 +593,7 @@ if response.stop_reason == "tool_use" and tool_results:
     # A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
     # Send back only the client tool_result blocks, with the same tools.
     continuation = client.messages.create(
-        model="claude-opus-4-8",
+        model="claude-opus-5-5",
         max_tokens=1024,
         tools=tools,
         messages=[
@@ -637,7 +637,7 @@ const messages: Anthropic.MessageParam[] = [
 ];
 
 const response = await client.messages.create({
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: [webFetchTool, runCommandTool],
   messages
@@ -659,7 +659,7 @@ if (response.stop_reason === "tool_use" && toolResults.length > 0) {
   // A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
   // Send back only the client tool_result blocks, with the same tools.
   const continuation = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools: [webFetchTool, runCommandTool],
     messages: [
@@ -706,7 +706,7 @@ MessageParam userMessage = new()
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_8,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = tools,
     Messages = [userMessage]
@@ -732,7 +732,7 @@ if (response.StopReason?.Value() == StopReason.ToolUse && toolResults.Count > 0)
     // Send back only the client tool_result blocks, with the same tools.
     var continuation = await client.Messages.Create(new MessageCreateParams
     {
-        Model = Model.ClaudeOpus4_8,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Tools = tools,
         Messages =
@@ -780,7 +780,7 @@ tools := []anthropic.ToolUnionParam{
 userMessage := anthropic.NewUserMessage(anthropic.NewTextBlock("Summarize https://example.com/article and run uname -a to tell me what system this is on."))
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_8,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 1024,
 	Tools:     tools,
 	Messages:  []anthropic.MessageParam{userMessage},
@@ -802,7 +802,7 @@ if response.StopReason == anthropic.StopReasonToolUse && len(toolResults) > 0 {
 	// A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
 	// Send back only the client tool_result blocks, with the same tools.
 	continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_8,
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
 		Tools:     tools,
 		Messages: []anthropic.MessageParam{
@@ -839,7 +839,7 @@ void main() {
     String prompt = "Summarize https://example.com/article and run uname -a to tell me what system this is on.";
 
     Message response = client.messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(WebFetchTool20250910.builder().maxUses(5L).build())
         .addTool(runCommandTool)
@@ -864,7 +864,7 @@ void main() {
         // A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
         // Send back only the client tool_result blocks, with the same tools.
         Message continuation = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024L)
             .addTool(WebFetchTool20250910.builder().maxUses(5L).build())
             .addTool(runCommandTool)
@@ -903,7 +903,7 @@ $userMessage = ['role' => 'user', 'content' => 'Summarize https://example.com/ar
 $response = $client->messages->create(
     maxTokens: 1024,
     messages: [$userMessage],
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5-5',
     tools: $tools,
 );
 
@@ -929,7 +929,7 @@ if ($response->stopReason === 'tool_use' && count($toolResults) > 0) {
             ['role' => 'assistant', 'content' => $response->content],
             ['role' => 'user', 'content' => $toolResults],
         ],
-        model: 'claude-opus-4-8',
+        model: 'claude-opus-5-5',
         tools: $tools,
     );
     // If a web_fetch was deferred, it runs on this request and its
@@ -963,7 +963,7 @@ user_message = {
 }
 
 response = client.messages.create(
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 1024,
   tools: tools,
   messages: [user_message]
@@ -985,7 +985,7 @@ if response.stop_reason == :tool_use && !tool_results.empty?
   # A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
   # Send back only the client tool_result blocks, with the same tools.
   continuation = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5-5",
     max_tokens: 1024,
     tools: tools,
     messages: [

@@ -18,11 +18,11 @@ For the launch context and examples of what teams run on schedules, see [schedul
 
 ## Create a scheduled deployment
 
-When creating a deployment, you pass the [session configurations](sessions.md) required for execution, in addition to a `schedule` (java, php; csharp, go: `Schedule`).
+When creating a deployment, you pass the [session configurations](sessions.md) required for execution, in addition to a `schedule` (csharp, go: `Schedule`).
 
 * Deployments require [agent configuration](agent-setup.md) and [environment configuration](environments.md), and optionally accept [files](files.md), [GitHub](github.md), [memory stores](memory.md), and [vaults](vaults.md). A deployment that targets a [self-hosted environment](self-hosted-sandboxes-memory.md) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
 * Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work. In a deployment file for `ant apply`, the text below the frontmatter becomes that `user.message`.
-* In the `schedule` (java, php; csharp, go: `Schedule`), you define a cron `expression` (java, php; csharp, go: `Expression`) and a `timezone` (java, php; csharp, go: `Timezone`). Maximum granularity supported is at the minute level.
+* In the `schedule` (csharp, go: `Schedule`), you define a cron `expression` (csharp, go: `Expression`) and a `timezone` (csharp, go: `Timezone`). Maximum granularity supported is at the minute level.
 
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
@@ -260,7 +260,7 @@ Wall-clock times that do not exist on a spring-forward day (such as 2 AM) are no
 
 ### Set a budget on each run
 
-Pass the optional `budget` (java, php; csharp, go: `Budget`) object when you create or update the deployment. It takes the same shape as a [session budget](budgets.md). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
+Pass the optional `budget` (csharp, go: `Budget`) object when you create or update the deployment. It takes the same shape as a [session budget](budgets.md). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
 
 A session started by the deployment behaves exactly like any other budgeted session: it pauses with `budget_reached` when its own list cost [reaches the cap](budgets.md#when-a-session-reaches-its-budget). Changing the deployment's budget applies to runs started afterward; a session already running keeps the cap it started with, which you can [change through the session itself](session-operations.md#updating-the-session-budget). Unlike a session budget, a deployment's budget can be removed with `"budget": null` (python: `budget=None`; typescript: `budget: null`; ruby: `budget: nil`; go: `Budget: param.NullStruct[anthropic.BetaManagedAgentsBudgetLimitParam]()`; java: `.budget(Optional.empty())`; csharp: `Budget = null`; php: `requestOptions: ['extraBodyParams' => ['budget' => null]]`; cli: `--budget null`) and set again later.
 

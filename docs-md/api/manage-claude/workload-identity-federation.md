@@ -381,7 +381,7 @@ Keyless CI authentication with the Actions OIDC token.
 
 **Kubernetes**
 
-Self-managed and on-premises clusters using projected service-account tokens.
+Self-managed and on-premise clusters using projected service-account tokens.
 
 **SPIFFE**
 

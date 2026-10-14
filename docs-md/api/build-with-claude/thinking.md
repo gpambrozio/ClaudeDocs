@@ -68,9 +68,9 @@ On most models, thinking is on by default or one parameter away. The following t
 
 In the table, "at `high` effort or below" means the request works at `low`, `medium`, and `high` effort and returns a 400 error at `xhigh` or `max`.
 
-On Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, and Claude Haiku 5.5, thinking is already on and needs no configuration. `display` defaults to `"omitted"` on these models, so the thinking text is hidden until you opt in. Opt in with `thinking: {"type": "adaptive", "display": "summarized"}`, which is exactly the following request with the [model string](../models/overview.md) swapped.
+On Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Mythos Preview, and Claude Haiku 5.5, thinking is already on and needs no configuration. `display` defaults to `"omitted"` on these models, so the thinking text is hidden until you opt in. Opt in with `thinking: {"type": "adaptive", "display": "summarized"}`, as the following examples do.
 
-On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thinking is off until you set `thinking: {type: "adaptive"}`, which lets Claude determine when and how deeply to think based on the request. The following examples do that, set `display: "summarized"` so the thinking text is visible, and use a roomy `max_tokens`:
+On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thinking is off until you set `thinking: {type: "adaptive"}`, which lets Claude determine when and how deeply to think based on the request. The same request, with the [model string](../models/overview.md) swapped, turns it on there. The following examples set `display: "summarized"` so the thinking text is visible, and use a roomy `max_tokens`:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -78,7 +78,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5-5",
     "max_tokens": 16000,
     "thinking": {
       "type": "adaptive",
@@ -95,7 +95,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-4-8 \
+  --model claude-opus-5-5 \
   --max-tokens 16000 \
   --thinking '{type: adaptive, display: summarized}' \
   --message '{role: user, content: "What is the greatest common divisor of 1071 and 462?"}' \
@@ -107,7 +107,7 @@ ant messages create \
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-8",
+    model="claude-opus-5-5",
     max_tokens=16000,
     thinking={"type": "adaptive", "display": "summarized"},
     messages=[
@@ -130,7 +130,7 @@ for block in response.content:
 const client = new Anthropic();
 
 const response = await client.messages.create({
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: {
     type: "adaptive",
@@ -161,7 +161,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_8,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigAdaptive { Display = Display.Summarized },
     Messages = [
@@ -191,7 +191,7 @@ foreach (var block in message.Content)
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_8,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{
@@ -223,7 +223,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(16000L)
         .thinking(ThinkingConfigAdaptive.builder()
             .display(ThinkingConfigAdaptive.Display.SUMMARIZED)
@@ -258,7 +258,7 @@ $message = $client->messages->create(
             'content' => 'What is the greatest common divisor of 1071 and 462?'
         ]
     ],
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5-5',
     thinking: ['type' => 'adaptive', 'display' => 'summarized'],
 );
 
@@ -278,7 +278,7 @@ foreach ($message->content as $block) {
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: {
     type: "adaptive",
@@ -541,7 +541,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5-5",
     "max_tokens": 16000,
     "stream": true,
     "thinking": {
@@ -559,7 +559,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-4-8 \
+  --model claude-opus-5-5 \
   --max-tokens 16000 \
   --thinking '{type: adaptive, display: summarized}' \
   --message '{role: user, content: "What is the greatest common divisor of 1071 and 462?"}' \
@@ -571,7 +571,7 @@ ant messages create \
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-opus-4-8",
+    model="claude-opus-5-5",
     max_tokens=16000,
     thinking={"type": "adaptive", "display": "summarized"},
     messages=[
@@ -598,7 +598,7 @@ with client.messages.stream(
 const client = new Anthropic();
 
 const stream = client.messages.stream({
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   thinking: { type: "adaptive", display: "summarized" },
   messages: [{ role: "user", content: "What is the greatest common divisor of 1071 and 462?" }]
@@ -628,7 +628,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_8,
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigAdaptive { Display = Display.Summarized },
     Messages = [new() { Role = Role.User, Content = "What is the greatest common divisor of 1071 and 462?" }]
@@ -658,7 +658,7 @@ await foreach (var rawEvent in client.Messages.CreateStreaming(parameters))
 client := anthropic.NewClient()
 
 stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_8,
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 16000,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{
@@ -696,7 +696,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(16000L)
         .thinking(ThinkingConfigAdaptive.builder()
             .display(ThinkingConfigAdaptive.Display.SUMMARIZED)
@@ -743,7 +743,7 @@ $stream = $client->messages->createStream(
     messages: [
         ['role' => 'user', 'content' => 'What is the greatest common divisor of 1071 and 462?']
     ],
-    model: 'claude-opus-4-8',
+    model: 'claude-opus-5-5',
     thinking: ['type' => 'adaptive', 'display' => 'summarized'],
 );
 
@@ -770,7 +770,7 @@ foreach ($stream as $event) {
 client = Anthropic::Client.new
 
 stream = client.messages.stream(
-  model: "claude-opus-4-8",
+  model: "claude-opus-5-5",
   max_tokens: 16000,
   # A plain hash like this one takes display:. The typed ThinkingConfigAdaptive class
   # spells it display_ (trailing underscore) to avoid shadowing Ruby's Kernel#display.
@@ -797,7 +797,7 @@ To reassemble complete thinking blocks with their signatures after streaming, us
 
 ```sse Output
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-8", "stop_reason": null, "stop_sequence": null}}
+data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-5-5", "stop_reason": null, "stop_sequence": null}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": "", "signature": ""}}
