@@ -127,6 +127,8 @@ Upload File
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -382,6 +384,8 @@ List Files
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -616,6 +620,8 @@ Download File
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -755,6 +761,8 @@ Get File Metadata
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -978,6 +986,8 @@ Delete File
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `"anthropic-workspace-id": optional string`
 

@@ -123,6 +123,8 @@ Create Skill
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -389,6 +391,8 @@ List Skills
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -627,6 +631,8 @@ Get Skill
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -859,6 +865,8 @@ Delete Skill
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1145,6 +1153,8 @@ Create Skill Version
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1370,6 +1380,8 @@ List Skill Versions
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1583,6 +1595,8 @@ Download a skill version's content as a zip archive.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1741,6 +1755,8 @@ Get Skill Version
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1953,6 +1969,8 @@ Delete Skill Version
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 

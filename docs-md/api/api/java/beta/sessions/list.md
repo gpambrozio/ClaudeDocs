@@ -205,6 +205,8 @@ List Sessions
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -230,6 +232,26 @@ List Sessions
     - `String id`
 
     - `Optional<String> description`
+
+    - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+      Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+      - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+        An AWS IAM role principal as returned in API responses.
+
+        - `JsonValue type = "aws_role"`
+
+        - `String roleArn`
+
+          The IAM role's ARN.
+
+      - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+        The Anthropic-managed service account as returned in API responses.
+
+        - `JsonValue type = "service_account"`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -386,6 +408,10 @@ List Sessions
             - `String id`
 
             - `Optional<String> description`
+
+            - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+              Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -933,6 +959,10 @@ List Sessions
 
               - `Optional<String> description`
 
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `BetaManagedAgentsModelConfig model`
@@ -980,6 +1010,10 @@ List Sessions
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -1350,6 +1384,9 @@ public final class Main {
       "agent": {
         "id": "agent_011CZkYpogX7uDKUyvBTophP",
         "description": "A general-purpose starter agent.",
+        "execution_identity": {
+          "type": "service_account"
+        },
         "mcp_servers": [
           {
             "name": "example-mcp",
@@ -1370,6 +1407,9 @@ public final class Main {
             {
               "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
               "description": "A focused research subagent.",
+              "execution_identity": {
+                "type": "service_account"
+              },
               "mcp_servers": [
                 {
                   "name": "example-mcp",

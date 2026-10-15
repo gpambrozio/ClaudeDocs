@@ -113,6 +113,8 @@ url: https://platform.claude.com/docs/en/api/java/beta
 
   - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+  - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 ### Beta API Error
 
 - `class BetaApiError`
@@ -474,6 +476,8 @@ The Models API response can be used to determine which models are available for 
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -938,6 +942,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1393,6 +1399,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> userProfileId` (header parameter)
 
@@ -9422,6 +9430,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> userProfileId` (header parameter)
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
@@ -13223,6 +13233,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> userProfileId` (header parameter)
 
@@ -17631,6 +17643,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -17913,6 +17927,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18192,6 +18208,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18464,6 +18482,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18637,6 +18657,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -22555,6 +22577,8 @@ Create Agent
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -22730,6 +22754,10 @@ Create Agent
     Description of what the agent does.
 
     maxLength: 2048
+
+  - `Optional<BetaManagedAgentsExecutionIdentityParams> executionIdentity`
+
+    Execution principal for runs of this agent. Omitting it, sending null, or sending `{"type": "service_account"}` stores the default.
 
   - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
 
@@ -23352,6 +23380,26 @@ Create Agent
     format: date-time
 
   - `Optional<String> description`
+
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    Execution principal for runs of this agent. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+    - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+      An AWS IAM role principal as returned in API responses.
+
+      - `JsonValue type = "aws_role"`
+
+      - `String roleArn`
+
+        The IAM role's ARN.
+
+    - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+      The Anthropic-managed service account as returned in API responses.
+
+      - `JsonValue type = "service_account"`
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -24129,6 +24177,9 @@ public final class Main {
   "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
+  "execution_identity": {
+    "type": "service_account"
+  },
   "mcp_servers": [
     {
       "name": "example-mcp",
@@ -24362,6 +24413,8 @@ List Agents
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -24391,6 +24444,26 @@ List Agents
     format: date-time
 
   - `Optional<String> description`
+
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    Execution principal for runs of this agent. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+    - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+      An AWS IAM role principal as returned in API responses.
+
+      - `JsonValue type = "aws_role"`
+
+      - `String roleArn`
+
+        The IAM role's ARN.
+
+    - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+      The Anthropic-managed service account as returned in API responses.
+
+      - `JsonValue type = "service_account"`
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -25165,6 +25238,9 @@ public final class Main {
       "archived_at": null,
       "created_at": "2026-03-15T10:00:00Z",
       "description": "A general-purpose starter agent.",
+      "execution_identity": {
+        "type": "service_account"
+      },
       "mcp_servers": [
         {
           "name": "example-mcp",
@@ -25385,6 +25461,8 @@ Get Agent
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -25414,6 +25492,26 @@ Get Agent
     format: date-time
 
   - `Optional<String> description`
+
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    Execution principal for runs of this agent. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+    - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+      An AWS IAM role principal as returned in API responses.
+
+      - `JsonValue type = "aws_role"`
+
+      - `String roleArn`
+
+        The IAM role's ARN.
+
+    - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+      The Anthropic-managed service account as returned in API responses.
+
+      - `JsonValue type = "service_account"`
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -26186,6 +26284,9 @@ public final class Main {
   "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
+  "execution_identity": {
+    "type": "service_account"
+  },
   "mcp_servers": [
     {
       "name": "example-mcp",
@@ -26397,6 +26498,8 @@ Update Agent
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26408,6 +26511,10 @@ Update Agent
     Description. Omit to preserve; send empty string or null to clear.
 
     maxLength: 2048
+
+  - `Optional<BetaManagedAgentsExecutionIdentityParams> executionIdentity`
+
+    Execution principal for runs of this agent. Full replacement. Omit to preserve; send null or `{"type": "service_account"}` to restore the default.
 
   - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
 
@@ -27201,6 +27308,26 @@ Update Agent
 
   - `Optional<String> description`
 
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    Execution principal for runs of this agent. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+    - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+      An AWS IAM role principal as returned in API responses.
+
+      - `JsonValue type = "aws_role"`
+
+      - `String roleArn`
+
+        The IAM role's ARN.
+
+    - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+      The Anthropic-managed service account as returned in API responses.
+
+      - `JsonValue type = "service_account"`
+
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
     - `Type type`
@@ -27972,6 +28099,9 @@ public final class Main {
   "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
+  "execution_identity": {
+    "type": "service_account"
+  },
   "mcp_servers": [
     {
       "name": "example-mcp",
@@ -28183,6 +28313,8 @@ Archive Agent
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -28212,6 +28344,26 @@ Archive Agent
     format: date-time
 
   - `Optional<String> description`
+
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    Execution principal for runs of this agent. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+    - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+      An AWS IAM role principal as returned in API responses.
+
+      - `JsonValue type = "aws_role"`
+
+      - `String roleArn`
+
+        The IAM role's ARN.
+
+    - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+      The Anthropic-managed service account as returned in API responses.
+
+      - `JsonValue type = "service_account"`
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -28984,6 +29136,9 @@ public final class Main {
   "archived_at": null,
   "created_at": "2026-03-15T10:00:00Z",
   "description": "A general-purpose starter agent.",
+  "execution_identity": {
+    "type": "service_account"
+  },
   "mcp_servers": [
     {
       "name": "example-mcp",
@@ -29207,6 +29362,8 @@ List Agent Versions
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29236,6 +29393,26 @@ List Agent Versions
     format: date-time
 
   - `Optional<String> description`
+
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    Execution principal for runs of this agent. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+    - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+      An AWS IAM role principal as returned in API responses.
+
+      - `JsonValue type = "aws_role"`
+
+      - `String roleArn`
+
+        The IAM role's ARN.
+
+    - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+      The Anthropic-managed service account as returned in API responses.
+
+      - `JsonValue type = "service_account"`
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -30010,6 +30187,9 @@ public final class Main {
       "archived_at": null,
       "created_at": "2026-03-15T10:00:00Z",
       "description": "A general-purpose starter agent.",
+      "execution_identity": {
+        "type": "service_account"
+      },
       "mcp_servers": [
         {
           "name": "example-mcp",
@@ -30221,6 +30401,8 @@ Create a new environment with the specified configuration.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -30675,6 +30857,8 @@ List environments with pagination support.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31004,6 +31188,8 @@ Retrieve a specific environment by ID.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31327,6 +31513,8 @@ Update an existing environment's configuration.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -31766,6 +31954,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31933,6 +32123,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -32264,6 +32456,8 @@ Retrieve detailed information about a specific work item.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32532,6 +32726,8 @@ Long poll for work items in the queue.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> anthropicWorkerId` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -32784,6 +32980,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -33045,6 +33243,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
@@ -33239,6 +33439,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -33512,6 +33714,8 @@ List work items in an environment.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaSelfHostedWork`
@@ -33764,6 +33968,8 @@ Update work item metadata with merge semantics.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -34028,6 +34234,8 @@ Get statistics about the work queue for an environment.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -34212,6 +34420,8 @@ Create Session
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -35349,6 +35559,26 @@ Create Session
 
     - `Optional<String> description`
 
+    - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+      Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+      - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+        An AWS IAM role principal as returned in API responses.
+
+        - `JsonValue type = "aws_role"`
+
+        - `String roleArn`
+
+          The IAM role's ARN.
+
+      - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+        The Anthropic-managed service account as returned in API responses.
+
+        - `JsonValue type = "service_account"`
+
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
       - `Type type`
@@ -35504,6 +35734,10 @@ Create Session
             - `String id`
 
             - `Optional<String> description`
+
+            - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+              Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -36051,6 +36285,10 @@ Create Session
 
               - `Optional<String> description`
 
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `BetaManagedAgentsModelConfig model`
@@ -36098,6 +36336,10 @@ Create Session
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -36470,6 +36712,9 @@ public final class Main {
   "agent": {
     "id": "agent_011CZkYpogX7uDKUyvBTophP",
     "description": "A general-purpose starter agent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -36490,6 +36735,9 @@ public final class Main {
         {
           "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
           "description": "A focused research subagent.",
+          "execution_identity": {
+            "type": "service_account"
+          },
           "mcp_servers": [
             {
               "name": "example-mcp",
@@ -36856,6 +37104,8 @@ List Sessions
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -36881,6 +37131,26 @@ List Sessions
     - `String id`
 
     - `Optional<String> description`
+
+    - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+      Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+      - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+        An AWS IAM role principal as returned in API responses.
+
+        - `JsonValue type = "aws_role"`
+
+        - `String roleArn`
+
+          The IAM role's ARN.
+
+      - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+        The Anthropic-managed service account as returned in API responses.
+
+        - `JsonValue type = "service_account"`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -37037,6 +37307,10 @@ List Sessions
             - `String id`
 
             - `Optional<String> description`
+
+            - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+              Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -37584,6 +37858,10 @@ List Sessions
 
               - `Optional<String> description`
 
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `BetaManagedAgentsModelConfig model`
@@ -37631,6 +37909,10 @@ List Sessions
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -38001,6 +38283,9 @@ public final class Main {
       "agent": {
         "id": "agent_011CZkYpogX7uDKUyvBTophP",
         "description": "A general-purpose starter agent.",
+        "execution_identity": {
+          "type": "service_account"
+        },
         "mcp_servers": [
           {
             "name": "example-mcp",
@@ -38021,6 +38306,9 @@ public final class Main {
             {
               "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
               "description": "A focused research subagent.",
+              "execution_identity": {
+                "type": "service_account"
+              },
               "mcp_servers": [
                 {
                   "name": "example-mcp",
@@ -38309,6 +38597,8 @@ Get Session
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -38334,6 +38624,26 @@ Get Session
     - `String id`
 
     - `Optional<String> description`
+
+    - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+      Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+      - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+        An AWS IAM role principal as returned in API responses.
+
+        - `JsonValue type = "aws_role"`
+
+        - `String roleArn`
+
+          The IAM role's ARN.
+
+      - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+        The Anthropic-managed service account as returned in API responses.
+
+        - `JsonValue type = "service_account"`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -38490,6 +38800,10 @@ Get Session
             - `String id`
 
             - `Optional<String> description`
+
+            - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+              Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -39037,6 +39351,10 @@ Get Session
 
               - `Optional<String> description`
 
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `BetaManagedAgentsModelConfig model`
@@ -39084,6 +39402,10 @@ Get Session
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -39452,6 +39774,9 @@ public final class Main {
   "agent": {
     "id": "agent_011CZkYpogX7uDKUyvBTophP",
     "description": "A general-purpose starter agent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -39472,6 +39797,9 @@ public final class Main {
         {
           "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
           "description": "A focused research subagent.",
+          "execution_identity": {
+            "type": "service_account"
+          },
           "mcp_servers": [
             {
               "name": "example-mcp",
@@ -39756,6 +40084,8 @@ Update Session
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -39803,6 +40133,26 @@ Update Session
     - `String id`
 
     - `Optional<String> description`
+
+    - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+      Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+      - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+        An AWS IAM role principal as returned in API responses.
+
+        - `JsonValue type = "aws_role"`
+
+        - `String roleArn`
+
+          The IAM role's ARN.
+
+      - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+        The Anthropic-managed service account as returned in API responses.
+
+        - `JsonValue type = "service_account"`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -39959,6 +40309,10 @@ Update Session
             - `String id`
 
             - `Optional<String> description`
+
+            - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+              Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -40506,6 +40860,10 @@ Update Session
 
               - `Optional<String> description`
 
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `BetaManagedAgentsModelConfig model`
@@ -40553,6 +40911,10 @@ Update Session
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -40921,6 +41283,9 @@ public final class Main {
   "agent": {
     "id": "agent_011CZkYpogX7uDKUyvBTophP",
     "description": "A general-purpose starter agent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -40941,6 +41306,9 @@ public final class Main {
         {
           "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
           "description": "A focused research subagent.",
+          "execution_identity": {
+            "type": "service_account"
+          },
           "mcp_servers": [
             {
               "name": "example-mcp",
@@ -41225,6 +41593,8 @@ Delete Session
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41389,6 +41759,8 @@ Archive Session
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41414,6 +41786,26 @@ Archive Session
     - `String id`
 
     - `Optional<String> description`
+
+    - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+      Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+      - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+        An AWS IAM role principal as returned in API responses.
+
+        - `JsonValue type = "aws_role"`
+
+        - `String roleArn`
+
+          The IAM role's ARN.
+
+      - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+        The Anthropic-managed service account as returned in API responses.
+
+        - `JsonValue type = "service_account"`
 
     - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -41570,6 +41962,10 @@ Archive Session
             - `String id`
 
             - `Optional<String> description`
+
+            - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+              Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
             - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -42117,6 +42513,10 @@ Archive Session
 
               - `Optional<String> description`
 
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `BetaManagedAgentsModelConfig model`
@@ -42164,6 +42564,10 @@ Archive Session
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -42532,6 +42936,9 @@ public final class Main {
   "agent": {
     "id": "agent_011CZkYpogX7uDKUyvBTophP",
     "description": "A general-purpose starter agent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -42552,6 +42959,9 @@ public final class Main {
         {
           "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
           "description": "A focused research subagent.",
+          "execution_identity": {
+            "type": "service_account"
+          },
           "mcp_servers": [
             {
               "name": "example-mcp",
@@ -42963,6 +43373,8 @@ List Events
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -44666,6 +45078,26 @@ List Events
 
       - `Optional<String> description`
 
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `JsonValue type = "aws_role"`
+
+          - `String roleArn`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `JsonValue type = "service_account"`
+
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
         - `Type type`
@@ -44821,6 +45253,10 @@ List Events
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -45368,6 +45804,10 @@ List Events
 
                 - `Optional<String> description`
 
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
                 - `BetaManagedAgentsModelConfig model`
@@ -45415,6 +45855,10 @@ List Events
                 - `String id`
 
                 - `Optional<String> description`
+
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -46032,6 +46476,8 @@ Send Events
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -47023,6 +47469,8 @@ Stream Events
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -48726,6 +49174,26 @@ Stream Events
 
       - `Optional<String> description`
 
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `JsonValue type = "aws_role"`
+
+          - `String roleArn`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `JsonValue type = "service_account"`
+
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
         - `Type type`
@@ -48881,6 +49349,10 @@ Stream Events
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -49428,6 +49900,10 @@ Stream Events
 
                 - `Optional<String> description`
 
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
                 - `BetaManagedAgentsModelConfig model`
@@ -49475,6 +49951,10 @@ Stream Events
                 - `String id`
 
                 - `Optional<String> description`
+
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -50130,6 +50610,8 @@ Add Session Resource
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -50333,6 +50815,8 @@ List Session Resources
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -50617,6 +51101,8 @@ Get Session Resource
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -50892,6 +51378,8 @@ Update Session Resource
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -51176,6 +51664,8 @@ Delete Session Resource
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -51370,6 +51860,8 @@ List Session Threads
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -51401,6 +51893,26 @@ List Session Threads
       - `String id`
 
       - `Optional<String> description`
+
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `JsonValue type = "aws_role"`
+
+          - `String roleArn`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `JsonValue type = "service_account"`
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -52013,6 +52525,10 @@ List Session Threads
       - `JsonValue type = "inline"`
 
       - `Optional<String> description`
+
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        The session's execution principal.
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -52219,6 +52735,9 @@ public final class Main {
       "agent": {
         "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
         "description": "A focused research subagent.",
+        "execution_identity": {
+          "type": "service_account"
+        },
         "mcp_servers": [
           {
             "name": "example-mcp",
@@ -52424,6 +52943,8 @@ Get Session Thread
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -52455,6 +52976,26 @@ Get Session Thread
       - `String id`
 
       - `Optional<String> description`
+
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `JsonValue type = "aws_role"`
+
+          - `String roleArn`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `JsonValue type = "service_account"`
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -53067,6 +53608,10 @@ Get Session Thread
       - `JsonValue type = "inline"`
 
       - `Optional<String> description`
+
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        The session's execution principal.
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -53275,6 +53820,9 @@ public final class Main {
   "agent": {
     "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
     "description": "A focused research subagent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -53477,6 +54025,8 @@ Archive Session Thread
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53508,6 +54058,26 @@ Archive Session Thread
       - `String id`
 
       - `Optional<String> description`
+
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `JsonValue type = "aws_role"`
+
+          - `String roleArn`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `JsonValue type = "service_account"`
 
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -54121,6 +54691,10 @@ Archive Session Thread
 
       - `Optional<String> description`
 
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        The session's execution principal.
+
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
         - `Type type`
@@ -54328,6 +54902,9 @@ public final class Main {
   "agent": {
     "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
     "description": "A focused research subagent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -54537,6 +55114,8 @@ List Session Thread Events
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -56240,6 +56819,26 @@ List Session Thread Events
 
       - `Optional<String> description`
 
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `JsonValue type = "aws_role"`
+
+          - `String roleArn`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `JsonValue type = "service_account"`
+
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
         - `Type type`
@@ -56395,6 +56994,10 @@ List Session Thread Events
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -56942,6 +57545,10 @@ List Session Thread Events
 
                 - `Optional<String> description`
 
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
                 - `BetaManagedAgentsModelConfig model`
@@ -56989,6 +57596,10 @@ List Session Thread Events
                 - `String id`
 
                 - `Optional<String> description`
+
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -57620,6 +58231,8 @@ Stream Session Thread Events
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -59323,6 +59936,26 @@ Stream Session Thread Events
 
       - `Optional<String> description`
 
+      - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+        Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
+        - `class BetaManagedAgentsAwsRoleExecutionIdentity`
+
+          An AWS IAM role principal as returned in API responses.
+
+          - `JsonValue type = "aws_role"`
+
+          - `String roleArn`
+
+            The IAM role's ARN.
+
+        - `class BetaManagedAgentsServiceAccountExecutionIdentity`
+
+          The Anthropic-managed service account as returned in API responses.
+
+          - `JsonValue type = "service_account"`
+
       - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
         - `Type type`
@@ -59478,6 +60111,10 @@ Stream Session Thread Events
               - `String id`
 
               - `Optional<String> description`
+
+              - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
               - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -60025,6 +60662,10 @@ Stream Session Thread Events
 
                 - `Optional<String> description`
 
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
+
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
                 - `BetaManagedAgentsModelConfig model`
@@ -60072,6 +60713,10 @@ Stream Session Thread Events
                 - `String id`
 
                 - `Optional<String> description`
+
+                - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+                  Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
                 - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
@@ -60728,6 +61373,8 @@ Create Deployment
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -61877,6 +62524,8 @@ List Deployments
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62616,6 +63265,8 @@ Get Deployment
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63349,6 +64000,8 @@ Update Deployment
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -64456,6 +65109,8 @@ Archive Deployment
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65190,6 +65845,8 @@ Run Deployment Now
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65585,6 +66242,8 @@ Pause Deployment
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -66319,6 +66978,8 @@ Unpause Deployment
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -67098,6 +67759,8 @@ List Deployment Runs
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67499,6 +68162,8 @@ Get Deployment Run
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67893,6 +68558,8 @@ Create Vault
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68117,6 +68784,8 @@ List Vaults
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68323,6 +68992,8 @@ Get Vault
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68523,6 +69194,8 @@ Update Vault
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -68735,6 +69408,8 @@ Delete Vault
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68902,6 +69577,8 @@ Archive Vault
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -69105,6 +69782,8 @@ Create Credential
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -69623,6 +70302,8 @@ List Credentials
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69954,6 +70635,8 @@ Get Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70283,6 +70966,8 @@ Update Credential
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -70744,6 +71429,8 @@ Delete Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70919,6 +71606,8 @@ Archive Credential
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -71250,6 +71939,8 @@ Validate Credential
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71530,6 +72221,8 @@ Create a memory store
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71777,6 +72470,8 @@ List memory stores
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71986,6 +72681,8 @@ Retrieve a memory store
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72191,6 +72888,8 @@ Update a memory store
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -72414,6 +73113,8 @@ Delete a memory store
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72581,6 +73282,8 @@ Archive a memory store
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -72793,6 +73496,8 @@ Create a memory
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -73047,6 +73752,8 @@ List memories
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73288,6 +73995,8 @@ Retrieve a memory
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73513,6 +74222,8 @@ Update a memory
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -73756,6 +74467,8 @@ Delete a memory
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73977,6 +74690,8 @@ List memory versions
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -74286,6 +75001,8 @@ Retrieve a memory version
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74589,6 +75306,8 @@ Redact a memory version
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74886,6 +75605,8 @@ Upload File
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75146,6 +75867,8 @@ List Files
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75379,6 +76102,8 @@ Download File
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75525,6 +76250,8 @@ Get File Metadata
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -75754,6 +76481,8 @@ Delete File
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75921,6 +76650,8 @@ Create Skill
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -76188,6 +76919,8 @@ List Skills
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76426,6 +77159,8 @@ Get Skill
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76659,6 +77394,8 @@ Delete Skill
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76834,6 +77571,8 @@ Create Skill Version
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -77060,6 +77799,8 @@ List Skill Versions
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77273,6 +78014,8 @@ Download a skill version's content as a zip archive.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77431,6 +78174,8 @@ Get Skill Version
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -77644,6 +78389,8 @@ Delete Skill Version
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77816,6 +78563,8 @@ Create User Profile
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -78190,6 +78939,8 @@ List User Profiles
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78498,6 +79249,8 @@ Get User Profile
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78800,6 +79553,8 @@ Update User Profile
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -79142,6 +79897,8 @@ Create Enrollment URL
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79320,6 +80077,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -79882,6 +80641,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80306,6 +81067,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80724,6 +81487,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -81144,6 +81909,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81559,6 +82326,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81758,6 +82527,8 @@ Fetches a tunnel by ID.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -81963,6 +82734,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82162,6 +82935,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82356,6 +83131,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82530,6 +83307,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -82713,6 +83492,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -82928,6 +83709,8 @@ Fetches a tunnel certificate by ID.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -83148,6 +83931,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83357,6 +84142,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -85139,6 +85926,8 @@ matched as the JWT's `iss` claim and is not fetched.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `String issuerUrl`
 
     The `iss` claim value to match against.
@@ -85537,6 +86326,8 @@ Archived issuers are excluded unless `include_archived=true`.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -85851,6 +86642,8 @@ Retrieve a federation issuer by its ID (`fdis_...`).
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -86168,6 +86961,8 @@ session.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<Boolean> checkJti`
 
@@ -86560,6 +87355,8 @@ issuer cannot be changed), or recreate them against another issuer.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -86881,6 +87678,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `String issuerId`
 
@@ -87272,6 +88071,8 @@ unless `include_archived=true`.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -87592,6 +88393,8 @@ Retrieve a federation rule by its ID (`fdrl_...`).
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -87924,6 +88727,8 @@ Console session.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<Boolean> appliesToAllWorkspaces`
 
@@ -88293,6 +89098,8 @@ other scopes require a Console session.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -88620,6 +89427,8 @@ other scopes require a Console session.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `String workspaceId`
 
     Tagged ID of the workspace to enable this rule for.
@@ -88828,6 +89637,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaFederationRuleWorkspace`
@@ -89026,6 +89837,8 @@ Console session.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class WorkspaceRemoveResponse`
@@ -89101,7 +89914,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     Role for the invited User.
 
-    The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
+    The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`; inviting with the `managed` role requires the `write:rbac_groups` scope in addition to `write:members`.
 
     - `BILLING("billing")`
 
@@ -89723,6 +90536,8 @@ accounts.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `String name`
 
     Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
@@ -89982,6 +90797,8 @@ archived service accounts.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -90209,6 +91026,8 @@ Retrieve a service account by its ID (`svac_...`).
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -90435,6 +91254,8 @@ interactive credential (a user OAuth token or a Console session).
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> description`
 
@@ -90677,6 +91498,8 @@ those rules first or change their target to another service account.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -90908,6 +91731,8 @@ rejected.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `String workspaceId`
 
     Tagged workspace ID to add the service account to.
@@ -91138,6 +91963,8 @@ page to recover.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -91346,6 +92173,8 @@ to the implicit `workspace_user` membership. Archived workspaces return
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -91649,7 +92478,7 @@ Update a member's organization role.
 
     New role for the User.
 
-    The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`.
+    The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations accept `user` and `managed`; changing a User's role to `managed` requires the `write:rbac_groups` scope in addition to `write:members`.
 
     - `BILLING("billing")`
 
@@ -92108,6 +92937,8 @@ Create Workspace
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `String name`
 
@@ -93628,6 +94459,8 @@ omitted from the results.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -93833,6 +94666,8 @@ accounts cannot be added and are rejected.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `String serviceAccountId`
 
@@ -94051,6 +94886,8 @@ account returns 404.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -94257,6 +95094,8 @@ rejected.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `BetaNoBillingWorkspaceRole workspaceRole`
 
@@ -94469,6 +95308,8 @@ membership. Archived workspaces return 400.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -98677,6 +99518,8 @@ Anthropic account team.
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> amount`
 
     Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
@@ -99219,6 +100062,8 @@ organizations only, not for Claude Console organizations.
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -102051,6 +102896,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `List<String> files`
 
     The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
@@ -102448,6 +103295,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaPlugin`
@@ -102842,6 +103691,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `String servedVersionId`
 
@@ -103286,6 +104137,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaPlugin`
@@ -103677,6 +104530,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaDeletedPlugin`
@@ -103863,6 +104718,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `List<String> files`
 
@@ -104212,6 +105069,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaPluginVersion`
@@ -104536,6 +105395,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -104877,6 +105738,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Example
 
 ```java
@@ -105058,6 +105921,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -105309,6 +106174,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `InstallationPreference installationPreference`
 
@@ -105577,6 +106444,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaDeletedPluginInstallationSetting`
@@ -105819,6 +106688,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -106078,6 +106949,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
 #### Returns
 
@@ -106346,6 +107219,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
 #### Returns
 
 - `class BetaPluginMarketplace`
@@ -106608,6 +107483,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `DefaultInstallationPreference defaultInstallationPreference`
 
@@ -106894,6 +107771,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `String repositoryUrl`
 
     The `https://` URL of a public repository on github.com that holds the marketplace. Any other host, a URL with credentials in it, or one that does not name a repository is a 400.
@@ -107168,6 +108047,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `String archive`
 
     A .zip of the marketplace directory (its contents at the root, or wrapped in one folder as a Git host's download produces), sent as a file part with a filename; DEFLATE- or STORE-compressed, at most 32 MB. A part sent without a filename, a second archive part, or any other form field is a 400; a larger archive is a 413.
@@ -107299,6 +108180,2418 @@ public final class Main {
   "total_plugin_count": 0,
   "type": "plugin_marketplace_validation_report",
   "valid": false
+}
+```
+
+## Beta › Organization › Telemetry Destinations
+
+### Create a Telemetry Destination
+
+`BetaTelemetryDestination beta().organization().telemetryDestinations().create(params, requestOptions = RequestOptions.none())`
+
+**POST** `/v1/organizations/telemetry_destinations`
+
+Register an OpenTelemetry destination for the organization.
+
+The destination starts in state `enabled`. An organization can have at most 10 destinations, including disabled ones.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-destination) to learn more about adding a destination.
+
+#### Parameters
+
+- `TelemetryDestinationCreateParams params`
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+  - `String endpointUrl`
+
+    The base URL of your collector's OTLP/HTTP endpoint, for example `https://gateway.example.com`.
+
+    The URL must use `https` and a hostname, not an IP address. The port, if given, must be 443. The URL must not contain a query string, a fragment, or a username and password. At most 2,048 characters.
+
+    A path prefix, such as `/otlp`, is allowed. Don't include the per-signal path (`/v1/traces`), because the API appends it on delivery. If your collector takes traces on another path, also set `traces.endpoint_url`.
+
+    minLength: 1, maxLength: 2048
+
+  - `BetaTelemetryDestinationWorkspacesParams workspaces`
+
+    Which of the organization's workspaces the destination covers.
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the destination. Optional. 1 to 255 characters.
+
+  - `Optional<DestinationHeaders> headers`
+
+    Request headers that the API sends with every delivery, typically your collector's authentication header (for example `authorization`).
+
+    The API stores the values encrypted and never returns them. Reads show only `header_names`.
+
+    At most 20 headers. Names are at most 128 characters. Two names can't differ only in case. Values are printable ASCII, at most 4,096 characters, and can't begin or end with a space. Names and values together are at most 16,384 bytes.
+
+    Reserved names are rejected, for example `host`, `cookie`, `user-agent`, and names that start with `content-`, `proxy-`, `x-forwarded-`, or `anthropic-`. For this check, `_` in a name counts as `-`.
+
+  - `Optional<BetaTelemetryDestinationTracesParams> traces`
+
+    The settings for the traces that the destination receives. If you leave it out, every setting takes its default.
+
+#### Returns
+
+- `class BetaTelemetryDestination`
+
+  An OpenTelemetry destination: an OTLP/HTTP endpoint, the request headers sent with every delivery to it, what the exported spans contain, and which workspaces it covers. A destination belongs to an organization. A workspace's spans go to every enabled destination that covers it.
+
+  - `JsonValue type = "telemetry_destination"`
+
+  - `String id`
+
+    The unique ID of the destination (`tdst_...`).
+
+  - `LocalDateTime createdAt`
+
+    Time the destination was created.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationDeliveryHealth deliveryHealth`
+
+    The most recent delivery results for this destination.
+
+    - `Optional<String> lastError`
+
+      A message that describes the most recent failed delivery to the destination, or `null` if no delivery has failed yet.
+
+      Examples are `temporary DNS failure`, `TLS failure`, `timeout`, `connection failure`, `invalid address`, `HTTP error (status 503)`, and `redirect (status 301)`. The message is `invalid address` both for a hostname that doesn't exist and for an address that isn't publicly routable. It never contains the endpoint's response body, a header value, a network address, or TLS details.
+
+      `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
+
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
+
+    - `Optional<LocalDateTime> lastErrorAt`
+
+      Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
+
+      format: date-time
+
+    - `Optional<LocalDateTime> lastSuccessAt`
+
+      Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
+
+      format: date-time
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the destination. Null when none was set.
+
+  - `String endpointUrl`
+
+    The base URL of the destination's OTLP/HTTP endpoint, exactly as registered.
+
+    The API appends the per-signal path, such as `/v1/traces`, on delivery, unless `traces.endpoint_url` is set.
+
+  - `List<String> headerNames`
+
+    Names of the registered request headers. Header values are write-only and are never returned.
+
+  - `BetaTelemetryDestinationState state`
+
+    Whether the destination receives deliveries.
+
+    - `class BetaTelemetryDestinationStateEnabled`
+
+      The telemetry destination receives the spans of the workspaces that it covers.
+
+      - `JsonValue type = "enabled"`
+
+    - `class BetaTelemetryDestinationStateDisabled`
+
+      The API doesn't deliver anything to the telemetry destination.
+
+      Spans produced while it is disabled aren't delivered later.
+
+      - `JsonValue type = "disabled"`
+
+      - `BetaTelemetryDestinationDisabledReason reason`
+
+        Whether a caller or the API disabled the destination and, when the API did, why. Read-only.
+
+        - `class BetaTelemetryDestinationDisabledReasonCaller`
+
+          A caller disabled the destination with an update that set `state` to `disabled`.
+
+          - `JsonValue type = "caller"`
+
+        - `class BetaTelemetryDestinationDisabledReasonSustainedFailure`
+
+          The API disabled the destination because deliveries to it failed, with no successful delivery in between, for longer than a threshold that Anthropic configures and that is not part of this contract. The reason is `invalid_address` instead when the most recent failed delivery failed with an invalid address.
+
+          - `JsonValue type = "sustained_failure"`
+
+        - `class BetaTelemetryDestinationDisabledReasonInvalidAddress`
+
+          The API disabled the destination because deliveries to it failed for longer than the same threshold as for `sustained_failure`, and the most recent failed delivery failed with an invalid address: the DNS answer says that the endpoint's hostname doesn't exist or doesn't have an address, or the address that the API would connect to isn't publicly routable or is reserved, for example a loopback, link-local, private-network, or cloud-metadata address. The API doesn't connect to such an address, and retries the delivery a bounded number of times as it does after a timeout. A timeout or a server failure of the DNS lookup is a temporary DNS failure instead, not an invalid address.
+
+          - `JsonValue type = "invalid_address"`
+
+        - `class BetaTelemetryDestinationDisabledReasonRedirect`
+
+          The API disabled the destination because the endpoint answered a delivery with a 3xx status. Redirects are never followed, and one such answer disables the destination at once.
+
+          - `JsonValue type = "redirect"`
+
+  - `BetaTelemetryDestinationTraces traces`
+
+    The destination's settings for the traces it receives.
+
+    - `BetaTelemetryDestinationContentMode contentMode`
+
+      What the exported spans contain.
+
+      - `METADATA_ONLY("metadata_only")`
+
+        The spans contain identifiers, timing, status, token counts, and similar metadata. They don't contain prompt text, completion text, or tool inputs and outputs.
+
+      - `CONTENT("content")`
+
+        The spans contain the same metadata as `metadata_only`, plus message and tool content.
+
+        An organization with a data-handling restriction, such as under HIPAA, can't choose this mode. The API exports only metadata for such an organization, even to a destination that already has `content`.
+
+    - `boolean enabled`
+
+      Whether the destination receives traces. A destination whose `enabled` is false keeps its other settings.
+
+    - `Optional<String> endpointUrl`
+
+      The full URL that the API posts traces to, exactly as registered, or `null` if the destination doesn't have one.
+
+      When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
+
+    - `Optional<Long> maxContentBytes`
+
+      The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
+
+      Content means model prompts and responses, and tool inputs and outputs. The API shortens longer content to this size before it delivers the span. A destination whose `content_mode` is `metadata_only` keeps this value. It applies once `content_mode` is `content`.
+
+      format: int32
+
+  - `LocalDateTime updatedAt`
+
+    Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
+
+    An update that sets a header value always changes it, even when the value is the same as before. Adding or removing a single workspace on the destination's list doesn't change it. An update that changes the list does.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationWorkspaces workspaces`
+
+    Which of the organization's workspaces the destination covers.
+
+    - `class BetaTelemetryDestinationWorkspacesAll`
+
+      The destination covers every workspace of the organization, including the default workspace, archived workspaces, and workspaces created later. It doesn't have a list.
+
+      - `JsonValue type = "all"`
+
+    - `class BetaTelemetryDestinationWorkspacesInclude`
+
+      The destination covers the workspaces on its list, and no others.
+
+      - `JsonValue type = "include"`
+
+    - `class BetaTelemetryDestinationWorkspacesExclude`
+
+      The destination covers every workspace of the organization except the workspaces on its list. A workspace created later is covered until it is added to the list.
+
+      - `JsonValue type = "exclude"`
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.BetaTelemetryDestination;
+import com.anthropic.models.beta.organization.telemetrydestinations.BetaTelemetryDestinationWorkspacesAllParams;
+import com.anthropic.models.beta.organization.telemetrydestinations.TelemetryDestinationCreateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        TelemetryDestinationCreateParams params = TelemetryDestinationCreateParams.builder()
+            .endpointUrl("x")
+            .workspaces(BetaTelemetryDestinationWorkspacesAllParams.builder().build())
+            .build();
+        BetaTelemetryDestination betaTelemetryDestination = client.beta().organization().telemetryDestinations().create(params);
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "delivery_health": {
+    "last_error": "last_error",
+    "last_error_at": "2019-12-27T18:11:19.117Z",
+    "last_success_at": "2019-12-27T18:11:19.117Z"
+  },
+  "display_name": "display_name",
+  "endpoint_url": "endpoint_url",
+  "header_names": [
+    "string"
+  ],
+  "state": {
+    "type": "enabled"
+  },
+  "traces": {
+    "content_mode": "metadata_only",
+    "enabled": true,
+    "endpoint_url": "endpoint_url",
+    "max_content_bytes": 0
+  },
+  "type": "telemetry_destination",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "workspaces": {
+    "type": "all"
+  }
+}
+```
+
+### List Telemetry Destinations
+
+`TelemetryDestinationListPage beta().organization().telemetryDestinations().list(params = TelemetryDestinationListParams.none(), requestOptions = RequestOptions.none())`
+
+**GET** `/v1/organizations/telemetry_destinations`
+
+List the organization's destinations, newest first, optionally only those that cover given workspaces.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up-api-tracing) to learn more about destinations.
+
+#### Parameters
+
+- `TelemetryDestinationListParams params`
+
+  - `Optional<Long> limit` (query parameter)
+
+    Number of destinations to return per page, between 1 and 1,000. Defaults to 20.
+
+    format: int32
+
+  - `Optional<String> page` (query parameter)
+
+    Opaque cursor from a previous response's `next_page`. Leave it out to get the first page.
+
+  - `Optional<List<String>> workspaceIds` (query parameter)
+
+    Return only the destinations that cover at least one of these workspaces (`wrkspc_...`).
+
+    Send at most 100 IDs, as `workspace_ids[]`. A destination covers a workspace when its `workspaces.type` is `all`, when its `include` list has the workspace, or when its `exclude` list doesn't have it. Destinations in either state can match. An ID that isn't the ID of one of the organization's workspaces doesn't match any destination, not even one whose type is `all`.
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+#### Returns
+
+- `class BetaTelemetryDestination`
+
+  An OpenTelemetry destination: an OTLP/HTTP endpoint, the request headers sent with every delivery to it, what the exported spans contain, and which workspaces it covers. A destination belongs to an organization. A workspace's spans go to every enabled destination that covers it.
+
+  - `JsonValue type = "telemetry_destination"`
+
+  - `String id`
+
+    The unique ID of the destination (`tdst_...`).
+
+  - `LocalDateTime createdAt`
+
+    Time the destination was created.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationDeliveryHealth deliveryHealth`
+
+    The most recent delivery results for this destination.
+
+    - `Optional<String> lastError`
+
+      A message that describes the most recent failed delivery to the destination, or `null` if no delivery has failed yet.
+
+      Examples are `temporary DNS failure`, `TLS failure`, `timeout`, `connection failure`, `invalid address`, `HTTP error (status 503)`, and `redirect (status 301)`. The message is `invalid address` both for a hostname that doesn't exist and for an address that isn't publicly routable. It never contains the endpoint's response body, a header value, a network address, or TLS details.
+
+      `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
+
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
+
+    - `Optional<LocalDateTime> lastErrorAt`
+
+      Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
+
+      format: date-time
+
+    - `Optional<LocalDateTime> lastSuccessAt`
+
+      Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
+
+      format: date-time
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the destination. Null when none was set.
+
+  - `String endpointUrl`
+
+    The base URL of the destination's OTLP/HTTP endpoint, exactly as registered.
+
+    The API appends the per-signal path, such as `/v1/traces`, on delivery, unless `traces.endpoint_url` is set.
+
+  - `List<String> headerNames`
+
+    Names of the registered request headers. Header values are write-only and are never returned.
+
+  - `BetaTelemetryDestinationState state`
+
+    Whether the destination receives deliveries.
+
+    - `class BetaTelemetryDestinationStateEnabled`
+
+      The telemetry destination receives the spans of the workspaces that it covers.
+
+      - `JsonValue type = "enabled"`
+
+    - `class BetaTelemetryDestinationStateDisabled`
+
+      The API doesn't deliver anything to the telemetry destination.
+
+      Spans produced while it is disabled aren't delivered later.
+
+      - `JsonValue type = "disabled"`
+
+      - `BetaTelemetryDestinationDisabledReason reason`
+
+        Whether a caller or the API disabled the destination and, when the API did, why. Read-only.
+
+        - `class BetaTelemetryDestinationDisabledReasonCaller`
+
+          A caller disabled the destination with an update that set `state` to `disabled`.
+
+          - `JsonValue type = "caller"`
+
+        - `class BetaTelemetryDestinationDisabledReasonSustainedFailure`
+
+          The API disabled the destination because deliveries to it failed, with no successful delivery in between, for longer than a threshold that Anthropic configures and that is not part of this contract. The reason is `invalid_address` instead when the most recent failed delivery failed with an invalid address.
+
+          - `JsonValue type = "sustained_failure"`
+
+        - `class BetaTelemetryDestinationDisabledReasonInvalidAddress`
+
+          The API disabled the destination because deliveries to it failed for longer than the same threshold as for `sustained_failure`, and the most recent failed delivery failed with an invalid address: the DNS answer says that the endpoint's hostname doesn't exist or doesn't have an address, or the address that the API would connect to isn't publicly routable or is reserved, for example a loopback, link-local, private-network, or cloud-metadata address. The API doesn't connect to such an address, and retries the delivery a bounded number of times as it does after a timeout. A timeout or a server failure of the DNS lookup is a temporary DNS failure instead, not an invalid address.
+
+          - `JsonValue type = "invalid_address"`
+
+        - `class BetaTelemetryDestinationDisabledReasonRedirect`
+
+          The API disabled the destination because the endpoint answered a delivery with a 3xx status. Redirects are never followed, and one such answer disables the destination at once.
+
+          - `JsonValue type = "redirect"`
+
+  - `BetaTelemetryDestinationTraces traces`
+
+    The destination's settings for the traces it receives.
+
+    - `BetaTelemetryDestinationContentMode contentMode`
+
+      What the exported spans contain.
+
+      - `METADATA_ONLY("metadata_only")`
+
+        The spans contain identifiers, timing, status, token counts, and similar metadata. They don't contain prompt text, completion text, or tool inputs and outputs.
+
+      - `CONTENT("content")`
+
+        The spans contain the same metadata as `metadata_only`, plus message and tool content.
+
+        An organization with a data-handling restriction, such as under HIPAA, can't choose this mode. The API exports only metadata for such an organization, even to a destination that already has `content`.
+
+    - `boolean enabled`
+
+      Whether the destination receives traces. A destination whose `enabled` is false keeps its other settings.
+
+    - `Optional<String> endpointUrl`
+
+      The full URL that the API posts traces to, exactly as registered, or `null` if the destination doesn't have one.
+
+      When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
+
+    - `Optional<Long> maxContentBytes`
+
+      The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
+
+      Content means model prompts and responses, and tool inputs and outputs. The API shortens longer content to this size before it delivers the span. A destination whose `content_mode` is `metadata_only` keeps this value. It applies once `content_mode` is `content`.
+
+      format: int32
+
+  - `LocalDateTime updatedAt`
+
+    Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
+
+    An update that sets a header value always changes it, even when the value is the same as before. Adding or removing a single workspace on the destination's list doesn't change it. An update that changes the list does.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationWorkspaces workspaces`
+
+    Which of the organization's workspaces the destination covers.
+
+    - `class BetaTelemetryDestinationWorkspacesAll`
+
+      The destination covers every workspace of the organization, including the default workspace, archived workspaces, and workspaces created later. It doesn't have a list.
+
+      - `JsonValue type = "all"`
+
+    - `class BetaTelemetryDestinationWorkspacesInclude`
+
+      The destination covers the workspaces on its list, and no others.
+
+      - `JsonValue type = "include"`
+
+    - `class BetaTelemetryDestinationWorkspacesExclude`
+
+      The destination covers every workspace of the organization except the workspaces on its list. A workspace created later is covered until it is added to the list.
+
+      - `JsonValue type = "exclude"`
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.TelemetryDestinationListPage;
+import com.anthropic.models.beta.organization.telemetrydestinations.TelemetryDestinationListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        TelemetryDestinationListPage page = client.beta().organization().telemetryDestinations().list();
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "delivery_health": {
+        "last_error": "last_error",
+        "last_error_at": "2019-12-27T18:11:19.117Z",
+        "last_success_at": "2019-12-27T18:11:19.117Z"
+      },
+      "display_name": "display_name",
+      "endpoint_url": "endpoint_url",
+      "header_names": [
+        "string"
+      ],
+      "state": {
+        "type": "enabled"
+      },
+      "traces": {
+        "content_mode": "metadata_only",
+        "enabled": true,
+        "endpoint_url": "endpoint_url",
+        "max_content_bytes": 0
+      },
+      "type": "telemetry_destination",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "workspaces": {
+        "type": "all"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Retrieve a Telemetry Destination
+
+`BetaTelemetryDestination beta().organization().telemetryDestinations().retrieve(params = TelemetryDestinationRetrieveParams.none(), requestOptions = RequestOptions.none())`
+
+**GET** `/v1/organizations/telemetry_destinations/{destination_id}`
+
+Read a destination's configuration, state, and most recent delivery results.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-and-health) to learn how the API delivers spans and when it disables a destination.
+
+#### Parameters
+
+- `TelemetryDestinationRetrieveParams params`
+
+  - `Optional<String> destinationId` (path parameter)
+
+    ID of the destination (`tdst_...`).
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+#### Returns
+
+- `class BetaTelemetryDestination`
+
+  An OpenTelemetry destination: an OTLP/HTTP endpoint, the request headers sent with every delivery to it, what the exported spans contain, and which workspaces it covers. A destination belongs to an organization. A workspace's spans go to every enabled destination that covers it.
+
+  - `JsonValue type = "telemetry_destination"`
+
+  - `String id`
+
+    The unique ID of the destination (`tdst_...`).
+
+  - `LocalDateTime createdAt`
+
+    Time the destination was created.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationDeliveryHealth deliveryHealth`
+
+    The most recent delivery results for this destination.
+
+    - `Optional<String> lastError`
+
+      A message that describes the most recent failed delivery to the destination, or `null` if no delivery has failed yet.
+
+      Examples are `temporary DNS failure`, `TLS failure`, `timeout`, `connection failure`, `invalid address`, `HTTP error (status 503)`, and `redirect (status 301)`. The message is `invalid address` both for a hostname that doesn't exist and for an address that isn't publicly routable. It never contains the endpoint's response body, a header value, a network address, or TLS details.
+
+      `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
+
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
+
+    - `Optional<LocalDateTime> lastErrorAt`
+
+      Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
+
+      format: date-time
+
+    - `Optional<LocalDateTime> lastSuccessAt`
+
+      Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
+
+      format: date-time
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the destination. Null when none was set.
+
+  - `String endpointUrl`
+
+    The base URL of the destination's OTLP/HTTP endpoint, exactly as registered.
+
+    The API appends the per-signal path, such as `/v1/traces`, on delivery, unless `traces.endpoint_url` is set.
+
+  - `List<String> headerNames`
+
+    Names of the registered request headers. Header values are write-only and are never returned.
+
+  - `BetaTelemetryDestinationState state`
+
+    Whether the destination receives deliveries.
+
+    - `class BetaTelemetryDestinationStateEnabled`
+
+      The telemetry destination receives the spans of the workspaces that it covers.
+
+      - `JsonValue type = "enabled"`
+
+    - `class BetaTelemetryDestinationStateDisabled`
+
+      The API doesn't deliver anything to the telemetry destination.
+
+      Spans produced while it is disabled aren't delivered later.
+
+      - `JsonValue type = "disabled"`
+
+      - `BetaTelemetryDestinationDisabledReason reason`
+
+        Whether a caller or the API disabled the destination and, when the API did, why. Read-only.
+
+        - `class BetaTelemetryDestinationDisabledReasonCaller`
+
+          A caller disabled the destination with an update that set `state` to `disabled`.
+
+          - `JsonValue type = "caller"`
+
+        - `class BetaTelemetryDestinationDisabledReasonSustainedFailure`
+
+          The API disabled the destination because deliveries to it failed, with no successful delivery in between, for longer than a threshold that Anthropic configures and that is not part of this contract. The reason is `invalid_address` instead when the most recent failed delivery failed with an invalid address.
+
+          - `JsonValue type = "sustained_failure"`
+
+        - `class BetaTelemetryDestinationDisabledReasonInvalidAddress`
+
+          The API disabled the destination because deliveries to it failed for longer than the same threshold as for `sustained_failure`, and the most recent failed delivery failed with an invalid address: the DNS answer says that the endpoint's hostname doesn't exist or doesn't have an address, or the address that the API would connect to isn't publicly routable or is reserved, for example a loopback, link-local, private-network, or cloud-metadata address. The API doesn't connect to such an address, and retries the delivery a bounded number of times as it does after a timeout. A timeout or a server failure of the DNS lookup is a temporary DNS failure instead, not an invalid address.
+
+          - `JsonValue type = "invalid_address"`
+
+        - `class BetaTelemetryDestinationDisabledReasonRedirect`
+
+          The API disabled the destination because the endpoint answered a delivery with a 3xx status. Redirects are never followed, and one such answer disables the destination at once.
+
+          - `JsonValue type = "redirect"`
+
+  - `BetaTelemetryDestinationTraces traces`
+
+    The destination's settings for the traces it receives.
+
+    - `BetaTelemetryDestinationContentMode contentMode`
+
+      What the exported spans contain.
+
+      - `METADATA_ONLY("metadata_only")`
+
+        The spans contain identifiers, timing, status, token counts, and similar metadata. They don't contain prompt text, completion text, or tool inputs and outputs.
+
+      - `CONTENT("content")`
+
+        The spans contain the same metadata as `metadata_only`, plus message and tool content.
+
+        An organization with a data-handling restriction, such as under HIPAA, can't choose this mode. The API exports only metadata for such an organization, even to a destination that already has `content`.
+
+    - `boolean enabled`
+
+      Whether the destination receives traces. A destination whose `enabled` is false keeps its other settings.
+
+    - `Optional<String> endpointUrl`
+
+      The full URL that the API posts traces to, exactly as registered, or `null` if the destination doesn't have one.
+
+      When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
+
+    - `Optional<Long> maxContentBytes`
+
+      The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
+
+      Content means model prompts and responses, and tool inputs and outputs. The API shortens longer content to this size before it delivers the span. A destination whose `content_mode` is `metadata_only` keeps this value. It applies once `content_mode` is `content`.
+
+      format: int32
+
+  - `LocalDateTime updatedAt`
+
+    Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
+
+    An update that sets a header value always changes it, even when the value is the same as before. Adding or removing a single workspace on the destination's list doesn't change it. An update that changes the list does.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationWorkspaces workspaces`
+
+    Which of the organization's workspaces the destination covers.
+
+    - `class BetaTelemetryDestinationWorkspacesAll`
+
+      The destination covers every workspace of the organization, including the default workspace, archived workspaces, and workspaces created later. It doesn't have a list.
+
+      - `JsonValue type = "all"`
+
+    - `class BetaTelemetryDestinationWorkspacesInclude`
+
+      The destination covers the workspaces on its list, and no others.
+
+      - `JsonValue type = "include"`
+
+    - `class BetaTelemetryDestinationWorkspacesExclude`
+
+      The destination covers every workspace of the organization except the workspaces on its list. A workspace created later is covered until it is added to the list.
+
+      - `JsonValue type = "exclude"`
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.BetaTelemetryDestination;
+import com.anthropic.models.beta.organization.telemetrydestinations.TelemetryDestinationRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaTelemetryDestination betaTelemetryDestination = client.beta().organization().telemetryDestinations().retrieve("destination_id");
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "delivery_health": {
+    "last_error": "last_error",
+    "last_error_at": "2019-12-27T18:11:19.117Z",
+    "last_success_at": "2019-12-27T18:11:19.117Z"
+  },
+  "display_name": "display_name",
+  "endpoint_url": "endpoint_url",
+  "header_names": [
+    "string"
+  ],
+  "state": {
+    "type": "enabled"
+  },
+  "traces": {
+    "content_mode": "metadata_only",
+    "enabled": true,
+    "endpoint_url": "endpoint_url",
+    "max_content_bytes": 0
+  },
+  "type": "telemetry_destination",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "workspaces": {
+    "type": "all"
+  }
+}
+```
+
+### Update a Telemetry Destination
+
+`BetaTelemetryDestination beta().organization().telemetryDestinations().update(params = TelemetryDestinationUpdateParams.none(), requestOptions = RequestOptions.none())`
+
+**POST** `/v1/organizations/telemetry_destinations/{destination_id}`
+
+Change a telemetry destination's settings, its state, or which workspaces it covers.
+
+Send at least one field. Omitted fields keep their stored values, except the registered headers, which a change of the endpoint's hostname or port removes. Only `display_name`, `traces`, `traces.endpoint_url`, `traces.content_mode`, `traces.max_content_bytes`, and individual `headers` values accept `null`.
+
+If another request changes the destination while the update runs, the API returns a 409 `conflict_error`. Read the destination again, then retry the update.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about changing a destination.
+
+#### Parameters
+
+- `TelemetryDestinationUpdateParams params`
+
+  - `Optional<String> destinationId` (path parameter)
+
+    ID of the destination (`tdst_...`).
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+  - `Optional<String> displayName`
+
+    New human-readable name, 1 to 255 characters. Null clears it.
+
+  - `Optional<String> endpointUrl`
+
+    The new base URL of the destination's OTLP/HTTP endpoint. The same rules as on create apply.
+
+    A change of hostname or port first removes every registered header, so send the headers for the new endpoint in the same request. When the destination has a `traces.endpoint_url`, such a change must also set `traces.endpoint_url` to a URL with the new hostname and port, or to `null`. A change of the path alone keeps the headers.
+
+    maxLength: 2048
+
+  - `Optional<DestinationHeaders> headers`
+
+    Headers to set or remove. The API merges them into the destination's headers by name.
+
+    Names compare case-insensitively. A string value sets or replaces that header. A `null` value removes it. Headers that you omit don't change. The field itself can't be `null`.
+
+    A request that sets a header value must also include `endpoint_url`. The current URL is accepted.
+
+    The resulting set must stay within the same limits as on create. When the request sets a value, each stored value that it doesn't set counts as 4,096 bytes toward the 16,384-byte limit, because you can't read its real length. So to change one header of a destination that has four or more other headers, send the values of the others again in the same request.
+
+  - `Optional<BetaTelemetryDestinationStateParams> state`
+
+    Whether the destination receives deliveries after the update. The field can't be `null`.
+
+  - `Optional<BetaTelemetryDestinationTracesParams> traces`
+
+    The traces settings to change. Omitted settings keep their stored values.
+
+    `null` sets every traces setting to its create default.
+
+  - `Optional<BetaTelemetryDestinationWorkspacesParams> workspaces`
+
+    The new workspace scope, in the same form as on create. The field can't be `null`.
+
+    The API refuses an update that changes the type or sends `workspace_ids` while the destination's list has more than 750 workspaces. Remove workspaces one at a time until 750 or fewer remain, then send the update again.
+
+#### Returns
+
+- `class BetaTelemetryDestination`
+
+  An OpenTelemetry destination: an OTLP/HTTP endpoint, the request headers sent with every delivery to it, what the exported spans contain, and which workspaces it covers. A destination belongs to an organization. A workspace's spans go to every enabled destination that covers it.
+
+  - `JsonValue type = "telemetry_destination"`
+
+  - `String id`
+
+    The unique ID of the destination (`tdst_...`).
+
+  - `LocalDateTime createdAt`
+
+    Time the destination was created.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationDeliveryHealth deliveryHealth`
+
+    The most recent delivery results for this destination.
+
+    - `Optional<String> lastError`
+
+      A message that describes the most recent failed delivery to the destination, or `null` if no delivery has failed yet.
+
+      Examples are `temporary DNS failure`, `TLS failure`, `timeout`, `connection failure`, `invalid address`, `HTTP error (status 503)`, and `redirect (status 301)`. The message is `invalid address` both for a hostname that doesn't exist and for an address that isn't publicly routable. It never contains the endpoint's response body, a header value, a network address, or TLS details.
+
+      `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
+
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
+
+    - `Optional<LocalDateTime> lastErrorAt`
+
+      Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
+
+      format: date-time
+
+    - `Optional<LocalDateTime> lastSuccessAt`
+
+      Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
+
+      format: date-time
+
+  - `Optional<String> displayName`
+
+    Human-readable name for the destination. Null when none was set.
+
+  - `String endpointUrl`
+
+    The base URL of the destination's OTLP/HTTP endpoint, exactly as registered.
+
+    The API appends the per-signal path, such as `/v1/traces`, on delivery, unless `traces.endpoint_url` is set.
+
+  - `List<String> headerNames`
+
+    Names of the registered request headers. Header values are write-only and are never returned.
+
+  - `BetaTelemetryDestinationState state`
+
+    Whether the destination receives deliveries.
+
+    - `class BetaTelemetryDestinationStateEnabled`
+
+      The telemetry destination receives the spans of the workspaces that it covers.
+
+      - `JsonValue type = "enabled"`
+
+    - `class BetaTelemetryDestinationStateDisabled`
+
+      The API doesn't deliver anything to the telemetry destination.
+
+      Spans produced while it is disabled aren't delivered later.
+
+      - `JsonValue type = "disabled"`
+
+      - `BetaTelemetryDestinationDisabledReason reason`
+
+        Whether a caller or the API disabled the destination and, when the API did, why. Read-only.
+
+        - `class BetaTelemetryDestinationDisabledReasonCaller`
+
+          A caller disabled the destination with an update that set `state` to `disabled`.
+
+          - `JsonValue type = "caller"`
+
+        - `class BetaTelemetryDestinationDisabledReasonSustainedFailure`
+
+          The API disabled the destination because deliveries to it failed, with no successful delivery in between, for longer than a threshold that Anthropic configures and that is not part of this contract. The reason is `invalid_address` instead when the most recent failed delivery failed with an invalid address.
+
+          - `JsonValue type = "sustained_failure"`
+
+        - `class BetaTelemetryDestinationDisabledReasonInvalidAddress`
+
+          The API disabled the destination because deliveries to it failed for longer than the same threshold as for `sustained_failure`, and the most recent failed delivery failed with an invalid address: the DNS answer says that the endpoint's hostname doesn't exist or doesn't have an address, or the address that the API would connect to isn't publicly routable or is reserved, for example a loopback, link-local, private-network, or cloud-metadata address. The API doesn't connect to such an address, and retries the delivery a bounded number of times as it does after a timeout. A timeout or a server failure of the DNS lookup is a temporary DNS failure instead, not an invalid address.
+
+          - `JsonValue type = "invalid_address"`
+
+        - `class BetaTelemetryDestinationDisabledReasonRedirect`
+
+          The API disabled the destination because the endpoint answered a delivery with a 3xx status. Redirects are never followed, and one such answer disables the destination at once.
+
+          - `JsonValue type = "redirect"`
+
+  - `BetaTelemetryDestinationTraces traces`
+
+    The destination's settings for the traces it receives.
+
+    - `BetaTelemetryDestinationContentMode contentMode`
+
+      What the exported spans contain.
+
+      - `METADATA_ONLY("metadata_only")`
+
+        The spans contain identifiers, timing, status, token counts, and similar metadata. They don't contain prompt text, completion text, or tool inputs and outputs.
+
+      - `CONTENT("content")`
+
+        The spans contain the same metadata as `metadata_only`, plus message and tool content.
+
+        An organization with a data-handling restriction, such as under HIPAA, can't choose this mode. The API exports only metadata for such an organization, even to a destination that already has `content`.
+
+    - `boolean enabled`
+
+      Whether the destination receives traces. A destination whose `enabled` is false keeps its other settings.
+
+    - `Optional<String> endpointUrl`
+
+      The full URL that the API posts traces to, exactly as registered, or `null` if the destination doesn't have one.
+
+      When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
+
+    - `Optional<Long> maxContentBytes`
+
+      The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
+
+      Content means model prompts and responses, and tool inputs and outputs. The API shortens longer content to this size before it delivers the span. A destination whose `content_mode` is `metadata_only` keeps this value. It applies once `content_mode` is `content`.
+
+      format: int32
+
+  - `LocalDateTime updatedAt`
+
+    Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
+
+    An update that sets a header value always changes it, even when the value is the same as before. Adding or removing a single workspace on the destination's list doesn't change it. An update that changes the list does.
+
+    format: date-time
+
+  - `BetaTelemetryDestinationWorkspaces workspaces`
+
+    Which of the organization's workspaces the destination covers.
+
+    - `class BetaTelemetryDestinationWorkspacesAll`
+
+      The destination covers every workspace of the organization, including the default workspace, archived workspaces, and workspaces created later. It doesn't have a list.
+
+      - `JsonValue type = "all"`
+
+    - `class BetaTelemetryDestinationWorkspacesInclude`
+
+      The destination covers the workspaces on its list, and no others.
+
+      - `JsonValue type = "include"`
+
+    - `class BetaTelemetryDestinationWorkspacesExclude`
+
+      The destination covers every workspace of the organization except the workspaces on its list. A workspace created later is covered until it is added to the list.
+
+      - `JsonValue type = "exclude"`
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.BetaTelemetryDestination;
+import com.anthropic.models.beta.organization.telemetrydestinations.TelemetryDestinationUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaTelemetryDestination betaTelemetryDestination = client.beta().organization().telemetryDestinations().update("destination_id");
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "delivery_health": {
+    "last_error": "last_error",
+    "last_error_at": "2019-12-27T18:11:19.117Z",
+    "last_success_at": "2019-12-27T18:11:19.117Z"
+  },
+  "display_name": "display_name",
+  "endpoint_url": "endpoint_url",
+  "header_names": [
+    "string"
+  ],
+  "state": {
+    "type": "enabled"
+  },
+  "traces": {
+    "content_mode": "metadata_only",
+    "enabled": true,
+    "endpoint_url": "endpoint_url",
+    "max_content_bytes": 0
+  },
+  "type": "telemetry_destination",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "workspaces": {
+    "type": "all"
+  }
+}
+```
+
+### Delete a Telemetry Destination
+
+`BetaDeletedTelemetryDestination beta().organization().telemetryDestinations().delete(params = TelemetryDestinationDeleteParams.none(), requestOptions = RequestOptions.none())`
+
+**DELETE** `/v1/organizations/telemetry_destinations/{destination_id}`
+
+Delete a destination and its workspace list.
+
+The API stops sending spans to the destination. The spans of the workspaces it covered still go to the other destinations that cover them. A deleted destination can't be read, listed, or restored.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about managing a destination.
+
+#### Parameters
+
+- `TelemetryDestinationDeleteParams params`
+
+  - `Optional<String> destinationId` (path parameter)
+
+    ID of the destination (`tdst_...`).
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+#### Returns
+
+- `class BetaDeletedTelemetryDestination`
+
+  Confirmation that a destination was deleted.
+
+  - `JsonValue type = "telemetry_destination_deleted"`
+
+  - `String id`
+
+    ID of the deleted destination (`tdst_...`).
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.BetaDeletedTelemetryDestination;
+import com.anthropic.models.beta.organization.telemetrydestinations.TelemetryDestinationDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaDeletedTelemetryDestination betaDeletedTelemetryDestination = client.beta().organization().telemetryDestinations().delete("destination_id");
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "telemetry_destination_deleted"
+}
+```
+
+### Test a Telemetry Destination
+
+`BetaTelemetryDestinationTestResponse beta().organization().telemetryDestinations().test(params = TelemetryDestinationTestParams.none(), requestOptions = RequestOptions.none())`
+
+**POST** `/v1/organizations/telemetry_destinations/{destination_id}/test`
+
+Send one test span, named `anthropic.test`, to the destination with its registered headers, once and without retries, and report the destination's answer. The response is 200 whether or not the destination answered with a 2xx status: its `result` has the type `success`, or the type `failure` and the reason in `error`. The destination's configuration, `state` and `delivery_health` do not change. A disabled destination can be tested too. Wait 10 seconds between tests of one destination; a request that comes sooner may be answered with status 429.
+
+#### Parameters
+
+- `TelemetryDestinationTestParams params`
+
+  - `Optional<String> destinationId` (path parameter)
+
+    ID of the destination to test (starts with `tdst_`).
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+#### Returns
+
+- `class BetaTelemetryDestinationTestResponse`
+
+  The result of one test span sent to a destination.
+
+  - `JsonValue type = "telemetry_destination_test"`
+
+  - `BetaTelemetryDestinationTestResult result`
+
+    How the test went: `success` when the destination answered with a 2xx status, else `failure` with the reason.
+
+    - `class BetaTelemetryDestinationTestSuccess`
+
+      The destination answered the test span with a 2xx status.
+
+      - `JsonValue type = "success"`
+
+    - `class BetaTelemetryDestinationTestFailure`
+
+      The test span was not delivered.
+
+      - `JsonValue type = "failure"`
+
+      - `String error`
+
+        A message that describes why the test span was not delivered, including the HTTP status code when the destination returned one. Examples: `HTTP error (status 403)`, `timeout`, `TLS failure`. It has the same form as the destination's `delivery_health.last_error` and never contains the destination's response body, any header value, a network address, or TLS details.
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.BetaTelemetryDestinationTestResponse;
+import com.anthropic.models.beta.organization.telemetrydestinations.TelemetryDestinationTestParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaTelemetryDestinationTestResponse betaTelemetryDestinationTestResponse = client.beta().organization().telemetryDestinations().test("destination_id");
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "result": {
+    "type": "success"
+  },
+  "type": "telemetry_destination_test"
+}
+```
+
+## Beta › Organization › Telemetry Destinations › Workspaces
+
+### List Telemetry Destination Workspaces
+
+`WorkspaceListPage beta().organization().telemetryDestinations().workspaces().list(params = WorkspaceListParams.none(), requestOptions = RequestOptions.none())`
+
+**GET** `/v1/organizations/telemetry_destinations/{destination_id}/workspaces`
+
+List the workspaces on a destination's workspace list, newest entry first.
+
+A destination whose `workspaces.type` is `all` doesn't have a list, so its page is empty. The list includes archived workspaces.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+
+#### Parameters
+
+- `WorkspaceListParams params`
+
+  - `Optional<String> destinationId` (path parameter)
+
+    ID of the destination (`tdst_...`).
+
+  - `Optional<Long> limit` (query parameter)
+
+    Number of entries to return per page, between 1 and 1,000. Defaults to 20.
+
+    format: int32
+
+  - `Optional<String> page` (query parameter)
+
+    Opaque cursor from a previous response's `next_page`. Leave it out to get the first page.
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+#### Returns
+
+- `class BetaTelemetryDestinationWorkspace`
+
+  A workspace on a telemetry destination's workspace list.
+
+  Under `include`, the destination covers the workspace. Under `exclude`, the destination covers every workspace except this one. The entry doesn't have an `id`. Its `telemetry_destination_id` and `workspace_id` together identify it.
+
+  - `JsonValue type = "telemetry_destination_workspace"`
+
+  - `LocalDateTime createdAt`
+
+    Time the workspace was added to the list.
+
+    format: date-time
+
+  - `String telemetryDestinationId`
+
+    ID of the telemetry destination (`tdst_...`).
+
+  - `String workspaceId`
+
+    ID of the workspace (`wrkspc_...`).
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.workspaces.WorkspaceListPage;
+import com.anthropic.models.beta.organization.telemetrydestinations.workspaces.WorkspaceListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkspaceListPage page = client.beta().organization().telemetryDestinations().workspaces().list("destination_id");
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "telemetry_destination_id": "telemetry_destination_id",
+      "type": "telemetry_destination_workspace",
+      "workspace_id": "workspace_id"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Add a Telemetry Destination Workspace
+
+`BetaTelemetryDestinationWorkspace beta().organization().telemetryDestinations().workspaces().add(params, requestOptions = RequestOptions.none())`
+
+**POST** `/v1/organizations/telemetry_destinations/{destination_id}/workspaces/{workspace_id}`
+
+Add one workspace to a destination's workspace list.
+
+Under `include` the workspace's spans start going to the destination. Under `exclude` they stop. A list holds at most 1,000 workspaces.
+
+Adding a workspace that is already on the list changes nothing and returns the existing entry. An archived workspace that isn't on the list yet can't be added. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400. To change which workspaces such a destination covers, update its `workspaces`.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+
+#### Parameters
+
+- `WorkspaceAddParams params`
+
+  - `String destinationId` (path parameter)
+
+    ID of the destination (`tdst_...`).
+
+  - `Optional<String> workspaceId` (path parameter)
+
+    ID of the workspace to add (`wrkspc_...`).
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+#### Returns
+
+- `class BetaTelemetryDestinationWorkspace`
+
+  A workspace on a telemetry destination's workspace list.
+
+  Under `include`, the destination covers the workspace. Under `exclude`, the destination covers every workspace except this one. The entry doesn't have an `id`. Its `telemetry_destination_id` and `workspace_id` together identify it.
+
+  - `JsonValue type = "telemetry_destination_workspace"`
+
+  - `LocalDateTime createdAt`
+
+    Time the workspace was added to the list.
+
+    format: date-time
+
+  - `String telemetryDestinationId`
+
+    ID of the telemetry destination (`tdst_...`).
+
+  - `String workspaceId`
+
+    ID of the workspace (`wrkspc_...`).
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.workspaces.BetaTelemetryDestinationWorkspace;
+import com.anthropic.models.beta.organization.telemetrydestinations.workspaces.WorkspaceAddParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkspaceAddParams params = WorkspaceAddParams.builder()
+            .destinationId("destination_id")
+            .workspaceId("workspace_id")
+            .build();
+        BetaTelemetryDestinationWorkspace betaTelemetryDestinationWorkspace = client.beta().organization().telemetryDestinations().workspaces().add(params);
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "telemetry_destination_id": "telemetry_destination_id",
+  "type": "telemetry_destination_workspace",
+  "workspace_id": "workspace_id"
+}
+```
+
+### Remove a Telemetry Destination Workspace
+
+`BetaDeletedTelemetryDestinationWorkspace beta().organization().telemetryDestinations().workspaces().remove(params, requestOptions = RequestOptions.none())`
+
+**DELETE** `/v1/organizations/telemetry_destinations/{destination_id}/workspaces/{workspace_id}`
+
+Remove one workspace from a destination's workspace list.
+
+Under `include` the workspace's spans stop going to the destination. Under `exclude` they start. An archived workspace can be removed too.
+
+The API returns 404 when the workspace isn't on the list. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400.
+
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+
+#### Parameters
+
+- `WorkspaceRemoveParams params`
+
+  - `String destinationId` (path parameter)
+
+    ID of the destination (`tdst_...`).
+
+  - `Optional<String> workspaceId` (path parameter)
+
+    ID of the workspace to remove (`wrkspc_...`).
+
+  - `Optional<List<AnthropicBeta>> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
+    - `USER_PROFILES_2026_09_04("user-profiles-2026-09-04")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `COMPACT_2026_01_12("compact-2026-01-12")`
+
+    - `COMPUTER_USE_2025_11_24("computer-use-2025-11-24")`
+
+    - `MCP_TUNNELS_2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `STRUCTURED_OUTPUTS_2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TASK_BUDGETS_2026_03_13("task-budgets-2026-03-13")`
+
+    - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `COMPACT_2026_09_04("compact-2026-09-04")`
+
+    - `INLINE_TOOLS_2026_09_15("inline-tools-2026-09-15")`
+
+    - `MCP_CLIENT_2026_09_15("mcp-client-2026-09-15")`
+
+    - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+#### Returns
+
+- `class BetaDeletedTelemetryDestinationWorkspace`
+
+  Confirmation that a workspace was removed from a destination's list.
+
+  - `JsonValue type = "telemetry_destination_workspace_deleted"`
+
+  - `String telemetryDestinationId`
+
+    ID of the telemetry destination (`tdst_...`).
+
+  - `String workspaceId`
+
+    ID of the workspace that was removed (`wrkspc_...`).
+
+#### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.organization.telemetrydestinations.workspaces.BetaDeletedTelemetryDestinationWorkspace;
+import com.anthropic.models.beta.organization.telemetrydestinations.workspaces.WorkspaceRemoveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        WorkspaceRemoveParams params = WorkspaceRemoveParams.builder()
+            .destinationId("destination_id")
+            .workspaceId("workspace_id")
+            .build();
+        BetaDeletedTelemetryDestinationWorkspace betaDeletedTelemetryDestinationWorkspace = client.beta().organization().telemetryDestinations().workspaces().remove(params);
+    }
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "telemetry_destination_id": "telemetry_destination_id",
+  "type": "telemetry_destination_workspace_deleted",
+  "workspace_id": "workspace_id"
 }
 ```
 

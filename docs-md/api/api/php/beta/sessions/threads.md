@@ -124,6 +124,9 @@ var_dump($page);
       "agent": {
         "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
         "description": "A focused research subagent.",
+        "execution_identity": {
+          "type": "service_account"
+        },
         "mcp_servers": [
           {
             "name": "example-mcp",
@@ -310,6 +313,9 @@ var_dump($betaManagedAgentsSessionThread);
   "agent": {
     "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
     "description": "A focused research subagent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -493,6 +499,9 @@ var_dump($betaManagedAgentsSessionThread);
   "agent": {
     "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
     "description": "A focused research subagent.",
+    "execution_identity": {
+      "type": "service_account"
+    },
     "mcp_servers": [
       {
         "name": "example-mcp",
@@ -584,6 +593,10 @@ var_dump($betaManagedAgentsSessionThread);
   - `"inline" type`
 
   - `?string description`
+
+  - `BetaManagedAgentsExecutionIdentity executionIdentity`
+
+    The session's execution principal.
 
   - `list<BetaManagedAgentsMCPServerURLDefinition> mcpServers`
 

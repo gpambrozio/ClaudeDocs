@@ -123,6 +123,8 @@ Upload File
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -383,6 +385,8 @@ List Files
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -616,6 +620,8 @@ Download File
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -762,6 +768,8 @@ Get File Metadata
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -990,6 +998,8 @@ Delete File
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 

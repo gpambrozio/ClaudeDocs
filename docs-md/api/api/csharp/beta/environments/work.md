@@ -129,6 +129,8 @@ Retrieve detailed information about a specific work item.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -386,6 +388,8 @@ Long poll for work items in the queue.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `string anthropicWorkerID` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -629,6 +633,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
 ### Returns
 
@@ -879,6 +885,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
 ### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
@@ -1066,6 +1074,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `string workspaceID` (header parameter)
 
@@ -1322,6 +1332,8 @@ List work items in an environment.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
 ### Returns
 
 - `class BetaSelfHostedWork`
@@ -1573,6 +1585,8 @@ Update work item metadata with merge semantics.
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1816,6 +1830,8 @@ Get statistics about the work queue for an environment.
     - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
 
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `string workspaceID` (header parameter)
 

@@ -123,6 +123,8 @@ Create a memory store
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -370,6 +372,8 @@ List memory stores
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -579,6 +583,8 @@ Retrieve a memory store
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -784,6 +790,8 @@ Update a memory store
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1007,6 +1015,8 @@ Delete a memory store
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1174,6 +1184,8 @@ Archive a memory store
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1443,6 +1455,8 @@ Create a memory
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1696,6 +1710,8 @@ List memories
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1937,6 +1953,8 @@ Retrieve a memory
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2162,6 +2180,8 @@ Update a memory
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -2405,6 +2425,8 @@ Delete a memory
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2626,6 +2648,8 @@ List memory versions
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -2935,6 +2959,8 @@ Retrieve a memory version
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3237,6 +3263,8 @@ Redact a memory version
     - `CE_PLUGINS_2026_09_01("ce-plugins-2026-09-01")`
 
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
   - `Optional<String> workspaceId` (header parameter)
 

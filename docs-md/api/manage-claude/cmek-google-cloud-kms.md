@@ -53,7 +53,7 @@ Create a symmetric key with the `ENCRYPT_DECRYPT` purpose. Anthropic strongly re
 
 The `--labels` option adds the organization label, `anthropic-org-<ORGANIZATION_UUID>` with the value `true`, where `<ORGANIZATION_UUID>` is your Anthropic organization ID in lowercase. The label is required for Anthropic to validate the key.
 
-**Finding your organization ID:** Copy the **Organization ID** field under **Settings > Organization** in the Claude Console, or under **Organization settings > Organization** in claude.ai, or read the `id` field from the [Organization Info](../api/organization/retrieve.md) endpoint. Use the bare UUID, not the `org_`-prefixed ID.
+**Finding your organization ID:** Copy the **Organization ID** field on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console, or under **Organization settings > Organization** in claude.ai, or read the `id` field from the [Organization Info](../api/organization/retrieve.md) endpoint. Use the bare UUID, not the `org_`-prefixed ID.
 
 ```bash
 gcloud kms keys create <KEY_NAME> \

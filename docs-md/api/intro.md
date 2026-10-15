@@ -70,7 +70,7 @@ Discover what Claude can do: thinking, web search, file handling, structured out
 
 Anthropic provides developer tools to help you build and scale applications with Claude.
 
-**Developer Console**
+**Claude Console**
 
 Explore and understand the API in your browser with playground.
 

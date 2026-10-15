@@ -101,7 +101,7 @@ Individual [memories](memory.md) and memory versions emit no webhook events.
 
 ## Register an endpoint
 
-Visit **Manage > Webhooks** in the [Claude Console](https://platform.claude.com/settings/workspaces/default/webhooks).
+In the Claude Console, go to the [Webhooks](https://platform.claude.com/settings/workspaces/default/webhooks) page (`platform.claude.com/settings/workspaces/default/webhooks`). Each endpoint belongs to one workspace. Select the workspace you want in the workspace picker in the sidebar.
 
 A webhook endpoint consists of:
 

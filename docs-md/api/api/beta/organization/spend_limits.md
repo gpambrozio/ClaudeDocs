@@ -135,6 +135,8 @@ Anthropic account team.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Body parameters
 
 - `amount: string or null`
@@ -700,6 +702,8 @@ organizations only, not for Claude Console organizations.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Returns
 

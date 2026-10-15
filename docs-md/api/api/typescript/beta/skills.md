@@ -137,6 +137,8 @@ Create Skill
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -386,6 +388,8 @@ List Skills
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -622,6 +626,8 @@ Get Skill
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -851,6 +857,8 @@ Delete Skill
     - `"ce-plugins-2026-09-01"`
 
     - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -1144,6 +1152,8 @@ Create Skill Version
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1357,6 +1367,8 @@ List Skill Versions
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1568,6 +1580,8 @@ Download a skill version's content as a zip archive.
 
     - `"spend-limit-reads-2026-09-26"`
 
+    - `"telemetry-destinations-2026-08-11"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1726,6 +1740,8 @@ Get Skill Version
     - `"ce-plugins-2026-09-01"`
 
     - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -1933,6 +1949,8 @@ Delete Skill Version
     - `"ce-plugins-2026-09-01"`
 
     - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
 
   - `workspace_id?: string` (header parameter)
 

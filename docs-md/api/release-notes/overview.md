@@ -12,6 +12,12 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### October 14, 2026
+
+* We've launched [OpenTelemetry export](../manage-claude/opentelemetry.md) in beta, so you can trace Messages API requests and Claude Managed Agents sessions in your observability backend. The Claude SDK emits spans in Python, TypeScript, C#, Go, Java, PHP, and Ruby. To get spans from the API, [add an OpenTelemetry destination](../manage-claude/opentelemetry/api.md#add-a-destination) in the Claude Console.
+
+- Claude Managed Agents [scheduled deployments](../managed-agents/scheduled-deployments.md) are now available on [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md#claude-managed-agents).
+
 ### October 9, 2026
 
 * You can now let a Claude Managed Agents agent use [dynamic workflows](../managed-agents/multiagent-orchestration.md#dynamic-workflows), in beta with the `managed-agents-2026-04-01` beta header. For work with many pieces, such as reviewing hundreds of documents, the agent can write a workflow. A workflow is a program that runs many agents in phases and combines their results. The server runs it in the background as a workflow run. To [turn dynamic workflows on](../managed-agents/multiagent-orchestration.md#turn-on-dynamic-workflows), set the agent's `multiagent` field to `{"type": "multiagent_20261001", "workflows": {"type": "enabled"}}`. To guide the agent, tell it in its system prompt when to start a run. Follow each run through `workflow_run.*` events on the session's event stream. See [Workflow runs](../managed-agents/workflow-runs.md).

@@ -143,6 +143,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Body parameters
 
 - `issuer_id: string`
@@ -566,6 +568,8 @@ unless `include_archived=true`.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Returns
 
 - `data: array of BetaFederationRule`
@@ -874,6 +878,8 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Returns
 
@@ -1201,6 +1207,8 @@ Console session.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Body parameters
 
@@ -1600,6 +1608,8 @@ other scopes require a Console session.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Returns
 
@@ -2137,6 +2147,8 @@ other scopes require a Console session.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 #### Body parameters
 
 - `workspace_id: string`
@@ -2344,6 +2356,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 #### Returns
 
 - `data: array of BetaFederationRuleWorkspace`
@@ -2540,6 +2554,8 @@ Console session.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 #### Returns
 

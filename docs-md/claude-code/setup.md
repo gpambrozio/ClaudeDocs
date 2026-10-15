@@ -33,7 +33,7 @@ To install Claude Code, open a terminal and run the command for your system. If 
 
 **macOS, Linux, WSL:**
 
-```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
@@ -41,13 +41,13 @@ On Windows, your prompt shows `PS C:\` when you're in PowerShell and `C:\` witho
 
 **Windows PowerShell:**
 
-```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```powershell
 irm https://claude.ai/install.ps1 | iex
 ```
 
 **Windows CMD:**
 
-```batch theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```batch
 curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 ```
 
@@ -63,7 +63,7 @@ Native installations automatically update in the background to keep you on the l
 
 **Homebrew**
 
-```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```bash
 brew install --cask claude-code
 ```
 
@@ -73,7 +73,7 @@ Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `br
 
 **WinGet**
 
-```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+```powershell
 winget install Anthropic.ClaudeCode
 ```
 

@@ -318,6 +318,8 @@ Create Workspace
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Body parameters
 
 - `name: string`
@@ -2132,6 +2134,8 @@ omitted from the results.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 #### Returns
 
 - `data: array of BetaServiceAccountWorkspaceMember`
@@ -2336,6 +2340,8 @@ accounts cannot be added and are rejected.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 #### Body parameters
 
@@ -2558,6 +2564,8 @@ account returns 404.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 #### Returns
 
 - `BetaServiceAccountWorkspaceMember object`
@@ -2755,6 +2763,8 @@ rejected.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 #### Body parameters
 
@@ -2970,6 +2980,8 @@ membership. Archived workspaces return 400.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 #### Returns
 

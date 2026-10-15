@@ -66,7 +66,7 @@ In the **API credits** section, choose the Console organization that should rece
 
 **Start building**
 
-Your credits appear in the Console, in the **Promotional credits** section under [**Settings > Billing**](https://platform.claude.com/settings/billing). Create an API key and make your first request. See [Get started](../get-started.md).
+Your credits appear in the **Promotional credits** section of the [Billing](https://platform.claude.com/settings/billing) page (`platform.claude.com/settings/billing`) in the Console. Create an API key and make your first request. See [Get started](../get-started.md).
 
 Each plan links to one Console organization, and each Console organization can receive credits from one plan. You can't change the linked organization yourself, so link the organization you plan to build in. To change it later, [contact support](https://support.claude.com/en/articles/9015913-how-to-get-support).
 
@@ -92,7 +92,7 @@ These API credits can only be used on the Claude Platform. The following table s
 * **Order.** Included credits are spent first, then any credits you've purchased. Auto-reload is based only on your purchased balance. It reloads when that balance reaches your threshold, even if included credits remain.
 * **Expiry.** Unused credits expire at the end of each billing cycle (or monthly for annual plans) and don't roll over.
 * **Sharing.** Every API key and workspace in the linked organization draws from the same balance. To cap spending on a project, give it its own workspace and set that workspace's [spend limit](../manage-claude/workspaces.md#setting-workspace-limits).
-* **Visibility.** Your credits appear in the Console under [**Settings > Billing**](https://platform.claude.com/settings/billing), in the **Promotional credits** section, with the amount and expiry date.
+* **Visibility.** Your credits appear in the **Promotional credits** section of the [Billing](https://platform.claude.com/settings/billing) page (`platform.claude.com/settings/billing`) in the Console, with the amount and expiry date.
 * **Your Claude plan.** Credits don't change your usage limits in Claude or Claude Code.
 
 ## Spend limits and rate limits
@@ -106,7 +106,7 @@ Credits don't change how [rate limits and spend limits](../api/rate-limits.md) w
 ### When credits run out
 
 * **If the organization has other credits**, requests continue using purchased credits. Auto-reload, if it's turned on, adds credits to the purchased balance.
-* **If the organization has no credits left**, API requests stop until your next monthly API credits arrive. Usage is never charged to your Claude plan. To keep building, purchase credits or turn on auto-reload in the Console.
+* **If the organization has no credits left**, API requests stop until your next monthly API credits arrive. Usage is never charged to your Claude plan. To keep building, purchase credits or turn on auto-reload on the [Billing](https://platform.claude.com/settings/billing) page (`platform.claude.com/settings/billing`) in the Console.
 * **If your organization is invoiced through Anthropic sales**, usage beyond the API credits is billed as usual.
 
 When the balance is exhausted, requests return:
@@ -137,7 +137,7 @@ Your monthly cost depends mainly on the model you choose and how often your appl
 * Choose a model that fits each task. To learn how, see [Choosing the right model](models/choosing-a-model.md).
 * Use [prompt caching](../build-with-claude/prompt-caching.md) for repeated context.
 * Use the [Message Batches API](../build-with-claude/batch-processing.md) for work that doesn't need an immediate response. It costs 50 percent less.
-* Check [pricing](pricing.md) and track spend on the [Cost](https://platform.claude.com/cost) page.
+* Check [pricing](pricing.md) and track spend on the [Cost](https://platform.claude.com/cost) page in the Claude Console.
 
 ## Related
 

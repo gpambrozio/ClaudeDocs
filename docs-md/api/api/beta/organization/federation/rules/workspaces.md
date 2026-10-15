@@ -144,6 +144,8 @@ other scopes require a Console session.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Body parameters
 
 - `workspace_id: string`
@@ -351,6 +353,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Returns
 
 - `data: array of BetaFederationRuleWorkspace`
@@ -547,6 +551,8 @@ Console session.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Returns
 

@@ -133,6 +133,8 @@ Create Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -350,6 +352,8 @@ List Vaults
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -559,6 +563,8 @@ Get Vault
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -779,6 +785,8 @@ Update Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -988,6 +996,8 @@ Delete Vault
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1163,6 +1173,8 @@ Archive Vault
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -1599,6 +1611,8 @@ Create Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1951,6 +1965,8 @@ List Credentials
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2289,6 +2305,8 @@ Get Credential
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -2756,6 +2774,8 @@ Update Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3092,6 +3112,8 @@ Delete Credential
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
 
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3273,6 +3295,8 @@ Archive Credential
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -3609,6 +3633,8 @@ Validate Credential
     - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
 
     - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 

@@ -43,7 +43,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=1.40.0
+VERSION=1.41.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -92,7 +92,7 @@ npm install @anthropic-ai/sdk
 **Java**
 
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java:2.71.0")
+implementation("com.anthropic:anthropic-java:2.72.0")
 ```
 
 **Go**
